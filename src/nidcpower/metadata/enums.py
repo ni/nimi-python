@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d270
+# This file is generated from NI-DCPower API metadata version 23.0.0d279
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -346,6 +346,42 @@ enums = {
                 'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT',
                 'python_name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER',
                 'value': 1052
+            }
+        ]
+    },
+    'EventInitialState': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The initial state is low.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_INITIAL_STATE_LOW',
+                'value': 1149
+            },
+            {
+                'documentation': {
+                    'description': 'The initial state is high.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_INITIAL_STATE_HIGH',
+                'value': 1150
+            }
+        ]
+    },
+    'EventOutputBehavior': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Output generates a pulse when the event is triggered.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE',
+                'value': 1147
+            },
+            {
+                'documentation': {
+                    'description': 'Output toggles state when the event is triggered.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE',
+                'value': 1148
             }
         ]
     },

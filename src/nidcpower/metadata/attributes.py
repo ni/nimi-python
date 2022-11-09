@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d270
+# This file is generated from NI-DCPower API metadata version 23.0.0d279
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -2480,6 +2480,126 @@ attributes = {
         ],
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+    },
+    1150331: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDetermines how the event type behaves when the corresponding trigger is received. If the Source Complete event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse of Source Complete event pulse width is emitted. If the Source Complete event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level changes from low to high or from high to low. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n',
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Source Complete Event:Output Behavior',
+        'name': 'SOURCE_COMPLETE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150332: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Source Complete event if the NIDCPOWER_ATTR_SOURCE_COMPLETE_EVENT_OUTPUT_BEHAVIOR is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.\nFor a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Source Complete Event:Toggle Initial State',
+        'name': 'SOURCE_COMPLETE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150333: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDetermines how the event type behaves when the corresponding trigger is received. If the Measure Complete event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse of Measure Complete event pulse width is emitted. If the Measure Complete event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level changes from low to high or from high to low. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n',
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Measure Complete Event:Output Behavior',
+        'name': 'MEASURE_COMPLETE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150334: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Measure Complete event if the NIDCPOWER_ATTR_MEASURE_COMPLETE_EVENT_OUTPUT_BEHAVIOR is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.\nFor a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Measure Complete Event:Toggle Initial State',
+        'name': 'MEASURE_COMPLETE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150335: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDetermines how the event type behaves when the corresponding trigger is received. If the Sequence Iteration Complete event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse of Sequence Iteration Complete event pulse width is emitted. If the Sequence Iteration Complete event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level changes from low to high or from high to low. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n',
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Iteration Complete Event:Output Behavior',
+        'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150336: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Sequence Iteration Complete event if the NIDCPOWER_ATTR_SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_BEHAVIOR is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.\nFor a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Iteration Complete Event:Toggle Initial State',
+        'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150345: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nDetermines how the event type behaves when the corresponding trigger is received. If the Sequence Engine Done event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse of Sequence Engine Done event pulse width is emitted. If the Sequence Engine Done event output behavior is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level changes from low to high or from high to low. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n',
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Engine Done Event:Output Behavior',
+        'name': 'SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150346: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Sequence Engine Done event if the NIDCPOWER_ATTR_SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_BEHAVIOR is set to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.\nFor a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'EventInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Engine Done Event:Toggle Initial State',
+        'name': 'SEQUENCE_ENGINE_DONE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
     },
     1250001: {
         'access': 'read-write',

@@ -1016,13 +1016,6 @@ class SystemTests:
         assert last_compensation_datetime.hour == 0
         assert last_compensation_datetime.minute == 0
 
-
-class TestLibrary(SystemTests):
-    @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
-        return {}
-
-    # Test doesn't run over gRPC due to issues with the name of the property attribute_value.
     def test_reset(self, session):
         channel = session.channels['0']
         assert channel.output_enabled is True
@@ -1030,7 +1023,6 @@ class TestLibrary(SystemTests):
         session.reset()
         assert channel.output_enabled is True
 
-    # Test doesn't run over gRPC due to issues with the name of the property attribute_value.
     @pytest.mark.include_legacy_session
     def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
         """Sessions should not error when specifying all channels by number."""
@@ -1039,7 +1031,6 @@ class TestLibrary(SystemTests):
         session.channels['0-11'].reset()
         assert session.channels['0'].output_enabled is True
 
-    # Test doesn't run over gRPC due to issues with the name of the property reference_value.
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     def test_perform_lcr_load_compensation(self, session):
@@ -1067,6 +1058,12 @@ class TestLibrary(SystemTests):
                 )
             ]
         )
+
+
+class TestLibrary(SystemTests):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
 
 
 class TestGrpc(SystemTests):

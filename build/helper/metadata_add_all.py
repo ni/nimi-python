@@ -219,7 +219,7 @@ def _add_interpreter_method_call_snippet(parameter, config):
 
 def _add_grpc_request_snippet(parameter, config):
     param_name = parameter['grpc_name']
-    if parameter['grpc_enum'] is not None or param_name == 'attribute_value':
+    if parameter['grpc_enum'] is not None:
         param_name += '_raw'
 
     if parameter['use_list']:
