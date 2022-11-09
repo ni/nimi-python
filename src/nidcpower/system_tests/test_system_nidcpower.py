@@ -1,8 +1,12 @@
+import grpc
 import hightime
 import nidcpower
 import os
+import pathlib
 import pytest
+import subprocess
 import tempfile
+import time
 
 
 def pytest_generate_tests(metafunc):
@@ -139,13 +143,6 @@ class SystemTests:
         channel.aperture_time_units = nidcpower.ApertureTimeUnits.POWER_LINE_CYCLES
         session.reset_with_defaults()
         assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
-
-    def test_reset(self, session):
-        channel = session.channels['0']
-        assert channel.output_enabled is True
-        channel.output_enabled = False
-        session.reset()
-        assert channel.output_enabled is True
 
     def test_disable(self, session):
         channel = session.channels['0']
@@ -655,14 +652,6 @@ class SystemTests:
         assert e.value.code == -1074118656
         # Error Description: Device was not recognized. The device is not supported with this driver or version.
 
-    @pytest.mark.include_legacy_session
-    def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
-        """Sessions should not error when specifying all channels by number."""
-        assert session.channels['0'].output_enabled is True
-        session.channels['0'].output_enabled = False
-        session.channels['0-11'].reset()
-        assert session.channels['0'].output_enabled is True
-
     @pytest.mark.legacy_session_only
     def test_error_channel_name_not_allowed_in_legacy_session(self, session):
         with pytest.raises(nidcpower.Error) as e:
@@ -981,34 +970,6 @@ class SystemTests:
 
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
-    def test_perform_lcr_load_compensation(self, session):
-        session.perform_lcr_load_compensation(
-            [
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=100_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
-                    reference_value=complex(100.0, 1000.0)
-                ),
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=200_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
-                    reference_value=300.0e-9
-                ),
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=300_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
-                    reference_value=400.0e-6
-                ),
-                nidcpower.LCRLoadCompensationSpot(
-                    frequency=400_000.0,
-                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
-                    reference_value=200.0
-                )
-            ]
-        )
-
-    @pytest.mark.resource_name("4190/0")
-    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     @pytest.mark.parametrize(
         "compensation_function",
         [
@@ -1061,3 +1022,86 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(self):
         return {}
 
+    # Test doesn't run over gRPC due to issues with the name of the property attribute_value.
+    def test_reset(self, session):
+        channel = session.channels['0']
+        assert channel.output_enabled is True
+        channel.output_enabled = False
+        session.reset()
+        assert channel.output_enabled is True
+
+    # Test doesn't run over gRPC due to issues with the name of the property attribute_value.
+    @pytest.mark.include_legacy_session
+    def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
+        """Sessions should not error when specifying all channels by number."""
+        assert session.channels['0'].output_enabled is True
+        session.channels['0'].output_enabled = False
+        session.channels['0-11'].reset()
+        assert session.channels['0'].output_enabled is True
+
+    # Test doesn't run over gRPC due to issues with the name of the property reference_value.
+    @pytest.mark.resource_name("4190/0")
+    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+    def test_perform_lcr_load_compensation(self, session):
+        session.perform_lcr_load_compensation(
+            [
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=100_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
+                    reference_value=complex(100.0, 1000.0)
+                ),
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=200_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_CAPACITANCE,
+                    reference_value=300.0e-9
+                ),
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=300_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_INDUCTANCE,
+                    reference_value=400.0e-6
+                ),
+                nidcpower.LCRLoadCompensationSpot(
+                    frequency=400_000.0,
+                    reference_value_type=nidcpower.LCRReferenceValueType.IDEAL_RESISTANCE,
+                    reference_value=200.0
+                )
+            ]
+        )
+
+
+class TestGrpc(SystemTests):
+    server_address = "localhost"
+    server_port = "31763"
+
+    def _get_grpc_server_exe(self):
+        if os.name != "nt":
+            pytest.skip("Only supported on Windows")
+        import winreg
+        try:
+            reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
+            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
+            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key) as key:
+                shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
+        except OSError:
+            pytest.skip("NI gRPC Device Server not installed")
+        server_exe = pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
+        if not server_exe.exists():
+            pytest.skip("NI gRPC Device Server not installed")
+        return server_exe
+
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        # TODO(DavidCurtiss): Remove the next 3 lines once (and the above method) the server is started automatically
+        server_exe = self._get_grpc_server_exe()
+        proc = subprocess.Popen([str(server_exe)])
+        time.sleep(3)
+        try:
+            channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
+            yield channel
+        finally:
+            proc.kill()
+
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
+        return {'_grpc_options': grpc_options}

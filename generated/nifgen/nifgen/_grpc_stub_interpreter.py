@@ -6,7 +6,7 @@ import hightime  # noqa: F401
 import threading
 import warnings
 
-from . import enums as enums
+from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import nifgen_pb2 as grpc_types
 from . import nifgen_pb2_grpc as nifgen_grpc
@@ -22,7 +22,6 @@ class GrpcStubInterpreter(object):
         self._vi = 0
 
     def _invoke(self, func, request):
-        grpc_error = None
         try:
             response = func(request)
             error_code = response.status
@@ -37,22 +36,23 @@ class GrpcStubInterpreter(object):
                         error_code = int(value)
                     except ValueError:
                         error_message += f'\nError status: {value}'
+
             grpc_error = rpc_error.code()
+            if grpc_error == grpc.StatusCode.NOT_FOUND:
+                raise errors.DriverTooOldError() from None
+            elif grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
+                raise ValueError(error_message) from None
+            elif grpc_error == grpc.StatusCode.UNAVAILABLE:
+                error_message = 'Failed to connect to server'
+            elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
+                error_message = (
+                    'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
+                )
 
-        if grpc_error == grpc.StatusCode.UNAVAILABLE:
-            error_message = 'Failed to connect to server'
-        elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
-            error_message = (
-                'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'
-            )
-        elif grpc_error == grpc.StatusCode.NOT_FOUND:
-            raise errors.DriverTooOldError()
+            if error_code is None:
+                raise errors.RpcError(grpc_error, error_message) from None
 
-        if grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
-            raise ValueError(error_message)
-        elif error_code is None:
-            raise errors.Error(error_message)
-        elif error_code < 0:
+        if error_code < 0:
             raise errors.DriverError(error_code, error_message)
         elif error_code > 0:
             if not error_message:
