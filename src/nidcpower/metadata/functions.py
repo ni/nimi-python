@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d279
+# This file is generated from NI-DCPower API metadata version 23.0.0d285
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -55,7 +55,7 @@ functions = {
         'documentation': {
             'description': 'Clears the state of an output cutoff that was engaged.\nTo clear the state for all output cutoff reasons, use NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL.\n'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2922,7 +2922,7 @@ functions = {
         'documentation': {
             'description': '\nDiscovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.\nIf a limit was exceeded, the state is latched until you clear it with the niDCPower_ClearLatchedOutputCutoffState function or the niDCPower_ResetWithChannels function.\n\noutputCutoffReason specifies the conditions for which an output is disconnected.\n'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',

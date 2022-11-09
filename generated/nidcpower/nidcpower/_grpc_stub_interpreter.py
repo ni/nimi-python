@@ -80,7 +80,10 @@ class GrpcStubInterpreter(object):
         )
 
     def clear_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
-        raise NotImplementedError('clear_latched_output_cutoff_state is not supported over gRPC')
+        self._invoke(
+            self._client.ClearLatchedOutputCutoffState,
+            grpc_types.ClearLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason=output_cutoff_reason.value),
+        )
 
     def commit(self, channel_name):  # noqa: N802
         self._invoke(
@@ -375,7 +378,11 @@ class GrpcStubInterpreter(object):
         return response.in_compliance
 
     def query_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
-        raise NotImplementedError('query_latched_output_cutoff_state is not supported over gRPC')
+        response = self._invoke(
+            self._client.QueryLatchedOutputCutoffState,
+            grpc_types.QueryLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason=output_cutoff_reason.value),
+        )
+        return response.output_cutoff_state
 
     def query_max_current_limit(self, channel_name, voltage_level):  # noqa: N802
         response = self._invoke(
