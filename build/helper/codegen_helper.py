@@ -155,8 +155,6 @@ def _get_library_interpreter_output_param_return_snippet(output_parameter, param
 
 def _get_grpc_interpreter_output_param_return_snippet(output_parameter, parameters, config):
     param_accessor = 'response.' + output_parameter['grpc_name']
-    if output_parameter['grpc_enum'] is not None:
-        param_accessor += '_raw'
 
     return_type, is_custom_type = _get_interpreter_output_param_return_type(output_parameter, config)
     if hasattr(builtins, return_type):

@@ -295,7 +295,7 @@ class GrpcStubInterpreter(object):
             self._client.GetHardwareState,
             grpc_types.GetHardwareStateRequest(vi=self._vi),
         )
-        return enums.HardwareState(response.state_raw)
+        return enums.HardwareState(response.state)
 
     def get_self_cal_last_date_and_time(self):  # noqa: N802
         response = self._invoke(
