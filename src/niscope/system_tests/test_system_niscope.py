@@ -558,4 +558,9 @@ class TestGrpc(SystemTests):
         except niscope.Error as e:
             assert e.code == -1074118609
             assert e.description.find('Simulation does not support the selected model and board type.') != -1
-
+        
+    def test_configure_ref_levels(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session._configure_ref_levels()
+        assert exc_info.value.args[0] == 'configure_ref_levels is not supported over gRPC'
+        assert str(exc_info.value) == 'configure_ref_levels is not supported over gRPC'
