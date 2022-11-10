@@ -7,6 +7,7 @@ __version__ = '1.4.3.dev0'
 from niscope.enums import *  # noqa: F403,F401,H303
 from niscope.errors import DriverWarning  # noqa: F401
 from niscope.errors import Error  # noqa: F401
+from niscope.grpc_session_options import *  # noqa: F403,F401,H303
 from niscope.session import Session  # noqa: F401
 
 from niscope.waveform_info import WaveformInfo  # noqa: F401
