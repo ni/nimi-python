@@ -74,7 +74,7 @@ class GrpcStubInterpreter(object):
             self._client.CanConnect,
             grpc_types.CanConnectRequest(vi=self._vi, channel1=channel1, channel2=channel2),
         )
-        return enums.PathCapability(response.path_capability_raw)
+        return enums.PathCapability(response.path_capability)
 
     def commit(self):  # noqa: N802
         self._invoke(
@@ -186,7 +186,7 @@ class GrpcStubInterpreter(object):
             self._client.GetRelayPosition,
             grpc_types.GetRelayPositionRequest(vi=self._vi, relay_name=relay_name),
         )
-        return enums.RelayPosition(response.relay_position_raw)
+        return enums.RelayPosition(response.relay_position)
 
     def init_with_topology(self, resource_name, topology, simulate, reset_device):  # noqa: N802
         response = self._invoke(

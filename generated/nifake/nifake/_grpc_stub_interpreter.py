@@ -106,7 +106,7 @@ class GrpcStubInterpreter(object):
             self._client.EnumArrayOutputFunction,
             grpc_types.EnumArrayOutputFunctionRequest(vi=self._vi, number_of_elements=number_of_elements),
         )
-        return [enums.Turtle(x) for x in response.an_array_raw]
+        return [enums.Turtle(x) for x in response.an_array]
 
     def enum_input_function_with_defaults(self, a_turtle):  # noqa: N802
         self._invoke(
@@ -289,7 +289,7 @@ class GrpcStubInterpreter(object):
             self._client.GetEnumValue,
             grpc_types.GetEnumValueRequest(vi=self._vi),
         )
-        return response.a_quantity, enums.Turtle(response.a_turtle_raw)
+        return response.a_quantity, enums.Turtle(response.a_turtle)
 
     def get_error(self):  # noqa: N802
         response = self._invoke(
@@ -326,7 +326,7 @@ class GrpcStubInterpreter(object):
             self._client.MethodUsingWholeAndFractionalNumbers,
             grpc_types.MethodUsingWholeAndFractionalNumbersRequest(),
         )
-        return response.whole_number_raw, response.fractional_number_raw
+        return response.whole_number, response.fractional_number
 
     def method_with_grpc_only_param(self, simple_param):  # noqa: N802
         self._invoke(
@@ -411,7 +411,7 @@ class GrpcStubInterpreter(object):
             self._client.ReturnMultipleTypes,
             grpc_types.ReturnMultipleTypesRequest(vi=self._vi, array_size=array_size),
         )
-        return response.a_boolean, response.an_int32, response.an_int64, enums.Turtle(response.an_int_enum_raw), response.a_float, enums.FloatEnum(response.a_float_enum_raw), response.an_array, response.a_string
+        return response.a_boolean, response.an_int32, response.an_int64, enums.Turtle(response.an_int_enum), response.a_float, enums.FloatEnum(response.a_float_enum), response.an_array, response.a_string
 
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(

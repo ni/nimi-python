@@ -298,7 +298,7 @@ class GrpcStubInterpreter(object):
             self._client.ReadStatus,
             grpc_types.ReadStatusRequest(vi=self._vi),
         )
-        return response.acquisition_backlog, enums.AcquisitionStatus(response.acquisition_status_raw)
+        return response.acquisition_backlog, enums.AcquisitionStatus(response.acquisition_status)
 
     def read_waveform(self, maximum_time, array_size):  # noqa: N802
         response = self._invoke(
