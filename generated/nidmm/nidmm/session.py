@@ -1042,11 +1042,11 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can update _library_interpreter._vi
+        # And then once _init_with_options succeeds, we can call set_session_handle
         # with the actual session handle.
-        self._interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1058,7 +1058,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._vi` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -1100,9 +1100,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

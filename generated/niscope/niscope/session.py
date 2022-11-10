@@ -2125,10 +2125,7 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
-        if isinstance(wfm, array.ArrayType):
-            mv = memoryview(wfm)
-        else:
-            mv = wfm
+        mv = memoryview(wfm)
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
@@ -2425,10 +2422,7 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._read(num_samples, timeout)
 
-        if isinstance(wfm, array.ArrayType):
-            mv = memoryview(wfm)
-        else:
-            mv = wfm
+        mv = memoryview(wfm)
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
@@ -3850,7 +3844,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SCOPE session to an NI digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
         r'''An NI-SCOPE session to an NI digitizer.
 
         Performs the following initialization actions:
@@ -3975,18 +3969,12 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
-            _grpc_options (niscope.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
-
 
         Returns:
             session (niscope.Session): A session object representing the device.
 
         '''
-        if _grpc_options:
-            import niscope._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
-        else:
-            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -3998,15 +3986,13 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can update _library_interpreter._vi
+        # And then once _init_with_options succeeds, we can call set_session_handle
         # with the actual session handle.
-        self._interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
-        # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_options:
-            self.tclk = nitclk.SessionReference(self._interpreter._vi)
+        self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -4019,7 +4005,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._vi` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -4033,8 +4019,7 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._interpreter._close_on_exit:
-            self.close()
+        self.close()
 
     def initiate(self):
         '''initiate
@@ -4066,9 +4051,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

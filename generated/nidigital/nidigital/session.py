@@ -3205,7 +3205,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-Digital Pattern Driver session'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None):
         r'''An NI-Digital Pattern Driver session
 
         Creates and returns a new session to the specified digital pattern instrument to use in all subsequent method calls. To place the instrument in a known startup state when creating a new session, set the reset parameter to True, which is equivalent to calling the reset method immediately after initializing the session.
@@ -3253,12 +3253,18 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            _grpc_options (nidigital.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
+
 
         Returns:
             new_vi (int): The returned instrument session.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_options:
+            import nidigital._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -3270,13 +3276,15 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can update _library_interpreter._vi
+        # And then once _init_with_options succeeds, we can call set_session_handle
         # with the actual session handle.
-        self._interpreter._vi = self._init_with_options(resource_name, id_query, reset_device, options)
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
-        self.tclk = nitclk.SessionReference(self._interpreter._vi)
+        # NI-TClk does not work over NI gRPC Device Server
+        if not _grpc_options:
+            self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -3288,7 +3296,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._vi` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -3302,7 +3310,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate
@@ -3325,9 +3334,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

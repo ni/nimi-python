@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.0.0d69
+# This file is generated from NI-SWITCH API metadata version 23.0.0d75
 functions = {
     'AbortScan': {
         'documentation': {
@@ -1039,6 +1039,7 @@ functions = {
                 'documentation': {
                     'description': '\nPass the value to which you want to set the attribute. From the function\npanel window, you can use this control as follows. - If the attribute\ncurrently showing in the Attribute ID ring control has constants as\nvalid values, you can view a list of the constants by pressing on this\ncontrol. Select a value by double-clicking on it or by selecting it and\nthen pressing . Note: Some of the values might not be valid depending on\nthe current settings of the instrument session. Default Value: none\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -1080,6 +1081,7 @@ functions = {
                 'documentation': {
                     'description': '\nPass the value to which you want to set the attribute. From the function\npanel window, you can use this control as follows. - If the attribute\ncurrently showing in the Attribute ID ring control has constants as\nvalid values, you can view a list of the constants by pressing on this\ncontrol. Select a value by double-clicking on it or by selecting it and\nthen pressing . Note: Some of the values might not be valid depending on\nthe current settings of the instrument session. Default Value: none\n'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViString'
             }

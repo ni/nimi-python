@@ -131,7 +131,7 @@ class SessionReference(object):
 
     def __init__(self, session_number, encoding='windows-1251'):
         self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
-        self._interpreter._session_number = session_number
+        self._interpreter.set_session_handle(session_number)
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
 
@@ -152,7 +152,7 @@ class SessionReference(object):
         object.__setattr__(self, key, value)
 
     def _get_tclk_session_reference(self):
-        return self._interpreter._session_number
+        return self._interpreter.get_session_handle()
 
     def _get_attribute_vi_real64(self, attribute_id):
         r'''_get_attribute_vi_real64

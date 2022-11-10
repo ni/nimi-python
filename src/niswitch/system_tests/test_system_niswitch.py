@@ -9,6 +9,7 @@ import pathlib
 import pytest
 import subprocess
 import tempfile
+import time
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
 # Trying to create simulated DAQmx devices at the same time (which can happen when running
@@ -126,6 +127,12 @@ class SystemTests:
         # We should not get an assert if self_test passes
         session.self_test()
 
+    def test_locks_are_reentrant(self, session):
+        with session.lock():
+            with session.lock():
+                # We should not get an assert if self_test passes
+                session.self_test()
+
     def test_functions_get_path(self, session):
         channel1 = 'r0'
         channel2 = 'c0'
@@ -181,7 +188,8 @@ class TestGrpc(SystemTests):
         import winreg
         try:
             reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer") as key:
+            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
+            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key) as key:
                 shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
         except OSError:
             pytest.skip("NI gRPC Device Server not installed")
@@ -192,8 +200,10 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='class')
     def grpc_channel(self):
+        # TODO(DavidCurtiss): Remove the next 3 lines once (and the above method) the server is started automatically
         server_exe = self._get_grpc_server_exe()
         proc = subprocess.Popen([str(server_exe)])
+        time.sleep(3)
         try:
             channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
             yield channel

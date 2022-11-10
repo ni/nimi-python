@@ -6782,7 +6782,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-DCPower session to an NI programmable power supply or source measure unit.'''
 
-    def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True):
+    def __init__(self, resource_name, channels=None, reset=False, options={}, independent_channels=True, *, _grpc_options=None):
         r'''An NI-DCPower session to an NI programmable power supply or source measure unit.
 
         Creates and returns a new NI-DCPower session to the instrument(s) and channel(s) specified
@@ -6886,12 +6886,18 @@ class Session(_SessionBase):
                 independent channels. Set this argument to False on legacy applications or if you
                 are unable to upgrade your NI-DCPower driver runtime to 20.6 or higher.
 
+            _grpc_options (nidcpower.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
+
 
         Returns:
             session (nidcpower.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_options:
+            import nidcpower._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -6905,11 +6911,11 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
+        # Note that _interpreter clears the session handle in its constructor, so that if
         # _fancy_initialize fails, the error handler can reference it.
-        # And then once _fancy_initialize succeeds, we can update _library_interpreter._vi
+        # And then once _fancy_initialize succeeds, we can call set_session_handle
         # with the actual session handle.
-        self._interpreter._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
+        self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -6923,7 +6929,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._vi` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -6937,7 +6943,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def close(self):
         '''close
@@ -6963,9 +6970,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 
