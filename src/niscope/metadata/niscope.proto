@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-SCOPE API metadata version 23.0.0d72
+// This file is generated from NI-SCOPE API metadata version 23.0.0d82
 //---------------------------------------------------------------------
 // Proto file for the NI-SCOPE Metadata
 //---------------------------------------------------------------------
@@ -27,6 +27,8 @@ service NiScope {
   rpc AutoSetup(AutoSetupRequest) returns (AutoSetupResponse);
   rpc CableSenseSignalStart(CableSenseSignalStartRequest) returns (CableSenseSignalStartResponse);
   rpc CableSenseSignalStop(CableSenseSignalStopRequest) returns (CableSenseSignalStopResponse);
+  rpc CalFetchDate(CalFetchDateRequest) returns (CalFetchDateResponse);
+  rpc CalFetchTemperature(CalFetchTemperatureRequest) returns (CalFetchTemperatureResponse);
   rpc CalSelfCalibrate(CalSelfCalibrateRequest) returns (CalSelfCalibrateResponse);
   rpc CheckAttributeViBoolean(CheckAttributeViBooleanRequest) returns (CheckAttributeViBooleanResponse);
   rpc CheckAttributeViInt32(CheckAttributeViInt32Request) returns (CheckAttributeViInt32Response);
@@ -363,6 +365,12 @@ enum ArrayMeasurement {
   ARRAY_MEASUREMENT_NISCOPE_VAL_BLACKMAN_WINDOW = 4024;
   ARRAY_MEASUREMENT_NISCOPE_VAL_ARRAY_OFFSET = 4025;
   ARRAY_MEASUREMENT_NISCOPE_VAL_ARRAY_GAIN = 4026;
+}
+
+enum CalibrationTypes {
+  CALIBRATION_TYPES_NISCOPE_VAL_CAL_EXTERNAL = 0;
+  CALIBRATION_TYPES_NISCOPE_VAL_CAL_SELF = 1;
+  CALIBRATION_TYPES_NISCOPE_VAL_CAL_MANUFACTURE = 2;
 }
 
 enum ClearableMeasurement {
@@ -922,6 +930,34 @@ message CableSenseSignalStopRequest {
 
 message CableSenseSignalStopResponse {
   int32 status = 1;
+}
+
+message CalFetchDateRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof which_one_enum {
+    CalibrationTypes which_one = 2;
+    sint32 which_one_raw = 3;
+  }
+}
+
+message CalFetchDateResponse {
+  int32 status = 1;
+  sint32 year = 2;
+  sint32 month = 3;
+  sint32 day = 4;
+}
+
+message CalFetchTemperatureRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof which_one_enum {
+    CalibrationTypes which_one = 2;
+    sint32 which_one_raw = 3;
+  }
+}
+
+message CalFetchTemperatureResponse {
+  int32 status = 1;
+  double temperature = 2;
 }
 
 message CalSelfCalibrateRequest {

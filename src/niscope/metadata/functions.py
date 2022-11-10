@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 23.0.0d72
+# This file is generated from NI-SCOPE API metadata version 23.0.0d87
 functions = {
     'Abort': {
         'documentation': {
@@ -269,7 +269,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -279,7 +279,6 @@ functions = {
             {
                 'direction': 'in',
                 'enum': 'CalibrationTypes',
-                'grpc_enum': None,
                 'name': 'whichOne',
                 'type': 'ViInt32'
             },
@@ -306,7 +305,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -315,6 +314,7 @@ functions = {
             },
             {
                 'direction': 'in',
+                'grpc_enum': 'CalibrationTypes',
                 'name': 'whichOne',
                 'type': 'ViInt32'
             },
@@ -1765,6 +1765,7 @@ functions = {
                     'description': '\nThe maximum number of samples returned in the measurement waveform array\nfor each waveform measurement. Default Value: None (returns all available samples).\n',
                     'note': '\nUse the attribute NISCOPE_ATTR_FETCH_MEAS_NUM_SAMPLES to set the\nnumber of samples to fetch when performing a measurement. For more\ninformation about when to use this attribute, refer to the `NI\nKnowledgeBase <javascript:WWW(WWW_KB_MEAS)>`__.\n'
                 },
+                'grpc_name': 'meas_wfm_size',
                 'name': 'measWfmSize',
                 'python_name': 'measurement_waveform_size',
                 'type': 'ViInt32'
@@ -3251,10 +3252,11 @@ functions = {
     'error_message': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Takes the **Error_Code** returned by the instrument driver functions, interprets it, and returns it as a user-readable string.'
+            'description': 'Takes the **Error_Code** returned by the instrument driver functions, interprets it, and returns it as a user-readable string.',
+            'note': '\nWhen using grpc-device, this method will call GetErrorMessage server-side while providing the same interface.\n'
         },
-        'grpc_name': 'ErrorMessage',
-        'included_in_proto': False,
+        'grpc_name': 'GetErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
