@@ -59,7 +59,13 @@ class LibraryInterpreter(object):
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
-        self._vi = 0
+        self.set_session_handle()
+
+    def set_session_handle(self, value=0):
+        self._vi = value
+
+    def get_session_handle(self):
+        return self._vi
 
     def get_error_description(self, error_code):
         '''get_error_description

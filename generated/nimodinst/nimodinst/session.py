@@ -146,11 +146,12 @@ class Session(object):
         self._item_count = 0
         self._current_item = 0
         self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
-        # Note that _library_interpreter sets _handle to 0 in its constructor, so that if
+        # Note that _library_interpreter clears the session handle in its constructor, so that if
         # _open_installed_devices_session fails, the error handler can reference it.
-        # And then once _open_installed_devices_session succeeds, we can update _library_interpreter._handle
-        # with the actual session handle.
-        self._interpreter._handle, self._item_count = self._open_installed_devices_session(driver)
+        # And then once _open_installed_devices_session succeeds, we can call this again with the
+        # actual session handle.
+        handle, self._item_count = self._open_installed_devices_session(driver)
+        self._interpreter.set_session_handle(handle)
         self._param_list = "driver=" + pp.pformat(driver)
 
         self.devices = []
@@ -190,9 +191,9 @@ class Session(object):
         try:
             self._close_installed_devices_session()
         except errors.DriverError:
-            self._interpreter._handle = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._handle = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 
