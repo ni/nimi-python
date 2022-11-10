@@ -82,7 +82,7 @@ class GrpcStubInterpreter(object):
     def clear_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
         self._invoke(
             self._client.ClearLatchedOutputCutoffState,
-            grpc_types.ClearLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason=output_cutoff_reason.value),
+            grpc_types.ClearLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason_raw=output_cutoff_reason.value),
         )
 
     def commit(self, channel_name):  # noqa: N802
@@ -380,7 +380,7 @@ class GrpcStubInterpreter(object):
     def query_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
         response = self._invoke(
             self._client.QueryLatchedOutputCutoffState,
-            grpc_types.QueryLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason=output_cutoff_reason.value),
+            grpc_types.QueryLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason_raw=output_cutoff_reason.value),
         )
         return response.output_cutoff_state
 

@@ -1855,25 +1855,6 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.measure_complete_event_delay`
     '''
-    measure_complete_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventOutputBehavior, 1150333)
-    '''Type: enums.EventOutputBehavior
-
-    Determines how the event type behaves when the corresponding trigger is received. If the Measure Complete event output behavior is set to EventOutputBehavior.PULSE, a single pulse of Measure Complete event pulse width is emitted. If the Measure Complete event output behavior is set to EventOutputBehavior.TOGGLE, the output level changes from low to high or from high to low. The default value is EventOutputBehavior.PULSE.
-
-    Note:
-    This property is not supported by all output terminals.
-    This property is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Properties by Device.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_output_behavior`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.measure_complete_event_output_behavior`
-    '''
     measure_complete_event_output_terminal = _attributes.AttributeViString(1150047)
     '''Type: str
 
@@ -1933,30 +1914,6 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.measure_complete_event_pulse_width`
-    '''
-    measure_complete_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventInitialState, 1150334)
-    '''Type: enums.EventInitialState
-
-    Specifies the initial state of the Measure Complete event if the measure_complete_event_output_behavior is set to EventOutputBehavior.TOGGLE.
-    For a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.
-    For a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.
-    The default value is NIDCPOWER_VAL_LOW_STATE.
-
-    Note:
-    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_toggle_initial_state`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.measure_complete_event_toggle_initial_state`
     '''
     measure_record_delta_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150065)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
@@ -3378,25 +3335,6 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.sequence_advance_trigger_type`
     '''
-    sequence_engine_done_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventOutputBehavior, 1150345)
-    '''Type: enums.EventOutputBehavior
-
-    Determines how the event type behaves when the corresponding trigger is received. If the Sequence Engine Done event output behavior is set to EventOutputBehavior.PULSE, a single pulse of Sequence Engine Done event pulse width is emitted. If the Sequence Engine Done event output behavior is set to EventOutputBehavior.TOGGLE, the output level changes from low to high or from high to low. The default value is EventOutputBehavior.PULSE.
-
-    Note:
-    This property is not supported by all output terminals.
-    This property is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Properties by Device.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_output_behavior`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.sequence_engine_done_event_output_behavior`
-    '''
     sequence_engine_done_event_output_terminal = _attributes.AttributeViString(1150050)
     '''Type: str
 
@@ -3456,49 +3394,6 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_engine_done_event_pulse_width`
-    '''
-    sequence_engine_done_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventInitialState, 1150346)
-    '''Type: enums.EventInitialState
-
-    Specifies the initial state of the Sequence Engine Done event if the sequence_engine_done_event_output_behavior is set to EventOutputBehavior.TOGGLE.
-    For a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.
-    For a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.
-    The default value is NIDCPOWER_VAL_LOW_STATE.
-
-    Note:
-    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_toggle_initial_state`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.sequence_engine_done_event_toggle_initial_state`
-    '''
-    sequence_iteration_complete_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventOutputBehavior, 1150335)
-    '''Type: enums.EventOutputBehavior
-
-    Determines how the event type behaves when the corresponding trigger is received. If the Sequence Iteration Complete event output behavior is set to EventOutputBehavior.PULSE, a single pulse of Sequence Iteration Complete event pulse width is emitted. If the Sequence Iteration Complete event output behavior is set to EventOutputBehavior.TOGGLE, the output level changes from low to high or from high to low. The default value is EventOutputBehavior.PULSE.
-
-    Note:
-    This property is not supported by all output terminals.
-    This property is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Properties by Device.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_output_behavior`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.sequence_iteration_complete_event_output_behavior`
     '''
     sequence_iteration_complete_event_output_terminal = _attributes.AttributeViString(1150040)
     '''Type: str
@@ -3560,30 +3455,6 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.sequence_iteration_complete_event_pulse_width`
-    '''
-    sequence_iteration_complete_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventInitialState, 1150336)
-    '''Type: enums.EventInitialState
-
-    Specifies the initial state of the Sequence Iteration Complete event if the sequence_iteration_complete_event_output_behavior is set to EventOutputBehavior.TOGGLE.
-    For a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.
-    For a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.
-    The default value is NIDCPOWER_VAL_LOW_STATE.
-
-    Note:
-    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_toggle_initial_state`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.sequence_iteration_complete_event_toggle_initial_state`
     '''
     sequence_loop_count = _attributes.AttributeViInt32(1150025)
     '''Type: int
@@ -3694,25 +3565,6 @@ class _SessionBase(object):
     Specifies whether to simulate NI-DCPower I/O operations. True specifies that operation is simulated.
     Default Value: False
     '''
-    source_complete_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventOutputBehavior, 1150331)
-    '''Type: enums.EventOutputBehavior
-
-    Determines how the event type behaves when the corresponding trigger is received. If the Source Complete event output behavior is set to EventOutputBehavior.PULSE, a single pulse of Source Complete event pulse width is emitted. If the Source Complete event output behavior is set to EventOutputBehavior.TOGGLE, the output level changes from low to high or from high to low. The default value is EventOutputBehavior.PULSE.
-
-    Note:
-    This property is not supported by all output terminals.
-    This property is not supported on all devices. For more information about supported devices and terminals, search ni.com for Supported Properties by Device.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].source_complete_event_output_behavior`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.source_complete_event_output_behavior`
-    '''
     source_complete_event_output_terminal = _attributes.AttributeViString(1150043)
     '''Type: str
 
@@ -3772,30 +3624,6 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.source_complete_event_pulse_width`
-    '''
-    source_complete_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventInitialState, 1150332)
-    '''Type: enums.EventInitialState
-
-    Specifies the initial state of the Source Complete event if the source_complete_event_output_behavior is set to EventOutputBehavior.TOGGLE.
-    For a Single Point mode acquisition, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high when the event occurs during the acquisition. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to a high state at session commit. The output will then go low when the event occurs during the acquisition.
-    For a Sequence mode operation, if the initial state is set to NIDCPOWER_VAL_LOW_STATE, the output will be set to low at session commit. The output will go high on the first time the event occurs during the acquisition. The second time the event occurs, the output will go low. This pattern continues for any subsequent event occurrences. If the initial state is set to NIDCPOWER_VAL_HIGH_STATE, the output will be set to high at session commit. The output will go low on the first time the event occurs during the acquisition. The second time the event occurs, the output will go high. This pattern continues for any subsequent event occurrences.
-    The default value is NIDCPOWER_VAL_LOW_STATE.
-
-    Note:
-    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-    Tip:
-    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
-    Use Python index notation on the repeated capabilities container channels to specify a subset.
-
-    Example: :py:attr:`my_session.channels[ ... ].source_complete_event_toggle_initial_state`
-
-    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
-
-    Example: :py:attr:`my_session.source_complete_event_toggle_initial_state`
     '''
     source_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150051)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds

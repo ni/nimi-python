@@ -186,28 +186,6 @@ class Event(Enum):
     '''
 
 
-class EventInitialState(Enum):
-    LOW = 1149
-    r'''
-    The initial state is low.
-    '''
-    HIGH = 1150
-    r'''
-    The initial state is high.
-    '''
-
-
-class EventOutputBehavior(Enum):
-    PULSE = 1147
-    r'''
-    Output generates a pulse when the event is triggered.
-    '''
-    TOGGLE = 1148
-    r'''
-    Output toggles state when the event is triggered.
-    '''
-
-
 class InstrumentMode(Enum):
     SMU_PS = 1061
     r'''

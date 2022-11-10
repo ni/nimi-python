@@ -436,56 +436,6 @@ Event
 
 
 
-EventInitialState
------------------
-
-.. py:class:: EventInitialState
-
-    .. py:attribute:: EventInitialState.LOW
-
-
-
-        The initial state is low.
-
-        
-
-
-
-    .. py:attribute:: EventInitialState.HIGH
-
-
-
-        The initial state is high.
-
-        
-
-
-
-EventOutputBehavior
--------------------
-
-.. py:class:: EventOutputBehavior
-
-    .. py:attribute:: EventOutputBehavior.PULSE
-
-
-
-        Output generates a pulse when the event is triggered.
-
-        
-
-
-
-    .. py:attribute:: EventOutputBehavior.TOGGLE
-
-
-
-        Output toggles state when the event is triggered.
-
-        
-
-
-
 InstrumentMode
 --------------
 
