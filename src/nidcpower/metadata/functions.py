@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d285
+# This file is generated from NI-DCPower API metadata version 23.0.0d9999
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -117,7 +117,6 @@ functions = {
                     ]
                 },
                 'enum': 'OutputCutoffReason',
-                'grpc_enum': None,
                 'name': 'outputCutoffReason',
                 'type': 'ViInt32'
             }
@@ -2984,7 +2983,6 @@ functions = {
                     ]
                 },
                 'enum': 'OutputCutoffReason',
-                'grpc_enum': None,
                 'name': 'outputCutoffReason',
                 'type': 'ViInt32'
             },
