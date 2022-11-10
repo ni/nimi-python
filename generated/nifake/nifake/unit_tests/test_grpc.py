@@ -203,7 +203,7 @@ class TestGrpcStubInterpreter(object):
 
     def test_api_key_sent_to_init(self):
         library_func = 'InitWithOptions'
-        expected_metadata = (('x-api-key', nifake.MEASUREMENT_LINK_23Q1_NIMI_PYTHON_API_KEY),)
+        expected_metadata = (('x-api-key', nifake.MEASUREMENTLINK_23Q1_NIMI_PYTHON_API_KEY),)
         from nifake.session_pb2 import Session as GrpcSession
         grpc_session_object = GrpcSession(id=42, name='')
         response_object = self._set_side_effect(library_func, new_session_initialized=True, vi=grpc_session_object)
