@@ -11,7 +11,7 @@ def example(resource_name, option_string, function, range, digits, address, port
 
     # Connect to the grpc server
     channel = grpc.insecure_channel(f'{address}:{port}')
-    session_options = nidmm.GrpcSessionOptions(channel, session_name, nidmm.SessionInitializationBehavior.AUTO)
+    session_options = nidmm.GrpcSessionOptions(channel, session_name)
 
     with nidmm.Session(resource_name=resource_name, options=option_string, _grpc_options=session_options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=range, resolution_digits=digits)

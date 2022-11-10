@@ -13,7 +13,7 @@ def example(resource_name, channel1, channel2, topology, simulate, address, port
 
     # Connect to the grpc server
     channel = grpc.insecure_channel(f'{address}:{port}')
-    session_options = niswitch.GrpcSessionOptions(channel, session_name, niswitch.SessionInitializationBehavior.AUTO)
+    session_options = niswitch.GrpcSessionOptions(channel, session_name)
 
     with niswitch.Session(resource_name=resource_name, topology=topology, simulate=simulate, _grpc_options=session_options) as session:
         session.connect(channel1=channel1, channel2=channel2)

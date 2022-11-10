@@ -12,7 +12,7 @@ def example(resource_name, options, waveform, frequency, amplitude, offset, phas
 
     # Connect to the grpc server
     channel = grpc.insecure_channel(f'{address}:{port}')
-    session_options = nifgen.GrpcSessionOptions(channel, session_name, nifgen.SessionInitializationBehavior.AUTO)
+    session_options = nifgen.GrpcSessionOptions(channel, session_name)
 
     with nifgen.Session(resource_name=resource_name, options=options, _grpc_options=session_options) as session:
         session.output_mode = nifgen.OutputMode.FUNC
