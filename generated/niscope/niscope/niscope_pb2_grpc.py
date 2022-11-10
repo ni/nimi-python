@@ -64,6 +64,16 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.CableSenseSignalStopRequest.SerializeToString,
                 response_deserializer=niscope__pb2.CableSenseSignalStopResponse.FromString,
                 )
+        self.CalFetchDate = channel.unary_unary(
+                '/niscope_grpc.NiScope/CalFetchDate',
+                request_serializer=niscope__pb2.CalFetchDateRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CalFetchDateResponse.FromString,
+                )
+        self.CalFetchTemperature = channel.unary_unary(
+                '/niscope_grpc.NiScope/CalFetchTemperature',
+                request_serializer=niscope__pb2.CalFetchTemperatureRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CalFetchTemperatureResponse.FromString,
+                )
         self.CalSelfCalibrate = channel.unary_unary(
                 '/niscope_grpc.NiScope/CalSelfCalibrate',
                 request_serializer=niscope__pb2.CalSelfCalibrateRequest.SerializeToString,
@@ -514,6 +524,18 @@ class NiScopeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CableSenseSignalStop(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CalFetchDate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CalFetchTemperature(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1039,6 +1061,16 @@ def add_NiScopeServicer_to_server(servicer, server):
                     servicer.CableSenseSignalStop,
                     request_deserializer=niscope__pb2.CableSenseSignalStopRequest.FromString,
                     response_serializer=niscope__pb2.CableSenseSignalStopResponse.SerializeToString,
+            ),
+            'CalFetchDate': grpc.unary_unary_rpc_method_handler(
+                    servicer.CalFetchDate,
+                    request_deserializer=niscope__pb2.CalFetchDateRequest.FromString,
+                    response_serializer=niscope__pb2.CalFetchDateResponse.SerializeToString,
+            ),
+            'CalFetchTemperature': grpc.unary_unary_rpc_method_handler(
+                    servicer.CalFetchTemperature,
+                    request_deserializer=niscope__pb2.CalFetchTemperatureRequest.FromString,
+                    response_serializer=niscope__pb2.CalFetchTemperatureResponse.SerializeToString,
             ),
             'CalSelfCalibrate': grpc.unary_unary_rpc_method_handler(
                     servicer.CalSelfCalibrate,
@@ -1607,6 +1639,40 @@ class NiScope(object):
         return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CableSenseSignalStop',
             niscope__pb2.CableSenseSignalStopRequest.SerializeToString,
             niscope__pb2.CableSenseSignalStopResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CalFetchDate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalFetchDate',
+            niscope__pb2.CalFetchDateRequest.SerializeToString,
+            niscope__pb2.CalFetchDateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CalFetchTemperature(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalFetchTemperature',
+            niscope__pb2.CalFetchTemperatureRequest.SerializeToString,
+            niscope__pb2.CalFetchTemperatureResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
