@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 23.0.0d28
+# This file is generated from NI-SCOPE API metadata version 23.0.0d82
 config = {
-    'api_version': '23.0.0d28',
+    'api_version': '23.0.0d82',
     'c_function_prefix': 'niScope_',
     'close_function': 'close',
     'context_manager_name': {
@@ -13,6 +13,7 @@ config = {
         {
             'ctypes_type': 'struct_niScope_wfmInfo',
             'file_name': 'waveform_info',
+            'grpc_name': 'WaveformInfo',
             'python_name': 'WaveformInfo'
         }
     ],
