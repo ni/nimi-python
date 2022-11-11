@@ -10,6 +10,7 @@ from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import nifake_pb2 as grpc_types
 from . import nifake_pb2_grpc as nifake_grpc
+from . import session_pb2 as session_grpc_types
 
 from . import custom_struct as custom_struct  # noqa: F401
 
@@ -25,7 +26,13 @@ class GrpcStubInterpreter(object):
         self._grpc_options = grpc_options
         self._lock = threading.RLock()
         self._client = nifake_grpc.NiFakeStub(grpc_options.grpc_channel)
-        self._vi = 0
+        self.set_session_handle()
+
+    def set_session_handle(self, value=session_grpc_types.Session()):
+        self._vi = value
+
+    def get_session_handle(self):
+        return self._vi
 
     def _invoke(self, func, request, metadata=None):
         try:

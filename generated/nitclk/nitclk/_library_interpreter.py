@@ -58,7 +58,13 @@ class LibraryInterpreter(object):
         # Initialize _session_number to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
-        self._session_number = 0
+        self.set_session_handle()
+
+    def set_session_handle(self, value=0):
+        self._session_number = value
+
+    def get_session_handle(self):
+        return self._session_number
 
     def get_error_description(self, error_code):
         '''get_error_description

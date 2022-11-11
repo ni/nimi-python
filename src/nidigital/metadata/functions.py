@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d15
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d57
 functions = {
     'Abort': {
         'documentation': {
@@ -2697,6 +2697,14 @@ functions = {
             'description': 'Creates and returns a new session to the specified digital pattern instrument to use in all subsequent function calls. To place the instrument in a known startup state when creating a new session, set the reset parameter to VI_TRUE, which is equivalent to calling the niDigital_reset function immediately after initializing the session.\n'
         },
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2966,7 +2974,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'lock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -3103,6 +3111,7 @@ functions = {
                     'description': 'The pattern sequencer flag you want to read.\n\n-   NIDIGITAL_VAL_SEQUENCER_FLAG0 ("seqflag0"): Reads pattern sequencer flag 0.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG1 ("seqflag1"): Reads pattern sequencer flag 1.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG2 ("seqflag2"): Reads pattern sequencer flag 2.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG3 ("seqflag3"): Reads pattern sequencer flag 3.\n'
                 },
                 'enum': 'SequencerFlag',
+                'grpc_enum': None,
                 'name': 'flag',
                 'type': 'ViConstString'
             },
@@ -3136,6 +3145,7 @@ functions = {
                     'description': 'The sequencer register to read from.\n\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER0 ("reg0"): Reads sequencer register 0.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER1 ("reg1"): Reads sequencer register 1.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER2 ("reg2"): Reads sequencer register 2.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER3 ("reg3"): Reads sequencer register 3.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER4 ("reg4"): Reads sequencer register 4.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER5 ("reg5"): Reads sequencer register 5.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER6 ("reg6"): Reads sequencer register 6.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER7 ("reg7"): Reads sequencer register 7.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER8 ("reg8"): Reads sequencer register 8.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER9 ("reg9"): Reads sequencer register 9.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER10 ("reg10"): Reads sequencer register 10.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER11 ("reg11"): Reads sequencer register 11.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER12 ("reg12"): Reads sequencer register 12.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER13 ("reg13"): Reads sequencer register 13.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER14 ("reg14"): Reads sequencer register 14.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER15 ("reg15"): Reads sequencer register 15.\n'
                 },
                 'enum': 'SequencerRegister',
+                'grpc_enum': None,
                 'name': 'reg',
                 'type': 'ViConstString'
             },
@@ -3358,6 +3368,7 @@ functions = {
                 'documentation': {
                     'description': 'The value to which you want to set the attribute; some of the values might not be valid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_enum': 'NiDigitalInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32'
             }
@@ -3399,6 +3410,7 @@ functions = {
                 'documentation': {
                     'description': 'The value to which you want to set the attribute; some of the values might not be valid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_name': 'value_raw',
                 'name': 'value',
                 'type': 'ViInt64'
             }
@@ -3440,6 +3452,7 @@ functions = {
                 'documentation': {
                     'description': 'The value to which you want to set the attribute; some of the values might not be valid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_name': 'value_raw',
                 'name': 'value',
                 'type': 'ViReal64'
             }
@@ -3481,6 +3494,7 @@ functions = {
                 'documentation': {
                     'description': 'The value to which you want to set the attribute; some of the values might not be valid depending on the current settings of the instrument session.\n'
                 },
+                'grpc_name': 'value_raw',
                 'name': 'value',
                 'type': 'ViConstString'
             }
@@ -3611,7 +3625,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -3685,6 +3699,7 @@ functions = {
                     'description': 'The pattern sequencer flag to write.\n\n-   NIDIGITAL_VAL_SEQUENCER_FLAG0 ("seqflag0"): Writes pattern sequencer flag 0.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG1 ("seqflag1"): Writes pattern sequencer flag 1.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG2 ("seqflag2"): Writes pattern sequencer flag 2.\n-   NIDIGITAL_VAL_SEQUENCER_FLAG3 ("seqflag3"): Writes pattern sequencer flag 3.\n'
                 },
                 'enum': 'SequencerFlag',
+                'grpc_enum': None,
                 'name': 'flag',
                 'type': 'ViConstString'
             },
@@ -3718,6 +3733,7 @@ functions = {
                     'description': 'The sequencer register you want to write to.\n\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER0 ("reg0"): Writes sequencer register 0.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER1 ("reg1"): Writes sequencer register 1.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER2 ("reg2"): Writes sequencer register 2.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER3 ("reg3"): Writes sequencer register 3.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER4 ("reg4"): Writes sequencer register 4.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER5 ("reg5"): Writes sequencer register 5.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER6 ("reg6"): Writes sequencer register 6.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER7 ("reg7"): Writes sequencer register 7.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER8 ("reg8"): Writes sequencer register 8.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER9 ("reg9"): Writes sequencer register 9.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER10 ("reg10"): Writes sequencer register 10.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER11 ("reg11"): Writes sequencer register 11.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER12 ("reg12"): Writes sequencer register 12.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER13 ("reg13"): Writes sequencer register 13.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER14 ("reg14"): Writes sequencer register 14.\n-   NIDIGITAL_VAL_SEQUENCER_REGISTER15 ("reg15"): Writes sequencer register 15.\n'
                 },
                 'enum': 'SequencerRegister',
+                'grpc_enum': None,
                 'name': 'reg',
                 'type': 'ViConstString'
             },

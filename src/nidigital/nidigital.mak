@@ -1,4 +1,4 @@
-
+PROTO_FILE = $(METADATA_DIR)/nidigitalpattern.proto
 
 include $(BUILD_HELPER_DIR)/defines.mak
 
@@ -12,4 +12,3 @@ CUSTOM_TYPES_TO_COPY += \
     history_ram_cycle_information.py \
 
 include $(BUILD_HELPER_DIR)/rules.mak
-

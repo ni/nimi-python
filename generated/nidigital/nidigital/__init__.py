@@ -7,6 +7,7 @@ __version__ = '1.4.3.dev0'
 from nidigital.enums import *  # noqa: F403,F401,H303
 from nidigital.errors import DriverWarning  # noqa: F401
 from nidigital.errors import Error  # noqa: F401
+from nidigital.grpc_session_options import *  # noqa: F403,F401,H303
 from nidigital.session import Session  # noqa: F401
 
 from nidigital.history_ram_cycle_information import HistoryRAMCycleInformation  # noqa: F401
