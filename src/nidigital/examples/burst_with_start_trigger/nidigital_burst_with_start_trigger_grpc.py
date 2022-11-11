@@ -7,7 +7,7 @@ import os
 import sys
 
 
-def example(resource_name, options, address, port, trigger_source=None, trigger_edge=None):
+def example(resource_name, options, address, port, trigger_source=None, trigger_edge=None, args.address, args.port):
     session_name = '' # user-specified name; empty string means use a new, unnamed session
 
     # Connect to the grpc server
@@ -70,26 +70,7 @@ def _main(argsv):
             args.trigger_source if args.command == 'start-trigger' else None,
             args.trigger_edge if args.command == 'start-trigger' else None, args.address, args.port )
 
-#TODO(IPETERSNI) Add example and main test once the gRPC server is started automatically
+#TODO(danestull) Add example and main test once the gRPC server is started automatically
 
 def main():
     _main(sys.argv[1:])
-
-
-def test_main():
-    _main([])
-    _main(['start-trigger'])
-
-
-def test_example():
-    resource_name = 'PXI1Slot2,PXI1Slot3'
-    options = {'simulate': True, 'driver_setup': {'Model': '6571'}, }
-    example(resource_name, options)
-
-    trigger_source = '/PXI1Slot2/PXI_Trig0'
-    trigger_edge = 'Rising'
-    example(resource_name, options, trigger_source, trigger_edge)
-
-
-if __name__ == '__main__':
-    main()
