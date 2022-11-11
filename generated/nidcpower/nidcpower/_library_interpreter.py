@@ -127,6 +127,15 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def configure_lcr_compensation(self, channel_name, compensation_data):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        compensation_data_size_ctype = _visatype.ViInt32(0 if compensation_data is None else len(compensation_data))  # case S160
+        compensation_data_ctype = _get_ctypes_pointer_for_buffer(value=compensation_data, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDCPower_ConfigureLCRCompensation(vi_ctype, channel_name_ctype, compensation_data_size_ctype, compensation_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def configure_lcr_custom_cable_compensation(self, channel_name, custom_cable_compensation_data):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d9999
+# This file is generated from NI-DCPower API metadata version 23.0.0d305
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -200,12 +200,48 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'ConfigureLCRCustomCableCompensation': {
+    'ConfigureLCRCompensation': {
         'documentation': {
-            'description': '\nApplies previously generated open and short custom cable compensation data to LCR measurements.\n\nThis function applies custom cable compensation data when you have set NIDCPOWER_ATTR_CABLE_LENGTH property to NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nCall this function after you have obtained custom cable compensation data.\n\nIf NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property is set to VI_TRUE, you must generate data with both niDCPower_PerformLCROpenCustomCableCompensation and niDCPower_PerformLCRShortCustomCableCompensation;\nif VI_FALSE, you must only use niDCPower_PerformLCROpenCustomCableCompensation, and NI-DCPower uses default short data.\n\nCall niDCPower_GetLCRCustomCableCompensationData and pass the **custom cable compensation data** to this function.\n',
-            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+            'description': 'TBD'
         },
         'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'channelName',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'compensationDataSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'compensationData',
+                'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'compensationDataSize'
+                },
+                'type': 'ViAddr[]',
+                'type_in_documentation': 'bytes'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ConfigureLCRCustomCableCompensation': {
+        'documentation': {
+            'description': '\nThis function is deprecated. Use niDCPower_ConfigureLCRCompensation\ninstead.\n\nApplies previously generated open and short custom cable compensation data to LCR measurements.\n\nThis function applies custom cable compensation data when you have set NIDCPOWER_ATTR_CABLE_LENGTH property to NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED.\n\nCall this function after you have obtained custom cable compensation data.\n\nIf NIDCPOWER_ATTR_LCR_SHORT_CUSTOM_CABLE_COMPENSATION_ENABLED property is set to VI_TRUE, you must generate data with both niDCPower_PerformLCROpenCustomCableCompensation and niDCPower_PerformLCRShortCustomCableCompensation;\nif VI_FALSE, you must only use niDCPower_PerformLCROpenCustomCableCompensation, and NI-DCPower uses default short data.\n\nCall niDCPower_GetLCRCustomCableCompensationData and pass the **custom cable compensation data** to this function.\n',
+            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+        },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -236,7 +272,6 @@ functions = {
                 },
                 'name': 'customCableCompensationData',
                 'python_api_converter_name': 'convert_to_bytes',
-                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'customCableCompensationDataSize'
@@ -1852,10 +1887,10 @@ functions = {
     },
     'GetLCRCustomCableCompensationData': {
         'documentation': {
-            'description': '\nCollects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with niDCPower_ConfigureLCRCustomCableCompensation.\n\nCall this function after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to niDCPower_ConfigureLCRCustomCableCompensation\n',
+            'description': '\nThis function is deprecated. Use niDCPower_GetLCRCompensationData\ninstead.\n\nCollects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with niDCPower_ConfigureLCRCustomCableCompensation.\n\nCall this function after you have obtained open and short custom cable compensation data. Pass the **custom cable compensation data** to niDCPower_ConfigureLCRCustomCableCompensation\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
-        'included_in_proto': True,
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -1885,7 +1920,6 @@ functions = {
                 },
                 'name': 'customCableCompensationData',
                 'python_api_converter_name': 'convert_to_bytes',
-                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'customCableCompensationDataSize'

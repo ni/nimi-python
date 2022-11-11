@@ -97,11 +97,14 @@ class GrpcStubInterpreter(object):
             grpc_types.ConfigureApertureTimeRequest(vi=self._vi, channel_name=channel_name, aperture_time=aperture_time, units_raw=units.value),
         )
 
-    def configure_lcr_custom_cable_compensation(self, channel_name, custom_cable_compensation_data):  # noqa: N802
+    def configure_lcr_compensation(self, channel_name, compensation_data):  # noqa: N802
         self._invoke(
-            self._client.ConfigureLCRCustomCableCompensation,
-            grpc_types.ConfigureLCRCustomCableCompensationRequest(vi=self._vi, channel_name=channel_name, custom_cable_compensation_data=custom_cable_compensation_data),
+            self._client.ConfigureLCRCompensation,
+            grpc_types.ConfigureLCRCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_data=compensation_data),
         )
+
+    def configure_lcr_custom_cable_compensation(self, channel_name, custom_cable_compensation_data):  # noqa: N802
+        raise NotImplementedError('configure_lcr_custom_cable_compensation is not supported over gRPC')
 
     def create_advanced_sequence_commit_step(self, channel_name, set_as_active_step):  # noqa: N802
         self._invoke(
@@ -259,11 +262,7 @@ class GrpcStubInterpreter(object):
         return response.year, response.month, response.day, response.hour, response.minute
 
     def get_lcr_custom_cable_compensation_data(self, channel_name):  # noqa: N802
-        response = self._invoke(
-            self._client.GetLCRCustomCableCompensationData,
-            grpc_types.GetLCRCustomCableCompensationDataRequest(vi=self._vi, channel_name=channel_name),
-        )
-        return response.custom_cable_compensation_data
+        raise NotImplementedError('get_lcr_custom_cable_compensation_data is not supported over gRPC')
 
     def get_self_cal_last_date_and_time(self):  # noqa: N802
         response = self._invoke(

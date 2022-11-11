@@ -26,6 +26,8 @@ class SideEffectsHelper(object):
         self._defaults['CommitWithChannels']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
+        self._defaults['ConfigureLCRCompensation'] = {}
+        self._defaults['ConfigureLCRCompensation']['return'] = 0
         self._defaults['ConfigureLCRCustomCableCompensation'] = {}
         self._defaults['ConfigureLCRCustomCableCompensation']['return'] = 0
         self._defaults['CreateAdvancedSequenceCommitStepWithChannels'] = {}
@@ -241,6 +243,11 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureApertureTime']['return'] != 0:
             return self._defaults['ConfigureApertureTime']['return']
         return self._defaults['ConfigureApertureTime']['return']
+
+    def niDCPower_ConfigureLCRCompensation(self, vi, channel_name, compensation_data_size, compensation_data):  # noqa: N802
+        if self._defaults['ConfigureLCRCompensation']['return'] != 0:
+            return self._defaults['ConfigureLCRCompensation']['return']
+        return self._defaults['ConfigureLCRCompensation']['return']
 
     def niDCPower_ConfigureLCRCustomCableCompensation(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
         if self._defaults['ConfigureLCRCustomCableCompensation']['return'] != 0:
@@ -926,6 +933,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_CommitWithChannels.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = 0
+        mock_library.niDCPower_ConfigureLCRCompensation.side_effect = MockFunctionCallError("niDCPower_ConfigureLCRCompensation")
+        mock_library.niDCPower_ConfigureLCRCompensation.return_value = 0
         mock_library.niDCPower_ConfigureLCRCustomCableCompensation.side_effect = MockFunctionCallError("niDCPower_ConfigureLCRCustomCableCompensation")
         mock_library.niDCPower_ConfigureLCRCustomCableCompensation.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceCommitStepWithChannels")
