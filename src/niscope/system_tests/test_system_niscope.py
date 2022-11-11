@@ -34,6 +34,28 @@ daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
 
 class SystemTests:
+    @pytest.fixture(scope='function')
+    def single_instrument_session(self, session_creation_kwargs):
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_5124(self, session_creation_kwargs):
+        with daqmx_sim_5124_lock:
+            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
+                yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_5142(self, session_creation_kwargs):
+        with daqmx_sim_5142_lock:
+            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
+                yield simulated_session
+
     # Attribute tests
     def test_vi_boolean_attribute(self, multi_instrument_session):
         multi_instrument_session.allow_more_records_than_memory = False
@@ -328,29 +350,20 @@ class SystemTests:
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerWindowMode.ENTERING == multi_instrument_session.trigger_window_mode
 
+    def test_error_message(self, session_creation_kwargs):
+        try:
+            # We pass in an invalid model name to force going to error_message
+            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', **session_creation_kwargs):
+                assert False
+        except niscope.Error as e:
+            assert e.code == -1074118609
+            assert e.description.find('Simulation does not support the selected model and board type.') != -1
+
 
 class TestLibrary(SystemTests):
-    @pytest.fixture(scope='function')
-    def single_instrument_session(self):
-        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def multi_instrument_session(self):
-        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe') as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_5124(self):
-        with daqmx_sim_5124_lock:
-            with niscope.Session('5124') as simulated_session:  # 5124 is needed for video triggering
-                yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_5142(self):
-        with daqmx_sim_5142_lock:
-            with niscope.Session('5142') as simulated_session:  # 5142 is needed for OSP
-                yield simulated_session
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
 
     @pytest.fixture(params=[numpy.int8, numpy.int16, numpy.int32, numpy.float64])
     def fetch_waveform_type(self, request):
@@ -387,15 +400,6 @@ class TestLibrary(SystemTests):
                 assert record_wfm[j] == waveform[i * test_record_length + j]
             assert waveforms[i].channel == expected_channels[i]
             assert waveforms[i].record == expected_records[i]
-
-    def test_error_message(self):
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
-                assert False
-        except niscope.Error as e:
-            assert e.code == -1074118609
-            assert e.description.find('Simulation does not support the selected model and board type.') != -1
 
     # TODO(danestull): Move these next 4 tests back to the general system tests once added to grpc-device
     def test_get_self_cal_last_date_time(self, single_instrument_session):
@@ -525,40 +529,9 @@ class TestGrpc(SystemTests):
             proc.kill()
 
     @pytest.fixture(scope='class')
-    def grpc_options(self, grpc_channel):
+    def session_creation_kwargs(self, grpc_channel):
         grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
-        yield grpc_options
-
-    @pytest.fixture(scope='function')
-    def single_instrument_session(self, grpc_options):
-        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def multi_instrument_session(self, grpc_options):
-        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_5124(self, grpc_options):
-        with daqmx_sim_5124_lock:
-            with niscope.Session('5124', _grpc_options=grpc_options) as simulated_session:  # 5124 is needed for video triggering
-                yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_5142(self, grpc_options):
-        with daqmx_sim_5142_lock:
-            with niscope.Session('5142', _grpc_options=grpc_options) as simulated_session:  # 5142 is needed for OSP
-                yield simulated_session
-
-    def test_error_message(self, grpc_options):
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_options=grpc_options):
-                assert False
-        except niscope.Error as e:
-            assert e.code == -1074118609
-            assert e.description.find('Simulation does not support the selected model and board type.') != -1
+        return {'_grpc_options': grpc_options}
 
     def test_configure_ref_levels(self, single_instrument_session):
         with pytest.raises(NotImplementedError) as exc_info:
