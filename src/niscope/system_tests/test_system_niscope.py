@@ -194,8 +194,8 @@ class SystemTests:
         multi_instrument_session.self_test()
 
     def test_reset(self, multi_instrument_session):
-        deault_fetch_relative_to = multi_instrument_session._fetch_relative_to
-        assert deault_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
+        default_fetch_relative_to = multi_instrument_session._fetch_relative_to
+        assert default_fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
         multi_instrument_session._fetch_relative_to = niscope.FetchRelativeTo.READ_POINTER
         non_default_acqusition_type = multi_instrument_session._fetch_relative_to
         assert non_default_acqusition_type == niscope.FetchRelativeTo.READ_POINTER
@@ -203,17 +203,8 @@ class SystemTests:
         assert multi_instrument_session._fetch_relative_to == niscope.FetchRelativeTo.PRETRIGGER
 
     def test_reset_device(self, multi_instrument_session):
-        deault_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
-        assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
-        multi_instrument_session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
-        non_default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
-        assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
-        multi_instrument_session.reset_device()
-        assert multi_instrument_session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
-
-    def test_reset_with_defaults(self, multi_instrument_session):
-        deault_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
-        assert deault_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+        default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
+        assert default_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
         multi_instrument_session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
         non_default_meas_time_histogram_high_time = multi_instrument_session.meas_time_histogram_high_time
         assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
@@ -491,6 +482,15 @@ class TestLibrary(SystemTests):
         for i in range(len(waveforms)):
             assert len(waveforms[i].samples) == test_record_length
 
+    def test_reset_with_defaults(self, single_instrument_session):
+        default_meas_time_histogram_high_time = single_instrument_session.meas_time_histogram_high_time
+        assert default_meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+        single_instrument_session.meas_time_histogram_high_time = hightime.timedelta(microseconds=1000)
+        non_default_meas_time_histogram_high_time = single_instrument_session.meas_time_histogram_high_time
+        assert non_default_meas_time_histogram_high_time == hightime.timedelta(microseconds=1000)
+        single_instrument_session.reset_with_defaults()
+        assert single_instrument_session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
+
 
 class TestGrpc(SystemTests):
     server_address = "localhost"
@@ -565,3 +565,9 @@ class TestGrpc(SystemTests):
             single_instrument_session._configure_ref_levels()
         assert exc_info.value.args[0] == 'configure_ref_levels is not supported over gRPC'
         assert str(exc_info.value) == 'configure_ref_levels is not supported over gRPC'
+
+    def test_reset_with_defaults(self, single_instrument_session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            single_instrument_session.reset_with_defaults()
+        assert exc_info.value.args[0] == 'reset_with_defaults is not supported over gRPC'
+        assert str(exc_info.value) == 'reset_with_defaults is not supported over gRPC'
