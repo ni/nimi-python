@@ -6911,9 +6911,9 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _interpreter clears the session handle in its constructor, so that if
-        # _fancy_initialize fails, the error handler can reference it.
-        # And then once _fancy_initialize succeeds, we can call set_session_handle
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _fancy_initialize fails, the error handler can reference it.
+        # And then here, once _fancy_initialize succeeds, we call set_session_handle
         # with the actual session handle.
         self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
 
