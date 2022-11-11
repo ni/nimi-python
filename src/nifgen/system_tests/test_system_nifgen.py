@@ -337,31 +337,35 @@ class SystemTests:
 
 
 class TestLibrary(SystemTests):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
+
     @pytest.fixture(scope='function')
-    def session(self):
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+    def session(self, session_creation_kwargs):
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
-    def session_5421(self):
+    def session_5421(self, session_creation_kwargs):
         with daqmx_sim_db_lock:
-            simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI')
+            simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI', **session_creation_kwargs)
         yield simulated_session
         with daqmx_sim_db_lock:
             simulated_session.close()
 
-    def test_error_message(self):
+    def test_error_message(self, session_creation_kwargs):
         try:
             # We pass in an invalid model name to force going to error_message
-            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe'):
+            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', **session_creation_kwargs):
                 assert False
         except nifgen.Error as e:
             assert e.code == -1074134944
             assert e.description.find('Insufficient location information or resource not present in the system.') != -1
 
     # Test doesn't run over gRPC due to incorrect attribute name for attribute_value.
-    def test_channels_rep_cap(self):
-        with nifgen.Session('', '', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as session:
+    def test_channels_rep_cap(self, session_creation_kwargs):
+        with nifgen.Session('', '', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as session:
             session.func_amplitude = 0.5
             assert session.channels[0:1].func_amplitude == 0.5
 
@@ -370,8 +374,8 @@ class TestLibrary(SystemTests):
             assert session.channels[1].func_amplitude == 0.5
 
     ''' Removed due to OSP disabled - #891
-    def test_fir_filter_coefficients(self):
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI') as session:
+    def test_fir_filter_coefficients(self, session_creation_kwargs):
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI', **session_creation_kwargs) as session:
             coeff_array = [0 for i in range(95)]
             coeff_array[0] = -1.0
             coeff_array[2] = 1.0
@@ -382,16 +386,16 @@ class TestLibrary(SystemTests):
             assert array == coeff_array
     '''
 
-    def test_channel_format_types(self):
-        with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+    def test_channel_format_types(self, session_creation_kwargs):
+        with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+        with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe') as simulated_session:
+        with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
+        with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe') as simulated_session:
+        with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
 
     # Test doesn't run over gRPC because numpy isn't supported by gRPC.
@@ -552,35 +556,36 @@ class TestGrpc(SystemTests):
         finally:
             proc.kill()
 
-    @pytest.fixture(scope='function')
-    def session(self, grpc_channel):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
         grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+        return {'_grpc_options': grpc_options}
+
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
-    def session_5421(self, grpc_channel):
+    def session_5421(self, session_creation_kwargs):
         with daqmx_sim_db_lock:
-            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
-            simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI', _grpc_options=grpc_options)
+            simulated_session = nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5421;BoardType:PXI', **session_creation_kwargs)
         yield simulated_session
         with daqmx_sim_db_lock:
             simulated_session.close()
 
-    def test_error_message(self, grpc_channel):
+    def test_error_message(self, session_creation_kwargs):
         try:
-            grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
             # We pass in an invalid model name to force going to error_message
-            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', _grpc_options=grpc_options):
+            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', **session_creation_kwargs):
                 assert False
         except nifgen.Error as e:
             assert e.code == -1074134944
             assert e.description.find('Insufficient location information or resource not present in the system.') != -1
 
     ''' Removed due to OSP disabled - #891
-    def test_fir_filter_coefficients(self, grpc_channel):
-        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
-        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI', _grpc_options=grpc_options) as session:
+    def test_fir_filter_coefficients(self, session_creation_kwargs):
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5441;BoardType:PXI', **session_creation_kwargs) as session:
             coeff_array = [0 for i in range(95)]
             coeff_array[0] = -1.0
             coeff_array[2] = 1.0
@@ -591,15 +596,14 @@ class TestGrpc(SystemTests):
             assert array == coeff_array
     '''
 
-    def test_channel_format_types(self, grpc_channel):
-        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
-        with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+    def test_channel_format_types(self, session_creation_kwargs):
+        with nifgen.Session('', [0, 1], False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+        with nifgen.Session('', range(2), False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+        with nifgen.Session('', '0,1', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+        with nifgen.Session('', None, False, 'Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2
-        with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+        with nifgen.Session(resource_name='', reset_device=False, options='Simulate=1, DriverSetup=Model:5433 (2CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             assert simulated_session.channel_count == 2

@@ -284,9 +284,13 @@ class SystemTests:
 
 
 class TestLibrary(SystemTests):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
+
     @pytest.fixture(scope='function')
-    def session(self):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe') as simulated_session:
+    def session(self, session_creation_kwargs):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
     def test_fetch_waveform_into(self, session):
@@ -300,10 +304,10 @@ class TestLibrary(SystemTests):
         for sample in waveform:
             assert not math.isnan(sample)
 
-    def test_error_message(self):
+    def test_error_message(self, session_creation_kwargs):
         try:
             # We pass in an invalid model name to force going to error_message
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', **session_creation_kwargs):
                 assert False
         except nidmm.Error as e:
             assert e.code == -1074134964
@@ -342,17 +346,20 @@ class TestGrpc(SystemTests):
         finally:
             proc.kill()
 
-    @pytest.fixture(scope='function')
-    def session(self, grpc_channel):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
+        return {'_grpc_options': grpc_options}
+
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
-    def test_error_message(self, grpc_channel):
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
+    def test_error_message(self, session_creation_kwargs):
         try:
             # We pass in an invalid model name to force going to error_message
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_options=grpc_options):
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', **session_creation_kwargs):
                 assert False
         except nidmm.Error as e:
             assert e.code == -1074134964
