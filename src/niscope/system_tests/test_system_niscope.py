@@ -406,6 +406,7 @@ class TestLibrary(SystemTests):
             assert e.code == -1074118609
             assert e.description.find('Simulation does not support the selected model and board type.') != -1
 
+    # TODO(danestull): Move these next 4 tests back to the general system tests once added to grpc-device
     def test_get_self_cal_last_date_time(self, single_instrument_session):
         last_cal = single_instrument_session.get_self_cal_last_date_and_time()
         assert last_cal.month == 12
@@ -558,7 +559,7 @@ class TestGrpc(SystemTests):
         except niscope.Error as e:
             assert e.code == -1074118609
             assert e.description.find('Simulation does not support the selected model and board type.') != -1
-        
+
     def test_configure_ref_levels(self, single_instrument_session):
         with pytest.raises(NotImplementedError) as exc_info:
             single_instrument_session._configure_ref_levels()
