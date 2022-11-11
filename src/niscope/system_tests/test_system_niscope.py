@@ -233,6 +233,15 @@ class SystemTests:
         multi_instrument_session.reset_device()
         assert multi_instrument_session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
+    def test_error_message(self, session_creation_kwargs):
+        try:
+            # We pass in an invalid model name to force going to error_message
+            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', **session_creation_kwargs):
+                assert False
+        except niscope.Error as e:
+            assert e.code == -1074118609
+            assert e.description.find('Simulation does not support the selected model and board type.') != -1
+
     def test_get_error(self, multi_instrument_session):
         try:
             multi_instrument_session.instrument_model = ''
@@ -350,15 +359,6 @@ class SystemTests:
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerWindowMode.ENTERING == multi_instrument_session.trigger_window_mode
 
-    def test_error_message(self, session_creation_kwargs):
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', **session_creation_kwargs):
-                assert False
-        except niscope.Error as e:
-            assert e.code == -1074118609
-            assert e.description.find('Simulation does not support the selected model and board type.') != -1
-
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
@@ -369,6 +369,7 @@ class TestLibrary(SystemTests):
     def fetch_waveform_type(self, request):
         return request.param
 
+    # not supported by grpc due to numpy usage
     def test_fetch_into(self, multi_instrument_session, fetch_waveform_type):
         test_voltage = 1.0
         test_record_length = 2000
