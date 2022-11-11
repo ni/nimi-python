@@ -17,6 +17,26 @@ test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
 class SystemTests:
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def single_instrument_session(self, session_creation_kwargs):
+        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    def test_close(self, session_creation_kwargs):
+        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs)
+        session.vil = 1
+        session.close()
+        try:
+            session.vil = 1
+            assert False
+        except nidigital.Error as e:
+            assert e.code == -1074130544
+
     def test_reset(self, multi_instrument_session):
         multi_instrument_session.selected_function = nidigital.SelectedFunction.PPMU
         assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
@@ -1300,26 +1320,6 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(self):
         return {}
 
-    @pytest.fixture(scope='function')
-    def multi_instrument_session(self, session_creation_kwargs):
-        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def single_instrument_session(self, session_creation_kwargs):
-        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    def test_close(self, session_creation_kwargs):
-        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs)
-        session.vil = 1
-        session.close()
-        try:
-            session.vil = 1
-            assert False
-        except nidigital.Error as e:
-            assert e.code == -1074130544
-
 
 class TestGrpc(SystemTests):
     server_address = "localhost"
@@ -1357,23 +1357,3 @@ class TestGrpc(SystemTests):
     def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'_grpc_options': grpc_options}
-
-    @pytest.fixture(scope='function')
-    def multi_instrument_session(self, session_creation_kwargs):
-        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def single_instrument_session(self, session_creation_kwargs):
-        with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    def test_close(self, session_creation_kwargs):
-        session = nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs)
-        session.vil = 1
-        session.close()
-        try:
-            session.vil = 1
-            assert False
-        except nidigital.Error as e:
-            assert e.code == -1074130544
