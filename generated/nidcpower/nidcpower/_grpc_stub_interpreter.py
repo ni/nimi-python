@@ -293,7 +293,7 @@ class GrpcStubInterpreter(object):
 
     def initialize_with_channels(self, resource_name, channels, reset, option_string):  # noqa: N802
         metadata = (
-            ('x-api-key', self._grpc_options.api_key),
+            ('ni-api-key', self._grpc_options.api_key),
         )
         response = self._invoke(
             self._client.InitializeWithChannels,
@@ -305,7 +305,7 @@ class GrpcStubInterpreter(object):
 
     def initialize_with_independent_channels(self, resource_name, reset, option_string):  # noqa: N802
         metadata = (
-            ('x-api-key', self._grpc_options.api_key),
+            ('ni-api-key', self._grpc_options.api_key),
         )
         response = self._invoke(
             self._client.InitializeWithIndependentChannels,

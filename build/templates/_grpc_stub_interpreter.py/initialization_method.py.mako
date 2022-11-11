@@ -16,7 +16,7 @@
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
         metadata = (
-            ('x-api-key', self._grpc_options.api_key),
+            ('ni-api-key', self._grpc_options.api_key),
         )
         ${capture_response}self._invoke(
             self._client.${grpc_name},

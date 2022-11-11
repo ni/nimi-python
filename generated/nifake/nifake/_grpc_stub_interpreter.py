@@ -309,7 +309,7 @@ class GrpcStubInterpreter(object):
 
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         metadata = (
-            ('x-api-key', self._grpc_options.api_key),
+            ('ni-api-key', self._grpc_options.api_key),
         )
         response = self._invoke(
             self._client.InitWithOptions,

@@ -193,7 +193,7 @@ class GrpcStubInterpreter(object):
 
     def init_with_topology(self, resource_name, topology, simulate, reset_device):  # noqa: N802
         metadata = (
-            ('x-api-key', self._grpc_options.api_key),
+            ('ni-api-key', self._grpc_options.api_key),
         )
         response = self._invoke(
             self._client.InitWithTopology,
