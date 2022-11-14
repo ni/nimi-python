@@ -7,7 +7,7 @@ import os
 import sys
 
 
-def example(resource_name, options, address, port, trigger_source=None, trigger_edge=None, args.address, args.port):
+def example(resource_name, options, address, port, trigger_source=None, trigger_edge=None):
     session_name = '' # user-specified name; empty string means use a new, unnamed session
 
     # Connect to the grpc server
@@ -67,8 +67,10 @@ def _main(argsv):
 
     example(args.resource_name,
             'Simulate=1, DriverSetup=Model:6571' if args.simulate == 'True' else '',
+            args.address,
+            args.port,
             args.trigger_source if args.command == 'start-trigger' else None,
-            args.trigger_edge if args.command == 'start-trigger' else None, args.address, args.port )
+            args.trigger_edge if args.command == 'start-trigger' else None,)
 
 #TODO(danestull) Add example and main test once the gRPC server is started automatically
 
