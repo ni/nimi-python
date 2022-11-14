@@ -13,7 +13,7 @@ nidigital_burst_with_start_trigger.py
    :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
 
 nidigital_burst_with_start_trigger_grpc.py
--------------------------
+------------------------------------------
 
 .. literalinclude:: ../../src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger_grpc.py
    :language: python

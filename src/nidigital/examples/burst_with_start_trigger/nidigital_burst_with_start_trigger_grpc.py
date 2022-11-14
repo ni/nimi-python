@@ -8,12 +8,12 @@ import sys
 
 
 def example(resource_name, options, address, port, trigger_source=None, trigger_edge=None):
-    session_name = '' # user-specified name; empty string means use a new, unnamed session
+    session_name = ''  # user-specified name; empty string means use a new, unnamed session
 
     # Connect to the grpc server
     channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = nidigital.GrpcSessionOptions(channel, session_name)
-    
+
     with nidigital.Session(resource_name=resource_name, options=options, grpc_options=session_options) as session:
 
         dir = os.path.join(os.path.dirname(__file__))
@@ -57,7 +57,7 @@ def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to create and configure a session that bursts a pattern on the digital pattern instrument using a start trigger', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument. Ensure the resource name matches the instrument name in the pinmap file.')
     parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
-    parser.add_argument('-a', '--address', default='localhost', help='Server address.' )
+    parser.add_argument('-a', '--address', default='localhost', help='Server address.')
     parser.add_argument('-p', '--port', default='31763', help='Server port.')
     subparser = parser.add_subparsers(dest='command', help='Sub-command help')
     start_trigger = subparser.add_parser('start-trigger', help='Configure start trigger')
@@ -67,10 +67,13 @@ def _main(argsv):
 
     example(args.resource_name,
             'Simulate=1, DriverSetup=Model:6571' if args.simulate == 'True' else '',
+            args.address,
+            args.port,
             args.trigger_source if args.command == 'start-trigger' else None,
-            args.trigger_edge if args.command == 'start-trigger' else None, args.address, args.port )
+            args.trigger_edge if args.command == 'start-trigger' else None)
 
 #TODO(IPETERSNI) Add example and main test once the gRPC server is started automatically
+
 
 def main():
     _main(sys.argv[1:])
