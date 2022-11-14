@@ -4263,35 +4263,8 @@ class _SessionBase(object):
         self._interpreter.configure_aperture_time(self._repeated_capability, aperture_time, units)
 
     @ivi_synchronized
-    def configure_lcr_compensation(self, compensation_data):
-        r'''configure_lcr_compensation
-
-        TBD
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_lcr_compensation`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
-
-        Example: :py:meth:`my_session.configure_lcr_compensation`
-
-        Args:
-            compensation_data (bytes):
-
-        '''
-        compensation_data = _converters.convert_to_bytes(compensation_data)
-        self._interpreter.configure_lcr_compensation(self._repeated_capability, compensation_data)
-
-    @ivi_synchronized
     def configure_lcr_custom_cable_compensation(self, custom_cable_compensation_data):
         r'''configure_lcr_custom_cable_compensation
-
-        This method is deprecated. Use configure_lcr_compensation
-        instead.
 
         Applies previously generated open and short custom cable compensation data to LCR measurements.
 
@@ -5500,35 +5473,6 @@ class _SessionBase(object):
         return _converters.convert_comma_separated_string_to_list(names)
 
     @ivi_synchronized
-    def get_lcr_compensation_data(self):
-        r'''get_lcr_compensation_data
-
-        Collects previously generated open, short, load, and custom cable compensation data so you can then apply it to LCR measurements with configure_lcr_compensation.
-
-        Call this method after you have obtained the compensation data of all types (open, short, load, open custom cable compensation, and short custom cable compensation) you want to apply to your measurements. Pass the **compensation data** to configure_lcr_compensation
-
-        Note:
-        This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_data`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
-
-        Example: :py:meth:`my_session.get_lcr_compensation_data`
-
-        Returns:
-            compensation_data (bytes): The open, short, load, and custom cable compensation data to retrieve.
-
-        '''
-        compensation_data = self._interpreter.get_lcr_compensation_data(self._repeated_capability)
-        return _converters.convert_to_bytes(compensation_data)
-
-    @ivi_synchronized
     def _get_lcr_compensation_last_date_and_time(self, compensation_type):
         r'''_get_lcr_compensation_last_date_and_time
 
@@ -5573,9 +5517,6 @@ class _SessionBase(object):
     @ivi_synchronized
     def get_lcr_custom_cable_compensation_data(self):
         r'''get_lcr_custom_cable_compensation_data
-
-        This method is deprecated. Use get_lcr_compensation_data
-        instead.
 
         Collects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with configure_lcr_custom_cable_compensation.
 

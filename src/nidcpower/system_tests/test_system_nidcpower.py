@@ -1025,6 +1025,22 @@ class SystemTests:
 
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+    def test_lcr_custom_cable_compensation_data(self, session):
+        compensation_data = session.get_lcr_custom_cable_compensation_data()
+        session.configure_lcr_custom_cable_compensation(compensation_data)
+
+        session.configure_lcr_custom_cable_compensation(list(compensation_data))
+
+        session.configure_lcr_custom_cable_compensation(bytes(compensation_data))
+
+        with tempfile.NamedTemporaryFile(suffix='.bin', delete=False) as temp_file:
+            temp_file.write(compensation_data)
+        with open(temp_file.name, 'rb') as reopened_temp_file:
+            compensation_data_bytes_from_file = reopened_temp_file.read()
+        session.configure_lcr_custom_cable_compensation(compensation_data_bytes_from_file)
+
+    @pytest.mark.resource_name("4190/0")
+    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     @pytest.mark.parametrize(
         "compensation_type",
         [
@@ -1048,23 +1064,6 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
-
-    # Test doesn't run over gRPC because get_lcr_custom_cable_compensation_data throws NotImplementedException.
-    @pytest.mark.resource_name("4190/0")
-    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
-    def test_lcr_custom_cable_compensation_data(self, session):
-        compensation_data = session.get_lcr_custom_cable_compensation_data()
-        session.configure_lcr_custom_cable_compensation(compensation_data)
-
-        session.configure_lcr_custom_cable_compensation(list(compensation_data))
-
-        session.configure_lcr_custom_cable_compensation(bytes(compensation_data))
-
-        with tempfile.NamedTemporaryFile(suffix='.bin', delete=False) as temp_file:
-            temp_file.write(compensation_data)
-        with open(temp_file.name, 'rb') as reopened_temp_file:
-            compensation_data_bytes_from_file = reopened_temp_file.read()
-        session.configure_lcr_custom_cable_compensation(compensation_data_bytes_from_file)
 
 
 class TestGrpc(SystemTests):
