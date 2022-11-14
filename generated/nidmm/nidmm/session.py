@@ -1042,9 +1042,9 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _interpreter clears the session handle in its constructor, so that if
-        # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can call set_session_handle
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _init_with_options fails, the error handler can reference it.
+        # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
         self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
