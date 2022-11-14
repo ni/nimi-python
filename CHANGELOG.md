@@ -41,6 +41,9 @@ All notable changes to this project will be documented in this file.
         * API parity with next NI-DCPower release.
             * Methods added:
                 * `get_lcr_compensation_data`
+        * gRPC NI-DCPower Example 
+            * Example added:
+                * `nidcpower_measure_record_grpc.py`
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
