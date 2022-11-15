@@ -6879,11 +6879,11 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _library_interpreter sets _vi to 0 in its constructor, so that if
-        # _fancy_initialize fails, the error handler can reference it.
-        # And then once _fancy_initialize succeeds, we can update _library_interpreter._vi
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _fancy_initialize fails, the error handler can reference it.
+        # And then here, once _fancy_initialize succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter._vi = self._fancy_initialize(resource_name, channels, reset, options, independent_channels)
+        self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -6897,7 +6897,7 @@ class Session(_SessionBase):
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._vi` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -6938,9 +6938,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._interpreter._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 

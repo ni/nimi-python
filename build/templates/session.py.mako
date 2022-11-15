@@ -272,19 +272,19 @@ if grpc_supported:
 % endfor
 
         # Call specified init function
-        # Note that _library_interpreter sets _${config['session_handle_parameter_name']} to 0 in its constructor, so that if
-        # ${init_function['python_name']} fails, the error handler can reference it.
-        # And then once ${init_function['python_name']} succeeds, we can update _library_interpreter._${config['session_handle_parameter_name']}
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if ${init_function['python_name']} fails, the error handler can reference it.
+        # And then here, once ${init_function['python_name']} succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter._${config['session_handle_parameter_name']} = self.${init_function['python_name']}(${init_call_params})
+        self._interpreter.set_session_handle(self.${init_function['python_name']}(${init_call_params}))
 
 % if config['uses_nitclk']:
 %   if grpc_supported:
         # NI-TClk does not work over NI gRPC Device Server
         if not _grpc_options:
-            self.tclk = nitclk.SessionReference(self._interpreter._${config['session_handle_parameter_name']})
+            self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 %   else:
-        self.tclk = nitclk.SessionReference(self._interpreter._${config['session_handle_parameter_name']})
+        self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 %   endif
 
 % endif
@@ -298,7 +298,7 @@ if grpc_supported:
         # Store the list of channels in the Session which is needed by some nimi-python modules.
         # Use try/except because not all the modules support channels.
         # self.get_channel_names() and self.channel_count can only be called after the session
-        # handle `self._interpreter._${config['session_handle_parameter_name']}` is set
+        # handle is set
         try:
             self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
         except AttributeError:
@@ -336,9 +336,9 @@ if grpc_supported:
         try:
             self._${close_function_name}()
         except errors.DriverError:
-            self._interpreter._${config['session_handle_parameter_name']} = 0
+            self._interpreter.set_session_handle()
             raise
-        self._interpreter._${config['session_handle_parameter_name']} = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if not v['render_in_session_base']}):

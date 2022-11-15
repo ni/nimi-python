@@ -19,7 +19,7 @@ class TestSession(object):
     class PatchedLibraryInterpreter(nifake._library_interpreter.LibraryInterpreter):
         def __init__(self, encoding):
             for f in dir(self):
-                if not f.startswith("_"):
+                if not f.startswith("_") and f not in {'get_session_handle', 'set_session_handle'}:
                     setattr(self, f, MagicMock(spec_set=getattr(self, f), side_effect=_mock_helper.MockFunctionCallError(f)))
 
     def setup_method(self, method):
@@ -810,7 +810,7 @@ class TestGrpcSession(object):
     class PatchedGrpcInterpreter(nifake._grpc_stub_interpreter.GrpcStubInterpreter):
         def __init__(self, grpc_options):
             for f in dir(self):
-                if not f.startswith("_"):
+                if not f.startswith("_") and f not in {'get_session_handle', 'set_session_handle'}:
                     setattr(self, f, MagicMock(spec_set=getattr(self, f), side_effect=_mock_helper.MockFunctionCallError(f)))
 
     def setup_method(self, method):

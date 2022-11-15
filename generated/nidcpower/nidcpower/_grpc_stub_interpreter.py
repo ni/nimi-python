@@ -10,6 +10,7 @@ from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import nidcpower_pb2 as grpc_types
 from . import nidcpower_pb2_grpc as nidcpower_grpc
+from . import session_pb2 as session_grpc_types
 
 from . import lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
 
@@ -23,7 +24,13 @@ class GrpcStubInterpreter(object):
         self._grpc_options = grpc_options
         self._lock = threading.RLock()
         self._client = nidcpower_grpc.NiDCPowerStub(grpc_options.grpc_channel)
-        self._vi = 0
+        self.set_session_handle()
+
+    def set_session_handle(self, value=session_grpc_types.Session()):
+        self._vi = value
+
+    def get_session_handle(self):
+        return self._vi
 
     def _invoke(self, func, request):
         try:
