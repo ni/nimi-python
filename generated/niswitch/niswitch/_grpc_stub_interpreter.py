@@ -81,7 +81,7 @@ class GrpcStubInterpreter(object):
             self._client.CanConnect,
             grpc_types.CanConnectRequest(vi=self._vi, channel1=channel1, channel2=channel2),
         )
-        return enums.PathCapability(response.path_capability)
+        return enums.PathCapability(response.path_capability_raw)
 
     def commit(self):  # noqa: N802
         self._invoke(
@@ -193,7 +193,7 @@ class GrpcStubInterpreter(object):
             self._client.GetRelayPosition,
             grpc_types.GetRelayPositionRequest(vi=self._vi, relay_name=relay_name),
         )
-        return enums.RelayPosition(response.relay_position)
+        return enums.RelayPosition(response.relay_position_raw)
 
     def init_with_topology(self, resource_name, topology, simulate, reset_device):  # noqa: N802
         response = self._invoke(
@@ -251,7 +251,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802

@@ -265,7 +265,7 @@ class GrpcStubInterpreter(object):
             self._client.FetchHistoryRAMCyclePinData,
             grpc_types.FetchHistoryRAMCyclePinDataRequest(vi=self._vi, site=site, pin_list=pin_list, sample_index=sample_index, dut_cycle_index=dut_cycle_index),
         )
-        return [enums.PinState(x) for x in response.expected_pin_states], [enums.PinState(x) for x in response.actual_pin_states], response.per_pin_pass_fail
+        return [enums.PinState(x) for x in response.expected_pin_states_raw], [enums.PinState(x) for x in response.actual_pin_states_raw], response.per_pin_pass_fail
 
     def fetch_history_ram_scan_cycle_number(self, site, sample_index):  # noqa: N802
         response = self._invoke(
@@ -391,7 +391,7 @@ class GrpcStubInterpreter(object):
             self._client.GetTimeSetDriveFormat,
             grpc_types.GetTimeSetDriveFormatRequest(vi=self._vi, pin=pin, time_set_name=time_set_name),
         )
-        return enums.DriveFormat(response.format)
+        return enums.DriveFormat(response.format_raw)
 
     def get_time_set_edge(self, pin, time_set_name, edge):  # noqa: N802
         response = self._invoke(
@@ -514,7 +514,7 @@ class GrpcStubInterpreter(object):
             self._client.ReadStatic,
             grpc_types.ReadStaticRequest(vi=self._vi, channel_list=channel_list),
         )
-        return [enums.PinState(x) for x in response.data]
+        return [enums.PinState(x) for x in response.data_raw]
 
     def reset_device(self):  # noqa: N802
         self._invoke(

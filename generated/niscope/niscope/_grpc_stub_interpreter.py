@@ -85,7 +85,7 @@ class GrpcStubInterpreter(object):
             self._client.AcquisitionStatus,
             grpc_types.AcquisitionStatusRequest(vi=self._vi),
         )
-        return enums.AcquisitionStatus(response.acquisition_status)
+        return enums.AcquisitionStatus(response.acquisition_status_raw)
 
     def actual_meas_wfm_size(self, array_meas_function):  # noqa: N802
         response = self._invoke(
