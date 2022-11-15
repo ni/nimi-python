@@ -367,8 +367,8 @@ class GrpcStubInterpreter(object):
 
     def error_message(self, error_code):  # noqa: N802
         response = self._invoke(
-            self._client.ErrorMessage,
-            grpc_types.ErrorMessageRequest(vi=self._vi, error_code=error_code),
+            self._client.GetErrorMessage,
+            grpc_types.GetErrorMessageRequest(vi=self._vi, error_code=error_code),
         )
         return response.error_message
 

@@ -23,6 +23,8 @@ class SideEffectsHelper(object):
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
+        self._defaults['ConfigureABC'] = {}
+        self._defaults['ConfigureABC']['return'] = 0
         self._defaults['CustomNestedStructRoundtrip'] = {}
         self._defaults['CustomNestedStructRoundtrip']['return'] = 0
         self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] = None
@@ -242,6 +244,11 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             an_array_ref[i] = test_value[i]
         return self._defaults['BoolArrayOutputFunction']['return']
+
+    def niFake_ConfigureABC(self, vi):  # noqa: N802
+        if self._defaults['ConfigureABC']['return'] != 0:
+            return self._defaults['ConfigureABC']['return']
+        return self._defaults['ConfigureABC']['return']
 
     def niFake_CustomNestedStructRoundtrip(self, nested_custom_type_in, nested_custom_type_out):  # noqa: N802
         if self._defaults['CustomNestedStructRoundtrip']['return'] != 0:
@@ -724,7 +731,7 @@ class SideEffectsHelper(object):
             return self._defaults['OneInputFunction']['return']
         return self._defaults['OneInputFunction']['return']
 
-    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):  # noqa: N802
         if self._defaults['ParametersAreMultipleTypes']['return'] != 0:
             return self._defaults['ParametersAreMultipleTypes']['return']
         return self._defaults['ParametersAreMultipleTypes']['return']
@@ -967,6 +974,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
+        mock_library.niFake_ConfigureABC.side_effect = MockFunctionCallError("niFake_ConfigureABC")
+        mock_library.niFake_ConfigureABC.return_value = 0
         mock_library.niFake_CustomNestedStructRoundtrip.side_effect = MockFunctionCallError("niFake_CustomNestedStructRoundtrip")
         mock_library.niFake_CustomNestedStructRoundtrip.return_value = 0
         mock_library.niFake_DoubleAllTheNums.side_effect = MockFunctionCallError("niFake_DoubleAllTheNums")
