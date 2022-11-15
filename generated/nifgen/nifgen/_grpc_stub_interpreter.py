@@ -302,7 +302,7 @@ class GrpcStubInterpreter(object):
             self._client.GetHardwareState,
             grpc_types.GetHardwareStateRequest(vi=self._vi),
         )
-        return enums.HardwareState(response.state)
+        return enums.HardwareState(response.state_raw)
 
     def get_self_cal_last_date_and_time(self):  # noqa: N802
         response = self._invoke(
@@ -422,7 +422,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -434,7 +434,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViString,
-            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_named_waveform_next_write_position(self, channel_name, waveform_name, relative_to, offset):  # noqa: N802
