@@ -17,9 +17,6 @@
             self._fetch_num_records = -1 if num_records is None else num_records
             self._fetch_meas_num_samples = -1 if meas_num_samples is None else meas_num_samples
 
-        if meas_wfm_size is None:
-            meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
-
         meas_wfm, wfm_info = self._${f['python_name']}(array_meas_function, meas_wfm_size, timeout)
 
         record_length = int(len(meas_wfm) / len(wfm_info))

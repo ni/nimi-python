@@ -366,6 +366,8 @@ class LibraryInterpreter(object):
         return [waveform_info.WaveformInfo(wfm_info_ctype[i]) for i in range(self.actual_num_wfms(channel_list))]
 
     def fetch_array_measurement(self, channel_list, timeout, array_meas_function, measurement_waveform_size):  # noqa: N802
+        if measurement_waveform_size is None:
+            measurement_waveform_size = self.actual_meas_wfm_size(array_meas_function)
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
