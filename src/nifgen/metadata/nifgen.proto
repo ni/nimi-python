@@ -1,6 +1,10 @@
 
 //---------------------------------------------------------------------
+<<<<<<< HEAD
 // This file is generated from NI-FGEN API metadata version 23.0.0d70
+=======
+// This file is generated from NI-FGEN API metadata version 23.0.0d57
+>>>>>>> 9654eb43ff0836d48e83467184be95686c069422
 //---------------------------------------------------------------------
 // Proto file for the NI-FGEN Metadata
 //---------------------------------------------------------------------

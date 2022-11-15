@@ -59,6 +59,11 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.CommandWithReservedParamRequest.SerializeToString,
                 response_deserializer=nifake__pb2.CommandWithReservedParamResponse.FromString,
                 )
+        self.ConfigureAbc = channel.unary_unary(
+                '/nifake_grpc.NiFake/ConfigureAbc',
+                request_serializer=nifake__pb2.ConfigureAbcRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ConfigureAbcResponse.FromString,
+                )
         self.Control4022 = channel.unary_unary(
                 '/nifake_grpc.NiFake/Control4022',
                 request_serializer=nifake__pb2.Control4022Request.SerializeToString,
@@ -503,6 +508,12 @@ class NiFakeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def CommandWithReservedParam(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ConfigureAbc(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1023,6 +1034,11 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.CommandWithReservedParam,
                     request_deserializer=nifake__pb2.CommandWithReservedParamRequest.FromString,
                     response_serializer=nifake__pb2.CommandWithReservedParamResponse.SerializeToString,
+            ),
+            'ConfigureAbc': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureAbc,
+                    request_deserializer=nifake__pb2.ConfigureAbcRequest.FromString,
+                    response_serializer=nifake__pb2.ConfigureAbcResponse.SerializeToString,
             ),
             'Control4022': grpc.unary_unary_rpc_method_handler(
                     servicer.Control4022,
@@ -1574,6 +1590,23 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CommandWithReservedParam',
             nifake__pb2.CommandWithReservedParamRequest.SerializeToString,
             nifake__pb2.CommandWithReservedParamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ConfigureAbc(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ConfigureAbc',
+            nifake__pb2.ConfigureAbcRequest.SerializeToString,
+            nifake__pb2.ConfigureAbcResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
