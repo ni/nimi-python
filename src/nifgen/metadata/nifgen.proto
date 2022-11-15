@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-FGEN API metadata version 23.0.0d52
+// This file is generated from NI-FGEN API metadata version 23.0.0d70
 //---------------------------------------------------------------------
 // Proto file for the NI-FGEN Metadata
 //---------------------------------------------------------------------
@@ -1930,7 +1930,7 @@ message SetAttributeViBooleanRequest {
   nidevice_grpc.Session vi = 1;
   string channel_name = 2;
   NiFgenAttribute attribute_id = 3;
-  bool attribute_value_raw = 4;
+  bool attribute_value = 4;
 }
 
 message SetAttributeViBooleanResponse {
@@ -1992,7 +1992,7 @@ message SetAttributeViStringRequest {
   string channel_name = 2;
   NiFgenAttribute attribute_id = 3;
   oneof attribute_value_enum {
-    string attribute_value = 4;
+    string attribute_value_raw = 4;
     NiFgenStringAttributeValuesMapped attribute_value_mapped = 5;
   }
 }
