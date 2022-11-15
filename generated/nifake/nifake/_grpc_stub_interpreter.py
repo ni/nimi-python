@@ -98,7 +98,7 @@ class GrpcStubInterpreter(object):
     def custom_nested_struct_roundtrip(self, nested_custom_type_in):  # noqa: N802
         response = self._invoke(
             self._client.CustomNestedStructRoundtrip,
-            grpc_types.CustomNestedStructRoundtripRequest(nested_custom_type_in=nested_custom_type_in.create_copy(grpc_types.CustomStructNestedTypedef)),
+            grpc_types.CustomNestedStructRoundtripRequest(nested_custom_type_in=nested_custom_type_in._create_copy(grpc_types.CustomStructNestedTypedef)),
         )
         return custom_struct_nested_typedef.CustomStructNestedTypedef(response.nested_custom_type_out)
 
@@ -453,13 +453,13 @@ class GrpcStubInterpreter(object):
     def set_custom_type(self, cs):  # noqa: N802
         self._invoke(
             self._client.SetCustomType,
-            grpc_types.SetCustomTypeRequest(vi=self._vi, cs=cs.create_copy(grpc_types.FakeCustomStruct)),
+            grpc_types.SetCustomTypeRequest(vi=self._vi, cs=cs._create_copy(grpc_types.FakeCustomStruct)),
         )
 
     def set_custom_type_array(self, cs):  # noqa: N802
         self._invoke(
             self._client.SetCustomTypeArray,
-            grpc_types.SetCustomTypeArrayRequest(vi=self._vi, cs=cs and [x.create_copy(grpc_types.FakeCustomStruct) for x in cs]),
+            grpc_types.SetCustomTypeArrayRequest(vi=self._vi, cs=cs and [x._create_copy(grpc_types.FakeCustomStruct) for x in cs]),
         )
 
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name):  # noqa: N802
