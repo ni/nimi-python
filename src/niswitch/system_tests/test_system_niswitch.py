@@ -24,6 +24,19 @@ daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 
 class SystemTests:
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_2532(self, session_creation_kwargs):
+        with daqmx_sim_db_lock:
+            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
+        yield simulated_session
+        with daqmx_sim_db_lock:
+            simulated_session.close()
+
     # Basic Use Case Tests
     def test_relayclose(self, session):
         relay_name = 'kr0c0'
@@ -153,29 +166,20 @@ class SystemTests:
         session.disable()   # expect no errors
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
 
-
-class TestLibrary(SystemTests):
-    @pytest.fixture(scope='function')
-    def session(self):
-        with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_2532(self):
-        with daqmx_sim_db_lock:
-            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False)
-        yield simulated_session
-        with daqmx_sim_db_lock:
-            simulated_session.close()
-
-    def test_error_message(self):
+    def test_error_message(self, session_creation_kwargs):
         try:
             # We pass in an invalid model name to force going to error_message
-            with niswitch.Session('', 'Invalid Topology', True, True):
+            with niswitch.Session('', 'Invalid Topology', True, True, **session_creation_kwargs):
                 assert False
         except niswitch.Error as e:
             assert e.code == -1074118654
             assert e.description.find('Invalid resource name.') != -1
+
+
+class TestLibrary(SystemTests):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
 
 
 class TestGrpc(SystemTests):
@@ -210,27 +214,7 @@ class TestGrpc(SystemTests):
         finally:
             proc.kill()
 
-    @pytest.fixture(scope='function')
-    def session(self, grpc_channel):
-        session_options = niswitch.GrpcSessionOptions(grpc_channel, '', initialization_behavior=niswitch.SessionInitializationBehavior.AUTO)
-        with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, _grpc_options=session_options) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_2532(self, grpc_channel):
-        session_options = niswitch.GrpcSessionOptions(grpc_channel, '', initialization_behavior=niswitch.SessionInitializationBehavior.AUTO)
-        with daqmx_sim_db_lock:
-            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, _grpc_options=session_options)
-        yield simulated_session
-        with daqmx_sim_db_lock:
-            simulated_session.close()
-
-    def test_error_message(self, grpc_channel):
-        session_options = niswitch.GrpcSessionOptions(grpc_channel, '', initialization_behavior=niswitch.SessionInitializationBehavior.AUTO)
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with niswitch.Session('', 'Invalid Topology', True, True, _grpc_options=session_options):
-                assert False
-        except niswitch.Error as e:
-            assert e.code == -1074118654
-            assert e.description.find('Invalid resource name.') != -1
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = niswitch.GrpcSessionOptions(grpc_channel, "")
+        return {'_grpc_options': grpc_options}

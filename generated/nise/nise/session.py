@@ -116,9 +116,9 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _interpreter clears the session handle in its constructor, so that if
-        # _open_session fails, the error handler can reference it.
-        # And then once _open_session succeeds, we can call set_session_handle
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _open_session fails, the error handler can reference it.
+        # And then here, once _open_session succeeds, we call set_session_handle
         # with the actual session handle.
         self._interpreter.set_session_handle(self._open_session(virtual_device_name, options))
 

@@ -813,7 +813,7 @@ class TestGrpcStubInterpreter(object):
         interpreter = self._get_initialized_stub_interpreter()
         assert interpreter.set_attribute_vi_boolean('', attribute_id, attrib_bool) is None  # no outputs
         self._assert_call(library_func, response_object).assert_called_once_with(
-            vi=GRPC_SESSION_OBJECT_FOR_TEST, channel_name='', attribute_id=attribute_id, attribute_value_raw=True
+            vi=GRPC_SESSION_OBJECT_FOR_TEST, channel_name='', attribute_id=attribute_id, attribute_value=True
         )
 
     def test_get_attribute_int64(self):

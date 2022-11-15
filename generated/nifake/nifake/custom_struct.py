@@ -37,7 +37,7 @@ class CustomStruct(object):
             self.struct_int = struct_int
             self.struct_double = struct_double
 
-    def create_copy(self, target_class):
+    def _create_copy(self, target_class):
         return target_class(struct_int=self.struct_int, struct_double=self.struct_double)
 
     def __repr__(self):

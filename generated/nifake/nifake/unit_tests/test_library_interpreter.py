@@ -374,7 +374,7 @@ class TestLibraryInterpreter(object):
         string_val = 'Testing is fun?'
         interpreter = self.get_initialized_library_interpreter()
         interpreter.parameters_are_multiple_types(boolean_val, int32_val, int64_val, enum_val, float_val, float_enum_val, string_val)
-        self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanMatcher(boolean_val), _matchers.ViInt32Matcher(int32_val), _matchers.ViInt64Matcher(int64_val), _matchers.ViInt16Matcher(enum_val.value), _matchers.ViReal64Matcher(float_val), _matchers.ViReal64Matcher(float_enum_val.value), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViStringMatcher(string_val))
+        self.patched_library.niFake_ParametersAreMultipleTypes.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViBooleanMatcher(boolean_val), _matchers.ViInt32Matcher(int32_val), _matchers.ViInt64Matcher(int64_val), _matchers.ViInt16Matcher(enum_val.value), _matchers.ViReal64Matcher(float_val), _matchers.ViReal64Matcher(float_enum_val.value), _matchers.ViStringMatcher(string_val))
 
     def test_method_with_error(self):
         test_error_code = -42

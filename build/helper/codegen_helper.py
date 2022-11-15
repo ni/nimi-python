@@ -155,8 +155,6 @@ def _get_library_interpreter_output_param_return_snippet(output_parameter, param
 
 def _get_grpc_interpreter_output_param_return_snippet(output_parameter, parameters, config):
     param_accessor = 'response.' + output_parameter['grpc_name']
-    if output_parameter['grpc_enum'] is not None:
-        param_accessor += '_raw'
 
     return_type, is_custom_type = _get_interpreter_output_param_return_type(output_parameter, config)
     if hasattr(builtins, return_type):
@@ -700,7 +698,7 @@ parameters_for_testing = [
         'documentation': {'description': 'Contains an array of enums, stored as 16 bit integers under the hood '},
         'enum': 'Turtle',
         'grpc_enum': 'Turtle',
-        'grpc_name': 'an_array',
+        'grpc_name': 'an_array_raw',
         'is_buffer': True,
         'use_array': False,
         'use_list': True,
@@ -730,7 +728,7 @@ parameters_for_testing = [
         },
         'enum': 'Turtle',
         'grpc_enum': 'Turtle',
-        'grpc_name': 'an_int_enum',
+        'grpc_name': 'an_int_enum_raw',
         'is_buffer': False,
         'is_string': False,
         'is_repeated_capability': False,
@@ -1452,7 +1450,7 @@ parameters_for_testing = [
         'documentation': {'description': 'An input string-valued enum.'},
         'enum': 'Color',
         'grpc_enum': 'Color',
-        'grpc_name': 'a_string_enum',
+        'grpc_name': 'a_string_enum_raw',
         'is_buffer': False,
         'is_string': True,
         'is_repeated_capability': False,
