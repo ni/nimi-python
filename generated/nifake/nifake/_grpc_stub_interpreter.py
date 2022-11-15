@@ -119,7 +119,7 @@ class GrpcStubInterpreter(object):
             self._client.EnumArrayOutputFunction,
             grpc_types.EnumArrayOutputFunctionRequest(vi=self._vi, number_of_elements=number_of_elements),
         )
-        return [enums.Turtle(x) for x in response.an_array]
+        return [enums.Turtle(x) for x in response.an_array_raw]
 
     def enum_input_function_with_defaults(self, a_turtle):  # noqa: N802
         self._invoke(
@@ -275,7 +275,7 @@ class GrpcStubInterpreter(object):
             self._client.GetEnumValue,
             grpc_types.GetEnumValueRequest(vi=self._vi),
         )
-        return response.a_quantity, enums.Turtle(response.a_turtle)
+        return response.a_quantity, enums.Turtle(response.a_turtle_raw)
 
     def get_error(self):  # noqa: N802
         response = self._invoke(
@@ -309,7 +309,7 @@ class GrpcStubInterpreter(object):
             self._client.MethodUsingWholeAndFractionalNumbers,
             grpc_types.MethodUsingWholeAndFractionalNumbersRequest(),
         )
-        return response.whole_number, response.fractional_number
+        return response.whole_number_raw, response.fractional_number_raw
 
     def method_with_grpc_only_param(self, simple_param):  # noqa: N802
         self._invoke(
@@ -394,7 +394,7 @@ class GrpcStubInterpreter(object):
             self._client.ReturnMultipleTypes,
             grpc_types.ReturnMultipleTypesRequest(vi=self._vi, array_size=array_size),
         )
-        return response.a_boolean, response.an_int32, response.an_int64, enums.Turtle(response.an_int_enum), response.a_float, enums.FloatEnum(response.a_float_enum), response.an_array, response.a_string
+        return response.a_boolean, response.an_int32, response.an_int64, enums.Turtle(response.an_int_enum_raw), response.a_float, enums.FloatEnum(response.a_float_enum_raw), response.an_array, response.a_string
 
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
@@ -405,7 +405,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViInt32,
-            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViInt32Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_attribute_vi_int64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -417,7 +417,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_real64(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViReal64,
-            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
+            grpc_types.SetAttributeViReal64Request(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
         )
 
     def set_attribute_vi_string(self, channel_name, attribute_id, attribute_value):  # noqa: N802
