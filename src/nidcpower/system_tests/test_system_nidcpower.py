@@ -144,6 +144,13 @@ class SystemTests:
         session.reset_with_defaults()
         assert channel.aperture_time_units == nidcpower.ApertureTimeUnits.SECONDS
 
+    def test_reset(self, session):
+        channel = session.channels['0']
+        assert channel.output_enabled is True
+        channel.output_enabled = False
+        session.reset()
+        assert channel.output_enabled is True
+
     def test_disable(self, session):
         channel = session.channels['0']
         assert channel.output_enabled is True
@@ -652,6 +659,14 @@ class SystemTests:
         assert e.value.code == -1074118656
         # Error Description: Device was not recognized. The device is not supported with this driver or version.
 
+    @pytest.mark.include_legacy_session
+    def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
+        """Sessions should not error when specifying all channels by number."""
+        assert session.channels['0'].output_enabled is True
+        session.channels['0'].output_enabled = False
+        session.channels['0-11'].reset()
+        assert session.channels['0'].output_enabled is True
+
     @pytest.mark.legacy_session_only
     def test_error_channel_name_not_allowed_in_legacy_session(self, session):
         with pytest.raises(nidcpower.Error) as e:
@@ -1021,23 +1036,6 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
-
-    # Test doesn't run over gRPC due to issues with the name of the property attribute_value.
-    def test_reset(self, session):
-        channel = session.channels['0']
-        assert channel.output_enabled is True
-        channel.output_enabled = False
-        session.reset()
-        assert channel.output_enabled is True
-
-    # Test doesn't run over gRPC due to issues with the name of the property attribute_value.
-    @pytest.mark.include_legacy_session
-    def test_repeated_capabilities_on_method_when_all_channels_are_specified(self, session):
-        """Sessions should not error when specifying all channels by number."""
-        assert session.channels['0'].output_enabled is True
-        session.channels['0'].output_enabled = False
-        session.channels['0-11'].reset()
-        assert session.channels['0'].output_enabled is True
 
     # Test doesn't run over gRPC due to issues with the name of the property reference_value.
     @pytest.mark.resource_name("4190/0")
