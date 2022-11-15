@@ -343,7 +343,7 @@ class GrpcStubInterpreter(object):
     def perform_lcr_load_compensation(self, channel_name, compensation_spots):  # noqa: N802
         self._invoke(
             self._client.PerformLCRLoadCompensation,
-            grpc_types.PerformLCRLoadCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_spots=compensation_spots and [x.create_copy(grpc_types.NILCRLoadCompensationSpot) for x in compensation_spots]),
+            grpc_types.PerformLCRLoadCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_spots=compensation_spots and [x._create_copy(grpc_types.NILCRLoadCompensationSpot) for x in compensation_spots]),
         )
 
     def perform_lcr_open_compensation(self, channel_name, additional_frequencies):  # noqa: N802

@@ -73,7 +73,7 @@ class LCRLoadCompensationSpot(object):
         self.reference_value_type = enums.LCRReferenceValueType(reference_value_type)
         self.reference_value = reference_value
 
-    def create_copy(self, target_class):
+    def _create_copy(self, target_class):
         try:
             return target_class(frequency=self.frequency, reference_value_type=self.reference_value_type.value, reference_value=self.reference_value)
         except ValueError:
