@@ -74,7 +74,10 @@ class LCRLoadCompensationSpot(object):
         self.reference_value = reference_value
 
     def create_copy(self, target_class):
-        return target_class(frequency=self.frequency, reference_value_type=self.reference_value_type.value, reference_value_a=self.reference_value.real, reference_value_b=self.reference_value.imag)
+        try:
+            return target_class(frequency=self.frequency, reference_value_type=self.reference_value_type.value, reference_value=self.reference_value)
+        except ValueError:
+            return target_class(frequency=self.frequency, reference_value_type=self.reference_value_type.value, reference_value_a=self.reference_value.real, reference_value_b=self.reference_value.imag)
 
     def __repr__(self):
         return "{0}.{1}(frequency={2}, reference_value_type={3}.{4}.{5}, reference_value={6})".format(
