@@ -39,6 +39,11 @@ class NiDCPowerStub(object):
                 request_serializer=nidcpower__pb2.ClearInterchangeWarningsRequest.SerializeToString,
                 response_deserializer=nidcpower__pb2.ClearInterchangeWarningsResponse.FromString,
                 )
+        self.ClearLatchedOutputCutoffState = channel.unary_unary(
+                '/nidcpower_grpc.NiDCPower/ClearLatchedOutputCutoffState',
+                request_serializer=nidcpower__pb2.ClearLatchedOutputCutoffStateRequest.SerializeToString,
+                response_deserializer=nidcpower__pb2.ClearLatchedOutputCutoffStateResponse.FromString,
+                )
         self.Close = channel.unary_unary(
                 '/nidcpower_grpc.NiDCPower/Close',
                 request_serializer=nidcpower__pb2.CloseRequest.SerializeToString,
@@ -138,11 +143,6 @@ class NiDCPowerStub(object):
                 '/nidcpower_grpc.NiDCPower/ConfigureDigitalEdgeStartTriggerWithChannels',
                 request_serializer=nidcpower__pb2.ConfigureDigitalEdgeStartTriggerWithChannelsRequest.SerializeToString,
                 response_deserializer=nidcpower__pb2.ConfigureDigitalEdgeStartTriggerWithChannelsResponse.FromString,
-                )
-        self.ConfigureLCRCompensation = channel.unary_unary(
-                '/nidcpower_grpc.NiDCPower/ConfigureLCRCompensation',
-                request_serializer=nidcpower__pb2.ConfigureLCRCompensationRequest.SerializeToString,
-                response_deserializer=nidcpower__pb2.ConfigureLCRCompensationResponse.FromString,
                 )
         self.ConfigureLCRCustomCableCompensation = channel.unary_unary(
                 '/nidcpower_grpc.NiDCPower/ConfigureLCRCustomCableCompensation',
@@ -514,11 +514,6 @@ class NiDCPowerStub(object):
                 request_serializer=nidcpower__pb2.GetExtCalRecommendedIntervalRequest.SerializeToString,
                 response_deserializer=nidcpower__pb2.GetExtCalRecommendedIntervalResponse.FromString,
                 )
-        self.GetLCRCompensationData = channel.unary_unary(
-                '/nidcpower_grpc.NiDCPower/GetLCRCompensationData',
-                request_serializer=nidcpower__pb2.GetLCRCompensationDataRequest.SerializeToString,
-                response_deserializer=nidcpower__pb2.GetLCRCompensationDataResponse.FromString,
-                )
         self.GetLCRCompensationLastDateAndTime = channel.unary_unary(
                 '/nidcpower_grpc.NiDCPower/GetLCRCompensationLastDateAndTime',
                 request_serializer=nidcpower__pb2.GetLCRCompensationLastDateAndTimeRequest.SerializeToString,
@@ -628,6 +623,11 @@ class NiDCPowerStub(object):
                 '/nidcpower_grpc.NiDCPower/QueryInCompliance',
                 request_serializer=nidcpower__pb2.QueryInComplianceRequest.SerializeToString,
                 response_deserializer=nidcpower__pb2.QueryInComplianceResponse.FromString,
+                )
+        self.QueryLatchedOutputCutoffState = channel.unary_unary(
+                '/nidcpower_grpc.NiDCPower/QueryLatchedOutputCutoffState',
+                request_serializer=nidcpower__pb2.QueryLatchedOutputCutoffStateRequest.SerializeToString,
+                response_deserializer=nidcpower__pb2.QueryLatchedOutputCutoffStateResponse.FromString,
                 )
         self.QueryMaxCurrentLimit = channel.unary_unary(
                 '/nidcpower_grpc.NiDCPower/QueryMaxCurrentLimit',
@@ -779,6 +779,12 @@ class NiDCPowerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ClearLatchedOutputCutoffState(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def Close(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -894,12 +900,6 @@ class NiDCPowerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ConfigureDigitalEdgeStartTriggerWithChannels(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ConfigureLCRCompensation(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1349,12 +1349,6 @@ class NiDCPowerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetLCRCompensationData(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetLCRCompensationLastDateAndTime(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1482,6 +1476,12 @@ class NiDCPowerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def QueryInCompliance(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def QueryLatchedOutputCutoffState(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1653,6 +1653,11 @@ def add_NiDCPowerServicer_to_server(servicer, server):
                     request_deserializer=nidcpower__pb2.ClearInterchangeWarningsRequest.FromString,
                     response_serializer=nidcpower__pb2.ClearInterchangeWarningsResponse.SerializeToString,
             ),
+            'ClearLatchedOutputCutoffState': grpc.unary_unary_rpc_method_handler(
+                    servicer.ClearLatchedOutputCutoffState,
+                    request_deserializer=nidcpower__pb2.ClearLatchedOutputCutoffStateRequest.FromString,
+                    response_serializer=nidcpower__pb2.ClearLatchedOutputCutoffStateResponse.SerializeToString,
+            ),
             'Close': grpc.unary_unary_rpc_method_handler(
                     servicer.Close,
                     request_deserializer=nidcpower__pb2.CloseRequest.FromString,
@@ -1752,11 +1757,6 @@ def add_NiDCPowerServicer_to_server(servicer, server):
                     servicer.ConfigureDigitalEdgeStartTriggerWithChannels,
                     request_deserializer=nidcpower__pb2.ConfigureDigitalEdgeStartTriggerWithChannelsRequest.FromString,
                     response_serializer=nidcpower__pb2.ConfigureDigitalEdgeStartTriggerWithChannelsResponse.SerializeToString,
-            ),
-            'ConfigureLCRCompensation': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureLCRCompensation,
-                    request_deserializer=nidcpower__pb2.ConfigureLCRCompensationRequest.FromString,
-                    response_serializer=nidcpower__pb2.ConfigureLCRCompensationResponse.SerializeToString,
             ),
             'ConfigureLCRCustomCableCompensation': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureLCRCustomCableCompensation,
@@ -2128,11 +2128,6 @@ def add_NiDCPowerServicer_to_server(servicer, server):
                     request_deserializer=nidcpower__pb2.GetExtCalRecommendedIntervalRequest.FromString,
                     response_serializer=nidcpower__pb2.GetExtCalRecommendedIntervalResponse.SerializeToString,
             ),
-            'GetLCRCompensationData': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetLCRCompensationData,
-                    request_deserializer=nidcpower__pb2.GetLCRCompensationDataRequest.FromString,
-                    response_serializer=nidcpower__pb2.GetLCRCompensationDataResponse.SerializeToString,
-            ),
             'GetLCRCompensationLastDateAndTime': grpc.unary_unary_rpc_method_handler(
                     servicer.GetLCRCompensationLastDateAndTime,
                     request_deserializer=nidcpower__pb2.GetLCRCompensationLastDateAndTimeRequest.FromString,
@@ -2242,6 +2237,11 @@ def add_NiDCPowerServicer_to_server(servicer, server):
                     servicer.QueryInCompliance,
                     request_deserializer=nidcpower__pb2.QueryInComplianceRequest.FromString,
                     response_serializer=nidcpower__pb2.QueryInComplianceResponse.SerializeToString,
+            ),
+            'QueryLatchedOutputCutoffState': grpc.unary_unary_rpc_method_handler(
+                    servicer.QueryLatchedOutputCutoffState,
+                    request_deserializer=nidcpower__pb2.QueryLatchedOutputCutoffStateRequest.FromString,
+                    response_serializer=nidcpower__pb2.QueryLatchedOutputCutoffStateResponse.SerializeToString,
             ),
             'QueryMaxCurrentLimit': grpc.unary_unary_rpc_method_handler(
                     servicer.QueryMaxCurrentLimit,
@@ -2450,6 +2450,23 @@ class NiDCPower(object):
         return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/ClearInterchangeWarnings',
             nidcpower__pb2.ClearInterchangeWarningsRequest.SerializeToString,
             nidcpower__pb2.ClearInterchangeWarningsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ClearLatchedOutputCutoffState(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/ClearLatchedOutputCutoffState',
+            nidcpower__pb2.ClearLatchedOutputCutoffStateRequest.SerializeToString,
+            nidcpower__pb2.ClearLatchedOutputCutoffStateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2790,23 +2807,6 @@ class NiDCPower(object):
         return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/ConfigureDigitalEdgeStartTriggerWithChannels',
             nidcpower__pb2.ConfigureDigitalEdgeStartTriggerWithChannelsRequest.SerializeToString,
             nidcpower__pb2.ConfigureDigitalEdgeStartTriggerWithChannelsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ConfigureLCRCompensation(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/ConfigureLCRCompensation',
-            nidcpower__pb2.ConfigureLCRCompensationRequest.SerializeToString,
-            nidcpower__pb2.ConfigureLCRCompensationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -4069,23 +4069,6 @@ class NiDCPower(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetLCRCompensationData(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/GetLCRCompensationData',
-            nidcpower__pb2.GetLCRCompensationDataRequest.SerializeToString,
-            nidcpower__pb2.GetLCRCompensationDataResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def GetLCRCompensationLastDateAndTime(request,
             target,
             options=(),
@@ -4456,6 +4439,23 @@ class NiDCPower(object):
         return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/QueryInCompliance',
             nidcpower__pb2.QueryInComplianceRequest.SerializeToString,
             nidcpower__pb2.QueryInComplianceResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def QueryLatchedOutputCutoffState(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/QueryLatchedOutputCutoffState',
+            nidcpower__pb2.QueryLatchedOutputCutoffStateRequest.SerializeToString,
+            nidcpower__pb2.QueryLatchedOutputCutoffStateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
