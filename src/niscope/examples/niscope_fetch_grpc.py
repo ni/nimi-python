@@ -10,12 +10,12 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 def example(resource_name, channels, options, length, voltage, address, port,):
-    session_name = '' # user-specified name; empty string means use a new , unnamed session
+    session_name = ''  # user-specified name; empty string means use a new , unnamed session
 
     # Connect to the grpc server
     channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = niscope.GrpcSessionOptions(channel, session_name)
-    
+
     with niscope.Session(resource_name=resource_name, options=options, _grpc_options=session_options) as session:
         session.configure_vertical(range=voltage, coupling=niscope.VerticalCoupling.AC)
         session.configure_horizontal_timing(min_sample_rate=50000000, min_num_pts=length, ref_position=50.0, num_records=1, enforce_realtime=True)
@@ -43,6 +43,7 @@ def _main(argsv):
 
 def main():
     _main(sys.argv[1:])
+
 
 if __name__ == '__main__':
     main()
