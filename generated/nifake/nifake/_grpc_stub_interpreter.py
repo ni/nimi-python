@@ -95,10 +95,16 @@ class GrpcStubInterpreter(object):
         )
         return response.an_array
 
+    def configure_abc(self):  # noqa: N802
+        self._invoke(
+            self._client.ConfigureAbc,
+            grpc_types.ConfigureAbcRequest(vi=self._vi),
+        )
+
     def custom_nested_struct_roundtrip(self, nested_custom_type_in):  # noqa: N802
         response = self._invoke(
             self._client.CustomNestedStructRoundtrip,
-            grpc_types.CustomNestedStructRoundtripRequest(nested_custom_type_in=nested_custom_type_in.create_copy(grpc_types.CustomStructNestedTypedef)),
+            grpc_types.CustomNestedStructRoundtripRequest(nested_custom_type_in=nested_custom_type_in._create_copy(grpc_types.CustomStructNestedTypedef)),
         )
         return custom_struct_nested_typedef.CustomStructNestedTypedef(response.nested_custom_type_out)
 
@@ -139,10 +145,7 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802
-        self._invoke(
-            self._client.FunctionWithRepeatedCapabilityType,
-            grpc_types.FunctionWithRepeatedCapabilityTypeRequest(vi=self._vi, site_list=site_list),
-        )
+        raise NotImplementedError('function_with_repeated_capability_type is not supported over gRPC')
 
     def get_a_boolean(self):  # noqa: N802
         response = self._invoke(
@@ -166,11 +169,7 @@ class GrpcStubInterpreter(object):
         return response.a_string
 
     def get_a_string_using_python_code(self, a_number):  # noqa: N802
-        response = self._invoke(
-            self._client.GetAStringUsingPythonCode,
-            grpc_types.GetAStringUsingPythonCodeRequest(vi=self._vi, a_number=a_number),
-        )
-        return response.a_string
+        raise NotImplementedError('get_a_string_using_python_code is not supported over gRPC')
 
     def get_an_ivi_dance_string(self):  # noqa: N802
         response = self._invoke(
@@ -187,25 +186,13 @@ class GrpcStubInterpreter(object):
         return response.a_string
 
     def get_array_for_python_code_custom_type(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetArrayForPythonCodeCustomType,
-            grpc_types.GetArrayForPythonCodeCustomTypeRequest(vi=self._vi, number_of_elements=self.get_array_size_for_python_code()),
-        )
-        return [custom_struct.CustomStruct(x) for x in response.array_out]
+        raise NotImplementedError('get_array_for_python_code_custom_type is not supported over gRPC')
 
     def get_array_for_python_code_double(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetArrayForPythonCodeDouble,
-            grpc_types.GetArrayForPythonCodeDoubleRequest(vi=self._vi, number_of_elements=self.get_array_size_for_python_code()),
-        )
-        return response.array_out
+        raise NotImplementedError('get_array_for_python_code_double is not supported over gRPC')
 
     def get_array_size_for_python_code(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetArraySizeForPythonCode,
-            grpc_types.GetArraySizeForPythonCodeRequest(vi=self._vi),
-        )
-        return response.size_out
+        raise NotImplementedError('get_array_size_for_python_code is not supported over gRPC')
 
     def get_array_using_ivi_dance(self):  # noqa: N802
         response = self._invoke(
@@ -264,11 +251,7 @@ class GrpcStubInterpreter(object):
         return response.months
 
     def get_channel_names(self, indices):  # noqa: N802
-        response = self._invoke(
-            self._client.GetChannelNames,
-            grpc_types.GetChannelNamesRequest(vi=self._vi, indices=indices),
-        )
-        return response.names
+        raise NotImplementedError('get_channel_names is not supported over gRPC')
 
     def get_custom_type(self):  # noqa: N802
         response = self._invoke(
@@ -285,11 +268,7 @@ class GrpcStubInterpreter(object):
         return [custom_struct.CustomStruct(x) for x in response.cs]
 
     def get_custom_type_typedef(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetCustomTypeTypedef,
-            grpc_types.GetCustomTypeTypedefRequest(vi=self._vi),
-        )
-        return custom_struct_typedef.CustomStructTypedef(response.cst), custom_struct_nested_typedef.CustomStructNestedTypedef(response.csnt)
+        raise NotImplementedError('get_custom_type_typedef is not supported over gRPC')
 
     def get_enum_value(self):  # noqa: N802
         response = self._invoke(
@@ -320,10 +299,7 @@ class GrpcStubInterpreter(object):
         return response.vi
 
     def initiate(self):  # noqa: N802
-        self._invoke(
-            self._client.Initiate,
-            grpc_types.InitiateRequest(vi=self._vi),
-        )
+        raise NotImplementedError('initiate is not supported over gRPC')
 
     def lock(self):  # noqa: N802
         self._lock.acquire()
@@ -344,7 +320,7 @@ class GrpcStubInterpreter(object):
     def method_with_proto_only_parameter(self, attribute_value):  # noqa: N802
         self._invoke(
             self._client.MethodWithProtoOnlyParameter,
-            grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value_raw=attribute_value),
+            grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value=attribute_value),
         )
 
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
@@ -423,7 +399,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViBoolean,
-            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
@@ -453,13 +429,13 @@ class GrpcStubInterpreter(object):
     def set_custom_type(self, cs):  # noqa: N802
         self._invoke(
             self._client.SetCustomType,
-            grpc_types.SetCustomTypeRequest(vi=self._vi, cs=cs.create_copy(grpc_types.FakeCustomStruct)),
+            grpc_types.SetCustomTypeRequest(vi=self._vi, cs=cs._create_copy(grpc_types.FakeCustomStruct)),
         )
 
     def set_custom_type_array(self, cs):  # noqa: N802
         self._invoke(
             self._client.SetCustomTypeArray,
-            grpc_types.SetCustomTypeArrayRequest(vi=self._vi, cs=cs and [x.create_copy(grpc_types.FakeCustomStruct) for x in cs]),
+            grpc_types.SetCustomTypeArrayRequest(vi=self._vi, cs=cs and [x._create_copy(grpc_types.FakeCustomStruct) for x in cs]),
         )
 
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name):  # noqa: N802
@@ -507,8 +483,4 @@ class GrpcStubInterpreter(object):
         return response.error_message
 
     def self_test(self):  # noqa: N802
-        response = self._invoke(
-            self._client.SelfTest,
-            grpc_types.SelfTestRequest(vi=self._vi),
-        )
-        return response.self_test_result, response.self_test_message
+        raise NotImplementedError('self_test is not supported over gRPC')

@@ -2125,7 +2125,10 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
-        mv = memoryview(wfm)
+        if isinstance(wfm, array.ArrayType):
+            mv = memoryview(wfm)
+        else:
+            mv = wfm
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
@@ -2422,7 +2425,10 @@ class _SessionBase(object):
 
         wfm, wfm_info = self._read(num_samples, timeout)
 
-        mv = memoryview(wfm)
+        if isinstance(wfm, array.ArrayType):
+            mv = memoryview(wfm)
+        else:
+            mv = wfm
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
@@ -3829,6 +3835,9 @@ class _SessionBase(object):
 
         Takes the **Error_Code** returned by the instrument driver methods, interprets it, and returns it as a user-readable string.
 
+        Note:
+        When using grpc-device, this method will call GetErrorMessage server-side while providing the same interface.
+
         Args:
             error_code (int): The **error_code** returned from the instrument. The default is 0, indicating VI_SUCCESS.
 
@@ -3844,7 +3853,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-SCOPE session to an NI digitizer.'''
 
-    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None):
         r'''An NI-SCOPE session to an NI digitizer.
 
         Performs the following initialization actions:
@@ -3969,12 +3978,18 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            _grpc_options (niscope.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
+
 
         Returns:
             session (niscope.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        if _grpc_options:
+            import niscope._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -3986,13 +4001,15 @@ class Session(_SessionBase):
         options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
-        # Note that _interpreter clears the session handle in its constructor, so that if
-        # _init_with_options fails, the error handler can reference it.
-        # And then once _init_with_options succeeds, we can call set_session_handle
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _init_with_options fails, the error handler can reference it.
+        # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
         self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
-        self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
+        # NI-TClk does not work over NI gRPC Device Server
+        if not _grpc_options:
+            self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -4019,7 +4036,8 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate

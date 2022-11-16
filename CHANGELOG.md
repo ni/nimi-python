@@ -38,9 +38,6 @@ All notable changes to this project will be documented in this file.
         * Support for Python 3.6
 * ### `nidcpower` (NI-DCPower)
     * #### Added
-        * API parity with next NI-DCPower release.
-            * Methods added:
-                * `get_lcr_compensation_data`
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)

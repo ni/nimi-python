@@ -28,6 +28,7 @@ class Library(object):
         self.niFake_Abort_cfunc = None
         self.niFake_AcceptListOfDurationsInSeconds_cfunc = None
         self.niFake_BoolArrayOutputFunction_cfunc = None
+        self.niFake_ConfigureABC_cfunc = None
         self.niFake_CustomNestedStructRoundtrip_cfunc = None
         self.niFake_DoubleAllTheNums_cfunc = None
         self.niFake_EnumArrayOutputFunction_cfunc = None
@@ -122,6 +123,14 @@ class Library(object):
                 self.niFake_BoolArrayOutputFunction_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFake_BoolArrayOutputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_BoolArrayOutputFunction_cfunc(vi, number_of_elements, an_array)
+
+    def niFake_ConfigureABC(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ConfigureABC_cfunc is None:
+                self.niFake_ConfigureABC_cfunc = self._get_library_function('niFake_ConfigureABC')
+                self.niFake_ConfigureABC_cfunc.argtypes = [ViSession]  # noqa: F405
+                self.niFake_ConfigureABC_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ConfigureABC_cfunc(vi)
 
     def niFake_CustomNestedStructRoundtrip(self, nested_custom_type_in, nested_custom_type_out):  # noqa: N802
         with self._func_lock:
@@ -443,13 +452,13 @@ class Library(object):
                 self.niFake_OneInputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_OneInputFunction_cfunc(vi, a_number)
 
-    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):  # noqa: N802
         with self._func_lock:
             if self.niFake_ParametersAreMultipleTypes_cfunc is None:
                 self.niFake_ParametersAreMultipleTypes_cfunc = self._get_library_function('niFake_ParametersAreMultipleTypes')
-                self.niFake_ParametersAreMultipleTypes_cfunc.argtypes = [ViSession, ViBoolean, ViInt32, ViInt64, ViInt16, ViReal64, ViReal64, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_ParametersAreMultipleTypes_cfunc.argtypes = [ViSession, ViBoolean, ViInt32, ViInt64, ViInt16, ViReal64, ViReal64, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_ParametersAreMultipleTypes_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_ParametersAreMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string)
+        return self.niFake_ParametersAreMultipleTypes_cfunc(vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string)
 
     def niFake_PoorlyNamedSimpleFunction(self, vi):  # noqa: N802
         with self._func_lock:

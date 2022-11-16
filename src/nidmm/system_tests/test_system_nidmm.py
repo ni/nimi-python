@@ -12,6 +12,11 @@ import time
 
 
 class SystemTests:
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
     # Basic usability tests
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
@@ -260,6 +265,15 @@ class SystemTests:
         assert session.sample_count == test_value_1
         os.remove(path)
 
+    def test_error_message(self, session_creation_kwargs):
+        try:
+            # We pass in an invalid model name to force going to error_message
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', **session_creation_kwargs):
+                assert False
+        except nidmm.Error as e:
+            assert e.code == -1074134964
+            assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
+
     # No boolean attributes that aren't IVI
     '''
     def test_vi_boolean_attribute(self, session):
@@ -284,10 +298,9 @@ class SystemTests:
 
 
 class TestLibrary(SystemTests):
-    @pytest.fixture(scope='function')
-    def session(self):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe') as simulated_session:
-            yield simulated_session
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
 
     def test_fetch_waveform_into(self, session):
         number_of_points_to_read = 100
@@ -299,15 +312,6 @@ class TestLibrary(SystemTests):
             session.fetch_waveform_into(waveform)
         for sample in waveform:
             assert not math.isnan(sample)
-
-    def test_error_message(self):
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe'):
-                assert False
-        except nidmm.Error as e:
-            assert e.code == -1074134964
-            assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
 
 
 class TestGrpc(SystemTests):
@@ -342,21 +346,10 @@ class TestGrpc(SystemTests):
         finally:
             proc.kill()
 
-    @pytest.fixture(scope='function')
-    def session(self, grpc_channel):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options) as simulated_session:
-            yield simulated_session
-
-    def test_error_message(self, grpc_channel):
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, "")
-        try:
-            # We pass in an invalid model name to force going to error_message
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:invalid_model; BoardType:PXIe', _grpc_options=grpc_options):
-                assert False
-        except nidmm.Error as e:
-            assert e.code == -1074134964
-            assert e.description.find('The option string parameter contains an entry with an unknown option value.') != -1
+        return {'_grpc_options': grpc_options}
 
     def test_new_session_already_exists(self, grpc_channel):
         session_name = 'existing_session'

@@ -38,13 +38,13 @@ class CustomStructNestedTypedef(object):
             self.struct_custom_struct = struct_custom_struct
             self.struct_custom_struct_typedef = struct_custom_struct_typedef
 
-    def create_copy(self, target_class):
+    def _create_copy(self, target_class):
         sample_object = target_class()
         return target_class(
-            struct_custom_struct=self.struct_custom_struct.create_copy(
+            struct_custom_struct=self.struct_custom_struct._create_copy(
                 type(sample_object.struct_custom_struct)
             ),
-            struct_custom_struct_typedef=self.struct_custom_struct_typedef.create_copy(
+            struct_custom_struct_typedef=self.struct_custom_struct_typedef._create_copy(
                 type(sample_object.struct_custom_struct_typedef)
             ),
         )

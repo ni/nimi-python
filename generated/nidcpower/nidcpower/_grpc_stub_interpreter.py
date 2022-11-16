@@ -87,7 +87,10 @@ class GrpcStubInterpreter(object):
         )
 
     def clear_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
-        raise NotImplementedError('clear_latched_output_cutoff_state is not supported over gRPC')
+        self._invoke(
+            self._client.ClearLatchedOutputCutoffState,
+            grpc_types.ClearLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason_raw=output_cutoff_reason.value),
+        )
 
     def commit(self, channel_name):  # noqa: N802
         self._invoke(
@@ -248,13 +251,6 @@ class GrpcStubInterpreter(object):
         )
         return response.months
 
-    def get_lcr_compensation_data(self, channel_name):  # noqa: N802
-        response = self._invoke(
-            self._client.GetLCRCompensationData,
-            grpc_types.GetLCRCompensationDataRequest(vi=self._vi, channel_name=channel_name),
-        )
-        return response.compensation_data
-
     def get_lcr_compensation_last_date_and_time(self, channel_name, compensation_type):  # noqa: N802
         response = self._invoke(
             self._client.GetLCRCompensationLastDateAndTime,
@@ -347,7 +343,7 @@ class GrpcStubInterpreter(object):
     def perform_lcr_load_compensation(self, channel_name, compensation_spots):  # noqa: N802
         self._invoke(
             self._client.PerformLCRLoadCompensation,
-            grpc_types.PerformLCRLoadCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_spots=compensation_spots and [x.create_copy(grpc_types.NILCRLoadCompensationSpot) for x in compensation_spots]),
+            grpc_types.PerformLCRLoadCompensationRequest(vi=self._vi, channel_name=channel_name, compensation_spots=compensation_spots and [x._create_copy(grpc_types.NILCRLoadCompensationSpot) for x in compensation_spots]),
         )
 
     def perform_lcr_open_compensation(self, channel_name, additional_frequencies):  # noqa: N802
@@ -382,7 +378,11 @@ class GrpcStubInterpreter(object):
         return response.in_compliance
 
     def query_latched_output_cutoff_state(self, channel_name, output_cutoff_reason):  # noqa: N802
-        raise NotImplementedError('query_latched_output_cutoff_state is not supported over gRPC')
+        response = self._invoke(
+            self._client.QueryLatchedOutputCutoffState,
+            grpc_types.QueryLatchedOutputCutoffStateRequest(vi=self._vi, channel_name=channel_name, output_cutoff_reason_raw=output_cutoff_reason.value),
+        )
+        return response.output_cutoff_state
 
     def query_max_current_limit(self, channel_name, voltage_level):  # noqa: N802
         response = self._invoke(
@@ -446,7 +446,7 @@ class GrpcStubInterpreter(object):
     def set_attribute_vi_boolean(self, channel_name, attribute_id, attribute_value):  # noqa: N802
         self._invoke(
             self._client.SetAttributeViBoolean,
-            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value_raw=attribute_value),
+            grpc_types.SetAttributeViBooleanRequest(vi=self._vi, channel_name=channel_name, attribute_id=attribute_id, attribute_value=attribute_value),
         )
 
     def set_attribute_vi_int32(self, channel_name, attribute_id, attribute_value):  # noqa: N802
