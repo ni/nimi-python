@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-DCPower API metadata version 23.0.0d225
+// This file is generated from NI-DCPower API metadata version 23.0.0d318
 //---------------------------------------------------------------------
 // Proto file for the NI-DCPower Metadata
 //---------------------------------------------------------------------
@@ -22,6 +22,7 @@ service NiDCPower {
   rpc CalSelfCalibrate(CalSelfCalibrateRequest) returns (CalSelfCalibrateResponse);
   rpc ClearError(ClearErrorRequest) returns (ClearErrorResponse);
   rpc ClearInterchangeWarnings(ClearInterchangeWarningsRequest) returns (ClearInterchangeWarningsResponse);
+  rpc ClearLatchedOutputCutoffState(ClearLatchedOutputCutoffStateRequest) returns (ClearLatchedOutputCutoffStateResponse);
   rpc Close(CloseRequest) returns (CloseResponse);
   rpc Commit(CommitRequest) returns (CommitResponse);
   rpc CommitWithChannels(CommitWithChannelsRequest) returns (CommitWithChannelsResponse);
@@ -42,7 +43,6 @@ service NiDCPower {
   rpc ConfigureDigitalEdgeSourceTriggerWithChannels(ConfigureDigitalEdgeSourceTriggerWithChannelsRequest) returns (ConfigureDigitalEdgeSourceTriggerWithChannelsResponse);
   rpc ConfigureDigitalEdgeStartTrigger(ConfigureDigitalEdgeStartTriggerRequest) returns (ConfigureDigitalEdgeStartTriggerResponse);
   rpc ConfigureDigitalEdgeStartTriggerWithChannels(ConfigureDigitalEdgeStartTriggerWithChannelsRequest) returns (ConfigureDigitalEdgeStartTriggerWithChannelsResponse);
-  rpc ConfigureLCRCompensation(ConfigureLCRCompensationRequest) returns (ConfigureLCRCompensationResponse);
   rpc ConfigureLCRCustomCableCompensation(ConfigureLCRCustomCableCompensationRequest) returns (ConfigureLCRCustomCableCompensationResponse);
   rpc ConfigureOutputEnabled(ConfigureOutputEnabledRequest) returns (ConfigureOutputEnabledResponse);
   rpc ConfigureOutputFunction(ConfigureOutputFunctionRequest) returns (ConfigureOutputFunctionResponse);
@@ -117,7 +117,6 @@ service NiDCPower {
   rpc GetExtCalLastDateAndTime(GetExtCalLastDateAndTimeRequest) returns (GetExtCalLastDateAndTimeResponse);
   rpc GetExtCalLastTemp(GetExtCalLastTempRequest) returns (GetExtCalLastTempResponse);
   rpc GetExtCalRecommendedInterval(GetExtCalRecommendedIntervalRequest) returns (GetExtCalRecommendedIntervalResponse);
-  rpc GetLCRCompensationData(GetLCRCompensationDataRequest) returns (GetLCRCompensationDataResponse);
   rpc GetLCRCompensationLastDateAndTime(GetLCRCompensationLastDateAndTimeRequest) returns (GetLCRCompensationLastDateAndTimeResponse);
   rpc GetLCRCustomCableCompensationData(GetLCRCustomCableCompensationDataRequest) returns (GetLCRCustomCableCompensationDataResponse);
   rpc GetNextCoercionRecord(GetNextCoercionRecordRequest) returns (GetNextCoercionRecordResponse);
@@ -140,6 +139,7 @@ service NiDCPower {
   rpc PerformLCRShortCompensation(PerformLCRShortCompensationRequest) returns (PerformLCRShortCompensationResponse);
   rpc PerformLCRShortCustomCableCompensation(PerformLCRShortCustomCableCompensationRequest) returns (PerformLCRShortCustomCableCompensationResponse);
   rpc QueryInCompliance(QueryInComplianceRequest) returns (QueryInComplianceResponse);
+  rpc QueryLatchedOutputCutoffState(QueryLatchedOutputCutoffStateRequest) returns (QueryLatchedOutputCutoffStateResponse);
   rpc QueryMaxCurrentLimit(QueryMaxCurrentLimitRequest) returns (QueryMaxCurrentLimitResponse);
   rpc QueryMaxVoltageLevel(QueryMaxVoltageLevelRequest) returns (QueryMaxVoltageLevelResponse);
   rpc QueryMinCurrentLimit(QueryMinCurrentLimitRequest) returns (QueryMinCurrentLimitResponse);
@@ -551,6 +551,19 @@ enum NiDCPowerReal64AttributeValues {
   NIDCPOWER_REAL64_POWER_LINE_FREQUENCIES_VAL_60_HERTZ = 60;
 }
 
+enum OutputCutoffReason {
+  OUTPUT_CUTOFF_REASON_UNSPECIFIED = 0;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL = -1;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH = 1;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW = 2;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH = 4;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW = 8;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH = 16;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW = 32;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH = 64;
+  OUTPUT_CUTOFF_REASON_NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW = 128;
+}
+
 enum OutputFunction {
   OUTPUT_FUNCTION_UNSPECIFIED = 0;
   OUTPUT_FUNCTION_NIDCPOWER_VAL_DC_VOLTAGE = 1006;
@@ -667,6 +680,19 @@ message ClearInterchangeWarningsRequest {
 }
 
 message ClearInterchangeWarningsResponse {
+  int32 status = 1;
+}
+
+message ClearLatchedOutputCutoffStateRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  oneof output_cutoff_reason_enum {
+    OutputCutoffReason output_cutoff_reason = 3;
+    sint32 output_cutoff_reason_raw = 4;
+  }
+}
+
+message ClearLatchedOutputCutoffStateResponse {
   int32 status = 1;
 }
 
@@ -912,16 +938,6 @@ message ConfigureDigitalEdgeStartTriggerWithChannelsRequest {
 }
 
 message ConfigureDigitalEdgeStartTriggerWithChannelsResponse {
-  int32 status = 1;
-}
-
-message ConfigureLCRCompensationRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  bytes compensation_data = 3;
-}
-
-message ConfigureLCRCompensationResponse {
   int32 status = 1;
 }
 
@@ -1672,16 +1688,6 @@ message GetExtCalRecommendedIntervalResponse {
   sint32 months = 2;
 }
 
-message GetLCRCompensationDataRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-}
-
-message GetLCRCompensationDataResponse {
-  int32 status = 1;
-  bytes compensation_data = 2;
-}
-
 message GetLCRCompensationLastDateAndTimeRequest {
   nidevice_grpc.Session vi = 1;
   string channel_name = 2;
@@ -1915,6 +1921,20 @@ message QueryInComplianceRequest {
 message QueryInComplianceResponse {
   int32 status = 1;
   bool in_compliance = 2;
+}
+
+message QueryLatchedOutputCutoffStateRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  oneof output_cutoff_reason_enum {
+    OutputCutoffReason output_cutoff_reason = 3;
+    sint32 output_cutoff_reason_raw = 4;
+  }
+}
+
+message QueryLatchedOutputCutoffStateResponse {
+  int32 status = 1;
+  bool output_cutoff_state = 2;
 }
 
 message QueryMaxCurrentLimitRequest {

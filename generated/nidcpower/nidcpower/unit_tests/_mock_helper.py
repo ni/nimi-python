@@ -94,9 +94,6 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['months'] = None
-        self._defaults['GetLCRCompensationData'] = {}
-        self._defaults['GetLCRCompensationData']['return'] = 0
-        self._defaults['GetLCRCompensationData']['compensationData'] = None
         self._defaults['GetLCRCompensationLastDateAndTime'] = {}
         self._defaults['GetLCRCompensationLastDateAndTime']['return'] = 0
         self._defaults['GetLCRCompensationLastDateAndTime']['year'] = None
@@ -505,22 +502,6 @@ class SideEffectsHelper(object):
         if months is not None:
             months.contents.value = self._defaults['GetExtCalRecommendedInterval']['months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
-
-    def niDCPower_GetLCRCompensationData(self, vi, channel_name, compensation_data_size, compensation_data):  # noqa: N802
-        if self._defaults['GetLCRCompensationData']['return'] != 0:
-            return self._defaults['GetLCRCompensationData']['return']
-        # compensation_data
-        if self._defaults['GetLCRCompensationData']['compensationData'] is None:
-            raise MockFunctionCallError("niDCPower_GetLCRCompensationData", param='compensationData')
-        if compensation_data_size.value == 0:
-            return len(self._defaults['GetLCRCompensationData']['compensationData'])
-        try:
-            compensation_data_ref = compensation_data.contents
-        except AttributeError:
-            compensation_data_ref = compensation_data
-        for i in range(len(self._defaults['GetLCRCompensationData']['compensationData'])):
-            compensation_data_ref[i] = self._defaults['GetLCRCompensationData']['compensationData'][i]
-        return self._defaults['GetLCRCompensationData']['return']
 
     def niDCPower_GetLCRCompensationLastDateAndTime(self, vi, channel_name, compensation_type, year, month, day, hour, minute):  # noqa: N802
         if self._defaults['GetLCRCompensationLastDateAndTime']['return'] != 0:
@@ -970,8 +951,6 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetExtCalLastTemp.return_value = 0
         mock_library.niDCPower_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niDCPower_GetExtCalRecommendedInterval")
         mock_library.niDCPower_GetExtCalRecommendedInterval.return_value = 0
-        mock_library.niDCPower_GetLCRCompensationData.side_effect = MockFunctionCallError("niDCPower_GetLCRCompensationData")
-        mock_library.niDCPower_GetLCRCompensationData.return_value = 0
         mock_library.niDCPower_GetLCRCompensationLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime")
         mock_library.niDCPower_GetLCRCompensationLastDateAndTime.return_value = 0
         mock_library.niDCPower_GetLCRCustomCableCompensationData.side_effect = MockFunctionCallError("niDCPower_GetLCRCustomCableCompensationData")

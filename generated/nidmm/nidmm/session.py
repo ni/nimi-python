@@ -908,6 +908,9 @@ class _SessionBase(object):
         Takes the **Error_Code** returned by the instrument driver methods,
         interprets it, and returns it as a user-readable string.
 
+        Note:
+        When using grpc-device, this method will call GetErrorMessage server-side while providing the same interface.
+
         Args:
             error_code (int): The **error_code** returned from the instrument. The default is 0,
                 indicating VI_SUCCESS.

@@ -815,6 +815,14 @@ class Session(_SessionBase):
         return an_array
 
     @ivi_synchronized
+    def configure_abc(self):
+        r'''configure_abc
+
+        TBD
+        '''
+        self._interpreter.configure_abc()
+
+    @ivi_synchronized
     def custom_nested_struct_roundtrip(self, nested_custom_type_in):
         r'''custom_nested_struct_roundtrip
 

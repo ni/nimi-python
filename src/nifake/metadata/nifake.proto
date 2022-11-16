@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-FAKE API metadata version 23.0.0d70
+// This file is generated from NI-FAKE API metadata version 23.0.0d96
 //---------------------------------------------------------------------
 // Proto file for the NI-FAKE Metadata
 //---------------------------------------------------------------------
@@ -25,6 +25,7 @@ service NiFake {
   rpc Close(CloseRequest) returns (CloseResponse);
   rpc CloseExtCal(CloseExtCalRequest) returns (CloseExtCalResponse);
   rpc CommandWithReservedParam(CommandWithReservedParamRequest) returns (CommandWithReservedParamResponse);
+  rpc ConfigureAbc(ConfigureAbcRequest) returns (ConfigureAbcResponse);
   rpc Control4022(Control4022Request) returns (Control4022Response);
   rpc CreateConfigurationList(CreateConfigurationListRequest) returns (CreateConfigurationListResponse);
   rpc CustomNestedStructRoundtrip(CustomNestedStructRoundtripRequest) returns (CustomNestedStructRoundtripResponse);
@@ -307,6 +308,14 @@ message CommandWithReservedParamRequest {
 }
 
 message CommandWithReservedParamResponse {
+  int32 status = 1;
+}
+
+message ConfigureAbcRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ConfigureAbcResponse {
   int32 status = 1;
 }
 

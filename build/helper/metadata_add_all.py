@@ -81,7 +81,10 @@ def _add_python_parameter_name(parameter):
 def _add_grpc_parameter_name(parameter):
     '''Adds a grpc_name key/value pair to the parameter metadata'''
     if 'grpc_name' not in parameter:
-        parameter['grpc_name'] = parameter['python_name']
+        if parameter.get('grpc_mapped_enum') is not None or parameter['grpc_enum'] is not None:
+            parameter['grpc_name'] = parameter['python_name'] + '_raw'
+        else:
+            parameter['grpc_name'] = parameter['python_name']
 
 
 def _add_python_type(item, config):
@@ -219,8 +222,6 @@ def _add_interpreter_method_call_snippet(parameter, config):
 
 def _add_grpc_request_snippet(parameter, config):
     param_name = parameter['grpc_name']
-    if parameter['grpc_enum'] is not None or param_name == 'attribute_value':
-        param_name += '_raw'
 
     if parameter['use_list']:
         param_accessor = 'x'
@@ -237,7 +238,7 @@ def _add_grpc_request_snippet(parameter, config):
         for custom_type in config['custom_types']:
             if parameter['type'] == custom_type['ctypes_type']:
                 ct_grpc_name = custom_type.get('grpc_name', custom_type['python_name'])
-                param_value = param_accessor + '.create_copy(grpc_types.' + ct_grpc_name + ')'
+                param_value = param_accessor + '._create_copy(grpc_types.' + ct_grpc_name + ')'
                 break
         else:
             ctypes_types = [t["ctypes_type"] for t in config["custom_types"]]
@@ -1250,7 +1251,7 @@ functions_expected = {
                 },
                 'type': 'struct_CustomStruct',
                 'interpreter_method_call_snippet': 'custom_type_input',
-                'grpc_request_snippet': 'custom_type_input=custom_type_input.create_copy(grpc_types.CustomStruct)',
+                'grpc_request_snippet': 'custom_type_input=custom_type_input._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_input',
             },
@@ -1286,7 +1287,7 @@ functions_expected = {
                 },
                 'type': 'struct_CustomStruct',
                 'interpreter_method_call_snippet': 'custom_type_output',
-                'grpc_request_snippet': 'custom_type_output=custom_type_output.create_copy(grpc_types.CustomStruct)',
+                'grpc_request_snippet': 'custom_type_output=custom_type_output._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_output',
             },
@@ -1322,7 +1323,7 @@ functions_expected = {
                 },
                 'type': 'struct_CustomStruct',
                 'interpreter_method_call_snippet': 'custom_type_without_struct_prefix_input',
-                'grpc_request_snippet': 'custom_type_without_struct_prefix_input=custom_type_without_struct_prefix_input.create_copy(grpc_types.CustomStruct)',
+                'grpc_request_snippet': 'custom_type_without_struct_prefix_input=custom_type_without_struct_prefix_input._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
             },
@@ -1358,7 +1359,7 @@ functions_expected = {
                 },
                 'type': 'struct_CustomStruct',
                 'interpreter_method_call_snippet': 'custom_type_without_struct_prefix_output',
-                'grpc_request_snippet': 'custom_type_without_struct_prefix_output=custom_type_without_struct_prefix_output.create_copy(grpc_types.CustomStruct)',
+                'grpc_request_snippet': 'custom_type_without_struct_prefix_output=custom_type_without_struct_prefix_output._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
             },
