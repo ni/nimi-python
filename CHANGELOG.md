@@ -61,9 +61,6 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
-        *gRPC NI-SCOPE Example
-            *Example added:
-                * `niscope_fetch_grpc.py`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
