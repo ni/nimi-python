@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 23.0.0d91
+# This file is generated from NI-SCOPE API metadata version 23.0.0d95
 functions = {
     'Abort': {
         'documentation': {
@@ -1722,7 +1722,7 @@ functions = {
             'note': '\nSome functionality, such as time stamping, is not supported in all\ndigitizers. Refer to `Features Supported by\nDevice <REPLACE_DRIVER_SPECIFIC_URL_1(features_supported_main)>`__ for\nmore information.\n'
         },
         'included_in_proto': True,
-        'method_templates': [ # TODO: This is currently hand-written. Update from generated export before submitting.
+        'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'fetch_array_measurement',
