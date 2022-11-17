@@ -12,7 +12,7 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 def example(resource_name, channels, options, length, voltage, address, port,):
     session_name = ''  # user-specified name; empty string means use a new , unnamed session
 
-    # Connect to the grpc server
+    # Connect to the NI gRPC Device Server
     channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = niscope.GrpcSessionOptions(channel, session_name)
 
@@ -37,8 +37,6 @@ def _main(argsv):
     parser.add_argument('-p', '--port', default='31763', help='Server port')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.channels, args.option_string, args.length, args.voltage, args.address, args.port)
-
-# TODO(danestull) Add example and main tests once the gRPC server is started automatically
 
 
 def main():
