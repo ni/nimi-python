@@ -10,7 +10,7 @@ import sys
 def example(resource_name, options, address, port, trigger_source=None, trigger_edge=None):
     session_name = ''  # user-specified name; empty string means use a new, unnamed session
 
-    # Connect to the grpc server
+    # Connect to the NI gRPC Device Server
     channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = nidigital.GrpcSessionOptions(channel, session_name)
 
@@ -71,8 +71,6 @@ def _main(argsv):
             args.port,
             args.trigger_source if args.command == 'start-trigger' else None,
             args.trigger_edge if args.command == 'start-trigger' else None)
-
-# TODO(danestull) Add example and main test once the gRPC server is started automatically
 
 
 def main():

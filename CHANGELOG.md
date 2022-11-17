@@ -45,9 +45,6 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
-        * gRPC NI-DIGITAL Example
-            * Example added:
-                * `nidigital_burst_with_start_trigger_grpc.py`
     * #### Changed
     * #### Removed
 * ### `nidmm` (NI-DMM)
