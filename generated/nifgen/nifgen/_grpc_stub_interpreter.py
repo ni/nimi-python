@@ -150,6 +150,12 @@ class GrpcStubInterpreter(object):
         )
 
     def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):  # noqa: N802
+        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
+        if sample_counts_array is not None and len(sample_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of sample_counts_array and waveform_handles_array parameters do not match.")  # case S160
+        if marker_location_array is not None and len(marker_location_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of marker_location_array and waveform_handles_array parameters do not match.")  # case S160
         response = self._invoke(
             self._client.CreateAdvancedArbSequence,
             grpc_types.CreateAdvancedArbSequenceRequest(vi=self._vi, waveform_handles_array=waveform_handles_array, loop_counts_array=loop_counts_array, sample_counts_array=sample_counts_array, marker_location_array=marker_location_array),
@@ -157,6 +163,8 @@ class GrpcStubInterpreter(object):
         return response.coerced_markers_array, response.sequence_handle
 
     def create_arb_sequence(self, waveform_handles_array, loop_counts_array):  # noqa: N802
+        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
         response = self._invoke(
             self._client.CreateArbSequence,
             grpc_types.CreateArbSequenceRequest(vi=self._vi, waveform_handles_array=waveform_handles_array, loop_counts_array=loop_counts_array),
@@ -164,6 +172,8 @@ class GrpcStubInterpreter(object):
         return response.sequence_handle
 
     def create_freq_list(self, waveform, frequency_array, duration_array):  # noqa: N802
+        if duration_array is not None and len(duration_array) != len(frequency_array):  # case S160
+            raise ValueError("Length of duration_array and frequency_array parameters do not match.")  # case S160
         response = self._invoke(
             self._client.CreateFreqList,
             grpc_types.CreateFreqListRequest(vi=self._vi, waveform_raw=waveform.value, frequency_array=frequency_array, duration_array=duration_array),

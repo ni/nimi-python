@@ -324,6 +324,8 @@ class GrpcStubInterpreter(object):
         )
 
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
+        if input_array_of_integers is not None and len(input_array_of_integers) != len(input_array_of_floats):  # case S160
+            raise ValueError("Length of input_array_of_integers and input_array_of_floats parameters do not match.")  # case S160
         response = self._invoke(
             self._client.MultipleArrayTypes,
             grpc_types.MultipleArrayTypesRequest(vi=self._vi, output_array_size=output_array_size, input_array_of_floats=input_array_of_floats, input_array_of_integers=input_array_of_integers),
@@ -331,6 +333,12 @@ class GrpcStubInterpreter(object):
         return response.output_array, response.output_array_of_fixed_length
 
     def multiple_arrays_same_size(self, values1, values2, values3, values4):  # noqa: N802
+        if values2 is not None and len(values2) != len(values1):  # case S160
+            raise ValueError("Length of values2 and values1 parameters do not match.")  # case S160
+        if values3 is not None and len(values3) != len(values1):  # case S160
+            raise ValueError("Length of values3 and values1 parameters do not match.")  # case S160
+        if values4 is not None and len(values4) != len(values1):  # case S160
+            raise ValueError("Length of values4 and values1 parameters do not match.")  # case S160
         self._invoke(
             self._client.MultipleArraysSameSize,
             grpc_types.MultipleArraysSameSizeRequest(vi=self._vi, values1=values1, values2=values2, values3=values3, values4=values4),

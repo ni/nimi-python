@@ -522,6 +522,49 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
     return definitions
 
 
+def get_grpc_args_check_snippets(parameter, parameters):
+    '''TODO: Fill this in
+
+    ...
+    '''
+
+    definitions = []
+
+    if parameter['is_string'] is True:
+        pass
+    elif parameter['is_buffer'] is True:
+        pass
+    else:
+        definitions = _get_grpc_arg_check_for_scalar(parameter, parameters)
+
+    return definitions
+
+
+def _get_grpc_arg_check_for_scalar(parameter, parameters):
+    assert parameter['is_buffer'] is False, 'Parameter {}'.format(parameter)
+    assert parameter['numpy'] is False, 'Parameter {}'.format(parameter)
+    corresponding_buffer_parameters = _get_buffer_parameters_for_size_parameter(parameter, parameters)
+
+    definitions = []
+
+    if parameter['direction'] == 'in':
+        if parameter['is_session_handle'] is True:
+            pass
+        elif parameter['size']['mechanism'] == 'python-code':
+            pass
+        elif parameter['enum'] is not None:
+            pass
+        elif not corresponding_buffer_parameters:
+            pass
+        elif corresponding_buffer_parameters and corresponding_buffer_parameters[0]['direction'] == 'in':  # We are only looking at the first one to see if it is 'in'. Assumes all are the same here, assert below if not
+            # Parameter denotes the size of another (the "corresponding") parameter.
+            for i in range(1, len(corresponding_buffer_parameters)):
+                definitions.append('if {0} is not None and len({0}) != len({1}):  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
+                definitions.append('    raise ValueError("Length of {0} and {1} parameters do not match.")  # case S160'.format(corresponding_buffer_parameters[i]['python_name'], corresponding_buffer_parameters[0]['python_name']))
+
+    return definitions
+
+
 def get_dictionary_snippet(d, indent=4):
     '''Returns a formatted dictionary'''
     d_str = pprint.pformat(d)
