@@ -6,6 +6,7 @@
     driver_name = config['driver_name']
     enums = config['enums']
     extra_errors_used = config['extra_errors_used']
+    grpc_supported = template_parameters['include_grpc_support']
 %>\
 ${helper.get_rst_header_snippet('Exceptions and Warnings', '=')}
 
@@ -78,6 +79,17 @@ ${helper.get_rst_header_snippet('SelfTestError', '-')}
     .. exception:: SelfTestError
 
         An error due to a failed self-test
+
+
+% endif
+% if grpc_supported:
+${helper.get_rst_header_snippet('RpcError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: RpcError
+
+        An error specific to gRPC sessions
 
 
 % endif

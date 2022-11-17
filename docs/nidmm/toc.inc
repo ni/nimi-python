@@ -7,4 +7,5 @@ API Reference
    nidmm/enums
    nidmm/errors
    nidmm/examples
+   nidmm/grpc_session_options
 

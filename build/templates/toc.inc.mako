@@ -4,6 +4,7 @@
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     enums = config['enums']
+    grpc_supported = template_parameters['include_grpc_support']
 %>\
 API Reference
 --------------
@@ -19,4 +20,7 @@ API Reference
 % endif
    ${module_name}/errors
    ${module_name}/examples
+% if grpc_supported:
+   ${module_name}/grpc_session_options
+% endif
 

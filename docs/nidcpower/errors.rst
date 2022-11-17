@@ -77,6 +77,16 @@ SelfTestError
         An error due to a failed self-test
 
 
+RpcError
+--------
+
+    .. py:currentmodule:: nidcpower.errors
+
+    .. exception:: RpcError
+
+        An error specific to gRPC sessions
+
+
 DriverWarning
 -------------
 
