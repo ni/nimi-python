@@ -10,7 +10,7 @@ import time
 def example(resource_name, options, waveform, frequency, amplitude, offset, phase, gen_time, address, port):
     session_name = ''  # user-specified name; empty string means use a new, unnamed session
 
-    # Connect to the grpc server
+    # Connect to the NI gRPC Device Server
     channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = nifgen.GrpcSessionOptions(channel, session_name)
 
@@ -36,8 +36,6 @@ def _main(argsv):
     parser.add_argument('--port', default='31763', help='Server port.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.waveform, args.frequency, args.amplitude, args.offset, args.phase, args.time, args.address, args.port)
-
-# TODO(danestull) Add example and main tests once the gRPC server is started automatically
 
 
 def main():

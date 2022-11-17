@@ -9,7 +9,7 @@ import sys
 def example(resource_name, option_string, function, range, digits, address, port):
     session_name = ''  # user-specified name; empty string means use a new, unnamed session
 
-    # Connect to the grpc server
+    # Connect to the NI gRPC Device Server
     channel = grpc.insecure_channel(f'{address}:{port}')
     session_options = nidmm.GrpcSessionOptions(channel, session_name)
 
@@ -30,8 +30,6 @@ def _main(argsv):
     parser.add_argument('-p', '--port', default='31763', help='Server port.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.function, args.range, args.digits, args.address, args.port)
-
-# TODO(danestull) Add example and main tests once the gRPC server is started automatically
 
 
 def main():
