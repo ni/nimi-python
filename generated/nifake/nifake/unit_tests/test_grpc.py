@@ -52,7 +52,7 @@ class TestGrpcStubInterpreter(object):
                     setattr(self, f, getattr(nifake._grpc_stub_interpreter.grpc_types, f))
 
     class PatchedGrpcStub(nifake._grpc_stub_interpreter.nifake_grpc.NiFakeServicer):
-        def _sample_func(self, request):
+        def _sample_func(self, request, metadata=None):
             pass
 
         def __init__(self):
@@ -82,7 +82,7 @@ class TestGrpcStubInterpreter(object):
         self.grpc_types_patch.stop()
 
     def _get_initialized_stub_interpreter(self, grpc_channel=object()):
-        session_options = nifake.GrpcSessionOptions(grpc_channel, "", nifake.SessionInitializationBehavior.AUTO)
+        session_options = nifake.GrpcSessionOptions(grpc_channel, '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(session_options)
         assert interpreter._client is self.patched_grpc_stub
         assert interpreter.get_session_handle().id == 0
@@ -161,8 +161,9 @@ class TestGrpcStubInterpreter(object):
         getattr(self.patched_grpc_stub, function_name).side_effect = side_effect
         return request_object
 
-    def _assert_call(self, function_name, request_object):
-        getattr(self.patched_grpc_stub, function_name).assert_called_once_with(request_object)
+    def _assert_call(self, function_name, request_object, metadata=None):
+        func = getattr(self.patched_grpc_stub, function_name)
+        func.assert_called_once_with(request_object, metadata=metadata)
         return getattr(self.patched_grpc_types, function_name + 'Request')
 
     # gRPC errors
@@ -171,8 +172,8 @@ class TestGrpcStubInterpreter(object):
         library_func = 'InitWithOptions'
         grpc_error = grpc.StatusCode.UNAVAILABLE
         expected_error_message = 'Failed to connect to server'
-        self._set_side_effect(library_func, side_effect=MyRpcError(None, "", grpc_error=grpc_error))
-        grpc_options = nifake.GrpcSessionOptions(object(), "", nifake.SessionInitializationBehavior.AUTO)
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, '', grpc_error=grpc_error))
+        grpc_options = nifake.GrpcSessionOptions(object(), '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
         try:
             interpreter.init_with_options('dev1', False, False, '')
@@ -186,7 +187,7 @@ class TestGrpcStubInterpreter(object):
         library_func = 'PoorlyNamedSimpleFunction'
         grpc_error = grpc.StatusCode.UNIMPLEMENTED
         expected_error_message_intro = 'This operation is not supported'
-        self._set_side_effect(library_func, side_effect=MyRpcError(None, "", grpc_error=grpc_error))
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, '', grpc_error=grpc_error))
         interpreter = self._get_initialized_stub_interpreter()
         try:
             interpreter.simple_function()
@@ -198,6 +199,20 @@ class TestGrpcStubInterpreter(object):
 
     # Methods
 
+    def test_api_key_sent_to_init(self):
+        library_func = 'InitWithOptions'
+        expected_metadata = (('ni-api-key', nifake.MEASUREMENTLINK_23Q1_NIMI_PYTHON_API_KEY),)
+        from nifake.session_pb2 import Session as GrpcSession
+        grpc_session_object = GrpcSession(id=42, name='')
+        response_object = self._set_side_effect(library_func, new_session_initialized=True, vi=grpc_session_object)
+        init_behavior = nifake.SessionInitializationBehavior.AUTO
+        grpc_options = nifake.GrpcSessionOptions(object(), '', initialization_behavior=init_behavior)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        interpreter.init_with_options('dev1', False, False, '')
+        self._assert_call(library_func, response_object, metadata=expected_metadata).assert_called_once_with(
+            resource_name='dev1', id_query=False, reset_device=False, option_string='', session_name='', initialization_behavior=init_behavior,
+        )
+
     def test_new_session_already_exists(self):
         library_func = 'InitWithOptions'
         session_name = 'existing_session'
@@ -205,7 +220,7 @@ class TestGrpcStubInterpreter(object):
         grpc_error = grpc.StatusCode.ALREADY_EXISTS
         self._set_side_effect(library_func, side_effect=MyRpcError(None, error_message, grpc_error=grpc_error))
         init_behavior = nifake.SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
-        grpc_options = nifake.GrpcSessionOptions(object(), session_name, init_behavior)
+        grpc_options = nifake.GrpcSessionOptions(object(), session_name, initialization_behavior=init_behavior)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
         try:
             interpreter.init_with_options('dev1', False, False, '')
@@ -222,7 +237,7 @@ class TestGrpcStubInterpreter(object):
         grpc_error = grpc.StatusCode.FAILED_PRECONDITION
         self._set_side_effect(library_func, side_effect=MyRpcError(None, error_message, grpc_error=grpc_error))
         init_behavior = nifake.SessionInitializationBehavior.ATTACH_TO_SERVER_SESSION
-        grpc_options = nifake.GrpcSessionOptions(object(), session_name, init_behavior)
+        grpc_options = nifake.GrpcSessionOptions(object(), session_name, initialization_behavior=init_behavior)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
         try:
             interpreter.init_with_options('dev1', False, False, '')
