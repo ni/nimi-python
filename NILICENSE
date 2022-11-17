@@ -1,4 +1,5 @@
 
-Usage of GrpcSessionOptions on session initialization are subject to the NI General Purpose EULA, available at ni.com
+Passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
+subject to the NI General Purpose EULA, available at ni.com
 
 https://www.ni.com/en-us/about-ni/legal/software-license-agreement.html
