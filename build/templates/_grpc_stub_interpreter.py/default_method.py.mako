@@ -2,7 +2,6 @@
 <%
     '''Renders a GrpcStubInterpreter method corresponding to the passed-in function metadata.'''
     import build.helper as helper
-    parameters = f['parameters']
     full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
     method_decl_params = helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION)
     grpc_name = f.get('grpc_name', f['name'])
