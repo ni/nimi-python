@@ -163,10 +163,7 @@ class TestGrpcStubInterpreter(object):
 
     def _assert_call(self, function_name, request_object, metadata=None):
         func = getattr(self.patched_grpc_stub, function_name)
-        if metadata:
-            func.assert_called_once_with(request_object, metadata=metadata)
-        else:
-            func.assert_called_once_with(request_object)
+        func.assert_called_once_with(request_object, metadata=metadata)
         return getattr(self.patched_grpc_types, function_name + 'Request')
 
     # gRPC errors

@@ -30,10 +30,7 @@ class GrpcStubInterpreter(object):
 
     def _invoke(self, func, request, metadata=None):
         try:
-            if metadata is not None:
-                response = func(request, metadata=metadata)
-            else:
-                response = func(request)
+            response = func(request, metadata=metadata)
             error_code = response.status
             error_message = ''
         except grpc.RpcError as rpc_error:
