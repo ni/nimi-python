@@ -1,7 +1,7 @@
 gRPC Support
 ============
 
-Support for gRPC used in NI-Digital Pattern Driver
+Support for using NI-Digital Pattern Driver over gRPC
 
 .. py:currentmodule:: nidigital
 

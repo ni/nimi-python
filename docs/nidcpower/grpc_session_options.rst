@@ -1,7 +1,7 @@
 gRPC Support
 ============
 
-Support for gRPC used in NI-DCPower
+Support for using NI-DCPower over gRPC
 
 .. py:currentmodule:: nidcpower
 

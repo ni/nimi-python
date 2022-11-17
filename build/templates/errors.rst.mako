@@ -2,10 +2,11 @@
     import build.helper as helper
 
     config = template_parameters['metadata'].config
-    module_name = config['module_name']
     driver_name = config['driver_name']
     enums = config['enums']
     extra_errors_used = config['extra_errors_used']
+    module_name = config['module_name']
+
     grpc_supported = template_parameters['include_grpc_support']
 %>\
 ${helper.get_rst_header_snippet('Exceptions and Warnings', '=')}

@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query=False, reset_device=False, options={})
+.. py:class:: Session(self, resource_name, id_query=False, reset_device=False, options={}, *, _grpc_options=None)
 
     
 
@@ -125,6 +125,16 @@ Session
 
 
     :type options: dict
+
+    :param _grpc_options:
+        
+
+        MeasurementLink gRPC session options
+
+        
+
+
+    :type _grpc_options: nidmm.grpc_session_options.GrpcSessionOptions
 
 
 Methods

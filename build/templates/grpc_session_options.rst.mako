@@ -8,7 +8,7 @@
 %>\
 ${helper.get_rst_header_snippet('gRPC Support', '=')}
 
-Support for gRPC used in ${driver_name}
+Support for using ${driver_name} over gRPC
 
 .. py:currentmodule:: ${module_name}
 

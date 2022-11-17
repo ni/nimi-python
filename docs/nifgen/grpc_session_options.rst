@@ -1,7 +1,7 @@
 gRPC Support
 ============
 
-Support for gRPC used in NI-FGEN
+Support for using NI-FGEN over gRPC
 
 .. py:currentmodule:: nifgen
 

@@ -1,7 +1,7 @@
 gRPC Support
 ============
 
-Support for gRPC used in NI-DMM
+Support for using NI-DMM over gRPC
 
 .. py:currentmodule:: nidmm
 

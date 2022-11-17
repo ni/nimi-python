@@ -1,7 +1,7 @@
 gRPC Support
 ============
 
-Support for gRPC used in NI-SCOPE
+Support for using NI-SCOPE over gRPC
 
 .. py:currentmodule:: niscope
 

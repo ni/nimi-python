@@ -1,7 +1,7 @@
 gRPC Support
 ============
 
-Support for gRPC used in NI-SWITCH
+Support for using NI-SWITCH over gRPC
 
 .. py:currentmodule:: niswitch
 
