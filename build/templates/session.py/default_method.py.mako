@@ -19,6 +19,11 @@
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
+% for p in parameters:
+%   for check_snippet in helper.get_grpc_args_check_snippets(p, parameters):
+        ${check_snippet}
+%   endfor
+% endfor
 % for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.INTERPRETER_METHOD_CALL):
 %   if 'python_api_converter_name' in p:
         ${p['python_name']} = _converters.${p['python_api_converter_name']}(${p['python_name']})

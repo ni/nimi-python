@@ -474,8 +474,6 @@ class GrpcStubInterpreter(object):
         )
 
     def set_sequence(self, channel_name, values, source_delays):  # noqa: N802
-        if source_delays is not None and len(source_delays) != len(values):  # case S160
-            raise ValueError("Length of source_delays and values parameters do not match.")  # case S160
         self._invoke(
             self._client.SetSequence,
             grpc_types.SetSequenceRequest(vi=self._vi, channel_name=channel_name, values=values, source_delays=source_delays),
