@@ -64,7 +64,8 @@ class GrpcSessionOptions(object):
                 Server. This is different from the resource name parameter many APIs take as a
                 separate parameter. Specifying a name makes it easy to share sessions across
                 multiple gRPC clients. You can use an empty string if you want to always initialize
-                a new session and then close it when the Python session goes out of scope.
+                a new session on the server and then close it when the Python Session instance on
+                the client goes out of scope.
 
             api_key (str): Specifies the API license key required by the NI gRPC Device Server.
 
