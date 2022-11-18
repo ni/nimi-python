@@ -201,12 +201,6 @@ class LibraryInterpreter(object):
     def create_advanced_arb_sequence(self, waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
-        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
-            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
-        if sample_counts_array is not None and len(sample_counts_array) != len(waveform_handles_array):  # case S160
-            raise ValueError("Length of sample_counts_array and waveform_handles_array parameters do not match.")  # case S160
-        if marker_location_array is not None and len(marker_location_array) != len(waveform_handles_array):  # case S160
-            raise ValueError("Length of marker_location_array and waveform_handles_array parameters do not match.")  # case S160
         waveform_handles_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
         loop_counts_array_ctype = _get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
         sample_counts_array_ctype = _get_ctypes_pointer_for_buffer(value=sample_counts_array, library_type=_visatype.ViInt32)  # case B550
@@ -221,8 +215,6 @@ class LibraryInterpreter(object):
     def create_arb_sequence(self, waveform_handles_array, loop_counts_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         sequence_length_ctype = _visatype.ViInt32(0 if waveform_handles_array is None else len(waveform_handles_array))  # case S160
-        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
-            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
         waveform_handles_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_handles_array, library_type=_visatype.ViInt32)  # case B550
         loop_counts_array_ctype = _get_ctypes_pointer_for_buffer(value=loop_counts_array, library_type=_visatype.ViInt32)  # case B550
         sequence_handle_ctype = _visatype.ViInt32()  # case S220
@@ -234,8 +226,6 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         waveform_ctype = _visatype.ViInt32(waveform.value)  # case S130
         frequency_list_length_ctype = _visatype.ViInt32(0 if frequency_array is None else len(frequency_array))  # case S160
-        if duration_array is not None and len(duration_array) != len(frequency_array):  # case S160
-            raise ValueError("Length of duration_array and frequency_array parameters do not match.")  # case S160
         frequency_array_ctype = _get_ctypes_pointer_for_buffer(value=frequency_array, library_type=_visatype.ViReal64)  # case B550
         duration_array_ctype = _get_ctypes_pointer_for_buffer(value=duration_array, library_type=_visatype.ViReal64)  # case B550
         frequency_list_handle_ctype = _visatype.ViInt32()  # case S220

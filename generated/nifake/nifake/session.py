@@ -1331,6 +1331,8 @@ class Session(_SessionBase):
             output_array_of_fixed_length (list of float): An array of doubles with fixed size.
 
         '''
+        if input_array_of_integers is not None and len(input_array_of_integers) != len(input_array_of_floats):  # case S160
+            raise ValueError("Length of input_array_of_integers and input_array_of_floats parameters do not match.")  # case S160
         output_array, output_array_of_fixed_length = self._interpreter.multiple_array_types(output_array_size, input_array_of_floats, input_array_of_integers)
         return output_array, output_array_of_fixed_length
 
@@ -1350,6 +1352,12 @@ class Session(_SessionBase):
             values4 (list of float): Array 4 of same size.
 
         '''
+        if values2 is not None and len(values2) != len(values1):  # case S160
+            raise ValueError("Length of values2 and values1 parameters do not match.")  # case S160
+        if values3 is not None and len(values3) != len(values1):  # case S160
+            raise ValueError("Length of values3 and values1 parameters do not match.")  # case S160
+        if values4 is not None and len(values4) != len(values1):  # case S160
+            raise ValueError("Length of values4 and values1 parameters do not match.")  # case S160
         self._interpreter.multiple_arrays_same_size(values1, values2, values3, values4)
 
     @ivi_synchronized
