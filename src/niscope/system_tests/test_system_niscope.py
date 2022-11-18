@@ -553,5 +553,5 @@ class TestGrpc(SystemTests):
                     array_meas_function=test_array_meas_function,
                     meas_wfm_size=test_meas_wfm_length)
 
-        assert exc_info.value.args[0] == 'The argument "meas_wfm_size" should be None when using gRPC.'
-        assert str(exc_info.value) == 'The argument "meas_wfm_size" should be None when using gRPC.'
+        assert exc_info.value.args[0] == 'The argument "meas_wfm_size" must be None when using gRPC.'
+        assert str(exc_info.value) == 'The argument "meas_wfm_size" must be None when using gRPC.'
