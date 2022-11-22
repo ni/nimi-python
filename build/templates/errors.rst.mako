@@ -90,7 +90,7 @@ ${helper.get_rst_header_snippet('RpcError', '-')}
 
     .. exception:: RpcError
 
-        An error specific to gRPC sessions
+        An error specific to sessions to the NI gRPC Device Server
 
 
 % endif

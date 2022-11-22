@@ -84,7 +84,7 @@ RpcError
 
     .. exception:: RpcError
 
-        An error specific to gRPC sessions
+        An error specific to sessions to the NI gRPC Device Server
 
 
 DriverWarning

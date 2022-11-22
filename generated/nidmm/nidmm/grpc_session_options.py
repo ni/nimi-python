@@ -16,26 +16,29 @@ MEASUREMENTLINK_23Q1_NIMI_PYTHON_API_KEY = 'DE10751B-3EE0-44EC-A93B-800E6A3C89E4
 class SessionInitializationBehavior(IntEnum):
     AUTO = 0
     r'''
-    Attach to an existing session with the specified name if it exists, otherwise intialize a new session.
+    The NI gRPC Device Server will attach to an existing session with the specified name if it exists, otherwise the server
+    will initialize a new session.
 
     Note:
-    If this initializes a new session on the NI gRPC Device Server, then when the Python session goes out of scope,
-    it will automatically close the server session. If this attaches to an existing session on the NI gRPC Device Server,
-    then when the Python session goes out of scope, it will detach from the server session and leave it open.
+    When using the Session as a context manager and the context exits, the behavior depends on what happened when the constructor
+    was called. If it resulted in a new session being initialized on the NI gRPC Device Server, then it will automatically close the
+    server session. If it instead attached to an existing session, then it will detach from the server session and leave it open.
     '''
     INITIALIZE_SERVER_SESSION = 1
     r'''
     Require the NI gRPC Device Server to initialize a new session with the specified name.
 
     Note:
-    When the Python session goes out of scope, it will automatically close the server session.
+    When using the Session as a context manager and the context exits, it will automatically close the
+    server session.
     '''
     ATTACH_TO_SERVER_SESSION = 2
     r'''
     Require the NI gRPC Device Server to attach to an existing session with the specified name.
 
     Note:
-    When the Python session goes out of scope, it will detach from the server session and leave it open.
+    When using the Session as a context manager and the context exits, it will detach from the server session
+    and leave it open.
     '''
 
 
@@ -52,23 +55,22 @@ class GrpcSessionOptions(object):
     ):
         r'''Collection of options that specifies session behaviors related to gRPC.
 
-        Creates and returns an object you can pass to a session constructor.
+        Creates and returns an object you can pass to a Session constructor.
 
         Args:
             grpc_channel (grpc.Channel): Specifies the channel to the NI gRPC Device Server.
 
-            session_name (str): Specifies the **session name** to be used in the NI gRPC Device
-                Server. This is different from the resource name parameter many APIs take as a
-                separate parameter. Specifying a name makes it easy to share sessions across
-                multiple gRPC clients. You can use an empty string if you want to always initialize
-                a new session on the server and then close it when the Python Session instance on
-                the client goes out of scope.
+            session_name (str): User-specified name that identifies the driver session in the NI gRPC Device
+                Server. This is different from the resource name parameter many APIs take as a separate
+                parameter. Specifying a name makes it easy to share sessions across multiple gRPC clients.
+                You can use an empty string if you want to always initialize a new session on the server.
+                To attach to an existing session, you must specify the session name it was initialized with.
 
             api_key (str): Specifies the API license key required by the NI gRPC Device Server.
 
             initialization_behavior (enum): Specifies whether it is acceptable to initialize a new
                 session or attach to an existing one, or if only one of the behaviors is desired.
-                To attach to an existing session, you must specify a non-empty session name.
+                The driver session exists in the NI gRPC Device Server.
         '''
         self.grpc_channel = grpc_channel
         self.session_name = session_name
