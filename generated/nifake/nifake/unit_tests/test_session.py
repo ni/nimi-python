@@ -665,6 +665,39 @@ class TestSession(object):
             except TypeError as e:
                 assert str(e) == 'must be Color not FloatEnum'
 
+    def test_multiple_arrays_same_size_wrong_size_2(self):
+        with nifake.Session('dev1') as session:
+            input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+            input_array_of_floats2 = [0.410, 0.420, 0.430]
+            input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+            input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+            except ValueError:
+                pass
+
+    def test_multiple_arrays_same_size_wrong_size_3(self):
+        with nifake.Session('dev1') as session:
+            input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+            input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+            input_array_of_floats3 = [4.100, 4.200, 4.400]
+            input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00]
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+            except ValueError:
+                pass
+
+    def test_multiple_arrays_same_size_wrong_size_4(self):
+        with nifake.Session('dev1') as session:
+            input_array_of_floats1 = [0.041, 0.042, 0.043, 0.044]
+            input_array_of_floats2 = [0.410, 0.420, 0.430, 0.440]
+            input_array_of_floats3 = [4.100, 4.200, 4.300, 4.400]
+            input_array_of_floats4 = [41.00, 42.00, 43.00, 44.00, 45.00]
+            try:
+                session.multiple_arrays_same_size(input_array_of_floats1, input_array_of_floats2, input_array_of_floats3, input_array_of_floats4)
+            except ValueError:
+                pass
+
     def test_get_cal_date_time(self):
         month = 12
         day = 30

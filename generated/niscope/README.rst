@@ -216,10 +216,6 @@ The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ i
 
         - **samples** (numpy array of datatype used) floating point array of samples. Length will be of the actual samples acquired
 
-            .. note::
-
-                Python 3 only
-
     - Such that all record 0 waveforms are first. For example, with a channel list of 0,1, you would have the following index values:
 
         - index 0 = record 0, channel 0
@@ -227,16 +223,6 @@ The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ i
         - index 2 = record 1, channel 0
         - index 3 = record 1, channel 1
         - etc.
-
-
-.. note:: When using Python 2, the waveform_infos objects do not include the waveform for that record. Instead, samples are in the waveform passed into the function using the following layout:
-
-    - index 0 = record 0, channel 0
-    - index *x* = record 0, channel 1
-    - index 2\ *x* = record 1, channel 0
-    - index 3\ *x* = record 1, channel 1
-    - etc.
-    - Where *x* = the record length
 
 
 `Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
@@ -283,3 +269,6 @@ Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
 
 
+**gRPC Features**
+For driver APIs that support it, passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
+subject to the NI General Purpose EULA (`see NILICENSE <https://github.com/ni/nimi-python/blob/master/NILICENSE>`_).

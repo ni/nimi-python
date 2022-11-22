@@ -20,6 +20,9 @@
 % for parameter in enum_input_parameters:
         ${helper.get_enum_type_check_snippet(parameter, indent=12)}
 % endfor
+% for size_check_snippet in helper.get_parameter_size_check_snippets(parameters):
+        ${size_check_snippet}
+% endfor
 % for parameter in helper.filter_parameters(parameters, helper.ParameterUsageOptions.NUMPY_PARAMETERS):
         if type(${parameter['python_name']}) is not numpy.ndarray:
             raise TypeError('${parameter['python_name']} must be {0}, is {1}'.format(numpy.ndarray, type(${parameter['python_name']})))

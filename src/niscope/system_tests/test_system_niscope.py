@@ -141,6 +141,24 @@ class SystemTests:
             assert measurement_stats[i].channel == expected_channels[i]
             assert measurement_stats[i].record == expected_records[i]
 
+    def test_fetch_array_measurement_defaults(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 1000
+        test_num_channels = 2
+        test_num_records = 3
+        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
+
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
+                array_meas_function=test_array_meas_function)
+
+        assert len(waveforms) == test_num_channels * test_num_records
+        for i in range(len(waveforms)):
+            assert len(waveforms[i].samples) == test_record_length
+
     def test_fetch_measurement_stats_defaults(self, multi_instrument_session):
         test_voltage = 1.0
         test_record_length = 1000
@@ -436,8 +454,6 @@ class TestLibrary(SystemTests):
         MeasWfmLength = collections.namedtuple('MeasurementWaveformLength', ['passed_in', 'expected'])
         return MeasWfmLength(passed_in=request.param[0], expected=request.param[1])
 
-    # TODO(RyanEckenrode): AB#2207665: Need to investigate how to get FetchArrayMeasurement working for the grpc versions of these tests
-    # This applies to `test_fetch_array_measurement` and `test_fetch_array_measurement_defaults`
     def test_fetch_array_measurement(self, multi_instrument_session, measurement_wfm_length):
         test_voltage = 1.0
         test_record_length = 1000
@@ -468,24 +484,6 @@ class TestLibrary(SystemTests):
             assert len(waveforms[i].samples) == measurement_wfm_length.expected
             assert waveforms[i].channel == expected_channels[i]
             assert waveforms[i].record == expected_records[i]
-
-    def test_fetch_array_measurement_defaults(self, multi_instrument_session):
-        test_voltage = 1.0
-        test_record_length = 1000
-        test_num_channels = 2
-        test_num_records = 3
-        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
-
-        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
-
-        with multi_instrument_session.initiate():
-            waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
-                array_meas_function=test_array_meas_function)
-
-        assert len(waveforms) == test_num_channels * test_num_records
-        for i in range(len(waveforms)):
-            assert len(waveforms[i].samples) == test_record_length
 
     def test_reset_with_defaults(self, single_instrument_session):
         default_meas_time_histogram_high_time = single_instrument_session.meas_time_histogram_high_time
@@ -545,3 +543,15 @@ class TestGrpc(SystemTests):
             single_instrument_session.reset_with_defaults()
         assert exc_info.value.args[0] == 'reset_with_defaults is not supported over gRPC'
         assert str(exc_info.value) == 'reset_with_defaults is not supported over gRPC'
+
+    def test_fetch_array_measurement_with_meas_wfm_size_value_error(self, multi_instrument_session):
+        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
+        test_meas_wfm_length = 2000
+        with pytest.raises(ValueError) as exc_info:
+            with multi_instrument_session.initiate():
+                multi_instrument_session.fetch_array_measurement(
+                    array_meas_function=test_array_meas_function,
+                    meas_wfm_size=test_meas_wfm_length)
+
+        assert exc_info.value.args[0] == 'The argument "meas_wfm_size" must be None when using gRPC.'
+        assert str(exc_info.value) == 'The argument "meas_wfm_size" must be None when using gRPC.'
