@@ -63,7 +63,7 @@ class GrpcSessionOptions(object):
         Args:
             grpc_channel (grpc.Channel): Specifies the channel to the NI gRPC Device Server.
 
-            session_name (str): User-specified name that identifies the driver session in the NI gRPC Device
+            session_name (str): User-specified name that identifies the driver session on the NI gRPC Device
                 Server. This is different from the resource name parameter many APIs take as a separate
                 parameter. Specifying a name makes it easy to share sessions across multiple gRPC clients.
                 You can use an empty string if you want to always initialize a new session on the server.
@@ -73,7 +73,7 @@ class GrpcSessionOptions(object):
 
             initialization_behavior (enum): Specifies whether it is acceptable to initialize a new
                 session or attach to an existing one, or if only one of the behaviors is desired.
-                The driver session exists in the NI gRPC Device Server.
+                The driver session exists on the NI gRPC Device Server.
         '''
         self.grpc_channel = grpc_channel
         self.session_name = session_name

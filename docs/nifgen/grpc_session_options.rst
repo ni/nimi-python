@@ -70,7 +70,7 @@ Classes
     :param session_name:
         
 
-        User-specified name that identifies the driver session in the NI gRPC Device Server.
+        User-specified name that identifies the driver session on the NI gRPC Device Server.
 
         This is different from the resource name parameter many APIs take as a separate
         parameter. Specifying a name makes it easy to share sessions across multiple gRPC clients.
@@ -87,7 +87,7 @@ Classes
 
         Specifies whether it is acceptable to initialize a new session or attach to an existing one, or if only one of the behaviors is desired.
 
-        The driver session exists in the NI gRPC Device Server.
+        The driver session exists on the NI gRPC Device Server.
 
         
 
