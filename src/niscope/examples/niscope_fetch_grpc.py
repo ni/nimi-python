@@ -10,7 +10,7 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 def example(resource_name, channels, options, length, voltage, address, port):
-session_name = '' # user-specified name; empty string means use a new, unnamed session
+    session_name = '' # user-specified name; empty string means use a new, unnamed session
 
     # Connect to the NI gRPC Device Server
     channel = grpc.insecure_channel(f'{address}:{port}')
