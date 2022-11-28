@@ -10,7 +10,6 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
     timeout = hightime.timedelta(seconds=(delay_in_seconds + 1.0))
 
     with nidcpower.Session(resource_name=resource_name, options=options) as session:
-
         # Configure the session.
         session.source_mode = nidcpower.SourceMode.SEQUENCE
         session.voltage_level_autorange = True
