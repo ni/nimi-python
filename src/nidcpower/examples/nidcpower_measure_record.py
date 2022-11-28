@@ -7,7 +7,6 @@ import sys
 
 def example(resource_name, options, voltage, length):
     with nidcpower.Session(resource_name=resource_name, options=options) as session:
-
         # Configure the session.
         session.measure_record_length = length
         session.measure_record_length_is_finite = True

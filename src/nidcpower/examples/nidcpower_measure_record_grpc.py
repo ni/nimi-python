@@ -14,7 +14,6 @@ def example(resource_name, options, voltage, length, address, port):
     session_options = nidcpower.GrpcSessionOptions(channel, session_name)
 
     with nidcpower.Session(resource_name=resource_name, options=options, _grpc_options=session_options) as session:
-
         # Configure the session.
         session.measure_record_length = length
         session.measure_record_length_is_finite = True
