@@ -458,6 +458,19 @@ class SystemTests:
             except (TypeError, ValueError):
                 pass
 
+    # TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
+    def test_create_advanced_arb_sequence_wrong_size(self, session_5421):
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
+        marker_location_array = [0, 16]
+        loop_counts_array = [10, 20, 30]
+        session_5421.output_mode = nifgen.OutputMode.SEQ
+        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
+        with pytest.raises(ValueError) as exc_info:
+            session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
+        assert exc_info.value.args[0] == 'Length of marker_location_array and waveform_handles_array parameters do not match.'
+        assert str(exc_info.value) == 'Length of marker_location_array and waveform_handles_array parameters do not match.'
+
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
@@ -502,21 +515,6 @@ class TestLibrary(SystemTests):
         session.allocate_named_waveform('foo', len(data))
         session.write_waveform('foo', data)
 
-    # Test doesn't run over gRPC because the exception isn't caught from create_advanced_arb_sequence().
-    # TODO(sbethur): When internal bug# 227842 is fixed, update the test to use PXIe-5433 (Tracked on GitHub by #1376)
-    def test_create_advanced_arb_sequence_wrong_size(self, session_5421):
-        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-        waveform_handles_array = [session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data), session_5421.create_waveform(waveform_data)]
-        marker_location_array = [0, 16]
-        loop_counts_array = [10, 20, 30]
-        session_5421.output_mode = nifgen.OutputMode.SEQ
-        # Test relies on value of sequence handles starting at a known value and incrementing sequentially. Hardly ideal.
-        try:
-            session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
-            assert False
-        except ValueError:
-            pass
-
 
 class TestGrpc(SystemTests):
     server_address = "localhost"
@@ -552,5 +550,5 @@ class TestGrpc(SystemTests):
 
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
-        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, "")
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         return {'_grpc_options': grpc_options}

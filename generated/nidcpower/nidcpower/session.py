@@ -6653,6 +6653,8 @@ class _SessionBase(object):
                 The valid values are between 0 and 167 seconds.
 
         '''
+        if source_delays is not None and len(source_delays) != len(values):  # case S160
+            raise ValueError("Length of source_delays and values parameters do not match.")  # case S160
         self._interpreter.set_sequence(self._repeated_capability, values, source_delays)
 
     def unlock(self):

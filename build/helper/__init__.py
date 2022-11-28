@@ -4,6 +4,7 @@ from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F40
 from build.helper.codegen_helper import get_enum_value_snippet  # noqa: F401
 from build.helper.codegen_helper import get_grpc_interpreter_method_return_snippet  # noqa: F401
 from build.helper.codegen_helper import get_library_interpreter_method_return_snippet  # noqa: F401
+from build.helper.codegen_helper import get_parameter_size_check_snippets  # noqa: F401
 from build.helper.codegen_helper import get_params_snippet  # noqa: F401
 from build.helper.codegen_helper import get_session_method_return_snippet  # noqa: F401
 from build.helper.codegen_helper import IviDanceStep  # noqa: F401

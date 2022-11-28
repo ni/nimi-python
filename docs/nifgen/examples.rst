@@ -30,6 +30,15 @@ nifgen_standard_function.py
    :encoding: utf8
    :caption: `(nifgen_standard_function.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_standard_function.py>`_
 
+nifgen_standard_function_grpc.py
+--------------------------------
+
+.. literalinclude:: ../../src/nifgen/examples/nifgen_standard_function_grpc.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nifgen_standard_function_grpc.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_standard_function_grpc.py>`_
+
 nifgen_trigger.py
 -----------------
 

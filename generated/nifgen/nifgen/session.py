@@ -3436,6 +3436,12 @@ class Session(_SessionBase):
                 arbitrary sequence.
 
         '''
+        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
+        if sample_counts_array is not None and len(sample_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of sample_counts_array and waveform_handles_array parameters do not match.")  # case S160
+        if marker_location_array is not None and len(marker_location_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of marker_location_array and waveform_handles_array parameters do not match.")  # case S160
         coerced_markers_array, sequence_handle = self._interpreter.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array, sample_counts_array, marker_location_array)
         return coerced_markers_array, sequence_handle
 
@@ -3495,6 +3501,8 @@ class Session(_SessionBase):
                 arbitrary sequence.
 
         '''
+        if loop_counts_array is not None and len(loop_counts_array) != len(waveform_handles_array):  # case S160
+            raise ValueError("Length of loop_counts_array and waveform_handles_array parameters do not match.")  # case S160
         sequence_handle = self._interpreter.create_arb_sequence(waveform_handles_array, loop_counts_array)
         return sequence_handle
 
@@ -3575,6 +3583,8 @@ class Session(_SessionBase):
         '''
         if type(waveform) is not enums.Waveform:
             raise TypeError('Parameter waveform must be of type ' + str(enums.Waveform))
+        if duration_array is not None and len(duration_array) != len(frequency_array):  # case S160
+            raise ValueError("Length of duration_array and frequency_array parameters do not match.")  # case S160
         frequency_list_handle = self._interpreter.create_freq_list(waveform, frequency_array, duration_array)
         return frequency_list_handle
 
