@@ -134,7 +134,7 @@ Session
         
 
 
-    :type _grpc_options: nidmm.grpc_session_options.GrpcSessionOptions
+    :type _grpc_options: nidmm.GrpcSessionOptions
 
 
 Methods

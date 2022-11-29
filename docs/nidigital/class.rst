@@ -93,7 +93,7 @@ Session
         
 
 
-    :type _grpc_options: nidigital.grpc_session_options.GrpcSessionOptions
+    :type _grpc_options: nidigital.GrpcSessionOptions
 
 
 Methods

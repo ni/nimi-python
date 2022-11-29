@@ -157,7 +157,7 @@ Session
         
 
 
-    :type _grpc_options: nidcpower.grpc_session_options.GrpcSessionOptions
+    :type _grpc_options: nidcpower.GrpcSessionOptions
 
 
 Methods

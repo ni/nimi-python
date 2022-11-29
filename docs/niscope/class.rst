@@ -166,7 +166,7 @@ Session
         
 
 
-    :type _grpc_options: niscope.grpc_session_options.GrpcSessionOptions
+    :type _grpc_options: niscope.GrpcSessionOptions
 
 
 Methods

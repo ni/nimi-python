@@ -142,7 +142,7 @@ Session
         
 
 
-    :type _grpc_options: nifgen.grpc_session_options.GrpcSessionOptions
+    :type _grpc_options: nifgen.GrpcSessionOptions
 
 
 Methods

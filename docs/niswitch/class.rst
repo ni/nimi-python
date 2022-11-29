@@ -277,7 +277,7 @@ Session
         
 
 
-    :type _grpc_options: niswitch.grpc_session_options.GrpcSessionOptions
+    :type _grpc_options: niswitch.GrpcSessionOptions
 
 
 Methods

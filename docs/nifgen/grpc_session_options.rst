@@ -6,9 +6,6 @@ Support for using NI-FGEN over gRPC
 .. py:currentmodule:: nifgen
 
 
-Enums
-=====
-
 
 SessionInitializationBehavior
 -----------------------------
@@ -45,8 +42,8 @@ SessionInitializationBehavior
 
 
 
-Classes
-=======
+GrpcSessionOptions
+------------------
 
 
 .. py:class:: GrpcSessionOptions(self, grpc_channel, session_name, initialization_behavior=SessionInitializationBehavior.AUTO)
@@ -91,4 +88,4 @@ Classes
 
         
 
-    :type initialization_behavior: enum
+    :type initialization_behavior: :py:data:`nifgen.SessionInitializationBehavior`

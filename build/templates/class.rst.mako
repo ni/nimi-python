@@ -52,7 +52,7 @@ if grpc_supported:
             'is_session_handle': False,
             'python_name': '_grpc_options',
             'size': {'mechanism': 'fixed', 'value': 1},
-            'type_in_documentation': module_name + '.grpc_session_options.GrpcSessionOptions',
+            'type_in_documentation': module_name + '.GrpcSessionOptions',
             'type_in_documentation_was_calculated': False,
             'use_in_python_api': False,
         },

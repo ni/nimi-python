@@ -13,9 +13,6 @@ Support for using ${driver_name} over gRPC
 .. py:currentmodule:: ${module_name}
 
 
-Enums
-=====
-
 
 SessionInitializationBehavior
 -----------------------------
@@ -52,8 +49,8 @@ SessionInitializationBehavior
 
 
 
-Classes
-=======
+GrpcSessionOptions
+------------------
 
 
 .. py:class:: GrpcSessionOptions(self, grpc_channel, session_name, initialization_behavior=SessionInitializationBehavior.AUTO)
@@ -98,4 +95,4 @@ Classes
 
         
 
-    :type initialization_behavior: enum
+    :type initialization_behavior: :py:data:`${module_name}.SessionInitializationBehavior`
