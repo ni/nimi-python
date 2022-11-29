@@ -16,7 +16,6 @@ def example(resource_name, options, voltage1, voltage2, delay):
     timeout = hightime.timedelta(seconds=(delay + 1.0))
 
     with nidcpower.Session(resource_name=resource_name, options=options) as session:
-
         # Configure the session.
         session.source_mode = nidcpower.SourceMode.SINGLE_POINT
         session.output_function = nidcpower.OutputFunction.DC_VOLTAGE

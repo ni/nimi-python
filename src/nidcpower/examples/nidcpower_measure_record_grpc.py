@@ -1,12 +1,19 @@
 #!/usr/bin/python
 
 import argparse
+import grpc
 import nidcpower
 import sys
 
 
-def example(resource_name, options, voltage, length):
-    with nidcpower.Session(resource_name=resource_name, options=options) as session:
+def example(resource_name, options, voltage, length, address, port):
+    session_name = ''  # user-specified name; empty string means use a new, unnamed session
+
+    # Connect to the NI gRPC Device Server
+    channel = grpc.insecure_channel(f'{address}:{port}')
+    session_options = nidcpower.GrpcSessionOptions(channel, session_name)
+
+    with nidcpower.Session(resource_name=resource_name, options=options, _grpc_options=session_options) as session:
         # Configure the session.
         session.measure_record_length = length
         session.measure_record_length_is_finite = True
@@ -36,25 +43,15 @@ def _main(argsv):
     parser.add_argument('-l', '--length', default='20', type=int, help='Measure record length per channel')
     parser.add_argument('-v', '--voltage', default=5.0, type=float, help='Voltage level (V)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
+    parser.add_argument('-a', '--address', default='localhost', help='Server address.')
+    parser.add_argument('-p', '--port', default='31763', help='Server port.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.voltage, args.length)
+    example(args.resource_name, args.option_string, args.voltage, args.length, args.address, args.port)
 
 
 def main():
     _main(sys.argv[1:])
 
 
-def test_example():
-    options = {'simulate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2/0, PXI1Slot3/1', options, 5.0, 20)
-
-
-def test_main():
-    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', ]
-    _main(cmd_line)
-
-
 if __name__ == '__main__':
     main()
-
-
