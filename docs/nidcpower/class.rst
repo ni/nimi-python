@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, channels=None, reset=False, options={}, independent_channels=True)
+.. py:class:: Session(self, resource_name, channels=None, reset=False, options={}, independent_channels=True, *, _grpc_options=None)
 
     
 
@@ -148,6 +148,16 @@ Session
 
 
     :type independent_channels: bool
+
+    :param _grpc_options:
+        
+
+        MeasurementLink gRPC session options
+
+        
+
+
+    :type _grpc_options: nidcpower.GrpcSessionOptions
 
 
 Methods

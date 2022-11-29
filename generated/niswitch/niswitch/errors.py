@@ -44,7 +44,7 @@ class DriverWarning(Warning):
 
 
 class RpcError(Error):
-    '''An error specific to gRPC sessions'''
+    '''An error specific to sessions to the NI gRPC Device Server'''
 
     def __init__(self, rpc_code, description):
         self.rpc_code = rpc_code

@@ -8,4 +8,5 @@ API Reference
    nidcpower/enums
    nidcpower/errors
    nidcpower/examples
+   nidcpower/grpc_session_options
 

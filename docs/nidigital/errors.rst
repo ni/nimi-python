@@ -77,6 +77,16 @@ SelfTestError
         An error due to a failed self-test
 
 
+RpcError
+--------
+
+    .. py:currentmodule:: nidigital.errors
+
+    .. exception:: RpcError
+
+        An error specific to sessions to the NI gRPC Device Server
+
+
 DriverWarning
 -------------
 

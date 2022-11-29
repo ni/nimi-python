@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False)
+.. py:class:: Session(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False, *, _grpc_options=None)
 
     
 
@@ -268,6 +268,16 @@ Session
 
 
     :type reset_device: bool
+
+    :param _grpc_options:
+        
+
+        MeasurementLink gRPC session options
+
+        
+
+
+    :type _grpc_options: niswitch.GrpcSessionOptions
 
 
 Methods
