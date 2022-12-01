@@ -21,15 +21,6 @@ niscope_fetch_forever.py
    :encoding: utf8
    :caption: `(niscope_fetch_forever.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_forever.py>`_
 
-niscope_fetch_grpc.py
----------------------
-
-.. literalinclude:: ../../src/niscope/examples/niscope_fetch_grpc.py
-   :language: python
-   :linenos:
-   :encoding: utf8
-   :caption: `(niscope_fetch_grpc.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_grpc.py>`_
-
 niscope_read.py
 ---------------
 
