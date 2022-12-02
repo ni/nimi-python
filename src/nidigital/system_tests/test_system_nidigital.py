@@ -3,7 +3,7 @@ import collections
 import os
 import pathlib
 import subprocess
-import time
+import threading
 
 import grpc
 import hightime
@@ -1321,9 +1321,28 @@ class TestLibrary(SystemTests):
         return {}
 
 
-class TestGrpc(SystemTests):
-    server_address = "localhost"
-    server_port = "31763"
+class GrpcServerProcess:
+    def __init__(self):
+        server_exe = self._get_grpc_server_exe()
+        self._proc = subprocess.Popen([str(server_exe)], stdout=subprocess.PIPE)
+
+        # Read/parse first line of output; discard the rest
+        try:
+            first_line = self._proc.stdout.readline()
+            assert first_line.startswith(b"Server listening on port "), f"Unrecognized output: {first_line}"
+            self.server_port = int(first_line.replace(b"Server listening on port ", b"").strip())
+
+            self._stdout_thread = threading.Thread(target=self._discard_output, args=(self._proc.stdout,), daemon=True)
+            self._stdout_thread.start()
+        except Exception:
+            self._proc.kill()
+            raise
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self._proc.kill()
 
     def _get_grpc_server_exe(self):
         if os.name != "nt":
@@ -1341,17 +1360,19 @@ class TestGrpc(SystemTests):
             pytest.skip("NI gRPC Device Server not installed")
         return server_exe
 
+    def _discard_output(stdout):
+        while True:
+            data = stdout.read(8196)
+            if not data:
+                return
+
+
+class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def grpc_channel(self):
-        # TODO(DavidCurtiss): Remove the next 3 lines once (and the above method) the server is started automatically
-        server_exe = self._get_grpc_server_exe()
-        proc = subprocess.Popen([str(server_exe)])
-        time.sleep(3)
-        try:
-            channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
+        with GrpcServerProcess() as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
-        finally:
-            proc.kill()
 
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
