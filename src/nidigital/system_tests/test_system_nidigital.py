@@ -1360,7 +1360,7 @@ class GrpcServerProcess:
             pytest.skip("NI gRPC Device Server not installed")
         return server_exe
 
-    def _discard_output(stdout):
+    def _discard_output(self, stdout):
         while True:
             data = stdout.read(8196)
             if not data:
