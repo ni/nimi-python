@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
-        * The byte packing alignment of `struct_NILCRLoadCompensationSpot` is changed from 4-byte to 8-byte in Linux.
+        * Binary compatibility change for type `LCRLoadCompensationSpot` on Linux. Client code using method `nidcpower.Session.perform_lcr_load_compensation` on Linux now requires NI-DCPower 2023 Q1 driver runtime or newer.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
