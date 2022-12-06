@@ -1,4 +1,5 @@
 import cmath
+import platform
 import pytest
 
 import nidcpower
@@ -334,3 +335,18 @@ def test_lcr_load_compensation_spot(
     ctype_instance = nidcpower.struct_NILCRLoadCompensationSpot(python_instance)
     for member in expected_ctype_members:
         assert getattr(ctype_instance, member) == pytest.approx(expected_ctype_members[member])
+
+
+def test_lcr_load_compensation_spot_byte_packing_alignment():
+    if (platform.system() == "Windows" and platform.architecture()[0] == "64bit") or \
+            platform.system() == "Linux" or platform.system() == "Darwin":
+        expected_bytes_len = 32
+    else:
+        expected_bytes_len = 28
+    python_spot = nidcpower.LCRLoadCompensationSpot(
+        frequency=1_000.0,
+        reference_value_type=nidcpower.LCRReferenceValueType.IMPEDANCE,
+        reference_value=complex(1.0, 2.0)
+    )
+    ctype_spot = nidcpower.struct_NILCRLoadCompensationSpot(python_spot)
+    assert len(bytes(ctype_spot)) == expected_bytes_len

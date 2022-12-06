@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
+        * Binary compatibility change for type `LCRLoadCompensationSpot` on Linux. Client code using method `nidcpower.Session.perform_lcr_load_compensation` on Linux now requires NI-DCPower 2023 Q1 driver runtime or newer.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
