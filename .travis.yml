@@ -13,7 +13,7 @@ matrix:
 install:
   - travis_retry sudo apt-get -y install python3-pip
   - travis_retry pip install --upgrade pip
-  - travis_retry pip install --upgrade tox tox-travis codecov
+  - travis_retry pip install --upgrade tox<4.0.0 tox-travis codecov
 
 before_script:
   - python tools/ensure_codegen_up_to_date.py
