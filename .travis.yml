@@ -14,6 +14,7 @@ install:
   - travis_retry sudo apt-get -y install python3-pip
   - travis_retry pip install --upgrade pip
   # tox 4.0 broke plugin compatibility
+  # TODO(ni-jfitzger): When tox-travis has a release compatible with tox>=4.0, remove the tox version specifier (Tracked on GitHub by #1876)
   - travis_retry pip install --upgrade tox==3.* tox-travis codecov
 
 before_script:
