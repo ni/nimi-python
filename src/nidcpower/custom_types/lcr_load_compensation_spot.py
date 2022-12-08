@@ -8,10 +8,9 @@ import nidcpower.enums as enums
 # This class is an internal ctypes implementation detail that corresponds to
 # NILCRLoadCompensationSpot in the C API
 class struct_NILCRLoadCompensationSpot(ctypes.Structure):  # noqa N801
-    if platform.system() == "Windows" and platform.architecture()[0] == "64bit":
+    if (platform.system() == "Windows" and platform.architecture()[0] == "64bit") or \
+            platform.system() == "Linux" or platform.system() == "Darwin":
         _pack_ = 8
-    elif platform.system() == "Linux" or platform.system() == "Darwin":
-        _pack_ = 4
     else:
         _pack_ = 1
     _fields_ = [
