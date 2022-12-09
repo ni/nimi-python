@@ -8,10 +8,10 @@ import grpc
 import hightime
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
-
 import niswitch
-from system_test_utilities import GrpcServerProcess
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
+from system_test_utilities import GrpcServerProcess  # noqa: E402
 
 # We need a lock file so multiple tests aren't hitting the db at the same time
 # Trying to create simulated DAQmx devices at the same time (which can happen when running

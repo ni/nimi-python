@@ -7,10 +7,10 @@ import grpc
 import hightime
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
-
 import nidcpower
-from system_test_utilities import GrpcServerProcess
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
+from system_test_utilities import GrpcServerProcess  # noqa: E402
 
 
 def pytest_generate_tests(metafunc):

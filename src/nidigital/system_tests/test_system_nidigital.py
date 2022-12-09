@@ -9,10 +9,10 @@ import hightime
 import numpy
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
-
 import nidigital
-from system_test_utilities import GrpcServerProcess
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
+from system_test_utilities import GrpcServerProcess  # noqa: E402
 
 instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')

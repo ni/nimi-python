@@ -10,10 +10,10 @@ import hightime
 import numpy
 import pytest
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
-
 import nidmm
-from system_test_utilities import GrpcServerProcess
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
+from system_test_utilities import GrpcServerProcess  # noqa: E402
 
 
 class SystemTests:
