@@ -1,14 +1,19 @@
-import grpc
-import hightime
 import math
-import nidmm
-import numpy
 import os
 import pathlib
-import pytest
-import subprocess
+import sys
 import tempfile
 import time
+
+import grpc
+import hightime
+import numpy
+import pytest
+
+import nidmm
+
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
+from system_test_utilities import GrpcServerProcess  # noqa: E402
 
 
 class SystemTests:
@@ -315,36 +320,11 @@ class TestLibrary(SystemTests):
 
 
 class TestGrpc(SystemTests):
-    server_address = "localhost"
-    server_port = "31763"
-
-    def _get_grpc_server_exe(self):
-        if os.name != "nt":
-            pytest.skip("Only supported on Windows")
-        import winreg
-        try:
-            reg = winreg.ConnectRegistry(None, winreg.HKEY_LOCAL_MACHINE)
-            read64key = winreg.KEY_READ | winreg.KEY_WOW64_64KEY
-            with winreg.OpenKey(reg, r"SOFTWARE\National Instruments\Common\Installer", access=read64key) as key:
-                shared_dir, _ = winreg.QueryValueEx(key, "NISHAREDDIR64")
-        except OSError:
-            pytest.skip("NI gRPC Device Server not installed")
-        server_exe = pathlib.Path(shared_dir) / "NI gRPC Device Server" / "ni_grpc_device_server.exe"
-        if not server_exe.exists():
-            pytest.skip("NI gRPC Device Server not installed")
-        return server_exe
-
     @pytest.fixture(scope='class')
     def grpc_channel(self):
-        # TODO(DavidCurtiss): Remove the next 3 lines once (and the above method) the server is started automatically
-        server_exe = self._get_grpc_server_exe()
-        proc = subprocess.Popen([str(server_exe)])
-        time.sleep(3)
-        try:
-            channel = grpc.insecure_channel(f"{self.server_address}:{self.server_port}")
+        with GrpcServerProcess() as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
-        finally:
-            proc.kill()
 
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
