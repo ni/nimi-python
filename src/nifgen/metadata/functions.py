@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d57
+# This file is generated from NI-FGEN API metadata version 23.0.0d131
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1288,7 +1288,7 @@ functions = {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -1987,7 +1987,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes'
             }
         ],
@@ -2543,7 +2543,7 @@ functions = {
                     'description': 'Trigger ID specifies the Script Trigger to use for triggering.'
                 },
                 'name': 'triggerId',
-                'type': 'ViString'
+                'type': 'ViConstString'
             }
         ],
         'render_in_session_base': True,
@@ -2717,7 +2717,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
-                'grpc_mapped_enum': 'NiFgenStringAttributeValuesMapped',
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViConstString'
             }
