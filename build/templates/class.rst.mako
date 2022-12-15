@@ -40,7 +40,7 @@
 ${helper.get_rst_header_snippet('Session', '=')}
 
 <%
-grpc_options_param = ', *, _grpc_options=None' if grpc_supported else ''
+grpc_options_param = ', *, grpc_options=None' if grpc_supported else ''
 if grpc_supported:
     input_params.append(
         {
@@ -50,7 +50,7 @@ if grpc_supported:
             'enum': None,
             'is_repeated_capability': False,
             'is_session_handle': False,
-            'python_name': '_grpc_options',
+            'python_name': 'grpc_options',
             'size': {'mechanism': 'fixed', 'value': 1},
             'type_in_documentation': module_name + '.GrpcSessionOptions',
             'type_in_documentation_was_calculated': False,

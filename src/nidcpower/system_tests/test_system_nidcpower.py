@@ -1080,4 +1080,4 @@ class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
-        return {'_grpc_options': grpc_options}
+        return {'grpc_options': grpc_options}

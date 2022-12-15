@@ -509,7 +509,7 @@ class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
         grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
-        return {'_grpc_options': grpc_options}
+        return {'grpc_options': grpc_options}
 
     def test_configure_ref_levels(self, single_instrument_session):
         with pytest.raises(NotImplementedError) as exc_info:

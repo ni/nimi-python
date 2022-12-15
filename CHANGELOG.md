@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
         * Support for Python 3.10
+        * MeasurementLink support
     * #### Changed
     * #### Removed
         * Support for Python 3.6

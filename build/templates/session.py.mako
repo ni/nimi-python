@@ -221,7 +221,7 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 class Session(_SessionBase):
     '''${config['session_class_description']}'''
 
-<% grpc_options_param = ', *, _grpc_options=None' if grpc_supported else '' %>\
+<% grpc_options_param = ', *, grpc_options=None' if grpc_supported else '' %>\
     def __init__(${init_method_params}${grpc_options_param}):
         r'''${config['session_class_description']}
 
@@ -238,7 +238,7 @@ if grpc_supported:
             'enum': None,
             'is_repeated_capability': False,
             'is_session_handle': False,
-            'python_name': '_grpc_options',
+            'python_name': 'grpc_options',
             'size': {'mechanism': 'fixed', 'value': 1},
             'type_in_documentation': module_name + '.grpc_session_options.GrpcSessionOptions',
             'type_in_documentation_was_calculated': False,
@@ -249,9 +249,9 @@ if grpc_supported:
         ${helper.get_function_docstring(ctor_for_docs, False, config, indent=8)}
         '''
 % if grpc_supported:
-        if _grpc_options:
+        if grpc_options:
             import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(_grpc_options)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
         else:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % else:
@@ -281,7 +281,7 @@ if grpc_supported:
 % if config['uses_nitclk']:
 %   if grpc_supported:
         # NI-TClk does not work over NI gRPC Device Server
-        if not _grpc_options:
+        if not grpc_options:
             self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 %   else:
         self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())

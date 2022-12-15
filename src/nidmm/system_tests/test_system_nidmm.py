@@ -329,7 +329,7 @@ class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
-        return {'_grpc_options': grpc_options}
+        return {'grpc_options': grpc_options}
 
     def test_new_session_already_exists(self, grpc_channel):
         session_name = 'existing_session'
@@ -337,9 +337,9 @@ class TestGrpc(SystemTests):
         expected_grpc_error = grpc.StatusCode.ALREADY_EXISTS
         init_behavior = nidmm.SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, initialization_behavior=init_behavior)
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
             try:
-                with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
+                with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
                     assert False
             except nidmm.Error as e:
                 assert e.rpc_code == expected_grpc_error
@@ -353,7 +353,7 @@ class TestGrpc(SystemTests):
         init_behavior = nidmm.SessionInitializationBehavior.ATTACH_TO_SERVER_SESSION
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, session_name, initialization_behavior=init_behavior)
         try:
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', _grpc_options=grpc_options):
+            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
                 assert False
         except nidmm.Error as e:
             assert e.rpc_code == expected_grpc_error
