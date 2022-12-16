@@ -38,19 +38,23 @@ All notable changes to this project will be documented in this file.
         * Support for Python 3.6
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * MeasurementLink support
     * #### Changed
         * Binary compatibility change for type `LCRLoadCompensationSpot` on Linux. Client code using method `nidcpower.Session.perform_lcr_load_compensation` on Linux now requires NI-DCPower 2023 Q1 driver runtime or newer.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
+        * MeasurementLink support
     * #### Changed
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
+        * MeasurementLink support
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
+        * MeasurementLink support
     * #### Changed
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
@@ -59,10 +63,12 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
+        * MeasurementLink support
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
+        * MeasurementLink support
     * #### Changed
     * #### Removed
 * ### `nise` (NI Switch Executive)
