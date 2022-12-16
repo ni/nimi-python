@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
 * [1.4.1](#141---2021-08-23)
 * [1.4.0](#140---2021-07-09)
@@ -29,11 +29,10 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.4.3
 * ### ALL
     * #### Added
         * Support for Python 3.10
-    * #### Changed
     * #### Removed
         * Support for Python 3.6
 * ### `nidcpower` (NI-DCPower)
@@ -41,45 +40,23 @@ All notable changes to this project will be documented in this file.
         * MeasurementLink support
     * #### Changed
         * Binary compatibility change for type `LCRLoadCompensationSpot` on Linux. Client code using method `nidcpower.Session.perform_lcr_load_compensation` on Linux now requires NI-DCPower 2023 Q1 driver runtime or newer.
-    * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
         * MeasurementLink support
-    * #### Changed
-    * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
         * MeasurementLink support
-    * #### Changed
-    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
         * MeasurementLink support
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
         * MeasurementLink support
-    * #### Changed
-    * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
         * MeasurementLink support
     * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
-
+        * Fix [#1652](https://github.com/ni/nimi-python/issues/1652): Topology constants haven't been updated on help page
 
 ## 1.4.2 - 2022-08-03
 * ### `nidcpower` (NI-DCPower)
