@@ -1,5 +1,6 @@
 # Changelog
 
+* [Unreleased](#unreleased)
 * [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
 * [1.4.1](#141---2021-08-23)
@@ -29,7 +30,49 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.4.3
+## Unreleased
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidcpower` (NI-DCPower)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidigital` (NI-Digital Pattern Driver)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidmm` (NI-DMM)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nifgen` (NI-FGEN)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nimodinst` (NI-ModInst)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `niscope` (NI-SCOPE)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `niswitch` (NI-SWITCH)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nise` (NI Switch Executive)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nitclk` (NI-TClk)
+    * #### Added
+    * #### Changed
+    * #### Removed
+
+## 1.4.3 - 2022-12-16
 * ### ALL
     * #### Added
         * Support for Python 3.10
