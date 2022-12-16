@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.0.0d75
+# This file is generated from NI-SWITCH API metadata version 23.0.0d149
 config = {
-    'api_version': '23.0.0d75',
+    'api_version': '23.0.0d149',
     'c_function_prefix': 'niSwitch_',
     'close_function': 'close',
     'context_manager_name': {
