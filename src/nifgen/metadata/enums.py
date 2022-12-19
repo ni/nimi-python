@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d131
+# This file is generated from NI-FGEN API metadata version 23.0.0d9999
 enums = {
     'AnalogPath': {
         'values': [
@@ -427,206 +427,6 @@ enums = {
             }
         ]
     },
-    'ObsoleteReferenceClockSource': {
-        'values': [
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the CLK IN input signal from the front panel connector is\nused as the Reference Clock source.\n'
-                },
-                'name': 'NIFGEN_VAL_CLK_IN',
-                'python_name': 'CLOCK_IN',
-                'value': 1202
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the PXI Clock is used as the Reference Clock source.'
-                },
-                'name': 'NIFGEN_VAL_PXI_CLK10',
-                'python_name': 'PXI_CLOCK',
-                'value': 1201
-            }
-        ]
-    },
-    'ObsoleteSampleClockSource': {
-        'values': [
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the Sample Clock from DDC connector is used as the Sample\nClock source.\n'
-                },
-                'name': 'NIFGEN_VAL_DDC_CLK_IN',
-                'value': 1203
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI\\_STAR trigger line is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_PXI_STAR',
-                'value': 131
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 0 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_0',
-                'value': 141
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 1 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_1',
-                'value': 142
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 2 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_2',
-                'value': 143
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 3 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_3',
-                'value': 144
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 4 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_4',
-                'value': 145
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 5 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_5',
-                'value': 146
-            },
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the PXI or RTSI line 6 is used as the Sample Clock\nsource.\n'
-                },
-                'name': 'NIFGEN_VAL_RTSI_6',
-                'value': 147
-            }
-        ]
-    },
-    'ObsoleteSampleClockTimebaseSource': {
-        'values': [
-            {
-                'documentation': {
-                    'description': '\nSpecifies that the external signal on the CLK IN front panel connector\nis used as the source.\n'
-                },
-                'name': 'NIFGEN_VAL_CLK_IN',
-                'value': 1202
-            }
-        ]
-    },
-    'ObsoleteSynchronizationSource': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'RTSI 0'
-                },
-                'name': 'NIFGEN_VAL_RTSI_0',
-                'value': 141
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG0 or VXI TTL0'
-                },
-                'name': 'NIFGEN_VAL_TTL0',
-                'value': 111
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG1 or VXI TTL1'
-                },
-                'name': 'NIFGEN_VAL_TTL1',
-                'value': 112
-            },
-            {
-                'documentation': {
-                    'description': 'RTSI 1'
-                },
-                'name': 'NIFGEN_VAL_RTSI_1',
-                'value': 142
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG2 or VXI TTL2'
-                },
-                'name': 'NIFGEN_VAL_TTL2',
-                'value': 113
-            },
-            {
-                'documentation': {
-                    'description': 'RTSI 2'
-                },
-                'name': 'NIFGEN_VAL_RTSI_2',
-                'value': 143
-            },
-            {
-                'documentation': {
-                    'description': 'RTSI 3'
-                },
-                'name': 'NIFGEN_VAL_RTSI_3',
-                'value': 144
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG3 or VXI TTL3'
-                },
-                'name': 'NIFGEN_VAL_TTL3',
-                'value': 114
-            },
-            {
-                'documentation': {
-                    'description': 'RTSI 4'
-                },
-                'name': 'NIFGEN_VAL_RTSI_4',
-                'value': 145
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG4 or VXI TTL4'
-                },
-                'name': 'NIFGEN_VAL_TTL4',
-                'value': 115
-            },
-            {
-                'documentation': {
-                    'description': 'RTSI 5'
-                },
-                'name': 'NIFGEN_VAL_RTSI_5',
-                'value': 146
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG5 or VXI TTL5'
-                },
-                'name': 'NIFGEN_VAL_TTL5',
-                'value': 116
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG6 or VXI TTL6'
-                },
-                'name': 'NIFGEN_VAL_TTL6',
-                'value': 117
-            },
-            {
-                'documentation': {
-                    'description': 'RTSI 6'
-                },
-                'name': 'NIFGEN_VAL_RTSI_6',
-                'value': 147
-            }
-        ]
-    },
     'OperationMode': {
         'values': [
             {
@@ -753,27 +553,43 @@ enums = {
         'values': [
             {
                 'documentation': {
+                    'description': '\nSpecifies that the CLK IN input signal from the front panel connector is\nused as the Reference Clock source.\n'
+                },
+                'name': 'NIFGEN_VAL_CLOCK_IN_COLLISION_AVOIDANCE',
+                'python_name': 'CLOCK_IN',
+                'value': 'ClkIn'
+            },
+            {
+                'documentation': {
                     'description': 'Specifies that a Reference Clock is not used.'
                 },
-                'name': 'NIFGEN_VAL_NONE',
+                'name': 'NIFGEN_VAL_NONE_COLLISION_AVOIDANCE',
                 'python_name': 'NONE',
-                'value': 1000
+                'value': 'None'
             },
             {
                 'documentation': {
                     'description': '\nSpecifies that the onboard Reference Clock is used as the Reference\nClock source.\n'
                 },
-                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
+                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK_COLLISION_AVOIDANCE',
                 'python_name': 'ONBOARD_REFERENCE_CLOCK',
-                'value': 1019
+                'value': 'OnboardRefClk'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies the PXI Clock is used as the Reference Clock source.'
+                },
+                'name': 'NIFGEN_VAL_PXI_CLOCK_COLLISION_AVOIDANCE',
+                'python_name': 'PXI_CLOCK',
+                'value': 'PXI_Clk'
             },
             {
                 'documentation': {
                     'description': 'Specifies that the RTSI line 7 is used as the Reference Clock source.'
                 },
-                'name': 'NIFGEN_VAL_RTSI_7',
+                'name': 'NIFGEN_VAL_RTSI_7_COLLISION_AVOIDANCE',
                 'python_name': 'RTSI_7',
-                'value': 1010
+                'value': 'RTSI7'
             }
         ]
     },
@@ -793,17 +609,87 @@ enums = {
         'values': [
             {
                 'documentation': {
+                    'description': '\nSpecifies that the signal at the CLK IN front panel connector is used as\nthe Sample Clock source.\n'
+                },
+                'name': 'NIFGEN_VAL_CLOCK_IN',
+                'value': 'ClkIn'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the Sample Clock from DDC connector is used as the Sample\nClock source.\n'
+                },
+                'name': 'NIFGEN_VAL_DDC_CLOCK_IN',
+                'value': 'DDC_ClkIn'
+            },
+            {
+                'documentation': {
                     'description': 'Specifies that the onboard clock is used as the Sample Clock source.'
                 },
-                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
-                'value': 1019
+                'name': 'NIFGEN_VAL_ONBOARD_CLOCK',
+                'value': 'OnboardClock'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI\\_STAR trigger line is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_STAR_LINE',
+                'value': 'PXI_Star'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 0 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_0_RTSI_0',
+                'value': 'PXI_Trig0'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 1 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_1_RTSI_1',
+                'value': 'PXI_Trig1'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 2 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_2_RTSI_2',
+                'value': 'PXI_Trig2'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 3 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_3_RTSI_3',
+                'value': 'PXI_Trig3'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 4 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_4_RTSI_4',
+                'value': 'PXI_Trig4'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 5 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_5_RTSI_5',
+                'value': 'PXI_Trig5'
+            },
+            {
+                'documentation': {
+                    'description': '\nSpecifies that the PXI or RTSI line 6 is used as the Sample Clock\nsource.\n'
+                },
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_6_RTSI_6',
+                'value': 'PXI_Trig6'
             },
             {
                 'documentation': {
                     'description': '\nSpecifies that the PXI or RTSI line 7 is used as the Sample Clock\nsource.\n'
                 },
-                'name': 'NIFGEN_VAL_RTSI_7',
-                'value': 1010
+                'name': 'NIFGEN_VAL_PXI_TRIGGER_LINE_7_RTSI_7',
+                'value': 'PXI_Trig7'
             }
         ]
     },
@@ -811,10 +697,17 @@ enums = {
         'values': [
             {
                 'documentation': {
+                    'description': '\nSpecifies that the external signal on the CLK IN front panel connector\nis used as the source.\n'
+                },
+                'name': 'NIFGEN_VAL_CLOCK_IN',
+                'value': 'ClkIn'
+            },
+            {
+                'documentation': {
                     'description': 'Specifies that the onboard Sample Clock timebase is used as the source.'
                 },
-                'name': 'NIFGEN_VAL_ONBOARD_REFERENCE_CLOCK',
-                'value': 1019
+                'name': 'NIFGEN_VAL_ONBOARD_CLOCK',
+                'value': 'OnboardClock'
             }
         ]
     },
@@ -1082,6 +975,115 @@ enums = {
             }
         ]
     },
+    'SynchronizationSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'PXI TRIG0 or VXI TTL0'
+                },
+                'name': 'NIFGEN_VAL_TTL0',
+                'value': 111
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG1 or VXI TTL1'
+                },
+                'name': 'NIFGEN_VAL_TTL1',
+                'value': 112
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG2 or VXI TTL2'
+                },
+                'name': 'NIFGEN_VAL_TTL2',
+                'value': 113
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG3 or VXI TTL3'
+                },
+                'name': 'NIFGEN_VAL_TTL3',
+                'value': 114
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG4 or VXI TTL4'
+                },
+                'name': 'NIFGEN_VAL_TTL4',
+                'value': 115
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG5 or VXI TTL5'
+                },
+                'name': 'NIFGEN_VAL_TTL5',
+                'value': 116
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG6 or VXI TTL6'
+                },
+                'name': 'NIFGEN_VAL_TTL6',
+                'value': 117
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 0'
+                },
+                'name': 'NIFGEN_VAL_RTSI_0',
+                'value': 141
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 1'
+                },
+                'name': 'NIFGEN_VAL_RTSI_1',
+                'value': 142
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 2'
+                },
+                'name': 'NIFGEN_VAL_RTSI_2',
+                'value': 143
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 3'
+                },
+                'name': 'NIFGEN_VAL_RTSI_3',
+                'value': 144
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 4'
+                },
+                'name': 'NIFGEN_VAL_RTSI_4',
+                'value': 145
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 5'
+                },
+                'name': 'NIFGEN_VAL_RTSI_5',
+                'value': 146
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 6'
+                },
+                'name': 'NIFGEN_VAL_RTSI_6',
+                'value': 147
+            },
+            {
+                'documentation': {
+                    'description': 'No Synchronization Source'
+                },
+                'name': 'NIFGEN_VAL_NONE',
+                'value': 1000
+            }
+        ]
+    },
     'TerminalConfiguration': {
         'values': [
             {
@@ -1150,6 +1152,13 @@ enums = {
         'values': [
             {
                 'documentation': {
+                    'description': 'Immediate-The signal generator does not wait for a trigger of any kind.'
+                },
+                'name': 'NIFGEN_VAL_IMMEDIATE',
+                'value': 0
+            },
+            {
+                'documentation': {
                     'description': 'External-The signal generator waits for a trigger on the external trigger input'
                 },
                 'name': 'NIFGEN_VAL_EXTERNAL',
@@ -1157,10 +1166,59 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Immediate-The signal generator does not wait for a trigger of any kind.'
+                    'description': 'Software Trigger-The signal generator waits until you call niFgen_SendSWTrigger.'
                 },
-                'name': 'NIFGEN_VAL_IMMEDIATE',
-                'value': 0
+                'name': 'NIFGEN_VAL_SOFTWARE_TRIG',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG0 or VXI TTL0'
+                },
+                'name': 'NIFGEN_VAL_TTL0',
+                'value': 111
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG1 or VXI TTL1'
+                },
+                'name': 'NIFGEN_VAL_TTL1',
+                'value': 112
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG2 or VXI TTL2'
+                },
+                'name': 'NIFGEN_VAL_TTL2',
+                'value': 113
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG3 or VXI TTL3'
+                },
+                'name': 'NIFGEN_VAL_TTL3',
+                'value': 114
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG4 or VXI TTL4'
+                },
+                'name': 'NIFGEN_VAL_TTL4',
+                'value': 115
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG5 or VXI TTL5'
+                },
+                'name': 'NIFGEN_VAL_TTL5',
+                'value': 116
+            },
+            {
+                'documentation': {
+                    'description': 'PXI TRIG6 or VXI TTL6'
+                },
+                'name': 'NIFGEN_VAL_TTL6',
+                'value': 117
             },
             {
                 'documentation': {
@@ -1220,59 +1278,45 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Software Trigger-The signal generator waits until you call niFgen_SendSWTrigger.'
+                    'description': 'RTSI line 7'
                 },
-                'name': 'NIFGEN_VAL_SOFTWARE_TRIG',
-                'value': 2
+                'name': 'NIFGEN_VAL_RTSI_7',
+                'value': 1010
             },
             {
                 'documentation': {
-                    'description': 'PXI TRIG0 or VXI TTL0'
+                    'description': 'PFI 0'
                 },
-                'name': 'NIFGEN_VAL_TTL0',
-                'value': 111
+                'name': 'NIFGEN_VAL_PFI_0',
+                'value': 1011
             },
             {
                 'documentation': {
-                    'description': 'PXI TRIG1 or VXI TTL1'
+                    'description': 'PFI 1'
                 },
-                'name': 'NIFGEN_VAL_TTL1',
-                'value': 112
+                'name': 'NIFGEN_VAL_PFI_1',
+                'value': 1012
             },
             {
                 'documentation': {
-                    'description': 'PXI TRIG2 or VXI TTL2'
+                    'description': 'PFI 2'
                 },
-                'name': 'NIFGEN_VAL_TTL2',
-                'value': 113
+                'name': 'NIFGEN_VAL_PFI_2',
+                'value': 1013
             },
             {
                 'documentation': {
-                    'description': 'PXI TRIG3 or VXI TTL3'
+                    'description': 'PFI 3'
                 },
-                'name': 'NIFGEN_VAL_TTL3',
-                'value': 114
+                'name': 'NIFGEN_VAL_PFI_3',
+                'value': 1014
             },
             {
                 'documentation': {
-                    'description': 'PXI TRIG4 or VXI TTL4'
+                    'description': 'Specifies that another terminal is used.'
                 },
-                'name': 'NIFGEN_VAL_TTL4',
-                'value': 115
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG5 or VXI TTL5'
-                },
-                'name': 'NIFGEN_VAL_TTL5',
-                'value': 116
-            },
-            {
-                'documentation': {
-                    'description': 'PXI TRIG6 or VXI TTL6'
-                },
-                'name': 'NIFGEN_VAL_TTL6',
-                'value': 117
+                'name': 'NIFGEN_VAL_OTHER_TERMINAL',
+                'value': 1018
             }
         ]
     },
@@ -1296,6 +1340,139 @@ enums = {
                 },
                 'name': 'NIFGEN_VAL_INTERNAL',
                 'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'External update clock given on the IO front panel connector'
+                },
+                'name': 'NIFGEN_VAL_EXTERNAL',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'TTL1'
+                },
+                'name': 'NIFGEN_VAL_TTL1',
+                'value': 112
+            },
+            {
+                'documentation': {
+                    'description': 'TTL2'
+                },
+                'name': 'NIFGEN_VAL_TTL2',
+                'value': 113
+            },
+            {
+                'documentation': {
+                    'description': 'TTL3'
+                },
+                'name': 'NIFGEN_VAL_TTL3',
+                'value': 114
+            },
+            {
+                'documentation': {
+                    'description': 'TTL4'
+                },
+                'name': 'NIFGEN_VAL_TTL4',
+                'value': 115
+            },
+            {
+                'documentation': {
+                    'description': 'TTL5'
+                },
+                'name': 'NIFGEN_VAL_TTL5',
+                'value': 116
+            },
+            {
+                'documentation': {
+                    'description': 'TTL6'
+                },
+                'name': 'NIFGEN_VAL_TTL6',
+                'value': 117
+            },
+            {
+                'documentation': {
+                    'description': 'PXI Star Trigger Line'
+                },
+                'name': 'NIFGEN_VAL_PXI_STAR',
+                'value': 131
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 0'
+                },
+                'name': 'NIFGEN_VAL_RTSI_0',
+                'value': 141
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 1'
+                },
+                'name': 'NIFGEN_VAL_RTSI_1',
+                'value': 142
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 2'
+                },
+                'name': 'NIFGEN_VAL_RTSI_2',
+                'value': 143
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 3'
+                },
+                'name': 'NIFGEN_VAL_RTSI_3',
+                'value': 144
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 4'
+                },
+                'name': 'NIFGEN_VAL_RTSI_4',
+                'value': 145
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 5'
+                },
+                'name': 'NIFGEN_VAL_RTSI_5',
+                'value': 146
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 6'
+                },
+                'name': 'NIFGEN_VAL_RTSI_6',
+                'value': 147
+            },
+            {
+                'documentation': {
+                    'description': 'RTSI 7'
+                },
+                'name': 'NIFGEN_VAL_RTSI_7',
+                'value': 1010
+            },
+            {
+                'documentation': {
+                    'description': 'Uses another device terminal.'
+                },
+                'name': 'NIFGEN_VAL_OTHER_TERMINAL',
+                'value': 1018
+            },
+            {
+                'documentation': {
+                    'description': 'CLK IN front panel connector'
+                },
+                'name': 'NIFGEN_VAL_CLK_IN',
+                'value': 1202
+            },
+            {
+                'documentation': {
+                    'description': 'DDC CLK IN line of the Digital Data & Control front panel connector'
+                },
+                'name': 'NIFGEN_VAL_DDC_CLK_IN',
+                'value': 1203
             }
         ]
     },

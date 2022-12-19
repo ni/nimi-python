@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d131
+# This file is generated from NI-FGEN API metadata version 23.0.0d9999
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -205,7 +205,6 @@ attributes = {
             'note': 'The signal generator must not be in the Generating state when you change this attribute.'
         },
         'enum': 'SampleClockSource',
-        'grpc_enum': None,
         'lv_property': 'Clocks:Sample Clock:Source',
         'name': 'SAMPLE_CLOCK_SOURCE',
         'type': 'ViString'
@@ -217,7 +216,6 @@ attributes = {
             'note': 'The signal generator must not be in the Generating state when you change this attribute.'
         },
         'enum': 'ReferenceClockSource',
-        'grpc_enum': None,
         'lv_property': 'Clocks:Reference Clock:Source',
         'name': 'REFERENCE_CLOCK_SOURCE',
         'type': 'ViString'
@@ -795,7 +793,6 @@ attributes = {
             'note': 'The signal generator must not be in the Generating state when you change this attribute.'
         },
         'enum': 'SampleClockTimebaseSource',
-        'grpc_enum': None,
         'lv_property': 'Clocks:Sample Clock Timebase:Source',
         'name': 'SAMPLE_CLOCK_TIMEBASE_SOURCE',
         'type': 'ViString'

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d131
+# This file is generated from NI-FGEN API metadata version 23.0.0d9999
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1284,6 +1284,7 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
@@ -1983,6 +1984,7 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
@@ -2717,7 +2719,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
-                'grpc_name': 'attribute_value_raw',
+                'grpc_mapped_enum': 'NiFgenStringAttributeValuesMapped',
                 'name': 'attributeValue',
                 'type': 'ViConstString'
             }

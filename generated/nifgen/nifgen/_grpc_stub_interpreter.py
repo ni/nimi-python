@@ -226,7 +226,7 @@ class GrpcStubInterpreter(object):
             self._client.ExportAttributeConfigurationBuffer,
             grpc_types.ExportAttributeConfigurationBufferRequest(vi=self._vi),
         )
-        return ViAddr(response.configuration)
+        return response.configuration
 
     def export_attribute_configuration_file(self, file_path):  # noqa: N802
         self._invoke(

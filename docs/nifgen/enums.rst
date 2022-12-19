@@ -310,6 +310,17 @@ ReferenceClockSource
 
 .. py:class:: ReferenceClockSource
 
+    .. py:attribute:: ReferenceClockSource.CLOCK_IN
+
+
+
+        Specifies that the CLK IN input signal from the front panel connector is
+        used as the Reference Clock source.
+
+        
+
+
+
     .. py:attribute:: ReferenceClockSource.NONE
 
 
@@ -326,6 +337,16 @@ ReferenceClockSource
 
         Specifies that the onboard Reference Clock is used as the Reference
         Clock source.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.PXI_CLOCK
+
+
+
+        Specifies the PXI Clock is used as the Reference Clock source.
 
         
 
@@ -359,7 +380,29 @@ SampleClockSource
 
 .. py:class:: SampleClockSource
 
-    .. py:attribute:: SampleClockSource.ONBOARD_REFERENCE_CLOCK
+    .. py:attribute:: SampleClockSource.CLOCK_IN
+
+
+
+        Specifies that the signal at the CLK IN front panel connector is used as
+        the Sample Clock source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.DDC_CLOCK_IN
+
+
+
+        Specifies that the Sample Clock from DDC connector is used as the Sample
+        Clock source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.ONBOARD_CLOCK
 
 
 
@@ -369,7 +412,95 @@ SampleClockSource
 
 
 
-    .. py:attribute:: SampleClockSource.RTSI_7
+    .. py:attribute:: SampleClockSource.PXI_STAR_LINE
+
+
+
+        Specifies that the PXI\_STAR trigger line is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_0_RTSI_0
+
+
+
+        Specifies that the PXI or RTSI line 0 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_1_RTSI_1
+
+
+
+        Specifies that the PXI or RTSI line 1 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_2_RTSI_2
+
+
+
+        Specifies that the PXI or RTSI line 2 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_3_RTSI_3
+
+
+
+        Specifies that the PXI or RTSI line 3 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_4_RTSI_4
+
+
+
+        Specifies that the PXI or RTSI line 4 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_5_RTSI_5
+
+
+
+        Specifies that the PXI or RTSI line 5 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_6_RTSI_6
+
+
+
+        Specifies that the PXI or RTSI line 6 is used as the Sample Clock
+        source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockSource.PXI_TRIGGER_LINE_7_RTSI_7
 
 
 
@@ -385,7 +516,18 @@ SampleClockTimebaseSource
 
 .. py:class:: SampleClockTimebaseSource
 
-    .. py:attribute:: SampleClockTimebaseSource.CLOCK
+    .. py:attribute:: SampleClockTimebaseSource.CLOCK_IN
+
+
+
+        Specifies that the external signal on the CLK IN front panel connector
+        is used as the source.
+
+        
+
+
+
+    .. py:attribute:: SampleClockTimebaseSource.ONBOARD_CLOCK
 
 
 
