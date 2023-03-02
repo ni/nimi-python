@@ -3,6 +3,7 @@ import collections
 import os
 import pathlib
 import sys
+import threading
 
 import grpc
 import hightime
@@ -1315,6 +1316,20 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
             timing_sheet='timing',
             initial_state_high_pins=['HI0', 'LowPins'],
             initial_state_tristate_pins='HI1, HI2')
+
+    # Multi-Threading tests
+    def test_multi_threading(self, multi_instrument_session):
+        # test that lock, unlock functions work properly
+        t1 = threading.Thread(target=multi_instrument_session.commit)
+        t2 = threading.Thread(target=multi_instrument_session.commit)
+
+        t1.start()
+        t1.join(0.5)
+        assert not t1.is_alive()
+
+        t2.start()
+        t2.join(0.5)
+        assert not t2.is_alive()
 
 
 class TestLibrary(SystemTests):

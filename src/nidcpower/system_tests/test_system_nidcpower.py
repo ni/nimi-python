@@ -2,6 +2,7 @@ import os
 import pathlib
 import sys
 import tempfile
+import threading
 
 import grpc
 import hightime
@@ -1062,6 +1063,20 @@ class SystemTests:
         assert last_compensation_datetime.day == 1
         assert last_compensation_datetime.hour == 0
         assert last_compensation_datetime.minute == 0
+
+    # Multi-Threading tests
+    def test_multi_threading(self, session):
+        # test that lock, unlock functions work properly
+        t1 = threading.Thread(target=session.commit)
+        t2 = threading.Thread(target=session.commit)
+
+        t1.start()
+        t1.join(0.5)
+        assert not t1.is_alive()
+
+        t2.start()
+        t2.join(0.5)
+        assert not t2.is_alive()
 
 
 class TestLibrary(SystemTests):

@@ -4,6 +4,7 @@ import os
 import pathlib
 import sys
 import tempfile
+import threading
 
 import fasteners
 import grpc
@@ -380,6 +381,20 @@ class SystemTests:
         multi_instrument_session.configure_trigger_window(trigger_source, 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerWindowMode.ENTERING == multi_instrument_session.trigger_window_mode
+
+    # Multi-Threading tests
+    def test_multi_threading(self, multi_instrument_session):
+        # test that lock, unlock functions work properly
+        t1 = threading.Thread(target=multi_instrument_session.commit)
+        t2 = threading.Thread(target=multi_instrument_session.commit)
+
+        t1.start()
+        t1.join(0.5)
+        assert not t1.is_alive()
+
+        t2.start()
+        t2.join(0.5)
+        assert not t2.is_alive()
 
 
 class TestLibrary(SystemTests):

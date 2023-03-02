@@ -2,6 +2,7 @@ import os
 import pathlib
 import sys
 import tempfile
+import threading
 import warnings
 
 import fasteners
@@ -474,6 +475,20 @@ class SystemTests:
             session_5421.create_advanced_arb_sequence(waveform_handles_array, loop_counts_array=loop_counts_array, marker_location_array=marker_location_array)
         assert exc_info.value.args[0] == 'Length of marker_location_array and waveform_handles_array parameters do not match.'
         assert str(exc_info.value) == 'Length of marker_location_array and waveform_handles_array parameters do not match.'
+
+    # Multi-Threading tests
+    def test_multi_threading(self, session):
+        # test that lock, unlock functions work properly
+        t1 = threading.Thread(target=session.commit)
+        t2 = threading.Thread(target=session.commit)
+
+        t1.start()
+        t1.join(0.5)
+        assert not t1.is_alive()
+
+        t2.start()
+        t2.join(0.5)
+        assert not t2.is_alive()
 
 
 class TestLibrary(SystemTests):

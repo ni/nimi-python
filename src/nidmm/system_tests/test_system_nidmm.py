@@ -3,6 +3,7 @@ import os
 import pathlib
 import sys
 import tempfile
+import threading
 import time
 
 import grpc
@@ -300,6 +301,20 @@ class SystemTests:
             with session.lock():
                 interval = session.get_ext_cal_recommended_interval()
                 assert interval.days == 730
+
+    # Multi-Threading tests
+    def test_multi_threading(self, session):
+        # test that lock, unlock functions work properly
+        t1 = threading.Thread(target=session.abort)
+        t2 = threading.Thread(target=session.abort)
+
+        t1.start()
+        t1.join(0.5)
+        assert not t1.is_alive()
+
+        t2.start()
+        t2.join(0.5)
+        assert not t2.is_alive()
 
 
 class TestLibrary(SystemTests):

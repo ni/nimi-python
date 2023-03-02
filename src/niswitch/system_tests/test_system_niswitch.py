@@ -2,6 +2,7 @@ import os
 import pathlib
 import sys
 import tempfile
+import threading
 
 import fasteners
 import grpc
@@ -176,6 +177,20 @@ class SystemTests:
         except niswitch.Error as e:
             assert e.code == -1074118654
             assert e.description.find('Invalid resource name.') != -1
+
+    # Multi-Threading tests
+    def test_multi_threading(self, session):
+        # test that lock, unlock functions work properly
+        t1 = threading.Thread(target=session.commit)
+        t2 = threading.Thread(target=session.commit)
+
+        t1.start()
+        t1.join(0.5)
+        assert not t1.is_alive()
+
+        t2.start()
+        t2.join(0.5)
+        assert not t2.is_alive()
 
 
 class TestLibrary(SystemTests):
