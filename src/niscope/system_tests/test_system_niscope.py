@@ -5,6 +5,7 @@ import pathlib
 import sys
 import tempfile
 import threading
+import time
 
 import fasteners
 import grpc
@@ -383,8 +384,38 @@ class SystemTests:
         assert niscope.TriggerWindowMode.ENTERING == multi_instrument_session.trigger_window_mode
 
     # Multi-Threading tests
-    def test_multi_threading(self, multi_instrument_session):
+    def test_multi_threading_lock_unlock(self, multi_instrument_session):
+        release_lock = threading.Event()
+
+        def lock_wait_unlock():
+            multi_instrument_session.lock()
+            release_lock.wait()
+            multi_instrument_session.unlock()
+
+        def lock_unlock():
+            multi_instrument_session.lock()
+            multi_instrument_session.unlock()
+
         # test that lock, unlock functions work properly
+        # No need to test locking for driver, but the gRPC_interpeter doesn't use the driver to lock
+        t1 = threading.Thread(target=lock_wait_unlock)
+        t2 = threading.Thread(target=lock_unlock)
+
+        t1.start()
+        t2.start()
+
+        t1.join(0.5)
+        time.sleep(0.5)
+        # t1 is blocked by the event, t2 should be blocked by t1's lock
+        assert t2.is_alive()
+        release_lock.set()
+        t2.join(0.5)
+
+        assert not t1.is_alive()
+        assert not t2.is_alive()
+
+    def test_multi_threading_ivi_synchronized_wrapper_releases_lock(self, multi_instrument_session):
+        # test that the 2nd thread doesn't hang
         t1 = threading.Thread(target=multi_instrument_session.commit)
         t2 = threading.Thread(target=multi_instrument_session.commit)
 
