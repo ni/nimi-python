@@ -388,13 +388,14 @@ class TestLibrary(SystemTests):
         return {}
 
     # not supported by grpc due to numpy usage
-    @pytest.mark.parametrize("fetch_waveform_type,type_min_value",
+    @pytest.mark.parametrize(
+        "fetch_waveform_type,type_min_value",
         [
             (numpy.int8, numpy.iinfo(numpy.int8).min),
             (numpy.int16, numpy.iinfo(numpy.int16).min),
             (numpy.int32, numpy.iinfo(numpy.int32).min),
-            (numpy.float64, numpy.finfo(numpy.float64).min)
-        ]
+            (numpy.float64, numpy.finfo(numpy.float64).min),
+        ],
     )
     def test_fetch_into(self, multi_instrument_session, fetch_waveform_type, type_min_value):
         test_voltage = 1.0
