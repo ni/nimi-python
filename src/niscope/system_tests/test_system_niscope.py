@@ -1,5 +1,5 @@
 import collections
-import math
+import copy
 import os
 import pathlib
 import sys
@@ -402,21 +402,27 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(self):
         return {}
 
-    @pytest.fixture(params=[numpy.int8, numpy.int16, numpy.int32, numpy.float64])
-    def fetch_waveform_type(self, request):
-        return request.param
-
     # not supported by grpc due to numpy usage
-    def test_fetch_into(self, multi_instrument_session, fetch_waveform_type):
+    @pytest.mark.parametrize(
+        "fetch_waveform_type,type_min_value",
+        [
+            (numpy.int8, numpy.iinfo(numpy.int8).min),
+            (numpy.int16, numpy.iinfo(numpy.int16).min),
+            (numpy.int32, numpy.iinfo(numpy.int32).min),
+            (numpy.float64, numpy.finfo(numpy.float64).min),
+        ],
+    )
+    def test_fetch_into(self, multi_instrument_session, fetch_waveform_type, type_min_value):
         test_voltage = 1.0
         test_record_length = 2000
         test_num_channels = 2
         test_starting_record_number = 2
         test_num_records_to_acquire = 5
         test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
-        waveform = numpy.ndarray(test_num_channels * test_num_records_to_fetch * test_record_length, dtype=fetch_waveform_type)
-        # Initialize with NaN so we can later verify all samples were overwritten by the driver.
-        waveform.fill(float('nan'))
+        init_waveform = numpy.ndarray(test_num_channels * test_num_records_to_fetch * test_record_length, dtype=fetch_waveform_type)
+        # Initialize with min supported value so we can later verify all samples were overwritten by the driver.
+        init_waveform.fill(type_min_value)
+        waveform = copy.deepcopy(init_waveform)
         multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
         multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
         with multi_instrument_session.initiate():
@@ -425,8 +431,8 @@ class TestLibrary(SystemTests):
                 record_number=test_starting_record_number,
                 num_records=test_num_records_to_fetch)
 
-        for sample in waveform:
-            assert not math.isnan(sample)
+        for index, sample in enumerate(waveform):
+            assert sample != init_waveform[index]
         assert len(waveforms) == test_num_channels * test_num_records_to_fetch
 
         expected_channels = test_channels.split(',') * test_num_records_to_fetch
