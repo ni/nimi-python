@@ -65,7 +65,6 @@ def impl_test_multi_threading_lock_unlock(session):
         session.unlock()
 
     # test that lock, unlock functions work properly
-    # No need to test locking for driver, but the gRPC_interpeter doesn't use the driver to lock
     t1 = threading.Thread(target=lock_wait_unlock)
     t2 = threading.Thread(target=lock_unlock)
 
