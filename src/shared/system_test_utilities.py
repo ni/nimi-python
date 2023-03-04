@@ -57,11 +57,13 @@ def impl_test_multi_threading_lock_unlock(session):
 
     def lock_wait_unlock():
         session.lock()
+        assert session.instrument_manufacturer != ''
         release_lock.wait()
         session.unlock()
 
     def lock_unlock():
         session.lock()
+        assert session.instrument_model != ''
         session.unlock()
 
     # test that lock, unlock functions work properly
