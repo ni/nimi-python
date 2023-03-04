@@ -3,6 +3,7 @@ import pathlib
 import pytest
 import subprocess
 import threading
+import time
 
 
 class GrpcServerProcess:
@@ -49,3 +50,47 @@ class GrpcServerProcess:
             data = stdout.read(8196)
             if not data:
                 return
+
+
+def impl_test_multi_threading_lock_unlock(session):
+    release_lock = threading.Event()
+
+    def lock_wait_unlock():
+        session.lock()
+        release_lock.wait()
+        session.unlock()
+
+    def lock_unlock():
+        session.lock()
+        session.unlock()
+
+    # test that lock, unlock functions work properly
+    # No need to test locking for driver, but the gRPC_interpeter doesn't use the driver to lock
+    t1 = threading.Thread(target=lock_wait_unlock)
+    t2 = threading.Thread(target=lock_unlock)
+
+    t1.start()
+    t2.start()
+
+    t1.join(0.5)
+    time.sleep(0.5)
+    # t1 is blocked by the event, t2 should be blocked by t1's lock
+    assert t2.is_alive()
+    release_lock.set()
+    t2.join(0.5)
+
+    assert not t1.is_alive()
+    assert not t2.is_alive()
+
+def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(session):
+    # test that the 2nd thread doesn't hang
+    t1 = threading.Thread(target=session.abort)
+    t2 = threading.Thread(target=session.abort)
+
+    t1.start()
+    t1.join(0.5)
+    assert not t1.is_alive()
+
+    t2.start()
+    t2.join(0.5)
+    assert not t2.is_alive()
