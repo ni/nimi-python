@@ -501,10 +501,9 @@ class LibraryInterpreter(object):
 
     def lock(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niFgen_LockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        error_code = self._library.niFgen_LockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(caller_has_lock_ctype.value)
+        return
 
     def query_arb_seq_capabilities(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -629,10 +628,9 @@ class LibraryInterpreter(object):
 
     def unlock(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        caller_has_lock_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niFgen_UnlockSession(vi_ctype, None if caller_has_lock_ctype is None else (ctypes.pointer(caller_has_lock_ctype)))
+        error_code = self._library.niFgen_UnlockSession(vi_ctype, None)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(caller_has_lock_ctype.value)
+        return
 
     def wait_until_done(self, max_time):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

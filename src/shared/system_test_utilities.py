@@ -3,6 +3,7 @@ import pathlib
 import pytest
 import subprocess
 import threading
+import time
 
 
 class GrpcServerProcess:
@@ -49,3 +50,50 @@ class GrpcServerProcess:
             data = stdout.read(8196)
             if not data:
                 return
+
+
+def impl_test_multi_threading_lock_unlock(session):
+    t1_lock_engaged = threading.Event()
+    release_t1_lock = threading.Event()
+
+    def lock_wait_unlock():
+        session.lock()
+        t1_lock_engaged.set()
+        assert session.instrument_manufacturer != ''
+        release_t1_lock.wait()
+        session.unlock()
+
+    def lock_unlock():
+        session.lock()
+        assert session.instrument_model != ''
+        session.unlock()
+
+    # test that lock, unlock functions work properly
+    t1 = threading.Thread(target=lock_wait_unlock)
+    t2 = threading.Thread(target=lock_unlock)
+
+    t1.start()
+    t2.start()
+
+    t1_lock_engaged.wait()
+    time.sleep(2.0)
+    # t1 is blocked by the release event, t2 should be blocked by t1's lock
+    assert t2.is_alive()
+    release_t1_lock.set()
+    t2.join()
+
+    assert not t1.is_alive()
+    assert not t2.is_alive()
+
+def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(session):
+    # test that the 2nd thread doesn't hang
+    t1 = threading.Thread(target=session.abort)
+    t2 = threading.Thread(target=session.abort)
+
+    t1.start()
+    t1.join()
+    assert not t1.is_alive()
+
+    t2.start()
+    t2.join()
+    assert not t2.is_alive()

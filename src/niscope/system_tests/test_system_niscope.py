@@ -14,7 +14,7 @@ import pytest
 import niscope
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
-from system_test_utilities import GrpcServerProcess  # noqa: E402
+import system_test_utilities  # noqa: E402
 
 
 instruments = ['FakeDevice1', 'FakeDevice2']
@@ -381,6 +381,14 @@ class SystemTests:
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerWindowMode.ENTERING == multi_instrument_session.trigger_window_mode
 
+    # Multi-Threading tests
+    def test_multi_threading_lock_unlock(self, multi_instrument_session):
+        system_test_utilities.impl_test_multi_threading_lock_unlock(multi_instrument_session)
+
+    def test_multi_threading_ivi_synchronized_wrapper_releases_lock(self, multi_instrument_session):
+        system_test_utilities.impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(
+            multi_instrument_session)
+
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
@@ -508,7 +516,7 @@ class TestLibrary(SystemTests):
 class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def grpc_channel(self):
-        with GrpcServerProcess() as proc:
+        with system_test_utilities.GrpcServerProcess() as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
