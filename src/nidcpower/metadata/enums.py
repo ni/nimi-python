@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d318
+# This file is generated from NI-DCPower API metadata version 23.3.0d364
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -62,17 +62,17 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Makes zero conversions for every measurement.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            },
-            {
-                'documentation': {
                     'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.'
                 },
                 'name': 'NIDCPOWER_VAL_ONCE',
                 'value': 1024
+            },
+            {
+                'documentation': {
+                    'description': 'Makes zero conversions for every measurement.'
+                },
+                'name': 'NIDCPOWER_VAL_ON',
+                'value': 1
             }
         ]
     },
@@ -190,20 +190,6 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.'
-                },
-                'name': 'NIDCPOWER_VAL_CUSTOM_ONBOARD_STORAGE',
-                'value': 1125
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the custom cable compensation data supplied to niDCPower_ConfigureLCRCustomCableCompensation. Use this option to manage multiple sets of custom cable compensation data.'
-                },
-                'name': 'NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED',
-                'value': 1126
-            },
-            {
-                'documentation': {
                     'description': 'Uses predefined cable compensation data for an NI standard 1m triaxial cable.'
                 },
                 'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_1M',
@@ -222,6 +208,20 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_4M',
                 'value': 1141
+            },
+            {
+                'documentation': {
+                    'description': 'Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.'
+                },
+                'name': 'NIDCPOWER_VAL_CUSTOM_ONBOARD_STORAGE',
+                'value': 1125
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the custom cable compensation data supplied to niDCPower_ConfigureLCRCustomCableCompensation. Use this option to manage multiple sets of custom cable compensation data.'
+                },
+                'name': 'NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED',
+                'value': 1126
             }
         ]
     },
@@ -231,14 +231,16 @@ enums = {
                 'documentation': {
                     'description': 'Compliance limits are specified symmetrically about 0.'
                 },
-                'name': 'NIDCPOWER_VAL_SYMMETRIC',
+                'name': 'NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC',
+                'python_name': 'NIDCPOWER_VAL_SYMMETRIC',
                 'value': 0
             },
             {
                 'documentation': {
                     'description': 'Compliance limits can be specified asymmetrically with respect to 0.'
                 },
-                'name': 'NIDCPOWER_VAL_ASYMMETRIC',
+                'name': 'NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC',
+                'python_name': 'NIDCPOWER_VAL_ASYMMETRIC',
                 'value': 1
             }
         ]
@@ -634,28 +636,28 @@ enums = {
                 'documentation': {
                     'description': 'The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.'
                 },
-                'name': 'NIDCPOWER_VAL_IMPEDANCE',
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IMPEDANCE',
                 'value': 1076
             },
             {
                 'documentation': {
                     'description': 'The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.'
                 },
-                'name': 'NIDCPOWER_VAL_IDEAL_CAPACITANCE',
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IDEAL_CAPACITANCE',
                 'value': 1077
             },
             {
                 'documentation': {
                     'description': 'The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.'
                 },
-                'name': 'NIDCPOWER_VAL_IDEAL_INDUCTANCE',
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IDEAL_INDUCTANCE',
                 'value': 1078
             },
             {
                 'documentation': {
                     'description': 'The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.'
                 },
-                'name': 'NIDCPOWER_VAL_IDEAL_RESISTANCE',
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IDEAL_RESISTANCE',
                 'value': 1079
             }
         ]
@@ -821,6 +823,30 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                 'value': 128
+            },
+            {
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_SATURATED',
+                'value': 256
+            },
+            {
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED',
+                'value': 512
+            },
+            {
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH',
+                'value': 1024
+            },
+            {
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW',
+                'value': 2048
+            },
+            {
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_SELF_TEST_MEASUREMENT_HIGH',
+                'value': 4096
+            },
+            {
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_SELF_TEST_MEASUREMENT_LOW',
+                'value': 8192
             }
         ]
     },

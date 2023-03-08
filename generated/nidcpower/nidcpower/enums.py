@@ -39,13 +39,13 @@ class AutoZero(Enum):
     r'''
     Disables auto zero.
     '''
-    ON = 1
-    r'''
-    Makes zero conversions for every measurement.
-    '''
     ONCE = 1024
     r'''
     Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+    '''
+    ON = 1
+    r'''
+    Makes zero conversions for every measurement.
     '''
 
 
@@ -115,14 +115,6 @@ class CableLength(Enum):
     r'''
     Uses predefined cable compensation data for an NI standard 4m coaxial cable.
     '''
-    CUSTOM_ONBOARD_STORAGE = 1125
-    r'''
-    Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
-    '''
-    CUSTOM_AS_CONFIGURED = 1126
-    r'''
-    Uses the custom cable compensation data supplied to configure_lcr_custom_cable_compensation. Use this option to manage multiple sets of custom cable compensation data.
-    '''
     NI_STANDARD_TRIAXIAL_1M = 1139
     r'''
     Uses predefined cable compensation data for an NI standard 1m triaxial cable.
@@ -135,6 +127,14 @@ class CableLength(Enum):
     r'''
     Uses predefined cable compensation data for an NI standard 4m triaxial cable.
     '''
+    CUSTOM_ONBOARD_STORAGE = 1125
+    r'''
+    Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
+    '''
+    CUSTOM_AS_CONFIGURED = 1126
+    r'''
+    Uses the custom cable compensation data supplied to configure_lcr_custom_cable_compensation. Use this option to manage multiple sets of custom cable compensation data.
+    '''
 
 
 class ComplianceLimitSymmetry(Enum):
@@ -145,6 +145,17 @@ class ComplianceLimitSymmetry(Enum):
     ASYMMETRIC = 1
     r'''
     Compliance limits can be specified asymmetrically with respect to 0.
+    '''
+
+
+class CurrentLimitBehavior(Enum):
+    REGULATE = 0
+    r'''
+    The channel acts to restrict the output current to the value of the Current Limit property when the actual output on the channel reaches or exceeds that value.
+    '''
+    TRIP = 1
+    r'''
+    The channel disables the output when the actual output current on the channel reaches or exceeds the value of the Current Limit property.
     '''
 
 
@@ -407,6 +418,12 @@ class OutputCutoffReason(Enum):
     r'''
     Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
     '''
+    VOLTAGE_SATURATED = 256
+    CURRENT_SATURATED = 512
+    VOLTAGE_MEASURE_HIGH = 1024
+    VOLTAGE_MEASURE_LOW = 2048
+    SELF_TEST_MEASUREMENT_HIGH = 4096
+    SELF_TEST_MEASUREMENT_LOW = 8192
 
 
 class OutputFunction(Enum):

@@ -91,21 +91,21 @@ AutoZero
 
 
 
-    .. py:attribute:: AutoZero.ON
-
-
-
-        Makes zero conversions for every measurement.
-
-        
-
-
-
     .. py:attribute:: AutoZero.ONCE
 
 
 
         Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+
+        
+
+
+
+    .. py:attribute:: AutoZero.ON
+
+
+
+        Makes zero conversions for every measurement.
 
         
 
@@ -271,26 +271,6 @@ CableLength
 
 
 
-    .. py:attribute:: CableLength.CUSTOM_ONBOARD_STORAGE
-
-
-
-        Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
-
-        
-
-
-
-    .. py:attribute:: CableLength.CUSTOM_AS_CONFIGURED
-
-
-
-        Uses the custom cable compensation data supplied to :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`. Use this option to manage multiple sets of custom cable compensation data.
-
-        
-
-
-
     .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_1M
 
 
@@ -321,6 +301,26 @@ CableLength
 
 
 
+    .. py:attribute:: CableLength.CUSTOM_ONBOARD_STORAGE
+
+
+
+        Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
+
+        
+
+
+
+    .. py:attribute:: CableLength.CUSTOM_AS_CONFIGURED
+
+
+
+        Uses the custom cable compensation data supplied to :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`. Use this option to manage multiple sets of custom cable compensation data.
+
+        
+
+
+
 ComplianceLimitSymmetry
 -----------------------
 
@@ -341,6 +341,31 @@ ComplianceLimitSymmetry
 
 
         Compliance limits can be specified asymmetrically with respect to 0.
+
+        
+
+
+
+CurrentLimitBehavior
+--------------------
+
+.. py:class:: CurrentLimitBehavior
+
+    .. py:attribute:: CurrentLimitBehavior.REGULATE
+
+
+
+        The channel acts to restrict the output current to the value of the Current Limit property when the actual output on the channel reaches or exceeds that value.
+
+        
+
+
+
+    .. py:attribute:: CurrentLimitBehavior.TRIP
+
+
+
+        The channel disables the output when the actual output current on the channel reaches or exceeds the value of the Current Limit property.
 
         
 
@@ -918,6 +943,30 @@ OutputCutoffReason
         Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
 
         
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_SATURATED
+
+
+
+    .. py:attribute:: OutputCutoffReason.CURRENT_SATURATED
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_MEASURE_HIGH
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_MEASURE_LOW
+
+
+
+    .. py:attribute:: OutputCutoffReason.SELF_TEST_MEASUREMENT_HIGH
+
+
+
+    .. py:attribute:: OutputCutoffReason.SELF_TEST_MEASUREMENT_LOW
 
 
 

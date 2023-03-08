@@ -191,6 +191,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['SetSequence'] = {}
         self._defaults['SetSequence']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -837,6 +839,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niDCPower_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
+
     def niDCPower_SetSequence(self, vi, channel_name, values, source_delays, size):  # noqa: N802
         if self._defaults['SetSequence']['return'] != 0:
             return self._defaults['SetSequence']['return']
@@ -1021,6 +1028,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_SetAttributeViReal64.return_value = 0
         mock_library.niDCPower_SetAttributeViString.side_effect = MockFunctionCallError("niDCPower_SetAttributeViString")
         mock_library.niDCPower_SetAttributeViString.return_value = 0
+        mock_library.niDCPower_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niDCPower_SetRuntimeEnvironment")
+        mock_library.niDCPower_SetRuntimeEnvironment.return_value = 0
         mock_library.niDCPower_SetSequence.side_effect = MockFunctionCallError("niDCPower_SetSequence")
         mock_library.niDCPower_SetSequence.return_value = 0
         mock_library.niDCPower_UnlockSession.side_effect = MockFunctionCallError("niDCPower_UnlockSession")

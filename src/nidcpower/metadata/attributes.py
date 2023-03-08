@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d318
+# This file is generated from NI-DCPower API metadata version 23.3.0d364
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -2522,7 +2522,7 @@ attributes = {
     },
     1250004: {
         'access': 'read-write',
-        'grpc_enum': 'CurrentLimitBehavior',
+        'enum': 'CurrentLimitBehavior',
         'name': 'CURRENT_LIMIT_BEHAVIOR',
         'supported_rep_caps': [
             'channels'

@@ -85,6 +85,7 @@ class Library(object):
         self.niDCPower_SetAttributeViInt64_cfunc = None
         self.niDCPower_SetAttributeViReal64_cfunc = None
         self.niDCPower_SetAttributeViString_cfunc = None
+        self.niDCPower_SetRuntimeEnvironment_cfunc = None
         self.niDCPower_SetSequence_cfunc = None
         self.niDCPower_UnlockSession_cfunc = None
         self.niDCPower_WaitForEventWithChannels_cfunc = None
@@ -594,6 +595,14 @@ class Library(object):
                 self.niDCPower_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDCPower_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
+
+    def niDCPower_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_SetRuntimeEnvironment_cfunc is None:
+                self.niDCPower_SetRuntimeEnvironment_cfunc = self._get_library_function('niDCPower_SetRuntimeEnvironment')
+                self.niDCPower_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDCPower_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niDCPower_SetSequence(self, vi, channel_name, values, source_delays, size):  # noqa: N802
         with self._func_lock:
