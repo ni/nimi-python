@@ -30,7 +30,7 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-% for func_name in sorted(helper.filter_codegen_functions(functions)):
+% for func_name in sorted(functions):
 <%
 f = functions[func_name]
 params = f['parameters']
@@ -54,7 +54,7 @@ ivi_dance_params = helper.filter_ivi_dance_parameters(params)
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-% for func_name in sorted(helper.filter_codegen_functions(functions)):
+% for func_name in sorted(functions):
 <%
 f = functions[func_name]
 params = f['parameters']
@@ -126,7 +126,7 @@ if p['use_array']:
 % endfor
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-% for func_name in sorted(helper.filter_codegen_functions(functions)):
+% for func_name in sorted(functions):
 <%
 f = functions[func_name]
 %>\
