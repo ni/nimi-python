@@ -3519,10 +3519,10 @@ compliance_limit_symmetry
         Specifies whether compliance limits for current generation and voltage
         generation for the device are applied symmetrically about 0 V and 0 A or
         asymmetrically with respect to 0 V and 0 A.
-        When set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`, voltage limits and current limits are set
+        When set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`, voltage limits and current limits are set
         using a single property with a positive value. The resulting range is
         bounded by this positive value and its opposite.
-        When set to :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC`, you must separately set a limit high and a
+        When set to :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC`, you must separately set a limit high and a
         limit low using distinct properties.
         For asymmetric limits, the range bounded by the limit high and limit low
         must include zero.
@@ -3536,8 +3536,6 @@ compliance_limit_symmetry
 
 
         .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3779,15 +3777,13 @@ current_limit
     .. py:attribute:: current_limit
 
         Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).
-        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
         Valid Values: The valid values for this property are defined by the values to which :py:attr:`nidcpower.Session.current_limit_range` property is set.
 
 
 
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3897,7 +3893,7 @@ current_limit_high
         Specifies the maximum current, in amps, that the output can produce when
         generating the desired voltage on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
         You must also specify a :py:attr:`nidcpower.Session.current_limit_low` to complete the asymmetric
         range.
         **Valid Values:** [1% of :py:attr:`nidcpower.Session.current_limit_range`, :py:attr:`nidcpower.Session.current_limit_range`]
@@ -3913,8 +3909,6 @@ current_limit_high
         .. note:: The limit may be extended beyond the selected limit range if the
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3952,7 +3946,7 @@ current_limit_low
         Specifies the minimum current, in amps, that the output can produce when
         generating the desired voltage on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
         You must also specify a :py:attr:`nidcpower.Session.current_limit_high` to complete the asymmetric
         range.
         **Valid Values:** [-:py:attr:`nidcpower.Session.current_limit_range`, -1% of :py:attr:`nidcpower.Session.current_limit_range`]
@@ -3968,8 +3962,6 @@ current_limit_low
         .. note:: The limit may be extended beyond the selected limit range if the
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7847,7 +7839,7 @@ pulse_bias_current_limit_high
         generating the desired pulse voltage on the specified channel(s) during
         the *off* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_bias_current_limit_low` to complete the
         asymmetric range.
         **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`, :py:attr:`nidcpower.Session.pulse_current_limit_range`]
@@ -7864,8 +7856,6 @@ pulse_bias_current_limit_high
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7904,7 +7894,7 @@ pulse_bias_current_limit_low
         generating the desired pulse voltage on the specified channel(s) during
         the *off* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_bias_current_limit_high` to complete the
         asymmetric range.
         **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_current_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`]
@@ -7921,8 +7911,6 @@ pulse_bias_current_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8084,7 +8072,7 @@ pulse_bias_voltage_limit_high
         when generating the desired pulse current on the specified channel(s)
         during the *off* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_bias_voltage_limit_low` to complete the
         asymmetric range.
         **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`, :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
@@ -8101,8 +8089,6 @@ pulse_bias_voltage_limit_high
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8141,7 +8127,7 @@ pulse_bias_voltage_limit_low
         when generating the desired pulse current on the specified channel(s)
         during the *off* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_bias_voltage_limit_high` to complete the
         asymmetric range.
         **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_voltage_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
@@ -8158,8 +8144,6 @@ pulse_bias_voltage_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8401,14 +8385,12 @@ pulse_current_limit
     .. py:attribute:: pulse_current_limit
 
         Specifies the pulse current limit, in amps, that the output cannot exceed when generating the desired pulse voltage on the specified channel(s) during the on phase of a pulse.
-        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         Valid Values: The valid values for this property are defined by the values you specify for the :py:attr:`nidcpower.Session.pulse_current_limit_range` property.
 
 
 
         .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8447,7 +8429,7 @@ pulse_current_limit_high
         generating the desired pulse voltage on the specified channel(s) during
         the *on* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_current_limit_low` to complete the asymmetric
         range.
         **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`, :py:attr:`nidcpower.Session.pulse_current_limit_range`]
@@ -8464,8 +8446,6 @@ pulse_current_limit_high
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8504,7 +8484,7 @@ pulse_current_limit_low
         generating the desired pulse voltage on the specified channel(s) during
         the *on* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_VOLTAGE`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_current_limit_high` to complete the
         asymmetric range.
         **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_current_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_current_limit_range`]
@@ -8521,8 +8501,6 @@ pulse_current_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8805,14 +8783,12 @@ pulse_voltage_limit
     .. py:attribute:: pulse_voltage_limit
 
         Specifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired pulse current on the specified channel(s) during the on phase of a pulse.
-        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         Valid Values: The valid values for this property are defined by the values you specify for the :py:attr:`nidcpower.Session.pulse_voltage_limit_range` property.
 
 
 
         .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8851,7 +8827,7 @@ pulse_voltage_limit_high
         when generating the desired pulse current on the specified channel(s)
         during the *on* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_voltage_limit_low` to complete the asymmetric
         range.
         **Valid Values:** [1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`, :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
@@ -8868,8 +8844,6 @@ pulse_voltage_limit_high
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8908,7 +8882,7 @@ pulse_voltage_limit_low
         when generating the desired pulse current on the specified channel(s)
         during the *on* phase of a pulse.
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.PULSE_CURRENT`.
         You must also specify a :py:attr:`nidcpower.Session.pulse_voltage_limit_high` to complete the
         asymmetric range.
         **Valid Values:** [-:py:attr:`nidcpower.Session.pulse_voltage_limit_range`, -1% of :py:attr:`nidcpower.Session.pulse_voltage_limit_range`]
@@ -8925,8 +8899,6 @@ pulse_voltage_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10562,15 +10534,13 @@ voltage_limit
     .. py:attribute:: voltage_limit
 
         Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.
-        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.NIDCPOWER_VAL_SYMMETRIC`.
+        This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
         :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
         Valid Values: The valid values for this property are defined by the values to which the :py:attr:`nidcpower.Session.voltage_limit_range` property is set.
 
 
 
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10649,7 +10619,7 @@ voltage_limit_high
         Specifies the maximum voltage, in volts, that the output can produce
         when generating the desired current on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
         You must also specify a :py:attr:`nidcpower.Session.voltage_limit_low` to complete the asymmetric
         range.
         **Valid Values:** [1% of :py:attr:`nidcpower.Session.voltage_limit_range`, :py:attr:`nidcpower.Session.voltage_limit_range`]
@@ -10665,8 +10635,6 @@ voltage_limit_high
         .. note:: The limit may be extended beyond the selected limit range if the
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10704,7 +10672,7 @@ voltage_limit_low
         Specifies the minimum voltage, in volts, that the output can produce
         when generating the desired current on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to
-        :py:data:`~nidcpower.NIDCPOWER_VAL_ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+        :py:data:`~nidcpower.ComplianceLimitSymmetry.ASYMMETRIC` and the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
         You must also specify a :py:attr:`nidcpower.Session.voltage_limit_high` to complete the asymmetric
         range.
         **Valid Values:** [-:py:attr:`nidcpower.Session.voltage_limit_range`, -1% of :py:attr:`nidcpower.Session.voltage_limit_range`]
@@ -10720,8 +10688,6 @@ voltage_limit_low
         .. note:: The limit may be extended beyond the selected limit range if the
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.

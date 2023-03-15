@@ -946,30 +946,6 @@ OutputCutoffReason
 
 
 
-    .. py:attribute:: OutputCutoffReason.VOLTAGE_SATURATED
-
-
-
-    .. py:attribute:: OutputCutoffReason.CURRENT_SATURATED
-
-
-
-    .. py:attribute:: OutputCutoffReason.VOLTAGE_MEASURE_HIGH
-
-
-
-    .. py:attribute:: OutputCutoffReason.VOLTAGE_MEASURE_LOW
-
-
-
-    .. py:attribute:: OutputCutoffReason.SELF_TEST_MEASUREMENT_HIGH
-
-
-
-    .. py:attribute:: OutputCutoffReason.SELF_TEST_MEASUREMENT_LOW
-
-
-
 OutputFunction
 --------------
 

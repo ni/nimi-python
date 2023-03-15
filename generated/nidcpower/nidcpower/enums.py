@@ -418,12 +418,6 @@ class OutputCutoffReason(Enum):
     r'''
     Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
     '''
-    VOLTAGE_SATURATED = 256
-    CURRENT_SATURATED = 512
-    VOLTAGE_MEASURE_HIGH = 1024
-    VOLTAGE_MEASURE_LOW = 2048
-    SELF_TEST_MEASUREMENT_HIGH = 4096
-    SELF_TEST_MEASUREMENT_LOW = 8192
 
 
 class OutputFunction(Enum):

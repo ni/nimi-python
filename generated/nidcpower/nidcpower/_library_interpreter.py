@@ -666,15 +666,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
-        environment_ctype = ctypes.create_string_buffer(environment.encode(self._encoding))  # case C020
-        environment_version_ctype = ctypes.create_string_buffer(environment_version.encode(self._encoding))  # case C020
-        reserved1_ctype = ctypes.create_string_buffer(reserved1.encode(self._encoding))  # case C020
-        reserved2_ctype = ctypes.create_string_buffer(reserved2.encode(self._encoding))  # case C020
-        error_code = self._library.niDCPower_SetRuntimeEnvironment(environment_ctype, environment_version_ctype, reserved1_ctype, reserved2_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def set_sequence(self, channel_name, values, source_delays):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010

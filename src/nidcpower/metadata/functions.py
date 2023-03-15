@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.3.0d364
+# This file is generated from NI-DCPower API metadata version 23.3.0d397
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -3496,7 +3496,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetRuntimeEnvironment': {
-        'codegen_method': 'private',
+        'codegen_method': 'library-only',
         'documentation': {
             'description': 'TBD'
         },

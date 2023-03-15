@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.3.0d364
+# This file is generated from NI-DCPower API metadata version 23.3.0d397
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -823,30 +823,6 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                 'value': 128
-            },
-            {
-                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_SATURATED',
-                'value': 256
-            },
-            {
-                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED',
-                'value': 512
-            },
-            {
-                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH',
-                'value': 1024
-            },
-            {
-                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW',
-                'value': 2048
-            },
-            {
-                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_SELF_TEST_MEASUREMENT_HIGH',
-                'value': 4096
-            },
-            {
-                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_SELF_TEST_MEASUREMENT_LOW',
-                'value': 8192
             }
         ]
     },
