@@ -74,6 +74,11 @@ class SideEffectsHelper(object):
         self._defaults['DisableSites']['return'] = 0
         self._defaults['EnableSites'] = {}
         self._defaults['EnableSites']['return'] = 0
+        self._defaults['FetchCaptureWaveformU32'] = {}
+        self._defaults['FetchCaptureWaveformU32']['return'] = 0
+        self._defaults['FetchCaptureWaveformU32']['actualNumWaveforms'] = None
+        self._defaults['FetchCaptureWaveformU32']['actualSamplesPerWaveform'] = None
+        self._defaults['FetchCaptureWaveformU32']['data'] = None
         self._defaults['FetchHistoryRAMCycleInformation'] = {}
         self._defaults['FetchHistoryRAMCycleInformation']['return'] = 0
         self._defaults['FetchHistoryRAMCycleInformation']['patternIndex'] = None
@@ -404,6 +409,32 @@ class SideEffectsHelper(object):
         if self._defaults['EnableSites']['return'] != 0:
             return self._defaults['EnableSites']['return']
         return self._defaults['EnableSites']['return']
+
+    def niDigital_FetchCaptureWaveformU32(self, vi, site_list, waveform_name, samples_to_read, timeout, data_buffer_size, data, actual_num_waveforms, actual_samples_per_waveform):  # noqa: N802
+        if self._defaults['FetchCaptureWaveformU32']['return'] != 0:
+            return self._defaults['FetchCaptureWaveformU32']['return']
+        # actual_num_waveforms
+        if self._defaults['FetchCaptureWaveformU32']['actualNumWaveforms'] is None:
+            raise MockFunctionCallError("niDigital_FetchCaptureWaveformU32", param='actualNumWaveforms')
+        if actual_num_waveforms is not None:
+            actual_num_waveforms.contents.value = self._defaults['FetchCaptureWaveformU32']['actualNumWaveforms']
+        # actual_samples_per_waveform
+        if self._defaults['FetchCaptureWaveformU32']['actualSamplesPerWaveform'] is None:
+            raise MockFunctionCallError("niDigital_FetchCaptureWaveformU32", param='actualSamplesPerWaveform')
+        if actual_samples_per_waveform is not None:
+            actual_samples_per_waveform.contents.value = self._defaults['FetchCaptureWaveformU32']['actualSamplesPerWaveform']
+        # data
+        if self._defaults['FetchCaptureWaveformU32']['data'] is None:
+            raise MockFunctionCallError("niDigital_FetchCaptureWaveformU32", param='data')
+        if data_buffer_size.value == 0:
+            return len(self._defaults['FetchCaptureWaveformU32']['data'])
+        try:
+            data_ref = data.contents
+        except AttributeError:
+            data_ref = data
+        for i in range(len(self._defaults['FetchCaptureWaveformU32']['data'])):
+            data_ref[i] = self._defaults['FetchCaptureWaveformU32']['data'][i]
+        return self._defaults['FetchCaptureWaveformU32']['return']
 
     def niDigital_FetchHistoryRAMCycleInformation(self, vi, site, sample_index, pattern_index, time_set_index, vector_number, cycle_number, num_dut_cycles):  # noqa: N802
         if self._defaults['FetchHistoryRAMCycleInformation']['return'] != 0:
@@ -1143,6 +1174,8 @@ class SideEffectsHelper(object):
         mock_library.niDigital_DisableSites.return_value = 0
         mock_library.niDigital_EnableSites.side_effect = MockFunctionCallError("niDigital_EnableSites")
         mock_library.niDigital_EnableSites.return_value = 0
+        mock_library.niDigital_FetchCaptureWaveformU32.side_effect = MockFunctionCallError("niDigital_FetchCaptureWaveformU32")
+        mock_library.niDigital_FetchCaptureWaveformU32.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCycleInformation.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCycleInformation")
         mock_library.niDigital_FetchHistoryRAMCycleInformation.return_value = 0
         mock_library.niDigital_FetchHistoryRAMCyclePinData.side_effect = MockFunctionCallError("niDigital_FetchHistoryRAMCyclePinData")
