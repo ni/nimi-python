@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.0.0d318
+# This file is generated from NI-DCPower API metadata version 23.3.0d397
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -3490,6 +3490,36 @@ functions = {
                 },
                 'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'SetRuntimeEnvironment': {
+        'codegen_method': 'library-only',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'environment',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'environmentVersion',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved1',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved2',
                 'type': 'ViConstString'
             }
         ],

@@ -38,7 +38,12 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * Enums added:
+            * `CurrentLimitBehavior`
     * #### Changed
+        * Enums reordered:
+            * `AutoZero`
+            * `CableLength`
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added

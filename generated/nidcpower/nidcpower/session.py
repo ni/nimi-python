@@ -609,8 +609,8 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.current_limit_autorange`
     '''
-    current_limit_behavior = _attributes.AttributeViInt32(1250004)
-    '''Type: int
+    current_limit_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CurrentLimitBehavior, 1250004)
+    '''Type: enums.CurrentLimitBehavior
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.

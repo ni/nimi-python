@@ -3870,15 +3870,15 @@ current_limit_behavior
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | channels   |
-            +-----------------------+------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.CurrentLimitBehavior |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | channels                   |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
