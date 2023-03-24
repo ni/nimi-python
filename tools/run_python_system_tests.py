@@ -14,7 +14,7 @@ parser.add_argument('-m', '--module', required=True, type=str,
                     choices=[x.name for x in src_dir.iterdir() if x.is_dir()])
 parser.add_argument('-pv', '--python-version', required=False, type=str,
                     help='Python version to be run. This is used to invoke the appropriate tox environment.',
-                    choices=['py37', 'py38', 'py39', 'py310'], default='py310')
+                    choices=['py37', 'py38', 'py39', 'py310', 'py311'], default='py311')
 parser.add_argument('-pb', '--python-bitness', required=False, type=str,
                     help="""
                     Python bitness to be run. "32" means pass "--32" to tox, which
@@ -32,8 +32,8 @@ if args.python_bitness != 'any':  # This means it must be '32'
 
 drivers_using_other_driver = ['niscope', 'nifgen', 'nidigital', 'nitclk', ]
 if args.module in drivers_using_other_driver:
-    # Creating the wheel for the other required module only uses Python 3.9
-    command += ['-e', 'py310-{0}-wheel_dep,'.format(args.module)]
+    # Creating the wheel for the other required module only uses Python 3.11
+    command += ['-e', 'py311-{0}-wheel_dep,'.format(args.module)]
 
 command += ['-e', '{0}-{1}-system_tests'.format(args.python_version, args.module)]
 command += ['-c', 'tox-system_tests.ini']

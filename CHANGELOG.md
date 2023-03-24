@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### ALL
     * #### Added
+        * Support for Python 3.11
     * #### Changed
         * Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
     * #### Removed
