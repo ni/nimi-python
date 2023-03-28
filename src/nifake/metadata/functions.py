@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d96
+# This file is generated from NI-FAKE API metadata version 23.3.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -500,35 +500,26 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetAnIviDanceString': {
+    'GetAnIviDanceCharArray': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns a string using the IVI dance.'
+            'description': 'TBD'
         },
         'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
                 'name': 'vi',
                 'type': 'ViSession'
             },
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': 'Number of bytes in aString You can IVI-dance with this.'
-                },
                 'name': 'bufferSize',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the string.'
-                },
-                'name': 'aString',
+                'name': 'charArray',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufferSize'
@@ -1341,6 +1332,33 @@ functions = {
         'real_datetime_call': 'GetCalDateAndTime',
         'returns': 'ViStatus'
     },
+    'GetParameterWithOverriddenGrpcName': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'grpc_name': 'overridden_parameter',
+                'name': 'originalParameter',
+                'type': 'ViInt16'
+            },
+            {
+                'direction': 'in',
+                'enum': 'Turtle',
+                'grpc_name': 'enum_parameter_raw',
+                'name': 'enumParameter',
+                'type': 'ViInt16'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'ImportAttributeConfigurationBuffer': {
         'documentation': {
             'description': 'Import configuration buffer.'
@@ -1367,6 +1385,34 @@ functions = {
                 },
                 'type': 'ViInt8[]',
                 'type_in_documentation': 'bytes'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ImportAttributeConfigurationBufferEx': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'size',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'configuration',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'size'
+                },
+                'type': 'ViAddr[]'
             }
         ],
         'returns': 'ViStatus'
@@ -2397,6 +2443,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_enum': 'NiFakeReal64AttributeValues',
                 'grpc_mapped_enum': 'NiFakeReal64AttributeValuesMapped',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
@@ -2507,6 +2554,36 @@ functions = {
                     'value': 'numberOfElements'
                 },
                 'type': 'struct CustomStruct[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'SetRuntimeEnvironment': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'environment',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'environmentVersion',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved1',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved2',
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'

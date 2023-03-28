@@ -51,5 +51,11 @@ def get():
             except OSError:
                 raise errors.DriverNotInstalledError()
             _instance = _library.Library(ctypes_library)
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                _instance.niFgen_SetRuntimeEnvironment(runtime_env, version, "", "")
+            except Exception:
+                pass
         return _instance
 

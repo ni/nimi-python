@@ -410,6 +410,40 @@ class TestLibraryInterpreter(object):
             assert test_error_desc in str(w[0].message)
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
 
+    def test_library_singleton_get(self):
+        # Test that if library singleton get is called multiple times it returns the same instance
+        interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
+        assert interpreter._library is nifake._library_interpreter.LibraryInterpreter('windows-1251')._library
+
+    def test_set_runtime_environment(self):
+        # Test that SetRuntimeEnvironment is called when library interpreter is initialized
+        self.patched_library_singleton_get.stop()
+        self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
+        self.patched_library_singleton_lib.start()
+        self.get_initialized_library_interpreter()
+        self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once_with(
+            platform.python_implementation(),
+            platform.python_version(),
+            "",
+            "",
+        )
+
+    def test_set_runtime_environment_not_defined(self):
+        # Test that missing SetRuntimeEnvironment from python impl. does not affect library interpreter init
+        self.patched_library_singleton_get.stop()
+        delattr(self.patched_library, 'niFake_SetRuntimeEnvironment')
+        self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
+        self.patched_library_singleton_lib.start()
+        self.get_initialized_library_interpreter()
+
+    def test_set_runtime_environment_not_present_in_driver(self):
+        # Test that missing SetRuntimeEnvironment from driver does not affect library interpreter init
+        self.patched_library_singleton_get.stop()
+        delattr(self.patched_library, 'niFake_SetRuntimeEnvironment_cfunc')
+        self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
+        self.patched_library_singleton_lib.start()
+        self.get_initialized_library_interpreter()
+
     # Retrieving buffers and strings
 
     def test_get_a_string_of_fixed_maximum_size(self):
@@ -445,19 +479,19 @@ class TestLibraryInterpreter(object):
         assert (returned_number == test_number)
         self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16PointerMatcher(), _matchers.ViCharBufferMatcher(256))
 
-    def test_get_an_ivi_dance_string(self):
-        self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
+    def test_get_an_ivi_dance_char_array(self):
+        self.patched_library.niFake_GetAnIviDanceCharArray.side_effect = self.side_effects_helper.niFake_GetAnIviDanceCharArray
         string_val = 'Testing is fun?'
-        self.side_effects_helper['GetAnIviDanceString']['aString'] = string_val
+        self.side_effects_helper['GetAnIviDanceCharArray']['charArray'] = string_val
         interpreter = self.get_initialized_library_interpreter()
-        result_string = interpreter.get_an_ivi_dance_string()
+        result_string = interpreter.get_an_ivi_dance_char_array()
         assert result_string == string_val
         calls = [
             call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None),
             call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)))
         ]
-        self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
-        assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
+        self.patched_library.niFake_GetAnIviDanceCharArray.assert_has_calls(calls)
+        assert self.patched_library.niFake_GetAnIviDanceCharArray.call_count == 2
 
     def test_get_string_ivi_dance_error(self):
         read_write_string_attribute_id = 1000002
@@ -836,19 +870,11 @@ class TestLibraryInterpreter(object):
 
 # not library interpreter tests per se
 def test_library_error():
-    if platform.architecture()[0] == '64bit':
-        ctypes_class_name = 'ctypes.CDLL'
-    else:
-        ctypes_class_name = 'ctypes.WinDLL'
-    with patch(ctypes_class_name) as mock_ctypes:
-        mock_ctypes_instance = mock_ctypes.return_value
-        # Delete function to simulate missing function from driver runtime
-        delattr(mock_ctypes_instance, 'niFake_Abort')
-
-        interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
-        try:
-            interpreter.abort()
-            assert False
-        except nifake.errors.DriverTooOldError as e:
-            message = e.args[0]
-            assert message == 'A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.'
+    interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
+    delattr(interpreter._library, 'niFake_Abort')
+    try:
+        interpreter.abort()
+        assert False
+    except nifake.errors.DriverTooOldError as e:
+        message = e.args[0]
+        assert message == 'A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.'
