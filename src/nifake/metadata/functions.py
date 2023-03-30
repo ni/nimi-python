@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.3.0d9999
+# This file is generated from NI-FAKE API metadata version 23.5.0d4
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2559,7 +2559,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetRuntimeEnvironment': {
-        'codegen_method': 'private',
+        'codegen_method': 'library-only',
         'documentation': {
             'description': 'TBD'
         },
