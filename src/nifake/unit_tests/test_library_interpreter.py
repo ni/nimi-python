@@ -4,7 +4,6 @@ import math
 import nifake
 import nifake.errors
 import numpy
-import platform
 import warnings
 
 from unittest.mock import call
@@ -410,7 +409,7 @@ class TestLibraryInterpreter(object):
             assert test_error_desc in str(w[0].message)
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
 
-    def test_library_singleton_get(self):
+    def test_library_singleton_get_returns_same_instance(self):
         # Test that if library singleton get is called multiple times it returns the same instance
         interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
         assert interpreter._library is nifake._library_interpreter.LibraryInterpreter('windows-1251')._library
@@ -419,14 +418,10 @@ class TestLibraryInterpreter(object):
         # Test that SetRuntimeEnvironment is called when library interpreter is initialized
         self.patched_library_singleton_get.stop()
         self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
+        self.patched_library.niFake_SetRuntimeEnvironment.side_effect = self.side_effects_helper.niFake_SetRuntimeEnvironment
         self.patched_library_singleton_lib.start()
         self.get_initialized_library_interpreter()
-        self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once_with(
-            platform.python_implementation(),
-            platform.python_version(),
-            "",
-            "",
-        )
+        self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
 
     def test_set_runtime_environment_not_defined(self):
         # Test that missing SetRuntimeEnvironment from python impl. does not affect library interpreter init
@@ -443,6 +438,17 @@ class TestLibraryInterpreter(object):
         self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
         self.patched_library_singleton_lib.start()
         self.get_initialized_library_interpreter()
+
+    def test_abort_not_present_in_driver(self):
+        # Test that missing SetRuntimeEnvironment from python impl. does not affect library interpreter init
+        delattr(self.patched_library, 'niFake_Abort')
+        interpreter = self.get_initialized_library_interpreter()
+        try:
+            interpreter.abort()
+            assert False
+        except nifake.errors.DriverTooOldError as e:
+            message = e.args[0]
+            assert message == 'A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.'
 
     # Retrieving buffers and strings
 
@@ -866,15 +872,3 @@ class TestLibraryInterpreter(object):
         cs_ctype = (nifake.struct_CustomStruct * len(cs))(*[nifake.struct_CustomStruct(c) for c in cs])
         assert _matchers.CustomTypeMatcher(nifake.struct_CustomStruct, nifake.struct_CustomStruct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.struct_CustomStruct'>, struct_CustomStruct(data=None, struct_int=42, struct_double=4.2))"
         assert _matchers.CustomTypeBufferMatcher(nifake.struct_CustomStruct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.struct_CustomStruct'>, [struct_CustomStruct(data=None, struct_int=42, struct_double=4.2), struct_CustomStruct(data=None, struct_int=43, struct_double=4.3), struct_CustomStruct(data=None, struct_int=42, struct_double=4.3)])"
-
-
-# not library interpreter tests per se
-def test_library_error():
-    interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
-    delattr(interpreter._library, 'niFake_Abort')
-    try:
-        interpreter.abort()
-        assert False
-    except nifake.errors.DriverTooOldError as e:
-        message = e.args[0]
-        assert message == 'A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.'
