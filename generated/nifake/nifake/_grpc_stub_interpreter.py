@@ -455,9 +455,6 @@ class GrpcStubInterpreter(object):
             grpc_types.SetCustomTypeArrayRequest(vi=self._vi, cs=cs and [x._create_copy(grpc_types.FakeCustomStruct) for x in cs]),
         )
 
-    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
-        raise NotImplementedError('set_runtime_environment is not supported over gRPC')
-
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name):  # noqa: N802
         self._invoke(
             self._client.StringValuedEnumInputFunctionWithDefaults,

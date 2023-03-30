@@ -1584,24 +1584,6 @@ class Session(_SessionBase):
         self._interpreter.set_custom_type_array(cs)
 
     @ivi_synchronized
-    def _set_runtime_environment(self, environment, environment_version, reserved1, reserved2):
-        r'''_set_runtime_environment
-
-        TBD
-
-        Args:
-            environment (str):
-
-            environment_version (str):
-
-            reserved1 (str):
-
-            reserved2 (str):
-
-        '''
-        self._interpreter.set_runtime_environment(environment, environment_version, reserved1, reserved2)
-
-    @ivi_synchronized
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name=enums.MobileOSNames.ANDROID):
         r'''string_valued_enum_input_function_with_defaults
 
