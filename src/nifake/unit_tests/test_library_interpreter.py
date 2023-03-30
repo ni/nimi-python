@@ -422,6 +422,8 @@ class TestLibraryInterpreter(object):
         self.patched_library_singleton_lib.start()
         self.get_initialized_library_interpreter()
         self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
+        self.patched_library_singleton_lib.stop()
+        self.patched_library_singleton_get.start()
 
     def test_set_runtime_environment_not_defined(self):
         # Test that missing SetRuntimeEnvironment from python impl. does not affect library interpreter init
