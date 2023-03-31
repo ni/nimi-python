@@ -440,8 +440,6 @@ class TestLibraryInterpreter(object):
             assert False
         except nifake.errors.DriverTooOldError:
             pass
-        nifake._library_singleton._instance = None
-        self.get_initialized_library_interpreter()
 
         self.patched_library_singleton_lib.stop()
         self.patched_library_singleton_get.start()
@@ -458,8 +456,6 @@ class TestLibraryInterpreter(object):
             assert False
         except nifake.errors.DriverTooOldError:
             pass
-        nifake._library_singleton._instance = None
-        self.get_initialized_library_interpreter()
 
         self.patched_library_singleton_lib.stop()
         self.patched_library_singleton_get.start()

@@ -440,13 +440,11 @@ class TestLibraryInterpreter(object):
             assert False
         except nifake.errors.DriverTooOldError:
             pass
-        nifake._library_singleton._instance = None
-        self.get_initialized_library_interpreter()
 
         self.patched_library_singleton_lib.stop()
         self.patched_library_singleton_get.start()
 
-    def test_set_runtime_environment_not_defined(self):
+    def test_set_runtime_environment_not_present_in_library(self):
         self.patched_library_singleton_get.stop()
         delattr(self.patched_library, 'niFake_SetRuntimeEnvironment')
         self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
@@ -458,8 +456,6 @@ class TestLibraryInterpreter(object):
             assert False
         except nifake.errors.DriverTooOldError:
             pass
-        nifake._library_singleton._instance = None
-        self.get_initialized_library_interpreter()
 
         self.patched_library_singleton_lib.stop()
         self.patched_library_singleton_get.start()
