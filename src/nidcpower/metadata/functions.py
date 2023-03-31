@@ -3496,11 +3496,19 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetRuntimeEnvironment': {
-        'codegen_method': 'library-only',
+        'codegen_method': 'library-interpreter-and-library-only',
         'documentation': {
             'description': 'TBD'
         },
         'included_in_proto': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'none',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
