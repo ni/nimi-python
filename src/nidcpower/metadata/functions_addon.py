@@ -7,11 +7,10 @@ functions_override_metadata = {
         'codegen_method': 'private',
         'method_templates': [
             {
-                'comment': 'the ession_filename value will (intentionally) keep this method out of session.py, despite the codegen_method being private',
                 'documentation_filename': 'none',
                 'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'none'
+                'session_filename': 'none'  # will (intentionally) keep this method out of session.py, despite the codegen_method being private
             }
         ],
     }
