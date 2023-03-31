@@ -52,8 +52,8 @@ def get():
                 raise errors.DriverNotInstalledError()
             _instance = _library.Library(ctypes_library)
             try:
-                runtime_env_ctype = ctypes.create_string_buffer(platform.python_implementation().encode('windows-1251'))  # case C020
-                version_ctype = ctypes.create_string_buffer(platform.python_version().encode('windows-1251'))  # case C020
+                runtime_env_ctype = ctypes.create_string_buffer(platform.python_implementation().encode('windows-1252'))  # case C020
+                version_ctype = ctypes.create_string_buffer(platform.python_version().encode('windows-1252'))  # case C020
                 reserved_ctype = ctypes.create_string_buffer(''.encode('windows-1252'))  # case C020
                 _instance.niSE_SetRuntimeEnvironment(
                     runtime_env_ctype,
