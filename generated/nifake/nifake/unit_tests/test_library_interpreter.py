@@ -432,6 +432,8 @@ class TestLibraryInterpreter(object):
         self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
         self.patched_library_singleton_lib.start()
         self.get_initialized_library_interpreter()
+        self.patched_library_singleton_lib.stop()
+        self.patched_library_singleton_get.start()
 
     def test_set_runtime_environment_not_present_in_driver(self):
         # Test that missing SetRuntimeEnvironment from driver does not affect library interpreter init
@@ -440,6 +442,8 @@ class TestLibraryInterpreter(object):
         self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
         self.patched_library_singleton_lib.start()
         self.get_initialized_library_interpreter()
+        self.patched_library_singleton_lib.stop()
+        self.patched_library_singleton_get.start()
 
     def test_abort_not_present_in_driver(self):
         # Test that missing SetRuntimeEnvironment from python impl. does not affect library interpreter init
