@@ -3496,7 +3496,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'SetRuntimeEnvironment': {
-        'codegen_method': 'library-interpreter-and-library-only',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
