@@ -29,7 +29,7 @@ name = rep_cap['python_name']
     #. ${name}_
 % endfor
 
-    Use the indexing operator :python:`[]` to indicate which repeated capability you are trying to access.
+    Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
     The parameter can be an integer, a string, a list, a tuple, or slice (range).
 
     The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
