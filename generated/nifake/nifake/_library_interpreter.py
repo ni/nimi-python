@@ -4,6 +4,8 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import platform
+
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums  # noqa: F401
@@ -62,6 +64,17 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        try:
+            runtime_env_ctype = platform.python_implementation()
+            version_ctype = platform.python_version()
+            self.set_runtime_environment(
+                runtime_env_ctype,
+                version_ctype,
+                '',
+                ''
+            )
+        except errors.DriverTooOldError:
+            pass
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
@@ -654,6 +667,15 @@ class LibraryInterpreter(object):
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
         cs_ctype = _get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        environment_ctype = ctypes.create_string_buffer(environment.encode(self._encoding))  # case C020
+        environment_version_ctype = ctypes.create_string_buffer(environment_version.encode(self._encoding))  # case C020
+        reserved1_ctype = ctypes.create_string_buffer(reserved1.encode(self._encoding))  # case C020
+        reserved2_ctype = ctypes.create_string_buffer(reserved2.encode(self._encoding))  # case C020
+        error_code = self._library.niFake_SetRuntimeEnvironment(environment_ctype, environment_version_ctype, reserved1_ctype, reserved2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

@@ -17,6 +17,10 @@ functions = helper.filter_codegen_functions(functions)
 import array
 import ctypes
 import hightime  # noqa: F401
+% if 'SetRuntimeEnvironment' in functions:
+import platform
+
+% endif
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 % if config['enums']:
@@ -75,6 +79,19 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        % if 'SetRuntimeEnvironment' in functions:
+        try:
+            runtime_env_ctype = platform.python_implementation()
+            version_ctype = platform.python_version()
+            self.set_runtime_environment(
+                runtime_env_ctype,
+                version_ctype,
+                '',
+                ''
+            )
+        except errors.DriverTooOldError:
+            pass
+        % endif
         # Initialize _${config['session_handle_parameter_name']} to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.

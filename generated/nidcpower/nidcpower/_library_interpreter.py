@@ -4,6 +4,8 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import platform
+
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
 import nidcpower.enums as enums  # noqa: F401
@@ -60,6 +62,17 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        try:
+            runtime_env_ctype = platform.python_implementation()
+            version_ctype = platform.python_version()
+            self.set_runtime_environment(
+                runtime_env_ctype,
+                version_ctype,
+                '',
+                ''
+            )
+        except errors.DriverTooOldError:
+            pass
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
