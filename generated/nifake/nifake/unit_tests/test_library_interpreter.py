@@ -4,6 +4,7 @@ import math
 import nifake
 import nifake.errors
 import numpy
+import pytest
 import warnings
 
 from unittest.mock import call
@@ -451,11 +452,9 @@ class TestLibraryInterpreter(object):
         self.patched_library_singleton_lib.start()
         nifake._library_singleton._instance = None
         interpreter = self.get_initialized_library_interpreter()
-        try:
+
+        with pytest.raises(nifake.errors.DriverTooOldError):
             interpreter._library.niFake_SetRuntimeEnvironment('', '', '', '')
-            assert False
-        except nifake.errors.DriverTooOldError:
-            pass
 
         self.patched_library_singleton_lib.stop()
         self.patched_library_singleton_get.start()
