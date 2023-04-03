@@ -435,12 +435,8 @@ class TestLibraryInterpreter(object):
         self.patched_library = self.PatchedLibrary(TypesLibrary)
         self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
         self.patched_library_singleton_lib.start()
-        try:
-            # Call _get_library_function directly so that exception is not caught in _library_singleton get
+        with pytest.raises(nifake.errors.DriverTooOldError):
             self.get_initialized_library_interpreter()._library._get_library_function('niFake_SetRuntimeEnvironment')
-            assert False
-        except nifake.errors.DriverTooOldError:
-            pass
 
         self.patched_library_singleton_lib.stop()
         self.patched_library_singleton_get.start()
