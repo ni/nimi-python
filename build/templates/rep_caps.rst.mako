@@ -43,29 +43,6 @@ ${helper.get_rst_header_snippet(name, '-')}
 
     .. py:attribute:: ${module_name}.Session.${name}[]
 
-% if len(prefix) > 0:
-        ..
-            If no prefix is added to the items in the parameter, the correct prefix will be added when
-            the driver function call is made.
-
-            .. code:: python
-
-                session.${name}['0-2'].channel_enabled = True
-
-            passes a string of :python:`'${prefix}0, ${prefix}1, ${prefix}2'` to the set attribute function.
-
-            If an invalid repeated capability is passed to the driver, the driver will return an error.
-
-            You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
-            for the specific repeated capability.
-
-            .. code:: python
-
-                session.${name}['${prefix}0-${prefix}2'].channel_enabled = True
-
-            passes a string of :python:`'${prefix}0, ${prefix}1, ${prefix}2'` to the set attribute function.
-
-% endif
         .. code:: python
 
             session.${name}[0].channel_enabled = True

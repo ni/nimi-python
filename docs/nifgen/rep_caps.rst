@@ -51,27 +51,6 @@ script_triggers
 
     .. py:attribute:: nifgen.Session.script_triggers[]
 
-        ..
-            If no prefix is added to the items in the parameter, the correct prefix will be added when
-            the driver function call is made.
-
-            .. code:: python
-
-                session.script_triggers['0-2'].channel_enabled = True
-
-            passes a string of :python:`'ScriptTrigger0, ScriptTrigger1, ScriptTrigger2'` to the set attribute function.
-
-            If an invalid repeated capability is passed to the driver, the driver will return an error.
-
-            You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
-            for the specific repeated capability.
-
-            .. code:: python
-
-                session.script_triggers['ScriptTrigger0-ScriptTrigger2'].channel_enabled = True
-
-            passes a string of :python:`'ScriptTrigger0, ScriptTrigger1, ScriptTrigger2'` to the set attribute function.
-
         .. code:: python
 
             session.script_triggers[0].channel_enabled = True
@@ -93,27 +72,6 @@ markers
 
     .. py:attribute:: nifgen.Session.markers[]
 
-        ..
-            If no prefix is added to the items in the parameter, the correct prefix will be added when
-            the driver function call is made.
-
-            .. code:: python
-
-                session.markers['0-2'].channel_enabled = True
-
-            passes a string of :python:`'Marker0, Marker1, Marker2'` to the set attribute function.
-
-            If an invalid repeated capability is passed to the driver, the driver will return an error.
-
-            You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
-            for the specific repeated capability.
-
-            .. code:: python
-
-                session.markers['Marker0-Marker2'].channel_enabled = True
-
-            passes a string of :python:`'Marker0, Marker1, Marker2'` to the set attribute function.
-
         .. code:: python
 
             session.markers[0].channel_enabled = True
@@ -134,27 +92,6 @@ data_markers
 ------------
 
     .. py:attribute:: nifgen.Session.data_markers[]
-
-        ..
-            If no prefix is added to the items in the parameter, the correct prefix will be added when
-            the driver function call is made.
-
-            .. code:: python
-
-                session.data_markers['0-2'].channel_enabled = True
-
-            passes a string of :python:`'DataMarker0, DataMarker1, DataMarker2'` to the set attribute function.
-
-            If an invalid repeated capability is passed to the driver, the driver will return an error.
-
-            You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
-            for the specific repeated capability.
-
-            .. code:: python
-
-                session.data_markers['DataMarker0-DataMarker2'].channel_enabled = True
-
-            passes a string of :python:`'DataMarker0, DataMarker1, DataMarker2'` to the set attribute function.
 
         .. code:: python
 
