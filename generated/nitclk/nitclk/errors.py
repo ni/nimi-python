@@ -58,18 +58,25 @@ class DriverNotInstalledError(Error):
 
 
 class DriverTooOldError(Error):
-    '''An error due to using this module with an older version of the driver runtime.'''
+    '''An error due to using this module with an older version of the NI-TClk driver runtime.'''
 
     def __init__(self):
         super(DriverTooOldError, self).__init__('A function was not found in the NI-TClk runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.')
 
 
-def handle_error(session, code, ignore_warnings, is_error_handling):
+class DriverTooNewError(Error):
+    '''An error due to the NI-TClk driver runtime being too new for this module.'''
+
+    def __init__(self):
+        super(DriverTooNewError, self).__init__('The NI-TClk runtime returned an unexpected value. This can occur if it is too new for the nitclk Python module. Upgrade the nitclk Python module.')
+
+
+def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
     '''handle_error
 
     Helper function for handling errors returned by nitclk.Library.
-    It calls back into the session to get the corresponding error description
-    and raises if necessary.
+    It calls back into the LibraryInterpreter to get the corresponding error
+    description and raises if necessary.
     '''
 
     if _is_success(code) or (_is_warning(code) and ignore_warnings):
@@ -80,12 +87,10 @@ def handle_error(session, code, ignore_warnings, is_error_handling):
         # Don't try to get the description or we'll start recursing until the stack overflows.
         description = ''
     else:
-        description = session._get_error_description(code)
+        description = library_interpreter.get_error_description(code)
 
     if _is_error(code):
         raise DriverError(code, description)
 
     assert _is_warning(code)
     warnings.warn(DriverWarning(code, description))
-
-

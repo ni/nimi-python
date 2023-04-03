@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d57
 enums = {
     'BitOrder': {
         'values': [
@@ -129,6 +129,24 @@ enums = {
             }
         ]
     },
+    'FrequencyMeasurementMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.\n\nMaximum frequency measured: 200 MHz.'
+                },
+                'name': 'NIDIGITAL_VAL_BANKED',
+                'value': 3700
+            },
+            {
+                'documentation': {
+                    'description': 'Frequency measurements are made by multiple frequency counters in parallel.\n\nMaximum frequency measured: 100 MHz.'
+                },
+                'name': 'NIDIGITAL_VAL_PARALLEL',
+                'value': 3701
+            }
+        ]
+    },
     'HistoryRAMCyclesToAcquire': {
         'values': [
             {
@@ -144,6 +162,14 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_ALL_CYCLES',
                 'value': 2304
+            }
+        ]
+    },
+    'HistoryRAMMaxSamplesToAcquirePerSite': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_ACQUIRE_ALL_SAMPLES',
+                'value': -1
             }
         ]
     },
@@ -169,24 +195,6 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_PATTERN_LABEL',
                 'value': 2202
-            }
-        ]
-    },
-    'FrequencyMeasurementMode': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Frequency measurements are made serially for groups of channels associated with a single frequency counter for each group.\n\nMaximum frequency measured: 200 MHz.'
-                },
-                'name': 'NIDIGITAL_VAL_BANKED',
-                'value': 3700
-            },
-            {
-                'documentation': {
-                    'description': 'Frequency measurements are made by multiple frequency counters in parallel.\n\nMaximum frequency measured: 100 MHz.'
-                },
-                'name': 'NIDIGITAL_VAL_PARALLEL',
-                'value': 3701
             }
         ]
     },
@@ -591,7 +599,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Specifies to route a pattern opcode event signal.'
+                    'description': 'Specifies to route a conditional jump trigger.'
                 },
                 'name': 'NIDIGITAL_VAL_CONDITIONAL_JUMP_TRIGGER',
                 'value': 2001

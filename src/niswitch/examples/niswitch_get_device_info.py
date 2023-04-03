@@ -36,8 +36,8 @@ def example(resource_name, topology, simulate, device, channel, relay):
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Prints information for the specified National Instruments Switch module.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of a National Instruments Switch.')
+    parser = argparse.ArgumentParser(description='Prints information for the specified NI-SWITCH.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI switch.')
     parser.add_argument('-d', '--device', default=False, action='store_true', help='Prints information for the device')
     parser.add_argument('-c', '--channel', default=False, action='store_true', help='Prints information for all channels on the device')
     parser.add_argument('-r', '--relay', default=False, action='store_true', help='Prints information for all relays on the device')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 1.2.0d9
+# This file is generated from NI-FAKE API metadata version 23.0.0d96
 config = {
-    'api_version': '1.2.0d9',
+    'api_version': '23.0.0d96',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
     'context_manager_name': {
@@ -13,7 +13,20 @@ config = {
         {
             'ctypes_type': 'struct_CustomStruct',
             'file_name': 'custom_struct',
+            'grpc_name': 'FakeCustomStruct',
             'python_name': 'CustomStruct'
+        },
+        {
+            'ctypes_type': 'struct_CustomStructNestedTypedef',
+            'file_name': 'custom_struct_nested_typedef',
+            'grpc_name': 'CustomStructNestedTypedef',
+            'python_name': 'CustomStructNestedTypedef'
+        },
+        {
+            'ctypes_type': 'struct_CustomStructTypedef',
+            'file_name': 'custom_struct_typedef',
+            'grpc_name': 'CustomStructTypedef',
+            'python_name': 'CustomStructTypedef'
         }
     ],
     'driver_name': 'NI-FAKE',
@@ -24,6 +37,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiFake',
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -43,7 +57,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nifake',
     'repeated_capabilities': [
         {

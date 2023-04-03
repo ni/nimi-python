@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d7
+# This file is generated from NI-DMM API metadata version 23.0.0d85
 config = {
-    'api_version': '19.6.0d7',
+    'api_version': '23.0.0d85',
     'c_function_prefix': 'niDMM_',
     'close_function': 'close',
     'context_manager_name': {
@@ -16,6 +16,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiDmm',
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -35,10 +36,9 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nidmm',
     'repeated_capabilities': [
     ],
-    'session_class_description': 'An NI-DMM session to a National Instruments Digital Multimeter',
+    'session_class_description': 'An NI-DMM session to an NI digital multimeter',
     'session_handle_parameter_name': 'vi'
 }

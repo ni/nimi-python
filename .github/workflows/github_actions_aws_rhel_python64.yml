@@ -1,0 +1,36 @@
+name: nimibot_rhel_64
+
+on:
+  pull_request:
+    branches:
+      - master
+      - releases/*
+    paths-ignore:
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - .gitattributes
+      - LICENSE
+      - VERSION
+    types: [ opened, synchronize, reopened ]
+
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+jobs:
+  do-the-job1:
+    name: system_test
+    runs-on: 
+    - self-hosted
+    - linux
+    - x64
+    - rdss-nimibot-rhel-83-py64
+    timeout-minutes: 40
+    strategy:
+      matrix:
+        module_name: ["nidcpower", "nidmm", "nifgen", "niscope", "niswitch", "nitclk"]
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+      - name: execute system tests
+        uses: ./.github/actions/linux
+        with:
+          module_name: ${{ matrix.module_name }}

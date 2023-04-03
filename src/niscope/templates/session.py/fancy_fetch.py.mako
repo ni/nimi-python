@@ -21,7 +21,10 @@
 
         wfm, wfm_info = self._${f['python_name']}(num_samples, timeout)
 
-        mv = memoryview(wfm)
+        if isinstance(wfm, array.ArrayType):
+            mv = memoryview(wfm)
+        else:
+            mv = wfm
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
@@ -33,4 +36,3 @@
         waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
 
         return wfm_info
-

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 19.6.0d7
+# This file is generated from NI-SWITCH API metadata version 23.0.0d149
 config = {
-    'api_version': '19.6.0d7',
+    'api_version': '23.0.0d149',
     'c_function_prefix': 'niSwitch_',
     'close_function': 'close',
     'context_manager_name': {
@@ -16,6 +16,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiSwitch',
     'init_function': 'InitWithTopology',
     'library_info': {
         'Linux': {
@@ -35,7 +36,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'niswitch',
     'repeated_capabilities': [
         {
@@ -43,6 +43,6 @@ config = {
             'python_name': 'channels'
         }
     ],
-    'session_class_description': 'An NI-SWITCH session to a National Instruments Switch Module',
+    'session_class_description': 'An NI-SWITCH session to an NI switch module.',
     'session_handle_parameter_name': 'vi'
 }

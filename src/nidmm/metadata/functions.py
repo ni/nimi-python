@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 19.6.0d7
+# This file is generated from NI-DMM API metadata version 23.0.0d85
 functions = {
     'Abort': {
         'documentation': {
             'description': '\nAborts a previously initiated measurement and returns the DMM to the\nIdle state.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -21,6 +22,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the common attributes of the measurement. These attributes\ninclude NIDMM_ATTR_FUNCTION, NIDMM_ATTR_RANGE, and\nNIDMM_ATTR_RESOLUTION_ABSOLUTE.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -81,6 +83,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the common attributes of the measurement. These attributes\ninclude NIDMM_ATTR_FUNCTION, NIDMM_ATTR_RANGE, and\nNIDMM_ATTR_RESOLUTION_DIGITS.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -141,6 +144,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the attributes for multipoint measurements. These attributes\ninclude NIDMM_ATTR_TRIGGER_COUNT, NIDMM_ATTR_SAMPLE_COUNT,\nNIDMM_ATTR_SAMPLE_TRIGGER, and NIDMM_ATTR_SAMPLE_INTERVAL.\n\nFor continuous acquisitions, set NIDMM_ATTR_TRIGGER_COUNT or\nNIDMM_ATTR_SAMPLE_COUNT to zero. For more information, refer to\n`Multiple Point\nAcquisitions <REPLACE_DRIVER_SPECIFIC_URL_1(multi_point)>`__,\n`Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__, and `Using\nSwitches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -155,6 +159,7 @@ functions = {
                 'documentation': {
                     'description': '\nSets the number of triggers you want the DMM to receive before returning\nto the Idle state. The driver sets NIDMM_ATTR_TRIGGER_COUNT to this\nvalue. The default value is 1.\n'
                 },
+                'grpc_enum': 'TriggerCount',
                 'name': 'triggerCount',
                 'type': 'ViInt32'
             },
@@ -163,6 +168,7 @@ functions = {
                 'documentation': {
                     'description': '\nSets the number of measurements the DMM makes in each measurement\nsequence initiated by a trigger. The driver sets\nNIDMM_ATTR_SAMPLE_COUNT to this value. The default value is 1.\n'
                 },
+                'grpc_enum': 'SampleCount',
                 'name': 'sampleCount',
                 'type': 'ViInt32'
             },
@@ -184,6 +190,7 @@ functions = {
                     'description': '\nSets the amount of time in seconds the DMM waits between measurement\ncycles. The driver sets NIDMM_ATTR_SAMPLE_INTERVAL to this value.\nSpecify a sample interval to add settling time between measurement\ncycles or to decrease the measurement rate. **sample_interval** only\napplies when the **Sample_Trigger** is set to INTERVAL.\n\nOn the NI 4060, the **sample_interval** value is used as the settling\ntime. When sample interval is set to 0, the DMM does not settle between\nmeasurement cycles. The NI 4065 and NI 4070/4071/4072 use the value\nspecified in **sample_interval** as additional delay. The default value\n(-1) ensures that the DMM settles for a recommended time. This is the\nsame as using an Immediate trigger.\n',
                     'note': 'This attribute is not used on the NI 4080/4081/4082 and the NI 4050.'
                 },
+                'grpc_enum': 'SampleInterval',
                 'name': 'sampleInterval',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -196,6 +203,7 @@ functions = {
         'documentation': {
             'description': 'Configures the A, B, and C parameters for a custom RTD.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -236,6 +244,7 @@ functions = {
         'documentation': {
             'description': 'Configures the RTD Type and RTD Resistance parameters for an RTD.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -339,6 +348,7 @@ functions = {
         'documentation': {
             'description': 'Configures the A, B, and C parameters for a custom thermistor.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -379,6 +389,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the thermocouple type and reference junction type for a\nchosen thermocouple.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -448,6 +459,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the DMM **Trigger_Source** and **Trigger_Delay**. Refer to\n`Triggering <REPLACE_DRIVER_SPECIFIC_URL_1(trigger)>`__ and `Using\nSwitches <REPLACE_DRIVER_SPECIFIC_URL_1(switch_selection)>`__ for more\ninformation.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -474,6 +486,7 @@ functions = {
                     'description': '\nSpecifies the time that the DMM waits after it has received a trigger\nbefore taking a measurement. The driver sets the\nNIDMM_ATTR_TRIGGER_DELAY attribute to this value. By default,\n**trigger_delay** is NIDMM_VAL_AUTO_DELAY (-1), which means the DMM\nwaits an appropriate settling time before taking the measurement. On the\nNI 4060, if you set **trigger_delay** to 0, the DMM does not settle\nbefore taking the measurement. The NI 4065 and NI 4070/4071/4072 use the\nvalue specified in **trigger_delay** as additional settling time.\n',
                     'note': '\nWhen using the NI 4050, **Trigger_Delay** must be set to\nNIDMM_VAL_AUTO_DELAY (-1).\n'
                 },
+                'grpc_enum': 'TriggerDelays',
                 'name': 'triggerDelay',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -486,6 +499,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the DMM for waveform acquisitions. This feature is supported\non the NI 4080/4081/4082 and the NI 4070/4071/4072.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -547,6 +561,7 @@ functions = {
         'documentation': {
             'description': '\nPlaces the instrument in a quiescent state where it has minimal or no\nimpact on the system to which it is connected. If a measurement is in\nprogress when this function is called, the measurement is aborted.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -564,6 +579,7 @@ functions = {
             'description': '\nExports the attribute configuration of the session to the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑DMM returns an\nerror.\n\n**Coercion Behavior for Certain Devices**\n\nImported and exported attribute configurations contain coerced values\nfor the following NI‑DMM devices:\n\n-  PXI/PCI/PCIe/USB‑4065\n-  PXI/PCI‑4070\n-  PXI‑4071\n-  PXI‑4072\n\nNI‑DMM coerces attribute values when the value you set is within the\nallowed range for the attribute but is not one of the discrete valid\nvalues the attribute supports. For example, for an attribute that\ncoerces values up, if you choose a value of 4 when the adjacent valid\nvalues are 1 and 10, the attribute coerces the value to 10.\n\n**Related Topics:**\n\n`Using Attributes and Properties with\nNI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__\n\n`Setting Attributes Before Reading\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -588,11 +604,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -604,6 +621,7 @@ functions = {
             'description': '\nExports the attribute configuration of the session to the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑DMM returns an\nerror.\n\n**Coercion Behavior for Certain Devices**\n\nImported and exported attribute configurations contain coerced values\nfor the following NI‑DMM devices:\n\n-  PXI/PCI/PCIe/USB‑4065\n-  PXI/PCI‑4070\n-  PXI‑4071\n-  PXI‑4072\n\nNI‑DMM coerces attribute values when the value you set is within the\nallowed range for the attribute but is not one of the discrete valid\nvalues the attribute supports. For example, for an attribute that\ncoerces values up, if you choose a value of 4 when the adjacent valid\nvalues are 1 and 10, the attribute coerces the value to 10.\n\n**Related Topics:**\n\n`Using Attributes and Properties with\nNI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__\n\n`Setting Attributes Before Reading\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -628,6 +646,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the value from a previously initiated measurement. You must call\nniDMM_Initiate before calling this function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -643,6 +662,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -663,6 +683,7 @@ functions = {
         'documentation': {
             'description': '\nReturns an array of values from a previously initiated multipoint\nmeasurement. The number of measurements the DMM makes is determined by\nthe values you specify for the **Trigger_Count** and **Sample_Count**\nparameters of niDMM_ConfigureMultiPoint. You must first call\nniDMM_Initiate to initiate a measurement before calling this function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -678,6 +699,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -721,14 +743,17 @@ functions = {
         'documentation': {
             'description': '\nFor the NI 4080/4081/4082 and the NI 4070/4071/4072, returns an array of\nvalues from a previously initiated waveform acquisition. You must call\nniDMM_Initiate before calling this function.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
                 'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '_into',
                 'session_filename': 'numpy_read_method'
             }
@@ -748,6 +773,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -792,6 +818,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViBoolean attribute. You can use this function to\nget the values of instrument-specific attributes and inherent IVI\nattributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -804,7 +831,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -833,6 +860,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViInt32 attribute. You can use this function to\nget the values of instrument-specific attributes and inherent IVI\nattributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -845,7 +873,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -874,6 +902,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViReal64 attribute. You can use this function to\nget the values of instrument-specific attributes and inherent IVI\nattributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -886,7 +915,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -915,6 +944,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViString attribute. You can use this function to\nget the values of instrument-specific attributes and inherent IVI\nattributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid.\n   You must provide a ViChar array to serve as a buffer for the value.\n   You pass the number of bytes in the buffer as the Array Size\n   parameter.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -927,7 +957,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -969,6 +999,7 @@ functions = {
             'description': 'Returns the date and time of the last calibration performed.',
             'note': 'The NI 4050 and NI 4060 are not supported.'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_cal_date_and_time',
         'parameters': [
             {
@@ -997,6 +1028,7 @@ functions = {
                         ]
                     ]
                 },
+                'grpc_enum': 'CalibrationType',
                 'name': 'calType',
                 'type': 'ViInt32'
             },
@@ -1048,6 +1080,7 @@ functions = {
             'description': 'Returns the current **Temperature** of the device.',
             'note': 'The NI 4050 and NI 4060 are not supported.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1082,7 +1115,16 @@ functions = {
         'documentation': {
             'description': '\nReturns the error information associated with the\n**Instrument_Handle**. This function retrieves and then clears the\nerror information for the session. If you leave the\n**Instrument_Handle** unwired, this function retrieves and then clears\nthe error information for the process.\n'
         },
+        'included_in_proto': True,
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1130,6 +1172,7 @@ functions = {
             'description': '\nReturns the recommended interval between external recalibration in\n**Months**.\n',
             'note': 'The NI 4050 and NI 4060 are not supported.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1158,9 +1201,11 @@ functions = {
             'description': 'Returns the date and time of the last calibration performed.',
             'note': 'The NI 4050 and NI 4060 are not supported.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1200,7 +1245,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1213,6 +1258,7 @@ functions = {
             'description': 'Returns the **Temperature** during the last calibration procedure.',
             'note': 'The NI 4050 and NI 4060 are not supported.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1240,6 +1286,7 @@ functions = {
                         ]
                     ]
                 },
+                'grpc_enum': 'CalibrationType',
                 'name': 'calType',
                 'type': 'ViInt32'
             },
@@ -1258,6 +1305,7 @@ functions = {
         'documentation': {
             'description': '\nReturns a Boolean value that expresses whether or not the DMM that you\nare using can perform self-calibration.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1295,6 +1343,7 @@ functions = {
             'description': '\nImports an attribute configuration to the session from the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers.\n\n**Coercion Behavior for Certain Devices**\n\nImported and exported attribute configurations contain coerced values\nfor the following NI‑DMM devices:\n\n-  PXI/PCI/PCIe/USB‑4065\n-  PXI/PCI‑4070\n-  PXI‑4071\n-  PXI‑4072\n\nNI‑DMM coerces attribute values when the value you set is within the\nallowed range for the attribute but is not one of the discrete valid\nvalues the attribute supports. For example, for an attribute that\ncoerces values up, if you choose a value of 4 when the adjacent valid\nvalues are 1 and 10, the attribute coerces the value to 10.\n\n**Related Topics:**\n\n`Using Attributes and Properties with\nNI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__\n\n`Setting Attributes Before Reading\nAttributes <REPLACE_DRIVER_SPECIFIC_URL_1(setting_before_reading_attributes)>`__\n',
             'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1319,11 +1368,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'size'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes'
             }
         ],
@@ -1334,6 +1384,7 @@ functions = {
             'description': "\nImports an attribute configuration to the session from the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers.\n\n**Coercion Behavior for Certain Devices**\n\nImported and exported attribute configurations contain coerced values\nfor the following NI‑DMM devices:\n\n-  PXI/PCI/PCIe/USB‑4065\n-  PXI/PCI‑4070\n-  PXI‑4071\n-  PXI‑4072\n\nNI‑DMM coerces attribute values when the value you set is within the\nallowed range for the attribute but is not one of the discrete valid\nvalues the attribute supports. For example, for an attribute that\ncoerces values up, if you choose a value of 4 when the adjacent valid\nvalues are 1 and 10, the attribute coerces the value to 10.\n\n**Related Topics:**\n\n`Using Attributes and Properties with\nNI‑DMM <REPLACE_DRIVER_SPECIFIC_URL_1(attributes)>`__\n\n`Setting Attributes Before Reading\nAttributes <javascript:LaunchHelp('DMM.chm::/setting_before_reading_attributes')>`__\n",
             'note': 'Not supported on the PCMCIA‑4050 or the PXI/PCI‑4060.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1359,7 +1410,16 @@ functions = {
         'documentation': {
             'description': '\nThis function completes the following tasks:\n\n-  Creates a new IVI instrument driver session and, optionally, sets the\n   initial state of the following session attributes:\n   NIDMM_ATTR_RANGE_CHECK, NIDMM_ATTR_QUERY_INSTR_STATUS,\n   NIDMM_ATTR_CACHE, NIDMM_ATTR_SIMULATE,\n   NIDMM_ATTR_RECORD_COERCIONS.\n-  Opens a session to the device you specify for the **Resource_Name**\n   parameter. If the **ID_Query** parameter is set to VI_TRUE, this\n   function queries the instrument ID and checks that it is valid for\n   this instrument driver.\n-  If the **Reset_Device** parameter is set to VI_TRUE, this function\n   resets the instrument to a known state. Sends initialization commands\n   to set the instrument to the state necessary for the operation of the\n   instrument driver.\n-  Returns a ViSession handle that you use to identify the instrument in\n   all subsequent instrument driver function calls.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1479,6 +1539,7 @@ functions = {
         'documentation': {
             'description': '\nInitiates an acquisition. After you call this function, the DMM leaves\nthe Idle state and enters the Wait-for-Trigger state. If trigger is set\nto Immediate mode, the DMM begins acquiring measurement data. Use\nniDMM_Fetch, niDMM_FetchMultiPoint, or niDMM_FetchWaveform to\nretrieve the measurement data.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1495,9 +1556,11 @@ functions = {
         'documentation': {
             'description': '\nThis function obtains a multithread lock on the instrument session.\nBefore it does so, it waits until all other execution threads have\nreleased their locks on the instrument session.\n\nOther threads might have obtained a lock on this session in the\nfollowing ways:\n\n-  The user application called this function.\n-  A call to the instrument driver locked the session.\n-  A call to the IVI Library locked the session.\n\nAfter your call to this function returns successfully, no other threads\ncan access the instrument session until you call niDMM_UnlockSession.\n\nUse this function and niDMM_UnlockSession around a sequence of calls to\ninstrument driver functions if you require that the instrument retain\nits settings through the end of the sequence. You can safely make nested\ncalls to this function within the same thread.\n\nTo completely unlock the session, you must balance each call to this\nfunction with a call to niDMM_UnlockSession. If, however, you use the\n**Caller_Has_Lock** parameter in all calls to this function and\nniDMM_UnlockSession within a function, the IVI Library locks the\nsession only once within the function regardless of the number of calls\nyou make to this function. This feature allows you to call\nniDMM_UnlockSession just once at the end of the function.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -1529,6 +1592,7 @@ functions = {
         'documentation': {
             'description': '\nFor the NI 4082 and NI 4072 only, performs the open cable compensation\nmeasurements for the current capacitance/inductance range, and returns\nopen cable compensation **Conductance** and **Susceptance** values. You\ncan use the return values of this function as inputs to\nniDMM_ConfigureOpenCableCompValues.\n\nThis function returns an error if the value of the NIDMM_ATTR_FUNCTION\nattribute is not set to NIDMM_VAL_CAPACITANCE (1005) or\nNIDMM_VAL_INDUCTANCE (1006).\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1561,6 +1625,7 @@ functions = {
         'documentation': {
             'description': '\nPerforms the short cable compensation measurements for the current\ncapacitance/inductance range, and returns short cable compensation\n**Resistance** and **Reactance** values. You can use the return values\nof this function as inputs to niDMM_ConfigureShortCableCompValues.\n\nThis function returns an error if the value of the NIDMM_ATTR_FUNCTION\nattribute is not set to NIDMM_VAL_CAPACITANCE (1005) or\nNIDMM_VAL_INDUCTANCE (1006).\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1593,6 +1658,7 @@ functions = {
         'documentation': {
             'description': 'Acquires a single measurement and returns the measured value.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1608,6 +1674,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -1628,6 +1695,7 @@ functions = {
         'documentation': {
             'description': '\nAcquires multiple measurements and returns an array of measured values.\nThe number of measurements the DMM makes is determined by the values you\nspecify for the **Trigger_Count** and **Sample_Count** parameters in\nniDMM_ConfigureMultiPoint.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1643,6 +1711,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -1687,6 +1756,7 @@ functions = {
             'description': '\nReturns measurement backlog and acquisition status. Use this function to\ndetermine how many measurements are available before calling\nniDMM_Fetch, niDMM_FetchMultiPoint, or niDMM_FetchWaveform.\n',
             'note': 'The NI 4050 is not supported.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1743,6 +1813,7 @@ functions = {
         'documentation': {
             'description': '\nFor the NI 4080/4081/4082 and the NI 4070/4071/4072, acquires a waveform\nand returns data as an array of values or as a waveform data type. The\nnumber of elements in the **Waveform_Array** is determined by the\nvalues you specify for the **Waveform_Points** parameter in\nniDMM_ConfigureWaveformAcquisition.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1758,6 +1829,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the **maximum_time** allowed for this function to complete in\nmilliseconds. If the function does not complete within this time\ninterval, the function returns the NIDMM_ERROR_MAX_TIME_EXCEEDED\nerror code. This may happen if an external trigger has not been\nreceived, or if the specified timeout is not long enough for the\nacquisition to complete.\n\nThe valid range is 0–86400000. The default value is\nNIDMM_VAL_TIME_LIMIT_AUTO (-1). The DMM calculates the timeout\nautomatically.\n'
                 },
+                'grpc_enum': 'TimeLimit',
                 'name': 'maximumTime',
                 'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
@@ -1801,6 +1873,7 @@ functions = {
         'documentation': {
             'description': '\nResets the instrument to a known state and sends initialization commands\nto the DMM. The initialization commands set the DMM settings to the\nstate necessary for the operation of NI-DMM. All user-defined default\nvalues associated with a logical name are applied after setting the DMM.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1818,6 +1891,7 @@ functions = {
             'description': '\nFor the NI 4080/4081/4082 and the NI 4070/4071/4072, executes the\nself-calibration routine to maintain measurement accuracy.\n',
             'note': '\nThis function calls niDMM_reset, and any configurations previous to\nthe call will be lost. All attributes will be set to their default\nvalues after the call returns.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1834,6 +1908,7 @@ functions = {
         'documentation': {
             'description': '\nSends a command to trigger the DMM. Call this function if you have\nconfigured either the NIDMM_ATTR_TRIGGER_SOURCE or\nNIDMM_ATTR_SAMPLE_TRIGGER attributes. If the\nNIDMM_ATTR_TRIGGER_SOURCE and/or NIDMM_ATTR_SAMPLE_TRIGGER\nattributes are set to NIDMM_VAL_EXTERNAL or NIDMM_VAL_TTL\\ *n*, you\ncan use this function to override the trigger source that you configured\nand trigger the device. The NI 4050 and NI 4060 are not supported.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1851,6 +1926,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViBoolean attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid\n   or is different than the value you specify.\n\nThis instrument driver contains high-level functions that set most of\nthe instrument attributes. It is best to use the high-level driver\nfunctions as much as possible. They handle order dependencies and\nmultithread locking for you. In addition, they perform status checking\nonly after setting all of the attributes.\n\nIn contrast, when you set multiple attributes using the SetAttribute\nfunctions, the functions check the instrument status after each call.\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1863,7 +1939,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1892,6 +1968,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViInt32 attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid\n   or is different than the value you specify.\n\nThis instrument driver contains high-level functions that set most of\nthe instrument attributes. It is best to use the high-level driver\nfunctions as much as possible. They handle order dependencies and\nmultithread locking for you. In addition, they perform status checking\nonly after setting all of the attributes.\n\nIn contrast, when you set multiple attributes using the SetAttribute\nfunctions, the functions check the instrument status after each call.\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1904,7 +1981,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1922,6 +1999,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_enum': 'NiDmmInt32AttributeValues',
                 'name': 'attributeValue',
                 'type': 'ViInt32'
             }
@@ -1933,6 +2011,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViReal64 attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid\n   or is different than the value you specify.\n\nThis instrument driver contains high-level functions that set most of\nthe instrument attributes. It is best to use the high-level driver\nfunctions as much as possible. They handle order dependencies and\nmultithread locking for you. In addition, they perform status checking\nonly after setting all of the attributes.\n\nIn contrast, when you set multiple attributes using the SetAttribute\nfunctions, the functions check the instrument status after each call.\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1945,7 +2024,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1963,6 +2042,8 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_enum': 'NiDmmReal64AttributeValues',
+                'grpc_mapped_enum': 'NiDmmReal64AttributeValuesMapped',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -1974,6 +2055,7 @@ functions = {
         'documentation': {
             'description': '\nThis function sets the value of a ViString attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes.\n\nIf the attribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled, and the currently cached value is invalid\n   or is different than the value you specify.\n\nThis instrument driver contains high-level functions that set most of\nthe instrument attributes. It is best to use the high-level driver\nfunctions as much as possible. They handle order dependencies and\nmultithread locking for you. In addition, they perform status checking\nonly after setting all of the attributes.\n\nIn contrast, when you set multiple attributes using the SetAttribute\nfunctions, the functions check the instrument status after each call.\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1986,7 +2068,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nThis parameter is ignored. National Instruments DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
+                    'description': '\nThis parameter is ignored. NI DMMs do not support\nchannel names since they only have a single channel. This parameter is\nincluded in order to support interchangeability and upgradability to\nmultiple channel DMMs.\n\nThe default value is " " (an empty string).\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2004,6 +2086,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value that you want to set the attribute to.'
                 },
+                'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
                 'type': 'ViString'
             }
@@ -2014,9 +2097,11 @@ functions = {
         'documentation': {
             'description': '\nThis function releases a lock that you acquired on an instrument session\nusing niDMM_LockSession. Refer to niDMM_LockSession for additional\ninformation on session locks.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2049,6 +2134,8 @@ functions = {
         'documentation': {
             'description': 'Closes the specified session and deallocates resources that it reserved.'
         },
+        'grpc_name': 'Close',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2066,8 +2153,11 @@ functions = {
     'error_message': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nTakes the **Error_Code** returned by the instrument driver functions,\ninterprets it, and returns it as a user-readable string.\n'
+            'description': '\nTakes the **Error_Code** returned by the instrument driver functions,\ninterprets it, and returns it as a user-readable string.\n',
+            'note': '\nWhen using grpc-device, this method will call GetErrorMessage server-side while providing the same interface.\n'
         },
+        'grpc_name': 'GetErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
@@ -2111,9 +2201,12 @@ functions = {
                 'This function calls niDMM_reset, and any configurations previous to the call will be lost. All attributes will be set to their default values after the call returns.'
             ]
         },
+        'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -2135,6 +2228,8 @@ functions = {
         'documentation': {
             'description': '\nResets the instrument to a known state and sends initialization commands\nto the instrument. The initialization commands set instrument settings\nto the state necessary for the operation of the instrument driver.\n'
         },
+        'grpc_name': 'Reset',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2153,6 +2248,8 @@ functions = {
             'description': '\nPerforms a self-test on the DMM to ensure that the DMM is functioning\nproperly. Self-test does not calibrate the DMM.\n',
             'note': '\nThis function calls niDMM_reset, and any configurations previous to\nthe call will be lost. All attributes will be set to their default\nvalues after the call returns.\n'
         },
+        'grpc_name': 'SelfTest',
+        'included_in_proto': True,
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

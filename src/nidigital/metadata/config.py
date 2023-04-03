@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 21.3.0d40
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d57
 config = {
-    'api_version': '21.3.0d40',
+    'api_version': '23.0.0d57',
     'c_function_prefix': 'niDigital_',
     'close_function': 'close',
     'context_manager_name': {
@@ -18,6 +18,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiDigital',
     'init_function': 'InitWithOptions',
     'library_info': {
         'Linux': {
@@ -37,8 +38,8 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nidigital',
+    'proto_name': 'nidigitalpattern',
     'repeated_capabilities': [
         {
             'prefix': '',

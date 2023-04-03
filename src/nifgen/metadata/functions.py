@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 21.5.0d106
+# This file is generated from NI-FGEN API metadata version 23.0.0d57
 functions = {
     'AbortGeneration': {
         'documentation': {
             'description': '\nAborts any previously initiated signal generation. Call the\nnifgen_InitiateGeneration function to cause the signal generator to\nproduce a signal again.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -22,6 +23,7 @@ functions = {
         'documentation': {
             'description': '\nSpecifies the size of a named waveform up front so that it can be\nallocated in onboard memory before loading the associated data. Data can\nthen be loaded in smaller blocks with the niFgen Write (Binary16)\nWaveform functions.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -63,6 +65,7 @@ functions = {
             'description': '\nSpecifies the size of a waveform so that it can be allocated in onboard\nmemory before loading the associated data. Data can then be loaded in\nsmaller blocks with the Write Binary 16 Waveform functions.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -104,6 +107,7 @@ functions = {
             'description': '\nRemoves all previously created arbitrary waveforms, sequences, and\nscripts from the signal generator memory and invalidates all waveform\nhandles, sequence handles, and waveform names.\n',
             'note': '\nThe signal generator must not be in the Generating state when you\ncall this function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -121,6 +125,7 @@ functions = {
             'description': '\nRemoves a previously created arbitrary sequence from the signal\ngenerator memory and invalidates the sequence handle.\n',
             'note': '\nThe signal generator must not be in the Generating state when you\ncall this function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -135,6 +140,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the arbitrary sequence that you want the signal\ngenerator to remove. You can create an arbitrary sequence using the\nnifgen_CreateArbSequence or nifgen_CreateAdvancedArbSequence function.\nThese functions return a handle that you use to identify the sequence.\n\n| **Defined Value**:\n| NIFGEN_VAL_ALL_SEQUENCES—Remove all sequences from the signal\n  generator\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'SequenceHandle',
                 'name': 'sequenceHandle',
                 'type': 'ViInt32'
             }
@@ -147,6 +153,7 @@ functions = {
             'description': '\nRemoves a previously created arbitrary waveform from the signal\ngenerator memory and invalidates the waveform handle.\n',
             'note': '\nThe signal generator must not be in the Generating state when you\ncall this function.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'delete_waveform',
         'parameters': [
             {
@@ -162,6 +169,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the arbitrary waveform that you want the signal\ngenerator to remove.\n\nYou can create multiple arbitrary waveforms using one of the following\nniFgen Create Waveform functions:\n\n-  niFgen_CreateWaveformF64\n-  niFgen_CreateWaveformI16\n-  niFgen_CreateWaveformFromFileI16\n-  niFgen_CreateWaveformFromFileF64\n\n**Defined Value**:\n\nNIFGEN_VAL_ALL_WAVEFORMS—Remove all waveforms from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'WaveformHandle',
                 'name': 'waveformHandle',
                 'type': 'ViInt32'
             }
@@ -173,6 +181,7 @@ functions = {
             'description': '\nRemoves a previously created frequency list from the signal generator\nmemory and invalidates the frequency list handle.\n',
             'note': '\nThe signal generator must not be in the Generating state when you\ncall this function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -187,6 +196,7 @@ functions = {
                 'documentation': {
                     'description': '\nSpecifies the handle of the frequency list you want the signal generator\nto remove. You create multiple frequency lists using\nniFgen_CreateFreqList. niFgen_CreateFreqList returns a handle that you\nuse to identify each list. Specify a value of -1 to clear all frequency\nlists.\n\n**Defined Value**\n\nNIFGEN_VAL_ALL_FLISTS—Remove all frequency lists from the signal\ngenerator.\n\n**Default Value**: None\n'
                 },
+                'grpc_enum': 'FrequencyListOptions',
                 'name': 'frequencyListHandle',
                 'type': 'ViInt32'
             }
@@ -197,6 +207,7 @@ functions = {
         'documentation': {
             'description': '\nClears the user-defined waveform created by the\nnifgen_DefineUserStandardWaveform function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -221,6 +232,7 @@ functions = {
         'documentation': {
             'description': '\nCauses a transition to the Committed state. This function verifies\nattribute values, reserves the device, and commits the attribute values\nto the device. If the attribute values are all valid, NI-FGEN sets the\ndevice hardware configuration to match the session configuration. This\nfunction does not support the NI 5401/5404/5411/5431 signal generators.\n\nIn the Committed state, you can load waveforms, scripts, and sequences\ninto memory. If any attributes are changed, NI-FGEN implicitly\ntransitions back to the Idle state, where you can program all session\nproperties before applying them to the device. This function has no\neffect if the device is already in the Committed or Generating state and\nreturns a successful status value.\n\nCalling this VI before the niFgen Initiate Generation VI is optional but\nhas the following benefits:\n\n-  Routes are committed, so signals are exported or imported.\n-  Any Reference Clock and external clock circuits are phase-locked.\n-  A subsequent niFgen_InitiateGeneration function can run faster\n   because the device is already configured.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -239,6 +251,7 @@ functions = {
             'description': '\nConfigures the signal generator attributes that affect arbitrary\nsequence generation. Sets the NIFGEN_ATTR_ARB_SEQUENCE_HANDLE,\nNIFGEN_ATTR_ARB_GAIN, and NIFGEN_ATTR_ARB_OFFSET attributes.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -289,6 +302,7 @@ functions = {
             'description': '\nConfigures the attributes of the signal generator that affect arbitrary\nwaveform generation. Sets the NIFGEN_ATTR_ARB_WAVEFORM_HANDLE,\nNIFGEN_ATTR_ARB_GAIN, and NIFGEN_ATTR_ARB_OFFSET attributes.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -339,6 +353,7 @@ functions = {
             'description': '\nConfigures the attributes of the signal generator that affect frequency\nlist generation (the NIFGEN_ATTR_FREQ_LIST_HANDLE,\nNIFGEN_ATTR_FUNC_AMPLITUDE, NIFGEN_ATTR_FUNC_DC_OFFSET, and\nNIFGEN_ATTR_FUNC_START_PHASE attributes).\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -401,6 +416,7 @@ functions = {
             'description': '\nConfigures the following attributes of the signal generator that affect\nstandard waveform generation:\n\n-  NIFGEN_ATTR_FUNC_WAVEFORM\n-  NIFGEN_ATTR_FUNC_AMPLITUDE\n-  NIFGEN_ATTR_FUNC_DC_OFFSET\n-  NIFGEN_ATTR_FUNC_FREQUENCY\n-  NIFGEN_ATTR_FUNC_START_PHASE\n',
             'note': '\nYou must call the niFgen_ConfigureOutputMode function with the\n**outputMode** parameter set to NIFGEN_VAL_OUTPUT_FUNC before calling\nthis function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -506,6 +522,7 @@ functions = {
             'description': '\nCreates an arbitrary sequence from an array of waveform handles and an\narray of corresponding loop counts. This function returns a handle that\nidentifies the sequence. You pass this handle to the\nniFgen_ConfigureArbSequence function to specify what arbitrary sequence\nyou want the signal generator to produce.\n\nThe niFgen_CreateAdvancedArbSequence function extends on the\nniFgen_CreateArbSequence function by adding the ability to set the\nnumber of samples in each sequence step and to set marker locations.\n\nAn arbitrary sequence consists of multiple waveforms. For each waveform,\nyou specify the number of times the signal generator produces the\nwaveform before proceeding to the next waveform. The number of times to\nrepeat a specific waveform is called the loop count.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\nYou must call the nifgen_ConfigureOutputMode function to set the\n**outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this\nfunction.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -601,6 +618,7 @@ functions = {
             'description': '\nCreates an arbitrary sequence from an array of waveform handles and an\narray of corresponding loop counts. This function returns a handle that\nidentifies the sequence. You pass this handle to the\nnifgen_ConfigureArbSequence function to specify what arbitrary sequence\nyou want the signal generator to produce.\n\nAn arbitrary sequence consists of multiple waveforms. For each waveform,\nyou can specify the number of times that the signal generator produces\nthe waveform before proceeding to the next waveform. The number of times\nto repeat a specific waveform is called the loop count.\n',
             'note': '\nYou must call the nifgen_ConfigureOutputMode function to set the\n**outputMode** parameter to NIFGEN_VAL_OUTPUT_SEQ before calling this\nfunction.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -658,6 +676,7 @@ functions = {
             'description': '\nCreates a frequency list from an array of frequencies\n(**frequencyArray**) and an array of durations (**durationArray**). The\ntwo arrays should have the same number of elements, and this value must\nalso be the size of the **frequencyListLength**. The function returns a\nhandle that identifies the frequency list (the **frequencyListHandle**).\nYou can pass this handle to nifgen_ConfigureFreqList to specify what\nfrequency list you want the signal generator to produce.\n\nA frequency list consists of a list of frequencies and durations. The\nsignal generator generates each frequency for the given amount of time\nand then proceeds to the next frequency. When the end of the list is\nreached, the signal generator starts over at the beginning of the list.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -759,9 +778,11 @@ functions = {
             'description': 'Creates an onboard waveform for use in Arbitrary Waveform output mode or Arbitrary Sequence output mode.',
             'note': 'You must set NIFGEN_ATTR_OUTPUT_MODE to NIFGEN_VAL_OUTPUT_ARB or NIFGEN_VAL_OUTPUT_SEQ before calling this function.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'create_waveform'
             }
@@ -804,13 +825,16 @@ functions = {
             'description': '\nCreates an onboard waveform from binary F64 (floating point double) data\nfor use in Arbitrary Waveform output mode or Arbitrary Sequence output\nmode. The **waveformHandle** returned can later be used for setting the\nactive waveform, changing the data in the waveform, building sequences\nof waveforms, or deleting the waveform when it is no longer needed.\n',
             'note': '\nYou must call the nifgen_ConfigureOutputMode function to set the\n**outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or\nNIFGEN_VAL_OUTPUT_SEQ before calling this function.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'create_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -870,6 +894,7 @@ functions = {
             'description': '\nThis function takes the floating point double (F64) data from the\nspecified file and creates an onboard waveform for use in Arbitrary\nWaveform or Arbitrary Sequence output mode. The **waveformHandle**\nreturned by this function can later be used for setting the active\nwaveform, changing the data in the waveform, building sequences of\nwaveforms, or deleting the waveform when it is no longer needed.\n',
             'note': '\nThe F64 data must be between –1.0 and +1.0 V. Use the\nNIFGEN_ATTR_DIGITAL_GAIN attribute to generate different voltage\noutputs.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -931,6 +956,7 @@ functions = {
             'description': '\nTakes the binary 16-bit signed integer (I16) data from the specified\nfile and creates an onboard waveform for use in Arbitrary Waveform or\nArbitrary Sequence output mode. The **waveformHandle** returned by this\nfunction can later be used for setting the active waveform, changing the\ndata in the waveform, building sequences of waveforms, or deleting the\nwaveform when it is no longer needed.\n',
             'note': '\nThe I16 data (values between –32768 and +32767) is assumed to\nrepresent –1 to +1 V. Use the NIFGEN_ATTR_DIGITAL_GAIN attribute to\ngenerate different voltage outputs.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -993,9 +1019,11 @@ functions = {
             'description': '\nCreates an onboard waveform from binary 16-bit signed integer (I16) data\nfor use in Arbitrary Waveform or Arbitrary Sequence output mode. The\n**waveformHandle** returned can later be used for setting the active\nwaveform, changing the data in the waveform, building sequences of\nwaveforms, or deleting the waveform when it is no longer needed.\n',
             'note': '\nYou must call the nifgen_ConfigureOutputMode function to set the\n**outputMode** parameter to NIFGEN_VAL_OUTPUT_ARB or\nNIFGEN_VAL_OUTPUT_SEQ before calling this function.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'create_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -1055,6 +1083,7 @@ functions = {
             'description': '\nDefines a user waveform for use in either Standard Function or Frequency\nList output mode.\n\nTo select the waveform, set the **waveform** parameter to\nNIFGEN_VAL_WFM_USER with either the nifgen_ConfigureStandardWaveform\nor the nifgen_CreateFreqList function.\n\nThe waveform data must be scaled between –1.0 and 1.0. Use the\n**amplitude** parameter in the niFgen_ConfigureStandardWaveform\nfunction to generate different output voltages.\n',
             'note': '\nYou must call the nifgen_ConfigureOutputMode function to set the\n**outputMode** parameter to NIFGEN_VAL_OUTPUT_FUNC or\nNIFGEN_VAL_OUTPUT_FREQ_LIST before calling this function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1101,6 +1130,7 @@ functions = {
             'description': '\nRemoves a previously created arbitrary waveform from the signal\ngenerator memory and invalidates the waveform handle.\n',
             'note': '\nThe signal generator must not be in the Generating state when you call\nthis function.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'delete_waveform',
         'parameters': [
             {
@@ -1134,6 +1164,7 @@ functions = {
         'documentation': {
             'description': 'Deletes the specified script from onboard memory.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1168,9 +1199,11 @@ functions = {
             'description': 'Removes a previously created arbitrary waveform from the signal generator memory.',
             'note': 'The signal generator must not be in the Generating state when you call this function.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'delete_waveform'
             }
@@ -1209,6 +1242,7 @@ functions = {
         'documentation': {
             'description': '\nPlaces the instrument in a quiescent state where it has minimal or no\nimpact on the system to which it is connected. The analog output and all\nexported signals are disabled.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1225,6 +1259,7 @@ functions = {
         'documentation': {
             'description': '\nExports the attribute configuration of the session to a configuration\nbuffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑FGEN returns an\nerror.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1264,6 +1299,7 @@ functions = {
         'documentation': {
             'description': '\nExports the attribute configuration of the session to the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\nThis function verifies that the attributes you have configured for the\nsession are valid. If the configuration is invalid, NI‑FGEN returns an\nerror.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1289,6 +1325,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViBoolean attribute.\n\nYou can use this function to get the values of instrument-specific\nattributes and inherent IVI attributes. If the attribute represents an\ninstrument state, this function performs instrument I/O in the following\ncases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1330,6 +1367,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViInt32 attribute. You can use this function to\nget the values of instrument-specific attributes and inherent IVI\nattributes. If the attribute represents an instrument state, this\nfunction performs instrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1371,6 +1409,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViReal64 attribute.\n\nYou can use this function to get the values of instrument-specific\nattributes and inherent IVI attributes. If the attribute represents an\ninstrument state, this function performs instrument I/O in the following\ncases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1412,6 +1451,7 @@ functions = {
         'documentation': {
             'description': '\nQueries the value of a ViString attribute.\n\nYou can use this function to get the values of instrument-specific\nattributes and inherent IVI attributes. If the attribute represents an\ninstrument state, this function performs instrument I/O in the following\ncases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid.\n\nYou must provide a ViChar array to serve as a buffer for the value. You\npass the number of bytes in the buffer as the **arraySize** parameter.\nIf the current value of the attribute, including the terminating NUL\nbyte, is larger than the size you indicate in the **arraySize**\nparameter, the function copies **arraySize** – 1 bytes into the buffer,\nplaces an ASCII NUL byte at the end of the buffer, and returns the array\nsize you must pass to get the entire value. For example, if the value is\n123456 and **arraySize** is 4, the function places 123 into the buffer\nand returns 7.\n\nIf you want to call this function just to get the required array size,\nyou can pass 0 for **arraySize** and VI_NULL for the **attributeValue**\nbuffer.\n\nIf you want the function to fill in the buffer regardless of the number\nof bytes in the value, pass a negative number for the **arraySize**\nparameter.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1465,6 +1505,7 @@ functions = {
             'description': '\nReturns the channel string that is in the channel table at an index you\nspecify.\n',
             'note': '\nThis function is included for compliance with the IviFgen Class\nSpecification.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1510,7 +1551,16 @@ functions = {
         'documentation': {
             'description': '\nReturns the error information associated with an IVI session or with the\ncurrent execution thread. If you specify a valid IVI session for the\n**vi** parameter, this function retrieves and then clears the error\ninformation for the session. If you pass VI_NULL for the **vi**\nparameter, this function retrieves and then clears the error information\nfor the current execution thread.\n\nThe IVI Engine also maintains this error information separately for each\nthread. This feature is useful if you do not have a session handle to\npass to the niFgen_GetError or nifgen_ClearError functions. This\nsituation occurs when a call to the nifgen_init or\nnifgen_InitWithOptions function fails.\n'
         },
+        'included_in_proto': True,
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -1557,6 +1607,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the date and time of the last successful external calibration.\nThe time returned is 24-hour (military) local time; for example, if the\ndevice was calibrated at 2:30 PM, this function returns 14 for the\n**hour** parameter and 30 for the **minute** parameter.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
         'parameters': [
             {
@@ -1614,6 +1665,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the temperature at the last successful external calibration. The\ntemperature is returned in degrees Celsius.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1638,6 +1690,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the recommended interval between external calibrations in\nmonths.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1665,6 +1718,7 @@ functions = {
             'description': '\nReturns the current hardware state of the device and, if the device is\nin the hardware error state, the current hardware error.\n',
             'note': 'Hardware states do not necessarily correspond to NI-FGEN states.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1709,13 +1763,15 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetLastExtCalLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30 PM, this function returns 14 for the **hour** parameter and 30 for the **minute** parameter.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1734,7 +1790,7 @@ functions = {
                 'documentation': {
                     'description': 'Indicates date and time of the last calibration.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1743,13 +1799,15 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetLastSelfCalLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'python-only',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'datetime_wrappers'
             }
@@ -1768,7 +1826,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the date and time the device was last calibrated.'
                 },
-                'name': 'month',
+                'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
             }
         ],
@@ -1781,6 +1839,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the date and time of the last successful self-calibration.\n\nAll values are returned as separate parameters. Each parameter is\nreturned as an integer, including the year, month, day, hour, minute,\nand second. For example, if the device is calibrated in September 2013,\nthis function returns 9 for the **month** parameter and 2013 for the\n**year** parameter.\n\nThe time returned is 24-hour (military) local time. For example, if the\ndevice was calibrated at 2:30 PM, this function returns 14 for the\n**hours** parameter and 30 for the **minutes** parameter.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'get_self_cal_last_date_and_time',
         'parameters': [
             {
@@ -1838,6 +1897,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the temperature at the last successful self-calibration. The\ntemperature is returned in degrees Celsius.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1862,6 +1922,7 @@ functions = {
         'documentation': {
             'description': 'Returns whether the device supports self–calibration.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1897,6 +1958,7 @@ functions = {
             'description': '\nImports an attribute configuration to the session from the specified\nconfiguration buffer.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n\n\n',
             'note': '\nYou cannot call this function while the session is in a running state,\nsuch as while generating a signal.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1936,6 +1998,7 @@ functions = {
             'description': '\nImports an attribute configuration to the session from the specified\nfile.\n\nYou can export and import session attribute configurations only between\ndevices with identical model numbers, channel counts, and onboard memory\nsizes.\n',
             'note': '\nYou cannot call this function while the session is in a running state,\nsuch as while generating a signal.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1961,7 +2024,16 @@ functions = {
         'documentation': {
             'description': '\nCreates and returns a new NI-FGEN session to the specified channel of a\nwaveform generator that is used in all subsequent NI-FGEN function\ncalls.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': '__init__',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -2096,6 +2168,7 @@ functions = {
         'documentation': {
             'description': '\nInitiates signal generation. If you want to abort signal generation,\ncall the nifgen_AbortGeneration function. After the signal generation\nis aborted, you can call the niFgen_InitiateGeneration function to\ncause the signal generator to produce a signal again.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'initiate',
         'parameters': [
             {
@@ -2114,6 +2187,7 @@ functions = {
             'description': '\nDetermines whether the current generation is complete. This function\nsets the **done** parameter to VI_TRUE if the session is in the Idle or\nCommitted states.\n',
             'note': '\nNI-FGEN only reports the **done** parameter as VI_TRUE after the\ncurrent generation is complete in Single trigger mode.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2148,9 +2222,11 @@ functions = {
         'documentation': {
             'description': '\nObtains a multithread lock on the instrument session. Before it does so,\nthis function waits until all other execution threads have released\ntheir locks on the instrument session.\n\nOther threads might have obtained a lock on this session in the\nfollowing ways:\n\n-  Your application called the niFgen_LockSession function.\n-  A call to the NI-FGEN locked the session.\n-  A call to the IVI Engine locked the session.\n\nAfter your call to the niFgen_LockSession function returns\nsuccessfully, no other threads can access the instrument session until\nyou call the nifgen_UnlockSession function.\n\nUse the niFgen_LockSession function and the niFgen_UnlockSession\nfunction around a sequence of calls to NI-FGEN functions if you require\nthat the instrument retain its settings through the end of the sequence.\n\nYou can safely make nested calls to the niFgen_LockSession function\nwithin the same thread. To completely unlock the session, you must\nbalance each call to the niFgen_LockSession function with a call to the\nniFgen_UnlockSession function. If, however, you use the\n**callerHasLock** parameter in all calls to the niFgen_LockSession\nfunction and the niFgen_UnlockSession function within a function, the\nIVI Engine locks the session only once within the function regardless of\nthe number of calls you make to the niFgen_LockSession function. This\nconfiguration allows you to call the niFgen_UnlockSession function just\nonce at the end of the function.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'lock',
+                'library_interpreter_filename': 'lock',
                 'method_python_name_suffix': '',
                 'session_filename': 'lock'
             }
@@ -2182,6 +2258,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the attributes of the signal generator that are related to\ncreating arbitrary sequences (the NIFGEN_ATTR_MAX_NUM_SEQUENCES,\nNIFGEN_ATTR_MIN_SEQUENCE_LENGTH,\nNIFGEN_ATTR_MAX_SEQUENCE_LENGTH, and NIFGEN_ATTR_MAX_LOOP_COUNT\nattributes).\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2231,6 +2308,7 @@ functions = {
             'description': '\nReturns the attributes of the signal generator that are related to\ncreating arbitrary waveforms. These attributes are the maximum number of\nwaveforms, waveform quantum, minimum waveform size, and maximum waveform\nsize.\n',
             'note': '\nIf you do not want to obtain the waveform quantum, pass a value of\nVI_NULL for this parameter.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2279,6 +2357,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the attributes of the signal generator that are related to\ncreating frequency lists. These attributes are\nNIFGEN_ATTR_MAX_NUM_FREQ_LISTS,\nNIFGEN_ATTR_MIN_FREQ_LIST_LENGTH,\nNIFGEN_ATTR_MAX_FREQ_LIST_LENGTH,\nNIFGEN_ATTR_MIN_FREQ_LIST_DURATION,\nNIFGEN_ATTR_MAX_FREQ_LIST_DURATION, and\nNIFGEN_ATTR_FREQ_LIST_DURATION_QUANTUM.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2343,6 +2422,7 @@ functions = {
         'documentation': {
             'description': '\nReads the current onboard temperature of the device. The temperature is\nreturned in degrees Celsius.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2367,6 +2447,7 @@ functions = {
         'documentation': {
             'description': '\nPerforms a hard reset on the device. Generation is stopped, all routes\nare released, external bidirectional terminals are tristated, FPGAs are\nreset, hardware is configured to its default state, and all session\nattributes are reset to their default states.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2383,6 +2464,7 @@ functions = {
         'documentation': {
             'description': '\nResets the instrument and reapplies initial user–specified settings from\nthe logical name that was used to initialize the session. If the session\nwas created without a logical name, this function is equivalent to the\nnifgen_reset function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2399,6 +2481,7 @@ functions = {
         'documentation': {
             'description': '\nPerforms a full internal self-calibration on the device. If the\ncalibration is successful, new calibration data and constants are stored\nin the onboard EEPROM.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2416,9 +2499,11 @@ functions = {
             'description': '\nSends a command to trigger the signal generator. This VI can act as an\noverride for an external edge trigger.\n',
             'note': '\nThis VI does not override external digital edge triggers of the\nNI 5401/5411/5431.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'send_software_edge_trigger'
             }
@@ -2469,6 +2554,7 @@ functions = {
         'documentation': {
             'description': '\nSets the value of a ViBoolean attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid or\n   is different than the value you specify.\n\nNI-FGEN contains high-level functions that set most of the instrument\nattributes. NI recommends that you use the high-level driver functions\nas much as possible. They handle order dependencies and multithread\nlocking for you. In addition, they perform status checking only after\nsetting all of the attributes. In contrast, when you set multiple\nattributes using the Set Attribute functions, the functions check the\ninstrument status after each call.\n\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2511,6 +2597,7 @@ functions = {
         'documentation': {
             'description': '\nSets the value of a ViInt32 attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid or\n   is different than the value you specify.\n\nNI-FGEN contains high-level functions that set most of the instrument\nattributes. NI recommends that you use the high-level driver functions\nas much as possible. They handle order dependencies and multithread\nlocking for you. In addition, they perform status checking only after\nsetting all of the attributes. In contrast, when you set multiple\nattributes using the Set Attribute functions, the functions check the\ninstrument status after each call.\n\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2542,6 +2629,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
+                'grpc_enum': 'NiFgenInt32AttributeValues',
                 'name': 'attributeValue',
                 'type': 'ViInt32'
             }
@@ -2553,6 +2641,7 @@ functions = {
         'documentation': {
             'description': '\nSets the value of a ViReal64 attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid or\n   is different than the value you specify.\n\nNI-FGEN contains high-level functions that set most of the instrument\nattributes. NI recommends that you use the high-level driver functions\nas much as possible. They handle order dependencies and multithread\nlocking for you. In addition, they perform status checking only after\nsetting all of the attributes. In contrast, when you set multiple\nattributes using the Set Attribute functions, the functions check the\ninstrument status after each call.\n\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2584,6 +2673,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
+                'grpc_enum': 'NiFgenReal64AttributeValues',
                 'name': 'attributeValue',
                 'type': 'ViReal64'
             }
@@ -2595,6 +2685,7 @@ functions = {
         'documentation': {
             'description': '\nSets the value of a ViString attribute.\n\nThis is a low-level function that you can use to set the values of\ninstrument-specific attributes and inherent IVI attributes. If the\nattribute represents an instrument state, this function performs\ninstrument I/O in the following cases:\n\n-  State caching is disabled for the entire session or for the\n   particular attribute.\n-  State caching is enabled and the currently cached value is invalid or\n   is different than the value you specify.\n\nNI-FGEN contains high-level functions that set most of the instrument\nattributes. NI recommends that you use the high-level driver functions\nas much as possible. They handle order dependencies and multithread\nlocking for you. In addition, they perform status checking only after\nsetting all of the attributes. In contrast, when you set multiple\nattributes using the Set Attribute functions, the functions check the\ninstrument status after each call.\n\nAlso, when state caching is enabled, the high-level functions that\nconfigure multiple attributes perform instrument I/O only for the\nattributes whose value you change. Thus, you can safely call the\nhigh-level functions without the penalty of redundant instrument I/O.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2626,6 +2717,7 @@ functions = {
                     'description': '\nSpecifies the value to which you want to set the attribute. **Default\nValue**: None\n',
                     'note': '\nSome of the values might not be valid depending on the current\nsettings of the instrument session.\n'
                 },
+                'grpc_mapped_enum': 'NiFgenStringAttributeValuesMapped',
                 'name': 'attributeValue',
                 'type': 'ViConstString'
             }
@@ -2637,6 +2729,7 @@ functions = {
         'documentation': {
             'description': '\nSets the position in the waveform to which data is written at the next\nwrite. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the **waveformHandle** parameter. Subsequent\nwrites to that waveform begin where the last write left off, unless this\nfunction is called again. The **waveformHandle** passed in must have\nbeen created with a call to one of the following functions:\n\n-  nifgen_AllocateWaveform\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'set_next_write_position',
         'parameters': [
             {
@@ -2698,9 +2791,11 @@ functions = {
         'documentation': {
             'description': '\nSets the position in the waveform at which the next waveform data is\nwritten. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the waveformHandle parameter. Subsequent writes to\nthat waveform begin where the last write left off, unless this function\nis called again. The waveformHandle passed in must have been created by\na call to the nifgen_AllocateWaveform function or one of the following\nniFgen_CreateWaveformF64 function.\n'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'set_next_write_position'
             }
@@ -2747,6 +2842,7 @@ functions = {
                     ]
                 },
                 'enum': 'RelativeTo',
+                'grpc_enum': None,
                 'name': 'relativeTo',
                 'type': 'ViInt32'
             },
@@ -2767,6 +2863,7 @@ functions = {
         'documentation': {
             'description': '\nSets the position in the waveform at which the next waveform data is\nwritten. This function allows you to write to arbitrary locations within\nthe waveform. These settings apply only to the next write to the\nwaveform specified by the waveformHandle parameter. Subsequent writes to\nthat waveform begin where the last write left off, unless this function\nis called again. The waveformHandle passed in must have been created by\na call to the nifgen_AllocateWaveform function or one of the following\nniFgen CreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'set_next_write_position',
         'parameters': [
             {
@@ -2827,9 +2924,11 @@ functions = {
         'documentation': {
             'description': '\nReleases a lock that you acquired on an instrument session using the\nnifgen_LockSession function.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
+                'library_interpreter_filename': 'unlock',
                 'method_python_name_suffix': '',
                 'session_filename': 'unlock'
             }
@@ -2861,6 +2960,7 @@ functions = {
         'documentation': {
             'description': '\nWaits until the device is done generating or until the maximum time has\nexpired.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2889,9 +2989,11 @@ functions = {
         'documentation': {
             'description': '\nWrites binary data to the waveform in onboard memory. The waveform\nhandle passed must have been created by a call to the\nnifgen_AllocateWaveform or the nifgen_CreateWaveformI16 function.\n\nBy default, the subsequent call to the niFgen_WriteBinary16Waveform\nfunction continues writing data from the position of the last sample\nwritten. You can set the write position and offset by calling the\nnifgen_SetWaveformNextWritePosition function. If streaming is enabled,\nyou can write more data than the allocated waveform size in onboard\nmemory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -2951,13 +3053,16 @@ functions = {
         'documentation': {
             'description': '\nWrites floating-point data to the waveform in onboard memory. The\nwaveform handle passed in must have been created by a call to the\nnifgen_AllocateWaveform function or to one of the following niFgen\nCreate Waveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n\nBy default, the subsequent call to the niFgen_WriteNamedWaveformF64\nfunction continues writing data from the position of the last sample\nwritten. You can set the write position and offset by calling the\nnifgen_SetNamedWaveformNextWritePosition function. If streaming is\nenabled, you can write more data than the allocated waveform size in\nonboard memory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3017,9 +3122,11 @@ functions = {
         'documentation': {
             'description': '\nWrites binary data to the named waveform in onboard memory.\n\nBy default, the subsequent call to the niFgen_WriteNamedWaveformI16\nfunction continues writing data from the position of the last sample\nwritten. You can set the write position and offset by calling the\nnifgen_SetNamedWaveformNextWritePosition function. If streaming is\nenabled, you can write more data than the allocated waveform size in\nonboard memory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3078,6 +3185,7 @@ functions = {
         'documentation': {
             'description': '\nWrites a string containing one or more scripts that govern the\ngeneration of waveforms.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3111,13 +3219,16 @@ functions = {
         'documentation': {
             'description': '\nWrites floating-point data to the waveform in onboard memory. The\nwaveform handle passed in must have been created by a call to the\nnifgen_AllocateWaveform function or one of the following niFgen\nCreateWaveform functions:\n\n-  nifgen_CreateWaveformF64\n-  nifgen_CreateWaveformI16\n-  nifgen_CreateWaveformFromFileI16\n-  nifgen_CreateWaveformFromFileF64\n\nBy default, the subsequent call to the niFgen_WriteWaveform function\ncontinues writing data from the position of the last sample written. You\ncan set the write position and offset by calling the\nnifgen_SetWaveformNextWritePosition function. If streaming is enabled,\nyou can write more data than the allocated waveform size in onboard\nmemory. Refer to the\n`Streaming <REPLACE_DRIVER_SPECIFIC_URL_2(streaming)>`__ topic for more\ninformation about streaming data.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': 'write_waveform',
         'method_templates': [
             {
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             },
             {
+                'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '_numpy',
                 'session_filename': 'numpy_write_method'
             }
@@ -3177,9 +3288,11 @@ functions = {
         'documentation': {
             'description': 'Writes data to the waveform in onboard memory.\n\nBy default, subsequent calls to this function\ncontinue writing data from the position of the last sample written. You\ncan set the write position and offset by calling the nifgen_SetNamedWaveformNextWritePosition\nnifgen_SetWaveformNextWritePosition function.'
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'write_waveform'
             }
@@ -3248,6 +3361,8 @@ functions = {
                 'Other Devices'
             ]
         },
+        'grpc_name': 'Close',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3267,6 +3382,8 @@ functions = {
         'documentation': {
             'description': '\nConverts a status code returned by an NI-FGEN function into a\nuser-readable string.\n'
         },
+        'grpc_name': 'ErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
@@ -3321,9 +3438,12 @@ functions = {
                 'Description'
             ]
         },
+        'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'fancy_self_test'
             }
@@ -3346,6 +3466,8 @@ functions = {
             'description': '\nResets the instrument to a known state. This function aborts the\ngeneration, clears all routes, and resets session attributes to the\ndefault values. This function does not, however, commit the session\nproperties or configure the device hardware to its default state.\n',
             'note': '\nFor the NI 5401/5404/5411/5431, this function exhibits the same\nbehavior as the nifgen_ResetDevice function.\n'
         },
+        'grpc_name': 'Reset',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3364,6 +3486,8 @@ functions = {
             'description': 'Runs the instrument self-test routine and returns the test result(s).',
             'note': '\nWhen used on some signal generators, the device is reset after the\nniFgen_self_test function runs. If you use the niFgen_self_test\nfunction, your device may not be in its previously configured state\nafter the function runs.\n'
         },
+        'grpc_name': 'SelfTest',
+        'included_in_proto': True,
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {

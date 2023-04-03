@@ -19,27 +19,41 @@ class ParameterUsageOptions(AutoNumber):
     SESSION_INIT_DECLARATION = ()
     '''For declaring an init method in Session'''
     SESSION_NUMPY_INTO_METHOD_DECLARATION = ()
-    '''For calling into a Session method that uses numpy arrays.'''
+    '''For declaring a Session method that uses numpy arrays.'''
+    INTERPRETER_NUMPY_INTO_METHOD_DECLARATION = ()
+    '''For declaring a **Interpreter method that uses numpy arrays.'''
+    INTERPRETER_NUMPY_INTO_METHOD_CALL = ()
+    '''For calling into a **Interpreter method (from Session) that uses numpy arrays.'''
     SESSION_METHOD_CALL = ()
     '''For calling into a regular Session method.'''
     SESSION_INIT_CALL = ()
     '''For calling into an init Session method.'''
     DOCUMENTATION_SESSION_METHOD = ()
     '''For documentation (rst) of Session methods'''
-    CTYPES_CALL = ()
-    '''For Library implementation calling into the DLL via ctypes'''
+    LIBRARY_METHOD_DECLARATION = ()
+    '''For declaring a Library method.'''
+    CDLL_METHOD_CALL = ()
+    '''For calling into a CDLL method (from Library).'''
     LIBRARY_METHOD_CALL = ()
-    '''For calling into a method in Library.'''
+    '''For calling into a Library method (from LibraryInterpreter).'''
+    INTERPRETER_METHOD_CALL = ()
+    '''For calling into a **Interpreter method (from Session).'''
+    GRPC_REQUEST_PARAMETERS = ()
+    '''For creating a gRPC Request object.'''
     CTYPES_ARGTYPES = ()
     '''For setting up the ctypes argument types'''
-    LIBRARY_METHOD_DECLARATION = ()
-    '''For declaring a method in Library'''
+    INTERPRETER_METHOD_DECLARATION = ()
+    '''For declaring a **Interpreter method.'''
     INPUT_PARAMETERS = ()
     '''Get all input parameters, other than self, rep caps, and size'''
-    OUTPUT_PARAMETERS = ()
+    LIBRARY_OUTPUT_PARAMETERS = ()
     '''Get all output parameters, other than ivi-dance'''
-    OUTPUT_PARAMETERS_FOR_DOCS = ()
+    API_OUTPUT_PARAMETERS = ()
     '''We also want to skip size parameters'''
+    API_NUMPY_OUTPUT_PARAMETERS = ()
+    '''Output parameters for numpy function'''
+    GRPC_OUTPUT_PARAMETERS = ()
+    '''Get all gRPC output parameters'''
     IVI_DANCE_PARAMETER = ()
     '''Get the ivi-dance parameter'''
     NUMPY_PARAMETERS = ()
@@ -48,6 +62,3 @@ class ParameterUsageOptions(AutoNumber):
     '''Get the len parameter'''
     INPUT_ENUM_PARAMETERS = ()
     '''Get any input parameters whose type is enum'''
-
-
-

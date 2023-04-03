@@ -1,5 +1,8 @@
 <%
     import build.helper as helper
+    import os
+
+    grpc_supported = template_parameters['include_grpc_support']
 
     config = template_parameters['metadata'].config
     module_name = config['module_name']
@@ -23,7 +26,7 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${wheel_env}py{36,37,38,39}-${module_name}-system_tests, py39-${module_name}-coverage
+envlist = ${wheel_env}py{37,38,39,310}-${module_name}-system_tests, py310-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
@@ -39,14 +42,14 @@ description =
 
 changedir =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: ../../generated/${other_wheel}
+    ${wheel_env_no_py}: ../${other_wheel}
 % endif
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
 
 commands =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: python.exe setup.py bdist_wheel --universal
+    ${wheel_env_no_py}: python setup.py bdist_wheel
 
 % endif
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
@@ -55,8 +58,8 @@ commands =
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver ${other_wheel} --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../../generated/kibana/${module_name}_system_test_result.json {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests --junitxml=../../generated/junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../../generated/kibana/${module_name}_system_test_result.json --durations=5 {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json --durations=5 {posargs}
 
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
@@ -64,26 +67,30 @@ commands =
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
     # token is from codecov
-    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file ../../generated/${module_name}/coverage.xml
+    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file coverage.xml
 
 deps =
 % if uses_other_wheel:
     ${wheel_env_no_py}: packaging
 
 % endif
+    ${module_name}-system_tests: py
     ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: hightime
-    ${module_name}-system_tests: scipy
     ${module_name}-system_tests: fasteners
     ${module_name}-system_tests: pytest-json
+% if grpc_supported:
+    ${module_name}-system_tests: grpcio
+    ${module_name}-system_tests: protobuf
+% endif
 
     ${module_name}-coverage: coverage
     ${module_name}-coverage: codecov
 
 depends =
-    ${module_name}-coverage: py{36,37,38,39}-${module_name}-system_tests
+    ${module_name}-coverage: py{37,38,39,310}-${module_name}-system_tests
 % if uses_other_wheel:
     ${module_name}-system_tests: ${wheel_env}
 % endif
@@ -97,6 +104,9 @@ passenv =
     BUILD_NUMBER
 
 [pytest]
+addopts = --verbose
+norecursedirs = .* build dist CVS _darcs {arch} *.egg venv
+junit_suite_name = nimi-python
 junit_family = xunit1
 % if module_name == 'nidcpower':
 markers = # Defines custom markers used by nidcpower system tests. Prevents PytestUnknownMarkWarning.

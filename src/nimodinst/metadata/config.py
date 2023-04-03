@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-ModInst API metadata version 255.0.0d4
+# This file is generated from NI-ModInst API metadata version 23.0.0d6
 config = {
-    'api_version': '255.0.0d4',
+    'api_version': '23.0.0d6',
     'c_function_prefix': 'niModInst_',
     'close_function': 'CloseInstalledDevicesSession',
     'context_manager_name': {
@@ -11,6 +11,7 @@ config = {
     'driver_name': 'NI-ModInst',
     'extra_errors_used': [
     ],
+    'grpc_service_class_prefix': 'NiModInst',
     'init_function': 'OpenInstalledDevicesSession',
     'library_info': {
         'Linux': {
@@ -30,7 +31,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nimodinst',
     'repeated_capabilities': [
     ],

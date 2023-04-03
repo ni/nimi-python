@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nidmm examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.4.1/nidmm_examples.zip>`_
+`You can download all nidmm examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.4.3/nidmm_examples.zip>`_
 
 nidmm_fetch_waveform.py
 -----------------------

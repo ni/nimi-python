@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 21.0.0d11
+# This file is generated from NI-FAKE API metadata version 23.0.0d96
 attributes = {
     1000000: {
         'access': 'read-write',
@@ -49,6 +49,7 @@ attributes = {
     },
     1000005: {
         'access': 'read-write',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'An attribute with an enum that is also a float'
         },
@@ -109,5 +110,12 @@ attributes = {
         ],
         'type': 'ViString',
         'type_in_documentation': "Any repeated capability type, as defined in nimi-python:\n        - str\n        - str - Comma delimited list\n        - str - Range (using '-' or ':')\n        - int\n        - Basic sequence types (list, tuple, range, slice) of other supported types"
+    },
+    1000011: {
+        'access': 'read-write',
+        'enum': 'EnumWithConverter',
+        'grpc_enum': None,
+        'name': 'READ_WRITE_ENUM_WITH_CONVERTER',
+        'type': 'ViInt32'
     }
 }

@@ -39,6 +39,24 @@ DriverNotInstalledError
 
         An error due to using this module without the driver runtime installed.
 
+DriverTooOldError
+-----------------
+
+    .. py:currentmodule:: nise.errors
+
+    .. exception:: DriverTooOldError
+
+        An error due to using this module with an older version of the NI Switch Executive driver runtime.
+
+DriverTooNewError
+-----------------
+
+    .. py:currentmodule:: nise.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the NI Switch Executive driver runtime being too new for this module.
+
 InvalidRepeatedCapabilityError
 ------------------------------
 

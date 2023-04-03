@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -61,7 +61,7 @@ called through its public C API using the `ctypes <https://docs.python.org/2/lib
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
 **nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
-this time this includes Python 3.6 and above using CPython.
+this time this includes Python 3.7 and above using CPython.
 
 
 NI-SCOPE Python API Status
@@ -70,7 +70,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 21.0.0                 |
+| Driver Version Tested Against | 2022 Q3                |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
@@ -216,10 +216,6 @@ The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ i
 
         - **samples** (numpy array of datatype used) floating point array of samples. Length will be of the actual samples acquired
 
-            .. note::
-
-                Python 3 only
-
     - Such that all record 0 waveforms are first. For example, with a channel list of 0,1, you would have the following index values:
 
         - index 0 = record 0, channel 0
@@ -229,17 +225,7 @@ The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ i
         - etc.
 
 
-.. note:: When using Python 2, the waveform_infos objects do not include the waveform for that record. Instead, samples are in the waveform passed into the function using the following layout:
-
-    - index 0 = record 0, channel 0
-    - index *x* = record 0, channel 1
-    - index 2\ *x* = record 1, channel 0
-    - index 3\ *x* = record 1, channel 1
-    - etc.
-    - Where *x* = the record length
-
-
-Additional examples for NI-SCOPE are located in src/niscope/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
 
 
 .. _support-section:
@@ -283,3 +269,6 @@ Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
 
 
+**gRPC Features**
+For driver APIs that support it, passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
+subject to the NI General Purpose EULA (`see NILICENSE <https://github.com/ni/nimi-python/blob/master/NILICENSE>`_).

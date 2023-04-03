@@ -39,6 +39,24 @@ DriverNotInstalledError
 
         An error due to using this module without the driver runtime installed.
 
+DriverTooOldError
+-----------------
+
+    .. py:currentmodule:: nimodinst.errors
+
+    .. exception:: DriverTooOldError
+
+        An error due to using this module with an older version of the NI-ModInst driver runtime.
+
+DriverTooNewError
+-----------------
+
+    .. py:currentmodule:: nimodinst.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the NI-ModInst driver runtime being too new for this module.
+
 DriverWarning
 -------------
 

@@ -30,21 +30,22 @@ class MockFunctionCallError(Exception):
 class SideEffectsHelper(object):
     def __init__(self):
         self._defaults = {}
-% for func_name in sorted(helper.filter_codegen_functions(functions)):
+% for func_name in sorted(functions):
 <%
 f = functions[func_name]
+params = f['parameters']
+ivi_dance_params = helper.filter_ivi_dance_parameters(params)
 %>\
         self._defaults['${func_name}'] = {}
         self._defaults['${func_name}']['return'] = 0
-% for p in helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS):
+%   for p in helper.filter_parameters(params, helper.ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS):
+%     if p not in ivi_dance_params:
         self._defaults['${func_name}']['${p['name']}'] = None
-% endfor
-<%
-ivi_dance_params = helper.filter_ivi_dance_parameters(f)
-%>\
-% for param in ivi_dance_params:
+%     endif
+%   endfor
+%   for param in ivi_dance_params:
         self._defaults['${func_name}']['${param['name']}'] = None
-% endfor
+%   endfor
 % endfor
 
     def __getitem__(self, func):
@@ -53,18 +54,19 @@ ivi_dance_params = helper.filter_ivi_dance_parameters(f)
     def __setitem__(self, func, val):
         self._defaults[func] = val
 
-% for func_name in sorted(helper.filter_codegen_functions(functions)):
+% for func_name in sorted(functions):
 <%
 f = functions[func_name]
 params = f['parameters']
-output_params = helper.filter_parameters(f, helper.ParameterUsageOptions.OUTPUT_PARAMETERS)
-ivi_dance_params = helper.filter_ivi_dance_parameters(f)
+output_params = helper.filter_parameters(params, helper.ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS)
+ivi_dance_params = helper.filter_ivi_dance_parameters(params)
 ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
+output_params_minus_ivi_dance_params = [p for p in output_params if p not in ivi_dance_params]
 %>\
     def ${c_function_prefix}${func_name}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.LIBRARY_METHOD_DECLARATION)}):  # noqa: N802
         if self._defaults['${func_name}']['return'] != 0:
             return self._defaults['${func_name}']['return']
-%    for p in output_params:
+%    for p in output_params_minus_ivi_dance_params:
         # ${p['python_name']}
         if self._defaults['${func_name}']['${p['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${p['name']}')
@@ -82,7 +84,7 @@ ivi_dance_size_param = helper.find_size_parameter(ivi_dance_params, params)
 %           if helper.find_custom_type(p, config) is not None:
         for field in self._defaults['${func_name}']['${p["python_name"]}']._fields_:
             field_name = field[0]
-            setattr(cs.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
+            setattr(${p["python_name"]}.contents, field_name, getattr(self._defaults['${func_name}']['${p["python_name"]}'], field_name))
 %           elif p['is_string']:
         test_value = self._defaults['${func_name}']['${p['name']}']
         if type(test_value) is str:
@@ -102,6 +104,7 @@ if p['use_array']:
 %       endif
 %    endfor
 %    for id_param in ivi_dance_params:
+        # ${id_param['python_name']}
         if self._defaults['${func_name}']['${id_param['name']}'] is None:
             raise MockFunctionCallError("${c_function_prefix}${func_name}", param='${id_param['name']}')
         if ${ivi_dance_size_param['python_name']}.value == 0:
@@ -123,7 +126,7 @@ if p['use_array']:
 % endfor
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
-% for func_name in sorted(helper.filter_codegen_functions(functions)):
+% for func_name in sorted(functions):
 <%
 f = functions[func_name]
 %>\

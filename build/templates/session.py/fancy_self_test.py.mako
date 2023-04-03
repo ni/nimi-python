@@ -12,4 +12,3 @@
         if code:
             raise errors.SelfTestError(code, msg)
         return None
-

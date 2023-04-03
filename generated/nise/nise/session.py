@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import array  # noqa: F401
-import ctypes
 
 import nise._converters as _converters
-import nise._library_singleton as _library_singleton
-import nise._visatype as _visatype
+import nise._library_interpreter as _library_interpreter
 import nise.enums as enums
 import nise.errors as errors
 
@@ -16,60 +14,26 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
-
-
-def get_ctypes_and_array(value, array_type):
-    if value is not None:
-        if isinstance(value, array.array):
-            value_array = value
-        else:
-            value_array = array.array(array_type, value)
-    else:
-        value_array = None
-
-    return value_array
-
-
 class _SessionBase(object):
     '''Base class for all NI Switch Executive sessions.'''
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
-        self._vi = vi
-        self._library = library
-        self._encoding = encoding
+        self._all_channels_in_session = all_channels_in_session
+        self._interpreter = interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
+        param_list.append("interpreter=" + pp.pformat(interpreter))
         self._param_list = ', '.join(param_list)
 
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -80,95 +44,7 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._error_message(error_code)
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
-
     ''' These are code-generated '''
-
-    def _get_error(self, error_description_size=[1024]):
-        r'''_get_error
-
-        Get error information of the first error that occurred. If a valid
-        pointer is passed to errorDescription or errorNumber, GetError will
-        clear the error on completion. errorDescriptionSize is an in/out
-        parameter that describes the size of the errorDescription buffer. On the
-        way in, it tells the method the size of string. On the way out, it
-        describes the number of bytes (including the trailing null string)
-        needed to hold the entire error description buffer. If NULL is passed
-        for errorDescription and the errorNumber, the method will not clear
-        the error. Users wanting to dynamically size the errorDescription string
-        can thus call the method twice. On the first call they can pass NULL
-        for the errorDescription and use the returned errorDescriptionSize to
-        allocate enough space for the entire errorDescription buffer. Note that
-        if a buffer is passed that is not large enough to hold the entire
-        description string, the portion of of the string that will fit in the
-        passed buffer will be returned and the error will still be cleared. All
-        of the parameters are NULL tolerant. Note that passing NULL for both
-        errorNumber and errorDescription can change the method's behavior.
-
-        Args:
-            error_description_size (list of int): As input, it is the size of the error description string buffer. As
-                output, it is the Size of the entire error description string (may be
-                larger than the buffer size as the method always returns the size
-                needed to hold the entire buffer). This parameter is a ViInt32 that is
-                passed by reference into the method. As an input, it is the size of
-                the error description buffer being passed. If the error description
-                string is larger than the string buffer being passed, only the portion
-                of the route string that can fit in the string buffer will be copied
-                into it. On return from the method, it holds the size required to hold
-                the entire error description string, including the NULL termination
-                character. Note that this size may be larger than the buffer size as the
-                method always returns the size needed to hold the entire buffer. You
-                may pass NULL for this parameter if you are not interested in the return
-                value for it.
-
-
-        Returns:
-            error_number (int): By reference parameter which returns the error number of the first error
-                which occurred on the session since the error was last cleared. You may
-                pass NULL for this parameter if you are not interested in the return
-                value.
-
-            error_description (str): By reference buffer which is to be filled with the error description
-                string. You may pass NULL for this parameter if you are not interested
-                in the return value. To obtain the error description string, you should
-                pass a buffer to this parameter. The size of the buffer required may be
-                obtained by calling the method with NULL for this parameter and a
-                valid ViInt32 to the error description size parameter. The error
-                description size will contain the size needed to hold the entire route
-                specification (including the NULL termination character). Common
-                operation is to call the method twice. The first time you call the
-                method you can determine the size needed to hold the route
-                specification string. Allocate a buffer of the appropriate size and then
-                re-call the method to obtain the entire buffer.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_number_ctype = _visatype.ViInt32()  # case S220
-        error_description_ctype = (_visatype.ViChar * error_description_size[0])()  # case C080
-        error_description_size_ctype = get_ctypes_pointer_for_buffer(value=error_description_size, library_type=_visatype.ViInt32)  # case B550
-        error_code = self._library.niSE_GetError(vi_ctype, None if error_number_ctype is None else (ctypes.pointer(error_number_ctype)), error_description_ctype, error_description_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(error_number_ctype.value), error_description_ctype.value.decode(self._encoding)
 
 
 class Session(_SessionBase):
@@ -228,14 +104,23 @@ class Session(_SessionBase):
             session (nise.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
+        # Initialize the superclass with default values first, populate them later
+        super(Session, self).__init__(
+            repeated_capability_list=[],
+            interpreter=interpreter,
+            freeze_it=False,
+            all_channels_in_session=None
+        )
         options = _converters.convert_init_with_options_dictionary(options)
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
 
         # Call specified init function
-        self._vi = 0  # This must be set before calling _open_session().
-        self._vi = self._open_session(virtual_device_name, options)
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _open_session fails, the error handler can reference it.
+        # And then here, once _open_session succeeds, we call set_session_handle
+        # with the actual session handle.
+        self._interpreter.set_session_handle(self._open_session(virtual_device_name, options))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -243,6 +128,17 @@ class Session(_SessionBase):
         param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
+        # Store the list of channels in the Session which is needed by some nimi-python modules.
+        # Use try/except because not all the modules support channels.
+        # self.get_channel_names() and self.channel_count can only be called after the session
+        # handle is set
+        try:
+            self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
+        except AttributeError:
+            self._all_channels_in_session = None
+
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = True
 
     def __enter__(self):
@@ -266,9 +162,9 @@ class Session(_SessionBase):
         try:
             self._close_session()
         except errors.DriverError:
-            self._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 
@@ -281,10 +177,7 @@ class Session(_SessionBase):
         close method, you should not use the NI Switch Executive
         virtual device again until you call __init__.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSE_CloseSession(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.close_session()
 
     def connect(self, connect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, wait_for_debounce=True):
         r'''connect
@@ -338,13 +231,7 @@ class Session(_SessionBase):
         '''
         if type(multiconnect_mode) is not enums.MulticonnectMode:
             raise TypeError('Parameter multiconnect_mode must be of type ' + str(enums.MulticonnectMode))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
-        multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
-        wait_for_debounce_ctype = _visatype.ViBoolean(wait_for_debounce)  # case S150
-        error_code = self._library.niSE_Connect(vi_ctype, connect_spec_ctype, multiconnect_mode_ctype, wait_for_debounce_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.connect(connect_spec, multiconnect_mode, wait_for_debounce)
 
     def connect_and_disconnect(self, connect_spec, disconnect_spec, multiconnect_mode=enums.MulticonnectMode.DEFAULT, operation_order=enums.OperationOrder.AFTER, wait_for_debounce=True):
         r'''connect_and_disconnect
@@ -431,15 +318,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter multiconnect_mode must be of type ' + str(enums.MulticonnectMode))
         if type(operation_order) is not enums.OperationOrder:
             raise TypeError('Parameter operation_order must be of type ' + str(enums.OperationOrder))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        connect_spec_ctype = ctypes.create_string_buffer(connect_spec.encode(self._encoding))  # case C020
-        disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
-        multiconnect_mode_ctype = _visatype.ViInt32(multiconnect_mode.value)  # case S130
-        operation_order_ctype = _visatype.ViInt32(operation_order.value)  # case S130
-        wait_for_debounce_ctype = _visatype.ViBoolean(wait_for_debounce)  # case S150
-        error_code = self._library.niSE_ConnectAndDisconnect(vi_ctype, connect_spec_ctype, disconnect_spec_ctype, multiconnect_mode_ctype, operation_order_ctype, wait_for_debounce_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.connect_and_disconnect(connect_spec, disconnect_spec, multiconnect_mode, operation_order, wait_for_debounce)
 
     def disconnect(self, disconnect_spec):
         r'''disconnect
@@ -464,11 +343,7 @@ class Session(_SessionBase):
                 Executive Help for more information.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        disconnect_spec_ctype = ctypes.create_string_buffer(disconnect_spec.encode(self._encoding))  # case C020
-        error_code = self._library.niSE_Disconnect(vi_ctype, disconnect_spec_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.disconnect(disconnect_spec)
 
     def disconnect_all(self):
         r'''disconnect_all
@@ -478,10 +353,7 @@ class Session(_SessionBase):
         ignores all multiconnect modes. Calling disconnect_all resets all
         of the switch states for the system.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSE_DisconnectAll(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.disconnect_all()
 
     def expand_route_spec(self, route_spec, expand_action=enums.ExpandAction.ROUTES, expanded_route_spec_size=[1024]):
         r'''expand_route_spec
@@ -540,14 +412,8 @@ class Session(_SessionBase):
         '''
         if type(expand_action) is not enums.ExpandAction:
             raise TypeError('Parameter expand_action must be of type ' + str(enums.ExpandAction))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
-        expand_action_ctype = _visatype.ViInt32(expand_action.value)  # case S130
-        expanded_route_spec_ctype = (_visatype.ViChar * expanded_route_spec_size[0])()  # case C080
-        expanded_route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=expanded_route_spec_size, library_type=_visatype.ViInt32)  # case B550
-        error_code = self._library.niSE_ExpandRouteSpec(vi_ctype, route_spec_ctype, expand_action_ctype, expanded_route_spec_ctype, expanded_route_spec_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return expanded_route_spec_ctype.value.decode(self._encoding)
+        expanded_route_spec = self._interpreter.expand_route_spec(route_spec, expand_action, expanded_route_spec_size)
+        return expanded_route_spec
 
     def find_route(self, channel1, channel2, route_spec_size=[1024]):
         r'''find_route
@@ -620,15 +486,8 @@ class Session(_SessionBase):
                 implicit path already exists.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C080
-        route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
-        path_capability_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSE_FindRoute(vi_ctype, channel1_ctype, channel2_ctype, route_spec_ctype, route_spec_size_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return route_spec_ctype.value.decode(self._encoding), enums.PathCapability(path_capability_ctype.value)
+        route_spec, path_capability = self._interpreter.find_route(channel1, channel2, route_spec_size)
+        return route_spec, path_capability
 
     def get_all_connections(self, route_spec_size=[1024]):
         r'''get_all_connections
@@ -670,12 +529,8 @@ class Session(_SessionBase):
                 to obtain the entire buffer.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        route_spec_ctype = (_visatype.ViChar * route_spec_size[0])()  # case C080
-        route_spec_size_ctype = get_ctypes_pointer_for_buffer(value=route_spec_size, library_type=_visatype.ViInt32)  # case B550
-        error_code = self._library.niSE_GetAllConnections(vi_ctype, route_spec_ctype, route_spec_size_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return route_spec_ctype.value.decode(self._encoding)
+        route_spec = self._interpreter.get_all_connections(route_spec_size)
+        return route_spec
 
     def is_connected(self, route_spec):
         r'''is_connected
@@ -699,12 +554,8 @@ class Session(_SessionBase):
                 they are not.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        route_spec_ctype = ctypes.create_string_buffer(route_spec.encode(self._encoding))  # case C020
-        is_connected_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niSE_IsConnected(vi_ctype, route_spec_ctype, None if is_connected_ctype is None else (ctypes.pointer(is_connected_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_connected_ctype.value)
+        is_connected = self._interpreter.is_connected(route_spec)
+        return is_connected
 
     def is_debounced(self):
         r'''is_debounced
@@ -719,11 +570,8 @@ class Session(_SessionBase):
                 settling.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        is_debounced_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niSE_IsDebounced(vi_ctype, None if is_debounced_ctype is None else (ctypes.pointer(is_debounced_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(is_debounced_ctype.value)
+        is_debounced = self._interpreter.is_debounced()
+        return is_debounced
 
     def _open_session(self, virtual_device_name, option_string=""):
         r'''_open_session
@@ -756,12 +604,9 @@ class Session(_SessionBase):
             vi (int): The session referencing this NI Switch Executive virtual device session.
 
         '''
-        virtual_device_name_ctype = ctypes.create_string_buffer(virtual_device_name.encode(self._encoding))  # case C020
-        option_string_ctype = ctypes.create_string_buffer(_converters.convert_init_with_options_dictionary(option_string).encode(self._encoding))  # case C040
-        vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niSE_OpenSession(virtual_device_name_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
+        option_string = _converters.convert_init_with_options_dictionary(option_string)
+        vi = self._interpreter.open_session(virtual_device_name, option_string)
+        return vi
 
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=-1)):
         r'''wait_for_debounce
@@ -783,11 +628,5 @@ class Session(_SessionBase):
                 block for an infinite period of time until the system is debounced.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
-        error_code = self._library.niSE_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-
-
+        maximum_time_ms = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)
+        self._interpreter.wait_for_debounce(maximum_time_ms)

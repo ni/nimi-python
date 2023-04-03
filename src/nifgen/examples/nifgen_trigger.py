@@ -23,8 +23,8 @@ def example(resource_name1, resource_name2, options, waveform, gen_time):
 def _main(argsv):
     supported_waveforms = list(nifgen.Waveform.__members__.keys())[:-1]  # no support for user-defined waveforms in example
     parser = argparse.ArgumentParser(description='Triggers one device on the start trigger of another device.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n1', '--resource-name1', default='PXI1Slot2', help='Resource name of a NI Function Generator')
-    parser.add_argument('-n2', '--resource-name2', default='PXI1Slot3', help='Resource name of a NI Function Generator')
+    parser.add_argument('-n1', '--resource-name1', default='PXI1Slot2', help='Resource name of an NI function generator.')
+    parser.add_argument('-n2', '--resource-name2', default='PXI1Slot3', help='Resource name of an NI function generator.')
     parser.add_argument('-w', '--waveform', default=supported_waveforms[0], choices=supported_waveforms, type=str.upper, help='Standard waveform')
     parser.add_argument('-t', '--time', default=5.0, type=float, help='Generation time (s)')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')

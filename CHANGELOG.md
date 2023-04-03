@@ -1,6 +1,8 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.4.3](#143---2022-12-16)
+* [1.4.2](#142---2022-08-03)
 * [1.4.1](#141---2021-08-23)
 * [1.4.0](#140---2021-07-09)
 * [1.3.3](#133---2021-02-26)
@@ -32,10 +34,16 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * Enums added:
+            * `CurrentLimitBehavior`
     * #### Changed
+        * Enums reordered:
+            * `AutoZero`
+            * `CableLength`
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
@@ -46,16 +54,8 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
 * ### `nifgen` (NI-FGEN)
-    * #### Added 
-        * `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
+    * #### Added
     * #### Changed
-        * Addressed [#1627](https://github.com/ni/nimi-python/issues/1627) for attributes supporting the following repeated capabilities
-           * `channels`
-           * `markers`
-           * `data_markers`
-           * `script_triggers`
-        * Corrected multiple mistakes in repeated capability info of attribute metadata
-            * alters API behavior (repeated capability access of attributes) and documentation
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
     * #### Added
@@ -77,6 +77,122 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+
+## 1.4.3 - 2022-12-16
+* ### ALL
+    * #### Added
+        * Support for Python 3.10
+    * #### Removed
+        * Support for Python 3.6
+* ### `nidcpower` (NI-DCPower)
+    * #### Added
+        * MeasurementLink support
+    * #### Changed
+        * Binary compatibility change for type `LCRLoadCompensationSpot` on Linux. Client code using method `nidcpower.Session.perform_lcr_load_compensation` on Linux now requires NI-DCPower 2023 Q1 driver runtime or newer.
+* ### `nidigital` (NI-Digital Pattern Driver)
+    * #### Added
+        * MeasurementLink support
+* ### `nidmm` (NI-DMM)
+    * #### Added
+        * MeasurementLink support
+* ### `nifgen` (NI-FGEN)
+    * #### Added
+        * MeasurementLink support
+* ### `niscope` (NI-SCOPE)
+    * #### Added
+        * MeasurementLink support
+* ### `niswitch` (NI-SWITCH)
+    * #### Added
+        * MeasurementLink support
+    * #### Changed
+        * Fix [#1652](https://github.com/ni/nimi-python/issues/1652): Topology constants haven't been updated on help page
+
+## 1.4.2 - 2022-08-03
+* ### `nidcpower` (NI-DCPower)
+    * #### Added
+        * API parity with NI-DCPower 2022 Q3.
+            * Properties added:
+                * `aperture_time_auto_mode`
+                * `autorange_maximum_delay_after_range_change`
+                * `cable_length`
+                * `instrument_mode`
+                * `isolation_state`
+                * `lcr_actual_load_reactance`
+                * `lcr_actual_load_resistance`
+                * `lcr_automatic_level_control`
+                * `lcr_current_amplitude`
+                * `lcr_current_range`
+                * `lcr_custom_measurement_time`
+                * `lcr_dc_bias_automatic_level_control`
+                * `lcr_dc_bias_current_level`
+                * `lcr_dc_bias_current_range`
+                * `lcr_dc_bias_source`
+                * `lcr_dc_bias_voltage_level`
+                * `lcr_dc_bias_voltage_range`
+                * `lcr_frequency`
+                * `lcr_impedance_auto_range`
+                * `lcr_impedance_range`
+                * `lcr_impedance_range_source`
+                * `lcr_load_capacitance`
+                * `lcr_load_compensation_enabled`
+                * `lcr_load_inductance`
+                * `lcr_load_resistance`
+                * `lcr_measured_load_reactance`
+                * `lcr_measured_load_resistance`
+                * `lcr_measurement_time`
+                * `lcr_open_compensation_enabled`
+                * `lcr_open_conductance`
+                * `lcr_open_short_load_compensation_data_source`
+                * `lcr_open_susceptance`
+                * `lcr_short_compensation_enabled`
+                * `lcr_short_custom_cable_compensation_enabled`
+                * `lcr_short_reactance`
+                * `lcr_short_resistance`
+                * `lcr_source_delay_mode`
+                * `lcr_stimulus_function`
+                * `lcr_voltage_amplitude`
+                * `lcr_voltage_range`
+            * Enums added:
+                * `ApertureTimeAutoMode`
+                * `CableLength`
+                * `InstrumentMode`
+                * `LCRCompensationType`
+                * `LCRDCBiasSource`
+                * `LCRImpedanceRangeSource`
+                * `LCRMeasurementTime`
+                * `LCROpenShortLoadCompensationDataSource`
+                * `LCRReferenceValueType`
+                * `LCRSourceDelayMode`
+                * `LCRStimulusFunction`
+            * Methods added:
+                * `configure_lcr_custom_cable_compensation`
+                * `fetch_multiple_lcr`
+                * `get_lcr_compensation_last_date_and_time`
+                * `get_lcr_custom_cable_compensation_data`
+                * `measure_multiple_lcr`
+                * `perform_lcr_load_compensation`
+                * `perform_lcr_open_compensation`
+                * `perform_lcr_open_custom_cable_compensation`
+                * `perform_lcr_short_compensation`
+                * `perform_lcr_short_custom_cable_compensation`
+            * Custom types added:
+                * `LCRLoadCompensationSpot`
+                * `LCRMeasurement`
+        * `nidcpower_lcr_source_ac_voltage.py` example
+    * #### Changed
+        * Updated supported devices information in documentation for methods and properties
+        * Added `channel` field to the `Measurement` namedtuple instances returned by `fetch_multiple` and `measure_multiple`
+* ### `nifgen` (NI-FGEN)
+    * #### Added
+        * `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
+    * #### Changed
+        * Addressed [#1627](https://github.com/ni/nimi-python/issues/1627) for attributes supporting the following repeated capabilities
+           * `channels`
+           * `markers`
+           * `data_markers`
+           * `script_triggers`
+        * Corrected multiple mistakes in repeated capability info of attribute metadata
+            * alters API behavior (repeated capability access of attributes) and documentation
 
 
 ## 1.4.1 - 2021-08-23

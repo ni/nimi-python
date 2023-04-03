@@ -2,10 +2,12 @@
     import build.helper as helper
 
     config = template_parameters['metadata'].config
-    module_name = config['module_name']
     driver_name = config['driver_name']
     enums = config['enums']
     extra_errors_used = config['extra_errors_used']
+    module_name = config['module_name']
+
+    grpc_supported = template_parameters['include_grpc_support']
 %>\
 ${helper.get_rst_header_snippet('Exceptions and Warnings', '=')}
 
@@ -43,6 +45,22 @@ ${helper.get_rst_header_snippet('DriverNotInstalledError', '-')}
 
         An error due to using this module without the driver runtime installed.
 
+${helper.get_rst_header_snippet('DriverTooOldError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: DriverTooOldError
+
+        An error due to using this module with an older version of the ${driver_name} driver runtime.
+
+${helper.get_rst_header_snippet('DriverTooNewError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the ${driver_name} driver runtime being too new for this module.
+
 % if 'InvalidRepeatedCapabilityError' in extra_errors_used:
 ${helper.get_rst_header_snippet('InvalidRepeatedCapabilityError', '-')}
 
@@ -62,6 +80,17 @@ ${helper.get_rst_header_snippet('SelfTestError', '-')}
     .. exception:: SelfTestError
 
         An error due to a failed self-test
+
+
+% endif
+% if grpc_supported:
+${helper.get_rst_header_snippet('RpcError', '-')}
+
+    .. py:currentmodule:: ${module_name}.errors
+
+    .. exception:: RpcError
+
+        An error specific to sessions to the NI gRPC Device Server
 
 
 % endif

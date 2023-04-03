@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import nidcpower._converters as _converters
+import nidcpower.errors as errors
 
 import hightime
 
@@ -27,7 +28,7 @@ class AttributeViInt32TimeDeltaMilliseconds(Attribute):
         return hightime.timedelta(milliseconds=session._get_attribute_vi_int32(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value).value)
+        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value))
 
 
 class AttributeViInt64(Attribute):
@@ -54,7 +55,7 @@ class AttributeViReal64TimeDeltaSeconds(Attribute):
         return hightime.timedelta(seconds=session._get_attribute_vi_real64(self._attribute_id))
 
     def __set__(self, session, value):
-        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds_real64(value).value)
+        session._set_attribute_vi_real64(self._attribute_id, _converters.convert_timedelta_to_seconds_real64(value))
 
 
 class AttributeViString(Attribute):
@@ -84,12 +85,12 @@ class AttributeViBoolean(Attribute):
         session._set_attribute_vi_boolean(self._attribute_id, value)
 
 
-class AttributeEnum(object):
+class AttributeEnum(Attribute):
 
     def __init__(self, underlying_attribute_meta_class, enum_meta_class, attribute_id):
+        super(AttributeEnum, self).__init__(attribute_id)
         self._underlying_attribute = underlying_attribute_meta_class(attribute_id)
         self._attribute_type = enum_meta_class
-        self._attribute_id = attribute_id
 
     def __get__(self, session, session_type):
         return self._attribute_type(self._underlying_attribute.__get__(session, session_type))
@@ -98,6 +99,42 @@ class AttributeEnum(object):
         if type(value) is not self._attribute_type:
             raise TypeError('must be ' + str(self._attribute_type.__name__) + ' not ' + str(type(value).__name__))
         return self._underlying_attribute.__set__(session, value.value)
+
+
+class AttributeEnumWithConverter(Attribute):
+    '''Class for attributes that use enums internally but are exposed in the nidcpower Python module as something else, thus need conversion.'''
+
+    def __init__(self, underlying_attribute_enum, getter_converter, setter_converter):
+        '''Creates and returns an instance of AttributeEnumWithConverter attribute meta class.
+
+        Args:
+            underlying_attribute_enum (AttributeEnum): The AttributeEnum instance for the underlying
+                enum
+
+            getter_converter (function): The function that converts the enum value to its converted
+                value
+
+            setter_converter (function): The function that converts the converted value back to the
+                enum value
+        '''
+        super(AttributeEnumWithConverter, self).__init__(underlying_attribute_enum._attribute_id)
+        self._underlying_attribute_enum = underlying_attribute_enum
+        self._getter_converter = getter_converter
+        self._setter_converter = setter_converter
+
+    def __get__(self, session, session_type):
+        try:
+            return self._getter_converter(
+                self._underlying_attribute_enum.__get__(session, session_type)
+            )
+        except (KeyError, ValueError):
+            raise errors.DriverTooNewError()
+
+    def __set__(self, session, value):
+        try:
+            return self._underlying_attribute_enum.__set__(session, self._setter_converter(value))
+        except KeyError:
+            raise ValueError(f'Invalid value: {value}')
 
 
 # nitclk specific attribute type
@@ -110,6 +147,3 @@ class AttributeSessionReference(Attribute):
 
     def __set__(self, session, value):
         session._set_attribute_vi_session(self._attribute_id, _converters.convert_to_nitclk_session_number(value))
-
-
-

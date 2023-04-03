@@ -113,12 +113,6 @@ class SideEffectsHelper(object):
         self._defaults['GetHardwareState'] = {}
         self._defaults['GetHardwareState']['return'] = 0
         self._defaults['GetHardwareState']['state'] = None
-        self._defaults['GetLastExtCalLastDateAndTime'] = {}
-        self._defaults['GetLastExtCalLastDateAndTime']['return'] = 0
-        self._defaults['GetLastExtCalLastDateAndTime']['month'] = None
-        self._defaults['GetLastSelfCalLastDateAndTime'] = {}
-        self._defaults['GetLastSelfCalLastDateAndTime']['return'] = 0
-        self._defaults['GetLastSelfCalLastDateAndTime']['month'] = None
         self._defaults['GetSelfCalLastDateAndTime'] = {}
         self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
         self._defaults['GetSelfCalLastDateAndTime']['year'] = None
@@ -397,6 +391,7 @@ class SideEffectsHelper(object):
     def niFgen_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niFgen_ExportAttributeConfigurationBuffer", param='configuration')
         if size_in_bytes.value == 0:
@@ -447,6 +442,7 @@ class SideEffectsHelper(object):
     def niFgen_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFgen_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
@@ -457,6 +453,7 @@ class SideEffectsHelper(object):
     def niFgen_GetChannelName(self, vi, index, buffer_size, channel_string):  # noqa: N802
         if self._defaults['GetChannelName']['return'] != 0:
             return self._defaults['GetChannelName']['return']
+        # channel_string
         if self._defaults['GetChannelName']['channelString'] is None:
             raise MockFunctionCallError("niFgen_GetChannelName", param='channelString')
         if buffer_size.value == 0:
@@ -472,6 +469,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFgen_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
+        # error_description
         if self._defaults['GetError']['errorDescription'] is None:
             raise MockFunctionCallError("niFgen_GetError", param='errorDescription')
         if error_description_buffer_size.value == 0:
@@ -538,26 +536,6 @@ class SideEffectsHelper(object):
         if state is not None:
             state.contents.value = self._defaults['GetHardwareState']['state']
         return self._defaults['GetHardwareState']['return']
-
-    def niFgen_GetLastExtCalLastDateAndTime(self, vi, month):  # noqa: N802
-        if self._defaults['GetLastExtCalLastDateAndTime']['return'] != 0:
-            return self._defaults['GetLastExtCalLastDateAndTime']['return']
-        # month
-        if self._defaults['GetLastExtCalLastDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime", param='month')
-        if month is not None:
-            month.contents.value = self._defaults['GetLastExtCalLastDateAndTime']['month']
-        return self._defaults['GetLastExtCalLastDateAndTime']['return']
-
-    def niFgen_GetLastSelfCalLastDateAndTime(self, vi, month):  # noqa: N802
-        if self._defaults['GetLastSelfCalLastDateAndTime']['return'] != 0:
-            return self._defaults['GetLastSelfCalLastDateAndTime']['return']
-        # month
-        if self._defaults['GetLastSelfCalLastDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niFgen_GetLastSelfCalLastDateAndTime", param='month')
-        if month is not None:
-            month.contents.value = self._defaults['GetLastSelfCalLastDateAndTime']['month']
-        return self._defaults['GetLastSelfCalLastDateAndTime']['return']
 
     def niFgen_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         if self._defaults['GetSelfCalLastDateAndTime']['return'] != 0:
@@ -956,10 +934,6 @@ class SideEffectsHelper(object):
         mock_library.niFgen_GetExtCalRecommendedInterval.return_value = 0
         mock_library.niFgen_GetHardwareState.side_effect = MockFunctionCallError("niFgen_GetHardwareState")
         mock_library.niFgen_GetHardwareState.return_value = 0
-        mock_library.niFgen_GetLastExtCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetLastExtCalLastDateAndTime")
-        mock_library.niFgen_GetLastExtCalLastDateAndTime.return_value = 0
-        mock_library.niFgen_GetLastSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetLastSelfCalLastDateAndTime")
-        mock_library.niFgen_GetLastSelfCalLastDateAndTime.return_value = 0
         mock_library.niFgen_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niFgen_GetSelfCalLastDateAndTime")
         mock_library.niFgen_GetSelfCalLastDateAndTime.return_value = 0
         mock_library.niFgen_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niFgen_GetSelfCalLastTemp")

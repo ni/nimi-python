@@ -1,9 +1,4 @@
 <%page args="f, config, method_template"/>\
-<%
-    import build.helper as helper
-
-    c_function_prefix = config['c_function_prefix']
-%>\
     def ${f['python_name']}(self):
         '''${f['python_name']}
 
@@ -34,18 +29,7 @@
             lock (context manager): When used in a with statement, ${config['module_name']}.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        self._interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    def _lock_session(self):
-        '''_lock_session
-
-        Actual call to driver
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.${c_function_prefix}LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
-

@@ -348,6 +348,7 @@ class SideEffectsHelper(object):
     def niScope_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niScope_ExportAttributeConfigurationBuffer", param='configuration')
         if size_in_bytes.value == 0:
@@ -614,6 +615,7 @@ class SideEffectsHelper(object):
     def niScope_GetAttributeViString(self, vi, channel_list, attribute_id, buf_size, value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # value
         if self._defaults['GetAttributeViString']['value'] is None:
             raise MockFunctionCallError("niScope_GetAttributeViString", param='value')
         if buf_size.value == 0:
@@ -645,6 +647,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niScope_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niScope_GetError", param='description')
         if buffer_size.value == 0:

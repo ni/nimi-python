@@ -1,6 +1,10 @@
 [run]
 omit =
     */_library*
+    */nidcpower/_*
+    */nidcpower/enums.py
+    */nidcpower/errors.py
+    */nidcpower/session.py
     */nidigital/__init__.py
     */nidigital/_attributes.py
     */nidigital/_converters.py
@@ -22,6 +26,8 @@ omit =
     */nitclk/errors.py
 include =
     */nifake/*
+    */nidcpower/lcr_load_compensation_spot.py
+    */nidcpower/lcr_measurement.py
     */nidigital/session.py
     */nimodinst/session.py
     */niscope/waveform_info.py

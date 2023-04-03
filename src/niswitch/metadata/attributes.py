@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 21.0.0d1
+# This file is generated from NI-SWITCH API metadata version 23.0.0d149
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -396,6 +396,7 @@ attributes = {
         'documentation': {
             'description': '\nThis attribute returns the wire mode of the switch device.\nThis attribute affects the values of the NISWITCH_ATTR_NUM_OF_ROWS and  NISWITCH_ATTR_NUM_OF_COLUMNS attributes.   The actual number of input and  output lines on the switch device is fixed, but the number of channels  depends on how many lines constitute each channel.\n'
         },
+        'grpc_enum': 'WireMode',
         'lv_property': 'Module Characteristics:Wire mode',
         'name': 'WIRE_MODE',
         'supported_rep_caps': [

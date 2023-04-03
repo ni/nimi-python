@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, channel_name=None, reset_device=False, options={})
+.. py:class:: Session(self, resource_name, channel_name=None, reset_device=False, options={}, *, grpc_options=None)
 
     
 
@@ -133,6 +133,16 @@ Session
 
 
     :type options: dict
+
+    :param grpc_options:
+        
+
+        MeasurementLink gRPC session options
+
+        
+
+
+    :type grpc_options: nifgen.GrpcSessionOptions
 
 
 Methods
@@ -1998,7 +2008,6 @@ lock
         When used in a `with` statement, :py:meth:`nifgen.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
 
-
 query_arb_seq_capabilities
 --------------------------
 
@@ -2455,8 +2464,6 @@ unlock
     Releases a lock that you acquired on an device session using
     :py:meth:`nifgen.Session.lock`. Refer to :py:meth:`nifgen.Session.unlock` for additional
     information on session locks.
-
-
 
 wait_until_done
 ---------------
@@ -6002,5 +6009,3 @@ NI-TClk Support
 
 
 .. contents:: Session
-
-

@@ -55,15 +55,15 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI Modular Instruments Python API'
-copyright = '2017-2022, National Instruments'
-author = 'National Instruments'
+copyright = '2017-2023, National Instruments Corporation'
+author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.4.2.dev0'
+release = '1.4.4.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -157,7 +157,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'NIModularInstrumentsPythonAPI.tex', 'NI Modular Instruments Python API Documentation',
-     'National Instruments', 'manual'),
+     'NI', 'manual'),
 ]
 
 

@@ -4,16 +4,24 @@ import _mock_helper
 import nimodinst
 import warnings
 
-from mock import patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 
 
 class TestSession(object):
+    class PatchedLibrary(nimodinst._library.Library):
+        def __init__(self, ctypes_library):
+            super().__init__(ctypes_library)
+
+            for f in dir(self):
+                if f.startswith("niModInst_") and not f.endswith("_cfunc"):
+                    setattr(self, f, MagicMock())
+
     def setup_method(self, method):
-        self.patched_library_patcher = patch('nimodinst._library.Library', autospec=True)
-        self.patched_library = self.patched_library_patcher.start()
-        self.patched_library_singleton_get = patch('nimodinst.session._library_singleton.get', return_value=self.patched_library)
+        self.patched_library = self.PatchedLibrary(None)
+        self.patched_library_singleton_get = patch('nimodinst._library_interpreter._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
@@ -33,7 +41,6 @@ class TestSession(object):
 
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
-        self.patched_library_patcher.stop()
 
     # Helper function for mocking multiple devices
     def niModInst_GetInstalledDeviceAttributeViString_looping(self, handle, index, attribute_id, attribute_value_buffer_size, attribute_value):  # noqa: N802
@@ -94,9 +101,9 @@ class TestSession(object):
         self.patched_library.niModInst_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niModInst_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['errorInfo'] = error_string
         with nimodinst.Session('') as session:
-            # Calling the private function directly, as _get_extended_error_info() functions differently than other IVI Dance functions.
+            # Calling the internal function directly, as get_extended_error_info() functions differently than other IVI Dance functions.
             # As a result, it cannot be used directly during error handling.
-            result = session._get_extended_error_info()
+            result = session._interpreter.get_extended_error_info()
             assert result == error_string
 
     def test_get_error_description_fails(self):

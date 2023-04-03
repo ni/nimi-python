@@ -14,4 +14,3 @@
         '''
 
         return self._cal_fetch_temperature(enums._CalibrationTypes.${calibration_type}.value)
-

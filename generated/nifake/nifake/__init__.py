@@ -2,16 +2,25 @@
 # This file was generated
 
 
-__version__ = '1.4.2.dev0'
+__version__ = '1.4.4.dev0'
 
 from nifake.enums import *  # noqa: F403,F401,H303
 from nifake.errors import DriverWarning  # noqa: F401
 from nifake.errors import Error  # noqa: F401
+from nifake.grpc_session_options import *  # noqa: F403,F401,H303
 from nifake.session import Session  # noqa: F401
 
 from nifake.custom_struct import CustomStruct  # noqa: F401
 
 from nifake.custom_struct import struct_CustomStruct  # noqa: F401
+
+from nifake.custom_struct_nested_typedef import CustomStructNestedTypedef  # noqa: F401
+
+from nifake.custom_struct_nested_typedef import struct_CustomStructNestedTypedef  # noqa: F401
+
+from nifake.custom_struct_typedef import CustomStructTypedef  # noqa: F401
+
+from nifake.custom_struct_typedef import struct_CustomStructTypedef  # noqa: F401
 
 
 def get_diagnostic_information():
@@ -68,7 +77,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-FAKE"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nifake'
-    info['module']['version'] = "1.4.2.dev0"
+    info['module']['version'] = "1.4.4.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
@@ -96,5 +105,3 @@ def print_diagnostic_information():
         print((' ' * 8) + p['name'] + '==' + p['version'])
 
     return info
-
-

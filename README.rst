@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -61,7 +61,7 @@ called through its public C API using the `ctypes <https://docs.python.org/2/lib
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
 **nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
-this time this includes Python 3.6 and above using CPython.
+this time this includes Python 3.7 and above using CPython.
 
 
 NI-DCPower Python API Status
@@ -70,7 +70,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 21.3.0                   |
+| Driver Version Tested Against | 2022 Q4                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -109,7 +109,7 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | NI-Digital Pattern Driver (nidigital) |                          |
 +=======================================+==========================+
-| Driver Version Tested Against         | 21.0.0                   |
+| Driver Version Tested Against         | 2022 Q4                  |
 +---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
@@ -148,7 +148,7 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
-| Driver Version Tested Against | 21.3.0               |
+| Driver Version Tested Against | 2022 Q3              |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
@@ -187,7 +187,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 21.3.0                |
+| Driver Version Tested Against | 21.8.0                |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -226,7 +226,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 21.3.0                   |
+| Driver Version Tested Against | 2022 Q4                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -265,7 +265,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 21.0.0                 |
+| Driver Version Tested Against | 2022 Q3                |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
@@ -304,7 +304,7 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | NI Switch Executive (nise)    |                     |
 +===============================+=====================+
-| Driver Version Tested Against | 20.0.0              |
+| Driver Version Tested Against | 21.5.0              |
 +-------------------------------+---------------------+
 | PyPI Version                  | |niseLatestVersion| |
 +-------------------------------+---------------------+
@@ -343,7 +343,7 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 21.3.0                  |
+| Driver Version Tested Against | 2022 Q4                 |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+
@@ -382,7 +382,7 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | NI-TClk (nitclk)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 21.3.0                |
+| Driver Version Tested Against | 2022 Q4               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+
@@ -449,7 +449,7 @@ The following is a basic example of using the **nidmm** module to open a session
         session.configureMeasurementDigits(nidmm.Function.DC_VOLTS, 10, 5.5)
         print("Measurement: " + str(session.read()))
 
-Additional examples for NI-DMM are located in src/nidmm/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nidmm/examples>`_
 
 .. _support-section:
 
@@ -492,3 +492,6 @@ Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
 
 
+**gRPC Features**
+For driver APIs that support it, passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
+subject to the NI General Purpose EULA (`see NILICENSE <https://github.com/ni/nimi-python/blob/master/NILICENSE>`_).

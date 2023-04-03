@@ -54,4 +54,3 @@
             i += 1
 
         self.sites[site_list]._write_source_waveform_site_unique_u32(waveform_name, len(waveform_data), actual_samples_per_waveform, data)
-

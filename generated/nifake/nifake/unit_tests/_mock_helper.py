@@ -23,6 +23,11 @@ class SideEffectsHelper(object):
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
+        self._defaults['ConfigureABC'] = {}
+        self._defaults['ConfigureABC']['return'] = 0
+        self._defaults['CustomNestedStructRoundtrip'] = {}
+        self._defaults['CustomNestedStructRoundtrip']['return'] = 0
+        self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] = None
         self._defaults['DoubleAllTheNums'] = {}
         self._defaults['DoubleAllTheNums']['return'] = 0
         self._defaults['EnumArrayOutputFunction'] = {}
@@ -37,6 +42,8 @@ class SideEffectsHelper(object):
         self._defaults['FetchWaveform']['return'] = 0
         self._defaults['FetchWaveform']['waveformData'] = None
         self._defaults['FetchWaveform']['actualNumberOfSamples'] = None
+        self._defaults['FunctionWithRepeatedCapabilityType'] = {}
+        self._defaults['FunctionWithRepeatedCapabilityType']['return'] = 0
         self._defaults['GetABoolean'] = {}
         self._defaults['GetABoolean']['return'] = 0
         self._defaults['GetABoolean']['aBoolean'] = None
@@ -93,12 +100,19 @@ class SideEffectsHelper(object):
         self._defaults['GetCalInterval'] = {}
         self._defaults['GetCalInterval']['return'] = 0
         self._defaults['GetCalInterval']['months'] = None
+        self._defaults['GetChannelNames'] = {}
+        self._defaults['GetChannelNames']['return'] = 0
+        self._defaults['GetChannelNames']['names'] = None
         self._defaults['GetCustomType'] = {}
         self._defaults['GetCustomType']['return'] = 0
         self._defaults['GetCustomType']['cs'] = None
         self._defaults['GetCustomTypeArray'] = {}
         self._defaults['GetCustomTypeArray']['return'] = 0
         self._defaults['GetCustomTypeArray']['cs'] = None
+        self._defaults['GetCustomTypeTypedef'] = {}
+        self._defaults['GetCustomTypeTypedef']['return'] = 0
+        self._defaults['GetCustomTypeTypedef']['cst'] = None
+        self._defaults['GetCustomTypeTypedef']['csnt'] = None
         self._defaults['GetEnumValue'] = {}
         self._defaults['GetEnumValue']['return'] = 0
         self._defaults['GetEnumValue']['aQuantity'] = None
@@ -117,6 +131,14 @@ class SideEffectsHelper(object):
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
+        self._defaults['MethodUsingWholeAndFractionalNumbers'] = {}
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['return'] = 0
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber'] = None
+        self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] = None
+        self._defaults['MethodWithGrpcOnlyParam'] = {}
+        self._defaults['MethodWithGrpcOnlyParam']['return'] = 0
+        self._defaults['MethodWithProtoOnlyParameter'] = {}
+        self._defaults['MethodWithProtoOnlyParameter']['return'] = 0
         self._defaults['MultipleArrayTypes'] = {}
         self._defaults['MultipleArrayTypes']['return'] = 0
         self._defaults['MultipleArrayTypes']['outputArray'] = None
@@ -223,6 +245,22 @@ class SideEffectsHelper(object):
             an_array_ref[i] = test_value[i]
         return self._defaults['BoolArrayOutputFunction']['return']
 
+    def niFake_ConfigureABC(self, vi):  # noqa: N802
+        if self._defaults['ConfigureABC']['return'] != 0:
+            return self._defaults['ConfigureABC']['return']
+        return self._defaults['ConfigureABC']['return']
+
+    def niFake_CustomNestedStructRoundtrip(self, nested_custom_type_in, nested_custom_type_out):  # noqa: N802
+        if self._defaults['CustomNestedStructRoundtrip']['return'] != 0:
+            return self._defaults['CustomNestedStructRoundtrip']['return']
+        # nested_custom_type_out
+        if self._defaults['CustomNestedStructRoundtrip']['nestedCustomTypeOut'] is None:
+            raise MockFunctionCallError("niFake_CustomNestedStructRoundtrip", param='nestedCustomTypeOut')
+        for field in self._defaults['CustomNestedStructRoundtrip']['nested_custom_type_out']._fields_:
+            field_name = field[0]
+            setattr(nested_custom_type_out.contents, field_name, getattr(self._defaults['CustomNestedStructRoundtrip']['nested_custom_type_out'], field_name))
+        return self._defaults['CustomNestedStructRoundtrip']['return']
+
     def niFake_DoubleAllTheNums(self, vi, number_count, numbers):  # noqa: N802
         if self._defaults['DoubleAllTheNums']['return'] != 0:
             return self._defaults['DoubleAllTheNums']['return']
@@ -252,6 +290,7 @@ class SideEffectsHelper(object):
     def niFake_ExportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niFake_ExportAttributeConfigurationBuffer", param='configuration')
         if size_in_bytes.value == 0:
@@ -284,6 +323,11 @@ class SideEffectsHelper(object):
         if actual_number_of_samples is not None:
             actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
         return self._defaults['FetchWaveform']['return']
+
+    def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
+        if self._defaults['FunctionWithRepeatedCapabilityType']['return'] != 0:
+            return self._defaults['FunctionWithRepeatedCapabilityType']['return']
+        return self._defaults['FunctionWithRepeatedCapabilityType']['return']
 
     def niFake_GetABoolean(self, vi, a_boolean):  # noqa: N802
         if self._defaults['GetABoolean']['return'] != 0:
@@ -336,6 +380,7 @@ class SideEffectsHelper(object):
     def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
         if self._defaults['GetAnIviDanceString']['return'] != 0:
             return self._defaults['GetAnIviDanceString']['return']
+        # a_string
         if self._defaults['GetAnIviDanceString']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAnIviDanceString", param='aString')
         if buffer_size.value == 0:
@@ -351,6 +396,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetAnIviDanceWithATwistString", param='actualSize')
         if actual_size is not None:
             actual_size.contents.value = self._defaults['GetAnIviDanceWithATwistString']['actualSize']
+        # a_string
         if self._defaults['GetAnIviDanceWithATwistString']['aString'] is None:
             raise MockFunctionCallError("niFake_GetAnIviDanceWithATwistString", param='aString')
         if buffer_size.value == 0:
@@ -403,6 +449,7 @@ class SideEffectsHelper(object):
     def niFake_GetArrayUsingIviDance(self, vi, array_size, array_out):  # noqa: N802
         if self._defaults['GetArrayUsingIviDance']['return'] != 0:
             return self._defaults['GetArrayUsingIviDance']['return']
+        # array_out
         if self._defaults['GetArrayUsingIviDance']['arrayOut'] is None:
             raise MockFunctionCallError("niFake_GetArrayUsingIviDance", param='arrayOut')
         if array_size.value == 0:
@@ -458,6 +505,7 @@ class SideEffectsHelper(object):
     def niFake_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niFake_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
@@ -505,6 +553,17 @@ class SideEffectsHelper(object):
             months.contents.value = self._defaults['GetCalInterval']['months']
         return self._defaults['GetCalInterval']['return']
 
+    def niFake_GetChannelNames(self, vi, indices, name_size, names):  # noqa: N802
+        if self._defaults['GetChannelNames']['return'] != 0:
+            return self._defaults['GetChannelNames']['return']
+        # names
+        if self._defaults['GetChannelNames']['names'] is None:
+            raise MockFunctionCallError("niFake_GetChannelNames", param='names')
+        if name_size.value == 0:
+            return len(self._defaults['GetChannelNames']['names'])
+        names.value = self._defaults['GetChannelNames']['names'].encode('ascii')
+        return self._defaults['GetChannelNames']['return']
+
     def niFake_GetCustomType(self, vi, cs):  # noqa: N802
         if self._defaults['GetCustomType']['return'] != 0:
             return self._defaults['GetCustomType']['return']
@@ -532,6 +591,23 @@ class SideEffectsHelper(object):
             cs_ref[i] = test_value[i]
         return self._defaults['GetCustomTypeArray']['return']
 
+    def niFake_GetCustomTypeTypedef(self, vi, cst, csnt):  # noqa: N802
+        if self._defaults['GetCustomTypeTypedef']['return'] != 0:
+            return self._defaults['GetCustomTypeTypedef']['return']
+        # cst
+        if self._defaults['GetCustomTypeTypedef']['cst'] is None:
+            raise MockFunctionCallError("niFake_GetCustomTypeTypedef", param='cst')
+        for field in self._defaults['GetCustomTypeTypedef']['cst']._fields_:
+            field_name = field[0]
+            setattr(cst.contents, field_name, getattr(self._defaults['GetCustomTypeTypedef']['cst'], field_name))
+        # csnt
+        if self._defaults['GetCustomTypeTypedef']['csnt'] is None:
+            raise MockFunctionCallError("niFake_GetCustomTypeTypedef", param='csnt')
+        for field in self._defaults['GetCustomTypeTypedef']['csnt']._fields_:
+            field_name = field[0]
+            setattr(csnt.contents, field_name, getattr(self._defaults['GetCustomTypeTypedef']['csnt'], field_name))
+        return self._defaults['GetCustomTypeTypedef']['return']
+
     def niFake_GetEnumValue(self, vi, a_quantity, a_turtle):  # noqa: N802
         if self._defaults['GetEnumValue']['return'] != 0:
             return self._defaults['GetEnumValue']['return']
@@ -555,6 +631,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niFake_GetError", param='errorCode')
         if error_code is not None:
             error_code.contents.value = self._defaults['GetError']['errorCode']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niFake_GetError", param='description')
         if buffer_size.value == 0:
@@ -591,6 +668,31 @@ class SideEffectsHelper(object):
         if caller_has_lock is not None:
             caller_has_lock.contents.value = self._defaults['LockSession']['callerHasLock']
         return self._defaults['LockSession']['return']
+
+    def niFake_MethodUsingWholeAndFractionalNumbers(self, whole_number, fractional_number):  # noqa: N802
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['return'] != 0:
+            return self._defaults['MethodUsingWholeAndFractionalNumbers']['return']
+        # whole_number
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber'] is None:
+            raise MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers", param='wholeNumber')
+        if whole_number is not None:
+            whole_number.contents.value = self._defaults['MethodUsingWholeAndFractionalNumbers']['wholeNumber']
+        # fractional_number
+        if self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber'] is None:
+            raise MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers", param='fractionalNumber')
+        if fractional_number is not None:
+            fractional_number.contents.value = self._defaults['MethodUsingWholeAndFractionalNumbers']['fractionalNumber']
+        return self._defaults['MethodUsingWholeAndFractionalNumbers']['return']
+
+    def niFake_MethodWithGrpcOnlyParam(self, simple_param):  # noqa: N802
+        if self._defaults['MethodWithGrpcOnlyParam']['return'] != 0:
+            return self._defaults['MethodWithGrpcOnlyParam']['return']
+        return self._defaults['MethodWithGrpcOnlyParam']['return']
+
+    def niFake_MethodWithProtoOnlyParameter(self, attribute_value):  # noqa: N802
+        if self._defaults['MethodWithProtoOnlyParameter']['return'] != 0:
+            return self._defaults['MethodWithProtoOnlyParameter']['return']
+        return self._defaults['MethodWithProtoOnlyParameter']['return']
 
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
@@ -629,7 +731,7 @@ class SideEffectsHelper(object):
             return self._defaults['OneInputFunction']['return']
         return self._defaults['OneInputFunction']['return']
 
-    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, string_size, a_string):  # noqa: N802
+    def niFake_ParametersAreMultipleTypes(self, vi, a_boolean, an_int32, an_int64, an_int_enum, a_float, a_float_enum, a_string):  # noqa: N802
         if self._defaults['ParametersAreMultipleTypes']['return'] != 0:
             return self._defaults['ParametersAreMultipleTypes']['return']
         return self._defaults['ParametersAreMultipleTypes']['return']
@@ -748,6 +850,7 @@ class SideEffectsHelper(object):
         assert len(an_array_ref) >= len(test_value)
         for i in range(len(test_value)):
             an_array_ref[i] = test_value[i]
+        # a_string
         if self._defaults['ReturnMultipleTypes']['aString'] is None:
             raise MockFunctionCallError("niFake_ReturnMultipleTypes", param='aString')
         if string_size.value == 0:
@@ -871,6 +974,10 @@ class SideEffectsHelper(object):
         mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
+        mock_library.niFake_ConfigureABC.side_effect = MockFunctionCallError("niFake_ConfigureABC")
+        mock_library.niFake_ConfigureABC.return_value = 0
+        mock_library.niFake_CustomNestedStructRoundtrip.side_effect = MockFunctionCallError("niFake_CustomNestedStructRoundtrip")
+        mock_library.niFake_CustomNestedStructRoundtrip.return_value = 0
         mock_library.niFake_DoubleAllTheNums.side_effect = MockFunctionCallError("niFake_DoubleAllTheNums")
         mock_library.niFake_DoubleAllTheNums.return_value = 0
         mock_library.niFake_EnumArrayOutputFunction.side_effect = MockFunctionCallError("niFake_EnumArrayOutputFunction")
@@ -881,6 +988,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ExportAttributeConfigurationBuffer.return_value = 0
         mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
         mock_library.niFake_FetchWaveform.return_value = 0
+        mock_library.niFake_FunctionWithRepeatedCapabilityType.side_effect = MockFunctionCallError("niFake_FunctionWithRepeatedCapabilityType")
+        mock_library.niFake_FunctionWithRepeatedCapabilityType.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")
         mock_library.niFake_GetABoolean.return_value = 0
         mock_library.niFake_GetANumber.side_effect = MockFunctionCallError("niFake_GetANumber")
@@ -915,10 +1024,14 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetCalDateAndTime.return_value = 0
         mock_library.niFake_GetCalInterval.side_effect = MockFunctionCallError("niFake_GetCalInterval")
         mock_library.niFake_GetCalInterval.return_value = 0
+        mock_library.niFake_GetChannelNames.side_effect = MockFunctionCallError("niFake_GetChannelNames")
+        mock_library.niFake_GetChannelNames.return_value = 0
         mock_library.niFake_GetCustomType.side_effect = MockFunctionCallError("niFake_GetCustomType")
         mock_library.niFake_GetCustomType.return_value = 0
         mock_library.niFake_GetCustomTypeArray.side_effect = MockFunctionCallError("niFake_GetCustomTypeArray")
         mock_library.niFake_GetCustomTypeArray.return_value = 0
+        mock_library.niFake_GetCustomTypeTypedef.side_effect = MockFunctionCallError("niFake_GetCustomTypeTypedef")
+        mock_library.niFake_GetCustomTypeTypedef.return_value = 0
         mock_library.niFake_GetEnumValue.side_effect = MockFunctionCallError("niFake_GetEnumValue")
         mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
@@ -931,6 +1044,12 @@ class SideEffectsHelper(object):
         mock_library.niFake_Initiate.return_value = 0
         mock_library.niFake_LockSession.side_effect = MockFunctionCallError("niFake_LockSession")
         mock_library.niFake_LockSession.return_value = 0
+        mock_library.niFake_MethodUsingWholeAndFractionalNumbers.side_effect = MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers")
+        mock_library.niFake_MethodUsingWholeAndFractionalNumbers.return_value = 0
+        mock_library.niFake_MethodWithGrpcOnlyParam.side_effect = MockFunctionCallError("niFake_MethodWithGrpcOnlyParam")
+        mock_library.niFake_MethodWithGrpcOnlyParam.return_value = 0
+        mock_library.niFake_MethodWithProtoOnlyParameter.side_effect = MockFunctionCallError("niFake_MethodWithProtoOnlyParameter")
+        mock_library.niFake_MethodWithProtoOnlyParameter.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
         mock_library.niFake_MultipleArrayTypes.return_value = 0
         mock_library.niFake_MultipleArraysSameSize.side_effect = MockFunctionCallError("niFake_MultipleArraysSameSize")

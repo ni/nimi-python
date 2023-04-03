@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 21.0.0d1
+# This file is generated from NI Switch Executive API metadata version 23.0.0d8
 functions = {
     'CloseSession': {
         'codegen_method': 'private',
@@ -341,6 +341,14 @@ functions = {
             'description': "\nGet error information of the first error that occurred. If a valid\npointer is passed to errorDescription or errorNumber, GetError will\nclear the error on completion. errorDescriptionSize is an in/out\nparameter that describes the size of the errorDescription buffer. On the\nway in, it tells the function the size of string. On the way out, it\ndescribes the number of bytes (including the trailing null string)\nneeded to hold the entire error description buffer. If NULL is passed\nfor errorDescription and the errorNumber, the function will not clear\nthe error. Users wanting to dynamically size the errorDescription string\ncan thus call the function twice. On the first call they can pass NULL\nfor the errorDescription and use the returned errorDescriptionSize to\nallocate enough space for the entire errorDescription buffer. Note that\nif a buffer is passed that is not large enough to hold the entire\ndescription string, the portion of of the string that will fit in the\npassed buffer will be returned and the error will still be cleared. All\nof the parameters are NULL tolerant. Note that passing NULL for both\nerrorNumber and errorDescription can change the function's behavior.\n"
         },
         'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',

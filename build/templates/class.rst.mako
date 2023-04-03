@@ -2,12 +2,14 @@
     import build.helper as helper
 
     config = template_parameters['metadata'].config
-    module_name = config['module_name']
-    driver_name = config['driver_name']
     c_function_prefix = config['c_function_prefix']
+    driver_name = config['driver_name']
+    module_name = config['module_name']
 
     functions_all = template_parameters['metadata'].functions
     functions = helper.filter_public_functions(functions_all)
+
+    grpc_supported = template_parameters['include_grpc_support']
 
     if 'context_manager_name' in config:
         # Add a InitiateDoc entry - only used to add initiate() to the Session documentation
@@ -30,14 +32,33 @@
 
     init_function = config['functions']['_init_function']
     init_method_params = helper.get_params_snippet(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
-    constructor_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
-    input_params = helper.filter_parameters(init_function, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
+    constructor_params = helper.filter_parameters(init_function['parameters'], helper.ParameterUsageOptions.SESSION_INIT_DECLARATION)
+    input_params = helper.filter_parameters(init_function['parameters'], helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)
 %>\
 .. py:module:: ${module_name}
 
 ${helper.get_rst_header_snippet('Session', '=')}
 
-.. py:class:: Session(${init_method_params})
+<%
+grpc_options_param = ', *, grpc_options=None' if grpc_supported else ''
+if grpc_supported:
+    input_params.append(
+        {
+            'default_value': None,
+            'direction': 'in',
+            'documentation': { 'description': 'MeasurementLink gRPC session options' },
+            'enum': None,
+            'is_repeated_capability': False,
+            'is_session_handle': False,
+            'python_name': 'grpc_options',
+            'size': {'mechanism': 'fixed', 'value': 1},
+            'type_in_documentation': module_name + '.GrpcSessionOptions',
+            'type_in_documentation_was_calculated': False,
+            'use_in_python_api': False,
+        },
+    )
+%>\
+.. py:class:: Session(${init_method_params}${grpc_options_param})
 
     ${helper.get_documentation_for_node_rst(init_function, config, indent=4)}
 
@@ -115,5 +136,3 @@ ${helper.get_rst_header_snippet('NI-TClk Support', '=')}
 
 % endif
 .. contents:: Session
-
-

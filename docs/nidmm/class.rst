@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query=False, reset_device=False, options={})
+.. py:class:: Session(self, resource_name, id_query=False, reset_device=False, options={}, *, grpc_options=None)
 
     
 
@@ -125,6 +125,16 @@ Session
 
 
     :type options: dict
+
+    :param grpc_options:
+        
+
+        MeasurementLink gRPC session options
+
+        
+
+
+    :type grpc_options: nidmm.GrpcSessionOptions
 
 
 Methods
@@ -598,11 +608,9 @@ configure_thermocouple
                 Specifies the type of reference junction to be used in the reference
                 junction compensation of a thermocouple measurement. NI-DMM uses this
                 value to set the Reference Junction Type property. The only supported
-                value is :py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED`.
+                value is :py:data:`~nidmm.ThermocoupleReferenceJunctionType.FIXED`.
 
                 
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type reference_junction_type: :py:data:`nidmm.ThermocoupleReferenceJunctionType`
@@ -969,11 +977,8 @@ fetch_multi_point
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (reading_array, actual_number_of_points)
-
-                WHERE
-
-                reading_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     An array of measurement values.
@@ -982,14 +987,6 @@ fetch_multi_point
 
                     .. note:: The size of the **Reading_Array** must be at least the size that you
                         specify for the **Array_Size** parameter.
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
 
 
 
@@ -1041,23 +1038,12 @@ fetch_waveform
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (waveform_array, actual_number_of_points)
-
-                WHERE
-
-                waveform_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     **Waveform Array** is an array of measurement values stored in waveform
                     data type.
-
-                    
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
 
                     
 
@@ -1108,28 +1094,6 @@ fetch_waveform_into
 
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
-
-            :rtype: tuple (waveform_array, actual_number_of_points)
-
-                WHERE
-
-                waveform_array (numpy.array(dtype=numpy.float64)): 
-
-
-                    **Waveform Array** is an array of measurement values stored in waveform
-                    data type.
-
-                    
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
-
-
 
 get_cal_date_and_time
 ---------------------
@@ -1486,7 +1450,6 @@ lock
         When used in a `with` statement, :py:meth:`nidmm.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
 
-
 perform_open_cable_comp
 -----------------------
 
@@ -1674,11 +1637,8 @@ read_multi_point
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (reading_array, actual_number_of_points)
-
-                WHERE
-
-                reading_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     An array of measurement values.
@@ -1687,14 +1647,6 @@ read_multi_point
 
                     .. note:: The size of the **Reading_Array** must be at least the size that you
                         specify for the **Array_Size** parameter.
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
 
 
 
@@ -1805,11 +1757,8 @@ read_waveform
 
             :type maximum_time: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
-            :rtype: tuple (waveform_array, actual_number_of_points)
-
-                WHERE
-
-                waveform_array (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     An array of measurement values.
@@ -1818,14 +1767,6 @@ read_waveform
 
                     .. note:: The size of the **Waveform_Array** must be at least the size that you
                         specify for the **Array_Size** parameter.
-
-
-                actual_number_of_points (int): 
-
-
-                    Indicates the number of measured values actually retrieved from the DMM.
-
-                    
 
 
 
@@ -1936,8 +1877,6 @@ unlock
     Releases a lock that you acquired on an device session using
     :py:meth:`nidmm.Session.lock`. Refer to :py:meth:`nidmm.Session.unlock` for additional
     information on session locks.
-
-
 
 
 Properties
@@ -3295,11 +3234,7 @@ temp_tc_ref_junc_type
 
     .. py:attribute:: temp_tc_ref_junc_type
 
-        Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, :py:data:`~nidmm.NIDMM_VAL_TEMP_REF_JUNC_FIXED`, is fixed.
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        Specifies the type of reference junction to be used in the reference junction compensation  of a thermocouple. The only supported value, :py:data:`~nidmm.ThermocoupleReferenceJunctionType.FIXED`, is fixed.
 
         The following table lists the characteristics of this property.
 
@@ -3615,5 +3550,3 @@ waveform_rate
 
 
 .. contents:: Session
-
-

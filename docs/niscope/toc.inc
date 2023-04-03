@@ -8,4 +8,5 @@ API Reference
    niscope/enums
    niscope/errors
    niscope/examples
+   niscope/grpc_session_options
 

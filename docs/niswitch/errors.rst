@@ -39,6 +39,24 @@ DriverNotInstalledError
 
         An error due to using this module without the driver runtime installed.
 
+DriverTooOldError
+-----------------
+
+    .. py:currentmodule:: niswitch.errors
+
+    .. exception:: DriverTooOldError
+
+        An error due to using this module with an older version of the NI-SWITCH driver runtime.
+
+DriverTooNewError
+-----------------
+
+    .. py:currentmodule:: niswitch.errors
+
+    .. exception:: DriverTooNewError
+
+        An error due to the NI-SWITCH driver runtime being too new for this module.
+
 InvalidRepeatedCapabilityError
 ------------------------------
 
@@ -57,6 +75,16 @@ SelfTestError
     .. exception:: SelfTestError
 
         An error due to a failed self-test
+
+
+RpcError
+--------
+
+    .. py:currentmodule:: niswitch.errors
+
+    .. exception:: RpcError
+
+        An error specific to sessions to the NI gRPC Device Server
 
 
 DriverWarning

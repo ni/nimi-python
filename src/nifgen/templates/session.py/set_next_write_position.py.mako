@@ -12,4 +12,3 @@
             return self._set_named_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
         else:
             return self._set_waveform_next_write_position(waveform_name_or_handle, relative_to, offset)
-

@@ -12,4 +12,3 @@
             return self._delete_named_waveform(waveform_name_or_handle)
         else:
             return self._clear_arb_waveform(waveform_name_or_handle)
-

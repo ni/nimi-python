@@ -202,6 +202,7 @@ class SideEffectsHelper(object):
     def niSwitch_GetAttributeViString(self, vi, channel_name, attribute_id, array_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niSwitch_GetAttributeViString", param='attributeValue')
         if array_size.value == 0:
@@ -212,6 +213,7 @@ class SideEffectsHelper(object):
     def niSwitch_GetChannelName(self, vi, index, buffer_size, channel_name_buffer):  # noqa: N802
         if self._defaults['GetChannelName']['return'] != 0:
             return self._defaults['GetChannelName']['return']
+        # channel_name_buffer
         if self._defaults['GetChannelName']['channelNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetChannelName", param='channelNameBuffer')
         if buffer_size.value == 0:
@@ -227,6 +229,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niSwitch_GetError", param='code')
         if code is not None:
             code.contents.value = self._defaults['GetError']['code']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='description')
         if buffer_size.value == 0:
@@ -237,6 +240,7 @@ class SideEffectsHelper(object):
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         if self._defaults['GetPath']['return'] != 0:
             return self._defaults['GetPath']['return']
+        # path
         if self._defaults['GetPath']['path'] is None:
             raise MockFunctionCallError("niSwitch_GetPath", param='path')
         if buffer_size.value == 0:
@@ -257,6 +261,7 @@ class SideEffectsHelper(object):
     def niSwitch_GetRelayName(self, vi, index, relay_name_buffer_size, relay_name_buffer):  # noqa: N802
         if self._defaults['GetRelayName']['return'] != 0:
             return self._defaults['GetRelayName']['return']
+        # relay_name_buffer
         if self._defaults['GetRelayName']['relayNameBuffer'] is None:
             raise MockFunctionCallError("niSwitch_GetRelayName", param='relayNameBuffer')
         if relay_name_buffer_size.value == 0:

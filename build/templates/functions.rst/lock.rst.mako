@@ -44,4 +44,3 @@
     :return:
         When used in a `with` statement, :py:meth:`${config['module_name']}.Session.lock` acts as
         a context manager and unlock will be called when the `with` block is exited
-

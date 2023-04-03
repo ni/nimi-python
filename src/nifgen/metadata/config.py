@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 21.5.0d106
+# This file is generated from NI-FGEN API metadata version 23.0.0d57
 config = {
-    'api_version': '21.5.0d106',
+    'api_version': '23.0.0d57',
     'c_function_prefix': 'niFgen_',
     'close_function': 'close',
     'context_manager_name': {
@@ -16,6 +16,7 @@ config = {
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiFgen',
     'init_function': 'InitializeWithChannels',
     'library_info': {
         'Linux': {
@@ -35,7 +36,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nifgen',
     'repeated_capabilities': [
         {
@@ -55,7 +55,7 @@ config = {
             'python_name': 'data_markers'
         }
     ],
-    'session_class_description': 'An NI-FGEN session to a National Instruments Signal Generator.',
+    'session_class_description': 'An NI-FGEN session to an NI signal generator.',
     'session_handle_parameter_name': 'vi',
     'uses_nitclk': True
 }

@@ -4,13 +4,12 @@ import _mock_helper
 import hightime
 import nitclk
 
-from mock import patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 SESSION_NUM_FOR_TEST = 42
 single_session = [SESSION_NUM_FOR_TEST]
-single_session_reference = [nitclk.SessionReference(x) for x in single_session]
 multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NUM_FOR_TEST * 100, SESSION_NUM_FOR_TEST + 1]
-multiple_session_references = [nitclk.SessionReference(x) for x in multiple_sessions]
 
 
 class NitclkSupportingDriverSession(object):
@@ -23,43 +22,52 @@ class NitclkSupportingDriverSession(object):
 
 
 class TestNitclkApi(object):
+    class PatchedLibrary(nitclk._library.Library):
+        def __init__(self, ctypes_library):
+            super().__init__(ctypes_library)
+
+            for f in dir(self):
+                if f.startswith("niTClk_") and not f.endswith("_cfunc"):
+                    setattr(self, f, MagicMock())
+
     def setup_method(self, method):
-        self.patched_library_patcher = patch('nitclk._library.Library', autospec=True)
-        self.patched_library = self.patched_library_patcher.start()
-        self.patched_library_singleton_get = patch('nitclk.session._library_singleton.get', return_value=self.patched_library)
+        self.patched_library = self.PatchedLibrary(None)
+        self.patched_library_singleton_get = patch('nitclk._library_interpreter._library_singleton.get', return_value=self.patched_library)
         self.patched_library_singleton_get.start()
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
 
+        self._single_session_reference = [nitclk.SessionReference(x) for x in single_session]
+        self._multiple_session_references = [nitclk.SessionReference(x) for x in multiple_sessions]
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
-        self.patched_library_patcher.stop()
 
     # API Tests
 
     def test_initialize_one_session(self):
         self.patched_library.niTClk_Initiate.side_effect = self.side_effects_helper.niTClk_Initiate
-        nitclk.initiate(single_session_reference)
+        nitclk.initiate(self._single_session_reference)
         self.patched_library.niTClk_Initiate.assert_called_once_with(_matchers.ViUInt32Matcher(len(single_session)), _matchers.ViSessionBufferMatcher(single_session))
         return
 
     def test_initialize_multiple_sessions(self):
         self.patched_library.niTClk_Initiate.side_effect = self.side_effects_helper.niTClk_Initiate
-        nitclk.initiate(multiple_session_references)
+        nitclk.initiate(self._multiple_session_references)
         self.patched_library.niTClk_Initiate.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions))
         return
 
     def test_configure_for_homogeneous_triggers(self):
         self.patched_library.niTClk_ConfigureForHomogeneousTriggers.side_effect = self.side_effects_helper.niTClk_ConfigureForHomogeneousTriggers
-        nitclk.configure_for_homogeneous_triggers(multiple_session_references)
+        nitclk.configure_for_homogeneous_triggers(self._multiple_session_references)
         self.patched_library.niTClk_ConfigureForHomogeneousTriggers.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions))
         return
 
     def test_finish_sync_pulse_sender_synchronize(self):
         min_time = 0.042
         self.patched_library.niTClk_FinishSyncPulseSenderSynchronize.side_effect = self.side_effects_helper.niTClk_FinishSyncPulseSenderSynchronize
-        nitclk.finish_sync_pulse_sender_synchronize(multiple_session_references, min_time)
+        nitclk.finish_sync_pulse_sender_synchronize(self._multiple_session_references, min_time)
         self.patched_library.niTClk_FinishSyncPulseSenderSynchronize.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time))
         return
 
@@ -68,7 +76,7 @@ class TestNitclkApi(object):
         self.side_effects_helper['IsDone']['done'] = expected_result
 
         self.patched_library.niTClk_IsDone.side_effect = self.side_effects_helper.niTClk_IsDone
-        actual_result = nitclk.is_done(multiple_session_references)
+        actual_result = nitclk.is_done(self._multiple_session_references)
         assert actual_result == expected_result
         self.patched_library.niTClk_IsDone.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViBooleanPointerMatcher())
         return
@@ -76,35 +84,35 @@ class TestNitclkApi(object):
     def test_setup_for_sync_pulse_sender_synchronize(self):
         min_time = 0.042
         self.patched_library.niTClk_SetupForSyncPulseSenderSynchronize.side_effect = self.side_effects_helper.niTClk_SetupForSyncPulseSenderSynchronize
-        nitclk.setup_for_sync_pulse_sender_synchronize(multiple_session_references, min_time)
+        nitclk.setup_for_sync_pulse_sender_synchronize(self._multiple_session_references, min_time)
         self.patched_library.niTClk_SetupForSyncPulseSenderSynchronize.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time))
         return
 
     def test_synchronize(self):
         min_time = 0.042
         self.patched_library.niTClk_Synchronize.side_effect = self.side_effects_helper.niTClk_Synchronize
-        nitclk.synchronize(multiple_session_references, min_time)
+        nitclk.synchronize(self._multiple_session_references, min_time)
         self.patched_library.niTClk_Synchronize.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time))
         return
 
     def test_synchronize_timedelta(self):
         min_time = hightime.timedelta(seconds=0.042)
         self.patched_library.niTClk_Synchronize.side_effect = self.side_effects_helper.niTClk_Synchronize
-        nitclk.synchronize(multiple_session_references, min_time)
+        nitclk.synchronize(self._multiple_session_references, min_time)
         self.patched_library.niTClk_Synchronize.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time.total_seconds()))
         return
 
     def test_synchronize_to_sync_pulse_sender(self):
         min_time = 0.042
         self.patched_library.niTClk_SynchronizeToSyncPulseSender.side_effect = self.side_effects_helper.niTClk_SynchronizeToSyncPulseSender
-        nitclk.synchronize_to_sync_pulse_sender(multiple_session_references, min_time)
+        nitclk.synchronize_to_sync_pulse_sender(self._multiple_session_references, min_time)
         self.patched_library.niTClk_SynchronizeToSyncPulseSender.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time))
         return
 
     def test_wait_until_done(self):
         min_time = 4.2
         self.patched_library.niTClk_WaitUntilDone.side_effect = self.side_effects_helper.niTClk_WaitUntilDone
-        nitclk.wait_until_done(multiple_session_references, min_time)
+        nitclk.wait_until_done(self._multiple_session_references, min_time)
         self.patched_library.niTClk_WaitUntilDone.assert_called_once_with(_matchers.ViUInt32Matcher(len(multiple_sessions)), _matchers.ViSessionBufferMatcher(multiple_sessions), _matchers.ViReal64Matcher(min_time))
         return
 
@@ -117,7 +125,7 @@ class TestNitclkApi(object):
         self.patched_library.niTClk_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niTClk_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['errorString'] = error_string
         try:
-            nitclk.synchronize(multiple_session_references, 0.42)
+            nitclk.synchronize(self._multiple_session_references, 0.42)
         except nitclk.Error as e:
             assert e.code == -1
             assert e.description == error_string
@@ -128,7 +136,7 @@ class TestNitclkApi(object):
         self.patched_library.niTClk_GetExtendedErrorInfo.side_effect = self.side_effects_helper.niTClk_GetExtendedErrorInfo
         self.side_effects_helper['GetExtendedErrorInfo']['return'] = -2
         try:
-            nitclk.synchronize(multiple_session_references, 0.42)
+            nitclk.synchronize(self._multiple_session_references, 0.42)
         except nitclk.Error as e:
             assert e.code == -1  # we want the original error code from getting the attribute.
             assert e.description == "Failed to retrieve error description."
@@ -227,7 +235,7 @@ class TestNitclkApi(object):
         attr_string = session.sync_pulse_sender_sync_pulse_source
         assert(attr_string == test_string)
 
-        from mock import call
+        from unittest.mock import call
         calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(len(test_string)), _matchers.ViCharBufferMatcher(len(test_string)))]
         self.patched_library.niTClk_GetAttributeViString.assert_has_calls(calls)
         assert self.patched_library.niTClk_GetAttributeViString.call_count == 2

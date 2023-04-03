@@ -9,7 +9,7 @@ Overall Status
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
-Author       National Instruments
+Author       NI
 ===========  ============================================================================================================================
 
 .. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
@@ -61,7 +61,7 @@ called through its public C API using the `ctypes <https://docs.python.org/2/lib
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
 **nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
-this time this includes Python 3.6 and above using CPython.
+this time this includes Python 3.7 and above using CPython.
 
 
 NI-FGEN Python API Status
@@ -70,7 +70,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 21.3.0                |
+| Driver Version Tested Against | 21.8.0                |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -140,7 +140,7 @@ The following is a basic example of using the **nifgen** module to open a sessio
         with session.initiate():
             time.sleep(5)
 
-Additional examples for NI-FGEN are located in src/nifgen/examples/ directory.
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nifgen/examples>`_
 
 .. _support-section:
 
@@ -183,3 +183,6 @@ Other incorporated projects may be licensed under different licenses. All
 licenses allow for non-commercial and commercial use.
 
 
+**gRPC Features**
+For driver APIs that support it, passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
+subject to the NI General Purpose EULA (`see NILICENSE <https://github.com/ni/nimi-python/blob/master/NILICENSE>`_).

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0f353
+# This file is generated from NI-DCPower API metadata version 23.3.0d397
 config = {
-    'api_version': '21.0.0f353',
+    'api_version': '23.3.0d397',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {
@@ -10,12 +10,25 @@ config = {
         'task': 'acquisition'
     },
     'custom_types': [
+        {
+            'ctypes_type': 'struct_NILCRLoadCompensationSpot',
+            'file_name': 'lcr_load_compensation_spot',
+            'grpc_name': 'NILCRLoadCompensationSpot',
+            'python_name': 'LCRLoadCompensationSpot'
+        },
+        {
+            'ctypes_type': 'struct_NILCRMeasurement',
+            'file_name': 'lcr_measurement',
+            'grpc_name': 'NILCRMeasurement',
+            'python_name': 'LCRMeasurement'
+        }
     ],
     'driver_name': 'NI-DCPower',
     'extra_errors_used': [
         'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
+    'grpc_service_class_prefix': 'NiDCPower',
     'init_function': 'FancyInitialize',
     'library_info': {
         'Linux': {
@@ -35,7 +48,6 @@ config = {
             }
         }
     },
-    'metadata_version': '2.0',
     'module_name': 'nidcpower',
     'repeated_capabilities': [
         {
@@ -47,7 +59,7 @@ config = {
             'python_name': 'instruments'
         }
     ],
-    'session_class_description': 'An NI-DCPower session to a National Instruments Programmable Power Supply or Source Measure Unit.',
+    'session_class_description': 'An NI-DCPower session to an NI programmable power supply or source measure unit.',
     'session_handle_parameter_name': 'vi',
     'uses_nitclk': False
 }

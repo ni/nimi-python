@@ -2,9 +2,6 @@
 <%
     import build.helper as helper
 
-    parameters = f['parameters']
-    c_function_prefix = config['c_function_prefix']
-
     output_params_list = []
     called_function = config['functions'][f['real_datetime_call']]
     for p in called_function['parameters']:
@@ -20,4 +17,3 @@
         '''
         ${output_params} = self.${called_function['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_CALL)})
         return hightime.datetime(year, month, day, hour, minute)
-

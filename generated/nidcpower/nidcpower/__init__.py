@@ -2,12 +2,21 @@
 # This file was generated
 
 
-__version__ = '1.4.2.dev0'
+__version__ = '1.4.4.dev0'
 
 from nidcpower.enums import *  # noqa: F403,F401,H303
 from nidcpower.errors import DriverWarning  # noqa: F401
 from nidcpower.errors import Error  # noqa: F401
+from nidcpower.grpc_session_options import *  # noqa: F403,F401,H303
 from nidcpower.session import Session  # noqa: F401
+
+from nidcpower.lcr_load_compensation_spot import LCRLoadCompensationSpot  # noqa: F401
+
+from nidcpower.lcr_load_compensation_spot import struct_NILCRLoadCompensationSpot  # noqa: F401
+
+from nidcpower.lcr_measurement import LCRMeasurement  # noqa: F401
+
+from nidcpower.lcr_measurement import struct_NILCRMeasurement  # noqa: F401
 
 
 def get_diagnostic_information():
@@ -64,7 +73,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-DCPower"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nidcpower'
-    info['module']['version'] = "1.4.2.dev0"
+    info['module']['version'] = "1.4.4.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
@@ -92,5 +101,3 @@ def print_diagnostic_information():
         print((' ' * 8) + p['name'] + '==' + p['version'])
 
     return info
-
-

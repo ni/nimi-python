@@ -1,6 +1,38 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 21.0.0f353
+# This file is generated from NI-DCPower API metadata version 23.3.0d397
 enums = {
+    'ApertureTimeAutoMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables automatic aperture time scaling. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for all ranges.'
+                },
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_OFF',
+                'value': 1135
+            },
+            {
+                'documentation': {
+                    'description': 'Prioritizes measurement speed over measurement accuracy by quickly scaling down aperture time in larger current ranges. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for the minimum range.'
+                },
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_SHORT',
+                'value': 1136
+            },
+            {
+                'documentation': {
+                    'description': 'Balances measurement accuracy and speed by scaling down aperture time in larger current ranges. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for the minimum range.'
+                },
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_NORMAL',
+                'value': 1137
+            },
+            {
+                'documentation': {
+                    'description': 'Prioritizes accuracy while still decreasing measurement time by slowly scaling down aperture time in larger current ranges. The NIDCPOWER_ATTR_APERTURE_TIME attribute specifies the aperture time for the minimum range.'
+                },
+                'name': 'NIDCPOWER_VAL_APERTURE_TIME_AUTO_MODE_LONG',
+                'value': 1138
+            }
+        ]
+    },
     'ApertureTimeUnits': {
         'values': [
             {
@@ -30,17 +62,17 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Makes zero conversions for every measurement.'
-                },
-                'name': 'NIDCPOWER_VAL_ON',
-                'value': 1
-            },
-            {
-                'documentation': {
                     'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.'
                 },
                 'name': 'NIDCPOWER_VAL_ONCE',
                 'value': 1024
+            },
+            {
+                'documentation': {
+                    'description': 'Makes zero conversions for every measurement.'
+                },
+                'name': 'NIDCPOWER_VAL_ON',
+                'value': 1
             }
         ]
     },
@@ -126,20 +158,89 @@ enums = {
             }
         ]
     },
+    'CableLength': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for a 0m cable (direct connection).'
+                },
+                'name': 'NIDCPOWER_VAL_ZERO_M',
+                'value': 1121
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 1m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_1M',
+                'value': 1122
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 2m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_2M',
+                'value': 1123
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 4m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_4M',
+                'value': 1124
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 1m triaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_1M',
+                'value': 1139
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 2m triaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_2M',
+                'value': 1140
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 4m triaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_TRIAXIAL_4M',
+                'value': 1141
+            },
+            {
+                'documentation': {
+                    'description': 'Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.'
+                },
+                'name': 'NIDCPOWER_VAL_CUSTOM_ONBOARD_STORAGE',
+                'value': 1125
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the custom cable compensation data supplied to niDCPower_ConfigureLCRCustomCableCompensation. Use this option to manage multiple sets of custom cable compensation data.'
+                },
+                'name': 'NIDCPOWER_VAL_CUSTOM_AS_CONFIGURED',
+                'value': 1126
+            }
+        ]
+    },
     'ComplianceLimitSymmetry': {
         'values': [
             {
                 'documentation': {
                     'description': 'Compliance limits are specified symmetrically about 0.'
                 },
-                'name': 'NIDCPOWER_VAL_SYMMETRIC',
+                'name': 'NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC',
+                'python_name': 'NIDCPOWER_VAL_SYMMETRIC',
                 'value': 0
             },
             {
                 'documentation': {
                     'description': 'Compliance limits can be specified asymmetrically with respect to 0.'
                 },
-                'name': 'NIDCPOWER_VAL_ASYMMETRIC',
+                'name': 'NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC',
+                'python_name': 'NIDCPOWER_VAL_ASYMMETRIC',
                 'value': 1
             }
         ]
@@ -148,14 +249,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': ''
+                    'description': 'The channel acts to restrict the output current to the value of the Current Limit property when the actual output on the channel reaches or exceeds that value.'
                 },
                 'name': 'NIDCPOWER_VAL_CURRENT_REGULATE',
                 'value': 0
             },
             {
                 'documentation': {
-                    'description': ''
+                    'description': 'The channel disables the output when the actual output current on the channel reaches or exceeds the value of the Current Limit property.'
                 },
                 'name': 'NIDCPOWER_VAL_CURRENT_TRIP',
                 'value': 1
@@ -201,27 +302,51 @@ enums = {
     'Event': {
         'values': [
             {
-                'name': 'NIDCPOWER_VAL_SOURCE_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Source Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_SOURCE_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_SOURCE_COMPLETE',
                 'value': 1030
             },
             {
-                'name': 'NIDCPOWER_VAL_MEASURE_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Measure Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASURE_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_MEASURE_COMPLETE',
                 'value': 1031
             },
             {
-                'name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Sequence Iteration Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_SEQUENCE_ITERATION_COMPLETE',
                 'value': 1032
             },
             {
-                'name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE',
+                'documentation': {
+                    'description': 'Specifies the Sequence Engine Done event.'
+                },
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_SEQUENCE_ENGINE_DONE',
                 'value': 1033
             },
             {
-                'name': 'NIDCPOWER_VAL_PULSE_COMPLETE',
+                'documentation': {
+                    'description': 'Specifies the Pulse Complete event.'
+                },
+                'name': 'NIDCPOWER_VAL_PULSE_COMPLETE_EVENT',
+                'python_name': 'NIDCPOWER_VAL_PULSE_COMPLETE',
                 'value': 1051
             },
             {
-                'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER',
+                'documentation': {
+                    'description': 'Specifies the Ready for Pulse Trigger event.'
+                },
+                'name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER_EVENT',
+                'python_name': 'NIDCPOWER_VAL_READY_FOR_PULSE_TRIGGER',
                 'value': 1052
             }
         ]
@@ -311,6 +436,265 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
                 'value': 1118
+            }
+        ]
+    },
+    'InstrumentMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The channel operates as an SMU/power supply.'
+                },
+                'name': 'NIDCPOWER_VAL_SMU_PS',
+                'value': 1061
+            },
+            {
+                'documentation': {
+                    'description': 'The channel operates as an LCR meter.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR',
+                'value': 1062
+            }
+        ]
+    },
+    'IsolationState': {
+        'codegen_method': 'private',
+        'converted_value_to_enum_function_name': 'convert_to_isolation_state_enum',
+        'enum_to_converted_value_function_name': 'convert_from_isolation_state_enum',
+        'values': [
+            {
+                'converts_to_value': True,
+                'documentation': {
+                    'description': 'The channel is disconnected from chassis ground.'
+                },
+                'name': 'NIDCPOWER_VAL_ISOLATED',
+                'value': 1128
+            },
+            {
+                'converts_to_value': False,
+                'documentation': {
+                    'description': 'The channel is connected to chassis ground.'
+                },
+                'name': 'NIDCPOWER_VAL_NON_ISOLATED',
+                'value': 1129
+            }
+        ]
+    },
+    'LCRCompensationType': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Open LCR compensation.'
+                },
+                'name': 'NIDCPOWER_VAL_OPEN_COMPENSATION',
+                'value': 1130
+            },
+            {
+                'documentation': {
+                    'description': 'Short LCR compensation.'
+                },
+                'name': 'NIDCPOWER_VAL_SHORT_COMPENSATION',
+                'value': 1131
+            },
+            {
+                'documentation': {
+                    'description': 'Load LCR compensation.'
+                },
+                'name': 'NIDCPOWER_VAL_LOAD_COMPENSATION',
+                'value': 1132
+            },
+            {
+                'documentation': {
+                    'description': 'Open custom cable compensation.'
+                },
+                'name': 'NIDCPOWER_VAL_OPEN_CUSTOM_CABLE_COMPENSATION',
+                'value': 1133
+            },
+            {
+                'documentation': {
+                    'description': 'Short custom cable compensation.'
+                },
+                'name': 'NIDCPOWER_VAL_SHORT_CUSTOM_CABLE_COMPENSATION',
+                'value': 1134
+            }
+        ]
+    },
+    'LCRDCBiasSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables DC bias in LCR mode.'
+                },
+                'name': 'NIDCPOWER_VAL_DC_BIAS_OFF',
+                'value': 1065
+            },
+            {
+                'documentation': {
+                    'description': 'Applies a constant voltage bias, as defined by the NIDCPOWER_ATTR_LCR_DC_BIAS_VOLTAGE_LEVEL property.'
+                },
+                'name': 'NIDCPOWER_VAL_DC_BIAS_VOLTAGE',
+                'value': 1066
+            },
+            {
+                'documentation': {
+                    'description': 'Applies a constant current bias, as defined by the NIDCPOWER_ATTR_LCR_DC_BIAS_CURRENT_LEVEL property.'
+                },
+                'name': 'NIDCPOWER_VAL_DC_BIAS_CURRENT',
+                'value': 1067
+            }
+        ]
+    },
+    'LCRImpedanceAutoRange': {
+        'codegen_method': 'private',
+        'converted_value_to_enum_function_name': 'convert_to_lcr_impedance_auto_range_enum',
+        'enum_to_converted_value_function_name': 'convert_from_lcr_impedance_auto_range_enum',
+        'values': [
+            {
+                'converts_to_value': False,
+                'name': 'NIDCPOWER_VAL_AUTO_RANGE_OFF',
+                'value': 1068
+            },
+            {
+                'converts_to_value': True,
+                'name': 'NIDCPOWER_VAL_AUTO_RANGE_ON',
+                'value': 1070
+            }
+        ]
+    },
+    'LCRImpedanceRangeSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the impedance range you specify with the NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE property.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_IMPEDANCE_RANGE',
+                'value': 1142
+            },
+            {
+                'documentation': {
+                    'description': 'Computes the impedance range to select based on the values you supply to the NIDCPOWER_ATTR_LCR_LOAD_RESISTANCE, NIDCPOWER_ATTR_LCR_LOAD_INDUCTANCE, and NIDCPOWER_ATTR_LCR_LOAD_CAPACITANCE properties. NI-DCPower uses a series model of load resistance, load inductance, and load capacitance to compute the impedance range.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION',
+                'value': 1143
+            }
+        ]
+    },
+    'LCRMeasurementTime': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses a short aperture time for LCR measurements.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_SHORT',
+                'value': 1071
+            },
+            {
+                'documentation': {
+                    'description': 'Uses a medium aperture time for LCR measurements.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_MEDIUM',
+                'value': 1072
+            },
+            {
+                'documentation': {
+                    'description': 'Uses a long aperture time for LCR measurements.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_LONG',
+                'value': 1073
+            },
+            {
+                'documentation': {
+                    'description': 'Uses a custom aperture time for LCR measurements as specified by the NIDCPOWER_ATTR_LCR_CUSTOM_MEASUREMENT_TIME property.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASUREMENT_TIME_CUSTOM',
+                'value': 1117
+            }
+        ]
+    },
+    'LCROpenShortLoadCompensationDataSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses previously generated LCR compensation data. Only the most recently performed compensation data for each LCR compensation type (open, short, and load) is stored.'
+                },
+                'name': 'NIDCPOWER_VAL_ONBOARD_STORAGE',
+                'value': 1074
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the LCR compensation data represented by the relevant LCR compensation attributes as generated by niDCPower_PerformLCROpenCompensation, niDCPower_PerformLCRShortCompensation, and niDCPower_PerformLCRLoadCompensation. Use this option to manage multiple sets of LCR compensation data. This option applies compensation data from the following attributes: NIDCPOWER_ATTR_LCR_OPEN_CONDUCTANCE, NIDCPOWER_ATTR_LCR_OPEN_SUSCEPTANCE, NIDCPOWER_ATTR_LCR_SHORT_RESISTANCE, NIDCPOWER_ATTR_LCR_SHORT_REACTANCE, NIDCPOWER_ATTR_LCR_MEASURED_LOAD_RESISTANCE, NIDCPOWER_ATTR_LCR_MEASURED_LOAD_REACTANCE, NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_RESISTANCE, NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_REACTANCE.'
+                },
+                'name': 'NIDCPOWER_VAL_AS_DEFINED',
+                'value': 1075
+            }
+        ]
+    },
+    'LCRReferenceValueType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IMPEDANCE',
+                'value': 1076
+            },
+            {
+                'documentation': {
+                    'description': 'The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IDEAL_CAPACITANCE',
+                'value': 1077
+            },
+            {
+                'documentation': {
+                    'description': 'The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IDEAL_INDUCTANCE',
+                'value': 1078
+            },
+            {
+                'documentation': {
+                    'description': 'The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_LOAD_COMPENSATION_SPOT_REFERENCE_VALUE_TYPE_IDEAL_RESISTANCE',
+                'value': 1079
+            }
+        ]
+    },
+    'LCRSourceDelayMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-DCPower automatically applies source delay of sufficient duration to account for settling time.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_SOURCE_DELAY_MODE_AUTOMATIC',
+                'value': 1144
+            },
+            {
+                'documentation': {
+                    'description': 'NI-DCPower applies the source delay that you set manually with NIDCPOWER_ATTR_SOURCE_DELAY. You can use this option to set a shorter delay to reduce measurement time at the possible expense of measurement accuracy.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_SOURCE_DELAY_MODE_MANUAL',
+                'value': 1145
+            }
+        ]
+    },
+    'LCRStimulusFunction': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Applies an AC voltage for LCR stimulus.'
+                },
+                'name': 'NIDCPOWER_VAL_AC_VOLTAGE',
+                'value': 1063
+            },
+            {
+                'documentation': {
+                    'description': 'Applies an AC current for LCR stimulus.'
+                },
+                'name': 'NIDCPOWER_VAL_AC_CURRENT',
+                'value': 1064
             }
         ]
     },
@@ -478,14 +862,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'The device maintains a constant voltage by adjusting the current '
+                    'description': 'The channel maintains a constant voltage by adjusting the current.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
                 'value': 0
             },
             {
                 'documentation': {
-                    'description': 'The device maintains a constant current by adjusting the voltage.'
+                    'description': 'The channel maintains a constant current by adjusting the voltage.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                 'value': 1
@@ -599,27 +983,51 @@ enums = {
     'SendSoftwareEdgeTriggerType': {
         'values': [
             {
-                'name': 'NIDCPOWER_VAL_START',
+                'documentation': {
+                    'description': 'Asserts the Start trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_START_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_START',
                 'value': 1034
             },
             {
-                'name': 'NIDCPOWER_VAL_SOURCE',
+                'documentation': {
+                    'description': 'Asserts the Source trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SOURCE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_SOURCE',
                 'value': 1035
             },
             {
-                'name': 'NIDCPOWER_VAL_MEASURE',
+                'documentation': {
+                    'description': 'Asserts the Measure trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_MEASURE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_MEASURE',
                 'value': 1036
             },
             {
-                'name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE',
+                'documentation': {
+                    'description': 'Asserts the Sequence Advance trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_SEQUENCE_ADVANCE',
                 'value': 1037
             },
             {
-                'name': 'NIDCPOWER_VAL_PULSE',
+                'documentation': {
+                    'description': 'Asserts the Pulse trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_PULSE_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_PULSE',
                 'value': 1053
             },
             {
-                'name': 'NIDCPOWER_VAL_SHUTDOWN',
+                'documentation': {
+                    'description': 'Asserts the Shutdown trigger.'
+                },
+                'name': 'NIDCPOWER_VAL_SHUTDOWN_TRIGGER',
+                'python_name': 'NIDCPOWER_VAL_SHUTDOWN',
                 'value': 1118
             }
         ]

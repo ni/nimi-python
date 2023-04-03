@@ -4,6 +4,25 @@
 from enum import Enum
 
 
+class ApertureTimeAutoMode(Enum):
+    OFF = 1135
+    r'''
+    Disables automatic aperture time scaling. The aperture_time property specifies the aperture time for all ranges.
+    '''
+    SHORT = 1136
+    r'''
+    Prioritizes measurement speed over measurement accuracy by quickly scaling down aperture time in larger current ranges. The aperture_time property specifies the aperture time for the minimum range.
+    '''
+    NORMAL = 1137
+    r'''
+    Balances measurement accuracy and speed by scaling down aperture time in larger current ranges. The aperture_time property specifies the aperture time for the minimum range.
+    '''
+    LONG = 1138
+    r'''
+    Prioritizes accuracy while still decreasing measurement time by slowly scaling down aperture time in larger current ranges. The aperture_time property specifies the aperture time for the minimum range.
+    '''
+
+
 class ApertureTimeUnits(Enum):
     SECONDS = 1028
     r'''
@@ -20,13 +39,13 @@ class AutoZero(Enum):
     r'''
     Disables auto zero.
     '''
-    ON = 1
-    r'''
-    Makes zero conversions for every measurement.
-    '''
     ONCE = 1024
     r'''
     Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+    '''
+    ON = 1
+    r'''
+    Makes zero conversions for every measurement.
     '''
 
 
@@ -79,6 +98,45 @@ class AutorangeThresholdMode(Enum):
     '''
 
 
+class CableLength(Enum):
+    ZERO_M = 1121
+    r'''
+    Uses predefined cable compensation data for a 0m cable (direct connection).
+    '''
+    NI_STANDARD_1M = 1122
+    r'''
+    Uses predefined cable compensation data for an NI standard 1m coaxial cable.
+    '''
+    NI_STANDARD_2M = 1123
+    r'''
+    Uses predefined cable compensation data for an NI standard 2m coaxial cable.
+    '''
+    NI_STANDARD_4M = 1124
+    r'''
+    Uses predefined cable compensation data for an NI standard 4m coaxial cable.
+    '''
+    NI_STANDARD_TRIAXIAL_1M = 1139
+    r'''
+    Uses predefined cable compensation data for an NI standard 1m triaxial cable.
+    '''
+    NI_STANDARD_TRIAXIAL_2M = 1140
+    r'''
+    Uses predefined cable compensation data for an NI standard 2m triaxial cable.
+    '''
+    NI_STANDARD_TRIAXIAL_4M = 1141
+    r'''
+    Uses predefined cable compensation data for an NI standard 4m triaxial cable.
+    '''
+    CUSTOM_ONBOARD_STORAGE = 1125
+    r'''
+    Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
+    '''
+    CUSTOM_AS_CONFIGURED = 1126
+    r'''
+    Uses the custom cable compensation data supplied to configure_lcr_custom_cable_compensation. Use this option to manage multiple sets of custom cable compensation data.
+    '''
+
+
 class ComplianceLimitSymmetry(Enum):
     SYMMETRIC = 0
     r'''
@@ -87,6 +145,17 @@ class ComplianceLimitSymmetry(Enum):
     ASYMMETRIC = 1
     r'''
     Compliance limits can be specified asymmetrically with respect to 0.
+    '''
+
+
+class CurrentLimitBehavior(Enum):
+    REGULATE = 0
+    r'''
+    The channel acts to restrict the output current to the value of the Current Limit property when the actual output on the channel reaches or exceeds that value.
+    '''
+    TRIP = 1
+    r'''
+    The channel disables the output when the actual output current on the channel reaches or exceeds the value of the Current Limit property.
     '''
 
 
@@ -103,11 +172,176 @@ class DCNoiseRejection(Enum):
 
 class Event(Enum):
     SOURCE_COMPLETE = 1030
+    r'''
+    Specifies the Source Complete event.
+    '''
     MEASURE_COMPLETE = 1031
+    r'''
+    Specifies the Measure Complete event.
+    '''
     SEQUENCE_ITERATION_COMPLETE = 1032
+    r'''
+    Specifies the Sequence Iteration Complete event.
+    '''
     SEQUENCE_ENGINE_DONE = 1033
+    r'''
+    Specifies the Sequence Engine Done event.
+    '''
     PULSE_COMPLETE = 1051
+    r'''
+    Specifies the Pulse Complete event.
+    '''
     READY_FOR_PULSE_TRIGGER = 1052
+    r'''
+    Specifies the Ready for Pulse Trigger event.
+    '''
+
+
+class InstrumentMode(Enum):
+    SMU_PS = 1061
+    r'''
+    The channel operates as an SMU/power supply.
+    '''
+    LCR = 1062
+    r'''
+    The channel operates as an LCR meter.
+    '''
+
+
+class _IsolationState(Enum):
+    ISOLATED = 1128
+    r'''
+    The channel is disconnected from chassis ground.
+    '''
+    NON_ISOLATED = 1129
+    r'''
+    The channel is connected to chassis ground.
+    '''
+
+
+class LCRCompensationType(Enum):
+    OPEN = 1130
+    r'''
+    Open LCR compensation.
+    '''
+    SHORT = 1131
+    r'''
+    Short LCR compensation.
+    '''
+    LOAD = 1132
+    r'''
+    Load LCR compensation.
+    '''
+    OPEN_CUSTOM_CABLE = 1133
+    r'''
+    Open custom cable compensation.
+    '''
+    SHORT_CUSTOM_CABLE = 1134
+    r'''
+    Short custom cable compensation.
+    '''
+
+
+class LCRDCBiasSource(Enum):
+    OFF = 1065
+    r'''
+    Disables DC bias in LCR mode.
+    '''
+    VOLTAGE = 1066
+    r'''
+    Applies a constant voltage bias, as defined by the lcr_dc_bias_voltage_level property.
+    '''
+    CURRENT = 1067
+    r'''
+    Applies a constant current bias, as defined by the lcr_dc_bias_current_level property.
+    '''
+
+
+class _LCRImpedanceAutoRange(Enum):
+    OFF = 1068
+    ON = 1070
+
+
+class LCRImpedanceRangeSource(Enum):
+    IMPEDANCE_RANGE = 1142
+    r'''
+    Uses the impedance range you specify with the lcr_impedance_range property.
+    '''
+    LOAD_CONFIGURATION = 1143
+    r'''
+    Computes the impedance range to select based on the values you supply to the lcr_load_resistance, lcr_load_inductance, and lcr_load_capacitance properties. NI-DCPower uses a series model of load resistance, load inductance, and load capacitance to compute the impedance range.
+    '''
+
+
+class LCRMeasurementTime(Enum):
+    SHORT = 1071
+    r'''
+    Uses a short aperture time for LCR measurements.
+    '''
+    MEDIUM = 1072
+    r'''
+    Uses a medium aperture time for LCR measurements.
+    '''
+    LONG = 1073
+    r'''
+    Uses a long aperture time for LCR measurements.
+    '''
+    CUSTOM = 1117
+    r'''
+    Uses a custom aperture time for LCR measurements as specified by the lcr_custom_measurement_time property.
+    '''
+
+
+class LCROpenShortLoadCompensationDataSource(Enum):
+    ONBOARD_STORAGE = 1074
+    r'''
+    Uses previously generated LCR compensation data. Only the most recently performed compensation data for each LCR compensation type (open, short, and load) is stored.
+    '''
+    AS_DEFINED = 1075
+    r'''
+    Uses the LCR compensation data represented by the relevant LCR compensation properties as generated by perform_lcr_open_compensation, perform_lcr_short_compensation, and perform_lcr_load_compensation. Use this option to manage multiple sets of LCR compensation data. This option applies compensation data from the following properties: lcr_open_conductance, lcr_open_susceptance, lcr_short_resistance, lcr_short_reactance, lcr_measured_load_resistance, lcr_measured_load_reactance, lcr_actual_load_resistance, lcr_actual_load_reactance.
+    '''
+
+
+class LCRReferenceValueType(Enum):
+    IMPEDANCE = 1076
+    r'''
+    The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.
+    '''
+    IDEAL_CAPACITANCE = 1077
+    r'''
+    The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.
+    '''
+    IDEAL_INDUCTANCE = 1078
+    r'''
+    The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.
+    '''
+    IDEAL_RESISTANCE = 1079
+    r'''
+    The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.
+    '''
+
+
+class LCRSourceDelayMode(Enum):
+    AUTOMATIC = 1144
+    r'''
+    NI-DCPower automatically applies source delay of sufficient duration to account for settling time.
+    '''
+    MANUAL = 1145
+    r'''
+    NI-DCPower applies the source delay that you set manually with source_delay. You can use this option to set a shorter delay to reduce measurement time at the possible expense of measurement accuracy.
+    '''
+
+
+class LCRStimulusFunction(Enum):
+    VOLTAGE = 1063
+    r'''
+    Applies an AC voltage for LCR stimulus.
+    '''
+    CURRENT = 1064
+    r'''
+    Applies an AC current for LCR stimulus.
+    '''
 
 
 class MeasureWhen(Enum):
@@ -208,11 +442,11 @@ class OutputFunction(Enum):
 class OutputStates(Enum):
     VOLTAGE = 0
     r'''
-    The device maintains a constant voltage by adjusting the current
+    The channel maintains a constant voltage by adjusting the current.
     '''
     CURRENT = 1
     r'''
-    The device maintains a constant current by adjusting the voltage.
+    The channel maintains a constant current by adjusting the voltage.
     '''
 
 
@@ -281,11 +515,29 @@ class SelfCalibrationPersistence(Enum):
 
 class SendSoftwareEdgeTriggerType(Enum):
     START = 1034
+    r'''
+    Asserts the Start trigger.
+    '''
     SOURCE = 1035
+    r'''
+    Asserts the Source trigger.
+    '''
     MEASURE = 1036
+    r'''
+    Asserts the Measure trigger.
+    '''
     SEQUENCE_ADVANCE = 1037
+    r'''
+    Asserts the Sequence Advance trigger.
+    '''
     PULSE = 1053
+    r'''
+    Asserts the Pulse trigger.
+    '''
     SHUTDOWN = 1118
+    r'''
+    Asserts the Shutdown trigger.
+    '''
 
 
 class Sense(Enum):

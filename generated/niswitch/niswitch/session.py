@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import array  # noqa: F401
-import ctypes
 # Used by @ivi_synchronized
 from functools import wraps
 
 import niswitch._attributes as _attributes
 import niswitch._converters as _converters
-import niswitch._library_singleton as _library_singleton
-import niswitch._visatype as _visatype
+import niswitch._library_interpreter as _library_interpreter
 import niswitch.enums as enums
 import niswitch.errors as errors
 
@@ -17,39 +15,6 @@ import hightime
 # Used for __repr__
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
-
-
-# Helper functions for creating ctypes needed for calling into the driver DLL
-def get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
-    if isinstance(value, array.array):
-        assert library_type is not None, 'library_type is required for array.array'
-        addr, _ = value.buffer_info()
-        return ctypes.cast(addr, ctypes.POINTER(library_type))
-    elif str(type(value)).find("'numpy.ndarray'") != -1:
-        import numpy
-        return numpy.ctypeslib.as_ctypes(value)
-    elif isinstance(value, bytes):
-        return ctypes.cast(value, ctypes.POINTER(library_type))
-    elif isinstance(value, list):
-        assert library_type is not None, 'library_type is required for list'
-        return (library_type * len(value))(*value)
-    else:
-        if library_type is not None and size is not None:
-            return (library_type * size)()
-        else:
-            return None
-
-
-def get_ctypes_and_array(value, array_type):
-    if value is not None:
-        if isinstance(value, array.array):
-            value_array = value
-        else:
-            value_array = array.array(array_type, value)
-    else:
-        value_array = None
-
-    return value_array
 
 
 class _Scan(object):
@@ -100,7 +65,12 @@ class _RepeatedCapabilities(object):
         rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
         complete_rep_cap_list = [current_rep_cap + self._separator + rep_cap for current_rep_cap in self._current_repeated_capability_list for rep_cap in rep_caps_list]
 
-        return _SessionBase(vi=self._session._vi, repeated_capability_list=complete_rep_cap_list, library=self._session._library, encoding=self._session._encoding, freeze_it=True)
+        return _SessionBase(
+            repeated_capability_list=complete_rep_cap_list,
+            all_channels_in_session=self._session._all_channels_in_session,
+            interpreter=self._session._interpreter,
+            freeze_it=True
+        )
 
 
 # This is a very simple context manager we can use when we need to set/get attributes
@@ -584,24 +554,23 @@ class _SessionBase(object):
     Example: :py:attr:`my_session.wire_mode`
     '''
 
-    def __init__(self, repeated_capability_list, vi, library, encoding, freeze_it=False):
+    def __init__(self, repeated_capability_list, all_channels_in_session, interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
         self._repeated_capability = ','.join(repeated_capability_list)
-        self._vi = vi
-        self._library = library
-        self._encoding = encoding
+        self._all_channels_in_session = all_channels_in_session
+        self._interpreter = interpreter
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("repeated_capability_list=" + pp.pformat(repeated_capability_list))
-        param_list.append("vi=" + pp.pformat(vi))
-        param_list.append("library=" + pp.pformat(library))
-        param_list.append("encoding=" + pp.pformat(encoding))
+        param_list.append("interpreter=" + pp.pformat(interpreter))
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
 
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = freeze_it
 
     def __repr__(self):
@@ -611,28 +580,6 @@ class _SessionBase(object):
         if self._is_frozen and key not in dir(self):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
-
-    def _get_error_description(self, error_code):
-        '''_get_error_description
-
-        Returns the error description.
-        '''
-        try:
-            _, error_string = self._get_error()
-            return error_string
-        except errors.Error:
-            pass
-
-        try:
-            '''
-            It is expected for _get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use _error_message instead. It doesn't require a session.
-            '''
-            error_string = self._error_message(error_code)
-            return error_string
-        except errors.Error:
-            return "Failed to retrieve error description."
 
     ''' These are code-generated '''
 
@@ -687,13 +634,8 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean()  # case S220
-        error_code = self._library.niSwitch_GetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return bool(attribute_value_ctype.value)
+        attribute_value = self._interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute_id):
@@ -746,13 +688,8 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_GetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(attribute_value_ctype.value)
+        attribute_value = self._interpreter.get_attribute_vi_int32(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute_id):
@@ -805,13 +742,8 @@ class _SessionBase(object):
                 double-clicking on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niSwitch_GetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, None if attribute_value_ctype is None else (ctypes.pointer(attribute_value_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(attribute_value_ctype.value)
+        attribute_value = self._interpreter.get_attribute_vi_real64(self._repeated_capability, attribute_id)
+        return attribute_value
 
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute_id):
@@ -885,68 +817,8 @@ class _SessionBase(object):
                 on it or by selecting it and then pressing .
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        array_size_ctype = _visatype.ViInt32()  # case S170
-        attribute_value_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        array_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        attribute_value_ctype = (_visatype.ViChar * array_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, array_size_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return attribute_value_ctype.value.decode(self._encoding)
-
-    def _get_error(self):
-        r'''_get_error
-
-        This method retrieves and then clears the IVI error information for
-        the session or the current execution thread. One exception exists: If
-        the buffer_size parameter is 0, the method does not clear the error
-        information. By passing 0 for the buffer size, the caller can ascertain
-        the buffer size required to get the entire error description string and
-        then call the method again with a sufficiently large buffer. If the
-        user specifies a valid IVI session for the InstrumentHandle parameter,
-        Get Error retrieves and then clears the error information for the
-        session. If the user passes VI_NULL for the InstrumentHandle parameter,
-        this method retrieves and then clears the error information for the
-        current execution thread. If the InstrumentHandle parameter is an
-        invalid session, the method does nothing and returns an error.
-        Normally, the error information describes the first error that occurred
-        since the user last called _get_error or ClearError.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
-
-        Returns:
-            code (int): Returns the error code for the session or execution thread. If you pass
-                0 for the Buffer Size, you can pass VI_NULL for this parameter.
-
-            description (str): Returns the error description for the IVI session or execution thread.
-                If there is no description, the method returns an empty string. The
-                buffer must contain at least as many elements as the value you specify
-                with the Buffer Size parameter. If the error description, including the
-                terminating NUL byte, contains more bytes than you indicate with the
-                Buffer Size parameter, the method copies Buffer Size - 1 bytes into
-                the buffer, places an ASCII NUL byte at the end of the buffer, and
-                returns the buffer size you must pass to get the entire value. For
-                example, if the value is "123456" and the Buffer Size is 4, the method
-                places "123" into the buffer and returns 7. If you pass 0 for the Buffer
-                Size, you can pass VI_NULL for this parameter.
-
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        code_ctype = _visatype.ViStatus()  # case S220
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        description_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=True)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        description_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetError(vi_ctype, None if code_ctype is None else (ctypes.pointer(code_ctype)), buffer_size_ctype, description_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return int(code_ctype.value), description_ctype.value.decode(self._encoding)
+        attribute_value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
+        return attribute_value
 
     def lock(self):
         '''lock
@@ -978,20 +850,10 @@ class _SessionBase(object):
             lock (context manager): When used in a with statement, niswitch.Session.lock acts as
             a context manager and unlock will be called when the with block is exited
         '''
-        self._lock_session()  # We do not call _lock_session() in the context manager so that this function can
+        self._interpreter.lock()  # We do not call this in the context manager so that this function can
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    def _lock_session(self):
-        '''_lock_session
-
-        Actual call to driver
-        '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_LockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, attribute_value):
@@ -1056,13 +918,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViBoolean(attribute_value)  # case S150
-        error_code = self._library.niSwitch_SetAttributeViBoolean(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute_id, attribute_value):
@@ -1127,13 +983,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViInt32(attribute_value)  # case S150
-        error_code = self._library.niSwitch_SetAttributeViInt32(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute_id, attribute_value):
@@ -1198,13 +1048,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = _visatype.ViReal64(attribute_value)  # case S150
-        error_code = self._library.niSwitch_SetAttributeViReal64(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, attribute_value)
 
     @ivi_synchronized
     def _set_attribute_vi_string(self, attribute_id, attribute_value):
@@ -1269,13 +1113,7 @@ class _SessionBase(object):
                 the current settings of the instrument session. Default Value: none
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(self._repeated_capability.encode(self._encoding))  # case C010
-        attribute_id_ctype = _visatype.ViAttr(attribute_id)  # case S150
-        attribute_value_ctype = ctypes.create_string_buffer(attribute_value.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_SetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, attribute_value_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, attribute_value)
 
     def unlock(self):
         '''unlock
@@ -1284,10 +1122,7 @@ class _SessionBase(object):
         lock. Refer to lock for additional
         information on session locks.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_UnlockSession(vi_ctype, None)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
+        self._interpreter.unlock()
 
     def _error_message(self, error_code):
         r'''_error_message
@@ -1307,19 +1142,15 @@ class _SessionBase(object):
                 array with at least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niSwitch_error_message(vi_ctype, error_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return error_message_ctype.value.decode(self._encoding)
+        error_message = self._interpreter.error_message(error_code)
+        return error_message
 
 
 class Session(_SessionBase):
-    '''An NI-SWITCH session to a National Instruments Switch Module'''
+    '''An NI-SWITCH session to an NI switch module.'''
 
-    def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
-        r'''An NI-SWITCH session to a National Instruments Switch Module
+    def __init__(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False, *, grpc_options=None):
+        r'''An NI-SWITCH session to an NI switch module.
 
         Returns a session handle used to identify the switch in all subsequent
         instrument driver calls and sets the topology of the switch.
@@ -1327,10 +1158,10 @@ class Session(_SessionBase):
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock
-        device with topology, you must specify the toplogy created when you
+        device with topology, you must specify the topology created when you
         configured the device in MAX, using either
-        NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the
-        device. Refer to the Initializing with Toplogy for NI SwitchBlock
+        "Configured Topology" or the topology string of the
+        device. Refer to the Initializing with Topology for NI SwitchBlock
         Devices topic in the NI Switches Help for information about determining
         the topology string of an NI SwitchBlock device. By default, the switch
         is reset to a known state. Enable simulation by specifying the topology
@@ -1351,194 +1182,163 @@ class Session(_SessionBase):
 
             topology (str): Pass the topology name you want to use for the switch you specify with
                 Resource Name parameter. You can also pass
-                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
-                was configured for the device in MAX. Default Value:
-                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY Valid Values:
-                NISWITCH_TOPOLOGY_1127_1_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_1127_2_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_1127_2_WIRE_4X8_MATRIX
-                NISWITCH_TOPOLOGY_1127_4_WIRE_16X1_MUX
-                NISWITCH_TOPOLOGY_1127_INDEPENDENT
-                NISWITCH_TOPOLOGY_1128_1_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_1128_2_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_1128_2_WIRE_4X8_MATRIX
-                NISWITCH_TOPOLOGY_1128_4_WIRE_16X1_MUX
-                NISWITCH_TOPOLOGY_1128_INDEPENDENT
-                NISWITCH_TOPOLOGY_1129_2_WIRE_16X16_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_8X16_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_4X32_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_QUAD_4X16_MATRIX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_256X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_DUAL_128X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_8x32_MATRIX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_OCTAL_32X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_QUAD_64X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_SIXTEEN_16X1_MUX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_4X32_MATRIX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_128X1_MUX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_OCTAL_16X1_MUX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_QUAD_32X1_MUX
-                NISWITCH_TOPOLOGY_1130_4_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_1130_4_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_1130_INDEPENDENT NISWITCH_TOPOLOGY_1160_16_SPDT
-                NISWITCH_TOPOLOGY_1161_8_SPDT
-                NISWITCH_TOPOLOGY_1163R_OCTAL_4X1_MUX
-                NISWITCH_TOPOLOGY_1166_16_DPDT NISWITCH_TOPOLOGY_1166_32_SPDT
-                NISWITCH_TOPOLOGY_1167_INDEPENDENT
-                NISWITCH_TOPOLOGY_1169_100_SPST NISWITCH_TOPOLOGY_1169_50_DPST
-                NISWITCH_TOPOLOGY_1175_1_WIRE_196X1_MUX
-                NISWITCH_TOPOLOGY_1175_2_WIRE_98X1_MUX
-                NISWITCH_TOPOLOGY_1175_2_WIRE_95X1_MUX
-                NISWITCH_TOPOLOGY_1190_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_1191_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_1192_8_SPDT NISWITCH_TOPOLOGY_1193_32X1_MUX
-                NISWITCH_TOPOLOGY_1193_16X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_1193_DUAL_16X1_MUX
-                NISWITCH_TOPOLOGY_1193_DUAL_8X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_1193_QUAD_8X1_MUX
-                NISWITCH_TOPOLOGY_1193_QUAD_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_1193_INDEPENDENT
-                NISWITCH_TOPOLOGY_1194_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_1195_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_MUX
-                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_AMPLIFIED_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_AMPLIFIED_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_DUAL_12X1_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_QUAD_6X1_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_4X6_MATRIX
-                NISWITCH_TOPOLOGY_2501_4_WIRE_12X1_MUX
-                NISWITCH_TOPOLOGY_2503_1_WIRE_48X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_24X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_DUAL_12X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_QUAD_6X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_4X6_MATRIX
-                NISWITCH_TOPOLOGY_2503_4_WIRE_12X1_MUX
-                NISWITCH_TOPOLOGY_2510_INDEPENDENT
-                NISWITCH_TOPOLOGY_2512_INDEPENDENT
-                NISWITCH_TOPOLOGY_2514_INDEPENDENT
-                NISWITCH_TOPOLOGY_2515_INDEPENDENT NISWITCH_TOPOLOGY_2520_80_SPST
-                NISWITCH_TOPOLOGY_2521_40_DPST NISWITCH_TOPOLOGY_2522_53_SPDT
-                NISWITCH_TOPOLOGY_2523_26_DPDT
-                NISWITCH_TOPOLOGY_2524_1_WIRE_128X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_DUAL_64X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_QUAD_32X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_OCTAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_SIXTEEN_8X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_OCTAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_SIXTEEN_4X1_MUX
-                NISWITCH_TOPOLOGY_2526_1_WIRE_158X1_MUX
-                NISWITCH_TOPOLOGY_2526_2_WIRE_79X1_MUX
-                NISWITCH_TOPOLOGY_2527_1_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2527_1_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2527_2_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_2527_2_WIRE_DUAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2527_4_WIRE_16X1_MUX
-                NISWITCH_TOPOLOGY_2527_INDEPENDENT
-                NISWITCH_TOPOLOGY_2529_2_WIRE_DUAL_4X16_MATRIX
-                NISWITCH_TOPOLOGY_2529_2_WIRE_8X16_MATRIX
-                NISWITCH_TOPOLOGY_2529_2_WIRE_4X32_MATRIX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_128X1_MUX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_DUAL_64X1_MUX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_4x32_MATRIX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_8x16_MATRIX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_OCTAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_QUAD_32X1_MUX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_4x16_MATRIX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_2530_4_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_2530_4_WIRE_DUAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2530_INDEPENDENT
-                NISWITCH_TOPOLOGY_2531_1_WIRE_4X128_MATRIX
-                NISWITCH_TOPOLOGY_2531_1_WIRE_8X64_MATRIX
-                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2531_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2531_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_16X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_4X128_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_8X64_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_16X16_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_SIXTEEN_2X16_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_16X16_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_DUAL_4X32_MATRIX
-                NISWITCH_TOPOLOGY_2533_1_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2534_1_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2535_1_WIRE_4X136_MATRIX
-                NISWITCH_TOPOLOGY_2536_1_WIRE_8X68_MATRIX
-                NISWITCH_TOPOLOGY_2540_1_WIRE_8X9_MATRIX
-                NISWITCH_TOPOLOGY_2541_1_WIRE_8X12_MATRIX
-                NISWITCH_TOPOLOGY_2542_QUAD_2X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2543_DUAL_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2544_8X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2545_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2546_DUAL_4X1_MUX
-                NISWITCH_TOPOLOGY_2547_8X1_MUX NISWITCH_TOPOLOGY_2548_4_SPDT
-                NISWITCH_TOPOLOGY_2549_TERMINATED_2_SPDT
-                NISWITCH_TOPOLOGY_2554_4X1_MUX
-                NISWITCH_TOPOLOGY_2555_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2556_DUAL_4X1_MUX
-                NISWITCH_TOPOLOGY_2557_8X1_MUX NISWITCH_TOPOLOGY_2558_4_SPDT
-                NISWITCH_TOPOLOGY_2559_TERMINATED_2_SPDT
-                NISWITCH_TOPOLOGY_2564_16_SPST NISWITCH_TOPOLOGY_2564_8_DPST
-                NISWITCH_TOPOLOGY_2565_16_SPST NISWITCH_TOPOLOGY_2566_16_SPDT
-                NISWITCH_TOPOLOGY_2566_8_DPDT NISWITCH_TOPOLOGY_2567_INDEPENDENT
-                NISWITCH_TOPOLOGY_2568_15_DPST NISWITCH_TOPOLOGY_2568_31_SPST
-                NISWITCH_TOPOLOGY_2569_100_SPST NISWITCH_TOPOLOGY_2569_50_DPST
-                NISWITCH_TOPOLOGY_2570_20_DPDT NISWITCH_TOPOLOGY_2570_40_SPDT
-                NISWITCH_TOPOLOGY_2571_66_SPDT
-                NISWITCH_TOPOLOGY_2575_1_WIRE_196X1_MUX
-                NISWITCH_TOPOLOGY_2575_2_WIRE_98X1_MUX
-                NISWITCH_TOPOLOGY_2575_2_WIRE_95X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_OCTAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_SIXTEEN_4X1_MUX
-                NISWITCH_TOPOLOGY_2576_INDEPENDENT
-                NISWITCH_TOPOLOGY_2584_1_WIRE_12X1_MUX
-                NISWITCH_TOPOLOGY_2584_1_WIRE_DUAL_6X1_MUX
-                NISWITCH_TOPOLOGY_2584_2_WIRE_6X1_MUX
-                NISWITCH_TOPOLOGY_2584_INDEPENDENT
-                NISWITCH_TOPOLOGY_2585_1_WIRE_10X1_MUX
-                NISWITCH_TOPOLOGY_2586_10_SPST NISWITCH_TOPOLOGY_2586_5_DPST
-                NISWITCH_TOPOLOGY_2590_4X1_MUX NISWITCH_TOPOLOGY_2591_4X1_MUX
-                NISWITCH_TOPOLOGY_2593_16X1_MUX
-                NISWITCH_TOPOLOGY_2593_8X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2593_DUAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2593_DUAL_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2593_INDEPENDENT NISWITCH_TOPOLOGY_2594_4X1_MUX
-                NISWITCH_TOPOLOGY_2595_4X1_MUX
-                NISWITCH_TOPOLOGY_2596_DUAL_6X1_MUX
-                NISWITCH_TOPOLOGY_2597_6X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2598_DUAL_TRANSFER
-                NISWITCH_TOPOLOGY_2599_2_SPDT NISWITCH_TOPOLOGY_2720_INDEPENDENT
-                NISWITCH_TOPOLOGY_2722_INDEPENDENT
-                NISWITCH_TOPOLOGY_2725_INDEPENDENT
-                NISWITCH_TOPOLOGY_2727_INDEPENDENT
-                NISWITCH_TOPOLOGY_2737_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2738_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2739_2_WIRE_16X16_MATRIX
-                NISWITCH_TOPOLOGY_2746_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_2747_DUAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2748_16X1_MUX
-                NISWITCH_TOPOLOGY_2790_INDEPENDENT
-                NISWITCH_TOPOLOGY_2796_DUAL_6X1_MUX
-                NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
-                NISWITCH_TOPOLOGY_2799_2_SPDT
+                "Configured Topology" to use the last topology that
+                was configured for the device in MAX.
+                Default Value:
+                "Configured Topology"
+                Valid Values:
+                "Configured Topology"
+                "2501/1-Wire 48x1 Mux"
+                "2501/1-Wire 48x1 Amplified Mux"
+                "2501/2-Wire 24x1 Mux"
+                "2501/2-Wire 24x1 Amplified Mux"
+                "2501/2-Wire Dual 12x1 Mux"
+                "2501/2-Wire Quad 6x1 Mux"
+                "2501/2-Wire 4x6 Matrix"
+                "2501/4-Wire 12x1 Mux"
+                "2503/1-Wire 48x1 Mux"
+                "2503/2-Wire 24x1 Mux"
+                "2503/2-Wire Dual 12x1 Mux"
+                "2503/2-Wire Quad 6x1 Mux"
+                "2503/2-Wire 4x6 Matrix"
+                "2503/4-Wire 12x1 Mux"
+                "2510/Independent"
+                "2512/Independent"
+                "2514/Independent"
+                "2515/Independent"
+                "2520/80-SPST"
+                "2521/40-DPST"
+                "2522/53-SPDT"
+                "2523/26-DPDT"
+                "2524/1-Wire 128x1 Mux"
+                "2524/1-Wire Dual 64x1 Mux"
+                "2524/1-Wire Quad 32x1 Mux"
+                "2524/1-Wire Octal 16x1 Mux"
+                "2524/1-Wire Sixteen 8x1 Mux"
+                "2525/2-Wire 64x1 Mux"
+                "2525/2-Wire Dual 32x1 Mux"
+                "2525/2-Wire Quad 16x1 Mux"
+                "2525/2-Wire Octal 8x1 Mux"
+                "2525/2-Wire Sixteen 4x1 Mux"
+                "2526/1-Wire 158x1 Mux"
+                "2526/2-Wire 79x1 Mux"
+                "2527/1-Wire 64x1 Mux"
+                "2527/1-Wire Dual 32x1 Mux"
+                "2527/2-Wire 32x1 Mux"
+                "2527/2-Wire Dual 16x1 Mux"
+                "2527/4-Wire 16x1 Mux"
+                "2527/Independent"
+                "2529/2-Wire Dual 4x16 Matrix"
+                "2529/2-Wire 8x16 Matrix"
+                "2529/2-Wire 4x32 Matrix"
+                "2530/1-Wire 128x1 Mux"
+                "2530/1-Wire Dual 64x1 Mux"
+                "2530/1-Wire 4x32 Matrix"
+                "2530/1-Wire 8x16 Matrix"
+                "2530/1-Wire Octal 16x1 Mux"
+                "2530/1-Wire Quad 32x1 Mux"
+                "2530/2-Wire 4x16 Matrix"
+                "2530/2-Wire 64x1 Mux"
+                "2530/2-Wire Dual 32x1 Mux"
+                "2530/2-Wire Quad 16x1 Mux"
+                "2530/4-Wire 32x1 Mux"
+                "2530/4-Wire Dual 16x1 Mux"
+                "2530/Independent"
+                "2531/1-Wire 4x128 Matrix"
+                "2531/1-Wire 8x64 Matrix"
+                "2531/1-Wire Dual 4x64 Matrix"
+                "2531/1-Wire Dual 8x32 Matrix"
+                "2531/2-Wire 4x64 Matrix"
+                "2531/2-Wire 8x32 Matrix"
+                "2532/1-Wire 16x32 Matrix"
+                "2532/1-Wire 4x128 Matrix"
+                "2532/1-Wire 8x64 Matrix"
+                "2532/1-Wire Dual 16x16 Matrix"
+                "2532/1-Wire Dual 4x64 Matrix"
+                "2532/1-Wire Dual 8x32 Matrix"
+                "2532/1-Wire Quad 4x32 Matrix"
+                "2532/1-Wire Sixteen 2x16 Matrix"
+                "2532/2-Wire 16x16 Matrix"
+                "2532/2-Wire 4x64 Matrix"
+                "2532/2-Wire 8x32 Matrix"
+                "2532/2-Wire Dual 4x32 Matrix"
+                "2533/1-Wire 4x64 Matrix"
+                "2534/1-Wire 8x32 Matrix"
+                "2535/1-Wire 4x136 Matrix"
+                "2536/1-Wire 8x68 Matrix"
+                "2540/1-Wire 8x9 Matrix"
+                "2541/1-Wire 8x12 Matrix"
+                "2542/Quad 2x1 Terminated Mux"
+                "2543/Dual 4x1 Terminated Mux"
+                "2544/8x1 Terminated Mux"
+                "2545/4x1 Terminated Mux"
+                "2546/Dual 4x1 Mux"
+                "2547/8x1 Mux"
+                "2548/4-SPDT"
+                "2549/Terminated 2-SPDT"
+                "2554/4x1 Mux"
+                "2555/4x1 Terminated Mux"
+                "2556/Dual 4x1 Mux"
+                "2557/8x1 Mux"
+                "2558/4-SPDT"
+                "2559/Terminated 2-SPDT"
+                "2564/16-SPST"
+                "2564/8-DPST"
+                "2565/16-SPST"
+                "2566/16-SPDT"
+                "2566/8-DPDT"
+                "2567/Independent"
+                "2568/15-DPST"
+                "2568/31-SPST"
+                "2569/100-SPST"
+                "2569/50-DPST"
+                "2570/20-DPDT"
+                "2570/40-SPDT"
+                "2571/66-SPDT"
+                "2575/1-Wire 196x1 Mux"
+                "2575/2-Wire 98x1 Mux"
+                "2575/2-Wire 95x1 Mux"
+                "2576/2-Wire 64x1 Mux"
+                "2576/2-Wire Dual 32x1 Mux"
+                "2576/2-Wire Octal 8x1 Mux"
+                "2576/2-Wire Quad 16x1 Mux"
+                "2576/2-Wire Sixteen 4x1 Mux"
+                "2576/Independent"
+                "2584/1-Wire 12x1 Mux"
+                "2584/1-Wire Dual 6x1 Mux"
+                "2584/2-Wire 6x1 Mux"
+                "2584/Independent"
+                "2585/1-Wire 10x1 Mux"
+                "2586/10-SPST"
+                "2586/5-DPST"
+                "2590/4x1 Mux"
+                "2591/4x1 Mux"
+                "2593/16x1 Mux"
+                "2593/8x1 Terminated Mux"
+                "2593/Dual 8x1 Mux"
+                "2593/Dual 4x1 Terminated Mux"
+                "2593/Independent"
+                "2594/4x1 Mux"
+                "2595/4x1 Mux"
+                "2596/Dual 6x1 Mux"
+                "2597/6x1 Terminated Mux"
+                "2598/Dual Transfer"
+                "2599/2-SPDT"
+                "2720/Independent"
+                "2722/Independent"
+                "2725/Independent"
+                "2727/Independent"
+                "2737/2-Wire 4x64 Matrix"
+                "2738/2-Wire 8x32 Matrix"
+                "2739/2-Wire 16x16 Matrix"
+                "2746/Quad 4x1 Mux"
+                "2747/Dual 8x1 Mux"
+                "2748/16x1 Mux"
+                "2790/Independent"
+                "2796/Dual 6x1 Mux"
+                "2797/6x1 Terminated Mux"
+                "2798/Dual Transfer"
+                "2799/2-SPDT"
 
             simulate (bool): Enables simulation of the switch module specified in the resource name
                 parameter. Valid Values: True - simulate False - Don't simulate
@@ -1548,18 +1348,33 @@ class Session(_SessionBase):
                 process. Valid Values: True - Reset Device (Default Value) False
                 - Currently unsupported. The device will not reset.
 
+            grpc_options (niswitch.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
+
 
         Returns:
             session (niswitch.Session): A session object representing the device.
 
         '''
-        super(Session, self).__init__(repeated_capability_list=[], vi=None, library=None, encoding=None, freeze_it=False)
-        self._library = _library_singleton.get()
-        self._encoding = 'windows-1251'
+        if grpc_options:
+            import niswitch._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+
+        # Initialize the superclass with default values first, populate them later
+        super(Session, self).__init__(
+            repeated_capability_list=[],
+            interpreter=interpreter,
+            freeze_it=False,
+            all_channels_in_session=None
+        )
 
         # Call specified init function
-        self._vi = 0  # This must be set before calling _init_with_topology().
-        self._vi = self._init_with_topology(resource_name, topology, simulate, reset_device)
+        # Note that _interpreter default-initializes the session handle in its constructor, so that
+        # if _init_with_topology fails, the error handler can reference it.
+        # And then here, once _init_with_topology succeeds, we call set_session_handle
+        # with the actual session handle.
+        self._interpreter.set_session_handle(self._init_with_topology(resource_name, topology, simulate, reset_device))
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -1569,13 +1384,25 @@ class Session(_SessionBase):
         param_list.append("reset_device=" + pp.pformat(reset_device))
         self._param_list = ', '.join(param_list)
 
+        # Store the list of channels in the Session which is needed by some nimi-python modules.
+        # Use try/except because not all the modules support channels.
+        # self.get_channel_names() and self.channel_count can only be called after the session
+        # handle is set
+        try:
+            self._all_channels_in_session = self.get_channel_names(range(self.channel_count))
+        except AttributeError:
+            self._all_channels_in_session = None
+
+        # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
+        # members when trying to set a property with a typo.
         self._is_frozen = True
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self.close()
+        if self._interpreter._close_on_exit:
+            self.close()
 
     def initiate(self):
         '''initiate
@@ -1612,9 +1439,9 @@ class Session(_SessionBase):
         try:
             self._close()
         except errors.DriverError:
-            self._vi = 0
+            self._interpreter.set_session_handle()
             raise
-        self._vi = 0
+        self._interpreter.set_session_handle()
 
     ''' These are code-generated '''
 
@@ -1626,10 +1453,7 @@ class Session(_SessionBase):
         initiate. If the switch module is not scanning,
         NISWITCH_ERROR_NO_SCAN_IN_PROGRESS error is returned.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_AbortScan(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.abort()
 
     @ivi_synchronized
     def can_connect(self, channel1, channel2):
@@ -1680,13 +1504,8 @@ class Session(_SessionBase):
                 configuration channel and thus unavailable for external connections.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        path_capability_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_CanConnect(vi_ctype, channel1_ctype, channel2_ctype, None if path_capability_ctype is None else (ctypes.pointer(path_capability_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.PathCapability(path_capability_ctype.value)
+        path_capability = self._interpreter.can_connect(channel1, channel2)
+        return path_capability
 
     @ivi_synchronized
     def commit(self):
@@ -1697,10 +1516,7 @@ class Session(_SessionBase):
         initiate. Use commit to arm triggers in a given
         order or to control when expensive hardware operations are performed.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_Commit(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.commit()
 
     @ivi_synchronized
     def connect(self, channel1, channel2):
@@ -1737,12 +1553,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_Connect(vi_ctype, channel1_ctype, channel2_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.connect(channel1, channel2)
 
     @ivi_synchronized
     def connect_multiple(self, connection_list):
@@ -1779,11 +1590,7 @@ class Session(_SessionBase):
                 r2 is a configuration channel. Default value: None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        connection_list_ctype = ctypes.create_string_buffer(connection_list.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_ConnectMultiple(vi_ctype, connection_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.connect_multiple(connection_list)
 
     @ivi_synchronized
     def disable(self):
@@ -1793,10 +1600,7 @@ class Session(_SessionBase):
         impact on the system to which it is connected. All channels are
         disconnected and any scan in progress is aborted.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_Disable(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.disable()
 
     @ivi_synchronized
     def disconnect(self, channel1, channel2):
@@ -1819,12 +1623,7 @@ class Session(_SessionBase):
                 names: ch0, com0, ab0, r1, c2, cjtemp Default value: None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_Disconnect(vi_ctype, channel1_ctype, channel2_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.disconnect(channel1, channel2)
 
     @ivi_synchronized
     def disconnect_all(self):
@@ -1833,10 +1632,7 @@ class Session(_SessionBase):
         Breaks all existing paths. If the switch module cannot break all paths,
         NISWITCH_WARN_PATH_REMAINS warning is returned.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_DisconnectAll(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.disconnect_all()
 
     @ivi_synchronized
     def disconnect_multiple(self, disconnection_list):
@@ -1858,11 +1654,7 @@ class Session(_SessionBase):
                 None
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        disconnection_list_ctype = ctypes.create_string_buffer(disconnection_list.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_DisconnectMultiple(vi_ctype, disconnection_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.disconnect_multiple(disconnection_list)
 
     @ivi_synchronized
     def get_channel_name(self, index):
@@ -1883,17 +1675,8 @@ class Session(_SessionBase):
                 specify.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        channel_name_buffer_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        channel_name_buffer_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, channel_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return channel_name_buffer_ctype.value.decode(self._encoding)
+        channel_name_buffer = self._interpreter.get_channel_name(index)
+        return channel_name_buffer
 
     @ivi_synchronized
     def get_path(self, channel1, channel2):
@@ -1930,18 +1713,8 @@ class Session(_SessionBase):
                 returned paths: ch0->com0, com0->ab0
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel1_ctype = ctypes.create_string_buffer(channel1.encode(self._encoding))  # case C020
-        channel2_ctype = ctypes.create_string_buffer(channel2.encode(self._encoding))  # case C020
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        path_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        path_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetPath(vi_ctype, channel1_ctype, channel2_ctype, buffer_size_ctype, path_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return path_ctype.value.decode(self._encoding)
+        path = self._interpreter.get_path(channel1, channel2)
+        return path
 
     @ivi_synchronized
     def get_relay_count(self, relay_name):
@@ -1963,12 +1736,8 @@ class Session(_SessionBase):
             relay_count (int): The number of relay cycles.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_count_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_GetRelayCount(vi_ctype, relay_name_ctype, None if relay_count_ctype is None else (ctypes.pointer(relay_count_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(relay_count_ctype.value)
+        relay_count = self._interpreter.get_relay_count(relay_name)
+        return relay_count
 
     @ivi_synchronized
     def get_relay_name(self, index):
@@ -1988,17 +1757,8 @@ class Session(_SessionBase):
             relay_name_buffer (str): Returns the relay name for the index you specify.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        index_ctype = _visatype.ViInt32(index)  # case S150
-        relay_name_buffer_size_ctype = _visatype.ViInt32()  # case S170
-        relay_name_buffer_ctype = None  # case C050
-        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        relay_name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        relay_name_buffer_ctype = (_visatype.ViChar * relay_name_buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niSwitch_GetRelayName(vi_ctype, index_ctype, relay_name_buffer_size_ctype, relay_name_buffer_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return relay_name_buffer_ctype.value.decode(self._encoding)
+        relay_name_buffer = self._interpreter.get_relay_name(index)
+        return relay_name_buffer
 
     @ivi_synchronized
     def get_relay_position(self, relay_name):
@@ -2018,12 +1778,8 @@ class Session(_SessionBase):
                 RelayPosition.CLOSED 11
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_position_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niSwitch_GetRelayPosition(vi_ctype, relay_name_ctype, None if relay_position_ctype is None else (ctypes.pointer(relay_position_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return enums.RelayPosition(relay_position_ctype.value)
+        relay_position = self._interpreter.get_relay_position(relay_name)
+        return relay_position
 
     def _init_with_topology(self, resource_name, topology="Configured Topology", simulate=False, reset_device=False):
         r'''_init_with_topology
@@ -2034,10 +1790,10 @@ class Session(_SessionBase):
         for the switch specified in the resourceName parameter. The driver uses
         the topology specified in the topology parameter and overrides the
         topology specified in MAX. Note: When initializing an NI SwitchBlock
-        device with topology, you must specify the toplogy created when you
+        device with topology, you must specify the topology created when you
         configured the device in MAX, using either
-        NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY or the toplogy string of the
-        device. Refer to the Initializing with Toplogy for NI SwitchBlock
+        "Configured Topology" or the topology string of the
+        device. Refer to the Initializing with Topology for NI SwitchBlock
         Devices topic in the NI Switches Help for information about determining
         the topology string of an NI SwitchBlock device. By default, the switch
         is reset to a known state. Enable simulation by specifying the topology
@@ -2058,194 +1814,163 @@ class Session(_SessionBase):
 
             topology (str): Pass the topology name you want to use for the switch you specify with
                 Resource Name parameter. You can also pass
-                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY to use the last topology that
-                was configured for the device in MAX. Default Value:
-                NISWITCH_TOPOLOGY_CONFIGURED_TOPOLOGY Valid Values:
-                NISWITCH_TOPOLOGY_1127_1_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_1127_2_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_1127_2_WIRE_4X8_MATRIX
-                NISWITCH_TOPOLOGY_1127_4_WIRE_16X1_MUX
-                NISWITCH_TOPOLOGY_1127_INDEPENDENT
-                NISWITCH_TOPOLOGY_1128_1_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_1128_2_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_1128_2_WIRE_4X8_MATRIX
-                NISWITCH_TOPOLOGY_1128_4_WIRE_16X1_MUX
-                NISWITCH_TOPOLOGY_1128_INDEPENDENT
-                NISWITCH_TOPOLOGY_1129_2_WIRE_16X16_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_8X16_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_DUAL_4X32_MATRIX
-                NISWITCH_TOPOLOGY_1129_2_WIRE_QUAD_4X16_MATRIX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_256X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_DUAL_128X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_8x32_MATRIX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_OCTAL_32X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_QUAD_64X1_MUX
-                NISWITCH_TOPOLOGY_1130_1_WIRE_SIXTEEN_16X1_MUX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_4X32_MATRIX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_128X1_MUX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_OCTAL_16X1_MUX
-                NISWITCH_TOPOLOGY_1130_2_WIRE_QUAD_32X1_MUX
-                NISWITCH_TOPOLOGY_1130_4_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_1130_4_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_1130_INDEPENDENT NISWITCH_TOPOLOGY_1160_16_SPDT
-                NISWITCH_TOPOLOGY_1161_8_SPDT
-                NISWITCH_TOPOLOGY_1163R_OCTAL_4X1_MUX
-                NISWITCH_TOPOLOGY_1166_16_DPDT NISWITCH_TOPOLOGY_1166_32_SPDT
-                NISWITCH_TOPOLOGY_1167_INDEPENDENT
-                NISWITCH_TOPOLOGY_1169_100_SPST NISWITCH_TOPOLOGY_1169_50_DPST
-                NISWITCH_TOPOLOGY_1175_1_WIRE_196X1_MUX
-                NISWITCH_TOPOLOGY_1175_2_WIRE_98X1_MUX
-                NISWITCH_TOPOLOGY_1175_2_WIRE_95X1_MUX
-                NISWITCH_TOPOLOGY_1190_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_1191_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_1192_8_SPDT NISWITCH_TOPOLOGY_1193_32X1_MUX
-                NISWITCH_TOPOLOGY_1193_16X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_1193_DUAL_16X1_MUX
-                NISWITCH_TOPOLOGY_1193_DUAL_8X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_1193_QUAD_8X1_MUX
-                NISWITCH_TOPOLOGY_1193_QUAD_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_1193_INDEPENDENT
-                NISWITCH_TOPOLOGY_1194_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_1195_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_MUX
-                NISWITCH_TOPOLOGY_2501_1_WIRE_48X1_AMPLIFIED_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_24X1_AMPLIFIED_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_DUAL_12X1_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_QUAD_6X1_MUX
-                NISWITCH_TOPOLOGY_2501_2_WIRE_4X6_MATRIX
-                NISWITCH_TOPOLOGY_2501_4_WIRE_12X1_MUX
-                NISWITCH_TOPOLOGY_2503_1_WIRE_48X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_24X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_DUAL_12X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_QUAD_6X1_MUX
-                NISWITCH_TOPOLOGY_2503_2_WIRE_4X6_MATRIX
-                NISWITCH_TOPOLOGY_2503_4_WIRE_12X1_MUX
-                NISWITCH_TOPOLOGY_2510_INDEPENDENT
-                NISWITCH_TOPOLOGY_2512_INDEPENDENT
-                NISWITCH_TOPOLOGY_2514_INDEPENDENT
-                NISWITCH_TOPOLOGY_2515_INDEPENDENT NISWITCH_TOPOLOGY_2520_80_SPST
-                NISWITCH_TOPOLOGY_2521_40_DPST NISWITCH_TOPOLOGY_2522_53_SPDT
-                NISWITCH_TOPOLOGY_2523_26_DPDT
-                NISWITCH_TOPOLOGY_2524_1_WIRE_128X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_DUAL_64X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_QUAD_32X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_OCTAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2524_1_WIRE_SIXTEEN_8X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_OCTAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2525_2_WIRE_SIXTEEN_4X1_MUX
-                NISWITCH_TOPOLOGY_2526_1_WIRE_158X1_MUX
-                NISWITCH_TOPOLOGY_2526_2_WIRE_79X1_MUX
-                NISWITCH_TOPOLOGY_2527_1_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2527_1_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2527_2_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_2527_2_WIRE_DUAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2527_4_WIRE_16X1_MUX
-                NISWITCH_TOPOLOGY_2527_INDEPENDENT
-                NISWITCH_TOPOLOGY_2529_2_WIRE_DUAL_4X16_MATRIX
-                NISWITCH_TOPOLOGY_2529_2_WIRE_8X16_MATRIX
-                NISWITCH_TOPOLOGY_2529_2_WIRE_4X32_MATRIX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_128X1_MUX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_DUAL_64X1_MUX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_4x32_MATRIX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_8x16_MATRIX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_OCTAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2530_1_WIRE_QUAD_32X1_MUX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_4x16_MATRIX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2530_2_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_2530_4_WIRE_32X1_MUX
-                NISWITCH_TOPOLOGY_2530_4_WIRE_DUAL_16X1_MUX
-                NISWITCH_TOPOLOGY_2530_INDEPENDENT
-                NISWITCH_TOPOLOGY_2531_1_WIRE_4X128_MATRIX
-                NISWITCH_TOPOLOGY_2531_1_WIRE_8X64_MATRIX
-                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2531_1_WIRE_DUAL_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2531_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2531_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_16X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_4X128_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_8X64_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_16X16_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_DUAL_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_1_WIRE_SIXTEEN_2X16_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_16X16_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2532_2_WIRE_DUAL_4X32_MATRIX
-                NISWITCH_TOPOLOGY_2533_1_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2534_1_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2535_1_WIRE_4X136_MATRIX
-                NISWITCH_TOPOLOGY_2536_1_WIRE_8X68_MATRIX
-                NISWITCH_TOPOLOGY_2540_1_WIRE_8X9_MATRIX
-                NISWITCH_TOPOLOGY_2541_1_WIRE_8X12_MATRIX
-                NISWITCH_TOPOLOGY_2542_QUAD_2X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2543_DUAL_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2544_8X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2545_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2546_DUAL_4X1_MUX
-                NISWITCH_TOPOLOGY_2547_8X1_MUX NISWITCH_TOPOLOGY_2548_4_SPDT
-                NISWITCH_TOPOLOGY_2549_TERMINATED_2_SPDT
-                NISWITCH_TOPOLOGY_2554_4X1_MUX
-                NISWITCH_TOPOLOGY_2555_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2556_DUAL_4X1_MUX
-                NISWITCH_TOPOLOGY_2557_8X1_MUX NISWITCH_TOPOLOGY_2558_4_SPDT
-                NISWITCH_TOPOLOGY_2559_TERMINATED_2_SPDT
-                NISWITCH_TOPOLOGY_2564_16_SPST NISWITCH_TOPOLOGY_2564_8_DPST
-                NISWITCH_TOPOLOGY_2565_16_SPST NISWITCH_TOPOLOGY_2566_16_SPDT
-                NISWITCH_TOPOLOGY_2566_8_DPDT NISWITCH_TOPOLOGY_2567_INDEPENDENT
-                NISWITCH_TOPOLOGY_2568_15_DPST NISWITCH_TOPOLOGY_2568_31_SPST
-                NISWITCH_TOPOLOGY_2569_100_SPST NISWITCH_TOPOLOGY_2569_50_DPST
-                NISWITCH_TOPOLOGY_2570_20_DPDT NISWITCH_TOPOLOGY_2570_40_SPDT
-                NISWITCH_TOPOLOGY_2571_66_SPDT
-                NISWITCH_TOPOLOGY_2575_1_WIRE_196X1_MUX
-                NISWITCH_TOPOLOGY_2575_2_WIRE_98X1_MUX
-                NISWITCH_TOPOLOGY_2575_2_WIRE_95X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_64X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_DUAL_32X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_OCTAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_QUAD_16X1_MUX
-                NISWITCH_TOPOLOGY_2576_2_WIRE_SIXTEEN_4X1_MUX
-                NISWITCH_TOPOLOGY_2576_INDEPENDENT
-                NISWITCH_TOPOLOGY_2584_1_WIRE_12X1_MUX
-                NISWITCH_TOPOLOGY_2584_1_WIRE_DUAL_6X1_MUX
-                NISWITCH_TOPOLOGY_2584_2_WIRE_6X1_MUX
-                NISWITCH_TOPOLOGY_2584_INDEPENDENT
-                NISWITCH_TOPOLOGY_2585_1_WIRE_10X1_MUX
-                NISWITCH_TOPOLOGY_2586_10_SPST NISWITCH_TOPOLOGY_2586_5_DPST
-                NISWITCH_TOPOLOGY_2590_4X1_MUX NISWITCH_TOPOLOGY_2591_4X1_MUX
-                NISWITCH_TOPOLOGY_2593_16X1_MUX
-                NISWITCH_TOPOLOGY_2593_8X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2593_DUAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2593_DUAL_4X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2593_INDEPENDENT NISWITCH_TOPOLOGY_2594_4X1_MUX
-                NISWITCH_TOPOLOGY_2595_4X1_MUX
-                NISWITCH_TOPOLOGY_2596_DUAL_6X1_MUX
-                NISWITCH_TOPOLOGY_2597_6X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2598_DUAL_TRANSFER
-                NISWITCH_TOPOLOGY_2599_2_SPDT NISWITCH_TOPOLOGY_2720_INDEPENDENT
-                NISWITCH_TOPOLOGY_2722_INDEPENDENT
-                NISWITCH_TOPOLOGY_2725_INDEPENDENT
-                NISWITCH_TOPOLOGY_2727_INDEPENDENT
-                NISWITCH_TOPOLOGY_2737_2_WIRE_4X64_MATRIX
-                NISWITCH_TOPOLOGY_2738_2_WIRE_8X32_MATRIX
-                NISWITCH_TOPOLOGY_2739_2_WIRE_16X16_MATRIX
-                NISWITCH_TOPOLOGY_2746_QUAD_4X1_MUX
-                NISWITCH_TOPOLOGY_2747_DUAL_8X1_MUX
-                NISWITCH_TOPOLOGY_2748_16X1_MUX
-                NISWITCH_TOPOLOGY_2790_INDEPENDENT
-                NISWITCH_TOPOLOGY_2796_DUAL_6X1_MUX
-                NISWITCH_TOPOLOGY_2797_6X1_TERMINATED_MUX
-                NISWITCH_TOPOLOGY_2798_DUAL_TRANSFER
-                NISWITCH_TOPOLOGY_2799_2_SPDT
+                "Configured Topology" to use the last topology that
+                was configured for the device in MAX.
+                Default Value:
+                "Configured Topology"
+                Valid Values:
+                "Configured Topology"
+                "2501/1-Wire 48x1 Mux"
+                "2501/1-Wire 48x1 Amplified Mux"
+                "2501/2-Wire 24x1 Mux"
+                "2501/2-Wire 24x1 Amplified Mux"
+                "2501/2-Wire Dual 12x1 Mux"
+                "2501/2-Wire Quad 6x1 Mux"
+                "2501/2-Wire 4x6 Matrix"
+                "2501/4-Wire 12x1 Mux"
+                "2503/1-Wire 48x1 Mux"
+                "2503/2-Wire 24x1 Mux"
+                "2503/2-Wire Dual 12x1 Mux"
+                "2503/2-Wire Quad 6x1 Mux"
+                "2503/2-Wire 4x6 Matrix"
+                "2503/4-Wire 12x1 Mux"
+                "2510/Independent"
+                "2512/Independent"
+                "2514/Independent"
+                "2515/Independent"
+                "2520/80-SPST"
+                "2521/40-DPST"
+                "2522/53-SPDT"
+                "2523/26-DPDT"
+                "2524/1-Wire 128x1 Mux"
+                "2524/1-Wire Dual 64x1 Mux"
+                "2524/1-Wire Quad 32x1 Mux"
+                "2524/1-Wire Octal 16x1 Mux"
+                "2524/1-Wire Sixteen 8x1 Mux"
+                "2525/2-Wire 64x1 Mux"
+                "2525/2-Wire Dual 32x1 Mux"
+                "2525/2-Wire Quad 16x1 Mux"
+                "2525/2-Wire Octal 8x1 Mux"
+                "2525/2-Wire Sixteen 4x1 Mux"
+                "2526/1-Wire 158x1 Mux"
+                "2526/2-Wire 79x1 Mux"
+                "2527/1-Wire 64x1 Mux"
+                "2527/1-Wire Dual 32x1 Mux"
+                "2527/2-Wire 32x1 Mux"
+                "2527/2-Wire Dual 16x1 Mux"
+                "2527/4-Wire 16x1 Mux"
+                "2527/Independent"
+                "2529/2-Wire Dual 4x16 Matrix"
+                "2529/2-Wire 8x16 Matrix"
+                "2529/2-Wire 4x32 Matrix"
+                "2530/1-Wire 128x1 Mux"
+                "2530/1-Wire Dual 64x1 Mux"
+                "2530/1-Wire 4x32 Matrix"
+                "2530/1-Wire 8x16 Matrix"
+                "2530/1-Wire Octal 16x1 Mux"
+                "2530/1-Wire Quad 32x1 Mux"
+                "2530/2-Wire 4x16 Matrix"
+                "2530/2-Wire 64x1 Mux"
+                "2530/2-Wire Dual 32x1 Mux"
+                "2530/2-Wire Quad 16x1 Mux"
+                "2530/4-Wire 32x1 Mux"
+                "2530/4-Wire Dual 16x1 Mux"
+                "2530/Independent"
+                "2531/1-Wire 4x128 Matrix"
+                "2531/1-Wire 8x64 Matrix"
+                "2531/1-Wire Dual 4x64 Matrix"
+                "2531/1-Wire Dual 8x32 Matrix"
+                "2531/2-Wire 4x64 Matrix"
+                "2531/2-Wire 8x32 Matrix"
+                "2532/1-Wire 16x32 Matrix"
+                "2532/1-Wire 4x128 Matrix"
+                "2532/1-Wire 8x64 Matrix"
+                "2532/1-Wire Dual 16x16 Matrix"
+                "2532/1-Wire Dual 4x64 Matrix"
+                "2532/1-Wire Dual 8x32 Matrix"
+                "2532/1-Wire Quad 4x32 Matrix"
+                "2532/1-Wire Sixteen 2x16 Matrix"
+                "2532/2-Wire 16x16 Matrix"
+                "2532/2-Wire 4x64 Matrix"
+                "2532/2-Wire 8x32 Matrix"
+                "2532/2-Wire Dual 4x32 Matrix"
+                "2533/1-Wire 4x64 Matrix"
+                "2534/1-Wire 8x32 Matrix"
+                "2535/1-Wire 4x136 Matrix"
+                "2536/1-Wire 8x68 Matrix"
+                "2540/1-Wire 8x9 Matrix"
+                "2541/1-Wire 8x12 Matrix"
+                "2542/Quad 2x1 Terminated Mux"
+                "2543/Dual 4x1 Terminated Mux"
+                "2544/8x1 Terminated Mux"
+                "2545/4x1 Terminated Mux"
+                "2546/Dual 4x1 Mux"
+                "2547/8x1 Mux"
+                "2548/4-SPDT"
+                "2549/Terminated 2-SPDT"
+                "2554/4x1 Mux"
+                "2555/4x1 Terminated Mux"
+                "2556/Dual 4x1 Mux"
+                "2557/8x1 Mux"
+                "2558/4-SPDT"
+                "2559/Terminated 2-SPDT"
+                "2564/16-SPST"
+                "2564/8-DPST"
+                "2565/16-SPST"
+                "2566/16-SPDT"
+                "2566/8-DPDT"
+                "2567/Independent"
+                "2568/15-DPST"
+                "2568/31-SPST"
+                "2569/100-SPST"
+                "2569/50-DPST"
+                "2570/20-DPDT"
+                "2570/40-SPDT"
+                "2571/66-SPDT"
+                "2575/1-Wire 196x1 Mux"
+                "2575/2-Wire 98x1 Mux"
+                "2575/2-Wire 95x1 Mux"
+                "2576/2-Wire 64x1 Mux"
+                "2576/2-Wire Dual 32x1 Mux"
+                "2576/2-Wire Octal 8x1 Mux"
+                "2576/2-Wire Quad 16x1 Mux"
+                "2576/2-Wire Sixteen 4x1 Mux"
+                "2576/Independent"
+                "2584/1-Wire 12x1 Mux"
+                "2584/1-Wire Dual 6x1 Mux"
+                "2584/2-Wire 6x1 Mux"
+                "2584/Independent"
+                "2585/1-Wire 10x1 Mux"
+                "2586/10-SPST"
+                "2586/5-DPST"
+                "2590/4x1 Mux"
+                "2591/4x1 Mux"
+                "2593/16x1 Mux"
+                "2593/8x1 Terminated Mux"
+                "2593/Dual 8x1 Mux"
+                "2593/Dual 4x1 Terminated Mux"
+                "2593/Independent"
+                "2594/4x1 Mux"
+                "2595/4x1 Mux"
+                "2596/Dual 6x1 Mux"
+                "2597/6x1 Terminated Mux"
+                "2598/Dual Transfer"
+                "2599/2-SPDT"
+                "2720/Independent"
+                "2722/Independent"
+                "2725/Independent"
+                "2727/Independent"
+                "2737/2-Wire 4x64 Matrix"
+                "2738/2-Wire 8x32 Matrix"
+                "2739/2-Wire 16x16 Matrix"
+                "2746/Quad 4x1 Mux"
+                "2747/Dual 8x1 Mux"
+                "2748/16x1 Mux"
+                "2790/Independent"
+                "2796/Dual 6x1 Mux"
+                "2797/6x1 Terminated Mux"
+                "2798/Dual Transfer"
+                "2799/2-SPDT"
 
             simulate (bool): Enables simulation of the switch module specified in the resource name
                 parameter. Valid Values: True - simulate False - Don't simulate
@@ -2265,14 +1990,8 @@ class Session(_SessionBase):
                 One or more of the referenced methods are not in the Python API for this driver.
 
         '''
-        resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
-        topology_ctype = ctypes.create_string_buffer(topology.encode(self._encoding))  # case C020
-        simulate_ctype = _visatype.ViBoolean(simulate)  # case S150
-        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
-        vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niSwitch_InitWithTopology(resource_name_ctype, topology_ctype, simulate_ctype, reset_device_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
+        vi = self._interpreter.init_with_topology(resource_name, topology, simulate, reset_device)
+        return vi
 
     @ivi_synchronized
     def _initiate_scan(self):
@@ -2287,10 +2006,7 @@ class Session(_SessionBase):
         scanning operation, To stop the scanning operation, call
         abort.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_InitiateScan(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.initiate_scan()
 
     @ivi_synchronized
     def relay_control(self, relay_name, relay_action):
@@ -2315,12 +2031,7 @@ class Session(_SessionBase):
         '''
         if type(relay_action) is not enums.RelayAction:
             raise TypeError('Parameter relay_action must be of type ' + str(enums.RelayAction))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        relay_name_ctype = ctypes.create_string_buffer(relay_name.encode(self._encoding))  # case C020
-        relay_action_ctype = _visatype.ViInt32(relay_action.value)  # case S130
-        error_code = self._library.niSwitch_RelayControl(vi_ctype, relay_name_ctype, relay_action_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.relay_control(relay_name, relay_action)
 
     @ivi_synchronized
     def reset_with_defaults(self):
@@ -2331,10 +2042,7 @@ class Session(_SessionBase):
         created without a logical name, this method is equivalent to
         reset.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_ResetWithDefaults(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.reset_with_defaults()
 
     @ivi_synchronized
     def route_scan_advanced_output(self, scan_advanced_output_connector, scan_advanced_output_bus_line, invert=False):
@@ -2369,13 +2077,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter scan_advanced_output_connector must be of type ' + str(enums.ScanAdvancedOutput))
         if type(scan_advanced_output_bus_line) is not enums.ScanAdvancedOutput:
             raise TypeError('Parameter scan_advanced_output_bus_line must be of type ' + str(enums.ScanAdvancedOutput))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        scan_advanced_output_connector_ctype = _visatype.ViInt32(scan_advanced_output_connector.value)  # case S130
-        scan_advanced_output_bus_line_ctype = _visatype.ViInt32(scan_advanced_output_bus_line.value)  # case S130
-        invert_ctype = _visatype.ViBoolean(invert)  # case S150
-        error_code = self._library.niSwitch_RouteScanAdvancedOutput(vi_ctype, scan_advanced_output_connector_ctype, scan_advanced_output_bus_line_ctype, invert_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.route_scan_advanced_output(scan_advanced_output_connector, scan_advanced_output_bus_line, invert)
 
     @ivi_synchronized
     def route_trigger_input(self, trigger_input_connector, trigger_input_bus_line, invert=False):
@@ -2411,13 +2113,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter trigger_input_connector must be of type ' + str(enums.TriggerInput))
         if type(trigger_input_bus_line) is not enums.TriggerInput:
             raise TypeError('Parameter trigger_input_bus_line must be of type ' + str(enums.TriggerInput))
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_input_connector_ctype = _visatype.ViInt32(trigger_input_connector.value)  # case S130
-        trigger_input_bus_line_ctype = _visatype.ViInt32(trigger_input_bus_line.value)  # case S130
-        invert_ctype = _visatype.ViBoolean(invert)  # case S150
-        error_code = self._library.niSwitch_RouteTriggerInput(vi_ctype, trigger_input_connector_ctype, trigger_input_bus_line_ctype, invert_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.route_trigger_input(trigger_input_connector, trigger_input_bus_line, invert)
 
     @ivi_synchronized
     def send_software_trigger(self):
@@ -2433,10 +2129,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_SendSoftwareTrigger(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.send_software_trigger()
 
     @ivi_synchronized
     def set_path(self, path_list):
@@ -2456,11 +2149,7 @@ class Session(_SessionBase):
                 previously created path with get_path.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        path_list_ctype = ctypes.create_string_buffer(path_list.encode(self._encoding))  # case C020
-        error_code = self._library.niSwitch_SetPath(vi_ctype, path_list_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.set_path(path_list)
 
     @ivi_synchronized
     def wait_for_debounce(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
@@ -2478,11 +2167,8 @@ class Session(_SessionBase):
                 Default Value:5000 ms
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
-        error_code = self._library.niSwitch_WaitForDebounce(vi_ctype, maximum_time_ms_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        maximum_time_ms = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)
+        self._interpreter.wait_for_debounce(maximum_time_ms)
 
     @ivi_synchronized
     def wait_for_scan_complete(self, maximum_time_ms=hightime.timedelta(milliseconds=5000)):
@@ -2501,11 +2187,8 @@ class Session(_SessionBase):
                 Value:5000 ms
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        maximum_time_ms_ctype = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)  # case S140
-        error_code = self._library.niSwitch_WaitForScanComplete(vi_ctype, maximum_time_ms_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        maximum_time_ms = _converters.convert_timedelta_to_milliseconds_int32(maximum_time_ms)
+        self._interpreter.wait_for_scan_complete(maximum_time_ms)
 
     def _close(self):
         r'''_close
@@ -2519,10 +2202,7 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced methods are not in the Python API for this driver.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_close(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.close()
 
     @ivi_synchronized
     def self_test(self):
@@ -2556,10 +2236,7 @@ class Session(_SessionBase):
         at initialization. Configuration channel and source channel settings
         remain unchanged.
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niSwitch_reset(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        self._interpreter.reset()
 
     @ivi_synchronized
     def _self_test(self):
@@ -2574,12 +2251,5 @@ class Session(_SessionBase):
                 array with at least 256 bytes.
 
         '''
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S220
-        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niSwitch_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
-
-
+        self_test_result, self_test_message = self._interpreter.self_test()
+        return self_test_result, self_test_message

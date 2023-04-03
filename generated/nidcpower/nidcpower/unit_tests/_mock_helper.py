@@ -26,6 +26,8 @@ class SideEffectsHelper(object):
         self._defaults['CommitWithChannels']['return'] = 0
         self._defaults['ConfigureApertureTime'] = {}
         self._defaults['ConfigureApertureTime']['return'] = 0
+        self._defaults['ConfigureLCRCustomCableCompensation'] = {}
+        self._defaults['ConfigureLCRCustomCableCompensation']['return'] = 0
         self._defaults['CreateAdvancedSequenceCommitStepWithChannels'] = {}
         self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return'] = 0
         self._defaults['CreateAdvancedSequenceStepWithChannels'] = {}
@@ -50,6 +52,10 @@ class SideEffectsHelper(object):
         self._defaults['FetchMultiple']['currentMeasurements'] = None
         self._defaults['FetchMultiple']['inCompliance'] = None
         self._defaults['FetchMultiple']['actualCount'] = None
+        self._defaults['FetchMultipleLCR'] = {}
+        self._defaults['FetchMultipleLCR']['return'] = 0
+        self._defaults['FetchMultipleLCR']['measurements'] = None
+        self._defaults['FetchMultipleLCR']['actualCount'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['attributeValue'] = None
@@ -88,6 +94,16 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['months'] = None
+        self._defaults['GetLCRCompensationLastDateAndTime'] = {}
+        self._defaults['GetLCRCompensationLastDateAndTime']['return'] = 0
+        self._defaults['GetLCRCompensationLastDateAndTime']['year'] = None
+        self._defaults['GetLCRCompensationLastDateAndTime']['month'] = None
+        self._defaults['GetLCRCompensationLastDateAndTime']['day'] = None
+        self._defaults['GetLCRCompensationLastDateAndTime']['hour'] = None
+        self._defaults['GetLCRCompensationLastDateAndTime']['minute'] = None
+        self._defaults['GetLCRCustomCableCompensationData'] = {}
+        self._defaults['GetLCRCustomCableCompensationData']['return'] = 0
+        self._defaults['GetLCRCustomCableCompensationData']['customCableCompensationData'] = None
         self._defaults['GetSelfCalLastDateAndTime'] = {}
         self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
         self._defaults['GetSelfCalLastDateAndTime']['year'] = None
@@ -120,9 +136,22 @@ class SideEffectsHelper(object):
         self._defaults['MeasureMultiple']['return'] = 0
         self._defaults['MeasureMultiple']['voltageMeasurements'] = None
         self._defaults['MeasureMultiple']['currentMeasurements'] = None
+        self._defaults['MeasureMultipleLCR'] = {}
+        self._defaults['MeasureMultipleLCR']['return'] = 0
+        self._defaults['MeasureMultipleLCR']['measurements'] = None
         self._defaults['ParseChannelCount'] = {}
         self._defaults['ParseChannelCount']['return'] = 0
         self._defaults['ParseChannelCount']['numberOfChannels'] = None
+        self._defaults['PerformLCRLoadCompensation'] = {}
+        self._defaults['PerformLCRLoadCompensation']['return'] = 0
+        self._defaults['PerformLCROpenCompensation'] = {}
+        self._defaults['PerformLCROpenCompensation']['return'] = 0
+        self._defaults['PerformLCROpenCustomCableCompensation'] = {}
+        self._defaults['PerformLCROpenCustomCableCompensation']['return'] = 0
+        self._defaults['PerformLCRShortCompensation'] = {}
+        self._defaults['PerformLCRShortCompensation']['return'] = 0
+        self._defaults['PerformLCRShortCustomCableCompensation'] = {}
+        self._defaults['PerformLCRShortCustomCableCompensation']['return'] = 0
         self._defaults['QueryInCompliance'] = {}
         self._defaults['QueryInCompliance']['return'] = 0
         self._defaults['QueryInCompliance']['inCompliance'] = None
@@ -162,6 +191,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['SetSequence'] = {}
         self._defaults['SetSequence']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -210,6 +241,11 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureApertureTime']['return']
         return self._defaults['ConfigureApertureTime']['return']
 
+    def niDCPower_ConfigureLCRCustomCableCompensation(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
+        if self._defaults['ConfigureLCRCustomCableCompensation']['return'] != 0:
+            return self._defaults['ConfigureLCRCustomCableCompensation']['return']
+        return self._defaults['ConfigureLCRCustomCableCompensation']['return']
+
     def niDCPower_CreateAdvancedSequenceCommitStepWithChannels(self, vi, channel_name, set_as_active_step):  # noqa: N802
         if self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return'] != 0:
             return self._defaults['CreateAdvancedSequenceCommitStepWithChannels']['return']
@@ -238,6 +274,7 @@ class SideEffectsHelper(object):
     def niDCPower_ExportAttributeConfigurationBuffer(self, vi, size, configuration):  # noqa: N802
         if self._defaults['ExportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ExportAttributeConfigurationBuffer']['return']
+        # configuration
         if self._defaults['ExportAttributeConfigurationBuffer']['configuration'] is None:
             raise MockFunctionCallError("niDCPower_ExportAttributeConfigurationBuffer", param='configuration')
         if size.value == 0:
@@ -308,6 +345,27 @@ class SideEffectsHelper(object):
             actual_count.contents.value = self._defaults['FetchMultiple']['actualCount']
         return self._defaults['FetchMultiple']['return']
 
+    def niDCPower_FetchMultipleLCR(self, vi, channel_name, timeout, count, measurements, actual_count):  # noqa: N802
+        if self._defaults['FetchMultipleLCR']['return'] != 0:
+            return self._defaults['FetchMultipleLCR']['return']
+        # measurements
+        if self._defaults['FetchMultipleLCR']['measurements'] is None:
+            raise MockFunctionCallError("niDCPower_FetchMultipleLCR", param='measurements')
+        test_value = self._defaults['FetchMultipleLCR']['measurements']
+        try:
+            measurements_ref = measurements.contents
+        except AttributeError:
+            measurements_ref = measurements
+        assert len(measurements_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            measurements_ref[i] = test_value[i]
+        # actual_count
+        if self._defaults['FetchMultipleLCR']['actualCount'] is None:
+            raise MockFunctionCallError("niDCPower_FetchMultipleLCR", param='actualCount')
+        if actual_count is not None:
+            actual_count.contents.value = self._defaults['FetchMultipleLCR']['actualCount']
+        return self._defaults['FetchMultipleLCR']['return']
+
     def niDCPower_GetAttributeViBoolean(self, vi, channel_name, attribute_id, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
@@ -351,6 +409,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetAttributeViString(self, vi, channel_name, attribute_id, buffer_size, attribute_value):  # noqa: N802
         if self._defaults['GetAttributeViString']['return'] != 0:
             return self._defaults['GetAttributeViString']['return']
+        # attribute_value
         if self._defaults['GetAttributeViString']['attributeValue'] is None:
             raise MockFunctionCallError("niDCPower_GetAttributeViString", param='attributeValue')
         if buffer_size.value == 0:
@@ -361,6 +420,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetChannelName(self, vi, index, buffer_size, channel_name):  # noqa: N802
         if self._defaults['GetChannelName']['return'] != 0:
             return self._defaults['GetChannelName']['return']
+        # channel_name
         if self._defaults['GetChannelName']['channelName'] is None:
             raise MockFunctionCallError("niDCPower_GetChannelName", param='channelName')
         if buffer_size.value == 0:
@@ -371,6 +431,7 @@ class SideEffectsHelper(object):
     def niDCPower_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
         if self._defaults['GetChannelNameFromString']['return'] != 0:
             return self._defaults['GetChannelNameFromString']['return']
+        # names
         if self._defaults['GetChannelNameFromString']['channelName'] is None:
             raise MockFunctionCallError("niDCPower_GetChannelNameFromString", param='channelName')
         if buffer_size.value == 0:
@@ -386,6 +447,7 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niDCPower_GetError", param='code')
         if code is not None:
             code.contents.value = self._defaults['GetError']['code']
+        # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niDCPower_GetError", param='description')
         if buffer_size.value == 0:
@@ -442,6 +504,52 @@ class SideEffectsHelper(object):
         if months is not None:
             months.contents.value = self._defaults['GetExtCalRecommendedInterval']['months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
+
+    def niDCPower_GetLCRCompensationLastDateAndTime(self, vi, channel_name, compensation_type, year, month, day, hour, minute):  # noqa: N802
+        if self._defaults['GetLCRCompensationLastDateAndTime']['return'] != 0:
+            return self._defaults['GetLCRCompensationLastDateAndTime']['return']
+        # year
+        if self._defaults['GetLCRCompensationLastDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime", param='year')
+        if year is not None:
+            year.contents.value = self._defaults['GetLCRCompensationLastDateAndTime']['year']
+        # month
+        if self._defaults['GetLCRCompensationLastDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime", param='month')
+        if month is not None:
+            month.contents.value = self._defaults['GetLCRCompensationLastDateAndTime']['month']
+        # day
+        if self._defaults['GetLCRCompensationLastDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime", param='day')
+        if day is not None:
+            day.contents.value = self._defaults['GetLCRCompensationLastDateAndTime']['day']
+        # hour
+        if self._defaults['GetLCRCompensationLastDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime", param='hour')
+        if hour is not None:
+            hour.contents.value = self._defaults['GetLCRCompensationLastDateAndTime']['hour']
+        # minute
+        if self._defaults['GetLCRCompensationLastDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime", param='minute')
+        if minute is not None:
+            minute.contents.value = self._defaults['GetLCRCompensationLastDateAndTime']['minute']
+        return self._defaults['GetLCRCompensationLastDateAndTime']['return']
+
+    def niDCPower_GetLCRCustomCableCompensationData(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
+        if self._defaults['GetLCRCustomCableCompensationData']['return'] != 0:
+            return self._defaults['GetLCRCustomCableCompensationData']['return']
+        # custom_cable_compensation_data
+        if self._defaults['GetLCRCustomCableCompensationData']['customCableCompensationData'] is None:
+            raise MockFunctionCallError("niDCPower_GetLCRCustomCableCompensationData", param='customCableCompensationData')
+        if custom_cable_compensation_data_size.value == 0:
+            return len(self._defaults['GetLCRCustomCableCompensationData']['customCableCompensationData'])
+        try:
+            custom_cable_compensation_data_ref = custom_cable_compensation_data.contents
+        except AttributeError:
+            custom_cable_compensation_data_ref = custom_cable_compensation_data
+        for i in range(len(self._defaults['GetLCRCustomCableCompensationData']['customCableCompensationData'])):
+            custom_cable_compensation_data_ref[i] = self._defaults['GetLCRCustomCableCompensationData']['customCableCompensationData'][i]
+        return self._defaults['GetLCRCustomCableCompensationData']['return']
 
     def niDCPower_GetSelfCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         if self._defaults['GetSelfCalLastDateAndTime']['return'] != 0:
@@ -565,6 +673,22 @@ class SideEffectsHelper(object):
             current_measurements_ref[i] = test_value[i]
         return self._defaults['MeasureMultiple']['return']
 
+    def niDCPower_MeasureMultipleLCR(self, vi, channel_name, measurements):  # noqa: N802
+        if self._defaults['MeasureMultipleLCR']['return'] != 0:
+            return self._defaults['MeasureMultipleLCR']['return']
+        # measurements
+        if self._defaults['MeasureMultipleLCR']['measurements'] is None:
+            raise MockFunctionCallError("niDCPower_MeasureMultipleLCR", param='measurements')
+        test_value = self._defaults['MeasureMultipleLCR']['measurements']
+        try:
+            measurements_ref = measurements.contents
+        except AttributeError:
+            measurements_ref = measurements
+        assert len(measurements_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            measurements_ref[i] = test_value[i]
+        return self._defaults['MeasureMultipleLCR']['return']
+
     def niDCPower_ParseChannelCount(self, vi, channels_string, number_of_channels):  # noqa: N802
         if self._defaults['ParseChannelCount']['return'] != 0:
             return self._defaults['ParseChannelCount']['return']
@@ -574,6 +698,31 @@ class SideEffectsHelper(object):
         if number_of_channels is not None:
             number_of_channels.contents.value = self._defaults['ParseChannelCount']['numberOfChannels']
         return self._defaults['ParseChannelCount']['return']
+
+    def niDCPower_PerformLCRLoadCompensation(self, vi, channel_name, num_compensation_spots, compensation_spots):  # noqa: N802
+        if self._defaults['PerformLCRLoadCompensation']['return'] != 0:
+            return self._defaults['PerformLCRLoadCompensation']['return']
+        return self._defaults['PerformLCRLoadCompensation']['return']
+
+    def niDCPower_PerformLCROpenCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        if self._defaults['PerformLCROpenCompensation']['return'] != 0:
+            return self._defaults['PerformLCROpenCompensation']['return']
+        return self._defaults['PerformLCROpenCompensation']['return']
+
+    def niDCPower_PerformLCROpenCustomCableCompensation(self, vi, channel_name):  # noqa: N802
+        if self._defaults['PerformLCROpenCustomCableCompensation']['return'] != 0:
+            return self._defaults['PerformLCROpenCustomCableCompensation']['return']
+        return self._defaults['PerformLCROpenCustomCableCompensation']['return']
+
+    def niDCPower_PerformLCRShortCompensation(self, vi, channel_name, num_frequencies, additional_frequencies):  # noqa: N802
+        if self._defaults['PerformLCRShortCompensation']['return'] != 0:
+            return self._defaults['PerformLCRShortCompensation']['return']
+        return self._defaults['PerformLCRShortCompensation']['return']
+
+    def niDCPower_PerformLCRShortCustomCableCompensation(self, vi, channel_name):  # noqa: N802
+        if self._defaults['PerformLCRShortCustomCableCompensation']['return'] != 0:
+            return self._defaults['PerformLCRShortCustomCableCompensation']['return']
+        return self._defaults['PerformLCRShortCustomCableCompensation']['return']
 
     def niDCPower_QueryInCompliance(self, vi, channel_name, in_compliance):  # noqa: N802
         if self._defaults['QueryInCompliance']['return'] != 0:
@@ -690,6 +839,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niDCPower_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
+
     def niDCPower_SetSequence(self, vi, channel_name, values, source_delays, size):  # noqa: N802
         if self._defaults['SetSequence']['return'] != 0:
             return self._defaults['SetSequence']['return']
@@ -760,6 +914,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_CommitWithChannels.return_value = 0
         mock_library.niDCPower_ConfigureApertureTime.side_effect = MockFunctionCallError("niDCPower_ConfigureApertureTime")
         mock_library.niDCPower_ConfigureApertureTime.return_value = 0
+        mock_library.niDCPower_ConfigureLCRCustomCableCompensation.side_effect = MockFunctionCallError("niDCPower_ConfigureLCRCustomCableCompensation")
+        mock_library.niDCPower_ConfigureLCRCustomCableCompensation.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceCommitStepWithChannels")
         mock_library.niDCPower_CreateAdvancedSequenceCommitStepWithChannels.return_value = 0
         mock_library.niDCPower_CreateAdvancedSequenceStepWithChannels.side_effect = MockFunctionCallError("niDCPower_CreateAdvancedSequenceStepWithChannels")
@@ -778,6 +934,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_FancyInitialize.return_value = 0
         mock_library.niDCPower_FetchMultiple.side_effect = MockFunctionCallError("niDCPower_FetchMultiple")
         mock_library.niDCPower_FetchMultiple.return_value = 0
+        mock_library.niDCPower_FetchMultipleLCR.side_effect = MockFunctionCallError("niDCPower_FetchMultipleLCR")
+        mock_library.niDCPower_FetchMultipleLCR.return_value = 0
         mock_library.niDCPower_GetAttributeViBoolean.side_effect = MockFunctionCallError("niDCPower_GetAttributeViBoolean")
         mock_library.niDCPower_GetAttributeViBoolean.return_value = 0
         mock_library.niDCPower_GetAttributeViInt32.side_effect = MockFunctionCallError("niDCPower_GetAttributeViInt32")
@@ -800,6 +958,10 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_GetExtCalLastTemp.return_value = 0
         mock_library.niDCPower_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niDCPower_GetExtCalRecommendedInterval")
         mock_library.niDCPower_GetExtCalRecommendedInterval.return_value = 0
+        mock_library.niDCPower_GetLCRCompensationLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetLCRCompensationLastDateAndTime")
+        mock_library.niDCPower_GetLCRCompensationLastDateAndTime.return_value = 0
+        mock_library.niDCPower_GetLCRCustomCableCompensationData.side_effect = MockFunctionCallError("niDCPower_GetLCRCustomCableCompensationData")
+        mock_library.niDCPower_GetLCRCustomCableCompensationData.return_value = 0
         mock_library.niDCPower_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastDateAndTime")
         mock_library.niDCPower_GetSelfCalLastDateAndTime.return_value = 0
         mock_library.niDCPower_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niDCPower_GetSelfCalLastTemp")
@@ -820,8 +982,20 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_Measure.return_value = 0
         mock_library.niDCPower_MeasureMultiple.side_effect = MockFunctionCallError("niDCPower_MeasureMultiple")
         mock_library.niDCPower_MeasureMultiple.return_value = 0
+        mock_library.niDCPower_MeasureMultipleLCR.side_effect = MockFunctionCallError("niDCPower_MeasureMultipleLCR")
+        mock_library.niDCPower_MeasureMultipleLCR.return_value = 0
         mock_library.niDCPower_ParseChannelCount.side_effect = MockFunctionCallError("niDCPower_ParseChannelCount")
         mock_library.niDCPower_ParseChannelCount.return_value = 0
+        mock_library.niDCPower_PerformLCRLoadCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCRLoadCompensation")
+        mock_library.niDCPower_PerformLCRLoadCompensation.return_value = 0
+        mock_library.niDCPower_PerformLCROpenCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCROpenCompensation")
+        mock_library.niDCPower_PerformLCROpenCompensation.return_value = 0
+        mock_library.niDCPower_PerformLCROpenCustomCableCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCROpenCustomCableCompensation")
+        mock_library.niDCPower_PerformLCROpenCustomCableCompensation.return_value = 0
+        mock_library.niDCPower_PerformLCRShortCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCRShortCompensation")
+        mock_library.niDCPower_PerformLCRShortCompensation.return_value = 0
+        mock_library.niDCPower_PerformLCRShortCustomCableCompensation.side_effect = MockFunctionCallError("niDCPower_PerformLCRShortCustomCableCompensation")
+        mock_library.niDCPower_PerformLCRShortCustomCableCompensation.return_value = 0
         mock_library.niDCPower_QueryInCompliance.side_effect = MockFunctionCallError("niDCPower_QueryInCompliance")
         mock_library.niDCPower_QueryInCompliance.return_value = 0
         mock_library.niDCPower_QueryLatchedOutputCutoffState.side_effect = MockFunctionCallError("niDCPower_QueryLatchedOutputCutoffState")
@@ -854,6 +1028,8 @@ class SideEffectsHelper(object):
         mock_library.niDCPower_SetAttributeViReal64.return_value = 0
         mock_library.niDCPower_SetAttributeViString.side_effect = MockFunctionCallError("niDCPower_SetAttributeViString")
         mock_library.niDCPower_SetAttributeViString.return_value = 0
+        mock_library.niDCPower_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niDCPower_SetRuntimeEnvironment")
+        mock_library.niDCPower_SetRuntimeEnvironment.return_value = 0
         mock_library.niDCPower_SetSequence.side_effect = MockFunctionCallError("niDCPower_SetSequence")
         mock_library.niDCPower_SetSequence.return_value = 0
         mock_library.niDCPower_UnlockSession.side_effect = MockFunctionCallError("niDCPower_UnlockSession")

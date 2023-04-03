@@ -6,6 +6,51 @@ Enums used in NI-DCPower
 .. py:currentmodule:: nidcpower
 
 
+ApertureTimeAutoMode
+--------------------
+
+.. py:class:: ApertureTimeAutoMode
+
+    .. py:attribute:: ApertureTimeAutoMode.OFF
+
+
+
+        Disables automatic aperture time scaling. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for all ranges.
+
+        
+
+
+
+    .. py:attribute:: ApertureTimeAutoMode.SHORT
+
+
+
+        Prioritizes measurement speed over measurement accuracy by quickly scaling down aperture time in larger current ranges. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for the minimum range.
+
+        
+
+
+
+    .. py:attribute:: ApertureTimeAutoMode.NORMAL
+
+
+
+        Balances measurement accuracy and speed by scaling down aperture time in larger current ranges. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for the minimum range.
+
+        
+
+
+
+    .. py:attribute:: ApertureTimeAutoMode.LONG
+
+
+
+        Prioritizes accuracy while still decreasing measurement time by slowly scaling down aperture time in larger current ranges. The :py:attr:`nidcpower.Session.aperture_time` property specifies the aperture time for the minimum range.
+
+        
+
+
+
 ApertureTimeUnits
 -----------------
 
@@ -46,21 +91,21 @@ AutoZero
 
 
 
-    .. py:attribute:: AutoZero.ON
-
-
-
-        Makes zero conversions for every measurement.
-
-        
-
-
-
     .. py:attribute:: AutoZero.ONCE
 
 
 
         Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.
+
+        
+
+
+
+    .. py:attribute:: AutoZero.ON
+
+
+
+        Makes zero conversions for every measurement.
 
         
 
@@ -181,6 +226,101 @@ AutorangeThresholdMode
 
 
 
+CableLength
+-----------
+
+.. py:class:: CableLength
+
+    .. py:attribute:: CableLength.ZERO_M
+
+
+
+        Uses predefined cable compensation data for a 0m cable (direct connection).
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_1M
+
+
+
+        Uses predefined cable compensation data for an NI standard 1m coaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_2M
+
+
+
+        Uses predefined cable compensation data for an NI standard 2m coaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_4M
+
+
+
+        Uses predefined cable compensation data for an NI standard 4m coaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_1M
+
+
+
+        Uses predefined cable compensation data for an NI standard 1m triaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_2M
+
+
+
+        Uses predefined cable compensation data for an NI standard 2m triaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.NI_STANDARD_TRIAXIAL_4M
+
+
+
+        Uses predefined cable compensation data for an NI standard 4m triaxial cable.
+
+        
+
+
+
+    .. py:attribute:: CableLength.CUSTOM_ONBOARD_STORAGE
+
+
+
+        Uses previously generated custom cable compensation data from onboard storage. Only the most recently performed compensation data for each custom cable compensation type (open, short) is stored.
+
+        
+
+
+
+    .. py:attribute:: CableLength.CUSTOM_AS_CONFIGURED
+
+
+
+        Uses the custom cable compensation data supplied to :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`. Use this option to manage multiple sets of custom cable compensation data.
+
+        
+
+
+
 ComplianceLimitSymmetry
 -----------------------
 
@@ -201,6 +341,31 @@ ComplianceLimitSymmetry
 
 
         Compliance limits can be specified asymmetrically with respect to 0.
+
+        
+
+
+
+CurrentLimitBehavior
+--------------------
+
+.. py:class:: CurrentLimitBehavior
+
+    .. py:attribute:: CurrentLimitBehavior.REGULATE
+
+
+
+        The channel acts to restrict the output current to the value of the Current Limit property when the actual output on the channel reaches or exceeds that value.
+
+        
+
+
+
+    .. py:attribute:: CurrentLimitBehavior.TRIP
+
+
+
+        The channel disables the output when the actual output current on the channel reaches or exceeds the value of the Current Limit property.
 
         
 
@@ -240,7 +405,19 @@ Event
 
 
 
+        Specifies the Source Complete event.
+
+        
+
+
+
     .. py:attribute:: Event.MEASURE_COMPLETE
+
+
+
+        Specifies the Measure Complete event.
+
+        
 
 
 
@@ -248,7 +425,19 @@ Event
 
 
 
+        Specifies the Sequence Iteration Complete event.
+
+        
+
+
+
     .. py:attribute:: Event.SEQUENCE_ENGINE_DONE
+
+
+
+        Specifies the Sequence Engine Done event.
+
+        
 
 
 
@@ -256,7 +445,324 @@ Event
 
 
 
+        Specifies the Pulse Complete event.
+
+        
+
+
+
     .. py:attribute:: Event.READY_FOR_PULSE_TRIGGER
+
+
+
+        Specifies the Ready for Pulse Trigger event.
+
+        
+
+
+
+InstrumentMode
+--------------
+
+.. py:class:: InstrumentMode
+
+    .. py:attribute:: InstrumentMode.SMU_PS
+
+
+
+        The channel operates as an SMU/power supply.
+
+        
+
+
+
+    .. py:attribute:: InstrumentMode.LCR
+
+
+
+        The channel operates as an LCR meter.
+
+        
+
+
+
+LCRCompensationType
+-------------------
+
+.. py:class:: LCRCompensationType
+
+    .. py:attribute:: LCRCompensationType.OPEN
+
+
+
+        Open LCR compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.SHORT
+
+
+
+        Short LCR compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.LOAD
+
+
+
+        Load LCR compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.OPEN_CUSTOM_CABLE
+
+
+
+        Open custom cable compensation.
+
+        
+
+
+
+    .. py:attribute:: LCRCompensationType.SHORT_CUSTOM_CABLE
+
+
+
+        Short custom cable compensation.
+
+        
+
+
+
+LCRDCBiasSource
+---------------
+
+.. py:class:: LCRDCBiasSource
+
+    .. py:attribute:: LCRDCBiasSource.OFF
+
+
+
+        Disables DC bias in LCR mode.
+
+        
+
+
+
+    .. py:attribute:: LCRDCBiasSource.VOLTAGE
+
+
+
+        Applies a constant voltage bias, as defined by the :py:attr:`nidcpower.Session.lcr_dc_bias_voltage_level` property.
+
+        
+
+
+
+    .. py:attribute:: LCRDCBiasSource.CURRENT
+
+
+
+        Applies a constant current bias, as defined by the :py:attr:`nidcpower.Session.lcr_dc_bias_current_level` property.
+
+        
+
+
+
+LCRImpedanceRangeSource
+-----------------------
+
+.. py:class:: LCRImpedanceRangeSource
+
+    .. py:attribute:: LCRImpedanceRangeSource.IMPEDANCE_RANGE
+
+
+
+        Uses the impedance range you specify with the :py:attr:`nidcpower.Session.lcr_impedance_range` property.
+
+        
+
+
+
+    .. py:attribute:: LCRImpedanceRangeSource.LOAD_CONFIGURATION
+
+
+
+        Computes the impedance range to select based on the values you supply to the :py:attr:`nidcpower.Session.lcr_load_resistance`, :py:attr:`nidcpower.Session.lcr_load_inductance`, and :py:attr:`nidcpower.Session.lcr_load_capacitance` properties. NI-DCPower uses a series model of load resistance, load inductance, and load capacitance to compute the impedance range.
+
+        
+
+
+
+LCRMeasurementTime
+------------------
+
+.. py:class:: LCRMeasurementTime
+
+    .. py:attribute:: LCRMeasurementTime.SHORT
+
+
+
+        Uses a short aperture time for LCR measurements.
+
+        
+
+
+
+    .. py:attribute:: LCRMeasurementTime.MEDIUM
+
+
+
+        Uses a medium aperture time for LCR measurements.
+
+        
+
+
+
+    .. py:attribute:: LCRMeasurementTime.LONG
+
+
+
+        Uses a long aperture time for LCR measurements.
+
+        
+
+
+
+    .. py:attribute:: LCRMeasurementTime.CUSTOM
+
+
+
+        Uses a custom aperture time for LCR measurements as specified by the :py:attr:`nidcpower.Session.lcr_custom_measurement_time` property.
+
+        
+
+
+
+LCROpenShortLoadCompensationDataSource
+--------------------------------------
+
+.. py:class:: LCROpenShortLoadCompensationDataSource
+
+    .. py:attribute:: LCROpenShortLoadCompensationDataSource.ONBOARD_STORAGE
+
+
+
+        Uses previously generated LCR compensation data. Only the most recently performed compensation data for each LCR compensation type (open, short, and load) is stored.
+
+        
+
+
+
+    .. py:attribute:: LCROpenShortLoadCompensationDataSource.AS_DEFINED
+
+
+
+        Uses the LCR compensation data represented by the relevant LCR compensation properties as generated by :py:meth:`nidcpower.Session.perform_lcr_open_compensation`, :py:meth:`nidcpower.Session.perform_lcr_short_compensation`, and :py:meth:`nidcpower.Session.perform_lcr_load_compensation`. Use this option to manage multiple sets of LCR compensation data. This option applies compensation data from the following properties: :py:attr:`nidcpower.Session.lcr_open_conductance`, :py:attr:`nidcpower.Session.lcr_open_susceptance`, :py:attr:`nidcpower.Session.lcr_short_resistance`, :py:attr:`nidcpower.Session.lcr_short_reactance`, :py:attr:`nidcpower.Session.lcr_measured_load_resistance`, :py:attr:`nidcpower.Session.lcr_measured_load_reactance`, :py:attr:`nidcpower.Session.lcr_actual_load_resistance`, :py:attr:`nidcpower.Session.lcr_actual_load_reactance`.
+
+        
+
+
+
+LCRReferenceValueType
+---------------------
+
+.. py:class:: LCRReferenceValueType
+
+    .. py:attribute:: LCRReferenceValueType.IMPEDANCE
+
+
+
+        The actual impedance, comprising real resistance and imaginary reactance, of your DUT. Supply resistance, in ohms, to reference value A; supply reactance, in ohms, to reference value B.
+
+        
+
+
+
+    .. py:attribute:: LCRReferenceValueType.IDEAL_CAPACITANCE
+
+
+
+        The ideal capacitance of your DUT. Supply capacitance, in farads, to reference value A.
+
+        
+
+
+
+    .. py:attribute:: LCRReferenceValueType.IDEAL_INDUCTANCE
+
+
+
+        The ideal inductance of your DUT. Supply inductance, in henrys, to reference value A.
+
+        
+
+
+
+    .. py:attribute:: LCRReferenceValueType.IDEAL_RESISTANCE
+
+
+
+        The ideal resistance of your DUT. Supply resistance, in ohms, to reference value A.
+
+        
+
+
+
+LCRSourceDelayMode
+------------------
+
+.. py:class:: LCRSourceDelayMode
+
+    .. py:attribute:: LCRSourceDelayMode.AUTOMATIC
+
+
+
+        NI-DCPower automatically applies source delay of sufficient duration to account for settling time.
+
+        
+
+
+
+    .. py:attribute:: LCRSourceDelayMode.MANUAL
+
+
+
+        NI-DCPower applies the source delay that you set manually with :py:attr:`nidcpower.Session.source_delay`. You can use this option to set a shorter delay to reduce measurement time at the possible expense of measurement accuracy.
+
+        
+
+
+
+LCRStimulusFunction
+-------------------
+
+.. py:class:: LCRStimulusFunction
+
+    .. py:attribute:: LCRStimulusFunction.VOLTAGE
+
+
+
+        Applies an AC voltage for LCR stimulus.
+
+        
+
+
+
+    .. py:attribute:: LCRStimulusFunction.CURRENT
+
+
+
+        Applies an AC current for LCR stimulus.
+
+        
 
 
 
@@ -494,7 +1000,7 @@ OutputStates
 
 
 
-        The device maintains a constant voltage by adjusting the current
+        The channel maintains a constant voltage by adjusting the current.
 
         
 
@@ -504,7 +1010,7 @@ OutputStates
 
 
 
-        The device maintains a constant current by adjusting the voltage.
+        The channel maintains a constant current by adjusting the voltage.
 
         
 
@@ -664,7 +1170,19 @@ SendSoftwareEdgeTriggerType
 
 
 
+        Asserts the Start trigger.
+
+        
+
+
+
     .. py:attribute:: SendSoftwareEdgeTriggerType.SOURCE
+
+
+
+        Asserts the Source trigger.
+
+        
 
 
 
@@ -672,7 +1190,19 @@ SendSoftwareEdgeTriggerType
 
 
 
+        Asserts the Measure trigger.
+
+        
+
+
+
     .. py:attribute:: SendSoftwareEdgeTriggerType.SEQUENCE_ADVANCE
+
+
+
+        Asserts the Sequence Advance trigger.
+
+        
 
 
 
@@ -680,7 +1210,19 @@ SendSoftwareEdgeTriggerType
 
 
 
+        Asserts the Pulse trigger.
+
+        
+
+
+
     .. py:attribute:: SendSoftwareEdgeTriggerType.SHUTDOWN
+
+
+
+        Asserts the Shutdown trigger.
+
+        
 
 
 

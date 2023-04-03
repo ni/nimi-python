@@ -8,4 +8,5 @@ API Reference
    nidigital/enums
    nidigital/errors
    nidigital/examples
+   nidigital/grpc_session_options
 

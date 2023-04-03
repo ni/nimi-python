@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nidigital examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.4.1/nidigital_examples.zip>`_
+`You can download all nidigital examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.4.3/nidigital_examples.zip>`_
 
 nidigital_burst_with_start_trigger.py
 -------------------------------------

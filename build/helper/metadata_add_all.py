@@ -7,6 +7,7 @@ from .documentation_snippets import options_table_header
 from .documentation_snippets import options_text
 from .documentation_snippets import session_return_text
 from .helper import camelcase_to_snakecase
+from .helper import enum_uses_converter
 from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
@@ -32,7 +33,6 @@ def _add_name(n, name):
     '''Adds a name' key/value pair to the function metadata'''
     assert 'name' not in n, "'name' is already populated which means issue #372 is closed, rendering _add_name() redundant."
     n['name'] = name
-    return n
 
 
 def _add_codegen_method(n):
@@ -47,22 +47,44 @@ def _add_enum(n):
         n['enum'] = None
 
 
+def _add_grpc_enum(n):
+    '''Add 'grpc_enum' if it isn't already there'''
+    if 'grpc_enum' not in n:
+        if 'enum' in n:
+            n['grpc_enum'] = n['enum']
+        else:
+            n['grpc_enum'] = None
+
+
 def _add_python_method_name(function, name):
-    '''Adds a python_name' key/value pair to the function metadata if not already specified'''
+    '''Adds 'python_name' to the function metadata if not already there'''
     if 'python_name' not in function:
         if function['codegen_method'] == 'private':
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
-            assert 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
-    return function
+            assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
+
+
+def _add_interpreter_method_name(function, name):
+    '''Adds 'interpreter_name' to the function metadata if not already there'''
+    if 'interpreter_name' not in function:
+        function['interpreter_name'] = function['python_name'].lstrip('_')
 
 
 def _add_python_parameter_name(parameter):
     '''Adds a python_name key/value pair to the parameter metadata'''
     if 'python_name' not in parameter:
         parameter['python_name'] = camelcase_to_snakecase(parameter['name'])
-    return parameter
+
+
+def _add_grpc_parameter_name(parameter):
+    '''Adds a grpc_name key/value pair to the parameter metadata'''
+    if 'grpc_name' not in parameter:
+        if parameter.get('grpc_mapped_enum') is not None or parameter['grpc_enum'] is not None:
+            parameter['grpc_name'] = parameter['python_name'] + '_raw'
+        else:
+            parameter['grpc_name'] = parameter['python_name']
 
 
 def _add_python_type(item, config):
@@ -79,18 +101,18 @@ def _add_python_type(item, config):
         item['type_in_documentation'] = item['python_type']
         item['type_in_documentation_was_calculated'] = True
 
-    return item
-
 
 def _add_ctypes_variable_name(parameter):
     '''Adds a ctypes_variable_name key/value pair to the parameter metadata for a corresponding ctypes variable'''
     parameter['ctypes_variable_name'] = parameter['python_name'] + '_ctype'
-    return parameter
 
 
 def _add_ctypes_type(parameter, config):
     '''Adds a ctypes_type key/value pair to the parameter metadata for calling into the library'''
-    parameter['ctypes_type'] = parameter['type']
+    if parameter['type'] == 'ViAddr' and (parameter['use_array'] or parameter['use_list']):
+        parameter['ctypes_type'] = 'ViInt8'
+    else:
+        parameter['ctypes_type'] = parameter['type']
     module_name = ''
     custom_type = find_custom_type(parameter, config)
     if custom_type is not None:
@@ -102,8 +124,6 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = "ctypes.POINTER(" + module_name + parameter['ctypes_type'] + ")"
     else:
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
-
-    return parameter
 
 
 def _add_numpy_info(parameter, parameters, config):
@@ -124,8 +144,6 @@ def _add_numpy_info(parameter, parameters, config):
             if size_param:
                 size_param['use_in_python_api'] = False
 
-    return parameter
-
 
 def _add_is_error_handling(f):
     '''Adds is_error_handling information to the function metadata if it isn't already defined. Defaults to False.'''
@@ -134,7 +152,6 @@ def _add_is_error_handling(f):
     if 'is_error_handling' not in f:
         # Not populated, assume False
         f['is_error_handling'] = False
-    return f
 
 
 def _add_buffer_info(parameter, config):
@@ -184,15 +201,58 @@ def _add_buffer_info(parameter, config):
 
     assert parameter['is_buffer'] is False or parameter['is_string'] is False
 
-    return parameter
 
-
-def _add_library_method_call_snippet(parameter):
-    '''Code snippet for calling a method of Library for this parameter.'''
+def _add_ctypes_method_call_snippet(parameter):
+    '''Code snippet for calling a ctypes method for this parameter.'''
     if parameter['direction'] == 'out' and not parameter['is_buffer'] and not parameter['is_string']:
-        parameter['library_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
+        parameter['ctypes_method_call_snippet'] = 'None if {0} is None else (ctypes.pointer({0}))'.format(parameter['ctypes_variable_name'])
     else:
-        parameter['library_method_call_snippet'] = parameter['ctypes_variable_name']
+        parameter['ctypes_method_call_snippet'] = parameter['ctypes_variable_name']
+
+
+def _add_interpreter_method_call_snippet(parameter, config):
+    '''Code snippet for calling a method of Library for this parameter.'''
+    if parameter['is_session_handle']:
+        parameter['interpreter_method_call_snippet'] = 'self._' + config['session_handle_parameter_name']
+    elif parameter['is_repeated_capability']:
+        parameter['interpreter_method_call_snippet'] = 'self._repeated_capability'
+    else:
+        parameter['interpreter_method_call_snippet'] = parameter['python_name']
+
+
+def _add_grpc_request_snippet(parameter, config):
+    param_name = parameter['grpc_name']
+
+    if parameter['use_list']:
+        param_accessor = 'x'
+    else:
+        param_accessor = parameter['python_name']
+
+    if parameter['is_session_handle']:
+        param_value = 'self._' + config['session_handle_parameter_name']
+    elif parameter['size']['mechanism'] == 'python-code' and parameter['direction'] == 'in':
+        param_value = parameter['size']['value']
+    elif parameter['enum'] is not None:
+        param_value = param_accessor + '.value'
+    elif parameter['type'].startswith('struct_'):
+        for custom_type in config['custom_types']:
+            if parameter['type'] == custom_type['ctypes_type']:
+                ct_grpc_name = custom_type.get('grpc_name', custom_type['python_name'])
+                param_value = param_accessor + '._create_copy(grpc_types.' + ct_grpc_name + ')'
+                break
+        else:
+            ctypes_types = [t["ctypes_type"] for t in config["custom_types"]]
+            assert False, f'Custom type not found for {parameter["type"]} among {ctypes_types}'
+    else:
+        param_value = param_accessor
+
+    if parameter['use_list']:
+        if param_value == param_accessor:
+            param_value = parameter['python_name']
+        else:
+            param_value = parameter['python_name'] + ' and [' + param_value + ' for x in ' + parameter['python_name'] + ']'
+
+    parameter['grpc_request_snippet'] = param_name + '=' + param_value
 
 
 def _add_default_value_name(parameter):
@@ -239,10 +299,11 @@ _repeated_capability_parameter_names = ['channelName', 'channelList', 'channel',
 def _add_method_templates(f):
     '''Adds a list of 'method_template_filenames' value to function metadata if not found. This are the mako templates that will be used to render the method.'''
     if 'method_templates' not in f:
-        f['method_templates'] = [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
+        f['method_templates'] = [{'session_filename': '/default_method', 'library_interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ]
     # Prefix the templates with a / so mako can find them. Not sure mako it works this way.
     for method_template in f['method_templates']:
         method_template['session_filename'] = '/' + method_template['session_filename'] if method_template['session_filename'][0] != '/' else method_template['session_filename']
+        method_template['library_interpreter_filename'] = '/' + method_template['library_interpreter_filename'] if method_template['library_interpreter_filename'][0] != '/' else method_template['library_interpreter_filename']
         # Some functions don't get code-generated documentation (i.e. private methods) so no need to specify template for those.
         if 'documentation_filename' in method_template and method_template['documentation_filename'] is not None:
             method_template['documentation_filename'] = '/' + method_template['documentation_filename'] if method_template['documentation_filename'][0] != '/' else method_template['documentation_filename']
@@ -295,6 +356,18 @@ def _add_is_session_handle(parameter):
 def _fix_type(parameter):
     '''Replace any spaces in the parameter type with an underscore.'''
     parameter['type'] = parameter['type'].replace('[ ]', '[]').replace(' []', '[]').replace(' ', '_')
+
+
+# TODO(olsl21): Metadata is inconsistent with regards to how structs are treated.
+#  This is a hack to workaround that inconsistency. The real root cause is tracked
+#  by internal NI bug 1918101. Once that is addressed, this method can be removed.
+def _fix_custom_type(parameter, config):
+    '''Add "struct_" prefix to custom type if necessary to match its ctypes_type.'''
+    parameter_type_with_struct_prefix = 'struct_' + parameter['type']
+    for custom_type in config['custom_types']:
+        if parameter_type_with_struct_prefix == custom_type['ctypes_type']:
+            parameter['type'] = custom_type['ctypes_type']
+            break
 
 
 def _add_use_in_python_api(p, parameters):
@@ -359,6 +432,7 @@ def add_all_function_metadata(functions, config):
     for f in functions:
         _add_name(functions[f], f)
         _add_python_method_name(functions[f], f)
+        _add_interpreter_method_name(functions[f], f)
         _add_is_error_handling(functions[f])
         _add_method_templates(functions[f])
         _add_use_session_lock(functions[f])
@@ -366,10 +440,13 @@ def add_all_function_metadata(functions, config):
             if 'documentation' not in p:
                 p['documentation'] = {}
             _add_enum(p)
+            _add_grpc_enum(p)
             _fix_type(p)
             _add_buffer_info(p, config)
+            _fix_custom_type(p, config)
             _add_use_in_python_api(p, functions[f]['parameters'])
             _add_python_parameter_name(p)
+            _add_grpc_parameter_name(p)
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
@@ -378,7 +455,9 @@ def add_all_function_metadata(functions, config):
             _add_default_value_name_for_docs(p, config['module_name'])
             _add_is_repeated_capability(p)
             _add_is_session_handle(p)
-            _add_library_method_call_snippet(p)
+            _add_ctypes_method_call_snippet(p)
+            _add_interpreter_method_call_snippet(p, config)
+            _add_grpc_request_snippet(p, config)
 
         # We can't do these until the parameters have been processed
         _add_has_repeated_capability(functions[f])
@@ -418,6 +497,7 @@ def add_all_attribute_metadata(attributes, config):
     for a in attributes:
         _add_codegen_method(attributes[a])
         _add_enum(attributes[a])
+        _add_grpc_enum(attributes[a])
         _add_python_name(a, attributes)
         _add_python_type(attributes[a], config)
         _add_default_attribute_class(a, attributes)
@@ -426,40 +506,104 @@ def add_all_attribute_metadata(attributes, config):
 
 
 def _add_enum_codegen_method(enums, config):
-    '''Adds 'codegen_method' that will determine whether and how the enum is code genned. Default is public
+    '''Adds 'codegen_method' if not explicitly specified that will determine whether and how the enum is code-generated.
 
-    Set all to 'no', then go through all functions and attributes and set to least restrictive use
+    If an enum does not explicitly specify its 'codegen_method' in metadata, it will be assigned the
+    least restrictive codegen_method based on the codegen_method of all the functions and attributes
+    that use it. The default codegen_method is 'no' (if no function nor attribute uses it).
+
+    If an enum explicitly specifies its 'codegen_method' in metadata, it will be checked against the
+    least restrictive codegen_method based on the codegen_method of all the functions and attributes
+    that use it (if its explicit 'codegen_method' is more restrictive than the calculated least
+    restrictive codegen_method and it does not use converter, a ValueError would be thrown).
+
+    The restrictiveness of the codegen_method is as follows (most restrictive -> least restrictive):
+    'no' -> 'private' -> 'public' / 'python-only' (will be converted to 'public' if not explicitly specified)
     '''
+    enum_to_client_functions = _get_functions_that_use_enums(enums, config)
+    enum_to_client_attributes = _get_attributes_that_use_enums(enums, config)
     for e in enums:
+        least_restrictive_codegen_method = _get_least_restrictive_codegen_method(
+            set.union(
+                set(config['functions'][f]['codegen_method'] for f in enum_to_client_functions[e]),
+                set(config['attributes'][a]['codegen_method'] for a in enum_to_client_attributes[e])
+            )
+        )
         if 'codegen_method' not in enums[e]:
-            enums[e]['codegen_method'] = 'no'
+            enums[e]['codegen_method'] = least_restrictive_codegen_method
+        else:
+            explicit_codegen_method = enums[e]['codegen_method']
+            # Check if explicit_codegen_method is more restrictive than
+            #  least_restrictive_codegen_method and the enum does not use converter
+            # _get_least_restrictive_codegen_method() might change 'python-only' to 'public',
+            #  so avoid comparing explicit_codegen_method with the output of
+            #  _get_least_restrictive_codegen_method() directly
+            if _get_least_restrictive_codegen_method([
+                explicit_codegen_method,
+                least_restrictive_codegen_method
+            ]) != _get_least_restrictive_codegen_method([
+                explicit_codegen_method
+            ]) and not enum_uses_converter(enums[e]):
+                client_function_names = enum_to_client_functions[e]
+                client_attribute_names = [
+                    config['attributes'][a]['name'] for a in enum_to_client_attributes[e]
+                ]
+                raise ValueError(
+                    f'Codegen_method of enum {e} used by functions {client_function_names} and attributes {client_attribute_names} must be {least_restrictive_codegen_method}, is {explicit_codegen_method}'
+                )
 
-    # Iterate through all codegen functions and set any enum parameters to the same level
+
+def _get_functions_that_use_enums(enums, config):
+    '''Generate a dict that maps each enum to a list of functions that use it in their parameters'''
+    enum_to_client_functions = {e: [] for e in enums}
     for f in filter_codegen_functions(config['functions']):
-        f_codegen_method = config['functions'][f]['codegen_method']
-        if f_codegen_method != 'no':
-            for p in config['functions'][f]['parameters']:
-                e = p['enum']
-                if e is not None and e not in enums:
+        for p in config['functions'][f]['parameters']:
+            e = p['enum']
+            if e is not None:
+                if e not in enum_to_client_functions:
                     print('Missing enum {0} referenced by function {1}'.format(e, f))
-                elif e is not None:
-                    if f_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
-                        enums[e]['codegen_method'] = f_codegen_method
-                    elif f_codegen_method == 'public' or f_codegen_method == 'python-only':
-                        enums[e]['codegen_method'] = 'public'
+                else:
+                    enum_to_client_functions[e].append(f)
+    return enum_to_client_functions
 
-    # Iterate through all codegen attributes and set any enum parameters to the same level
+
+def _get_attributes_that_use_enums(enums, config):
+    '''Generate a dict that maps each enum to a list of attributes that use it'''
+    enum_to_client_attributes = {e: [] for e in enums}
     for a in filter_codegen_attributes(config['attributes']):
-        a_codegen_method = config['attributes'][a]['codegen_method']
-        if a_codegen_method != 'no':
-            e = config['attributes'][a]['enum']
-            if e is not None and e not in enums:
+        e = config['attributes'][a]['enum']
+        if e is not None:
+            if e not in enum_to_client_attributes:
                 print('Missing enum {0} referenced by attribute {1}'.format(e, a))
-            elif e is not None:
-                if a_codegen_method == 'private' and enums[e]['codegen_method'] == 'no':
-                    enums[e]['codegen_method'] = a_codegen_method
-                elif a_codegen_method == 'public':
-                    enums[e]['codegen_method'] = a_codegen_method
+            else:
+                enum_to_client_attributes[e].append(a)
+    return enum_to_client_attributes
+
+
+def _get_least_restrictive_codegen_method(codegen_methods):
+    '''Get the least restrictive codegen_method among the input codegen_methods.
+
+    If the codegen_methods parameter is empty, return 'no'.
+    The restrictiveness of the codegen_method is as follows (most restrictive -> least restrictive):
+    'no' -> 'private' -> 'public' / 'python-only' (will be converted to 'public')
+    '''
+    if len(codegen_methods) == 0:
+        return 'no'
+
+    codegen_method_to_permissiveness = {
+        'no': 0,
+        'private': 1,
+        'python-only': 2,
+        'public': 2
+    }
+    permissiveness_to_codegen_method = {
+        0: 'no',
+        1: 'private',
+        2: 'public'
+    }
+    return permissiveness_to_codegen_method[
+        max(codegen_method_to_permissiveness[codegen_method] for codegen_method in codegen_methods)
+    ]
 
 
 def _add_enum_value_python_name(enum_info, config):
@@ -507,11 +651,12 @@ def _add_enum_value_python_name(enum_info, config):
         for v in enum_info['values']:
             assert v['python_name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
             v['suffix'] = suffix
-            v['python_name'] = v['python_name'].replace(suffix, '')
+            v['python_name'] = v['python_name'][:-len(suffix)]
 
     # We need to check again to see if we have any values that start with a digit
     # If we are not going to code generate this enum, we don't care about this
     for v in enum_info['values']:
+        assert v['python_name'], enum_info
         if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
             raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
@@ -669,7 +814,7 @@ functions_input = {
     'MakeAFoo': {
         'codegen_method': 'public',
         'returns': 'ViStatus',
-        'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/cool_template', 'library_interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
                 'direction': 'in',
@@ -701,6 +846,19 @@ functions_input = {
                 'type': 'ViInt32'
             },
             {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'python-code input',
+                },
+                'enum': None,
+                'name': 'pythonCodeInput',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': '2 ** 14'
+                },
+                'type': 'ViInt32'
+            },
+            {
                 'direction': 'out',
                 'documentation': {
                     'description': 'buffer size output',
@@ -722,6 +880,42 @@ functions_input = {
                     'value_twist': 'actualNumPinData'
                 },
                 'type': 'ViUInt8[]'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type input',
+                },
+                'enum': None,
+                'name': 'customTypeInput',
+                'type': 'struct CustomStruct'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type output',
+                },
+                'enum': None,
+                'name': 'customTypeOutput',
+                'type': 'struct CustomStruct'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type without struct prefix input',
+                },
+                'enum': None,
+                'name': 'customTypeWithoutStructPrefixInput',
+                'type': 'CustomStruct'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type without struct prefix output',
+                },
+                'enum': None,
+                'name': 'customTypeWithoutStructPrefixOutput',
+                'type': 'CustomStruct'
             },
         ],
         'documentation': {
@@ -777,6 +971,23 @@ functions_input = {
             'description': 'Perform actions as method defined',
         },
     },
+    'MakeANoCodegenMethod': {
+        'codegen_method': 'no',
+        'documentation': {
+            'description': 'This is a method with codegen_method set to no',
+        },
+        'method_name_for_documentation': 'MakeAPublicMethod',
+        'method_templates': [
+            {
+                'session_filename': '/cool_template',
+                'library_interpreter_filename': '/cool_template',
+                'documentation_filename': '/cool_template',
+                'method_python_name_suffix': '',
+            },
+        ],
+        'parameters': [],
+        'returns': 'ViStatus',
+    },
 }
 
 
@@ -791,9 +1002,10 @@ functions_expected = {
         'has_repeated_capability': False,
         'is_error_handling': False,
         'render_in_session_base': False,
-        'method_templates': [{'session_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/cool_template', 'library_interpreter_filename': '/cool_template', 'documentation_filename': '/cool_template', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
+                'ctypes_method_call_snippet': 'vi_ctype',
                 'ctypes_type': 'ViSession',
                 'ctypes_variable_name': 'vi_ctype',
                 'ctypes_type_library_call': 'ViSession',
@@ -804,6 +1016,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': True,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -813,6 +1026,7 @@ functions_expected = {
                 'use_list': False,
                 'is_string': False,
                 'name': 'vi',
+                'grpc_name': 'vi',
                 'python_name': 'vi',
                 'python_name_with_default': 'vi',
                 'python_name_with_doc_default': 'vi',
@@ -821,11 +1035,13 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViSession',
-                'library_method_call_snippet': 'vi_ctype',
+                'interpreter_method_call_snippet': 'self._vi',
+                'grpc_request_snippet': 'vi=self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
             },
             {
+                'ctypes_method_call_snippet': 'name_ctype',
                 'ctypes_type': 'ViString',
                 'ctypes_variable_name': 'name_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViChar)',
@@ -836,6 +1052,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'str',
                 'type_in_documentation': 'str',
@@ -845,16 +1062,19 @@ functions_expected = {
                 'use_list': False,
                 'is_string': True,
                 'name': 'channelName',
+                'grpc_name': 'name',
                 'python_name': 'name',
                 'python_name_with_default': 'name',
                 'python_name_with_doc_default': 'name',
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViString',
-                'library_method_call_snippet': 'name_ctype',
+                'interpreter_method_call_snippet': 'name',
+                'grpc_request_snippet': 'name=name',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'name',
             },
             {
+                'ctypes_method_call_snippet': 'pin_data_buffer_size_ctype',
                 'ctypes_type': 'ViInt32',
                 'ctypes_variable_name': 'pin_data_buffer_size_ctype',
                 'ctypes_type_library_call': 'ViInt32',
@@ -865,6 +1085,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -874,6 +1095,7 @@ functions_expected = {
                 'use_list': False,
                 'is_string': False,
                 'name': 'pinDataBufferSize',
+                'grpc_name': 'pin_data_buffer_size',
                 'python_name': 'pin_data_buffer_size',
                 'python_name_with_default': 'pin_data_buffer_size',
                 'python_name_with_doc_default': 'pin_data_buffer_size',
@@ -882,11 +1104,49 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'pin_data_buffer_size_ctype',
+                'interpreter_method_call_snippet': 'pin_data_buffer_size',
+                'grpc_request_snippet': 'pin_data_buffer_size=pin_data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'pin_data_buffer_size',
             },
             {
+                'ctypes_method_call_snippet': 'python_code_input_ctype',
+                'ctypes_type': 'ViInt32',
+                'ctypes_variable_name': 'python_code_input_ctype',
+                'ctypes_type_library_call': 'ViInt32',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'python-code input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'grpc_enum': None,
+                'numpy': False,
+                'python_type': 'int',
+                'type_in_documentation': 'int',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'pythonCodeInput',
+                'grpc_name': 'python_code_input',
+                'python_name': 'python_code_input',
+                'python_name_with_default': 'python_code_input',
+                'python_name_with_doc_default': 'python_code_input',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': '2 ** 14'
+                },
+                'type': 'ViInt32',
+                'interpreter_method_call_snippet': 'python_code_input',
+                'grpc_request_snippet': 'python_code_input=2 ** 14',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'python_code_input',
+            },
+            {
+                'ctypes_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
                 'ctypes_type': 'ViInt32',
                 'ctypes_variable_name': 'actual_num_pin_data_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViInt32)',
@@ -897,6 +1157,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -906,6 +1167,7 @@ functions_expected = {
                 'use_list': False,
                 'is_string': False,
                 'name': 'actualNumPinData',
+                'grpc_name': 'actual_num_pin_data',
                 'python_name': 'actual_num_pin_data',
                 'python_name_with_default': 'actual_num_pin_data',
                 'python_name_with_doc_default': 'actual_num_pin_data',
@@ -914,11 +1176,13 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
+                'interpreter_method_call_snippet': 'actual_num_pin_data',
+                'grpc_request_snippet': 'actual_num_pin_data=actual_num_pin_data',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'actual_num_pin_data',
             },
             {
+                'ctypes_method_call_snippet': 'expected_pin_states_ctype',
                 'ctypes_type': 'ViUInt8',
                 'ctypes_variable_name': 'expected_pin_states_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViUInt8)',
@@ -929,6 +1193,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -939,6 +1204,7 @@ functions_expected = {
                 'is_string': False,
                 'name': 'expectedPinStates',
                 'original_type': 'ViUInt8[]',
+                'grpc_name': 'expected_pin_states',
                 'python_name': 'expected_pin_states',
                 'python_name_with_default': 'expected_pin_states',
                 'python_name_with_doc_default': 'expected_pin_states',
@@ -948,29 +1214,178 @@ functions_expected = {
                     'value_twist': 'actualNumPinData'
                 },
                 'type': 'ViUInt8',
-                'library_method_call_snippet': 'expected_pin_states_ctype',
+                'interpreter_method_call_snippet': 'expected_pin_states',
+                'grpc_request_snippet': 'expected_pin_states=expected_pin_states',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
             },
+            {
+                'ctypes_method_call_snippet': 'custom_type_input_ctype',
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_input_ctype',
+                'ctypes_type_library_call': 'custom_struct.struct_CustomStruct',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'grpc_enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeInput',
+                'grpc_name': 'custom_type_input',
+                'python_name': 'custom_type_input',
+                'python_name_with_default': 'custom_type_input',
+                'python_name_with_doc_default': 'custom_type_input',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'interpreter_method_call_snippet': 'custom_type_input',
+                'grpc_request_snippet': 'custom_type_input=custom_type_input._create_copy(grpc_types.CustomStruct)',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_input',
+            },
+            {
+                'ctypes_method_call_snippet': 'None if custom_type_output_ctype is None else (ctypes.pointer(custom_type_output_ctype))',
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_output_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'grpc_enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeOutput',
+                'grpc_name': 'custom_type_output',
+                'python_name': 'custom_type_output',
+                'python_name_with_default': 'custom_type_output',
+                'python_name_with_doc_default': 'custom_type_output',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'interpreter_method_call_snippet': 'custom_type_output',
+                'grpc_request_snippet': 'custom_type_output=custom_type_output._create_copy(grpc_types.CustomStruct)',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_output',
+            },
+            {
+                'ctypes_method_call_snippet': 'custom_type_without_struct_prefix_input_ctype',
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_without_struct_prefix_input_ctype',
+                'ctypes_type_library_call': 'custom_struct.struct_CustomStruct',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'custom type without struct prefix input',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'grpc_enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeWithoutStructPrefixInput',
+                'grpc_name': 'custom_type_without_struct_prefix_input',
+                'python_name': 'custom_type_without_struct_prefix_input',
+                'python_name_with_default': 'custom_type_without_struct_prefix_input',
+                'python_name_with_doc_default': 'custom_type_without_struct_prefix_input',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'interpreter_method_call_snippet': 'custom_type_without_struct_prefix_input',
+                'grpc_request_snippet': 'custom_type_without_struct_prefix_input=custom_type_without_struct_prefix_input._create_copy(grpc_types.CustomStruct)',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
+            },
+            {
+                'ctypes_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
+                'ctypes_type': 'struct_CustomStruct',
+                'ctypes_variable_name': 'custom_type_without_struct_prefix_output_ctype',
+                'ctypes_type_library_call': 'ctypes.POINTER(custom_struct.struct_CustomStruct)',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'custom type without struct prefix output',
+                },
+                'is_repeated_capability': False,
+                'is_session_handle': False,
+                'enum': None,
+                'grpc_enum': None,
+                'numpy': False,
+                'python_type': 'CustomStruct',
+                'type_in_documentation': 'CustomStruct',
+                'type_in_documentation_was_calculated': True,
+                'use_array': False,
+                'is_buffer': False,
+                'use_list': False,
+                'is_string': False,
+                'name': 'customTypeWithoutStructPrefixOutput',
+                'grpc_name': 'custom_type_without_struct_prefix_output',
+                'python_name': 'custom_type_without_struct_prefix_output',
+                'python_name_with_default': 'custom_type_without_struct_prefix_output',
+                'python_name_with_doc_default': 'custom_type_without_struct_prefix_output',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'struct_CustomStruct',
+                'interpreter_method_call_snippet': 'custom_type_without_struct_prefix_output',
+                'grpc_request_snippet': 'custom_type_without_struct_prefix_output=custom_type_without_struct_prefix_output._create_copy(grpc_types.CustomStruct)',
+                'use_in_python_api': True,
+                'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
+            },
         ],
         'python_name': 'make_a_foo',
+        'interpreter_name': 'make_a_foo',
         'returns': 'ViStatus',
     },
     'MakeAPrivateMethod': {
         'codegen_method': 'private',
         'returns': 'ViStatus',
         'use_session_lock': True,
-        'method_templates': [{'session_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
+        'method_templates': [{'session_filename': '/default_method', 'library_interpreter_filename': '/default_method', 'documentation_filename': '/default_method', 'method_python_name_suffix': '', }, ],
         'parameters': [
             {
+                'ctypes_method_call_snippet': 'vi_ctype',
                 'direction': 'in',
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'name': 'vi',
                 'type': 'ViSession',
                 'documentation': {
                     'description': 'Identifies a particular instrument session.'
                 },
+                'grpc_name': 'vi',
                 'python_name': 'vi',
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -990,19 +1405,23 @@ functions_expected = {
                 'python_name_with_doc_default': 'vi',
                 'is_repeated_capability': False,
                 'is_session_handle': True,
-                'library_method_call_snippet': 'vi_ctype',
+                'interpreter_method_call_snippet': 'self._vi',
+                'grpc_request_snippet': 'vi=self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
             },
             {
+                'ctypes_method_call_snippet': 'status_ctype',
                 'direction': 'out',
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'name': 'status',
                 'type': 'ViString',
                 'documentation': {
                     'description': 'Return a device status'
                 },
+                'grpc_name': 'status',
                 'python_name': 'status',
                 'python_type': 'str',
                 'type_in_documentation': 'str',
@@ -1022,11 +1441,13 @@ functions_expected = {
                 'python_name_with_doc_default': 'status',
                 'is_repeated_capability': False,
                 'is_session_handle': False,
-                'library_method_call_snippet': 'status_ctype',
+                'interpreter_method_call_snippet': 'status',
+                'grpc_request_snippet': 'status=status',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
             },
             {
+                'ctypes_method_call_snippet': 'data_buffer_size_ctype',
                 'ctypes_type': 'ViInt32',
                 'ctypes_variable_name': 'data_buffer_size_ctype',
                 'ctypes_type_library_call': 'ViInt32',
@@ -1037,6 +1458,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -1046,6 +1468,7 @@ functions_expected = {
                 'use_list': False,
                 'is_string': False,
                 'name': 'dataBufferSize',
+                'grpc_name': 'data_buffer_size',
                 'python_name': 'data_buffer_size',
                 'python_name_with_default': 'data_buffer_size',
                 'python_name_with_doc_default': 'data_buffer_size',
@@ -1054,11 +1477,13 @@ functions_expected = {
                     'value': 1
                 },
                 'type': 'ViInt32',
-                'library_method_call_snippet': 'data_buffer_size_ctype',
+                'interpreter_method_call_snippet': 'data_buffer_size',
+                'grpc_request_snippet': 'data_buffer_size=data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'data_buffer_size',
             },
             {
+                'ctypes_method_call_snippet': 'data_ctype',
                 'ctypes_type': 'ViUInt32',
                 'ctypes_variable_name': 'data_ctype',
                 'ctypes_type_library_call': 'ctypes.POINTER(ViUInt32)',
@@ -1069,6 +1494,7 @@ functions_expected = {
                 'is_repeated_capability': False,
                 'is_session_handle': False,
                 'enum': None,
+                'grpc_enum': None,
                 'numpy': False,
                 'python_type': 'int',
                 'type_in_documentation': 'int',
@@ -1079,6 +1505,7 @@ functions_expected = {
                 'is_string': False,
                 'name': 'data',
                 'original_type': 'ViUInt32[]',
+                'grpc_name': 'data',
                 'python_name': 'data',
                 'python_name_with_default': 'data',
                 'python_name_with_doc_default': 'data',
@@ -1087,7 +1514,8 @@ functions_expected = {
                     'value': 'dataBufferSize',
                 },
                 'type': 'ViUInt32',
-                'library_method_call_snippet': 'data_ctype',
+                'interpreter_method_call_snippet': 'data',
+                'grpc_request_snippet': 'data=data',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'data',
             },
@@ -1097,9 +1525,34 @@ functions_expected = {
         },
         'name': 'MakeAPrivateMethod',
         'python_name': '_make_a_private_method',
+        'interpreter_name': 'make_a_private_method',
         'is_error_handling': False,
         'render_in_session_base': False,
         'has_repeated_capability': False
+    },
+    'MakeANoCodegenMethod': {
+        'name': 'MakeANoCodegenMethod',
+        'codegen_method': 'no',
+        'method_name_for_documentation': 'MakeAPublicMethod',
+        'use_session_lock': True,
+        'documentation': {
+            'description': 'This is a method with codegen_method set to no'
+        },
+        'has_repeated_capability': False,
+        'is_error_handling': False,
+        'render_in_session_base': False,
+        'method_templates': [
+            {
+                'session_filename': '/cool_template',
+                'library_interpreter_filename': '/cool_template',
+                'documentation_filename': '/cool_template',
+                'method_python_name_suffix': ''
+            }
+        ],
+        'parameters': [],
+        'python_name': 'make_a_no_codegen_method',
+        'interpreter_name': 'make_a_no_codegen_method',
+        'returns': 'ViStatus',
     }
 }
 
@@ -1124,6 +1577,7 @@ attributes_expected = {
         'codegen_method': 'public',
         'documentation': {'description': 'An attribute of type bool with read/write access.'},
         'enum': None,
+        'grpc_enum': None,
         'lv_property': 'Fake attributes:Read Write Bool',
         'name': 'READ_WRITE_BOOL',
         'python_name': 'read_write_bool',
@@ -1169,6 +1623,33 @@ enums_input = {
             },
         ],
     },
+    'EnumWithConverter': {
+        'codegen_method': 'private',
+        'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
+        'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
+        'values': [
+            {
+                'converts_to_value': True,
+                'name': 'RED',
+                'value': 1
+            },
+            {
+                'converts_to_value': False,
+                'name': 'BLUE',
+                'value': 2
+            },
+            {
+                'converts_to_value': 'yellow',
+                'name': 'YELLOW',
+                'value': 5
+            },
+            {
+                'converts_to_value': 42,
+                'name': 'BLACK',
+                'value': 42
+            }
+        ]
+    },
 }
 
 
@@ -1181,6 +1662,18 @@ enums_expected = {
             {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
             {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
             {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
+        ]
+    },
+    'EnumWithConverter': {
+        'codegen_method': 'private',
+        'python_name': '_EnumWithConverter',
+        'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
+        'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
+        'values': [
+            {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED'},
+            {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE'},
+            {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW'},
+            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK'}
         ]
     },
 }
@@ -1212,7 +1705,12 @@ config_input = {
     'init_function': 'InitWithOptions',
     'close_function': 'close',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+        {
+            'ctypes_type': 'struct_CustomStruct',
+            'file_name': 'custom_struct',
+            'grpc_name': 'CustomStruct',
+            'python_name': 'CustomStruct',
+        },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
@@ -1253,7 +1751,12 @@ config_expected = {
     'init_function': 'InitWithOptions',
     'close_function': 'close',
     'custom_types': [
-        {'file_name': 'custom_struct', 'python_name': 'CustomStruct', 'ctypes_type': 'custom_struct', },
+        {
+            'ctypes_type': 'struct_CustomStruct',
+            'file_name': 'custom_struct',
+            'grpc_name': 'CustomStruct',
+            'python_name': 'CustomStruct',
+        },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
@@ -1334,4 +1837,87 @@ def test_add_all_metadata():
         expected=expected)
 
 
+def _setup_inputs_for_enum_codegen_method_tests():
+    actual_enums = copy.deepcopy(enums_input)
+    actual_config = copy.deepcopy(config_input)
+    # Set up minimal input functions metadata
+    actual_config['functions'] = {
+        'PublicMethod': {
+            'codegen_method': 'public',
+            'parameters': [{'enum': None}, {'enum': 'EnumWithConverter'}],
+        },
+        'PythonOnlyMethod': {
+            'codegen_method': 'python-only',
+            'parameters': [{'enum': 'Color'}, {'enum': None}],
+        },
+        'PrivateMethod': {
+            'codegen_method': 'private',
+            'parameters': [{'enum': 'EnumWithConverter'}],
+        },
+        'NoCodegenMethod': {
+            'codegen_method': 'no',
+            'parameters': [{'enum': 'Color'}],
+        },
+    }
+    # Set up minimal input attributes metadata
+    actual_config['attributes'] = {
+        '1000000': {'codegen_method': 'public', 'name': 'PUBLIC_ATTR', 'enum': None},
+        '1000001': {'codegen_method': 'public', 'name': 'PUBLIC_ATTR_2', 'enum': 'EnumWithConverter'},
+        '1000002': {'codegen_method': 'private', 'name': 'PRIVATE_ATTR', 'enum': 'Color'},
+        '1000003': {'codegen_method': 'private', 'name': 'PRIVATE_ATTR_2', 'enum': 'EnumWithConverter'},
+        '1000004': {'codegen_method': 'no', 'name': 'NO_CODEGEN_ATTR', 'enum': 'Color'},
+    }
+    return actual_enums, actual_config
 
+
+def test_add_enum_codegen_method():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    _add_enum_codegen_method(actual_enums, actual_config)
+    assert actual_enums['Color']['codegen_method'] == 'public'
+    assert actual_enums['EnumWithConverter']['codegen_method'] == 'private'
+
+
+def test_add_enum_codegen_method_error():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    actual_enums['Color']['codegen_method'] = 'private'
+    expected_error_description = "Codegen_method of enum Color used by functions ['PythonOnlyMethod'] and attributes ['PRIVATE_ATTR'] must be public, is private"
+    try:
+        _add_enum_codegen_method(actual_enums, actual_config)
+    except ValueError as actual_error:
+        actual_error_message = actual_error.args[0]
+        assert actual_error_message == expected_error_description
+
+
+def test_get_functions_that_use_enums():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    expected_output = {
+        'Color': ['PythonOnlyMethod'],
+        'EnumWithConverter': ['PublicMethod', 'PrivateMethod'],
+    }
+    actual_output = _get_functions_that_use_enums(actual_enums, actual_config)
+    _compare_dicts(actual_output, expected_output)
+
+
+def test_get_attributes_that_use_enums():
+    actual_enums, actual_config = _setup_inputs_for_enum_codegen_method_tests()
+    expected_output = {
+        'Color': ['1000002'],
+        'EnumWithConverter': ['1000001', '1000003'],
+    }
+    actual_output = _get_attributes_that_use_enums(actual_enums, actual_config)
+    _compare_dicts(actual_output, expected_output)
+
+
+def test_get_least_restrictive_codegen_method():
+    for codegen_methods, expected_least_restrictive_codegen_method in (
+        ([], 'no'),
+        (['no'], 'no'),
+        (['private', 'private'], 'private'),
+        (['no', 'private'], 'private'),
+        (['public', 'private'], 'public'),
+        (['private', 'python-only', 'private', 'no'], 'public'),
+        (['public', 'python-only', 'public'], 'public')
+    ):
+        assert _get_least_restrictive_codegen_method(
+            codegen_methods
+        ) == expected_least_restrictive_codegen_method
