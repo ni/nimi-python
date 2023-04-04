@@ -159,11 +159,6 @@ class NiDCPowerStub(object):
                 request_serializer=nidcpower__pb2.ConfigureOutputFunctionRequest.SerializeToString,
                 response_deserializer=nidcpower__pb2.ConfigureOutputFunctionResponse.FromString,
                 )
-        self.ConfigureOutputRange = channel.unary_unary(
-                '/nidcpower_grpc.NiDCPower/ConfigureOutputRange',
-                request_serializer=nidcpower__pb2.ConfigureOutputRangeRequest.SerializeToString,
-                response_deserializer=nidcpower__pb2.ConfigureOutputRangeResponse.FromString,
-                )
         self.ConfigureOutputResistance = channel.unary_unary(
                 '/nidcpower_grpc.NiDCPower/ConfigureOutputResistance',
                 request_serializer=nidcpower__pb2.ConfigureOutputResistanceRequest.SerializeToString,
@@ -918,12 +913,6 @@ class NiDCPowerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ConfigureOutputFunction(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ConfigureOutputRange(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1772,11 +1761,6 @@ def add_NiDCPowerServicer_to_server(servicer, server):
                     servicer.ConfigureOutputFunction,
                     request_deserializer=nidcpower__pb2.ConfigureOutputFunctionRequest.FromString,
                     response_serializer=nidcpower__pb2.ConfigureOutputFunctionResponse.SerializeToString,
-            ),
-            'ConfigureOutputRange': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureOutputRange,
-                    request_deserializer=nidcpower__pb2.ConfigureOutputRangeRequest.FromString,
-                    response_serializer=nidcpower__pb2.ConfigureOutputRangeResponse.SerializeToString,
             ),
             'ConfigureOutputResistance': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureOutputResistance,
@@ -2858,23 +2842,6 @@ class NiDCPower(object):
         return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/ConfigureOutputFunction',
             nidcpower__pb2.ConfigureOutputFunctionRequest.SerializeToString,
             nidcpower__pb2.ConfigureOutputFunctionResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ConfigureOutputRange(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nidcpower_grpc.NiDCPower/ConfigureOutputRange',
-            nidcpower__pb2.ConfigureOutputRangeRequest.SerializeToString,
-            nidcpower__pb2.ConfigureOutputRangeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

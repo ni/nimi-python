@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-DCPower API metadata version 23.0.0d318
+// This file is generated from NI-DCPower API metadata version 23.0.0f517
 //---------------------------------------------------------------------
 // Proto file for the NI-DCPower Metadata
 //---------------------------------------------------------------------
@@ -46,7 +46,6 @@ service NiDCPower {
   rpc ConfigureLCRCustomCableCompensation(ConfigureLCRCustomCableCompensationRequest) returns (ConfigureLCRCustomCableCompensationResponse);
   rpc ConfigureOutputEnabled(ConfigureOutputEnabledRequest) returns (ConfigureOutputEnabledResponse);
   rpc ConfigureOutputFunction(ConfigureOutputFunctionRequest) returns (ConfigureOutputFunctionResponse);
-  rpc ConfigureOutputRange(ConfigureOutputRangeRequest) returns (ConfigureOutputRangeResponse);
   rpc ConfigureOutputResistance(ConfigureOutputResistanceRequest) returns (ConfigureOutputResistanceResponse);
   rpc ConfigureOvp(ConfigureOvpRequest) returns (ConfigureOvpResponse);
   rpc ConfigurePowerLineFrequency(ConfigurePowerLineFrequencyRequest) returns (ConfigurePowerLineFrequencyResponse);
@@ -971,17 +970,6 @@ message ConfigureOutputFunctionRequest {
 }
 
 message ConfigureOutputFunctionResponse {
-  int32 status = 1;
-}
-
-message ConfigureOutputRangeRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  sint32 range_type = 3;
-  double range = 4;
-}
-
-message ConfigureOutputRangeResponse {
   int32 status = 1;
 }
 
@@ -2188,4 +2176,3 @@ message WaitForEventWithChannelsRequest {
 message WaitForEventWithChannelsResponse {
   int32 status = 1;
 }
-
