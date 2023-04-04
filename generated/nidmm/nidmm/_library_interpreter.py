@@ -9,6 +9,8 @@ import nidmm._visatype as _visatype
 import nidmm.enums as enums  # noqa: F401
 import nidmm.errors as errors
 
+_was_runtime_env_set = None
+
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):

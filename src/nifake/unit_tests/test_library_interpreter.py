@@ -418,43 +418,27 @@ class TestLibraryInterpreter(object):
         assert interpreter1._library is interpreter2._library
 
     def test_set_runtime_environment_is_called_if_present(self):
-        self.patched_library_singleton_get.stop()
-        self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
-        self.patched_library.niFake_SetRuntimeEnvironment.side_effect = self.side_effects_helper.niFake_SetRuntimeEnvironment
-        self.patched_library_singleton_lib.start()
+        nifake._library_interpreter._was_runtime_env_set = None
         self.get_initialized_library_interpreter()
         self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
-        self.patched_library_singleton_lib.stop()
-        self.patched_library_singleton_get.start()
 
     def test_set_runtime_environment_not_present_in_driver_runtime(self):
 
         class TypesLibrary:
             item = ""
 
-        self.patched_library_singleton_get.stop()
-        self.patched_library = self.PatchedLibrary(TypesLibrary)
-        self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
-        self.patched_library_singleton_lib.start()
+        nifake._library_interpreter._was_runtime_env_set = None
+        self.patched_library._library = TypesLibrary()
         with pytest.raises(nifake.errors.DriverTooOldError):
             self.get_initialized_library_interpreter()._library._get_library_function('niFake_SetRuntimeEnvironment')
 
-        self.patched_library_singleton_lib.stop()
-        self.patched_library_singleton_get.start()
-
     def test_set_runtime_environment_not_present_in_library(self):
-        self.patched_library_singleton_get.stop()
         delattr(self.patched_library, 'niFake_SetRuntimeEnvironment')
-        self.patched_library_singleton_lib = patch('nifake._library.Library', return_value=self.patched_library)
-        self.patched_library_singleton_lib.start()
         nifake._library_singleton._instance = None
         interpreter = self.get_initialized_library_interpreter()
 
         with pytest.raises(nifake.errors.DriverTooOldError):
             interpreter._library.niFake_SetRuntimeEnvironment('', '', '', '')
-
-        self.patched_library_singleton_lib.stop()
-        self.patched_library_singleton_get.start()
 
     # Retrieving buffers and strings
 

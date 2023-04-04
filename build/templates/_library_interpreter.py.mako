@@ -32,6 +32,8 @@ import ${module_name}.errors as errors
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
+_was_runtime_env_set = None
+
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
@@ -80,17 +82,21 @@ class LibraryInterpreter(object):
         self._encoding = encoding
         self._library = _library_singleton.get()
         % if 'SetRuntimeEnvironment' in functions:
-        try:
-            runtime_env_ctype = platform.python_implementation()
-            version_ctype = platform.python_version()
-            self.set_runtime_environment(
-                runtime_env_ctype,
-                version_ctype,
-                '',
-                ''
-            )
-        except errors.DriverTooOldError:
-            pass
+        global _was_runtime_env_set
+        if _was_runtime_env_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except errors.DriverTooOldError:
+                pass
+            finally:
+                _was_runtime_env_set = True
         % endif
         # Initialize _${config['session_handle_parameter_name']} to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
