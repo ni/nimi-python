@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.3.0d397
+# This file is generated from NI-DCPower API metadata version 23.5.0d58
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -62,7 +62,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future  measurements until the device is reinitiated.'
+                    'description': 'Makes zero conversions following the first measurement after initiating the device.  The device uses these zero conversions for the preceding measurement and future measurements until the device is reinitiated.'
                 },
                 'name': 'NIDCPOWER_VAL_ONCE',
                 'value': 1024
@@ -351,6 +351,42 @@ enums = {
             }
         ]
     },
+    'EventOutputBehavior': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Output generates a pulse when the event is triggered.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE',
+                'value': 1147
+            },
+            {
+                'documentation': {
+                    'description': 'Output toggles state when the event is triggered.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE',
+                'value': 1148
+            }
+        ]
+    },
+    'EventToggleInitialState': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The initial state is low.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_TOGGLE_INITIAL_STATE_LOW',
+                'value': 1149
+            },
+            {
+                'documentation': {
+                    'description': 'The initial state is high.'
+                },
+                'name': 'NIDCPOWER_VAL_EVENT_TOGGLE_INITIAL_STATE_HIGH',
+                'value': 1150
+            }
+        ]
+    },
     'ExportSignal': {
         'values': [
             {
@@ -626,6 +662,13 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_AS_DEFINED',
                 'value': 1075
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the LCR compensation data supplied to niDCPower_ConfigureLCRCompensation. Use this option to manage multiple sets of LCR compensation data.'
+                },
+                'name': 'NIDCPOWER_VAL_AS_CONFIGURED',
+                'value': 1146
             }
         ]
     },
@@ -955,7 +998,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Uses the auxiliary power source connected to the device. Only the NI PXI-4110,  NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value  for the NI PXIe-4112 and NI PXIe-4113.'
+                    'description': 'Uses the auxiliary power source connected to the device. Only the NI PXI-4110, NI PXIe-4112, NI PXIe-4113, and NI PXI-4130 support this value. This is the only supported value for the NI PXIe-4112 and NI PXIe-4113.'
                 },
                 'name': 'NIDCPOWER_VAL_AUXILIARY',
                 'value': 1004
