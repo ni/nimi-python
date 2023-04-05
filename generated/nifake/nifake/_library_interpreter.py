@@ -17,6 +17,7 @@ import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # no
 
 import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
 
+
 _was_runtime_env_set = None
 
 

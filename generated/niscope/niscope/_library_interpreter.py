@@ -13,8 +13,6 @@ import niscope.waveform_info as waveform_info  # noqa: F401
 
 import niscope.measurement_stats as measurement_stats  # noqa: F401
 
-_was_runtime_env_set = None
-
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):

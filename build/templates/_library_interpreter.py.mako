@@ -32,9 +32,12 @@ import ${module_name}.errors as errors
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
+
+% if 'SetRuntimeEnvironment' in functions:
 _was_runtime_env_set = None
 
 
+% endif
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):

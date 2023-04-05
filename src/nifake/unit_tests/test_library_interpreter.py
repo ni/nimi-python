@@ -417,9 +417,10 @@ class TestLibraryInterpreter(object):
         assert interpreter1 is not interpreter2
         assert interpreter1._library is interpreter2._library
 
-    def test_set_runtime_environment_is_called_if_present(self):
+    def test_set_runtime_environment_is_called_once_if_present(self):
         nifake._library_interpreter._was_runtime_env_set = None
         self.get_initialized_library_interpreter()
+        nifake._library_interpreter.LibraryInterpreter('windows-1251')
         self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
 
     def test_set_runtime_environment_not_present_in_driver_runtime(self):
@@ -428,8 +429,9 @@ class TestLibraryInterpreter(object):
 
         nifake._library_interpreter._was_runtime_env_set = None
         self.patched_library._library = TypesLibrary()
+        interpreter = self.get_initialized_library_interpreter()
         with pytest.raises(nifake.errors.DriverTooOldError):
-            self.get_initialized_library_interpreter()._library._get_library_function('niFake_SetRuntimeEnvironment')
+            interpreter._library._get_library_function('niFake_SetRuntimeEnvironment')
 
     def test_abort_not_present_in_library_raises_driver_too_old_error(self):
         delattr(self.patched_library, 'niFake_Abort')
