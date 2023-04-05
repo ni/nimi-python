@@ -423,7 +423,6 @@ class TestLibraryInterpreter(object):
         self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
 
     def test_set_runtime_environment_not_present_in_driver_runtime(self):
-
         class TypesLibrary:
             item = ""
 
@@ -432,13 +431,12 @@ class TestLibraryInterpreter(object):
         with pytest.raises(nifake.errors.DriverTooOldError):
             self.get_initialized_library_interpreter()._library._get_library_function('niFake_SetRuntimeEnvironment')
 
-    def test_set_runtime_environment_not_present_in_library(self):
-        delattr(self.patched_library, 'niFake_SetRuntimeEnvironment')
-        nifake._library_singleton._instance = None
+    def test_abort_not_present_in_library_raises_driver_too_old_error(self):
+        delattr(self.patched_library, 'niFake_Abort')
         interpreter = self.get_initialized_library_interpreter()
 
         with pytest.raises(nifake.errors.DriverTooOldError):
-            interpreter._library.niFake_SetRuntimeEnvironment('', '', '', '')
+            interpreter.abort()
 
     # Retrieving buffers and strings
 
