@@ -83,7 +83,7 @@ deps =
     ${module_name}-system_tests: pytest-json
 % if grpc_supported:
     ${module_name}-system_tests: grpcio
-    ${module_name}-system_tests: protobuf
+    ${module_name}-system_tests: protobuf >= 4.21, < 5.0
 % endif
 
     ${module_name}-coverage: coverage
