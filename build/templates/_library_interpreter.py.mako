@@ -34,7 +34,7 @@ import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 
 
 % if 'SetRuntimeEnvironment' in functions:
-_was_runtime_env_set = None
+_was_runtime_environment_set = None
 
 
 % endif
@@ -85,8 +85,8 @@ class LibraryInterpreter(object):
         self._encoding = encoding
         self._library = _library_singleton.get()
         % if 'SetRuntimeEnvironment' in functions:
-        global _was_runtime_env_set
-        if _was_runtime_env_set is None:
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
             try:
                 runtime_env = platform.python_implementation()
                 version = platform.python_version()
@@ -99,7 +99,7 @@ class LibraryInterpreter(object):
             except errors.DriverTooOldError:
                 pass
             finally:
-                _was_runtime_env_set = True
+                _was_runtime_environment_set = True
         % endif
         # Initialize _${config['session_handle_parameter_name']} to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and

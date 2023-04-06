@@ -18,7 +18,7 @@ import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # no
 import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
 
 
-_was_runtime_env_set = None
+_was_runtime_environment_set = None
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -67,8 +67,8 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
-        global _was_runtime_env_set
-        if _was_runtime_env_set is None:
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
             try:
                 runtime_env = platform.python_implementation()
                 version = platform.python_version()
@@ -81,7 +81,7 @@ class LibraryInterpreter(object):
             except errors.DriverTooOldError:
                 pass
             finally:
-                _was_runtime_env_set = True
+                _was_runtime_environment_set = True
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
