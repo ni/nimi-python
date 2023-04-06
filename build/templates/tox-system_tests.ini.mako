@@ -82,7 +82,7 @@ deps =
     ${module_name}-system_tests: fasteners
     ${module_name}-system_tests: pytest-json
 % if grpc_supported:
-    ${module_name}-system_tests: grpcio
+    ${module_name}-system_tests: grpcio >= 1.49.1, < 2.0
     ${module_name}-system_tests: protobuf >= 4.21, < 5.0
 % endif
 
