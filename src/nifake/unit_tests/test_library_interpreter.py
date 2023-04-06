@@ -412,15 +412,15 @@ class TestLibraryInterpreter(object):
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
 
     def test_library_interpreter_always_uses_same_library_instance(self):
-        interpreter1 = nifake._library_interpreter.LibraryInterpreter('windows-1251')
-        interpreter2 = nifake._library_interpreter.LibraryInterpreter('windows-1251')
+        interpreter1 = self.get_initialized_library_interpreter()
+        interpreter2 = self.get_initialized_library_interpreter()
         assert interpreter1 is not interpreter2
         assert interpreter1._library is interpreter2._library
 
     def test_set_runtime_environment_is_called_once_if_present(self):
         nifake._library_interpreter._was_runtime_environment_set = None
         self.get_initialized_library_interpreter()
-        nifake._library_interpreter.LibraryInterpreter('windows-1251')
+        self.get_initialized_library_interpreter()
         self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
 
     def test_set_runtime_environment_not_present_in_driver_runtime(self):
