@@ -47,6 +47,9 @@ setup(
         'singledispatch;python_version<"3.4"',
         'hightime>=0.2.0',
     ],
+    extras_require={
+        'grpc': ['grpcio>=1.49.1,<2.0'],
+    },
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',

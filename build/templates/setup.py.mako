@@ -5,6 +5,7 @@
 import build.helper as helper
 
 config         = template_parameters['metadata'].config
+grpc_supported = template_parameters['include_grpc_support']
 module_version = config['module_version']
 %>
 
@@ -55,6 +56,11 @@ setup(
         'nitclk',
         % endif
     ],
+    % if grpc_supported:
+    extras_require={
+        'grpc': ['grpcio>=1.49.1,<2.0'],
+    },
+    % endif
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
