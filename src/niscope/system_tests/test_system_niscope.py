@@ -387,7 +387,7 @@ class SystemTests:
 
     def test_multi_threading_ivi_synchronized_wrapper_releases_lock(self, multi_instrument_session):
         system_test_utilities.impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(
-            multi_instrument_session)
+            multi_instrument_session.abort)
 
 
 class TestLibrary(SystemTests):

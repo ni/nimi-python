@@ -307,7 +307,7 @@ class SystemTests:
 
     def test_multi_threading_ivi_synchronized_wrapper_releases_lock(self, session):
         system_test_utilities.impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(
-            session)
+            session.abort)
 
 
 class TestLibrary(SystemTests):
