@@ -433,13 +433,6 @@ class TestLibraryInterpreter(object):
         with pytest.raises(nifake.errors.DriverTooOldError):
             interpreter._library._get_library_function('niFake_SetRuntimeEnvironment')
 
-    def test_abort_not_present_in_library_raises_driver_too_old_error(self):
-        delattr(self.patched_library, 'niFake_Abort')
-        interpreter = self.get_initialized_library_interpreter()
-
-        with pytest.raises(nifake.errors.DriverTooOldError):
-            interpreter.abort()
-
     # Retrieving buffers and strings
 
     def test_get_a_string_of_fixed_maximum_size(self):
