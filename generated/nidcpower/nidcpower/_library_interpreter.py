@@ -4,6 +4,8 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import platform
+
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
 import nidcpower.enums as enums  # noqa: F401
@@ -12,6 +14,9 @@ import nidcpower.errors as errors
 import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
 
 import nidcpower.lcr_measurement as lcr_measurement  # noqa: F401
+
+
+_was_runtime_environment_set = None
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -60,6 +65,21 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except errors.DriverTooOldError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.

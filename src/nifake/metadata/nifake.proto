@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-FAKE API metadata version 23.0.0d96
+// This file is generated from NI-FAKE API metadata version 23.5.0d4
 //---------------------------------------------------------------------
 // Proto file for the NI-FAKE Metadata
 //---------------------------------------------------------------------
@@ -26,6 +26,7 @@ service NiFake {
   rpc CloseExtCal(CloseExtCalRequest) returns (CloseExtCalResponse);
   rpc CommandWithReservedParam(CommandWithReservedParamRequest) returns (CommandWithReservedParamResponse);
   rpc ConfigureAbc(ConfigureAbcRequest) returns (ConfigureAbcResponse);
+  rpc ConfigureEnums(ConfigureEnumsRequest) returns (ConfigureEnumsResponse);
   rpc Control4022(Control4022Request) returns (Control4022Response);
   rpc CreateConfigurationList(CreateConfigurationListRequest) returns (CreateConfigurationListResponse);
   rpc CustomNestedStructRoundtrip(CustomNestedStructRoundtripRequest) returns (CustomNestedStructRoundtripResponse);
@@ -34,11 +35,14 @@ service NiFake {
   rpc EnumInputFunctionWithDefaults(EnumInputFunctionWithDefaultsRequest) returns (EnumInputFunctionWithDefaultsResponse);
   rpc ErrorMessage(ErrorMessageRequest) returns (ErrorMessageResponse);
   rpc ExportAttributeConfigurationBuffer(ExportAttributeConfigurationBufferRequest) returns (ExportAttributeConfigurationBufferResponse);
+  rpc ExportAttributeConfigurationBufferEx(ExportAttributeConfigurationBufferExRequest) returns (ExportAttributeConfigurationBufferExResponse);
   rpc FetchWaveform(FetchWaveformRequest) returns (FetchWaveformResponse);
+  rpc FetchWithCustomSize(FetchWithCustomSizeRequest) returns (FetchWithCustomSizeResponse);
+  rpc FunctionWithOverriddenGrpcName2x(FunctionWithOverriddenGrpcName2xRequest) returns (FunctionWithOverriddenGrpcName2xResponse);
   rpc GetABoolean(GetABooleanRequest) returns (GetABooleanResponse);
   rpc GetANumber(GetANumberRequest) returns (GetANumberResponse);
   rpc GetAStringOfFixedMaximumSize(GetAStringOfFixedMaximumSizeRequest) returns (GetAStringOfFixedMaximumSizeResponse);
-  rpc GetAnIviDanceString(GetAnIviDanceStringRequest) returns (GetAnIviDanceStringResponse);
+  rpc GetAnIviDanceCharArray(GetAnIviDanceCharArrayRequest) returns (GetAnIviDanceCharArrayResponse);
   rpc GetAnIviDanceWithATwistArray(GetAnIviDanceWithATwistArrayRequest) returns (GetAnIviDanceWithATwistArrayResponse);
   rpc GetAnIviDanceWithATwistArrayOfCustomType(GetAnIviDanceWithATwistArrayOfCustomTypeRequest) returns (GetAnIviDanceWithATwistArrayOfCustomTypeResponse);
   rpc GetAnIviDanceWithATwistArrayWithInputArray(GetAnIviDanceWithATwistArrayWithInputArrayRequest) returns (GetAnIviDanceWithATwistArrayWithInputArrayResponse);
@@ -61,13 +65,17 @@ service NiFake {
   rpc GetCustomTypeArray(GetCustomTypeArrayRequest) returns (GetCustomTypeArrayResponse);
   rpc GetEnumValue(GetEnumValueRequest) returns (GetEnumValueResponse);
   rpc GetError(GetErrorRequest) returns (GetErrorResponse);
+  rpc GetParameterWithOverriddenGrpcName(GetParameterWithOverriddenGrpcNameRequest) returns (GetParameterWithOverriddenGrpcNameResponse);
   rpc GetViInt32Array(GetViInt32ArrayRequest) returns (GetViInt32ArrayResponse);
   rpc GetViUInt32Array(GetViUInt32ArrayRequest) returns (GetViUInt32ArrayResponse);
   rpc GetViUInt8(GetViUInt8Request) returns (GetViUInt8Response);
   rpc ImportAttributeConfigurationBuffer(ImportAttributeConfigurationBufferRequest) returns (ImportAttributeConfigurationBufferResponse);
+  rpc ImportAttributeConfigurationBufferEx(ImportAttributeConfigurationBufferExRequest) returns (ImportAttributeConfigurationBufferExResponse);
   rpc InitExtCal(InitExtCalRequest) returns (InitExtCalResponse);
   rpc InitWithOptions(InitWithOptionsRequest) returns (InitWithOptionsResponse);
   rpc InitWithVarArgs(InitWithVarArgsRequest) returns (InitWithVarArgsResponse);
+  rpc IviDanceWithATwistCalculatedSizeOut(IviDanceWithATwistCalculatedSizeOutRequest) returns (IviDanceWithATwistCalculatedSizeOutResponse);
+  rpc IviDanceWithTwistWithMultipleArraysAndOneBufferSize(IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest) returns (IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse);
   rpc MethodUsingEnumWithGrpcNameValues(MethodUsingEnumWithGrpcNameValuesRequest) returns (MethodUsingEnumWithGrpcNameValuesResponse);
   rpc MethodUsingWholeAndFractionalNumbers(MethodUsingWholeAndFractionalNumbersRequest) returns (MethodUsingWholeAndFractionalNumbersResponse);
   rpc MethodUsingWholeMappedNumbers(MethodUsingWholeMappedNumbersRequest) returns (MethodUsingWholeMappedNumbersResponse);
@@ -97,6 +105,7 @@ service NiFake {
   rpc SetCustomType(SetCustomTypeRequest) returns (SetCustomTypeResponse);
   rpc SetCustomTypeArray(SetCustomTypeArrayRequest) returns (SetCustomTypeArrayResponse);
   rpc StringValuedEnumInputFunctionWithDefaults(StringValuedEnumInputFunctionWithDefaultsRequest) returns (StringValuedEnumInputFunctionWithDefaultsResponse);
+  rpc StringValuedEnumNoEnumGenerated(StringValuedEnumNoEnumGeneratedRequest) returns (StringValuedEnumNoEnumGeneratedResponse);
   rpc TwoInputFunction(TwoInputFunctionRequest) returns (TwoInputFunctionResponse);
   rpc Use64BitNumber(Use64BitNumberRequest) returns (Use64BitNumberResponse);
   rpc UseATwoDimensionParameter(UseATwoDimensionParameterRequest) returns (UseATwoDimensionParameterResponse);
@@ -119,6 +128,8 @@ enum NiFakeAttribute {
   NIFAKE_ATTRIBUTE_READ_WRITE_INTEGER_WITH_CONVERTER = 1000008;
   NIFAKE_ATTRIBUTE_READ_WRITE_DOUBLE_WITH_REPEATED_CAPABILITY = 1000009;
   NIFAKE_ATTRIBUTE_READ_WRITE_STRING_REPEATED_CAPABILITY = 1000010;
+  NIFAKE_ATTRIBUTE_SAMPLE_COUNT = 1000012;
+  NIFAKE_ATTRIBUTE_SAMPLE_INTERVAL = 1000013;
 }
 
 enum Bitfield {
@@ -184,11 +195,18 @@ enum MobileOSNames {
 }
 
 enum NiFakeInt32AttributeValues {
+  option allow_alias = true;
   NIFAKE_INT32_UNSPECIFIED = 0;
   NIFAKE_INT32_GRPC_COLOR_OVERRIDE_RED = 1;
   NIFAKE_INT32_GRPC_COLOR_OVERRIDE_BLUE = 2;
   NIFAKE_INT32_GRPC_COLOR_OVERRIDE_YELLOW = 5;
   NIFAKE_INT32_GRPC_COLOR_OVERRIDE_BLACK = 42;
+  NIFAKE_INT32_SAMPLE_COUNT_SAMPLE_COUNT_INFINITE = 0;
+}
+
+enum NiFakeReal64AttributeValues {
+  NIFAKE_REAL64_UNSPECIFIED = 0;
+  NIFAKE_REAL64_SAMPLE_INTERVAL_AUTO_DELAY = -1;
 }
 
 enum NiFakeReal64AttributeValuesMapped {
@@ -198,6 +216,15 @@ enum NiFakeReal64AttributeValuesMapped {
   NIFAKE_REAL64_FLOAT_ENUM_FIVE_POINT_FIVE = 3;
   NIFAKE_REAL64_FLOAT_ENUM_SIX_POINT_FIVE = 4;
   NIFAKE_REAL64_FLOAT_ENUM_SEVEN_POINT_FIVE = 5;
+}
+
+enum SampleCount {
+  SAMPLE_COUNT_SAMPLE_COUNT_INFINITE = 0;
+}
+
+enum SampleInterval {
+  SAMPLE_INTERVAL_UNSPECIFIED = 0;
+  SAMPLE_INTERVAL_AUTO_DELAY = -1;
 }
 
 enum Turtle {
@@ -224,6 +251,16 @@ message CustomStructNestedTypedef {
 message CustomStructTypedef {
   sint32 struct_int = 1;
   double struct_double = 2;
+}
+
+message NIComplexI16_struct {
+  sint32 real = 1;
+  sint32 imaginary = 2;
+}
+
+message NIComplexNumber_struct {
+  double real = 1;
+  double imaginary = 2;
 }
 
 message StringAndTurtle {
@@ -319,6 +356,22 @@ message ConfigureAbcResponse {
   int32 status = 1;
 }
 
+message ConfigureEnumsRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof sample_count_enum {
+    SampleCount sample_count = 2;
+    sint32 sample_count_raw = 3;
+  }
+  oneof sample_interval_enum {
+    SampleInterval sample_interval = 4;
+    double sample_interval_raw = 5;
+  }
+}
+
+message ConfigureEnumsResponse {
+  int32 status = 1;
+}
+
 message Control4022Request {
   string resource_name = 1;
   sint32 configuration = 2;
@@ -396,6 +449,15 @@ message ExportAttributeConfigurationBufferResponse {
   bytes configuration = 2;
 }
 
+message ExportAttributeConfigurationBufferExRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ExportAttributeConfigurationBufferExResponse {
+  int32 status = 1;
+  bytes configuration = 2;
+}
+
 message FetchWaveformRequest {
   nidevice_grpc.Session vi = 1;
   sint32 number_of_samples = 2;
@@ -405,6 +467,25 @@ message FetchWaveformResponse {
   int32 status = 1;
   repeated double waveform_data = 2;
   sint32 actual_number_of_samples = 3;
+}
+
+message FetchWithCustomSizeRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 number_of_waveforms = 2;
+  sint32 number_of_samples = 3;
+}
+
+message FetchWithCustomSizeResponse {
+  int32 status = 1;
+  repeated double waveform_data = 2;
+}
+
+message FunctionWithOverriddenGrpcName2xRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message FunctionWithOverriddenGrpcName2xResponse {
+  int32 status = 1;
 }
 
 message GetABooleanRequest {
@@ -434,13 +515,13 @@ message GetAStringOfFixedMaximumSizeResponse {
   string a_string = 2;
 }
 
-message GetAnIviDanceStringRequest {
+message GetAnIviDanceCharArrayRequest {
   nidevice_grpc.Session vi = 1;
 }
 
-message GetAnIviDanceStringResponse {
+message GetAnIviDanceCharArrayResponse {
   int32 status = 1;
-  string a_string = 2;
+  string char_array = 2;
 }
 
 message GetAnIviDanceWithATwistArrayRequest {
@@ -669,6 +750,19 @@ message GetErrorResponse {
   string description = 3;
 }
 
+message GetParameterWithOverriddenGrpcNameRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof enum_parameter_raw_enum {
+    Turtle enum_parameter_raw = 2;
+    sint32 enum_parameter_raw_raw = 3;
+  }
+}
+
+message GetParameterWithOverriddenGrpcNameResponse {
+  int32 status = 1;
+  sint32 overridden_parameter = 2;
+}
+
 message GetViInt32ArrayRequest {
   nidevice_grpc.Session vi = 1;
   sint32 array_len = 2;
@@ -707,6 +801,15 @@ message ImportAttributeConfigurationBufferResponse {
   int32 status = 1;
 }
 
+message ImportAttributeConfigurationBufferExRequest {
+  nidevice_grpc.Session vi = 1;
+  bytes configuration = 2;
+}
+
+message ImportAttributeConfigurationBufferExResponse {
+  int32 status = 1;
+}
+
 message InitExtCalRequest {
   string session_name = 1;
   string resource_name = 2;
@@ -742,6 +845,29 @@ message InitWithVarArgsRequest {
 message InitWithVarArgsResponse {
   int32 status = 1;
   nidevice_grpc.Session vi = 2;
+}
+
+message IviDanceWithATwistCalculatedSizeOutRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message IviDanceWithATwistCalculatedSizeOutResponse {
+  int32 status = 1;
+  repeated uint32 data = 2;
+  sint32 actual_num_waveforms = 3;
+  sint32 actual_samples_per_waveform = 4;
+}
+
+message IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse {
+  int32 status = 1;
+  repeated sint32 array1 = 2;
+  repeated sint32 array2 = 3;
+  repeated sint32 array3 = 4;
+  sint32 actual_num_elements = 5;
 }
 
 message MethodUsingEnumWithGrpcNameValuesRequest {
@@ -1014,8 +1140,9 @@ message SetAttributeViReal64Request {
   string channel_name = 2;
   NiFakeAttribute attribute_id = 3;
   oneof attribute_value_enum {
-    NiFakeReal64AttributeValuesMapped attribute_value_mapped = 4;
-    double attribute_value_raw = 5;
+    NiFakeReal64AttributeValues attribute_value = 4;
+    NiFakeReal64AttributeValuesMapped attribute_value_mapped = 5;
+    double attribute_value_raw = 6;
   }
 }
 
@@ -1061,6 +1188,15 @@ message StringValuedEnumInputFunctionWithDefaultsRequest {
 }
 
 message StringValuedEnumInputFunctionWithDefaultsResponse {
+  int32 status = 1;
+}
+
+message StringValuedEnumNoEnumGeneratedRequest {
+  nidevice_grpc.Session vi = 1;
+  string a_string_enum = 2;
+}
+
+message StringValuedEnumNoEnumGeneratedResponse {
   int32 status = 1;
 }
 

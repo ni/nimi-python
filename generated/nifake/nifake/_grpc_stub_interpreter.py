@@ -171,12 +171,12 @@ class GrpcStubInterpreter(object):
     def get_a_string_using_python_code(self, a_number):  # noqa: N802
         raise NotImplementedError('get_a_string_using_python_code is not supported over gRPC')
 
-    def get_an_ivi_dance_string(self):  # noqa: N802
+    def get_an_ivi_dance_char_array(self):  # noqa: N802
         response = self._invoke(
-            self._client.GetAnIviDanceString,
-            grpc_types.GetAnIviDanceStringRequest(vi=self._vi),
+            self._client.GetAnIviDanceCharArray,
+            grpc_types.GetAnIviDanceCharArrayRequest(vi=self._vi),
         )
-        return response.a_string
+        return response.char_array
 
     def get_an_ivi_dance_with_a_twist_string(self):  # noqa: N802
         response = self._invoke(
@@ -284,10 +284,23 @@ class GrpcStubInterpreter(object):
         )
         return response.error_code, response.description
 
+    def get_parameter_with_overridden_grpc_name(self, enum_parameter):  # noqa: N802
+        response = self._invoke(
+            self._client.GetParameterWithOverriddenGrpcName,
+            grpc_types.GetParameterWithOverriddenGrpcNameRequest(vi=self._vi, enum_parameter_raw=enum_parameter.value),
+        )
+        return response.overridden_parameter
+
     def import_attribute_configuration_buffer(self, configuration):  # noqa: N802
         self._invoke(
             self._client.ImportAttributeConfigurationBuffer,
             grpc_types.ImportAttributeConfigurationBufferRequest(vi=self._vi, configuration=configuration),
+        )
+
+    def import_attribute_configuration_buffer_ex(self, configuration):  # noqa: N802
+        self._invoke(
+            self._client.ImportAttributeConfigurationBufferEx,
+            grpc_types.ImportAttributeConfigurationBufferExRequest(vi=self._vi, configuration=configuration),
         )
 
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
@@ -441,6 +454,9 @@ class GrpcStubInterpreter(object):
             self._client.SetCustomTypeArray,
             grpc_types.SetCustomTypeArrayRequest(vi=self._vi, cs=cs and [x._create_copy(grpc_types.FakeCustomStruct) for x in cs]),
         )
+
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        raise NotImplementedError('set_runtime_environment is not supported over gRPC')
 
     def string_valued_enum_input_function_with_defaults(self, a_mobile_os_name):  # noqa: N802
         self._invoke(

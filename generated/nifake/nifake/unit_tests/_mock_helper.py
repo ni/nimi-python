@@ -56,9 +56,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAStringUsingPythonCode'] = {}
         self._defaults['GetAStringUsingPythonCode']['return'] = 0
         self._defaults['GetAStringUsingPythonCode']['aString'] = None
-        self._defaults['GetAnIviDanceString'] = {}
-        self._defaults['GetAnIviDanceString']['return'] = 0
-        self._defaults['GetAnIviDanceString']['aString'] = None
+        self._defaults['GetAnIviDanceCharArray'] = {}
+        self._defaults['GetAnIviDanceCharArray']['return'] = 0
+        self._defaults['GetAnIviDanceCharArray']['charArray'] = None
         self._defaults['GetAnIviDanceWithATwistString'] = {}
         self._defaults['GetAnIviDanceWithATwistString']['return'] = 0
         self._defaults['GetAnIviDanceWithATwistString']['actualSize'] = None
@@ -121,8 +121,13 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
+        self._defaults['GetParameterWithOverriddenGrpcName'] = {}
+        self._defaults['GetParameterWithOverriddenGrpcName']['return'] = 0
+        self._defaults['GetParameterWithOverriddenGrpcName']['originalParameter'] = None
         self._defaults['ImportAttributeConfigurationBuffer'] = {}
         self._defaults['ImportAttributeConfigurationBuffer']['return'] = 0
+        self._defaults['ImportAttributeConfigurationBufferEx'] = {}
+        self._defaults['ImportAttributeConfigurationBufferEx']['return'] = 0
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
         self._defaults['InitWithOptions']['vi'] = None
@@ -191,6 +196,8 @@ class SideEffectsHelper(object):
         self._defaults['SetCustomType']['return'] = 0
         self._defaults['SetCustomTypeArray'] = {}
         self._defaults['SetCustomTypeArray']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['StringValuedEnumInputFunctionWithDefaults'] = {}
         self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] = 0
         self._defaults['TwoInputFunction'] = {}
@@ -377,16 +384,16 @@ class SideEffectsHelper(object):
             a_string[i] = test_value[i]
         return self._defaults['GetAStringUsingPythonCode']['return']
 
-    def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
-        if self._defaults['GetAnIviDanceString']['return'] != 0:
-            return self._defaults['GetAnIviDanceString']['return']
-        # a_string
-        if self._defaults['GetAnIviDanceString']['aString'] is None:
-            raise MockFunctionCallError("niFake_GetAnIviDanceString", param='aString')
+    def niFake_GetAnIviDanceCharArray(self, vi, buffer_size, char_array):  # noqa: N802
+        if self._defaults['GetAnIviDanceCharArray']['return'] != 0:
+            return self._defaults['GetAnIviDanceCharArray']['return']
+        # char_array
+        if self._defaults['GetAnIviDanceCharArray']['charArray'] is None:
+            raise MockFunctionCallError("niFake_GetAnIviDanceCharArray", param='charArray')
         if buffer_size.value == 0:
-            return len(self._defaults['GetAnIviDanceString']['aString'])
-        a_string.value = self._defaults['GetAnIviDanceString']['aString'].encode('ascii')
-        return self._defaults['GetAnIviDanceString']['return']
+            return len(self._defaults['GetAnIviDanceCharArray']['charArray'])
+        char_array.value = self._defaults['GetAnIviDanceCharArray']['charArray'].encode('ascii')
+        return self._defaults['GetAnIviDanceCharArray']['return']
 
     def niFake_GetAnIviDanceWithATwistString(self, vi, buffer_size, a_string, actual_size):  # noqa: N802
         if self._defaults['GetAnIviDanceWithATwistString']['return'] != 0:
@@ -639,10 +646,25 @@ class SideEffectsHelper(object):
         description.value = self._defaults['GetError']['description'].encode('ascii')
         return self._defaults['GetError']['return']
 
+    def niFake_GetParameterWithOverriddenGrpcName(self, vi, original_parameter, enum_parameter):  # noqa: N802
+        if self._defaults['GetParameterWithOverriddenGrpcName']['return'] != 0:
+            return self._defaults['GetParameterWithOverriddenGrpcName']['return']
+        # original_parameter
+        if self._defaults['GetParameterWithOverriddenGrpcName']['originalParameter'] is None:
+            raise MockFunctionCallError("niFake_GetParameterWithOverriddenGrpcName", param='originalParameter')
+        if original_parameter is not None:
+            original_parameter.contents.value = self._defaults['GetParameterWithOverriddenGrpcName']['originalParameter']
+        return self._defaults['GetParameterWithOverriddenGrpcName']['return']
+
     def niFake_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         if self._defaults['ImportAttributeConfigurationBuffer']['return'] != 0:
             return self._defaults['ImportAttributeConfigurationBuffer']['return']
         return self._defaults['ImportAttributeConfigurationBuffer']['return']
+
+    def niFake_ImportAttributeConfigurationBufferEx(self, vi, size, configuration):  # noqa: N802
+        if self._defaults['ImportAttributeConfigurationBufferEx']['return'] != 0:
+            return self._defaults['ImportAttributeConfigurationBufferEx']['return']
+        return self._defaults['ImportAttributeConfigurationBufferEx']['return']
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
@@ -893,6 +915,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetCustomTypeArray']['return']
         return self._defaults['SetCustomTypeArray']['return']
 
+    def niFake_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
+
     def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os_name):  # noqa: N802
         if self._defaults['StringValuedEnumInputFunctionWithDefaults']['return'] != 0:
             return self._defaults['StringValuedEnumInputFunctionWithDefaults']['return']
@@ -998,8 +1025,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetAStringOfFixedMaximumSize.return_value = 0
         mock_library.niFake_GetAStringUsingPythonCode.side_effect = MockFunctionCallError("niFake_GetAStringUsingPythonCode")
         mock_library.niFake_GetAStringUsingPythonCode.return_value = 0
-        mock_library.niFake_GetAnIviDanceString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceString")
-        mock_library.niFake_GetAnIviDanceString.return_value = 0
+        mock_library.niFake_GetAnIviDanceCharArray.side_effect = MockFunctionCallError("niFake_GetAnIviDanceCharArray")
+        mock_library.niFake_GetAnIviDanceCharArray.return_value = 0
         mock_library.niFake_GetAnIviDanceWithATwistString.side_effect = MockFunctionCallError("niFake_GetAnIviDanceWithATwistString")
         mock_library.niFake_GetAnIviDanceWithATwistString.return_value = 0
         mock_library.niFake_GetArrayForPythonCodeCustomType.side_effect = MockFunctionCallError("niFake_GetArrayForPythonCodeCustomType")
@@ -1036,8 +1063,12 @@ class SideEffectsHelper(object):
         mock_library.niFake_GetEnumValue.return_value = 0
         mock_library.niFake_GetError.side_effect = MockFunctionCallError("niFake_GetError")
         mock_library.niFake_GetError.return_value = 0
+        mock_library.niFake_GetParameterWithOverriddenGrpcName.side_effect = MockFunctionCallError("niFake_GetParameterWithOverriddenGrpcName")
+        mock_library.niFake_GetParameterWithOverriddenGrpcName.return_value = 0
         mock_library.niFake_ImportAttributeConfigurationBuffer.side_effect = MockFunctionCallError("niFake_ImportAttributeConfigurationBuffer")
         mock_library.niFake_ImportAttributeConfigurationBuffer.return_value = 0
+        mock_library.niFake_ImportAttributeConfigurationBufferEx.side_effect = MockFunctionCallError("niFake_ImportAttributeConfigurationBufferEx")
+        mock_library.niFake_ImportAttributeConfigurationBufferEx.return_value = 0
         mock_library.niFake_InitWithOptions.side_effect = MockFunctionCallError("niFake_InitWithOptions")
         mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
@@ -1086,6 +1117,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_SetCustomType.return_value = 0
         mock_library.niFake_SetCustomTypeArray.side_effect = MockFunctionCallError("niFake_SetCustomTypeArray")
         mock_library.niFake_SetCustomTypeArray.return_value = 0
+        mock_library.niFake_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niFake_SetRuntimeEnvironment")
+        mock_library.niFake_SetRuntimeEnvironment.return_value = 0
         mock_library.niFake_StringValuedEnumInputFunctionWithDefaults.side_effect = MockFunctionCallError("niFake_StringValuedEnumInputFunctionWithDefaults")
         mock_library.niFake_StringValuedEnumInputFunctionWithDefaults.return_value = 0
         mock_library.niFake_TwoInputFunction.side_effect = MockFunctionCallError("niFake_TwoInputFunction")

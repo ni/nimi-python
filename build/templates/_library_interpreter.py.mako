@@ -17,6 +17,10 @@ functions = helper.filter_codegen_functions(functions)
 import array
 import ctypes
 import hightime  # noqa: F401
+% if 'SetRuntimeEnvironment' in functions:
+import platform
+
+% endif
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
 % if config['enums']:
@@ -29,6 +33,11 @@ import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
 
+% if 'SetRuntimeEnvironment' in functions:
+_was_runtime_environment_set = None
+
+
+% endif
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
@@ -75,6 +84,23 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        % if 'SetRuntimeEnvironment' in functions:
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except errors.DriverTooOldError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
+        % endif
         # Initialize _${config['session_handle_parameter_name']} to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
