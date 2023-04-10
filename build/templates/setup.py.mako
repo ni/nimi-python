@@ -49,8 +49,6 @@ setup(
     include_package_data=True,
     packages=['${config['module_name']}'],
     install_requires=[
-        'enum34;python_version<"3.4"',
-        'singledispatch;python_version<"3.4"',
         'hightime>=0.2.0',
         % if config['uses_nitclk']:
         'nitclk',

@@ -43,8 +43,6 @@ setup(
     include_package_data=True,
     packages=['nidcpower'],
     install_requires=[
-        'enum34;python_version<"3.4"',
-        'singledispatch;python_version<"3.4"',
         'hightime>=0.2.0',
     ],
     extras_require={
