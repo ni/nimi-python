@@ -47,7 +47,10 @@ setup(
         'nitclk',
     ],
     extras_require={
-        'grpc': ['grpcio>=1.49.1,<2.0'],
+        'grpc': [
+            'grpcio>=1.49.1,<2.0',
+            'protobuf>=4.21,<5.0'
+        ],
     },
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
