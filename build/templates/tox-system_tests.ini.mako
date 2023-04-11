@@ -82,7 +82,7 @@ deps =
     ${module_name}-system_tests: fasteners
     ${module_name}-system_tests: pytest-json
 % if grpc_supported:
-    ${module_name}-system_tests: grpcio
+    ${module_name}-system_tests: grpcio != 1.53 # no Python 3.7 win32 wheel
     ${module_name}-system_tests: protobuf
 % endif
 
