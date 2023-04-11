@@ -104,6 +104,9 @@ class GrpcStubInterpreter(object):
             grpc_types.ConfigureApertureTimeRequest(vi=self._vi, channel_name=channel_name, aperture_time=aperture_time, units_raw=units.value),
         )
 
+    def configure_lcr_compensation(self, channel_name, compensation_data):  # noqa: N802
+        raise NotImplementedError('configure_lcr_compensation is not supported over gRPC')
+
     def configure_lcr_custom_cable_compensation(self, channel_name, custom_cable_compensation_data):  # noqa: N802
         self._invoke(
             self._client.ConfigureLCRCustomCableCompensation,
@@ -250,6 +253,9 @@ class GrpcStubInterpreter(object):
             grpc_types.GetExtCalRecommendedIntervalRequest(vi=self._vi),
         )
         return response.months
+
+    def get_lcr_compensation_data(self, channel_name):  # noqa: N802
+        raise NotImplementedError('get_lcr_compensation_data is not supported over gRPC')
 
     def get_lcr_compensation_last_date_and_time(self, channel_name, compensation_type):  # noqa: N802
         response = self._invoke(
