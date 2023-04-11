@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d57
+// This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0f112
 //---------------------------------------------------------------------
 // Proto file for the NI-Digital Pattern Driver Metadata
 //---------------------------------------------------------------------
@@ -1839,4 +1839,3 @@ message WriteStaticRequest {
 message WriteStaticResponse {
   int32 status = 1;
 }
-
