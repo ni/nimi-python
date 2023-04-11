@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 23.0.0d57
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.3.0f165
 functions = {
     'Abort': {
         'documentation': {
             'description': 'Stops bursting the pattern.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -21,6 +22,7 @@ functions = {
         'documentation': {
             'description': 'Stops the keep alive pattern if it is currently running. If a pattern burst is in progress, the function aborts the pattern burst. If you start a new pattern burst while a keep alive pattern is running, the keep alive pattern runs to the last keep alive vector, and the new pattern burst starts on the next cycle.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -38,6 +40,7 @@ functions = {
             'description': 'Applies digital levels and timing values defined in previously loaded levels and timing sheets. When applying a levels sheet, only the levels specified in the sheet are affected. Any levels not specified in the sheet remain unchanged. When applying a timing sheet, all existing time sets are deleted before the new time sets are loaded.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -115,6 +118,7 @@ functions = {
             'description': 'Applies the correction for propagation delay offsets to a digital pattern instrument. Use this function to apply TDR offsets that are stored from a past measurement or are measured by means other than the niDigital_TDR function. Also use this function to apply correction for offsets if the **applyOffsets** input of the niDigital_TDR function was set to False at the time of measurement.\n'
         },
         'grpc_name': 'ApplyTDROffsets',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -163,6 +167,7 @@ functions = {
             'description': 'Uses the **startLabel** you specify to burst the pattern on the sites you specify and provides the option to wait for the burst to complete. Digital pins retain their state at the end of a pattern burst until the first vector of a subsequent pattern burst, a call to niDigital_WriteStatic, or a call to niDigital_ApplyLevelsAndTiming.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -228,6 +233,7 @@ functions = {
             'description': 'Stops clock generation on the specified channel(s) or pin(s) and pin group(s).\n'
         },
         'grpc_name': 'ClockGeneratorAbort',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -254,6 +260,7 @@ functions = {
             'description': 'Configures clock generator frequency and initiates clock generation on the specified channel(s) or pin(s) and pin group(s).\n'
         },
         'grpc_name': 'ClockGeneratorGenerateClock',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -296,6 +303,7 @@ functions = {
         'documentation': {
             'description': 'Applies all previously configured pin levels, termination modes, clocks, triggers, and pattern timing to a digital pattern instrument. If you do not call the niDigital_Commit function, then the initiate function or the niDigital_FancyBurstPattern function will implicitly call this function for you. Calling this function moves the session from the Uncommitted state to the Committed state.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -312,6 +320,7 @@ functions = {
         'documentation': {
             'description': 'Configures I\\ :sub:`OL`, I\\ :sub:`OH`, and V\\ :sub:`COM` levels for the active load on the pins you specify. The DUT sources or sinks current based on the level values. To enable active load, set the termination mode to NIDIGITAL_VAL_ACTIVE_LOAD. To disable active load, set the termination mode of the instrument to NIDIGITAL_VAL_HIGH_Z or NIDIGITAL_VAL_VTERM.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -361,6 +370,7 @@ functions = {
             'description': 'Configures which sites burst the pattern on the next call to the initiate function. The pattern burst sites can also be modified through the repeated capabilities for the niDigital_FancyBurstPattern function. If a site has been disabled through the niDigital_DisableSites function, the site does not burst a pattern even if included in the pattern burst sites.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -389,6 +399,7 @@ functions = {
             'description': 'Configures the strobe edge time for the specified pins. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -438,6 +449,7 @@ functions = {
         },
         'grpc_name': 'ConfigureTimeSetCompareEdgesStrobe2x',
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -496,6 +508,7 @@ functions = {
             'description': 'Configures the drive format and drive edge placement for the specified pins. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -584,6 +597,7 @@ functions = {
         },
         'grpc_name': 'ConfigureTimeSetDriveEdges2x',
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -691,6 +705,7 @@ functions = {
             'description': 'Configures the drive format for the pins specified in the **pinList**. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -738,6 +753,7 @@ functions = {
             'description': 'Configures the edge placement for the pins specified in the pin list. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -795,6 +811,7 @@ functions = {
             'description': 'Configures the edge multiplier of the pins in the time set. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -840,6 +857,7 @@ functions = {
         'documentation': {
             'description': 'Configures the period of a time set. Use this function to modify time set values after applying a timing sheet with the niDigital_ApplyLevelsAndTiming function, or to create time sets programmatically without the use of timing sheets. This function does not modify the timing sheet file or the timing sheet contents that will be used in future calls to niDigital_ApplyLevelsAndTiming; it only affects the values of the current timing context.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -876,6 +894,7 @@ functions = {
         'documentation': {
             'description': 'Configures voltage levels for the pins you specify.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -940,6 +959,7 @@ functions = {
         'documentation': {
             'description': 'Creates a capture waveform with the configuration information from a Digicapture file generated by the Digital Pattern Editor.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -973,6 +993,7 @@ functions = {
             'description': 'Sets the capture waveform settings for parallel acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1009,6 +1030,7 @@ functions = {
             'description': 'Sets the capture waveform settings for serial acquisition. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1062,6 +1084,7 @@ functions = {
             'description': 'Creates a source waveform with configuration information from a TDMS file generated by the Digital Pattern Editor. It also optionally writes waveform data from the file.\n'
         },
         'grpc_name': 'CreateSourceWaveformFromFileTDMS',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1104,6 +1127,7 @@ functions = {
             'description': 'Sets the source waveform settings required for parallel sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1149,6 +1173,7 @@ functions = {
             'description': 'Sets the source waveform settings required for serial sourcing. Settings apply across all sites if multiple sites are configured in the pin map. You cannot reconfigure settings after waveforms are created.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1210,6 +1235,7 @@ functions = {
         'documentation': {
             'description': 'Creates a time set with the name that you specify. Use this function when you want to create time sets programmatically rather than with a timing sheet.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1234,6 +1260,7 @@ functions = {
         'documentation': {
             'description': 'Deletes all time sets from instrument memory.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1251,6 +1278,7 @@ functions = {
             'description': 'Disables specified sites. Disabled sites are not included in pattern bursts initiated by the initiate function or the niDigital_FancyBurstPattern function, even if the site is specified in the list of pattern burst sites in niDigital_ConfigurePatternBurstSites function or in the repeated capabilities for the niDigital_FancyBurstPattern function. Additionally, if you specify a list of pin or pin group names in repeated capabilities in any NI-Digital function, digital pattern instrument channels mapped to disabled sites are not affected by the function. The functions that return per-pin data, such as the niDigital_PPMU_Measure function, do not return data for channels mapped to disabled sites. The digital pattern instrument channels mapped to the sites specified are left in their current state. NI TestStand Semiconductor Module requires all sites to always be enabled, and manages the set of active sites without disabling the sites in the digital instrument session. Do not use this function with the Semiconductor Module.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1279,6 +1307,7 @@ functions = {
             'description': 'Enables the sites you specify. All sites are enabled by default.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1321,6 +1350,7 @@ functions = {
                 'Description'
             ]
         },
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1348,6 +1378,7 @@ functions = {
             'description': 'Fetches a defined number of samples for a specific list of sites. This function only returns data from sites that are enabled when fetch is called.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1439,6 +1470,7 @@ functions = {
         },
         'grpc_name': 'FetchHistoryRAMCycleInformation',
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1517,6 +1549,7 @@ functions = {
         },
         'grpc_name': 'FetchHistoryRAMCyclePinData',
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1628,6 +1661,7 @@ functions = {
         },
         'grpc_name': 'FetchHistoryRAMScanCycleNumber',
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1672,6 +1706,7 @@ functions = {
             'description': 'Measures the frequency on the specified channel(s) over the specified measurement time. All channels in the repeated capabilities should have the same measurement time.\n'
         },
         'grpc_name': 'FrequencyCounterMeasureFrequency',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1727,6 +1762,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViBoolean attribute. Use this function to get the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1768,6 +1804,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViInt32 attribute. Use this function to get the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1809,6 +1846,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViInt64 attribute. Use this function to get the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1850,6 +1888,7 @@ functions = {
         'documentation': {
             'description': 'This function queries the value of a ViReal64 attribute. Use this function to get the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1891,6 +1930,7 @@ functions = {
         'documentation': {
             'description': 'Queries the value of a ViString attribute. Use this function to get the values of digital pattern instrument-specific attributes and inherent IVI attributes. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **bufferSize**. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the **bufferSize**, the function copies (bufferSize - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the **bufferSize** you must pass to get the entire value. For example, if the value is "123456" and the **bufferSize** is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for the **bufferSize** and VI_NULL for the value.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1943,6 +1983,7 @@ functions = {
         'documentation': {
             'description': 'Returns a list of channel names for given channel indices.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -1998,6 +2039,7 @@ functions = {
         'documentation': {
             'description': 'Returns the error information associated with the digital pattern instrument handle. This function retrieves and then clears the error information for the session. If **vi** is VI_NULL, this function retrieves and then clears the error information for the current thread. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the buffer size. If the current value of the error description, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the function copies (buffer size -1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for the buffer size and VI_NULL for **errorDescription**.\n'
         },
+        'included_in_proto': True,
         'is_error_handling': True,
         'method_templates': [
             {
@@ -2052,6 +2094,7 @@ functions = {
         'documentation': {
             'description': 'Returns the comparison fail count for pins in the repeated capabilities.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2108,6 +2151,7 @@ functions = {
         },
         'grpc_name': 'GetHistoryRAMSampleCount',
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2144,6 +2188,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2177,6 +2222,7 @@ functions = {
         'documentation': {
             'description': 'Returns the pattern pin list.'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2225,6 +2271,7 @@ functions = {
         'documentation': {
             'description': 'Returns the name of the pin at the index you specify. You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **nameBufferSize**. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the buffer size, the function copies (buffer size - 1) bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7. If you want to call this function just to get the required buffer size, you can pass 0 for **nameBufferSize** and VI_NULL for the name.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2271,6 +2318,7 @@ functions = {
         'documentation': {
             'description': 'Returns the pin names, site numbers, and channel names that correspond to per-pin data read from the digital pattern instrument. The function returns pin information in the same order as values read using the niDigital_ReadStatic function, niDigital_PPMU_Measure function, and niDigital_GetFailCount function. Use this function to match values the previously listed functions return with pins, sites, and instrument channels.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2352,6 +2400,7 @@ functions = {
             'description': 'Returns the pass or fail results for each site.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2410,6 +2459,7 @@ functions = {
             'description': 'Returns the site numbers that correspond to per-site data read from the digital pattern instrument. The function returns site numbers in the same order as values read using the niDigital_GetSitePassFail and niDigital_FetchCaptureWaveformU32 functions. Use this function to match values the previously listed functions return with site numbers.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2476,6 +2526,7 @@ functions = {
             'description': 'Returns the drive format of a pin in the specified time set.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2523,6 +2574,7 @@ functions = {
             'description': 'Returns the edge time of a pin in the specified time set.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2580,6 +2632,7 @@ functions = {
             'description': 'Returns the edge multiplier of the specified time set.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2626,6 +2679,7 @@ functions = {
         'documentation': {
             'description': 'TBD'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2659,6 +2713,7 @@ functions = {
         'documentation': {
             'description': 'Returns the period of the specified time set.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2696,6 +2751,7 @@ functions = {
         'documentation': {
             'description': 'Creates and returns a new session to the specified digital pattern instrument to use in all subsequent function calls. To place the instrument in a known startup state when creating a new session, set the reset parameter to VI_TRUE, which is equivalent to calling the niDigital_reset function immediately after initializing the session.\n'
         },
+        'included_in_proto': True,
         'method_name_for_documentation': '__init__',
         'method_templates': [
             {
@@ -2713,7 +2769,7 @@ functions = {
                     'note': '\n'
                 },
                 'name': 'resourceName',
-                'type': 'ViString'
+                'type': 'ViRsrc'
             },
             {
                 'default_value': False,
@@ -2763,6 +2819,7 @@ functions = {
         'documentation': {
             'description': 'Starts bursting the pattern configured by NIDIGITAL_ATTR_START_LABEL, causing the NI-Digital session to be committed. To stop the pattern burst, call niDigital_Abort. If keep alive pattern is bursting when niDigital_Abort is called or upon exiting the context manager, keep alive pattern will not be stopped. To stop the keep alive pattern, call niDigital_AbortKeepAlive.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2779,6 +2836,7 @@ functions = {
         'documentation': {
             'description': 'Checks the hardware to determine if the pattern burst has completed or if any errors have occurred.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2805,6 +2863,7 @@ functions = {
             'note': 'The function returns an error if more than one site is specified.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2841,6 +2900,7 @@ functions = {
         'documentation': {
             'description': 'Loads a levels sheet from a specified file.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2867,6 +2927,7 @@ functions = {
         'documentation': {
             'description': 'Loads the specified pattern file.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2891,6 +2952,7 @@ functions = {
         'documentation': {
             'description': 'Loads a pin map file. You can load only a single pin and channel map file during an NI-Digital Pattern Driver session. To switch pin maps, create a new session or call the niDigital_reset function.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2918,6 +2980,7 @@ functions = {
         'documentation': {
             'description': 'Loads a specifications sheet from a specified file.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2945,6 +3008,7 @@ functions = {
         'documentation': {
             'description': 'Loads a timing sheet from a specified file.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -2971,6 +3035,7 @@ functions = {
         'documentation': {
             'description': 'Obtains the multithreaded lock on the instrument session. Before doing so, the function waits until all other execution threads have released the lock on the instrument session. Other threads might have obtained the lock on this session in the following ways: niDigital_LockSession After the call to niDigital_LockSession returns successfully, no other threads can access the instrument session until you call niDigital_UnlockSession. Use niDigital_LockSession and niDigital_UnlockSession around a sequence of calls to instrument driver functions if you require exclusive access through the end of the sequence. You can safely make nested calls to niDigital_LockSession within the same thread. To completely unlock the session, you must balance each call to niDigital_LockSession with a call to niDigital_UnlockSession. If, however, you use the **callerHasLock** parameter in all calls to niDigital_LockSession and niDigital_UnlockSession within a function, the IVI Library locks the session only once within the function, regardless of the number of calls you make to niDigital_LockSession. This functionality allows you to call niDigital_UnlockSession just once at the end of the function.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'lock',
@@ -3007,6 +3072,7 @@ functions = {
             'description': 'Instructs the PPMU to measure voltage or current. This function can be called to take a voltage measurement even if the pin function is not set to PPMU.\n'
         },
         'grpc_name': 'PPMUMeasure',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3071,6 +3137,7 @@ functions = {
             'description': 'Starts sourcing voltage or current from the PPMU. This function automatically selects the PPMU function. Changes to PPMU source settings do not take effect until you call this function. If you modify source settings after you call this function, you must call this function again for changes in the configuration to take effect.\n'
         },
         'grpc_name': 'PPMUSource',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3096,6 +3163,7 @@ functions = {
         'documentation': {
             'description': 'Reads the state of a pattern sequencer flag. Use pattern sequencer flags to coordinate execution between the pattern sequencer and a runtime test program.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3130,6 +3198,7 @@ functions = {
         'documentation': {
             'description': 'Reads the value of a pattern sequencer register. Use pattern sequencer registers to pass numeric values between the pattern sequencer and a runtime test program. For example, you can use this function to read a register modified by the write_reg opcode during a pattern burst.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3164,6 +3233,7 @@ functions = {
         'documentation': {
             'description': 'Reads the current state of comparators for pins you specify in the repeated capabilities. If there are uncommitted changes to levels or the termination mode, this function commits the changes to the pins.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3218,6 +3288,7 @@ functions = {
         'documentation': {
             'description': 'Returns a digital pattern instrument to a known state. This function performs the following actions:\n\n- Aborts pattern execution.\n- Clears pin maps, time sets, source and capture waveforms, and patterns.\n- Resets all properties to default values, including the NIDIGITAL_ATTR_SELECTED_FUNCTION property that is set to NIDIGITAL_VAL_DISCONNECT, causing the I/O switches to open.\n- Stops export of all external signals and events.\n- Clears over-temperature and over-power conditions.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3234,6 +3305,7 @@ functions = {
         'documentation': {
             'description': 'Performs self-calibration on a digital pattern instrument.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3250,6 +3322,7 @@ functions = {
         'documentation': {
             'description': 'Forces a particular edge-based trigger to occur regardless of how the specified trigger is configured. You can use this function as a software override.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3297,6 +3370,7 @@ functions = {
         'documentation': {
             'description': 'Sets the value of a ViBoolean attribute. Use this function to set the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3338,6 +3412,7 @@ functions = {
         'documentation': {
             'description': 'Sets the value of a ViInt32 attribute. Use this function to set the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3380,6 +3455,7 @@ functions = {
         'documentation': {
             'description': 'Sets the value of a ViInt64 attribute. Use this function to set the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3422,6 +3498,7 @@ functions = {
         'documentation': {
             'description': 'Sets the value of a ViIntReal64 attribute. Use this function to set the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3464,6 +3541,7 @@ functions = {
         'documentation': {
             'description': 'Sets the value of a ViString attribute. Use this function to set the values of digital pattern instrument-specific attributes and inherent IVI attributes.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3506,6 +3584,7 @@ functions = {
             'description': 'Measures propagation delays through cables, connectors, and load boards using Time-Domain Reflectometry (TDR). Ensure that the channels and pins you select are connected to an open circuit.\n'
         },
         'grpc_name': 'TDR',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3570,6 +3649,7 @@ functions = {
         'documentation': {
             'description': 'Unloads all patterns, source waveforms, and capture waveforms from a digital pattern instrument.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3596,6 +3676,7 @@ functions = {
         'documentation': {
             'description': 'Unloads the given specifications sheet present in the previously loaded specifications file that you select. You must call the niDigital_LoadSpecifications function to reload the file with updated specifications values. You must then call the niDigital_ApplyLevelsAndTiming function in order to apply the levels and timing values that reference the updated specifications values.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3622,6 +3703,7 @@ functions = {
         'documentation': {
             'description': 'Releases a lock that you acquired on an instrument session using the niDigital_LockSession function.\n'
         },
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'unlock',
@@ -3657,6 +3739,7 @@ functions = {
         'documentation': {
             'description': 'Waits until the pattern burst has completed or the timeout has expired.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3684,6 +3767,7 @@ functions = {
         'documentation': {
             'description': 'Writes the state of a pattern sequencer flag. Use pattern sequencer flags to coordinate execution between the pattern sequencer and a runtime test program.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3718,6 +3802,7 @@ functions = {
         'documentation': {
             'description': 'Writes a value to a pattern sequencer register. Use pattern sequencer registers to pass numeric values between the pattern sequencer and a runtime test program.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3752,6 +3837,7 @@ functions = {
         'documentation': {
             'description': 'Writes the same waveform data to all sites. Use this write function if you set the data_mapping parameter of the create source waveform function to NIDIGITAL_VAL_BROADCAST.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3798,6 +3884,7 @@ functions = {
             'description': 'Writes a source waveform based on the waveform data and configuration information the file contains.\n'
         },
         'grpc_name': 'WriteSourceWaveformDataFromFileTDMS',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3832,6 +3919,7 @@ functions = {
             'description': 'Writes one waveform per site. Use this write function if you set the parameter of the create source waveform function to Site Unique.\n'
         },
         'has_repeated_capability': True,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3896,6 +3984,7 @@ functions = {
         'documentation': {
             'description': 'Writes a static state to the specified pins. The selected pins remain in the specified state until the next pattern burst or call to this function. If there are uncommitted changes to levels or the termination mode, this function commits the changes to the pins. This function does not change the selected pin function. If you write a static state to a pin that does not have the Digital function selected, the new static state is stored by the instrument, and affects the state of the pin the next time you change the selected function to Digital.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3931,6 +4020,7 @@ functions = {
             'description': 'Closes the specified instrument session to a digital pattern instrument, aborts pattern execution, and unloads pattern memory. The channels on a digital pattern instrument remain in their current state.\n'
         },
         'grpc_name': 'Close',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3951,6 +4041,7 @@ functions = {
             'description': 'Takes the error code returned by the digital pattern instrument driver functions, interprets it, and returns it as a user readable string.\n'
         },
         'grpc_name': 'ErrorMessage',
+        'included_in_proto': True,
         'is_error_handling': True,
         'parameters': [
             {
@@ -3990,6 +4081,7 @@ functions = {
             'description': 'Returns a digital pattern instrument to a known state. This function performs the following actions:\n\n- Aborts pattern execution.\n- Clears pin maps, time sets, source and capture waveforms, and patterns.\n- Resets all properties to default values, including the NIDIGITAL_ATTR_SELECTED_FUNCTION property that is set to NIDIGITAL_VAL_DISCONNECT, causing the I/O switches to open.\n- Stops exporting all external signals and events.\n'
         },
         'grpc_name': 'Reset',
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -4008,6 +4100,7 @@ functions = {
             'description': 'Returns self test results from a digital pattern instrument. This test requires several minutes to execute.\n'
         },
         'grpc_name': 'SelfTest',
+        'included_in_proto': True,
         'method_name_for_documentation': 'self_test',
         'parameters': [
             {
