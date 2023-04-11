@@ -40,8 +40,25 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-        * Enums added:
-            * `CurrentLimitBehavior`
+        * API parity with NI-DCPower 2023 Q1.
+            * Properties added:
+                * `measure_complete_event_output_behavior`
+                * `measure_complete_event_toggle_initial_state`
+                * `sequence_engine_done_event_output_behavior`
+                * `sequence_engine_done_event_toggle_initial_state`
+                * `sequence_iteration_complete_event_output_behavior`
+                * `sequence_iteration_complete_event_toggle_initial_state`
+                * `source_complete_event_output_behavior`
+                * `source_complete_event_toggle_initial_state`
+            * Enums added:
+                * `CurrentLimitBehavior`
+                * `EventOutputBehavior`
+                * `EventToggleInitialState`
+            * Enum values added:
+                * `AS_CONFIGURED` added to enum `LCROpenShortLoadCompensationDataSource`
+            * Methods added:
+                * `configure_lcr_compensation`
+                * `get_lcr_compensation_data`
     * #### Changed
         * Enums reordered:
             * `AutoZero`

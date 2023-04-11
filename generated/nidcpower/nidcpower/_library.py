@@ -28,6 +28,7 @@ class Library(object):
         self.niDCPower_ClearLatchedOutputCutoffState_cfunc = None
         self.niDCPower_CommitWithChannels_cfunc = None
         self.niDCPower_ConfigureApertureTime_cfunc = None
+        self.niDCPower_ConfigureLCRCompensation_cfunc = None
         self.niDCPower_ConfigureLCRCustomCableCompensation_cfunc = None
         self.niDCPower_CreateAdvancedSequenceCommitStepWithChannels_cfunc = None
         self.niDCPower_CreateAdvancedSequenceStepWithChannels_cfunc = None
@@ -50,6 +51,7 @@ class Library(object):
         self.niDCPower_GetExtCalLastDateAndTime_cfunc = None
         self.niDCPower_GetExtCalLastTemp_cfunc = None
         self.niDCPower_GetExtCalRecommendedInterval_cfunc = None
+        self.niDCPower_GetLCRCompensationData_cfunc = None
         self.niDCPower_GetLCRCompensationLastDateAndTime_cfunc = None
         self.niDCPower_GetLCRCustomCableCompensationData_cfunc = None
         self.niDCPower_GetSelfCalLastDateAndTime_cfunc = None
@@ -139,6 +141,14 @@ class Library(object):
                 self.niDCPower_ConfigureApertureTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32]  # noqa: F405
                 self.niDCPower_ConfigureApertureTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_ConfigureApertureTime_cfunc(vi, channel_name, aperture_time, units)
+
+    def niDCPower_ConfigureLCRCompensation(self, vi, channel_name, compensation_data_size, compensation_data):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_ConfigureLCRCompensation_cfunc is None:
+                self.niDCPower_ConfigureLCRCompensation_cfunc = self._get_library_function('niDCPower_ConfigureLCRCompensation')
+                self.niDCPower_ConfigureLCRCompensation_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_ConfigureLCRCompensation_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_ConfigureLCRCompensation_cfunc(vi, channel_name, compensation_data_size, compensation_data)
 
     def niDCPower_ConfigureLCRCustomCableCompensation(self, vi, channel_name, custom_cable_compensation_data_size, custom_cable_compensation_data):  # noqa: N802
         with self._func_lock:
@@ -315,6 +325,14 @@ class Library(object):
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDCPower_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niDCPower_GetExtCalRecommendedInterval_cfunc(vi, months)
+
+    def niDCPower_GetLCRCompensationData(self, vi, channel_name, compensation_data_size, compensation_data):  # noqa: N802
+        with self._func_lock:
+            if self.niDCPower_GetLCRCompensationData_cfunc is None:
+                self.niDCPower_GetLCRCompensationData_cfunc = self._get_library_function('niDCPower_GetLCRCompensationData')
+                self.niDCPower_GetLCRCompensationData_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niDCPower_GetLCRCompensationData_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDCPower_GetLCRCompensationData_cfunc(vi, channel_name, compensation_data_size, compensation_data)
 
     def niDCPower_GetLCRCompensationLastDateAndTime(self, vi, channel_name, compensation_type, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
