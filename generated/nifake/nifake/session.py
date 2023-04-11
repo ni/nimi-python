@@ -180,6 +180,8 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.read_write_string_repeated_capability`
     '''
+    sample_count = _attributes.AttributeViInt32(1000012)
+    sample_interval = _attributes.AttributeViReal64(1000013)
 
     def __init__(self, repeated_capability_list, all_channels_in_session, interpreter, freeze_it=False):
         self._repeated_capability_list = repeated_capability_list
@@ -1006,17 +1008,17 @@ class Session(_SessionBase):
         return a_string
 
     @ivi_synchronized
-    def get_an_ivi_dance_string(self):
-        r'''get_an_ivi_dance_string
+    def get_an_ivi_dance_char_array(self):
+        r'''get_an_ivi_dance_char_array
 
-        Returns a string using the IVI dance.
+        TBD
 
         Returns:
-            a_string (str): Returns the string.
+            char_array (str):
 
         '''
-        a_string = self._interpreter.get_an_ivi_dance_string()
-        return a_string
+        char_array = self._interpreter.get_an_ivi_dance_char_array()
+        return char_array
 
     @ivi_synchronized
     def get_an_ivi_dance_with_a_twist_string(self):
@@ -1213,6 +1215,25 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
+    def get_parameter_with_overridden_grpc_name(self, enum_parameter):
+        r'''get_parameter_with_overridden_grpc_name
+
+        TBD
+
+        Args:
+            enum_parameter (enums.Turtle):
+
+
+        Returns:
+            original_parameter (int):
+
+        '''
+        if type(enum_parameter) is not enums.Turtle:
+            raise TypeError('Parameter enum_parameter must be of type ' + str(enums.Turtle))
+        original_parameter = self._interpreter.get_parameter_with_overridden_grpc_name(enum_parameter)
+        return original_parameter
+
+    @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
         r'''import_attribute_configuration_buffer
 
@@ -1224,6 +1245,18 @@ class Session(_SessionBase):
         '''
         configuration = _converters.convert_to_bytes(configuration)
         self._interpreter.import_attribute_configuration_buffer(configuration)
+
+    @ivi_synchronized
+    def import_attribute_configuration_buffer_ex(self, configuration):
+        r'''import_attribute_configuration_buffer_ex
+
+        TBD
+
+        Args:
+            configuration (list of ViAddr):
+
+        '''
+        self._interpreter.import_attribute_configuration_buffer_ex(configuration)
 
     def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
         r'''_init_with_options

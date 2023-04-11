@@ -1027,6 +1027,7 @@ class SystemTests:
     def test_perform_lcr_open_short_custom_cable_compensation(self, session, compensation_function):
         compensation_function(session)
 
+    @pytest.mark.skip(reason="TODO(jfitzger): Skip until we have a way to successfully call configure with a simulated device. GitHub issue #1908")
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     def test_lcr_custom_cable_compensation_data(self, session):
@@ -1069,7 +1070,7 @@ class SystemTests:
 
     def test_multi_threading_ivi_synchronized_wrapper_releases_lock(self, session):
         system_test_utilities.impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(
-            session)
+            session.abort)
 
 
 class TestLibrary(SystemTests):
