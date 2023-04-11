@@ -2,9 +2,11 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    # TODO (ni-jfitzger): delete this override once ConfigureLCRCompensation is in nidcpower.proto. See https://github.com/ni/nimi-python/issues/1920
     'ConfigureLCRCompensation': {
         'included_in_proto': False,
     },
+    # TODO (ni-jfitzger): delete this override once GetLCRCompensationData is in nidcpower.proto. See https://github.com/ni/nimi-python/issues/1920
     'GetLCRCompensationData': {
         'included_in_proto': False,
     },
