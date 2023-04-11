@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.0.0d149
+# This file is generated from NI-SWITCH API metadata version 23.0.0f167
 enums = {
     'CabledModuleScanAdvancedBus': {
         'values': [
