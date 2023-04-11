@@ -4,6 +4,8 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import platform
+
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums  # noqa: F401
@@ -14,6 +16,9 @@ import nifake.custom_struct as custom_struct  # noqa: F401
 import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
 
 import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
+
+
+_was_runtime_environment_set = None
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -62,6 +67,21 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except errors.DriverTooOldError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
@@ -228,17 +248,17 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return a_string_ctype.value.decode(self._encoding)
 
-    def get_an_ivi_dance_string(self):  # noqa: N802
+    def get_an_ivi_dance_char_array(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         buffer_size_ctype = _visatype.ViInt32()  # case S170
-        a_string_ctype = None  # case C050
-        error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
+        char_array_ctype = None  # case C050
+        error_code = self._library.niFake_GetAnIviDanceCharArray(vi_ctype, buffer_size_ctype, char_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        a_string_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niFake_GetAnIviDanceString(vi_ctype, buffer_size_ctype, a_string_ctype)
+        char_array_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niFake_GetAnIviDanceCharArray(vi_ctype, buffer_size_ctype, char_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return a_string_ctype.value.decode(self._encoding)
+        return char_array_ctype.value.decode(self._encoding)
 
     def get_an_ivi_dance_with_a_twist_string(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -418,11 +438,27 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), description_ctype.value.decode(self._encoding)
 
+    def get_parameter_with_overridden_grpc_name(self, enum_parameter):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        original_parameter_ctype = _visatype.ViInt16()  # case S220
+        enum_parameter_ctype = _visatype.ViInt16(enum_parameter.value)  # case S130
+        error_code = self._library.niFake_GetParameterWithOverriddenGrpcName(vi_ctype, None if original_parameter_ctype is None else (ctypes.pointer(original_parameter_ctype)), enum_parameter_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(original_parameter_ctype.value)
+
     def import_attribute_configuration_buffer(self, configuration):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         size_in_bytes_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
         configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
         error_code = self._library.niFake_ImportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def import_attribute_configuration_buffer_ex(self, configuration):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        size_ctype = _visatype.ViInt32(0 if configuration is None else len(configuration))  # case S160
+        configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niFake_ImportAttributeConfigurationBufferEx(vi_ctype, size_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -638,6 +674,15 @@ class LibraryInterpreter(object):
         number_of_elements_ctype = _visatype.ViInt32(0 if cs is None else len(cs))  # case S160
         cs_ctype = _get_ctypes_pointer_for_buffer([custom_struct.struct_CustomStruct(c) for c in cs], library_type=custom_struct.struct_CustomStruct)  # case B540
         error_code = self._library.niFake_SetCustomTypeArray(vi_ctype, number_of_elements_ctype, cs_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        environment_ctype = ctypes.create_string_buffer(environment.encode(self._encoding))  # case C020
+        environment_version_ctype = ctypes.create_string_buffer(environment_version.encode(self._encoding))  # case C020
+        reserved1_ctype = ctypes.create_string_buffer(reserved1.encode(self._encoding))  # case C020
+        reserved2_ctype = ctypes.create_string_buffer(reserved2.encode(self._encoding))  # case C020
+        error_code = self._library.niFake_SetRuntimeEnvironment(environment_ctype, environment_version_ctype, reserved1_ctype, reserved2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

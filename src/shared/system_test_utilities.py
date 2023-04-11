@@ -85,10 +85,10 @@ def impl_test_multi_threading_lock_unlock(session):
     assert not t1.is_alive()
     assert not t2.is_alive()
 
-def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(session):
+def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_to_call):
     # test that the 2nd thread doesn't hang
-    t1 = threading.Thread(target=session.abort)
-    t2 = threading.Thread(target=session.abort)
+    t1 = threading.Thread(target=ivi_method_to_call)
+    t2 = threading.Thread(target=ivi_method_to_call)
 
     t1.start()
     t1.join()

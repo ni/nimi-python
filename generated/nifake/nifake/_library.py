@@ -40,7 +40,7 @@ class Library(object):
         self.niFake_GetANumber_cfunc = None
         self.niFake_GetAStringOfFixedMaximumSize_cfunc = None
         self.niFake_GetAStringUsingPythonCode_cfunc = None
-        self.niFake_GetAnIviDanceString_cfunc = None
+        self.niFake_GetAnIviDanceCharArray_cfunc = None
         self.niFake_GetAnIviDanceWithATwistString_cfunc = None
         self.niFake_GetArrayForPythonCodeCustomType_cfunc = None
         self.niFake_GetArrayForPythonCodeDouble_cfunc = None
@@ -59,7 +59,9 @@ class Library(object):
         self.niFake_GetCustomTypeTypedef_cfunc = None
         self.niFake_GetEnumValue_cfunc = None
         self.niFake_GetError_cfunc = None
+        self.niFake_GetParameterWithOverriddenGrpcName_cfunc = None
         self.niFake_ImportAttributeConfigurationBuffer_cfunc = None
+        self.niFake_ImportAttributeConfigurationBufferEx_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
         self.niFake_LockSession_cfunc = None
@@ -84,6 +86,7 @@ class Library(object):
         self.niFake_SetAttributeViString_cfunc = None
         self.niFake_SetCustomType_cfunc = None
         self.niFake_SetCustomTypeArray_cfunc = None
+        self.niFake_SetRuntimeEnvironment_cfunc = None
         self.niFake_StringValuedEnumInputFunctionWithDefaults_cfunc = None
         self.niFake_TwoInputFunction_cfunc = None
         self.niFake_UnlockSession_cfunc = None
@@ -220,13 +223,13 @@ class Library(object):
                 self.niFake_GetAStringUsingPythonCode_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetAStringUsingPythonCode_cfunc(vi, a_number, a_string)
 
-    def niFake_GetAnIviDanceString(self, vi, buffer_size, a_string):  # noqa: N802
+    def niFake_GetAnIviDanceCharArray(self, vi, buffer_size, char_array):  # noqa: N802
         with self._func_lock:
-            if self.niFake_GetAnIviDanceString_cfunc is None:
-                self.niFake_GetAnIviDanceString_cfunc = self._get_library_function('niFake_GetAnIviDanceString')
-                self.niFake_GetAnIviDanceString_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niFake_GetAnIviDanceString_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_GetAnIviDanceString_cfunc(vi, buffer_size, a_string)
+            if self.niFake_GetAnIviDanceCharArray_cfunc is None:
+                self.niFake_GetAnIviDanceCharArray_cfunc = self._get_library_function('niFake_GetAnIviDanceCharArray')
+                self.niFake_GetAnIviDanceCharArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_GetAnIviDanceCharArray_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetAnIviDanceCharArray_cfunc(vi, buffer_size, char_array)
 
     def niFake_GetAnIviDanceWithATwistString(self, vi, buffer_size, a_string, actual_size):  # noqa: N802
         with self._func_lock:
@@ -372,6 +375,14 @@ class Library(object):
                 self.niFake_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_GetError_cfunc(vi, error_code, buffer_size, description)
 
+    def niFake_GetParameterWithOverriddenGrpcName(self, vi, original_parameter, enum_parameter):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_GetParameterWithOverriddenGrpcName_cfunc is None:
+                self.niFake_GetParameterWithOverriddenGrpcName_cfunc = self._get_library_function('niFake_GetParameterWithOverriddenGrpcName')
+                self.niFake_GetParameterWithOverriddenGrpcName_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ViInt16]  # noqa: F405
+                self.niFake_GetParameterWithOverriddenGrpcName_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_GetParameterWithOverriddenGrpcName_cfunc(vi, original_parameter, enum_parameter)
+
     def niFake_ImportAttributeConfigurationBuffer(self, vi, size_in_bytes, configuration):  # noqa: N802
         with self._func_lock:
             if self.niFake_ImportAttributeConfigurationBuffer_cfunc is None:
@@ -379,6 +390,14 @@ class Library(object):
                 self.niFake_ImportAttributeConfigurationBuffer_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
                 self.niFake_ImportAttributeConfigurationBuffer_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ImportAttributeConfigurationBuffer_cfunc(vi, size_in_bytes, configuration)
+
+    def niFake_ImportAttributeConfigurationBufferEx(self, vi, size, configuration):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ImportAttributeConfigurationBufferEx_cfunc is None:
+                self.niFake_ImportAttributeConfigurationBufferEx_cfunc = self._get_library_function('niFake_ImportAttributeConfigurationBufferEx')
+                self.niFake_ImportAttributeConfigurationBufferEx_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViInt8)]  # noqa: F405
+                self.niFake_ImportAttributeConfigurationBufferEx_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ImportAttributeConfigurationBufferEx_cfunc(vi, size, configuration)
 
     def niFake_InitWithOptions(self, resource_name, id_query, reset_device, option_string, vi):  # noqa: N802
         with self._func_lock:
@@ -571,6 +590,14 @@ class Library(object):
                 self.niFake_SetCustomTypeArray_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(custom_struct.struct_CustomStruct)]  # noqa: F405
                 self.niFake_SetCustomTypeArray_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_SetCustomTypeArray_cfunc(vi, number_of_elements, cs)
+
+    def niFake_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_SetRuntimeEnvironment_cfunc is None:
+                self.niFake_SetRuntimeEnvironment_cfunc = self._get_library_function('niFake_SetRuntimeEnvironment')
+                self.niFake_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niFake_StringValuedEnumInputFunctionWithDefaults(self, vi, a_mobile_os_name):  # noqa: N802
         with self._func_lock:

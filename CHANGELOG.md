@@ -39,6 +39,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
         * Enums added:
             * `CurrentLimitBehavior`
     * #### Changed
