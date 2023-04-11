@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d57
+# This file is generated from NI-FGEN API metadata version 23.5.0d28
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -1284,11 +1284,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes',
                 'use_array': True
             }
@@ -1983,11 +1984,12 @@ functions = {
                 },
                 'name': 'configuration',
                 'python_api_converter_name': 'convert_to_bytes',
+                'python_type': 'bytes',
                 'size': {
                     'mechanism': 'len',
                     'value': 'sizeInBytes'
                 },
-                'type': 'ViInt8[]',
+                'type': 'ViAddr[]',
                 'type_in_documentation': 'bytes'
             }
         ],
@@ -2091,7 +2093,7 @@ functions = {
                 'is_repeated_capability': False,
                 'name': 'channelName',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
-                'type': 'ViString',
+                'type': 'ViConstString',
                 'type_in_documentation': 'str, list, range, tuple'
             },
             {
@@ -2148,7 +2150,7 @@ functions = {
                 },
                 'name': 'optionString',
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
-                'type': 'ViString',
+                'type': 'ViConstString',
                 'type_in_documentation': 'dict'
             },
             {
@@ -2543,7 +2545,7 @@ functions = {
                     'description': 'Trigger ID specifies the Script Trigger to use for triggering.'
                 },
                 'name': 'triggerId',
-                'type': 'ViString'
+                'type': 'ViConstString'
             }
         ],
         'render_in_session_base': True,
