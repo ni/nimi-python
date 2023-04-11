@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-ModInst API metadata version 23.0.0d6
+# This file is generated from NI-ModInst API metadata version 23.3.0f82
 functions = {
     'CloseInstalledDevicesSession': {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nCleans up the NI-ModInst session created by a call to\nniModInst_OpenInstalledDevicesSession. Call this function when you are\nfinished using the session handle and do not use this handle again.\n'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -23,6 +24,7 @@ functions = {
         'documentation': {
             'description': '\nReturns detailed information about the last error that occurred in the\ncurrent thread during a call to one of the NI-ModInst functions. When\none of the other functions returns a negative value as its return value,\nimmediately call this function to get detailed information about the\nerror. Because error information is stored on a thread-by-thread basis,\nbe sure to call this function in the same thread that called the\nfunction that returned an error. The extended error information is\nreturned as a string. To find out the length of the error information\nstring before you allocate a buffer for it, call this function and pass\n0 as the errorInfoBufferSize parameter or NULL as the errorInfo\nparameter. When you do this, the function returns the size of the buffer\nrequired to hold the error information string as its return value. You\ncan then allocate an appropriately sized string character buffer and\ncall this function again.\n'
         },
+        'included_in_proto': False,
         'is_error_handling': True,
         'method_templates': [
             {
@@ -61,6 +63,7 @@ functions = {
         'documentation': {
             'description': '\nReturns an integer attribute specified by the attributeID parameter for\na device specified by the handle and index parameters. The handle\nparameter is expected to be a valid handle returned by\nniModInst_OpenInstalledDevicesSession. It therefore acts as a handle to\na list of installed devices. The index parameter specifies the device in\nthe list for which you want the attribute.\n'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -102,6 +105,7 @@ functions = {
         'documentation': {
             'description': '\nReturns a string attribute specified by the attributeID parameter for a\ndevice specified by the handle and index parameters. The handle\nparameter is expected to be a valid handle returned by\nniModInst_OpenInstalledDevicesSession. Therefore, it acts as a handle\nto a list of installed devices. The index parameter specifies for which\ndevice in the list you want the attribute. To find out the length of the\ndevice name string before you allocate a buffer for it, simply call this\nfunction and pass 0 as the attributeValueBufferSize parameter or NULL as\nthe attributeValue parameter. When you do this, the function returns the\nsize of the buffer required to hold the attribute value string as its\nreturn value. You can then allocate an appropriately sized character\nbuffer and call this function again.\n'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -155,6 +159,7 @@ functions = {
         'documentation': {
             'description': '\nCreates a handle to a list of installed devices supported by the\nspecified driver. Call this function and pass in the name of an NI \ninstrument driver, such as "NI-SCOPE". This function\nsearches the system and constructs a list of all the installed devices\nthat are supported by that driver, and then returns both a handle to\nthis list and the number of devices found. The handle is used with other\nfunctions to query for attributes such as device name and model, and to\nsafely discard the list when finished. Note This handle reflects the\nsystem state when the handle is created (that is, when you call this\nfunction. If you remove devices from the system or rename them in\nMeasurement & Automation Explorer (MAX), this handle may not refer to an\naccurate list of devices. You should destroy the handle using\nniModInst_CloseInstalledDevicesSession and create a new handle using\nthis function.\n'
         },
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
