@@ -346,7 +346,7 @@ ReferenceClockSource
 
 
 
-        Specifies the PXI Clock is used as the Reference Clock source.
+        Specifies that the PXI Clock is used as the Reference Clock source.
 
         
 
@@ -395,7 +395,7 @@ SampleClockSource
 
 
 
-        Specifies that the Sample Clock from DDC connector is used as the Sample
+        Specifies that the Sample Clock from the DDC connector is used as the Sample
         Clock source.
 
         
