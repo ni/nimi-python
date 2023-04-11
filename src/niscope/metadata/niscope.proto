@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-SCOPE API metadata version 23.0.0d95
+// This file is generated from NI-SCOPE API metadata version 23.3.0d127
 //---------------------------------------------------------------------
 // Proto file for the NI-SCOPE Metadata
 //---------------------------------------------------------------------
@@ -1439,6 +1439,7 @@ message FetchArrayMeasurementRequest {
     ArrayMeasurement array_meas_function = 4;
     sint32 array_meas_function_raw = 5;
   }
+  optional sint32 meas_wfm_size = 6;
 }
 
 message FetchArrayMeasurementResponse {
@@ -1952,4 +1953,3 @@ message SetAttributeViStringRequest {
 message SetAttributeViStringResponse {
   int32 status = 1;
 }
-
