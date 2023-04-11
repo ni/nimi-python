@@ -1027,7 +1027,7 @@ class SystemTests:
     def test_perform_lcr_open_short_custom_cable_compensation(self, session, compensation_function):
         compensation_function(session)
 
-    @pytest.mark.skip(reason="TODO(jfitzger): Skip until we have a way to successfully call configure with a simulated device. GitHub issue #1908")
+    @pytest.mark.skip(reason="TODO(jfitzger): Skip until we have a way to successfully call configure_lcr_custom_cable_compensation() with a simulated device. GitHub issue #1908")
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     def test_lcr_custom_cable_compensation_data(self, session):
@@ -1077,6 +1077,25 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
+
+    @pytest.mark.skip(reason="TODO(jfitzger): Skip until we have a way to successfully call configure_lcr_compensation() with a simulated device. GitHub issue #1908")
+    @pytest.mark.resource_name("4190/0")
+    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+    def test_lcr_compensation_data(self, session):
+        compensation_data = session.get_lcr_compensation_data()
+        session.configure_lcr_compensation(compensation_data)
+
+        session.configure_lcr_compensation(compensation_data.decode())
+
+        session.configure_lcr_compensation(list(compensation_data))
+
+        session.configure_lcr_compensation(bytes(compensation_data))
+
+        with tempfile.NamedTemporaryFile(suffix='.bin', delete=False) as temp_file:
+            temp_file.write(compensation_data)
+        with open(temp_file.name, 'rb') as reopened_temp_file:
+            compensation_data_bytes_from_file = reopened_temp_file.read()
+        session.configure_lcr_compensation(compensation_data_bytes_from_file)
 
 
 class TestGrpc(SystemTests):

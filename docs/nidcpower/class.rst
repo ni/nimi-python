@@ -386,12 +386,58 @@ configure_aperture_time
 
             :type units: :py:data:`nidcpower.ApertureTimeUnits`
 
+configure_lcr_compensation
+--------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: configure_lcr_compensation(compensation_data)
+
+            Applies previously generated open, short, load, as well as open and short custom cable compensation data to LCR measurements.
+
+            This method applies open, short and load compensation data when you have set the :py:attr:`nidcpower.Session.lcr_open_short_load_compensation_data_source` property to :py:data:`~nidcpower.LCROpenShortLoadCompensationDataSource.AS_CONFIGURED`, and it also applies custom cable compensation data when you have set the :py:attr:`nidcpower.Session.cable_length` property to :py:data:`~nidcpower.CableLength.CUSTOM_AS_CONFIGURED`.
+
+            Call this method after you have obtained LCR compensation data.
+
+            If the :py:attr:`nidcpower.Session.lcr_short_custom_cable_compensation_enabled` property is set to True, you must generate data with both :py:meth:`nidcpower.Session.perform_lcr_open_custom_cable_compensation` and :py:meth:`nidcpower.Session.perform_lcr_short_custom_cable_compensation`; if False, you must only use :py:meth:`nidcpower.Session.perform_lcr_open_custom_cable_compensation`, and NI-DCPower uses default short data.
+
+            Call :py:meth:`nidcpower.Session.get_lcr_compensation_data` and pass the **compensation data** to this method.
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].configure_lcr_compensation`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.configure_lcr_compensation`
+
+
+            :param compensation_data:
+
+
+                The open, short and load compensation data to apply.
+
+                
+
+
+            :type compensation_data: bytes
+
 configure_lcr_custom_cable_compensation
 ---------------------------------------
 
     .. py:currentmodule:: nidcpower.Session
 
     .. py:method:: configure_lcr_custom_cable_compensation(custom_cable_compensation_data)
+
+            This method is deprecated. Use :py:meth:`nidcpower.Session.configure_lcr_compensation`
+            instead.
 
             Applies previously generated open and short custom cable compensation data to LCR measurements.
 
@@ -1308,6 +1354,43 @@ get_ext_cal_recommended_interval
 
 
 
+get_lcr_compensation_data
+-------------------------
+
+    .. py:currentmodule:: nidcpower.Session
+
+    .. py:method:: get_lcr_compensation_data()
+
+            Collects previously generated open, short, load, and custom cable compensation data so you can then apply it to LCR measurements with :py:meth:`nidcpower.Session.configure_lcr_compensation`.
+
+            Call this method after you have obtained the compensation data of all types (open, short, load, open custom cable compensation, and short custom cable compensation) you want to apply to your measurements. Pass the **compensation data** to :py:meth:`nidcpower.Session.configure_lcr_compensation`
+
+            
+
+            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_lcr_compensation_data`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nidcpower.Session`.
+
+                Example: :py:meth:`my_session.get_lcr_compensation_data`
+
+
+            :rtype: bytes
+            :return:
+
+
+                    The open, short, load, and custom cable compensation data to retrieve.
+
+                    
+
+
+
 get_lcr_compensation_last_date_and_time
 ---------------------------------------
 
@@ -1359,6 +1442,9 @@ get_lcr_custom_cable_compensation_data
     .. py:currentmodule:: nidcpower.Session
 
     .. py:method:: get_lcr_custom_cable_compensation_data()
+
+            This method is deprecated. Use :py:meth:`nidcpower.Session.get_lcr_compensation_data`
+            instead.
 
             Collects previously generated open and short custom cable compensation data so you can then apply it to LCR measurements with :py:meth:`nidcpower.Session.configure_lcr_custom_cable_compensation`.
 
@@ -5427,6 +5513,8 @@ lcr_impedance_auto_range
 
         When enabled, impedance autoranging overrides impedance range settings you configure manually with any other properties.
 
+        When using a load with unknown impedance, you can set this property to :py:data:`~nidcpower._LCRImpedanceAutoRange.ON` to determine the correct impedance range for the load. When you know the load impedance, you can achieve faster performance by setting this property to :py:data:`~nidcpower._LCRImpedanceAutoRange.OFF` and setting :py:attr:`nidcpower.Session.lcr_impedance_range_source` to :py:data:`~nidcpower.LCRImpedanceRangeSource.LOAD_CONFIGURATION`.
+
         Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
 
 
@@ -5511,9 +5599,15 @@ lcr_impedance_range_source
 
         Specifies how the impedance range for LCR measurements is determined.
 
+        ":py:attr:`nidcpower.Session.LCR_IMPEDANCE_AUTORANGE` overrides any impedance range determined by this property.
+
+        "
+
 
 
         .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6441,6 +6535,46 @@ measure_complete_event_delay
                 - LabVIEW Property: **Events:Measure Complete Event:Event Delay**
                 - C Attribute: **NIDCPOWER_ATTR_MEASURE_COMPLETE_EVENT_DELAY**
 
+measure_complete_event_output_behavior
+--------------------------------------
+
+    .. py:attribute:: measure_complete_event_output_behavior
+
+        Determines the event type's behavior when a corresponding trigger is received. If you set the Measure Complete event output behavior to :py:data:`~nidcpower.EventOutputBehavior.PULSE`, a single pulse is transmitted. If you set the Measure Complete event output behavior to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`, the output level toggles between low and high. The default value is :py:data:`~nidcpower.EventOutputBehavior.PULSE`.
+
+
+
+        .. note:: This property is not supported by all output terminals.
+            This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_output_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_complete_event_output_behavior`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.EventOutputBehavior |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | channels                  |
+            +-----------------------+---------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Measure Complete Event:Output Behavior**
+                - C Attribute: **NIDCPOWER_ATTR_MEASURE_COMPLETE_EVENT_OUTPUT_BEHAVIOR**
+
 measure_complete_event_output_terminal
 --------------------------------------
 
@@ -6563,6 +6697,56 @@ measure_complete_event_pulse_width
 
                 - LabVIEW Property: **Events:Measure Complete Event:Pulse:Width**
                 - C Attribute: **NIDCPOWER_ATTR_MEASURE_COMPLETE_EVENT_PULSE_WIDTH**
+
+measure_complete_event_toggle_initial_state
+-------------------------------------------
+
+    .. py:attribute:: measure_complete_event_toggle_initial_state
+
+        Specifies the initial state of the Measure Complete event when you set the :py:attr:`nidcpower.Session.measure_complete_event_output_behavior` property to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`.
+        For a Single Point mode acquisition, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit.
+        The output switches to high when the event occurs during the acquisition. If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to a high state at session commit.
+        The output switches to low when the event occurs during the acquisition.
+        For a Sequence mode operation, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.
+        The second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.
+        If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to high at session commit.
+        The output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.
+        This pattern repeats for any subsequent event occurrences.
+        The default value is :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].measure_complete_event_toggle_initial_state`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.measure_complete_event_toggle_initial_state`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.EventToggleInitialState |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | channels                      |
+            +-----------------------+-------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Measure Complete Event:Toggle:Initial State**
+                - C Attribute: **NIDCPOWER_ATTR_MEASURE_COMPLETE_EVENT_TOGGLE_INITIAL_STATE**
 
 measure_record_delta_time
 -------------------------
@@ -9377,6 +9561,46 @@ sequence_advance_trigger_type
                 - LabVIEW Property: **Triggers:Sequence Advance Trigger:Trigger Type**
                 - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ADVANCE_TRIGGER_TYPE**
 
+sequence_engine_done_event_output_behavior
+------------------------------------------
+
+    .. py:attribute:: sequence_engine_done_event_output_behavior
+
+        Determines the event type's behavior when a corresponding trigger is received. If you set the Sequence Engine Done event output behavior to :py:data:`~nidcpower.EventOutputBehavior.PULSE`, a single pulse is transmitted. If you set the Sequence Engine Done event output behavior to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`, the output level toggles between low and high. The default value is :py:data:`~nidcpower.EventOutputBehavior.PULSE`.
+
+
+
+        .. note:: This property is not supported by all output terminals.
+            This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_output_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_engine_done_event_output_behavior`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.EventOutputBehavior |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | channels                  |
+            +-----------------------+---------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Sequence Engine Done Event:Output Behavior**
+                - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_BEHAVIOR**
+
 sequence_engine_done_event_output_terminal
 ------------------------------------------
 
@@ -9499,6 +9723,96 @@ sequence_engine_done_event_pulse_width
 
                 - LabVIEW Property: **Events:Sequence Engine Done Event:Pulse:Width**
                 - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ENGINE_DONE_EVENT_PULSE_WIDTH**
+
+sequence_engine_done_event_toggle_initial_state
+-----------------------------------------------
+
+    .. py:attribute:: sequence_engine_done_event_toggle_initial_state
+
+        Specifies the initial state of the Sequence Engine Done event when you set the :py:attr:`nidcpower.Session.sequence_engine_done_event_output_behavior` property to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`.
+        For a Single Point mode acquisition, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit.
+        The output switches to high when the event occurs during the acquisition. If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to a high state at session commit.
+        The output switches to low when the event occurs during the acquisition.
+        For a Sequence mode operation, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.
+        The second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.
+        If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to high at session commit.
+        The output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.
+        This pattern repeats for any subsequent event occurrences.
+        The default value is :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_engine_done_event_toggle_initial_state`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_engine_done_event_toggle_initial_state`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.EventToggleInitialState |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | channels                      |
+            +-----------------------+-------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Sequence Engine Done Event:Toggle:Initial State**
+                - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ENGINE_DONE_EVENT_TOGGLE_INITIAL_STATE**
+
+sequence_iteration_complete_event_output_behavior
+-------------------------------------------------
+
+    .. py:attribute:: sequence_iteration_complete_event_output_behavior
+
+        Determines the event type's behavior when a corresponding trigger is received. If you set the Sequence Iteration Complete event output behavior to :py:data:`~nidcpower.EventOutputBehavior.PULSE`, a single pulse is transmitted. If you set the Sequence Iteration Complete event output behavior to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`, the output level toggles between low and high. The default value is :py:data:`~nidcpower.EventOutputBehavior.PULSE`.
+
+
+
+        .. note:: This property is not supported by all output terminals.
+            This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_output_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_output_behavior`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.EventOutputBehavior |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | channels                  |
+            +-----------------------+---------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Sequence Iteration Complete Event:Output Behavior**
+                - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_BEHAVIOR**
 
 sequence_iteration_complete_event_output_terminal
 -------------------------------------------------
@@ -9623,6 +9937,56 @@ sequence_iteration_complete_event_pulse_width
 
                 - LabVIEW Property: **Events:Sequence Iteration Complete Event:Pulse:Width**
                 - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ITERATION_COMPLETE_EVENT_PULSE_WIDTH**
+
+sequence_iteration_complete_event_toggle_initial_state
+------------------------------------------------------
+
+    .. py:attribute:: sequence_iteration_complete_event_toggle_initial_state
+
+        Specifies the initial state of the Sequence Iteration Complete event when you set the :py:attr:`nidcpower.Session.sequence_iteration_complete_event_output_behavior` property to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`.
+        For a Single Point mode acquisition, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit.
+        The output switches to high when the event occurs during the acquisition. If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to a high state at session commit.
+        The output switches to low when the event occurs during the acquisition.
+        For a Sequence mode operation, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.
+        The second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.
+        If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to high at session commit.
+        The output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.
+        This pattern repeats for any subsequent event occurrences.
+        The default value is :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].sequence_iteration_complete_event_toggle_initial_state`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.sequence_iteration_complete_event_toggle_initial_state`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.EventToggleInitialState |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | channels                      |
+            +-----------------------+-------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Sequence Iteration Complete Event:Toggle:Initial State**
+                - C Attribute: **NIDCPOWER_ATTR_SEQUENCE_ITERATION_COMPLETE_EVENT_TOGGLE_INITIAL_STATE**
 
 sequence_loop_count
 -------------------
@@ -9874,6 +10238,46 @@ simulate
                 - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
                 - C Attribute: **NIDCPOWER_ATTR_SIMULATE**
 
+source_complete_event_output_behavior
+-------------------------------------
+
+    .. py:attribute:: source_complete_event_output_behavior
+
+        Determines the event type's behavior when a corresponding trigger is received. If you set the Source Complete event output behavior to :py:data:`~nidcpower.EventOutputBehavior.PULSE`, a single pulse is transmitted. If you set the Source Complete event output behavior to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`, the output level toggles between low and high. The default value is :py:data:`~nidcpower.EventOutputBehavior.PULSE`.
+
+
+
+        .. note:: This property is not supported by all output terminals.
+            This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_output_behavior`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_complete_event_output_behavior`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+---------------------------+
+            | Characteristic        | Value                     |
+            +=======================+===========================+
+            | Datatype              | enums.EventOutputBehavior |
+            +-----------------------+---------------------------+
+            | Permissions           | read-write                |
+            +-----------------------+---------------------------+
+            | Repeated Capabilities | channels                  |
+            +-----------------------+---------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Source Complete Event:Output Behavior**
+                - C Attribute: **NIDCPOWER_ATTR_SOURCE_COMPLETE_EVENT_OUTPUT_BEHAVIOR**
+
 source_complete_event_output_terminal
 -------------------------------------
 
@@ -9996,6 +10400,56 @@ source_complete_event_pulse_width
 
                 - LabVIEW Property: **Events:Source Complete Event:Pulse:Width**
                 - C Attribute: **NIDCPOWER_ATTR_SOURCE_COMPLETE_EVENT_PULSE_WIDTH**
+
+source_complete_event_toggle_initial_state
+------------------------------------------
+
+    .. py:attribute:: source_complete_event_toggle_initial_state
+
+        Specifies the initial state of the Source Complete event when you set the :py:attr:`nidcpower.Session.source_complete_event_output_behavior` property to :py:data:`~nidcpower.EventOutputBehavior.TOGGLE`.
+        For a Single Point mode acquisition, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit.
+        The output switches to high when the event occurs during the acquisition. If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to a high state at session commit.
+        The output switches to low when the event occurs during the acquisition.
+        For a Sequence mode operation, if you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.
+        The second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.
+        If you set the initial state to :py:data:`~nidcpower.NIDCPOWER_VAL_HIGH_STATE`, the output is set to high at session commit.
+        The output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.
+        This pattern repeats for any subsequent event occurrences.
+        The default value is :py:data:`~nidcpower.NIDCPOWER_VAL_LOW_STATE`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].source_complete_event_toggle_initial_state`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.source_complete_event_toggle_initial_state`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.EventToggleInitialState |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | channels                      |
+            +-----------------------+-------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Source Complete Event:Toggle:Initial State**
+                - C Attribute: **NIDCPOWER_ATTR_SOURCE_COMPLETE_EVENT_TOGGLE_INITIAL_STATE**
 
 source_delay
 ------------

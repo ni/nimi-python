@@ -5,7 +5,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 2022 Q3                |
+| Driver Version Tested Against | 2023 Q1.1              |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
