@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 23.0.0d8
+# This file is generated from NI Switch Executive API metadata version 23.0.0f50
 functions = {
     'CloseSession': {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nReduces the reference count of open sessions by one. If the reference\ncount goes to 0, the function deallocates any memory resources the\ndriver uses and closes any open IVI switch sessions. After calling the\nniSE_CloseSession function, you should not use the NI Switch Executive\nvirtual device again until you call niSE_OpenSession.\n'
         },
+        'included_in_proto': False,
         'method_name_for_documentation': 'close',
         'parameters': [
             {
@@ -23,6 +24,7 @@ functions = {
         'documentation': {
             'description': '\nConnects the routes specified by the connection specification. When\nconnecting, it may allow for multiconnection based on the\nmulticonnection mode. In the event of an error, the call to\nniSE_Connect will attempt to undo any connections made so that the\nsystem will be left in the same state that it was in before the call was\nmade. Some errors can be caught before manipulating hardware, although\nit is feasible that a hardware call could fail causing some connections\nto be momentarily closed and then reopened. If the wait for debounce\nparameter is set, the function will not return until the switch system\nhas debounced.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -66,6 +68,7 @@ functions = {
         'documentation': {
             'description': '\nConnects routes and disconnects routes in a similar fashion to\nniSE_Connect and niSE_Disconnect except that the operations happen in\nthe context of a single function call. This function is useful for\nswitching from one state to another state. niSE_ConnectAndDisconnect\nmanipulates the hardware connections and disconnections only when the\nroutes are different between the connection and disconnection\nspecifications. If any routes are common between the connection and\ndisconnection specifications, NI Switch Executive determines whether or\nnot the relays need to be switched. This functionality has the distinct\nadvantage of increased throughput for shared connections, because\nhardware does not have to be involved and potentially increases relay\nlifetime by decreasing the number of times that the relay has to be\nswitched. In the event of an error, the call to\nniSE_ConnectAndDisconnect attempts to undo any connections made, but\ndoes not attempt to reconnect disconnections. Some errors can be caught\nbefore manipulating hardware, although it is feasible that a hardware\ncall could fail causing some connections to be momentarily closed and\nthen reopened.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -127,6 +130,7 @@ functions = {
         'documentation': {
             'description': '\nDisconnects the routes specified in the Disconnection Specification. If\nany of the specified routes were originally connected in a\nmulticonnected mode, the call to niSE_Disconnect reduces the reference\ncount on the route by 1. If the reference count reaches 0, it is\ndisconnected. If a specified route does not exist, it is an error\ncondition. In the event of an error, the call to niSE_Disconnect\ncontinues to try to disconnect everything specified by the route\nspecification string but reports the error on completion.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -151,6 +155,7 @@ functions = {
         'documentation': {
             'description': '\nDisconnects all connections on every IVI switch device managed by the\nNISE session reference passed to this function. niSE_DisconnectAll\nignores all multiconnect modes. Calling niSE_DisconnectAll resets all\nof the switch states for the system.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -167,6 +172,7 @@ functions = {
         'documentation': {
             'description': '\nExpands a route spec string to yield more information about the routes\nand route groups within the spec. The route specification string\nreturned from niSE_ExpandRouteSpec can be passed to other Switch\nExecutive API functions (such as niSE_Connect, niSE_Disconnect, and\nniSE_ConnectAndDisconnect) that use route specification strings.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -228,6 +234,7 @@ functions = {
         'documentation': {
             'description': '\nFinds an existing or potential route between channel 1 and channel 2.\nThe returned route specification contains the route specification and\nthe route capability determines whether or not the route existed, is\npossible, or is not possible for various reasons. The route\nspecification string returned from niSE_FindRoute can be passed to\nother Switch Executive API functions (such as niSE_Connect,\nniSE_Disconnect, and niSE_ConnectAndDisconnect) that use route\nspecification strings.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -296,6 +303,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the top-level connected routes and route groups. The route\nspecification string returned from niSE_GetAllConnections can be passed\nto other Switch Executive API functions (such as niSE_Connect,\nniSE_Disconnect, niSE_ConnectAndDisconnect, and niSE_ExpandRouteSpec)\nthat use route specification strings.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -340,6 +348,7 @@ functions = {
         'documentation': {
             'description': "\nGet error information of the first error that occurred. If a valid\npointer is passed to errorDescription or errorNumber, GetError will\nclear the error on completion. errorDescriptionSize is an in/out\nparameter that describes the size of the errorDescription buffer. On the\nway in, it tells the function the size of string. On the way out, it\ndescribes the number of bytes (including the trailing null string)\nneeded to hold the entire error description buffer. If NULL is passed\nfor errorDescription and the errorNumber, the function will not clear\nthe error. Users wanting to dynamically size the errorDescription string\ncan thus call the function twice. On the first call they can pass NULL\nfor the errorDescription and use the returned errorDescriptionSize to\nallocate enough space for the entire errorDescription buffer. Note that\nif a buffer is passed that is not large enough to hold the entire\ndescription string, the portion of of the string that will fit in the\npassed buffer will be returned and the error will still be cleared. All\nof the parameters are NULL tolerant. Note that passing NULL for both\nerrorNumber and errorDescription can change the function's behavior.\n"
         },
+        'included_in_proto': False,
         'is_error_handling': True,
         'method_templates': [
             {
@@ -400,6 +409,7 @@ functions = {
         'documentation': {
             'description': '\nChecks whether the specified routes and routes groups are connected. It\nreturns true if connected.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -432,6 +442,7 @@ functions = {
         'documentation': {
             'description': '\nChecks to see if the switching system is debounced or not. This function\ndoes not wait for debouncing to occur. It returns true if the system is\nfully debounced. This function is similar to the IviSwtch specific\nfunction.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -457,6 +468,7 @@ functions = {
         'documentation': {
             'description': '\nOpens a session to a specified NI Switch Executive virtual device. Opens\ncommunications with all of the IVI switches associated with the\nspecified NI Switch Executive virtual device. Returns a session handle\nthat you use to identify the virtual device in all subsequent NI Switch\nExecutive function calls. NI Switch Executive uses a reference counting\nscheme to manage open session handles to an NI Switch Executive virtual\ndevice. Each call to niSE_OpenSession must be matched with a subsequent\ncall to niSE_CloseSession. Successive calls to niSE_OpenSession with\nthe same virtual device name always returns the same session handle. NI\nSwitch Executive disconnects its communication with the IVI switches\nafter all session handles are closed to a given virtual device. The\nsession handles may be used safely in multiple threads of an\napplication. Sessions may only be opened to a given NI Switch Executive\nvirtual device from a single process at a time.\n'
         },
+        'included_in_proto': False,
         'method_name_for_documentation': '__init__',
         'parameters': [
             {
@@ -493,6 +505,7 @@ functions = {
         'documentation': {
             'description': '\nWaits for all of the switches in the NI Switch Executive virtual device\nto debounce. This function does not return until either the switching\nsystem is completely debounced and settled or the maximum time has\nelapsed and the system is not yet debounced. In the event that the\nmaximum time elapses, the function returns an error indicating that a\ntimeout has occurred. To ensure that all of the switches have settled,\nNI recommends calling niSE_WaitForDebounce after a series of connection\nor disconnection operations and before taking any measurements of the\nsignals connected to the switching system.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
