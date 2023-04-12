@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.5.0d58
+# This file is generated from NI-DCPower API metadata version 23.5.0d79
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -166,6 +166,13 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_ZERO_M',
                 'value': 1121
+            },
+            {
+                'documentation': {
+                    'description': 'Uses predefined cable compensation data for an NI standard 0.5m coaxial cable.'
+                },
+                'name': 'NIDCPOWER_VAL_NI_STANDARD_0_5M',
+                'value': 1153
             },
             {
                 'documentation': {
@@ -577,6 +584,24 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_DC_BIAS_CURRENT',
                 'value': 1067
+            }
+        ]
+    },
+    'LCRDCBiasTransientResponse': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-DCPower automatically applies transient response values for DC bias.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_DC_BIAS_TRANSIENT_RESPONSE_NORMAL',
+                'value': 1151
+            },
+            {
+                'documentation': {
+                    'description': 'NI-DCPower applies the transient response that you set manually with NIDCPOWER_ATTR_TRANSIENT_RESPONSE for DC bias. Search ni.com for information on configuring transient response.'
+                },
+                'name': 'NIDCPOWER_VAL_LCR_DC_BIAS_TRANSIENT_RESPONSE_CUSTOM',
+                'value': 1152
             }
         ]
     },

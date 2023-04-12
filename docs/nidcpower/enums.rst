@@ -241,6 +241,16 @@ CableLength
 
 
 
+    .. py:attribute:: CableLength.NI_STANDARD_0_5M
+
+
+
+        Uses predefined cable compensation data for an NI standard 0.5m coaxial cable.
+
+        
+
+
+
     .. py:attribute:: CableLength.NI_STANDARD_1M
 
 
@@ -621,6 +631,31 @@ LCRDCBiasSource
 
 
         Applies a constant current bias, as defined by the :py:attr:`nidcpower.Session.lcr_dc_bias_current_level` property.
+
+        
+
+
+
+LCRDCBiasTransientResponse
+--------------------------
+
+.. py:class:: LCRDCBiasTransientResponse
+
+    .. py:attribute:: LCRDCBiasTransientResponse.NORMAL
+
+
+
+        NI-DCPower automatically applies transient response values for DC bias.
+
+        
+
+
+
+    .. py:attribute:: LCRDCBiasTransientResponse.CUSTOM
+
+
+
+        NI-DCPower applies the transient response that you set manually with :py:attr:`nidcpower.Session.transient_response` for DC bias. Search ni.com for information on configuring transient response.
 
         
 
