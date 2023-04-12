@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.5.0d58
+# This file is generated from NI-DCPower API metadata version 23.5.0d79
 config = {
-    'api_version': '23.5.0d58',
+    'api_version': '23.5.0d79',
     'c_function_prefix': 'niDCPower_',
     'close_function': 'close',
     'context_manager_name': {

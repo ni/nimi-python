@@ -1135,6 +1135,46 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lcr_actual_load_resistance`
     '''
+    lcr_ac_dither_enabled = _attributes.AttributeViBoolean(1150348)
+    '''Type: bool
+
+    Specifies whether dithering is enabled during LCR measurements.
+    Dithering adds out-of-band noise to improve measurements of small voltage and current signals.
+
+    Note:
+    Hardware is only warranted to meet its accuracy specs with dither enabled. You can disable dither if the added noise interferes with your device-under-test.
+
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_ac_dither_enabled`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_ac_dither_enabled`
+    '''
+    lcr_ac_electrical_cable_length_delay = _attributes.AttributeViReal64(1150309)
+    '''Type: float
+
+    Specifies the one-way electrical length delay of the cable, in seconds.
+    The default value depends on cable_length.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_ac_electrical_cable_length_delay`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_ac_electrical_cable_length_delay`
+    '''
     lcr_automatic_level_control = _attributes.AttributeViInt32(1150290)
     '''Type: bool
 
@@ -1290,6 +1330,28 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_dc_bias_source`
+    '''
+    lcr_dc_bias_transient_response = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRDCBiasTransientResponse, 1150347)
+    '''Type: enums.LCRDCBiasTransientResponse
+
+    For instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the transient response values for DC bias or applies the transient response you set manually.
+
+    Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
+
+    Related Topics: Transient Response
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_transient_response`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_dc_bias_transient_response`
     '''
     lcr_dc_bias_voltage_level = _attributes.AttributeViReal64(1150214)
     '''Type: float
@@ -1731,6 +1793,24 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.lcr_short_resistance`
+    '''
+    lcr_source_aperture_time = _attributes.AttributeViReal64(1150349)
+    '''Type: float
+
+    Specifies the LCR source aperture time for a channel, in seconds.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].lcr_source_aperture_time`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.lcr_source_aperture_time`
     '''
     lcr_source_delay_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LCRSourceDelayMode, 1150315)
     '''Type: enums.LCRSourceDelayMode

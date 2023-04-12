@@ -34,3 +34,9 @@ jobs:
         uses: ./.github/actions/linux
         with:
           module_name: ${{ matrix.module_name }}
+      - name: upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          flags: ${{ matrix.module_name }}systemtests
+          name: ${{ matrix.module_name }}
+          files: ./generated/${{ matrix.module_name }}/coverage.xml
