@@ -5054,6 +5054,88 @@ lcr_actual_load_resistance
                 - LabVIEW Property: **LCR:Compensation:LCR Actual Load Resistance**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_ACTUAL_LOAD_RESISTANCE**
 
+lcr_ac_dither_enabled
+---------------------
+
+    .. py:attribute:: lcr_ac_dither_enabled
+
+        Specifies whether dithering is enabled during LCR measurements.
+        Dithering adds out-of-band noise to improve measurements of small voltage and current signals.
+
+
+
+        .. note:: Hardware is only warranted to meet its accuracy specs with dither enabled. You can disable dither if the added noise interferes with your device-under-test.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_ac_dither_enabled`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_ac_dither_enabled`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Advanced:Dither Enabled**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_AC_DITHER_ENABLED**
+
+lcr_ac_electrical_cable_length_delay
+------------------------------------
+
+    .. py:attribute:: lcr_ac_electrical_cable_length_delay
+
+        Specifies the one-way electrical length delay of the cable, in seconds.
+        The default value depends on :py:attr:`nidcpower.Session.cable_length`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_ac_electrical_cable_length_delay`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_ac_electrical_cable_length_delay`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:Compensation:LCR AC Electrical Cable Length Delay**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_AC_ELECTRICAL_CABLE_LENGTH_DELAY**
+
 lcr_automatic_level_control
 ---------------------------
 
@@ -5377,6 +5459,49 @@ lcr_dc_bias_source
 
                 - LabVIEW Property: **LCR:DC Bias:Source**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_SOURCE**
+
+lcr_dc_bias_transient_response
+------------------------------
+
+    .. py:attribute:: lcr_dc_bias_transient_response
+
+        For instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the transient response values for DC bias or applies the transient response you set manually.
+
+        Default Value: Search ni.com for Supported Properties by Device for the default value by instrument.
+
+        Related Topics: Transient Response
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_dc_bias_transient_response`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_dc_bias_transient_response`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------------------+
+            | Characteristic        | Value                            |
+            +=======================+==================================+
+            | Datatype              | enums.LCRDCBiasTransientResponse |
+            +-----------------------+----------------------------------+
+            | Permissions           | read-write                       |
+            +-----------------------+----------------------------------+
+            | Repeated Capabilities | channels                         |
+            +-----------------------+----------------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:DC Bias:Advanced:Transient Response**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_DC_BIAS_TRANSIENT_RESPONSE**
 
 lcr_dc_bias_voltage_level
 -------------------------
@@ -6256,6 +6381,45 @@ lcr_short_resistance
 
                 - LabVIEW Property: **LCR:Compensation:Short:Resistance**
                 - C Attribute: **NIDCPOWER_ATTR_LCR_SHORT_RESISTANCE**
+
+lcr_source_aperture_time
+------------------------
+
+    .. py:attribute:: lcr_source_aperture_time
+
+        Specifies the LCR source aperture time for a channel, in seconds.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].lcr_source_aperture_time`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.lcr_source_aperture_time`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **LCR:AC Stimulus:Advanced:Source Aperture Time**
+                - C Attribute: **NIDCPOWER_ATTR_LCR_SOURCE_APERTURE_TIME**
 
 lcr_source_delay_mode
 ---------------------
