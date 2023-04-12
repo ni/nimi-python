@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.5.0d58
+# This file is generated from NI-DCPower API metadata version 23.5.0d79
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -2385,6 +2385,19 @@ attributes = {
         'type': 'ViInt32',
         'type_in_documentation': 'bool'
     },
+    1150309: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the one-way electrical length delay of the cable, in seconds.\nThe default value depends on NIDCPOWER_ATTR_CABLE_LENGTH.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:LCR AC Electrical Cable Length Delay',
+        'name': 'LCR_AC_ELECTRICAL_CABLE_LENGTH_DELAY',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
     1150314: {
         'access': 'read-write',
         'documentation': {
@@ -2600,6 +2613,46 @@ attributes = {
             'channels'
         ],
         'type': 'ViInt32'
+    },
+    1150347: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nFor instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the transient response values for DC bias or applies the transient response you set manually.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument.\n\nRelated Topics: Transient Response\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRDCBiasTransientResponse',
+        'lv_property': 'LCR:DC Bias:Advanced:Transient Response',
+        'name': 'LCR_DC_BIAS_TRANSIENT_RESPONSE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150348: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether dithering is enabled during LCR measurements.\nDithering adds out-of-band noise to improve measurements of small voltage and current signals.\n',
+            'note': '\nHardware is only warranted to meet its accuracy specs with dither enabled. You can disable dither if the added noise interferes with your device-under-test.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Advanced:Dither Enabled',
+        'name': 'LCR_AC_DITHER_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
+    1150349: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the LCR source aperture time for a channel, in seconds.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Advanced:Source Aperture Time',
+        'name': 'LCR_SOURCE_APERTURE_TIME',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
     },
     1250001: {
         'access': 'read-write',
