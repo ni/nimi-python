@@ -40,4 +40,4 @@ jobs:
           gcov: true
           flags: ${{ matrix.module_name }}systemtests
           name: ${{ matrix.module_name }}
-          files: ./generated/ ${{ matrix.module_name }}/coverage.xml
+          files: ./generated/${{ matrix.module_name }}/coverage.xml
