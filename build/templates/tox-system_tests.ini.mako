@@ -38,7 +38,7 @@ description =
     ${wheel_env_no_py}: Build the ${other_wheel} wheel because we use it in ${module_name} tests
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
-    ${module_name}-coverage: Report all coverage results to codecov.io
+    ${module_name}-coverage: Prepare coverage report for upload to codecov.io  # upload handled by GitHub Actions
 
 changedir =
 % if uses_other_wheel:
@@ -66,8 +66,6 @@ commands =
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    # token is from codecov
-    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file coverage.xml
 
 deps =
 % if uses_other_wheel:
@@ -85,7 +83,6 @@ deps =
 % endif
 
     ${module_name}-coverage: coverage
-    ${module_name}-coverage: codecov
 
 depends =
     ${module_name}-coverage: py{37,38,39,310,311}-${module_name}-system_tests
