@@ -103,6 +103,10 @@ class CableLength(Enum):
     r'''
     Uses predefined cable compensation data for a 0m cable (direct connection).
     '''
+    NI_STANDARD_0_5M = 1153
+    r'''
+    Uses predefined cable compensation data for an NI standard 0.5m coaxial cable.
+    '''
     NI_STANDARD_1M = 1122
     r'''
     Uses predefined cable compensation data for an NI standard 1m coaxial cable.
@@ -276,6 +280,17 @@ class LCRDCBiasSource(Enum):
     CURRENT = 1067
     r'''
     Applies a constant current bias, as defined by the lcr_dc_bias_current_level property.
+    '''
+
+
+class LCRDCBiasTransientResponse(Enum):
+    NORMAL = 1151
+    r'''
+    NI-DCPower automatically applies transient response values for DC bias.
+    '''
+    CUSTOM = 1152
+    r'''
+    NI-DCPower applies the transient response that you set manually with transient_response for DC bias. Search ni.com for information on configuring transient response.
     '''
 
 
