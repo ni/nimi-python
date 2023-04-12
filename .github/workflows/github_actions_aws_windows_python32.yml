@@ -46,3 +46,10 @@ jobs:
           uses: ./.github/actions/windows
           with:
             module_name: ${{ matrix.module_name }}
+        - name: upload coverage
+          uses: codecov/codecov-action@v3
+          with:
+            gcov: true
+            flags: ${{ matrix.module_name }}systemtests
+            name: ${{ matrix.module_name }}
+            files: ./generated/ ${{ matrix.module_name }}/coverage.xml
