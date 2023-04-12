@@ -34,9 +34,9 @@ after_success:
   - travis_retry shasum -a 256 -c codecov.SHA256SUM
   - travis_retry chmod +x codecov
   # upload coverage
-  - travis_retry codecov --flags codegenunittests --file codegen.xml
-  - travis_retry codecov --flags nifakeunittests --file nifakeunittest.xml
-  - travis_retry codecov --flags nidcpowerunittests --file nidcpowerunittest.xml
-  - travis_retry codecov --flags nidigitalunittests --file nidigitalunittest.xml
-  - travis_retry codecov --flags nimodinstunittests --file nimodinstunittest.xml
-  - travis_retry codecov --flags nitclkunittests --file nitclkunittest.xml
+  - travis_retry ./codecov --flags codegenunittests --file codegen.xml
+  - travis_retry ./codecov --flags nifakeunittests --file nifakeunittest.xml
+  - travis_retry ./codecov --flags nidcpowerunittests --file nidcpowerunittest.xml
+  - travis_retry ./codecov --flags nidigitalunittests --file nidigitalunittest.xml
+  - travis_retry ./codecov --flags nimodinstunittests --file nimodinstunittest.xml
+  - travis_retry ./codecov --flags nitclkunittests --file nitclkunittest.xml
