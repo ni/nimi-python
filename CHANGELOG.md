@@ -40,8 +40,12 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-        * API parity with NI-DCPower 2023 Q1.
+        * API parity with NI-DCPower 2023 Q2.
             * Properties added:
+                * `lcr_ac_dither_enabled`
+                * `lcr_ac_electrical_cable_length_delay`
+                * `lcr_dc_bias_transient_response`
+                * `lcr_source_aperture_time`
                 * `measure_complete_event_output_behavior`
                 * `measure_complete_event_toggle_initial_state`
                 * `sequence_engine_done_event_output_behavior`
@@ -54,8 +58,10 @@ All notable changes to this project will be documented in this file.
                 * `CurrentLimitBehavior`
                 * `EventOutputBehavior`
                 * `EventToggleInitialState`
+                * `LCRDCBiasTransientResponse`
             * Enum values added:
                 * `AS_CONFIGURED` added to enum `LCROpenShortLoadCompensationDataSource`
+                * `NI_STANDARD_0_5M` added to enum `CableLength`
             * Methods added:
                 * `configure_lcr_compensation`
                 * `get_lcr_compensation_data`
