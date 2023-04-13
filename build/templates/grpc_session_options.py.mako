@@ -2,6 +2,8 @@ ${template_parameters['encoding_tag']}
 # This file was generated
 <%
     config = template_parameters['metadata'].config
+    module_name = config['module_name']
+    proto_name = config.get('proto_name', module_name)
 %>\
 
 from enum import IntEnum
@@ -9,7 +11,7 @@ from enum import IntEnum
 
 # This constant specifies the gRPC package and service used by this API.
 # Customers can pass this value to the MeasurementLink discovery service to resolve the server instance that provides this interface.
-GRPC_SERVICE_INTERFACE_NAME = '${config["module_name"]}_grpc.${config["grpc_service_class_prefix"]}'
+GRPC_SERVICE_INTERFACE_NAME = '${proto_name}_grpc.${config["grpc_service_class_prefix"]}'
 
 # This constant specifies the API license key required by the NI gRPC Device Server that comes with
 # MeasurementLink 2023 Q1.
