@@ -89,8 +89,8 @@ All notable changes to this project will be documented in this file.
 * ### `niscope` (NI-SCOPE)
     * #### Added
     * #### Changed
-        * `GrpcStubInterpreter` now accepts the `meas_wfm_size` argument when calling `fetch_array_measurement`.
-            * If using NI gRPC Device Server 2023 Q1, `meas_wfm_size` will be ignored and all available samples will be returned.
+        * Fix [#1941](https://github.com/ni/nimi-python/issues/1941): When calling niscope.Session.fetch_array_measurement in a MeasurementLink measurement plugin, meas_wfm_size cannot be set.
+            * Requires NI gRPC Device Server 2023 Q2 or later. Older versions do not support this parameter and return all available samples.
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
