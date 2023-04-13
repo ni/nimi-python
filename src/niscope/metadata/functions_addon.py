@@ -2,6 +2,17 @@
 # Changes to the metadata should be made here, because functions.py is generated thus any changes get overwritten.
 
 functions_override_metadata = {
+    # TODO (ni-jfitzger): delete this override once functions.py lists "default_method" for library_interpreter_filename. See https://github.com/ni/nimi-python/issues/1938
+    'FetchArrayMeasurement': {
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ]
+    }
 }
 
 functions_additional_fetch_array_measurement = {
