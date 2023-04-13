@@ -73,6 +73,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
     * #### Changed
+        * Update `GRPC_SERVICE_INTERFACE_NAME` to use the correct gRPC package name (`nidigitalpattern_grpc`).
     * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
