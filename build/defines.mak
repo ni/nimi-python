@@ -89,6 +89,5 @@ DEFAULT_RST_FILES_TO_GENERATE := \
 
 
 # Files for tracking parts of the build
-WHEEL_BUILD_DONE := $(LOG_DIR)/wheel_build_done
-SDIST_BUILD_DONE := $(LOG_DIR)/sdist_build_done
+SDIST_WHEEL_BUILD_DONE := $(LOG_DIR)/sdist_wheel_build_done
 GENERATED_FILES_COPY_DONE := $(LOG_DIR)/generated_files_copy_done
