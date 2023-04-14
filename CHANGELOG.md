@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
 * [1.4.1](#141---2021-08-23)
@@ -30,13 +30,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.4.4 - 2023-04-14
 * ### ALL
     * #### Added
         * Support for Python 3.11
     * #### Changed
         * Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
-    * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
@@ -69,42 +68,13 @@ All notable changes to this project will be documented in this file.
         * Enums reordered:
             * `AutoZero`
             * `CableLength`
-    * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
     * #### Changed
         * Update `GRPC_SERVICE_INTERFACE_NAME` to use the correct gRPC package name (`nidigitalpattern_grpc`).
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nifgen` (NI-FGEN)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `niscope` (NI-SCOPE)
-    * #### Added
     * #### Changed
         * Fix [#1941](https://github.com/ni/nimi-python/issues/1941): When calling niscope.Session.fetch_array_measurement in a MeasurementLink measurement plugin, meas_wfm_size cannot be set.
             * Requires NI gRPC Device Server 2023 Q2 or later. Older versions do not support this parameter and return all available samples.
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
 
 ## 1.4.3 - 2022-12-16
 * ### ALL
