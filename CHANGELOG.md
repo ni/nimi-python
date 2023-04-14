@@ -1,5 +1,6 @@
 # Changelog
 
+* [Unreleased](#unreleased)
 * [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
@@ -29,6 +30,49 @@
 * [0.1.0](#010---2017-09-01)
 
 All notable changes to this project will be documented in this file.
+
+## Unreleased
+* ### ALL
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidcpower` (NI-DCPower)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidigital` (NI-Digital Pattern Driver)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nidmm` (NI-DMM)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nifgen` (NI-FGEN)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nimodinst` (NI-ModInst)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `niscope` (NI-SCOPE)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `niswitch` (NI-SWITCH)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nise` (NI Switch Executive)
+    * #### Added
+    * #### Changed
+    * #### Removed
+* ### `nitclk` (NI-TClk)
+    * #### Added
+    * #### Changed
+    * #### Removed
+
 
 ## 1.4.4 - 2023-04-14
 * ### ALL
