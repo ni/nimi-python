@@ -29,9 +29,3 @@ The nimi-python modules (i.e. for **${driver_name}**) can be installed with `pip
 
   $ python -m pip install ${module_name}${version_pin}
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install ${module_name}
-
-

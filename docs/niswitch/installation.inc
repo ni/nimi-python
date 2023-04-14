@@ -10,9 +10,3 @@ The nimi-python modules (i.e. for **NI-SWITCH**) can be installed with `pip <htt
 
   $ python -m pip install niswitch~=1.4.4
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install niswitch
-
-

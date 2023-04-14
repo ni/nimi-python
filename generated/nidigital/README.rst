@@ -114,12 +114,6 @@ The nimi-python modules (i.e. for **NI-Digital Pattern Driver**) can be installe
 
   $ python -m pip install nidigital~=1.4.4
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nidigital
-
-
 Contributing
 ============
 
