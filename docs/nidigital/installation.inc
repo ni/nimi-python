@@ -8,7 +8,7 @@ As a prerequisite to using the nidigital module, you must install the NI-Digital
 
 The nimi-python modules (i.e. for **NI-Digital Pattern Driver**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nidigital~=1.4.4
+  $ python -m pip install nidigital
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::

@@ -112,7 +112,7 @@ As a prerequisite to using the niscope module, you must install the NI-SCOPE run
 
 The nimi-python modules (i.e. for **NI-SCOPE**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install niscope~=1.4.4
+  $ python -m pip install niscope
 
 Or **easy_install** from
 `setuptools <http://pypi.python.org/pypi/setuptools>`_::
