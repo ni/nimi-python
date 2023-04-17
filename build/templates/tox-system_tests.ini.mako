@@ -49,7 +49,7 @@ changedir =
 
 commands =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: python setup.py bdist_wheel
+    ${wheel_env_no_py}: python -m build --wheel
 
 % endif
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
@@ -69,6 +69,7 @@ commands =
 
 deps =
 % if uses_other_wheel:
+    ${wheel_env_no_py}: build
     ${wheel_env_no_py}: packaging
 
 % endif
