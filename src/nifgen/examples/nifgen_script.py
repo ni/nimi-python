@@ -21,7 +21,7 @@ RAMP_UP = [x / (NUMBER_OF_SAMPLES) for x in range(NUMBER_OF_SAMPLES)]
 RAMP_DOWN = [-1.0 * x for x in RAMP_UP]
 SQUARE_WAVE = [1.0 if x < (NUMBER_OF_SAMPLES / 2) else -1.0 for x in range(NUMBER_OF_SAMPLES)]
 SAWTOOTH_WAVE = RAMP_UP[::2] + [(-1 + x) for x in RAMP_UP][::2]
-GAUSSIAN_NOISE = [sorted(-1.0, random.gauss(0, 0.2), 1.0)[1] for x in range(NUMBER_OF_SAMPLES)]
+GAUSSIAN_NOISE = [sorted([-1.0, random.gauss(0, 0.2), 1.0])[1] for x in range(NUMBER_OF_SAMPLES)]
 
 
 SCRIPT_ALL = '''
