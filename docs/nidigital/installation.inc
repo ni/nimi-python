@@ -10,3 +10,4 @@ The nimi-python modules (i.e. for **NI-Digital Pattern Driver**) can be installe
 
   $ python -m pip install nidigital
 
+

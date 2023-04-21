@@ -114,6 +114,7 @@ The nimi-python modules (i.e. for **NI-SWITCH**) can be installed with `pip <htt
 
   $ python -m pip install niswitch
 
+
 Contributing
 ============
 
