@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * `easy_install` support dropped.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
