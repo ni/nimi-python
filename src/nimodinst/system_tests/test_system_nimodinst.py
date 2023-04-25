@@ -65,7 +65,7 @@ def test_serial_number_attribute():
         assert len(session) > 0, 'This test expects an instrument in the system (real or simulated).'
         pattern = r'^[0-9A-F]+$'
         assert isinstance(session.devices[0].serial_number, str)
-        assert (len(session.devices[0].serial_number) == 0) | (re.search(pattern, session.devices[0].serial_number) is not None)  # NI Serial numbers hex unless it is simulated than it is 0
+        assert (len(session.devices[0].serial_number) == 0) or (re.search(pattern, session.devices[0].serial_number) is not None)  # NI Serial numbers hex unless it is simulated than it is 0
 
 
 def test_bus_number_attribute():
