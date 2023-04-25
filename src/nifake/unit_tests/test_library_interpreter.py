@@ -531,7 +531,7 @@ class TestLibraryInterpreter(object):
         self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
         interpreter = self.get_initialized_library_interpreter()
         attr_int = interpreter.get_attribute_vi_int32('', attribute_id)
-        assert(attr_int == test_number)
+        assert (attr_int == test_number)
         self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32PointerMatcher())
 
     def test_set_attribute_int32(self):
@@ -606,7 +606,7 @@ class TestLibraryInterpreter(object):
         self.side_effects_helper['GetAttributeViInt64']['attributeValue'] = test_number
         interpreter = self.get_initialized_library_interpreter()
         attr_int = interpreter.get_attribute_vi_int64('', attribute_id)
-        assert(attr_int == test_number)
+        assert (attr_int == test_number)
         self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt64PointerMatcher())
 
     def test_set_attribute_int64(self):

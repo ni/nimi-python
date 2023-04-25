@@ -1518,7 +1518,7 @@ def test_square_up_tables():
     square_up_tables(local_config)
     assert len(local_config['functions']['MakeAFoo']['documentation']['table_header']) == 3
     for line in local_config['functions']['MakeAFoo']['documentation']['table_body']:
-        assert(len(line)) == 3
+        assert (len(line)) == 3
 
 
 config_for_testing = {

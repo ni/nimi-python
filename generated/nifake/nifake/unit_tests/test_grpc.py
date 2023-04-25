@@ -721,7 +721,7 @@ class TestGrpcStubInterpreter(object):
         response_object = self._set_side_effect(library_func, attribute_value=test_number)
         interpreter = self._get_initialized_stub_interpreter()
         attr_int = interpreter.get_attribute_vi_int32('', attribute_id)
-        assert(attr_int == test_number)
+        assert (attr_int == test_number)
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST, channel_name='', attribute_id=attribute_id
         )
@@ -820,7 +820,7 @@ class TestGrpcStubInterpreter(object):
         response_object = self._set_side_effect(library_func, attribute_value=test_number)
         interpreter = self._get_initialized_stub_interpreter()
         attr_int = interpreter.get_attribute_vi_int64('', attribute_id)
-        assert(attr_int == test_number)
+        assert (attr_int == test_number)
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST, channel_name='', attribute_id=attribute_id
         )

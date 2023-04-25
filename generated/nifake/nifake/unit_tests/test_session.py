@@ -372,7 +372,7 @@ class TestSession(object):
         self.patched_library_interpreter.get_attribute_vi_int32.side_effect = [test_number]
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_integer
-            assert(attr_int == test_number)
+            assert (attr_int == test_number)
             self.patched_library_interpreter.get_attribute_vi_int32.assert_called_once_with('', 1000004)
 
     def test_set_attribute_int32(self):
@@ -390,7 +390,7 @@ class TestSession(object):
         self.patched_library_interpreter.get_attribute_vi_int32.side_effect = [test_number_ms]
         with nifake.Session('dev1') as session:
             attr_timedelta = session.read_write_integer_with_converter
-            assert(attr_timedelta.total_seconds() == test_number_s)
+            assert (attr_timedelta.total_seconds() == test_number_s)
             self.patched_library_interpreter.get_attribute_vi_int32.assert_called_once_with('', attribute_id)
 
     def test_set_attribute_int32_with_converter(self):
@@ -565,7 +565,7 @@ class TestSession(object):
         attribute_id = 1000004
         with nifake.Session('dev1') as session:
             attr_int = session.channels[['0', '1']].read_write_integer
-            assert(attr_int == test_number)
+            assert (attr_int == test_number)
             self.patched_library_interpreter.get_attribute_vi_int32.assert_called_once_with('0,1', attribute_id)
 
     def test_set_attribute_channel(self):
@@ -582,7 +582,7 @@ class TestSession(object):
         self.patched_library_interpreter.get_attribute_vi_int64.side_effect = [test_number]
         with nifake.Session('dev1') as session:
             attr_int = session.read_write_int64
-            assert(attr_int == test_number)
+            assert (attr_int == test_number)
             self.patched_library_interpreter.get_attribute_vi_int64.assert_called_once_with('', attribute_id)
 
     def test_set_attribute_int64(self):
@@ -933,7 +933,7 @@ class TestGrpcSession(object):
         self.patched_grpc_interpreter.get_attribute_vi_int32.side_effect = [test_number]
         with nifake.Session('dev1', grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             attr_int = session.read_write_integer
-            assert(attr_int == test_number)
+            assert (attr_int == test_number)
             self.patched_grpc_interpreter.get_attribute_vi_int32.assert_called_once_with('', 1000004)
 
 
