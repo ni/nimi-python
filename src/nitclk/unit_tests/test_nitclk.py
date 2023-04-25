@@ -189,7 +189,7 @@ class TestNitclkApi(object):
         test_number = 4.2
         self.side_effects_helper['GetAttributeViReal64']['value'] = test_number
         attr_val = session.tclk_actual_period
-        assert (attr_val == test_number)
+        assert attr_val == test_number
         self.patched_library.niTClk_GetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64PointerMatcher())
 
     def test_set_timedelta_as_vi_real64(self):
@@ -215,7 +215,7 @@ class TestNitclkApi(object):
         test_number = 4.2
         self.side_effects_helper['GetAttributeViReal64']['value'] = test_number
         attr_timedelta = session.sample_clock_delay
-        assert (attr_timedelta.total_seconds() == test_number)
+        assert attr_timedelta.total_seconds() == test_number
         self.patched_library.niTClk_GetAttributeViReal64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViReal64PointerMatcher())
 
     def test_set_vi_string(self):
@@ -233,7 +233,7 @@ class TestNitclkApi(object):
         test_string = "The answer to the ultimate question is 42"
         self.side_effects_helper['GetAttributeViString']['value'] = test_string
         attr_string = session.sync_pulse_sender_sync_pulse_source
-        assert (attr_string == test_string)
+        assert attr_string == test_string
 
         from unittest.mock import call
         calls = [call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(0), None), call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32Matcher(len(test_string)), _matchers.ViCharBufferMatcher(len(test_string)))]
@@ -278,7 +278,7 @@ class TestNitclkApi(object):
         self.side_effects_helper['GetAttributeViSession']['value'] = other_session_number
         attr_session_reference = session.start_trigger_master_session
         assert type(attr_session_reference) is nitclk.SessionReference
-        assert (attr_session_reference._get_tclk_session_reference() == other_session_number)
+        assert attr_session_reference._get_tclk_session_reference() == other_session_number
         self.patched_library.niTClk_GetAttributeViSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViSessionPointerMatcher())
 
 

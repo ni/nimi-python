@@ -125,7 +125,7 @@ class TestSession(object):
         self.side_effects_helper['GetInstalledDeviceAttributeViInt32']['attributeValue'] = val
         with nimodinst.Session('') as session:
             attr_int = session.devices[0].chassis_number
-            assert (attr_int == val)
+            assert attr_int == val
 
     def test_get_attribute_vi_int32_for_loop_index(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViInt32.side_effect = self.niModInst_GetInstalledDeviceAttributeViInt32_looping
@@ -134,7 +134,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             attr_int = session.devices[index].chassis_number
             index += 1
-            assert (attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+            assert attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1]  # Have to subtract once since it was already incremented in the callback function
 
     def test_get_attribute_vi_string_for_loop_index(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
@@ -143,7 +143,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             attr_int = session.devices[index].device_name
             index += 1
-            assert (attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+            assert attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1]  # Have to subtract once since it was already incremented in the callback function
 
     def test_get_attribute_session_no_index(self):
         val = 123
@@ -163,7 +163,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             for d in session:
                 attr_int = d.chassis_number
-                assert (attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+                assert attr_int == self.int_vals_device_looping[self.iteration_device_looping - 1]  # Have to subtract once since it was already incremented in the callback function
 
     def test_get_attribute_vi_string_for_loop_multiple_devices(self):
         self.patched_library.niModInst_GetInstalledDeviceAttributeViString.side_effect = self.niModInst_GetInstalledDeviceAttributeViString_looping
@@ -171,7 +171,7 @@ class TestSession(object):
         with nimodinst.Session('') as session:
             for d in session:
                 attr_int = d.device_name
-                assert (attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1])  # Have to subtract once since it was already incremented in the callback function
+                assert attr_int == self.string_vals_device_looping[self.iteration_device_looping - 1]  # Have to subtract once since it was already incremented in the callback function
 
     # Error Tests
     def test_cannot_add_properties_to_session_set(self):
