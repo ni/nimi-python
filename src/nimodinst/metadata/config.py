@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-ModInst API metadata version 23.0.0d6
+# This file is generated from NI-ModInst API metadata version 23.3.0f82
 config = {
-    'api_version': '23.0.0d6',
+    'api_version': '23.3.0f82',
     'c_function_prefix': 'niModInst_',
     'close_function': 'CloseInstalledDevicesSession',
     'context_manager_name': {

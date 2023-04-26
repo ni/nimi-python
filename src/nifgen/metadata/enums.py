@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.0.0d57
+# This file is generated from NI-FGEN API metadata version 23.5.0d28
 enums = {
     'AnalogPath': {
         'values': [
@@ -577,7 +577,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Specifies the PXI Clock is used as the Reference Clock source.'
+                    'description': 'Specifies that the PXI Clock is used as the Reference Clock source.'
                 },
                 'name': 'NIFGEN_VAL_PXI_CLOCK_COLLISION_AVOIDANCE',
                 'python_name': 'PXI_CLOCK',
@@ -616,7 +616,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': '\nSpecifies that the Sample Clock from DDC connector is used as the Sample\nClock source.\n'
+                    'description': '\nSpecifies that the Sample Clock from the DDC connector is used as the Sample\nClock source.\n'
                 },
                 'name': 'NIFGEN_VAL_DDC_CLOCK_IN',
                 'value': 'DDC_ClkIn'

@@ -118,6 +118,60 @@ class SystemTests:
         for i in range(len(waveforms)):
             assert len(waveforms[i].samples) == test_record_length
 
+    @pytest.fixture(params=[(1000, 1000), (2000, 2000), (3000, 2000)], ids=["less_than_actual", "equal_to_actual", "greater_than_actual"])
+    def measurement_wfm_length(self, request):
+        MeasWfmLength = collections.namedtuple('MeasurementWaveformLength', ['passed_in', 'expected'])
+        return MeasWfmLength(passed_in=request.param[0], expected=request.param[1])
+
+    def test_fetch_array_measurement(self, multi_instrument_session, measurement_wfm_length):
+        test_voltage = 1.0
+        test_record_length = 1000
+        test_num_channels = 2
+        test_meas_wfm_length = measurement_wfm_length.passed_in
+        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
+        test_starting_record_number = 2
+        test_num_records_to_acquire = 5
+        test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
+
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
+                array_meas_function=test_array_meas_function,
+                meas_wfm_size=test_meas_wfm_length,
+                relative_to=niscope.FetchRelativeTo.PRETRIGGER,
+                offset=5,
+                record_number=test_starting_record_number,
+                num_records=test_num_records_to_fetch,
+                meas_num_samples=2000,
+                timeout=hightime.timedelta(seconds=4))
+
+        assert len(waveforms) == test_num_channels * test_num_records_to_fetch
+        expected_channels = test_channels.split(',') * test_num_records_to_fetch
+        expected_records = [2, 2, 3, 3, 4, 4]
+        for i in range(len(waveforms)):
+            assert len(waveforms[i].samples) == measurement_wfm_length.expected
+            assert waveforms[i].channel == expected_channels[i]
+            assert waveforms[i].record == expected_records[i]
+
+    def test_fetch_array_measurement_defaults(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 1000
+        test_num_channels = 2
+        test_num_records = 3
+        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
+
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
+                array_meas_function=test_array_meas_function)
+
+        assert len(waveforms) == test_num_channels * test_num_records
+        for i in range(len(waveforms)):
+            assert len(waveforms[i].samples) == test_record_length
+
     def test_fetch_measurement_stats(self, multi_instrument_session):
         test_voltage = 1.0
         test_record_length = 1000
@@ -144,24 +198,6 @@ class SystemTests:
             assert measurement_stats[i].result == 0.0
             assert measurement_stats[i].channel == expected_channels[i]
             assert measurement_stats[i].record == expected_records[i]
-
-    def test_fetch_array_measurement_defaults(self, multi_instrument_session):
-        test_voltage = 1.0
-        test_record_length = 1000
-        test_num_channels = 2
-        test_num_records = 3
-        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
-
-        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
-
-        with multi_instrument_session.initiate():
-            waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
-                array_meas_function=test_array_meas_function)
-
-        assert len(waveforms) == test_num_channels * test_num_records
-        for i in range(len(waveforms)):
-            assert len(waveforms[i].samples) == test_record_length
 
     def test_fetch_measurement_stats_defaults(self, multi_instrument_session):
         test_voltage = 1.0
@@ -277,6 +313,30 @@ class SystemTests:
 
     def test_self_cal(self, multi_instrument_session):
         multi_instrument_session.self_cal(niscope.Option.SELF_CALIBRATE_ALL_CHANNELS)
+
+    def test_get_self_cal_last_date_time(self, single_instrument_session):
+        last_cal = single_instrument_session.get_self_cal_last_date_and_time()
+        assert last_cal.month == 12
+        assert last_cal.day == 21
+        assert last_cal.year == 1999
+        assert last_cal.hour == 0
+        assert last_cal.minute == 0
+
+    def test_get_ext_cal_last_date_time(self, single_instrument_session):
+        last_cal = single_instrument_session.get_ext_cal_last_date_and_time()
+        assert last_cal.month == 12
+        assert last_cal.day == 21
+        assert last_cal.year == 1999
+        assert last_cal.hour == 0
+        assert last_cal.minute == 0
+
+    def test_get_self_cal_last_temperature(self, single_instrument_session):
+        last_cal_temp = single_instrument_session.get_self_cal_last_temp()
+        assert last_cal_temp == 25
+
+    def test_get_ext_cal_last_temperature(self, single_instrument_session):
+        last_cal_temp = single_instrument_session.get_ext_cal_last_temp()
+        assert last_cal_temp == 25
 
     def test_probe_compensation_signal(self, multi_instrument_session):
         multi_instrument_session.probe_compensation_signal_start()
@@ -438,70 +498,9 @@ class TestLibrary(SystemTests):
             assert waveforms[i].channel == expected_channels[i]
             assert waveforms[i].record == expected_records[i]
 
-    # TODO(danestull): Move these next 4 tests back to the general system tests once added to grpc-device
-    def test_get_self_cal_last_date_time(self, single_instrument_session):
-        last_cal = single_instrument_session.get_self_cal_last_date_and_time()
-        assert last_cal.month == 12
-        assert last_cal.day == 21
-        assert last_cal.year == 1999
-        assert last_cal.hour == 0
-        assert last_cal.minute == 0
-
-    def test_get_ext_cal_last_date_time(self, single_instrument_session):
-        last_cal = single_instrument_session.get_ext_cal_last_date_and_time()
-        assert last_cal.month == 12
-        assert last_cal.day == 21
-        assert last_cal.year == 1999
-        assert last_cal.hour == 0
-        assert last_cal.minute == 0
-
-    def test_get_self_cal_last_temperature(self, single_instrument_session):
-        last_cal_temp = single_instrument_session.get_self_cal_last_temp()
-        assert last_cal_temp == 25
-
-    def test_get_ext_cal_last_temperature(self, single_instrument_session):
-        last_cal_temp = single_instrument_session.get_ext_cal_last_temp()
-        assert last_cal_temp == 25
-
     def test_configure_ref_levels(self, single_instrument_session):
         single_instrument_session._configure_ref_levels()
         assert 90.0 == single_instrument_session.meas_chan_high_ref_level
-
-    @pytest.fixture(params=[(1000, 1000), (2000, 2000), (3000, 2000)], ids=["less_than_actual", "equal_to_actual", "greater_than_actual"])
-    def measurement_wfm_length(self, request):
-        MeasWfmLength = collections.namedtuple('MeasurementWaveformLength', ['passed_in', 'expected'])
-        return MeasWfmLength(passed_in=request.param[0], expected=request.param[1])
-
-    def test_fetch_array_measurement(self, multi_instrument_session, measurement_wfm_length):
-        test_voltage = 1.0
-        test_record_length = 1000
-        test_num_channels = 2
-        test_meas_wfm_length = measurement_wfm_length.passed_in
-        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
-        test_starting_record_number = 2
-        test_num_records_to_acquire = 5
-        test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
-        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
-        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
-
-        with multi_instrument_session.initiate():
-            waveforms = multi_instrument_session.channels[test_channels].fetch_array_measurement(
-                array_meas_function=test_array_meas_function,
-                meas_wfm_size=test_meas_wfm_length,
-                relative_to=niscope.FetchRelativeTo.PRETRIGGER,
-                offset=5,
-                record_number=test_starting_record_number,
-                num_records=test_num_records_to_fetch,
-                meas_num_samples=2000,
-                timeout=hightime.timedelta(seconds=4))
-
-        assert len(waveforms) == test_num_channels * test_num_records_to_fetch
-        expected_channels = test_channels.split(',') * test_num_records_to_fetch
-        expected_records = [2, 2, 3, 3, 4, 4]
-        for i in range(len(waveforms)):
-            assert len(waveforms[i].samples) == measurement_wfm_length.expected
-            assert waveforms[i].channel == expected_channels[i]
-            assert waveforms[i].record == expected_records[i]
 
     def test_reset_with_defaults(self, single_instrument_session):
         default_meas_time_histogram_high_time = single_instrument_session.meas_time_histogram_high_time
@@ -536,15 +535,3 @@ class TestGrpc(SystemTests):
             single_instrument_session.reset_with_defaults()
         assert exc_info.value.args[0] == 'reset_with_defaults is not supported over gRPC'
         assert str(exc_info.value) == 'reset_with_defaults is not supported over gRPC'
-
-    def test_fetch_array_measurement_with_meas_wfm_size_value_error(self, multi_instrument_session):
-        test_array_meas_function = niscope.ArrayMeasurement.ARRAY_GAIN
-        test_meas_wfm_length = 2000
-        with pytest.raises(ValueError) as exc_info:
-            with multi_instrument_session.initiate():
-                multi_instrument_session.fetch_array_measurement(
-                    array_meas_function=test_array_meas_function,
-                    meas_wfm_size=test_meas_wfm_length)
-
-        assert exc_info.value.args[0] == 'The argument "meas_wfm_size" must be None when using gRPC.'
-        assert str(exc_info.value) == 'The argument "meas_wfm_size" must be None when using gRPC.'

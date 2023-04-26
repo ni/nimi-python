@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.4.4.dev0',
+    version='1.4.5.dev0',
     description='NI Switch Executive Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -61,6 +61,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
