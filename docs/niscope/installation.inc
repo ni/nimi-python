@@ -10,9 +10,4 @@ The nimi-python modules (i.e. for **NI-SCOPE**) can be installed with `pip <http
 
   $ python -m pip install niscope
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install niscope
-
 
