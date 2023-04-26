@@ -1109,3 +1109,15 @@ class TestGrpc(SystemTests):
     def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    def test_get_lcr_compensation_data(self, session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            session.get_lcr_compensation_data()
+        assert exc_info.value.args[0] == 'get_lcr_compensation_data is not supported over gRPC'
+        assert str(exc_info.value) == 'get_lcr_compensation_data is not supported over gRPC'
+
+    def test_configure_lcr_compensation(self, session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            session.configure_lcr_compensation([])
+        assert exc_info.value.args[0] == 'configure_lcr_compensation is not supported over gRPC'
+        assert str(exc_info.value) == 'configure_lcr_compensation is not supported over gRPC'

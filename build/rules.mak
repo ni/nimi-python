@@ -114,18 +114,11 @@ $(TOX_INI): $(TEMPLATE_DIR)/tox-system_tests.ini.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
-sdist: $(SDIST_BUILD_DONE)
+sdist wheel: $(SDIST_WHEEL_BUILD_DONE)
 
-$(SDIST_BUILD_DONE): # codegen should have already run or just use what is is git
-	$(call trace_to_console, "Creating sdist",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py sdist $(LOG_OUTPUT) $(LOG_DIR)/sdist.log)
-	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
-
-wheel: $(WHEEL_BUILD_DONE)
-
-$(WHEEL_BUILD_DONE): # codegen should have already run or just use what is is git
-	$(call trace_to_console, "Creating wheel",$(OUTPUT_DIR)/dist)
-	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) setup.py bdist_wheel $(LOG_OUTPUT) $(LOG_DIR)/wheel.log)
+$(SDIST_WHEEL_BUILD_DONE): # codegen should have already run or just use what is in git
+	$(call trace_to_console, "Creating sdist and wheel",$(OUTPUT_DIR)/dist)
+	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) -m build $(LOG_OUTPUT) $(LOG_DIR)/sdist_wheel.log)
 	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
 
 # If we are building nifake, we just need a placeholder file for inclusion into the wheel that will never be used. We can't build the actual readme since not all the files are created
