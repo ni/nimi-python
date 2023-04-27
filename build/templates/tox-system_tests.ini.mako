@@ -70,7 +70,6 @@ commands =
 deps =
 % if uses_other_wheel:
     ${wheel_env_no_py}: build
-    ${wheel_env_no_py}: packaging
 
 % endif
     ${module_name}-system_tests: pytest
