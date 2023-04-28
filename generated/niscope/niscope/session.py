@@ -2123,6 +2123,11 @@ class _SessionBase(object):
             if num_samples is None:
                 num_samples = self.horz_record_length
 
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
         wfm, wfm_info = self._fetch(num_samples, timeout)
 
         if isinstance(wfm, array.ArrayType):
@@ -2133,11 +2138,11 @@ class _SessionBase(object):
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
         lwfm_i = len(wfm_info)
-        lrcl = len(self._repeated_capability_list)
+        lrcl = len(channel_names)
         # Should this raise instead? If this asserts, is it the users fault?
-        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
+        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(lwfm_i, lrcl)
         actual_num_records = int(lwfm_i / lrcl)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
@@ -2425,6 +2430,11 @@ class _SessionBase(object):
             if num_samples is None:
                 num_samples = self.horz_record_length
 
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
         wfm, wfm_info = self._read(num_samples, timeout)
 
         if isinstance(wfm, array.ArrayType):
@@ -2435,11 +2445,11 @@ class _SessionBase(object):
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
         lwfm_i = len(wfm_info)
-        lrcl = len(self._repeated_capability_list)
+        lrcl = len(channel_names)
         # Should this raise instead? If this asserts, is it the users fault?
-        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
+        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(lwfm_i, lrcl)
         actual_num_records = int(lwfm_i / lrcl)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
