@@ -2231,16 +2231,21 @@ class _SessionBase(object):
             if meas_wfm_size is None:
                 meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
 
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
         meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, meas_wfm_size, timeout)
 
         record_length = int(len(meas_wfm) / len(wfm_info))
         waveform_info._populate_samples_info(wfm_info, meas_wfm, record_length)
 
         wfm_info_count = len(wfm_info)
-        channel_count = len(self._repeated_capability_list)
-        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(wfm_info_count, channel_count)
+        channel_count = len(channel_names)
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
         actual_num_records = int(wfm_info_count / channel_count)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
