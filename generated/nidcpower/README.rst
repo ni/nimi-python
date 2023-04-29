@@ -114,11 +114,6 @@ The nimi-python modules (i.e. for **NI-DCPower**) can be installed with `pip <ht
 
   $ python -m pip install nidcpower
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nidcpower
-
 
 Contributing
 ============

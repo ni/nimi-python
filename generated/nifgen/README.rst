@@ -114,11 +114,6 @@ The nimi-python modules (i.e. for **NI-FGEN**) can be installed with `pip <http:
 
   $ python -m pip install nifgen
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nifgen
-
 
 Contributing
 ============

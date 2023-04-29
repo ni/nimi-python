@@ -4,7 +4,6 @@ import argparse
 import nifgen
 
 import math
-import random
 import sys
 import time
 
@@ -21,7 +20,6 @@ RAMP_UP = [x / (NUMBER_OF_SAMPLES) for x in range(NUMBER_OF_SAMPLES)]
 RAMP_DOWN = [-1.0 * x for x in RAMP_UP]
 SQUARE_WAVE = [1.0 if x < (NUMBER_OF_SAMPLES / 2) else -1.0 for x in range(NUMBER_OF_SAMPLES)]
 SAWTOOTH_WAVE = RAMP_UP[::2] + [(-1 + x) for x in RAMP_UP][::2]
-GAUSSIAN_NOISE = [random.gauss(0, 0.2) for x in range(NUMBER_OF_SAMPLES)]
 
 
 SCRIPT_ALL = '''
@@ -48,7 +46,6 @@ script scriptmulti
   end repeat
   repeat until scriptTrigger0
     generate rampdown
-    generate noise
     generate rampup
   end repeat
 end script
@@ -82,12 +79,6 @@ script scriptsawtooth
     generate sawtooth
   end repeat
 end script
-
-script scriptnoise
-  repeat until scriptTrigger0
-    generate noise
-  end repeat
-end script
 '''
 
 
@@ -108,10 +99,9 @@ def example(resource_name, options, shape, channel):
         session.channels[channel].write_waveform('rampdown', RAMP_DOWN)
         session.channels[channel].write_waveform('square', SQUARE_WAVE)
         session.channels[channel].write_waveform('sawtooth', SAWTOOTH_WAVE)
-        session.channels[channel].write_waveform('noise', GAUSSIAN_NOISE)
 
         # 4 - Script to generate
-        # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / NOISE / MULTI
+        # supported shapes: SINE / SQUARE / SAWTOOTH / RAMPUP / RAMPDOWN / MULTI
         script_name = 'script{}'.format(shape.lower())
         num_triggers = 6 if shape.upper() == 'MULTI' else 1  # Only multi needs multiple triggers, all others need one
 
