@@ -121,6 +121,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['value'] = None
+        self._defaults['GetChannelNameFromString'] = {}
+        self._defaults['GetChannelNameFromString']['return'] = 0
+        self._defaults['GetChannelNameFromString']['name'] = None
         self._defaults['GetEqualizationFilterCoefficients'] = {}
         self._defaults['GetEqualizationFilterCoefficients']['return'] = 0
         self._defaults['GetEqualizationFilterCoefficients']['coefficients'] = None
@@ -623,6 +626,17 @@ class SideEffectsHelper(object):
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
+    def niScope_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
+        if self._defaults['GetChannelNameFromString']['return'] != 0:
+            return self._defaults['GetChannelNameFromString']['return']
+        # names
+        if self._defaults['GetChannelNameFromString']['name'] is None:
+            raise MockFunctionCallError("niScope_GetChannelNameFromString", param='name')
+        if name_buffer_size.value == 0:
+            return len(self._defaults['GetChannelNameFromString']['name'])
+        names.value = self._defaults['GetChannelNameFromString']['name'].encode('ascii')
+        return self._defaults['GetChannelNameFromString']['return']
+
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
         if self._defaults['GetEqualizationFilterCoefficients']['return'] != 0:
             return self._defaults['GetEqualizationFilterCoefficients']['return']
@@ -898,6 +912,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_GetAttributeViReal64.return_value = 0
         mock_library.niScope_GetAttributeViString.side_effect = MockFunctionCallError("niScope_GetAttributeViString")
         mock_library.niScope_GetAttributeViString.return_value = 0
+        mock_library.niScope_GetChannelNameFromString.side_effect = MockFunctionCallError("niScope_GetChannelNameFromString")
+        mock_library.niScope_GetChannelNameFromString.return_value = 0
         mock_library.niScope_GetEqualizationFilterCoefficients.side_effect = MockFunctionCallError("niScope_GetEqualizationFilterCoefficients")
         mock_library.niScope_GetEqualizationFilterCoefficients.return_value = 0
         mock_library.niScope_GetError.side_effect = MockFunctionCallError("niScope_GetError")

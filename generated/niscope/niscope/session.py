@@ -3421,6 +3421,30 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
+    def get_channel_names(self, indices):
+        r'''get_channel_names
+
+        Returns a list of channel names for given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        indices = _converters.convert_repeated_capabilities_without_prefix(indices)
+        names = self._interpreter.get_channel_names(indices)
+        return _converters.convert_comma_separated_string_to_list(names)
+
+    @ivi_synchronized
     def _get_equalization_filter_coefficients(self, number_of_coefficients):
         r'''_get_equalization_filter_coefficients
 

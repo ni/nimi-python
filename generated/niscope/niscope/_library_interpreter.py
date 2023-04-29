@@ -486,6 +486,19 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
+    def get_channel_names(self, indices):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        indices_ctype = ctypes.create_string_buffer(indices.encode(self._encoding))  # case C020
+        name_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        names_ctype = None  # case C050
+        error_code = self._library.niScope_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        name_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        names_ctype = (_visatype.ViChar * name_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niScope_GetChannelNameFromString(vi_ctype, indices_ctype, name_buffer_size_ctype, names_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return names_ctype.value.decode(self._encoding)
+
     def get_equalization_filter_coefficients(self, channel, number_of_coefficients):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_ctype = ctypes.create_string_buffer(channel.encode(self._encoding))  # case C010

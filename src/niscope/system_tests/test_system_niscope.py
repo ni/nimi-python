@@ -49,6 +49,11 @@ class SystemTests:
             yield simulated_session
 
     @pytest.fixture(scope='function')
+    def multi_instrument_session_5171(self, session_creation_kwargs):  # High channel-count session for get_channel_names testing
+        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5171R (8CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
     def session_5124(self, session_creation_kwargs):
         with daqmx_sim_5124_lock:
             with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
@@ -72,6 +77,13 @@ class SystemTests:
         assert trigger_source == multi_instrument_session.acq_arm_source
 
     # Basic usability tests
+    def test_get_channel_names(self, multi_instrument_session_5171):
+        expected_string = [f'{instruments[0]}/{x}' for x in range(8)] + [f'{instruments[1]}/{x}' for x in range(4)]
+        # Sanity test few different types of input. No need for test to be exhaustive
+        # since all the various types are covered by converter unit tests.
+        channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+        assert multi_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
+
     def test_read(self, multi_instrument_session):
         test_voltage = 1.0
         test_record_length = 2000
