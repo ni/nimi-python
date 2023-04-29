@@ -114,11 +114,6 @@ The nimi-python modules (i.e. for **NI-TClk**) can be installed with `pip <http:
 
   $ python -m pip install nitclk
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nitclk
-
 
 Contributing
 ============
