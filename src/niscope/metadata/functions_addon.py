@@ -19,6 +19,7 @@ functions_additional_get_channel_name = {
         'documentation': {
             'description': 'Returns a list of channel names for given channel indices.\n'
         },
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -38,14 +39,14 @@ functions_additional_get_channel_name = {
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
                 'python_name': 'indices',
                 'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str or int',
+                'type_in_documentation': 'basic sequence types or str or int'
             },
             {
                 'direction': 'in',
                 'documentation': {
                     'description': 'The number of elements in the ViChar array you specify for name.\n'
                 },
-                'name': 'nameBufferSize',
+                'name': 'bufferSize',
                 'type': 'ViInt32'
             },
             {
@@ -59,16 +60,16 @@ functions_additional_get_channel_name = {
                 'python_name': 'names',
                 'size': {
                     'mechanism': 'ivi-dance',
-                    'value': 'nameBufferSize'
+                    'value': 'bufferSize'
                 },
                 'type': 'ViChar[]',
-                'type_in_documentation': 'list of str',
+                'type_in_documentation': 'list of str'
             }
         ],
         'python_name': 'get_channel_names',
         'render_in_session_base': True,
         'returns': 'ViStatus'
-    }
+    },
 }
 functions_additional_fetch_array_measurement = {
     'FancyFetchArrayMeasurement': {

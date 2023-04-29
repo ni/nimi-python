@@ -397,13 +397,13 @@ class Library(object):
                 self.niScope_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_GetAttributeViString_cfunc(vi, channel_list, attribute_id, buf_size, value)
 
-    def niScope_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
+    def niScope_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
         with self._func_lock:
             if self.niScope_GetChannelNameFromString_cfunc is None:
                 self.niScope_GetChannelNameFromString_cfunc = self._get_library_function('niScope_GetChannelNameFromString')
                 self.niScope_GetChannelNameFromString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_GetChannelNameFromString_cfunc.restype = ViStatus  # noqa: F405
-        return self.niScope_GetChannelNameFromString_cfunc(vi, indices, name_buffer_size, names)
+        return self.niScope_GetChannelNameFromString_cfunc(vi, indices, buffer_size, names)
 
     def niScope_GetEqualizationFilterCoefficients(self, vi, channel, number_of_coefficients, coefficients):  # noqa: N802
         with self._func_lock:

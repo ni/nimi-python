@@ -626,13 +626,13 @@ class SideEffectsHelper(object):
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
-    def niScope_GetChannelNameFromString(self, vi, indices, name_buffer_size, names):  # noqa: N802
+    def niScope_GetChannelNameFromString(self, vi, indices, buffer_size, names):  # noqa: N802
         if self._defaults['GetChannelNameFromString']['return'] != 0:
             return self._defaults['GetChannelNameFromString']['return']
         # names
         if self._defaults['GetChannelNameFromString']['name'] is None:
             raise MockFunctionCallError("niScope_GetChannelNameFromString", param='name')
-        if name_buffer_size.value == 0:
+        if buffer_size.value == 0:
             return len(self._defaults['GetChannelNameFromString']['name'])
         names.value = self._defaults['GetChannelNameFromString']['name'].encode('ascii')
         return self._defaults['GetChannelNameFromString']['return']
