@@ -114,11 +114,6 @@ The nimi-python modules (i.e. for **NI-DMM**) can be installed with `pip <http:/
 
   $ python -m pip install nidmm
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nidmm
-
 
 Contributing
 ============

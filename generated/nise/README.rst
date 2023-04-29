@@ -114,11 +114,6 @@ The nimi-python modules (i.e. for **NI Switch Executive**) can be installed with
 
   $ python -m pip install nise
 
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nise
-
 
 Contributing
 ============
