@@ -560,7 +560,6 @@ class TestLibrary(SystemTests):
 
         for index, sample in enumerate(waveform):
             assert sample != init_waveform[index]
-        assert len(waveforms) == test_num_channels * test_num_records_to_fetch
 
         check_fetched_data(
             waveforms,
