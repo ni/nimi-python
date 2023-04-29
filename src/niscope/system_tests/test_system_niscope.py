@@ -22,7 +22,7 @@ instruments = ['FakeDevice1', 'FakeDevice2']
 test_channels_1 = 'FakeDevice2/0,FakeDevice1/1'
 test_channels_1_expanded = test_channels_1
 # TODO(jfitzger): Use the commented values, once #1770 is fixed
-test_channels_2 = 'FakeDevice2/0'  #'FakeDevice2/0:1'
+test_channels_2 = 'FakeDevice2/0'  # 'FakeDevice2/0:1'
 test_channels_2_expanded = 'FakeDevice2/0'  # 'FakeDevice2/0,FakeDevice2/1'
 
 
@@ -43,7 +43,7 @@ daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
 def check_fetched_data(
     data,  # either waveforms or measurement_stats
-    test_channels_expanded, 
+    test_channels_expanded,
     test_record_length,
     test_num_records_to_fetch,
     test_starting_record_number=0
@@ -103,7 +103,8 @@ class SystemTests:
         assert trigger_source == multi_instrument_session.acq_arm_source
 
     # Basic usability tests
-    @pytest.mark.parametrize("test_channels,test_channels_expanded",
+    @pytest.mark.parametrize(
+        "test_channels,test_channels_expanded",
         [
             (test_channels_1, test_channels_1_expanded),
             (test_channels_2, test_channels_2_expanded),
@@ -118,8 +119,8 @@ class SystemTests:
         waveforms = multi_instrument_session.channels[test_channels].read(num_samples=test_record_length, num_records=test_num_records)
         check_fetched_data(waveforms, test_channels_expanded, test_record_length, test_num_records)
 
-
-    @pytest.mark.parametrize("test_channels,test_channels_expanded",
+    @pytest.mark.parametrize(
+        "test_channels,test_channels_expanded",
         [
             (test_channels_1, test_channels_1_expanded),
             (test_channels_2, test_channels_2_expanded),
@@ -146,7 +147,6 @@ class SystemTests:
             test_starting_record_number,
         )
 
-
     def test_fetch_defaults(self, multi_instrument_session):
         test_voltage = 1.0
         test_record_length = 2000
@@ -164,7 +164,8 @@ class SystemTests:
         MeasWfmLength = collections.namedtuple('MeasurementWaveformLength', ['passed_in', 'expected'])
         return MeasWfmLength(passed_in=request.param[0], expected=request.param[1])
 
-    @pytest.mark.parametrize("test_channels,test_channels_expanded",
+    @pytest.mark.parametrize(
+        "test_channels,test_channels_expanded",
         [
             (test_channels_1, test_channels_1_expanded),
             (test_channels_2, test_channels_2_expanded),
@@ -224,7 +225,8 @@ class SystemTests:
         for i in range(len(waveforms)):
             assert len(waveforms[i].samples) == test_record_length
 
-    @pytest.mark.parametrize("test_channels,test_channels_expanded",
+    @pytest.mark.parametrize(
+        "test_channels,test_channels_expanded",
         [
             (test_channels_1, test_channels_1_expanded),
             (test_channels_2, test_channels_2_expanded),
@@ -238,8 +240,6 @@ class SystemTests:
     ):
         test_voltage = 1.0
         test_record_length = 1000
-        test_num_channels = 2
-        test_num_records = 3
         test_starting_record_number = 2
         test_num_records_to_acquire = 5
         test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
