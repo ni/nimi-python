@@ -19,7 +19,6 @@ functions_additional_get_channel_name = {
         'documentation': {
             'description': 'Returns a list of channel names for given channel indices.\n'
         },
-        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
