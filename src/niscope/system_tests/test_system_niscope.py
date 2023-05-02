@@ -114,7 +114,7 @@ class SystemTests:
 
     # Basic usability tests
     def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
-        expected_string = [f'FakeDevice/{x}' for x in range(8)] + [f'FakeDevice/{x}' for x in range(4)]
+        expected_string = [f'{x}' for x in range(8)]
         # Sanity test few different types of input. No need for test to be exhaustive
         # since all the various types are covered by converter unit tests.
         channel_indices = ['0-1, 2, 3:4', 5, range(6, 7), slice(7, 8)]
