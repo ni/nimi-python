@@ -67,7 +67,6 @@ functions_additional_get_channel_name = {
             }
         ],
         'python_name': 'get_channel_names',
-        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
 }
