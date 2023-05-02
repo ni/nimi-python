@@ -44,6 +44,11 @@ class SystemTests:
             yield simulated_session
 
     @pytest.fixture(scope='function')
+    def single_instrument_session_5171(self, session_creation_kwargs):  # High channel-count session for get_channel_names testing
+        with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5171R (8CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
     def multi_instrument_session(self, session_creation_kwargs):
         with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
@@ -77,7 +82,14 @@ class SystemTests:
         assert trigger_source == multi_instrument_session.acq_arm_source
 
     # Basic usability tests
-    def test_get_channel_names(self, multi_instrument_session_5171):
+    def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
+        expected_string = [f'FakeDevice/{x}' for x in range(8)] + [f'FakeDevice/{x}' for x in range(4)]
+        # Sanity test few different types of input. No need for test to be exhaustive
+        # since all the various types are covered by converter unit tests.
+        channel_indices = ['0-1, 2, 3:4', 5, range(6, 7), slice(7, 8)]
+        assert single_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
+
+    def test_get_channel_names_with_multi_instrument_session(self, multi_instrument_session_5171):
         expected_string = [f'{instruments[0]}/{x}' for x in range(8)] + [f'{instruments[1]}/{x}' for x in range(4)]
         # Sanity test few different types of input. No need for test to be exhaustive
         # since all the various types are covered by converter unit tests.
