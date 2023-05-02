@@ -59,6 +59,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
+        * `get_channel_names()`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
