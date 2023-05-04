@@ -307,6 +307,13 @@ class GrpcStubInterpreter(object):
         )
         return response.value
 
+    def get_channel_names(self, indices):  # noqa: N802
+        response = self._invoke(
+            self._client.GetChannelNameFromString,
+            grpc_types.GetChannelNameFromStringRequest(vi=self._vi, index=indices),
+        )
+        return response.name
+
     def get_equalization_filter_coefficients(self, channel, number_of_coefficients):  # noqa: N802
         response = self._invoke(
             self._client.GetEqualizationFilterCoefficients,
