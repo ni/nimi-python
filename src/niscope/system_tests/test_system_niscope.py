@@ -21,9 +21,8 @@ instruments = ['FakeDevice1', 'FakeDevice2']
 # TODO(sbethur): Use `get_channel_names` when #1402 is fixed
 test_channels_1 = 'FakeDevice2/0,FakeDevice1/1'
 test_channels_1_expanded = test_channels_1
-# TODO(jfitzger): Use the commented values, once #1770 is fixed
-test_channels_2 = 'FakeDevice2/0'  # 'FakeDevice2/0:1'
-test_channels_2_expanded = 'FakeDevice2/0'  # 'FakeDevice2/0,FakeDevice2/1'
+test_channels_2 = 'FakeDevice2/0:1'
+test_channels_2_expanded = 'FakeDevice2/0,FakeDevice2/1'
 
 
 # There are system tests below that need either a PXI-5124 or a PXI-5142 instead of the PXIe-5164 we use everywhere else
