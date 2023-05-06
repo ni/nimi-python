@@ -26,7 +26,7 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${wheel_env}py{37,38,39,310}-${module_name}-system_tests, py310-${module_name}-coverage
+envlist = ${wheel_env}py{37,38,39,310,311}-${module_name}-system_tests, py311-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
@@ -38,7 +38,7 @@ description =
     ${wheel_env_no_py}: Build the ${other_wheel} wheel because we use it in ${module_name} tests
 % endif
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
-    ${module_name}-coverage: Report all coverage results to codecov.io
+    ${module_name}-coverage: Prepare coverage report for upload to codecov.io  # upload handled by GitHub Actions
 
 changedir =
 % if uses_other_wheel:
@@ -49,7 +49,7 @@ changedir =
 
 commands =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: python setup.py bdist_wheel
+    ${wheel_env_no_py}: python -m build --wheel
 
 % endif
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
@@ -58,23 +58,20 @@ commands =
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver ${other_wheel} --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m py.test ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json --durations=5 {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --json=../kibana/${module_name}_system_test_result.json --durations=5 {posargs}
 
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
     ${module_name}-coverage: coverage xml -i --rcfile=../../tools/coverage_system_tests.rc
     # Display the coverage results
     ${module_name}-coverage: coverage report --rcfile=../../tools/coverage_system_tests.rc
-    # token is from codecov
-    ${module_name}-coverage: codecov -X gcov --token=4c58f03d-b74c-489a-889a-ab0a77b7809f --no-color --flags ${module_name}systemtests --name ${module_name} --root ../.. --file coverage.xml
 
 deps =
 % if uses_other_wheel:
-    ${wheel_env_no_py}: packaging
+    ${wheel_env_no_py}: build
 
 % endif
-    ${module_name}-system_tests: py
     ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
@@ -82,15 +79,13 @@ deps =
     ${module_name}-system_tests: fasteners
     ${module_name}-system_tests: pytest-json
 % if grpc_supported:
-    ${module_name}-system_tests: grpcio
-    ${module_name}-system_tests: protobuf
+    ${module_name}-system_tests: .[grpc]
 % endif
 
     ${module_name}-coverage: coverage
-    ${module_name}-coverage: codecov
 
 depends =
-    ${module_name}-coverage: py{37,38,39,310}-${module_name}-system_tests
+    ${module_name}-coverage: py{37,38,39,310,311}-${module_name}-system_tests
 % if uses_other_wheel:
     ${module_name}-system_tests: ${wheel_env}
 % endif
@@ -105,6 +100,8 @@ passenv =
 
 [pytest]
 addopts = --verbose
+filterwarnings =
+   error::pytest.PytestUnhandledThreadExceptionWarning
 norecursedirs = .* build dist CVS _darcs {arch} *.egg venv
 junit_suite_name = nimi-python
 junit_family = xunit1

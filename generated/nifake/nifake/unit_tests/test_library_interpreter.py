@@ -4,7 +4,7 @@ import math
 import nifake
 import nifake.errors
 import numpy
-import platform
+import pytest
 import warnings
 
 from unittest.mock import call
@@ -34,6 +34,7 @@ class TestLibraryInterpreter(object):
 
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
+        self.patched_library.niFake_SetRuntimeEnvironment.side_effect = self.side_effects_helper.niFake_SetRuntimeEnvironment
 
         self.get_ctypes_pointer_for_buffer_side_effect_count = 0
         self.get_ctypes_pointer_for_buffer_side_effect_items = []
@@ -410,6 +411,28 @@ class TestLibraryInterpreter(object):
             assert test_error_desc in str(w[0].message)
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
 
+    def test_library_interpreter_always_uses_same_library_instance(self):
+        interpreter1 = self.get_initialized_library_interpreter()
+        interpreter2 = self.get_initialized_library_interpreter()
+        assert interpreter1 is not interpreter2
+        assert interpreter1._library is interpreter2._library
+
+    def test_set_runtime_environment_is_called_once_if_present(self):
+        nifake._library_interpreter._was_runtime_environment_set = None
+        self.get_initialized_library_interpreter()
+        self.get_initialized_library_interpreter()
+        self.patched_library.niFake_SetRuntimeEnvironment.assert_called_once()
+
+    def test_set_runtime_environment_not_present_in_driver_runtime(self):
+        class TypesLibrary:
+            item = ""
+
+        nifake._library_interpreter._was_runtime_environment_set = None
+        self.patched_library._library = TypesLibrary()
+        interpreter = self.get_initialized_library_interpreter()
+        with pytest.raises(nifake.errors.DriverTooOldError):
+            interpreter._library._get_library_function('niFake_SetRuntimeEnvironment')
+
     # Retrieving buffers and strings
 
     def test_get_a_string_of_fixed_maximum_size(self):
@@ -441,23 +464,23 @@ class TestLibraryInterpreter(object):
         self.side_effects_helper['ReturnANumberAndAString']['aNumber'] = test_number
         interpreter = self.get_initialized_library_interpreter()
         returned_number, returned_string = interpreter.return_a_number_and_a_string()
-        assert (returned_string == test_string)
-        assert (returned_number == test_number)
+        assert returned_string == test_string
+        assert returned_number == test_number
         self.patched_library.niFake_ReturnANumberAndAString.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt16PointerMatcher(), _matchers.ViCharBufferMatcher(256))
 
-    def test_get_an_ivi_dance_string(self):
-        self.patched_library.niFake_GetAnIviDanceString.side_effect = self.side_effects_helper.niFake_GetAnIviDanceString
+    def test_get_an_ivi_dance_char_array(self):
+        self.patched_library.niFake_GetAnIviDanceCharArray.side_effect = self.side_effects_helper.niFake_GetAnIviDanceCharArray
         string_val = 'Testing is fun?'
-        self.side_effects_helper['GetAnIviDanceString']['aString'] = string_val
+        self.side_effects_helper['GetAnIviDanceCharArray']['charArray'] = string_val
         interpreter = self.get_initialized_library_interpreter()
-        result_string = interpreter.get_an_ivi_dance_string()
+        result_string = interpreter.get_an_ivi_dance_char_array()
         assert result_string == string_val
         calls = [
             call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(0), None),
             call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(string_val)), _matchers.ViCharBufferMatcher(len(string_val)))
         ]
-        self.patched_library.niFake_GetAnIviDanceString.assert_has_calls(calls)
-        assert self.patched_library.niFake_GetAnIviDanceString.call_count == 2
+        self.patched_library.niFake_GetAnIviDanceCharArray.assert_has_calls(calls)
+        assert self.patched_library.niFake_GetAnIviDanceCharArray.call_count == 2
 
     def test_get_string_ivi_dance_error(self):
         read_write_string_attribute_id = 1000002
@@ -508,7 +531,7 @@ class TestLibraryInterpreter(object):
         self.side_effects_helper['GetAttributeViInt32']['attributeValue'] = test_number
         interpreter = self.get_initialized_library_interpreter()
         attr_int = interpreter.get_attribute_vi_int32('', attribute_id)
-        assert(attr_int == test_number)
+        assert attr_int == test_number
         self.patched_library.niFake_GetAttributeViInt32.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt32PointerMatcher())
 
     def test_set_attribute_int32(self):
@@ -583,7 +606,7 @@ class TestLibraryInterpreter(object):
         self.side_effects_helper['GetAttributeViInt64']['attributeValue'] = test_number
         interpreter = self.get_initialized_library_interpreter()
         attr_int = interpreter.get_attribute_vi_int64('', attribute_id)
-        assert(attr_int == test_number)
+        assert attr_int == test_number
         self.patched_library.niFake_GetAttributeViInt64.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViStringMatcher(''), _matchers.ViAttrMatcher(attribute_id), _matchers.ViInt64PointerMatcher())
 
     def test_set_attribute_int64(self):
@@ -832,23 +855,3 @@ class TestLibraryInterpreter(object):
         cs_ctype = (nifake.struct_CustomStruct * len(cs))(*[nifake.struct_CustomStruct(c) for c in cs])
         assert _matchers.CustomTypeMatcher(nifake.struct_CustomStruct, nifake.struct_CustomStruct(cs[0])).__repr__() == "CustomTypeMatcher(<class 'nifake.custom_struct.struct_CustomStruct'>, struct_CustomStruct(data=None, struct_int=42, struct_double=4.2))"
         assert _matchers.CustomTypeBufferMatcher(nifake.struct_CustomStruct, cs_ctype).__repr__() == "CustomTypeBufferMatcher(<class 'nifake.custom_struct.struct_CustomStruct'>, [struct_CustomStruct(data=None, struct_int=42, struct_double=4.2), struct_CustomStruct(data=None, struct_int=43, struct_double=4.3), struct_CustomStruct(data=None, struct_int=42, struct_double=4.3)])"
-
-
-# not library interpreter tests per se
-def test_library_error():
-    if platform.architecture()[0] == '64bit':
-        ctypes_class_name = 'ctypes.CDLL'
-    else:
-        ctypes_class_name = 'ctypes.WinDLL'
-    with patch(ctypes_class_name) as mock_ctypes:
-        mock_ctypes_instance = mock_ctypes.return_value
-        # Delete function to simulate missing function from driver runtime
-        delattr(mock_ctypes_instance, 'niFake_Abort')
-
-        interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
-        try:
-            interpreter.abort()
-            assert False
-        except nifake.errors.DriverTooOldError as e:
-            message = e.args[0]
-            assert message == 'A function was not found in the NI-FAKE runtime. Please visit http://www.ni.com/downloads/drivers/ to download a newer version and install it.'

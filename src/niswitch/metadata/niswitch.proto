@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-SWITCH API metadata version 23.0.0d75
+// This file is generated from NI-SWITCH API metadata version 23.0.0f167
 //---------------------------------------------------------------------
 // Proto file for the NI-SWITCH Metadata
 //---------------------------------------------------------------------
@@ -988,4 +988,3 @@ message WaitForScanCompleteRequest {
 message WaitForScanCompleteResponse {
   int32 status = 1;
 }
-

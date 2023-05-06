@@ -70,7 +70,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 2022 Q3                |
+| Driver Version Tested Against | 2023 Q1.1              |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
@@ -113,11 +113,6 @@ As a prerequisite to using the niscope module, you must install the NI-SCOPE run
 The nimi-python modules (i.e. for **NI-SCOPE**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
   $ python -m pip install niscope
-
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install niscope
 
 
 Contributing

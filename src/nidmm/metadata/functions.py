@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.0.0d85
+# This file is generated from NI-DMM API metadata version 23.0.0f147
 functions = {
     'Abort': {
         'documentation': {

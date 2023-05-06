@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d96
+# This file is generated from NI-FAKE API metadata version 23.5.0d13
 attributes = {
     1000000: {
         'access': 'read-write',
@@ -117,5 +117,17 @@ attributes = {
         'grpc_enum': None,
         'name': 'READ_WRITE_ENUM_WITH_CONVERTER',
         'type': 'ViInt32'
+    },
+    1000012: {
+        'access': 'read-write',
+        'grpc_enum': 'SampleCount',
+        'name': 'SAMPLE_COUNT',
+        'type': 'ViInt32'
+    },
+    1000013: {
+        'access': 'read-write',
+        'grpc_enum': 'SampleInterval',
+        'name': 'SAMPLE_INTERVAL',
+        'type': 'ViReal64'
     }
 }

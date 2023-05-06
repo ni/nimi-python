@@ -668,16 +668,16 @@ class TestGrpcStubInterpreter(object):
         response_object = self._set_side_effect(library_func, a_string=test_string, a_number=test_number)
         interpreter = self._get_initialized_stub_interpreter()
         returned_number, returned_string = interpreter.return_a_number_and_a_string()
-        assert (returned_string == test_string)
-        assert (returned_number == test_number)
+        assert returned_string == test_string
+        assert returned_number == test_number
         self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
 
-    def test_get_an_ivi_dance_string(self):
-        library_func = 'GetAnIviDanceString'
+    def test_get_an_ivi_dance_char_array(self):
+        library_func = 'GetAnIviDanceCharArray'
         string_val = 'Testing is fun?'
-        response_object = self._set_side_effect(library_func, a_string=string_val)
+        response_object = self._set_side_effect(library_func, char_array=string_val)
         interpreter = self._get_initialized_stub_interpreter()
-        result_string = interpreter.get_an_ivi_dance_string()
+        result_string = interpreter.get_an_ivi_dance_char_array()
         assert result_string == string_val
         self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
 
@@ -721,7 +721,7 @@ class TestGrpcStubInterpreter(object):
         response_object = self._set_side_effect(library_func, attribute_value=test_number)
         interpreter = self._get_initialized_stub_interpreter()
         attr_int = interpreter.get_attribute_vi_int32('', attribute_id)
-        assert(attr_int == test_number)
+        assert attr_int == test_number
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST, channel_name='', attribute_id=attribute_id
         )
@@ -820,7 +820,7 @@ class TestGrpcStubInterpreter(object):
         response_object = self._set_side_effect(library_func, attribute_value=test_number)
         interpreter = self._get_initialized_stub_interpreter()
         attr_int = interpreter.get_attribute_vi_int64('', attribute_id)
-        assert(attr_int == test_number)
+        assert attr_int == test_number
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST, channel_name='', attribute_id=attribute_id
         )

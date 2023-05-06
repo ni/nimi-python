@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.3.0d397
+# This file is generated from NI-DCPower API metadata version 23.5.0d79
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -1747,7 +1747,7 @@ attributes = {
     1150216: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nDefines whether an instrument in LCR mode automatically selects the best impedance range for each given LCR measurement.\n\nImpedance autoranging may be enabled only when both:\n\n- The NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT\n- NIDCPOWER_ATTR_MEASURE_WHEN is set to a value other than NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n\nYou can read NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE back after a measurement to determine the actual range used.\n\nWhen enabled, impedance autoranging overrides impedance range settings you configure manually with any other attributes.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument.\n',
+            'description': '\nDefines whether an instrument in LCR mode automatically selects the best impedance range for each given LCR measurement.\n\nImpedance autoranging may be enabled only when both:\n\n- The NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT\n- NIDCPOWER_ATTR_MEASURE_WHEN is set to a value other than NIDCPOWER_VAL_ON_MEASURE_TRIGGER\n\nYou can read NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE back after a measurement to determine the actual range used.\n\nWhen enabled, impedance autoranging overrides impedance range settings you configure manually with any other attributes.\n\nWhen using a load with unknown impedance, you can set this attribute to NIDCPOWER_VAL_AUTO_RANGE_ON to determine the correct impedance range for the load. When you know the load impedance, you can achieve faster performance by setting this attribute to NIDCPOWER_VAL_AUTO_RANGE_OFF and setting NIDCPOWER_ATTR_LCR_IMPEDANCE_RANGE_SOURCE to NIDCPOWER_VAL_LCR_LOAD_CONFIGURATION.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'enum': 'LCRImpedanceAutoRange',
@@ -2385,6 +2385,19 @@ attributes = {
         'type': 'ViInt32',
         'type_in_documentation': 'bool'
     },
+    1150309: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the one-way electrical length delay of the cable, in seconds.\nThe default value depends on NIDCPOWER_ATTR_CABLE_LENGTH.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:Compensation:LCR AC Electrical Cable Length Delay',
+        'name': 'LCR_AC_ELECTRICAL_CABLE_LENGTH_DELAY',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
     1150314: {
         'access': 'read-write',
         'documentation': {
@@ -2455,7 +2468,7 @@ attributes = {
     1150321: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies how the impedance range for LCR measurements is determined.',
+            'description': '\nSpecifies how the impedance range for LCR measurements is determined.\n\n"NIDCPOWER_ATTR_LCR_IMPEDANCE_AUTORANGE overrides any impedance range determined by this attribute.\n\n"',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'enum': 'LCRImpedanceRangeSource',
@@ -2480,6 +2493,166 @@ attributes = {
         ],
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+    },
+    1150331: {
+        'access': 'read-write',
+        'documentation': {
+            'description': "\nDetermines the event type's behavior when a corresponding trigger is received. If you set the Source Complete event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse is transmitted. If you set the Source Complete event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level toggles between low and high. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n",
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Source Complete Event:Output Behavior',
+        'name': 'SOURCE_COMPLETE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150332: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Source Complete event when you set the NIDCPOWER_ATTR_SOURCE_COMPLETE_EVENT_OUTPUT_BEHAVIOR attribute to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit.\nThe output switches to high when the event occurs during the acquisition. If you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to a high state at session commit.\nThe output switches to low when the event occurs during the acquisition.\nFor a Sequence mode operation, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.\nThe second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.\nIf you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to high at session commit.\nThe output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.\nThis pattern repeats for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com\n'
+        },
+        'enum': 'EventToggleInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Source Complete Event:Toggle:Initial State',
+        'name': 'SOURCE_COMPLETE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150333: {
+        'access': 'read-write',
+        'documentation': {
+            'description': "\nDetermines the event type's behavior when a corresponding trigger is received. If you set the Measure Complete event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse is transmitted. If you set the Measure Complete event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level toggles between low and high. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n",
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Measure Complete Event:Output Behavior',
+        'name': 'MEASURE_COMPLETE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150334: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Measure Complete event when you set the NIDCPOWER_ATTR_MEASURE_COMPLETE_EVENT_OUTPUT_BEHAVIOR attribute to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit.\nThe output switches to high when the event occurs during the acquisition. If you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to a high state at session commit.\nThe output switches to low when the event occurs during the acquisition.\nFor a Sequence mode operation, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.\nThe second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.\nIf you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to high at session commit.\nThe output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.\nThis pattern repeats for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com\n'
+        },
+        'enum': 'EventToggleInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Measure Complete Event:Toggle:Initial State',
+        'name': 'MEASURE_COMPLETE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150335: {
+        'access': 'read-write',
+        'documentation': {
+            'description': "\nDetermines the event type's behavior when a corresponding trigger is received. If you set the Sequence Iteration Complete event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse is transmitted. If you set the Sequence Iteration Complete event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level toggles between low and high. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n",
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Iteration Complete Event:Output Behavior',
+        'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150336: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Sequence Iteration Complete event when you set the NIDCPOWER_ATTR_SEQUENCE_ITERATION_COMPLETE_EVENT_OUTPUT_BEHAVIOR attribute to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit.\nThe output switches to high when the event occurs during the acquisition. If you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to a high state at session commit.\nThe output switches to low when the event occurs during the acquisition.\nFor a Sequence mode operation, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.\nThe second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.\nIf you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to high at session commit.\nThe output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.\nThis pattern repeats for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com\n'
+        },
+        'enum': 'EventToggleInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Iteration Complete Event:Toggle:Initial State',
+        'name': 'SEQUENCE_ITERATION_COMPLETE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150345: {
+        'access': 'read-write',
+        'documentation': {
+            'description': "\nDetermines the event type's behavior when a corresponding trigger is received. If you set the Sequence Engine Done event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE, a single pulse is transmitted. If you set the Sequence Engine Done event output behavior to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE, the output level toggles between low and high. The default value is NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_PULSE.\n",
+            'note': '\nThis attribute is not supported by all output terminals.\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com.\n'
+        },
+        'enum': 'EventOutputBehavior',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Engine Done Event:Output Behavior',
+        'name': 'SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_BEHAVIOR',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150346: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the initial state of the Sequence Engine Done event when you set the NIDCPOWER_ATTR_SEQUENCE_ENGINE_DONE_EVENT_OUTPUT_BEHAVIOR attribute to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit.\nThe output switches to high when the event occurs during the acquisition. If you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to a high state at session commit.\nThe output switches to low when the event occurs during the acquisition.\nFor a Sequence mode operation, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.\nThe second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.\nIf you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to high at session commit.\nThe output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.\nThis pattern repeats for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com\n'
+        },
+        'enum': 'EventToggleInitialState',
+        'grpc_enum': None,
+        'lv_property': 'Events:Sequence Engine Done Event:Toggle:Initial State',
+        'name': 'SEQUENCE_ENGINE_DONE_EVENT_TOGGLE_INITIAL_STATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150347: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nFor instruments in LCR mode, determines whether NI-DCPower automatically calculates and applies the transient response values for DC bias or applies the transient response you set manually.\n\nDefault Value: Search ni.com for Supported Attributes by Device for the default value by instrument.\n\nRelated Topics: Transient Response\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'LCRDCBiasTransientResponse',
+        'lv_property': 'LCR:DC Bias:Advanced:Transient Response',
+        'name': 'LCR_DC_BIAS_TRANSIENT_RESPONSE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150348: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether dithering is enabled during LCR measurements.\nDithering adds out-of-band noise to improve measurements of small voltage and current signals.\n',
+            'note': '\nHardware is only warranted to meet its accuracy specs with dither enabled. You can disable dither if the added noise interferes with your device-under-test.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Advanced:Dither Enabled',
+        'name': 'LCR_AC_DITHER_ENABLED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
+    1150349: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the LCR source aperture time for a channel, in seconds.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'LCR:AC Stimulus:Advanced:Source Aperture Time',
+        'name': 'LCR_SOURCE_APERTURE_TIME',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
     },
     1250001: {
         'access': 'read-write',

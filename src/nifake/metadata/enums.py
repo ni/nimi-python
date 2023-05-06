@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.0.0d96
+# This file is generated from NI-FAKE API metadata version 23.5.0d13
 enums = {
     'AltColor': {
         'values': [
@@ -261,6 +261,38 @@ enums = {
                 },
                 'name': 'NIFAKE_VAL_NONE',
                 'value': 'None'
+            }
+        ]
+    },
+    'NotGeneratedStringEnum': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_ANDROID',
+                'value': 'Android'
+            },
+            {
+                'name': 'NIFAKE_VAL_IOS',
+                'value': 'iOS'
+            },
+            {
+                'name': 'NIFAKE_VAL_NONE',
+                'value': 'None'
+            }
+        ]
+    },
+    'SampleCount': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_SAMPLE_COUNT_INFINITE',
+                'value': 0
+            }
+        ]
+    },
+    'SampleInterval': {
+        'values': [
+            {
+                'name': 'NIFAKE_VAL_AUTO_DELAY',
+                'value': -1.0
             }
         ]
     },

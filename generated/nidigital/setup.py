@@ -29,7 +29,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.4.4.dev0',
+    version='1.4.5.dev0',
     description='NI-Digital Pattern Driver Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -43,11 +43,16 @@ setup(
     include_package_data=True,
     packages=['nidigital'],
     install_requires=[
-        'enum34;python_version<"3.4"',
-        'singledispatch;python_version<"3.4"',
         'hightime>=0.2.0',
         'nitclk',
     ],
+    extras_require={
+        'grpc': [
+            'grpcio>=1.49.1,<1.53;python_version=="3.7"',  # no 32-bit wheel for 1.53.0 and later
+            'grpcio>=1.49.1,<2.0;python_version>"3.7"',
+            'protobuf>=4.21,<5.0'
+        ],
+    },
     setup_requires=['pytest-runner', ],
     tests_require=['pytest'],
     test_suite='tests',
@@ -64,6 +69,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],

@@ -70,7 +70,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 21.8.0                |
+| Driver Version Tested Against | 2023 Q1.1             |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -113,11 +113,6 @@ As a prerequisite to using the nifgen module, you must install the NI-FGEN runti
 The nimi-python modules (i.e. for **NI-FGEN**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
   $ python -m pip install nifgen
-
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nifgen
 
 
 Contributing

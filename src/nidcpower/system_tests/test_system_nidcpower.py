@@ -1027,6 +1027,7 @@ class SystemTests:
     def test_perform_lcr_open_short_custom_cable_compensation(self, session, compensation_function):
         compensation_function(session)
 
+    @pytest.mark.skip(reason="TODO(jfitzger): Skip until we have a way to successfully call configure_lcr_custom_cable_compensation() with a simulated device. GitHub issue #1908")
     @pytest.mark.resource_name("4190/0")
     @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
     def test_lcr_custom_cable_compensation_data(self, session):
@@ -1069,13 +1070,32 @@ class SystemTests:
 
     def test_multi_threading_ivi_synchronized_wrapper_releases_lock(self, session):
         system_test_utilities.impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(
-            session)
+            session.abort)
 
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
+
+    @pytest.mark.skip(reason="TODO(jfitzger): Skip until we have a way to successfully call configure_lcr_compensation() with a simulated device. GitHub issue #1908")
+    @pytest.mark.resource_name("4190/0")
+    @pytest.mark.options("Simulate=1, DriverSetup=Model:4190; BoardType:PXIe")
+    def test_lcr_compensation_data(self, session):
+        compensation_data = session.get_lcr_compensation_data()
+        session.configure_lcr_compensation(compensation_data)
+
+        session.configure_lcr_compensation(compensation_data.decode())
+
+        session.configure_lcr_compensation(list(compensation_data))
+
+        session.configure_lcr_compensation(bytes(compensation_data))
+
+        with tempfile.NamedTemporaryFile(suffix='.bin', delete=False) as temp_file:
+            temp_file.write(compensation_data)
+        with open(temp_file.name, 'rb') as reopened_temp_file:
+            compensation_data_bytes_from_file = reopened_temp_file.read()
+        session.configure_lcr_compensation(compensation_data_bytes_from_file)
 
 
 class TestGrpc(SystemTests):
@@ -1089,3 +1109,15 @@ class TestGrpc(SystemTests):
     def session_creation_kwargs(self, grpc_channel):
         grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    def test_get_lcr_compensation_data(self, session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            session.get_lcr_compensation_data()
+        assert exc_info.value.args[0] == 'get_lcr_compensation_data is not supported over gRPC'
+        assert str(exc_info.value) == 'get_lcr_compensation_data is not supported over gRPC'
+
+    def test_configure_lcr_compensation(self, session):
+        with pytest.raises(NotImplementedError) as exc_info:
+            session.configure_lcr_compensation([])
+        assert exc_info.value.args[0] == 'configure_lcr_compensation is not supported over gRPC'
+        assert str(exc_info.value) == 'configure_lcr_compensation is not supported over gRPC'

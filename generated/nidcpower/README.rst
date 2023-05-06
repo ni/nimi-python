@@ -70,7 +70,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 2022 Q4                  |
+| Driver Version Tested Against | 2023 Q2                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -113,11 +113,6 @@ As a prerequisite to using the nidcpower module, you must install the NI-DCPower
 The nimi-python modules (i.e. for **NI-DCPower**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
   $ python -m pip install nidcpower
-
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install nidcpower
 
 
 Contributing

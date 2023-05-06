@@ -70,7 +70,7 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 2022 Q4                 |
+| Driver Version Tested Against | 2023 Q1                 |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+
@@ -113,11 +113,6 @@ As a prerequisite to using the niswitch module, you must install the NI-SWITCH r
 The nimi-python modules (i.e. for **NI-SWITCH**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
   $ python -m pip install niswitch
-
-Or **easy_install** from
-`setuptools <http://pypi.python.org/pypi/setuptools>`_::
-
-  $ python -m easy_install niswitch
 
 
 Contributing

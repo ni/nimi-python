@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
 * [1.4.1](#141---2021-08-23)
@@ -34,16 +35,11 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
-        * Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
     * #### Removed
+        * `easy_install` support
 * ### `nidcpower` (NI-DCPower)
     * #### Added
-        * Enums added:
-            * `CurrentLimitBehavior`
     * #### Changed
-        * Enums reordered:
-            * `AutoZero`
-            * `CableLength`
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
@@ -63,6 +59,7 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
+        * `get_channel_names()`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
@@ -77,6 +74,53 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+
+
+## 1.4.4 - 2023-04-14
+* ### ALL
+    * #### Added
+        * Support for Python 3.11
+    * #### Changed
+        * Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
+* ### `nidcpower` (NI-DCPower)
+    * #### Added
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
+        * API parity with NI-DCPower 2023 Q2.
+            * Properties added:
+                * `lcr_ac_dither_enabled`
+                * `lcr_ac_electrical_cable_length_delay`
+                * `lcr_dc_bias_transient_response`
+                * `lcr_source_aperture_time`
+                * `measure_complete_event_output_behavior`
+                * `measure_complete_event_toggle_initial_state`
+                * `sequence_engine_done_event_output_behavior`
+                * `sequence_engine_done_event_toggle_initial_state`
+                * `sequence_iteration_complete_event_output_behavior`
+                * `sequence_iteration_complete_event_toggle_initial_state`
+                * `source_complete_event_output_behavior`
+                * `source_complete_event_toggle_initial_state`
+            * Enums added:
+                * `CurrentLimitBehavior`
+                * `EventOutputBehavior`
+                * `EventToggleInitialState`
+                * `LCRDCBiasTransientResponse`
+            * Enum values added:
+                * `AS_CONFIGURED` added to enum `LCROpenShortLoadCompensationDataSource`
+                * `NI_STANDARD_0_5M` added to enum `CableLength`
+            * Methods added:
+                * `configure_lcr_compensation`
+                * `get_lcr_compensation_data`
+    * #### Changed
+        * Enums reordered:
+            * `AutoZero`
+            * `CableLength`
+* ### `nidigital` (NI-Digital Pattern Driver)
+    * #### Changed
+        * Update `GRPC_SERVICE_INTERFACE_NAME` to use the correct gRPC package name (`nidigitalpattern_grpc`).
+* ### `niscope` (NI-SCOPE)
+    * #### Changed
+        * Fix [#1941](https://github.com/ni/nimi-python/issues/1941): When calling niscope.Session.fetch_array_measurement in a MeasurementLink measurement plugin, meas_wfm_size cannot be set.
+            * Requires NI gRPC Device Server 2023 Q2 or later. Older versions do not support this parameter and return all available samples.
 
 ## 1.4.3 - 2022-12-16
 * ### ALL

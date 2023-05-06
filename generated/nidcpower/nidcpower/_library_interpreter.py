@@ -4,6 +4,8 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import platform
+
 import nidcpower._library_singleton as _library_singleton
 import nidcpower._visatype as _visatype
 import nidcpower.enums as enums  # noqa: F401
@@ -12,6 +14,9 @@ import nidcpower.errors as errors
 import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
 
 import nidcpower.lcr_measurement as lcr_measurement  # noqa: F401
+
+
+_was_runtime_environment_set = None
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -60,6 +65,21 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except errors.DriverTooOldError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
@@ -130,6 +150,15 @@ class LibraryInterpreter(object):
         aperture_time_ctype = _visatype.ViReal64(aperture_time)  # case S150
         units_ctype = _visatype.ViInt32(units.value)  # case S130
         error_code = self._library.niDCPower_ConfigureApertureTime(vi_ctype, channel_name_ctype, aperture_time_ctype, units_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def configure_lcr_compensation(self, channel_name, compensation_data):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        compensation_data_size_ctype = _visatype.ViInt32(0 if compensation_data is None else len(compensation_data))  # case S160
+        compensation_data_ctype = _get_ctypes_pointer_for_buffer(value=compensation_data, library_type=_visatype.ViInt8)  # case B550
+        error_code = self._library.niDCPower_ConfigureLCRCompensation(vi_ctype, channel_name_ctype, compensation_data_size_ctype, compensation_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -358,6 +387,21 @@ class LibraryInterpreter(object):
         error_code = self._library.niDCPower_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
+
+    def get_lcr_compensation_data(self, channel_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        compensation_data_size_ctype = _visatype.ViInt32()  # case S170
+        compensation_data_ctype = None  # case B580
+        error_code = self._library.niDCPower_GetLCRCompensationData(vi_ctype, channel_name_ctype, compensation_data_size_ctype, compensation_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        compensation_data_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        compensation_data_size = compensation_data_size_ctype.value  # case B590
+        compensation_data_array = array.array("b", [0] * compensation_data_size)  # case B590
+        compensation_data_ctype = _get_ctypes_pointer_for_buffer(value=compensation_data_array, library_type=_visatype.ViInt8)  # case B590
+        error_code = self._library.niDCPower_GetLCRCompensationData(vi_ctype, channel_name_ctype, compensation_data_size_ctype, compensation_data_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return compensation_data_array
 
     def get_lcr_compensation_last_date_and_time(self, channel_name, compensation_type):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

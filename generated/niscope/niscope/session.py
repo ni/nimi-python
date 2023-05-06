@@ -2221,12 +2221,10 @@ class _SessionBase(object):
             self._fetch_num_records = -1 if num_records is None else num_records
             self._fetch_meas_num_samples = -1 if meas_num_samples is None else meas_num_samples
 
+        # For GrpcStubInterpreter, the server will automatically get _actual_meas_wfm_size, if needed.
         if isinstance(self._interpreter, _library_interpreter.LibraryInterpreter):
             if meas_wfm_size is None:
                 meas_wfm_size = self._actual_meas_wfm_size(array_meas_function)
-        else:
-            if meas_wfm_size is not None:
-                raise ValueError('The argument "meas_wfm_size" must be None when using gRPC.')
 
         meas_wfm, wfm_info = self._fetch_array_measurement(array_meas_function, meas_wfm_size, timeout)
 
@@ -4823,6 +4821,30 @@ class Session(_SessionBase):
         '''
 
         return self._cal_fetch_temperature(enums._CalibrationTypes.SELF.value)
+
+    @ivi_synchronized
+    def get_channel_names(self, indices):
+        r'''get_channel_names
+
+        Returns a list of channel names for given channel indices.
+
+        Args:
+            indices (basic sequence types or str or int): Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:
+
+                -   A comma-separated list—for example, "0,2,3,1"
+                -   A range using a hyphen—for example, "0-3"
+                -   A range using a colon—for example, "0:3 "
+
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+
+
+        Returns:
+            names (list of str): The channel name(s) at the specified indices.
+
+        '''
+        indices = _converters.convert_repeated_capabilities_without_prefix(indices)
+        names = self._interpreter.get_channel_names(indices)
+        return _converters.convert_comma_separated_string_to_list(names)
 
     @ivi_synchronized
     def import_attribute_configuration_buffer(self, configuration):
