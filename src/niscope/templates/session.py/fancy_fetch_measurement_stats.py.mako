@@ -23,15 +23,6 @@
             measurement_stat = measurement_stats.MeasurementStats(result, mean, stdev, min_val, max_val, num_in_stats)
             output.append(measurement_stat)
 
-        channel_names = _converters.expand_channel_string(
-            self._repeated_capability,
-            self._all_channels_in_session
-        )
-
-        results_count = len(results)
-        channel_count = len(channel_names)
-        assert results_count % channel_count == 0, 'Number of results should be evenly divisible by the number of channels: len(results) == {0}, len(channel_names) == {1}'.format(results_count, channel_count)
-        actual_num_records = int(results_count / channel_count)
-        waveform_info._populate_channel_and_record_info(output, channel_names, range(record_number, record_number + actual_num_records))
+<%include file="./fetch_waveform_info_population.py.mako" args="results_name='results', results_description='results', output_name='output'"/>
 
         return output

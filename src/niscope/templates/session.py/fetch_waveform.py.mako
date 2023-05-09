@@ -36,15 +36,6 @@
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
-        channel_names = _converters.expand_channel_string(
-            self._repeated_capability,
-            self._all_channels_in_session
-        )
-
-        lwfm_i = len(wfm_info)
-        lrcl = len(channel_names)
-        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(lwfm_i, lrcl)
-        actual_num_records = int(lwfm_i / lrcl)
-        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
+<%include file="./fetch_waveform_info_population.py.mako"/>
 
         return wfm_info
