@@ -18,7 +18,6 @@ import system_test_utilities  # noqa: E402
 
 
 instruments = ['FakeDevice1', 'FakeDevice2']
-# TODO(sbethur): Use `get_channel_names` when #1402 is fixed
 test_channels_1 = 'FakeDevice2/0,FakeDevice1/1'
 test_channels_1_expanded = test_channels_1
 test_channels_2 = 'FakeDevice2/0:1'
