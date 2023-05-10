@@ -21,6 +21,7 @@ class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescri
     '''
     pass
 
+# TODO(ni-jfitzger): update this file to work for individual pacakge releases.
 
 def main():
     # Setup the required arguments for this script
