@@ -2132,12 +2132,17 @@ class _SessionBase(object):
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
-        lwfm_i = len(wfm_info)
-        lrcl = len(self._repeated_capability_list)
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        wfm_info_count = len(wfm_info)
+        channel_count = len(channel_names)
         # Should this raise instead? If this asserts, is it the users fault?
-        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
-        actual_num_records = int(lwfm_i / lrcl)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
@@ -2231,11 +2236,17 @@ class _SessionBase(object):
         record_length = int(len(meas_wfm) / len(wfm_info))
         waveform_info._populate_samples_info(wfm_info, meas_wfm, record_length)
 
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
         wfm_info_count = len(wfm_info)
-        channel_count = len(self._repeated_capability_list)
-        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(wfm_info_count, channel_count)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
         actual_num_records = int(wfm_info_count / channel_count)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
@@ -2325,11 +2336,17 @@ class _SessionBase(object):
             measurement_stat = measurement_stats.MeasurementStats(result, mean, stdev, min_val, max_val, num_in_stats)
             output.append(measurement_stat)
 
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
         results_count = len(results)
-        channel_count = len(self._repeated_capability_list)
-        assert results_count % channel_count == 0, 'Number of results should be evenly divisible by the number of channels: len(results) == {0}, len(self._repeated_capability_list) == {1}'.format(results_count, channel_count)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert results_count % channel_count == 0, 'Number of results should be evenly divisible by the number of channels: len(results) == {0}, len(channel_names) == {1}'.format(results_count, channel_count)
         actual_num_records = int(results_count / channel_count)
-        waveform_info._populate_channel_and_record_info(output, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        waveform_info._populate_channel_and_record_info(output, channel_names, range(record_number, record_number + actual_num_records))
 
         return output
 
@@ -2434,12 +2451,17 @@ class _SessionBase(object):
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
-        lwfm_i = len(wfm_info)
-        lrcl = len(self._repeated_capability_list)
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        wfm_info_count = len(wfm_info)
+        channel_count = len(channel_names)
         # Should this raise instead? If this asserts, is it the users fault?
-        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
-        actual_num_records = int(lwfm_i / lrcl)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 
@@ -3147,11 +3169,17 @@ class _SessionBase(object):
 
         waveform_info._populate_samples_info(wfm_info, mv, num_samples)
 
-        lwfm_i = len(wfm_info)
-        lrcl = len(self._repeated_capability_list)
-        assert lwfm_i % lrcl == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(self._repeated_capability_list) == {1}'.format(lwfm_i, lrcl)
-        actual_num_records = int(lwfm_i / lrcl)
-        waveform_info._populate_channel_and_record_info(wfm_info, self._repeated_capability_list, range(record_number, record_number + actual_num_records))
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        wfm_info_count = len(wfm_info)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
 
         return wfm_info
 

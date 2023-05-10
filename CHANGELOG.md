@@ -61,6 +61,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * `get_channel_names()`
     * #### Changed
+        * Fix [#1770](https://github.com/ni/nimi-python/issues/1770): fetch(), read(), and friends return wrong data when called with channel ranges on multi-instrument session.
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
