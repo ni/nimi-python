@@ -8,15 +8,17 @@
 ${doc_header}
 ${"=" * len(doc_header)}
 
-.. include:: ../_static/about.inc
-
-.. include:: ../_static/installation.inc
+.. include:: ../_static/about_driver.inc
 
 .. include:: ../_static/contributing.inc
 
 .. include:: ../_static/support.inc
 
-.. include:: ../_static/documentation.inc
+.. toctree::
+   :maxdepth: 3
+   :caption: Documentation
+
+   ${module_name}
 
 Additional Documentation
 ------------------------
@@ -25,11 +27,6 @@ Refer to your driver documentation for device-specific information and detailed 
 
 
 .. include:: ../_static/license.inc
-
-.. toctree::
-   :maxdepth: 3
-
-   ${module_name}
 
 Indices and tables
 ==================
