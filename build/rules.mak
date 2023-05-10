@@ -30,8 +30,6 @@ endif # ifneq (,$(EXAMPLE_FILES))
 
 MKDIR: $(MKDIRECTORIES)
 
-CURRENT_DIR := $(shell pwd)
-
 define mkdir_rule
 $1:
 	$(call trace_to_console, "Making dir",$1)
@@ -86,6 +84,10 @@ $(DRIVER_DOCS_DIR)/%.inc: %.inc.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
+$(SPHINX_CONF_PY): $(TEMPLATE_DIR)/conf.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
 $(DRIVER_EXAMPLES_ZIP_FILE): $(EXAMPLE_FILES)
 	$(call trace_to_console, "Zipping",$@)
 	$(_hide_cmds)$(call log_command,cd src/$(DRIVER)/examples && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
@@ -101,7 +103,7 @@ clean:
 
 .PHONY: module doc_files sdist wheel installers
 module: $(MODULE_FILES) $(UNIT_TEST_FILES)
-doc_files: $(RST_FILES)
+doc_files: $(RST_FILES) $(SPHINX_CONF_PY)
 installers: sdist wheel
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)
@@ -131,7 +133,15 @@ else
 # We piece together the readme files instead of relying on the rst include directive because we need these files to be standalone and not require any additional files that are in specific locations.
 $(README): $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
 	$(call trace_to_console, "Creating",$@)
-	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DRIVER_DOCS_DIR)/status.inc $(DRIVER_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc \
+										$(STATIC_DOCS_DIR)/about.inc \
+										$(DRIVER_DOCS_DIR)/status.inc \
+										$(DRIVER_DOCS_DIR)/installation.inc \
+										$(STATIC_DOCS_DIR)/contributing.inc \
+										$(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc \
+										$(STATIC_DOCS_DIR)/support.inc \
+										$(STATIC_DOCS_DIR)/documentation.inc \
+										$(STATIC_DOCS_DIR)/license.inc > $@)
 
 endif
 

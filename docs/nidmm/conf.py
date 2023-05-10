@@ -1,18 +1,7 @@
-<%
-import datetime
-current_year = datetime.datetime.today().year
-
-config = template_parameters['metadata'].config
-version = config['module_version']
-
-api_name = f"{config['driver_name']} Python API"
-api_name_no_spaces_or_hyphens = api_name.replace(" ", "").replace("-", "")
-api_name_no_spaces_or_hyphens_lower = api_name_no_spaces_or_hyphens.lower()
-%>\
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# ${api_name} documentation build configuration file, created by
+# NI-DMM Python API documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul 14 13:04:36 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -66,9 +55,9 @@ master_doc = 'index'
 
 # General information about the project.
 # TODO(ni-jfitzger): Should we leave the project name unchanged?
-project = '${api_name}'
+project = 'NI-DMM Python API'
 # TODO(ni-jfitzger): Should we adjust the copyright start date based on the year each API was added?
-copyright = '2017-${current_year}, National Instruments Corporation'
+copyright = '2017-2023, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -76,7 +65,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '${version}'
+release = '1.4.5.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -169,7 +158,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, '${api_name_no_spaces_or_hyphens}.tex', '${api_name} Documentation',
+    (master_doc, 'NIDMMPythonAPI.tex', 'NI-DMM Python API Documentation',
      'NI', 'manual'),
 ]
 
@@ -179,7 +168,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, '${api_name_no_spaces_or_hyphens_lower}', '${api_name} Documentation',
+    (master_doc, 'nidmmpythonapi', 'NI-DMM Python API Documentation',
      [author], 1)
 ]
 
@@ -190,8 +179,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, '${api_name_no_spaces_or_hyphens}', '${api_name} Documentation',
-     author, '${api_name_no_spaces_or_hyphens}', 'One line description of project.',
+    (master_doc, 'NIDMMPythonAPI', 'NI-DMM Python API Documentation',
+     author, 'NIDMMPythonAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
 

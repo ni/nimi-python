@@ -24,7 +24,6 @@ ifeq (,$(MAKECMDGOALS))
 ROOT_FILES := \
 	$(ROOT_DIR)/README.rst \
 	$(ROOT_DIR)/VERSION \
-	$(DOCS_DIR)/conf.py \
 
 endif
 
@@ -152,11 +151,6 @@ $(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
 $(ROOT_DIR)/VERSION: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
 	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file $(GENERATED_DIR)/$(d)/$(d)/VERSION ))
-
-$(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@))
-	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
-
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.

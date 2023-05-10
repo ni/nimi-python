@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# NI Modular Instruments Python API documentation build configuration file, created by
+# NI Switch Executive Python API documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul 14 13:04:36 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -54,7 +54,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'NI Modular Instruments Python API'
+# TODO(ni-jfitzger): Should we leave the project name unchanged?
+project = 'NI Switch Executive Python API'
+# TODO(ni-jfitzger): Should we adjust the copyright start date based on the year each API was added?
 copyright = '2017-2023, National Instruments Corporation'
 author = 'NI'
 
@@ -156,7 +158,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'NIModularInstrumentsPythonAPI.tex', 'NI Modular Instruments Python API Documentation',
+    (master_doc, 'NISwitchExecutivePythonAPI.tex', 'NI Switch Executive Python API Documentation',
      'NI', 'manual'),
 ]
 
@@ -166,7 +168,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'nimodularinstrumentspythonapi', 'NI Modular Instruments Python API Documentation',
+    (master_doc, 'niswitchexecutivepythonapi', 'NI Switch Executive Python API Documentation',
      [author], 1)
 ]
 
@@ -177,8 +179,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'NIModularInstrumentsPythonAPI', 'NI Modular Instruments Python API Documentation',
-     author, 'NIModularInstrumentsPythonAPI', 'One line description of project.',
+    (master_doc, 'NISwitchExecutivePythonAPI', 'NI Switch Executive Python API Documentation',
+     author, 'NISwitchExecutivePythonAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
 

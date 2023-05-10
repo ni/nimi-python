@@ -8,6 +8,8 @@ MODULE_FILES_TO_COPY := $(DEFAULT_PY_FILES_TO_COPY)
 
 RST_FILES_TO_GENERATE := $(DEFAULT_RST_FILES_TO_GENERATE)
 
+SPHINX_CONF_PY := $(DEFAULT_SPHINX_CONF_PY)
+
 CUSTOM_TYPES_TO_COPY += \
     lcr_load_compensation_spot.py \
     lcr_measurement.py \

@@ -2,6 +2,7 @@
 # - nifake first to get the most code generator coverage
 # - nimodinst last so that the version from nimodinst is used for any global versions (docs/conf.py)
 ALL_DRIVERS := nifake nidcpower nidigital nidmm nifgen niscope niswitch nise nimodinst nitclk
+DRIVERS_WITH_DOCS := nidcpower nidigital nidmm nifgen niscope niswitch nise nimodinst nitclk
 DRIVERS ?= $(ALL_DRIVERS)
 
 ROOT_DIR := $(abspath .)
