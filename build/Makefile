@@ -146,7 +146,15 @@ endef
 
 $(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
-	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
+	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc \
+											   $(STATIC_DOCS_DIR)/about.inc \
+											   $(DOCS_DIR)/*/status.inc \
+											   $(STATIC_DOCS_DIR)/installation.inc \
+											   $(STATIC_DOCS_DIR)/contributing.inc \
+											   $(STATIC_DOCS_DIR)/nidmm_usage.inc \
+											   $(STATIC_DOCS_DIR)/support.inc \
+											   $(STATIC_DOCS_DIR)/documentation.inc \
+											   $(STATIC_DOCS_DIR)/license.inc > $@)
 
 $(ROOT_DIR)/VERSION: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py

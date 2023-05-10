@@ -106,7 +106,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['../_static']
 
 # Fix wide tables of RTD per https://github.com/rtfd/sphinx_rtd_theme/issues/117#issuecomment-41571653
 def setup(app):
@@ -185,5 +185,7 @@ texinfo_documents = [
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.
+# TODO(ni-jfitzger): Add mappings for nimi-python APIs that reference other nimi-python APIs.
+# We can probably just list all of the mappings (other than maybe the current module, I think)
 intersphinx_mapping = {'https://docs.python.org/': None}
 
