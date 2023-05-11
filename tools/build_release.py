@@ -1,5 +1,9 @@
 # !python
 # TODO(ni-jfitzger): update this file to work for individual package releases.
+# Specifics:
+# * update LATEST_RELEASE files: figure out for instructions if it neeeds to include driver name for a correct url in examples.rst, rather than just X.Y.Z
+# * update "Create a release on GitHub" step instructions to be for each individual package releasing. We may need to name/tag releases differently.
+# * update "Update CHANGELOG.md" instructions to whatever new process is.
 
 import argparse
 from configure_logging import configure_logging
@@ -39,7 +43,7 @@ Steps
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
-    * Update contents of LATEST_RELEASE with the version of the release being created.
+    * Update contents of src/<driver>/LATEST_RELEASE with the version of the release being created.
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
         * Commit to branch
