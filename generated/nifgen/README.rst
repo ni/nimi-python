@@ -142,7 +142,7 @@ The following is a basic example of using the **nifgen** module to open a sessio
 Support / Feedback
 ==================
 
-The packages included in **nimi-python** package are supported by NI. For support, open
+The packages included in the **nimi-python** repository are supported by NI. For support, open
 a request through the NI support portal at `ni.com <http://www.ni.com>`_.
 
 .. _bugs-section:
