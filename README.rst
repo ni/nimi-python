@@ -421,17 +421,15 @@ Installation
 
 Driver specific installation instructions can be found on Read The Docs:
 
-.. # TODO(ni-jfitzger): Update these links
-
 * `nidcpower <https://nidcpower.readthedocs.io/en/latest/nidcpower.html#installation>`_
-* `nidigital <http://nimi-python.readthedocs.io/en/master/nidigital.html#installation>`_
-* `nidmm <http://nimi-python.readthedocs.io/en/master/nidmm.html#installation>`_
-* `nifgen <http://nimi-python.readthedocs.io/en/master/nifgen.html#installation>`_
-* `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
-* `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
-* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
-* `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
-* `nitclk <http://nimi-python.readthedocs.io/en/master/nitclk.html#installation>`_
+* `nidigital <https://nidigital.readthedocs.io/en/latest/nidigital.html#installation>`_
+* `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
+* `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
+* `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
+* `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
+* `niswitch <https://niswitch.readthedocs.io/en/latest/niswitch.html#installation>`_
+* `nitclk <https://nitclk.readthedocs.io/en/latest/nitclk.html#installation>`_
 
 
 Contributing
