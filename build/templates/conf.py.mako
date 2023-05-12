@@ -3,6 +3,7 @@ import datetime
 current_year = datetime.datetime.today().year
 
 config = template_parameters['metadata'].config
+copyright_start_year = config['initial_release_year']
 version = config['module_version']
 
 api_name = f"{config['driver_name']} Python API"
@@ -66,8 +67,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = '${api_name}'
-# TODO(ni-jfitzger): Should we adjust the copyright start date based on the year each API was added?
-copyright = '2017-${current_year}, National Instruments Corporation'
+copyright = '${copyright_start_year}-${current_year}, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for

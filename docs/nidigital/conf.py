@@ -55,8 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI-Digital Pattern Driver Python API'
-# TODO(ni-jfitzger): Should we adjust the copyright start date based on the year each API was added?
-copyright = '2017-2023, National Instruments Corporation'
+copyright = '2019-2023, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
