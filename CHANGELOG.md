@@ -1,4 +1,3 @@
-<!--- # TODO(ni-jfitzger): Update readthedocs links in this file. --->
 # Changelog
 
 * [Unreleased](#unreleased)
