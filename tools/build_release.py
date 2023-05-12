@@ -3,7 +3,6 @@
 # Specifics:
 # * update LATEST_RELEASE files: figure out for instructions if it neeeds to include driver name for a correct url in examples.rst, rather than just X.Y.Z
 # * update "Create a release on GitHub" step instructions to be for each individual package releasing. We may need to name/tag releases differently.
-# * update "Update CHANGELOG.md" instructions to whatever new process is.
 
 import argparse
 from configure_logging import configure_logging
