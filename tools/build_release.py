@@ -1,8 +1,4 @@
 # !python
-# TODO(ni-jfitzger): update this file to work for individual package releases.
-# Specifics:
-# * update LATEST_RELEASE files: figure out for instructions if it neeeds to include driver name for a correct url in examples.rst, rather than just X.Y.Z
-# * update "Create a release on GitHub" step instructions to be for each individual package releasing. We may need to name/tag releases differently.
 
 import argparse
 from configure_logging import configure_logging
@@ -31,7 +27,7 @@ def main():
     usage = """Release script
 Prereqs
     * Be able to build locally
-    * `pip install --upgrade twine tox` into whichever Python 2.7 you use to build
+    * `pip install --upgrade twine tox` into whichever Python 3 you use to build
 
 Steps
     * Build master to ensure it is in a good state and ready for release
@@ -42,7 +38,14 @@ Steps
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
-    * Update contents of src/<driver>/LATEST_RELEASE with the version of the release being created.
+    * Examine changes mentioned in the changelog for each releasing module and determine if a major or minor version bump is warranted, according to [semver rules](https://semver.org/)
+        * SEMVER Rules Summary
+            * MAJOR.MINOR.PATCH
+            * MAJOR: breaking changes
+            * MINOR: backward-compatible feature additions
+            * PATCH: backward-compatible bug fixes
+        * Manually update the MAJOR.MINOR.PATCH part of module versions in src/<module>/metadata/config_addon.py as needed.
+    * For each module being released, update contents of src/<module>/LATEST_RELEASE to "<module>-<module_version>", where <module_version> is the semantic version for the upcoming release.
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
         * Commit to branch
@@ -55,11 +58,13 @@ Steps
     * `python3 tools/build_release.py --upload`
         * Upload to PyPI - you will need to type in your credentials
     * Merge the pull request to origin/master
-    * Create a release on GitHub using the portion from the changelog for this release for the description
-        * Add the ZIP files under `generated/examples` for each module as a release artifact.
+    * For each package that you are releasing:
+        * Create a release on GitHub using the portion from the changelog for this release for the description
+            * Add the ZIP files under `generated/examples` for the module as a release artifact.
+            * Tag: <module>-<module_version>
     * Create and checkout another branch for post-release changes
     * `python3 tools/build_release.py --update`
-        * This will update the version to X.X.(N+1).dev0
+        * This will update the version to X.X.(N+1).dev0 for each module
         * Commit to branch
     * `python3 tools/build_release.py --build`
         * Clean and Build to update generated files
