@@ -54,7 +54,6 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-# TODO(ni-jfitzger): Should we leave the project name unchanged?
 project = 'NI-DCPower Python API'
 # TODO(ni-jfitzger): Should we adjust the copyright start date based on the year each API was added?
 copyright = '2017-2023, National Instruments Corporation'
