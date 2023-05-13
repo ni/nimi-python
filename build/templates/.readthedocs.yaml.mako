@@ -42,7 +42,7 @@ build:
           exit 183;
         fi
 
-# Have ReadTheDocs build documentation with Sphinx
+# Have Read the Docs build documentation with Sphinx
 sphinx:
   builder: html
   configuration: ${conf_py_path}

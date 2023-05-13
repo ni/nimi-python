@@ -19,7 +19,8 @@ Documentation for versions 1.4.4 and earlier of the following modules can be fou
 * nitclk
 
 Simply select the version you wish to view documentation for.
-For newer documentation, refer to the individual ReadTheDocs projects.
+
+For newer documentation, refer to the individual **Read the Docs** projects.
 
 * `nidcpower <https://nidcpower.readthedocs.io/en/latest>`_
 * `nidigital <https://nidigital.readthedocs.io/en/latest>`_

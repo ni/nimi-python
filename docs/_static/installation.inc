@@ -3,7 +3,7 @@
 Installation
 ============
 
-Driver specific installation instructions can be found on Read The Docs:
+Driver specific installation instructions can be found on **Read the Docs**:
 
 * `nidcpower <https://nidcpower.readthedocs.io/en/latest/nidcpower.html#installation>`_
 * `nidigital <https://nidigital.readthedocs.io/en/latest/nidigital.html#installation>`_
