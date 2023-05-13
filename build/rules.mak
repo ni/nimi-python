@@ -92,6 +92,10 @@ $(SPHINX_CONF_PY): $(TEMPLATE_DIR)/conf.py.mako $(BUILD_HELPER_SCRIPTS) $(METADA
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
+$(READTHEDOCS_CONFIG): $(TEMPLATE_DIR)/.readthedocs.yaml.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
 $(DRIVER_EXAMPLES_ZIP_FILE): $(EXAMPLE_FILES)
 	$(call trace_to_console, "Zipping",$@)
 	$(_hide_cmds)$(call log_command,cd src/$(DRIVER)/examples && zip -u -r -9 $@ * || ([ $$? -eq 12 ] && exit 0) || exit)
@@ -107,7 +111,7 @@ clean:
 
 .PHONY: module doc_files sdist wheel installers
 module: $(MODULE_FILES) $(UNIT_TEST_FILES)
-doc_files: $(RST_FILES) $(SPHINX_CONF_PY)
+doc_files: $(RST_FILES) $(SPHINX_CONF_PY) $(READTHEDOCS_CONFIG)
 installers: sdist wheel
 
 $(UNIT_TEST_FILES): $(MODULE_FILES)

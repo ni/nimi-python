@@ -90,6 +90,7 @@ DEFAULT_RST_FILES_TO_GENERATE := \
     ) \
 
 DEFAULT_SPHINX_CONF_PY := $(DRIVER_DOCS_DIR)/conf.py
+DEFAULT_READTHEDOCS_CONFIG := $(DRIVER_DOCS_DIR)/.readthedocs.yaml
 
 # Files for tracking parts of the build
 SDIST_WHEEL_BUILD_DONE := $(LOG_DIR)/sdist_wheel_build_done
