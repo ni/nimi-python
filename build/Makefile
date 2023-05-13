@@ -79,7 +79,6 @@ clean: start
 	-$(_hide_cmds)rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
-	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)mkdir $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
