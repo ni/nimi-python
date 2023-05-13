@@ -3,44 +3,30 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-NI Modular Instruments Python Documentation
+NI Modular Instruments Python Documentation Redirect
 ============================================================
 
-.. include:: _static/about.inc
+Documentation for versions 1.4.4 and earlier of the following modules can be found here:
 
-.. include:: _static/installation.inc
+* nidcpower
+* nidigital
+* nidmm
+* nifgen
+* nimodinst
+* niscope
+* niswitch
+* nise
+* nitclk
 
-.. include:: _static/contributing.inc
+Simply select the version you wish to view documentation for.
+For newer documentation, refer to the individual ReadTheDocs projects.
 
-.. include:: _static/support.inc
-
-.. include:: _static/documentation.inc
-
-Additional Documentation
-------------------------
-
-Refer to your driver documentation for device-specific information and detailed API documentation.
-
-
-.. include:: _static/license.inc
-
-.. toctree::
-   :maxdepth: 3
-   :caption: Drivers
-
-   nidcpower
-   nidigital
-   nidmm
-   nifgen
-   niscope
-   niswitch
-   nise
-   nimodinst
-   nitclk
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+* `nidcpower <https://nidcpower.readthedocs.io/en/latest>`_
+* `nidigital <https://nidigital.readthedocs.io/en/latest>`_
+* `nidmm <https://nidmm.readthedocs.io/en/latest>`_
+* `nifgen <https://nifgen.readthedocs.io/en/latest>`_
+* `nimodinst <https://nimodinst.readthedocs.io/en/latest>`_
+* `niscope <https://niscope.readthedocs.io/en/latest>`_
+* `nise <https://nise.readthedocs.io/en/latest>`_
+* `niswitch <https://niswitch.readthedocs.io/en/latest>`_
+* `nitclk <https://nitclk.readthedocs.io/en/latest>`_
