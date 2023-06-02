@@ -60,6 +60,7 @@ All notable changes to this project will be documented in this file.
 * ### `niscope` (NI-SCOPE)
     * #### Added
         * `get_channel_names()`
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
     * #### Changed
         * Fix [#1770](https://github.com/ni/nimi-python/issues/1770): fetch(), read(), and friends return wrong data when called with channel ranges on multi-instrument session.
     * #### Removed
