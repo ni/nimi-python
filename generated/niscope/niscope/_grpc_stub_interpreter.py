@@ -425,6 +425,9 @@ class GrpcStubInterpreter(object):
             grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_list=channel_list, attribute_id=attribute_id, value_raw=value),
         )
 
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        raise NotImplementedError('set_runtime_environment is not supported over gRPC')
+
     def unlock(self):  # noqa: N802
         self._lock.release()
 
