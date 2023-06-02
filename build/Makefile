@@ -23,8 +23,6 @@ endif
 ifeq (,$(MAKECMDGOALS))
 ROOT_FILES := \
 	$(ROOT_DIR)/README.rst \
-	$(ROOT_DIR)/VERSION \
-	$(DOCS_DIR)/conf.py \
 
 endif
 
@@ -79,9 +77,9 @@ clean: start
 	-$(_hide_cmds)find $(ROOT_DIR)/build -name __pycache__ -exec rmdir {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)find $(ROOT_DIR)/build -name '*.pyc' -exec rm {} \; $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/*) $(SUPPRESS_ERROR_OUTPUT) ||:
+	-$(_hide_cmds)rm $(foreach d,$(DRIVERS), $(ROOT_DIR)/docs/$(d)/.readthedocs.yaml) $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/.coverage $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/README.rst $(SUPPRESS_ERROR_OUTPUT) ||:
-	-$(_hide_cmds)rm -Rf $(ROOT_DIR)/docs/conf.py $(SUPPRESS_ERROR_OUTPUT) ||:
 	-$(_hide_cmds)mkdir $(GENERATED_DIR) $(SUPPRESS_ERROR_OUTPUT) ||:
 
 start:
@@ -147,16 +145,15 @@ endef
 
 $(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
-	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc $(STATIC_DOCS_DIR)/about.inc $(DOCS_DIR)/*/status.inc $(STATIC_DOCS_DIR)/installation.inc $(STATIC_DOCS_DIR)/contributing.inc $(STATIC_DOCS_DIR)/nidmm_usage.inc $(STATIC_DOCS_DIR)/support.inc $(STATIC_DOCS_DIR)/documentation.inc $(STATIC_DOCS_DIR)/license.inc > $@)
-
-$(ROOT_DIR)/VERSION: $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@)) tools/update_version_file.py
-	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/update_version_file.py --output-file $@ $(foreach d,$(DRIVERS),--input-file $(GENERATED_DIR)/$(d)/$(d)/VERSION ))
-
-$(DOCS_DIR)/conf.py: build/templates/conf.py.mako $(ROOT_DIR)/VERSION tools/simple_mako.py $(GLOBAL_FILES_STARTED_FILE)
-	$(call trace_to_console, "Creating Root",$(notdir $@))
-	$(_hide_cmds)$(call global_log_command,$(PYTHON_CMD) tools/simple_mako.py --output-file $@ --template $<)
-
+	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc \
+                                               $(STATIC_DOCS_DIR)/about.inc \
+                                               $(DOCS_DIR)/*/status.inc \
+                                               $(STATIC_DOCS_DIR)/installation.inc \
+                                               $(STATIC_DOCS_DIR)/contributing.inc \
+                                               $(STATIC_DOCS_DIR)/nidmm_usage.inc \
+                                               $(STATIC_DOCS_DIR)/support.inc \
+                                               $(STATIC_DOCS_DIR)/documentation.inc \
+                                               $(STATIC_DOCS_DIR)/license.inc > $@)
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
