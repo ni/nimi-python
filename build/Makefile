@@ -146,14 +146,14 @@ endef
 $(ROOT_DIR)/README.rst: $(GLOBAL_FILES_STARTED_FILE)
 	$(call trace_to_console, "Creating Root",$(notdir $@))
 	$(_hide_cmds)$(call global_log_command,cat $(STATIC_DOCS_DIR)/status_project.inc \
-											   $(STATIC_DOCS_DIR)/about.inc \
-											   $(DOCS_DIR)/*/status.inc \
-											   $(STATIC_DOCS_DIR)/installation.inc \
-											   $(STATIC_DOCS_DIR)/contributing.inc \
-											   $(STATIC_DOCS_DIR)/nidmm_usage.inc \
-											   $(STATIC_DOCS_DIR)/support.inc \
-											   $(STATIC_DOCS_DIR)/documentation.inc \
-											   $(STATIC_DOCS_DIR)/license.inc > $@)
+                                               $(STATIC_DOCS_DIR)/about.inc \
+                                               $(DOCS_DIR)/*/status.inc \
+                                               $(STATIC_DOCS_DIR)/installation.inc \
+                                               $(STATIC_DOCS_DIR)/contributing.inc \
+                                               $(STATIC_DOCS_DIR)/nidmm_usage.inc \
+                                               $(STATIC_DOCS_DIR)/support.inc \
+                                               $(STATIC_DOCS_DIR)/documentation.inc \
+                                               $(STATIC_DOCS_DIR)/license.inc > $@)
 
 # Any step that any driver build does that would invalidate unit testing, flake8 or generated html
 # needs to delete this file. This will trigger a tox run.
