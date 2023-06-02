@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 23.3.0f165
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.5.0d80
 functions = {
     'Abort': {
         'documentation': {
@@ -1996,14 +1996,14 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                    'description': 'Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
                 },
                 'grpc_name': 'indices',
                 'name': 'index',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
                 'python_name': 'indices',
                 'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str or int'
+                'type_in_documentation': 'basic sequence types, str, or int'
             },
             {
                 'direction': 'in',
@@ -3574,6 +3574,44 @@ functions = {
                 },
                 'grpc_name': 'value_raw',
                 'name': 'value',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'SetRuntimeEnvironment': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'none',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'environment',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'environmentVersion',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved1',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved2',
                 'type': 'ViConstString'
             }
         ],
