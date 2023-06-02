@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.5.0d28
+# This file is generated from NI-FGEN API metadata version 23.5.0d86
 functions = {
     'AbortGeneration': {
         'documentation': {
@@ -2858,6 +2858,44 @@ functions = {
             }
         ],
         'python_name': 'set_next_write_position',
+        'returns': 'ViStatus'
+    },
+    'SetRuntimeEnvironment': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'none',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'environment',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'environmentVersion',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved1',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved2',
+                'type': 'ViConstString'
+            }
+        ],
         'returns': 'ViStatus'
     },
     'SetWaveformNextWritePosition': {

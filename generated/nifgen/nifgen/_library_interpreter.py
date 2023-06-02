@@ -4,10 +4,15 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import platform
+
 import nifgen._library_singleton as _library_singleton
 import nifgen._visatype as _visatype
 import nifgen.enums as enums  # noqa: F401
 import nifgen.errors as errors
+
+
+_was_runtime_environment_set = None
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
@@ -56,6 +61,21 @@ class LibraryInterpreter(object):
     def __init__(self, encoding):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        global _was_runtime_environment_set
+        if _was_runtime_environment_set is None:
+            try:
+                runtime_env = platform.python_implementation()
+                version = platform.python_version()
+                self.set_runtime_environment(
+                    runtime_env,
+                    version,
+                    '',
+                    ''
+                )
+            except errors.DriverTooOldError:
+                pass
+            finally:
+                _was_runtime_environment_set = True
         # Initialize _vi to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
@@ -613,6 +633,15 @@ class LibraryInterpreter(object):
         relative_to_ctype = _visatype.ViInt32(relative_to.value)  # case S130
         offset_ctype = _visatype.ViInt32(offset)  # case S150
         error_code = self._library.niFgen_SetNamedWaveformNextWritePosition(vi_ctype, channel_name_ctype, waveform_name_ctype, relative_to_ctype, offset_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        environment_ctype = ctypes.create_string_buffer(environment.encode(self._encoding))  # case C020
+        environment_version_ctype = ctypes.create_string_buffer(environment_version.encode(self._encoding))  # case C020
+        reserved1_ctype = ctypes.create_string_buffer(reserved1.encode(self._encoding))  # case C020
+        reserved2_ctype = ctypes.create_string_buffer(reserved2.encode(self._encoding))  # case C020
+        error_code = self._library.niFgen_SetRuntimeEnvironment(environment_ctype, environment_version_ctype, reserved1_ctype, reserved2_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

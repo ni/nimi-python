@@ -447,6 +447,9 @@ class GrpcStubInterpreter(object):
             grpc_types.SetNamedWaveformNextWritePositionRequest(vi=self._vi, channel_name=channel_name, waveform_name=waveform_name, relative_to_raw=relative_to.value, offset=offset),
         )
 
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        raise NotImplementedError('set_runtime_environment is not supported over gRPC')
+
     def set_waveform_next_write_position(self, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         self._invoke(
             self._client.SetWaveformNextWritePosition,
