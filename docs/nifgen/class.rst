@@ -6005,7 +6005,7 @@ NI-TClk Support
 
         This is used to get and set NI-TClk attributes on the session.
 
-        .. seealso:: See :py:attr:`nitclk.SessionReference` for a complete list of attributes.
+        .. seealso:: See :py:class:`nitclk.SessionReference` for a complete list of attributes.
 
 
 .. contents:: Session
