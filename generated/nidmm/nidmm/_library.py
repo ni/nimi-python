@@ -63,6 +63,7 @@ class Library(object):
         self.niDMM_SetAttributeViInt32_cfunc = None
         self.niDMM_SetAttributeViReal64_cfunc = None
         self.niDMM_SetAttributeViString_cfunc = None
+        self.niDMM_SetRuntimeEnvironment_cfunc = None
         self.niDMM_UnlockSession_cfunc = None
         self.niDMM_close_cfunc = None
         self.niDMM_error_message_cfunc = None
@@ -427,6 +428,14 @@ class Library(object):
                 self.niDMM_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDMM_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDMM_SetAttributeViString_cfunc(vi, channel_name, attribute_id, attribute_value)
+
+    def niDMM_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niDMM_SetRuntimeEnvironment_cfunc is None:
+                self.niDMM_SetRuntimeEnvironment_cfunc = self._get_library_function('niDMM_SetRuntimeEnvironment')
+                self.niDMM_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDMM_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDMM_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niDMM_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
