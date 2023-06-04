@@ -9,6 +9,10 @@ version = config['module_version']
 api_name = f"{config['driver_name']} Python API"
 api_name_no_spaces_or_hyphens = api_name.replace(" ", "").replace("-", "")
 api_name_no_spaces_or_hyphens_lower = api_name_no_spaces_or_hyphens.lower()
+
+all_modules = {'nidcpower', 'nidigital', 'nidmm', 'nifgen', 'nimodinst', 'niscope', 'niswitch', 'nise', 'nitclk'}
+module_name   = config['module_name']
+external_modules = all_modules - {module_name}
 %>\
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -195,6 +199,9 @@ texinfo_documents = [
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-## TODO(ni-jfitzger): Add mappings for nimi-python APIs that reference other nimi-python APIs.
-## We can probably just list all of the mappings (other than maybe the current module, I think)
-intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+% for module in sorted(external_modules):
+    '${module}': ('https://${module}.readthedocs.io/en/latest/', None),
+% endfor
+}
