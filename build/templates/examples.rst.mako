@@ -25,7 +25,7 @@
     #       - (1) will link to the zip file for the current release
     #       - (2) will include current code snippet and URL will point to release version
 
-    with open('./LATEST_RELEASE') as vf:
+    with open(f'./src/{module_name}/LATEST_RELEASE') as vf:
         latest_release_version = vf.read().strip()
     released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{0}/{1}_examples.zip'.format(latest_release_version, module_name)
 
