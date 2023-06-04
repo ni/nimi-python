@@ -2,4 +2,5 @@
 config_additional_config = {
     'module_version': '1.4.5.dev0',
     'latest_runtime_version_tested_against': '2023 Q2',
+    'initial_release_year': '2019',
 }

@@ -32,7 +32,7 @@ GRPC_SUPPORTED := $(if $(wildcard $(PROTO_FILE)),$(true))
 PYTHON_CMD ?= python
 GRPC_SUPPORT_PARAM := $(if $(GRPC_SUPPORTED),--include-grpc-support)
 define GENERATE_SCRIPT
-$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $(PRINT),-v,) $(GRPC_SUPPORT_PARAM)
+$(PYTHON_CMD) -m build --template $1 --dest-dir $2 --metadata $3 $(if $4,--dest-file $4) $(if $(PRINT),-v,) $(GRPC_SUPPORT_PARAM)
 endef
 
 ifeq (,$(PRINT))
@@ -75,6 +75,8 @@ DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
+    index.rst \
+    $(DRIVER).rst \
     enums.rst \
     examples.rst \
     installation.inc \
@@ -87,6 +89,8 @@ DEFAULT_RST_FILES_TO_GENERATE := \
         grpc_session_options.rst \
     ) \
 
+DEFAULT_SPHINX_CONF_PY := $(DRIVER_DOCS_DIR)/conf.py
+DEFAULT_READTHEDOCS_CONFIG := $(DRIVER_DOCS_DIR)/.readthedocs.yaml
 
 # Files for tracking parts of the build
 SDIST_WHEEL_BUILD_DONE := $(LOG_DIR)/sdist_wheel_build_done
