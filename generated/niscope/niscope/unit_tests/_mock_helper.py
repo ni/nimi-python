@@ -167,6 +167,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
@@ -781,6 +783,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niScope_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
+
     def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         if self._defaults['UnlockSession']['return'] != 0:
             return self._defaults['UnlockSession']['return']
@@ -950,6 +957,8 @@ class SideEffectsHelper(object):
         mock_library.niScope_SetAttributeViReal64.return_value = 0
         mock_library.niScope_SetAttributeViString.side_effect = MockFunctionCallError("niScope_SetAttributeViString")
         mock_library.niScope_SetAttributeViString.return_value = 0
+        mock_library.niScope_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niScope_SetRuntimeEnvironment")
+        mock_library.niScope_SetRuntimeEnvironment.return_value = 0
         mock_library.niScope_UnlockSession.side_effect = MockFunctionCallError("niScope_UnlockSession")
         mock_library.niScope_UnlockSession.return_value = 0
         mock_library.niScope_close.side_effect = MockFunctionCallError("niScope_close")

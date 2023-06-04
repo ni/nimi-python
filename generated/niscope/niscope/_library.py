@@ -80,6 +80,7 @@ class Library(object):
         self.niScope_SetAttributeViInt64_cfunc = None
         self.niScope_SetAttributeViReal64_cfunc = None
         self.niScope_SetAttributeViString_cfunc = None
+        self.niScope_SetRuntimeEnvironment_cfunc = None
         self.niScope_UnlockSession_cfunc = None
         self.niScope_close_cfunc = None
         self.niScope_error_message_cfunc = None
@@ -548,6 +549,14 @@ class Library(object):
                 self.niScope_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niScope_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niScope_SetAttributeViString_cfunc(vi, channel_list, attribute_id, value)
+
+    def niScope_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niScope_SetRuntimeEnvironment_cfunc is None:
+                self.niScope_SetRuntimeEnvironment_cfunc = self._get_library_function('niScope_SetRuntimeEnvironment')
+                self.niScope_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niScope_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niScope_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niScope_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
