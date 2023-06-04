@@ -1,5 +1,7 @@
 # Useful functions
 
+CURRENT_DIR := $(shell pwd)
+
 # Traces to console, nicely formatted.
 # $1 is the Action, for example: "Generating"
 # $2 is a Path.

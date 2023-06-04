@@ -2,14 +2,18 @@
 import datetime
 current_year = datetime.datetime.today().year
 
-with open('./VERSION') as vf:
-    global_version = vf.read().strip()
+config = template_parameters['metadata'].config
+copyright_start_year = config['initial_release_year']
+version = config['module_version']
 
+api_name = f"{config['driver_name']} Python API"
+api_name_no_spaces_or_hyphens = api_name.replace(" ", "").replace("-", "")
+api_name_no_spaces_or_hyphens_lower = api_name_no_spaces_or_hyphens.lower()
 %>\
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# NI Modular Instruments Python API documentation build configuration file, created by
+# ${api_name} documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul 14 13:04:36 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -62,8 +66,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'NI Modular Instruments Python API'
-copyright = '2017-${current_year}, National Instruments Corporation'
+project = '${api_name}'
+copyright = '${copyright_start_year}-${current_year}, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -71,7 +75,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '${global_version}'
+release = '${version}'
 # The short X.Y version.
 version = release[:3]
 
@@ -112,7 +116,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['../_static']
 
 # Fix wide tables of RTD per https://github.com/rtfd/sphinx_rtd_theme/issues/117#issuecomment-41571653
 def setup(app):
@@ -164,7 +168,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'NIModularInstrumentsPythonAPI.tex', 'NI Modular Instruments Python API Documentation',
+    (master_doc, '${api_name_no_spaces_or_hyphens}.tex', '${api_name} Documentation',
      'NI', 'manual'),
 ]
 
@@ -174,7 +178,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'nimodularinstrumentspythonapi', 'NI Modular Instruments Python API Documentation',
+    (master_doc, '${api_name_no_spaces_or_hyphens_lower}', '${api_name} Documentation',
      [author], 1)
 ]
 
@@ -185,11 +189,12 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'NIModularInstrumentsPythonAPI', 'NI Modular Instruments Python API Documentation',
-     author, 'NIModularInstrumentsPythonAPI', 'One line description of project.',
+    (master_doc, '${api_name_no_spaces_or_hyphens}', '${api_name} Documentation',
+     author, '${api_name_no_spaces_or_hyphens}', 'One line description of project.',
      'Miscellaneous'),
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
-
+## TODO(ni-jfitzger): Add mappings for nimi-python APIs that reference other nimi-python APIs.
+## We can probably just list all of the mappings (other than maybe the current module, I think)
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
