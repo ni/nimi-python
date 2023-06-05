@@ -52,7 +52,7 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName']['channelNameBuffer'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
-        self._defaults['GetError']['code'] = None
+        self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['description'] = None
         self._defaults['GetPath'] = {}
         self._defaults['GetPath']['return'] = 0
@@ -94,6 +94,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetPath'] = {}
         self._defaults['SetPath']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
@@ -221,14 +223,14 @@ class SideEffectsHelper(object):
         channel_name_buffer.value = self._defaults['GetChannelName']['channelNameBuffer'].encode('ascii')
         return self._defaults['GetChannelName']['return']
 
-    def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
+    def niSwitch_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
             return self._defaults['GetError']['return']
-        # code
-        if self._defaults['GetError']['code'] is None:
-            raise MockFunctionCallError("niSwitch_GetError", param='code')
-        if code is not None:
-            code.contents.value = self._defaults['GetError']['code']
+        # error_code
+        if self._defaults['GetError']['errorCode'] is None:
+            raise MockFunctionCallError("niSwitch_GetError", param='errorCode')
+        if error_code is not None:
+            error_code.contents.value = self._defaults['GetError']['errorCode']
         # description
         if self._defaults['GetError']['description'] is None:
             raise MockFunctionCallError("niSwitch_GetError", param='description')
@@ -353,6 +355,11 @@ class SideEffectsHelper(object):
         if self._defaults['SetPath']['return'] != 0:
             return self._defaults['SetPath']['return']
         return self._defaults['SetPath']['return']
+
+    def niSwitch_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
 
     def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         if self._defaults['UnlockSession']['return'] != 0:
@@ -483,6 +490,8 @@ class SideEffectsHelper(object):
         mock_library.niSwitch_SetAttributeViString.return_value = 0
         mock_library.niSwitch_SetPath.side_effect = MockFunctionCallError("niSwitch_SetPath")
         mock_library.niSwitch_SetPath.return_value = 0
+        mock_library.niSwitch_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niSwitch_SetRuntimeEnvironment")
+        mock_library.niSwitch_SetRuntimeEnvironment.return_value = 0
         mock_library.niSwitch_UnlockSession.side_effect = MockFunctionCallError("niSwitch_UnlockSession")
         mock_library.niSwitch_UnlockSession.return_value = 0
         mock_library.niSwitch_WaitForDebounce.side_effect = MockFunctionCallError("niSwitch_WaitForDebounce")

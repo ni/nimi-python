@@ -276,6 +276,9 @@ class GrpcStubInterpreter(object):
             grpc_types.SetPathRequest(vi=self._vi, path_list=path_list),
         )
 
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        raise NotImplementedError('set_runtime_environment is not supported over gRPC')
+
     def unlock(self):  # noqa: N802
         self._lock.release()
 
