@@ -222,6 +222,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViReal64']['return'] = 0
         self._defaults['SetAttributeViString'] = {}
         self._defaults['SetAttributeViString']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['TDR'] = {}
         self._defaults['TDR']['return'] = 0
         self._defaults['TDR']['actualNumOffsets'] = None
@@ -995,6 +997,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetAttributeViString']['return']
         return self._defaults['SetAttributeViString']['return']
 
+    def niDigital_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
+
     def niDigital_TDR(self, vi, channel_list, apply_offsets, offsets_buffer_size, offsets, actual_num_offsets):  # noqa: N802
         if self._defaults['TDR']['return'] != 0:
             return self._defaults['TDR']['return']
@@ -1270,6 +1277,8 @@ class SideEffectsHelper(object):
         mock_library.niDigital_SetAttributeViReal64.return_value = 0
         mock_library.niDigital_SetAttributeViString.side_effect = MockFunctionCallError("niDigital_SetAttributeViString")
         mock_library.niDigital_SetAttributeViString.return_value = 0
+        mock_library.niDigital_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niDigital_SetRuntimeEnvironment")
+        mock_library.niDigital_SetRuntimeEnvironment.return_value = 0
         mock_library.niDigital_TDR.side_effect = MockFunctionCallError("niDigital_TDR")
         mock_library.niDigital_TDR.return_value = 0
         mock_library.niDigital_UnloadAllPatterns.side_effect = MockFunctionCallError("niDigital_UnloadAllPatterns")

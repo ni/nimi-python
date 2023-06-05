@@ -98,6 +98,7 @@ class Library(object):
         self.niDigital_SetAttributeViInt64_cfunc = None
         self.niDigital_SetAttributeViReal64_cfunc = None
         self.niDigital_SetAttributeViString_cfunc = None
+        self.niDigital_SetRuntimeEnvironment_cfunc = None
         self.niDigital_TDR_cfunc = None
         self.niDigital_UnloadAllPatterns_cfunc = None
         self.niDigital_UnloadSpecifications_cfunc = None
@@ -736,6 +737,14 @@ class Library(object):
                 self.niDigital_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_SetAttributeViString_cfunc(vi, channel_name, attribute, value)
+
+    def niDigital_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_SetRuntimeEnvironment_cfunc is None:
+                self.niDigital_SetRuntimeEnvironment_cfunc = self._get_library_function('niDigital_SetRuntimeEnvironment')
+                self.niDigital_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDigital_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niDigital_TDR(self, vi, channel_list, apply_offsets, offsets_buffer_size, offsets, actual_num_offsets):  # noqa: N802
         with self._func_lock:

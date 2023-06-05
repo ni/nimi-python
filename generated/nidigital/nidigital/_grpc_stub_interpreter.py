@@ -568,6 +568,9 @@ class GrpcStubInterpreter(object):
             grpc_types.SetAttributeViStringRequest(vi=self._vi, channel_name=channel_name, attribute=attribute, value_raw=value),
         )
 
+    def set_runtime_environment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        raise NotImplementedError('set_runtime_environment is not supported over gRPC')
+
     def tdr(self, channel_list, apply_offsets):  # noqa: N802
         response = self._invoke(
             self._client.TDR,
