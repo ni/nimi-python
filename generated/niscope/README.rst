@@ -143,7 +143,7 @@ The following is a basic example of using the **niscope** module to open a sessi
         # Find all record number 3
         rec3 = [wfm for wfm in waveforms if wfm.record == 3]
 
-The waveform returned from `fetch <niscope/class.html#fetch>`_ is a flat list of Python objects
+The waveform returned from `fetch <class.html#fetch>`_ is a flat list of Python objects
 
     - Attributes:
 
@@ -192,7 +192,7 @@ method takes an already allocated `numpy <http://www.numpy.org/>`_ array and put
     with session.initiate():
         waveform_infos = session.channels[channels].fetch_into(wfm=wfm, num_records=num_records)
 
-The waveform_infos returned from `fetch_into <niscope/class.html#fetch-into>`_ is a 1D list of Python objects
+The waveform_infos returned from `fetch_into <class.html#fetch-into>`_ is a 1D list of Python objects
 
     - Attributes:
 
