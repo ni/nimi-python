@@ -120,6 +120,9 @@ Contributing
 
 We welcome contributions! You can clone the project repository, build it, and install it by `following these instructions <https://github.com/ni/nimi-python/blob/master/CONTRIBUTING.md>`_.
 
+.. _fetch: https://niscope.readthedocs.io/en/stable/class.html#fetch
+.. _fetch_into: https://niscope.readthedocs.io/en/stable/class.html#fetch-into
+
 Usage
 ------
 
@@ -143,7 +146,7 @@ The following is a basic example of using the **niscope** module to open a sessi
         # Find all record number 3
         rec3 = [wfm for wfm in waveforms if wfm.record == 3]
 
-The waveform returned from `fetch <class.html#fetch>`_ is a flat list of Python objects
+The waveform returned from `fetch`_ is a flat list of Python objects
 
     - Attributes:
 
@@ -192,7 +195,7 @@ method takes an already allocated `numpy <http://www.numpy.org/>`_ array and put
     with session.initiate():
         waveform_infos = session.channels[channels].fetch_into(wfm=wfm, num_records=num_records)
 
-The waveform_infos returned from `fetch_into <class.html#fetch-into>`_ is a 1D list of Python objects
+The waveform_infos returned from `fetch_into`_ is a 1D list of Python objects
 
     - Attributes:
 
