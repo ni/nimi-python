@@ -22,12 +22,12 @@ Simply select the version you wish to view documentation for.
 
 For newer documentation, refer to the individual **Read the Docs** projects.
 
-* `nidcpower <https://nidcpower.readthedocs.io/en/latest>`_
-* `nidigital <https://nidigital.readthedocs.io/en/latest>`_
-* `nidmm <https://nidmm.readthedocs.io/en/latest>`_
-* `nifgen <https://nifgen.readthedocs.io/en/latest>`_
-* `nimodinst <https://nimodinst.readthedocs.io/en/latest>`_
-* `niscope <https://niscope.readthedocs.io/en/latest>`_
-* `nise <https://nise.readthedocs.io/en/latest>`_
-* `niswitch <https://niswitch.readthedocs.io/en/latest>`_
-* `nitclk <https://nitclk.readthedocs.io/en/latest>`_
+* `nidcpower <https://nidcpower.readthedocs.io/en/stable>`_
+* `nidigital <https://nidigital.readthedocs.io/en/stable>`_
+* `nidmm <https://nidmm.readthedocs.io/en/stable>`_
+* `nifgen <https://nifgen.readthedocs.io/en/stable>`_
+* `nimodinst <https://nimodinst.readthedocs.io/en/stable>`_
+* `niscope <https://niscope.readthedocs.io/en/stable>`_
+* `nise <https://nise.readthedocs.io/en/stable>`_
+* `niswitch <https://niswitch.readthedocs.io/en/stable>`_
+* `nitclk <https://nitclk.readthedocs.io/en/stable>`_
