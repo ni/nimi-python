@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.5](#145---2023-06-12)
 * [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
@@ -31,56 +31,28 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.4.5 - 2023-06-12
 * ### ALL
-    * #### Added
-    * #### Changed
     * #### Removed
         * `easy_install` support
-* ### `nidcpower` (NI-DCPower)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-    * #### Changed
-    * #### Removed
 * ### `nidmm` (NI-DMM)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-    * #### Changed
-    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
         * `get_channel_names()`
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
     * #### Changed
         * Fix [#1770](https://github.com/ni/nimi-python/issues/1770): fetch(), read(), and friends return wrong data when called with channel ranges on multi-instrument session.
-    * #### Removed
 * ### `niswitch` (NI-SWITCH)
     * #### Added
         * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
-
 
 ## 1.4.4 - 2023-04-14
 * ### ALL
