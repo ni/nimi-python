@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nidigital examples here <https://github.com/ni/nimi-python/releases/download/1.4.5/nidigital_examples.zip>`_
+`You can download all nidigital examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.4.5/nidigital_examples.zip>`_
 
 nidigital_burst_with_start_trigger.py
 -------------------------------------
@@ -10,7 +10,7 @@ nidigital_burst_with_start_trigger.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/1.4.5/src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
+   :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
 
 nidigital_configure_time_set_and_voltage_levels.py
 --------------------------------------------------
@@ -19,7 +19,7 @@ nidigital_configure_time_set_and_voltage_levels.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/1.4.5/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
+   :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
 
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
@@ -28,5 +28,5 @@ nidigital_ppmu_source_and_measure.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/1.4.5/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
+   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
