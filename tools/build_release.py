@@ -38,7 +38,7 @@ Steps
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
-    * Update contents of src/<driver>/LATEST_RELEASE with the versions of each module being released by dropping the `'.dev0' suffix.
+    * Update contents of src/<driver>/LATEST_RELEASE with the versions of each module being released by dropping the '.dev0' suffix.
     * `python3 tools/build_release.py --update --release`
         * This will update all the versions to remove any '.devN'
         * Commit to branch
