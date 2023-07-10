@@ -11,6 +11,7 @@ def example(resource_name, options, voltage, length):
         session.measure_record_length = length
         session.measure_record_length_is_finite = True
         session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
         session.voltage_level = voltage
 
         session.commit()
@@ -56,5 +57,3 @@ def test_main():
 
 if __name__ == '__main__':
     main()
-
-
