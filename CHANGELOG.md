@@ -40,7 +40,6 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
-        * Updated the nidcpower_measure_record example to ensure Output Function DC Voltage is correctly selected.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
