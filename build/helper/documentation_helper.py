@@ -60,8 +60,6 @@ def get_repeated_capability_single_index_python_example(rep_cap_config):
     '''Returns a python code snippet and explanation for example usage of a repeated capability.'''
     rep_cap_name = rep_cap_config['python_name']
 
-    # TODO(ni-jfitzger): Handle read-only properties (snippet to print the value)
-
     # defaults
     attr_for_example = 'channel_enabled'
     attr_type_for_example = 'property'
@@ -93,8 +91,12 @@ def get_repeated_capability_single_index_python_example(rep_cap_config):
         explanation_value = f':py:data:`~{value}`'
 
     if attr_type_for_example == "property":
-        snippet = f'session.{rep_cap_name}[{index}].{attr_for_example} = {value}'
-        explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {index}."
+        if value is None:
+            snippet = f'print(session.{rep_cap_name}[{index}].{attr_for_example})'
+            explanation = f"prints {class_attr_ref} for {rep_cap_name} {index}."
+        else:
+            snippet = f'session.{rep_cap_name}[{index}].{attr_for_example} = {value}'
+            explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {index}."
     elif attr_type_for_example == "method":
         if value is None:
             snippet = f'session.{rep_cap_name}[{index}].{attr_for_example}()'
@@ -111,8 +113,6 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
     '''Returns a python code snippet and explanation  for example usage of a repeated capability.'''
     rep_cap_name = rep_cap_config['python_name']
 
-    # TODO(ni-jfitzger): Handle read-only properties (snippet to print the value)
-
     # defaults
     attr_for_example = 'channel_enabled'
     attr_type_for_example = 'property'
@@ -121,7 +121,7 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
     value = True
     value_type = bool
 
-    # TODO (ni-jfitzger): reduce code duplication between this and other function
+    # TODO(ni-jfitzger): reduce code duplication between this and other function
     if 'attr_for_docs_example' in rep_cap_config and rep_cap_config['attr_for_docs_example']:
         attr_for_example = rep_cap_config['attr_for_docs_example']
         if 'attr_type_for_docs_example' in rep_cap_config and rep_cap_config['attr_type_for_docs_example']:
@@ -145,8 +145,12 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
         explanation_value = f':py:data:`~{value}`'
 
     if attr_type_for_example == "property":
-        snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example} = {value}'
-        explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {', '.join(indices)}."
+        if value is None:
+            snippet = f'print(session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example})'
+            explanation = f"prints {class_attr_ref} for {rep_cap_name} {', '.join(indices)} or errors if the value is not the same for all."
+        else:
+            snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example} = {value}'
+            explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {', '.join(indices)}."
     elif attr_type_for_example == "method":
         if value is None:
             snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example}()'

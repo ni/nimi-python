@@ -33,15 +33,15 @@ channels
 
         .. code:: python
 
-            session.channels[0].channel_enabled = True
+            session.channels[0].output_function = nidcpower.OutputFunction.DC_CURRENT
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0.
+        sets :py:attr:`output_function` to :py:data:`~nidcpower.OutputFunction.DC_CURRENT` for channels 0.
 
         .. code:: python
 
-            session.channels[0, 2].channel_enabled = True
+            session.channels[0, 2].output_function = nidcpower.OutputFunction.DC_CURRENT
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.
+        sets :py:attr:`output_function` to :py:data:`~nidcpower.OutputFunction.DC_CURRENT` for channels 0, 2.
 
 instruments
 -----------
@@ -50,14 +50,14 @@ instruments
 
         .. code:: python
 
-            session.instruments[0].channel_enabled = True
+            print(session.instruments['Dev1'].serial_number)
 
-        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0.
+        prints :py:attr:`serial_number` for instruments 'Dev1'.
 
         .. code:: python
 
-            session.instruments[0, 2].channel_enabled = True
+            print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)
 
-        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0, 2.
+        prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all.
 
 

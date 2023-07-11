@@ -768,6 +768,18 @@ def test_get_repeated_capability_single_index_python_example():
     method_no_val_explanation = "calls :py:meth:`disable_sites` for sites 0."
     assert (method_no_val_snippet, method_no_val_explanation) == get_repeated_capability_single_index_python_example(method_no_val_rep_cap)
 
+    property_no_val_rep_cap = {
+        'attr_for_docs_example': 'serial_number',
+        'attr_type_for_docs_example': 'property',
+        'prefix': '',
+        'python_name': 'instruments',
+        'string_indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
+        'value_for_docs_example': None,
+    }
+    property_no_val_snippet = "print(session.instruments['Dev1'].serial_number)"
+    property_no_val_explanation = "prints :py:attr:`serial_number` for instruments 'Dev1'."
+    assert (property_no_val_snippet, property_no_val_explanation) == get_repeated_capability_single_index_python_example(property_no_val_rep_cap)
+
     enum_val_rep_cap = {
         'attr_for_docs_example': 'conditional_jump_trigger_type',
         'attr_type_for_docs_example': 'property',
@@ -820,6 +832,18 @@ def test_get_repeated_capability_tuple_index_python_example():
     method_no_val_snippet = "session.sites[0, 2].disable_sites()"
     method_no_val_explanation = "calls :py:meth:`disable_sites` for sites 0, 2."
     assert (method_no_val_snippet, method_no_val_explanation) == get_repeated_capability_tuple_index_python_example(method_no_val_rep_cap)
+
+    property_no_val_rep_cap = {
+        'attr_for_docs_example': 'serial_number',
+        'attr_type_for_docs_example': 'property',
+        'prefix': '',
+        'python_name': 'instruments',
+        'string_indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
+        'value_for_docs_example': None,
+    }
+    property_no_val_snippet = "print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)"
+    property_no_val_explanation = "prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all."
+    assert (property_no_val_snippet, property_no_val_explanation) == get_repeated_capability_tuple_index_python_example(property_no_val_rep_cap)
 
     enum_val_rep_cap = {
         'attr_for_docs_example': 'conditional_jump_trigger_type',
