@@ -8,7 +8,8 @@ config_additional_config = {
             'attr_for_docs_example': 'is_source_channel',
             'attr_type_for_docs_example': 'property',
             'prefix': '',
-            'python_name': 'channels'
+            'python_name': 'channels',
+            'value_for_docs_example': True,
         }
     ],
 }

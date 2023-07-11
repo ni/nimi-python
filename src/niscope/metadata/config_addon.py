@@ -18,8 +18,11 @@ config_additional_config = {
     ],
     'repeated_capabilities': [
         {
+            'attr_for_docs_example': 'channel_enabled',
+            'attr_type_for_docs_example': 'property',
             'prefix': '',
-            'python_name': 'channels'
+            'python_name': 'channels',
+            'value_for_docs_example': True,
         },
         {
             'attr_for_docs_example': 'serial_number',

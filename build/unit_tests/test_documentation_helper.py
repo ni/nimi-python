@@ -734,7 +734,13 @@ def test_add_notes_re_links():
     "rep_cap,snippet,explanation",
     [
         pytest.param(
-            {'prefix': '', 'python_name': 'channels'},
+            {
+                'attr_for_docs_example': 'channel_enabled',
+                'attr_type_for_docs_example': 'property',
+                'prefix': '',
+                'python_name': 'channels',
+                'value_for_docs_example': True,
+            },
             'session.channels[0].channel_enabled = True',
             'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.',
             id="defaults",
@@ -753,9 +759,12 @@ def test_add_notes_re_links():
         ),
         pytest.param(
             {
+                'attr_for_docs_example': 'channel_enabled',
+                'attr_type_for_docs_example': 'property',
                 'indices_for_docs_example': [0, 1],
                 'prefix': '',
                 'python_name': 'channels',
+                'value_for_docs_example': True,
             },
             'session.channels[0].channel_enabled = True',
             'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.',
@@ -822,7 +831,13 @@ def test_get_repeated_capability_single_index_python_example(rep_cap, snippet, e
     "rep_cap,snippet,explanation",
     [
         pytest.param(
-            {'prefix': '', 'python_name': 'channels'},
+            {
+                'attr_for_docs_example': 'channel_enabled',
+                'attr_type_for_docs_example': 'property',
+                'prefix': '',
+                'python_name': 'channels',
+                'value_for_docs_example': True,
+            },
             'session.channels[0, 2].channel_enabled = True',
             'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.',
             id="defaults",
@@ -841,9 +856,12 @@ def test_get_repeated_capability_single_index_python_example(rep_cap, snippet, e
         ),
         pytest.param(
             {
+                'attr_for_docs_example': 'channel_enabled',
+                'attr_type_for_docs_example': 'property',
                 'indices_for_docs_example': [0, 1],
                 'prefix': '',
                 'python_name': 'channels',
+                'value_for_docs_example': True,
             },
             'session.channels[0, 1].channel_enabled = True',
             'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1.',
