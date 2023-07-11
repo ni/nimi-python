@@ -79,8 +79,8 @@ def get_repeated_capability_single_index_python_example(rep_cap_config):
 
     if 'indices_for_docs_example' in rep_cap_config:
         index = rep_cap_config["indices_for_docs_example"][0]
-    elif 'string_indices_for_docs_example' in rep_cap_config:
-        index = repr(rep_cap_config["string_indices_for_docs_example"][0])
+        if isinstance(index, str):
+            index = repr(index)
 
     if 'value_for_docs_example' in rep_cap_config:
         value = rep_cap_config['value_for_docs_example']
@@ -137,8 +137,6 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
 
     if 'indices_for_docs_example' in rep_cap_config:
         indices = [repr(index) for index in rep_cap_config["indices_for_docs_example"]]
-    elif 'string_indices_for_docs_example' in rep_cap_config:
-        indices = [repr(index) for index in rep_cap_config['string_indices_for_docs_example']]
 
     if 'value_for_docs_example' in rep_cap_config:
         value = rep_cap_config['value_for_docs_example']

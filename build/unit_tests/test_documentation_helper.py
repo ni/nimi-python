@@ -757,9 +757,9 @@ def test_get_repeated_capability_single_index_python_example():
     string_indices_with_numerical_val_rep_cap = {
         'attr_for_docs_example': 'vil',
         'attr_type_for_docs_example': 'property',
+        'indices_for_docs_example': ["PinA", "PinB", "CPin"],
         'prefix': '',
         'python_name': 'pins',
-        'string_indices_for_docs_example': ["PinA", "PinB", "CPin"],
         'value_for_docs_example': 2,
     }
     string_indices_with_numerical_val_snippet = "session.pins['PinA'].vil = 2"
@@ -780,9 +780,9 @@ def test_get_repeated_capability_single_index_python_example():
     property_no_val_rep_cap = {
         'attr_for_docs_example': 'serial_number',
         'attr_type_for_docs_example': 'property',
+        'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
         'prefix': '',
         'python_name': 'instruments',
-        'string_indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
         'value_for_docs_example': None,
     }
     property_no_val_snippet = "print(session.instruments['Dev1'].serial_number)"
@@ -831,9 +831,9 @@ def test_get_repeated_capability_tuple_index_python_example():
     string_indices_with_numerical_val_rep_cap = {
         'attr_for_docs_example': 'vil',
         'attr_type_for_docs_example': 'property',
+        'indices_for_docs_example': ["PinA", "PinB", "CPin"],
         'prefix': '',
         'python_name': 'pins',
-        'string_indices_for_docs_example': ["PinA", "PinB", "CPin"],
         'value_for_docs_example': 2,
     }
     string_indices_with_numerical_val_snippet = "session.pins['PinA', 'PinB', 'CPin'].vil = 2"
@@ -854,9 +854,9 @@ def test_get_repeated_capability_tuple_index_python_example():
     property_no_val_rep_cap = {
         'attr_for_docs_example': 'serial_number',
         'attr_type_for_docs_example': 'property',
+        'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
         'prefix': '',
         'python_name': 'instruments',
-        'string_indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
         'value_for_docs_example': None,
     }
     property_no_val_snippet = "print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)"

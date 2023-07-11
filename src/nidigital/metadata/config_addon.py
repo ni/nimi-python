@@ -21,17 +21,17 @@ config_additional_config = {
         {
             'attr_for_docs_example': 'vil',
             'attr_type_for_docs_example': 'property',
+            'indices_for_docs_example': ["PinA", "PinB", "CPin"],
             'prefix': '',
             'python_name': 'pins',
-            'string_indices_for_docs_example': ["PinA", "PinB", "CPin"],
             'value_for_docs_example': 2,
         },
         {
             'attr_for_docs_example': 'timing_absolute_delay',
             'attr_type_for_docs_example': 'property',
+            'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
             'prefix': '',
             'python_name': 'instruments',
-            'string_indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
             'value_for_docs_example': 5e-09,
         },
         {
