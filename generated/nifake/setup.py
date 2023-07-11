@@ -48,8 +48,7 @@ setup(
     ],
     extras_require={
         'grpc': [
-            'grpcio>=1.49.1,<1.53;python_version=="3.7"',  # no 32-bit wheel for 1.53.0 and later
-            'grpcio>=1.49.1,<2.0;python_version>"3.7"',
+            'grpcio>=1.49.1,<2.0',
             'protobuf>=4.21,<5.0'
         ],
     },
@@ -65,7 +64,6 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
