@@ -32,14 +32,14 @@ channels
 
         .. code:: python
 
-            session.channels[0].channel_enabled = True
+            session.channels[0].is_source_channel = True
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0.
+        sets :py:attr:`is_source_channel` to :python:`True` for channels 0.
 
         .. code:: python
 
-            session.channels[0, 2].channel_enabled = True
+            session.channels[0, 2].is_source_channel = True
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.
+        sets :py:attr:`is_source_channel` to :python:`True` for channels 0, 2.
 
 
