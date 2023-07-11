@@ -35,15 +35,15 @@ channels
 
         .. code:: python
 
-            session.channels[0].channel_enabled = True
+            session.channels[0].func_amplitude = 0.5
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0.
+        sets :py:attr:`func_amplitude` to :python:`0.5` for channels 0.
 
         .. code:: python
 
-            session.channels[0, 2].channel_enabled = True
+            session.channels[0, 1].func_amplitude = 0.5
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.
+        sets :py:attr:`func_amplitude` to :python:`0.5` for channels 0, 1.
 
 script_triggers
 ---------------
@@ -52,15 +52,15 @@ script_triggers
 
         .. code:: python
 
-            session.script_triggers[0].channel_enabled = True
+            session.script_triggers[0].exported_script_trigger_output_terminal = '/Dev1/PXI_Trig0'
 
-        sets :py:attr:`channel_enabled` to :python:`True` for script_triggers 0.
+        sets :py:attr:`exported_script_trigger_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for script_triggers 0.
 
         .. code:: python
 
-            session.script_triggers[0, 2].channel_enabled = True
+            session.script_triggers[0, 2].exported_script_trigger_output_terminal = '/Dev1/PXI_Trig0'
 
-        sets :py:attr:`channel_enabled` to :python:`True` for script_triggers 0, 2.
+        sets :py:attr:`exported_script_trigger_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for script_triggers 0, 2.
 
 markers
 -------
@@ -69,15 +69,15 @@ markers
 
         .. code:: python
 
-            session.markers[0].channel_enabled = True
+            session.markers[0].marker_event_output_terminal = '/Dev1/PXI_Trig0'
 
-        sets :py:attr:`channel_enabled` to :python:`True` for markers 0.
+        sets :py:attr:`marker_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for markers 0.
 
         .. code:: python
 
-            session.markers[0, 2].channel_enabled = True
+            session.markers[0, 2].marker_event_output_terminal = '/Dev1/PXI_Trig0'
 
-        sets :py:attr:`channel_enabled` to :python:`True` for markers 0, 2.
+        sets :py:attr:`marker_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for markers 0, 2.
 
 data_markers
 ------------
@@ -86,14 +86,14 @@ data_markers
 
         .. code:: python
 
-            session.data_markers[0].channel_enabled = True
+            session.data_markers[0].data_marker_event_level_polarity = nifgen.DataMarkerEventLevelPolarity.LOW
 
-        sets :py:attr:`channel_enabled` to :python:`True` for data_markers 0.
+        sets :py:attr:`data_marker_event_level_polarity` to :py:data:`~nifgen.DataMarkerEventLevelPolarity.LOW` for data_markers 0.
 
         .. code:: python
 
-            session.data_markers[0, 2].channel_enabled = True
+            session.data_markers[0, 2].data_marker_event_level_polarity = nifgen.DataMarkerEventLevelPolarity.LOW
 
-        sets :py:attr:`channel_enabled` to :python:`True` for data_markers 0, 2.
+        sets :py:attr:`data_marker_event_level_polarity` to :py:data:`~nifgen.DataMarkerEventLevelPolarity.LOW` for data_markers 0, 2.
 
 

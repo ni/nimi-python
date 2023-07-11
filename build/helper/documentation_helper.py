@@ -76,15 +76,19 @@ def get_repeated_capability_single_index_python_example(rep_cap_config):
                 class_attr_ref = f':py:attr:`{attr_for_example}`'
             elif attr_type_for_example == 'method':
                 class_attr_ref = f':py:meth:`{attr_for_example}`'
-        if 'string_indices_for_docs_example' in rep_cap_config:
-            index = repr(rep_cap_config["string_indices_for_docs_example"][0])
-        if 'value_for_docs_example' in rep_cap_config:
-            value = rep_cap_config['value_for_docs_example']
-            value_type = type(value)
-            if 'value_type_for_docs_example' in rep_cap_config:
-                value_type = rep_cap_config['value_type_for_docs_example']
-            if not value_type == 'enum' and isinstance(value, str):
-                value = repr(value)
+
+    if 'indices_for_docs_example' in rep_cap_config:
+        index = rep_cap_config["indices_for_docs_example"][0]
+    elif 'string_indices_for_docs_example' in rep_cap_config:
+        index = repr(rep_cap_config["string_indices_for_docs_example"][0])
+
+    if 'value_for_docs_example' in rep_cap_config:
+        value = rep_cap_config['value_for_docs_example']
+        value_type = type(value)
+        if 'value_type_for_docs_example' in rep_cap_config:
+            value_type = rep_cap_config['value_type_for_docs_example']
+        if not value_type == 'enum' and isinstance(value, str):
+            value = repr(value)
 
     explanation_value = f':python:`{value}`'
     if value_type == 'enum':
@@ -130,15 +134,19 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
                 class_attr_ref = f':py:attr:`{attr_for_example}`'
             elif attr_type_for_example == 'method':
                 class_attr_ref = f':py:meth:`{attr_for_example}`'
-        if 'string_indices_for_docs_example' in rep_cap_config:
-            indices = [repr(index) for index in rep_cap_config['string_indices_for_docs_example']]
-        if 'value_for_docs_example' in rep_cap_config:
-            value = rep_cap_config['value_for_docs_example']
-            value_type = type(value)
-            if 'value_type_for_docs_example' in rep_cap_config:
-                value_type = rep_cap_config['value_type_for_docs_example']
-            if not value_type == 'enum' and isinstance(value, str):
-                value = repr(value)
+
+    if 'indices_for_docs_example' in rep_cap_config:
+        indices = [repr(index) for index in rep_cap_config["indices_for_docs_example"]]
+    elif 'string_indices_for_docs_example' in rep_cap_config:
+        indices = [repr(index) for index in rep_cap_config['string_indices_for_docs_example']]
+
+    if 'value_for_docs_example' in rep_cap_config:
+        value = rep_cap_config['value_for_docs_example']
+        value_type = type(value)
+        if 'value_type_for_docs_example' in rep_cap_config:
+            value_type = rep_cap_config['value_type_for_docs_example']
+        if not value_type == 'enum' and isinstance(value, str):
+            value = repr(value)
 
     explanation_value = f':python:`{value}`'
     if value_type == 'enum':

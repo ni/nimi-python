@@ -745,6 +745,15 @@ def test_get_repeated_capability_single_index_python_example():
     property_with_string_val_explanation = "sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0."
     assert (property_with_string_val_snippet, property_with_string_val_explanation) == get_repeated_capability_single_index_python_example(property_with_string_val_rep_cap)
 
+    custom_indices_rep_cap = {
+        'indices_for_docs_example': [0, 1],
+        'prefix': '',
+        'python_name': 'channels',
+    }
+    custom_indices_snippet = 'session.channels[0].channel_enabled = True'
+    custom_indices_explanation = 'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.'
+    assert (custom_indices_snippet, custom_indices_explanation) == get_repeated_capability_single_index_python_example(custom_indices_rep_cap)
+
     string_indices_with_numerical_val_rep_cap = {
         'attr_for_docs_example': 'vil',
         'attr_type_for_docs_example': 'property',
@@ -809,6 +818,15 @@ def test_get_repeated_capability_tuple_index_python_example():
     property_with_string_val_snippet = "session.pattern_opcode_events[0, 2].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'"
     property_with_string_val_explanation = "sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0, 2."
     assert (property_with_string_val_snippet, property_with_string_val_explanation) == get_repeated_capability_tuple_index_python_example(property_with_string_val_rep_cap)
+
+    custom_indices_rep_cap = {
+        'indices_for_docs_example': [0, 1],
+        'prefix': '',
+        'python_name': 'channels',
+    }
+    custom_indices_snippet = 'session.channels[0, 1].channel_enabled = True'
+    custom_indices_explanation = 'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1.'
+    assert (custom_indices_snippet, custom_indices_explanation) == get_repeated_capability_tuple_index_python_example(custom_indices_rep_cap)
 
     string_indices_with_numerical_val_rep_cap = {
         'attr_for_docs_example': 'vil',
