@@ -15,5 +15,19 @@ config_additional_config = {
             'file_name': 'measurement_stats',
             'python_name': 'MeasurementStats'
         }
-    ]
+    ],
+    'repeated_capabilities': [
+        {
+            'prefix': '',
+            'python_name': 'channels'
+        },
+        {
+            'attr_for_docs_example': 'serial_number',
+            'attr_type_for_docs_example': 'property',
+            'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
+            'prefix': '',
+            'python_name': 'instruments',
+            'value_for_docs_example': None,
+        }
+    ],
 }

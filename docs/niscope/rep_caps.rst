@@ -50,14 +50,14 @@ instruments
 
         .. code:: python
 
-            session.instruments[0].channel_enabled = True
+            print(session.instruments['Dev1'].serial_number)
 
-        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0.
+        prints :py:attr:`serial_number` for instruments 'Dev1'.
 
         .. code:: python
 
-            session.instruments[0, 2].channel_enabled = True
+            print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)
 
-        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0, 2.
+        prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all.
 
 
