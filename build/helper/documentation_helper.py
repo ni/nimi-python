@@ -11,22 +11,9 @@ from .parameter_usage_options import ParameterUsageOptions
 
 import pprint
 import re
-import string
 import sys
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
-
-
-# Python 2/3 compatibility
-def _normalize_string_type(d):
-    '''Normalize string type between python2 & python3'''
-    if sys.version_info.major < 3:
-        if type(d) is dict:
-            for k in d:
-                d[k] = _normalize_string_type(d[k])
-        elif type(d) is str:
-            d = d.decode('utf-8')
-    return d
 
 
 def get_indented_docstring_snippet(d, indent=4):
@@ -52,7 +39,7 @@ def get_indented_docstring_snippet(d, indent=4):
             ret_val += '\n'
             if len(line.rstrip()) > 0:
                 ret_val += (' ' * indent)
-        ret_val += _normalize_string_type(line.rstrip())
+        ret_val += line.rstrip()
     return ret_val
 
 
@@ -637,8 +624,6 @@ def as_rest_table(data, header=True):
     template = '{0}{1}{2}'.format(start_of_line, meta_template.format(*sizes), end_of_line)
     # determine top/bottom borders
     to_separator = {ord('|'): '+', ord(' '): '-'}
-    if sys.version_info.major < 3:
-        to_separator = string.maketrans('| ', '+-')
 
     start_of_line = start_of_line.translate(to_separator)
     vertical_separator = vertical_separator.translate(to_separator)
@@ -646,8 +631,6 @@ def as_rest_table(data, header=True):
     separator = '{0}{1}{2}'.format(start_of_line, vertical_separator.join([x * line_marker for x in sizes]), end_of_line)
     # determine header separator
     th_separator_tr = {ord('-'): '='}
-    if sys.version_info.major < 3:
-        th_separator_tr = string.maketrans('-', '=')
     start_of_line = start_of_line.translate(th_separator_tr)
     line_marker = line_marker.translate(th_separator_tr)
     vertical_separator = vertical_separator.translate(th_separator_tr)
