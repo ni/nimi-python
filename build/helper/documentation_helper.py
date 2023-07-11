@@ -56,17 +56,16 @@ def get_indented_docstring_snippet(d, indent=4):
     return ret_val
 
 
-def get_repeated_capability_single_index_python_example(rep_cap_config):
-    '''Returns a python code snippet and explanation for example usage of a repeated capability.'''
-    rep_cap_name = rep_cap_config['python_name']
-
+def _get_repeated_capability_example_info(rep_cap_config):
+    '''Returns values needed for building a rep cap doc snippet and explanation.'''
     # defaults
     attr_for_example = 'channel_enabled'
     attr_type_for_example = 'property'
     class_attr_ref = f':py:attr:`{attr_for_example}`'
     index = 0
+    indices = ["0", "2"]  # use strings so that we can call join
     value = True
-    value_type = bool
+    value_type = None  # we only set this for enum values
 
     if 'attr_for_docs_example' in rep_cap_config and rep_cap_config['attr_for_docs_example']:
         attr_for_example = rep_cap_config['attr_for_docs_example']
@@ -81,6 +80,7 @@ def get_repeated_capability_single_index_python_example(rep_cap_config):
         index = rep_cap_config["indices_for_docs_example"][0]
         if isinstance(index, str):
             index = repr(index)
+        indices = [repr(index) for index in rep_cap_config["indices_for_docs_example"]]
 
     if 'value_for_docs_example' in rep_cap_config:
         value = rep_cap_config['value_for_docs_example']
@@ -93,6 +93,30 @@ def get_repeated_capability_single_index_python_example(rep_cap_config):
     explanation_value = f':python:`{value}`'
     if value_type == 'enum':
         explanation_value = f':py:data:`~{value}`'
+
+    ret_val = {
+        'attr_for_example': attr_for_example,
+        'attr_type_for_example': attr_type_for_example,
+        'class_attr_ref': class_attr_ref,
+        'explanation_value': explanation_value,
+        'index': index,
+        'indices': indices,
+        'value': value,
+    }
+    return ret_val
+
+
+def get_repeated_capability_single_index_python_example(rep_cap_config):
+    '''Returns a python code snippet and explanation for example usage of a repeated capability.'''
+    rep_cap_name = rep_cap_config['python_name']
+
+    rep_cap_info = _get_repeated_capability_example_info(rep_cap_config)
+    attr_for_example = rep_cap_info['attr_for_example']
+    attr_type_for_example = rep_cap_info['attr_type_for_example']
+    class_attr_ref = rep_cap_info['class_attr_ref']
+    explanation_value = rep_cap_info['explanation_value']
+    index = rep_cap_info['index']
+    value = rep_cap_info['value']
 
     if attr_type_for_example == "property":
         if value is None:
@@ -117,38 +141,13 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
     '''Returns a python code snippet and explanation  for example usage of a repeated capability.'''
     rep_cap_name = rep_cap_config['python_name']
 
-    # defaults
-    attr_for_example = 'channel_enabled'
-    attr_type_for_example = 'property'
-    class_attr_ref = f':py:attr:`{attr_for_example}`'
-    indices = ["0", "2"]  # use strings so that we can call join
-    value = True
-    value_type = bool
-
-    # TODO(ni-jfitzger): reduce code duplication between this and other function
-    if 'attr_for_docs_example' in rep_cap_config and rep_cap_config['attr_for_docs_example']:
-        attr_for_example = rep_cap_config['attr_for_docs_example']
-        if 'attr_type_for_docs_example' in rep_cap_config and rep_cap_config['attr_type_for_docs_example']:
-            attr_type_for_example = rep_cap_config['attr_type_for_docs_example']
-            if attr_type_for_example == 'property':
-                class_attr_ref = f':py:attr:`{attr_for_example}`'
-            elif attr_type_for_example == 'method':
-                class_attr_ref = f':py:meth:`{attr_for_example}`'
-
-    if 'indices_for_docs_example' in rep_cap_config:
-        indices = [repr(index) for index in rep_cap_config["indices_for_docs_example"]]
-
-    if 'value_for_docs_example' in rep_cap_config:
-        value = rep_cap_config['value_for_docs_example']
-        value_type = type(value)
-        if 'value_type_for_docs_example' in rep_cap_config:
-            value_type = rep_cap_config['value_type_for_docs_example']
-        if not value_type == 'enum' and isinstance(value, str):
-            value = repr(value)
-
-    explanation_value = f':python:`{value}`'
-    if value_type == 'enum':
-        explanation_value = f':py:data:`~{value}`'
+    rep_cap_info = _get_repeated_capability_example_info(rep_cap_config)
+    attr_for_example = rep_cap_info['attr_for_example']
+    attr_type_for_example = rep_cap_info['attr_type_for_example']
+    class_attr_ref = rep_cap_info['class_attr_ref']
+    explanation_value = rep_cap_info['explanation_value']
+    indices = rep_cap_info['indices']
+    value = rep_cap_info['value']
 
     if attr_type_for_example == "property":
         if value is None:
