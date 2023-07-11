@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# NI Modular Instruments Python API documentation build configuration file, created by
+# NI-Digital Pattern Driver Python API documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul 14 13:04:36 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -54,8 +54,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'NI Modular Instruments Python API'
-copyright = '2017-2023, National Instruments Corporation'
+project = 'NI-Digital Pattern Driver Python API'
+copyright = '2019-2023, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -63,7 +63,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.4.5.dev0'
+release = '1.4.6.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -72,7 +72,7 @@ version = release[:3]
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -104,7 +104,7 @@ html_theme_options = {
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ['../_static']
 
 # Fix wide tables of RTD per https://github.com/rtfd/sphinx_rtd_theme/issues/117#issuecomment-41571653
 def setup(app):
@@ -156,7 +156,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'NIModularInstrumentsPythonAPI.tex', 'NI Modular Instruments Python API Documentation',
+    (master_doc, 'NIDigitalPatternDriverPythonAPI.tex', 'NI-Digital Pattern Driver Python API Documentation',
      'NI', 'manual'),
 ]
 
@@ -166,7 +166,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'nimodularinstrumentspythonapi', 'NI Modular Instruments Python API Documentation',
+    (master_doc, 'nidigitalpatterndriverpythonapi', 'NI-Digital Pattern Driver Python API Documentation',
      [author], 1)
 ]
 
@@ -177,11 +177,20 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'NIModularInstrumentsPythonAPI', 'NI Modular Instruments Python API Documentation',
-     author, 'NIModularInstrumentsPythonAPI', 'One line description of project.',
+    (master_doc, 'NIDigitalPatternDriverPythonAPI', 'NI-Digital Pattern Driver Python API Documentation',
+     author, 'NIDigitalPatternDriverPythonAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
-
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3', None),
+    'nidcpower': ('https://nidcpower.readthedocs.io/en/latest/', None),
+    'nidmm': ('https://nidmm.readthedocs.io/en/latest/', None),
+    'nifgen': ('https://nifgen.readthedocs.io/en/latest/', None),
+    'nimodinst': ('https://nimodinst.readthedocs.io/en/latest/', None),
+    'niscope': ('https://niscope.readthedocs.io/en/latest/', None),
+    'nise': ('https://nise.readthedocs.io/en/latest/', None),
+    'niswitch': ('https://niswitch.readthedocs.io/en/latest/', None),
+    'nitclk': ('https://nitclk.readthedocs.io/en/latest/', None),
+}

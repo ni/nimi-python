@@ -11,16 +11,16 @@ API Reference
 
 .. toctree::
 
-   ${module_name}/class
+   class
 % if len(config['repeated_capabilities']) > 0:
-   ${module_name}/rep_caps
+   rep_caps
 % endif
 % if len(enums) > 0:
-   ${module_name}/enums
+   enums
 % endif
-   ${module_name}/errors
-   ${module_name}/examples
+   errors
+   examples
 % if grpc_supported:
-   ${module_name}/grpc_session_options
+   grpc_session_options
 % endif
 

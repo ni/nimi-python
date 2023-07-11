@@ -77,6 +77,7 @@ class Library(object):
         self.niFgen_SetAttributeViReal64_cfunc = None
         self.niFgen_SetAttributeViString_cfunc = None
         self.niFgen_SetNamedWaveformNextWritePosition_cfunc = None
+        self.niFgen_SetRuntimeEnvironment_cfunc = None
         self.niFgen_SetWaveformNextWritePosition_cfunc = None
         self.niFgen_UnlockSession_cfunc = None
         self.niFgen_WaitUntilDone_cfunc = None
@@ -560,6 +561,14 @@ class Library(object):
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ViInt32]  # noqa: F405
                 self.niFgen_SetNamedWaveformNextWritePosition_cfunc.restype = ViStatus  # noqa: F405
         return self.niFgen_SetNamedWaveformNextWritePosition_cfunc(vi, channel_name, waveform_name, relative_to, offset)
+
+    def niFgen_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niFgen_SetRuntimeEnvironment_cfunc is None:
+                self.niFgen_SetRuntimeEnvironment_cfunc = self._get_library_function('niFgen_SetRuntimeEnvironment')
+                self.niFgen_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFgen_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFgen_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niFgen_SetWaveformNextWritePosition(self, vi, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         with self._func_lock:

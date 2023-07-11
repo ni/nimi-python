@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.0.0f167
+# This file is generated from NI-SWITCH API metadata version 23.5.0d149
 functions = {
     'AbortScan': {
         'documentation': {
@@ -482,7 +482,8 @@ functions = {
                 'documentation': {
                     'description': '\nReturns the error code for the session or execution thread. If you pass\n0 for the Buffer Size, you can pass VI_NULL for this parameter.\n'
                 },
-                'name': 'code',
+                'grpc_name': 'code',
+                'name': 'errorCode',
                 'type': 'ViStatus'
             },
             {
@@ -1115,7 +1116,7 @@ functions = {
                 },
                 'grpc_name': 'attribute_value_raw',
                 'name': 'attributeValue',
-                'type': 'ViString'
+                'type': 'ViConstString'
             }
         ],
         'returns': 'ViStatus'
@@ -1140,6 +1141,44 @@ functions = {
                     'description': '\nA string composed of comma-separated paths between channel 1 and channel\n2. The first and last names in the path are the endpoints of the path.\nEvery other channel in the path are configuration channels. Example of a\nvalid path list string: ch0->com0, com0->ab0. In this example, com0 is a\nconfiguration channel. Default value: None Obtain the path list for a\npreviously created path with niSwitch_GetPath.\n'
                 },
                 'name': 'pathList',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'SetRuntimeEnvironment': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'none',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'environment',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'environmentVersion',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved1',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'name': 'reserved2',
                 'type': 'ViConstString'
             }
         ],

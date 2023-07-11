@@ -419,17 +419,17 @@ NI-TClk Python API Status
 Installation
 ============
 
-Driver specific installation instructions can be found on Read The Docs:
+Driver specific installation instructions can be found on **Read the Docs**:
 
-* `nidcpower <http://nimi-python.readthedocs.io/en/master/nidcpower.html#installation>`_
-* `nidigital <http://nimi-python.readthedocs.io/en/master/nidigital.html#installation>`_
-* `nidmm <http://nimi-python.readthedocs.io/en/master/nidmm.html#installation>`_
-* `nifgen <http://nimi-python.readthedocs.io/en/master/nifgen.html#installation>`_
-* `nimodinst <http://nimi-python.readthedocs.io/en/master/nimodinst.html#installation>`_
-* `niscope <http://nimi-python.readthedocs.io/en/master/niscope.html#installation>`_
-* `nise <http://nimi-python.readthedocs.io/en/master/nise.html#installation>`_
-* `niswitch <http://nimi-python.readthedocs.io/en/master/niswitch.html#installation>`_
-* `nitclk <http://nimi-python.readthedocs.io/en/master/nitclk.html#installation>`_
+* `nidcpower <https://nidcpower.readthedocs.io/en/latest/nidcpower.html#installation>`_
+* `nidigital <https://nidigital.readthedocs.io/en/latest/nidigital.html#installation>`_
+* `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
+* `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
+* `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
+* `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
+* `niswitch <https://niswitch.readthedocs.io/en/latest/niswitch.html#installation>`_
+* `nitclk <https://nitclk.readthedocs.io/en/latest/nitclk.html#installation>`_
 
 
 Contributing
@@ -456,21 +456,19 @@ The following is a basic example of using the **nidmm** module to open a session
 Support / Feedback
 ==================
 
-The packages included in **nimi-python** package are supported by NI. For support, open
-a request through the NI support portal at `ni.com <http://www.ni.com>`_.
+For support specific to the Python API, follow the processs in `Bugs / Feature Requests`_.
+For support with hardware, the driver runtime or any other questions not specific to the Python API, please visit `NI Community Forums <https://forums.ni.com/>`_.
 
 .. _bugs-section:
 
 Bugs / Feature Requests
 =======================
 
-To report a bug or submit a feature request specific to NI Modular Instruments Python bindings (nimi-python), please use the
+To report a bug or submit a feature request specific to Python API, please use the
 `GitHub issues page <https://github.com/ni/nimi-python/issues>`_.
 
 Fill in the issue template as completely as possible and we will respond as soon
 as we can.
-
-For hardware support or any other questions not specific to this GitHub project, please visit `NI Community Forums <https://forums.ni.com/>`_.
 
 
 .. _documentation-section:

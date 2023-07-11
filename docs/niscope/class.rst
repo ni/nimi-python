@@ -1916,12 +1916,12 @@ get_channel_names
                 -   A range using a hyphen—for example, "0-3"
                 -   A range using a colon—for example, "0:3 "
 
-                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
+                You can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.
 
                 
 
 
-            :type indices: basic sequence types or str or int
+            :type indices: basic sequence types, str, or int
 
             :rtype: list of str
             :return:
@@ -7477,7 +7477,7 @@ NI-TClk Support
 
         This is used to get and set NI-TClk attributes on the session.
 
-        .. seealso:: See :py:attr:`nitclk.SessionReference` for a complete list of attributes.
+        .. seealso:: See :py:class:`nitclk.SessionReference` for a complete list of attributes.
 
 
 .. contents:: Session

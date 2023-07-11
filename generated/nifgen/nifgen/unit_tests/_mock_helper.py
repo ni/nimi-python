@@ -182,6 +182,8 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetNamedWaveformNextWritePosition'] = {}
         self._defaults['SetNamedWaveformNextWritePosition']['return'] = 0
+        self._defaults['SetRuntimeEnvironment'] = {}
+        self._defaults['SetRuntimeEnvironment']['return'] = 0
         self._defaults['SetWaveformNextWritePosition'] = {}
         self._defaults['SetWaveformNextWritePosition']['return'] = 0
         self._defaults['UnlockSession'] = {}
@@ -772,6 +774,11 @@ class SideEffectsHelper(object):
             return self._defaults['SetNamedWaveformNextWritePosition']['return']
         return self._defaults['SetNamedWaveformNextWritePosition']['return']
 
+    def niFgen_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        if self._defaults['SetRuntimeEnvironment']['return'] != 0:
+            return self._defaults['SetRuntimeEnvironment']['return']
+        return self._defaults['SetRuntimeEnvironment']['return']
+
     def niFgen_SetWaveformNextWritePosition(self, vi, channel_name, waveform_handle, relative_to, offset):  # noqa: N802
         if self._defaults['SetWaveformNextWritePosition']['return'] != 0:
             return self._defaults['SetWaveformNextWritePosition']['return']
@@ -978,6 +985,8 @@ class SideEffectsHelper(object):
         mock_library.niFgen_SetAttributeViString.return_value = 0
         mock_library.niFgen_SetNamedWaveformNextWritePosition.side_effect = MockFunctionCallError("niFgen_SetNamedWaveformNextWritePosition")
         mock_library.niFgen_SetNamedWaveformNextWritePosition.return_value = 0
+        mock_library.niFgen_SetRuntimeEnvironment.side_effect = MockFunctionCallError("niFgen_SetRuntimeEnvironment")
+        mock_library.niFgen_SetRuntimeEnvironment.return_value = 0
         mock_library.niFgen_SetWaveformNextWritePosition.side_effect = MockFunctionCallError("niFgen_SetWaveformNextWritePosition")
         mock_library.niFgen_SetWaveformNextWritePosition.return_value = 0
         mock_library.niFgen_UnlockSession.side_effect = MockFunctionCallError("niFgen_UnlockSession")

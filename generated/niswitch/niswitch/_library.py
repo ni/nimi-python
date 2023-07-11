@@ -51,6 +51,7 @@ class Library(object):
         self.niSwitch_SetAttributeViReal64_cfunc = None
         self.niSwitch_SetAttributeViString_cfunc = None
         self.niSwitch_SetPath_cfunc = None
+        self.niSwitch_SetRuntimeEnvironment_cfunc = None
         self.niSwitch_UnlockSession_cfunc = None
         self.niSwitch_WaitForDebounce_cfunc = None
         self.niSwitch_WaitForScanComplete_cfunc = None
@@ -178,13 +179,13 @@ class Library(object):
                 self.niSwitch_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_GetChannelName_cfunc(vi, index, buffer_size, channel_name_buffer)
 
-    def niSwitch_GetError(self, vi, code, buffer_size, description):  # noqa: N802
+    def niSwitch_GetError(self, vi, error_code, buffer_size, description):  # noqa: N802
         with self._func_lock:
             if self.niSwitch_GetError_cfunc is None:
                 self.niSwitch_GetError_cfunc = self._get_library_function('niSwitch_GetError')
                 self.niSwitch_GetError_cfunc.argtypes = [ViSession, ctypes.POINTER(ViStatus), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_GetError_cfunc.restype = ViStatus  # noqa: F405
-        return self.niSwitch_GetError_cfunc(vi, code, buffer_size, description)
+        return self.niSwitch_GetError_cfunc(vi, error_code, buffer_size, description)
 
     def niSwitch_GetPath(self, vi, channel1, channel2, buffer_size, path):  # noqa: N802
         with self._func_lock:
@@ -321,6 +322,14 @@ class Library(object):
                 self.niSwitch_SetPath_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niSwitch_SetPath_cfunc.restype = ViStatus  # noqa: F405
         return self.niSwitch_SetPath_cfunc(vi, path_list)
+
+    def niSwitch_SetRuntimeEnvironment(self, environment, environment_version, reserved1, reserved2):  # noqa: N802
+        with self._func_lock:
+            if self.niSwitch_SetRuntimeEnvironment_cfunc is None:
+                self.niSwitch_SetRuntimeEnvironment_cfunc = self._get_library_function('niSwitch_SetRuntimeEnvironment')
+                self.niSwitch_SetRuntimeEnvironment_cfunc.argtypes = [ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niSwitch_SetRuntimeEnvironment_cfunc.restype = ViStatus  # noqa: F405
+        return self.niSwitch_SetRuntimeEnvironment_cfunc(environment, environment_version, reserved1, reserved2)
 
     def niSwitch_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:

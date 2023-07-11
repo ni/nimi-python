@@ -1,6 +1,7 @@
 # Changelog
 
 * [Unreleased](#unreleased)
+* [1.4.5](#145---2023-06-12)
 * [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
 * [1.4.2](#142---2022-08-03)
@@ -36,7 +37,6 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
-        * `easy_install` support
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
@@ -59,7 +59,6 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `niscope` (NI-SCOPE)
     * #### Added
-        * `get_channel_names()`
     * #### Changed
     * #### Removed
 * ### `niswitch` (NI-SWITCH)
@@ -75,6 +74,29 @@ All notable changes to this project will be documented in this file.
     * #### Changed
     * #### Removed
 
+
+## 1.4.5 - 2023-06-12
+* ### ALL
+    * #### Removed
+        * `easy_install` support
+* ### `nidigital` (NI-Digital Pattern Driver)
+    * #### Added
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
+* ### `nidmm` (NI-DMM)
+    * #### Added
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
+* ### `nifgen` (NI-FGEN)
+    * #### Added
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
+* ### `niscope` (NI-SCOPE)
+    * #### Added
+        * `get_channel_names()`
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
+    * #### Changed
+        * Fix [#1770](https://github.com/ni/nimi-python/issues/1770): fetch(), read(), and friends return wrong data when called with channel ranges on multi-instrument session.
+* ### `niswitch` (NI-SWITCH)
+    * #### Added
+        * Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
 
 ## 1.4.4 - 2023-04-14
 * ### ALL

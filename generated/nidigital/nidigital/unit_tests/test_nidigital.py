@@ -39,6 +39,10 @@ class TestSession(object):
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
 
+        # The side effect must be set for this, because it's called.
+        # No need to set argument values; the method is tested in nifake unit tests, not here.
+        self.patched_library.niDigital_SetRuntimeEnvironment.side_effect = self.side_effects_helper.niDigital_SetRuntimeEnvironment
+
         self.patched_library.niDigital_InitWithOptions.side_effect = self.side_effects_helper.niDigital_InitWithOptions
         self.side_effects_helper['InitWithOptions']['newVi'] = session_id_for_test
 

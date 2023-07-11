@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 23.3.0f165
+# This file is generated from NI-Digital Pattern Driver API metadata version 23.5.0d80
 config = {
-    'api_version': '23.3.0f165',
+    'api_version': '23.5.0d80',
     'c_function_prefix': 'niDigital_',
     'close_function': 'close',
     'context_manager_name': {
