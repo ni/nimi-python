@@ -142,13 +142,13 @@ else
 $(README): $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
 	$(call trace_to_console, "Creating",$@)
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc \
-                                        $(STATIC_DOCS_DIR)/about.inc \
+                                        $(STATIC_DOCS_DIR)/about_driver.inc \
                                         $(DRIVER_DOCS_DIR)/status.inc \
                                         $(DRIVER_DOCS_DIR)/installation.inc \
                                         $(STATIC_DOCS_DIR)/contributing.inc \
                                         $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc \
                                         $(STATIC_DOCS_DIR)/support.inc \
-                                        $(STATIC_DOCS_DIR)/documentation.inc \
+                                        $(STATIC_DOCS_DIR)/$(DRIVER)_documentation.inc \
                                         $(STATIC_DOCS_DIR)/license.inc > $@)
 
 endif
