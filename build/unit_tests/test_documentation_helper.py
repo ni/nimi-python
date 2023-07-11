@@ -1,3 +1,5 @@
+import pytest
+
 from build.helper.documentation_helper import *
 
 
@@ -728,150 +730,178 @@ def test_add_notes_re_links():
     assert enum_note_text in local_config['functions']['MakeAFoo']['parameters'][1]['documentation']['note']
 
 
-def test_get_repeated_capability_single_index_python_example():
-    basic_rep_cap = {'prefix': '', 'python_name': 'channels'}
-    basic_snippet = 'session.channels[0].channel_enabled = True'
-    basic_explanation = 'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.'
-    assert (basic_snippet, basic_explanation) == get_repeated_capability_single_index_python_example(basic_rep_cap)
+@pytest.mark.parametrize(
+    "rep_cap,snippet,explanation",
+    [
+        pytest.param(
+            {'prefix': '', 'python_name': 'channels'},
+            'session.channels[0].channel_enabled = True',
+            'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.',
+            id="defaults",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'exported_pattern_opcode_event_output_terminal',
+                'attr_type_for_docs_example': 'property',
+                'prefix': 'patternOpcodeEvent',
+                'python_name': 'pattern_opcode_events',
+                'value_for_docs_example': '/Dev1/PXI_Trig0',
+            },
+            "session.pattern_opcode_events[0].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'",
+            "sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0.",
+            id="property_with_string_val",
+        ),
+        pytest.param(
+            {
+                'indices_for_docs_example': [0, 1],
+                'prefix': '',
+                'python_name': 'channels',
+            },
+            'session.channels[0].channel_enabled = True',
+            'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.',
+            id="custom_indices",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'vil',
+                'attr_type_for_docs_example': 'property',
+                'indices_for_docs_example': ["PinA", "PinB", "CPin"],
+                'prefix': '',
+                'python_name': 'pins',
+                'value_for_docs_example': 2,
+            },
+            "session.pins['PinA'].vil = 2",
+            "sets :py:attr:`vil` to :python:`2` for pins 'PinA'.",
+            id="string_indices_with_numerical_val",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'disable_sites',
+                'attr_type_for_docs_example': 'method',
+                'prefix': 'site',
+                'python_name': 'sites',
+                'value_for_docs_example': None,
+            },
+            "session.sites[0].disable_sites()",
+            "calls :py:meth:`disable_sites` for sites 0.",
+            id="method_no_val",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'serial_number',
+                'attr_type_for_docs_example': 'property',
+                'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
+                'prefix': '',
+                'python_name': 'instruments',
+                'value_for_docs_example': None,
+            },
+            "print(session.instruments['Dev1'].serial_number)",
+            "prints :py:attr:`serial_number` for instruments 'Dev1'.",
+            id="property_no_val",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'conditional_jump_trigger_type',
+                'attr_type_for_docs_example': 'property',
+                'prefix': 'conditionalJumpTrigger',
+                'python_name': 'conditional_jump_triggers',
+                'value_for_docs_example': 'nidigital.TriggerType.DIGITAL_EDGE',
+                'value_type_for_docs_example': 'enum',
+            },
+            "session.conditional_jump_triggers[0].conditional_jump_trigger_type = nidigital.TriggerType.DIGITAL_EDGE",
+            "sets :py:attr:`conditional_jump_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for conditional_jump_triggers 0.",
+            id="enum_val",
+        ),
+    ],
+)
+def test_get_repeated_capability_single_index_python_example(rep_cap, snippet, explanation):
+    assert (snippet, explanation) == get_repeated_capability_single_index_python_example(rep_cap)
 
-    property_with_string_val_rep_cap = {
-        'attr_for_docs_example': 'exported_pattern_opcode_event_output_terminal',
-        'attr_type_for_docs_example': 'property',
-        'prefix': 'patternOpcodeEvent',
-        'python_name': 'pattern_opcode_events',
-        'value_for_docs_example': '/Dev1/PXI_Trig0',
-    }
-    property_with_string_val_snippet = "session.pattern_opcode_events[0].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'"
-    property_with_string_val_explanation = "sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0."
-    assert (property_with_string_val_snippet, property_with_string_val_explanation) == get_repeated_capability_single_index_python_example(property_with_string_val_rep_cap)
 
-    custom_indices_rep_cap = {
-        'indices_for_docs_example': [0, 1],
-        'prefix': '',
-        'python_name': 'channels',
-    }
-    custom_indices_snippet = 'session.channels[0].channel_enabled = True'
-    custom_indices_explanation = 'sets :py:attr:`channel_enabled` to :python:`True` for channels 0.'
-    assert (custom_indices_snippet, custom_indices_explanation) == get_repeated_capability_single_index_python_example(custom_indices_rep_cap)
-
-    string_indices_with_numerical_val_rep_cap = {
-        'attr_for_docs_example': 'vil',
-        'attr_type_for_docs_example': 'property',
-        'indices_for_docs_example': ["PinA", "PinB", "CPin"],
-        'prefix': '',
-        'python_name': 'pins',
-        'value_for_docs_example': 2,
-    }
-    string_indices_with_numerical_val_snippet = "session.pins['PinA'].vil = 2"
-    string_indices_with_numerical_val_explanation = "sets :py:attr:`vil` to :python:`2` for pins 'PinA'."
-    assert (string_indices_with_numerical_val_snippet, string_indices_with_numerical_val_explanation) == get_repeated_capability_single_index_python_example(string_indices_with_numerical_val_rep_cap)
-
-    method_no_val_rep_cap = {
-        'attr_for_docs_example': 'disable_sites',
-        'attr_type_for_docs_example': 'method',
-        'prefix': 'site',
-        'python_name': 'sites',
-        'value_for_docs_example': None,
-    }
-    method_no_val_snippet = "session.sites[0].disable_sites()"
-    method_no_val_explanation = "calls :py:meth:`disable_sites` for sites 0."
-    assert (method_no_val_snippet, method_no_val_explanation) == get_repeated_capability_single_index_python_example(method_no_val_rep_cap)
-
-    property_no_val_rep_cap = {
-        'attr_for_docs_example': 'serial_number',
-        'attr_type_for_docs_example': 'property',
-        'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
-        'prefix': '',
-        'python_name': 'instruments',
-        'value_for_docs_example': None,
-    }
-    property_no_val_snippet = "print(session.instruments['Dev1'].serial_number)"
-    property_no_val_explanation = "prints :py:attr:`serial_number` for instruments 'Dev1'."
-    assert (property_no_val_snippet, property_no_val_explanation) == get_repeated_capability_single_index_python_example(property_no_val_rep_cap)
-
-    enum_val_rep_cap = {
-        'attr_for_docs_example': 'conditional_jump_trigger_type',
-        'attr_type_for_docs_example': 'property',
-        'prefix': 'conditionalJumpTrigger',
-        'python_name': 'conditional_jump_triggers',
-        'value_for_docs_example': 'nidigital.TriggerType.DIGITAL_EDGE',
-        'value_type_for_docs_example': 'enum',
-    }
-    enum_val_snippet = "session.conditional_jump_triggers[0].conditional_jump_trigger_type = nidigital.TriggerType.DIGITAL_EDGE"
-    enum_val_explanation = "sets :py:attr:`conditional_jump_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for conditional_jump_triggers 0."
-    assert (enum_val_snippet, enum_val_explanation) == get_repeated_capability_single_index_python_example(enum_val_rep_cap)
-
-
-def test_get_repeated_capability_tuple_index_python_example():
-    basic_rep_cap = {'prefix': '', 'python_name': 'channels'}
-    basic_snippet = 'session.channels[0, 2].channel_enabled = True'
-    basic_explanation = 'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.'
-    assert (basic_snippet, basic_explanation) == get_repeated_capability_tuple_index_python_example(basic_rep_cap)
-
-    property_with_string_val_rep_cap = {
-        'attr_for_docs_example': 'exported_pattern_opcode_event_output_terminal',
-        'attr_type_for_docs_example': 'property',
-        'prefix': 'patternOpcodeEvent',
-        'python_name': 'pattern_opcode_events',
-        'value_for_docs_example': '/Dev1/PXI_Trig0',
-    }
-    property_with_string_val_snippet = "session.pattern_opcode_events[0, 2].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'"
-    property_with_string_val_explanation = "sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0, 2."
-    assert (property_with_string_val_snippet, property_with_string_val_explanation) == get_repeated_capability_tuple_index_python_example(property_with_string_val_rep_cap)
-
-    custom_indices_rep_cap = {
-        'indices_for_docs_example': [0, 1],
-        'prefix': '',
-        'python_name': 'channels',
-    }
-    custom_indices_snippet = 'session.channels[0, 1].channel_enabled = True'
-    custom_indices_explanation = 'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1.'
-    assert (custom_indices_snippet, custom_indices_explanation) == get_repeated_capability_tuple_index_python_example(custom_indices_rep_cap)
-
-    string_indices_with_numerical_val_rep_cap = {
-        'attr_for_docs_example': 'vil',
-        'attr_type_for_docs_example': 'property',
-        'indices_for_docs_example': ["PinA", "PinB", "CPin"],
-        'prefix': '',
-        'python_name': 'pins',
-        'value_for_docs_example': 2,
-    }
-    string_indices_with_numerical_val_snippet = "session.pins['PinA', 'PinB', 'CPin'].vil = 2"
-    string_indices_with_numerical_val_explanation = "sets :py:attr:`vil` to :python:`2` for pins 'PinA', 'PinB', 'CPin'."
-    assert (string_indices_with_numerical_val_snippet, string_indices_with_numerical_val_explanation) == get_repeated_capability_tuple_index_python_example(string_indices_with_numerical_val_rep_cap)
-
-    method_no_val_rep_cap = {
-        'attr_for_docs_example': 'disable_sites',
-        'attr_type_for_docs_example': 'method',
-        'prefix': 'site',
-        'python_name': 'sites',
-        'value_for_docs_example': None,
-    }
-    method_no_val_snippet = "session.sites[0, 2].disable_sites()"
-    method_no_val_explanation = "calls :py:meth:`disable_sites` for sites 0, 2."
-    assert (method_no_val_snippet, method_no_val_explanation) == get_repeated_capability_tuple_index_python_example(method_no_val_rep_cap)
-
-    property_no_val_rep_cap = {
-        'attr_for_docs_example': 'serial_number',
-        'attr_type_for_docs_example': 'property',
-        'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
-        'prefix': '',
-        'python_name': 'instruments',
-        'value_for_docs_example': None,
-    }
-    property_no_val_snippet = "print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)"
-    property_no_val_explanation = "prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all."
-    assert (property_no_val_snippet, property_no_val_explanation) == get_repeated_capability_tuple_index_python_example(property_no_val_rep_cap)
-
-    enum_val_rep_cap = {
-        'attr_for_docs_example': 'conditional_jump_trigger_type',
-        'attr_type_for_docs_example': 'property',
-        'prefix': 'conditionalJumpTrigger',
-        'python_name': 'conditional_jump_triggers',
-        'value_for_docs_example': 'nidigital.TriggerType.DIGITAL_EDGE',
-        'value_type_for_docs_example': 'enum',
-    }
-    enum_val_snippet = "session.conditional_jump_triggers[0, 2].conditional_jump_trigger_type = nidigital.TriggerType.DIGITAL_EDGE"
-    enum_val_explanation = "sets :py:attr:`conditional_jump_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for conditional_jump_triggers 0, 2."
-    assert (enum_val_snippet, enum_val_explanation) == get_repeated_capability_tuple_index_python_example(enum_val_rep_cap)
+@pytest.mark.parametrize(
+    "rep_cap,snippet,explanation",
+    [
+        pytest.param(
+            {'prefix': '', 'python_name': 'channels'},
+            'session.channels[0, 2].channel_enabled = True',
+            'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.',
+            id="defaults",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'exported_pattern_opcode_event_output_terminal',
+                'attr_type_for_docs_example': 'property',
+                'prefix': 'patternOpcodeEvent',
+                'python_name': 'pattern_opcode_events',
+                'value_for_docs_example': '/Dev1/PXI_Trig0',
+            },
+            "session.pattern_opcode_events[0, 2].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'",
+            "sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0, 2.",
+            id="property_with_string_val",
+        ),
+        pytest.param(
+            {
+                'indices_for_docs_example': [0, 1],
+                'prefix': '',
+                'python_name': 'channels',
+            },
+            'session.channels[0, 1].channel_enabled = True',
+            'sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1.',
+            id="custom_indices",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'vil',
+                'attr_type_for_docs_example': 'property',
+                'indices_for_docs_example': ["PinA", "PinB", "CPin"],
+                'prefix': '',
+                'python_name': 'pins',
+                'value_for_docs_example': 2,
+            },
+            "session.pins['PinA', 'PinB', 'CPin'].vil = 2",
+            "sets :py:attr:`vil` to :python:`2` for pins 'PinA', 'PinB', 'CPin'.",
+            id="string_indices_with_numerical_val",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'disable_sites',
+                'attr_type_for_docs_example': 'method',
+                'prefix': 'site',
+                'python_name': 'sites',
+                'value_for_docs_example': None,
+            },
+            "session.sites[0, 2].disable_sites()",
+            "calls :py:meth:`disable_sites` for sites 0, 2.",
+            id="method_no_val",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'serial_number',
+                'attr_type_for_docs_example': 'property',
+                'indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
+                'prefix': '',
+                'python_name': 'instruments',
+                'value_for_docs_example': None,
+            },
+            "print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)",
+            "prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all.",
+            id="property_no_val",
+        ),
+        pytest.param(
+            {
+                'attr_for_docs_example': 'conditional_jump_trigger_type',
+                'attr_type_for_docs_example': 'property',
+                'prefix': 'conditionalJumpTrigger',
+                'python_name': 'conditional_jump_triggers',
+                'value_for_docs_example': 'nidigital.TriggerType.DIGITAL_EDGE',
+                'value_type_for_docs_example': 'enum',
+            },
+            "session.conditional_jump_triggers[0, 2].conditional_jump_trigger_type = nidigital.TriggerType.DIGITAL_EDGE",
+            "sets :py:attr:`conditional_jump_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for conditional_jump_triggers 0, 2.",
+            id="enum_val",
+        ),
+    ],
+)
+def test_get_repeated_capability_tuple_index_python_example(rep_cap, snippet, explanation):
+    assert (snippet, explanation) == get_repeated_capability_tuple_index_python_example(rep_cap)
 
