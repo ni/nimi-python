@@ -30,14 +30,20 @@ name = rep_cap['python_name']
 % endfor
 
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
-    The parameter can be an integer, a string, a list, a tuple, or slice (range).
+    The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
 
-    The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
+    The recommended way of accessing a single repeated capability is with an integer :python:`[0]` for capabilities that support it and a string :python:`['Dev1']`
+    for those that don't support integers.
+
+    The recommended way of accessing multiple repeated capabilites at once is with a tuple (:python:`[0, 1]` or :python:`['Dev1', 'Dev2']`) or slice :python:`[0:2]`.
 
 % for rep_cap in config['repeated_capabilities']:
 <%
 name = rep_cap['python_name']
-prefix = rep_cap['prefix']
+
+single_index_snippet, single_index_explanation = helper.get_repeated_capability_single_index_python_example(rep_cap)
+tuple_index_snippet, tuple_index_explanation = helper.get_repeated_capability_tuple_index_python_example(rep_cap)
+
 %>\
 ${helper.get_rst_header_snippet(name, '-')}
 
@@ -45,19 +51,15 @@ ${helper.get_rst_header_snippet(name, '-')}
 
         .. code:: python
 
-            session.${name}[0].channel_enabled = True
+            ${single_index_snippet}
 
-        sets :py:attr:`channel_enabled` to :python:`True` for ${name} 0.
+        ${single_index_explanation}
 
         .. code:: python
 
-            session.${name}[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for ${name} 0, 1, 2.
+            ${tuple_index_snippet}
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        ${tuple_index_explanation}
 
 % endfor
 

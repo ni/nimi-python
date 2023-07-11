@@ -56,6 +56,109 @@ def get_indented_docstring_snippet(d, indent=4):
     return ret_val
 
 
+def get_repeated_capability_single_index_python_example(rep_cap_config):
+    '''Returns a python code snippet and explanation for example usage of a repeated capability.'''
+    rep_cap_name = rep_cap_config['python_name']
+
+    # TODO(ni-jfitzger): Handle read-only properties (snippet to print the value)
+
+    # defaults
+    attr_for_example = 'channel_enabled'
+    attr_type_for_example = 'property'
+    class_attr_ref = f':py:attr:`{attr_for_example}`'
+    index = 0
+    value = True
+    value_type = bool
+
+    if 'attr_for_docs_example' in rep_cap_config and rep_cap_config['attr_for_docs_example']:
+        attr_for_example = rep_cap_config['attr_for_docs_example']
+        if 'attr_type_for_docs_example' in rep_cap_config and rep_cap_config['attr_type_for_docs_example']:
+            attr_type_for_example = rep_cap_config['attr_type_for_docs_example']
+            if attr_type_for_example == 'property':
+                class_attr_ref = f':py:attr:`{attr_for_example}`'
+            elif attr_type_for_example == 'method':
+                class_attr_ref = f':py:meth:`{attr_for_example}`'
+        if 'string_indices_for_docs_example' in rep_cap_config:
+            index = repr(rep_cap_config["string_indices_for_docs_example"][0])
+        if 'value_for_docs_example' in rep_cap_config:
+            value = rep_cap_config['value_for_docs_example']
+            value_type = type(value)
+            if 'value_type_for_docs_example' in rep_cap_config:
+                value_type = rep_cap_config['value_type_for_docs_example']
+            if not value_type == 'enum' and isinstance(value, str):
+                value = repr(value)
+
+    explanation_value = f':python:`{value}`'
+    if value_type == 'enum':
+        explanation_value = f':py:data:`~{value}`'
+
+    if attr_type_for_example == "property":
+        snippet = f'session.{rep_cap_name}[{index}].{attr_for_example} = {value}'
+        explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {index}."
+    elif attr_type_for_example == "method":
+        if value is None:
+            snippet = f'session.{rep_cap_name}[{index}].{attr_for_example}()'
+            explanation = f"calls {class_attr_ref} for {rep_cap_name} {index}."
+        else:
+            snippet = f'session.{rep_cap_name}[{index}].{attr_for_example}({value})'
+            explanation = f"calls {class_attr_ref} with {explanation_value} for {rep_cap_name} {index}."
+    else:
+        raise ValueError(f"Ilegal value {attr_type_for_example} in {repr(rep_cap_config)}.")
+    return snippet, explanation
+
+
+def get_repeated_capability_tuple_index_python_example(rep_cap_config):
+    '''Returns a python code snippet and explanation  for example usage of a repeated capability.'''
+    rep_cap_name = rep_cap_config['python_name']
+
+    # TODO(ni-jfitzger): Handle read-only properties (snippet to print the value)
+
+    # defaults
+    attr_for_example = 'channel_enabled'
+    attr_type_for_example = 'property'
+    class_attr_ref = f':py:attr:`{attr_for_example}`'
+    indices = ["0", "2"]  # use strings so that we can call join
+    value = True
+    value_type = bool
+
+    # TODO (ni-jfitzger): reduce code duplication between this and other function
+    if 'attr_for_docs_example' in rep_cap_config and rep_cap_config['attr_for_docs_example']:
+        attr_for_example = rep_cap_config['attr_for_docs_example']
+        if 'attr_type_for_docs_example' in rep_cap_config and rep_cap_config['attr_type_for_docs_example']:
+            attr_type_for_example = rep_cap_config['attr_type_for_docs_example']
+            if attr_type_for_example == 'property':
+                class_attr_ref = f':py:attr:`{attr_for_example}`'
+            elif attr_type_for_example == 'method':
+                class_attr_ref = f':py:meth:`{attr_for_example}`'
+        if 'string_indices_for_docs_example' in rep_cap_config:
+            indices = [repr(index) for index in rep_cap_config['string_indices_for_docs_example']]
+        if 'value_for_docs_example' in rep_cap_config:
+            value = rep_cap_config['value_for_docs_example']
+            value_type = type(value)
+            if 'value_type_for_docs_example' in rep_cap_config:
+                value_type = rep_cap_config['value_type_for_docs_example']
+            if not value_type == 'enum' and isinstance(value, str):
+                value = repr(value)
+
+    explanation_value = f':python:`{value}`'
+    if value_type == 'enum':
+        explanation_value = f':py:data:`~{value}`'
+
+    if attr_type_for_example == "property":
+        snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example} = {value}'
+        explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {', '.join(indices)}."
+    elif attr_type_for_example == "method":
+        if value is None:
+            snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example}()'
+            explanation = f"calls {class_attr_ref} for {rep_cap_name} {', '.join(indices)}."
+        else:
+            snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example}({value})'
+            explanation = f"calls {class_attr_ref} with {explanation_value} for {rep_cap_name} {', '.join(indices)}."
+    else:
+        raise ValueError(f"Ilegal value {attr_type_for_example} in {repr(rep_cap_config)}.")
+    return snippet, explanation
+
+
 def get_rst_header_snippet(t, header_level='='):
     '''Get rst formatted heading'''
     ret_val = t + '\n'

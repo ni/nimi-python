@@ -21,9 +21,12 @@ Repeated Capabilities
     #. data_markers_
 
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
-    The parameter can be an integer, a string, a list, a tuple, or slice (range).
+    The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
 
-    The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
+    The recommended way of accessing a single repeated capability is with an integer :python:`[0]` for capabilities that support it and a string :python:`['Dev1']`
+    for those that don't support integers.
+
+    The recommended way of accessing multiple repeated capabilites at once is with a tuple (:python:`[0, 1]` or :python:`['Dev1', 'Dev2']`) or slice :python:`[0:2]`.
 
 channels
 --------
@@ -38,13 +41,9 @@ channels
 
         .. code:: python
 
-            session.channels[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1, 2.
+            session.channels[0, 2].channel_enabled = True
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 2.
 
 script_triggers
 ---------------
@@ -59,13 +58,9 @@ script_triggers
 
         .. code:: python
 
-            session.script_triggers[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for script_triggers 0, 1, 2.
+            session.script_triggers[0, 2].channel_enabled = True
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`channel_enabled` to :python:`True` for script_triggers 0, 2.
 
 markers
 -------
@@ -80,13 +75,9 @@ markers
 
         .. code:: python
 
-            session.markers[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for markers 0, 1, 2.
+            session.markers[0, 2].channel_enabled = True
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`channel_enabled` to :python:`True` for markers 0, 2.
 
 data_markers
 ------------
@@ -101,12 +92,8 @@ data_markers
 
         .. code:: python
 
-            session.data_markers[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for data_markers 0, 1, 2.
+            session.data_markers[0, 2].channel_enabled = True
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`channel_enabled` to :python:`True` for data_markers 0, 2.
 
 

@@ -25,9 +25,12 @@ Repeated Capabilities
     #. rio_triggers_
 
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
-    The parameter can be an integer, a string, a list, a tuple, or slice (range).
+    The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
 
-    The recommended way of accessing repeated capabilities is with an integer :python:`[0]` or range :python:`[0:2]`.
+    The recommended way of accessing a single repeated capability is with an integer :python:`[0]` for capabilities that support it and a string :python:`['Dev1']`
+    for those that don't support integers.
+
+    The recommended way of accessing multiple repeated capabilites at once is with a tuple (:python:`[0, 1]` or :python:`['Dev1', 'Dev2']`) or slice :python:`[0:2]`.
 
 channels
 --------
@@ -36,19 +39,15 @@ channels
 
         .. code:: python
 
-            session.channels[0].channel_enabled = True
+            session.channels[0].vil = 2
 
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0.
+        sets :py:attr:`vil` to :python:`2` for channels 0.
 
         .. code:: python
 
-            session.channels[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for channels 0, 1, 2.
+            session.channels[0, 2].vil = 2
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`vil` to :python:`2` for channels 0, 2.
 
 pins
 ----
@@ -57,19 +56,15 @@ pins
 
         .. code:: python
 
-            session.pins[0].channel_enabled = True
+            session.pins['PinA'].vil = 2
 
-        sets :py:attr:`channel_enabled` to :python:`True` for pins 0.
+        sets :py:attr:`vil` to :python:`2` for pins 'PinA'.
 
         .. code:: python
 
-            session.pins[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for pins 0, 1, 2.
+            session.pins['PinA', 'PinB', 'CPin'].vil = 2
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`vil` to :python:`2` for pins 'PinA', 'PinB', 'CPin'.
 
 instruments
 -----------
@@ -78,19 +73,15 @@ instruments
 
         .. code:: python
 
-            session.instruments[0].channel_enabled = True
+            session.instruments['Dev1'].timing_absolute_delay = 5e-09
 
-        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0.
+        sets :py:attr:`timing_absolute_delay` to :python:`5e-09` for instruments 'Dev1'.
 
         .. code:: python
 
-            session.instruments[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for instruments 0, 1, 2.
+            session.instruments['Dev1', 'Dev2', '3rdDevice'].timing_absolute_delay = 5e-09
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`timing_absolute_delay` to :python:`5e-09` for instruments 'Dev1', 'Dev2', '3rdDevice'.
 
 pattern_opcode_events
 ---------------------
@@ -99,19 +90,15 @@ pattern_opcode_events
 
         .. code:: python
 
-            session.pattern_opcode_events[0].channel_enabled = True
+            session.pattern_opcode_events[0].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'
 
-        sets :py:attr:`channel_enabled` to :python:`True` for pattern_opcode_events 0.
+        sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0.
 
         .. code:: python
 
-            session.pattern_opcode_events[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for pattern_opcode_events 0, 1, 2.
+            session.pattern_opcode_events[0, 2].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`exported_pattern_opcode_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for pattern_opcode_events 0, 2.
 
 conditional_jump_triggers
 -------------------------
@@ -120,19 +107,15 @@ conditional_jump_triggers
 
         .. code:: python
 
-            session.conditional_jump_triggers[0].channel_enabled = True
+            session.conditional_jump_triggers[0].conditional_jump_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
 
-        sets :py:attr:`channel_enabled` to :python:`True` for conditional_jump_triggers 0.
+        sets :py:attr:`conditional_jump_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for conditional_jump_triggers 0.
 
         .. code:: python
 
-            session.conditional_jump_triggers[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for conditional_jump_triggers 0, 1, 2.
+            session.conditional_jump_triggers[0, 2].conditional_jump_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`conditional_jump_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for conditional_jump_triggers 0, 2.
 
 sites
 -----
@@ -141,19 +124,15 @@ sites
 
         .. code:: python
 
-            session.sites[0].channel_enabled = True
+            session.sites[0].disable_sites()
 
-        sets :py:attr:`channel_enabled` to :python:`True` for sites 0.
+        calls :py:meth:`disable_sites` for sites 0.
 
         .. code:: python
 
-            session.sites[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for sites 0, 1, 2.
+            session.sites[0, 2].disable_sites()
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        calls :py:meth:`disable_sites` for sites 0, 2.
 
 rio_events
 ----------
@@ -162,19 +141,15 @@ rio_events
 
         .. code:: python
 
-            session.rio_events[0].channel_enabled = True
+            session.rio_events[0].exported_rio_event_output_terminal = '/Dev1/PXI_Trig0'
 
-        sets :py:attr:`channel_enabled` to :python:`True` for rio_events 0.
+        sets :py:attr:`exported_rio_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for rio_events 0.
 
         .. code:: python
 
-            session.rio_events[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for rio_events 0, 1, 2.
+            session.rio_events[0, 2].exported_rio_event_output_terminal = '/Dev1/PXI_Trig0'
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`exported_rio_event_output_terminal` to :python:`'/Dev1/PXI_Trig0'` for rio_events 0, 2.
 
 rio_triggers
 ------------
@@ -183,18 +158,14 @@ rio_triggers
 
         .. code:: python
 
-            session.rio_triggers[0].channel_enabled = True
+            session.rio_triggers[0].rio_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
 
-        sets :py:attr:`channel_enabled` to :python:`True` for rio_triggers 0.
+        sets :py:attr:`rio_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for rio_triggers 0.
 
         .. code:: python
 
-            session.rio_triggers[0:2].channel_enabled = True
-        
-        sets :py:attr:`channel_enabled` to :python:`True` for rio_triggers 0, 1, 2.
+            session.rio_triggers[0, 2].rio_trigger_type = nidigital.TriggerType.DIGITAL_EDGE
 
-        Note that :py:attr:`channel_enabled` is only used as an example and is not necessarily a property which
-        supports this repeated capability. See documentation for individual properties and methods to
-        learn what repeated capabilites they support, if any.
+        sets :py:attr:`rio_trigger_type` to :py:data:`~nidigital.TriggerType.DIGITAL_EDGE` for rio_triggers 0, 2.
 
 

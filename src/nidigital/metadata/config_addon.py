@@ -10,4 +10,66 @@ config_additional_config = {
             'python_name': 'HistoryRAMCycleInformation'
         }
     ],
+    'repeated_capabilities': [
+        {
+            'attr_for_docs_example': 'vil',
+            'attr_type_for_docs_example': 'property',
+            'prefix': '',
+            'python_name': 'channels',
+            'value_for_docs_example': 2,
+        },
+        {
+            'attr_for_docs_example': 'vil',
+            'attr_type_for_docs_example': 'property',
+            'prefix': '',
+            'python_name': 'pins',
+            'string_indices_for_docs_example': ["PinA", "PinB", "CPin"],
+            'value_for_docs_example': 2,
+        },
+        {
+            'attr_for_docs_example': 'timing_absolute_delay',
+            'attr_type_for_docs_example': 'property',
+            'prefix': '',
+            'python_name': 'instruments',
+            'string_indices_for_docs_example': ["Dev1", "Dev2", "3rdDevice"],
+            'value_for_docs_example': 5e-09,
+        },
+        {
+            'attr_for_docs_example': 'exported_pattern_opcode_event_output_terminal',
+            'attr_type_for_docs_example': 'property',
+            'prefix': 'patternOpcodeEvent',
+            'python_name': 'pattern_opcode_events',
+            'value_for_docs_example': '/Dev1/PXI_Trig0',
+        },
+        {
+            'attr_for_docs_example': 'conditional_jump_trigger_type',
+            'attr_type_for_docs_example': 'property',
+            'prefix': 'conditionalJumpTrigger',
+            'python_name': 'conditional_jump_triggers',
+            'value_for_docs_example': 'nidigital.TriggerType.DIGITAL_EDGE',
+            'value_type_for_docs_example': 'enum',
+        },
+        {
+            'attr_for_docs_example': 'disable_sites',
+            'attr_type_for_docs_example': 'method',
+            'prefix': 'site',
+            'python_name': 'sites',
+            'value_for_docs_example': None,
+        },
+        {
+            'attr_for_docs_example': 'exported_rio_event_output_terminal',
+            'attr_type_for_docs_example': 'property',
+            'prefix': 'RIOEvent',
+            'python_name': 'rio_events',
+            'value_for_docs_example': '/Dev1/PXI_Trig0',
+        },
+        {
+            'attr_for_docs_example': 'rio_trigger_type',
+            'attr_type_for_docs_example': 'property',
+            'prefix': 'RIOTrigger',
+            'python_name': 'rio_triggers',
+            'value_for_docs_example': 'nidigital.TriggerType.DIGITAL_EDGE',
+            'value_type_for_docs_example': 'enum',
+        }
+    ],
 }
