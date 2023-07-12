@@ -46,9 +46,8 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
         sys.exit(1)
 
     logging.debug(rendered_template)
-    file_handle_public = open(dest_file, 'wb')
-    file_handle_public.write(bytes(rendered_template, "UTF-8"))
-    file_handle_public.close()
+    with open(dest_file, 'wb') as file_handle_public:
+        file_handle_public.write(bytes(rendered_template, "UTF-8"))
 
 
 
