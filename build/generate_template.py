@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import codecs
 import logging
 from mako.exceptions import RichTraceback
 from mako.lookup import TemplateLookup
@@ -47,14 +46,8 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
         sys.exit(1)
 
     logging.debug(rendered_template)
-    if sys.version_info.major < 3:
-        file_handle_public = codecs.open(dest_file, mode="w", encoding='utf-8')
-        file_handle_public.write(rendered_template)
-        file_handle_public.close()
-    else:
-        file_handle_public = open(dest_file, 'wb')
+    with open(dest_file, 'wb') as file_handle_public:
         file_handle_public.write(bytes(rendered_template, "UTF-8"))
-        file_handle_public.close()
 
 
 
