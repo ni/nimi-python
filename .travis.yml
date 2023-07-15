@@ -6,7 +6,6 @@ matrix:
       # We run tests on the latest supported version of Python first.
       # This is where additional tests are run so we give it more time.
       - python: "3.11"
-      - python: "3.7"
       - python: "3.8"
       - python: "3.9"
       - python: "3.10"
