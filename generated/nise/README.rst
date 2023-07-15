@@ -48,8 +48,17 @@ Support Policy
 --------------
 This package supports all the Operating Systems supported by the underlying driver.
 
+<<<<<<< HEAD
 It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions. At
 this time this includes Python 3.7 and above using CPython.
+=======
+It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is
+called through its public C API using the `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
+
+**nimi-python** supports all the Operating Systems supported by the underlying driver.
+
+**nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+>>>>>>> 8b2b8d08939f8cf94cfdb655c164cda88e43478e
 
 
 NI Switch Executive Python API Status

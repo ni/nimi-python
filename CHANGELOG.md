@@ -37,6 +37,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * Support for Python 3.7
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
