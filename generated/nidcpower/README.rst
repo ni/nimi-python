@@ -42,7 +42,7 @@ Author       NI
 About
 =====
 
-The **nidcpower** package provides a Python API for NI-DCPower. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
+The **nidcpower** module provides a Python API for NI-DCPower. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------

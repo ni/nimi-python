@@ -3,7 +3,7 @@
 About
 =====
 
-The **nifgen** package provides a Python API for NI-FGEN. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
+The **nifgen** module provides a Python API for NI-FGEN. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------

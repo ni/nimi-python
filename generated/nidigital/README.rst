@@ -42,7 +42,7 @@ Author       NI
 About
 =====
 
-The **nidigital** package provides a Python API for NI-Digital Pattern Driver. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
+The **nidigital** module provides a Python API for NI-Digital Pattern Driver. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------

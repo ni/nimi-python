@@ -3,7 +3,7 @@
 About
 =====
 
-The **nidmm** package provides a Python API for NI-DMM. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
+The **nidmm** module provides a Python API for NI-DMM. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------

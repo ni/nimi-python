@@ -42,7 +42,7 @@ Author       NI
 About
 =====
 
-The **niscope** package provides a Python API for NI-SCOPE. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
+The **niscope** module provides a Python API for NI-SCOPE. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------

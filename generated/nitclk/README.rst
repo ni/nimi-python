@@ -42,7 +42,7 @@ Author       NI
 About
 =====
 
-The **nitclk** package provides a Python API for NI-TClk. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
+The **nitclk** module provides a Python API for NI-TClk. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------
