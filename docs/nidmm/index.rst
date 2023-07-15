@@ -2,7 +2,7 @@
 NI-DMM Python API Documentation
 ===============================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_nidmm.inc
 
 .. include:: ../_static/contributing.inc
 

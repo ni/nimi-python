@@ -2,7 +2,7 @@
 NI-Digital Pattern Driver Python API Documentation
 ==================================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_nidigital.inc
 
 .. include:: ../_static/contributing.inc
 

@@ -2,7 +2,7 @@
 NI-SWITCH Python API Documentation
 ==================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_niswitch.inc
 
 .. include:: ../_static/contributing.inc
 

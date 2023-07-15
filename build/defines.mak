@@ -75,6 +75,7 @@ DEFAULT_PY_FILES_TO_COPY := \
     _visatype.py \
 
 DEFAULT_RST_FILES_TO_GENERATE := \
+    about_$(DRIVER).inc \
     index.rst \
     $(DRIVER).rst \
     enums.rst \

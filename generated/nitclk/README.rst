@@ -42,11 +42,11 @@ Author       NI
 About
 =====
 
-This package, which is maintained in the `**nimi-python** repository <https://github.com/ni/nimi-python>`_, provides a Python API for the associated driver.
+The **nitclk** package provides a Python API for NI-TClk. The code is maintained in the Open Source repository for `nimi-python <https://github.com/ni/nimi-python>`_.
 
 Support Policy
 --------------
-This package supports all the Operating Systems supported by the underlying driver.
+nitclk supports all the Operating Systems supported by NI-TClk.
 
 It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
 

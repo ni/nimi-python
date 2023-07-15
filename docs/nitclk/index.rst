@@ -2,7 +2,7 @@
 NI-TClk Python API Documentation
 ================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_nitclk.inc
 
 .. include:: ../_static/contributing.inc
 

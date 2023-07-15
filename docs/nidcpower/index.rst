@@ -2,7 +2,7 @@
 NI-DCPower Python API Documentation
 ===================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_nidcpower.inc
 
 .. include:: ../_static/contributing.inc
 

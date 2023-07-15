@@ -8,7 +8,7 @@
 ${doc_header}
 ${"=" * len(doc_header)}
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_${module_name}.inc
 
 .. include:: ../_static/contributing.inc
 

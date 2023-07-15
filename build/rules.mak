@@ -88,6 +88,10 @@ $(DRIVER_DOCS_DIR)/%.inc: %.inc.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
+$(DRIVER_DOCS_DIR)/about_$(DRIVER).inc: about_driver.inc.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR), $(notdir $@)))
+
 $(SPHINX_CONF_PY): $(TEMPLATE_DIR)/conf.py.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
@@ -142,7 +146,7 @@ else
 $(README): $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
 	$(call trace_to_console, "Creating",$@)
 	$(_hide_cmds)$(call log_command,cat $(STATIC_DOCS_DIR)/status_project.inc \
-                                        $(STATIC_DOCS_DIR)/about_driver.inc \
+                                        $(DRIVER_DOCS_DIR)/about_$(DRIVER).inc \
                                         $(DRIVER_DOCS_DIR)/status.inc \
                                         $(DRIVER_DOCS_DIR)/installation.inc \
                                         $(STATIC_DOCS_DIR)/contributing.inc \
