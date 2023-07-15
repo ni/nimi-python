@@ -10,10 +10,6 @@ ${"=" * len(doc_header)}
 
 .. include:: installation.inc
 
-% if module_name == "niscope":
-.. include:: ../_static/niscope_usage_docs_links.inc
-% endif
-
 .. include:: ../_static/${module_name}_usage.inc
 
 .. include:: toc.inc

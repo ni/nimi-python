@@ -131,11 +131,6 @@ $(SDIST_WHEEL_BUILD_DONE): # codegen should have already run or just use what is
 	$(_hide_cmds)$(call log_command_no_tracking,cd $(OUTPUT_DIR) && $(PYTHON_CMD) -m build $(LOG_OUTPUT) $(LOG_DIR)/sdist_wheel.log)
 	$(_hide_cmds)$(call log_command_no_tracking,touch $@)
 
-
-ifeq (niscope,$(DRIVER))
-NISCOPE_USAGE_LINKS_DOC := $(STATIC_DOCS_DIR)/niscope_usage_readme_links.inc
-endif
-
 # If we are building nifake, we just need a placeholder file for inclusion into the wheel that will never be used. We can't build the actual readme since not all the files are created
 ifeq (nifake,$(DRIVER))
 $(README):
@@ -151,7 +146,6 @@ $(README): $(RST_FILES) $(wildcard $(STATIC_DOCS_DIR)/*)
                                         $(DRIVER_DOCS_DIR)/status.inc \
                                         $(DRIVER_DOCS_DIR)/installation.inc \
                                         $(STATIC_DOCS_DIR)/contributing.inc \
-                                        $(NISCOPE_USAGE_LINKS_DOC) \
                                         $(STATIC_DOCS_DIR)/$(DRIVER)_usage.inc \
                                         $(STATIC_DOCS_DIR)/support.inc \
                                         $(STATIC_DOCS_DIR)/documentation.inc \

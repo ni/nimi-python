@@ -119,9 +119,6 @@ Contributing
 
 We welcome contributions! You can clone the project repository, build it, and install it by `following these instructions <https://github.com/ni/nimi-python/blob/master/CONTRIBUTING.md>`_.
 
-.. _fetch: https://niscope.readthedocs.io/en/stable/class.html#fetch
-.. _fetch_into: https://niscope.readthedocs.io/en/stable/class.html#fetch-into
-
 Usage
 ------
 
