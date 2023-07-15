@@ -18,7 +18,7 @@ Repeated Capabilities
     #. channels_
 
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
-    The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
+    The parameter can be a single element or an iterable that implements sequence semantics, such as list, tuple, range and slice.
 
     A single element will access one repeated capability.
 
