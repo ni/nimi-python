@@ -23,15 +23,16 @@ Repeated Capabilities
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
     The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
 
-    The recommended way of accessing a single repeated capability is with an integer :python:`[0]` for capabilities that support it and a string :python:`['Dev1']`
-    for those that don't support integers.
+    A single element will access one repeated capability.
 
-    The recommended way of accessing multiple repeated capabilites at once is with a tuple (:python:`[0, 1]` or :python:`['Dev1', 'Dev2']`) or slice :python:`[0:2]`.
+    An iterable will access multiple repeated capabilites at once.
 
 channels
 --------
 
     .. py:attribute:: nifgen.Session.channels[]
+
+        The basic element for indexing this repeated capability is an integer.
 
         .. code:: python
 
@@ -50,6 +51,8 @@ script_triggers
 
     .. py:attribute:: nifgen.Session.script_triggers[]
 
+        The basic element for indexing this repeated capability is an integer.
+
         .. code:: python
 
             session.script_triggers[0].exported_script_trigger_output_terminal = '/Dev1/PXI_Trig0'
@@ -67,6 +70,8 @@ markers
 
     .. py:attribute:: nifgen.Session.markers[]
 
+        The basic element for indexing this repeated capability is an integer.
+
         .. code:: python
 
             session.markers[0].marker_event_output_terminal = '/Dev1/PXI_Trig0'
@@ -83,6 +88,8 @@ data_markers
 ------------
 
     .. py:attribute:: nifgen.Session.data_markers[]
+
+        The basic element for indexing this repeated capability is an integer.
 
         .. code:: python
 

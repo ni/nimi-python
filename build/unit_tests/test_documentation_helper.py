@@ -731,6 +731,39 @@ def test_add_notes_re_links():
 
 
 @pytest.mark.parametrize(
+    "rep_cap,recommendation",
+    [
+        pytest.param(
+            {
+                'prefix': '',
+                'python_name': 'channels',
+            },
+            'The basic element for indexing this repeated capability is an integer.',
+            id="no_prefix-channels",
+        ),
+        pytest.param(
+            {
+                'prefix': '',
+                'python_name': 'non-channels_cap',
+            },
+            'The basic element for indexing this repeated capability is a string.',
+            id="no_prefix-other",
+        ),
+        pytest.param(
+            {
+                'prefix': 'RepCap',
+                'python_name': 'any_rep_cap',
+            },
+            'The basic element for indexing this repeated capability is an integer.',
+            id="prefix",
+        ),
+    ],
+)
+def test_get_repeated_capability_element_recommendation(rep_cap, recommendation):
+    assert recommendation == get_repeated_capability_element_recommendation(rep_cap)
+
+
+@pytest.mark.parametrize(
     "rep_cap,snippet,explanation",
     [
         pytest.param(

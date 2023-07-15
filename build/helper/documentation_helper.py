@@ -56,6 +56,18 @@ def get_indented_docstring_snippet(d, indent=4):
     return ret_val
 
 
+def get_repeated_capability_element_recommendation(rep_cap_config):
+    '''Returns a string recommending a specific type be useed for the repeated capability.'''
+    rep_cap_prefix = rep_cap_config['prefix']
+    rep_cap_name = rep_cap_config['python_name']
+    if rep_cap_prefix or rep_cap_name == 'channels':
+        element_type = 'an integer'
+    else:
+        element_type = 'a string'
+
+    return f'The basic element for indexing this repeated capability is {element_type}.'
+
+
 def _get_repeated_capability_example_info(rep_cap_config):
     '''Returns values needed for building a rep cap doc snippet and explanation.'''
     index = 0

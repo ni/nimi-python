@@ -27,15 +27,16 @@ Repeated Capabilities
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
     The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
 
-    The recommended way of accessing a single repeated capability is with an integer :python:`[0]` for capabilities that support it and a string :python:`['Dev1']`
-    for those that don't support integers.
+    A single element will access one repeated capability.
 
-    The recommended way of accessing multiple repeated capabilites at once is with a tuple (:python:`[0, 1]` or :python:`['Dev1', 'Dev2']`) or slice :python:`[0:2]`.
+    An iterable will access multiple repeated capabilites at once.
 
 channels
 --------
 
     .. py:attribute:: nidigital.Session.channels[]
+
+        The basic element for indexing this repeated capability is an integer.
 
         .. code:: python
 
@@ -54,6 +55,8 @@ pins
 
     .. py:attribute:: nidigital.Session.pins[]
 
+        The basic element for indexing this repeated capability is a string.
+
         .. code:: python
 
             session.pins['PinA'].vil = 2
@@ -70,6 +73,8 @@ instruments
 -----------
 
     .. py:attribute:: nidigital.Session.instruments[]
+
+        The basic element for indexing this repeated capability is a string.
 
         .. code:: python
 
@@ -88,6 +93,8 @@ pattern_opcode_events
 
     .. py:attribute:: nidigital.Session.pattern_opcode_events[]
 
+        The basic element for indexing this repeated capability is an integer.
+
         .. code:: python
 
             session.pattern_opcode_events[0].exported_pattern_opcode_event_output_terminal = '/Dev1/PXI_Trig0'
@@ -104,6 +111,8 @@ conditional_jump_triggers
 -------------------------
 
     .. py:attribute:: nidigital.Session.conditional_jump_triggers[]
+
+        The basic element for indexing this repeated capability is an integer.
 
         .. code:: python
 
@@ -122,6 +131,8 @@ sites
 
     .. py:attribute:: nidigital.Session.sites[]
 
+        The basic element for indexing this repeated capability is an integer.
+
         .. code:: python
 
             session.sites[0].disable_sites()
@@ -139,6 +150,8 @@ rio_events
 
     .. py:attribute:: nidigital.Session.rio_events[]
 
+        The basic element for indexing this repeated capability is an integer.
+
         .. code:: python
 
             session.rio_events[0].exported_rio_event_output_terminal = '/Dev1/PXI_Trig0'
@@ -155,6 +168,8 @@ rio_triggers
 ------------
 
     .. py:attribute:: nidigital.Session.rio_triggers[]
+
+        The basic element for indexing this repeated capability is an integer.
 
         .. code:: python
 

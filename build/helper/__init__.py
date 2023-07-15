@@ -23,6 +23,7 @@ from build.helper.documentation_helper import get_documentation_for_node_rst  # 
 from build.helper.documentation_helper import get_function_docstring  # noqa: F401
 from build.helper.documentation_helper import get_function_rst  # noqa: F401
 from build.helper.documentation_helper import get_indented_docstring_snippet  # noqa: F401
+from build.helper.documentation_helper import get_repeated_capability_element_recommendation  # noqa: F401
 from build.helper.documentation_helper import get_repeated_capability_single_index_python_example  # noqa: F401
 from build.helper.documentation_helper import get_repeated_capability_tuple_index_python_example  # noqa: F401
 from build.helper.documentation_helper import get_rst_header_snippet  # noqa: F401

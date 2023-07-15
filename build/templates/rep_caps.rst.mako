@@ -32,10 +32,9 @@ name = rep_cap['python_name']
     Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
     The parameter can be a single element or an iterable that implements sequence semantics, like list, tuple, range and slice.
 
-    The recommended way of accessing a single repeated capability is with an integer :python:`[0]` for capabilities that support it and a string :python:`['Dev1']`
-    for those that don't support integers.
+    A single element will access one repeated capability.
 
-    The recommended way of accessing multiple repeated capabilites at once is with a tuple (:python:`[0, 1]` or :python:`['Dev1', 'Dev2']`) or slice :python:`[0:2]`.
+    An iterable will access multiple repeated capabilites at once.
 
 % for rep_cap in config['repeated_capabilities']:
 <%
@@ -48,6 +47,8 @@ tuple_index_snippet, tuple_index_explanation = helper.get_repeated_capability_tu
 ${helper.get_rst_header_snippet(name, '-')}
 
     .. py:attribute:: ${module_name}.Session.${name}[]
+
+        ${helper.get_repeated_capability_element_recommendation(rep_cap)}
 
         .. code:: python
 
