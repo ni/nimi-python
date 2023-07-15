@@ -156,7 +156,7 @@ def get_repeated_capability_tuple_index_python_example(rep_cap_config):
     if attr_type_for_example == "property":
         if value is None:
             snippet = f'print(session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example})'
-            explanation = f"prints {class_attr_ref} for {rep_cap_name} {', '.join(indices)} or errors if the value is not the same for all."
+            explanation = f"prints {class_attr_ref} for {rep_cap_name} {', '.join(indices)}."
         else:
             snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example} = {value}'
             explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {', '.join(indices)}."

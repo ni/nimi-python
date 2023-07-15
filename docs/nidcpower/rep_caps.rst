@@ -61,6 +61,6 @@ instruments
 
             print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)
 
-        prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all.
+        prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice'.
 
 

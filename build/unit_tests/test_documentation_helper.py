@@ -935,7 +935,7 @@ def test_get_repeated_capability_single_index_python_example(rep_cap, snippet, e
                 'value_for_docs_example': None,
             },
             "print(session.instruments['Dev1', 'Dev2', '3rdDevice'].serial_number)",
-            "prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice' or errors if the value is not the same for all.",
+            "prints :py:attr:`serial_number` for instruments 'Dev1', 'Dev2', '3rdDevice'.",
             id="property_no_val",
         ),
         pytest.param(
