@@ -36,6 +36,7 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Fix [#1970](https://github.com/ni/nimi-python/issues/1970): Incorrect error when driver runtime not installed.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
