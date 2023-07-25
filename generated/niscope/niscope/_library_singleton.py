@@ -19,7 +19,10 @@ _library_info = {'Linux': {'64bit': {'name': 'niscope', 'type': 'cdll'}},
 
 def _get_library_name():
     try:
-        return ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
+        lib_name = ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
+        if lib_name is None:
+            raise errors.DriverNotInstalledError()
+        return lib_name
     except KeyError:
         raise errors.UnsupportedConfigurationError
 
