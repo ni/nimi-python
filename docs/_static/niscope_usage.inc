@@ -21,23 +21,7 @@ The following is a basic example of using the **niscope** module to open a sessi
         # Find all record number 3
         rec3 = [wfm for wfm in waveforms if wfm.record == 3]
 
-If you need more performance (faster fetching) or need to work with `SciPy <https://www.scipy.org/>`_, you can use the **fetch_into()** method instead of **fetch()**. This
-method takes an already allocated `numpy <http://www.numpy.org/>`_ array and puts the acquired samples in it.
-
-.. code-block:: python
-
-    voltage_range = 1.0
-    record_length = 2000
-    channels = [0, 1]
-    num_channels = len(channels)
-    num_records = 5
-    total_num_wfms = num_channels * num_records
-    wfm = numpy.ndarray(record_length * total_num_wfms, dtype=numpy.int8)
-    session.configure_vertical(voltage_range, niscope.VerticalCoupling.AC)
-    session.configure_horizontal_timing(50000000, record_length, 50.0, num_records, True)
-    with session.initiate():
-        waveform_infos = session.channels[channels].fetch_into(waveform=wfm, num_records=num_records)
-
+If you need more performance (faster fetching) or need to work with `SciPy <https://www.scipy.org/>`_, you can use the **fetch_into()** method instead of **fetch()**. See the fetch_into example.
 
 
 `Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
