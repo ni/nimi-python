@@ -142,41 +142,8 @@ The following is a basic example of using the **niscope** module to open a sessi
         # Find all record number 3
         rec3 = [wfm for wfm in waveforms if wfm.record == 3]
 
-The waveform returned from `fetch`_ is a flat list of Python objects
-
-    - Attributes:
-
-        -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
-        -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-        -  **x_increment** (float) the time between points in the acquired waveform in seconds
-        -  **channel** (str) channel name this waveform was acquired from
-        -  **record** (int) record number of this waveform
-        -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
-
-                voltage = binary data * gain factor + offset
-
-        -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-                voltage = binary data * gain factor + offset
-
-        - **samples** (array of float) floating point array of samples. Length will be of the actual samples acquired
-
-    - Such that all record 0 waveforms are first. For example, with a channel list of 0,1, you would have the following index values:
-
-        - index 0 = record 0, channel 0
-        - index 1 = record 0, channel 1
-        - index 2 = record 1, channel 0
-        - index 3 = record 1, channel 1
-        - etc.
-
-
-If you need more performance or need to work with `SciPy <https://www.scipy.org/>`_, you can use the `fetch_into()` method instead of `fetch()`. This
-method takes an already allocated `numpy <http://www.numpy.org/>`_ array and puts the acquired samples in it. Data types supported:
-
-    - `numpy.float64`
-    - `numpy.int8`
-    - `numpy.in16`
-    - `numpy.int32`
+If you need more performance or need to work with `SciPy <https://www.scipy.org/>`_, you can use the **fetch_into**() method instead of **fetch**(). This
+method takes an already allocated `numpy <http://www.numpy.org/>`_ array and puts the acquired samples in it.
 
 .. code-block:: python
 
@@ -191,32 +158,6 @@ method takes an already allocated `numpy <http://www.numpy.org/>`_ array and put
     with session.initiate():
         waveform_infos = session.channels[channels].fetch_into(wfm=wfm, num_records=num_records)
 
-The waveform_infos returned from `fetch_into`_ is a 1D list of Python objects
-
-    - Attributes:
-
-        -  **relative_initial_x** (float) the time (in seconds) from the trigger to the first sample in the fetched waveform
-        -  **absolute_initial_x** (float) timestamp (in seconds) of the first fetched sample. This timestamp is comparable between records and acquisitions; devices that do not support this parameter use 0 for this output.
-        -  **x_increment** (float) the time between points in the acquired waveform in seconds
-        -  **channel** (str) channel name this waveform was asquire from
-        -  **record** (int) record number of this waveform
-        -  **gain** (float) the gain factor of the given channel; useful for scaling binary data with the following formula:
-
-                voltage = binary data * gain factor + offset
-
-        -  **offset** (float) the offset factor of the given channel; useful for scaling binary data with the following formula:
-
-                voltage = binary data * gain factor + offset
-
-        - **samples** (numpy array of datatype used) floating point array of samples. Length will be of the actual samples acquired
-
-    - Such that all record 0 waveforms are first. For example, with a channel list of 0,1, you would have the following index values:
-
-        - index 0 = record 0, channel 0
-        - index 1 = record 0, channel 1
-        - index 2 = record 1, channel 0
-        - index 3 = record 1, channel 1
-        - etc.
 
 
 `Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
