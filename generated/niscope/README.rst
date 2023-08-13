@@ -152,7 +152,8 @@ method takes an already allocated `numpy <http://www.numpy.org/>`_ array and put
     channels = [0, 1]
     num_channels = len(channels)
     num_records = 5
-    wfm = numpy.ndarray(num_channels * record_length, dtype=numpy.int8)
+    total_num_wfms = num_channels * num_records
+    wfm = numpy.ndarray(record_length * total_num_wfms, dtype=numpy.int8)
     session.configure_vertical(voltage_range, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, record_length, 50.0, num_records, True)
     with session.initiate():
