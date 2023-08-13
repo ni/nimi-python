@@ -35,7 +35,7 @@ method takes an already allocated `numpy <http://www.numpy.org/>`_ array and put
     session.configure_vertical(voltage_range, niscope.VerticalCoupling.AC)
     session.configure_horizontal_timing(50000000, record_length, 50.0, num_records, True)
     with session.initiate():
-        waveform_infos = session.channels[channels].fetch_into(wfm=wfm, num_records=num_records)
+        waveform_infos = session.channels[channels].fetch_into(waveform=wfm, num_records=num_records)
 
 
 
