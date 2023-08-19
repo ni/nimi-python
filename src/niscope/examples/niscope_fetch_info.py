@@ -10,7 +10,7 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 def example(resource_name, channels, options, length, voltage):
-    # This method of fetching is more complicated, but much faster than fetch().
+    # fetch_into() allows you to preallocate and reuse the destination of the fetched waveforms, which can result in better performance at the expense of the usability of fetch().
     channels = [ch.strip() for ch in channels.split(",")]
     num_channels = len(channels)
     num_records = 5
