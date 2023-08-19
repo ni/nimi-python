@@ -346,7 +346,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_in_bytes_ctype.value  # case B590
-        configuration_array = array.array("b", [0] * configuration_size)  # case B590
+        configuration_array = array.array("b", [0]) * configuration_size  # case B590
         configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niScope_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -365,7 +365,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self.actual_num_wfms(channel_list))  # case B560
-        waveform_array = array.array("d", [0] * waveform_size)  # case B560
+        waveform_array = array.array("d", [0]) * waveform_size  # case B560
         waveform_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
         wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = _get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560
@@ -598,7 +598,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         num_samples_ctype = _visatype.ViInt32(num_samples)  # case S150
         waveform_size = (num_samples * self.actual_num_wfms(channel_list))  # case B560
-        waveform_array = array.array("d", [0] * waveform_size)  # case B560
+        waveform_array = array.array("d", [0]) * waveform_size  # case B560
         waveform_ctype = _get_ctypes_pointer_for_buffer(value=waveform_array, library_type=_visatype.ViReal64)  # case B560
         wfm_info_size = self.actual_num_wfms(channel_list)  # case B560
         wfm_info_ctype = _get_ctypes_pointer_for_buffer(library_type=waveform_info.struct_niScope_wfmInfo, size=wfm_info_size)  # case B560

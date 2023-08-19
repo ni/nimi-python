@@ -1220,7 +1220,7 @@ def test_get_ctype_variable_declaration_snippet_case_b570():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[18], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
         'an_int_size = 256  # case B570',
-        'an_int_array = array.array("h", [0] * an_int_size)  # case B570',
+        'an_int_array = array.array("h", [0]) * an_int_size  # case B570',
         'an_int_ctype = _get_ctypes_pointer_for_buffer(value=an_int_array, library_type=_visatype.ViInt16)  # case B570',
     ]
     assert len(actual) == len(expected)
@@ -1237,7 +1237,7 @@ def test_get_ctype_variable_declaration_snippet_case_b590_array():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[24], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
     expected = [
         'a_buffer_array_size = string_size_ctype.value  # case B590',
-        'a_buffer_array_array = array.array("l", [0] * a_buffer_array_size)  # case B590',
+        'a_buffer_array_array = array.array("l", [0]) * a_buffer_array_size  # case B590',
         'a_buffer_array_ctype = _get_ctypes_pointer_for_buffer(value=a_buffer_array_array, library_type=_visatype.ViInt32)  # case B590',
     ]
     assert len(actual) == len(expected)
@@ -1265,7 +1265,7 @@ def test_get_ctype_variable_declaration_snippet_case_b600():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     expected = [
         'output_size = number_of_elements  # case B600',
-        'output_array = array.array("q", [0] * output_size)  # case B600',
+        'output_array = array.array("q", [0]) * output_size  # case B600',
         'output_ctype = _get_ctypes_pointer_for_buffer(value=output_array, library_type=_visatype.ViInt64)  # case B600',
     ]
     assert len(actual) == len(expected)
@@ -1282,7 +1282,7 @@ def test_get_ctype_variable_declaration_snippet_case_b620_array():
     actual = get_ctype_variable_declaration_snippet(parameters_for_testing[26], parameters_for_testing, IviDanceStep.GET_DATA, config_for_testing, use_numpy_array=False)
     expected = [
         'a_buffer_twist_array_size = output_twist_ctype.value  # case B620',
-        'a_buffer_twist_array_array = array.array("l", [0] * a_buffer_twist_array_size)  # case B620',
+        'a_buffer_twist_array_array = array.array("l", [0]) * a_buffer_twist_array_size  # case B620',
         'a_buffer_twist_array_ctype = _get_ctypes_pointer_for_buffer(value=a_buffer_twist_array_array, library_type=_visatype.ViInt32)  # case B620',
     ]
     assert len(actual) == len(expected)
