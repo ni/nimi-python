@@ -142,7 +142,7 @@ The following is a basic example of using the **niscope** module to open a sessi
         # Find all record number 3
         rec3 = [wfm for wfm in waveforms if wfm.record == 3]
 
-If you need more performance (faster fetching) or need to work with `SciPy <https://www.scipy.org/>`_, you can use the **fetch_into()** method instead of **fetch()**. See the fetch_into example.
+If you need faster fetch performance, or to directly interface with `SciPy <https://www.scipy.org/>`_, you can use the **fetch_into()** method instead of **fetch()**. See the fetch_into example.
 
 
 `Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/niscope/examples>`_
