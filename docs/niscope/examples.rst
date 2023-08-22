@@ -21,14 +21,14 @@ niscope_fetch_forever.py
    :encoding: utf8
    :caption: `(niscope_fetch_forever.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_forever.py>`_
 
-niscope_fetch_info.py
+niscope_fetch_into.py
 ---------------------
 
-.. literalinclude:: ../../src/niscope/examples/niscope_fetch_info.py
+.. literalinclude:: ../../src/niscope/examples/niscope_fetch_into.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(niscope_fetch_info.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_info.py>`_
+   :caption: `(niscope_fetch_into.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_into.py>`_
 
 niscope_read.py
 ---------------
