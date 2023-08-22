@@ -185,7 +185,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         size_in_bytes_ctype = _visatype.ViInt32(error_code)  # case S180
         configuration_size = size_in_bytes_ctype.value  # case B590
-        configuration_array = array.array("b", [0] * configuration_size)  # case B590
+        configuration_array = array.array("b", [0]) * configuration_size  # case B590
         configuration_ctype = _get_ctypes_pointer_for_buffer(value=configuration_array, library_type=_visatype.ViInt8)  # case B590
         error_code = self._library.niFake_ExportAttributeConfigurationBuffer(vi_ctype, size_in_bytes_ctype, configuration_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -195,7 +195,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(number_of_samples)  # case S210
         waveform_data_size = number_of_samples  # case B600
-        waveform_data_array = array.array("d", [0] * waveform_data_size)  # case B600
+        waveform_data_array = array.array("d", [0]) * waveform_data_size  # case B600
         waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_visatype.ViReal64)  # case B600
         actual_number_of_samples_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))

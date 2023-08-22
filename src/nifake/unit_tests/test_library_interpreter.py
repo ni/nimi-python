@@ -161,7 +161,7 @@ class TestLibraryInterpreter(object):
 
         # Because we are mocking _get_ctypes_pointer_for_buffer() we don't end up using the array allocated in the function call. Instead, we will allocate the arrays here
         # and have the mock return them. These are the ones that are actually filled in by the function.
-        expected_waveform = array.array('d', [0] * len(expected_waveform_list))
+        expected_waveform = array.array('d', [0]) * len(expected_waveform_list)
         expected_waveform_ctypes = ctypes.cast(expected_waveform.buffer_info()[0], ctypes.POINTER(nifake._visatype.ViReal64 * len(expected_waveform_list)))
 
         interpreter = self.get_initialized_library_interpreter()

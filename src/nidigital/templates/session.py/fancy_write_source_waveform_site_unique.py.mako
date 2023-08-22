@@ -18,7 +18,7 @@
             actual_samples_per_waveform = 0
         else:
             actual_samples_per_waveform = len(waveform_data[next(iter(waveform_data))])
-        data = array.array('L', [0] * (len(waveform_data) * actual_samples_per_waveform))
+        data = array.array('L', [0]) * (len(waveform_data) * actual_samples_per_waveform)
         mv = memoryview(data)
 
         i = 0
