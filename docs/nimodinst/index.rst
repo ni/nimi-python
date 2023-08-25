@@ -2,7 +2,7 @@
 NI-ModInst Python API Documentation
 ===================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_nimodinst.inc
 
 .. include:: ../_static/contributing.inc
 

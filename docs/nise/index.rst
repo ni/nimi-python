@@ -2,7 +2,7 @@
 NI Switch Executive Python API Documentation
 ============================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_nise.inc
 
 .. include:: ../_static/contributing.inc
 

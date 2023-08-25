@@ -2,7 +2,7 @@
 NI-SCOPE Python API Documentation
 =================================
 
-.. include:: ../_static/about_driver.inc
+.. include:: about_niscope.inc
 
 .. include:: ../_static/contributing.inc
 
