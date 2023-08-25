@@ -14,7 +14,7 @@ The **${module_name}** module provides a Python API for ${driver_name}. The code
 
 Support Policy
 --------------
-${module_name} supports all the Operating Systems supported by ${driver_name}.
+**${module_name}** supports all the Operating Systems supported by ${driver_name}.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

@@ -7,7 +7,7 @@ The **nifgen** module provides a Python API for NI-FGEN. The code is maintained 
 
 Support Policy
 --------------
-nifgen supports all the Operating Systems supported by NI-FGEN.
+**nifgen** supports all the Operating Systems supported by NI-FGEN.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

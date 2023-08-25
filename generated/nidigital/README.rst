@@ -46,9 +46,9 @@ The **nidigital** module provides a Python API for NI-Digital Pattern Driver. Th
 
 Support Policy
 --------------
-nidigital supports all the Operating Systems supported by NI-Digital Pattern Driver.
+**nidigital** supports all the Operating Systems supported by NI-Digital Pattern Driver.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 
 
 NI-Digital Pattern Driver Python API Status
@@ -95,7 +95,7 @@ NI-Digital Pattern Driver Python API Status
 Installation
 ------------
 
-As a prerequisite to using the nidigital module, you must install the NI-Digital Pattern Driver runtime on your system. Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the driver runtime for your devices.
+As a prerequisite to using the **nidigital** module, you must install the NI-Digital Pattern Driver runtime on your system. Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the driver runtime for your devices.
 
 The nimi-python modules (i.e. for **NI-Digital Pattern Driver**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
@@ -192,5 +192,6 @@ licenses allow for non-commercial and commercial use.
 
 
 **gRPC Features**
+
 For driver APIs that support it, passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
 subject to the NI General Purpose EULA (`see NILICENSE <https://github.com/ni/nimi-python/blob/master/NILICENSE>`_).

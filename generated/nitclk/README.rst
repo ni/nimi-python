@@ -46,9 +46,9 @@ The **nitclk** module provides a Python API for NI-TClk. The code is maintained 
 
 Support Policy
 --------------
-nitclk supports all the Operating Systems supported by NI-TClk.
+**nitclk** supports all the Operating Systems supported by NI-TClk.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 
 
 NI-TClk Python API Status
@@ -95,7 +95,7 @@ NI-TClk Python API Status
 Installation
 ------------
 
-As a prerequisite to using the nitclk module, you must install the NI-TClk runtime on your system. Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the driver runtime for your devices.
+As a prerequisite to using the **nitclk** module, you must install the NI-TClk runtime on your system. Visit `ni.com/downloads <http://www.ni.com/downloads/>`_ to download the driver runtime for your devices.
 
 The nimi-python modules (i.e. for **NI-TClk**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
@@ -158,5 +158,6 @@ licenses allow for non-commercial and commercial use.
 
 
 **gRPC Features**
+
 For driver APIs that support it, passing a GrpcSessionOptions instance as a parameter to Session.__init__() is
 subject to the NI General Purpose EULA (`see NILICENSE <https://github.com/ni/nimi-python/blob/master/NILICENSE>`_).

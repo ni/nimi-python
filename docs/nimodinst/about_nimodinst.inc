@@ -7,7 +7,7 @@ The **nimodinst** module provides a Python API for NI-ModInst. The code is maint
 
 Support Policy
 --------------
-nimodinst supports all the Operating Systems supported by NI-ModInst.
+**nimodinst** supports all the Operating Systems supported by NI-ModInst.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

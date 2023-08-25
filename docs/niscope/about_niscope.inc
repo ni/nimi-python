@@ -7,7 +7,7 @@ The **niscope** module provides a Python API for NI-SCOPE. The code is maintaine
 
 Support Policy
 --------------
-niscope supports all the Operating Systems supported by NI-SCOPE.
+**niscope** supports all the Operating Systems supported by NI-SCOPE.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

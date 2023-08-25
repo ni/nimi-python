@@ -7,7 +7,7 @@ The **nise** module provides a Python API for NI Switch Executive. The code is m
 
 Support Policy
 --------------
-nise supports all the Operating Systems supported by NI Switch Executive.
+**nise** supports all the Operating Systems supported by NI Switch Executive.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

@@ -7,7 +7,7 @@ The **nidcpower** module provides a Python API for NI-DCPower. The code is maint
 
 Support Policy
 --------------
-nidcpower supports all the Operating Systems supported by NI-DCPower.
+**nidcpower** supports all the Operating Systems supported by NI-DCPower.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

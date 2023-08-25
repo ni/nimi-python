@@ -7,7 +7,7 @@ The **nidmm** module provides a Python API for NI-DMM. The code is maintained in
 
 Support Policy
 --------------
-nidmm supports all the Operating Systems supported by NI-DMM.
+**nidmm** supports all the Operating Systems supported by NI-DMM.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 

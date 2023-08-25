@@ -7,7 +7,7 @@ The **nidigital** module provides a Python API for NI-Digital Pattern Driver. Th
 
 Support Policy
 --------------
-nidigital supports all the Operating Systems supported by NI-Digital Pattern Driver.
+**nidigital** supports all the Operating Systems supported by NI-Digital Pattern Driver.
 
-It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 
