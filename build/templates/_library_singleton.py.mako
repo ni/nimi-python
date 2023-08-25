@@ -23,7 +23,10 @@ _library_info = ${helper.get_dictionary_snippet(config['library_info'], indent=1
 
 def _get_library_name():
     try:
-        return ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
+        lib_name = ctypes.util.find_library(_library_info[platform.system()][platform.architecture()[0]]['name'])  # We find and return full path to the DLL
+        if lib_name is None:
+            raise errors.DriverNotInstalledError()
+        return lib_name
     except KeyError:
         raise errors.UnsupportedConfigurationError
 
