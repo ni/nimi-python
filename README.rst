@@ -1,32 +1,18 @@
 Overall Status
 --------------
 
-+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|                                                                                 |
-+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| GitHub status        | |OpenIssues| |OpenPullRequests|                                                                                                    |
-+----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+|MITLicense|
+
+|OpenIssues| |OpenPullRequests|
 
 ===========  ============================================================================================================================
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
 Author       NI
 ===========  ============================================================================================================================
 
-.. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
-    :alt: Build Status - master branch
-    :target: https://travis-ci.org/ni/nimi-python
-
-.. |Docs| image:: https://readthedocs.org/projects/nimi-python/badge/?version=latest
-    :alt: Documentation Status - master branch
-    :target: https://nimi-python.readthedocs.io/en/latest/?badge=latest
-
 .. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License
     :target: https://opensource.org/licenses/MIT
-
-.. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master&dummy=no_cache_please_1
-    :alt: Test Coverage - master branch
-    :target: https://coveralls.io/github/ni/nimi-python?branch=master
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
     :alt: Open Issues + Pull Requests
@@ -75,6 +61,8 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nidcpowerPythonVersion| |
 +-------------------------------+--------------------------+
+| Documentation                 | |nidcpowerDocs|          |
++-------------------------------+--------------------------+
 | Open Issues                   | |nidcpowerOpenIssues|    |
 +-------------------------------+--------------------------+
 | Open Pull Requests            | |nidcpowerOpenPRs|       |
@@ -89,6 +77,11 @@ NI-DCPower Python API Status
 .. |nidcpowerPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidcpower.svg
     :alt: NI-DCPower supported Python versions
     :target: http://pypi.python.org/pypi/nidcpower
+
+
+.. |nidcpowerDocs| image:: https://readthedocs.org/projects/nidcpower/badge/?version=latest
+    :alt: NI-DCPower Documentation Status
+    :target: https://nidcpower.readthedocs.io/en/latest/?badge=latest
 
 
 .. |nidcpowerOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidcpower.svg
@@ -114,6 +107,8 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | Supported Python Version              | |nidigitalPythonVersion| |
 +---------------------------------------+--------------------------+
+| Documentation                         | |nidigitalDocs|          |
++---------------------------------------+--------------------------+
 | Open Issues                           | |nidigitalOpenIssues|    |
 +---------------------------------------+--------------------------+
 | Open Pull Requests                    | |nidigitalOpenPRs|       |
@@ -128,6 +123,11 @@ NI-Digital Pattern Driver Python API Status
 .. |nidigitalPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidigital.svg
     :alt: NI-Digital Pattern Driver supported Python versions
     :target: http://pypi.python.org/pypi/nidigital
+
+
+.. |nidigitalDocs| image:: https://readthedocs.org/projects/nidigital/badge/?version=latest
+    :alt: NI-Digital Pattern Driver Documentation Status
+    :target: https://nidigital.readthedocs.io/en/latest/?badge=latest
 
 
 .. |nidigitalOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidigital.svg
@@ -153,6 +153,8 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | Supported Python Version      | |nidmmPythonVersion| |
 +-------------------------------+----------------------+
+| Documentation                 | |nidmmDocs|          |
++-------------------------------+----------------------+
 | Open Issues                   | |nidmmOpenIssues|    |
 +-------------------------------+----------------------+
 | Open Pull Requests            | |nidmmOpenPRs|       |
@@ -167,6 +169,11 @@ NI-DMM Python API Status
 .. |nidmmPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
     :target: http://pypi.python.org/pypi/nidmm
+
+
+.. |nidmmDocs| image:: https://readthedocs.org/projects/nidmm/badge/?version=latest
+    :alt: NI-DMM Documentation Status
+    :target: https://nidmm.readthedocs.io/en/latest/?badge=latest
 
 
 .. |nidmmOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidmm.svg
@@ -192,6 +199,8 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nifgenPythonVersion| |
 +-------------------------------+-----------------------+
+| Documentation                 | |nifgenDocs|          |
++-------------------------------+-----------------------+
 | Open Issues                   | |nifgenOpenIssues|    |
 +-------------------------------+-----------------------+
 | Open Pull Requests            | |nifgenOpenPRs|       |
@@ -206,6 +215,11 @@ NI-FGEN Python API Status
 .. |nifgenPythonVersion| image:: http://img.shields.io/pypi/pyversions/nifgen.svg
     :alt: NI-FGEN supported Python versions
     :target: http://pypi.python.org/pypi/nifgen
+
+
+.. |nifgenDocs| image:: https://readthedocs.org/projects/nifgen/badge/?version=latest
+    :alt: NI-FGEN Documentation Status
+    :target: https://nifgen.readthedocs.io/en/latest/?badge=latest
 
 
 .. |nifgenOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nifgen.svg
@@ -231,6 +245,8 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nimodinstPythonVersion| |
 +-------------------------------+--------------------------+
+| Documentation                 | |nimodinstDocs|          |
++-------------------------------+--------------------------+
 | Open Issues                   | |nimodinstOpenIssues|    |
 +-------------------------------+--------------------------+
 | Open Pull Requests            | |nimodinstOpenPRs|       |
@@ -245,6 +261,11 @@ NI-ModInst Python API Status
 .. |nimodinstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
     :alt: NI-ModInst supported Python versions
     :target: http://pypi.python.org/pypi/nimodinst
+
+
+.. |nimodinstDocs| image:: https://readthedocs.org/projects/nimodinst/badge/?version=latest
+    :alt: NI-ModInst Documentation Status
+    :target: https://nimodinst.readthedocs.io/en/latest/?badge=latest
 
 
 .. |nimodinstOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nimodinst.svg
@@ -270,6 +291,8 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | Supported Python Version      | |niscopePythonVersion| |
 +-------------------------------+------------------------+
+| Documentation                 | |niscopeDocs|          |
++-------------------------------+------------------------+
 | Open Issues                   | |niscopeOpenIssues|    |
 +-------------------------------+------------------------+
 | Open Pull Requests            | |niscopeOpenPRs|       |
@@ -284,6 +307,11 @@ NI-SCOPE Python API Status
 .. |niscopePythonVersion| image:: http://img.shields.io/pypi/pyversions/niscope.svg
     :alt: NI-SCOPE supported Python versions
     :target: http://pypi.python.org/pypi/niscope
+
+
+.. |niscopeDocs| image:: https://readthedocs.org/projects/niscope/badge/?version=latest
+    :alt: NI-SCOPE Documentation Status
+    :target: https://niscope.readthedocs.io/en/latest/?badge=latest
 
 
 .. |niscopeOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niscope.svg
@@ -309,6 +337,8 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | Supported Python Version      | |nisePythonVersion| |
 +-------------------------------+---------------------+
+| Documentation                 | |niseDocs|          |
++-------------------------------+---------------------+
 | Open Issues                   | |niseOpenIssues|    |
 +-------------------------------+---------------------+
 | Open Pull Requests            | |niseOpenPRs|       |
@@ -323,6 +353,11 @@ NI Switch Executive Python API Status
 .. |nisePythonVersion| image:: http://img.shields.io/pypi/pyversions/nise.svg
     :alt: NI Switch Executive supported Python versions
     :target: http://pypi.python.org/pypi/nise
+
+
+.. |niseDocs| image:: https://readthedocs.org/projects/nise/badge/?version=latest
+    :alt: NI Switch Executive Documentation Status
+    :target: https://nise.readthedocs.io/en/latest/?badge=latest
 
 
 .. |niseOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nise.svg
@@ -348,6 +383,8 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | Supported Python Version      | |niswitchPythonVersion| |
 +-------------------------------+-------------------------+
+| Documentation                 | |niswitchDocs|          |
++-------------------------------+-------------------------+
 | Open Issues                   | |niswitchOpenIssues|    |
 +-------------------------------+-------------------------+
 | Open Pull Requests            | |niswitchOpenPRs|       |
@@ -362,6 +399,11 @@ NI-SWITCH Python API Status
 .. |niswitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
     :alt: NI-SWITCH supported Python versions
     :target: http://pypi.python.org/pypi/niswitch
+
+
+.. |niswitchDocs| image:: https://readthedocs.org/projects/niswitch/badge/?version=latest
+    :alt: NI-SWITCH Documentation Status
+    :target: https://niswitch.readthedocs.io/en/latest/?badge=latest
 
 
 .. |niswitchOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niswitch.svg
@@ -387,6 +429,8 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nitclkPythonVersion| |
 +-------------------------------+-----------------------+
+| Documentation                 | |nitclkDocs|          |
++-------------------------------+-----------------------+
 | Open Issues                   | |nitclkOpenIssues|    |
 +-------------------------------+-----------------------+
 | Open Pull Requests            | |nitclkOpenPRs|       |
@@ -401,6 +445,11 @@ NI-TClk Python API Status
 .. |nitclkPythonVersion| image:: http://img.shields.io/pypi/pyversions/nitclk.svg
     :alt: NI-TClk supported Python versions
     :target: http://pypi.python.org/pypi/nitclk
+
+
+.. |nitclkDocs| image:: https://readthedocs.org/projects/nitclk/badge/?version=latest
+    :alt: NI-TClk Documentation Status
+    :target: https://nitclk.readthedocs.io/en/latest/?badge=latest
 
 
 .. |nitclkOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nitclk.svg
@@ -475,8 +524,17 @@ as we can.
 Documentation
 =============
 
-Documentation is available `here <http://nimi-python.readthedocs.io>`_.
+Documentation is available on **Read the Docs**:
 
+- https://nidcpower.readthedocs.io/en/latest
+- https://nidigital.readthedocs.io/en/latest
+- https://nidmm.readthedocs.io/en/latest
+- https://nifgen.readthedocs.io/en/latest
+- https://nimodinst.readthedocs.io/en/latest
+- https://niscope.readthedocs.io/en/latest
+- https://nise.readthedocs.io/en/latest
+- https://niswitch.readthedocs.io/en/latest
+- https://nitclk.readthedocs.io/en/latest
 
 .. _license-section:
 
