@@ -78,7 +78,7 @@ NI Switch Executive Python API Status
 
 
 .. |niseDocs| image:: https://readthedocs.org/projects/nise/badge/?version=latest
-    :alt: NI Switch Executive Documentation Status
+    :alt: NI Switch Executive Python API Documentation Status
     :target: https://nise.readthedocs.io/en/latest
 
 

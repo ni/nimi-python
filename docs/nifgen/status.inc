@@ -30,7 +30,7 @@ NI-FGEN Python API Status
 
 
 .. |nifgenDocs| image:: https://readthedocs.org/projects/nifgen/badge/?version=latest
-    :alt: NI-FGEN Documentation Status
+    :alt: NI-FGEN Python API Documentation Status
     :target: https://nifgen.readthedocs.io/en/latest
 
 

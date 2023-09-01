@@ -30,7 +30,7 @@ NI-DCPower Python API Status
 
 
 .. |nidcpowerDocs| image:: https://readthedocs.org/projects/nidcpower/badge/?version=latest
-    :alt: NI-DCPower Documentation Status
+    :alt: NI-DCPower Python API Documentation Status
     :target: https://nidcpower.readthedocs.io/en/latest
 
 

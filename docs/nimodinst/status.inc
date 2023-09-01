@@ -30,7 +30,7 @@ NI-ModInst Python API Status
 
 
 .. |nimodinstDocs| image:: https://readthedocs.org/projects/nimodinst/badge/?version=latest
-    :alt: NI-ModInst Documentation Status
+    :alt: NI-ModInst Python API Documentation Status
     :target: https://nimodinst.readthedocs.io/en/latest
 
 

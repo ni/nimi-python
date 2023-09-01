@@ -78,7 +78,7 @@ NI-SCOPE Python API Status
 
 
 .. |niscopeDocs| image:: https://readthedocs.org/projects/niscope/badge/?version=latest
-    :alt: NI-SCOPE Documentation Status
+    :alt: NI-SCOPE Python API Documentation Status
     :target: https://niscope.readthedocs.io/en/latest
 
 

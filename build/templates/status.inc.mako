@@ -30,7 +30,7 @@ ${helper.get_rst_picture_reference('{0}LatestVersion'.format(module_name), 'http
 
 ${helper.get_rst_picture_reference('{0}PythonVersion'.format(module_name), 'http://img.shields.io/pypi/pyversions/{0}.svg'.format(module_name), '{0} supported Python versions'.format(driver_name), 'http://pypi.python.org/pypi/{0}'.format(module_name), indent=0)}
 
-${helper.get_rst_picture_reference('{0}Docs'.format(module_name), 'https://readthedocs.org/projects/{0}/badge/?version=latest'.format(module_name), '{0} Documentation Status'.format(driver_name), 'https://{0}.readthedocs.io/en/latest'.format(module_name), indent=0)}
+${helper.get_rst_picture_reference('{0}Docs'.format(module_name), 'https://readthedocs.org/projects/{0}/badge/?version=latest'.format(module_name), '{0} Python API Documentation Status'.format(driver_name), 'https://{0}.readthedocs.io/en/latest'.format(module_name), indent=0)}
 
 ${helper.get_rst_picture_reference('{0}OpenIssues'.format(module_name), 'https://img.shields.io/github/issues/ni/nimi-python/{0}.svg'.format(module_name), 'Open Issues + Pull Requests for {0}'.format(driver_name), 'https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3A{0}'.format(module_name), indent=0)}
 

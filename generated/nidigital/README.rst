@@ -78,7 +78,7 @@ NI-Digital Pattern Driver Python API Status
 
 
 .. |nidigitalDocs| image:: https://readthedocs.org/projects/nidigital/badge/?version=latest
-    :alt: NI-Digital Pattern Driver Documentation Status
+    :alt: NI-Digital Pattern Driver Python API Documentation Status
     :target: https://nidigital.readthedocs.io/en/latest
 
 

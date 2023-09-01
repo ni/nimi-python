@@ -30,7 +30,7 @@ NI-DMM Python API Status
 
 
 .. |nidmmDocs| image:: https://readthedocs.org/projects/nidmm/badge/?version=latest
-    :alt: NI-DMM Documentation Status
+    :alt: NI-DMM Python API Documentation Status
     :target: https://nidmm.readthedocs.io/en/latest
 
 

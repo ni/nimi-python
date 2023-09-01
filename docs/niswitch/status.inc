@@ -30,7 +30,7 @@ NI-SWITCH Python API Status
 
 
 .. |niswitchDocs| image:: https://readthedocs.org/projects/niswitch/badge/?version=latest
-    :alt: NI-SWITCH Documentation Status
+    :alt: NI-SWITCH Python API Documentation Status
     :target: https://niswitch.readthedocs.io/en/latest
 
 

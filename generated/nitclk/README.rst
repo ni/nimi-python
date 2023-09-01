@@ -78,7 +78,7 @@ NI-TClk Python API Status
 
 
 .. |nitclkDocs| image:: https://readthedocs.org/projects/nitclk/badge/?version=latest
-    :alt: NI-TClk Documentation Status
+    :alt: NI-TClk Python API Documentation Status
     :target: https://nitclk.readthedocs.io/en/latest
 
 

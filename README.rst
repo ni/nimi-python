@@ -90,7 +90,7 @@ NI-DCPower Python API Status
 
 
 .. |nidcpowerDocs| image:: https://readthedocs.org/projects/nidcpower/badge/?version=latest
-    :alt: NI-DCPower Documentation Status
+    :alt: NI-DCPower Python API Documentation Status
     :target: https://nidcpower.readthedocs.io/en/latest
 
 
@@ -136,7 +136,7 @@ NI-Digital Pattern Driver Python API Status
 
 
 .. |nidigitalDocs| image:: https://readthedocs.org/projects/nidigital/badge/?version=latest
-    :alt: NI-Digital Pattern Driver Documentation Status
+    :alt: NI-Digital Pattern Driver Python API Documentation Status
     :target: https://nidigital.readthedocs.io/en/latest
 
 
@@ -182,7 +182,7 @@ NI-DMM Python API Status
 
 
 .. |nidmmDocs| image:: https://readthedocs.org/projects/nidmm/badge/?version=latest
-    :alt: NI-DMM Documentation Status
+    :alt: NI-DMM Python API Documentation Status
     :target: https://nidmm.readthedocs.io/en/latest
 
 
@@ -228,7 +228,7 @@ NI-FGEN Python API Status
 
 
 .. |nifgenDocs| image:: https://readthedocs.org/projects/nifgen/badge/?version=latest
-    :alt: NI-FGEN Documentation Status
+    :alt: NI-FGEN Python API Documentation Status
     :target: https://nifgen.readthedocs.io/en/latest
 
 
@@ -274,7 +274,7 @@ NI-ModInst Python API Status
 
 
 .. |nimodinstDocs| image:: https://readthedocs.org/projects/nimodinst/badge/?version=latest
-    :alt: NI-ModInst Documentation Status
+    :alt: NI-ModInst Python API Documentation Status
     :target: https://nimodinst.readthedocs.io/en/latest
 
 
@@ -320,7 +320,7 @@ NI-SCOPE Python API Status
 
 
 .. |niscopeDocs| image:: https://readthedocs.org/projects/niscope/badge/?version=latest
-    :alt: NI-SCOPE Documentation Status
+    :alt: NI-SCOPE Python API Documentation Status
     :target: https://niscope.readthedocs.io/en/latest
 
 
@@ -366,7 +366,7 @@ NI Switch Executive Python API Status
 
 
 .. |niseDocs| image:: https://readthedocs.org/projects/nise/badge/?version=latest
-    :alt: NI Switch Executive Documentation Status
+    :alt: NI Switch Executive Python API Documentation Status
     :target: https://nise.readthedocs.io/en/latest
 
 
@@ -412,7 +412,7 @@ NI-SWITCH Python API Status
 
 
 .. |niswitchDocs| image:: https://readthedocs.org/projects/niswitch/badge/?version=latest
-    :alt: NI-SWITCH Documentation Status
+    :alt: NI-SWITCH Python API Documentation Status
     :target: https://niswitch.readthedocs.io/en/latest
 
 
@@ -458,7 +458,7 @@ NI-TClk Python API Status
 
 
 .. |nitclkDocs| image:: https://readthedocs.org/projects/nitclk/badge/?version=latest
-    :alt: NI-TClk Documentation Status
+    :alt: NI-TClk Python API Documentation Status
     :target: https://nitclk.readthedocs.io/en/latest
 
 
