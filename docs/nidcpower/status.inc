@@ -11,6 +11,8 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nidcpowerPythonVersion| |
 +-------------------------------+--------------------------+
+| Documentation                 | |nidcpowerDocs|          |
++-------------------------------+--------------------------+
 | Open Issues                   | |nidcpowerOpenIssues|    |
 +-------------------------------+--------------------------+
 | Open Pull Requests            | |nidcpowerOpenPRs|       |
@@ -25,6 +27,11 @@ NI-DCPower Python API Status
 .. |nidcpowerPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidcpower.svg
     :alt: NI-DCPower supported Python versions
     :target: http://pypi.python.org/pypi/nidcpower
+
+
+.. |nidcpowerDocs| image:: https://readthedocs.org/projects/nidcpower/badge/?version=latest
+    :alt: NI-DCPower Documentation Status
+    :target: https://nidcpower.readthedocs.io/en/latest
 
 
 .. |nidcpowerOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidcpower.svg

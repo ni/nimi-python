@@ -59,6 +59,8 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | Supported Python Version      | |nidmmPythonVersion| |
 +-------------------------------+----------------------+
+| Documentation                 | |nidmmDocs|          |
++-------------------------------+----------------------+
 | Open Issues                   | |nidmmOpenIssues|    |
 +-------------------------------+----------------------+
 | Open Pull Requests            | |nidmmOpenPRs|       |
@@ -73,6 +75,11 @@ NI-DMM Python API Status
 .. |nidmmPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidmm.svg
     :alt: NI-DMM supported Python versions
     :target: http://pypi.python.org/pypi/nidmm
+
+
+.. |nidmmDocs| image:: https://readthedocs.org/projects/nidmm/badge/?version=latest
+    :alt: NI-DMM Documentation Status
+    :target: https://nidmm.readthedocs.io/en/latest
 
 
 .. |nidmmOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidmm.svg

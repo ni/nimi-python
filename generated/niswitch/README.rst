@@ -59,6 +59,8 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | Supported Python Version      | |niswitchPythonVersion| |
 +-------------------------------+-------------------------+
+| Documentation                 | |niswitchDocs|          |
++-------------------------------+-------------------------+
 | Open Issues                   | |niswitchOpenIssues|    |
 +-------------------------------+-------------------------+
 | Open Pull Requests            | |niswitchOpenPRs|       |
@@ -73,6 +75,11 @@ NI-SWITCH Python API Status
 .. |niswitchPythonVersion| image:: http://img.shields.io/pypi/pyversions/niswitch.svg
     :alt: NI-SWITCH supported Python versions
     :target: http://pypi.python.org/pypi/niswitch
+
+
+.. |niswitchDocs| image:: https://readthedocs.org/projects/niswitch/badge/?version=latest
+    :alt: NI-SWITCH Documentation Status
+    :target: https://niswitch.readthedocs.io/en/latest
 
 
 .. |niswitchOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niswitch.svg

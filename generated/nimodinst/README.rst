@@ -59,6 +59,8 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | Supported Python Version      | |nimodinstPythonVersion| |
 +-------------------------------+--------------------------+
+| Documentation                 | |nimodinstDocs|          |
++-------------------------------+--------------------------+
 | Open Issues                   | |nimodinstOpenIssues|    |
 +-------------------------------+--------------------------+
 | Open Pull Requests            | |nimodinstOpenPRs|       |
@@ -73,6 +75,11 @@ NI-ModInst Python API Status
 .. |nimodinstPythonVersion| image:: http://img.shields.io/pypi/pyversions/nimodinst.svg
     :alt: NI-ModInst supported Python versions
     :target: http://pypi.python.org/pypi/nimodinst
+
+
+.. |nimodinstDocs| image:: https://readthedocs.org/projects/nimodinst/badge/?version=latest
+    :alt: NI-ModInst Documentation Status
+    :target: https://nimodinst.readthedocs.io/en/latest
 
 
 .. |nimodinstOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nimodinst.svg

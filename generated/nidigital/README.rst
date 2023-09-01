@@ -59,6 +59,8 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | Supported Python Version              | |nidigitalPythonVersion| |
 +---------------------------------------+--------------------------+
+| Documentation                         | |nidigitalDocs|          |
++---------------------------------------+--------------------------+
 | Open Issues                           | |nidigitalOpenIssues|    |
 +---------------------------------------+--------------------------+
 | Open Pull Requests                    | |nidigitalOpenPRs|       |
@@ -73,6 +75,11 @@ NI-Digital Pattern Driver Python API Status
 .. |nidigitalPythonVersion| image:: http://img.shields.io/pypi/pyversions/nidigital.svg
     :alt: NI-Digital Pattern Driver supported Python versions
     :target: http://pypi.python.org/pypi/nidigital
+
+
+.. |nidigitalDocs| image:: https://readthedocs.org/projects/nidigital/badge/?version=latest
+    :alt: NI-Digital Pattern Driver Documentation Status
+    :target: https://nidigital.readthedocs.io/en/latest
 
 
 .. |nidigitalOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nidigital.svg

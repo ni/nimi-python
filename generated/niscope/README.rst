@@ -59,6 +59,8 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | Supported Python Version      | |niscopePythonVersion| |
 +-------------------------------+------------------------+
+| Documentation                 | |niscopeDocs|          |
++-------------------------------+------------------------+
 | Open Issues                   | |niscopeOpenIssues|    |
 +-------------------------------+------------------------+
 | Open Pull Requests            | |niscopeOpenPRs|       |
@@ -73,6 +75,11 @@ NI-SCOPE Python API Status
 .. |niscopePythonVersion| image:: http://img.shields.io/pypi/pyversions/niscope.svg
     :alt: NI-SCOPE supported Python versions
     :target: http://pypi.python.org/pypi/niscope
+
+
+.. |niscopeDocs| image:: https://readthedocs.org/projects/niscope/badge/?version=latest
+    :alt: NI-SCOPE Documentation Status
+    :target: https://niscope.readthedocs.io/en/latest
 
 
 .. |niscopeOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/niscope.svg

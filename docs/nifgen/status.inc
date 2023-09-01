@@ -11,6 +11,8 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nifgenPythonVersion| |
 +-------------------------------+-----------------------+
+| Documentation                 | |nifgenDocs|          |
++-------------------------------+-----------------------+
 | Open Issues                   | |nifgenOpenIssues|    |
 +-------------------------------+-----------------------+
 | Open Pull Requests            | |nifgenOpenPRs|       |
@@ -25,6 +27,11 @@ NI-FGEN Python API Status
 .. |nifgenPythonVersion| image:: http://img.shields.io/pypi/pyversions/nifgen.svg
     :alt: NI-FGEN supported Python versions
     :target: http://pypi.python.org/pypi/nifgen
+
+
+.. |nifgenDocs| image:: https://readthedocs.org/projects/nifgen/badge/?version=latest
+    :alt: NI-FGEN Documentation Status
+    :target: https://nifgen.readthedocs.io/en/latest
 
 
 .. |nifgenOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nifgen.svg

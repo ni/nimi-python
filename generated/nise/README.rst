@@ -59,6 +59,8 @@ NI Switch Executive Python API Status
 +-------------------------------+---------------------+
 | Supported Python Version      | |nisePythonVersion| |
 +-------------------------------+---------------------+
+| Documentation                 | |niseDocs|          |
++-------------------------------+---------------------+
 | Open Issues                   | |niseOpenIssues|    |
 +-------------------------------+---------------------+
 | Open Pull Requests            | |niseOpenPRs|       |
@@ -73,6 +75,11 @@ NI Switch Executive Python API Status
 .. |nisePythonVersion| image:: http://img.shields.io/pypi/pyversions/nise.svg
     :alt: NI Switch Executive supported Python versions
     :target: http://pypi.python.org/pypi/nise
+
+
+.. |niseDocs| image:: https://readthedocs.org/projects/nise/badge/?version=latest
+    :alt: NI Switch Executive Documentation Status
+    :target: https://nise.readthedocs.io/en/latest
 
 
 .. |niseOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nise.svg

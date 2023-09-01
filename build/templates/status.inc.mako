@@ -14,6 +14,7 @@ table_contents.append(['{0} ({1})'.format(driver_name, module_name), '', ])
 table_contents.append(['Driver Version Tested Against', config['latest_runtime_version_tested_against']])
 table_contents.append(['PyPI Version', '|{0}LatestVersion|'.format(module_name)])
 table_contents.append(['Supported Python Version', '|{0}PythonVersion|'.format(module_name)])
+table_contents.append(['Documentation', '|{0}Docs|'.format(module_name)])
 table_contents.append(['Open Issues', '|{0}OpenIssues|'.format(module_name)])
 table_contents.append(['Open Pull Requests', '|{0}OpenPRs|'.format(module_name)])
 
@@ -28,6 +29,8 @@ ${helper.get_indented_docstring_snippet(driver_status_table, indent=0)}
 ${helper.get_rst_picture_reference('{0}LatestVersion'.format(module_name), 'http://img.shields.io/pypi/v/{0}.svg'.format(module_name), 'Latest {0} Version'.format(driver_name), 'http://pypi.python.org/pypi/{0}'.format(module_name), indent=0)}
 
 ${helper.get_rst_picture_reference('{0}PythonVersion'.format(module_name), 'http://img.shields.io/pypi/pyversions/{0}.svg'.format(module_name), '{0} supported Python versions'.format(driver_name), 'http://pypi.python.org/pypi/{0}'.format(module_name), indent=0)}
+
+${helper.get_rst_picture_reference('{0}Docs'.format(module_name), 'https://readthedocs.org/projects/{0}/badge/?version=latest'.format(module_name), '{0} Documentation Status'.format(driver_name), 'https://{0}.readthedocs.io/en/latest'.format(module_name), indent=0)}
 
 ${helper.get_rst_picture_reference('{0}OpenIssues'.format(module_name), 'https://img.shields.io/github/issues/ni/nimi-python/{0}.svg'.format(module_name), 'Open Issues + Pull Requests for {0}'.format(driver_name), 'https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3A{0}'.format(module_name), indent=0)}
 
