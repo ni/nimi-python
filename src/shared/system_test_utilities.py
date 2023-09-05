@@ -1,7 +1,7 @@
-import json
 import os
 import pathlib
 import pytest
+import re
 import subprocess
 import threading
 import time
@@ -11,11 +11,19 @@ class GrpcServerProcess:
     def __init__(self):
         server_exe = self._get_grpc_server_exe()
         self._proc = subprocess.Popen([str(server_exe)], stdout=subprocess.PIPE)
-        grpc_server_config = self._get_grpc_json_config()
-        self.server_port = grpc_server_config["port"]
 
-        # Discard output from server
+        # Read/parse output until we find the port number or the process exits; discard the rest.
         try:
+            self.server_port = None
+            while self.server_port is None and self._proc.poll() is None:
+                line = self._proc.stdout.readline()
+                match = re.search(rb"Server listening on port (\d+)", line)
+                if match:
+                    self.server_port = int(match.group(1))
+
+            if self._proc.poll() is not None:
+                raise RuntimeError(f"Server exited with return code {self._proc.returncode}")
+
             self._stdout_thread = threading.Thread(target=self._discard_output, args=(self._proc.stdout,), daemon=True)
             self._stdout_thread.start()
         except Exception:
@@ -43,12 +51,6 @@ class GrpcServerProcess:
         if not server_exe.exists():
             pytest.skip("NI gRPC Device Server not installed")
         return server_exe
-
-    def _get_grpc_json_config(self):
-        config_file = self._get_grpc_server_exe().parent / "server_config.json"
-        with open(config_file, "r") as f:
-            config_data = json.load(f)
-        return config_data
 
     def _discard_output(self, stdout):
         while True:
