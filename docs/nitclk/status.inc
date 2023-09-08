@@ -11,6 +11,8 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nitclkPythonVersion| |
 +-------------------------------+-----------------------+
+| Documentation                 | |nitclkDocs|          |
++-------------------------------+-----------------------+
 | Open Issues                   | |nitclkOpenIssues|    |
 +-------------------------------+-----------------------+
 | Open Pull Requests            | |nitclkOpenPRs|       |
@@ -25,6 +27,11 @@ NI-TClk Python API Status
 .. |nitclkPythonVersion| image:: http://img.shields.io/pypi/pyversions/nitclk.svg
     :alt: NI-TClk supported Python versions
     :target: http://pypi.python.org/pypi/nitclk
+
+
+.. |nitclkDocs| image:: https://readthedocs.org/projects/nitclk/badge/?version=latest
+    :alt: NI-TClk Python API Documentation Status
+    :target: https://nitclk.readthedocs.io/en/latest
 
 
 .. |nitclkOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nitclk.svg

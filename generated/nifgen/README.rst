@@ -2,7 +2,7 @@ Overall Status
 --------------
 
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-| master branch status | |BuildStatus| |Docs| |MITLicense| |CoverageStatus|                                                                                 |
+| master branch status | |BuildStatus| |MITLicense| |CoverageStatus|                                                                                        |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 | GitHub status        | |OpenIssues| |OpenPullRequests|                                                                                                    |
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
@@ -12,21 +12,17 @@ Info         Python bindings for NI Modular Instrument drivers. See `GitHub <htt
 Author       NI
 ===========  ============================================================================================================================
 
-.. |BuildStatus| image:: https://img.shields.io/travis/ni/nimi-python.svg
+.. |BuildStatus| image:: https://api.travis-ci.com/ni/nimi-python.svg
     :alt: Build Status - master branch
     :target: https://travis-ci.org/ni/nimi-python
-
-.. |Docs| image:: https://readthedocs.org/projects/nimi-python/badge/?version=latest
-    :alt: Documentation Status - master branch
-    :target: https://nimi-python.readthedocs.io/en/latest/?badge=latest
 
 .. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License
     :target: https://opensource.org/licenses/MIT
 
-.. |CoverageStatus| image:: https://coveralls.io/repos/github/ni/nimi-python/badge.svg?branch=master&dummy=no_cache_please_1
+.. |CoverageStatus| image:: https://codecov.io/github/ni/nimi-python/graph/badge.svg
     :alt: Test Coverage - master branch
-    :target: https://coveralls.io/github/ni/nimi-python?branch=master
+    :target: https://codecov.io/github/ni/nimi-python
 
 .. |OpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python.svg
     :alt: Open Issues + Pull Requests
@@ -63,6 +59,8 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | Supported Python Version      | |nifgenPythonVersion| |
 +-------------------------------+-----------------------+
+| Documentation                 | |nifgenDocs|          |
++-------------------------------+-----------------------+
 | Open Issues                   | |nifgenOpenIssues|    |
 +-------------------------------+-----------------------+
 | Open Pull Requests            | |nifgenOpenPRs|       |
@@ -77,6 +75,11 @@ NI-FGEN Python API Status
 .. |nifgenPythonVersion| image:: http://img.shields.io/pypi/pyversions/nifgen.svg
     :alt: NI-FGEN supported Python versions
     :target: http://pypi.python.org/pypi/nifgen
+
+
+.. |nifgenDocs| image:: https://readthedocs.org/projects/nifgen/badge/?version=latest
+    :alt: NI-FGEN Python API Documentation Status
+    :target: https://nifgen.readthedocs.io/en/latest
 
 
 .. |nifgenOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nifgen.svg
