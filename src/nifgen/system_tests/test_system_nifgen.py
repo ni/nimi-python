@@ -70,8 +70,15 @@ class SystemTests:
             with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:invalid_model (2CH);BoardType:PXIe', **session_creation_kwargs):
                 assert False
         except nifgen.Error as e:
-            assert e.code == -1074134944
-            assert e.description.find('Insufficient location information or resource not present in the system.') != -1
+            # The returned error has changed over time, so accept multiple error codes, descriptions.
+            # Users should generally not look for specific error codes and should instead correct their code if they hit an error.
+            assert e.code in [-1074134944, -1074134964]
+            assert any(
+                [
+                    e.description.find('Insufficient location information or resource not present in the system.') != -1,
+                    e.description.find('The option string parameter contains an entry with an unknown option value.') != -1,
+                ]
+            )
 
     def test_get_error(self, session):
         try:
