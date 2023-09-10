@@ -228,7 +228,7 @@ class SystemTests:
         assert 1 == session.create_arb_sequence(waveform_handles_array, [10])
 
     def test_create_advanced_arb_sequence(self, session):
-        seq_handle_base = 100000  # This is not necessary on 5433 because handles start at 0.
+        seq_handle_base = 0  # On 5433, handles start at 0.
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]
         waveform_handles_array = [session.create_waveform(waveform_data), session.create_waveform(waveform_data), session.create_waveform(waveform_data)]
         marker_location_array = [0, 16, 32]
