@@ -74,7 +74,7 @@ class SystemTests:
     def test_get_self_cal_last_date_and_time(self, session):
         before = hightime.datetime.now()
         # Returned cal time does not have sub-minute info
-        before = before.replace(second = 0, microsecond = 0)
+        before = before.replace(second=0, microsecond=0)
         last_cal_time = session.get_self_cal_last_date_and_time()
         after = hightime.datetime.now()
         assert before <= last_cal_time <= after
