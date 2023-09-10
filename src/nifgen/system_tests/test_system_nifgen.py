@@ -72,11 +72,12 @@ class SystemTests:
         assert session.get_self_cal_supported() in [True, False]
 
     def test_get_self_cal_last_date_and_time(self, session):
-        try:
-            session.get_self_cal_last_date_and_time()
-            assert False
-        except nifgen.Error as e:
-            assert e.code == -1074118632  # This operation is not supported for simulated device
+        before = hightime.datetime.now()
+        # Returned cal time does not have sub-minute info
+        before = before.replace(second = 0, microsecond = 0)
+        last_cal_time = session.get_self_cal_last_date_and_time()
+        after = hightime.datetime.now()
+        assert before <= last_cal_time <= after
 
     def test_self_cal(self, session):
         session.self_cal()
