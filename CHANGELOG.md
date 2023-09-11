@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.6](#146---2023-09-11)
 * [1.4.5](#145---2023-06-12)
 * [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
@@ -32,51 +32,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.4.6 - 2023-09-11
 * ### ALL
-    * #### Added
     * #### Changed
         * Fix [#1970](https://github.com/ni/nimi-python/issues/1970): Incorrect error when driver runtime not installed.
         * Fix [#1998](https://github.com/ni/nimi-python/issues/1998): nimi-python APIs inefficiently allocate Python arrays.
     * #### Removed
         * Support for Python 3.7
-* ### `nidcpower` (NI-DCPower)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nifgen` (NI-FGEN)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
-
 
 ## 1.4.5 - 2023-06-12
 * ### ALL
