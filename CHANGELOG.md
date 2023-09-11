@@ -1,6 +1,6 @@
 # Changelog
 
-* [1.4.6](#146---2023-09-12)
+* [1.4.6](#146---2023-09-11)
 * [1.4.5](#145---2023-06-12)
 * [1.4.4](#144---2023-04-14)
 * [1.4.3](#143---2022-12-16)
@@ -32,7 +32,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.4.6 - 2023-09-12
+## 1.4.6 - 2023-09-11
 * ### ALL
     * #### Changed
         * Fix [#1970](https://github.com/ni/nimi-python/issues/1970): Incorrect error when driver runtime not installed.
