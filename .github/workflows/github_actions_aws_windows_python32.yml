@@ -49,6 +49,7 @@ jobs:
         - name: upload coverage
           uses: codecov/codecov-action@v3
           with:
+            token: ${{ secrets.CODECOV_TOKEN }}
             flags: ${{ matrix.module_name }}systemtests
             name: ${{ matrix.module_name }}
             files: ./generated/${{ matrix.module_name }}/coverage.xml
