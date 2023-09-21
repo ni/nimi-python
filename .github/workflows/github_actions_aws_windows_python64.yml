@@ -13,6 +13,20 @@ on:
       - VERSION
     types: [ opened, synchronize, reopened ]
 
+  # For this action, also trigger on a merge to master, because
+  # the coverage badge tracks coverage of master, not PRs.
+  # Doing this for windows_python32 and rhel_python64 is unlikely to
+  # add any coverage, so don't bother triggering those on pushes to master.
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - .gitattributes
+      - LICENSE
+      - VERSION
+
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
   
@@ -49,6 +63,8 @@ jobs:
         - name: upload coverage
           uses: codecov/codecov-action@v3
           with:
+            # See ../PUBLIC_CODECOV_TOKEN_README.md
+            token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
             flags: ${{ matrix.module_name }}systemtests
             name: ${{ matrix.module_name }}
             files: ./generated/${{ matrix.module_name }}/coverage.xml
