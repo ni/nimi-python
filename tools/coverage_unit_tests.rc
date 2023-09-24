@@ -22,27 +22,24 @@ omit =
 
     ; Everthing below here needs to be explicitly excluded because "include" is ignored.
 
-    ; Covered by nifake unit tests
+    ; All private modules are covered by nifake unit tests, except for interpreter modules, which are covered by system tests.
     */nidcpower/_*
+    */nidigital/_*
+    */nimodinst/_*
+    */niscope/_*
+    */nitclk/_*
+
+    ; Common code, so covered by nifake unit tests
     */nidcpower/enums.py
     */nidcpower/errors.py
-    */nidcpower/session.py
-    */nidigital/__init__.py
-    */nidigital/_attributes.py
-    */nidigital/_converters.py
-    */nidigital/_visatype.py
     */nidigital/errors.py
-    */nimodinst/__init__.py
-    */nimodinst/_converters.py
-    */nimodinst/_visatype.py
     */nimodinst/errors.py
-    */niscope/_*
     */niscope/enums.py
     */niscope/errors.py
-    */niscope/measurement_stats.py
-    */niscope/session.py
-    */nitclk/__init__.py
-    */nitclk/_attributes.py
-    */nitclk/_converters.py
-    */nitclk/_visatype.py
     */nitclk/errors.py
+
+    ; See the include section; these modules don't have unit tests covering session.py
+    */nidcpower/session.py
+    */niscope/session.py
+
+    */niscope/measurement_stats.py
