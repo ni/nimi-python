@@ -44,6 +44,7 @@ omit =
     */niscope/session.py
 
     ; Covered by System tests
+    */nidigital/history_ram_cycle_information.py
     */niscope/measurement_stats.py
 
     ; Most of the lines in *_pb2.py are only used for the pure-Python implementation of protobuf, and the default implementation nowadays is the upb C implementation.
