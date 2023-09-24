@@ -1,12 +1,20 @@
+; This file controls what modules are examined for code coverage in our system tests.
+
 [run]
 omit =
+    ; Common code, so covered by nifake unit tests.
+    ; Some modules don't even exercise all of _attributes.py and _converters.py, making parts unreachable in system tests.
     */__init__.py
     */_attributes.py
     */_converters.py
+    */errors.py
     */_library_singleton.py
     */_visatype.py
+
+    ; Although the enum names and values vary between modules, all enums are mostly the same. nifake unit tests cover the various kinds that we use.
     */enums.py
-    */errors.py
+
+    ; I really think we shouldn't omit this. It's the public API that all of our system tests call.
     */session.py
 
 
