@@ -11,7 +11,10 @@ on:
       - .gitattributes
       - LICENSE
       - VERSION
-    types: [ opened, synchronize, reopened ]
+    types:
+      - opened
+      - synchronize
+      - reopened
 
   # For this action, also trigger on a merge to master, because
   # the coverage badge tracks coverage of master, not PRs.
@@ -34,25 +37,23 @@ jobs:
   do-the-job1:
       name: system_test
       runs-on: 
-      - self-hosted
-      - windows
-      - x64
-      - rdss-nimibot-win-10-py64
+        - self-hosted
+        - windows
+        - x64
+        - rdss-nimibot-win-10-py64
       timeout-minutes: 80
       strategy:
         matrix:
           module_name:
-            [
-              "nidigital",
-              "nitclk",
-              "nifgen",
-              "nidcpower",
-              "nidmm",
-              "niscope",
-              "nimodinst",
-              "nise",
-              "niswitch",
-            ]
+            - "nidigital"
+            - "nitclk"
+            - "nifgen"
+            - "nidcpower"
+            - "nidmm"
+            - "niscope"
+            - "nimodinst"
+            - "nise"
+            - "niswitch"
       steps:
         - name: checkout repository
           uses: actions/checkout@v3
