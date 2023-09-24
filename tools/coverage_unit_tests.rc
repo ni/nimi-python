@@ -52,3 +52,8 @@ omit =
     ; *_pb2_grpc.py defines a stub, a servicer, and an "experimental API", and we only use the stub.
     ; If our system test coverage of the stub_interpreter is okay, we should be in good shape.
     */*_pb2_grpc.py
+
+    ; grpc_session_options.py is tested by system tests and nifake unit tests
+    */nidcpower/grpc_session_options.py
+    */nidigital/grpc_session_options.py
+    */niscope/grpc_session_options.py
