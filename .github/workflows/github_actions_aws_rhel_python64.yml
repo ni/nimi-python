@@ -33,6 +33,7 @@ jobs:
           - nidcpower
           - nidmm
           - nifgen
+          - nimodinst
           - niscope
           - niswitch
           - nitclk
