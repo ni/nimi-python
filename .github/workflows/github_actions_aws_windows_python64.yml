@@ -45,15 +45,15 @@ jobs:
       strategy:
         matrix:
           module_name:
-            - "nidigital"
-            - "nitclk"
-            - "nifgen"
-            - "nidcpower"
-            - "nidmm"
-            - "niscope"
-            - "nimodinst"
-            - "nise"
-            - "niswitch"
+            - nidigital
+            - nitclk
+            - nifgen
+            - nidcpower
+            - nidmm
+            - niscope
+            - nimodinst
+            - nise
+            - niswitch
       steps:
         - name: checkout repository
           uses: actions/checkout@v3

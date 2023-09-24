@@ -30,12 +30,12 @@ jobs:
     strategy:
       matrix:
         module_name:
-          - "nidcpower"
-          - "nidmm"
-          - "nifgen"
-          - "niscope"
-          - "niswitch"
-          - "nitclk"
+          - nidcpower
+          - nidmm
+          - nifgen
+          - niscope
+          - niswitch
+          - nitclk
     steps:
       - name: checkout repository
         uses: actions/checkout@v3
