@@ -3,8 +3,9 @@
 
 [run]
 ; Fileset is restricted to include matches, first
+; Unfortunately, all of these patterns will be ignored, because we pass --source, when running the unit tests.
 include =
-    ; nifake is tested entirely by unit tests. It's sole purpose is to test code that is common to all APIs
+    ; nifake is tested entirely by unit tests. Its sole purpose is to test code that is common to all APIs
     */nifake/*
     ; System testing is preferred, but some published modules have code that's easier to test with a unit test
     */nidcpower/lcr_load_compensation_spot.py
@@ -16,9 +17,12 @@ include =
     build/*
 ; Any include matches that match omit patterns are removed
 omit =
-    ; covered by system tests
+    ; Covered by system tests
     */_library*
 
+    ; Everthing below here needs to be explicitly excluded because "include" is ignored.
+
+    ; Covered by nifake unit tests
     */nidcpower/_*
     */nidcpower/enums.py
     */nidcpower/errors.py
