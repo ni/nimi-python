@@ -1,6 +1,24 @@
+; This file controls what modules are examined for code coverage in our unit tests.
+; See https://coverage.readthedocs.io/en/latest/source.html#source
+
 [run]
+; Fileset is restricted to include matches, first
+include =
+    ; nifake is tested entirely by unit tests. It's sole purpose is to test code that is common to all APIs
+    */nifake/*
+    ; System testing is preferred, but some published modules have code that's easier to test with a unit test
+    */nidcpower/lcr_load_compensation_spot.py
+    */nidcpower/lcr_measurement.py
+    */nidigital/session.py
+    */nimodinst/session.py
+    */niscope/waveform_info.py
+    */nitclk/session.py
+    build/*
+; Any include matches that match omit patterns are removed
 omit =
+    ; covered by system tests
     */_library*
+
     */nidcpower/_*
     */nidcpower/enums.py
     */nidcpower/errors.py
@@ -24,12 +42,3 @@ omit =
     */nitclk/_converters.py
     */nitclk/_visatype.py
     */nitclk/errors.py
-include =
-    */nifake/*
-    */nidcpower/lcr_load_compensation_spot.py
-    */nidcpower/lcr_measurement.py
-    */nidigital/session.py
-    */nimodinst/session.py
-    */niscope/waveform_info.py
-    */nitclk/session.py
-    build/*
