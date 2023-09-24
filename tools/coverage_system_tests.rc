@@ -17,4 +17,10 @@ omit =
     ; I really think we shouldn't omit this. It's the public API that all of our system tests call.
     */session.py
 
+    ; Most of the lines in *_pb2.py are only used for the pure-Python implementation of protobuf, and the default implementation nowadays is the upb C implementation.
+    */*pb2.py
+
+    ; *_pb2_grpc.py defines a stub, a servicer, and an "experimental API", and we only use the stub.
+    ; If our system test coverage of the stub_interpreter is okay, we should be in good shape.
+    */*_pb2_grpc.py
 
