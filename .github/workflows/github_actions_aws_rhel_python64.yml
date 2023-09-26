@@ -18,6 +18,7 @@ on:
 jobs:
   do-the-job1:
     name: system_test
+    if: github.repository == 'ni/nimi-python'
     runs-on: 
     - self-hosted
     - linux
