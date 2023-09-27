@@ -14,9 +14,6 @@ omit =
     ; Although the enum names and values vary between modules, all enums are mostly the same. nifake unit tests cover the various kinds that we use.
     */enums.py
 
-    ; Although there is unit test coverage for session.py (in nifake, nidigital, nimodinst, nitclk), that doesn't cover all of our hand-coded fancy functions, so don't omit it.
-    ; */session.py
-
     ; Most of the lines in *_pb2.py are only used for the pure-Python implementation of protobuf, and the default implementation nowadays is the upb C implementation.
     */*pb2.py
 
