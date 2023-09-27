@@ -11,7 +11,10 @@ on:
       - .gitattributes
       - LICENSE
       - VERSION
-    types: [ opened, synchronize, reopened ]
+    types:
+      - opened
+      - synchronize
+      - reopened
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,25 +24,23 @@ jobs:
       name: system_test
       if: github.repository == 'ni/nimi-python'
       runs-on: 
-      - self-hosted
-      - windows
-      - x64
-      - rdss-nimibot-win-10-py32
+        - self-hosted
+        - windows
+        - x64
+        - rdss-nimibot-win-10-py32
       timeout-minutes: 80
       strategy:
         matrix:
           module_name:
-            [
-              "nidigital",
-              "nitclk",
-              "nifgen",
-              "nidcpower",
-              "nidmm",
-              "niscope",
-              "nimodinst",
-              "nise",
-              "niswitch",
-            ]
+            - nidigital
+            - nitclk
+            - nifgen
+            - nidcpower
+            - nidmm
+            - niscope
+            - nimodinst
+            - nise
+            - niswitch
       steps:
         - name: checkout repository
           uses: actions/checkout@v3
