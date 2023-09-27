@@ -1,31 +1,13 @@
+; This file controls what modules are examined for code coverage in our unit tests.
+; See https://coverage.readthedocs.io/en/latest/source.html#source
+
 [run]
-omit =
-    */_library*
-    */nidcpower/_*
-    */nidcpower/enums.py
-    */nidcpower/errors.py
-    */nidcpower/session.py
-    */nidigital/__init__.py
-    */nidigital/_attributes.py
-    */nidigital/_converters.py
-    */nidigital/_visatype.py
-    */nidigital/errors.py
-    */nimodinst/__init__.py
-    */nimodinst/_converters.py
-    */nimodinst/_visatype.py
-    */nimodinst/errors.py
-    */niscope/_*
-    */niscope/enums.py
-    */niscope/errors.py
-    */niscope/measurement_stats.py
-    */niscope/session.py
-    */nitclk/__init__.py
-    */nitclk/_attributes.py
-    */nitclk/_converters.py
-    */nitclk/_visatype.py
-    */nitclk/errors.py
+; Fileset is restricted to include matches, first
+; Unfortunately, all of these patterns will be ignored, because we pass --source, when running the unit tests.
 include =
+    ; nifake is tested entirely by unit tests. Its sole purpose is to test code that is common to all APIs
     */nifake/*
+    ; System testing is preferred, but some published modules have code that's easier to test with a unit test
     */nidcpower/lcr_load_compensation_spot.py
     */nidcpower/lcr_measurement.py
     */nidigital/session.py
@@ -33,3 +15,46 @@ include =
     */niscope/waveform_info.py
     */nitclk/session.py
     build/*
+; Any include matches that match omit patterns are removed
+omit =
+    ; Covered by system tests
+    */_library*
+
+    ; Everthing below here needs to be explicitly excluded because "include" is ignored.
+
+    ; All private modules are covered by nifake unit tests, except for interpreter modules, which are covered by system tests.
+    */nidcpower/_*
+    */nidigital/_*
+    */nimodinst/_*
+    */niscope/_*
+    */nitclk/_*
+
+    ; Common code, so covered by nifake unit tests
+    */nidcpower/enums.py
+    */nidcpower/errors.py
+    */nidigital/enums.py
+    */nidigital/errors.py
+    */nimodinst/errors.py
+    */niscope/enums.py
+    */niscope/errors.py
+    */nitclk/errors.py
+
+    ; See the include section; these modules don't have unit tests covering session.py
+    */nidcpower/session.py
+    */niscope/session.py
+
+    ; Covered by System tests
+    */nidigital/history_ram_cycle_information.py
+    */niscope/measurement_stats.py
+
+    ; Most of the lines in *_pb2.py are only used for the pure-Python implementation of protobuf, and the default implementation nowadays is the upb C implementation.
+    */*pb2.py
+
+    ; *_pb2_grpc.py defines a stub, a servicer, and an "experimental API", and we only use the stub.
+    ; If our system test coverage of the stub_interpreter is okay, we should be in good shape.
+    */*_pb2_grpc.py
+
+    ; grpc_session_options.py is tested by system tests and nifake unit tests
+    */nidcpower/grpc_session_options.py
+    */nidigital/grpc_session_options.py
+    */niscope/grpc_session_options.py
