@@ -38,4 +38,5 @@ after_success:
   - travis_retry ./codecov --flags nidcpowerunittests --file nidcpowerunittest.xml
   - travis_retry ./codecov --flags nidigitalunittests --file nidigitalunittest.xml
   - travis_retry ./codecov --flags nimodinstunittests --file nimodinstunittest.xml
+  - travis_retry ./codecov --flags niscopeunittests --file niscopeunittest.xml
   - travis_retry ./codecov --flags nitclkunittests --file nitclkunittest.xml
