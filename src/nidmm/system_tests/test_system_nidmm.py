@@ -42,9 +42,9 @@ class SystemTests:
 
     # Attribute tests
     def test_vi_string_attribute(self, session):
-        assert session.serial_number == 'FFFFFFFF'
+        assert session.instrument_model == 'NI PXIe-4082'
         try:
-            session.serial_number = 'FFFFFFFA'
+            session.instrument_model = 'NI PXIe-4081'
         except nidmm.Error as e:
             assert e.code == -1074135027  # Attribute is read-only
 
