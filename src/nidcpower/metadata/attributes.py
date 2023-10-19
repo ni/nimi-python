@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.5.0d79
+# This file is generated from NI-DCPower API metadata version 23.8.0f501
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -182,8 +182,8 @@ attributes = {
     1150004: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the current limit range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the current limit. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute to enable automatic selection of the current limit range.\nThe NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
-            'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the current limit range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the current limit. Use the NIDCPOWER_ATTR_CURRENT_LIMIT_AUTORANGE attribute to enable automatic selection of the current limit range.\nThe NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\n\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:DC Voltage:Current Limit Range',
         'name': 'CURRENT_LIMIT_RANGE',
@@ -195,8 +195,8 @@ attributes = {
     1150005: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the voltage level range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute to enable automatic selection of the voltage level range.\nThe NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
-            'note': 'The channel must be enabled for the specified voltage level range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the voltage level range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage level can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LEVEL_AUTORANGE attribute to enable automatic selection of the voltage level range.\nThe NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\n\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': 'The channel must be enabled for the specified voltage level range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:DC Voltage:Voltage Level Range',
         'name': 'VOLTAGE_LEVEL_RANGE',
@@ -208,7 +208,7 @@ attributes = {
     1150006: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether the measurement returned from any measurement call starts with a new measurement call (VI_TRUE) or returns a measurement that has already begun or completed(VI_FALSE).\nWhen you set the NIDCPOWER_ATTR_SAMPLES_TO_AVERAGE attribute in the Running state, the output channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the niDCPower_MeasureMultiple function. To force a synchronization in the running state, set this attribute to VI_TRUE, and then run the niDCPower_MeasureMultiple function, specifying all channels in the channel name parameter. You can set the NIDCPOWER_ATTR_RESET_AVERAGE_BEFORE_MEASUREMENT attribute to VI_FALSE after the niDCPower_MeasureMultiple function completes.\nDefault Value: VI_TRUE\n',
+            'description': '\nSpecifies whether the measurement returned from any measurement call starts with a new measurement call (VI_TRUE) or returns a measurement that has already begun or completed(VI_FALSE).\nWhen you set the NIDCPOWER_ATTR_SAMPLES_TO_AVERAGE attribute in the Running state, the channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the niDCPower_MeasureMultiple function. To force a synchronization in the running state, set this attribute to VI_TRUE, and then run the niDCPower_MeasureMultiple function, specifying all channels in the channel name parameter. You can set the NIDCPOWER_ATTR_RESET_AVERAGE_BEFORE_MEASUREMENT attribute to VI_FALSE after the niDCPower_MeasureMultiple function completes.\nDefault Value: VI_TRUE\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Reset Average Before Measurement',
@@ -233,7 +233,8 @@ attributes = {
     1150008: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nConfigures the function to generate on the specified channel(s).\nWhen NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. You can use the following attributes to configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:\nNIDCPOWER_ATTR_VOLTAGE_LEVEL\nNIDCPOWER_ATTR_CURRENT_LIMIT\nNIDCPOWER_ATTR_CURRENT_LIMIT_HIGH\nNIDCPOWER_ATTR_CURRENT_LIMIT_LOW\nNIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE\nNIDCPOWER_ATTR_CURRENT_LIMIT_RANGE\nNIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\nWhen NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. You can use the following attributes to configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:\nNIDCPOWER_ATTR_CURRENT_LEVEL\nNIDCPOWER_ATTR_VOLTAGE_LIMIT\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW\nNIDCPOWER_ATTR_CURRENT_LEVEL_RANGE\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE\nNIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n'
+            'description': '\nConfigures the function to generate on the specified channel(s).\nWhen NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. You can use the following attributes to configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:\nNIDCPOWER_ATTR_VOLTAGE_LEVEL\nNIDCPOWER_ATTR_CURRENT_LIMIT\nNIDCPOWER_ATTR_CURRENT_LIMIT_HIGH\nNIDCPOWER_ATTR_CURRENT_LIMIT_LOW\nNIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE\nNIDCPOWER_ATTR_CURRENT_LIMIT_RANGE\nNIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\nWhen NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. You can use the following attributes to configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:\nNIDCPOWER_ATTR_CURRENT_LEVEL\nNIDCPOWER_ATTR_VOLTAGE_LIMIT\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW\nNIDCPOWER_ATTR_CURRENT_LEVEL_RANGE\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE\nNIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'enum': 'OutputFunction',
         'lv_property': 'Source:Output Function',
@@ -246,8 +247,8 @@ attributes = {
     1150009: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the current level, in amps, that the device attempts to generate on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nValid Values: The valid values for this attribute are defined by the values to which the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is set.\n',
-            'note': 'The channel must be enabled for the specified current level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the current level, in amps, that the device attempts to generate on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\n\nValid Values: The valid values for this attribute are defined by the values to which the NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is set.\n',
+            'note': 'The channel must be enabled for the specified current level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:DC Current:Current Level',
         'name': 'CURRENT_LEVEL',
@@ -259,8 +260,8 @@ attributes = {
     1150010: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nValid Values: The valid values for this attribute are defined by the values to which the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.\n',
-            'note': 'The channel must be enabled for the specified current level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\n\nValid Values: The valid values for this attribute are defined by the values to which the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.\n',
+            'note': 'The channel must be enabled for the specified current level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Current:Voltage Limit',
         'name': 'VOLTAGE_LIMIT',
@@ -272,8 +273,8 @@ attributes = {
     1150011: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the current level range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the current level. Use the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.\nThe NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
-            'note': 'The channel must be enabled for the specified current level range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the current level range, in amps, for the specified channel(s).\nThe range defines the valid values to which you can set the current level. Use the NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE attribute to enable automatic selection of the current level range.\nThe NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\n\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': 'The channel must be enabled for the specified current level range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:DC Current:Current Level Range',
         'name': 'CURRENT_LEVEL_RANGE',
@@ -285,8 +286,8 @@ attributes = {
     1150012: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute to enable automatic selection of the voltage limit range.\nThe NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nFor valid ranges, refer to the specifications for your instrument.\n',
-            'note': 'The channel must be enabled for the specified voltage limit range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which the voltage limit can be set. Use the NIDCPOWER_ATTR_VOLTAGE_LIMIT_AUTORANGE attribute to enable automatic selection of the voltage limit range.\nThe NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\n\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': 'The channel must be enabled for the specified voltage limit range to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:DC Current:Voltage Limit Range',
         'name': 'VOLTAGE_LIMIT_RANGE',
@@ -298,7 +299,8 @@ attributes = {
     1150013: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSelects either local or remote sensing of the output voltage for the specified channel(s).\nRefer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more information about sensing voltage on supported channels and about devices that support local and/or remote sensing.\nDefault Value: The default value is NIDCPOWER_VAL_LOCAL if the device supports local sense. Otherwise, the default and only supported value is NIDCPOWER_VAL_REMOTE.\n'
+            'description': '\nSelects either local or remote sensing of the output voltage for the specified channel(s).\nRefer to the Local and Remote Sense topic in the NI DC Power Supplies and SMUs Help for more information about sensing voltage on supported channels and about devices that support local and/or remote sensing.\nDefault Value: The default value is NIDCPOWER_VAL_LOCAL if the device supports local sense. Otherwise, the default and only supported value is NIDCPOWER_VAL_REMOTE.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'enum': 'Sense',
         'lv_property': 'Measurement:Sense',
@@ -312,7 +314,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies whether to use a low or high capacitance on the output for the specified channel(s).\nRefer to the NI PXI-4130 Output Capacitance Selection topic in the NI DC Power Supplies and SMUs Help for more information about capacitance.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'enum': 'OutputCapacitance',
         'lv_property': 'Source:Advanced:Output Capacitance',
@@ -430,7 +432,7 @@ attributes = {
     1150025: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the number of times a sequence is run after initiation.\nRefer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence loop count.\nWhen the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute is set to VI_FALSE, the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.\nValid Range: 1 to 134217727\nDefault Value: 1\n',
+            'description': '\nSpecifies the number of times a sequence is run after initiation.\nRefer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence loop count.\nWhen the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT_IS_FINITE attribute is set to VI_FALSE, the NIDCPOWER_ATTR_SEQUENCE_LOOP_COUNT attribute is ignored.\nValid Range: 1 to 2147483647\nDefault Value: 1\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Advanced:Sequence Loop Count',
@@ -484,7 +486,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the behavior of the Source trigger.\nDefault Value: NIDCPOWER_VAL_NONE\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'enum': 'TriggerType',
         'lv_property': 'Triggers:Source Trigger:Trigger Type',
@@ -498,7 +500,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the input terminal for the Source trigger. Use this attribute only when the NIDCPOWER_ATTR_SOURCE_TRIGGER_TYPE attribute is set to NIDCPOWER_VAL_DIGITAL_EDGE.\nYou can specify any valid input terminal for this attribute. Valid terminals are listed in Measurement & Automation Explorer under the Device Routes tab.\nInput terminals can be specified in one of two ways. If the device is named Dev1 and your terminal is PXI_Trig0, you can specify the terminal with the fully qualified terminal name, /Dev1/PXI_Trig0, or with the shortened terminal name, PXI_Trig0. The input terminal can also be a terminal from another device. For example, you can set the input terminal on Dev1 to be /Dev2/SourceCompleteEvent.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Triggers:Source Trigger:Digital Edge:Input Terminal',
         'name': 'DIGITAL_EDGE_SOURCE_TRIGGER_INPUT_TERMINAL',
@@ -604,7 +606,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the behavior of the Source Complete event.\nDefault Value: NIDCPOWER_VAL_ACTIVE_HIGH\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'enum': 'Polarity',
         'lv_property': 'Events:Source Complete Event:Pulse:Polarity',
@@ -618,7 +620,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the width of the Source Complete event, in seconds.\nThe minimum event pulse width value for PXI devices is 150 ns, and the minimum event pulse width value for PXI Express devices is 250 ns.\nThe maximum event pulse width value for all devices is 1.6 microseconds\nValid Values: 1.5e-7 to 1.6e-6 seconds\nDefault Value: The default value for PXI devices is 150 ns. The default value for PXI Express devices is 250 ns.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Events:Source Complete Event:Pulse:Width',
         'name': 'SOURCE_COMPLETE_EVENT_PULSE_WIDTH',
@@ -671,7 +673,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nSpecifies the amount of time to delay the generation of the Measure Complete event, in seconds.\nValid Values: 0 to 167 seconds\nDefault Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.\n',
+            'description': '\nSpecifies the amount of time to delay the generation of the Measure Complete event, in seconds.\nValid Values: The PXIe-4051 supports values from 0 seconds to 39 seconds.\nThe PXIe-4147 supports values from 0 seconds to 26.5 seconds.\nThe PXIe-4151 supports values from 0 seconds to 42 seconds.\nThe PXIe-4162/4163 and PXIe-4190 support values from 0 seconds to 23 seconds.\nAll other supported instruments support values from 0 to 167 seconds.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Events:Measure Complete Event:Event Delay',
@@ -739,8 +741,8 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nDetermines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.\nRefer to the Single Point Source Mode and Sequence Source Mode topics for more information.\nValid Values: 0 to 167 seconds\nDefault Value: 0.01667 seconds\n',
-            'note': '\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\n'
+            'description': '\nDetermines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.\nRefer to the Single Point Source Mode and Sequence Source Mode topics for more information.\nValid Values: The PXIe-4051 supports values from 0 to 39 seconds.\nThe PXIe-4147 supports values from 0 to 26.5 seconds.\nThe PXIe-4151 supports values from 0 to 42 seconds.\nThe PXIe-4162/4163 and PXIe-4190 support values from 0 to 23 seconds.\nAll other supported instruments support values from 0 to 167 seconds.\nDefault Value: 0.01667 seconds\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\n'
         },
         'lv_property': 'Source:Advanced:Source Delay',
         'name': 'SOURCE_DELAY',
@@ -753,7 +755,8 @@ attributes = {
     1150054: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.\nDefault value: NIDCPOWER_VAL_SINGLE_POINT\n'
+            'description': '\nSpecifies whether to run a single output point or a sequence. Refer to the Single Point Source Mode and Sequence Source Mode topics in the NI DC Power Supplies and SMUs Help for more information about source modes.\nDefault value: NIDCPOWER_VAL_SINGLE_POINT\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'enum': 'SourceMode',
         'lv_property': 'Source:Source Mode',
@@ -791,7 +794,8 @@ attributes = {
     1150057: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies when the measure unit should acquire measurements. Unless this attribute is configured to NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.\nRefer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements.\nDefault Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.\n'
+            'description': '\nSpecifies when the measure unit should acquire measurements. Unless this attribute is configured to NIDCPOWER_VAL_ON_MEASURE_TRIGGER, the NIDCPOWER_ATTR_MEASURE_TRIGGER_TYPE attribute is ignored.\nRefer to the Acquiring Measurements topic in the NI DC Power Supplies and SMUs Help for more information about how to configure your measurements.\nDefault Value: If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SINGLE_POINT, the default value is NIDCPOWER_VAL_ON_DEMAND. This value supports only the niDCPower_Measure function and niDCPower_MeasureMultiple function. If the NIDCPOWER_ATTR_SOURCE_MODE attribute is set to NIDCPOWER_VAL_SEQUENCE, the default value is NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE. This value supports only the niDCPower_FetchMultiple function.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'enum': 'MeasureWhen',
         'lv_property': 'Measurement:Advanced:Measure When',
@@ -831,8 +835,8 @@ attributes = {
     1150060: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether the output relay is connected (closed) or disconnected (open). The NIDCPOWER_ATTR_OUTPUT_ENABLED attribute does not change based on this attribute; they are independent of each other.\nabout supported devices.\nSet this attribute to VI_FALSE to disconnect the output terminal from the output.\nto the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the output can cause premature wear on the relay.\nDefault Value: VI_TRUE\n',
-            'note': 'Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected'
+            'description': '\nSpecifies whether the output relay is connected (closed) or disconnected (open). The NIDCPOWER_ATTR_OUTPUT_ENABLED attribute does not change based on this attribute; they are independent of each other.\n\nSet this attribute to VI_FALSE to disconnect the output terminal from the output.\n\nDefault Value: VI_TRUE\n',
+            'note': '\nOnly disconnect the output when disconnecting is necessary for your application. For example, a battery connected to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the output can cause premature wear on electromechanical relays, such as those used by the PXIe-4147, PXI-4132, or PXIe-4138/39.\n\nThe PXIe-4051 does not have an output relay. For the PXIe-4051, this property specifies whether the input MOSFETs are connected (ON) or disconnected (OFF).\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Connected',
         'name': 'OUTPUT_CONNECTED',
@@ -845,7 +849,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': "\nSpecifies the output resistance that the device attempts to generate for the specified channel(s). This attribute is available only when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.\nabout supported devices.\nDefault Value: 0.0\n",
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Resistance',
         'name': 'OUTPUT_RESISTANCE',
@@ -1044,7 +1048,7 @@ attributes = {
     1150077: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nValid Values: 1000 to 2147483647\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
+            'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nValid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.\nThe PXIe-4162/4163 supports values from  256 to 1000192.\nThe PXIe-4190 supports values from 102 to 6000048.\nAll other supported instruments support values from 1000 to 2147483647.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Measure Buffer Size',
@@ -1110,7 +1114,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the pulse bias current limit, in amps, that the output cannot exceed when generating the desired pulse bias voltage on the specified channel(s) during the off phase of a pulse.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nValid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE property.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit',
         'name': 'PULSE_BIAS_CURRENT_LIMIT',
@@ -1188,7 +1192,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the pulse voltage limit, in volts, that the output cannot exceed when generating the desired current on the specified channel(s) during the off phase of a pulse.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nValid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE attribute.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT',
@@ -1429,7 +1433,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the maximum voltage, in volts, that the output can produce\nwhen generating the desired current on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nYou must also specify a NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW to complete the asymmetric\nrange.\n**Valid Values:** [1% of NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE, NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Current:Voltage Limit High',
         'name': 'VOLTAGE_LIMIT_HIGH',
@@ -1442,7 +1446,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the minimum voltage, in volts, that the output can produce\nwhen generating the desired current on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT.\nYou must also specify a NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH to complete the asymmetric\nrange.\n**Valid Values:** [-NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE, -1% of NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Current:Voltage Limit Low',
         'name': 'VOLTAGE_LIMIT_LOW',
@@ -1455,7 +1459,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the maximum current, in amps, that the output can produce when\ngenerating the desired voltage on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nYou must also specify a NIDCPOWER_ATTR_CURRENT_LIMIT_LOW to complete the asymmetric\nrange.\n**Valid Values:** [1% of NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE, NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Voltage:Current Limit High',
         'name': 'CURRENT_LIMIT_HIGH',
@@ -1468,7 +1472,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the minimum current, in amps, that the output can produce when\ngenerating the desired voltage on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nYou must also specify a NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH to complete the asymmetric\nrange.\n**Valid Values:** [-NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE, -1% of NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Voltage:Current Limit Low',
         'name': 'CURRENT_LIMIT_LOW',
@@ -1507,7 +1511,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the maximum voltage, in volts, that the output can produce\nwhen generating the desired pulse current on the specified channel(s)\nduring the *off* phase of a pulse.\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nYou must also specify a NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT_LOW to complete the\nasymmetric range.\n**Valid Values:** [1% of NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE, NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit High',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT_HIGH',
@@ -1520,7 +1524,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the minimum voltage, in volts, that the output can produce\nwhen generating the desired pulse current on the specified channel(s)\nduring the *off* phase of a pulse.\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nYou must also specify a NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT_HIGH to complete the\nasymmetric range.\n**Valid Values:** [-NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE, -1% of NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:Pulse Current:Pulse Bias Voltage Limit Low',
         'name': 'PULSE_BIAS_VOLTAGE_LIMIT_LOW',
@@ -1559,7 +1563,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the maximum current, in amps, that the output can produce when\ngenerating the desired pulse voltage on the specified channel(s) during\nthe *off* phase of a pulse.\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nYou must also specify a NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT_LOW to complete the\nasymmetric range.\n**Valid Values:** [1% of NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE, NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit High',
         'name': 'PULSE_BIAS_CURRENT_LIMIT_HIGH',
@@ -1572,7 +1576,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the minimum current, in amps, that the output can produce when\ngenerating the desired pulse voltage on the specified channel(s) during\nthe *off* phase of a pulse.\nThis attribute is applicable only if the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to\nNIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_ASYMMETRIC and the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_VOLTAGE.\nYou must also specify a NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT_HIGH to complete the\nasymmetric range.\n**Valid Values:** [-NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE, -1% of NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE]\nThe range bounded by the limit high and limit low must include zero.\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n**Related Topics:**\nRanges;\nChanging Ranges;\nOverranging\n',
-            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n'
+            'note': '\nThe limit may be extended beyond the selected limit range if the\nNIDCPOWER_ATTR_OVERRANGING_ENABLED attribute is\nset to VI_TRUE or if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to a\npulsing function.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:Pulse Voltage:Pulse Bias Current Limit Low',
         'name': 'PULSE_BIAS_CURRENT_LIMIT_LOW',
@@ -1601,7 +1605,7 @@ attributes = {
         'access': 'read only',
         'documentation': {
             'description': '\nReturns the power, in watts, the device is sourcing on each active channel if the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_AUTOMATIC or NIDCPOWER_VAL_POWER_ALLOCATION_MODE_MANUAL.\n\n Valid Values: [0, device per-channel maximum power]\n\n Default Value: Refer to the Supported Attributes by Device topic for the default value by device.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\n This attribute returns -1 when the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED.\n\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\n This attribute returns -1 when the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED.\n\n'
         },
         'lv_property': 'Source:Advanced:Actual Power Allocation',
         'name': 'ACTUAL_POWER_ALLOCATION',
@@ -1614,7 +1618,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the power, in watts, to request the device to source from each active channel.\n This attribute defines the power to source from the device only if the NIDCPOWER_ATTR_POWER_ALLOCATION_MODE attribute is set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_MANUAL.\n\n The power you request with this attribute may be incompatible with the power a given source configuration requires or the power the device can provide:\n If the requested power is less than the power required for the source configuration, the device does not exceed the requested power, and NI-DCPower returns an error.\n If the requested power is greater than the maximum per-channel or overall sourcing power, the device does not exceed the allowed power, and NI-DCPower returns an error.\n\nValid Values: [0, device per-channel maximum power]\n Default Value: Refer to the Supported Attributes by Device topic for the default value by device.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Advanced:Requested Power Allocation',
         'name': 'REQUESTED_POWER_ALLOCATION',
@@ -1627,7 +1631,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nDetermines whether the device sources the power its source configuration requires or a specific wattage you request; determines whether NI-DCPower proactively checks that this sourcing power is within the maximum per-channel and overall sourcing power of the device.\n\n When this attribute configures NI-DCPower to perform a sourcing power check, a device is not permitted to source power in excess of its maximum per-channel or overall sourcing power. If the check determines a source configuration or power request would require the device to do so, NI-DCPower returns an error.\n\n When this attribute does not configure NI-DCPower to perform a sourcing power check, a device can attempt to fulfill source configurations that would require it to source power in excess of its maximum per-channel or overall sourcing power and may shut down to prevent damage.\n\n Default Value: Refer to the Supported Attributes by Device topic for the default value by device.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device. Devices that do not support this attribute behave as if this attribute were set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED.\n\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device. Devices that do not support this attribute behave as if this attribute were set to NIDCPOWER_VAL_POWER_ALLOCATION_MODE_DISABLED.\n\n'
         },
         'enum': 'PowerAllocationMode',
         'lv_property': 'Source:Advanced:Power Allocation Mode',
@@ -1843,7 +1847,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nEnables or disables output cutoff functionality. If enabled, you can define output cutoffs that, if exceeded, cause the output of the specified channel(s) to be disconnected.\nWhen this attribute is disabled, all other output cutoff attributes are ignored.',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n Instruments that do not support this attribute behave as if this attribute were set to VI_FALSE.'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n Instruments that do not support this attribute behave as if this attribute were set to VI_FALSE.'
         },
         'lv_property': 'Source:Output Cutoff:Enabled',
         'name': 'OUTPUT_CUTOFF_ENABLED',
@@ -1856,7 +1860,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a high limit voltage value, in volts, for output cutoff.\nIf the voltage output exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Voltage Output Limit High',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_HIGH',
@@ -1869,7 +1873,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a high limit current value, in amps, for output cutoff.\nIf the measured current exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Current Measure Limit High',
         'name': 'OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_HIGH',
@@ -1882,7 +1886,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a limit for negative voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_LOW as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Voltage Change Limit Low',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_LOW',
@@ -1895,7 +1899,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a limit for negative current slew rate, in amps per microsecond, for output cutoff.\nIf the current decreases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Current Change Limit Low',
         'name': 'OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_LOW',
@@ -1907,8 +1911,8 @@ attributes = {
     1150240: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nEnables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_HIGH as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'description': '\nEnables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED as the output cutoff reason.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Current Overrange Enabled',
         'name': 'OUTPUT_CUTOFF_CURRENT_OVERRANGE_ENABLED',
@@ -1990,8 +1994,8 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViStringRepeatedCapability',
         'documentation': {
-            'description': '\nSpecifies the channel(s) to merge with a designated primary channel of an SMU in order to increase the maximum current you can source from the SMU.\nThis attribute designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.\nNote: You cannot change the merge configuration with this attribute when the session is in the Running state.\nFor complete information on using merged channels with this attribute, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device. Devices that do not support this property behave as if no channels were merged.\nDefault Value: Refer to the Supported Attributes by Device topic for the default value by device.\n'
+            'description': '\nSpecifies the channel(s) to merge with a designated primary channel of an instrument in order to increase the maximum current you can source from the instrument.\nThis attribute designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.\nNote: You cannot change the merge configuration with this attribute when the session is in the Running state.\nFor complete information on using merged channels with this attribute, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device. Devices that do not support this property behave as if no channels were merged.\nDefault Value: Refer to the Supported Attributes by Device topic for the default value by device.\n'
         },
         'lv_property': 'Source:Advanced:Merged Channels',
         'name': 'MERGED_CHANNELS',
@@ -2284,7 +2288,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a low limit voltage value, in volts, for output cutoff.\nIf the voltage output falls below this limit, the output is disconnected.\n\nTo find out whether an output has fallen below this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_OUTPUT_LOW as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Voltage Output Limit Low',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_OUTPUT_LIMIT_LOW',
@@ -2297,7 +2301,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a low limit current value, in amps, for output cutoff.\nIf the measured current falls below this limit, the output is disconnected.\n\nTo find out whether an output has fallen below this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_LOW as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Current Measure Limit Low',
         'name': 'OUTPUT_CUTOFF_CURRENT_MEASURE_LIMIT_LOW',
@@ -2310,7 +2314,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a limit for positive voltage slew rate, in volts per microsecond, for output cutoff.\nIf the voltage increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_CHANGE_HIGH as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Voltage Change Limit High',
         'name': 'OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_HIGH',
@@ -2323,7 +2327,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies a limit for positive current slew rate, in amps per microsecond, for output cutoff.\nIf the current increases at a rate that exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_HIGH as the output cutoff reason.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Current Change Limit High',
         'name': 'OUTPUT_CUTOFF_CURRENT_CHANGE_LIMIT_HIGH',
@@ -2360,7 +2364,7 @@ attributes = {
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
             'description': '\nDelays disconnecting the output by the time you specify, in seconds, when a limit is exceeded.',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Cutoff:Delay',
         'name': 'OUTPUT_CUTOFF_DELAY',
@@ -2483,7 +2487,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n**Valid Values:** The minimum and maximum values of this property are hardware-dependent. \nPXIe-4135/4136/4137: 0 to 9 seconds \nPXIe-4138/4139: 0 to 9 seconds \nPXIe-4147: 0 to 9 seconds \nPXIe-4163: 0 to 0.1 seconds.\n',
+            'description': '\nBalances between settling time and maximum measurement time by specifying the maximum time delay between when a range change occurs and when measurements resume.\n**Valid Values:** The minimum and maximum values of this property are hardware-dependent. \nPXIe-4135/4136/4137: 0 to 9 seconds \nPXIe-4138/4139: 0 to 9 seconds \nPXIe-4147: 0 to 9 seconds \nPXIe-4162/4163: 0 to 0.1 seconds.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Autorange Maximum Delay After Range Change',
@@ -2513,7 +2517,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the initial state of the Source Complete event when you set the NIDCPOWER_ATTR_SOURCE_COMPLETE_EVENT_OUTPUT_BEHAVIOR attribute to NIDCPOWER_VAL_EVENT_OUTPUT_BEHAVIOR_TOGGLE.\nFor a Single Point mode acquisition, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit.\nThe output switches to high when the event occurs during the acquisition. If you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to a high state at session commit.\nThe output switches to low when the event occurs during the acquisition.\nFor a Sequence mode operation, if you set the initial state to NIDCPOWER_VAL_LOW_STATE, the output is set to low at session commit. The output switches to high the first time an event occurs during the acquisition.\nThe second time an event occurs, the output switches to low. This pattern repeats for any subsequent event occurrences.\nIf you set the initial state to NIDCPOWER_VAL_HIGH_STATE, the output is set to high at session commit.\nThe output switches to low on the first time the event occurs during the acquisition. The second time the event occurs, the output switches to high.\nThis pattern repeats for any subsequent event occurrences.\nThe default value is NIDCPOWER_VAL_LOW_STATE.\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices and terminals, search Supported Attributes by Device on ni.com\n'
         },
         'enum': 'EventToggleInitialState',
         'grpc_enum': None,
@@ -2583,6 +2587,32 @@ attributes = {
             'channels'
         ],
         'type': 'ViInt32'
+    },
+    1150343: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the rate of increase, in amps per microsecond, to apply to the absolute magnitude of the current level of the specified channel(s).\nThis property is applicable only if you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION property to NIDCPOWER_VAL_DC_CURRENT.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:DC Current:Current Level Slew Rate:Rising',
+        'name': 'CURRENT_LEVEL_RISING_SLEW_RATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150344: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the rate of decrease, in amps per microsecond, to apply to the absolute magnitude of the current level of the specified channel(s).\nThis property is applicable only if you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION property to NIDCPOWER_VAL_DC_CURRENT.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:DC Current:Current Level Slew Rate:Falling',
+        'name': 'CURRENT_LEVEL_FALLING_SLEW_RATE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
     },
     1150345: {
         'access': 'read-write',
@@ -2654,11 +2684,77 @@ attributes = {
         ],
         'type': 'ViReal64'
     },
+    1150350: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether the conduction voltage feature is enabled on the specified channel(s).\n\nWhen the conduction voltage feature is enabled,\n - The instrument will not begin sinking on the specified channel(s) until the voltage at the input of the specified channel(s) rises above NIDCPOWER_ATTR_CONDUCTION_VOLTAGE_ON_THRESHOLD\n - The instrument will stop sinking if the voltage at the input of the specified channel(s) falls below NIDCPOWER_ATTR_CONDUCTION_VOLTAGE_OFF_THRESHOLD.\n\nWhen the conduction voltage feature is disabled,\n - The instrument will start sinking regardless of the voltage at the input of the specified channel(s).\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'enum': 'ConductionVoltageMode',
+        'lv_property': 'Source:Advanced:Conduction Voltage:Mode',
+        'name': 'CONDUCTION_VOLTAGE_MODE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViInt32'
+    },
+    1150351: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the required minimum voltage, in volts, at the input of the specified channel(s) before the instrument starts sinking on the specified channel(s) when the conduction voltage feature is enabled.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:Advanced:Conduction Voltage:On Threshold',
+        'name': 'CONDUCTION_VOLTAGE_ON_THRESHOLD',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150352: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the minimum voltage, in volts, at the input of the specified channel(s) below which the instrument stops sinking on the specified channel(s) when the conduction voltage feature is enabled.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:Advanced:Conduction Voltage:Off Threshold',
+        'name': 'CONDUCTION_VOLTAGE_OFF_THRESHOLD',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150357: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies a high limit voltage value, in volts, for output cutoff.\nIf the measured voltage exceeds this limit, the output is disconnected.\n\nTo find out whether an output has exceeded this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH as the output cutoff reason.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:Output Cutoff:Voltage Measure Limit High',
+        'name': 'OUTPUT_CUTOFF_VOLTAGE_MEASURE_LIMIT_HIGH',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150358: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies a low limit voltage value, in volts, for output cutoff.\nIf the measured voltage falls below this limit, the output is disconnected.\n\nTo find out whether an output has fallen below this limit, call the niDCPower_QueryLatchedOutputCutoffState function with NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW as the output cutoff reason.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:Output Cutoff:Voltage Measure Limit Low',
+        'name': 'OUTPUT_CUTOFF_VOLTAGE_MEASURE_LIMIT_LOW',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
     1250001: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nValid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute.\n',
-            'note': 'The channel must be enabled for the specified voltage level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE.\n\nValid Values: The valid values for this attribute are defined by the values you specify for the NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE attribute.\n',
+            'note': 'The channel must be enabled for the specified voltage level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:DC Voltage:Voltage Level',
         'name': 'VOLTAGE_LEVEL',
@@ -2683,8 +2779,8 @@ attributes = {
     1250003: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nDetermines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.\nValid Values: 2 V to 210 V\nDefault Value: 210 V\n',
-            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'description': '\nDetermines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.\nThe limit is specified as a positive value, but symmetric positive and negative limits are enforced simultaneously.\nFor example, setting the OVP Limit to 65 will configure the OVP feature to trigger an OVP error if the output exceeds ±65 V.\n\nValid Values: 2 V to 210 V\nDefault Value: 210 V\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Advanced:OVP Limit',
         'name': 'OVP_LIMIT',
@@ -2705,8 +2801,8 @@ attributes = {
     1250005: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\nValid Values: The valid values for this attribute are defined by the values to which NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.\n',
-            'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'description': '\nSpecifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\n\nValid Values: The valid values for this attribute are defined by the values to which NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.\n',
+            'note': '\nThe channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Voltage:Current Limit',
         'name': 'CURRENT_LIMIT',
@@ -2718,8 +2814,8 @@ attributes = {
     1250006: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the voltage level or current level in addition to enabling the output\nthe niDCPower_InitiateWithChannels function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for more information about NI-DCPower programming states.\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
-            'note': 'If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call'
+            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the voltage level or current level in addition to enabling the output\n\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
+            'note': '\nIf the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call the niDCPower_InitiateWithChannels function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for more information about NI-DCPower programming states.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:Output Enabled',
         'name': 'OUTPUT_ENABLED',

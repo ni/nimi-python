@@ -10,13 +10,13 @@ from nidcpower.errors import Error  # noqa: F401
 from nidcpower.grpc_session_options import *  # noqa: F403,F401,H303
 from nidcpower.session import Session  # noqa: F401
 
-from nidcpower.lcr_load_compensation_spot import LCRLoadCompensationSpot  # noqa: F401
-
-from nidcpower.lcr_load_compensation_spot import struct_NILCRLoadCompensationSpot  # noqa: F401
-
 from nidcpower.lcr_measurement import LCRMeasurement  # noqa: F401
 
 from nidcpower.lcr_measurement import struct_NILCRMeasurement  # noqa: F401
+
+from nidcpower.lcr_load_compensation_spot import LCRLoadCompensationSpot  # noqa: F401
+
+from nidcpower.lcr_load_compensation_spot import struct_NILCRLoadCompensationSpot  # noqa: F401
 
 
 def get_diagnostic_information():

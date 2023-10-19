@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.5.0d79
+# This file is generated from NI-DCPower API metadata version 23.8.0f501
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -252,6 +252,31 @@ enums = {
             }
         ]
     },
+    'ConductionVoltageMode': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The conduction voltage feature is only enabled when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute to NIDCPOWER_VAL_DC_CURRENT.'
+                },
+                'name': 'NIDCPOWER_VAL_CONDUCTION_VOLTAGE_MODE_AUTOMATIC',
+                'value': 1155
+            },
+            {
+                'documentation': {
+                    'description': 'The conduction voltage feature is enabled.'
+                },
+                'name': 'NIDCPOWER_VAL_CONDUCTION_VOLTAGE_MODE_ENABLED',
+                'value': 1156
+            },
+            {
+                'documentation': {
+                    'description': 'The conduction voltage feature is disabled.'
+                },
+                'name': 'NIDCPOWER_VAL_CONDUCTION_VOLTAGE_MODE_DISABLED',
+                'value': 1157
+            }
+        ]
+    },
     'CurrentLimitBehavior': {
         'values': [
             {
@@ -497,6 +522,13 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_LCR',
                 'value': 1062
+            },
+            {
+                'documentation': {
+                    'description': 'The channel operates as an electronic load (E-Load).'
+                },
+                'name': 'NIDCPOWER_VAL_E_LOAD',
+                'value': 1154
             }
         ]
     },
@@ -891,6 +923,27 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                 'value': 128
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the measured current saturates the current range.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED',
+                'value': 512
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the measured voltage exceeded the high cutoff limit for voltage output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH',
+                'value': 1024
+            },
+            {
+                'documentation': {
+                    'description': 'Queries or clears cutoff conditions when the measured voltage fell below the low cutoff limit for voltage output.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW',
+                'value': 2048
             }
         ]
     },

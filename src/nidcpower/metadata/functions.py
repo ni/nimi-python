@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.5.0d79
+# This file is generated from NI-DCPower API metadata version 23.8.0f501
 functions = {
     'AbortWithChannels': {
         'documentation': {
-            'description': '\nTransitions the specified channel(s) from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_InitiateWithChannels function is called. If power output is enabled\nwhen you call the niDCPower_AbortWithChannels function, the output channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nTransitions the specified channel(s) from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_InitiateWithChannels function is called. If power output is enabled\nwhen you call the niDCPower_AbortWithChannels function, the output channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -27,7 +28,7 @@ functions = {
     'CalSelfCalibrate': {
         'documentation': {
             'description': '\nPerforms a self-calibration upon the specified channel(s).\n\nThis function disables the output, performs several internal\ncalculations, and updates calibration values. The updated calibration\nvalues are written to the device hardware if the\nNIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute is set to\nNIDCPOWER_VAL_WRITE_TO_EEPROM. Refer to the\nNIDCPOWER_ATTR_SELF_CALIBRATION_PERSISTENCE attribute topic for more\ninformation about the settings for this attribute.\n\nWhen calling niDCPower_CalSelfCalibrate with the PXIe-4162/4163,\nspecify all channels of your PXIe-4162/4163 with the channelName input.\nYou cannot self-calibrate a subset of PXIe-4162/4163 channels.\n\nRefer to the\n`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__ topic for\nmore information about this function.\n\n**Related Topics:**\n\n`Self-Calibration <REPLACE_DRIVER_SPECIFIC_URL_1(selfcal)>`__\n',
-            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -53,7 +54,8 @@ functions = {
     },
     'ClearLatchedOutputCutoffState': {
         'documentation': {
-            'description': 'Clears the state of an output cutoff that was engaged.\nTo clear the state for all output cutoff reasons, use NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL.\n'
+            'description': 'Clears the state of an output cutoff that was engaged.\nTo clear the state for all output cutoff reasons, use NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_ALL.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -91,6 +93,14 @@ functions = {
                             'Clears cutoffs caused when the output fell below the low cutoff limit for voltage output'
                         ],
                         [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH',
+                            'Clears cutoffs caused when the measured voltage exceeded the high cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW',
+                            'Clears cutoffs caused when the measured voltage fell below the low cutoff limit for voltage output'
+                        ],
+                        [
                             'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
                             'Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output'
                         ],
@@ -113,6 +123,10 @@ functions = {
                         [
                             'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                             'Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED',
+                            'Clears cutoffs caused when the measured current saturates the current range'
                         ]
                     ]
                 },
@@ -297,7 +311,7 @@ functions = {
     'CreateAdvancedSequenceCommitStepWithChannels': {
         'documentation': {
             'description': '\nCreates a Commit step in the Active advanced sequence. A Commit step\nconfigures channels to a user-defined known state before starting the advanced sequence.\nWhen a Commit step exists in the Active advanced sequence, you cannot\nset the output function to Pulse Voltage or Pulse Current in either\nthe Commit step (-1) or step 0. When you create an advanced sequence\nstep, each attribute you passed to the niDCPower_CreateAdvancedSequenceWithChannels\nfunction is reset to its default value for that step unless otherwise specified.\n\n**Support for this Function**\n\nYou must set the source mode to Sequence to use this function.\n\nUsing the niDCPower_SetSequence function with Advanced Sequence\nfunctions is unsupported.\n\n**Related Topics**:\n\n`Advanced Sequence\nMode <REPLACE_DRIVER_SPECIFIC_URL_1(advancedsequencemode)>`__\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n\nniDCPower_CreateAdvancedSequenceWithChannels\n',
-            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -455,7 +469,8 @@ functions = {
     },
     'Disable': {
         'documentation': {
-            'description': '\nThis function performs the same actions as the niDCPower_ResetWithChannels\nfunction, except that this function also immediately sets the\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute to VI_FALSE.\n\nThis function opens the output relay on devices that have an output\nrelay.\n'
+            'description': '\nThis function performs the same actions as the niDCPower_ResetWithChannels\nfunction, except that this function also immediately sets the\nNIDCPOWER_ATTR_OUTPUT_ENABLED attribute to VI_FALSE.\n\nThis function opens the output relay on devices that have an output\nrelay.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -848,7 +863,7 @@ functions = {
     'FancyMeasureMultiple': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified output channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n\n',
+            'description': '\nReturns a list of named tuples (Measurement) containing the measured voltage\nand current values on the specified channel(s). Each call to this function\nblocks other function calls until the measurements are returned from the device.\nThe order of the measurements returned in the array corresponds to the order\non the specified channel(s).\n\nFields in Measurement:\n\n- **voltage** (float)\n- **current** (float)\n- **in_compliance** (bool) - Always None\n- **channel** (str)\n\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
@@ -1567,14 +1582,14 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nIndex list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0," "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
+                    'description': 'Index list for the channels in the session. Valid values are from zero to the total number of channels in the session minus one. The index string can be one of the following formats:\n\n-   A comma-separated list—for example, "0,2,3,1"\n-   A range using a hyphen—for example, "0-3"\n-   A range using a colon—for example, "0:3 "\n\nYou can combine comma-separated lists and ranges that use a hyphen or colon. Both out-of-order and repeated indices are supported ("2,3,0", "1,2,2,3"). White space characters, including spaces, tabs, feeds, and carriage returns, are allowed between characters. Ranges can be incrementing or decrementing.\n'
                 },
                 'grpc_name': 'index',
                 'name': 'index',
                 'python_api_converter_name': 'convert_repeated_capabilities_without_prefix',
                 'python_name': 'indices',
                 'type': 'ViConstString',
-                'type_in_documentation': 'basic sequence types or str or int'
+                'type_in_documentation': 'basic sequence types, str, or int'
             },
             {
                 'direction': 'in',
@@ -2228,7 +2243,7 @@ functions = {
     'InitializeWithChannels': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates and returns a new NI-DCPower session to the power supply or SMU\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_InitiateWithChannels function.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCreates and returns a new NI-DCPower session to the instrument\nspecified in **resource name** to be used in all subsequent NI-DCPower\nfunction calls. With this function, you can optionally set the initial\nstate of the following session attributes:\n\n-  NIDCPOWER_ATTR_SIMULATE\n-  NIDCPOWER_ATTR_DRIVER_SETUP\n\nAfter calling this function, the session will be in the Uncommitted\nstate. Refer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\ndetails about specific software states.\n\nTo place the device in a known start-up state when creating a new\nsession, set **reset** to VI_TRUE. This action is equivalent to using\nthe niDCPower_ResetWithChannels function immediately after initializing the\nsession.\n\nTo open a session and leave the device in its existing configuration\nwithout passing through a transitional output state, set **reset** to\nVI_FALSE. Then configure the device as in the previous session,\nchanging only the desired settings, and then call the\nniDCPower_InitiateWithChannels function.\n\n**Related Topics:**\n\n`Programming States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
         },
         'included_in_proto': True,
         'method_name_for_documentation': '__init__',
@@ -2269,7 +2284,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned\nvalue where 1 is VI_TRUE and 0 is VI_FALSE. For example:\n\n"Simulate=0"\n\nYou do not have to specify a value for all the attributes. If you do not\nspecify a value for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a\nPower Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned\nvalue where 1 is VI_TRUE and 0 is VI_FALSE. For example:\n\n"Simulate=0"\n\nYou do not have to specify a value for all the attributes. If you do not\nspecify a value for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating an\nInstrument <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
                 },
                 'name': 'optionString',
                 'type': 'ViConstString'
@@ -2321,7 +2336,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned value where\n1 is VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session, set Simulate to 1 and list multiple\ninstruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating a\nPower Supply or SMU <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
+                    'description': '\nSpecifies the initial value of certain attributes for the session.\nThe syntax for **optionString** is a list of attributes with an assigned value where\n1 is VI_TRUE and 0 is VI_FALSE. For example:\n\nSimulate=0, DriverSetup=Model:<model number>; BoardType:<bus connector>\n\nTo simulate a multi-instrument session, set Simulate to 1 and list multiple\ninstruments for DriverSetup. For example:\n\nSimulate=1, DriverSetup=ResourceName:<instrument name>; Model:<model number>;\nBoardType:<bus connector> & ResourceName:<resource name>; Model:<model number>;\nBoardType:<bus connector>\n\nYou do not have to specify a value for all the attributes. If you do not specify a\nvalue for an attribute, the default value is used.\n\nFor more information about simulating a device, refer to `Simulating an\nInstrument <REPLACE_DRIVER_SPECIFIC_URL_1(simulate)>`__.\n'
                 },
                 'name': 'optionString',
                 'type': 'ViConstString'
@@ -2400,7 +2415,7 @@ functions = {
     },
     'Measure': {
         'documentation': {
-            'description': '\nReturns the measured value of either the voltage or current on the\nspecified output channel. Each call to this function blocks other\nfunction calls until the hardware returns the **measurement**. To\nmeasure multiple output channels, use the niDCPower_MeasureMultiple\nfunction.\n'
+            'description': '\nReturns the measured value of either the voltage or current on the\nspecified channel. Each call to this function blocks other\nfunction calls until the hardware returns the **measurement**. To\nmeasure multiple channels, use the niDCPower_MeasureMultiple\nfunction.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -2453,7 +2468,7 @@ functions = {
     'MeasureMultiple': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nReturns arrays of the measured voltage and current values on the\nspecified output channel(s). Each call to this function blocks other\nfunction calls until the measurements are returned from the device. The\norder of the measurements returned in the array corresponds to the order\non the specified output channel(s).\n'
+            'description': '\nReturns arrays of the measured voltage and current values on the\nspecified channel(s). Each call to this function blocks other\nfunction calls until the measurements are returned from the device. The\norder of the measurements returned in the array corresponds to the order\non the specified channel(s).\n'
         },
         'included_in_proto': True,
         'method_name_for_documentation': 'measure_multiple',
@@ -2933,7 +2948,8 @@ functions = {
     },
     'QueryInCompliance': {
         'documentation': {
-            'description': '\nQueries the specified output device to determine if it is operating at\nthe `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.\n\nThe compliance limit is the current limit when the output function is\nset to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the\ncompliance limit, the output reaches the current limit before the\ndesired voltage level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureCurrentLimit function for more\ninformation about output function and current limit, respectively.\n\nThe compliance limit is the voltage limit when the output function is\nset to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the\ncompliance limit, the output reaches the voltage limit before the\ndesired current level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureVoltageLimit function for more\ninformation about output function and voltage limit, respectively.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n'
+            'description': '\nQueries the specified output device to determine if it is operating at\nthe `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.\n\nThe compliance limit is the current limit when the output function is\nset to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the\ncompliance limit, the output reaches the current limit before the\ndesired voltage level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureCurrentLimit function for more\ninformation about output function and current limit, respectively.\n\nThe compliance limit is the voltage limit when the output function is\nset to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the\ncompliance limit, the output reaches the voltage limit before the\ndesired current level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureVoltageLimit function for more\ninformation about output function and voltage limit, respectively.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -2966,7 +2982,8 @@ functions = {
     },
     'QueryLatchedOutputCutoffState': {
         'documentation': {
-            'description': '\nDiscovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.\nIf a limit was exceeded, the state is latched until you clear it with the niDCPower_ClearLatchedOutputCutoffState function or the niDCPower_ResetWithChannels function.\n\noutputCutoffReason specifies the conditions for which an output is disconnected.\n'
+            'description': '\nDiscovers if an output cutoff limit was exceeded for the specified reason. When an output cutoff is engaged, the output of the channel(s) is disconnected.\nIf a limit was exceeded, the state is latched until you clear it with the niDCPower_ClearLatchedOutputCutoffState function or the niDCPower_ResetWithChannels function.\n\noutputCutoffReason specifies the conditions for which an output is disconnected.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3004,6 +3021,14 @@ functions = {
                             'The output fell below the low cutoff limit for voltage output'
                         ],
                         [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH',
+                            'The measured voltage exceeded the high cutoff limit for voltage output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW',
+                            'The measured voltage fell below the low cutoff limit for voltage output'
+                        ],
+                        [
                             'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_MEASURE_HIGH',
                             'The measured current exceeded the high cutoff limit for current output'
                         ],
@@ -3026,6 +3051,10 @@ functions = {
                         [
                             'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_CHANGE_LOW',
                             'The current slew rate decreased beyond the negative change cutoff for current output'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED',
+                            'The measured current saturates the current range'
                         ]
                     ]
                 },
@@ -3056,7 +3085,7 @@ functions = {
     },
     'QueryMaxCurrentLimit': {
         'documentation': {
-            'description': '\nQueries the maximum current limit on an output channel if the output\nchannel is set to the specified **voltageLevel**.\n'
+            'description': '\nQueries the maximum current limit on a channel if the channel is set to the specified **voltageLevel**.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3097,7 +3126,7 @@ functions = {
     },
     'QueryMaxVoltageLevel': {
         'documentation': {
-            'description': '\nQueries the maximum voltage level on an output channel if the output\nchannel is set to the specified **currentLimit**.\n'
+            'description': '\nQueries the maximum voltage level on a channel if the channel is set to the specified **currentLimit**.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3138,7 +3167,7 @@ functions = {
     },
     'QueryMinCurrentLimit': {
         'documentation': {
-            'description': '\nQueries the minimum current limit on an output channel if the output\nchannel is set to the specified **voltageLevel**.\n'
+            'description': '\nQueries the minimum current limit on a channel if the channel is set to the specified **voltageLevel**.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3179,7 +3208,8 @@ functions = {
     },
     'QueryOutputState': {
         'documentation': {
-            'description': '\nQueries the specified output channel to determine if the output channel\nis currently in the state specified by **outputState**.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n'
+            'description': '\nQueries the specified output channel to determine if the output channel\nis currently in the state specified by **outputState**.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3256,7 +3286,8 @@ functions = {
     },
     'ResetDevice': {
         'documentation': {
-            'description': '\nResets the device to a known state. The function disables power\ngeneration, resets session attributes to their default values, clears\nerrors such as overtemperature and unexpected loss of auxiliary power,\ncommits the session attributes, and leaves the session in the\nUncommitted state. This function also performs a hard reset on the\ndevice and driver software. This function has the same functionality as\nusing reset in Measurement & Automation Explorer. Refer to the\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\nmore information about NI-DCPower software states.\n\nThis will also open the output relay on devices that have an output\nrelay.\n'
+            'description': '\nResets the device to a known state. The function disables power\ngeneration, resets session attributes to their default values, clears\nerrors such as overtemperature and unexpected loss of auxiliary power,\ncommits the session attributes, and leaves the session in the\nUncommitted state. This function also performs a hard reset on the\ndevice and driver software. This function has the same functionality as\nusing reset in Measurement & Automation Explorer. Refer to the\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic for\nmore information about NI-DCPower software states.\n\nThis will also open the output relay on devices that have an output\nrelay.\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3630,7 +3661,7 @@ functions = {
     'SetSequence': {
         'documentation': {
             'description': '\nConfigures a series of voltage or current outputs and corresponding\nsource delays. The source mode must be set to\n`Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this\nfunction to take effect.\n\nRefer to the `Configuring the Source\nUnit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic\nin the *NI DC Power Supplies and SMUs Help* for more information about\nhow to configure your device.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n',
-            'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3795,7 +3826,8 @@ functions = {
     'close': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the output channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_ResetWithChannels function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n'
+            'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the output channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_ResetWithChannels function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
+            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'grpc_name': 'Close',
         'included_in_proto': True,
