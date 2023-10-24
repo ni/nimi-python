@@ -52,9 +52,9 @@ formats:
   - epub
   - pdf
 
-# Optionally declare the Python requirements required to build your docs
+# Declare the Python requirements required to build your docs
 ## TODO(ni-jfitzger): Create requirements file for docs to make builds reproducible. See https://github.com/ni/nimi-python/issues/1968
 ## Note: Our nimi-python readthedocs project used the defaults here: https://docs.readthedocs.io/en/stable/build-default-versions.html#external-dependencies
-# python:
-#   install:
-#   - requirements: docs/requirements.txt
+python:
+  install:
+  - requirements: docs/requirements.txt
