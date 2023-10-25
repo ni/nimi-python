@@ -55,8 +55,8 @@ All notable changes to this project will be documented in this file.
                 * `EventToggleInitialState`
                 * `LCRDCBiasTransientResponse`
             * Enum values added:
-                * `NIDCPOWER_VAL_E_LOAD` added to enum `InstrumentMode`
-                * `NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_CURRENT_SATURATED`, `NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_HIGH` and `NIDCPOWER_VAL_OUTPUT_CUTOFF_REASON_VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
+                * `E_LOAD` added to enum `InstrumentMode`
+                * `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
