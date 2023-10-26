@@ -49,11 +49,8 @@ All notable changes to this project will be documented in this file.
                 * `conduction_voltage_off_threshold`
                 * `output_cutoff_voltage_measure_limit_high`
                 * `output_cutoff_voltage_measure_limit_low`
-            * Enums added:
+            * Enum added:
                 * `ConductionVoltageMode`
-                * `EventOutputBehavior`
-                * `EventToggleInitialState`
-                * `LCRDCBiasTransientResponse`
             * Enum values added:
                 * `E_LOAD` added to enum `InstrumentMode`
                 * `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
