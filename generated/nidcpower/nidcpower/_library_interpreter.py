@@ -11,9 +11,9 @@ import nidcpower._visatype as _visatype
 import nidcpower.enums as enums  # noqa: F401
 import nidcpower.errors as errors
 
-import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
-
 import nidcpower.lcr_measurement as lcr_measurement  # noqa: F401
+
+import nidcpower.lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
 
 
 _was_runtime_environment_set = None

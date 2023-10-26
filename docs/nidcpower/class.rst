@@ -193,6 +193,8 @@ abort
 
             
 
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
@@ -219,6 +221,8 @@ clear_latched_output_cutoff_state
 
             
 
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
@@ -243,6 +247,10 @@ clear_latched_output_cutoff_state
                 +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`   | Clears cutoffs caused when the output fell below the low cutoff limit for voltage output                        |
                 +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_MEASURE_HIGH` | Clears cutoffs caused when the measured voltage exceeded the high cutoff limit for voltage output               |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_MEASURE_LOW`  | Clears cutoffs caused when the measured voltage fell below the low cutoff limit for voltage output              |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH` | Clears cutoffs caused when the measured current exceeded the high cutoff limit for current output               |
                 +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`  | Clears cutoffs caused when the measured current fell below the low cutoff limit for current output              |
@@ -254,6 +262,8 @@ clear_latched_output_cutoff_state
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH`  | Clears cutoffs caused when the current slew rate increased beyond the positive change cutoff for current output |
                 +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW`   | Clears cutoffs caused when the voltage slew rate decreased beyond the negative change cutoff for current output |
+                +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_SATURATED`    | Clears cutoffs caused when the measured current saturates the current range                                     |
                 +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
 
 
@@ -279,6 +289,8 @@ close
             States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__
 
             
+
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
@@ -755,7 +767,9 @@ create_advanced_sequence_commit_step
 
             
 
-            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+                This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -901,6 +915,8 @@ disable
             relay.
 
             
+
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
 
@@ -1755,9 +1771,9 @@ measure
     .. py:method:: measure(measurement_type)
 
             Returns the measured value of either the voltage or current on the
-            specified output channel. Each call to this method blocks other
+            specified channel. Each call to this method blocks other
             method calls until the hardware returns the **measurement**. To
-            measure multiple output channels, use the :py:meth:`nidcpower.Session.measure_multiple`
+            measure multiple channels, use the :py:meth:`nidcpower.Session.measure_multiple`
             method.
 
             
@@ -1808,10 +1824,10 @@ measure_multiple
     .. py:method:: measure_multiple()
 
             Returns a list of named tuples (Measurement) containing the measured voltage
-            and current values on the specified output channel(s). Each call to this method
+            and current values on the specified channel(s). Each call to this method
             blocks other method calls until the measurements are returned from the device.
             The order of the measurements returned in the array corresponds to the order
-            on the specified output channel(s).
+            on the specified channel(s).
 
             Fields in Measurement:
 
@@ -2191,6 +2207,8 @@ query_in_compliance
 
             
 
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
             .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
@@ -2229,6 +2247,8 @@ query_latched_output_cutoff_state
 
             
 
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
                 Use Python index notation on the repeated capabilities container channels to specify a subset,
@@ -2253,6 +2273,10 @@ query_latched_output_cutoff_state
                 +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_LOW`   | The output fell below the low cutoff limit for voltage output                        |
                 +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_MEASURE_HIGH` | The measured voltage exceeded the high cutoff limit for voltage output               |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_MEASURE_LOW`  | The measured voltage fell below the low cutoff limit for voltage output              |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_HIGH` | The measured current exceeded the high cutoff limit for current output               |
                 +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_MEASURE_LOW`  | The measured current fell below the low cutoff limit for current output              |
@@ -2264,6 +2288,8 @@ query_latched_output_cutoff_state
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_HIGH`  | The current slew rate increased beyond the positive change cutoff for current output |
                 +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
                 | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_CHANGE_LOW`   | The current slew rate decreased beyond the negative change cutoff for current output |
+                +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputCutoffReason.CURRENT_SATURATED`    | The measured current saturates the current range                                     |
                 +---------------------------------------------------------------+--------------------------------------------------------------------------------------+
 
 
@@ -2290,8 +2316,7 @@ query_max_current_limit
 
     .. py:method:: query_max_current_limit(voltage_level)
 
-            Queries the maximum current limit on an output channel if the output
-            channel is set to the specified **voltageLevel**.
+            Queries the maximum current limit on a channel if the channel is set to the specified **voltageLevel**.
 
             
 
@@ -2336,8 +2361,7 @@ query_max_voltage_level
 
     .. py:method:: query_max_voltage_level(current_limit)
 
-            Queries the maximum voltage level on an output channel if the output
-            channel is set to the specified **currentLimit**.
+            Queries the maximum voltage level on a channel if the channel is set to the specified **currentLimit**.
 
             
 
@@ -2382,8 +2406,7 @@ query_min_current_limit
 
     .. py:method:: query_min_current_limit(voltage_level)
 
-            Queries the minimum current limit on an output channel if the output
-            channel is set to the specified **voltageLevel**.
+            Queries the minimum current limit on a channel if the channel is set to the specified **voltageLevel**.
 
             
 
@@ -2436,6 +2459,8 @@ query_output_state
             `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
 
             
+
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2550,6 +2575,8 @@ reset_device
 
             
 
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
 
 reset_with_defaults
@@ -2602,7 +2629,9 @@ self_cal
 
             
 
-            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+                This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2726,7 +2755,9 @@ set_sequence
 
             
 
-            .. note:: This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
+            .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+                This method is not supported on all devices. For more information about supported devices, search ni.com for Supported Methods by Device.
 
 
             .. tip:: This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -2944,7 +2975,9 @@ actual_power_allocation
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
              This property returns -1 when the :py:attr:`nidcpower.Session.power_allocation_mode` property is set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
 
@@ -3227,7 +3260,7 @@ autorange_maximum_delay_after_range_change
         PXIe-4135/4136/4137: 0 to 9 seconds
         PXIe-4138/4139: 0 to 9 seconds
         PXIe-4147: 0 to 9 seconds
-        PXIe-4163: 0 to 0.1 seconds.
+        PXIe-4162/4163: 0 to 0.1 seconds.
 
 
 
@@ -3651,6 +3684,130 @@ compliance_limit_symmetry
                 - LabVIEW Property: **Source:Advanced:Compliance Limit Symmetry**
                 - C Attribute: **NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY**
 
+conduction_voltage_mode
+-----------------------
+
+    .. py:attribute:: conduction_voltage_mode
+
+        Specifies whether the conduction voltage feature is enabled on the specified channel(s).
+
+        When the conduction voltage feature is enabled,
+         - The instrument will not begin sinking on the specified channel(s) until the voltage at the input of the specified channel(s) rises above :py:attr:`nidcpower.Session.conduction_voltage_on_threshold`
+         - The instrument will stop sinking if the voltage at the input of the specified channel(s) falls below :py:attr:`nidcpower.Session.conduction_voltage_off_threshold`.
+
+        When the conduction voltage feature is disabled,
+         - The instrument will start sinking regardless of the voltage at the input of the specified channel(s).
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].conduction_voltage_mode`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.conduction_voltage_mode`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.ConductionVoltageMode |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | channels                    |
+            +-----------------------+-----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Conduction Voltage:Mode**
+                - C Attribute: **NIDCPOWER_ATTR_CONDUCTION_VOLTAGE_MODE**
+
+conduction_voltage_off_threshold
+--------------------------------
+
+    .. py:attribute:: conduction_voltage_off_threshold
+
+        Specifies the minimum voltage, in volts, at the input of the specified channel(s) below which the instrument stops sinking on the specified channel(s) when the conduction voltage feature is enabled.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].conduction_voltage_off_threshold`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.conduction_voltage_off_threshold`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Conduction Voltage:Off Threshold**
+                - C Attribute: **NIDCPOWER_ATTR_CONDUCTION_VOLTAGE_OFF_THRESHOLD**
+
+conduction_voltage_on_threshold
+-------------------------------
+
+    .. py:attribute:: conduction_voltage_on_threshold
+
+        Specifies the required minimum voltage, in volts, at the input of the specified channel(s) before the instrument starts sinking on the specified channel(s) when the conduction voltage feature is enabled.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].conduction_voltage_on_threshold`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.conduction_voltage_on_threshold`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Advanced:Conduction Voltage:On Threshold**
+                - C Attribute: **NIDCPOWER_ATTR_CONDUCTION_VOLTAGE_ON_THRESHOLD**
+
 current_compensation_frequency
 ------------------------------
 
@@ -3738,12 +3895,12 @@ current_level
 
         Specifies the current level, in amps, that the device attempts to generate on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         Valid Values: The valid values for this property are defined by the values to which the :py:attr:`nidcpower.Session.current_level_range` property is set.
 
 
 
-        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3814,6 +3971,46 @@ current_level_autorange
                 - LabVIEW Property: **Source:DC Current:Current Level Autorange**
                 - C Attribute: **NIDCPOWER_ATTR_CURRENT_LEVEL_AUTORANGE**
 
+current_level_falling_slew_rate
+-------------------------------
+
+    .. py:attribute:: current_level_falling_slew_rate
+
+        Specifies the rate of decrease, in amps per microsecond, to apply to the absolute magnitude of the current level of the specified channel(s).
+        This property is applicable only if you set the :py:attr:`nidcpower.Session.output_function` property to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_level_falling_slew_rate`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_level_falling_slew_rate`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:DC Current:Current Level Slew Rate:Falling**
+                - C Attribute: **NIDCPOWER_ATTR_CURRENT_LEVEL_FALLING_SLEW_RATE**
+
 current_level_range
 -------------------
 
@@ -3822,12 +4019,12 @@ current_level_range
         Specifies the current level range, in amps, for the specified channel(s).
         The range defines the valid values to which you can set the current level. Use the :py:attr:`nidcpower.Session.current_level_autorange` property to enable automatic selection of the current level range.
         The :py:attr:`nidcpower.Session.current_level_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         For valid ranges, refer to the specifications for your instrument.
 
 
 
-        .. note:: The channel must be enabled for the specified current level range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified current level range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3857,6 +4054,46 @@ current_level_range
                 - LabVIEW Property: **Source:DC Current:Current Level Range**
                 - C Attribute: **NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE**
 
+current_level_rising_slew_rate
+------------------------------
+
+    .. py:attribute:: current_level_rising_slew_rate
+
+        Specifies the rate of increase, in amps per microsecond, to apply to the absolute magnitude of the current level of the specified channel(s).
+        This property is applicable only if you set the :py:attr:`nidcpower.Session.output_function` property to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+
+
+
+        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].current_level_rising_slew_rate`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.current_level_rising_slew_rate`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:DC Current:Current Level Slew Rate:Rising**
+                - C Attribute: **NIDCPOWER_ATTR_CURRENT_LEVEL_RISING_SLEW_RATE**
+
 current_limit
 -------------
 
@@ -3864,12 +4101,14 @@ current_limit
 
         Specifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         Valid Values: The valid values for this property are defined by the values to which :py:attr:`nidcpower.Session.current_limit_range` property is set.
 
 
 
         .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -3996,6 +4235,8 @@ current_limit_high
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
 
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -4049,6 +4290,8 @@ current_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
 
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -4085,12 +4328,12 @@ current_limit_range
         Specifies the current limit range, in amps, for the specified channel(s).
         The range defines the valid values to which you can set the current limit. Use the :py:attr:`nidcpower.Session.current_limit_autorange` property to enable automatic selection of the current limit range.
         The :py:attr:`nidcpower.Session.current_limit_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         For valid ranges, refer to the specifications for your instrument.
 
 
 
-        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4377,7 +4620,9 @@ digital_edge_source_trigger_input_terminal
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -6623,7 +6868,10 @@ measure_buffer_size
 
         Specifies the number of samples that the active channel measurement buffer can hold.
         The default value is the maximum number of samples that a device is capable of recording in one second.
-        Valid Values: 1000 to 2147483647
+        Valid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.
+        The PXIe-4162/4163 supports values from  256 to 1000192.
+        The PXIe-4190 supports values from 102 to 6000048.
+        All other supported instruments support values from 1000 to 2147483647.
         Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
 
@@ -6664,8 +6912,12 @@ measure_complete_event_delay
     .. py:attribute:: measure_complete_event_delay
 
         Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
-        Valid Values: 0 to 167 seconds
-        Default Value: The NI PXI-4132 and NI PXIe-4140/4141/4142/4143/4144/4145/4154 supports values from  0 seconds to 167 seconds.
+        Valid Values: The PXIe-4051 supports values from 0 seconds to 39 seconds.
+        The PXIe-4147 supports values from 0 seconds to 26.5 seconds.
+        The PXIe-4151 supports values from 0 seconds to 42 seconds.
+        The PXIe-4162/4163 and PXIe-4190 support values from 0 seconds to 23 seconds.
+        All other supported instruments support values from 0 to 167 seconds.
+        Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
 
 
@@ -7084,6 +7336,8 @@ measure_when
 
 
 
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -7117,14 +7371,16 @@ merged_channels
 
     .. py:attribute:: merged_channels
 
-        Specifies the channel(s) to merge with a designated primary channel of an SMU in order to increase the maximum current you can source from the SMU.
+        Specifies the channel(s) to merge with a designated primary channel of an instrument in order to increase the maximum current you can source from the instrument.
         This property designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.
         Note: You cannot change the merge configuration with this property when the session is in the Running state.
         For complete information on using merged channels with this property, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. Devices that do not support this property behave as if no channels were merged.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. Devices that do not support this property behave as if no channels were merged.
             Default Value: Refer to the Supported Properties by Device topic for the default value by device.
 
 
@@ -7165,7 +7421,9 @@ output_capacitance
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7201,14 +7459,20 @@ output_connected
     .. py:attribute:: output_connected
 
         Specifies whether the output relay is connected (closed) or disconnected (open). The :py:attr:`nidcpower.Session.output_enabled` property does not change based on this property; they are independent of each other.
-        about supported devices.
+
         Set this property to False to disconnect the output terminal from the output.
-        to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the output can cause premature wear on the relay.
+
         Default Value: True
 
 
 
-        .. note:: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected
+        .. note:: Only disconnect the output when disconnecting is necessary for your application. For example, a battery connected to the output terminal might discharge unless the relay is disconnected. Excessive connecting and disconnecting of the output can cause premature wear on electromechanical relays, such as those used by the PXIe-4147, PXI-4132, or PXIe-4138/39.
+
+            The PXIe-4051 does not have an output relay. For the PXIe-4051, this property specifies whether the input MOSFETs are connected (ON) or disconnected (OFF).
+
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7250,7 +7514,9 @@ output_cutoff_current_change_limit_high
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7292,7 +7558,9 @@ output_cutoff_current_change_limit_low
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7334,7 +7602,9 @@ output_cutoff_current_measure_limit_high
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7376,7 +7646,9 @@ output_cutoff_current_measure_limit_low
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7413,11 +7685,13 @@ output_cutoff_current_overrange_enabled
 
         Enables or disables current overrange functionality for output cutoff. If enabled, the output is disconnected when the measured current saturates the current range.
 
-        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_OUTPUT_HIGH` as the output cutoff reason.
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.CURRENT_SATURATED` as the output cutoff reason.
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7456,7 +7730,9 @@ output_cutoff_delay
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7496,7 +7772,9 @@ output_cutoff_enabled
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
              Instruments that do not support this property behave as if this property were set to False.
 
 
@@ -7539,7 +7817,9 @@ output_cutoff_voltage_change_limit_high
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7581,7 +7861,9 @@ output_cutoff_voltage_change_limit_low
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7611,6 +7893,94 @@ output_cutoff_voltage_change_limit_low
                 - LabVIEW Property: **Source:Output Cutoff:Voltage Change Limit Low**
                 - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_CHANGE_LIMIT_LOW**
 
+output_cutoff_voltage_measure_limit_high
+----------------------------------------
+
+    .. py:attribute:: output_cutoff_voltage_measure_limit_high
+
+        Specifies a high limit voltage value, in volts, for output cutoff.
+        If the measured voltage exceeds this limit, the output is disconnected.
+
+        To find out whether an output has exceeded this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_MEASURE_HIGH` as the output cutoff reason.
+
+
+
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_measure_limit_high`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_voltage_measure_limit_high`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Voltage Measure Limit High**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_MEASURE_LIMIT_HIGH**
+
+output_cutoff_voltage_measure_limit_low
+---------------------------------------
+
+    .. py:attribute:: output_cutoff_voltage_measure_limit_low
+
+        Specifies a low limit voltage value, in volts, for output cutoff.
+        If the measured voltage falls below this limit, the output is disconnected.
+
+        To find out whether an output has fallen below this limit, call the :py:meth:`nidcpower.Session.query_latched_output_cutoff_state` method with :py:data:`~nidcpower.OutputCutoffReason.VOLTAGE_MEASURE_LOW` as the output cutoff reason.
+
+
+
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+            Example: :py:attr:`my_session.channels[ ... ].output_cutoff_voltage_measure_limit_low`
+
+            To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+            Example: :py:attr:`my_session.output_cutoff_voltage_measure_limit_low`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | channels   |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Source:Output Cutoff:Voltage Measure Limit Low**
+                - C Attribute: **NIDCPOWER_ATTR_OUTPUT_CUTOFF_VOLTAGE_MEASURE_LIMIT_LOW**
+
 output_cutoff_voltage_output_limit_high
 ---------------------------------------
 
@@ -7623,7 +7993,9 @@ output_cutoff_voltage_output_limit_high
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7665,7 +8037,9 @@ output_cutoff_voltage_output_limit_low
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7702,12 +8076,14 @@ output_enabled
 
         Specifies whether the output is enabled (True) or disabled (False).
         Depending on the value you specify for the :py:attr:`nidcpower.Session.output_function` property, you also must set the voltage level or current level in addition to enabling the output
-        the :py:meth:`nidcpower.Session.initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for more information about NI-DCPower programming states.
+
         Default Value: The default value is True if you use the :py:meth:`nidcpower.Session.__init__` method to open the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
 
 
-        .. note:: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call
+        .. note:: If the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call the :py:meth:`nidcpower.Session.initiate` method. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for more information about NI-DCPower programming states.
+
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7762,6 +8138,8 @@ output_function
 
 
 
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -7801,7 +8179,9 @@ output_resistance
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7917,12 +8297,17 @@ ovp_limit
     .. py:attribute:: ovp_limit
 
         Determines the voltage limit, in volts, beyond which overvoltage protection (OVP) engages.
+        The limit is specified as a positive value, but symmetric positive and negative limits are enforced simultaneously.
+        For example, setting the OVP Limit to 65 will configure the OVP feature to trigger an OVP error if the output exceeds ±65 V.
+
         Valid Values: 2 V to 210 V
         Default Value: 210 V
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7967,7 +8352,9 @@ power_allocation_mode
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. Devices that do not support this property behave as if this property were set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device. Devices that do not support this property behave as if this property were set to :py:data:`~nidcpower.PowerAllocationMode.DISABLED`.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8148,7 +8535,9 @@ pulse_bias_current_limit
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8205,6 +8594,8 @@ pulse_bias_current_limit_high
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
 
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -8259,6 +8650,8 @@ pulse_bias_current_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
+
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8381,7 +8774,9 @@ pulse_bias_voltage_limit
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -8438,6 +8833,8 @@ pulse_bias_voltage_limit_high
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
 
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -8492,6 +8889,8 @@ pulse_bias_voltage_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True or if the :py:attr:`nidcpower.Session.output_function` property is set to a
             pulsing method.
+
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -9486,7 +9885,9 @@ requested_power_allocation
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -9522,7 +9923,7 @@ reset_average_before_measurement
     .. py:attribute:: reset_average_before_measurement
 
         Specifies whether the measurement returned from any measurement call starts with a new measurement call (True) or returns a measurement that has already begun or completed(False).
-        When you set the :py:attr:`nidcpower.Session.samples_to_average` property in the Running state, the output channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the :py:meth:`nidcpower.Session.measure_multiple` method. To force a synchronization in the running state, set this property to True, and then run the :py:meth:`nidcpower.Session.measure_multiple` method, specifying all channels in the channel name parameter. You can set the :py:attr:`nidcpower.Session.reset_average_before_measurement` property to False after the :py:meth:`nidcpower.Session.measure_multiple` method completes.
+        When you set the :py:attr:`nidcpower.Session.samples_to_average` property in the Running state, the channel measurements might move out of synchronization. While NI-DCPower automatically synchronizes measurements upon the initialization of a session, you can force a synchronization in the running state before you run the :py:meth:`nidcpower.Session.measure_multiple` method. To force a synchronization in the running state, set this property to True, and then run the :py:meth:`nidcpower.Session.measure_multiple` method, specifying all channels in the channel name parameter. You can set the :py:attr:`nidcpower.Session.reset_average_before_measurement` property to False after the :py:meth:`nidcpower.Session.measure_multiple` method completes.
         Default Value: True
 
 
@@ -9656,6 +10057,8 @@ sense
         Default Value: The default value is :py:data:`~nidcpower.Sense.LOCAL` if the device supports local sense. Otherwise, the default and only supported value is :py:data:`~nidcpower.Sense.REMOTE`.
 
 
+
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10160,7 +10563,7 @@ sequence_loop_count
         Specifies the number of times a sequence is run after initiation.
         Refer to the Sequence Source Mode topic in the NI DC Power Supplies and SMUs Help for more information about the sequence loop count.
         When the :py:attr:`nidcpower.Session.sequence_loop_count_is_finite` property is set to False, the :py:attr:`nidcpower.Session.sequence_loop_count` property is ignored.
-        Valid Range: 1 to 134217727
+        Valid Range: 1 to 2147483647
         Default Value: 1
 
 
@@ -10492,7 +10895,9 @@ source_complete_event_pulse_polarity
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10535,7 +10940,9 @@ source_complete_event_pulse_width
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10583,7 +10990,9 @@ source_complete_event_toggle_initial_state
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices and terminals, search Supported Properties by Device on ni.com
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -10622,12 +11031,18 @@ source_delay
 
         Determines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the :py:attr:`nidcpower.Session.measure_when` property is set to :py:data:`~nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE`.
         Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
-        Valid Values: 0 to 167 seconds
+        Valid Values: The PXIe-4051 supports values from 0 to 39 seconds.
+        The PXIe-4147 supports values from 0 to 26.5 seconds.
+        The PXIe-4151 supports values from 0 to 42 seconds.
+        The PXIe-4162/4163 and PXIe-4190 support values from 0 to 23 seconds.
+        All other supported instruments support values from 0 to 167 seconds.
         Default Value: 0.01667 seconds
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -10667,6 +11082,8 @@ source_mode
 
 
 
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -10705,7 +11122,9 @@ source_trigger_type
 
 
 
-        .. note:: This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+        .. note:: NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+            This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -11027,12 +11446,12 @@ voltage_level
 
         Specifies the voltage level, in volts, that the device attempts to generate on the specified channel(s).
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         Valid Values: The valid values for this property are defined by the values you specify for the :py:attr:`nidcpower.Session.voltage_level_range` property.
 
 
 
-        .. note:: The channel must be enabled for the specified voltage level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified voltage level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -11111,12 +11530,12 @@ voltage_level_range
         Specifies the voltage level range, in volts, for the specified channel(s).
         The range defines the valid values to which the voltage level can be set. Use the :py:attr:`nidcpower.Session.voltage_level_autorange` property to enable automatic selection of the voltage level range.
         The :py:attr:`nidcpower.Session.voltage_level_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_VOLTAGE`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         For valid ranges, refer to the specifications for your instrument.
 
 
 
-        .. note:: The channel must be enabled for the specified voltage level range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified voltage level range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -11153,12 +11572,14 @@ voltage_limit
 
         Specifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.
         This property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT` and the :py:attr:`nidcpower.Session.compliance_limit_symmetry` property is set to :py:data:`~nidcpower.ComplianceLimitSymmetry.SYMMETRIC`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         Valid Values: The valid values for this property are defined by the values to which the :py:attr:`nidcpower.Session.voltage_limit_range` property is set.
 
 
 
         .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -11254,6 +11675,8 @@ voltage_limit_high
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
 
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -11307,6 +11730,8 @@ voltage_limit_low
             :py:attr:`nidcpower.Session.overranging_enabled` property is
             set to True.
 
+            NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
             Use Python index notation on the repeated capabilities container channels to specify a subset.
@@ -11343,12 +11768,12 @@ voltage_limit_range
         Specifies the voltage limit range, in volts, for the specified channel(s).
         The range defines the valid values to which the voltage limit can be set. Use the :py:attr:`nidcpower.Session.voltage_limit_autorange` property to enable automatic selection of the voltage limit range.
         The :py:attr:`nidcpower.Session.voltage_limit_range` property is applicable only if the :py:attr:`nidcpower.Session.output_function` property is set to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
-        :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+
         For valid ranges, refer to the specifications for your instrument.
 
 
 
-        .. note:: The channel must be enabled for the specified voltage limit range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified voltage limit range to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.

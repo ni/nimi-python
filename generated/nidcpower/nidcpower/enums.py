@@ -152,6 +152,21 @@ class ComplianceLimitSymmetry(Enum):
     '''
 
 
+class ConductionVoltageMode(Enum):
+    AUTOMATIC = 1155
+    r'''
+    The conduction voltage feature is only enabled when you set the output_function property to OutputFunction.DC_CURRENT.
+    '''
+    ENABLED = 1156
+    r'''
+    The conduction voltage feature is enabled.
+    '''
+    DISABLED = 1157
+    r'''
+    The conduction voltage feature is disabled.
+    '''
+
+
 class CurrentLimitBehavior(Enum):
     REGULATE = 0
     r'''
@@ -231,6 +246,10 @@ class InstrumentMode(Enum):
     LCR = 1062
     r'''
     The channel operates as an LCR meter.
+    '''
+    E_LOAD = 1154
+    r'''
+    The channel operates as an electronic load (E-Load).
     '''
 
 
@@ -458,6 +477,18 @@ class OutputCutoffReason(Enum):
     CURRENT_CHANGE_LOW = 128
     r'''
     Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
+    '''
+    CURRENT_SATURATED = 512
+    r'''
+    Queries or clears cutoff conditions when the measured current saturates the current range.
+    '''
+    VOLTAGE_MEASURE_HIGH = 1024
+    r'''
+    Queries or clears cutoff conditions when the measured voltage exceeded the high cutoff limit for voltage output.
+    '''
+    VOLTAGE_MEASURE_LOW = 2048
+    r'''
+    Queries or clears cutoff conditions when the measured voltage fell below the low cutoff limit for voltage output.
     '''
 
 

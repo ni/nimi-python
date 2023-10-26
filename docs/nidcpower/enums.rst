@@ -356,6 +356,41 @@ ComplianceLimitSymmetry
 
 
 
+ConductionVoltageMode
+---------------------
+
+.. py:class:: ConductionVoltageMode
+
+    .. py:attribute:: ConductionVoltageMode.AUTOMATIC
+
+
+
+        The conduction voltage feature is only enabled when you set the :py:attr:`nidcpower.Session.output_function` property to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+
+        
+
+
+
+    .. py:attribute:: ConductionVoltageMode.ENABLED
+
+
+
+        The conduction voltage feature is enabled.
+
+        
+
+
+
+    .. py:attribute:: ConductionVoltageMode.DISABLED
+
+
+
+        The conduction voltage feature is disabled.
+
+        
+
+
+
 CurrentLimitBehavior
 --------------------
 
@@ -541,6 +576,16 @@ InstrumentMode
 
 
         The channel operates as an LCR meter.
+
+        
+
+
+
+    .. py:attribute:: InstrumentMode.E_LOAD
+
+
+
+        The channel operates as an electronic load (E-Load).
 
         
 
@@ -1036,6 +1081,36 @@ OutputCutoffReason
 
 
         Queries or clears cutoff conditions when the current slew rate decreased beyond the negative change cutoff for current output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.CURRENT_SATURATED
+
+
+
+        Queries or clears cutoff conditions when the measured current saturates the current range.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_MEASURE_HIGH
+
+
+
+        Queries or clears cutoff conditions when the measured voltage exceeded the high cutoff limit for voltage output.
+
+        
+
+
+
+    .. py:attribute:: OutputCutoffReason.VOLTAGE_MEASURE_LOW
+
+
+
+        Queries or clears cutoff conditions when the measured voltage fell below the low cutoff limit for voltage output.
 
         
 

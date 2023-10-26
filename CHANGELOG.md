@@ -40,6 +40,20 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 2023 Q4.
+            * Properties added:
+                * `current_level_rising_slew_rate`
+                * `current_level_falling_slew_rate`
+                * `conduction_voltage_mode`
+                * `conduction_voltage_on_threshold`
+                * `conduction_voltage_off_threshold`
+                * `output_cutoff_voltage_measure_limit_high`
+                * `output_cutoff_voltage_measure_limit_low`
+            * Enum added:
+                * `ConductionVoltageMode`
+            * Enum values added:
+                * `E_LOAD` added to enum `InstrumentMode`
+                * `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
     * #### Changed
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)

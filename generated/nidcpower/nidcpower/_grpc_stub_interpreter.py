@@ -12,9 +12,9 @@ from . import nidcpower_pb2 as grpc_types
 from . import nidcpower_pb2_grpc as nidcpower_grpc
 from . import session_pb2 as session_grpc_types
 
-from . import lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
-
 from . import lcr_measurement as lcr_measurement  # noqa: F401
+
+from . import lcr_load_compensation_spot as lcr_load_compensation_spot  # noqa: F401
 
 
 class GrpcStubInterpreter(object):
