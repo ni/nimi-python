@@ -21,7 +21,7 @@ before_script:
   - python tools/ensure_codegen_up_to_date.py
 
 script:
-  - tox -c tox-travis.ini
+  - tox -c tox-travis.ini -p auto -o
 
 after_success:
   # Install and verify codecov tool
