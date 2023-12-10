@@ -881,7 +881,7 @@ class TestGrpcStubInterpreter(object):
         cs = interpreter.get_custom_type()
         assert cs.struct_int == expected_cs.struct_int
         assert cs.struct_double == expected_cs.struct_double
-        assert type(cs) == type(expected_cs)
+        assert isinstance(cs, type(expected_cs))
         self._assert_call(library_func, response_object).assert_called_once_with(vi=GRPC_SESSION_OBJECT_FOR_TEST)
 
     def test_set_custom_type_array(self):
@@ -906,7 +906,7 @@ class TestGrpcStubInterpreter(object):
         for actual, expected in zip(cs_test, cs):
             assert actual.struct_int == expected.struct_int
             assert actual.struct_double == expected.struct_double
-            assert type(actual) == type(expected)
+            assert isinstance(actual, type(expected))
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST, number_of_elements=len(cs)
         )
@@ -928,9 +928,9 @@ class TestGrpcStubInterpreter(object):
         assert csnt_test.struct_custom_struct.struct_double == csnt.struct_custom_struct.struct_double
         assert csnt_test.struct_custom_struct_typedef.struct_int == csnt.struct_custom_struct_typedef.struct_int
         assert csnt_test.struct_custom_struct_typedef.struct_double == csnt.struct_custom_struct_typedef.struct_double
-        assert type(csnt_test.struct_custom_struct) == type(csnt.struct_custom_struct)  # noqa: E721
-        assert type(csnt_test.struct_custom_struct_typedef) == type(csnt.struct_custom_struct_typedef)  # noqa: E721
-        assert type(csnt_test) == type(csnt)
+        assert isinstance(csnt_test.struct_custom_struct, type(csnt.struct_custom_struct))
+        assert isinstance(csnt_test.struct_custom_struct_typedef, type(csnt.struct_custom_struct_typedef))
+        assert isinstance(csnt_test, type(csnt))
         request_object = self._assert_call(library_func, response_object)
         request_object.assert_called_once()
         call = request_object.call_args_list[0]
@@ -943,9 +943,9 @@ class TestGrpcStubInterpreter(object):
         assert sent_csnt.struct_custom_struct.struct_double == grpc_csnt.struct_custom_struct.struct_double
         assert sent_csnt.struct_custom_struct_typedef.struct_int == grpc_csnt.struct_custom_struct_typedef.struct_int
         assert sent_csnt.struct_custom_struct_typedef.struct_double == grpc_csnt.struct_custom_struct_typedef.struct_double
-        assert type(sent_csnt.struct_custom_struct) == type(grpc_csnt.struct_custom_struct)  # noqa: E721
-        assert type(sent_csnt.struct_custom_struct_typedef) == type(grpc_csnt.struct_custom_struct_typedef)  # noqa: E721
-        assert type(sent_csnt) == type(grpc_csnt)
+        assert isinstance(sent_csnt.struct_custom_struct, type(grpc_csnt.struct_custom_struct))
+        assert isinstance(sent_csnt.struct_custom_struct_typedef, type(grpc_csnt.struct_custom_struct_typedef))
+        assert isinstance(sent_csnt, type(grpc_csnt))
 
     def test_get_cal_date_time(self):
         library_func = 'GetCalDateAndTime'
