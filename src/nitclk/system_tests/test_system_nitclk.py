@@ -18,7 +18,7 @@ def multiple_niscope_sessions():
 
 
 def test_nitclk_integration(single_niscope_session):
-    assert type(single_niscope_session.tclk) == nitclk.SessionReference
+    assert isinstance(single_niscope_session.tclk, nitclk.SessionReference)
 
 
 def test_nitclk_vi_string(single_niscope_session):

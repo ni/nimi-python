@@ -15,14 +15,14 @@ def _compare_values(actual, expected, k):
 
 
 def _compare_lists(actual, expected):
-    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    assert isinstance(actual, type(expected)), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
     assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
     for k in range(len(actual)):
         _compare_values(actual[k], expected[k], k)
 
 
 def _compare_dicts(actual, expected):
-    assert type(actual) == type(expected), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    assert isinstance(actual, type(expected)), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
     for k in actual:
         assert k in expected, 'Key {0} not in expected'.format(k)
         _compare_values(actual[k], expected[k], k)
