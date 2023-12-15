@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.7](#147---2023-12-15)
 * [1.4.6](#146---2023-09-11)
 * [1.4.5](#145---2023-06-12)
 * [1.4.4](#144---2023-04-14)
@@ -33,11 +33,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
-* ### ALL
-    * #### Added
-    * #### Changed
-    * #### Removed
+## 1.4.7 - 2023-12-15
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 2023 Q4.
@@ -54,41 +50,6 @@ All notable changes to this project will be documented in this file.
             * Enum values added:
                 * `E_LOAD` added to enum `InstrumentMode`
                 * `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
-    * #### Changed
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nifgen` (NI-FGEN)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
-
 
 ## 1.4.6 - 2023-09-11
 * ### ALL
