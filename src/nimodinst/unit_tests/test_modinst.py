@@ -74,7 +74,7 @@ class TestSession(object):
 
     def test_context_manager(self):
         with nimodinst.Session('') as session:
-            assert type(session) == nimodinst.Session
+            assert isinstance(session, nimodinst.Session)
             self.patched_library.niModInst_OpenInstalledDevicesSession.assert_called_once_with(_matchers.ViStringMatcher(''), _matchers.ViSessionPointerMatcher(), _matchers.ViInt32PointerMatcher())
         self.patched_library.niModInst_CloseInstalledDevicesSession.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST))
 

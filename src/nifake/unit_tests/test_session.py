@@ -76,7 +76,7 @@ class TestSession(object):
 
     def test_session_context_manager(self):
         with nifake.Session('dev1') as session:
-            assert type(session) == nifake.Session
+            assert isinstance(session, nifake.Session)
             self.patched_library_interpreter.init_with_options.assert_called_once_with('dev1', False, False, '')
             assert session._interpreter._vi == SESSION_NUM_FOR_TEST
         self.patched_library_interpreter.close.assert_called_once_with()
@@ -114,7 +114,7 @@ class TestSession(object):
         self.patched_library_interpreter.init_with_options.side_effect = nifake.errors.DriverError(test_error_code, test_error_desc)
         try:
             with nifake.Session('dev1') as session:
-                assert type(session) == nifake.Session
+                assert isinstance(session, nifake.Session)
                 assert False
         except nifake.Error as e:
             assert e.code == test_error_code
@@ -126,7 +126,7 @@ class TestSession(object):
         self.patched_library_interpreter.close.side_effect = nifake.errors.DriverError(test_error_code, test_error_desc)
         try:
             with nifake.Session('dev1') as session:
-                assert type(session) == nifake.Session
+                assert isinstance(session, nifake.Session)
                 assert False
         except nifake.Error as e:
             assert e.code == test_error_code
