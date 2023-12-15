@@ -1,6 +1,6 @@
 # Changelog
 
-* [1.4.7](#147---2023-12-12)
+* [1.4.7](#147---2023-12-15)
 * [1.4.6](#146---2023-09-11)
 * [1.4.5](#145---2023-06-12)
 * [1.4.4](#144---2023-04-14)
@@ -33,7 +33,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.4.7 - 2023-12-12
+## 1.4.7 - 2023-12-15
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 2023 Q4.
