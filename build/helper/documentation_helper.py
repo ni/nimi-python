@@ -43,6 +43,122 @@ def get_indented_docstring_snippet(d, indent=4):
     return ret_val
 
 
+def get_repeated_capability_element_recommendation(rep_cap_config):
+    '''Returns a string recommending a specific type be useed for the repeated capability.'''
+    rep_cap_prefix = rep_cap_config['prefix']
+    rep_cap_name = rep_cap_config['python_name']
+    if rep_cap_prefix or rep_cap_name == 'channels':
+        element_type = 'an integer'
+    else:
+        element_type = 'a string'
+
+    return f'The basic element for indexing this repeated capability is {element_type}.'
+
+
+def _get_repeated_capability_example_info(rep_cap_config):
+    '''Returns values needed for building a rep cap doc snippet and explanation.'''
+    index = 0
+    indices = ["0", "2"]  # use strings so that we can call join
+    value_type = None  # we only set this for enum values
+
+    attr_for_example = rep_cap_config['attr_for_docs_example']
+    attr_type_for_example = rep_cap_config['attr_type_for_docs_example']
+    if attr_type_for_example == 'property':
+        class_attr_ref = f':py:attr:`{attr_for_example}`'
+    elif attr_type_for_example == 'method':
+        class_attr_ref = f':py:meth:`{attr_for_example}`'
+
+    if 'indices_for_docs_example' in rep_cap_config:
+        index = rep_cap_config["indices_for_docs_example"][0]
+        if isinstance(index, str):
+            index = repr(index)
+        indices = [repr(index) for index in rep_cap_config["indices_for_docs_example"]]
+
+    value = rep_cap_config['value_for_docs_example']
+    value_type = type(value)
+    if 'value_type_for_docs_example' in rep_cap_config:
+        value_type = rep_cap_config['value_type_for_docs_example']
+    if not value_type == 'enum' and isinstance(value, str):
+        value = repr(value)
+
+    explanation_value = f':python:`{value}`'
+    if value_type == 'enum':
+        explanation_value = f':py:data:`~{value}`'
+
+    ret_val = {
+        'attr_for_example': attr_for_example,
+        'attr_type_for_example': attr_type_for_example,
+        'class_attr_ref': class_attr_ref,
+        'explanation_value': explanation_value,
+        'index': index,
+        'indices': indices,
+        'value': value,
+    }
+    return ret_val
+
+
+def get_repeated_capability_single_index_python_example(rep_cap_config):
+    '''Returns a python code snippet and explanation for example usage of a repeated capability.'''
+    rep_cap_name = rep_cap_config['python_name']
+
+    rep_cap_info = _get_repeated_capability_example_info(rep_cap_config)
+    attr_for_example = rep_cap_info['attr_for_example']
+    attr_type_for_example = rep_cap_info['attr_type_for_example']
+    class_attr_ref = rep_cap_info['class_attr_ref']
+    explanation_value = rep_cap_info['explanation_value']
+    index = rep_cap_info['index']
+    value = rep_cap_info['value']
+
+    if attr_type_for_example == "property":
+        if value is None:
+            snippet = f'print(session.{rep_cap_name}[{index}].{attr_for_example})'
+            explanation = f"prints {class_attr_ref} for {rep_cap_name} {index}."
+        else:
+            snippet = f'session.{rep_cap_name}[{index}].{attr_for_example} = {value}'
+            explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {index}."
+    elif attr_type_for_example == "method":
+        if value is None:
+            snippet = f'session.{rep_cap_name}[{index}].{attr_for_example}()'
+            explanation = f"calls {class_attr_ref} for {rep_cap_name} {index}."
+        else:
+            snippet = f'session.{rep_cap_name}[{index}].{attr_for_example}({value})'
+            explanation = f"calls {class_attr_ref} with {explanation_value} for {rep_cap_name} {index}."
+    else:
+        raise ValueError(f"Ilegal value {attr_type_for_example} in {repr(rep_cap_config)}.")
+    return snippet, explanation
+
+
+def get_repeated_capability_tuple_index_python_example(rep_cap_config):
+    '''Returns a python code snippet and explanation  for example usage of a repeated capability.'''
+    rep_cap_name = rep_cap_config['python_name']
+
+    rep_cap_info = _get_repeated_capability_example_info(rep_cap_config)
+    attr_for_example = rep_cap_info['attr_for_example']
+    attr_type_for_example = rep_cap_info['attr_type_for_example']
+    class_attr_ref = rep_cap_info['class_attr_ref']
+    explanation_value = rep_cap_info['explanation_value']
+    indices = rep_cap_info['indices']
+    value = rep_cap_info['value']
+
+    if attr_type_for_example == "property":
+        if value is None:
+            snippet = f'print(session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example})'
+            explanation = f"prints {class_attr_ref} for {rep_cap_name} {', '.join(indices)}."
+        else:
+            snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example} = {value}'
+            explanation = f"sets {class_attr_ref} to {explanation_value} for {rep_cap_name} {', '.join(indices)}."
+    elif attr_type_for_example == "method":
+        if value is None:
+            snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example}()'
+            explanation = f"calls {class_attr_ref} for {rep_cap_name} {', '.join(indices)}."
+        else:
+            snippet = f'session.{rep_cap_name}[{", ".join(indices)}].{attr_for_example}({value})'
+            explanation = f"calls {class_attr_ref} with {explanation_value} for {rep_cap_name} {', '.join(indices)}."
+    else:
+        raise ValueError(f"Ilegal value {attr_type_for_example} in {repr(rep_cap_config)}.")
+    return snippet, explanation
+
+
 def get_rst_header_snippet(t, header_level='='):
     '''Get rst formatted heading'''
     ret_val = t + '\n'
