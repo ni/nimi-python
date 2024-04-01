@@ -17,7 +17,7 @@ import _mock_helper
 SESSION_NUM_FOR_TEST = 42
 
 
-class TestLibraryInterpreter(object):
+class TestLibraryInterpreter:
 
     class PatchedLibrary(nifake._library.Library):
         def __init__(self, ctypes_library):

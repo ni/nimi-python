@@ -40,7 +40,7 @@ class DriverWarning(Warning):
 
     def __init__(self, code, description):
         assert _is_warning(code), "Should not create Warning if code is not positive."
-        super(DriverWarning, self).__init__('Warning {0} occurred.\n\n{1}'.format(code, description))
+        super(DriverWarning, self).__init__('Warning {} occurred.\n\n{}'.format(code, description))
 
 
 class RpcError(Error):
@@ -89,7 +89,7 @@ class InvalidRepeatedCapabilityError(Error):
     '''An error due to an invalid character in a repeated capability'''
 
     def __init__(self, invalid_character, invalid_string):
-        super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({0}) was found in repeated capability string ({1})'.format(invalid_character, invalid_string))
+        super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({}) was found in repeated capability string ({})'.format(invalid_character, invalid_string))
 
 
 class SelfTestError(Error):
@@ -98,7 +98,7 @@ class SelfTestError(Error):
     def __init__(self, code, msg):
         self.code = code
         self.message = msg
-        super(SelfTestError, self).__init__('Self-test failed with code {0}: {1}'.format(code, msg))
+        super(SelfTestError, self).__init__('Self-test failed with code {}: {}'.format(code, msg))
 
 
 def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):

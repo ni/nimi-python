@@ -125,7 +125,7 @@ The following is a basic example of using the **niscope** module to open a sessi
         with session.initiate():
             waveforms = session.channels[0,1].fetch(num_records=5)
         for wfm in waveforms:
-            print('Channel {0}, record {1} samples acquired: {2:,}\n'.format(wfm.channel, wfm.record, len(wfm.samples)))
+            print('Channel {}, record {} samples acquired: {:,}\n'.format(wfm.channel, wfm.record, len(wfm.samples)))
 
         # Find all channel 1 records (Note channel name is always a string even if integers used in channel[])
         chan1 = [wfm for wfm in waveforms if wfm.channel == '0']
