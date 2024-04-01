@@ -19,9 +19,9 @@
         attribute_ids_used = set()
         for prop in property_names:
             if prop not in Session.__base__.__dict__:
-                raise KeyError('{0} is not an property on the nidcpower.Session'.format(prop))
+                raise KeyError('{} is not an property on the nidcpower.Session'.format(prop))
             if not isinstance(Session.__base__.__dict__[prop], _attributes.Attribute):
-                raise TypeError('{0} is not a valid property: {1}'.format(prop, type(Session.__base__.__dict__[prop])))
+                raise TypeError('{} is not a valid property: {}'.format(prop, type(Session.__base__.__dict__[prop])))
             attribute_ids_used.add(Session.__base__.__dict__[prop]._attribute_id)
 
         self._create_advanced_sequence_with_channels(sequence_name, list(attribute_ids_used), set_as_active_sequence)

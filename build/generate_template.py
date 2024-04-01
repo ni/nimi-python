@@ -14,7 +14,7 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
     try:
         template_params['encoding_tag'] = '# -*- coding: utf-8 -*-'
         module_name = template_params['metadata'].config['module_name']
-        lookup = TemplateLookup(directories=['src/{0}/templates'.format(module_name), 'build/templates'])
+        lookup = TemplateLookup(directories=[f'src/{module_name}/templates', 'build/templates'])
         template = Template(filename=template_name, lookup=lookup)
         rendered_template = template.render(template_parameters=template_params)
 
@@ -28,7 +28,7 @@ def generate_template(template_name, template_params, dest_file, in_zip_file=Fal
         lines = tback.source.split('\n')
 
         # The underlying error.
-        logging.error("\n%s: %s\n" % (str(tback.error.__class__.__name__), str(tback.error)))
+        logging.error("\n{}: {}\n".format(str(tback.error.__class__.__name__), str(tback.error)))
         logging.error("Offending Template: %s\n" % template_name)
 
         # Show a source listing of the template, with offending line marked.

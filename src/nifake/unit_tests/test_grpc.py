@@ -39,7 +39,7 @@ class MyRpcError(grpc.RpcError):
             return [Metadatum('ni-error', str(self._error_code))]
 
 
-class TestGrpcStubInterpreter(object):
+class TestGrpcStubInterpreter:
 
     class PatchedGrpcTypes:
         def __init__(self):
@@ -93,7 +93,7 @@ class TestGrpcStubInterpreter(object):
 
     def _check_fields(self, response_class, **kwargs):
         fields = dict(kwargs)
-        response_fields = dict((x.name, x) for x in response_class.DESCRIPTOR.fields)
+        response_fields = {x.name: x for x in response_class.DESCRIPTOR.fields}
 
         unexpected_fields = set(fields) - set(response_fields)
         assert not unexpected_fields, 'Unexpected fields: ' + str(list(sorted(unexpected_fields)))

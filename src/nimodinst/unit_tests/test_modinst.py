@@ -10,7 +10,7 @@ from unittest.mock import patch
 SESSION_NUM_FOR_TEST = 42
 
 
-class TestSession(object):
+class TestSession:
     class PatchedLibrary(nimodinst._library.Library):
         def __init__(self, ctypes_library):
             super().__init__(ctypes_library)

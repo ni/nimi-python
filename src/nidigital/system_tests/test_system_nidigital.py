@@ -181,7 +181,7 @@ class SystemTests:
         assert multi_instrument_session.start_label == 'foo'
 
     def test_get_channel_names(self, multi_instrument_session):
-        expected_string = ['{0}/{1}'.format(instruments[0], x) for x in range(12)]
+        expected_string = [f'{instruments[0]}/{x}' for x in range(12)]
         # Sanity test few different types of input. No need for test to be exhaustive
         # since all the various types are covered by converter unit tests.
         channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
@@ -294,7 +294,7 @@ class SystemTests:
                 1: [i for i in range(num_samples)],
                 0: [i for i in reversed(range(num_samples))]}
         else:
-            assert False, "Invalid source waveform data type: {}".format(source_waveform_type)
+            assert False, f"Invalid source waveform data type: {source_waveform_type}"
 
         multi_instrument_session.write_source_waveform_site_unique(
             waveform_name='src_wfm',
@@ -343,7 +343,7 @@ class SystemTests:
                 str(1): [str(i) for i in range(num_samples)],
                 str(0): [str(i) for i in reversed(range(num_samples))]}
         else:
-            assert False, "Invalid source waveform data type: {}".format(source_waveform_wrong_type)
+            assert False, f"Invalid source waveform data type: {source_waveform_wrong_type}"
 
         with pytest.raises(TypeError):
             multi_instrument_session.write_source_waveform_site_unique(

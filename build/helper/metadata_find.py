@@ -1,7 +1,7 @@
 # Find utilities
 def find_parameter(name, parameters):
     parameter = [x for x in parameters if x['name'] == name]
-    assert len(parameter) == 1, 'Parameter {0} not found in {1}. Check your metadata.'.format(name, parameters)
+    assert len(parameter) == 1, f'Parameter {name} not found in {parameters}. Check your metadata.'
     return parameter[0]
 
 
@@ -11,11 +11,11 @@ def find_session_handle_parameter(parameters):
     Usually it's the one marked as is_session_handle. For Init functions, it's the output parameter.
     '''
     matching = [p for p in parameters if p['is_session_handle']]
-    assert len(matching) <= 1, 'More than one parameter found with is_session_handle=True:\n{0}'.format(parameters)
+    assert len(matching) <= 1, f'More than one parameter found with is_session_handle=True:\n{parameters}'
     if len(matching) == 0:
         matching = [p for p in parameters if p['type'] == 'ViSession']
-        assert len(matching) <= 1, 'More than one ViSession parameter found:\n{0}'.format(parameters)
-        assert len(matching) > 0, 'No ViSession parameter found:\n{0}'.format(parameters)
+        assert len(matching) <= 1, f'More than one ViSession parameter found:\n{parameters}'
+        assert len(matching) > 0, f'No ViSession parameter found:\n{parameters}'
     return matching[0]
 
 
@@ -24,7 +24,7 @@ def find_size_parameter(parameter_list, parameters, key='value'):
 
     Most behaviors will use 'value', but 'ivi-dance-with-a-twist' uses 'value' and 'value_twist'
     '''
-    assert type(parameter_list) is list or type(parameter_list) is dict, 'Wrong type: {}'.format(type(parameter_list))
+    assert type(parameter_list) is list or type(parameter_list) is dict, f'Wrong type: {type(parameter_list)}'
     if len(parameter_list) == 0:
         return None
     # Assumption: all parameters have the same size parameter, so we only need to use the first one

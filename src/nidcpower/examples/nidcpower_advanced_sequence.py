@@ -32,7 +32,7 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
 
         with session.initiate():
             session.wait_for_event(nidcpower.Event.SEQUENCE_ENGINE_DONE)
-            channel_indices = '0-{0}'.format(session.channel_count - 1)
+            channel_indices = f'0-{session.channel_count - 1}'
             channels = session.get_channel_names(channel_indices)
             measurement_group = [session.channels[name].fetch_multiple(points_per_output_function * 2, timeout=timeout) for name in channels]
 

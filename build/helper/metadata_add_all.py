@@ -63,7 +63,7 @@ def _add_python_method_name(function, name):
             function['python_name'] = '_' + camelcase_to_snakecase(name)
         else:
             function['python_name'] = camelcase_to_snakecase(name)
-            assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{0}', function['python_name'] = '{1}'".format(function['method_name_for_documentation'], function['python_name'])
+            assert function['codegen_method'] == 'no' or 'method_name_for_documentation' not in function, "'method_name_for_documentation' not allowed to be set: function['method_name_for_documentation'] = '{}', function['python_name'] = '{}'".format(function['method_name_for_documentation'], function['python_name'])
 
 
 def _add_interpreter_method_name(function, name):
@@ -264,7 +264,7 @@ def _add_default_value_name(parameter):
             name_with_default = parameter['python_name'] + "=" + str(parameter['default_value'])
 
         if 'python_api_converter_name' in parameter:
-            name_for_init = '_converters.{0}({1}, self._encoding)'.format(parameter['python_api_converter_name'], parameter['python_name'])
+            name_for_init = '_converters.{}({}, self._encoding)'.format(parameter['python_api_converter_name'], parameter['python_name'])
         elif parameter['use_in_python_api']:
             name_for_init = parameter['python_name']
         else:
@@ -525,8 +525,8 @@ def _add_enum_codegen_method(enums, config):
     for e in enums:
         least_restrictive_codegen_method = _get_least_restrictive_codegen_method(
             set.union(
-                set(config['functions'][f]['codegen_method'] for f in enum_to_client_functions[e]),
-                set(config['attributes'][a]['codegen_method'] for a in enum_to_client_attributes[e])
+                {config['functions'][f]['codegen_method'] for f in enum_to_client_functions[e]},
+                {config['attributes'][a]['codegen_method'] for a in enum_to_client_attributes[e]}
             )
         )
         if 'codegen_method' not in enums[e]:
@@ -561,7 +561,7 @@ def _get_functions_that_use_enums(enums, config):
             e = p['enum']
             if e is not None:
                 if e not in enum_to_client_functions:
-                    print('Missing enum {0} referenced by function {1}'.format(e, f))
+                    print(f'Missing enum {e} referenced by function {f}')
                 else:
                     enum_to_client_functions[e].append(f)
     return enum_to_client_functions
@@ -574,7 +574,7 @@ def _get_attributes_that_use_enums(enums, config):
         e = config['attributes'][a]['enum']
         if e is not None:
             if e not in enum_to_client_attributes:
-                print('Missing enum {0} referenced by attribute {1}'.format(e, a))
+                print(f'Missing enum {e} referenced by attribute {a}')
             else:
                 enum_to_client_attributes[e].append(a)
     return enum_to_client_attributes
@@ -610,7 +610,7 @@ def _add_enum_value_python_name(enum_info, config):
     '''Add 'python_name' for all values, removing any common prefixes and suffixes'''
     for v in enum_info['values']:
         if 'python_name' not in v:
-            v['python_name'] = v['name'].replace('{0}_VAL_'.format(config['module_name'].upper()), '')
+            v['python_name'] = v['name'].replace('{}_VAL_'.format(config['module_name'].upper()), '')
 
     # We are using an os.path function do find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
@@ -627,7 +627,7 @@ def _add_enum_value_python_name(enum_info, config):
     # '_' only means the name starts with a number
     if len(prefix) > 0 and prefix != '_':
         for v in enum_info['values']:
-            assert v['python_name'].startswith(prefix), '{0} does not start with {1}'.format(v['name'], prefix)
+            assert v['python_name'].startswith(prefix), '{} does not start with {}'.format(v['name'], prefix)
             v['prefix'] = prefix
             v['python_name'] = v['python_name'].replace(prefix, '')
 
@@ -649,7 +649,7 @@ def _add_enum_value_python_name(enum_info, config):
     # '_' only means the name starts with a number
     if len(suffix) > 0:
         for v in enum_info['values']:
-            assert v['python_name'].endswith(suffix), '{0} does not end with {1}'.format(v['name'], suffix)
+            assert v['python_name'].endswith(suffix), '{} does not end with {}'.format(v['name'], suffix)
             v['suffix'] = suffix
             v['python_name'] = v['python_name'][:-len(suffix)]
 
@@ -759,13 +759,13 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
         os.makedirs(metadata_dir)
 
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_functions.py'), "w", "utf-8") as text_file:
-        text_file.write("function =\n{0}".format(pp_persist.pformat(functions)))
+        text_file.write(f"function =\n{pp_persist.pformat(functions)}")
 
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_attributes.py'), "w", "utf-8") as text_file:
-        text_file.write("attributes =\n{0}".format(pp_persist.pformat(attributes)))
+        text_file.write(f"attributes =\n{pp_persist.pformat(attributes)}")
 
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_enums.py'), "w", "utf-8") as text_file:
-        text_file.write("enums =\n{0}".format(pp_persist.pformat(enums)))
+        text_file.write(f"enums =\n{pp_persist.pformat(enums)}")
 
     # We need to delete modules before we deepcopy, otherwise we get an error
     # These were needed only for merging, which has already happened
@@ -779,7 +779,7 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
     del config_copy['enums']
 
     with codecs.open(os.path.join(metadata_dir, config['module_name'] + '_config.py'), "w", "utf-8") as text_file:
-        text_file.write("enums =\n{0}".format(pp_persist.pformat(config_copy)))
+        text_file.write(f"enums =\n{pp_persist.pformat(config_copy)}")
 
     return config
 

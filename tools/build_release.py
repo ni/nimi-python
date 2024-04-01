@@ -73,7 +73,7 @@ Steps
     build_group.add_argument("--upload", action="store_true", default=False, help="Upload build distributions to PyPI")
     build_group.add_argument("--update", action="store_true", default=False, help="Update version in config.py files")
     build_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
-    build_group.add_argument("--python-cmd", action="store", default=None, help="Command to use for invoking python. Default: {}".format(default_python_cmd))
+    build_group.add_argument("--python-cmd", action="store", default=None, help=f"Command to use for invoking python. Default: {default_python_cmd}")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
@@ -107,8 +107,8 @@ Steps
         logging.info('Updating versions')
 
         for d in drivers_to_update:
-            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/{}/metadata/config_addon.py'.format(d), ] + passthrough_params))
-            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', 'src/{}/metadata/config_addon.py'.format(d), ] + passthrough_params)
+            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', f'src/{d}/metadata/config_addon.py', ] + passthrough_params))
+            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', f'src/{d}/metadata/config_addon.py', ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')
@@ -123,7 +123,7 @@ Steps
         logging.info('Uploading to PyPI')
         complete_twine_cmd = twine_cmd + ['upload']
         for d in drivers_to_upload:
-            complete_twine_cmd += ['generated/{}/dist/*'.format(d)]
+            complete_twine_cmd += [f'generated/{d}/dist/*']
 
         logging.info(pp.pformat(complete_twine_cmd))
         if not args.preview:

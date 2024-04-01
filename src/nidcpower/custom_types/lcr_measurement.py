@@ -48,7 +48,7 @@ class struct_NILCRMeasurement(ctypes.Structure):  # noqa N801
     ]
 
 
-class LCRMeasurement(object):
+class LCRMeasurement:
     """Specifies an LCR measurement.
 
     Data attributes:
@@ -182,9 +182,9 @@ class LCRMeasurement(object):
                 "ac_in_compliance",
                 "unbalanced"
             ):
-                row_format = "{{:<{}}}: {{:}}{{}}\n".format(max_field_label_len)
+                row_format = f"{{:<{max_field_label_len}}}: {{:}}{{}}\n"
             else:
-                row_format = "{{:<{}}}: {{:,.6g}}{{}}\n".format(max_field_label_len)
+                row_format = f"{{:<{max_field_label_len}}}: {{:,.6g}}{{}}\n"
             # Process namedtuple fields
             if isinstance(field_label, tuple) and isinstance(field_unit, tuple):
                 for label, unit, value in zip(field_label, field_unit, getattr(self, field_name)):
