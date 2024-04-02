@@ -15,7 +15,7 @@ def example(resource_name, channels, options, length, voltage):
         with session.initiate():
             waveforms = session.channels[channels].fetch(num_samples=length)
         for i in range(len(waveforms)):
-            print('Waveform {0} information:'.format(i))
+            print(f'Waveform {i} information:')
             print(str(waveforms[i]) + '\n\n')
 
 

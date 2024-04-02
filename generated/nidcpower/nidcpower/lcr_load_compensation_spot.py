@@ -32,7 +32,7 @@ class struct_NILCRLoadCompensationSpot(ctypes.Structure):  # noqa N801
             self.reference_value_b = 0.0
 
 
-class LCRLoadCompensationSpot(object):
+class LCRLoadCompensationSpot:
     """Specifies a DUT specification for a given frequency to use in LCR load compensation."""
 
     _lcr_reference_value_type_to_label_and_units = {
@@ -79,7 +79,7 @@ class LCRLoadCompensationSpot(object):
             return target_class(frequency=self.frequency, reference_value_type=self.reference_value_type.value, reference_value_a=self.reference_value.real, reference_value_b=self.reference_value.imag)
 
     def __repr__(self):
-        return "{0}.{1}(frequency={2}, reference_value_type={3}.{4}.{5}, reference_value={6})".format(
+        return "{}.{}(frequency={}, reference_value_type={}.{}.{}, reference_value={})".format(
             self.__class__.__module__,
             self.__class__.__qualname__,
             self.frequency,

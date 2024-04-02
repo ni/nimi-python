@@ -22,13 +22,13 @@ class struct_CustomStruct(ctypes.Structure):  # noqa N801
             self.struct_double = struct_double
 
     def __repr__(self):
-        return '{0}(data=None, struct_int={1}, struct_double={2})'.format(self.__class__.__name__, self.struct_int, self.struct_double)
+        return f'{self.__class__.__name__}(data=None, struct_int={self.struct_int}, struct_double={self.struct_double})'
 
     def __str__(self):
         return self.__repr__()
 
 
-class CustomStruct(object):
+class CustomStruct:
     def __init__(self, data=None, struct_int=0, struct_double=0.0):
         if data is not None:
             self.struct_int = data.struct_int
@@ -41,7 +41,7 @@ class CustomStruct(object):
         return target_class(struct_int=self.struct_int, struct_double=self.struct_double)
 
     def __repr__(self):
-        return '{0}(data=None, struct_int={1}, struct_double={2})'.format(self.__class__.__name__, self.struct_int, self.struct_double)
+        return f'{self.__class__.__name__}(data=None, struct_int={self.struct_int}, struct_double={self.struct_double})'
 
     def __str__(self):
         return self.__repr__()

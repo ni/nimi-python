@@ -19,7 +19,7 @@ class struct_CustomStructTypedef(ctypes.Structure):  # noqa N801
             self.struct_double = 0.0
 
 
-class CustomStructTypedef(object):
+class CustomStructTypedef:
     def __init__(self, data=None, struct_int=0, struct_double=0.0):
         if data is not None:
             self.struct_int = data.struct_int
@@ -32,7 +32,7 @@ class CustomStructTypedef(object):
         return target_class(struct_int=self.struct_int, struct_double=self.struct_double)
 
     def __repr__(self):
-        return '{0}(data=None, struct_int={1}, struct_double={2})'.format(
+        return '{}(data=None, struct_int={}, struct_double={})'.format(
             self.__class__.__name__,
             self.struct_int,
             self.struct_double

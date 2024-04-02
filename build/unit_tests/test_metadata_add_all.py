@@ -11,23 +11,23 @@ def _compare_values(actual, expected, k):
     elif type(actual) is list:
         _compare_lists(actual, expected)
     else:
-        assert actual == expected, "Value mismatch with key/index '{0}', {1} != {2}".format(k, actual, expected)
+        assert actual == expected, f"Value mismatch with key/index '{k}', {actual} != {expected}"
 
 
 def _compare_lists(actual, expected):
-    assert isinstance(actual, type(expected)), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
-    assert len(actual) == len(expected), 'Length mismatch, {0} != {1}'.format(len(actual), len(expected))
+    assert isinstance(actual, type(expected)), f'Type mismatch, {type(actual)} != {type(expected)}'
+    assert len(actual) == len(expected), f'Length mismatch, {len(actual)} != {len(expected)}'
     for k in range(len(actual)):
         _compare_values(actual[k], expected[k], k)
 
 
 def _compare_dicts(actual, expected):
-    assert isinstance(actual, type(expected)), 'Type mismatch, {0} != {1}'.format(type(actual), type(expected))
+    assert isinstance(actual, type(expected)), f'Type mismatch, {type(actual)} != {type(expected)}'
     for k in actual:
-        assert k in expected, 'Key {0} not in expected'.format(k)
+        assert k in expected, f'Key {k} not in expected'
         _compare_values(actual[k], expected[k], k)
     for k in expected:
-        assert k in actual, 'Key {0} not in actual'.format(k)
+        assert k in actual, f'Key {k} not in actual'
 
 
 functions_input = {

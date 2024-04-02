@@ -88,13 +88,13 @@ class SystemTests:
         assert name == '4162/0'
 
     def test_get_channel_names(self, session):
-        expected_string = ['4162/{0}'.format(x) for x in range(12)]
+        expected_string = [f'4162/{x}' for x in range(12)]
         channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
         assert session.get_channel_names(channel_indices) == expected_string
 
     @pytest.mark.resource_name('Dev1/0-5,Dev2/0-5')
     def test_get_channel_names_multiple_instruments(self, session):
-        expected_string = ['{0}/{1}'.format(name, channel) for name in ['Dev1', 'Dev2'] for channel in range(6)]
+        expected_string = [f'{name}/{channel}' for name in ['Dev1', 'Dev2'] for channel in range(6)]
         channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
         assert session.get_channel_names(channel_indices) == expected_string
 

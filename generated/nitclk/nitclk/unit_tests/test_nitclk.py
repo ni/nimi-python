@@ -12,7 +12,7 @@ single_session = [SESSION_NUM_FOR_TEST]
 multiple_sessions = [SESSION_NUM_FOR_TEST, SESSION_NUM_FOR_TEST * 10, SESSION_NUM_FOR_TEST * 100, SESSION_NUM_FOR_TEST + 1]
 
 
-class NitclkSupportingDriverSession(object):
+class NitclkSupportingDriverSession:
     '''Session objects for drivers that support NI-TClk are expected to have a property of type nitclk.SessionReference called tclk
 
     This is why we're creating this fake driver class and adding the tclk property.
@@ -21,7 +21,7 @@ class NitclkSupportingDriverSession(object):
         self.tclk = nitclk.SessionReference(session_number)
 
 
-class TestNitclkApi(object):
+class TestNitclkApi:
     class PatchedLibrary(nitclk._library.Library):
         def __init__(self, ctypes_library):
             super().__init__(ctypes_library)

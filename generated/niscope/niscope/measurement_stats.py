@@ -1,4 +1,4 @@
-class MeasurementStats(object):
+class MeasurementStats:
     def __init__(self, result=0.0, mean=0.0, stdev=0.0, min_val=0.0, max_val=0.0, num_in_stats=0):
         self.result = result
         self.mean = mean
@@ -12,15 +12,15 @@ class MeasurementStats(object):
 
     def __repr__(self):
         parameter_list = [
-            'result={}'.format(self.result),
-            'mean={}'.format(self.mean),
-            'stdev={}'.format(self.stdev),
-            'min_val={}'.format(self.min_val),
-            'max_val={}'.format(self.max_val),
-            'num_in_stats={}'.format(self.num_in_stats)
+            f'result={self.result}',
+            f'mean={self.mean}',
+            f'stdev={self.stdev}',
+            f'min_val={self.min_val}',
+            f'max_val={self.max_val}',
+            f'num_in_stats={self.num_in_stats}'
         ]
 
-        return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
+        return '{}({})'.format(self.__class__.__name__, ', '.join(parameter_list))
 
     def __str__(self):
         row_format_g = '{:<20}: {:,.6g}\n'

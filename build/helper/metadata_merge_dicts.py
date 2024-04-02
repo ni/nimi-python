@@ -7,15 +7,15 @@ pp = pprint.PrettyPrinter(indent=4, width=80)
 
 
 def merge_helper(metadata, metadata_type, config, use_re):
-    metadata_module = 'metadata.{0}_addon'.format(metadata_type)
+    metadata_module = f'metadata.{metadata_type}_addon'
     if 'modules' in config and metadata_module in config['modules']:
         for m in dir(config['modules'][metadata_module]):
-            if m.startswith('{0}_additional_'.format(metadata_type)):
+            if m.startswith(f'{metadata_type}_additional_'):
                 # We need to explicitly copy new entries
                 outof = config['modules'][metadata_module].__getattribute__(m)
                 for a in outof:
                     metadata[a] = outof[a]
-            elif m.startswith('{0}_'.format(metadata_type)):
+            elif m.startswith(f'{metadata_type}_'):
                 merge_dicts(metadata, config['modules'][metadata_module].__getattribute__(m), use_re, m)
 
     # Delete any entries that are empty
@@ -41,7 +41,7 @@ def merge_dicts(into, outof, use_re, dict_name):
     for item in sorted(outof):
         # If we're not using regex's then this is an easy check
         if not use_re and item not in into and dict_name is not None:
-            raise KeyError('Key {0} from {1} is not in the destination'.format(item, dict_name))
+            raise KeyError(f'Key {item} from {dict_name} is not in the destination')
         # If we are using regex's we need to seach all keys to see if any match
         if use_re and dict_name is not None:
             key_exists = False
@@ -49,7 +49,7 @@ def merge_dicts(into, outof, use_re, dict_name):
                 if re.search(item, item2):
                     key_exists = True
             if not key_exists:
-                raise KeyError('Key {0} from {1} is not in the destination'.format(item, dict_name))
+                raise KeyError(f'Key {item} from {dict_name} is not in the destination')
 
         if type(outof[item]) is dict:
             if item in into:

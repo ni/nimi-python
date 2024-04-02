@@ -30,7 +30,7 @@ def generate_template(template_name, template_params, dest_file):
         lines = tback.source.split('\n')
 
         # The underlying error.
-        logging.error("\n%s: %s\n" % (str(tback.error.__class__.__name__), str(tback.error)))
+        logging.error("\n{}: {}\n".format(str(tback.error.__class__.__name__), str(tback.error)))
         logging.error("Offending Template: %s\n" % template_name)
 
         # Show a source listing of the template, with offending line marked.

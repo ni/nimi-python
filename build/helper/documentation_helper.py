@@ -52,9 +52,9 @@ def get_rst_header_snippet(t, header_level='='):
 
 def get_rst_picture_reference(tag, url, title, link, indent=0):
     '''Get rst formatted snippet that represents a picture'''
-    ret_val = (' ' * indent) + '.. |{0}| image:: {1}\n'.format(tag, url)
-    ret_val += (' ' * (indent + 4)) + ':alt: {0}\n'.format(title)
-    ret_val += (' ' * (indent + 4)) + ':target: {0}\n'.format(link)
+    ret_val = (' ' * indent) + f'.. |{tag}| image:: {url}\n'
+    ret_val += (' ' * (indent + 4)) + f':alt: {title}\n'
+    ret_val += (' ' * (indent + 4)) + f':target: {link}\n'
     return ret_val
 
 
@@ -101,7 +101,7 @@ def get_rst_admonition_snippet(node, admonition, d, config, indent=0):
             admonition_content = [admonition_content]
         a = ''
         for admonition_text in admonition_content:
-            a += '\n\n' + (' ' * indent) + '.. {0}:: '.format(admonition)
+            a += '\n\n' + (' ' * indent) + f'.. {admonition}:: '
             a += get_indented_docstring_snippet(_fix_references(node, admonition_text, config, make_link=True), indent + 4)
         return a
     else:
@@ -173,7 +173,7 @@ def get_docstring_admonition_snippet(node, admonition, d, config, indent=0, extr
             admonition_content = [admonition_content]
         a = ''
         for admonition_text in admonition_content:
-            admonition_text = '{0}: {1}'.format(admonition.title(), admonition_text)
+            admonition_text = f'{admonition.title()}: {admonition_text}'
             admonition_text = _fix_references(node, admonition_text, config, make_link=False)
             a += '\n' + extra_newline + (' ' * indent) + get_indented_docstring_snippet(admonition_text, indent)
             extra_newline = '\n'
@@ -270,15 +270,15 @@ def _replace_enum_python_name(e_match):
     ename = e_match.group(1)
     start_enum = config['start_enum']
     if e_match:
-        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), ename.replace('\\', ''))
+        ename = '{}_VAL_{}'.format(config['module_name'].upper(), ename.replace('\\', ''))
         enum, value = find_enum_by_value(config['enums'], ename, start_enum)
         if enum and enum['codegen_method'] != 'no':
             ename = enum['python_name'] + '.' + value['python_name']
 
     if config['make_link']:
-        return ':py:data:`~{0}.{1}`'.format(config['module_name'], ename)
+        return ':py:data:`~{}.{}`'.format(config['module_name'], ename)
     else:
-        return '{0}'.format(ename)
+        return f'{ename}'
 
 
 def find_attribute_by_name(attributes, name):
@@ -287,7 +287,7 @@ def find_attribute_by_name(attributes, name):
     There should only be one so return that individual parameter and not a list
     '''
     attr = [attributes[x] for x in attributes if attributes[x]['name'] == name]
-    assert len(attr) <= 1, '{0} attributes with name {1}. No more than one is allowed'.format(len(attr), name)
+    assert len(attr) <= 1, f'{len(attr)} attributes with name {name}. No more than one is allowed'
     if len(attr) == 0:
         return None
     return attr[0]
@@ -311,11 +311,11 @@ def _replace_attribute_python_name(a_match):
 
     if config['make_link']:
         if config['module_name'] == 'nitclk':
-            return ':py:attr:`{0}.SessionReference.{1}`'.format(config['module_name'], aname)
+            return ':py:attr:`{}.SessionReference.{}`'.format(config['module_name'], aname)
         else:
-            return ':py:attr:`{0}.Session.{1}`'.format(config['module_name'], aname)
+            return ':py:attr:`{}.Session.{}`'.format(config['module_name'], aname)
     else:
-        return '{0}'.format(aname)
+        return f'{aname}'
 
 
 def _replace_func_python_name(f_match):
@@ -336,18 +336,18 @@ def _replace_func_python_name(f_match):
             else:
                 fname = config['functions'][fname]['python_name']
         except KeyError:
-            print('Warning: "{0}" not found in function metadata. Typo? Generated code will be funky!'.format(fname))
+            print(f'Warning: "{fname}" not found in function metadata. Typo? Generated code will be funky!')
     else:
-        print('Unknown function name: {0}'.format(f_match.group(1)))
+        print(f'Unknown function name: {f_match.group(1)}')
         print(config['functions'])
 
     if config['make_link']:
         if config['module_name'] == 'nitclk':
-            return ':py:func:`{0}.{1}`'.format(config['module_name'], fname)
+            return ':py:func:`{}.{}`'.format(config['module_name'], fname)
         else:
-            return ':py:meth:`{0}.Session.{1}`'.format(config['module_name'], fname)
+            return ':py:meth:`{}.Session.{}`'.format(config['module_name'], fname)
     else:
-        return '{0}'.format(fname)
+        return f'{fname}'
 
 
 def _replace_urls(u_match):
@@ -393,10 +393,10 @@ def _fix_references(node, doc, cfg, make_link=False):
     if 'enum' in node:
         config['start_enum'] = node['enum']
 
-    attr_search_string = '{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper())
-    func_search_string = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', ''))
-    func_search_string_lower = '{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].lower().replace('_', ''))
-    enum_search_string = '{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper())
+    attr_search_string = '{}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper())
+    func_search_string = '{}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', ''))
+    func_search_string_lower = '{}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].lower().replace('_', ''))
+    enum_search_string = '{}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper())
     attr_re = re.compile(attr_search_string)
     func_re = re.compile(func_search_string)
     func_lower_re = re.compile(func_search_string_lower)
@@ -409,7 +409,7 @@ def _fix_references(node, doc, cfg, make_link=False):
 
     if 'driver_urls' in cfg:
         for url_key in cfg['driver_urls']:
-            url_re = re.compile(r'{0}\((.+?)\)'.format(url_key))
+            url_re = re.compile(fr'{url_key}\((.+?)\)')
             config['url_key'] = url_key
             doc = url_re.sub(_replace_urls, doc)
 
@@ -439,7 +439,7 @@ def format_type_for_rst_documentation(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
     elif param['enum'] is not None:
-        p_type = ':py:data:`{0}.{1}`'.format(config['module_name'], param['enum'])
+        p_type = ':py:data:`{}.{}`'.format(config['module_name'], param['enum'])
     else:
         p_type = param['type_in_documentation']
 
@@ -448,11 +448,11 @@ def format_type_for_rst_documentation(param, numpy, config):
         if param['is_string'] is True and param['enum'] is None:
             p_type = 'str'
         elif param['is_buffer'] is True and numpy is True:
-            p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+            p_type = 'numpy.array(dtype=numpy.{})'.format(get_numpy_type_for_api_type(param['type'], config))
         elif param['use_list'] is True:
             p_type = 'list of ' + p_type
         elif param['use_array'] is True:
-            p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+            p_type = 'array.array("{}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
 
@@ -482,7 +482,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     if function['has_repeated_capability'] is True:
         function['documentation']['tip'] = rep_cap_method_desc.format(config['module_name'], function['repeated_capability_type'], function['python_name'])
 
-    rst = '.. py:{0}:: {1}{2}('.format(method_or_function, function['python_name'], suffix)
+    rst = '.. py:{}:: {}{}('.format(method_or_function, function['python_name'], suffix)
     rst += get_params_snippet(function, session_method) + ')'
     indent += 4
     rst += get_documentation_for_node_rst(function, config, indent)
@@ -491,11 +491,11 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
     if len(input_params) > 0:
         rst += '\n'
     for p in input_params:
-        rst += '\n' + (' ' * indent) + ':param {0}:'.format(p['python_name']) + '\n'
+        rst += '\n' + (' ' * indent) + ':param {}:'.format(p['python_name']) + '\n'
         rst += get_documentation_for_node_rst(p, config, indent + 4)
 
         p_type = format_type_for_rst_documentation(p, numpy, config)
-        rst += '\n' + (' ' * indent) + ':type {0}: '.format(p['python_name']) + p_type
+        rst += '\n' + (' ' * indent) + ':type {}: '.format(p['python_name']) + p_type
 
     output_params = filter_parameters(function['parameters'], output_parameters)
     if len(output_params) > 1:
@@ -503,7 +503,7 @@ def get_function_rst(function, method_template, numpy, config, indent=0, method_
         rst += (' ' * (indent + 4)) + 'WHERE\n'
         for p in output_params:
             p_type = format_type_for_rst_documentation(p, numpy, config)
-            rst += '\n' + (' ' * (indent + 4)) + '{0} ({1}): '.format(p['python_name'], p_type) + '\n'
+            rst += '\n' + (' ' * (indent + 4)) + '{} ({}): '.format(p['python_name'], p_type) + '\n'
             rst += get_documentation_for_node_rst(p, config, indent + 8)
     elif len(output_params) == 1:
         p = output_params[0]
@@ -527,11 +527,11 @@ def _format_type_for_docstring(param, numpy, config):
         if param['is_string'] is True and param['enum'] is None:
             p_type = 'str'
         elif param['is_buffer'] is True and numpy is True:
-            p_type = 'numpy.array(dtype=numpy.{0})'.format(get_numpy_type_for_api_type(param['type'], config))
+            p_type = 'numpy.array(dtype=numpy.{})'.format(get_numpy_type_for_api_type(param['type'], config))
         elif param['use_list'] is True:
             p_type = 'list of ' + p_type
         elif param['use_array'] is True:
-            p_type = 'array.array("{0}")'.format(get_array_type_for_api_type(param['type']))
+            p_type = 'array.array("{}")'.format(get_array_type_for_api_type(param['type']))
 
     return p_type
 
@@ -564,7 +564,7 @@ def get_function_docstring(function, numpy, config, indent=0):
     if len(input_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Args:'
     for p in input_params:
-        docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
+        docstring += '\n' + (' ' * (indent + 4)) + '{} ({}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
         ds = get_documentation_for_node_docstring(p, config, indent + 8)
         if len(ds) > 0:
             docstring += ' ' + ds
@@ -574,7 +574,7 @@ def get_function_docstring(function, numpy, config, indent=0):
     if len(output_params) > 0:
         docstring += '\n\n' + (' ' * indent) + 'Returns:'
         for p in output_params:
-            docstring += '\n' + (' ' * (indent + 4)) + '{0} ({1}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
+            docstring += '\n' + (' ' * (indent + 4)) + '{} ({}):'.format(p['python_name'], _format_type_for_docstring(p, numpy, config))
             ds = get_documentation_for_node_docstring(p, config, indent + 8)
             if len(ds) > 0:
                 docstring += ' ' + ds
@@ -621,21 +621,21 @@ def as_rest_table(data, header=True):
     line_marker = '-'
 
     meta_template = vertical_separator.join(['{{{{{0}:{{{0}}}}}}}'.format(i) for i in range(num_elts)])
-    template = '{0}{1}{2}'.format(start_of_line, meta_template.format(*sizes), end_of_line)
+    template = f'{start_of_line}{meta_template.format(*sizes)}{end_of_line}'
     # determine top/bottom borders
     to_separator = {ord('|'): '+', ord(' '): '-'}
 
     start_of_line = start_of_line.translate(to_separator)
     vertical_separator = vertical_separator.translate(to_separator)
     end_of_line = end_of_line.translate(to_separator)
-    separator = '{0}{1}{2}'.format(start_of_line, vertical_separator.join([x * line_marker for x in sizes]), end_of_line)
+    separator = f'{start_of_line}{vertical_separator.join([x * line_marker for x in sizes])}{end_of_line}'
     # determine header separator
     th_separator_tr = {ord('-'): '='}
     start_of_line = start_of_line.translate(th_separator_tr)
     line_marker = line_marker.translate(th_separator_tr)
     vertical_separator = vertical_separator.translate(th_separator_tr)
     end_of_line = end_of_line.translate(th_separator_tr)
-    th_separator = '{0}{1}{2}'.format(start_of_line, vertical_separator.join([x * line_marker for x in sizes]), end_of_line)
+    th_separator = f'{start_of_line}{vertical_separator.join([x * line_marker for x in sizes])}{end_of_line}'
     # prepare result
     table.append(separator)
     # set table header
@@ -719,7 +719,7 @@ def square_up_tables(config):
 
 def _need_func_note(nd, config):
     '''Determine if we need the extra note about function names not matching anything in Python'''
-    func_re = re.compile('{0}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', '')))
+    func_re = re.compile('{}_([A-Za-z0-9_]+)'.format(config['c_function_prefix'].replace('_', '')))
     for m in func_re.finditer(nd):
         fname = m.group(1).replace('.', '').replace(',', '').replace('\\', '')
         try:
@@ -732,7 +732,7 @@ def _need_func_note(nd, config):
 
 def _need_attr_note(nd, config):
     '''Determine if we need the extra note about attribute names not matching anything in Python'''
-    attr_re = re.compile('{0}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper()))
+    attr_re = re.compile('{}_ATTR_([A-Z0-9_]+)'.format(config['module_name'].upper()))
     for m in attr_re.finditer(nd):
         aname = m.group(1).replace('\\', '')
         attr = find_attribute_by_name(config['attributes'], aname)
@@ -744,9 +744,9 @@ def _need_attr_note(nd, config):
 
 def _need_enum_note(nd, config, start_enum=None):
     '''Determine if we need the extra note about enum names not matching anything in Python'''
-    enum_re = re.compile('{0}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper()))
+    enum_re = re.compile('{}_VAL_([A-Z0-9_]+)'.format(config['module_name'].upper()))
     for m in enum_re.finditer(nd):
-        ename = '{0}_VAL_{1}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
+        ename = '{}_VAL_{}'.format(config['module_name'].upper(), m.group(1).replace('\\', ''))
         enum, _ = find_enum_by_value(config['enums'], ename, start_enum=start_enum)
         if not enum or enum['codegen_method'] == 'no':
             return True

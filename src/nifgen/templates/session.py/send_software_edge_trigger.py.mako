@@ -24,7 +24,7 @@
             pass  # This is how the function should be called
 
         else:
-            raise ValueError('Both trigger ({0}) and trigger_id ({1}) should be passed in to the method'.format(str(trigger), str(trigger_id)))
+            raise ValueError('Both trigger ({}) and trigger_id ({}) should be passed in to the method'.format(str(trigger), str(trigger_id)))
 
         if type(trigger) is not enums.Trigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))

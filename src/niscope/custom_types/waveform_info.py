@@ -43,7 +43,7 @@ class struct_niScope_wfmInfo(ctypes.Structure):  # noqa N801
             self.reserved2 = reserved2
 
 
-class WaveformInfo(object):
+class WaveformInfo:
     def __init__(self, data=None, absolute_initial_x=0.0, relative_initial_x=0.0,
                  x_increment=0.0, offset=0.0, gain=0.0,
                  reserved1=0.0, reserved2=0.0):
@@ -75,14 +75,14 @@ class WaveformInfo(object):
 
     def __repr__(self):
         parameter_list = [
-            'absolute_initial_x={}'.format(self.absolute_initial_x),
-            'relative_initial_x={}'.format(self.relative_initial_x),
-            'x_increment={}'.format(self.x_increment),
-            'offset={}'.format(self.offset),
-            'gain={}'.format(self.gain)
+            f'absolute_initial_x={self.absolute_initial_x}',
+            f'relative_initial_x={self.relative_initial_x}',
+            f'x_increment={self.x_increment}',
+            f'offset={self.offset}',
+            f'gain={self.gain}'
         ]
 
-        return '{0}({1})'.format(self.__class__.__name__, ', '.join(parameter_list))
+        return '{}({})'.format(self.__class__.__name__, ', '.join(parameter_list))
 
     def __str__(self):
         # different format lines
