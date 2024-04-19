@@ -65,7 +65,7 @@ def get_diagnostic_information():
         installed_packages_names = set(installed_packages_names)
         installed_packages_list = [
             {'name': name, 'version': importlib.metadata.distribution(name).version}
-            for name in installed_packages_names
+            for name in sorted(installed_packages_names)
         ]
     else:
         import pkg_resources

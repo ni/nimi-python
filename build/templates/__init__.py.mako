@@ -116,7 +116,7 @@ def get_diagnostic_information():
         installed_packages_names = set(installed_packages_names)
         installed_packages_list = [
             {'name': name, 'version': importlib.metadata.distribution(name).version}
-            for name in installed_packages_names
+            for name in sorted(installed_packages_names)
         ]
     ## TODO (ni-jfitzger): Delete use of pkg_resources when we drop Python 3.9 support. See https://github.com/ni/nimi-python/issues/2047
     else:
