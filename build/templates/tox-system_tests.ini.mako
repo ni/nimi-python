@@ -52,14 +52,16 @@ changedir =
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
 
+% if module_name == 'nise':
+commands_pre =
+    # Create SwitchExecutiveExample Virtual Device, if it's missing. This device is used by the tests.
+    nise-system_tests: "C:\Program Files (x86)\National Instruments\Switch Executive\SwitchExecutive.exe" s
+
+% endif
 commands =
 % if uses_other_wheel:
     ${wheel_env_no_py}: python -m build --wheel
 
-% endif
-% if module_name == 'nise':
-    # Create SwitchExecutiveExample Virtual Device, if it's missing. This device is used by the tests.
-    nise-system_tests: "C:\Program Files (x86)\National Instruments\Switch Executive\SwitchExecutive.exe" s
 % endif
     # --disable-pip-version-check prevents pip from telling us we need to upgrade pip, since we are doing that now
     ${module_name}-system_tests: python -m pip install --disable-pip-version-check --upgrade pip
