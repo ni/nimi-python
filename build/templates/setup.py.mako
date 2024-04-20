@@ -56,8 +56,8 @@ setup(
     % if grpc_supported:
     extras_require={
         'grpc': [
-            'grpcio>=1.49.1,<2.0',
-            'protobuf>=4.21,<5.0'
+            'grpcio>=1.59.0,<2.0',
+            'protobuf>=4.21.6,<5.0'
         ],
     },
     % endif
