@@ -12,7 +12,6 @@ runs:
     - run: |
         cd generated        
         mkdir junit
-        mkdir kibana
         cd ${{ inputs.module_name }}
         python -m tox -c tox-system_tests.ini
       shell: powershell
