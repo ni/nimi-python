@@ -28,42 +28,7 @@ def main():
 Prereqs
     * Be able to build locally
     * `pip install --upgrade twine tox` into whichever Python 2.7 you use to build
-
-Steps
-    * Build master to ensure it is in a good state and ready for release
-    * Ensure no commits are made on master until the release is complete
-    * Create and checkout a branch for release-related changes
-    * Update CHANGELOG.md
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
-        * Change the "Unreleased" header to the version of the release
-        * Change [Unreleased] in TOC to the version of the release
-        * Commit to branch
-    * `python3 tools/build_release.py --update --release`
-        * This will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
-        * Commit to branch
-    * `python3 tools/build_release.py --build`
-        * Clean and build to update generated files with new version
-        * Commit to branch
-    * Create a pull request
-        * It should contain all the changes made so far
-        * Get the pull request reviewed but DO NOT merge to master yet
-    * `python3 tools/build_release.py --upload`
-        * Upload to PyPI - you will need to type in your credentials
-    * Merge the pull request to origin/master
-    * Create a release on GitHub using the portion from the changelog for this release for the description
-        * Add the ZIP files under `generated/examples` for each module as a release artifact.
-    * Create and checkout another branch for post-release changes
-    * `python3 tools/build_release.py --update`
-        * This will update the version to X.X.(N+1).dev0
-        * Commit to branch
-    * `python3 tools/build_release.py --build`
-        * Clean and Build to update generated files
-        * Commit to branch
-    * Update changelog
-        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
-        * Commit to branch
-    * Create a pull request containing post-release changes and get it merged
-
+Steps: see "Release Process" section of CONTRIBUTING.md
 """
     parser = argparse.ArgumentParser(description=usage, formatter_class=CustomFormatter)
 
