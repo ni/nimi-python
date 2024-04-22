@@ -38,9 +38,8 @@ Steps
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
-    * Update contents of src/<driver>/LATEST_RELEASE with the versions of each module being released by dropping the '.dev0' suffix.
     * `python3 tools/build_release.py --update --release`
-        * This will update all the versions to remove any '.devN'
+        * This will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
         * Commit to branch
     * `python3 tools/build_release.py --build`
         * Clean and build to update generated files with new version
@@ -107,8 +106,8 @@ Steps
         logging.info('Updating versions')
 
         for d in drivers_to_update:
-            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', f'src/{d}/metadata/config_addon.py', ] + passthrough_params))
-            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-file', f'src/{d}/metadata/config_addon.py', ] + passthrough_params)
+            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-folder', f'src/{d}', ] + passthrough_params))
+            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-folder', f'src/{d}', ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')

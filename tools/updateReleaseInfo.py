@@ -3,6 +3,7 @@
 import argparse
 from configure_logging import configure_logging
 import logging
+import os
 import pprint
 import re
 
@@ -12,11 +13,11 @@ pp = pprint.PrettyPrinter(indent=4, width=100)
 def main():
     # Setup the required arguments for this script
     usage = """
-Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
+Update version in files. Example: X.Y.Z.devN to X.Y.Z
 """
     parser = argparse.ArgumentParser(description=usage)
     file_group = parser.add_argument_group("Input and Output files")
-    file_group.add_argument("--src-file", action="store", required=True, help="Source file")
+    file_group.add_argument("--src-folder", action="store", required=True, help="Source folder")
     file_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. Error if not there")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
@@ -34,7 +35,8 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     logging.info(pp.pformat(args))
 
-    with open(args.src_file) as content_file:
+    metadata_file = os.path.join(args.src_folder, "metadata", "config_addon.py")
+    with open(metadata_file) as content_file:
         contents = content_file.read()
 
     module_dev_version_re = re.compile(r"'module_version': '(\d+\.\d+\.\d+)\.dev(\d+)'")
@@ -43,6 +45,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         if args.release:
             logging.info('Dev version found, updating {0}.dev{1} to {0}'.format(m.group(1), int(m.group(2))))
             contents = module_dev_version_re.sub(f"'module_version': '{m.group(1)}'", contents)
+            new_version = m.group(1)
         else:
             logging.info('Dev version found, updating {0}.dev{1} to {0}.dev{2}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
             contents = module_dev_version_re.sub(f"'module_version': '{m.group(1)}.dev{int(m.group(2)) + 1}'", contents)
@@ -54,8 +57,15 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
         contents = module_version_re.sub(f"'module_version': '{m.group(1)}{int(m.group(2)) + 1}.dev0'", contents)
 
     if not args.preview:
-        with open(args.src_file, 'w') as content_file:
+        with open(metadata_file, 'w') as content_file:
             content_file.write(contents)
+
+    if args.release:
+        latest_release_file = os.path.join(args.src_folder, "LATEST_RELEASE")
+        logging.info(f'Updating version in {latest_release_file} to {new_version}.')
+        if not args.preview:
+            with open(latest_release_file, 'w') as content_file:
+                content_file.write(f'{new_version}\n')
 
 
 if __name__ == '__main__':
