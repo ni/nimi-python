@@ -27,7 +27,7 @@ def main():
     usage = """Release script
 Prereqs
     * Be able to build locally
-    * `pip install --upgrade twine tox` into whichever Python 2.7 you use to build
+    * `pip install --upgrade twine tox` into whichever Python you use to build
 Steps: see "Release Process" section of CONTRIBUTING.md
 """
     parser = argparse.ArgumentParser(description=usage, formatter_class=CustomFormatter)
