@@ -60,7 +60,7 @@ Update version in files. Example: X.Y.Z.devN to X.Y.Z
         with open(metadata_file, 'w') as content_file:
             content_file.write(contents)
 
-    if args.release:
+    if args.release and "nifake" not in args.src_folder:
         latest_release_file = os.path.join(args.src_folder, "LATEST_RELEASE")
         logging.info(f'Updating version in {latest_release_file} to {new_version}.')
         if not args.preview:
