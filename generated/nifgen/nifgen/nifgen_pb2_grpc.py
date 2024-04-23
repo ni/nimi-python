@@ -259,11 +259,6 @@ class NiFgenStub(object):
                 request_serializer=nifgen__pb2.CreateWaveformFromFileF64Request.SerializeToString,
                 response_deserializer=nifgen__pb2.CreateWaveformFromFileF64Response.FromString,
                 )
-        self.CreateWaveformFromFileHWS = channel.unary_unary(
-                '/nifgen_grpc.NiFgen/CreateWaveformFromFileHWS',
-                request_serializer=nifgen__pb2.CreateWaveformFromFileHWSRequest.SerializeToString,
-                response_deserializer=nifgen__pb2.CreateWaveformFromFileHWSResponse.FromString,
-                )
         self.CreateWaveformFromFileI16 = channel.unary_unary(
                 '/nifgen_grpc.NiFgen/CreateWaveformFromFileI16',
                 request_serializer=nifgen__pb2.CreateWaveformFromFileI16Request.SerializeToString,
@@ -429,16 +424,6 @@ class NiFgenStub(object):
                 request_serializer=nifgen__pb2.GetHardwareStateRequest.SerializeToString,
                 response_deserializer=nifgen__pb2.GetHardwareStateResponse.FromString,
                 )
-        self.GetNextCoercionRecord = channel.unary_unary(
-                '/nifgen_grpc.NiFgen/GetNextCoercionRecord',
-                request_serializer=nifgen__pb2.GetNextCoercionRecordRequest.SerializeToString,
-                response_deserializer=nifgen__pb2.GetNextCoercionRecordResponse.FromString,
-                )
-        self.GetNextInterchangeWarning = channel.unary_unary(
-                '/nifgen_grpc.NiFgen/GetNextInterchangeWarning',
-                request_serializer=nifgen__pb2.GetNextInterchangeWarningRequest.SerializeToString,
-                response_deserializer=nifgen__pb2.GetNextInterchangeWarningResponse.FromString,
-                )
         self.GetSelfCalLastDateAndTime = channel.unary_unary(
                 '/nifgen_grpc.NiFgen/GetSelfCalLastDateAndTime',
                 request_serializer=nifgen__pb2.GetSelfCalLastDateAndTimeRequest.SerializeToString,
@@ -498,11 +483,6 @@ class NiFgenStub(object):
                 '/nifgen_grpc.NiFgen/IsDone',
                 request_serializer=nifgen__pb2.IsDoneRequest.SerializeToString,
                 response_deserializer=nifgen__pb2.IsDoneResponse.FromString,
-                )
-        self.ManualEnableP2PStream = channel.unary_unary(
-                '/nifgen_grpc.NiFgen/ManualEnableP2PStream',
-                request_serializer=nifgen__pb2.ManualEnableP2PStreamRequest.SerializeToString,
-                response_deserializer=nifgen__pb2.ManualEnableP2PStreamResponse.FromString,
                 )
         self.QueryArbSeqCapabilities = channel.unary_unary(
                 '/nifgen_grpc.NiFgen/QueryArbSeqCapabilities',
@@ -668,6 +648,16 @@ class NiFgenStub(object):
                 '/nifgen_grpc.NiFgen/WriteWaveformComplexF64',
                 request_serializer=nifgen__pb2.WriteWaveformComplexF64Request.SerializeToString,
                 response_deserializer=nifgen__pb2.WriteWaveformComplexF64Response.FromString,
+                )
+        self.CreateWaveformFromFileHWS = channel.unary_unary(
+                '/nifgen_grpc.NiFgen/CreateWaveformFromFileHWS',
+                request_serializer=nifgen__pb2.CreateWaveformFromFileHWSRequest.SerializeToString,
+                response_deserializer=nifgen__pb2.CreateWaveformFromFileHWSResponse.FromString,
+                )
+        self.ManualEnableP2PStream = channel.unary_unary(
+                '/nifgen_grpc.NiFgen/ManualEnableP2PStream',
+                request_serializer=nifgen__pb2.ManualEnableP2PStreamRequest.SerializeToString,
+                response_deserializer=nifgen__pb2.ManualEnableP2PStreamResponse.FromString,
                 )
 
 
@@ -968,12 +958,6 @@ class NiFgenServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CreateWaveformFromFileHWS(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def CreateWaveformFromFileI16(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1172,18 +1156,6 @@ class NiFgenServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetNextCoercionRecord(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetNextInterchangeWarning(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetSelfCalLastDateAndTime(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1251,12 +1223,6 @@ class NiFgenServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def IsDone(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ManualEnableP2PStream(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1455,6 +1421,18 @@ class NiFgenServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def WriteWaveformComplexF64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateWaveformFromFileHWS(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ManualEnableP2PStream(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1708,11 +1686,6 @@ def add_NiFgenServicer_to_server(servicer, server):
                     request_deserializer=nifgen__pb2.CreateWaveformFromFileF64Request.FromString,
                     response_serializer=nifgen__pb2.CreateWaveformFromFileF64Response.SerializeToString,
             ),
-            'CreateWaveformFromFileHWS': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateWaveformFromFileHWS,
-                    request_deserializer=nifgen__pb2.CreateWaveformFromFileHWSRequest.FromString,
-                    response_serializer=nifgen__pb2.CreateWaveformFromFileHWSResponse.SerializeToString,
-            ),
             'CreateWaveformFromFileI16': grpc.unary_unary_rpc_method_handler(
                     servicer.CreateWaveformFromFileI16,
                     request_deserializer=nifgen__pb2.CreateWaveformFromFileI16Request.FromString,
@@ -1878,16 +1851,6 @@ def add_NiFgenServicer_to_server(servicer, server):
                     request_deserializer=nifgen__pb2.GetHardwareStateRequest.FromString,
                     response_serializer=nifgen__pb2.GetHardwareStateResponse.SerializeToString,
             ),
-            'GetNextCoercionRecord': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetNextCoercionRecord,
-                    request_deserializer=nifgen__pb2.GetNextCoercionRecordRequest.FromString,
-                    response_serializer=nifgen__pb2.GetNextCoercionRecordResponse.SerializeToString,
-            ),
-            'GetNextInterchangeWarning': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetNextInterchangeWarning,
-                    request_deserializer=nifgen__pb2.GetNextInterchangeWarningRequest.FromString,
-                    response_serializer=nifgen__pb2.GetNextInterchangeWarningResponse.SerializeToString,
-            ),
             'GetSelfCalLastDateAndTime': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSelfCalLastDateAndTime,
                     request_deserializer=nifgen__pb2.GetSelfCalLastDateAndTimeRequest.FromString,
@@ -1947,11 +1910,6 @@ def add_NiFgenServicer_to_server(servicer, server):
                     servicer.IsDone,
                     request_deserializer=nifgen__pb2.IsDoneRequest.FromString,
                     response_serializer=nifgen__pb2.IsDoneResponse.SerializeToString,
-            ),
-            'ManualEnableP2PStream': grpc.unary_unary_rpc_method_handler(
-                    servicer.ManualEnableP2PStream,
-                    request_deserializer=nifgen__pb2.ManualEnableP2PStreamRequest.FromString,
-                    response_serializer=nifgen__pb2.ManualEnableP2PStreamResponse.SerializeToString,
             ),
             'QueryArbSeqCapabilities': grpc.unary_unary_rpc_method_handler(
                     servicer.QueryArbSeqCapabilities,
@@ -2117,6 +2075,16 @@ def add_NiFgenServicer_to_server(servicer, server):
                     servicer.WriteWaveformComplexF64,
                     request_deserializer=nifgen__pb2.WriteWaveformComplexF64Request.FromString,
                     response_serializer=nifgen__pb2.WriteWaveformComplexF64Response.SerializeToString,
+            ),
+            'CreateWaveformFromFileHWS': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateWaveformFromFileHWS,
+                    request_deserializer=nifgen__pb2.CreateWaveformFromFileHWSRequest.FromString,
+                    response_serializer=nifgen__pb2.CreateWaveformFromFileHWSResponse.SerializeToString,
+            ),
+            'ManualEnableP2PStream': grpc.unary_unary_rpc_method_handler(
+                    servicer.ManualEnableP2PStream,
+                    request_deserializer=nifgen__pb2.ManualEnableP2PStreamRequest.FromString,
+                    response_serializer=nifgen__pb2.ManualEnableP2PStreamResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2962,23 +2930,6 @@ class NiFgen(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def CreateWaveformFromFileHWS(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/CreateWaveformFromFileHWS',
-            nifgen__pb2.CreateWaveformFromFileHWSRequest.SerializeToString,
-            nifgen__pb2.CreateWaveformFromFileHWSResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def CreateWaveformFromFileI16(request,
             target,
             options=(),
@@ -3540,40 +3491,6 @@ class NiFgen(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetNextCoercionRecord(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/GetNextCoercionRecord',
-            nifgen__pb2.GetNextCoercionRecordRequest.SerializeToString,
-            nifgen__pb2.GetNextCoercionRecordResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetNextInterchangeWarning(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/GetNextInterchangeWarning',
-            nifgen__pb2.GetNextInterchangeWarningRequest.SerializeToString,
-            nifgen__pb2.GetNextInterchangeWarningResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def GetSelfCalLastDateAndTime(request,
             target,
             options=(),
@@ -3774,23 +3691,6 @@ class NiFgen(object):
         return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/IsDone',
             nifgen__pb2.IsDoneRequest.SerializeToString,
             nifgen__pb2.IsDoneResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ManualEnableP2PStream(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/ManualEnableP2PStream',
-            nifgen__pb2.ManualEnableP2PStreamRequest.SerializeToString,
-            nifgen__pb2.ManualEnableP2PStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -4352,5 +4252,39 @@ class NiFgen(object):
         return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/WriteWaveformComplexF64',
             nifgen__pb2.WriteWaveformComplexF64Request.SerializeToString,
             nifgen__pb2.WriteWaveformComplexF64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateWaveformFromFileHWS(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/CreateWaveformFromFileHWS',
+            nifgen__pb2.CreateWaveformFromFileHWSRequest.SerializeToString,
+            nifgen__pb2.CreateWaveformFromFileHWSResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ManualEnableP2PStream(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifgen_grpc.NiFgen/ManualEnableP2PStream',
+            nifgen__pb2.ManualEnableP2PStreamRequest.SerializeToString,
+            nifgen__pb2.ManualEnableP2PStreamResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

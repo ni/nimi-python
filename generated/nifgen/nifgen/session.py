@@ -438,6 +438,16 @@ class _SessionBase(object):
 
     Specifies the destination terminal for the Done Event.
     '''
+    done_event_pulse_width = _attributes.AttributeViReal64(1150336)
+    '''Type: float
+
+    Specifies the pulse width for the Done Event.
+    '''
+    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
+    '''Type: enums.DoneEventPulseWidthUnits
+
+    Specifies the pulse width units for the Done Event.
+    '''
     driver_setup = _attributes.AttributeViString(1050007)
     '''Type: str
 
@@ -754,6 +764,36 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.marker_event_output_terminal`
     '''
+    marker_event_pulse_width = _attributes.AttributeViReal64(1150340)
+    '''Type: float
+
+    Specifies the pulse width for the Marker Event.
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_pulse_width`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.marker_event_pulse_width`
+    '''
+    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
+    '''Type: enums.MarkerEventPulseWidthUnits
+
+    Specifies the pulse width units for the Marker Event.
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nifgen.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_pulse_width_units`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+    Example: :py:attr:`my_session.marker_event_pulse_width_units`
+    '''
     max_freq_list_duration = _attributes.AttributeViReal64(1150213)
     '''Type: float
 
@@ -981,6 +1021,16 @@ class _SessionBase(object):
     '''Type: str
 
     Specifies the destination terminal for the Started Event.
+    '''
+    started_event_pulse_width = _attributes.AttributeViReal64(1150335)
+    '''Type: float
+
+    Specifies the pulse width for the Started Event.
+    '''
+    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
+    '''Type: enums.StartedEventPulseWidthUnits
+
+    Specifies the pulse width units for the Started Event.
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150280)
     '''Type: enums.StartTriggerType
