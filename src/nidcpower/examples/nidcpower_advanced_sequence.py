@@ -6,15 +6,13 @@ import nidcpower
 import sys
 
 
-def example(resource_name, options, voltage_max, current_max, points_per_output_function, delay_in_seconds):
-    timeout = hightime.timedelta(seconds=(delay_in_seconds * points_per_output_function + 1.0))
-
+def example(resource_name, options, voltage_max, current_max, points_per_output_function, source_delay):
     with nidcpower.Session(resource_name=resource_name, options=options) as session:
         # Configure the session.
         session.source_mode = nidcpower.SourceMode.SEQUENCE
         session.voltage_level_autorange = True
         session.current_limit_autorange = True
-        session.source_delay = hightime.timedelta(seconds=delay_in_seconds)
+        session.source_delay = hightime.timedelta(seconds=source_delay)
         properties_used = ['output_function', 'voltage_level', 'current_level']
         session.create_advanced_sequence(sequence_name='my_sequence', property_names=properties_used, set_as_active_sequence=True)
 
@@ -29,11 +27,16 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
             session.create_advanced_sequence_step(set_as_active_step=False)
             session.output_function = nidcpower.OutputFunction.DC_CURRENT
             session.current_level = current_per_step * i
-
+        
+        # Calculate the timeout.
+        aperture_time = session.aperture_time
+        total_points = points_per_output_function * 2
+        timeout = hightime.timedelta(seconds=((source_delay + aperture_time) * total_points + 1.0))
+            
         with session.initiate():
             channel_indices = '0-{0}'.format(session.channel_count - 1)
             channels = session.get_channel_names(channel_indices)
-            measurement_group = [session.channels[name].fetch_multiple(points_per_output_function * 2, timeout=timeout) for name in channels]
+            measurement_group = [session.channels[name].fetch_multiple(total_points, timeout=timeout) for name in channels]
 
         session.delete_advanced_sequence(sequence_name='my_sequence')
         line_format = '{:<15} {:<4} {:<10} {:<10} {:<6}'
