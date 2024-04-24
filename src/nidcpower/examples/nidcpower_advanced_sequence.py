@@ -27,12 +27,12 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
             session.create_advanced_sequence_step(set_as_active_step=False)
             session.output_function = nidcpower.OutputFunction.DC_CURRENT
             session.current_level = current_per_step * i
-        
+
         # Calculate the timeout.
         aperture_time = session.aperture_time
         total_points = points_per_output_function * 2
         timeout = hightime.timedelta(seconds=((source_delay + aperture_time) * total_points + 1.0))
-            
+
         with session.initiate():
             channel_indices = f'0-{session.channel_count - 1}'
             channels = session.get_channel_names(channel_indices)
