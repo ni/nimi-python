@@ -42,6 +42,7 @@ All notable changes to this project will be documented in this file.
 * ### `nidcpower` (NI-DCPower)
     * #### Added
     * #### Changed
+        * Fix [#1664](https://github.com/ni/nimi-python/issues/1970): nidcpower_advanced_sequence.py has several issues preventing it from working out of the box on real hardware.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
