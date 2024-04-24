@@ -27,7 +27,7 @@
 
     with open(f'./src/{module_name}/LATEST_RELEASE') as vf:
         latest_release_version = vf.read().strip()
-    released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{0}/{1}_examples.zip'.format(latest_release_version, module_name)
+    released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{}/{}_examples.zip'.format(latest_release_version, module_name)
 
     example_url_base = 'https://github.com/ni/nimi-python/blob/'
 
@@ -35,10 +35,10 @@
     v = Version(module_version)
 
     if v.dev is None and v.pre is None:
-        examples_zip_url_text = '`You can download all {0} examples here <{1}>`_'.format(module_name, released_zip_url)
+        examples_zip_url_text = '`You can download all {} examples here <{}>`_'.format(module_name, released_zip_url)
         example_url_base += latest_release_version
     else:
-        examples_zip_url_text = '`You can download all {0} examples for latest version here <{1}>`_'.format(module_name, released_zip_url)
+        examples_zip_url_text = '`You can download all {} examples for latest version here <{}>`_'.format(module_name, released_zip_url)
         example_url_base += 'master'
 %>\
 ${helper.get_rst_header_snippet('Examples', '=')}

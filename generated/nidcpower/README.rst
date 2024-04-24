@@ -53,7 +53,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 2023 Q2                  |
+| Driver Version Tested Against | 2024 Q2                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -127,13 +127,13 @@ The following is a basic example of using the **nidcpower** module to open a ses
         session.voltage_level = 5.0
 
         session.commit()
-        print('Effective measurement rate: {0} S/s'.format(session.measure_record_delta_time / 1))
+        print('Effective measurement rate: {} S/s'.format(session.measure_record_delta_time / 1))
 
         samples_acquired = 0
         print('Channel           Num  Voltage    Current    In Compliance')
         row_format = '{0:15} {1:3d}    {2:8.6f}   {3:8.6f}   {4}'
         with session.initiate():
-            channel_indices = '0-{0}'.format(session.channel_count - 1)
+            channel_indices = '0-{}'.format(session.channel_count - 1)
             channels = session.get_channel_names(channel_indices)
             for i, channel_name in enumerate(channels):
                 samples_acquired = 0

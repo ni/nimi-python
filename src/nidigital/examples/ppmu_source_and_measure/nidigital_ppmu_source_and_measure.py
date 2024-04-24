@@ -58,14 +58,14 @@ def example(resource_name, options, channels, measure, aperture_time,
             print('{:<6} {:<20} {:<10}'.format('Site', 'Pin Name', 'Current'))
 
             for pin, current in zip(pin_info, current_measurements):
-                print('{:<6d} {:<20} {:<10f}'.format(pin.site_number, pin.pin_name, current))
+                print(f'{pin.site_number:<6d} {pin.pin_name:<20} {current:<10f}')
         else:
             voltage_measurements = session.channels[channels].ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
 
             print('{:<6} {:<20} {:<10}'.format('Site', 'Pin Name', 'Voltage'))
 
             for pin, voltage in zip(pin_info, voltage_measurements):
-                print('{:<6d} {:<20} {:<10f}'.format(pin.site_number, pin.pin_name, voltage))
+                print(f'{pin.site_number:<6d} {pin.pin_name:<20} {voltage:<10f}')
 
         # Disconnect all channels using programmable onboard switching
         session.channels[channels].selected_function = nidigital.SelectedFunction.DISCONNECT

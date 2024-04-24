@@ -31,7 +31,7 @@
                 if waveform_data[site].dtype == numpy.uint32:
                     wfm = array.array('L', waveform_data[site])
                 else:
-                    raise TypeError("Unsupported dtype for waveform_data array element type. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
+                    raise TypeError("Unsupported dtype for waveform_data array element type. Is {}, expected {}".format(waveform_data[site].dtype, numpy.int32))
 
             elif isinstance(waveform_data[site], array.array):
                 if waveform_data[site].typecode == 'L':

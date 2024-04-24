@@ -23,7 +23,7 @@
         channel_name_unpack = ', channel_name'
         channel_name_value = 'channel_name'
     else:
-        raise ValueError('Only fetch_multiple and measure_multiple are supported. Got {0}'.format(f['python_name']))
+        raise ValueError('Only fetch_multiple and measure_multiple are supported. Got {}'.format(f['python_name']))
 %>\
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}

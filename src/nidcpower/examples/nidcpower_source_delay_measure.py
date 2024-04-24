@@ -7,9 +7,9 @@ import sys
 
 
 def print_fetched_measurements(measurements):
-    print('             Voltage : {:f} V'.format(measurements[0].voltage))
-    print('              Current: {:f} A'.format(measurements[0].current))
-    print('        In compliance: {0}'.format(measurements[0].in_compliance))
+    print(f'             Voltage : {measurements[0].voltage:f} V')
+    print(f'              Current: {measurements[0].current:f} A')
+    print(f'        In compliance: {measurements[0].in_compliance}')
 
 
 def example(resource_name, options, voltage1, voltage2, delay):
@@ -27,10 +27,10 @@ def example(resource_name, options, voltage1, voltage2, delay):
         session.voltage_level = voltage1
 
         with session.initiate():
-            channel_indices = '0-{0}'.format(session.channel_count - 1)
+            channel_indices = f'0-{session.channel_count - 1}'
             channels = session.get_channel_names(channel_indices)
             for channel_name in channels:
-                print('Channel: {0}'.format(channel_name))
+                print(f'Channel: {channel_name}')
                 print('---------------------------------')
                 print('Voltage 1:')
                 print_fetched_measurements(session.channels[channel_name].fetch_multiple(count=1, timeout=timeout))
