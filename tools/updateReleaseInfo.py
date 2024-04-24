@@ -34,7 +34,7 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
 
     logging.info(pp.pformat(args))
 
-    with open(args.src_file, 'r') as content_file:
+    with open(args.src_file) as content_file:
         contents = content_file.read()
 
     module_dev_version_re = re.compile(r"'module_version': '(\d+\.\d+\.\d+)\.dev(\d+)'")
@@ -42,16 +42,16 @@ Update version when it is a dev version. I.e. X.Y.Z.devN to X.Y.Z.dev(N+1)
     if m:
         if args.release:
             logging.info('Dev version found, updating {0}.dev{1} to {0}'.format(m.group(1), int(m.group(2))))
-            contents = module_dev_version_re.sub("'module_version': '{0}'".format(m.group(1)), contents)
+            contents = module_dev_version_re.sub(f"'module_version': '{m.group(1)}'", contents)
         else:
             logging.info('Dev version found, updating {0}.dev{1} to {0}.dev{2}'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-            contents = module_dev_version_re.sub("'module_version': '{0}.dev{1}'".format(m.group(1), int(m.group(2)) + 1), contents)
+            contents = module_dev_version_re.sub(f"'module_version': '{m.group(1)}.dev{int(m.group(2)) + 1}'", contents)
 
     module_version_re = re.compile(r"'module_version': '(\d+\.\d+\.)(\d+)'")
     m = module_version_re.search(contents)
     if m and not args.release:
         logging.info('Release version found, updating {0}{1} to {0}{2}.dev0'.format(m.group(1), int(m.group(2)), int(m.group(2)) + 1))
-        contents = module_version_re.sub("'module_version': '{0}{1}.dev0'".format(m.group(1), int(m.group(2)) + 1), contents)
+        contents = module_version_re.sub(f"'module_version': '{m.group(1)}{int(m.group(2)) + 1}.dev0'", contents)
 
     if not args.preview:
         with open(args.src_file, 'w') as content_file:

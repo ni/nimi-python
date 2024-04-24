@@ -14,7 +14,7 @@ SESSION_NUM_FOR_TEST = 42
 GRPC_SESSION_OBJECT_FOR_TEST = object()
 
 
-class TestSession(object):
+class TestSession:
 
     class PatchedLibraryInterpreter(nifake._library_interpreter.LibraryInterpreter):
         def __init__(self, encoding):
@@ -838,7 +838,7 @@ class TestSession(object):
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
 
 
-class TestGrpcSession(object):
+class TestGrpcSession:
 
     class PatchedGrpcInterpreter(nifake._grpc_stub_interpreter.GrpcStubInterpreter):
         def __init__(self, grpc_options):
@@ -944,5 +944,5 @@ def test_diagnostic_information():
 
 
 def test_dunder_version():
-    print('Version = {}'.format(nifake.__version__))
+    print(f'Version = {nifake.__version__}')
     assert type(nifake.__version__) is str

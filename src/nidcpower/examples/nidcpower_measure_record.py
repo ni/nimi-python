@@ -15,12 +15,12 @@ def example(resource_name, options, voltage, length):
         session.voltage_level = voltage
 
         session.commit()
-        print('Effective measurement rate: {0} S/s'.format(session.measure_record_delta_time / 1))
+        print(f'Effective measurement rate: {session.measure_record_delta_time / 1} S/s')
 
         print('Channel           Num  Voltage    Current    In Compliance')
         row_format = '{0:15} {1:3d}    {2:8.6f}   {3:8.6f}   {4}'
         with session.initiate():
-            channel_indices = '0-{0}'.format(session.channel_count - 1)
+            channel_indices = f'0-{session.channel_count - 1}'
             channels = session.get_channel_names(channel_indices)
             for i, channel_name in enumerate(channels):
                 samples_acquired = 0

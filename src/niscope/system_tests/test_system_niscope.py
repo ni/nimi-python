@@ -106,7 +106,7 @@ class SystemTests:
         assert default_option is False
 
     def test_vi_string_attribute(self, multi_instrument_session):
-        trigger_source = '/{0}/NISCOPE_VAL_IMMEDIATE'.format(instruments[1])
+        trigger_source = f'/{instruments[1]}/NISCOPE_VAL_IMMEDIATE'
         multi_instrument_session.acq_arm_source = trigger_source
         assert trigger_source == multi_instrument_session.acq_arm_source
 
@@ -464,21 +464,21 @@ class SystemTests:
 
     # Basic configuration tests
     def test_configure_trigger_digital(self, multi_instrument_session):
-        trigger_source = '/{0}/VAL_RTSI_0'.format(instruments[1])
+        trigger_source = f'/{instruments[1]}/VAL_RTSI_0'
         multi_instrument_session.configure_trigger_digital(trigger_source)
         multi_instrument_session.vertical_range = 5
         assert trigger_source == multi_instrument_session.trigger_source
 
     def test_configure_trigger_edge(self, multi_instrument_session):
         assert niscope.TriggerSlope.POSITIVE == multi_instrument_session.trigger_slope
-        trigger_source = '{0}/0'.format(instruments[1])
+        trigger_source = f'{instruments[1]}/0'
         multi_instrument_session.configure_trigger_edge(trigger_source, 0.0, niscope.TriggerCoupling.DC)
         multi_instrument_session.commit()
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerCoupling.DC == multi_instrument_session.trigger_coupling
 
     def test_configure_trigger_hysteresis(self, multi_instrument_session):
-        trigger_source = '{0}/1'.format(instruments[1])
+        trigger_source = f'{instruments[1]}/1'
         multi_instrument_session.configure_trigger_hysteresis(trigger_source, 0.0, 0.05, niscope.TriggerCoupling.DC)
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerCoupling.DC == multi_instrument_session.trigger_coupling
@@ -521,7 +521,7 @@ class SystemTests:
         assert niscope.TriggerCoupling.DC == session_5124.trigger_coupling
 
     def test_configure_trigger_window(self, multi_instrument_session):
-        trigger_source = '{0}/1'.format(instruments[1])
+        trigger_source = f'{instruments[1]}/1'
         multi_instrument_session.configure_trigger_window(trigger_source, 0, 5, niscope.TriggerWindowMode.ENTERING, niscope.TriggerCoupling.DC)
         assert trigger_source == multi_instrument_session.trigger_source
         assert niscope.TriggerWindowMode.ENTERING == multi_instrument_session.trigger_window_mode

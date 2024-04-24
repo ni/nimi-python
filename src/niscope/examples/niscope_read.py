@@ -14,7 +14,7 @@ def example(resource_name, channels, options, length, voltage):
         session.configure_horizontal_timing(min_sample_rate=50000000, min_num_pts=length, ref_position=50.0, num_records=1, enforce_realtime=True)
         waveforms = session.channels[channels].read(num_samples=length)
         for i in range(len(waveforms)):
-            print('Waveform {0} information:'.format(i))
+            print(f'Waveform {i} information:')
             print(str(waveforms[i]) + '\n\n')
 
 

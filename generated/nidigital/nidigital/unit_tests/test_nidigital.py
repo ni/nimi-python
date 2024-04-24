@@ -10,7 +10,7 @@ from unittest.mock import patch
 session_id_for_test = 42
 
 
-class TestSession(object):
+class TestSession:
     class PatchedLibrary(nidigital._library.Library):
         def __init__(self, ctypes_library):
             super().__init__(ctypes_library)
@@ -335,7 +335,7 @@ class TestSession(object):
 
     # Helper function for validating site behavior in fetch_history_ram_cycle_information.
     def niDigital_GetHistoryRAMSampleCount_check_site_looping(self, vi, site, sample_count):  # noqa: N802
-        assert site.value.decode('ascii') == 'site{}'.format(self.site_numbers_looping[self.iteration_check_site_looping])
+        assert site.value.decode('ascii') == f'site{self.site_numbers_looping[self.iteration_check_site_looping]}'
         sample_count.contents.value = 0  # we don't care if this is right as long as the fetch does not error
         self.iteration_check_site_looping += 1
         return 0

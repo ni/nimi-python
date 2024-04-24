@@ -4,7 +4,7 @@ from build.helper.metadata_merge_dicts import *
 def _do_the_test_merge_dicts(a, b, expected, use_re):
     actual = a.copy()
     merge_dicts(actual, b, use_re, 'test')
-    assert expected == actual, "\na = {0}\nb = {1}\nexpected = {2}\nactual = {3}".format(a, b, expected, actual)
+    assert expected == actual, f"\na = {a}\nb = {b}\nexpected = {expected}\nactual = {actual}"
 
 
 def test_merge_dict_second_is_empty():

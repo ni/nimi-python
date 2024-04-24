@@ -2087,7 +2087,7 @@ class _SessionBase(object):
         # site is passed as repeated capability
         samples_available = self.get_history_ram_sample_count()
         if position > samples_available:
-            raise ValueError('position: Specified value = {0}, Maximum value = {1}.'.format(position, samples_available - 1))
+            raise ValueError('position: Specified value = {}, Maximum value = {}.'.format(position, samples_available - 1))
 
         if samples_to_read == -1:
             with _NoChannel(session=self):
@@ -2099,7 +2099,7 @@ class _SessionBase(object):
 
         if position + samples_to_read > samples_available:
             raise ValueError(
-                'position: Specified value = {0}, samples_to_read: Specified value = {1}; Samples available = {2}.'
+                'position: Specified value = {}, samples_to_read: Specified value = {}; Samples available = {}.'
                 .format(position, samples_to_read, samples_available - position))
 
         pattern_names = {}
@@ -3536,7 +3536,7 @@ class Session(_SessionBase):
                 if waveform_data[site].dtype == numpy.uint32:
                     wfm = array.array('L', waveform_data[site])
                 else:
-                    raise TypeError("Unsupported dtype for waveform_data array element type. Is {0}, expected {1}".format(waveform_data[site].dtype, numpy.int32))
+                    raise TypeError("Unsupported dtype for waveform_data array element type. Is {}, expected {}".format(waveform_data[site].dtype, numpy.int32))
 
             elif isinstance(waveform_data[site], array.array):
                 if waveform_data[site].typecode == 'L':

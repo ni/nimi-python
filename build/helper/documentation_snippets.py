@@ -106,7 +106,7 @@ def close_function_def_for_doc(functions, config):
         function_def['documentation']['note'].append(close_function_note)
         function_def['python_name'] = 'close'
     else:
-        assert False, "No '{}' function defined".format(close_name)
+        assert False, f"No '{close_name}' function defined"
 
     return function_def
 
@@ -138,7 +138,7 @@ def initiate_function_def_for_doc(functions, config):
         function_def['documentation']['note'].append(initiate_function_note)
         function_def['python_name'] = 'initiate'
     else:
-        assert False, "No '{}' function defined".format(session_context_manager_initiate)
+        assert False, f"No '{session_context_manager_initiate}' function defined"
 
     return function_def
 

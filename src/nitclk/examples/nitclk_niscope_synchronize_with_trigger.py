@@ -19,7 +19,7 @@ def example(resource_name1, resource_name2, options):
         session1.send_software_trigger_edge(niscope.WhichTrigger.START)
         waveforms = session2.channels[0].fetch(num_samples=1000)
         for i in range(len(waveforms)):
-            print('Waveform {0} information:'.format(i))
+            print(f'Waveform {i} information:')
             print(str(waveforms[i]) + '\n\n')
 
 

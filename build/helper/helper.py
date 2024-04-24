@@ -86,7 +86,7 @@ def get_numpy_type_for_api_type(api_type, config):
             if c['ctypes_type'] == api_type:
                 return c['python_name']
         # We didn't find it so assert
-        assert False, 'Unknown value for api_type: {0}'.format(api_type)
+        assert False, f'Unknown value for api_type: {api_type}'
 
 
 def get_array_type_for_api_type(api_type):
@@ -98,7 +98,7 @@ def get_array_type_for_api_type(api_type):
     if api_type in _type_map and _type_map[api_type]['array_type'] is not None:
         return _type_map[api_type]['array_type']
     else:
-        raise TypeError('Only simple types allowed for arrays: {0}'.format(api_type))
+        raise TypeError(f'Only simple types allowed for arrays: {api_type}')
 
 
 def get_development_status(config):

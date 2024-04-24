@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 # This file was generated
 
 
@@ -48,8 +47,8 @@ setup(
     ],
     extras_require={
         'grpc': [
-            'grpcio>=1.49.1,<2.0',
-            'protobuf>=4.21,<5.0'
+            'grpcio>=1.59.0,<2.0',
+            'protobuf>=4.21.6,<5.0'
         ],
     },
     setup_requires=['pytest-runner', ],
@@ -68,6 +67,7 @@ setup(
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],

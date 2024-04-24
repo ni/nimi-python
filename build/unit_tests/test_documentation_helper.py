@@ -23,7 +23,7 @@ def assert_rst_strings_are_equal(expected, actual):
     expected = _remove_trailing_whitespace(expected)
     actual = _remove_trailing_whitespace(actual)
     for expected_line, actual_line in zip(expected, actual):
-        assert expected_line == actual_line, 'Difference found:\n{0}\n{1}'.format(expected_line, actual_line)
+        assert expected_line == actual_line, f'Difference found:\n{expected_line}\n{actual_line}'
 
 
 config = {

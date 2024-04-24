@@ -22,7 +22,7 @@ class struct_CustomStructNestedTypedef(ctypes.Structure):  # noqa N801
             self.struct_custom_struct_typedef = custom_struct_typedef.struct_CustomStructTypedef()
 
 
-class CustomStructNestedTypedef(object):
+class CustomStructNestedTypedef:
     def __init__(
         self,
         data=None,
@@ -50,7 +50,7 @@ class CustomStructNestedTypedef(object):
         )
 
     def __repr__(self):
-        return '{0}(data=None, struct_custom_struct={1}, struct_custom_struct_typedef={2})'.format(
+        return '{}(data=None, struct_custom_struct={}, struct_custom_struct_typedef={})'.format(
             self.__class__.__name__,
             repr(self.struct_custom_struct),
             repr(self.struct_custom_struct_typedef)

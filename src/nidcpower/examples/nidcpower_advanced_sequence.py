@@ -34,7 +34,7 @@ def example(resource_name, options, voltage_max, current_max, points_per_output_
         timeout = hightime.timedelta(seconds=((source_delay + aperture_time) * total_points + 1.0))
             
         with session.initiate():
-            channel_indices = '0-{0}'.format(session.channel_count - 1)
+            channel_indices = f'0-{session.channel_count - 1}'
             channels = session.get_channel_names(channel_indices)
             measurement_group = [session.channels[name].fetch_multiple(total_points, timeout=timeout) for name in channels]
 
