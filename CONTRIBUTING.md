@@ -165,9 +165,9 @@ Release Process
         * It should contain all the changes made so far
         * Get the pull request reviewed but DO NOT merge to master yet
 1. Release Steps
+    1. Wait until the pull request has been approved
     1. Upload the releases to PyPI
         * `python3 tools/build_release.py --upload`
-        * Wait until the pull request has been approved
         * You will need to type in your PyPI credentials
     1. Merge the pull request to origin/master
     1. Create a release on GitHub using the portion from the changelog for this release for the description
