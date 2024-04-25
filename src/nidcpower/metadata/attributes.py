@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.8.0f501
+# This file is generated from NI-DCPower API metadata version 24.3.0f264
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -261,7 +261,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the voltage limit, in volts, that the output cannot exceed when generating the desired current level on the specified channels.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_CURRENT and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\n\nValid Values: The valid values for this attribute are defined by the values to which the NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE attribute is set.\n',
-            'note': 'The channel must be enabled for the specified current level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+            'note': 'The channel must be enabled for the specified current level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Current:Voltage Limit',
         'name': 'VOLTAGE_LIMIT',
@@ -1048,7 +1048,7 @@ attributes = {
     1150077: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nValid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.\nThe PXIe-4162/4163 supports values from  256 to 1000192.\nThe PXIe-4190 supports values from 102 to 6000048.\nAll other supported instruments support values from 1000 to 2147483647.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
+            'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nValid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.\nThe PXIe-4162/4163 supports values from  256 to 1000192.\nThe PXIe-4190 supports values from 102 to 6000048.\nThe PXIe-4112, PXIe-4113, and PXIe-4154 support values from 1000 to 178956970.\nAll other supported instruments support values from 1000 to 268435455.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Measure Buffer Size',
@@ -1218,7 +1218,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the pulse voltage limit range, in volts, for the specified channel(s).\nThe range defines the valid values to which you can set the pulse voltage limit and pulse bias voltage limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_PULSE_CURRENT.\nFor valid ranges, refer to the specifications for your instrument.\n',
-            'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.'
+            'note': 'The channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.'
         },
         'lv_property': 'Source:Pulse Current:Pulse Voltage Limit Range',
         'name': 'PULSE_VOLTAGE_LIMIT_RANGE',
@@ -2802,7 +2802,7 @@ attributes = {
         'access': 'read-write',
         'documentation': {
             'description': '\nSpecifies the current limit, in amps, that the output cannot exceed when generating the desired voltage level on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_DC_VOLTAGE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\n\nValid Values: The valid values for this attribute are defined by the values to which NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE attribute is set.\n',
-            'note': '\nThe channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the output channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+            'note': '\nThe channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:DC Voltage:Current Limit',
         'name': 'CURRENT_LIMIT',

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 23.8.0f501
+# This file is generated from NI-DCPower API metadata version 24.3.0f264
 functions = {
     'AbortWithChannels': {
         'documentation': {
-            'description': '\nTransitions the specified channel(s) from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_InitiateWithChannels function is called. If power output is enabled\nwhen you call the niDCPower_AbortWithChannels function, the output channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
+            'description': '\nTransitions the specified channel(s) from the Running state to the\nUncommitted state. If a sequence is running, it is stopped. Any\nconfiguration functions called after this function are not applied until\nthe niDCPower_InitiateWithChannels function is called. If power output is enabled\nwhen you call the niDCPower_AbortWithChannels function, the channels remain\nin their current state and continue providing power.\n\nUse the niDCPower_ConfigureOutputEnabled function to disable power\noutput on a per channel basis. Use the niDCPower_reset function to\ndisable output on all channels.\n\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for information about the\nspecific NI-DCPower software states.\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
@@ -43,7 +43,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -70,7 +70,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -178,7 +178,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -231,7 +231,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'documentation': {'\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'},
+                'documentation': {'\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'},
                 'name': 'channelName',
                 'type': 'ViConstString'
             },
@@ -278,7 +278,7 @@ functions = {
             },
             {
                 'direction': 'in',
-                'documentation': {'\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'},
+                'documentation': {'\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'},
                 'name': 'channelName',
                 'type': 'ViConstString'
             },
@@ -580,7 +580,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViString'
@@ -649,7 +649,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViString'
@@ -811,7 +811,7 @@ functions = {
                 'default_value': None,
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nFor new applications, use the default value of None\nand specify the channels in **resource name**.\n\nSpecifies which output channel(s) to include in a new session. Specify multiple\nchannels by using a channel list or a channel range. A channel list is a comma (,)\nseparated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:)\nfollowed by an upper bound channel (for example, 0-2 specifies channels 0, 1,\nand 2).\n\nIf independent_channels is False, this argument specifies which channels to include\nin a legacy synchronized channels session. If you do not specify any channels, by\ndefault all channels on the device are included in the session.\n\nIf independent_channels is True, this argument combines with **resource name** to\nspecify which channels to include in an independent channels session. Initializing\nan independent channels session with a channels argument is deprecated.\n'
+                    'description': '\nFor new applications, use the default value of None\nand specify the channels in **resource name**.\n\nSpecifies which channel(s) to include in a new session. Specify multiple\nchannels by using a channel list or a channel range. A channel list is a comma (,)\nseparated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:)\nfollowed by an upper bound channel (for example, 0-2 specifies channels 0, 1,\nand 2).\n\nIf independent_channels is False, this argument specifies which channels to include\nin a legacy synchronized channels session. If you do not specify any channels, by\ndefault all channels on the device are included in the session.\n\nIf independent_channels is True, this argument combines with **resource name** to\nspecify which channels to include in an independent channels session. Initializing\nan independent channels session with a channels argument is deprecated.\n'
                 },
                 'is_repeated_capability': False,
                 'name': 'channels',
@@ -887,7 +887,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViString'
@@ -912,7 +912,7 @@ functions = {
     'FancyMeasureMultipleLCR': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
@@ -936,7 +936,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViString'
@@ -1069,7 +1069,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1162,7 +1162,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1313,7 +1313,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1355,7 +1355,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1397,7 +1397,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1439,7 +1439,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1481,7 +1481,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1534,7 +1534,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies which output channel name to return. The index values begin at\n1.\n'
+                    'description': '\nSpecifies which channel name to return. The index values begin at\n1.\n'
                 },
                 'name': 'index',
                 'type': 'ViInt32'
@@ -1550,7 +1550,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns the output channel name that corresponds to **index**.'
+                    'description': 'Returns the channel name that corresponds to **index**.'
                 },
                 'is_repeated_capability': False,
                 'name': 'channelName',
@@ -1806,7 +1806,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1855,7 +1855,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -1930,7 +1930,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2022,7 +2022,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViString'
@@ -2267,7 +2267,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies which output channel(s) to include in a new session. Specify\nmultiple channels by using a channel list or a channel range. A channel\nlist is a comma (,) separated sequence of channel names (for example,\n0,2 specifies channels 0 and 2). A channel range is a lower bound\nchannel followed by a hyphen (-) or colon (:) followed by an upper bound\nchannel (for example, 0-2 specifies channels 0, 1, and 2). In the\nRunning state, multiple output channel configurations are performed\nsequentially based on the order specified in this parameter. If you do\nnot specify any channels, by default all channels on the device are\nincluded in the session.\n'
+                    'description': '\nSpecifies which channel(s) to include in a new session. Specify\nmultiple channels by using a channel list or a channel range. A channel\nlist is a comma (,) separated sequence of channel names (for example,\n0,2 specifies channels 0 and 2). A channel range is a lower bound\nchannel followed by a hyphen (-) or colon (:) followed by an upper bound\nchannel (for example, 0-2 specifies channels 0, 1, and 2). In the\nRunning state, multiple channel configurations are performed\nsequentially based on the order specified in this parameter. If you do\nnot specify any channels, by default all channels on the device are\nincluded in the session.\n'
                 },
                 'is_repeated_capability': False,
                 'name': 'channels',
@@ -2430,7 +2430,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to measure. Only one measurement at a time\nmay be made with the niDCPower_Measure function. Use the\nniDCPower_MeasureMultiple function to measure multiple channels.\n'
+                    'description': '\nSpecifies the channel to measure. Only one measurement at a time\nmay be made with the niDCPower_Measure function. Use the\nniDCPower_MeasureMultiple function to measure multiple channels.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2484,7 +2484,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channels to measure. You can specify multiple\nchannels by using a channel list or a channel range. A channel list is a\ncomma (,) separated sequence of channel names (e.g. 0,2 specifies\nchannels 0 and 2). A channel range is a lower bound channel followed by\na hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2\nspecifies channels 0, 1, and 2). If you do not specify a channel name,\nthe function uses all channels in the session.\n'
+                    'description': '\nSpecifies the channels to measure. You can specify multiple\nchannels by using a channel list or a channel range. A channel list is a\ncomma (,) separated sequence of channel names (e.g. 0,2 specifies\nchannels 0 and 2). A channel range is a lower bound channel followed by\na hyphen (-) or colon (:) followed by an upper bound channel (e.g. 0-2\nspecifies channels 0, 1, and 2). If you do not specify a channel name,\nthe function uses all channels in the session.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2521,7 +2521,7 @@ functions = {
     'MeasureMultipleLCR': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified output channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
+            'description': '\nMeasures and returns a list of LCRMeasurement instances on the specified channel(s).\n\nTo use this function:\n\n-  Set NIDCPOWER_ATTR_INSTRUMENT_MODE property to NIDCPOWER_VAL_LCR\n-  Set NIDCPOWER_ATTR_MEASURE_WHEN property to NIDCPOWER_VAL_ON_DEMAND\n-  Put the channel(s) in the Running state (call niDCPower_InitiateWithChannels)\n',
             'note': '\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
@@ -2537,7 +2537,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2688,7 +2688,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sfequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sfequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2751,7 +2751,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2798,7 +2798,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2827,7 +2827,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2874,7 +2874,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are performed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value applies.\nSpecify multiple channels by using a channel list or a channel range. A channel list is a comma (,) separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).\nA channel range is a lower bound channel followed by a hyphen (-) or colon (:) followed by an upper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are performed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2964,7 +2964,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to query. Compliance status can only be\nqueried for one channel at a time.\n'
+                    'description': '\nSpecifies the channel to query. Compliance status can only be\nqueried for one channel at a time.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -2972,7 +2972,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns whether the device output channel is in compliance.'
+                    'description': 'Returns whether the device channel is in compliance.'
                 },
                 'name': 'inCompliance',
                 'type': 'ViBoolean'
@@ -2998,7 +2998,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3100,7 +3100,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to query. The maximum current limit may\nonly be queried for one channel at a time.\n'
+                    'description': '\nSpecifies the channel to query. The maximum current limit may\nonly be queried for one channel at a time.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3141,7 +3141,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to query. The maximum voltage level may\nonly be queried for one channel at a time.\n'
+                    'description': '\nSpecifies the channel to query. The maximum voltage level may\nonly be queried for one channel at a time.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3157,7 +3157,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns the maximum voltage level that can be set on an output channel\nwith the specified **currentLimit**.\n'
+                    'description': '\nReturns the maximum voltage level that can be set on a channel\nwith the specified **currentLimit**.\n'
                 },
                 'name': 'maxVoltageLevel',
                 'type': 'ViReal64'
@@ -3182,7 +3182,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to query. The minimum current limit may\nonly be queried for one channel at a time.\n'
+                    'description': '\nSpecifies the channel to query. The minimum current limit may\nonly be queried for one channel at a time.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3198,7 +3198,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns the minimum current limit that can be set on an output channel\nwith the specified **voltageLevel**.\n'
+                    'description': '\nReturns the minimum current limit that can be set on a channel\nwith the specified **voltageLevel**.\n'
                 },
                 'name': 'minCurrentLimit',
                 'type': 'ViReal64'
@@ -3208,7 +3208,7 @@ functions = {
     },
     'QueryOutputState': {
         'documentation': {
-            'description': '\nQueries the specified output channel to determine if the output channel\nis currently in the state specified by **outputState**.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n',
+            'description': '\nQueries the specified channel to determine if the channel\nis currently in the state specified by **outputState**.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
@@ -3224,7 +3224,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to query. The output state may only be\nqueried for one channel at a time.\n'
+                    'description': '\nSpecifies the channel to query. The output state may only be\nqueried for one channel at a time.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3232,7 +3232,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output state of the output channel that is being queried.\n**Defined Values**:\n',
+                    'description': '\nSpecifies the output state of the channel that is being queried.\n**Defined Values**:\n',
                     'table_body': [
                         [
                             'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
@@ -3251,7 +3251,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nReturns whether the device output channel is in the specified output\nstate.\n'
+                    'description': '\nReturns whether the device channel is in the specified output\nstate.\n'
                 },
                 'name': 'inState',
                 'type': 'ViBoolean'
@@ -3419,7 +3419,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3462,7 +3462,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3506,7 +3506,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3550,7 +3550,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3594,7 +3594,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple output channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
+                    'description': '\nSpecifies the channel(s) to which this configuration value\napplies. Specify multiple channels by using a channel list or a channel\nrange. A channel list is a comma (,) separated sequence of channel names\n(for example, 0,2 specifies channels 0 and 2). A channel range is a\nlower bound channel followed by a hyphen (-) or colon (:) followed by an\nupper bound channel (for example, 0-2 specifies channels 0, 1, and 2).\nIn the Running state, multiple channel configurations are\nperformed sequentially based on the order specified in this parameter.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3676,7 +3676,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the output channel to which this configuration value applies.\nYou can only set a sequence for one channel at a time.\n'
+                    'description': '\nSpecifies the channel to which this configuration value applies.\nYou can only set a sequence for one channel at a time.\n'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString'
@@ -3826,7 +3826,7 @@ functions = {
     'close': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the output channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_ResetWithChannels function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
+            'description': '\nCloses the session specified in **vi** and deallocates the resources\nthat NI-DCPower reserves. If power output is enabled when you call this\nfunction, the channels remain in their existing state and\ncontinue providing power. Use the niDCPower_ConfigureOutputEnabled\nfunction to disable power output on a per channel basis. Use the\nniDCPower_ResetWithChannels function to disable power output on all channel(s).\n\n**Related Topics:**\n\n`Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'grpc_name': 'Close',
