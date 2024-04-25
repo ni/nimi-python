@@ -19,26 +19,6 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.AbortRequest.SerializeToString,
                 response_deserializer=nifake__pb2.AbortResponse.FromString,
                 )
-        self.AcceptListOfDurationsInSeconds = channel.unary_unary(
-                '/nifake_grpc.NiFake/AcceptListOfDurationsInSeconds',
-                request_serializer=nifake__pb2.AcceptListOfDurationsInSecondsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.AcceptListOfDurationsInSecondsResponse.FromString,
-                )
-        self.AcceptViSessionArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/AcceptViSessionArray',
-                request_serializer=nifake__pb2.AcceptViSessionArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.AcceptViSessionArrayResponse.FromString,
-                )
-        self.AcceptViUInt32Array = channel.unary_unary(
-                '/nifake_grpc.NiFake/AcceptViUInt32Array',
-                request_serializer=nifake__pb2.AcceptViUInt32ArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.AcceptViUInt32ArrayResponse.FromString,
-                )
-        self.BoolArrayInputFunction = channel.unary_unary(
-                '/nifake_grpc.NiFake/BoolArrayInputFunction',
-                request_serializer=nifake__pb2.BoolArrayInputFunctionRequest.SerializeToString,
-                response_deserializer=nifake__pb2.BoolArrayInputFunctionResponse.FromString,
-                )
         self.BoolArrayOutputFunction = channel.unary_unary(
                 '/nifake_grpc.NiFake/BoolArrayOutputFunction',
                 request_serializer=nifake__pb2.BoolArrayOutputFunctionRequest.SerializeToString,
@@ -48,46 +28,6 @@ class NiFakeStub(object):
                 '/nifake_grpc.NiFake/Close',
                 request_serializer=nifake__pb2.CloseRequest.SerializeToString,
                 response_deserializer=nifake__pb2.CloseResponse.FromString,
-                )
-        self.CloseExtCal = channel.unary_unary(
-                '/nifake_grpc.NiFake/CloseExtCal',
-                request_serializer=nifake__pb2.CloseExtCalRequest.SerializeToString,
-                response_deserializer=nifake__pb2.CloseExtCalResponse.FromString,
-                )
-        self.CommandWithReservedParam = channel.unary_unary(
-                '/nifake_grpc.NiFake/CommandWithReservedParam',
-                request_serializer=nifake__pb2.CommandWithReservedParamRequest.SerializeToString,
-                response_deserializer=nifake__pb2.CommandWithReservedParamResponse.FromString,
-                )
-        self.ConfigureAbc = channel.unary_unary(
-                '/nifake_grpc.NiFake/ConfigureAbc',
-                request_serializer=nifake__pb2.ConfigureAbcRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ConfigureAbcResponse.FromString,
-                )
-        self.ConfigureEnums = channel.unary_unary(
-                '/nifake_grpc.NiFake/ConfigureEnums',
-                request_serializer=nifake__pb2.ConfigureEnumsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ConfigureEnumsResponse.FromString,
-                )
-        self.Control4022 = channel.unary_unary(
-                '/nifake_grpc.NiFake/Control4022',
-                request_serializer=nifake__pb2.Control4022Request.SerializeToString,
-                response_deserializer=nifake__pb2.Control4022Response.FromString,
-                )
-        self.CreateConfigurationList = channel.unary_unary(
-                '/nifake_grpc.NiFake/CreateConfigurationList',
-                request_serializer=nifake__pb2.CreateConfigurationListRequest.SerializeToString,
-                response_deserializer=nifake__pb2.CreateConfigurationListResponse.FromString,
-                )
-        self.CustomNestedStructRoundtrip = channel.unary_unary(
-                '/nifake_grpc.NiFake/CustomNestedStructRoundtrip',
-                request_serializer=nifake__pb2.CustomNestedStructRoundtripRequest.SerializeToString,
-                response_deserializer=nifake__pb2.CustomNestedStructRoundtripResponse.FromString,
-                )
-        self.DoubleAllTheNums = channel.unary_unary(
-                '/nifake_grpc.NiFake/DoubleAllTheNums',
-                request_serializer=nifake__pb2.DoubleAllTheNumsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.DoubleAllTheNumsResponse.FromString,
                 )
         self.EnumArrayOutputFunction = channel.unary_unary(
                 '/nifake_grpc.NiFake/EnumArrayOutputFunction',
@@ -99,35 +39,20 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.EnumInputFunctionWithDefaultsRequest.SerializeToString,
                 response_deserializer=nifake__pb2.EnumInputFunctionWithDefaultsResponse.FromString,
                 )
+        self.StringValuedEnumInputFunctionWithDefaults = channel.unary_unary(
+                '/nifake_grpc.NiFake/StringValuedEnumInputFunctionWithDefaults',
+                request_serializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsResponse.FromString,
+                )
         self.ErrorMessage = channel.unary_unary(
                 '/nifake_grpc.NiFake/ErrorMessage',
                 request_serializer=nifake__pb2.ErrorMessageRequest.SerializeToString,
                 response_deserializer=nifake__pb2.ErrorMessageResponse.FromString,
                 )
-        self.ExportAttributeConfigurationBuffer = channel.unary_unary(
-                '/nifake_grpc.NiFake/ExportAttributeConfigurationBuffer',
-                request_serializer=nifake__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ExportAttributeConfigurationBufferResponse.FromString,
-                )
-        self.ExportAttributeConfigurationBufferEx = channel.unary_unary(
-                '/nifake_grpc.NiFake/ExportAttributeConfigurationBufferEx',
-                request_serializer=nifake__pb2.ExportAttributeConfigurationBufferExRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ExportAttributeConfigurationBufferExResponse.FromString,
-                )
         self.FetchWaveform = channel.unary_unary(
                 '/nifake_grpc.NiFake/FetchWaveform',
                 request_serializer=nifake__pb2.FetchWaveformRequest.SerializeToString,
                 response_deserializer=nifake__pb2.FetchWaveformResponse.FromString,
-                )
-        self.FetchWithCustomSize = channel.unary_unary(
-                '/nifake_grpc.NiFake/FetchWithCustomSize',
-                request_serializer=nifake__pb2.FetchWithCustomSizeRequest.SerializeToString,
-                response_deserializer=nifake__pb2.FetchWithCustomSizeResponse.FromString,
-                )
-        self.FunctionWithOverriddenGrpcName2x = channel.unary_unary(
-                '/nifake_grpc.NiFake/FunctionWithOverriddenGrpcName2x',
-                request_serializer=nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.SerializeToString,
-                response_deserializer=nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.FromString,
                 )
         self.GetABoolean = channel.unary_unary(
                 '/nifake_grpc.NiFake/GetABoolean',
@@ -149,50 +74,10 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.GetAnIviDanceCharArrayRequest.SerializeToString,
                 response_deserializer=nifake__pb2.GetAnIviDanceCharArrayResponse.FromString,
                 )
-        self.GetAnIviDanceWithATwistArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArray',
-                request_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayResponse.FromString,
-                )
-        self.GetAnIviDanceWithATwistArrayOfCustomType = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayOfCustomType',
-                request_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeResponse.FromString,
-                )
-        self.GetAnIviDanceWithATwistArrayWithInputArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayWithInputArray',
-                request_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayResponse.FromString,
-                )
-        self.GetAnIviDanceWithATwistByteArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistByteArray',
-                request_serializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayResponse.FromString,
-                )
-        self.GetAnIviDanceWithATwistString = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistString',
-                request_serializer=nifake__pb2.GetAnIviDanceWithATwistStringRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringResponse.FromString,
-                )
-        self.GetAnIviDanceWithATwistStringStrlenBug = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistStringStrlenBug',
-                request_serializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugResponse.FromString,
-                )
-        self.GetArraySizeForCustomCode = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetArraySizeForCustomCode',
-                request_serializer=nifake__pb2.GetArraySizeForCustomCodeRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetArraySizeForCustomCodeResponse.FromString,
-                )
         self.GetArrayUsingIviDance = channel.unary_unary(
                 '/nifake_grpc.NiFake/GetArrayUsingIviDance',
                 request_serializer=nifake__pb2.GetArrayUsingIviDanceRequest.SerializeToString,
                 response_deserializer=nifake__pb2.GetArrayUsingIviDanceResponse.FromString,
-                )
-        self.GetArrayViUInt8WithEnum = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetArrayViUInt8WithEnum',
-                request_serializer=nifake__pb2.GetArrayViUInt8WithEnumRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetArrayViUInt8WithEnumResponse.FromString,
                 )
         self.GetAttributeViBoolean = channel.unary_unary(
                 '/nifake_grpc.NiFake/GetAttributeViBoolean',
@@ -224,11 +109,6 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.GetAttributeViStringRequest.SerializeToString,
                 response_deserializer=nifake__pb2.GetAttributeViStringResponse.FromString,
                 )
-        self.GetBitfieldAsEnumArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetBitfieldAsEnumArray',
-                request_serializer=nifake__pb2.GetBitfieldAsEnumArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetBitfieldAsEnumArrayResponse.FromString,
-                )
         self.GetCalDateAndTime = channel.unary_unary(
                 '/nifake_grpc.NiFake/GetCalDateAndTime',
                 request_serializer=nifake__pb2.GetCalDateAndTimeRequest.SerializeToString,
@@ -238,16 +118,6 @@ class NiFakeStub(object):
                 '/nifake_grpc.NiFake/GetCalInterval',
                 request_serializer=nifake__pb2.GetCalIntervalRequest.SerializeToString,
                 response_deserializer=nifake__pb2.GetCalIntervalResponse.FromString,
-                )
-        self.GetCustomType = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetCustomType',
-                request_serializer=nifake__pb2.GetCustomTypeRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetCustomTypeResponse.FromString,
-                )
-        self.GetCustomTypeArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetCustomTypeArray',
-                request_serializer=nifake__pb2.GetCustomTypeArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetCustomTypeArrayResponse.FromString,
                 )
         self.GetEnumValue = channel.unary_unary(
                 '/nifake_grpc.NiFake/GetEnumValue',
@@ -259,95 +129,10 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.GetErrorRequest.SerializeToString,
                 response_deserializer=nifake__pb2.GetErrorResponse.FromString,
                 )
-        self.GetParameterWithOverriddenGrpcName = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetParameterWithOverriddenGrpcName',
-                request_serializer=nifake__pb2.GetParameterWithOverriddenGrpcNameRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetParameterWithOverriddenGrpcNameResponse.FromString,
-                )
-        self.GetViInt32Array = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetViInt32Array',
-                request_serializer=nifake__pb2.GetViInt32ArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetViInt32ArrayResponse.FromString,
-                )
-        self.GetViUInt32Array = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetViUInt32Array',
-                request_serializer=nifake__pb2.GetViUInt32ArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.GetViUInt32ArrayResponse.FromString,
-                )
-        self.GetViUInt8 = channel.unary_unary(
-                '/nifake_grpc.NiFake/GetViUInt8',
-                request_serializer=nifake__pb2.GetViUInt8Request.SerializeToString,
-                response_deserializer=nifake__pb2.GetViUInt8Response.FromString,
-                )
-        self.ImportAttributeConfigurationBuffer = channel.unary_unary(
-                '/nifake_grpc.NiFake/ImportAttributeConfigurationBuffer',
-                request_serializer=nifake__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ImportAttributeConfigurationBufferResponse.FromString,
-                )
-        self.ImportAttributeConfigurationBufferEx = channel.unary_unary(
-                '/nifake_grpc.NiFake/ImportAttributeConfigurationBufferEx',
-                request_serializer=nifake__pb2.ImportAttributeConfigurationBufferExRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ImportAttributeConfigurationBufferExResponse.FromString,
-                )
-        self.InitExtCal = channel.unary_unary(
-                '/nifake_grpc.NiFake/InitExtCal',
-                request_serializer=nifake__pb2.InitExtCalRequest.SerializeToString,
-                response_deserializer=nifake__pb2.InitExtCalResponse.FromString,
-                )
         self.InitWithOptions = channel.unary_unary(
                 '/nifake_grpc.NiFake/InitWithOptions',
                 request_serializer=nifake__pb2.InitWithOptionsRequest.SerializeToString,
                 response_deserializer=nifake__pb2.InitWithOptionsResponse.FromString,
-                )
-        self.InitWithVarArgs = channel.unary_unary(
-                '/nifake_grpc.NiFake/InitWithVarArgs',
-                request_serializer=nifake__pb2.InitWithVarArgsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.InitWithVarArgsResponse.FromString,
-                )
-        self.IviDanceWithATwistCalculatedSizeOut = channel.unary_unary(
-                '/nifake_grpc.NiFake/IviDanceWithATwistCalculatedSizeOut',
-                request_serializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutRequest.SerializeToString,
-                response_deserializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutResponse.FromString,
-                )
-        self.IviDanceWithTwistWithMultipleArraysAndOneBufferSize = channel.unary_unary(
-                '/nifake_grpc.NiFake/IviDanceWithTwistWithMultipleArraysAndOneBufferSize',
-                request_serializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest.SerializeToString,
-                response_deserializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse.FromString,
-                )
-        self.MethodUsingEnumWithGrpcNameValues = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodUsingEnumWithGrpcNameValues',
-                request_serializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesResponse.FromString,
-                )
-        self.MethodUsingWholeAndFractionalNumbers = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodUsingWholeAndFractionalNumbers',
-                request_serializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersResponse.FromString,
-                )
-        self.MethodUsingWholeMappedNumbers = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodUsingWholeMappedNumbers',
-                request_serializer=nifake__pb2.MethodUsingWholeMappedNumbersRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodUsingWholeMappedNumbersResponse.FromString,
-                )
-        self.MethodWithGetLastErrorParam = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodWithGetLastErrorParam',
-                request_serializer=nifake__pb2.MethodWithGetLastErrorParamRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodWithGetLastErrorParamResponse.FromString,
-                )
-        self.MethodWithGrpcFieldNumber = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodWithGrpcFieldNumber',
-                request_serializer=nifake__pb2.MethodWithGrpcFieldNumberRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodWithGrpcFieldNumberResponse.FromString,
-                )
-        self.MethodWithGrpcOnlyParam = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodWithGrpcOnlyParam',
-                request_serializer=nifake__pb2.MethodWithGrpcOnlyParamRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodWithGrpcOnlyParamResponse.FromString,
-                )
-        self.MethodWithProtoOnlyParameter = channel.unary_unary(
-                '/nifake_grpc.NiFake/MethodWithProtoOnlyParameter',
-                request_serializer=nifake__pb2.MethodWithProtoOnlyParameterRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MethodWithProtoOnlyParameterResponse.FromString,
                 )
         self.MultipleArrayTypes = channel.unary_unary(
                 '/nifake_grpc.NiFake/MultipleArrayTypes',
@@ -358,11 +143,6 @@ class NiFakeStub(object):
                 '/nifake_grpc.NiFake/MultipleArraysSameSize',
                 request_serializer=nifake__pb2.MultipleArraysSameSizeRequest.SerializeToString,
                 response_deserializer=nifake__pb2.MultipleArraysSameSizeResponse.FromString,
-                )
-        self.MultipleArraysSameSizeWithOptional = channel.unary_unary(
-                '/nifake_grpc.NiFake/MultipleArraysSameSizeWithOptional',
-                request_serializer=nifake__pb2.MultipleArraysSameSizeWithOptionalRequest.SerializeToString,
-                response_deserializer=nifake__pb2.MultipleArraysSameSizeWithOptionalResponse.FromString,
                 )
         self.OneInputFunction = channel.unary_unary(
                 '/nifake_grpc.NiFake/OneInputFunction',
@@ -384,16 +164,6 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.ReadRequest.SerializeToString,
                 response_deserializer=nifake__pb2.ReadResponse.FromString,
                 )
-        self.ReadDataWithInOutIviTwist = channel.unary_unary(
-                '/nifake_grpc.NiFake/ReadDataWithInOutIviTwist',
-                request_serializer=nifake__pb2.ReadDataWithInOutIviTwistRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ReadDataWithInOutIviTwistResponse.FromString,
-                )
-        self.ReadDataWithMultipleIviTwistParamSets = channel.unary_unary(
-                '/nifake_grpc.NiFake/ReadDataWithMultipleIviTwistParamSets',
-                request_serializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsResponse.FromString,
-                )
         self.ReadFromChannel = channel.unary_unary(
                 '/nifake_grpc.NiFake/ReadFromChannel',
                 request_serializer=nifake__pb2.ReadFromChannelRequest.SerializeToString,
@@ -403,16 +173,6 @@ class NiFakeStub(object):
                 '/nifake_grpc.NiFake/ReturnANumberAndAString',
                 request_serializer=nifake__pb2.ReturnANumberAndAStringRequest.SerializeToString,
                 response_deserializer=nifake__pb2.ReturnANumberAndAStringResponse.FromString,
-                )
-        self.ReturnDurationInSeconds = channel.unary_unary(
-                '/nifake_grpc.NiFake/ReturnDurationInSeconds',
-                request_serializer=nifake__pb2.ReturnDurationInSecondsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ReturnDurationInSecondsResponse.FromString,
-                )
-        self.ReturnListOfDurationsInSeconds = channel.unary_unary(
-                '/nifake_grpc.NiFake/ReturnListOfDurationsInSeconds',
-                request_serializer=nifake__pb2.ReturnListOfDurationsInSecondsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ReturnListOfDurationsInSecondsResponse.FromString,
                 )
         self.ReturnMultipleTypes = channel.unary_unary(
                 '/nifake_grpc.NiFake/ReturnMultipleTypes',
@@ -444,26 +204,6 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.SetAttributeViStringRequest.SerializeToString,
                 response_deserializer=nifake__pb2.SetAttributeViStringResponse.FromString,
                 )
-        self.SetCustomType = channel.unary_unary(
-                '/nifake_grpc.NiFake/SetCustomType',
-                request_serializer=nifake__pb2.SetCustomTypeRequest.SerializeToString,
-                response_deserializer=nifake__pb2.SetCustomTypeResponse.FromString,
-                )
-        self.SetCustomTypeArray = channel.unary_unary(
-                '/nifake_grpc.NiFake/SetCustomTypeArray',
-                request_serializer=nifake__pb2.SetCustomTypeArrayRequest.SerializeToString,
-                response_deserializer=nifake__pb2.SetCustomTypeArrayResponse.FromString,
-                )
-        self.StringValuedEnumInputFunctionWithDefaults = channel.unary_unary(
-                '/nifake_grpc.NiFake/StringValuedEnumInputFunctionWithDefaults',
-                request_serializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsRequest.SerializeToString,
-                response_deserializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsResponse.FromString,
-                )
-        self.StringValuedEnumNoEnumGenerated = channel.unary_unary(
-                '/nifake_grpc.NiFake/StringValuedEnumNoEnumGenerated',
-                request_serializer=nifake__pb2.StringValuedEnumNoEnumGeneratedRequest.SerializeToString,
-                response_deserializer=nifake__pb2.StringValuedEnumNoEnumGeneratedResponse.FromString,
-                )
         self.TwoInputFunction = channel.unary_unary(
                 '/nifake_grpc.NiFake/TwoInputFunction',
                 request_serializer=nifake__pb2.TwoInputFunctionRequest.SerializeToString,
@@ -474,15 +214,275 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.Use64BitNumberRequest.SerializeToString,
                 response_deserializer=nifake__pb2.Use64BitNumberResponse.FromString,
                 )
+        self.WriteWaveform = channel.unary_unary(
+                '/nifake_grpc.NiFake/WriteWaveform',
+                request_serializer=nifake__pb2.WriteWaveformRequest.SerializeToString,
+                response_deserializer=nifake__pb2.WriteWaveformResponse.FromString,
+                )
+        self.SetCustomType = channel.unary_unary(
+                '/nifake_grpc.NiFake/SetCustomType',
+                request_serializer=nifake__pb2.SetCustomTypeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.SetCustomTypeResponse.FromString,
+                )
+        self.SetCustomTypeArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/SetCustomTypeArray',
+                request_serializer=nifake__pb2.SetCustomTypeArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.SetCustomTypeArrayResponse.FromString,
+                )
+        self.GetCustomType = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetCustomType',
+                request_serializer=nifake__pb2.GetCustomTypeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetCustomTypeResponse.FromString,
+                )
+        self.GetCustomTypeArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetCustomTypeArray',
+                request_serializer=nifake__pb2.GetCustomTypeArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetCustomTypeArrayResponse.FromString,
+                )
+        self.GetAnIviDanceWithATwistArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArray',
+                request_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayResponse.FromString,
+                )
+        self.GetAnIviDanceWithATwistString = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistString',
+                request_serializer=nifake__pb2.GetAnIviDanceWithATwistStringRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringResponse.FromString,
+                )
+        self.DoubleAllTheNums = channel.unary_unary(
+                '/nifake_grpc.NiFake/DoubleAllTheNums',
+                request_serializer=nifake__pb2.DoubleAllTheNumsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.DoubleAllTheNumsResponse.FromString,
+                )
+        self.AcceptListOfDurationsInSeconds = channel.unary_unary(
+                '/nifake_grpc.NiFake/AcceptListOfDurationsInSeconds',
+                request_serializer=nifake__pb2.AcceptListOfDurationsInSecondsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.AcceptListOfDurationsInSecondsResponse.FromString,
+                )
+        self.ReturnDurationInSeconds = channel.unary_unary(
+                '/nifake_grpc.NiFake/ReturnDurationInSeconds',
+                request_serializer=nifake__pb2.ReturnDurationInSecondsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ReturnDurationInSecondsResponse.FromString,
+                )
+        self.ReturnListOfDurationsInSeconds = channel.unary_unary(
+                '/nifake_grpc.NiFake/ReturnListOfDurationsInSeconds',
+                request_serializer=nifake__pb2.ReturnListOfDurationsInSecondsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ReturnListOfDurationsInSecondsResponse.FromString,
+                )
+        self.ConfigureAbc = channel.unary_unary(
+                '/nifake_grpc.NiFake/ConfigureAbc',
+                request_serializer=nifake__pb2.ConfigureAbcRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ConfigureAbcResponse.FromString,
+                )
+        self.ConfigureEnums = channel.unary_unary(
+                '/nifake_grpc.NiFake/ConfigureEnums',
+                request_serializer=nifake__pb2.ConfigureEnumsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ConfigureEnumsResponse.FromString,
+                )
+        self.ExportAttributeConfigurationBufferEx = channel.unary_unary(
+                '/nifake_grpc.NiFake/ExportAttributeConfigurationBufferEx',
+                request_serializer=nifake__pb2.ExportAttributeConfigurationBufferExRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ExportAttributeConfigurationBufferExResponse.FromString,
+                )
+        self.ImportAttributeConfigurationBufferEx = channel.unary_unary(
+                '/nifake_grpc.NiFake/ImportAttributeConfigurationBufferEx',
+                request_serializer=nifake__pb2.ImportAttributeConfigurationBufferExRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ImportAttributeConfigurationBufferExResponse.FromString,
+                )
+        self.FetchWithCustomSize = channel.unary_unary(
+                '/nifake_grpc.NiFake/FetchWithCustomSize',
+                request_serializer=nifake__pb2.FetchWithCustomSizeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.FetchWithCustomSizeResponse.FromString,
+                )
+        self.GetParameterWithOverriddenGrpcName = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetParameterWithOverriddenGrpcName',
+                request_serializer=nifake__pb2.GetParameterWithOverriddenGrpcNameRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetParameterWithOverriddenGrpcNameResponse.FromString,
+                )
+        self.IviDanceWithTwistWithMultipleArraysAndOneBufferSize = channel.unary_unary(
+                '/nifake_grpc.NiFake/IviDanceWithTwistWithMultipleArraysAndOneBufferSize',
+                request_serializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse.FromString,
+                )
+        self.FunctionWithOverriddenGrpcName2x = channel.unary_unary(
+                '/nifake_grpc.NiFake/FunctionWithOverriddenGrpcName2x',
+                request_serializer=nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.SerializeToString,
+                response_deserializer=nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.FromString,
+                )
+        self.StringValuedEnumNoEnumGenerated = channel.unary_unary(
+                '/nifake_grpc.NiFake/StringValuedEnumNoEnumGenerated',
+                request_serializer=nifake__pb2.StringValuedEnumNoEnumGeneratedRequest.SerializeToString,
+                response_deserializer=nifake__pb2.StringValuedEnumNoEnumGeneratedResponse.FromString,
+                )
+        self.IviDanceWithATwistCalculatedSizeOut = channel.unary_unary(
+                '/nifake_grpc.NiFake/IviDanceWithATwistCalculatedSizeOut',
+                request_serializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutRequest.SerializeToString,
+                response_deserializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutResponse.FromString,
+                )
+        self.ImportAttributeConfigurationBuffer = channel.unary_unary(
+                '/nifake_grpc.NiFake/ImportAttributeConfigurationBuffer',
+                request_serializer=nifake__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ImportAttributeConfigurationBufferResponse.FromString,
+                )
+        self.ExportAttributeConfigurationBuffer = channel.unary_unary(
+                '/nifake_grpc.NiFake/ExportAttributeConfigurationBuffer',
+                request_serializer=nifake__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ExportAttributeConfigurationBufferResponse.FromString,
+                )
+        self.Control4022 = channel.unary_unary(
+                '/nifake_grpc.NiFake/Control4022',
+                request_serializer=nifake__pb2.Control4022Request.SerializeToString,
+                response_deserializer=nifake__pb2.Control4022Response.FromString,
+                )
+        self.AcceptViSessionArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/AcceptViSessionArray',
+                request_serializer=nifake__pb2.AcceptViSessionArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.AcceptViSessionArrayResponse.FromString,
+                )
+        self.AcceptViUInt32Array = channel.unary_unary(
+                '/nifake_grpc.NiFake/AcceptViUInt32Array',
+                request_serializer=nifake__pb2.AcceptViUInt32ArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.AcceptViUInt32ArrayResponse.FromString,
+                )
+        self.BoolArrayInputFunction = channel.unary_unary(
+                '/nifake_grpc.NiFake/BoolArrayInputFunction',
+                request_serializer=nifake__pb2.BoolArrayInputFunctionRequest.SerializeToString,
+                response_deserializer=nifake__pb2.BoolArrayInputFunctionResponse.FromString,
+                )
+        self.CloseExtCal = channel.unary_unary(
+                '/nifake_grpc.NiFake/CloseExtCal',
+                request_serializer=nifake__pb2.CloseExtCalRequest.SerializeToString,
+                response_deserializer=nifake__pb2.CloseExtCalResponse.FromString,
+                )
+        self.CommandWithReservedParam = channel.unary_unary(
+                '/nifake_grpc.NiFake/CommandWithReservedParam',
+                request_serializer=nifake__pb2.CommandWithReservedParamRequest.SerializeToString,
+                response_deserializer=nifake__pb2.CommandWithReservedParamResponse.FromString,
+                )
+        self.CreateConfigurationList = channel.unary_unary(
+                '/nifake_grpc.NiFake/CreateConfigurationList',
+                request_serializer=nifake__pb2.CreateConfigurationListRequest.SerializeToString,
+                response_deserializer=nifake__pb2.CreateConfigurationListResponse.FromString,
+                )
+        self.CustomNestedStructRoundtrip = channel.unary_unary(
+                '/nifake_grpc.NiFake/CustomNestedStructRoundtrip',
+                request_serializer=nifake__pb2.CustomNestedStructRoundtripRequest.SerializeToString,
+                response_deserializer=nifake__pb2.CustomNestedStructRoundtripResponse.FromString,
+                )
+        self.GetBitfieldAsEnumArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetBitfieldAsEnumArray',
+                request_serializer=nifake__pb2.GetBitfieldAsEnumArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetBitfieldAsEnumArrayResponse.FromString,
+                )
+        self.GetAnIviDanceWithATwistArrayOfCustomType = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayOfCustomType',
+                request_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeResponse.FromString,
+                )
+        self.GetAnIviDanceWithATwistArrayWithInputArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayWithInputArray',
+                request_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayResponse.FromString,
+                )
+        self.GetAnIviDanceWithATwistByteArray = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistByteArray',
+                request_serializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayResponse.FromString,
+                )
+        self.GetAnIviDanceWithATwistStringStrlenBug = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetAnIviDanceWithATwistStringStrlenBug',
+                request_serializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugResponse.FromString,
+                )
+        self.GetArraySizeForCustomCode = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetArraySizeForCustomCode',
+                request_serializer=nifake__pb2.GetArraySizeForCustomCodeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetArraySizeForCustomCodeResponse.FromString,
+                )
+        self.GetArrayViUInt8WithEnum = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetArrayViUInt8WithEnum',
+                request_serializer=nifake__pb2.GetArrayViUInt8WithEnumRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetArrayViUInt8WithEnumResponse.FromString,
+                )
+        self.GetViUInt8 = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetViUInt8',
+                request_serializer=nifake__pb2.GetViUInt8Request.SerializeToString,
+                response_deserializer=nifake__pb2.GetViUInt8Response.FromString,
+                )
+        self.GetViInt32Array = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetViInt32Array',
+                request_serializer=nifake__pb2.GetViInt32ArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetViInt32ArrayResponse.FromString,
+                )
+        self.GetViUInt32Array = channel.unary_unary(
+                '/nifake_grpc.NiFake/GetViUInt32Array',
+                request_serializer=nifake__pb2.GetViUInt32ArrayRequest.SerializeToString,
+                response_deserializer=nifake__pb2.GetViUInt32ArrayResponse.FromString,
+                )
+        self.MethodUsingEnumWithGrpcNameValues = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodUsingEnumWithGrpcNameValues',
+                request_serializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesResponse.FromString,
+                )
+        self.MethodWithGetLastErrorParam = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodWithGetLastErrorParam',
+                request_serializer=nifake__pb2.MethodWithGetLastErrorParamRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodWithGetLastErrorParamResponse.FromString,
+                )
+        self.MethodWithGrpcOnlyParam = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodWithGrpcOnlyParam',
+                request_serializer=nifake__pb2.MethodWithGrpcOnlyParamRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodWithGrpcOnlyParamResponse.FromString,
+                )
+        self.MethodUsingWholeAndFractionalNumbers = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodUsingWholeAndFractionalNumbers',
+                request_serializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersResponse.FromString,
+                )
+        self.MethodUsingWholeMappedNumbers = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodUsingWholeMappedNumbers',
+                request_serializer=nifake__pb2.MethodUsingWholeMappedNumbersRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodUsingWholeMappedNumbersResponse.FromString,
+                )
+        self.MethodWithGrpcFieldNumber = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodWithGrpcFieldNumber',
+                request_serializer=nifake__pb2.MethodWithGrpcFieldNumberRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodWithGrpcFieldNumberResponse.FromString,
+                )
+        self.MethodWithProtoOnlyParameter = channel.unary_unary(
+                '/nifake_grpc.NiFake/MethodWithProtoOnlyParameter',
+                request_serializer=nifake__pb2.MethodWithProtoOnlyParameterRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MethodWithProtoOnlyParameterResponse.FromString,
+                )
+        self.ReadDataWithInOutIviTwist = channel.unary_unary(
+                '/nifake_grpc.NiFake/ReadDataWithInOutIviTwist',
+                request_serializer=nifake__pb2.ReadDataWithInOutIviTwistRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ReadDataWithInOutIviTwistResponse.FromString,
+                )
+        self.ReadDataWithMultipleIviTwistParamSets = channel.unary_unary(
+                '/nifake_grpc.NiFake/ReadDataWithMultipleIviTwistParamSets',
+                request_serializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsResponse.FromString,
+                )
+        self.InitExtCal = channel.unary_unary(
+                '/nifake_grpc.NiFake/InitExtCal',
+                request_serializer=nifake__pb2.InitExtCalRequest.SerializeToString,
+                response_deserializer=nifake__pb2.InitExtCalResponse.FromString,
+                )
+        self.InitWithVarArgs = channel.unary_unary(
+                '/nifake_grpc.NiFake/InitWithVarArgs',
+                request_serializer=nifake__pb2.InitWithVarArgsRequest.SerializeToString,
+                response_deserializer=nifake__pb2.InitWithVarArgsResponse.FromString,
+                )
+        self.MultipleArraysSameSizeWithOptional = channel.unary_unary(
+                '/nifake_grpc.NiFake/MultipleArraysSameSizeWithOptional',
+                request_serializer=nifake__pb2.MultipleArraysSameSizeWithOptionalRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MultipleArraysSameSizeWithOptionalResponse.FromString,
+                )
         self.UseATwoDimensionParameter = channel.unary_unary(
                 '/nifake_grpc.NiFake/UseATwoDimensionParameter',
                 request_serializer=nifake__pb2.UseATwoDimensionParameterRequest.SerializeToString,
                 response_deserializer=nifake__pb2.UseATwoDimensionParameterResponse.FromString,
-                )
-        self.ViInt16ArrayInputFunction = channel.unary_unary(
-                '/nifake_grpc.NiFake/ViInt16ArrayInputFunction',
-                request_serializer=nifake__pb2.ViInt16ArrayInputFunctionRequest.SerializeToString,
-                response_deserializer=nifake__pb2.ViInt16ArrayInputFunctionResponse.FromString,
                 )
         self.ViUInt8ArrayInputFunction = channel.unary_unary(
                 '/nifake_grpc.NiFake/ViUInt8ArrayInputFunction',
@@ -494,10 +494,10 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.ViUInt8ArrayOutputFunctionRequest.SerializeToString,
                 response_deserializer=nifake__pb2.ViUInt8ArrayOutputFunctionResponse.FromString,
                 )
-        self.WriteWaveform = channel.unary_unary(
-                '/nifake_grpc.NiFake/WriteWaveform',
-                request_serializer=nifake__pb2.WriteWaveformRequest.SerializeToString,
-                response_deserializer=nifake__pb2.WriteWaveformResponse.FromString,
+        self.ViInt16ArrayInputFunction = channel.unary_unary(
+                '/nifake_grpc.NiFake/ViInt16ArrayInputFunction',
+                request_serializer=nifake__pb2.ViInt16ArrayInputFunctionRequest.SerializeToString,
+                response_deserializer=nifake__pb2.ViInt16ArrayInputFunctionResponse.FromString,
                 )
 
 
@@ -505,30 +505,6 @@ class NiFakeServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Abort(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AcceptListOfDurationsInSeconds(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AcceptViSessionArray(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AcceptViUInt32Array(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def BoolArrayInputFunction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -546,54 +522,6 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CloseExtCal(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CommandWithReservedParam(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ConfigureAbc(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ConfigureEnums(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def Control4022(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CreateConfigurationList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CustomNestedStructRoundtrip(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DoubleAllTheNums(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def EnumArrayOutputFunction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -606,37 +534,19 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def StringValuedEnumInputFunctionWithDefaults(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ErrorMessage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ExportAttributeConfigurationBuffer(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ExportAttributeConfigurationBufferEx(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def FetchWaveform(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def FetchWithCustomSize(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def FunctionWithOverriddenGrpcName2x(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -666,55 +576,7 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAnIviDanceWithATwistArray(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAnIviDanceWithATwistArrayOfCustomType(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAnIviDanceWithATwistArrayWithInputArray(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAnIviDanceWithATwistByteArray(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAnIviDanceWithATwistString(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAnIviDanceWithATwistStringStrlenBug(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetArraySizeForCustomCode(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetArrayUsingIviDance(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetArrayViUInt8WithEnum(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -756,12 +618,6 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetBitfieldAsEnumArray(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetCalDateAndTime(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -769,18 +625,6 @@ class NiFakeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetCalInterval(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetCustomType(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetCustomTypeArray(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -798,109 +642,7 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetParameterWithOverriddenGrpcName(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetViInt32Array(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetViUInt32Array(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetViUInt8(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ImportAttributeConfigurationBuffer(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ImportAttributeConfigurationBufferEx(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def InitExtCal(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def InitWithOptions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def InitWithVarArgs(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def IviDanceWithATwistCalculatedSizeOut(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def IviDanceWithTwistWithMultipleArraysAndOneBufferSize(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodUsingEnumWithGrpcNameValues(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodUsingWholeAndFractionalNumbers(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodUsingWholeMappedNumbers(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodWithGetLastErrorParam(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodWithGrpcFieldNumber(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodWithGrpcOnlyParam(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MethodWithProtoOnlyParameter(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -913,12 +655,6 @@ class NiFakeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def MultipleArraysSameSize(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def MultipleArraysSameSizeWithOptional(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -948,18 +684,6 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ReadDataWithInOutIviTwist(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ReadDataWithMultipleIviTwistParamSets(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def ReadFromChannel(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -967,18 +691,6 @@ class NiFakeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ReturnANumberAndAString(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ReturnDurationInSeconds(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ReturnListOfDurationsInSeconds(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1020,30 +732,6 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SetCustomType(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def SetCustomTypeArray(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def StringValuedEnumInputFunctionWithDefaults(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def StringValuedEnumNoEnumGenerated(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def TwoInputFunction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1056,13 +744,325 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def UseATwoDimensionParameter(self, request, context):
+    def WriteWaveform(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ViInt16ArrayInputFunction(self, request, context):
+    def SetCustomType(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetCustomTypeArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetCustomType(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetCustomTypeArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAnIviDanceWithATwistArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAnIviDanceWithATwistString(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DoubleAllTheNums(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AcceptListOfDurationsInSeconds(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReturnDurationInSeconds(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReturnListOfDurationsInSeconds(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ConfigureAbc(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ConfigureEnums(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ExportAttributeConfigurationBufferEx(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ImportAttributeConfigurationBufferEx(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FetchWithCustomSize(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetParameterWithOverriddenGrpcName(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def IviDanceWithTwistWithMultipleArraysAndOneBufferSize(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FunctionWithOverriddenGrpcName2x(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StringValuedEnumNoEnumGenerated(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def IviDanceWithATwistCalculatedSizeOut(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ImportAttributeConfigurationBuffer(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ExportAttributeConfigurationBuffer(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Control4022(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AcceptViSessionArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AcceptViUInt32Array(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def BoolArrayInputFunction(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CloseExtCal(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CommandWithReservedParam(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateConfigurationList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CustomNestedStructRoundtrip(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBitfieldAsEnumArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAnIviDanceWithATwistArrayOfCustomType(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAnIviDanceWithATwistArrayWithInputArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAnIviDanceWithATwistByteArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAnIviDanceWithATwistStringStrlenBug(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetArraySizeForCustomCode(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetArrayViUInt8WithEnum(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetViUInt8(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetViInt32Array(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetViUInt32Array(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodUsingEnumWithGrpcNameValues(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodWithGetLastErrorParam(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodWithGrpcOnlyParam(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodUsingWholeAndFractionalNumbers(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodUsingWholeMappedNumbers(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodWithGrpcFieldNumber(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MethodWithProtoOnlyParameter(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReadDataWithInOutIviTwist(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReadDataWithMultipleIviTwistParamSets(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def InitExtCal(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def InitWithVarArgs(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MultipleArraysSameSizeWithOptional(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UseATwoDimensionParameter(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1080,7 +1080,7 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def WriteWaveform(self, request, context):
+    def ViInt16ArrayInputFunction(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1094,26 +1094,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.AbortRequest.FromString,
                     response_serializer=nifake__pb2.AbortResponse.SerializeToString,
             ),
-            'AcceptListOfDurationsInSeconds': grpc.unary_unary_rpc_method_handler(
-                    servicer.AcceptListOfDurationsInSeconds,
-                    request_deserializer=nifake__pb2.AcceptListOfDurationsInSecondsRequest.FromString,
-                    response_serializer=nifake__pb2.AcceptListOfDurationsInSecondsResponse.SerializeToString,
-            ),
-            'AcceptViSessionArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.AcceptViSessionArray,
-                    request_deserializer=nifake__pb2.AcceptViSessionArrayRequest.FromString,
-                    response_serializer=nifake__pb2.AcceptViSessionArrayResponse.SerializeToString,
-            ),
-            'AcceptViUInt32Array': grpc.unary_unary_rpc_method_handler(
-                    servicer.AcceptViUInt32Array,
-                    request_deserializer=nifake__pb2.AcceptViUInt32ArrayRequest.FromString,
-                    response_serializer=nifake__pb2.AcceptViUInt32ArrayResponse.SerializeToString,
-            ),
-            'BoolArrayInputFunction': grpc.unary_unary_rpc_method_handler(
-                    servicer.BoolArrayInputFunction,
-                    request_deserializer=nifake__pb2.BoolArrayInputFunctionRequest.FromString,
-                    response_serializer=nifake__pb2.BoolArrayInputFunctionResponse.SerializeToString,
-            ),
             'BoolArrayOutputFunction': grpc.unary_unary_rpc_method_handler(
                     servicer.BoolArrayOutputFunction,
                     request_deserializer=nifake__pb2.BoolArrayOutputFunctionRequest.FromString,
@@ -1123,46 +1103,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.Close,
                     request_deserializer=nifake__pb2.CloseRequest.FromString,
                     response_serializer=nifake__pb2.CloseResponse.SerializeToString,
-            ),
-            'CloseExtCal': grpc.unary_unary_rpc_method_handler(
-                    servicer.CloseExtCal,
-                    request_deserializer=nifake__pb2.CloseExtCalRequest.FromString,
-                    response_serializer=nifake__pb2.CloseExtCalResponse.SerializeToString,
-            ),
-            'CommandWithReservedParam': grpc.unary_unary_rpc_method_handler(
-                    servicer.CommandWithReservedParam,
-                    request_deserializer=nifake__pb2.CommandWithReservedParamRequest.FromString,
-                    response_serializer=nifake__pb2.CommandWithReservedParamResponse.SerializeToString,
-            ),
-            'ConfigureAbc': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureAbc,
-                    request_deserializer=nifake__pb2.ConfigureAbcRequest.FromString,
-                    response_serializer=nifake__pb2.ConfigureAbcResponse.SerializeToString,
-            ),
-            'ConfigureEnums': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureEnums,
-                    request_deserializer=nifake__pb2.ConfigureEnumsRequest.FromString,
-                    response_serializer=nifake__pb2.ConfigureEnumsResponse.SerializeToString,
-            ),
-            'Control4022': grpc.unary_unary_rpc_method_handler(
-                    servicer.Control4022,
-                    request_deserializer=nifake__pb2.Control4022Request.FromString,
-                    response_serializer=nifake__pb2.Control4022Response.SerializeToString,
-            ),
-            'CreateConfigurationList': grpc.unary_unary_rpc_method_handler(
-                    servicer.CreateConfigurationList,
-                    request_deserializer=nifake__pb2.CreateConfigurationListRequest.FromString,
-                    response_serializer=nifake__pb2.CreateConfigurationListResponse.SerializeToString,
-            ),
-            'CustomNestedStructRoundtrip': grpc.unary_unary_rpc_method_handler(
-                    servicer.CustomNestedStructRoundtrip,
-                    request_deserializer=nifake__pb2.CustomNestedStructRoundtripRequest.FromString,
-                    response_serializer=nifake__pb2.CustomNestedStructRoundtripResponse.SerializeToString,
-            ),
-            'DoubleAllTheNums': grpc.unary_unary_rpc_method_handler(
-                    servicer.DoubleAllTheNums,
-                    request_deserializer=nifake__pb2.DoubleAllTheNumsRequest.FromString,
-                    response_serializer=nifake__pb2.DoubleAllTheNumsResponse.SerializeToString,
             ),
             'EnumArrayOutputFunction': grpc.unary_unary_rpc_method_handler(
                     servicer.EnumArrayOutputFunction,
@@ -1174,35 +1114,20 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.EnumInputFunctionWithDefaultsRequest.FromString,
                     response_serializer=nifake__pb2.EnumInputFunctionWithDefaultsResponse.SerializeToString,
             ),
+            'StringValuedEnumInputFunctionWithDefaults': grpc.unary_unary_rpc_method_handler(
+                    servicer.StringValuedEnumInputFunctionWithDefaults,
+                    request_deserializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsRequest.FromString,
+                    response_serializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsResponse.SerializeToString,
+            ),
             'ErrorMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.ErrorMessage,
                     request_deserializer=nifake__pb2.ErrorMessageRequest.FromString,
                     response_serializer=nifake__pb2.ErrorMessageResponse.SerializeToString,
             ),
-            'ExportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportAttributeConfigurationBuffer,
-                    request_deserializer=nifake__pb2.ExportAttributeConfigurationBufferRequest.FromString,
-                    response_serializer=nifake__pb2.ExportAttributeConfigurationBufferResponse.SerializeToString,
-            ),
-            'ExportAttributeConfigurationBufferEx': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportAttributeConfigurationBufferEx,
-                    request_deserializer=nifake__pb2.ExportAttributeConfigurationBufferExRequest.FromString,
-                    response_serializer=nifake__pb2.ExportAttributeConfigurationBufferExResponse.SerializeToString,
-            ),
             'FetchWaveform': grpc.unary_unary_rpc_method_handler(
                     servicer.FetchWaveform,
                     request_deserializer=nifake__pb2.FetchWaveformRequest.FromString,
                     response_serializer=nifake__pb2.FetchWaveformResponse.SerializeToString,
-            ),
-            'FetchWithCustomSize': grpc.unary_unary_rpc_method_handler(
-                    servicer.FetchWithCustomSize,
-                    request_deserializer=nifake__pb2.FetchWithCustomSizeRequest.FromString,
-                    response_serializer=nifake__pb2.FetchWithCustomSizeResponse.SerializeToString,
-            ),
-            'FunctionWithOverriddenGrpcName2x': grpc.unary_unary_rpc_method_handler(
-                    servicer.FunctionWithOverriddenGrpcName2x,
-                    request_deserializer=nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.FromString,
-                    response_serializer=nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.SerializeToString,
             ),
             'GetABoolean': grpc.unary_unary_rpc_method_handler(
                     servicer.GetABoolean,
@@ -1224,50 +1149,10 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.GetAnIviDanceCharArrayRequest.FromString,
                     response_serializer=nifake__pb2.GetAnIviDanceCharArrayResponse.SerializeToString,
             ),
-            'GetAnIviDanceWithATwistArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnIviDanceWithATwistArray,
-                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayResponse.SerializeToString,
-            ),
-            'GetAnIviDanceWithATwistArrayOfCustomType': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnIviDanceWithATwistArrayOfCustomType,
-                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeRequest.FromString,
-                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeResponse.SerializeToString,
-            ),
-            'GetAnIviDanceWithATwistArrayWithInputArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnIviDanceWithATwistArrayWithInputArray,
-                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayResponse.SerializeToString,
-            ),
-            'GetAnIviDanceWithATwistByteArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnIviDanceWithATwistByteArray,
-                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayResponse.SerializeToString,
-            ),
-            'GetAnIviDanceWithATwistString': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnIviDanceWithATwistString,
-                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringRequest.FromString,
-                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistStringResponse.SerializeToString,
-            ),
-            'GetAnIviDanceWithATwistStringStrlenBug': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnIviDanceWithATwistStringStrlenBug,
-                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugRequest.FromString,
-                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugResponse.SerializeToString,
-            ),
-            'GetArraySizeForCustomCode': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetArraySizeForCustomCode,
-                    request_deserializer=nifake__pb2.GetArraySizeForCustomCodeRequest.FromString,
-                    response_serializer=nifake__pb2.GetArraySizeForCustomCodeResponse.SerializeToString,
-            ),
             'GetArrayUsingIviDance': grpc.unary_unary_rpc_method_handler(
                     servicer.GetArrayUsingIviDance,
                     request_deserializer=nifake__pb2.GetArrayUsingIviDanceRequest.FromString,
                     response_serializer=nifake__pb2.GetArrayUsingIviDanceResponse.SerializeToString,
-            ),
-            'GetArrayViUInt8WithEnum': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetArrayViUInt8WithEnum,
-                    request_deserializer=nifake__pb2.GetArrayViUInt8WithEnumRequest.FromString,
-                    response_serializer=nifake__pb2.GetArrayViUInt8WithEnumResponse.SerializeToString,
             ),
             'GetAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAttributeViBoolean,
@@ -1299,11 +1184,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.GetAttributeViStringRequest.FromString,
                     response_serializer=nifake__pb2.GetAttributeViStringResponse.SerializeToString,
             ),
-            'GetBitfieldAsEnumArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetBitfieldAsEnumArray,
-                    request_deserializer=nifake__pb2.GetBitfieldAsEnumArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetBitfieldAsEnumArrayResponse.SerializeToString,
-            ),
             'GetCalDateAndTime': grpc.unary_unary_rpc_method_handler(
                     servicer.GetCalDateAndTime,
                     request_deserializer=nifake__pb2.GetCalDateAndTimeRequest.FromString,
@@ -1313,16 +1193,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.GetCalInterval,
                     request_deserializer=nifake__pb2.GetCalIntervalRequest.FromString,
                     response_serializer=nifake__pb2.GetCalIntervalResponse.SerializeToString,
-            ),
-            'GetCustomType': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCustomType,
-                    request_deserializer=nifake__pb2.GetCustomTypeRequest.FromString,
-                    response_serializer=nifake__pb2.GetCustomTypeResponse.SerializeToString,
-            ),
-            'GetCustomTypeArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCustomTypeArray,
-                    request_deserializer=nifake__pb2.GetCustomTypeArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetCustomTypeArrayResponse.SerializeToString,
             ),
             'GetEnumValue': grpc.unary_unary_rpc_method_handler(
                     servicer.GetEnumValue,
@@ -1334,95 +1204,10 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.GetErrorRequest.FromString,
                     response_serializer=nifake__pb2.GetErrorResponse.SerializeToString,
             ),
-            'GetParameterWithOverriddenGrpcName': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetParameterWithOverriddenGrpcName,
-                    request_deserializer=nifake__pb2.GetParameterWithOverriddenGrpcNameRequest.FromString,
-                    response_serializer=nifake__pb2.GetParameterWithOverriddenGrpcNameResponse.SerializeToString,
-            ),
-            'GetViInt32Array': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetViInt32Array,
-                    request_deserializer=nifake__pb2.GetViInt32ArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetViInt32ArrayResponse.SerializeToString,
-            ),
-            'GetViUInt32Array': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetViUInt32Array,
-                    request_deserializer=nifake__pb2.GetViUInt32ArrayRequest.FromString,
-                    response_serializer=nifake__pb2.GetViUInt32ArrayResponse.SerializeToString,
-            ),
-            'GetViUInt8': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetViUInt8,
-                    request_deserializer=nifake__pb2.GetViUInt8Request.FromString,
-                    response_serializer=nifake__pb2.GetViUInt8Response.SerializeToString,
-            ),
-            'ImportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
-                    servicer.ImportAttributeConfigurationBuffer,
-                    request_deserializer=nifake__pb2.ImportAttributeConfigurationBufferRequest.FromString,
-                    response_serializer=nifake__pb2.ImportAttributeConfigurationBufferResponse.SerializeToString,
-            ),
-            'ImportAttributeConfigurationBufferEx': grpc.unary_unary_rpc_method_handler(
-                    servicer.ImportAttributeConfigurationBufferEx,
-                    request_deserializer=nifake__pb2.ImportAttributeConfigurationBufferExRequest.FromString,
-                    response_serializer=nifake__pb2.ImportAttributeConfigurationBufferExResponse.SerializeToString,
-            ),
-            'InitExtCal': grpc.unary_unary_rpc_method_handler(
-                    servicer.InitExtCal,
-                    request_deserializer=nifake__pb2.InitExtCalRequest.FromString,
-                    response_serializer=nifake__pb2.InitExtCalResponse.SerializeToString,
-            ),
             'InitWithOptions': grpc.unary_unary_rpc_method_handler(
                     servicer.InitWithOptions,
                     request_deserializer=nifake__pb2.InitWithOptionsRequest.FromString,
                     response_serializer=nifake__pb2.InitWithOptionsResponse.SerializeToString,
-            ),
-            'InitWithVarArgs': grpc.unary_unary_rpc_method_handler(
-                    servicer.InitWithVarArgs,
-                    request_deserializer=nifake__pb2.InitWithVarArgsRequest.FromString,
-                    response_serializer=nifake__pb2.InitWithVarArgsResponse.SerializeToString,
-            ),
-            'IviDanceWithATwistCalculatedSizeOut': grpc.unary_unary_rpc_method_handler(
-                    servicer.IviDanceWithATwistCalculatedSizeOut,
-                    request_deserializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutRequest.FromString,
-                    response_serializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutResponse.SerializeToString,
-            ),
-            'IviDanceWithTwistWithMultipleArraysAndOneBufferSize': grpc.unary_unary_rpc_method_handler(
-                    servicer.IviDanceWithTwistWithMultipleArraysAndOneBufferSize,
-                    request_deserializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest.FromString,
-                    response_serializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse.SerializeToString,
-            ),
-            'MethodUsingEnumWithGrpcNameValues': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodUsingEnumWithGrpcNameValues,
-                    request_deserializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesRequest.FromString,
-                    response_serializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesResponse.SerializeToString,
-            ),
-            'MethodUsingWholeAndFractionalNumbers': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodUsingWholeAndFractionalNumbers,
-                    request_deserializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersRequest.FromString,
-                    response_serializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersResponse.SerializeToString,
-            ),
-            'MethodUsingWholeMappedNumbers': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodUsingWholeMappedNumbers,
-                    request_deserializer=nifake__pb2.MethodUsingWholeMappedNumbersRequest.FromString,
-                    response_serializer=nifake__pb2.MethodUsingWholeMappedNumbersResponse.SerializeToString,
-            ),
-            'MethodWithGetLastErrorParam': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodWithGetLastErrorParam,
-                    request_deserializer=nifake__pb2.MethodWithGetLastErrorParamRequest.FromString,
-                    response_serializer=nifake__pb2.MethodWithGetLastErrorParamResponse.SerializeToString,
-            ),
-            'MethodWithGrpcFieldNumber': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodWithGrpcFieldNumber,
-                    request_deserializer=nifake__pb2.MethodWithGrpcFieldNumberRequest.FromString,
-                    response_serializer=nifake__pb2.MethodWithGrpcFieldNumberResponse.SerializeToString,
-            ),
-            'MethodWithGrpcOnlyParam': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodWithGrpcOnlyParam,
-                    request_deserializer=nifake__pb2.MethodWithGrpcOnlyParamRequest.FromString,
-                    response_serializer=nifake__pb2.MethodWithGrpcOnlyParamResponse.SerializeToString,
-            ),
-            'MethodWithProtoOnlyParameter': grpc.unary_unary_rpc_method_handler(
-                    servicer.MethodWithProtoOnlyParameter,
-                    request_deserializer=nifake__pb2.MethodWithProtoOnlyParameterRequest.FromString,
-                    response_serializer=nifake__pb2.MethodWithProtoOnlyParameterResponse.SerializeToString,
             ),
             'MultipleArrayTypes': grpc.unary_unary_rpc_method_handler(
                     servicer.MultipleArrayTypes,
@@ -1433,11 +1218,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.MultipleArraysSameSize,
                     request_deserializer=nifake__pb2.MultipleArraysSameSizeRequest.FromString,
                     response_serializer=nifake__pb2.MultipleArraysSameSizeResponse.SerializeToString,
-            ),
-            'MultipleArraysSameSizeWithOptional': grpc.unary_unary_rpc_method_handler(
-                    servicer.MultipleArraysSameSizeWithOptional,
-                    request_deserializer=nifake__pb2.MultipleArraysSameSizeWithOptionalRequest.FromString,
-                    response_serializer=nifake__pb2.MultipleArraysSameSizeWithOptionalResponse.SerializeToString,
             ),
             'OneInputFunction': grpc.unary_unary_rpc_method_handler(
                     servicer.OneInputFunction,
@@ -1459,16 +1239,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.ReadRequest.FromString,
                     response_serializer=nifake__pb2.ReadResponse.SerializeToString,
             ),
-            'ReadDataWithInOutIviTwist': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReadDataWithInOutIviTwist,
-                    request_deserializer=nifake__pb2.ReadDataWithInOutIviTwistRequest.FromString,
-                    response_serializer=nifake__pb2.ReadDataWithInOutIviTwistResponse.SerializeToString,
-            ),
-            'ReadDataWithMultipleIviTwistParamSets': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReadDataWithMultipleIviTwistParamSets,
-                    request_deserializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsRequest.FromString,
-                    response_serializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsResponse.SerializeToString,
-            ),
             'ReadFromChannel': grpc.unary_unary_rpc_method_handler(
                     servicer.ReadFromChannel,
                     request_deserializer=nifake__pb2.ReadFromChannelRequest.FromString,
@@ -1478,16 +1248,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.ReturnANumberAndAString,
                     request_deserializer=nifake__pb2.ReturnANumberAndAStringRequest.FromString,
                     response_serializer=nifake__pb2.ReturnANumberAndAStringResponse.SerializeToString,
-            ),
-            'ReturnDurationInSeconds': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReturnDurationInSeconds,
-                    request_deserializer=nifake__pb2.ReturnDurationInSecondsRequest.FromString,
-                    response_serializer=nifake__pb2.ReturnDurationInSecondsResponse.SerializeToString,
-            ),
-            'ReturnListOfDurationsInSeconds': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReturnListOfDurationsInSeconds,
-                    request_deserializer=nifake__pb2.ReturnListOfDurationsInSecondsRequest.FromString,
-                    response_serializer=nifake__pb2.ReturnListOfDurationsInSecondsResponse.SerializeToString,
             ),
             'ReturnMultipleTypes': grpc.unary_unary_rpc_method_handler(
                     servicer.ReturnMultipleTypes,
@@ -1519,26 +1279,6 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.SetAttributeViStringRequest.FromString,
                     response_serializer=nifake__pb2.SetAttributeViStringResponse.SerializeToString,
             ),
-            'SetCustomType': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetCustomType,
-                    request_deserializer=nifake__pb2.SetCustomTypeRequest.FromString,
-                    response_serializer=nifake__pb2.SetCustomTypeResponse.SerializeToString,
-            ),
-            'SetCustomTypeArray': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetCustomTypeArray,
-                    request_deserializer=nifake__pb2.SetCustomTypeArrayRequest.FromString,
-                    response_serializer=nifake__pb2.SetCustomTypeArrayResponse.SerializeToString,
-            ),
-            'StringValuedEnumInputFunctionWithDefaults': grpc.unary_unary_rpc_method_handler(
-                    servicer.StringValuedEnumInputFunctionWithDefaults,
-                    request_deserializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsRequest.FromString,
-                    response_serializer=nifake__pb2.StringValuedEnumInputFunctionWithDefaultsResponse.SerializeToString,
-            ),
-            'StringValuedEnumNoEnumGenerated': grpc.unary_unary_rpc_method_handler(
-                    servicer.StringValuedEnumNoEnumGenerated,
-                    request_deserializer=nifake__pb2.StringValuedEnumNoEnumGeneratedRequest.FromString,
-                    response_serializer=nifake__pb2.StringValuedEnumNoEnumGeneratedResponse.SerializeToString,
-            ),
             'TwoInputFunction': grpc.unary_unary_rpc_method_handler(
                     servicer.TwoInputFunction,
                     request_deserializer=nifake__pb2.TwoInputFunctionRequest.FromString,
@@ -1549,15 +1289,275 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.Use64BitNumberRequest.FromString,
                     response_serializer=nifake__pb2.Use64BitNumberResponse.SerializeToString,
             ),
+            'WriteWaveform': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteWaveform,
+                    request_deserializer=nifake__pb2.WriteWaveformRequest.FromString,
+                    response_serializer=nifake__pb2.WriteWaveformResponse.SerializeToString,
+            ),
+            'SetCustomType': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetCustomType,
+                    request_deserializer=nifake__pb2.SetCustomTypeRequest.FromString,
+                    response_serializer=nifake__pb2.SetCustomTypeResponse.SerializeToString,
+            ),
+            'SetCustomTypeArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetCustomTypeArray,
+                    request_deserializer=nifake__pb2.SetCustomTypeArrayRequest.FromString,
+                    response_serializer=nifake__pb2.SetCustomTypeArrayResponse.SerializeToString,
+            ),
+            'GetCustomType': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetCustomType,
+                    request_deserializer=nifake__pb2.GetCustomTypeRequest.FromString,
+                    response_serializer=nifake__pb2.GetCustomTypeResponse.SerializeToString,
+            ),
+            'GetCustomTypeArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetCustomTypeArray,
+                    request_deserializer=nifake__pb2.GetCustomTypeArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetCustomTypeArrayResponse.SerializeToString,
+            ),
+            'GetAnIviDanceWithATwistArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAnIviDanceWithATwistArray,
+                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayResponse.SerializeToString,
+            ),
+            'GetAnIviDanceWithATwistString': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAnIviDanceWithATwistString,
+                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringRequest.FromString,
+                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistStringResponse.SerializeToString,
+            ),
+            'DoubleAllTheNums': grpc.unary_unary_rpc_method_handler(
+                    servicer.DoubleAllTheNums,
+                    request_deserializer=nifake__pb2.DoubleAllTheNumsRequest.FromString,
+                    response_serializer=nifake__pb2.DoubleAllTheNumsResponse.SerializeToString,
+            ),
+            'AcceptListOfDurationsInSeconds': grpc.unary_unary_rpc_method_handler(
+                    servicer.AcceptListOfDurationsInSeconds,
+                    request_deserializer=nifake__pb2.AcceptListOfDurationsInSecondsRequest.FromString,
+                    response_serializer=nifake__pb2.AcceptListOfDurationsInSecondsResponse.SerializeToString,
+            ),
+            'ReturnDurationInSeconds': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReturnDurationInSeconds,
+                    request_deserializer=nifake__pb2.ReturnDurationInSecondsRequest.FromString,
+                    response_serializer=nifake__pb2.ReturnDurationInSecondsResponse.SerializeToString,
+            ),
+            'ReturnListOfDurationsInSeconds': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReturnListOfDurationsInSeconds,
+                    request_deserializer=nifake__pb2.ReturnListOfDurationsInSecondsRequest.FromString,
+                    response_serializer=nifake__pb2.ReturnListOfDurationsInSecondsResponse.SerializeToString,
+            ),
+            'ConfigureAbc': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureAbc,
+                    request_deserializer=nifake__pb2.ConfigureAbcRequest.FromString,
+                    response_serializer=nifake__pb2.ConfigureAbcResponse.SerializeToString,
+            ),
+            'ConfigureEnums': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureEnums,
+                    request_deserializer=nifake__pb2.ConfigureEnumsRequest.FromString,
+                    response_serializer=nifake__pb2.ConfigureEnumsResponse.SerializeToString,
+            ),
+            'ExportAttributeConfigurationBufferEx': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExportAttributeConfigurationBufferEx,
+                    request_deserializer=nifake__pb2.ExportAttributeConfigurationBufferExRequest.FromString,
+                    response_serializer=nifake__pb2.ExportAttributeConfigurationBufferExResponse.SerializeToString,
+            ),
+            'ImportAttributeConfigurationBufferEx': grpc.unary_unary_rpc_method_handler(
+                    servicer.ImportAttributeConfigurationBufferEx,
+                    request_deserializer=nifake__pb2.ImportAttributeConfigurationBufferExRequest.FromString,
+                    response_serializer=nifake__pb2.ImportAttributeConfigurationBufferExResponse.SerializeToString,
+            ),
+            'FetchWithCustomSize': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchWithCustomSize,
+                    request_deserializer=nifake__pb2.FetchWithCustomSizeRequest.FromString,
+                    response_serializer=nifake__pb2.FetchWithCustomSizeResponse.SerializeToString,
+            ),
+            'GetParameterWithOverriddenGrpcName': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetParameterWithOverriddenGrpcName,
+                    request_deserializer=nifake__pb2.GetParameterWithOverriddenGrpcNameRequest.FromString,
+                    response_serializer=nifake__pb2.GetParameterWithOverriddenGrpcNameResponse.SerializeToString,
+            ),
+            'IviDanceWithTwistWithMultipleArraysAndOneBufferSize': grpc.unary_unary_rpc_method_handler(
+                    servicer.IviDanceWithTwistWithMultipleArraysAndOneBufferSize,
+                    request_deserializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest.FromString,
+                    response_serializer=nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse.SerializeToString,
+            ),
+            'FunctionWithOverriddenGrpcName2x': grpc.unary_unary_rpc_method_handler(
+                    servicer.FunctionWithOverriddenGrpcName2x,
+                    request_deserializer=nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.FromString,
+                    response_serializer=nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.SerializeToString,
+            ),
+            'StringValuedEnumNoEnumGenerated': grpc.unary_unary_rpc_method_handler(
+                    servicer.StringValuedEnumNoEnumGenerated,
+                    request_deserializer=nifake__pb2.StringValuedEnumNoEnumGeneratedRequest.FromString,
+                    response_serializer=nifake__pb2.StringValuedEnumNoEnumGeneratedResponse.SerializeToString,
+            ),
+            'IviDanceWithATwistCalculatedSizeOut': grpc.unary_unary_rpc_method_handler(
+                    servicer.IviDanceWithATwistCalculatedSizeOut,
+                    request_deserializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutRequest.FromString,
+                    response_serializer=nifake__pb2.IviDanceWithATwistCalculatedSizeOutResponse.SerializeToString,
+            ),
+            'ImportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
+                    servicer.ImportAttributeConfigurationBuffer,
+                    request_deserializer=nifake__pb2.ImportAttributeConfigurationBufferRequest.FromString,
+                    response_serializer=nifake__pb2.ImportAttributeConfigurationBufferResponse.SerializeToString,
+            ),
+            'ExportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExportAttributeConfigurationBuffer,
+                    request_deserializer=nifake__pb2.ExportAttributeConfigurationBufferRequest.FromString,
+                    response_serializer=nifake__pb2.ExportAttributeConfigurationBufferResponse.SerializeToString,
+            ),
+            'Control4022': grpc.unary_unary_rpc_method_handler(
+                    servicer.Control4022,
+                    request_deserializer=nifake__pb2.Control4022Request.FromString,
+                    response_serializer=nifake__pb2.Control4022Response.SerializeToString,
+            ),
+            'AcceptViSessionArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.AcceptViSessionArray,
+                    request_deserializer=nifake__pb2.AcceptViSessionArrayRequest.FromString,
+                    response_serializer=nifake__pb2.AcceptViSessionArrayResponse.SerializeToString,
+            ),
+            'AcceptViUInt32Array': grpc.unary_unary_rpc_method_handler(
+                    servicer.AcceptViUInt32Array,
+                    request_deserializer=nifake__pb2.AcceptViUInt32ArrayRequest.FromString,
+                    response_serializer=nifake__pb2.AcceptViUInt32ArrayResponse.SerializeToString,
+            ),
+            'BoolArrayInputFunction': grpc.unary_unary_rpc_method_handler(
+                    servicer.BoolArrayInputFunction,
+                    request_deserializer=nifake__pb2.BoolArrayInputFunctionRequest.FromString,
+                    response_serializer=nifake__pb2.BoolArrayInputFunctionResponse.SerializeToString,
+            ),
+            'CloseExtCal': grpc.unary_unary_rpc_method_handler(
+                    servicer.CloseExtCal,
+                    request_deserializer=nifake__pb2.CloseExtCalRequest.FromString,
+                    response_serializer=nifake__pb2.CloseExtCalResponse.SerializeToString,
+            ),
+            'CommandWithReservedParam': grpc.unary_unary_rpc_method_handler(
+                    servicer.CommandWithReservedParam,
+                    request_deserializer=nifake__pb2.CommandWithReservedParamRequest.FromString,
+                    response_serializer=nifake__pb2.CommandWithReservedParamResponse.SerializeToString,
+            ),
+            'CreateConfigurationList': grpc.unary_unary_rpc_method_handler(
+                    servicer.CreateConfigurationList,
+                    request_deserializer=nifake__pb2.CreateConfigurationListRequest.FromString,
+                    response_serializer=nifake__pb2.CreateConfigurationListResponse.SerializeToString,
+            ),
+            'CustomNestedStructRoundtrip': grpc.unary_unary_rpc_method_handler(
+                    servicer.CustomNestedStructRoundtrip,
+                    request_deserializer=nifake__pb2.CustomNestedStructRoundtripRequest.FromString,
+                    response_serializer=nifake__pb2.CustomNestedStructRoundtripResponse.SerializeToString,
+            ),
+            'GetBitfieldAsEnumArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBitfieldAsEnumArray,
+                    request_deserializer=nifake__pb2.GetBitfieldAsEnumArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetBitfieldAsEnumArrayResponse.SerializeToString,
+            ),
+            'GetAnIviDanceWithATwistArrayOfCustomType': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAnIviDanceWithATwistArrayOfCustomType,
+                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeRequest.FromString,
+                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeResponse.SerializeToString,
+            ),
+            'GetAnIviDanceWithATwistArrayWithInputArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAnIviDanceWithATwistArrayWithInputArray,
+                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayResponse.SerializeToString,
+            ),
+            'GetAnIviDanceWithATwistByteArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAnIviDanceWithATwistByteArray,
+                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistByteArrayResponse.SerializeToString,
+            ),
+            'GetAnIviDanceWithATwistStringStrlenBug': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAnIviDanceWithATwistStringStrlenBug,
+                    request_deserializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugRequest.FromString,
+                    response_serializer=nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugResponse.SerializeToString,
+            ),
+            'GetArraySizeForCustomCode': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetArraySizeForCustomCode,
+                    request_deserializer=nifake__pb2.GetArraySizeForCustomCodeRequest.FromString,
+                    response_serializer=nifake__pb2.GetArraySizeForCustomCodeResponse.SerializeToString,
+            ),
+            'GetArrayViUInt8WithEnum': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetArrayViUInt8WithEnum,
+                    request_deserializer=nifake__pb2.GetArrayViUInt8WithEnumRequest.FromString,
+                    response_serializer=nifake__pb2.GetArrayViUInt8WithEnumResponse.SerializeToString,
+            ),
+            'GetViUInt8': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetViUInt8,
+                    request_deserializer=nifake__pb2.GetViUInt8Request.FromString,
+                    response_serializer=nifake__pb2.GetViUInt8Response.SerializeToString,
+            ),
+            'GetViInt32Array': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetViInt32Array,
+                    request_deserializer=nifake__pb2.GetViInt32ArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetViInt32ArrayResponse.SerializeToString,
+            ),
+            'GetViUInt32Array': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetViUInt32Array,
+                    request_deserializer=nifake__pb2.GetViUInt32ArrayRequest.FromString,
+                    response_serializer=nifake__pb2.GetViUInt32ArrayResponse.SerializeToString,
+            ),
+            'MethodUsingEnumWithGrpcNameValues': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodUsingEnumWithGrpcNameValues,
+                    request_deserializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesRequest.FromString,
+                    response_serializer=nifake__pb2.MethodUsingEnumWithGrpcNameValuesResponse.SerializeToString,
+            ),
+            'MethodWithGetLastErrorParam': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodWithGetLastErrorParam,
+                    request_deserializer=nifake__pb2.MethodWithGetLastErrorParamRequest.FromString,
+                    response_serializer=nifake__pb2.MethodWithGetLastErrorParamResponse.SerializeToString,
+            ),
+            'MethodWithGrpcOnlyParam': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodWithGrpcOnlyParam,
+                    request_deserializer=nifake__pb2.MethodWithGrpcOnlyParamRequest.FromString,
+                    response_serializer=nifake__pb2.MethodWithGrpcOnlyParamResponse.SerializeToString,
+            ),
+            'MethodUsingWholeAndFractionalNumbers': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodUsingWholeAndFractionalNumbers,
+                    request_deserializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersRequest.FromString,
+                    response_serializer=nifake__pb2.MethodUsingWholeAndFractionalNumbersResponse.SerializeToString,
+            ),
+            'MethodUsingWholeMappedNumbers': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodUsingWholeMappedNumbers,
+                    request_deserializer=nifake__pb2.MethodUsingWholeMappedNumbersRequest.FromString,
+                    response_serializer=nifake__pb2.MethodUsingWholeMappedNumbersResponse.SerializeToString,
+            ),
+            'MethodWithGrpcFieldNumber': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodWithGrpcFieldNumber,
+                    request_deserializer=nifake__pb2.MethodWithGrpcFieldNumberRequest.FromString,
+                    response_serializer=nifake__pb2.MethodWithGrpcFieldNumberResponse.SerializeToString,
+            ),
+            'MethodWithProtoOnlyParameter': grpc.unary_unary_rpc_method_handler(
+                    servicer.MethodWithProtoOnlyParameter,
+                    request_deserializer=nifake__pb2.MethodWithProtoOnlyParameterRequest.FromString,
+                    response_serializer=nifake__pb2.MethodWithProtoOnlyParameterResponse.SerializeToString,
+            ),
+            'ReadDataWithInOutIviTwist': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReadDataWithInOutIviTwist,
+                    request_deserializer=nifake__pb2.ReadDataWithInOutIviTwistRequest.FromString,
+                    response_serializer=nifake__pb2.ReadDataWithInOutIviTwistResponse.SerializeToString,
+            ),
+            'ReadDataWithMultipleIviTwistParamSets': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReadDataWithMultipleIviTwistParamSets,
+                    request_deserializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsRequest.FromString,
+                    response_serializer=nifake__pb2.ReadDataWithMultipleIviTwistParamSetsResponse.SerializeToString,
+            ),
+            'InitExtCal': grpc.unary_unary_rpc_method_handler(
+                    servicer.InitExtCal,
+                    request_deserializer=nifake__pb2.InitExtCalRequest.FromString,
+                    response_serializer=nifake__pb2.InitExtCalResponse.SerializeToString,
+            ),
+            'InitWithVarArgs': grpc.unary_unary_rpc_method_handler(
+                    servicer.InitWithVarArgs,
+                    request_deserializer=nifake__pb2.InitWithVarArgsRequest.FromString,
+                    response_serializer=nifake__pb2.InitWithVarArgsResponse.SerializeToString,
+            ),
+            'MultipleArraysSameSizeWithOptional': grpc.unary_unary_rpc_method_handler(
+                    servicer.MultipleArraysSameSizeWithOptional,
+                    request_deserializer=nifake__pb2.MultipleArraysSameSizeWithOptionalRequest.FromString,
+                    response_serializer=nifake__pb2.MultipleArraysSameSizeWithOptionalResponse.SerializeToString,
+            ),
             'UseATwoDimensionParameter': grpc.unary_unary_rpc_method_handler(
                     servicer.UseATwoDimensionParameter,
                     request_deserializer=nifake__pb2.UseATwoDimensionParameterRequest.FromString,
                     response_serializer=nifake__pb2.UseATwoDimensionParameterResponse.SerializeToString,
-            ),
-            'ViInt16ArrayInputFunction': grpc.unary_unary_rpc_method_handler(
-                    servicer.ViInt16ArrayInputFunction,
-                    request_deserializer=nifake__pb2.ViInt16ArrayInputFunctionRequest.FromString,
-                    response_serializer=nifake__pb2.ViInt16ArrayInputFunctionResponse.SerializeToString,
             ),
             'ViUInt8ArrayInputFunction': grpc.unary_unary_rpc_method_handler(
                     servicer.ViUInt8ArrayInputFunction,
@@ -1569,10 +1569,10 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.ViUInt8ArrayOutputFunctionRequest.FromString,
                     response_serializer=nifake__pb2.ViUInt8ArrayOutputFunctionResponse.SerializeToString,
             ),
-            'WriteWaveform': grpc.unary_unary_rpc_method_handler(
-                    servicer.WriteWaveform,
-                    request_deserializer=nifake__pb2.WriteWaveformRequest.FromString,
-                    response_serializer=nifake__pb2.WriteWaveformResponse.SerializeToString,
+            'ViInt16ArrayInputFunction': grpc.unary_unary_rpc_method_handler(
+                    servicer.ViInt16ArrayInputFunction,
+                    request_deserializer=nifake__pb2.ViInt16ArrayInputFunctionRequest.FromString,
+                    response_serializer=nifake__pb2.ViInt16ArrayInputFunctionResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1598,74 +1598,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/Abort',
             nifake__pb2.AbortRequest.SerializeToString,
             nifake__pb2.AbortResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AcceptListOfDurationsInSeconds(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/AcceptListOfDurationsInSeconds',
-            nifake__pb2.AcceptListOfDurationsInSecondsRequest.SerializeToString,
-            nifake__pb2.AcceptListOfDurationsInSecondsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AcceptViSessionArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/AcceptViSessionArray',
-            nifake__pb2.AcceptViSessionArrayRequest.SerializeToString,
-            nifake__pb2.AcceptViSessionArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AcceptViUInt32Array(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/AcceptViUInt32Array',
-            nifake__pb2.AcceptViUInt32ArrayRequest.SerializeToString,
-            nifake__pb2.AcceptViUInt32ArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def BoolArrayInputFunction(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/BoolArrayInputFunction',
-            nifake__pb2.BoolArrayInputFunctionRequest.SerializeToString,
-            nifake__pb2.BoolArrayInputFunctionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1704,142 +1636,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def CloseExtCal(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CloseExtCal',
-            nifake__pb2.CloseExtCalRequest.SerializeToString,
-            nifake__pb2.CloseExtCalResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CommandWithReservedParam(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CommandWithReservedParam',
-            nifake__pb2.CommandWithReservedParamRequest.SerializeToString,
-            nifake__pb2.CommandWithReservedParamResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ConfigureAbc(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ConfigureAbc',
-            nifake__pb2.ConfigureAbcRequest.SerializeToString,
-            nifake__pb2.ConfigureAbcResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ConfigureEnums(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ConfigureEnums',
-            nifake__pb2.ConfigureEnumsRequest.SerializeToString,
-            nifake__pb2.ConfigureEnumsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def Control4022(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/Control4022',
-            nifake__pb2.Control4022Request.SerializeToString,
-            nifake__pb2.Control4022Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CreateConfigurationList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CreateConfigurationList',
-            nifake__pb2.CreateConfigurationListRequest.SerializeToString,
-            nifake__pb2.CreateConfigurationListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CustomNestedStructRoundtrip(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CustomNestedStructRoundtrip',
-            nifake__pb2.CustomNestedStructRoundtripRequest.SerializeToString,
-            nifake__pb2.CustomNestedStructRoundtripResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def DoubleAllTheNums(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/DoubleAllTheNums',
-            nifake__pb2.DoubleAllTheNumsRequest.SerializeToString,
-            nifake__pb2.DoubleAllTheNumsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def EnumArrayOutputFunction(request,
             target,
             options=(),
@@ -1874,6 +1670,23 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def StringValuedEnumInputFunctionWithDefaults(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/StringValuedEnumInputFunctionWithDefaults',
+            nifake__pb2.StringValuedEnumInputFunctionWithDefaultsRequest.SerializeToString,
+            nifake__pb2.StringValuedEnumInputFunctionWithDefaultsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ErrorMessage(request,
             target,
             options=(),
@@ -1891,40 +1704,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ExportAttributeConfigurationBuffer(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ExportAttributeConfigurationBuffer',
-            nifake__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
-            nifake__pb2.ExportAttributeConfigurationBufferResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ExportAttributeConfigurationBufferEx(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ExportAttributeConfigurationBufferEx',
-            nifake__pb2.ExportAttributeConfigurationBufferExRequest.SerializeToString,
-            nifake__pb2.ExportAttributeConfigurationBufferExResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def FetchWaveform(request,
             target,
             options=(),
@@ -1938,40 +1717,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FetchWaveform',
             nifake__pb2.FetchWaveformRequest.SerializeToString,
             nifake__pb2.FetchWaveformResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def FetchWithCustomSize(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FetchWithCustomSize',
-            nifake__pb2.FetchWithCustomSizeRequest.SerializeToString,
-            nifake__pb2.FetchWithCustomSizeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def FunctionWithOverriddenGrpcName2x(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FunctionWithOverriddenGrpcName2x',
-            nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.SerializeToString,
-            nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2044,125 +1789,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAnIviDanceWithATwistArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArray',
-            nifake__pb2.GetAnIviDanceWithATwistArrayRequest.SerializeToString,
-            nifake__pb2.GetAnIviDanceWithATwistArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAnIviDanceWithATwistArrayOfCustomType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayOfCustomType',
-            nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeRequest.SerializeToString,
-            nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAnIviDanceWithATwistArrayWithInputArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayWithInputArray',
-            nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayRequest.SerializeToString,
-            nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAnIviDanceWithATwistByteArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistByteArray',
-            nifake__pb2.GetAnIviDanceWithATwistByteArrayRequest.SerializeToString,
-            nifake__pb2.GetAnIviDanceWithATwistByteArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAnIviDanceWithATwistString(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistString',
-            nifake__pb2.GetAnIviDanceWithATwistStringRequest.SerializeToString,
-            nifake__pb2.GetAnIviDanceWithATwistStringResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAnIviDanceWithATwistStringStrlenBug(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistStringStrlenBug',
-            nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugRequest.SerializeToString,
-            nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetArraySizeForCustomCode(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetArraySizeForCustomCode',
-            nifake__pb2.GetArraySizeForCustomCodeRequest.SerializeToString,
-            nifake__pb2.GetArraySizeForCustomCodeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def GetArrayUsingIviDance(request,
             target,
             options=(),
@@ -2176,23 +1802,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetArrayUsingIviDance',
             nifake__pb2.GetArrayUsingIviDanceRequest.SerializeToString,
             nifake__pb2.GetArrayUsingIviDanceResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetArrayViUInt8WithEnum(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetArrayViUInt8WithEnum',
-            nifake__pb2.GetArrayViUInt8WithEnumRequest.SerializeToString,
-            nifake__pb2.GetArrayViUInt8WithEnumResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2299,23 +1908,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetBitfieldAsEnumArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetBitfieldAsEnumArray',
-            nifake__pb2.GetBitfieldAsEnumArrayRequest.SerializeToString,
-            nifake__pb2.GetBitfieldAsEnumArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def GetCalDateAndTime(request,
             target,
             options=(),
@@ -2346,40 +1938,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetCalInterval',
             nifake__pb2.GetCalIntervalRequest.SerializeToString,
             nifake__pb2.GetCalIntervalResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetCustomType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetCustomType',
-            nifake__pb2.GetCustomTypeRequest.SerializeToString,
-            nifake__pb2.GetCustomTypeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetCustomTypeArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetCustomTypeArray',
-            nifake__pb2.GetCustomTypeArrayRequest.SerializeToString,
-            nifake__pb2.GetCustomTypeArrayResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2418,125 +1976,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetParameterWithOverriddenGrpcName(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetParameterWithOverriddenGrpcName',
-            nifake__pb2.GetParameterWithOverriddenGrpcNameRequest.SerializeToString,
-            nifake__pb2.GetParameterWithOverriddenGrpcNameResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetViInt32Array(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetViInt32Array',
-            nifake__pb2.GetViInt32ArrayRequest.SerializeToString,
-            nifake__pb2.GetViInt32ArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetViUInt32Array(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetViUInt32Array',
-            nifake__pb2.GetViUInt32ArrayRequest.SerializeToString,
-            nifake__pb2.GetViUInt32ArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetViUInt8(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetViUInt8',
-            nifake__pb2.GetViUInt8Request.SerializeToString,
-            nifake__pb2.GetViUInt8Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ImportAttributeConfigurationBuffer(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ImportAttributeConfigurationBuffer',
-            nifake__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
-            nifake__pb2.ImportAttributeConfigurationBufferResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ImportAttributeConfigurationBufferEx(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ImportAttributeConfigurationBufferEx',
-            nifake__pb2.ImportAttributeConfigurationBufferExRequest.SerializeToString,
-            nifake__pb2.ImportAttributeConfigurationBufferExResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def InitExtCal(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/InitExtCal',
-            nifake__pb2.InitExtCalRequest.SerializeToString,
-            nifake__pb2.InitExtCalResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def InitWithOptions(request,
             target,
             options=(),
@@ -2550,176 +1989,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/InitWithOptions',
             nifake__pb2.InitWithOptionsRequest.SerializeToString,
             nifake__pb2.InitWithOptionsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def InitWithVarArgs(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/InitWithVarArgs',
-            nifake__pb2.InitWithVarArgsRequest.SerializeToString,
-            nifake__pb2.InitWithVarArgsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def IviDanceWithATwistCalculatedSizeOut(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/IviDanceWithATwistCalculatedSizeOut',
-            nifake__pb2.IviDanceWithATwistCalculatedSizeOutRequest.SerializeToString,
-            nifake__pb2.IviDanceWithATwistCalculatedSizeOutResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def IviDanceWithTwistWithMultipleArraysAndOneBufferSize(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/IviDanceWithTwistWithMultipleArraysAndOneBufferSize',
-            nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest.SerializeToString,
-            nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodUsingEnumWithGrpcNameValues(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodUsingEnumWithGrpcNameValues',
-            nifake__pb2.MethodUsingEnumWithGrpcNameValuesRequest.SerializeToString,
-            nifake__pb2.MethodUsingEnumWithGrpcNameValuesResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodUsingWholeAndFractionalNumbers(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodUsingWholeAndFractionalNumbers',
-            nifake__pb2.MethodUsingWholeAndFractionalNumbersRequest.SerializeToString,
-            nifake__pb2.MethodUsingWholeAndFractionalNumbersResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodUsingWholeMappedNumbers(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodUsingWholeMappedNumbers',
-            nifake__pb2.MethodUsingWholeMappedNumbersRequest.SerializeToString,
-            nifake__pb2.MethodUsingWholeMappedNumbersResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodWithGetLastErrorParam(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGetLastErrorParam',
-            nifake__pb2.MethodWithGetLastErrorParamRequest.SerializeToString,
-            nifake__pb2.MethodWithGetLastErrorParamResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodWithGrpcFieldNumber(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGrpcFieldNumber',
-            nifake__pb2.MethodWithGrpcFieldNumberRequest.SerializeToString,
-            nifake__pb2.MethodWithGrpcFieldNumberResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodWithGrpcOnlyParam(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGrpcOnlyParam',
-            nifake__pb2.MethodWithGrpcOnlyParamRequest.SerializeToString,
-            nifake__pb2.MethodWithGrpcOnlyParamResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MethodWithProtoOnlyParameter(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithProtoOnlyParameter',
-            nifake__pb2.MethodWithProtoOnlyParameterRequest.SerializeToString,
-            nifake__pb2.MethodWithProtoOnlyParameterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2754,23 +2023,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MultipleArraysSameSize',
             nifake__pb2.MultipleArraysSameSizeRequest.SerializeToString,
             nifake__pb2.MultipleArraysSameSizeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def MultipleArraysSameSizeWithOptional(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MultipleArraysSameSizeWithOptional',
-            nifake__pb2.MultipleArraysSameSizeWithOptionalRequest.SerializeToString,
-            nifake__pb2.MultipleArraysSameSizeWithOptionalResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2843,40 +2095,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ReadDataWithInOutIviTwist(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReadDataWithInOutIviTwist',
-            nifake__pb2.ReadDataWithInOutIviTwistRequest.SerializeToString,
-            nifake__pb2.ReadDataWithInOutIviTwistResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ReadDataWithMultipleIviTwistParamSets(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReadDataWithMultipleIviTwistParamSets',
-            nifake__pb2.ReadDataWithMultipleIviTwistParamSetsRequest.SerializeToString,
-            nifake__pb2.ReadDataWithMultipleIviTwistParamSetsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def ReadFromChannel(request,
             target,
             options=(),
@@ -2907,40 +2125,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReturnANumberAndAString',
             nifake__pb2.ReturnANumberAndAStringRequest.SerializeToString,
             nifake__pb2.ReturnANumberAndAStringResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ReturnDurationInSeconds(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReturnDurationInSeconds',
-            nifake__pb2.ReturnDurationInSecondsRequest.SerializeToString,
-            nifake__pb2.ReturnDurationInSecondsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ReturnListOfDurationsInSeconds(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReturnListOfDurationsInSeconds',
-            nifake__pb2.ReturnListOfDurationsInSecondsRequest.SerializeToString,
-            nifake__pb2.ReturnListOfDurationsInSecondsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3047,74 +2231,6 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SetCustomType(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/SetCustomType',
-            nifake__pb2.SetCustomTypeRequest.SerializeToString,
-            nifake__pb2.SetCustomTypeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def SetCustomTypeArray(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/SetCustomTypeArray',
-            nifake__pb2.SetCustomTypeArrayRequest.SerializeToString,
-            nifake__pb2.SetCustomTypeArrayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def StringValuedEnumInputFunctionWithDefaults(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/StringValuedEnumInputFunctionWithDefaults',
-            nifake__pb2.StringValuedEnumInputFunctionWithDefaultsRequest.SerializeToString,
-            nifake__pb2.StringValuedEnumInputFunctionWithDefaultsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def StringValuedEnumNoEnumGenerated(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/StringValuedEnumNoEnumGenerated',
-            nifake__pb2.StringValuedEnumNoEnumGeneratedRequest.SerializeToString,
-            nifake__pb2.StringValuedEnumNoEnumGeneratedResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def TwoInputFunction(request,
             target,
             options=(),
@@ -3149,6 +2265,907 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def WriteWaveform(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/WriteWaveform',
+            nifake__pb2.WriteWaveformRequest.SerializeToString,
+            nifake__pb2.WriteWaveformResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetCustomType(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/SetCustomType',
+            nifake__pb2.SetCustomTypeRequest.SerializeToString,
+            nifake__pb2.SetCustomTypeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetCustomTypeArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/SetCustomTypeArray',
+            nifake__pb2.SetCustomTypeArrayRequest.SerializeToString,
+            nifake__pb2.SetCustomTypeArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetCustomType(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetCustomType',
+            nifake__pb2.GetCustomTypeRequest.SerializeToString,
+            nifake__pb2.GetCustomTypeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetCustomTypeArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetCustomTypeArray',
+            nifake__pb2.GetCustomTypeArrayRequest.SerializeToString,
+            nifake__pb2.GetCustomTypeArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAnIviDanceWithATwistArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArray',
+            nifake__pb2.GetAnIviDanceWithATwistArrayRequest.SerializeToString,
+            nifake__pb2.GetAnIviDanceWithATwistArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAnIviDanceWithATwistString(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistString',
+            nifake__pb2.GetAnIviDanceWithATwistStringRequest.SerializeToString,
+            nifake__pb2.GetAnIviDanceWithATwistStringResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DoubleAllTheNums(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/DoubleAllTheNums',
+            nifake__pb2.DoubleAllTheNumsRequest.SerializeToString,
+            nifake__pb2.DoubleAllTheNumsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AcceptListOfDurationsInSeconds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/AcceptListOfDurationsInSeconds',
+            nifake__pb2.AcceptListOfDurationsInSecondsRequest.SerializeToString,
+            nifake__pb2.AcceptListOfDurationsInSecondsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReturnDurationInSeconds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReturnDurationInSeconds',
+            nifake__pb2.ReturnDurationInSecondsRequest.SerializeToString,
+            nifake__pb2.ReturnDurationInSecondsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReturnListOfDurationsInSeconds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReturnListOfDurationsInSeconds',
+            nifake__pb2.ReturnListOfDurationsInSecondsRequest.SerializeToString,
+            nifake__pb2.ReturnListOfDurationsInSecondsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ConfigureAbc(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ConfigureAbc',
+            nifake__pb2.ConfigureAbcRequest.SerializeToString,
+            nifake__pb2.ConfigureAbcResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ConfigureEnums(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ConfigureEnums',
+            nifake__pb2.ConfigureEnumsRequest.SerializeToString,
+            nifake__pb2.ConfigureEnumsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExportAttributeConfigurationBufferEx(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ExportAttributeConfigurationBufferEx',
+            nifake__pb2.ExportAttributeConfigurationBufferExRequest.SerializeToString,
+            nifake__pb2.ExportAttributeConfigurationBufferExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ImportAttributeConfigurationBufferEx(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ImportAttributeConfigurationBufferEx',
+            nifake__pb2.ImportAttributeConfigurationBufferExRequest.SerializeToString,
+            nifake__pb2.ImportAttributeConfigurationBufferExResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FetchWithCustomSize(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FetchWithCustomSize',
+            nifake__pb2.FetchWithCustomSizeRequest.SerializeToString,
+            nifake__pb2.FetchWithCustomSizeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetParameterWithOverriddenGrpcName(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetParameterWithOverriddenGrpcName',
+            nifake__pb2.GetParameterWithOverriddenGrpcNameRequest.SerializeToString,
+            nifake__pb2.GetParameterWithOverriddenGrpcNameResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def IviDanceWithTwistWithMultipleArraysAndOneBufferSize(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/IviDanceWithTwistWithMultipleArraysAndOneBufferSize',
+            nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest.SerializeToString,
+            nifake__pb2.IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FunctionWithOverriddenGrpcName2x(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FunctionWithOverriddenGrpcName2x',
+            nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.SerializeToString,
+            nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StringValuedEnumNoEnumGenerated(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/StringValuedEnumNoEnumGenerated',
+            nifake__pb2.StringValuedEnumNoEnumGeneratedRequest.SerializeToString,
+            nifake__pb2.StringValuedEnumNoEnumGeneratedResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def IviDanceWithATwistCalculatedSizeOut(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/IviDanceWithATwistCalculatedSizeOut',
+            nifake__pb2.IviDanceWithATwistCalculatedSizeOutRequest.SerializeToString,
+            nifake__pb2.IviDanceWithATwistCalculatedSizeOutResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ImportAttributeConfigurationBuffer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ImportAttributeConfigurationBuffer',
+            nifake__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
+            nifake__pb2.ImportAttributeConfigurationBufferResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExportAttributeConfigurationBuffer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ExportAttributeConfigurationBuffer',
+            nifake__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
+            nifake__pb2.ExportAttributeConfigurationBufferResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Control4022(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/Control4022',
+            nifake__pb2.Control4022Request.SerializeToString,
+            nifake__pb2.Control4022Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AcceptViSessionArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/AcceptViSessionArray',
+            nifake__pb2.AcceptViSessionArrayRequest.SerializeToString,
+            nifake__pb2.AcceptViSessionArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AcceptViUInt32Array(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/AcceptViUInt32Array',
+            nifake__pb2.AcceptViUInt32ArrayRequest.SerializeToString,
+            nifake__pb2.AcceptViUInt32ArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def BoolArrayInputFunction(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/BoolArrayInputFunction',
+            nifake__pb2.BoolArrayInputFunctionRequest.SerializeToString,
+            nifake__pb2.BoolArrayInputFunctionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CloseExtCal(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CloseExtCal',
+            nifake__pb2.CloseExtCalRequest.SerializeToString,
+            nifake__pb2.CloseExtCalResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CommandWithReservedParam(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CommandWithReservedParam',
+            nifake__pb2.CommandWithReservedParamRequest.SerializeToString,
+            nifake__pb2.CommandWithReservedParamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateConfigurationList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CreateConfigurationList',
+            nifake__pb2.CreateConfigurationListRequest.SerializeToString,
+            nifake__pb2.CreateConfigurationListResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CustomNestedStructRoundtrip(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/CustomNestedStructRoundtrip',
+            nifake__pb2.CustomNestedStructRoundtripRequest.SerializeToString,
+            nifake__pb2.CustomNestedStructRoundtripResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBitfieldAsEnumArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetBitfieldAsEnumArray',
+            nifake__pb2.GetBitfieldAsEnumArrayRequest.SerializeToString,
+            nifake__pb2.GetBitfieldAsEnumArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAnIviDanceWithATwistArrayOfCustomType(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayOfCustomType',
+            nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeRequest.SerializeToString,
+            nifake__pb2.GetAnIviDanceWithATwistArrayOfCustomTypeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAnIviDanceWithATwistArrayWithInputArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistArrayWithInputArray',
+            nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayRequest.SerializeToString,
+            nifake__pb2.GetAnIviDanceWithATwistArrayWithInputArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAnIviDanceWithATwistByteArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistByteArray',
+            nifake__pb2.GetAnIviDanceWithATwistByteArrayRequest.SerializeToString,
+            nifake__pb2.GetAnIviDanceWithATwistByteArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAnIviDanceWithATwistStringStrlenBug(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetAnIviDanceWithATwistStringStrlenBug',
+            nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugRequest.SerializeToString,
+            nifake__pb2.GetAnIviDanceWithATwistStringStrlenBugResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetArraySizeForCustomCode(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetArraySizeForCustomCode',
+            nifake__pb2.GetArraySizeForCustomCodeRequest.SerializeToString,
+            nifake__pb2.GetArraySizeForCustomCodeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetArrayViUInt8WithEnum(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetArrayViUInt8WithEnum',
+            nifake__pb2.GetArrayViUInt8WithEnumRequest.SerializeToString,
+            nifake__pb2.GetArrayViUInt8WithEnumResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetViUInt8(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetViUInt8',
+            nifake__pb2.GetViUInt8Request.SerializeToString,
+            nifake__pb2.GetViUInt8Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetViInt32Array(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetViInt32Array',
+            nifake__pb2.GetViInt32ArrayRequest.SerializeToString,
+            nifake__pb2.GetViInt32ArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetViUInt32Array(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/GetViUInt32Array',
+            nifake__pb2.GetViUInt32ArrayRequest.SerializeToString,
+            nifake__pb2.GetViUInt32ArrayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodUsingEnumWithGrpcNameValues(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodUsingEnumWithGrpcNameValues',
+            nifake__pb2.MethodUsingEnumWithGrpcNameValuesRequest.SerializeToString,
+            nifake__pb2.MethodUsingEnumWithGrpcNameValuesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodWithGetLastErrorParam(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGetLastErrorParam',
+            nifake__pb2.MethodWithGetLastErrorParamRequest.SerializeToString,
+            nifake__pb2.MethodWithGetLastErrorParamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodWithGrpcOnlyParam(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGrpcOnlyParam',
+            nifake__pb2.MethodWithGrpcOnlyParamRequest.SerializeToString,
+            nifake__pb2.MethodWithGrpcOnlyParamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodUsingWholeAndFractionalNumbers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodUsingWholeAndFractionalNumbers',
+            nifake__pb2.MethodUsingWholeAndFractionalNumbersRequest.SerializeToString,
+            nifake__pb2.MethodUsingWholeAndFractionalNumbersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodUsingWholeMappedNumbers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodUsingWholeMappedNumbers',
+            nifake__pb2.MethodUsingWholeMappedNumbersRequest.SerializeToString,
+            nifake__pb2.MethodUsingWholeMappedNumbersResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodWithGrpcFieldNumber(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithGrpcFieldNumber',
+            nifake__pb2.MethodWithGrpcFieldNumberRequest.SerializeToString,
+            nifake__pb2.MethodWithGrpcFieldNumberResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MethodWithProtoOnlyParameter(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MethodWithProtoOnlyParameter',
+            nifake__pb2.MethodWithProtoOnlyParameterRequest.SerializeToString,
+            nifake__pb2.MethodWithProtoOnlyParameterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReadDataWithInOutIviTwist(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReadDataWithInOutIviTwist',
+            nifake__pb2.ReadDataWithInOutIviTwistRequest.SerializeToString,
+            nifake__pb2.ReadDataWithInOutIviTwistResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReadDataWithMultipleIviTwistParamSets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ReadDataWithMultipleIviTwistParamSets',
+            nifake__pb2.ReadDataWithMultipleIviTwistParamSetsRequest.SerializeToString,
+            nifake__pb2.ReadDataWithMultipleIviTwistParamSetsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def InitExtCal(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/InitExtCal',
+            nifake__pb2.InitExtCalRequest.SerializeToString,
+            nifake__pb2.InitExtCalResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def InitWithVarArgs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/InitWithVarArgs',
+            nifake__pb2.InitWithVarArgsRequest.SerializeToString,
+            nifake__pb2.InitWithVarArgsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MultipleArraysSameSizeWithOptional(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MultipleArraysSameSizeWithOptional',
+            nifake__pb2.MultipleArraysSameSizeWithOptionalRequest.SerializeToString,
+            nifake__pb2.MultipleArraysSameSizeWithOptionalResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def UseATwoDimensionParameter(request,
             target,
             options=(),
@@ -3162,23 +3179,6 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/UseATwoDimensionParameter',
             nifake__pb2.UseATwoDimensionParameterRequest.SerializeToString,
             nifake__pb2.UseATwoDimensionParameterResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ViInt16ArrayInputFunction(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ViInt16ArrayInputFunction',
-            nifake__pb2.ViInt16ArrayInputFunctionRequest.SerializeToString,
-            nifake__pb2.ViInt16ArrayInputFunctionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3217,7 +3217,7 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def WriteWaveform(request,
+    def ViInt16ArrayInputFunction(request,
             target,
             options=(),
             channel_credentials=None,
@@ -3227,8 +3227,8 @@ class NiFake(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/WriteWaveform',
-            nifake__pb2.WriteWaveformRequest.SerializeToString,
-            nifake__pb2.WriteWaveformResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/ViInt16ArrayInputFunction',
+            nifake__pb2.ViInt16ArrayInputFunctionRequest.SerializeToString,
+            nifake__pb2.ViInt16ArrayInputFunctionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

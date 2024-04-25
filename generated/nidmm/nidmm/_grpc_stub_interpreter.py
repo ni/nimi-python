@@ -204,7 +204,7 @@ class GrpcStubInterpreter(object):
     def get_cal_date_and_time(self, cal_type):  # noqa: N802
         response = self._invoke(
             self._client.GetCalDateAndTime,
-            grpc_types.GetCalDateAndTimeRequest(vi=self._vi, cal_type_raw=cal_type),
+            grpc_types.GetCalDateAndTimeRequest(vi=self._vi, cal_type=cal_type),
         )
         return response.month, response.day, response.year, response.hour, response.minute
 
@@ -232,7 +232,7 @@ class GrpcStubInterpreter(object):
     def get_last_cal_temp(self, cal_type):  # noqa: N802
         response = self._invoke(
             self._client.GetLastCalTemp,
-            grpc_types.GetLastCalTempRequest(vi=self._vi, cal_type_raw=cal_type),
+            grpc_types.GetLastCalTempRequest(vi=self._vi, cal_type=cal_type),
         )
         return response.temperature
 

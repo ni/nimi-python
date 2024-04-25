@@ -13,9 +13,9 @@ import nifake.errors as errors
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 
-import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
-
 import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
+
+import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
 
 
 _was_runtime_environment_set = None
