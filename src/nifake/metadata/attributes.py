@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 23.5.0d13
+# This file is generated from NI-FAKE API metadata version 24.3.0f98
 attributes = {
     1000000: {
         'access': 'read-write',
