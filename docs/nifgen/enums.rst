@@ -199,12 +199,12 @@ DataMarkerEventLevelPolarity
 
 
 
-DoneEventPulseWidthUnits
-------------------------
+EventPulseWidthUnits
+--------------------
 
-.. py:class:: DoneEventPulseWidthUnits
+.. py:class:: EventPulseWidthUnits
 
-    .. py:attribute:: DoneEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
+    .. py:attribute:: EventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
 
 
 
@@ -214,7 +214,7 @@ DoneEventPulseWidthUnits
 
 
 
-    .. py:attribute:: DoneEventPulseWidthUnits.SECONDS
+    .. py:attribute:: EventPulseWidthUnits.SECONDS
 
 
 
@@ -269,31 +269,6 @@ IdleBehavior
 
 
         While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value property.
-
-        
-
-
-
-MarkerEventPulseWidthUnits
---------------------------
-
-.. py:class:: MarkerEventPulseWidthUnits
-
-    .. py:attribute:: MarkerEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: MarkerEventPulseWidthUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
 
         
 
@@ -722,31 +697,6 @@ StartTriggerType
 
 
         P2P Endpoint Fullness
-
-        
-
-
-
-StartedEventPulseWidthUnits
----------------------------
-
-.. py:class:: StartedEventPulseWidthUnits
-
-    .. py:attribute:: StartedEventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
-
-
-
-        Specifies the pulse width in Sample clock periods.
-
-        
-
-
-
-    .. py:attribute:: StartedEventPulseWidthUnits.SECONDS
-
-
-
-        Specifies the pulse width in seconds.
 
         
 

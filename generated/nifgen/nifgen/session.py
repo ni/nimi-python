@@ -443,8 +443,8 @@ class _SessionBase(object):
 
     Specifies the pulse width for the Done Event.
     '''
-    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DoneEventPulseWidthUnits, 1150334)
-    '''Type: enums.DoneEventPulseWidthUnits
+    done_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventPulseWidthUnits, 1150334)
+    '''Type: enums.EventPulseWidthUnits
 
     Specifies the pulse width units for the Done Event.
     '''
@@ -779,8 +779,8 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.marker_event_pulse_width`
     '''
-    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150341)
-    '''Type: enums.MarkerEventPulseWidthUnits
+    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventPulseWidthUnits, 1150341)
+    '''Type: enums.EventPulseWidthUnits
 
     Specifies the pulse width units for the Marker Event.
 
@@ -1027,8 +1027,8 @@ class _SessionBase(object):
 
     Specifies the pulse width for the Started Event.
     '''
-    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartedEventPulseWidthUnits, 1150333)
-    '''Type: enums.StartedEventPulseWidthUnits
+    started_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EventPulseWidthUnits, 1150333)
+    '''Type: enums.EventPulseWidthUnits
 
     Specifies the pulse width units for the Started Event.
     '''

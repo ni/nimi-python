@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 24.5.0d38
+# This file is generated from NI-FGEN API metadata version 24.5.0d9999
 attributes = {
     1050005: {
         'access': 'read-write',
@@ -711,7 +711,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the pulse width units for the Started Event.'
         },
-        'enum': 'StartedEventPulseWidthUnits',
+        'enum': 'EventPulseWidthUnits',
         'lv_property': 'Events:Started:Pulse:Width Units',
         'name': 'STARTED_EVENT_PULSE_WIDTH_UNITS',
         'type': 'ViInt32'
@@ -721,7 +721,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the pulse width units for the Done Event.'
         },
-        'enum': 'DoneEventPulseWidthUnits',
+        'enum': 'EventPulseWidthUnits',
         'lv_property': 'Events:Done:Pulse:Width Units',
         'name': 'DONE_EVENT_PULSE_WIDTH_UNITS',
         'type': 'ViInt32'
@@ -798,7 +798,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the pulse width units for the Marker Event.'
         },
-        'enum': 'MarkerEventPulseWidthUnits',
+        'enum': 'EventPulseWidthUnits',
         'lv_property': 'Events:Marker:Pulse:Width Units',
         'name': 'MARKER_EVENT_PULSE_WIDTH_UNITS',
         'supported_rep_caps': [

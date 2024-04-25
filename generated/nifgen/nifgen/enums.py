@@ -85,7 +85,7 @@ class DataMarkerEventLevelPolarity(Enum):
     '''
 
 
-class DoneEventPulseWidthUnits(Enum):
+class EventPulseWidthUnits(Enum):
     SAMPLE_CLOCK_PERIODS = 101
     r'''
     Specifies the pulse width in Sample clock periods.
@@ -112,17 +112,6 @@ class IdleBehavior(Enum):
     JUMP_TO = 401
     r'''
     While in an Idle or Wait state, the output signal remains  at the value configured in the Idle or Wait value property.
-    '''
-
-
-class MarkerEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    r'''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    r'''
-    Specifies the pulse width in seconds.
     '''
 
 
@@ -311,17 +300,6 @@ class StartTriggerType(Enum):
     P2P_ENDPOINT_FULLNESS = 106
     r'''
     P2P Endpoint Fullness
-    '''
-
-
-class StartedEventPulseWidthUnits(Enum):
-    SAMPLE_CLOCK_PERIODS = 101
-    r'''
-    Specifies the pulse width in Sample clock periods.
-    '''
-    SECONDS = 102
-    r'''
-    Specifies the pulse width in seconds.
     '''
 
 

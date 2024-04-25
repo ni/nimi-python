@@ -3739,15 +3739,15 @@ done_event_pulse_width_units
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------------+
-            | Characteristic        | Value                          |
-            +=======================+================================+
-            | Datatype              | enums.DoneEventPulseWidthUnits |
-            +-----------------------+--------------------------------+
-            | Permissions           | read-write                     |
-            +-----------------------+--------------------------------+
-            | Repeated Capabilities | None                           |
-            +-----------------------+--------------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.EventPulseWidthUnits |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4854,15 +4854,15 @@ marker_event_pulse_width_units
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------------+
-            | Characteristic        | Value                            |
-            +=======================+==================================+
-            | Datatype              | enums.MarkerEventPulseWidthUnits |
-            +-----------------------+----------------------------------+
-            | Permissions           | read-write                       |
-            +-----------------------+----------------------------------+
-            | Repeated Capabilities | markers                          |
-            +-----------------------+----------------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.EventPulseWidthUnits |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | markers                    |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5851,15 +5851,15 @@ started_event_pulse_width_units
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------------+
-            | Characteristic        | Value                             |
-            +=======================+===================================+
-            | Datatype              | enums.StartedEventPulseWidthUnits |
-            +-----------------------+-----------------------------------+
-            | Permissions           | read-write                        |
-            +-----------------------+-----------------------------------+
-            | Repeated Capabilities | None                              |
-            +-----------------------+-----------------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.EventPulseWidthUnits |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

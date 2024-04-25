@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 24.5.0d38
+# This file is generated from NI-FGEN API metadata version 24.5.0d9999
 enums = {
     'AnalogPath': {
         'values': [
@@ -231,13 +231,14 @@ enums = {
             }
         ]
     },
-    'DoneEventPulseWidthUnits': {
+    'EventPulseWidthUnits': {
         'values': [
             {
                 'documentation': {
                     'description': 'Specifies the pulse width in Sample clock periods.'
                 },
                 'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
+                'python_name': 'SAMPLE_CLOCK_PERIODS',
                 'value': 101
             },
             {
@@ -245,6 +246,7 @@ enums = {
                     'description': 'Specifies the pulse width in seconds.'
                 },
                 'name': 'NIFGEN_VAL_SECONDS',
+                'python_name': 'SECONDS',
                 'value': 102
             }
         ]
@@ -387,24 +389,6 @@ enums = {
                     'description': 'When the operation is ready to start, the Ready for Start  event level is low.'
                 },
                 'name': 'NIFGEN_VAL_ACTIVE_LOW',
-                'value': 102
-            }
-        ]
-    },
-    'MarkerEventPulseWidthUnits': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the pulse width in Sample clock periods.'
-                },
-                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
-                'value': 101
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the pulse width in seconds.'
-                },
-                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102
             }
         ]
@@ -953,24 +937,6 @@ enums = {
                     'description': 'When the operation is ready to start, the Ready for Start  event level is low.'
                 },
                 'name': 'NIFGEN_VAL_ACTIVE_LOW',
-                'value': 102
-            }
-        ]
-    },
-    'StartedEventPulseWidthUnits': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the pulse width in Sample clock periods.'
-                },
-                'name': 'NIFGEN_VAL_SAMPLE_CLOCK_PERIODS',
-                'value': 101
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the pulse width in seconds.'
-                },
-                'name': 'NIFGEN_VAL_SECONDS',
                 'value': 102
             }
         ]
