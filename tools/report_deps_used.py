@@ -24,6 +24,7 @@ ni_owned_modules = [
     'nitclk',
 ]
 
+
 class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
     '''We want the description to use the raw formatting but have the parameters be formatted as before
 
@@ -45,7 +46,7 @@ def main():
     report_group.add_argument("--env_name", action="store", default=None, help="The name of the tox env used")
     report_group.add_argument("--report", action="store_true", default=False, help="Report all unique deps and versions used.")
     report_group.add_argument("--python-cmd", action="store", default=None, help=f"Command to use for invoking python. Default: {default_python_cmd}")
-    report_group.add_argument("--dir", action="store", default=None, help=f"Working directory to change to before running commands")
+    report_group.add_argument("--dir", action="store", default=None, help="Working directory to change to before running commands")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
