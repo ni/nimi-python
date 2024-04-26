@@ -28,7 +28,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.4.8',
+    version='1.4.9.dev0',
     description='NI Switch Executive Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -48,7 +48,7 @@ setup(
     tests_require=['pytest'],
     test_suite='tests',
     classifiers=[
-        "Development Status :: 5 - Production/Stable",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
