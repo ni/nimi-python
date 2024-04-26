@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.8](#148---2024-04-26)
 * [1.4.7](#147---2023-12-15)
 * [1.4.6](#146---2023-09-11)
 * [1.4.5](#145---2023-06-12)
@@ -34,25 +34,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.4.8 - 2024-04-26
 * ### ALL
     * #### Added
         * Support for Python 3.12
-    * #### Changed
-    * #### Removed
 * ### `nidcpower` (NI-DCPower)
-    * #### Added
     * #### Changed
         * Fix [#1664](https://github.com/ni/nimi-python/issues/1970): nidcpower_advanced_sequence.py has several issues preventing it from working out of the box on real hardware.
-    * #### Removed
-* ### `nidigital` (NI-Digital Pattern Driver)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
         * Properties added:
@@ -64,29 +52,6 @@ All notable changes to this project will be documented in this file.
             * `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
         * Enum added:
             * `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
-
 
 ## 1.4.7 - 2023-12-15
 * ### `nidcpower` (NI-DCPower)
