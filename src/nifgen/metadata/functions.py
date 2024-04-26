@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FGEN API metadata version 23.5.0d86
+# This file is generated from NI-FGEN API metadata version 24.5.0d52
 functions = {
     'AbortGeneration': {
         'documentation': {

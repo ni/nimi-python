@@ -3705,6 +3705,56 @@ done_event_output_terminal
                 - LabVIEW Property: **Events:Done:Output Terminal**
                 - C Attribute: **NIFGEN_ATTR_DONE_EVENT_OUTPUT_TERMINAL**
 
+done_event_pulse_width
+----------------------
+
+    .. py:attribute:: done_event_pulse_width
+
+        Specifies the pulse width for the Done Event.
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Done:Pulse:Width Value**
+                - C Attribute: **NIFGEN_ATTR_DONE_EVENT_PULSE_WIDTH**
+
+done_event_pulse_width_units
+----------------------------
+
+    .. py:attribute:: done_event_pulse_width_units
+
+        Specifies the pulse width units for the Done Event.
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.EventPulseWidthUnits |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Done:Pulse:Width Units**
+                - C Attribute: **NIFGEN_ATTR_DONE_EVENT_PULSE_WIDTH_UNITS**
+
 driver_setup
 ------------
 
@@ -4746,6 +4796,80 @@ marker_event_output_terminal
                 - LabVIEW Property: **Events:Marker:Output Terminal**
                 - C Attribute: **NIFGEN_ATTR_MARKER_EVENT_OUTPUT_TERMINAL**
 
+marker_event_pulse_width
+------------------------
+
+    .. py:attribute:: marker_event_pulse_width
+
+        Specifies the pulse width for the Marker Event.
+
+
+
+
+        .. tip:: This property can be set/get on specific markers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+            Example: :py:attr:`my_session.markers[ ... ].marker_event_pulse_width`
+
+            To set/get on all markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.marker_event_pulse_width`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | markers    |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Marker:Pulse:Width Value**
+                - C Attribute: **NIFGEN_ATTR_MARKER_EVENT_PULSE_WIDTH**
+
+marker_event_pulse_width_units
+------------------------------
+
+    .. py:attribute:: marker_event_pulse_width_units
+
+        Specifies the pulse width units for the Marker Event.
+
+
+
+
+        .. tip:: This property can be set/get on specific markers within your :py:class:`nifgen.Session` instance.
+            Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+            Example: :py:attr:`my_session.markers[ ... ].marker_event_pulse_width_units`
+
+            To set/get on all markers, you can call the property directly on the :py:class:`nifgen.Session`.
+
+            Example: :py:attr:`my_session.marker_event_pulse_width_units`
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.EventPulseWidthUnits |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | markers                    |
+            +-----------------------+----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Marker:Pulse:Width Units**
+                - C Attribute: **NIFGEN_ATTR_MARKER_EVENT_PULSE_WIDTH_UNITS**
+
 max_freq_list_duration
 ----------------------
 
@@ -5692,6 +5816,56 @@ started_event_output_terminal
 
                 - LabVIEW Property: **Events:Started:Output Terminal**
                 - C Attribute: **NIFGEN_ATTR_STARTED_EVENT_OUTPUT_TERMINAL**
+
+started_event_pulse_width
+-------------------------
+
+    .. py:attribute:: started_event_pulse_width
+
+        Specifies the pulse width for the Started Event.
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Started:Pulse:Width Value**
+                - C Attribute: **NIFGEN_ATTR_STARTED_EVENT_PULSE_WIDTH**
+
+started_event_pulse_width_units
+-------------------------------
+
+    .. py:attribute:: started_event_pulse_width_units
+
+        Specifies the pulse width units for the Started Event.
+
+        The following table lists the characteristics of this property.
+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.EventPulseWidthUnits |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
+
+        .. tip::
+            This property corresponds to the following LabVIEW Property or C Attribute:
+
+                - LabVIEW Property: **Events:Started:Pulse:Width Units**
+                - C Attribute: **NIFGEN_ATTR_STARTED_EVENT_PULSE_WIDTH_UNITS**
 
 start_trigger_type
 ------------------

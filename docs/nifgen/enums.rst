@@ -199,6 +199,31 @@ DataMarkerEventLevelPolarity
 
 
 
+EventPulseWidthUnits
+--------------------
+
+.. py:class:: EventPulseWidthUnits
+
+    .. py:attribute:: EventPulseWidthUnits.SAMPLE_CLOCK_PERIODS
+
+
+
+        Specifies the pulse width in Sample clock periods.
+
+        
+
+
+
+    .. py:attribute:: EventPulseWidthUnits.SECONDS
+
+
+
+        Specifies the pulse width in seconds.
+
+        
+
+
+
 HardwareState
 -------------
 

@@ -85,6 +85,17 @@ class DataMarkerEventLevelPolarity(Enum):
     '''
 
 
+class EventPulseWidthUnits(Enum):
+    SAMPLE_CLOCK_PERIODS = 101
+    r'''
+    Specifies the pulse width in Sample clock periods.
+    '''
+    SECONDS = 102
+    r'''
+    Specifies the pulse width in seconds.
+    '''
+
+
 class HardwareState(Enum):
     IDLE = 0
     WAITING_FOR_START_TRIGGER = 100
