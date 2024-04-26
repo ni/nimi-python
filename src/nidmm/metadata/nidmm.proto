@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-DMM API metadata version 23.0.0f147
+// This file is generated from NI-DMM API metadata version 24.3.0d105
 //---------------------------------------------------------------------
 // Proto file for the NI-DMM Metadata
 //---------------------------------------------------------------------
@@ -16,93 +16,91 @@ package nidmm_grpc;
 import "session.proto";
 
 service NiDmm {
-  rpc Abort(AbortRequest) returns (AbortResponse);
-  rpc CheckAttributeViBoolean(CheckAttributeViBooleanRequest) returns (CheckAttributeViBooleanResponse);
-  rpc CheckAttributeViInt32(CheckAttributeViInt32Request) returns (CheckAttributeViInt32Response);
-  rpc CheckAttributeViReal64(CheckAttributeViReal64Request) returns (CheckAttributeViReal64Response);
-  rpc CheckAttributeViSession(CheckAttributeViSessionRequest) returns (CheckAttributeViSessionResponse);
-  rpc CheckAttributeViString(CheckAttributeViStringRequest) returns (CheckAttributeViStringResponse);
-  rpc ClearError(ClearErrorRequest) returns (ClearErrorResponse);
-  rpc ClearInterchangeWarnings(ClearInterchangeWarningsRequest) returns (ClearInterchangeWarningsResponse);
-  rpc Close(CloseRequest) returns (CloseResponse);
-  rpc ConfigureACBandwidth(ConfigureACBandwidthRequest) returns (ConfigureACBandwidthResponse);
-  rpc ConfigureADCCalibration(ConfigureADCCalibrationRequest) returns (ConfigureADCCalibrationResponse);
-  rpc ConfigureAutoZeroMode(ConfigureAutoZeroModeRequest) returns (ConfigureAutoZeroModeResponse);
-  rpc ConfigureCableCompType(ConfigureCableCompTypeRequest) returns (ConfigureCableCompTypeResponse);
-  rpc ConfigureCurrentSource(ConfigureCurrentSourceRequest) returns (ConfigureCurrentSourceResponse);
-  rpc ConfigureFixedRefJunction(ConfigureFixedRefJunctionRequest) returns (ConfigureFixedRefJunctionResponse);
-  rpc ConfigureFrequencyVoltageRange(ConfigureFrequencyVoltageRangeRequest) returns (ConfigureFrequencyVoltageRangeResponse);
-  rpc ConfigureMeasCompleteDest(ConfigureMeasCompleteDestRequest) returns (ConfigureMeasCompleteDestResponse);
-  rpc ConfigureMeasCompleteSlope(ConfigureMeasCompleteSlopeRequest) returns (ConfigureMeasCompleteSlopeResponse);
-  rpc ConfigureMeasurementAbsolute(ConfigureMeasurementAbsoluteRequest) returns (ConfigureMeasurementAbsoluteResponse);
-  rpc ConfigureMeasurementDigits(ConfigureMeasurementDigitsRequest) returns (ConfigureMeasurementDigitsResponse);
-  rpc ConfigureMultiPoint(ConfigureMultiPointRequest) returns (ConfigureMultiPointResponse);
-  rpc ConfigureOffsetCompOhms(ConfigureOffsetCompOhmsRequest) returns (ConfigureOffsetCompOhmsResponse);
-  rpc ConfigureOpenCableCompValues(ConfigureOpenCableCompValuesRequest) returns (ConfigureOpenCableCompValuesResponse);
-  rpc ConfigurePowerLineFrequency(ConfigurePowerLineFrequencyRequest) returns (ConfigurePowerLineFrequencyResponse);
-  rpc ConfigureRTDCustom(ConfigureRTDCustomRequest) returns (ConfigureRTDCustomResponse);
-  rpc ConfigureRTDType(ConfigureRTDTypeRequest) returns (ConfigureRTDTypeResponse);
-  rpc ConfigureSampleTriggerSlope(ConfigureSampleTriggerSlopeRequest) returns (ConfigureSampleTriggerSlopeResponse);
-  rpc ConfigureShortCableCompValues(ConfigureShortCableCompValuesRequest) returns (ConfigureShortCableCompValuesResponse);
-  rpc ConfigureThermistorCustom(ConfigureThermistorCustomRequest) returns (ConfigureThermistorCustomResponse);
-  rpc ConfigureThermistorType(ConfigureThermistorTypeRequest) returns (ConfigureThermistorTypeResponse);
-  rpc ConfigureThermocouple(ConfigureThermocoupleRequest) returns (ConfigureThermocoupleResponse);
-  rpc ConfigureTransducerType(ConfigureTransducerTypeRequest) returns (ConfigureTransducerTypeResponse);
-  rpc ConfigureTrigger(ConfigureTriggerRequest) returns (ConfigureTriggerResponse);
-  rpc ConfigureTriggerSlope(ConfigureTriggerSlopeRequest) returns (ConfigureTriggerSlopeResponse);
-  rpc ConfigureWaveformAcquisition(ConfigureWaveformAcquisitionRequest) returns (ConfigureWaveformAcquisitionResponse);
-  rpc ConfigureWaveformCoupling(ConfigureWaveformCouplingRequest) returns (ConfigureWaveformCouplingResponse);
-  rpc Control(ControlRequest) returns (ControlResponse);
-  rpc Disable(DisableRequest) returns (DisableResponse);
-  rpc ExportAttributeConfigurationBuffer(ExportAttributeConfigurationBufferRequest) returns (ExportAttributeConfigurationBufferResponse);
-  rpc ExportAttributeConfigurationFile(ExportAttributeConfigurationFileRequest) returns (ExportAttributeConfigurationFileResponse);
-  rpc Fetch(FetchRequest) returns (FetchResponse);
-  rpc FetchMultiPoint(FetchMultiPointRequest) returns (FetchMultiPointResponse);
-  rpc FetchWaveform(FetchWaveformRequest) returns (FetchWaveformResponse);
-  rpc GetApertureTimeInfo(GetApertureTimeInfoRequest) returns (GetApertureTimeInfoResponse);
-  rpc GetAttributeViBoolean(GetAttributeViBooleanRequest) returns (GetAttributeViBooleanResponse);
-  rpc GetAttributeViInt32(GetAttributeViInt32Request) returns (GetAttributeViInt32Response);
-  rpc GetAttributeViReal64(GetAttributeViReal64Request) returns (GetAttributeViReal64Response);
-  rpc GetAttributeViSession(GetAttributeViSessionRequest) returns (GetAttributeViSessionResponse);
-  rpc GetAttributeViString(GetAttributeViStringRequest) returns (GetAttributeViStringResponse);
-  rpc GetAutoRangeValue(GetAutoRangeValueRequest) returns (GetAutoRangeValueResponse);
-  rpc GetCalDateAndTime(GetCalDateAndTimeRequest) returns (GetCalDateAndTimeResponse);
-  rpc GetChannelName(GetChannelNameRequest) returns (GetChannelNameResponse);
-  rpc GetDevTemp(GetDevTempRequest) returns (GetDevTempResponse);
-  rpc GetError(GetErrorRequest) returns (GetErrorResponse);
-  rpc GetErrorMessage(GetErrorMessageRequest) returns (GetErrorMessageResponse);
-  rpc GetExtCalRecommendedInterval(GetExtCalRecommendedIntervalRequest) returns (GetExtCalRecommendedIntervalResponse);
-  rpc GetLastCalTemp(GetLastCalTempRequest) returns (GetLastCalTempResponse);
-  rpc GetMeasurementPeriod(GetMeasurementPeriodRequest) returns (GetMeasurementPeriodResponse);
-  rpc GetNextCoercionRecord(GetNextCoercionRecordRequest) returns (GetNextCoercionRecordResponse);
-  rpc GetNextInterchangeWarning(GetNextInterchangeWarningRequest) returns (GetNextInterchangeWarningResponse);
-  rpc GetSelfCalSupported(GetSelfCalSupportedRequest) returns (GetSelfCalSupportedResponse);
-  rpc ImportAttributeConfigurationBuffer(ImportAttributeConfigurationBufferRequest) returns (ImportAttributeConfigurationBufferResponse);
-  rpc ImportAttributeConfigurationFile(ImportAttributeConfigurationFileRequest) returns (ImportAttributeConfigurationFileResponse);
   rpc Init(InitRequest) returns (InitResponse);
   rpc InitWithOptions(InitWithOptionsRequest) returns (InitWithOptionsResponse);
+  rpc Close(CloseRequest) returns (CloseResponse);
+  rpc GetError(GetErrorRequest) returns (GetErrorResponse);
+  rpc GetErrorMessage(GetErrorMessageRequest) returns (GetErrorMessageResponse);
+  rpc ClearError(ClearErrorRequest) returns (ClearErrorResponse);
+  rpc Reset(ResetRequest) returns (ResetResponse);
+  rpc SelfTest(SelfTestRequest) returns (SelfTestResponse);
+  rpc SelfCal(SelfCalRequest) returns (SelfCalResponse);
+  rpc RevisionQuery(RevisionQueryRequest) returns (RevisionQueryResponse);
+  rpc ResetWithDefaults(ResetWithDefaultsRequest) returns (ResetWithDefaultsResponse);
+  rpc Disable(DisableRequest) returns (DisableResponse);
+  rpc GetMeasurementPeriod(GetMeasurementPeriodRequest) returns (GetMeasurementPeriodResponse);
+  rpc ConfigureTrigger(ConfigureTriggerRequest) returns (ConfigureTriggerResponse);
+  rpc Read(ReadRequest) returns (ReadResponse);
+  rpc Fetch(FetchRequest) returns (FetchResponse);
+  rpc Abort(AbortRequest) returns (AbortResponse);
   rpc Initiate(InitiateRequest) returns (InitiateResponse);
-  rpc InvalidateAllAttributes(InvalidateAllAttributesRequest) returns (InvalidateAllAttributesResponse);
   rpc IsOverRange(IsOverRangeRequest) returns (IsOverRangeResponse);
   rpc IsUnderRange(IsUnderRangeRequest) returns (IsUnderRangeResponse);
+  rpc ConfigureACBandwidth(ConfigureACBandwidthRequest) returns (ConfigureACBandwidthResponse);
+  rpc ConfigureFrequencyVoltageRange(ConfigureFrequencyVoltageRangeRequest) returns (ConfigureFrequencyVoltageRangeResponse);
+  rpc ConfigureMeasCompleteDest(ConfigureMeasCompleteDestRequest) returns (ConfigureMeasCompleteDestResponse);
+  rpc ConfigureMultiPoint(ConfigureMultiPointRequest) returns (ConfigureMultiPointResponse);
+  rpc ReadMultiPoint(ReadMultiPointRequest) returns (ReadMultiPointResponse);
+  rpc FetchMultiPoint(FetchMultiPointRequest) returns (FetchMultiPointResponse);
+  rpc ConfigureTriggerSlope(ConfigureTriggerSlopeRequest) returns (ConfigureTriggerSlopeResponse);
+  rpc SendSoftwareTrigger(SendSoftwareTriggerRequest) returns (SendSoftwareTriggerResponse);
+  rpc GetApertureTimeInfo(GetApertureTimeInfoRequest) returns (GetApertureTimeInfoResponse);
+  rpc GetAutoRangeValue(GetAutoRangeValueRequest) returns (GetAutoRangeValueResponse);
+  rpc ConfigureAutoZeroMode(ConfigureAutoZeroModeRequest) returns (ConfigureAutoZeroModeResponse);
+  rpc ConfigurePowerLineFrequency(ConfigurePowerLineFrequencyRequest) returns (ConfigurePowerLineFrequencyResponse);
+  rpc ConfigureMeasurementDigits(ConfigureMeasurementDigitsRequest) returns (ConfigureMeasurementDigitsResponse);
+  rpc ConfigureMeasurementAbsolute(ConfigureMeasurementAbsoluteRequest) returns (ConfigureMeasurementAbsoluteResponse);
+  rpc ConfigureMeasCompleteSlope(ConfigureMeasCompleteSlopeRequest) returns (ConfigureMeasCompleteSlopeResponse);
+  rpc ConfigureSampleTriggerSlope(ConfigureSampleTriggerSlopeRequest) returns (ConfigureSampleTriggerSlopeResponse);
+  rpc ReadStatus(ReadStatusRequest) returns (ReadStatusResponse);
+  rpc Control(ControlRequest) returns (ControlResponse);
+  rpc ConfigureADCCalibration(ConfigureADCCalibrationRequest) returns (ConfigureADCCalibrationResponse);
+  rpc ConfigureOffsetCompOhms(ConfigureOffsetCompOhmsRequest) returns (ConfigureOffsetCompOhmsResponse);
+  rpc ConfigureCurrentSource(ConfigureCurrentSourceRequest) returns (ConfigureCurrentSourceResponse);
+  rpc ConfigureCableCompType(ConfigureCableCompTypeRequest) returns (ConfigureCableCompTypeResponse);
   rpc PerformOpenCableComp(PerformOpenCableCompRequest) returns (PerformOpenCableCompResponse);
   rpc PerformShortCableComp(PerformShortCableCompRequest) returns (PerformShortCableCompResponse);
-  rpc Read(ReadRequest) returns (ReadResponse);
-  rpc ReadMultiPoint(ReadMultiPointRequest) returns (ReadMultiPointResponse);
-  rpc ReadStatus(ReadStatusRequest) returns (ReadStatusResponse);
+  rpc ConfigureOpenCableCompValues(ConfigureOpenCableCompValuesRequest) returns (ConfigureOpenCableCompValuesResponse);
+  rpc ConfigureShortCableCompValues(ConfigureShortCableCompValuesRequest) returns (ConfigureShortCableCompValuesResponse);
+  rpc ConfigureWaveformAcquisition(ConfigureWaveformAcquisitionRequest) returns (ConfigureWaveformAcquisitionResponse);
+  rpc ConfigureWaveformCoupling(ConfigureWaveformCouplingRequest) returns (ConfigureWaveformCouplingResponse);
+  rpc FetchWaveform(FetchWaveformRequest) returns (FetchWaveformResponse);
   rpc ReadWaveform(ReadWaveformRequest) returns (ReadWaveformResponse);
-  rpc Reset(ResetRequest) returns (ResetResponse);
-  rpc ResetInterchangeCheck(ResetInterchangeCheckRequest) returns (ResetInterchangeCheckResponse);
-  rpc ResetWithDefaults(ResetWithDefaultsRequest) returns (ResetWithDefaultsResponse);
-  rpc RevisionQuery(RevisionQueryRequest) returns (RevisionQueryResponse);
-  rpc SelfCal(SelfCalRequest) returns (SelfCalResponse);
-  rpc SelfTest(SelfTestRequest) returns (SelfTestResponse);
-  rpc SendSoftwareTrigger(SendSoftwareTriggerRequest) returns (SendSoftwareTriggerResponse);
-  rpc SetAttributeViBoolean(SetAttributeViBooleanRequest) returns (SetAttributeViBooleanResponse);
+  rpc GetAttributeViInt32(GetAttributeViInt32Request) returns (GetAttributeViInt32Response);
   rpc SetAttributeViInt32(SetAttributeViInt32Request) returns (SetAttributeViInt32Response);
+  rpc CheckAttributeViInt32(CheckAttributeViInt32Request) returns (CheckAttributeViInt32Response);
+  rpc GetAttributeViReal64(GetAttributeViReal64Request) returns (GetAttributeViReal64Response);
   rpc SetAttributeViReal64(SetAttributeViReal64Request) returns (SetAttributeViReal64Response);
-  rpc SetAttributeViSession(SetAttributeViSessionRequest) returns (SetAttributeViSessionResponse);
+  rpc CheckAttributeViReal64(CheckAttributeViReal64Request) returns (CheckAttributeViReal64Response);
+  rpc GetAttributeViString(GetAttributeViStringRequest) returns (GetAttributeViStringResponse);
   rpc SetAttributeViString(SetAttributeViStringRequest) returns (SetAttributeViStringResponse);
+  rpc CheckAttributeViString(CheckAttributeViStringRequest) returns (CheckAttributeViStringResponse);
+  rpc GetAttributeViSession(GetAttributeViSessionRequest) returns (GetAttributeViSessionResponse);
+  rpc SetAttributeViSession(SetAttributeViSessionRequest) returns (SetAttributeViSessionResponse);
+  rpc CheckAttributeViSession(CheckAttributeViSessionRequest) returns (CheckAttributeViSessionResponse);
+  rpc GetAttributeViBoolean(GetAttributeViBooleanRequest) returns (GetAttributeViBooleanResponse);
+  rpc SetAttributeViBoolean(SetAttributeViBooleanRequest) returns (SetAttributeViBooleanResponse);
+  rpc CheckAttributeViBoolean(CheckAttributeViBooleanRequest) returns (CheckAttributeViBooleanResponse);
+  rpc ImportAttributeConfigurationFile(ImportAttributeConfigurationFileRequest) returns (ImportAttributeConfigurationFileResponse);
+  rpc ExportAttributeConfigurationFile(ExportAttributeConfigurationFileRequest) returns (ExportAttributeConfigurationFileResponse);
+  rpc ImportAttributeConfigurationBuffer(ImportAttributeConfigurationBufferRequest) returns (ImportAttributeConfigurationBufferResponse);
+  rpc ExportAttributeConfigurationBuffer(ExportAttributeConfigurationBufferRequest) returns (ExportAttributeConfigurationBufferResponse);
+  rpc ResetInterchangeCheck(ResetInterchangeCheckRequest) returns (ResetInterchangeCheckResponse);
+  rpc ClearInterchangeWarnings(ClearInterchangeWarningsRequest) returns (ClearInterchangeWarningsResponse);
+  rpc GetChannelName(GetChannelNameRequest) returns (GetChannelNameResponse);
+  rpc GetExtCalRecommendedInterval(GetExtCalRecommendedIntervalRequest) returns (GetExtCalRecommendedIntervalResponse);
+  rpc GetSelfCalSupported(GetSelfCalSupportedRequest) returns (GetSelfCalSupportedResponse);
+  rpc GetCalDateAndTime(GetCalDateAndTimeRequest) returns (GetCalDateAndTimeResponse);
+  rpc GetLastCalTemp(GetLastCalTempRequest) returns (GetLastCalTempResponse);
+  rpc GetDevTemp(GetDevTempRequest) returns (GetDevTempResponse);
+  rpc ConfigureTransducerType(ConfigureTransducerTypeRequest) returns (ConfigureTransducerTypeResponse);
+  rpc ConfigureThermocouple(ConfigureThermocoupleRequest) returns (ConfigureThermocoupleResponse);
+  rpc ConfigureFixedRefJunction(ConfigureFixedRefJunctionRequest) returns (ConfigureFixedRefJunctionResponse);
+  rpc ConfigureRTDType(ConfigureRTDTypeRequest) returns (ConfigureRTDTypeResponse);
+  rpc ConfigureRTDCustom(ConfigureRTDCustomRequest) returns (ConfigureRTDCustomResponse);
+  rpc ConfigureThermistorType(ConfigureThermistorTypeRequest) returns (ConfigureThermistorTypeResponse);
+  rpc ConfigureThermistorCustom(ConfigureThermistorCustomRequest) returns (ConfigureThermistorCustomResponse);
+  rpc InvalidateAllAttributes(InvalidateAllAttributesRequest) returns (InvalidateAllAttributesResponse);
 }
 
 enum NiDmmAttribute {
@@ -112,40 +110,58 @@ enum NiDmmAttribute {
   NIDMM_ATTRIBUTE_CACHE = 1050004;
   NIDMM_ATTRIBUTE_SIMULATE = 1050005;
   NIDMM_ATTRIBUTE_RECORD_COERCIONS = 1050006;
-  NIDMM_ATTRIBUTE_DRIVER_SETUP = 1050007;
   NIDMM_ATTRIBUTE_INTERCHANGE_CHECK = 1050021;
-  NIDMM_ATTRIBUTE_CHANNEL_COUNT = 1050203;
-  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_PREFIX = 1050302;
-  NIDMM_ATTRIBUTE_IO_RESOURCE_DESCRIPTOR = 1050304;
-  NIDMM_ATTRIBUTE_LOGICAL_NAME = 1050305;
-  NIDMM_ATTRIBUTE_SUPPORTED_INSTRUMENT_MODELS = 1050327;
-  NIDMM_ATTRIBUTE_GROUP_CAPABILITIES = 1050401;
-  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_MAJOR_VERSION = 1050503;
-  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_MINOR_VERSION = 1050504;
-  NIDMM_ATTRIBUTE_INSTRUMENT_FIRMWARE_REVISION = 1050510;
-  NIDMM_ATTRIBUTE_INSTRUMENT_MANUFACTURER = 1050511;
-  NIDMM_ATTRIBUTE_INSTRUMENT_MODEL = 1050512;
-  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_VENDOR = 1050513;
-  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_DESCRIPTION = 1050514;
   NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION = 1050515;
   NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION = 1050516;
+  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_DESCRIPTION = 1050514;
+  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_PREFIX = 1050302;
+  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_VENDOR = 1050513;
   NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_REVISION = 1050551;
-  NIDMM_ATTRIBUTE_MEAS_DEST_SLOPE = 1150002;
-  NIDMM_ATTRIBUTE_SHUNT_VALUE = 1150003;
+  NIDMM_ATTRIBUTE_CHANNEL_COUNT = 1050203;
+  NIDMM_ATTRIBUTE_SUPPORTED_INSTRUMENT_MODELS = 1050327;
+  NIDMM_ATTRIBUTE_GROUP_CAPABILITIES = 1050401;
+  NIDMM_ATTRIBUTE_INSTRUMENT_MANUFACTURER = 1050511;
+  NIDMM_ATTRIBUTE_INSTRUMENT_MODEL = 1050512;
+  NIDMM_ATTRIBUTE_INSTRUMENT_FIRMWARE_REVISION = 1050510;
+  NIDMM_ATTRIBUTE_LOGICAL_NAME = 1050305;
+  NIDMM_ATTRIBUTE_IO_RESOURCE_DESCRIPTOR = 1050304;
+  NIDMM_ATTRIBUTE_DRIVER_SETUP = 1050007;
+  NIDMM_ATTRIBUTE_FUNCTION = 1250001;
+  NIDMM_ATTRIBUTE_RANGE = 1250002;
+  NIDMM_ATTRIBUTE_RESOLUTION_ABSOLUTE = 1250008;
+  NIDMM_ATTRIBUTE_RESOLUTION_DIGITS = 1250003;
+  NIDMM_ATTRIBUTE_TRIGGER_DELAY = 1250005;
+  NIDMM_ATTRIBUTE_TRIGGER_SOURCE = 1250004;
+  NIDMM_ATTRIBUTE_AC_MAX_FREQ = 1250007;
+  NIDMM_ATTRIBUTE_AC_MIN_FREQ = 1250006;
+  NIDMM_ATTRIBUTE_FREQ_VOLTAGE_RANGE = 1250101;
+  NIDMM_ATTRIBUTE_MEAS_COMPLETE_DEST = 1250305;
+  NIDMM_ATTRIBUTE_SAMPLE_COUNT = 1250301;
+  NIDMM_ATTRIBUTE_SAMPLE_INTERVAL = 1250303;
+  NIDMM_ATTRIBUTE_SAMPLE_TRIGGER = 1250302;
+  NIDMM_ATTRIBUTE_TRIGGER_COUNT = 1250304;
+  NIDMM_ATTRIBUTE_APERTURE_TIME = 1250321;
+  NIDMM_ATTRIBUTE_APERTURE_TIME_UNITS = 1250322;
+  NIDMM_ATTRIBUTE_AUTO_RANGE_VALUE = 1250331;
+  NIDMM_ATTRIBUTE_AUTO_ZERO = 1250332;
+  NIDMM_ATTRIBUTE_POWERLINE_FREQ = 1250333;
+  NIDMM_ATTRIBUTE_TRIGGER_SLOPE = 1250334;
   NIDMM_ATTRIBUTE_SAMPLE_TRIGGER_SLOPE = 1150010;
+  NIDMM_ATTRIBUTE_MEAS_DEST_SLOPE = 1150002;
+  NIDMM_ATTRIBUTE_ADC_CALIBRATION = 1150022;
+  NIDMM_ATTRIBUTE_OFFSET_COMP_OHMS = 1150023;
+  NIDMM_ATTRIBUTE_NUMBER_OF_AVERAGES = 1150032;
+  NIDMM_ATTRIBUTE_CURRENT_SOURCE = 1150025;
+  NIDMM_ATTRIBUTE_DC_NOISE_REJECTION = 1150026;
+  NIDMM_ATTRIBUTE_SETTLE_TIME = 1150028;
+  NIDMM_ATTRIBUTE_INPUT_RESISTANCE = 1150029;
+  NIDMM_ATTRIBUTE_LATENCY = 1150034;
+  NIDMM_ATTRIBUTE_BUFFER_SIZE = 1150037;
+  NIDMM_ATTRIBUTE_SHUNT_VALUE = 1150003;
   NIDMM_ATTRIBUTE_OPERATION_MODE = 1150014;
   NIDMM_ATTRIBUTE_WAVEFORM_RATE = 1150018;
   NIDMM_ATTRIBUTE_WAVEFORM_POINTS = 1150019;
-  NIDMM_ATTRIBUTE_ADC_CALIBRATION = 1150022;
-  NIDMM_ATTRIBUTE_OFFSET_COMP_OHMS = 1150023;
-  NIDMM_ATTRIBUTE_CURRENT_SOURCE = 1150025;
-  NIDMM_ATTRIBUTE_DC_NOISE_REJECTION = 1150026;
   NIDMM_ATTRIBUTE_WAVEFORM_COUPLING = 1150027;
-  NIDMM_ATTRIBUTE_SETTLE_TIME = 1150028;
-  NIDMM_ATTRIBUTE_INPUT_RESISTANCE = 1150029;
-  NIDMM_ATTRIBUTE_NUMBER_OF_AVERAGES = 1150032;
-  NIDMM_ATTRIBUTE_LATENCY = 1150034;
-  NIDMM_ATTRIBUTE_BUFFER_SIZE = 1150037;
   NIDMM_ATTRIBUTE_FREQ_VOLTAGE_AUTO_RANGE_VALUE = 1150044;
   NIDMM_ATTRIBUTE_CABLE_COMP_TYPE = 1150045;
   NIDMM_ATTRIBUTE_SHORT_CABLE_COMP_REACTANCE = 1150046;
@@ -154,10 +170,15 @@ enum NiDmmAttribute {
   NIDMM_ATTRIBUTE_OPEN_CABLE_COMP_CONDUCTANCE = 1150049;
   NIDMM_ATTRIBUTE_LC_CALCULATION_MODEL = 1150052;
   NIDMM_ATTRIBUTE_DC_BIAS = 1150053;
-  NIDMM_ATTRIBUTE_SERIAL_NUMBER = 1150054;
   NIDMM_ATTRIBUTE_LC_NUMBER_MEAS_TO_AVERAGE = 1150055;
+  NIDMM_ATTRIBUTE_SERIAL_NUMBER = 1150054;
   NIDMM_ATTRIBUTE_CONFIG_PRODUCT_NUMBER = 1150061;
+  NIDMM_ATTRIBUTE_TEMP_TRANSDUCER_TYPE = 1250201;
+  NIDMM_ATTRIBUTE_TEMP_TC_REF_JUNC_TYPE = 1250232;
+  NIDMM_ATTRIBUTE_TEMP_TC_TYPE = 1250231;
+  NIDMM_ATTRIBUTE_TEMP_TC_FIXED_REF_JUNC = 1250233;
   NIDMM_ATTRIBUTE_TEMP_RTD_TYPE = 1150120;
+  NIDMM_ATTRIBUTE_TEMP_RTD_RES = 1250242;
   NIDMM_ATTRIBUTE_TEMP_RTD_A = 1150121;
   NIDMM_ATTRIBUTE_TEMP_RTD_B = 1150122;
   NIDMM_ATTRIBUTE_TEMP_RTD_C = 1150123;
@@ -165,31 +186,122 @@ enum NiDmmAttribute {
   NIDMM_ATTRIBUTE_TEMP_THERMISTOR_A = 1150125;
   NIDMM_ATTRIBUTE_TEMP_THERMISTOR_B = 1150126;
   NIDMM_ATTRIBUTE_TEMP_THERMISTOR_C = 1150127;
-  NIDMM_ATTRIBUTE_FUNCTION = 1250001;
-  NIDMM_ATTRIBUTE_RANGE = 1250002;
-  NIDMM_ATTRIBUTE_RESOLUTION_DIGITS = 1250003;
-  NIDMM_ATTRIBUTE_TRIGGER_SOURCE = 1250004;
-  NIDMM_ATTRIBUTE_TRIGGER_DELAY = 1250005;
-  NIDMM_ATTRIBUTE_AC_MIN_FREQ = 1250006;
-  NIDMM_ATTRIBUTE_AC_MAX_FREQ = 1250007;
-  NIDMM_ATTRIBUTE_RESOLUTION_ABSOLUTE = 1250008;
-  NIDMM_ATTRIBUTE_FREQ_VOLTAGE_RANGE = 1250101;
-  NIDMM_ATTRIBUTE_TEMP_TRANSDUCER_TYPE = 1250201;
-  NIDMM_ATTRIBUTE_TEMP_TC_TYPE = 1250231;
-  NIDMM_ATTRIBUTE_TEMP_TC_REF_JUNC_TYPE = 1250232;
-  NIDMM_ATTRIBUTE_TEMP_TC_FIXED_REF_JUNC = 1250233;
-  NIDMM_ATTRIBUTE_TEMP_RTD_RES = 1250242;
-  NIDMM_ATTRIBUTE_SAMPLE_COUNT = 1250301;
-  NIDMM_ATTRIBUTE_SAMPLE_TRIGGER = 1250302;
-  NIDMM_ATTRIBUTE_SAMPLE_INTERVAL = 1250303;
-  NIDMM_ATTRIBUTE_TRIGGER_COUNT = 1250304;
-  NIDMM_ATTRIBUTE_MEAS_COMPLETE_DEST = 1250305;
-  NIDMM_ATTRIBUTE_APERTURE_TIME = 1250321;
-  NIDMM_ATTRIBUTE_APERTURE_TIME_UNITS = 1250322;
-  NIDMM_ATTRIBUTE_AUTO_RANGE_VALUE = 1250331;
-  NIDMM_ATTRIBUTE_AUTO_ZERO = 1250332;
-  NIDMM_ATTRIBUTE_POWERLINE_FREQ = 1250333;
-  NIDMM_ATTRIBUTE_TRIGGER_SLOPE = 1250334;
+  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_MAJOR_VERSION = 1050503;
+  NIDMM_ATTRIBUTE_SPECIFIC_DRIVER_MINOR_VERSION = 1050504;
+}
+
+enum Function {
+  FUNCTION_UNSPECIFIED = 0;
+  FUNCTION_NIDMM_VAL_DC_VOLTS = 1;
+  FUNCTION_NIDMM_VAL_AC_VOLTS = 2;
+  FUNCTION_NIDMM_VAL_DC_CURRENT = 3;
+  FUNCTION_NIDMM_VAL_AC_CURRENT = 4;
+  FUNCTION_NIDMM_VAL_2_WIRE_RES = 5;
+  FUNCTION_NIDMM_VAL_4_WIRE_RES = 101;
+  FUNCTION_NIDMM_VAL_FREQ = 104;
+  FUNCTION_NIDMM_VAL_PERIOD = 105;
+  FUNCTION_NIDMM_VAL_TEMPERATURE = 108;
+  FUNCTION_NIDMM_VAL_AC_VOLTS_DC_COUPLED = 1001;
+  FUNCTION_NIDMM_VAL_DIODE = 1002;
+  FUNCTION_NIDMM_VAL_WAVEFORM_VOLTAGE = 1003;
+  FUNCTION_NIDMM_VAL_WAVEFORM_CURRENT = 1004;
+  FUNCTION_NIDMM_VAL_CAPACITANCE = 1005;
+  FUNCTION_NIDMM_VAL_INDUCTANCE = 1006;
+}
+
+enum TriggerSource {
+  TRIGGER_SOURCE_UNSPECIFIED = 0;
+  TRIGGER_SOURCE_NIDMM_VAL_IMMEDIATE = 1;
+  TRIGGER_SOURCE_NIDMM_VAL_EXTERNAL = 2;
+  TRIGGER_SOURCE_NIDMM_VAL_SOFTWARE_TRIG = 3;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG0 = 111;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG1 = 112;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG2 = 113;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG3 = 114;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG4 = 115;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG5 = 116;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG6 = 117;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG7 = 118;
+  TRIGGER_SOURCE_NIDMM_VAL_PXI_STAR = 131;
+  TRIGGER_SOURCE_NIDMM_VAL_AUX_TRIG1 = 1001;
+  TRIGGER_SOURCE_NIDMM_VAL_LBR_TRIG1 = 1004;
+}
+
+enum SampleTrigger {
+  SAMPLE_TRIGGER_UNSPECIFIED = 0;
+  SAMPLE_TRIGGER_NIDMM_VAL_IMMEDIATE = 1;
+  SAMPLE_TRIGGER_NIDMM_VAL_EXTERNAL = 2;
+  SAMPLE_TRIGGER_NIDMM_VAL_SOFTWARE_TRIG = 3;
+  SAMPLE_TRIGGER_NIDMM_VAL_INTERVAL = 10;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG0 = 111;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG1 = 112;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG2 = 113;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG3 = 114;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG4 = 115;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG5 = 116;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG6 = 117;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG7 = 118;
+  SAMPLE_TRIGGER_NIDMM_VAL_PXI_STAR = 131;
+  SAMPLE_TRIGGER_NIDMM_VAL_AUX_TRIG1 = 1001;
+  SAMPLE_TRIGGER_NIDMM_VAL_LBR_TRIG1 = 1004;
+}
+
+enum TriggerSlope {
+  TRIGGER_SLOPE_NIDMM_VAL_POSITIVE = 0;
+  TRIGGER_SLOPE_NIDMM_VAL_NEGATIVE = 1;
+}
+
+enum SampleTrigSlope {
+  SAMPLE_TRIG_SLOPE_NIDMM_VAL_POSITIVE = 0;
+  SAMPLE_TRIG_SLOPE_NIDMM_VAL_NEGATIVE = 1;
+}
+
+enum PowerLineFrequencies {
+  POWER_LINE_FREQUENCIES_UNSPECIFIED = 0;
+  POWER_LINE_FREQUENCIES_NIDMM_VAL_50_HERTZ = 50;
+  POWER_LINE_FREQUENCIES_NIDMM_VAL_60_HERTZ = 60;
+}
+
+enum ApertureTimeUnits {
+  APERTURE_TIME_UNITS_NIDMM_VAL_SECONDS = 0;
+  APERTURE_TIME_UNITS_NIDMM_VAL_POWER_LINE_CYCLES = 1;
+}
+
+enum CompensatedOhms {
+  COMPENSATED_OHMS_NIDMM_VAL_OFFSET_COMP_OHMS_OFF = 0;
+  COMPENSATED_OHMS_NIDMM_VAL_OFFSET_COMP_OHMS_ON = 1;
+}
+
+enum CalibrationType {
+  CALIBRATION_TYPE_NIDMM_VAL_INTERNAL_AREA = 0;
+  CALIBRATION_TYPE_NIDMM_VAL_EXTERNAL_AREA = 1;
+}
+
+enum ThermocoupleReferenceJunctionType {
+  THERMOCOUPLE_REFERENCE_JUNCTION_TYPE_UNSPECIFIED = 0;
+  THERMOCOUPLE_REFERENCE_JUNCTION_TYPE_NIDMM_VAL_TEMP_REF_JUNC_FIXED = 2;
+}
+
+enum ThermocoupleType {
+  THERMOCOUPLE_TYPE_UNSPECIFIED = 0;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_B = 1;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_E = 4;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_J = 6;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_K = 7;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_N = 8;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_R = 9;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_S = 10;
+  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_T = 11;
+}
+
+enum RtdType {
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_CUSTOM = 0;
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3750 = 1;
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3851 = 2;
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3911 = 3;
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3916 = 4;
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3920 = 5;
+  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3928 = 6;
 }
 
 enum AcquisitionStatus {
@@ -212,21 +324,6 @@ enum ApertureTime {
   APERTURE_TIME_NIDMM_VAL_120_PLC = 120;
 }
 
-enum ApertureTimeUnits {
-  APERTURE_TIME_UNITS_NIDMM_VAL_SECONDS = 0;
-  APERTURE_TIME_UNITS_NIDMM_VAL_POWER_LINE_CYCLES = 1;
-}
-
-enum CalibrationType {
-  CALIBRATION_TYPE_NIDMM_VAL_INTERNAL_AREA = 0;
-  CALIBRATION_TYPE_NIDMM_VAL_EXTERNAL_AREA = 1;
-}
-
-enum CompensatedOhms {
-  COMPENSATED_OHMS_NIDMM_VAL_OFFSET_COMP_OHMS_OFF = 0;
-  COMPENSATED_OHMS_NIDMM_VAL_OFFSET_COMP_OHMS_ON = 1;
-}
-
 enum ControlCommit {
   CONTROL_COMMIT_NIDMM_VAL_CONTROL_COMMIT = 0;
 }
@@ -237,23 +334,28 @@ enum FrequencyVoltageRange {
   FREQUENCY_VOLTAGE_RANGE_NIDMM_VAL_AUTO_RANGE_OFF = -2;
 }
 
-enum Function {
-  FUNCTION_UNSPECIFIED = 0;
-  FUNCTION_NIDMM_VAL_DC_VOLTS = 1;
-  FUNCTION_NIDMM_VAL_AC_VOLTS = 2;
-  FUNCTION_NIDMM_VAL_DC_CURRENT = 3;
-  FUNCTION_NIDMM_VAL_AC_CURRENT = 4;
-  FUNCTION_NIDMM_VAL_2_WIRE_RES = 5;
-  FUNCTION_NIDMM_VAL_4_WIRE_RES = 101;
-  FUNCTION_NIDMM_VAL_FREQ = 104;
-  FUNCTION_NIDMM_VAL_PERIOD = 105;
-  FUNCTION_NIDMM_VAL_TEMPERATURE = 108;
-  FUNCTION_NIDMM_VAL_AC_VOLTS_DC_COUPLED = 1001;
-  FUNCTION_NIDMM_VAL_DIODE = 1002;
-  FUNCTION_NIDMM_VAL_WAVEFORM_VOLTAGE = 1003;
-  FUNCTION_NIDMM_VAL_WAVEFORM_CURRENT = 1004;
-  FUNCTION_NIDMM_VAL_CAPACITANCE = 1005;
-  FUNCTION_NIDMM_VAL_INDUCTANCE = 1006;
+enum SampleCount {
+  SAMPLE_COUNT_NIDMM_VAL_SAMPLE_COUNT_INFINITE = 0;
+}
+
+enum SampleInterval {
+  SAMPLE_INTERVAL_UNSPECIFIED = 0;
+  SAMPLE_INTERVAL_NIDMM_VAL_AUTO_DELAY = -1;
+}
+
+enum TimeLimit {
+  TIME_LIMIT_UNSPECIFIED = 0;
+  TIME_LIMIT_NIDMM_VAL_TIME_LIMIT_AUTO = -1;
+}
+
+enum TriggerCount {
+  TRIGGER_COUNT_NIDMM_VAL_TRIG_COUNT_INFINITE = 0;
+}
+
+enum TriggerDelays {
+  TRIGGER_DELAYS_UNSPECIFIED = 0;
+  TRIGGER_DELAYS_NIDMM_VAL_AUTO_DELAY_ON = -1;
+  TRIGGER_DELAYS_NIDMM_VAL_AUTO_DELAY_OFF = -2;
 }
 
 enum NiDmmInt32AttributeValues {
@@ -413,808 +515,6 @@ enum NiDmmReal64AttributeValuesMapped {
   NIDMM_REAL64_INPUT_RESISTANCE_VAL_GREATER_THAN_10_GIGAOHM = 7;
 }
 
-enum PowerLineFrequencies {
-  POWER_LINE_FREQUENCIES_UNSPECIFIED = 0;
-  POWER_LINE_FREQUENCIES_NIDMM_VAL_50_HERTZ = 50;
-  POWER_LINE_FREQUENCIES_NIDMM_VAL_60_HERTZ = 60;
-}
-
-enum RtdType {
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_CUSTOM = 0;
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3750 = 1;
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3851 = 2;
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3911 = 3;
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3916 = 4;
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3920 = 5;
-  RTD_TYPE_NIDMM_VAL_TEMP_RTD_PT3928 = 6;
-}
-
-enum SampleCount {
-  SAMPLE_COUNT_NIDMM_VAL_SAMPLE_COUNT_INFINITE = 0;
-}
-
-enum SampleInterval {
-  SAMPLE_INTERVAL_UNSPECIFIED = 0;
-  SAMPLE_INTERVAL_NIDMM_VAL_AUTO_DELAY = -1;
-}
-
-enum SampleTrigSlope {
-  SAMPLE_TRIG_SLOPE_NIDMM_VAL_POSITIVE = 0;
-  SAMPLE_TRIG_SLOPE_NIDMM_VAL_NEGATIVE = 1;
-}
-
-enum SampleTrigger {
-  SAMPLE_TRIGGER_UNSPECIFIED = 0;
-  SAMPLE_TRIGGER_NIDMM_VAL_IMMEDIATE = 1;
-  SAMPLE_TRIGGER_NIDMM_VAL_EXTERNAL = 2;
-  SAMPLE_TRIGGER_NIDMM_VAL_SOFTWARE_TRIG = 3;
-  SAMPLE_TRIGGER_NIDMM_VAL_INTERVAL = 10;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG0 = 111;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG1 = 112;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG2 = 113;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG3 = 114;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG4 = 115;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG5 = 116;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG6 = 117;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_TRIG7 = 118;
-  SAMPLE_TRIGGER_NIDMM_VAL_PXI_STAR = 131;
-  SAMPLE_TRIGGER_NIDMM_VAL_AUX_TRIG1 = 1001;
-  SAMPLE_TRIGGER_NIDMM_VAL_LBR_TRIG1 = 1004;
-}
-
-enum ThermocoupleReferenceJunctionType {
-  THERMOCOUPLE_REFERENCE_JUNCTION_TYPE_UNSPECIFIED = 0;
-  THERMOCOUPLE_REFERENCE_JUNCTION_TYPE_NIDMM_VAL_TEMP_REF_JUNC_FIXED = 2;
-}
-
-enum ThermocoupleType {
-  THERMOCOUPLE_TYPE_UNSPECIFIED = 0;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_B = 1;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_E = 4;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_J = 6;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_K = 7;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_N = 8;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_R = 9;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_S = 10;
-  THERMOCOUPLE_TYPE_NIDMM_VAL_TEMP_TC_T = 11;
-}
-
-enum TimeLimit {
-  TIME_LIMIT_UNSPECIFIED = 0;
-  TIME_LIMIT_NIDMM_VAL_TIME_LIMIT_AUTO = -1;
-}
-
-enum TriggerCount {
-  TRIGGER_COUNT_NIDMM_VAL_TRIG_COUNT_INFINITE = 0;
-}
-
-enum TriggerDelays {
-  TRIGGER_DELAYS_UNSPECIFIED = 0;
-  TRIGGER_DELAYS_NIDMM_VAL_AUTO_DELAY_ON = -1;
-  TRIGGER_DELAYS_NIDMM_VAL_AUTO_DELAY_OFF = -2;
-}
-
-enum TriggerSlope {
-  TRIGGER_SLOPE_NIDMM_VAL_POSITIVE = 0;
-  TRIGGER_SLOPE_NIDMM_VAL_NEGATIVE = 1;
-}
-
-enum TriggerSource {
-  TRIGGER_SOURCE_UNSPECIFIED = 0;
-  TRIGGER_SOURCE_NIDMM_VAL_IMMEDIATE = 1;
-  TRIGGER_SOURCE_NIDMM_VAL_EXTERNAL = 2;
-  TRIGGER_SOURCE_NIDMM_VAL_SOFTWARE_TRIG = 3;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG0 = 111;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG1 = 112;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG2 = 113;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG3 = 114;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG4 = 115;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG5 = 116;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG6 = 117;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_TRIG7 = 118;
-  TRIGGER_SOURCE_NIDMM_VAL_PXI_STAR = 131;
-  TRIGGER_SOURCE_NIDMM_VAL_AUX_TRIG1 = 1001;
-  TRIGGER_SOURCE_NIDMM_VAL_LBR_TRIG1 = 1004;
-}
-
-message AbortRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message AbortResponse {
-  int32 status = 1;
-}
-
-message CheckAttributeViBooleanRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-  bool attribute_value = 4;
-}
-
-message CheckAttributeViBooleanResponse {
-  int32 status = 1;
-}
-
-message CheckAttributeViInt32Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-  oneof attribute_value_enum {
-    NiDmmInt32AttributeValues attribute_value = 4;
-    sint32 attribute_value_raw = 5;
-  }
-}
-
-message CheckAttributeViInt32Response {
-  int32 status = 1;
-}
-
-message CheckAttributeViReal64Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-  oneof attribute_value_enum {
-    NiDmmReal64AttributeValues attribute_value = 4;
-    double attribute_value_raw = 5;
-    NiDmmReal64AttributeValuesMapped attribute_value_mapped = 6;
-  }
-}
-
-message CheckAttributeViReal64Response {
-  int32 status = 1;
-}
-
-message CheckAttributeViSessionRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-  nidevice_grpc.Session attribute_value = 4;
-}
-
-message CheckAttributeViSessionResponse {
-  int32 status = 1;
-}
-
-message CheckAttributeViStringRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-  string attribute_value_raw = 4;
-}
-
-message CheckAttributeViStringResponse {
-  int32 status = 1;
-}
-
-message ClearErrorRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ClearErrorResponse {
-  int32 status = 1;
-}
-
-message ClearInterchangeWarningsRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ClearInterchangeWarningsResponse {
-  int32 status = 1;
-}
-
-message CloseRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message CloseResponse {
-  int32 status = 1;
-}
-
-message ConfigureACBandwidthRequest {
-  nidevice_grpc.Session vi = 1;
-  double ac_minimum_frequency_hz = 2;
-  double ac_maximum_frequency_hz = 3;
-}
-
-message ConfigureACBandwidthResponse {
-  int32 status = 1;
-}
-
-message ConfigureADCCalibrationRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 adc_calibration = 2;
-}
-
-message ConfigureADCCalibrationResponse {
-  int32 status = 1;
-}
-
-message ConfigureAutoZeroModeRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 auto_zero_mode = 2;
-}
-
-message ConfigureAutoZeroModeResponse {
-  int32 status = 1;
-}
-
-message ConfigureCableCompTypeRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 cable_comp_type = 2;
-}
-
-message ConfigureCableCompTypeResponse {
-  int32 status = 1;
-}
-
-message ConfigureCurrentSourceRequest {
-  nidevice_grpc.Session vi = 1;
-  double current_source = 2;
-}
-
-message ConfigureCurrentSourceResponse {
-  int32 status = 1;
-}
-
-message ConfigureFixedRefJunctionRequest {
-  nidevice_grpc.Session vi = 1;
-  double fixed_reference_junction = 2;
-}
-
-message ConfigureFixedRefJunctionResponse {
-  int32 status = 1;
-}
-
-message ConfigureFrequencyVoltageRangeRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof voltage_range_enum {
-    FrequencyVoltageRange voltage_range = 2;
-    double voltage_range_raw = 3;
-  }
-}
-
-message ConfigureFrequencyVoltageRangeResponse {
-  int32 status = 1;
-}
-
-message ConfigureMeasCompleteDestRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 meas_complete_destination = 2;
-}
-
-message ConfigureMeasCompleteDestResponse {
-  int32 status = 1;
-}
-
-message ConfigureMeasCompleteSlopeRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 meas_complete_slope = 2;
-}
-
-message ConfigureMeasCompleteSlopeResponse {
-  int32 status = 1;
-}
-
-message ConfigureMeasurementAbsoluteRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof measurement_function_enum {
-    Function measurement_function = 2;
-    sint32 measurement_function_raw = 3;
-  }
-  double range = 4;
-  double resolution_absolute = 5;
-}
-
-message ConfigureMeasurementAbsoluteResponse {
-  int32 status = 1;
-}
-
-message ConfigureMeasurementDigitsRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof measurement_function_enum {
-    Function measurement_function = 2;
-    sint32 measurement_function_raw = 3;
-  }
-  double range = 4;
-  double resolution_digits = 5;
-}
-
-message ConfigureMeasurementDigitsResponse {
-  int32 status = 1;
-}
-
-message ConfigureMultiPointRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof trigger_count_enum {
-    TriggerCount trigger_count = 2;
-    sint32 trigger_count_raw = 3;
-  }
-  oneof sample_count_enum {
-    SampleCount sample_count = 4;
-    sint32 sample_count_raw = 5;
-  }
-  oneof sample_trigger_enum {
-    SampleTrigger sample_trigger = 6;
-    sint32 sample_trigger_raw = 7;
-  }
-  oneof sample_interval_enum {
-    SampleInterval sample_interval = 8;
-    double sample_interval_raw = 9;
-  }
-}
-
-message ConfigureMultiPointResponse {
-  int32 status = 1;
-}
-
-message ConfigureOffsetCompOhmsRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof offset_comp_ohms_enum {
-    CompensatedOhms offset_comp_ohms = 2;
-    sint32 offset_comp_ohms_raw = 3;
-  }
-}
-
-message ConfigureOffsetCompOhmsResponse {
-  int32 status = 1;
-}
-
-message ConfigureOpenCableCompValuesRequest {
-  nidevice_grpc.Session vi = 1;
-  double conductance = 2;
-  double susceptance = 3;
-}
-
-message ConfigureOpenCableCompValuesResponse {
-  int32 status = 1;
-}
-
-message ConfigurePowerLineFrequencyRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof power_line_frequency_hz_enum {
-    PowerLineFrequencies power_line_frequency_hz = 2;
-    double power_line_frequency_hz_raw = 3;
-  }
-}
-
-message ConfigurePowerLineFrequencyResponse {
-  int32 status = 1;
-}
-
-message ConfigureRTDCustomRequest {
-  nidevice_grpc.Session vi = 1;
-  double rtd_a = 2;
-  double rtd_b = 3;
-  double rtd_c = 4;
-}
-
-message ConfigureRTDCustomResponse {
-  int32 status = 1;
-}
-
-message ConfigureRTDTypeRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof rtd_type_enum {
-    RtdType rtd_type = 2;
-    sint32 rtd_type_raw = 3;
-  }
-  double rtd_resistance = 4;
-}
-
-message ConfigureRTDTypeResponse {
-  int32 status = 1;
-}
-
-message ConfigureSampleTriggerSlopeRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof sample_trigger_slope_enum {
-    SampleTrigSlope sample_trigger_slope = 2;
-    sint32 sample_trigger_slope_raw = 3;
-  }
-}
-
-message ConfigureSampleTriggerSlopeResponse {
-  int32 status = 1;
-}
-
-message ConfigureShortCableCompValuesRequest {
-  nidevice_grpc.Session vi = 1;
-  double resistance = 2;
-  double reactance = 3;
-}
-
-message ConfigureShortCableCompValuesResponse {
-  int32 status = 1;
-}
-
-message ConfigureThermistorCustomRequest {
-  nidevice_grpc.Session vi = 1;
-  double thermistor_a = 2;
-  double thermistor_b = 3;
-  double thermistor_c = 4;
-}
-
-message ConfigureThermistorCustomResponse {
-  int32 status = 1;
-}
-
-message ConfigureThermistorTypeRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 thermistor_type = 2;
-}
-
-message ConfigureThermistorTypeResponse {
-  int32 status = 1;
-}
-
-message ConfigureThermocoupleRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof thermocouple_type_enum {
-    ThermocoupleType thermocouple_type = 2;
-    sint32 thermocouple_type_raw = 3;
-  }
-  oneof reference_junction_type_enum {
-    ThermocoupleReferenceJunctionType reference_junction_type = 4;
-    sint32 reference_junction_type_raw = 5;
-  }
-}
-
-message ConfigureThermocoupleResponse {
-  int32 status = 1;
-}
-
-message ConfigureTransducerTypeRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 transducer_type = 2;
-}
-
-message ConfigureTransducerTypeResponse {
-  int32 status = 1;
-}
-
-message ConfigureTriggerRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof trigger_source_enum {
-    TriggerSource trigger_source = 2;
-    sint32 trigger_source_raw = 3;
-  }
-  oneof trigger_delay_enum {
-    TriggerDelays trigger_delay = 4;
-    double trigger_delay_raw = 5;
-  }
-}
-
-message ConfigureTriggerResponse {
-  int32 status = 1;
-}
-
-message ConfigureTriggerSlopeRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof trigger_slope_enum {
-    TriggerSlope trigger_slope = 2;
-    sint32 trigger_slope_raw = 3;
-  }
-}
-
-message ConfigureTriggerSlopeResponse {
-  int32 status = 1;
-}
-
-message ConfigureWaveformAcquisitionRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof measurement_function_enum {
-    Function measurement_function = 2;
-    sint32 measurement_function_raw = 3;
-  }
-  double range = 4;
-  double rate = 5;
-  sint32 waveform_points = 6;
-}
-
-message ConfigureWaveformAcquisitionResponse {
-  int32 status = 1;
-}
-
-message ConfigureWaveformCouplingRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 waveform_coupling = 2;
-}
-
-message ConfigureWaveformCouplingResponse {
-  int32 status = 1;
-}
-
-message ControlRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof control_action_enum {
-    ControlCommit control_action = 2;
-    sint32 control_action_raw = 3;
-  }
-}
-
-message ControlResponse {
-  int32 status = 1;
-}
-
-message DisableRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message DisableResponse {
-  int32 status = 1;
-}
-
-message ExportAttributeConfigurationBufferRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ExportAttributeConfigurationBufferResponse {
-  int32 status = 1;
-  bytes configuration = 2;
-}
-
-message ExportAttributeConfigurationFileRequest {
-  nidevice_grpc.Session vi = 1;
-  string file_path = 2;
-}
-
-message ExportAttributeConfigurationFileResponse {
-  int32 status = 1;
-}
-
-message FetchRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof maximum_time_enum {
-    TimeLimit maximum_time = 2;
-    sint32 maximum_time_raw = 3;
-  }
-}
-
-message FetchResponse {
-  int32 status = 1;
-  double reading = 2;
-}
-
-message FetchMultiPointRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof maximum_time_enum {
-    TimeLimit maximum_time = 2;
-    sint32 maximum_time_raw = 3;
-  }
-  sint32 array_size = 4;
-}
-
-message FetchMultiPointResponse {
-  int32 status = 1;
-  repeated double reading_array = 2;
-  sint32 actual_number_of_points = 3;
-}
-
-message FetchWaveformRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof maximum_time_enum {
-    TimeLimit maximum_time = 2;
-    sint32 maximum_time_raw = 3;
-  }
-  sint32 array_size = 4;
-}
-
-message FetchWaveformResponse {
-  int32 status = 1;
-  repeated double waveform_array = 2;
-  sint32 actual_number_of_points = 3;
-}
-
-message GetApertureTimeInfoRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetApertureTimeInfoResponse {
-  int32 status = 1;
-  ApertureTime aperture_time = 2;
-  double aperture_time_raw = 3;
-  ApertureTimeUnits aperture_time_units = 4;
-  sint32 aperture_time_units_raw = 5;
-}
-
-message GetAttributeViBooleanRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-}
-
-message GetAttributeViBooleanResponse {
-  int32 status = 1;
-  bool attribute_value = 2;
-}
-
-message GetAttributeViInt32Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-}
-
-message GetAttributeViInt32Response {
-  int32 status = 1;
-  sint32 attribute_value = 2;
-}
-
-message GetAttributeViReal64Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-}
-
-message GetAttributeViReal64Response {
-  int32 status = 1;
-  double attribute_value = 2;
-}
-
-message GetAttributeViSessionRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-}
-
-message GetAttributeViSessionResponse {
-  int32 status = 1;
-  nidevice_grpc.Session attribute_value = 2;
-}
-
-message GetAttributeViStringRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiDmmAttribute attribute_id = 3;
-}
-
-message GetAttributeViStringResponse {
-  int32 status = 1;
-  string attribute_value = 2;
-}
-
-message GetAutoRangeValueRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetAutoRangeValueResponse {
-  int32 status = 1;
-  double actual_range = 2;
-}
-
-message GetCalDateAndTimeRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof cal_type_enum {
-    CalibrationType cal_type = 2;
-    sint32 cal_type_raw = 3;
-  }
-}
-
-message GetCalDateAndTimeResponse {
-  int32 status = 1;
-  sint32 month = 2;
-  sint32 day = 3;
-  sint32 year = 4;
-  sint32 hour = 5;
-  sint32 minute = 6;
-}
-
-message GetChannelNameRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 index = 2;
-}
-
-message GetChannelNameResponse {
-  int32 status = 1;
-  string channel_string = 2;
-}
-
-message GetDevTempRequest {
-  nidevice_grpc.Session vi = 1;
-  string options = 2;
-}
-
-message GetDevTempResponse {
-  int32 status = 1;
-  double temperature = 2;
-}
-
-message GetErrorRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetErrorResponse {
-  int32 status = 1;
-  sint32 error_code = 2;
-  string description = 3;
-}
-
-message GetErrorMessageRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 error_code = 2;
-}
-
-message GetErrorMessageResponse {
-  int32 status = 1;
-  string error_message = 2;
-}
-
-message GetExtCalRecommendedIntervalRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetExtCalRecommendedIntervalResponse {
-  int32 status = 1;
-  sint32 months = 2;
-}
-
-message GetLastCalTempRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof cal_type_enum {
-    CalibrationType cal_type = 2;
-    sint32 cal_type_raw = 3;
-  }
-}
-
-message GetLastCalTempResponse {
-  int32 status = 1;
-  double temperature = 2;
-}
-
-message GetMeasurementPeriodRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetMeasurementPeriodResponse {
-  int32 status = 1;
-  double period = 2;
-}
-
-message GetNextCoercionRecordRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetNextCoercionRecordResponse {
-  int32 status = 1;
-  string coercion_record = 2;
-}
-
-message GetNextInterchangeWarningRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetNextInterchangeWarningResponse {
-  int32 status = 1;
-  string interchange_warning = 2;
-}
-
-message GetSelfCalSupportedRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetSelfCalSupportedResponse {
-  int32 status = 1;
-  bool self_cal_supported = 2;
-}
-
-message ImportAttributeConfigurationBufferRequest {
-  nidevice_grpc.Session vi = 1;
-  bytes configuration = 2;
-}
-
-message ImportAttributeConfigurationBufferResponse {
-  int32 status = 1;
-}
-
-message ImportAttributeConfigurationFileRequest {
-  nidevice_grpc.Session vi = 1;
-  string file_path = 2;
-}
-
-message ImportAttributeConfigurationFileResponse {
-  int32 status = 1;
-}
-
 message InitRequest {
   string session_name = 1;
   string resource_name = 2;
@@ -1246,19 +546,158 @@ message InitWithOptionsResponse {
   bool new_session_initialized = 4;
 }
 
+message CloseRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message CloseResponse {
+  int32 status = 1;
+}
+
+message GetErrorRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetErrorResponse {
+  int32 status = 1;
+  sint32 error_code = 2;
+  string description = 3;
+}
+
+message GetErrorMessageRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 error_code = 2;
+}
+
+message GetErrorMessageResponse {
+  int32 status = 1;
+  string error_message = 2;
+}
+
+message ClearErrorRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ClearErrorResponse {
+  int32 status = 1;
+}
+
+message ResetRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ResetResponse {
+  int32 status = 1;
+}
+
+message SelfTestRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message SelfTestResponse {
+  int32 status = 1;
+  sint32 self_test_result = 2;
+  string self_test_message = 3;
+}
+
+message SelfCalRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message SelfCalResponse {
+  int32 status = 1;
+}
+
+message RevisionQueryRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message RevisionQueryResponse {
+  int32 status = 1;
+  string instrument_driver_revision = 2;
+  string firmware_revision = 3;
+}
+
+message ResetWithDefaultsRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ResetWithDefaultsResponse {
+  int32 status = 1;
+}
+
+message DisableRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message DisableResponse {
+  int32 status = 1;
+}
+
+message GetMeasurementPeriodRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetMeasurementPeriodResponse {
+  int32 status = 1;
+  double period = 2;
+}
+
+message ConfigureTriggerRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof trigger_source_enum {
+    TriggerSource trigger_source = 2;
+    sint32 trigger_source_raw = 3;
+  }
+  oneof trigger_delay_enum {
+    TriggerDelays trigger_delay = 4;
+    double trigger_delay_raw = 5;
+  }
+}
+
+message ConfigureTriggerResponse {
+  int32 status = 1;
+}
+
+message ReadRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof maximum_time_enum {
+    TimeLimit maximum_time = 2;
+    sint32 maximum_time_raw = 3;
+  }
+}
+
+message ReadResponse {
+  int32 status = 1;
+  double reading = 2;
+}
+
+message FetchRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof maximum_time_enum {
+    TimeLimit maximum_time = 2;
+    sint32 maximum_time_raw = 3;
+  }
+}
+
+message FetchResponse {
+  int32 status = 1;
+  double reading = 2;
+}
+
+message AbortRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message AbortResponse {
+  int32 status = 1;
+}
+
 message InitiateRequest {
   nidevice_grpc.Session vi = 1;
 }
 
 message InitiateResponse {
-  int32 status = 1;
-}
-
-message InvalidateAllAttributesRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message InvalidateAllAttributesResponse {
   int32 status = 1;
 }
 
@@ -1282,6 +721,264 @@ message IsUnderRangeResponse {
   bool is_under_range = 2;
 }
 
+message ConfigureACBandwidthRequest {
+  nidevice_grpc.Session vi = 1;
+  double ac_minimum_frequency_hz = 2;
+  double ac_maximum_frequency_hz = 3;
+}
+
+message ConfigureACBandwidthResponse {
+  int32 status = 1;
+}
+
+message ConfigureFrequencyVoltageRangeRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof voltage_range_enum {
+    FrequencyVoltageRange voltage_range = 2;
+    double voltage_range_raw = 3;
+  }
+}
+
+message ConfigureFrequencyVoltageRangeResponse {
+  int32 status = 1;
+}
+
+message ConfigureMeasCompleteDestRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 meas_complete_destination = 2;
+}
+
+message ConfigureMeasCompleteDestResponse {
+  int32 status = 1;
+}
+
+message ConfigureMultiPointRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof trigger_count_enum {
+    TriggerCount trigger_count = 2;
+    sint32 trigger_count_raw = 3;
+  }
+  oneof sample_count_enum {
+    SampleCount sample_count = 4;
+    sint32 sample_count_raw = 5;
+  }
+  oneof sample_trigger_enum {
+    SampleTrigger sample_trigger = 6;
+    sint32 sample_trigger_raw = 7;
+  }
+  oneof sample_interval_enum {
+    SampleInterval sample_interval = 8;
+    double sample_interval_raw = 9;
+  }
+}
+
+message ConfigureMultiPointResponse {
+  int32 status = 1;
+}
+
+message ReadMultiPointRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof maximum_time_enum {
+    TimeLimit maximum_time = 2;
+    sint32 maximum_time_raw = 3;
+  }
+  sint32 array_size = 4;
+}
+
+message ReadMultiPointResponse {
+  int32 status = 1;
+  repeated double reading_array = 2;
+  sint32 actual_number_of_points = 3;
+}
+
+message FetchMultiPointRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof maximum_time_enum {
+    TimeLimit maximum_time = 2;
+    sint32 maximum_time_raw = 3;
+  }
+  sint32 array_size = 4;
+}
+
+message FetchMultiPointResponse {
+  int32 status = 1;
+  repeated double reading_array = 2;
+  sint32 actual_number_of_points = 3;
+}
+
+message ConfigureTriggerSlopeRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof trigger_slope_enum {
+    TriggerSlope trigger_slope = 2;
+    sint32 trigger_slope_raw = 3;
+  }
+}
+
+message ConfigureTriggerSlopeResponse {
+  int32 status = 1;
+}
+
+message SendSoftwareTriggerRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message SendSoftwareTriggerResponse {
+  int32 status = 1;
+}
+
+message GetApertureTimeInfoRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetApertureTimeInfoResponse {
+  int32 status = 1;
+  ApertureTime aperture_time = 2;
+  double aperture_time_raw = 3;
+  ApertureTimeUnits aperture_time_units = 4;
+  sint32 aperture_time_units_raw = 5;
+}
+
+message GetAutoRangeValueRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetAutoRangeValueResponse {
+  int32 status = 1;
+  double actual_range = 2;
+}
+
+message ConfigureAutoZeroModeRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 auto_zero_mode = 2;
+}
+
+message ConfigureAutoZeroModeResponse {
+  int32 status = 1;
+}
+
+message ConfigurePowerLineFrequencyRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof power_line_frequency_hz_enum {
+    PowerLineFrequencies power_line_frequency_hz = 2;
+    double power_line_frequency_hz_raw = 3;
+  }
+}
+
+message ConfigurePowerLineFrequencyResponse {
+  int32 status = 1;
+}
+
+message ConfigureMeasurementDigitsRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof measurement_function_enum {
+    Function measurement_function = 2;
+    sint32 measurement_function_raw = 3;
+  }
+  double range = 4;
+  double resolution_digits = 5;
+}
+
+message ConfigureMeasurementDigitsResponse {
+  int32 status = 1;
+}
+
+message ConfigureMeasurementAbsoluteRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof measurement_function_enum {
+    Function measurement_function = 2;
+    sint32 measurement_function_raw = 3;
+  }
+  double range = 4;
+  double resolution_absolute = 5;
+}
+
+message ConfigureMeasurementAbsoluteResponse {
+  int32 status = 1;
+}
+
+message ConfigureMeasCompleteSlopeRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 meas_complete_slope = 2;
+}
+
+message ConfigureMeasCompleteSlopeResponse {
+  int32 status = 1;
+}
+
+message ConfigureSampleTriggerSlopeRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof sample_trigger_slope_enum {
+    SampleTrigSlope sample_trigger_slope = 2;
+    sint32 sample_trigger_slope_raw = 3;
+  }
+}
+
+message ConfigureSampleTriggerSlopeResponse {
+  int32 status = 1;
+}
+
+message ReadStatusRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ReadStatusResponse {
+  int32 status = 1;
+  sint32 acquisition_backlog = 2;
+  AcquisitionStatus acquisition_status = 3;
+  sint32 acquisition_status_raw = 4;
+}
+
+message ControlRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof control_action_enum {
+    ControlCommit control_action = 2;
+    sint32 control_action_raw = 3;
+  }
+}
+
+message ControlResponse {
+  int32 status = 1;
+}
+
+message ConfigureADCCalibrationRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 adc_calibration = 2;
+}
+
+message ConfigureADCCalibrationResponse {
+  int32 status = 1;
+}
+
+message ConfigureOffsetCompOhmsRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof offset_comp_ohms_enum {
+    CompensatedOhms offset_comp_ohms = 2;
+    sint32 offset_comp_ohms_raw = 3;
+  }
+}
+
+message ConfigureOffsetCompOhmsResponse {
+  int32 status = 1;
+}
+
+message ConfigureCurrentSourceRequest {
+  nidevice_grpc.Session vi = 1;
+  double current_source = 2;
+}
+
+message ConfigureCurrentSourceResponse {
+  int32 status = 1;
+}
+
+message ConfigureCableCompTypeRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 cable_comp_type = 2;
+}
+
+message ConfigureCableCompTypeResponse {
+  int32 status = 1;
+}
+
 message PerformOpenCableCompRequest {
   nidevice_grpc.Session vi = 1;
 }
@@ -1302,20 +999,51 @@ message PerformShortCableCompResponse {
   double reactance = 3;
 }
 
-message ReadRequest {
+message ConfigureOpenCableCompValuesRequest {
   nidevice_grpc.Session vi = 1;
-  oneof maximum_time_enum {
-    TimeLimit maximum_time = 2;
-    sint32 maximum_time_raw = 3;
-  }
+  double conductance = 2;
+  double susceptance = 3;
 }
 
-message ReadResponse {
+message ConfigureOpenCableCompValuesResponse {
   int32 status = 1;
-  double reading = 2;
 }
 
-message ReadMultiPointRequest {
+message ConfigureShortCableCompValuesRequest {
+  nidevice_grpc.Session vi = 1;
+  double resistance = 2;
+  double reactance = 3;
+}
+
+message ConfigureShortCableCompValuesResponse {
+  int32 status = 1;
+}
+
+message ConfigureWaveformAcquisitionRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof measurement_function_enum {
+    Function measurement_function = 2;
+    sint32 measurement_function_raw = 3;
+  }
+  double range = 4;
+  double rate = 5;
+  sint32 waveform_points = 6;
+}
+
+message ConfigureWaveformAcquisitionResponse {
+  int32 status = 1;
+}
+
+message ConfigureWaveformCouplingRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 waveform_coupling = 2;
+}
+
+message ConfigureWaveformCouplingResponse {
+  int32 status = 1;
+}
+
+message FetchWaveformRequest {
   nidevice_grpc.Session vi = 1;
   oneof maximum_time_enum {
     TimeLimit maximum_time = 2;
@@ -1324,21 +1052,10 @@ message ReadMultiPointRequest {
   sint32 array_size = 4;
 }
 
-message ReadMultiPointResponse {
+message FetchWaveformResponse {
   int32 status = 1;
-  repeated double reading_array = 2;
+  repeated double waveform_array = 2;
   sint32 actual_number_of_points = 3;
-}
-
-message ReadStatusRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ReadStatusResponse {
-  int32 status = 1;
-  sint32 acquisition_backlog = 2;
-  AcquisitionStatus acquisition_status = 3;
-  sint32 acquisition_status_raw = 4;
 }
 
 message ReadWaveformRequest {
@@ -1356,75 +1073,15 @@ message ReadWaveformResponse {
   sint32 actual_number_of_points = 3;
 }
 
-message ResetRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ResetResponse {
-  int32 status = 1;
-}
-
-message ResetInterchangeCheckRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ResetInterchangeCheckResponse {
-  int32 status = 1;
-}
-
-message ResetWithDefaultsRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ResetWithDefaultsResponse {
-  int32 status = 1;
-}
-
-message RevisionQueryRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message RevisionQueryResponse {
-  int32 status = 1;
-  string instrument_driver_revision = 2;
-  string firmware_revision = 3;
-}
-
-message SelfCalRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message SelfCalResponse {
-  int32 status = 1;
-}
-
-message SelfTestRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message SelfTestResponse {
-  int32 status = 1;
-  sint32 self_test_result = 2;
-  string self_test_message = 3;
-}
-
-message SendSoftwareTriggerRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message SendSoftwareTriggerResponse {
-  int32 status = 1;
-}
-
-message SetAttributeViBooleanRequest {
+message GetAttributeViInt32Request {
   nidevice_grpc.Session vi = 1;
   string channel_name = 2;
   NiDmmAttribute attribute_id = 3;
-  bool attribute_value = 4;
 }
 
-message SetAttributeViBooleanResponse {
+message GetAttributeViInt32Response {
   int32 status = 1;
+  sint32 attribute_value = 2;
 }
 
 message SetAttributeViInt32Request {
@@ -1439,6 +1096,31 @@ message SetAttributeViInt32Request {
 
 message SetAttributeViInt32Response {
   int32 status = 1;
+}
+
+message CheckAttributeViInt32Request {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+  oneof attribute_value_enum {
+    NiDmmInt32AttributeValues attribute_value = 4;
+    sint32 attribute_value_raw = 5;
+  }
+}
+
+message CheckAttributeViInt32Response {
+  int32 status = 1;
+}
+
+message GetAttributeViReal64Request {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+}
+
+message GetAttributeViReal64Response {
+  int32 status = 1;
+  double attribute_value = 2;
 }
 
 message SetAttributeViReal64Request {
@@ -1456,15 +1138,30 @@ message SetAttributeViReal64Response {
   int32 status = 1;
 }
 
-message SetAttributeViSessionRequest {
+message CheckAttributeViReal64Request {
   nidevice_grpc.Session vi = 1;
   string channel_name = 2;
   NiDmmAttribute attribute_id = 3;
-  nidevice_grpc.Session attribute_value = 4;
+  oneof attribute_value_enum {
+    NiDmmReal64AttributeValues attribute_value = 4;
+    double attribute_value_raw = 5;
+    NiDmmReal64AttributeValuesMapped attribute_value_mapped = 6;
+  }
 }
 
-message SetAttributeViSessionResponse {
+message CheckAttributeViReal64Response {
   int32 status = 1;
+}
+
+message GetAttributeViStringRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+}
+
+message GetAttributeViStringResponse {
+  int32 status = 1;
+  string attribute_value = 2;
 }
 
 message SetAttributeViStringRequest {
@@ -1477,3 +1174,287 @@ message SetAttributeViStringRequest {
 message SetAttributeViStringResponse {
   int32 status = 1;
 }
+
+message CheckAttributeViStringRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+  string attribute_value_raw = 4;
+}
+
+message CheckAttributeViStringResponse {
+  int32 status = 1;
+}
+
+message GetAttributeViSessionRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+}
+
+message GetAttributeViSessionResponse {
+  int32 status = 1;
+  nidevice_grpc.Session attribute_value = 2;
+}
+
+message SetAttributeViSessionRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+  nidevice_grpc.Session attribute_value = 4;
+}
+
+message SetAttributeViSessionResponse {
+  int32 status = 1;
+}
+
+message CheckAttributeViSessionRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+  nidevice_grpc.Session attribute_value = 4;
+}
+
+message CheckAttributeViSessionResponse {
+  int32 status = 1;
+}
+
+message GetAttributeViBooleanRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+}
+
+message GetAttributeViBooleanResponse {
+  int32 status = 1;
+  bool attribute_value = 2;
+}
+
+message SetAttributeViBooleanRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+  bool attribute_value = 4;
+}
+
+message SetAttributeViBooleanResponse {
+  int32 status = 1;
+}
+
+message CheckAttributeViBooleanRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiDmmAttribute attribute_id = 3;
+  bool attribute_value = 4;
+}
+
+message CheckAttributeViBooleanResponse {
+  int32 status = 1;
+}
+
+message ImportAttributeConfigurationFileRequest {
+  nidevice_grpc.Session vi = 1;
+  string file_path = 2;
+}
+
+message ImportAttributeConfigurationFileResponse {
+  int32 status = 1;
+}
+
+message ExportAttributeConfigurationFileRequest {
+  nidevice_grpc.Session vi = 1;
+  string file_path = 2;
+}
+
+message ExportAttributeConfigurationFileResponse {
+  int32 status = 1;
+}
+
+message ImportAttributeConfigurationBufferRequest {
+  nidevice_grpc.Session vi = 1;
+  bytes configuration = 2;
+}
+
+message ImportAttributeConfigurationBufferResponse {
+  int32 status = 1;
+}
+
+message ExportAttributeConfigurationBufferRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ExportAttributeConfigurationBufferResponse {
+  int32 status = 1;
+  bytes configuration = 2;
+}
+
+message ResetInterchangeCheckRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ResetInterchangeCheckResponse {
+  int32 status = 1;
+}
+
+message ClearInterchangeWarningsRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ClearInterchangeWarningsResponse {
+  int32 status = 1;
+}
+
+message GetChannelNameRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 index = 2;
+}
+
+message GetChannelNameResponse {
+  int32 status = 1;
+  string channel_string = 2;
+}
+
+message GetExtCalRecommendedIntervalRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetExtCalRecommendedIntervalResponse {
+  int32 status = 1;
+  sint32 months = 2;
+}
+
+message GetSelfCalSupportedRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetSelfCalSupportedResponse {
+  int32 status = 1;
+  bool self_cal_supported = 2;
+}
+
+message GetCalDateAndTimeRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof cal_type_enum {
+    CalibrationType cal_type = 2;
+    sint32 cal_type_raw = 3;
+  }
+}
+
+message GetCalDateAndTimeResponse {
+  int32 status = 1;
+  sint32 month = 2;
+  sint32 day = 3;
+  sint32 year = 4;
+  sint32 hour = 5;
+  sint32 minute = 6;
+}
+
+message GetLastCalTempRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof cal_type_enum {
+    CalibrationType cal_type = 2;
+    sint32 cal_type_raw = 3;
+  }
+}
+
+message GetLastCalTempResponse {
+  int32 status = 1;
+  double temperature = 2;
+}
+
+message GetDevTempRequest {
+  nidevice_grpc.Session vi = 1;
+  string options = 2;
+}
+
+message GetDevTempResponse {
+  int32 status = 1;
+  double temperature = 2;
+}
+
+message ConfigureTransducerTypeRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 transducer_type = 2;
+}
+
+message ConfigureTransducerTypeResponse {
+  int32 status = 1;
+}
+
+message ConfigureThermocoupleRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof thermocouple_type_enum {
+    ThermocoupleType thermocouple_type = 2;
+    sint32 thermocouple_type_raw = 3;
+  }
+  oneof reference_junction_type_enum {
+    ThermocoupleReferenceJunctionType reference_junction_type = 4;
+    sint32 reference_junction_type_raw = 5;
+  }
+}
+
+message ConfigureThermocoupleResponse {
+  int32 status = 1;
+}
+
+message ConfigureFixedRefJunctionRequest {
+  nidevice_grpc.Session vi = 1;
+  double fixed_reference_junction = 2;
+}
+
+message ConfigureFixedRefJunctionResponse {
+  int32 status = 1;
+}
+
+message ConfigureRTDTypeRequest {
+  nidevice_grpc.Session vi = 1;
+  oneof rtd_type_enum {
+    RtdType rtd_type = 2;
+    sint32 rtd_type_raw = 3;
+  }
+  double rtd_resistance = 4;
+}
+
+message ConfigureRTDTypeResponse {
+  int32 status = 1;
+}
+
+message ConfigureRTDCustomRequest {
+  nidevice_grpc.Session vi = 1;
+  double rtd_a = 2;
+  double rtd_b = 3;
+  double rtd_c = 4;
+}
+
+message ConfigureRTDCustomResponse {
+  int32 status = 1;
+}
+
+message ConfigureThermistorTypeRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 thermistor_type = 2;
+}
+
+message ConfigureThermistorTypeResponse {
+  int32 status = 1;
+}
+
+message ConfigureThermistorCustomRequest {
+  nidevice_grpc.Session vi = 1;
+  double thermistor_a = 2;
+  double thermistor_b = 3;
+  double thermistor_c = 4;
+}
+
+message ConfigureThermistorCustomResponse {
+  int32 status = 1;
+}
+
+message InvalidateAllAttributesRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message InvalidateAllAttributesResponse {
+  int32 status = 1;
+}
+

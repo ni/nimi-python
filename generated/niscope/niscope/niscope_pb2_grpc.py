@@ -14,150 +14,55 @@ class NiScopeStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Abort = channel.unary_unary(
-                '/niscope_grpc.NiScope/Abort',
-                request_serializer=niscope__pb2.AbortRequest.SerializeToString,
-                response_deserializer=niscope__pb2.AbortResponse.FromString,
+        self.Init = channel.unary_unary(
+                '/niscope_grpc.NiScope/Init',
+                request_serializer=niscope__pb2.InitRequest.SerializeToString,
+                response_deserializer=niscope__pb2.InitResponse.FromString,
                 )
-        self.AcquisitionStatus = channel.unary_unary(
-                '/niscope_grpc.NiScope/AcquisitionStatus',
-                request_serializer=niscope__pb2.AcquisitionStatusRequest.SerializeToString,
-                response_deserializer=niscope__pb2.AcquisitionStatusResponse.FromString,
-                )
-        self.ActualMeasWfmSize = channel.unary_unary(
-                '/niscope_grpc.NiScope/ActualMeasWfmSize',
-                request_serializer=niscope__pb2.ActualMeasWfmSizeRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ActualMeasWfmSizeResponse.FromString,
-                )
-        self.ActualNumWfms = channel.unary_unary(
-                '/niscope_grpc.NiScope/ActualNumWfms',
-                request_serializer=niscope__pb2.ActualNumWfmsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ActualNumWfmsResponse.FromString,
-                )
-        self.ActualRecordLength = channel.unary_unary(
-                '/niscope_grpc.NiScope/ActualRecordLength',
-                request_serializer=niscope__pb2.ActualRecordLengthRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ActualRecordLengthResponse.FromString,
-                )
-        self.AddWaveformProcessing = channel.unary_unary(
-                '/niscope_grpc.NiScope/AddWaveformProcessing',
-                request_serializer=niscope__pb2.AddWaveformProcessingRequest.SerializeToString,
-                response_deserializer=niscope__pb2.AddWaveformProcessingResponse.FromString,
-                )
-        self.AdjustSampleClockRelativeDelay = channel.unary_unary(
-                '/niscope_grpc.NiScope/AdjustSampleClockRelativeDelay',
-                request_serializer=niscope__pb2.AdjustSampleClockRelativeDelayRequest.SerializeToString,
-                response_deserializer=niscope__pb2.AdjustSampleClockRelativeDelayResponse.FromString,
-                )
-        self.AutoSetup = channel.unary_unary(
-                '/niscope_grpc.NiScope/AutoSetup',
-                request_serializer=niscope__pb2.AutoSetupRequest.SerializeToString,
-                response_deserializer=niscope__pb2.AutoSetupResponse.FromString,
-                )
-        self.CableSenseSignalStart = channel.unary_unary(
-                '/niscope_grpc.NiScope/CableSenseSignalStart',
-                request_serializer=niscope__pb2.CableSenseSignalStartRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CableSenseSignalStartResponse.FromString,
-                )
-        self.CableSenseSignalStop = channel.unary_unary(
-                '/niscope_grpc.NiScope/CableSenseSignalStop',
-                request_serializer=niscope__pb2.CableSenseSignalStopRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CableSenseSignalStopResponse.FromString,
-                )
-        self.CalFetchDate = channel.unary_unary(
-                '/niscope_grpc.NiScope/CalFetchDate',
-                request_serializer=niscope__pb2.CalFetchDateRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CalFetchDateResponse.FromString,
-                )
-        self.CalFetchTemperature = channel.unary_unary(
-                '/niscope_grpc.NiScope/CalFetchTemperature',
-                request_serializer=niscope__pb2.CalFetchTemperatureRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CalFetchTemperatureResponse.FromString,
-                )
-        self.CalSelfCalibrate = channel.unary_unary(
-                '/niscope_grpc.NiScope/CalSelfCalibrate',
-                request_serializer=niscope__pb2.CalSelfCalibrateRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CalSelfCalibrateResponse.FromString,
-                )
-        self.CheckAttributeViBoolean = channel.unary_unary(
-                '/niscope_grpc.NiScope/CheckAttributeViBoolean',
-                request_serializer=niscope__pb2.CheckAttributeViBooleanRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CheckAttributeViBooleanResponse.FromString,
-                )
-        self.CheckAttributeViInt32 = channel.unary_unary(
-                '/niscope_grpc.NiScope/CheckAttributeViInt32',
-                request_serializer=niscope__pb2.CheckAttributeViInt32Request.SerializeToString,
-                response_deserializer=niscope__pb2.CheckAttributeViInt32Response.FromString,
-                )
-        self.CheckAttributeViInt64 = channel.unary_unary(
-                '/niscope_grpc.NiScope/CheckAttributeViInt64',
-                request_serializer=niscope__pb2.CheckAttributeViInt64Request.SerializeToString,
-                response_deserializer=niscope__pb2.CheckAttributeViInt64Response.FromString,
-                )
-        self.CheckAttributeViReal64 = channel.unary_unary(
-                '/niscope_grpc.NiScope/CheckAttributeViReal64',
-                request_serializer=niscope__pb2.CheckAttributeViReal64Request.SerializeToString,
-                response_deserializer=niscope__pb2.CheckAttributeViReal64Response.FromString,
-                )
-        self.CheckAttributeViSession = channel.unary_unary(
-                '/niscope_grpc.NiScope/CheckAttributeViSession',
-                request_serializer=niscope__pb2.CheckAttributeViSessionRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CheckAttributeViSessionResponse.FromString,
-                )
-        self.CheckAttributeViString = channel.unary_unary(
-                '/niscope_grpc.NiScope/CheckAttributeViString',
-                request_serializer=niscope__pb2.CheckAttributeViStringRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CheckAttributeViStringResponse.FromString,
-                )
-        self.ClearWaveformMeasurementStats = channel.unary_unary(
-                '/niscope_grpc.NiScope/ClearWaveformMeasurementStats',
-                request_serializer=niscope__pb2.ClearWaveformMeasurementStatsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ClearWaveformMeasurementStatsResponse.FromString,
-                )
-        self.ClearWaveformProcessing = channel.unary_unary(
-                '/niscope_grpc.NiScope/ClearWaveformProcessing',
-                request_serializer=niscope__pb2.ClearWaveformProcessingRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ClearWaveformProcessingResponse.FromString,
+        self.InitWithOptions = channel.unary_unary(
+                '/niscope_grpc.NiScope/InitWithOptions',
+                request_serializer=niscope__pb2.InitWithOptionsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.InitWithOptionsResponse.FromString,
                 )
         self.Close = channel.unary_unary(
                 '/niscope_grpc.NiScope/Close',
                 request_serializer=niscope__pb2.CloseRequest.SerializeToString,
                 response_deserializer=niscope__pb2.CloseResponse.FromString,
                 )
-        self.Commit = channel.unary_unary(
-                '/niscope_grpc.NiScope/Commit',
-                request_serializer=niscope__pb2.CommitRequest.SerializeToString,
-                response_deserializer=niscope__pb2.CommitResponse.FromString,
+        self.AutoSetup = channel.unary_unary(
+                '/niscope_grpc.NiScope/AutoSetup',
+                request_serializer=niscope__pb2.AutoSetupRequest.SerializeToString,
+                response_deserializer=niscope__pb2.AutoSetupResponse.FromString,
                 )
-        self.ConfigureAcquisition = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureAcquisition',
-                request_serializer=niscope__pb2.ConfigureAcquisitionRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureAcquisitionResponse.FromString,
+        self.ConfigureVertical = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureVertical',
+                request_serializer=niscope__pb2.ConfigureVerticalRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureVerticalResponse.FromString,
                 )
         self.ConfigureChanCharacteristics = channel.unary_unary(
                 '/niscope_grpc.NiScope/ConfigureChanCharacteristics',
                 request_serializer=niscope__pb2.ConfigureChanCharacteristicsRequest.SerializeToString,
                 response_deserializer=niscope__pb2.ConfigureChanCharacteristicsResponse.FromString,
                 )
-        self.ConfigureClock = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureClock',
-                request_serializer=niscope__pb2.ConfigureClockRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureClockResponse.FromString,
-                )
-        self.ConfigureEqualizationFilterCoefficients = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureEqualizationFilterCoefficients',
-                request_serializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsResponse.FromString,
-                )
         self.ConfigureHorizontalTiming = channel.unary_unary(
                 '/niscope_grpc.NiScope/ConfigureHorizontalTiming',
                 request_serializer=niscope__pb2.ConfigureHorizontalTimingRequest.SerializeToString,
                 response_deserializer=niscope__pb2.ConfigureHorizontalTimingResponse.FromString,
                 )
-        self.ConfigureTriggerDigital = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureTriggerDigital',
-                request_serializer=niscope__pb2.ConfigureTriggerDigitalRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureTriggerDigitalResponse.FromString,
+        self.ConfigureClock = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureClock',
+                request_serializer=niscope__pb2.ConfigureClockRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureClockResponse.FromString,
+                )
+        self.ExportSignal = channel.unary_unary(
+                '/niscope_grpc.NiScope/ExportSignal',
+                request_serializer=niscope__pb2.ExportSignalRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ExportSignalResponse.FromString,
+                )
+        self.AdjustSampleClockRelativeDelay = channel.unary_unary(
+                '/niscope_grpc.NiScope/AdjustSampleClockRelativeDelay',
+                request_serializer=niscope__pb2.AdjustSampleClockRelativeDelayRequest.SerializeToString,
+                response_deserializer=niscope__pb2.AdjustSampleClockRelativeDelayResponse.FromString,
                 )
         self.ConfigureTriggerEdge = channel.unary_unary(
                 '/niscope_grpc.NiScope/ConfigureTriggerEdge',
@@ -174,6 +79,21 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.ConfigureTriggerHysteresisRequest.SerializeToString,
                 response_deserializer=niscope__pb2.ConfigureTriggerHysteresisResponse.FromString,
                 )
+        self.ConfigureTriggerWindow = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureTriggerWindow',
+                request_serializer=niscope__pb2.ConfigureTriggerWindowRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureTriggerWindowResponse.FromString,
+                )
+        self.ConfigureTriggerSoftware = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureTriggerSoftware',
+                request_serializer=niscope__pb2.ConfigureTriggerSoftwareRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureTriggerSoftwareResponse.FromString,
+                )
+        self.SendSoftwareTriggerEdge = channel.unary_unary(
+                '/niscope_grpc.NiScope/SendSoftwareTriggerEdge',
+                request_serializer=niscope__pb2.SendSoftwareTriggerEdgeRequest.SerializeToString,
+                response_deserializer=niscope__pb2.SendSoftwareTriggerEdgeResponse.FromString,
+                )
         self.ConfigureTriggerImmediate = channel.unary_unary(
                 '/niscope_grpc.NiScope/ConfigureTriggerImmediate',
                 request_serializer=niscope__pb2.ConfigureTriggerImmediateRequest.SerializeToString,
@@ -184,10 +104,10 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.ConfigureTriggerRuntRequest.SerializeToString,
                 response_deserializer=niscope__pb2.ConfigureTriggerRuntResponse.FromString,
                 )
-        self.ConfigureTriggerSoftware = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureTriggerSoftware',
-                request_serializer=niscope__pb2.ConfigureTriggerSoftwareRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureTriggerSoftwareResponse.FromString,
+        self.ConfigureTriggerDigital = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureTriggerDigital',
+                request_serializer=niscope__pb2.ConfigureTriggerDigitalRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureTriggerDigitalResponse.FromString,
                 )
         self.ConfigureTriggerVideo = channel.unary_unary(
                 '/niscope_grpc.NiScope/ConfigureTriggerVideo',
@@ -199,50 +119,55 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.ConfigureTriggerWidthRequest.SerializeToString,
                 response_deserializer=niscope__pb2.ConfigureTriggerWidthResponse.FromString,
                 )
-        self.ConfigureTriggerWindow = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureTriggerWindow',
-                request_serializer=niscope__pb2.ConfigureTriggerWindowRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureTriggerWindowResponse.FromString,
+        self.ConfigureEqualizationFilterCoefficients = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureEqualizationFilterCoefficients',
+                request_serializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsResponse.FromString,
                 )
-        self.ConfigureVertical = channel.unary_unary(
-                '/niscope_grpc.NiScope/ConfigureVertical',
-                request_serializer=niscope__pb2.ConfigureVerticalRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ConfigureVerticalResponse.FromString,
+        self.GetEqualizationFilterCoefficients = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetEqualizationFilterCoefficients',
+                request_serializer=niscope__pb2.GetEqualizationFilterCoefficientsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetEqualizationFilterCoefficientsResponse.FromString,
                 )
-        self.Disable = channel.unary_unary(
-                '/niscope_grpc.NiScope/Disable',
-                request_serializer=niscope__pb2.DisableRequest.SerializeToString,
-                response_deserializer=niscope__pb2.DisableResponse.FromString,
+        self.GetFrequencyResponse = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetFrequencyResponse',
+                request_serializer=niscope__pb2.GetFrequencyResponseRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetFrequencyResponseResponse.FromString,
                 )
-        self.ErrorHandler = channel.unary_unary(
-                '/niscope_grpc.NiScope/ErrorHandler',
-                request_serializer=niscope__pb2.ErrorHandlerRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ErrorHandlerResponse.FromString,
+        self.ConfigureAcquisition = channel.unary_unary(
+                '/niscope_grpc.NiScope/ConfigureAcquisition',
+                request_serializer=niscope__pb2.ConfigureAcquisitionRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ConfigureAcquisitionResponse.FromString,
                 )
-        self.ExportAttributeConfigurationBuffer = channel.unary_unary(
-                '/niscope_grpc.NiScope/ExportAttributeConfigurationBuffer',
-                request_serializer=niscope__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ExportAttributeConfigurationBufferResponse.FromString,
+        self.InitiateAcquisition = channel.unary_unary(
+                '/niscope_grpc.NiScope/InitiateAcquisition',
+                request_serializer=niscope__pb2.InitiateAcquisitionRequest.SerializeToString,
+                response_deserializer=niscope__pb2.InitiateAcquisitionResponse.FromString,
                 )
-        self.ExportAttributeConfigurationFile = channel.unary_unary(
-                '/niscope_grpc.NiScope/ExportAttributeConfigurationFile',
-                request_serializer=niscope__pb2.ExportAttributeConfigurationFileRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ExportAttributeConfigurationFileResponse.FromString,
+        self.Abort = channel.unary_unary(
+                '/niscope_grpc.NiScope/Abort',
+                request_serializer=niscope__pb2.AbortRequest.SerializeToString,
+                response_deserializer=niscope__pb2.AbortResponse.FromString,
                 )
-        self.ExportSignal = channel.unary_unary(
-                '/niscope_grpc.NiScope/ExportSignal',
-                request_serializer=niscope__pb2.ExportSignalRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ExportSignalResponse.FromString,
+        self.Commit = channel.unary_unary(
+                '/niscope_grpc.NiScope/Commit',
+                request_serializer=niscope__pb2.CommitRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CommitResponse.FromString,
+                )
+        self.Read = channel.unary_unary(
+                '/niscope_grpc.NiScope/Read',
+                request_serializer=niscope__pb2.ReadRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ReadResponse.FromString,
                 )
         self.Fetch = channel.unary_unary(
                 '/niscope_grpc.NiScope/Fetch',
                 request_serializer=niscope__pb2.FetchRequest.SerializeToString,
                 response_deserializer=niscope__pb2.FetchResponse.FromString,
                 )
-        self.FetchArrayMeasurement = channel.unary_unary(
-                '/niscope_grpc.NiScope/FetchArrayMeasurement',
-                request_serializer=niscope__pb2.FetchArrayMeasurementRequest.SerializeToString,
-                response_deserializer=niscope__pb2.FetchArrayMeasurementResponse.FromString,
+        self.FetchBinary8 = channel.unary_unary(
+                '/niscope_grpc.NiScope/FetchBinary8',
+                request_serializer=niscope__pb2.FetchBinary8Request.SerializeToString,
+                response_deserializer=niscope__pb2.FetchBinary8Response.FromString,
                 )
         self.FetchBinary16 = channel.unary_unary(
                 '/niscope_grpc.NiScope/FetchBinary16',
@@ -254,11 +179,6 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.FetchBinary32Request.SerializeToString,
                 response_deserializer=niscope__pb2.FetchBinary32Response.FromString,
                 )
-        self.FetchBinary8 = channel.unary_unary(
-                '/niscope_grpc.NiScope/FetchBinary8',
-                request_serializer=niscope__pb2.FetchBinary8Request.SerializeToString,
-                response_deserializer=niscope__pb2.FetchBinary8Response.FromString,
-                )
         self.FetchComplex = channel.unary_unary(
                 '/niscope_grpc.NiScope/FetchComplex',
                 request_serializer=niscope__pb2.FetchComplexRequest.SerializeToString,
@@ -268,6 +188,56 @@ class NiScopeStub(object):
                 '/niscope_grpc.NiScope/FetchComplexBinary16',
                 request_serializer=niscope__pb2.FetchComplexBinary16Request.SerializeToString,
                 response_deserializer=niscope__pb2.FetchComplexBinary16Response.FromString,
+                )
+        self.AcquisitionStatus = channel.unary_unary(
+                '/niscope_grpc.NiScope/AcquisitionStatus',
+                request_serializer=niscope__pb2.AcquisitionStatusRequest.SerializeToString,
+                response_deserializer=niscope__pb2.AcquisitionStatusResponse.FromString,
+                )
+        self.ActualNumWfms = channel.unary_unary(
+                '/niscope_grpc.NiScope/ActualNumWfms',
+                request_serializer=niscope__pb2.ActualNumWfmsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ActualNumWfmsResponse.FromString,
+                )
+        self.ActualMeasWfmSize = channel.unary_unary(
+                '/niscope_grpc.NiScope/ActualMeasWfmSize',
+                request_serializer=niscope__pb2.ActualMeasWfmSizeRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ActualMeasWfmSizeResponse.FromString,
+                )
+        self.ActualRecordLength = channel.unary_unary(
+                '/niscope_grpc.NiScope/ActualRecordLength',
+                request_serializer=niscope__pb2.ActualRecordLengthRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ActualRecordLengthResponse.FromString,
+                )
+        self.SampleRate = channel.unary_unary(
+                '/niscope_grpc.NiScope/SampleRate',
+                request_serializer=niscope__pb2.SampleRateRequest.SerializeToString,
+                response_deserializer=niscope__pb2.SampleRateResponse.FromString,
+                )
+        self.SampleMode = channel.unary_unary(
+                '/niscope_grpc.NiScope/SampleMode',
+                request_serializer=niscope__pb2.SampleModeRequest.SerializeToString,
+                response_deserializer=niscope__pb2.SampleModeResponse.FromString,
+                )
+        self.AddWaveformProcessing = channel.unary_unary(
+                '/niscope_grpc.NiScope/AddWaveformProcessing',
+                request_serializer=niscope__pb2.AddWaveformProcessingRequest.SerializeToString,
+                response_deserializer=niscope__pb2.AddWaveformProcessingResponse.FromString,
+                )
+        self.ClearWaveformProcessing = channel.unary_unary(
+                '/niscope_grpc.NiScope/ClearWaveformProcessing',
+                request_serializer=niscope__pb2.ClearWaveformProcessingRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ClearWaveformProcessingResponse.FromString,
+                )
+        self.ClearWaveformMeasurementStats = channel.unary_unary(
+                '/niscope_grpc.NiScope/ClearWaveformMeasurementStats',
+                request_serializer=niscope__pb2.ClearWaveformMeasurementStatsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ClearWaveformMeasurementStatsResponse.FromString,
+                )
+        self.ReadMeasurement = channel.unary_unary(
+                '/niscope_grpc.NiScope/ReadMeasurement',
+                request_serializer=niscope__pb2.ReadMeasurementRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ReadMeasurementResponse.FromString,
                 )
         self.FetchMeasurement = channel.unary_unary(
                 '/niscope_grpc.NiScope/FetchMeasurement',
@@ -279,105 +249,40 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.FetchMeasurementStatsRequest.SerializeToString,
                 response_deserializer=niscope__pb2.FetchMeasurementStatsResponse.FromString,
                 )
-        self.GetAttributeViBoolean = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetAttributeViBoolean',
-                request_serializer=niscope__pb2.GetAttributeViBooleanRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetAttributeViBooleanResponse.FromString,
+        self.FetchArrayMeasurement = channel.unary_unary(
+                '/niscope_grpc.NiScope/FetchArrayMeasurement',
+                request_serializer=niscope__pb2.FetchArrayMeasurementRequest.SerializeToString,
+                response_deserializer=niscope__pb2.FetchArrayMeasurementResponse.FromString,
                 )
-        self.GetAttributeViInt32 = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetAttributeViInt32',
-                request_serializer=niscope__pb2.GetAttributeViInt32Request.SerializeToString,
-                response_deserializer=niscope__pb2.GetAttributeViInt32Response.FromString,
+        self.Reset = channel.unary_unary(
+                '/niscope_grpc.NiScope/Reset',
+                request_serializer=niscope__pb2.ResetRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ResetResponse.FromString,
                 )
-        self.GetAttributeViInt64 = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetAttributeViInt64',
-                request_serializer=niscope__pb2.GetAttributeViInt64Request.SerializeToString,
-                response_deserializer=niscope__pb2.GetAttributeViInt64Response.FromString,
+        self.SelfTest = channel.unary_unary(
+                '/niscope_grpc.NiScope/SelfTest',
+                request_serializer=niscope__pb2.SelfTestRequest.SerializeToString,
+                response_deserializer=niscope__pb2.SelfTestResponse.FromString,
                 )
-        self.GetAttributeViReal64 = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetAttributeViReal64',
-                request_serializer=niscope__pb2.GetAttributeViReal64Request.SerializeToString,
-                response_deserializer=niscope__pb2.GetAttributeViReal64Response.FromString,
+        self.Disable = channel.unary_unary(
+                '/niscope_grpc.NiScope/Disable',
+                request_serializer=niscope__pb2.DisableRequest.SerializeToString,
+                response_deserializer=niscope__pb2.DisableResponse.FromString,
                 )
-        self.GetAttributeViSession = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetAttributeViSession',
-                request_serializer=niscope__pb2.GetAttributeViSessionRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetAttributeViSessionResponse.FromString,
+        self.ResetDevice = channel.unary_unary(
+                '/niscope_grpc.NiScope/ResetDevice',
+                request_serializer=niscope__pb2.ResetDeviceRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ResetDeviceResponse.FromString,
                 )
-        self.GetAttributeViString = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetAttributeViString',
-                request_serializer=niscope__pb2.GetAttributeViStringRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetAttributeViStringResponse.FromString,
+        self.CalSelfCalibrate = channel.unary_unary(
+                '/niscope_grpc.NiScope/CalSelfCalibrate',
+                request_serializer=niscope__pb2.CalSelfCalibrateRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CalSelfCalibrateResponse.FromString,
                 )
-        self.GetChannelName = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetChannelName',
-                request_serializer=niscope__pb2.GetChannelNameRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetChannelNameResponse.FromString,
-                )
-        self.GetChannelNameFromString = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetChannelNameFromString',
-                request_serializer=niscope__pb2.GetChannelNameFromStringRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetChannelNameFromStringResponse.FromString,
-                )
-        self.GetEqualizationFilterCoefficients = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetEqualizationFilterCoefficients',
-                request_serializer=niscope__pb2.GetEqualizationFilterCoefficientsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetEqualizationFilterCoefficientsResponse.FromString,
-                )
-        self.GetError = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetError',
-                request_serializer=niscope__pb2.GetErrorRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetErrorResponse.FromString,
-                )
-        self.GetErrorMessage = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetErrorMessage',
-                request_serializer=niscope__pb2.GetErrorMessageRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetErrorMessageResponse.FromString,
-                )
-        self.GetFrequencyResponse = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetFrequencyResponse',
-                request_serializer=niscope__pb2.GetFrequencyResponseRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetFrequencyResponseResponse.FromString,
-                )
-        self.GetNormalizationCoefficients = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetNormalizationCoefficients',
-                request_serializer=niscope__pb2.GetNormalizationCoefficientsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetNormalizationCoefficientsResponse.FromString,
-                )
-        self.GetScalingCoefficients = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetScalingCoefficients',
-                request_serializer=niscope__pb2.GetScalingCoefficientsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetScalingCoefficientsResponse.FromString,
-                )
-        self.GetStreamEndpointHandle = channel.unary_unary(
-                '/niscope_grpc.NiScope/GetStreamEndpointHandle',
-                request_serializer=niscope__pb2.GetStreamEndpointHandleRequest.SerializeToString,
-                response_deserializer=niscope__pb2.GetStreamEndpointHandleResponse.FromString,
-                )
-        self.ImportAttributeConfigurationBuffer = channel.unary_unary(
-                '/niscope_grpc.NiScope/ImportAttributeConfigurationBuffer',
-                request_serializer=niscope__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ImportAttributeConfigurationBufferResponse.FromString,
-                )
-        self.ImportAttributeConfigurationFile = channel.unary_unary(
-                '/niscope_grpc.NiScope/ImportAttributeConfigurationFile',
-                request_serializer=niscope__pb2.ImportAttributeConfigurationFileRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ImportAttributeConfigurationFileResponse.FromString,
-                )
-        self.Init = channel.unary_unary(
-                '/niscope_grpc.NiScope/Init',
-                request_serializer=niscope__pb2.InitRequest.SerializeToString,
-                response_deserializer=niscope__pb2.InitResponse.FromString,
-                )
-        self.InitWithOptions = channel.unary_unary(
-                '/niscope_grpc.NiScope/InitWithOptions',
-                request_serializer=niscope__pb2.InitWithOptionsRequest.SerializeToString,
-                response_deserializer=niscope__pb2.InitWithOptionsResponse.FromString,
-                )
-        self.InitiateAcquisition = channel.unary_unary(
-                '/niscope_grpc.NiScope/InitiateAcquisition',
-                request_serializer=niscope__pb2.InitiateAcquisitionRequest.SerializeToString,
-                response_deserializer=niscope__pb2.InitiateAcquisitionResponse.FromString,
+        self.RevisionQuery = channel.unary_unary(
+                '/niscope_grpc.NiScope/RevisionQuery',
+                request_serializer=niscope__pb2.RevisionQueryRequest.SerializeToString,
+                response_deserializer=niscope__pb2.RevisionQueryResponse.FromString,
                 )
         self.ProbeCompensationSignalStart = channel.unary_unary(
                 '/niscope_grpc.NiScope/ProbeCompensationSignalStart',
@@ -389,207 +294,188 @@ class NiScopeStub(object):
                 request_serializer=niscope__pb2.ProbeCompensationSignalStopRequest.SerializeToString,
                 response_deserializer=niscope__pb2.ProbeCompensationSignalStopResponse.FromString,
                 )
-        self.Read = channel.unary_unary(
-                '/niscope_grpc.NiScope/Read',
-                request_serializer=niscope__pb2.ReadRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ReadResponse.FromString,
+        self.CableSenseSignalStart = channel.unary_unary(
+                '/niscope_grpc.NiScope/CableSenseSignalStart',
+                request_serializer=niscope__pb2.CableSenseSignalStartRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CableSenseSignalStartResponse.FromString,
                 )
-        self.ReadMeasurement = channel.unary_unary(
-                '/niscope_grpc.NiScope/ReadMeasurement',
-                request_serializer=niscope__pb2.ReadMeasurementRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ReadMeasurementResponse.FromString,
+        self.CableSenseSignalStop = channel.unary_unary(
+                '/niscope_grpc.NiScope/CableSenseSignalStop',
+                request_serializer=niscope__pb2.CableSenseSignalStopRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CableSenseSignalStopResponse.FromString,
                 )
-        self.Reset = channel.unary_unary(
-                '/niscope_grpc.NiScope/Reset',
-                request_serializer=niscope__pb2.ResetRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ResetResponse.FromString,
+        self.GetChannelName = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetChannelName',
+                request_serializer=niscope__pb2.GetChannelNameRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetChannelNameResponse.FromString,
                 )
-        self.ResetDevice = channel.unary_unary(
-                '/niscope_grpc.NiScope/ResetDevice',
-                request_serializer=niscope__pb2.ResetDeviceRequest.SerializeToString,
-                response_deserializer=niscope__pb2.ResetDeviceResponse.FromString,
+        self.GetChannelNameFromString = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetChannelNameFromString',
+                request_serializer=niscope__pb2.GetChannelNameFromStringRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetChannelNameFromStringResponse.FromString,
                 )
-        self.RevisionQuery = channel.unary_unary(
-                '/niscope_grpc.NiScope/RevisionQuery',
-                request_serializer=niscope__pb2.RevisionQueryRequest.SerializeToString,
-                response_deserializer=niscope__pb2.RevisionQueryResponse.FromString,
+        self.ErrorHandler = channel.unary_unary(
+                '/niscope_grpc.NiScope/ErrorHandler',
+                request_serializer=niscope__pb2.ErrorHandlerRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ErrorHandlerResponse.FromString,
                 )
-        self.SampleMode = channel.unary_unary(
-                '/niscope_grpc.NiScope/SampleMode',
-                request_serializer=niscope__pb2.SampleModeRequest.SerializeToString,
-                response_deserializer=niscope__pb2.SampleModeResponse.FromString,
+        self.GetError = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetError',
+                request_serializer=niscope__pb2.GetErrorRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetErrorResponse.FromString,
                 )
-        self.SampleRate = channel.unary_unary(
-                '/niscope_grpc.NiScope/SampleRate',
-                request_serializer=niscope__pb2.SampleRateRequest.SerializeToString,
-                response_deserializer=niscope__pb2.SampleRateResponse.FromString,
+        self.GetErrorMessage = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetErrorMessage',
+                request_serializer=niscope__pb2.GetErrorMessageRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetErrorMessageResponse.FromString,
                 )
-        self.SelfTest = channel.unary_unary(
-                '/niscope_grpc.NiScope/SelfTest',
-                request_serializer=niscope__pb2.SelfTestRequest.SerializeToString,
-                response_deserializer=niscope__pb2.SelfTestResponse.FromString,
-                )
-        self.SendSoftwareTriggerEdge = channel.unary_unary(
-                '/niscope_grpc.NiScope/SendSoftwareTriggerEdge',
-                request_serializer=niscope__pb2.SendSoftwareTriggerEdgeRequest.SerializeToString,
-                response_deserializer=niscope__pb2.SendSoftwareTriggerEdgeResponse.FromString,
-                )
-        self.SetAttributeViBoolean = channel.unary_unary(
-                '/niscope_grpc.NiScope/SetAttributeViBoolean',
-                request_serializer=niscope__pb2.SetAttributeViBooleanRequest.SerializeToString,
-                response_deserializer=niscope__pb2.SetAttributeViBooleanResponse.FromString,
+        self.GetAttributeViInt32 = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetAttributeViInt32',
+                request_serializer=niscope__pb2.GetAttributeViInt32Request.SerializeToString,
+                response_deserializer=niscope__pb2.GetAttributeViInt32Response.FromString,
                 )
         self.SetAttributeViInt32 = channel.unary_unary(
                 '/niscope_grpc.NiScope/SetAttributeViInt32',
                 request_serializer=niscope__pb2.SetAttributeViInt32Request.SerializeToString,
                 response_deserializer=niscope__pb2.SetAttributeViInt32Response.FromString,
                 )
+        self.CheckAttributeViInt32 = channel.unary_unary(
+                '/niscope_grpc.NiScope/CheckAttributeViInt32',
+                request_serializer=niscope__pb2.CheckAttributeViInt32Request.SerializeToString,
+                response_deserializer=niscope__pb2.CheckAttributeViInt32Response.FromString,
+                )
+        self.GetAttributeViInt64 = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetAttributeViInt64',
+                request_serializer=niscope__pb2.GetAttributeViInt64Request.SerializeToString,
+                response_deserializer=niscope__pb2.GetAttributeViInt64Response.FromString,
+                )
         self.SetAttributeViInt64 = channel.unary_unary(
                 '/niscope_grpc.NiScope/SetAttributeViInt64',
                 request_serializer=niscope__pb2.SetAttributeViInt64Request.SerializeToString,
                 response_deserializer=niscope__pb2.SetAttributeViInt64Response.FromString,
+                )
+        self.CheckAttributeViInt64 = channel.unary_unary(
+                '/niscope_grpc.NiScope/CheckAttributeViInt64',
+                request_serializer=niscope__pb2.CheckAttributeViInt64Request.SerializeToString,
+                response_deserializer=niscope__pb2.CheckAttributeViInt64Response.FromString,
+                )
+        self.GetAttributeViReal64 = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetAttributeViReal64',
+                request_serializer=niscope__pb2.GetAttributeViReal64Request.SerializeToString,
+                response_deserializer=niscope__pb2.GetAttributeViReal64Response.FromString,
                 )
         self.SetAttributeViReal64 = channel.unary_unary(
                 '/niscope_grpc.NiScope/SetAttributeViReal64',
                 request_serializer=niscope__pb2.SetAttributeViReal64Request.SerializeToString,
                 response_deserializer=niscope__pb2.SetAttributeViReal64Response.FromString,
                 )
-        self.SetAttributeViSession = channel.unary_unary(
-                '/niscope_grpc.NiScope/SetAttributeViSession',
-                request_serializer=niscope__pb2.SetAttributeViSessionRequest.SerializeToString,
-                response_deserializer=niscope__pb2.SetAttributeViSessionResponse.FromString,
+        self.CheckAttributeViReal64 = channel.unary_unary(
+                '/niscope_grpc.NiScope/CheckAttributeViReal64',
+                request_serializer=niscope__pb2.CheckAttributeViReal64Request.SerializeToString,
+                response_deserializer=niscope__pb2.CheckAttributeViReal64Response.FromString,
+                )
+        self.GetAttributeViString = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetAttributeViString',
+                request_serializer=niscope__pb2.GetAttributeViStringRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetAttributeViStringResponse.FromString,
                 )
         self.SetAttributeViString = channel.unary_unary(
                 '/niscope_grpc.NiScope/SetAttributeViString',
                 request_serializer=niscope__pb2.SetAttributeViStringRequest.SerializeToString,
                 response_deserializer=niscope__pb2.SetAttributeViStringResponse.FromString,
                 )
+        self.CheckAttributeViString = channel.unary_unary(
+                '/niscope_grpc.NiScope/CheckAttributeViString',
+                request_serializer=niscope__pb2.CheckAttributeViStringRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CheckAttributeViStringResponse.FromString,
+                )
+        self.GetAttributeViSession = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetAttributeViSession',
+                request_serializer=niscope__pb2.GetAttributeViSessionRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetAttributeViSessionResponse.FromString,
+                )
+        self.SetAttributeViSession = channel.unary_unary(
+                '/niscope_grpc.NiScope/SetAttributeViSession',
+                request_serializer=niscope__pb2.SetAttributeViSessionRequest.SerializeToString,
+                response_deserializer=niscope__pb2.SetAttributeViSessionResponse.FromString,
+                )
+        self.CheckAttributeViSession = channel.unary_unary(
+                '/niscope_grpc.NiScope/CheckAttributeViSession',
+                request_serializer=niscope__pb2.CheckAttributeViSessionRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CheckAttributeViSessionResponse.FromString,
+                )
+        self.GetAttributeViBoolean = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetAttributeViBoolean',
+                request_serializer=niscope__pb2.GetAttributeViBooleanRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetAttributeViBooleanResponse.FromString,
+                )
+        self.SetAttributeViBoolean = channel.unary_unary(
+                '/niscope_grpc.NiScope/SetAttributeViBoolean',
+                request_serializer=niscope__pb2.SetAttributeViBooleanRequest.SerializeToString,
+                response_deserializer=niscope__pb2.SetAttributeViBooleanResponse.FromString,
+                )
+        self.CheckAttributeViBoolean = channel.unary_unary(
+                '/niscope_grpc.NiScope/CheckAttributeViBoolean',
+                request_serializer=niscope__pb2.CheckAttributeViBooleanRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CheckAttributeViBooleanResponse.FromString,
+                )
+        self.ImportAttributeConfigurationBuffer = channel.unary_unary(
+                '/niscope_grpc.NiScope/ImportAttributeConfigurationBuffer',
+                request_serializer=niscope__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ImportAttributeConfigurationBufferResponse.FromString,
+                )
+        self.ExportAttributeConfigurationBuffer = channel.unary_unary(
+                '/niscope_grpc.NiScope/ExportAttributeConfigurationBuffer',
+                request_serializer=niscope__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ExportAttributeConfigurationBufferResponse.FromString,
+                )
+        self.ImportAttributeConfigurationFile = channel.unary_unary(
+                '/niscope_grpc.NiScope/ImportAttributeConfigurationFile',
+                request_serializer=niscope__pb2.ImportAttributeConfigurationFileRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ImportAttributeConfigurationFileResponse.FromString,
+                )
+        self.ExportAttributeConfigurationFile = channel.unary_unary(
+                '/niscope_grpc.NiScope/ExportAttributeConfigurationFile',
+                request_serializer=niscope__pb2.ExportAttributeConfigurationFileRequest.SerializeToString,
+                response_deserializer=niscope__pb2.ExportAttributeConfigurationFileResponse.FromString,
+                )
+        self.GetScalingCoefficients = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetScalingCoefficients',
+                request_serializer=niscope__pb2.GetScalingCoefficientsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetScalingCoefficientsResponse.FromString,
+                )
+        self.GetNormalizationCoefficients = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetNormalizationCoefficients',
+                request_serializer=niscope__pb2.GetNormalizationCoefficientsRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetNormalizationCoefficientsResponse.FromString,
+                )
+        self.GetStreamEndpointHandle = channel.unary_unary(
+                '/niscope_grpc.NiScope/GetStreamEndpointHandle',
+                request_serializer=niscope__pb2.GetStreamEndpointHandleRequest.SerializeToString,
+                response_deserializer=niscope__pb2.GetStreamEndpointHandleResponse.FromString,
+                )
+        self.CalFetchDate = channel.unary_unary(
+                '/niscope_grpc.NiScope/CalFetchDate',
+                request_serializer=niscope__pb2.CalFetchDateRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CalFetchDateResponse.FromString,
+                )
+        self.CalFetchTemperature = channel.unary_unary(
+                '/niscope_grpc.NiScope/CalFetchTemperature',
+                request_serializer=niscope__pb2.CalFetchTemperatureRequest.SerializeToString,
+                response_deserializer=niscope__pb2.CalFetchTemperatureResponse.FromString,
+                )
 
 
 class NiScopeServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def Abort(self, request, context):
+    def Init(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def AcquisitionStatus(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ActualMeasWfmSize(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ActualNumWfms(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ActualRecordLength(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AddWaveformProcessing(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AdjustSampleClockRelativeDelay(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def AutoSetup(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CableSenseSignalStart(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CableSenseSignalStop(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CalFetchDate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CalFetchTemperature(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CalSelfCalibrate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckAttributeViBoolean(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckAttributeViInt32(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckAttributeViInt64(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckAttributeViReal64(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckAttributeViSession(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def CheckAttributeViString(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ClearWaveformMeasurementStats(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ClearWaveformProcessing(self, request, context):
+    def InitWithOptions(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -601,13 +487,13 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Commit(self, request, context):
+    def AutoSetup(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfigureAcquisition(self, request, context):
+    def ConfigureVertical(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -619,25 +505,25 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfigureClock(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ConfigureEqualizationFilterCoefficients(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def ConfigureHorizontalTiming(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfigureTriggerDigital(self, request, context):
+    def ConfigureClock(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ExportSignal(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AdjustSampleClockRelativeDelay(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -661,6 +547,24 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ConfigureTriggerWindow(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ConfigureTriggerSoftware(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SendSoftwareTriggerEdge(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ConfigureTriggerImmediate(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -673,7 +577,7 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfigureTriggerSoftware(self, request, context):
+    def ConfigureTriggerDigital(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -691,43 +595,49 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfigureTriggerWindow(self, request, context):
+    def ConfigureEqualizationFilterCoefficients(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConfigureVertical(self, request, context):
+    def GetEqualizationFilterCoefficients(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Disable(self, request, context):
+    def GetFrequencyResponse(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ErrorHandler(self, request, context):
+    def ConfigureAcquisition(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ExportAttributeConfigurationBuffer(self, request, context):
+    def InitiateAcquisition(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ExportAttributeConfigurationFile(self, request, context):
+    def Abort(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ExportSignal(self, request, context):
+    def Commit(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Read(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -739,7 +649,7 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def FetchArrayMeasurement(self, request, context):
+    def FetchBinary8(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -757,12 +667,6 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def FetchBinary8(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def FetchComplex(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -770,6 +674,66 @@ class NiScopeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def FetchComplexBinary16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AcquisitionStatus(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ActualNumWfms(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ActualMeasWfmSize(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ActualRecordLength(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SampleRate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SampleMode(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def AddWaveformProcessing(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ClearWaveformProcessing(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ClearWaveformMeasurementStats(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ReadMeasurement(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -787,121 +751,43 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAttributeViBoolean(self, request, context):
+    def FetchArrayMeasurement(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAttributeViInt32(self, request, context):
+    def Reset(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAttributeViInt64(self, request, context):
+    def SelfTest(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAttributeViReal64(self, request, context):
+    def Disable(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAttributeViSession(self, request, context):
+    def ResetDevice(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetAttributeViString(self, request, context):
+    def CalSelfCalibrate(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetChannelName(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetChannelNameFromString(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetEqualizationFilterCoefficients(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetError(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetErrorMessage(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetFrequencyResponse(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetNormalizationCoefficients(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetScalingCoefficients(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetStreamEndpointHandle(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ImportAttributeConfigurationBuffer(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ImportAttributeConfigurationFile(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def Init(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def InitWithOptions(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def InitiateAcquisition(self, request, context):
+    def RevisionQuery(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -919,61 +805,49 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Read(self, request, context):
+    def CableSenseSignalStart(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ReadMeasurement(self, request, context):
+    def CableSenseSignalStop(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Reset(self, request, context):
+    def GetChannelName(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ResetDevice(self, request, context):
+    def GetChannelNameFromString(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RevisionQuery(self, request, context):
+    def ErrorHandler(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SampleMode(self, request, context):
+    def GetError(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SampleRate(self, request, context):
+    def GetErrorMessage(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SelfTest(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def SendSoftwareTriggerEdge(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def SetAttributeViBoolean(self, request, context):
+    def GetAttributeViInt32(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -985,7 +859,31 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CheckAttributeViInt32(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAttributeViInt64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SetAttributeViInt64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CheckAttributeViInt64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAttributeViReal64(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -997,7 +895,13 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def SetAttributeViSession(self, request, context):
+    def CheckAttributeViReal64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAttributeViString(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1009,153 +913,154 @@ class NiScopeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CheckAttributeViString(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAttributeViSession(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetAttributeViSession(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CheckAttributeViSession(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAttributeViBoolean(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SetAttributeViBoolean(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CheckAttributeViBoolean(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ImportAttributeConfigurationBuffer(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ExportAttributeConfigurationBuffer(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ImportAttributeConfigurationFile(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ExportAttributeConfigurationFile(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetScalingCoefficients(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetNormalizationCoefficients(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetStreamEndpointHandle(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CalFetchDate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CalFetchTemperature(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_NiScopeServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Abort': grpc.unary_unary_rpc_method_handler(
-                    servicer.Abort,
-                    request_deserializer=niscope__pb2.AbortRequest.FromString,
-                    response_serializer=niscope__pb2.AbortResponse.SerializeToString,
+            'Init': grpc.unary_unary_rpc_method_handler(
+                    servicer.Init,
+                    request_deserializer=niscope__pb2.InitRequest.FromString,
+                    response_serializer=niscope__pb2.InitResponse.SerializeToString,
             ),
-            'AcquisitionStatus': grpc.unary_unary_rpc_method_handler(
-                    servicer.AcquisitionStatus,
-                    request_deserializer=niscope__pb2.AcquisitionStatusRequest.FromString,
-                    response_serializer=niscope__pb2.AcquisitionStatusResponse.SerializeToString,
-            ),
-            'ActualMeasWfmSize': grpc.unary_unary_rpc_method_handler(
-                    servicer.ActualMeasWfmSize,
-                    request_deserializer=niscope__pb2.ActualMeasWfmSizeRequest.FromString,
-                    response_serializer=niscope__pb2.ActualMeasWfmSizeResponse.SerializeToString,
-            ),
-            'ActualNumWfms': grpc.unary_unary_rpc_method_handler(
-                    servicer.ActualNumWfms,
-                    request_deserializer=niscope__pb2.ActualNumWfmsRequest.FromString,
-                    response_serializer=niscope__pb2.ActualNumWfmsResponse.SerializeToString,
-            ),
-            'ActualRecordLength': grpc.unary_unary_rpc_method_handler(
-                    servicer.ActualRecordLength,
-                    request_deserializer=niscope__pb2.ActualRecordLengthRequest.FromString,
-                    response_serializer=niscope__pb2.ActualRecordLengthResponse.SerializeToString,
-            ),
-            'AddWaveformProcessing': grpc.unary_unary_rpc_method_handler(
-                    servicer.AddWaveformProcessing,
-                    request_deserializer=niscope__pb2.AddWaveformProcessingRequest.FromString,
-                    response_serializer=niscope__pb2.AddWaveformProcessingResponse.SerializeToString,
-            ),
-            'AdjustSampleClockRelativeDelay': grpc.unary_unary_rpc_method_handler(
-                    servicer.AdjustSampleClockRelativeDelay,
-                    request_deserializer=niscope__pb2.AdjustSampleClockRelativeDelayRequest.FromString,
-                    response_serializer=niscope__pb2.AdjustSampleClockRelativeDelayResponse.SerializeToString,
-            ),
-            'AutoSetup': grpc.unary_unary_rpc_method_handler(
-                    servicer.AutoSetup,
-                    request_deserializer=niscope__pb2.AutoSetupRequest.FromString,
-                    response_serializer=niscope__pb2.AutoSetupResponse.SerializeToString,
-            ),
-            'CableSenseSignalStart': grpc.unary_unary_rpc_method_handler(
-                    servicer.CableSenseSignalStart,
-                    request_deserializer=niscope__pb2.CableSenseSignalStartRequest.FromString,
-                    response_serializer=niscope__pb2.CableSenseSignalStartResponse.SerializeToString,
-            ),
-            'CableSenseSignalStop': grpc.unary_unary_rpc_method_handler(
-                    servicer.CableSenseSignalStop,
-                    request_deserializer=niscope__pb2.CableSenseSignalStopRequest.FromString,
-                    response_serializer=niscope__pb2.CableSenseSignalStopResponse.SerializeToString,
-            ),
-            'CalFetchDate': grpc.unary_unary_rpc_method_handler(
-                    servicer.CalFetchDate,
-                    request_deserializer=niscope__pb2.CalFetchDateRequest.FromString,
-                    response_serializer=niscope__pb2.CalFetchDateResponse.SerializeToString,
-            ),
-            'CalFetchTemperature': grpc.unary_unary_rpc_method_handler(
-                    servicer.CalFetchTemperature,
-                    request_deserializer=niscope__pb2.CalFetchTemperatureRequest.FromString,
-                    response_serializer=niscope__pb2.CalFetchTemperatureResponse.SerializeToString,
-            ),
-            'CalSelfCalibrate': grpc.unary_unary_rpc_method_handler(
-                    servicer.CalSelfCalibrate,
-                    request_deserializer=niscope__pb2.CalSelfCalibrateRequest.FromString,
-                    response_serializer=niscope__pb2.CalSelfCalibrateResponse.SerializeToString,
-            ),
-            'CheckAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckAttributeViBoolean,
-                    request_deserializer=niscope__pb2.CheckAttributeViBooleanRequest.FromString,
-                    response_serializer=niscope__pb2.CheckAttributeViBooleanResponse.SerializeToString,
-            ),
-            'CheckAttributeViInt32': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckAttributeViInt32,
-                    request_deserializer=niscope__pb2.CheckAttributeViInt32Request.FromString,
-                    response_serializer=niscope__pb2.CheckAttributeViInt32Response.SerializeToString,
-            ),
-            'CheckAttributeViInt64': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckAttributeViInt64,
-                    request_deserializer=niscope__pb2.CheckAttributeViInt64Request.FromString,
-                    response_serializer=niscope__pb2.CheckAttributeViInt64Response.SerializeToString,
-            ),
-            'CheckAttributeViReal64': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckAttributeViReal64,
-                    request_deserializer=niscope__pb2.CheckAttributeViReal64Request.FromString,
-                    response_serializer=niscope__pb2.CheckAttributeViReal64Response.SerializeToString,
-            ),
-            'CheckAttributeViSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckAttributeViSession,
-                    request_deserializer=niscope__pb2.CheckAttributeViSessionRequest.FromString,
-                    response_serializer=niscope__pb2.CheckAttributeViSessionResponse.SerializeToString,
-            ),
-            'CheckAttributeViString': grpc.unary_unary_rpc_method_handler(
-                    servicer.CheckAttributeViString,
-                    request_deserializer=niscope__pb2.CheckAttributeViStringRequest.FromString,
-                    response_serializer=niscope__pb2.CheckAttributeViStringResponse.SerializeToString,
-            ),
-            'ClearWaveformMeasurementStats': grpc.unary_unary_rpc_method_handler(
-                    servicer.ClearWaveformMeasurementStats,
-                    request_deserializer=niscope__pb2.ClearWaveformMeasurementStatsRequest.FromString,
-                    response_serializer=niscope__pb2.ClearWaveformMeasurementStatsResponse.SerializeToString,
-            ),
-            'ClearWaveformProcessing': grpc.unary_unary_rpc_method_handler(
-                    servicer.ClearWaveformProcessing,
-                    request_deserializer=niscope__pb2.ClearWaveformProcessingRequest.FromString,
-                    response_serializer=niscope__pb2.ClearWaveformProcessingResponse.SerializeToString,
+            'InitWithOptions': grpc.unary_unary_rpc_method_handler(
+                    servicer.InitWithOptions,
+                    request_deserializer=niscope__pb2.InitWithOptionsRequest.FromString,
+                    response_serializer=niscope__pb2.InitWithOptionsResponse.SerializeToString,
             ),
             'Close': grpc.unary_unary_rpc_method_handler(
                     servicer.Close,
                     request_deserializer=niscope__pb2.CloseRequest.FromString,
                     response_serializer=niscope__pb2.CloseResponse.SerializeToString,
             ),
-            'Commit': grpc.unary_unary_rpc_method_handler(
-                    servicer.Commit,
-                    request_deserializer=niscope__pb2.CommitRequest.FromString,
-                    response_serializer=niscope__pb2.CommitResponse.SerializeToString,
+            'AutoSetup': grpc.unary_unary_rpc_method_handler(
+                    servicer.AutoSetup,
+                    request_deserializer=niscope__pb2.AutoSetupRequest.FromString,
+                    response_serializer=niscope__pb2.AutoSetupResponse.SerializeToString,
             ),
-            'ConfigureAcquisition': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureAcquisition,
-                    request_deserializer=niscope__pb2.ConfigureAcquisitionRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureAcquisitionResponse.SerializeToString,
+            'ConfigureVertical': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureVertical,
+                    request_deserializer=niscope__pb2.ConfigureVerticalRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureVerticalResponse.SerializeToString,
             ),
             'ConfigureChanCharacteristics': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureChanCharacteristics,
                     request_deserializer=niscope__pb2.ConfigureChanCharacteristicsRequest.FromString,
                     response_serializer=niscope__pb2.ConfigureChanCharacteristicsResponse.SerializeToString,
             ),
-            'ConfigureClock': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureClock,
-                    request_deserializer=niscope__pb2.ConfigureClockRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureClockResponse.SerializeToString,
-            ),
-            'ConfigureEqualizationFilterCoefficients': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureEqualizationFilterCoefficients,
-                    request_deserializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsResponse.SerializeToString,
-            ),
             'ConfigureHorizontalTiming': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureHorizontalTiming,
                     request_deserializer=niscope__pb2.ConfigureHorizontalTimingRequest.FromString,
                     response_serializer=niscope__pb2.ConfigureHorizontalTimingResponse.SerializeToString,
             ),
-            'ConfigureTriggerDigital': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureTriggerDigital,
-                    request_deserializer=niscope__pb2.ConfigureTriggerDigitalRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureTriggerDigitalResponse.SerializeToString,
+            'ConfigureClock': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureClock,
+                    request_deserializer=niscope__pb2.ConfigureClockRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureClockResponse.SerializeToString,
+            ),
+            'ExportSignal': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExportSignal,
+                    request_deserializer=niscope__pb2.ExportSignalRequest.FromString,
+                    response_serializer=niscope__pb2.ExportSignalResponse.SerializeToString,
+            ),
+            'AdjustSampleClockRelativeDelay': grpc.unary_unary_rpc_method_handler(
+                    servicer.AdjustSampleClockRelativeDelay,
+                    request_deserializer=niscope__pb2.AdjustSampleClockRelativeDelayRequest.FromString,
+                    response_serializer=niscope__pb2.AdjustSampleClockRelativeDelayResponse.SerializeToString,
             ),
             'ConfigureTriggerEdge': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureTriggerEdge,
@@ -1172,6 +1077,21 @@ def add_NiScopeServicer_to_server(servicer, server):
                     request_deserializer=niscope__pb2.ConfigureTriggerHysteresisRequest.FromString,
                     response_serializer=niscope__pb2.ConfigureTriggerHysteresisResponse.SerializeToString,
             ),
+            'ConfigureTriggerWindow': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureTriggerWindow,
+                    request_deserializer=niscope__pb2.ConfigureTriggerWindowRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureTriggerWindowResponse.SerializeToString,
+            ),
+            'ConfigureTriggerSoftware': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureTriggerSoftware,
+                    request_deserializer=niscope__pb2.ConfigureTriggerSoftwareRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureTriggerSoftwareResponse.SerializeToString,
+            ),
+            'SendSoftwareTriggerEdge': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendSoftwareTriggerEdge,
+                    request_deserializer=niscope__pb2.SendSoftwareTriggerEdgeRequest.FromString,
+                    response_serializer=niscope__pb2.SendSoftwareTriggerEdgeResponse.SerializeToString,
+            ),
             'ConfigureTriggerImmediate': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureTriggerImmediate,
                     request_deserializer=niscope__pb2.ConfigureTriggerImmediateRequest.FromString,
@@ -1182,10 +1102,10 @@ def add_NiScopeServicer_to_server(servicer, server):
                     request_deserializer=niscope__pb2.ConfigureTriggerRuntRequest.FromString,
                     response_serializer=niscope__pb2.ConfigureTriggerRuntResponse.SerializeToString,
             ),
-            'ConfigureTriggerSoftware': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureTriggerSoftware,
-                    request_deserializer=niscope__pb2.ConfigureTriggerSoftwareRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureTriggerSoftwareResponse.SerializeToString,
+            'ConfigureTriggerDigital': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureTriggerDigital,
+                    request_deserializer=niscope__pb2.ConfigureTriggerDigitalRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureTriggerDigitalResponse.SerializeToString,
             ),
             'ConfigureTriggerVideo': grpc.unary_unary_rpc_method_handler(
                     servicer.ConfigureTriggerVideo,
@@ -1197,50 +1117,55 @@ def add_NiScopeServicer_to_server(servicer, server):
                     request_deserializer=niscope__pb2.ConfigureTriggerWidthRequest.FromString,
                     response_serializer=niscope__pb2.ConfigureTriggerWidthResponse.SerializeToString,
             ),
-            'ConfigureTriggerWindow': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureTriggerWindow,
-                    request_deserializer=niscope__pb2.ConfigureTriggerWindowRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureTriggerWindowResponse.SerializeToString,
+            'ConfigureEqualizationFilterCoefficients': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureEqualizationFilterCoefficients,
+                    request_deserializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureEqualizationFilterCoefficientsResponse.SerializeToString,
             ),
-            'ConfigureVertical': grpc.unary_unary_rpc_method_handler(
-                    servicer.ConfigureVertical,
-                    request_deserializer=niscope__pb2.ConfigureVerticalRequest.FromString,
-                    response_serializer=niscope__pb2.ConfigureVerticalResponse.SerializeToString,
+            'GetEqualizationFilterCoefficients': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetEqualizationFilterCoefficients,
+                    request_deserializer=niscope__pb2.GetEqualizationFilterCoefficientsRequest.FromString,
+                    response_serializer=niscope__pb2.GetEqualizationFilterCoefficientsResponse.SerializeToString,
             ),
-            'Disable': grpc.unary_unary_rpc_method_handler(
-                    servicer.Disable,
-                    request_deserializer=niscope__pb2.DisableRequest.FromString,
-                    response_serializer=niscope__pb2.DisableResponse.SerializeToString,
+            'GetFrequencyResponse': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFrequencyResponse,
+                    request_deserializer=niscope__pb2.GetFrequencyResponseRequest.FromString,
+                    response_serializer=niscope__pb2.GetFrequencyResponseResponse.SerializeToString,
             ),
-            'ErrorHandler': grpc.unary_unary_rpc_method_handler(
-                    servicer.ErrorHandler,
-                    request_deserializer=niscope__pb2.ErrorHandlerRequest.FromString,
-                    response_serializer=niscope__pb2.ErrorHandlerResponse.SerializeToString,
+            'ConfigureAcquisition': grpc.unary_unary_rpc_method_handler(
+                    servicer.ConfigureAcquisition,
+                    request_deserializer=niscope__pb2.ConfigureAcquisitionRequest.FromString,
+                    response_serializer=niscope__pb2.ConfigureAcquisitionResponse.SerializeToString,
             ),
-            'ExportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportAttributeConfigurationBuffer,
-                    request_deserializer=niscope__pb2.ExportAttributeConfigurationBufferRequest.FromString,
-                    response_serializer=niscope__pb2.ExportAttributeConfigurationBufferResponse.SerializeToString,
+            'InitiateAcquisition': grpc.unary_unary_rpc_method_handler(
+                    servicer.InitiateAcquisition,
+                    request_deserializer=niscope__pb2.InitiateAcquisitionRequest.FromString,
+                    response_serializer=niscope__pb2.InitiateAcquisitionResponse.SerializeToString,
             ),
-            'ExportAttributeConfigurationFile': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportAttributeConfigurationFile,
-                    request_deserializer=niscope__pb2.ExportAttributeConfigurationFileRequest.FromString,
-                    response_serializer=niscope__pb2.ExportAttributeConfigurationFileResponse.SerializeToString,
+            'Abort': grpc.unary_unary_rpc_method_handler(
+                    servicer.Abort,
+                    request_deserializer=niscope__pb2.AbortRequest.FromString,
+                    response_serializer=niscope__pb2.AbortResponse.SerializeToString,
             ),
-            'ExportSignal': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExportSignal,
-                    request_deserializer=niscope__pb2.ExportSignalRequest.FromString,
-                    response_serializer=niscope__pb2.ExportSignalResponse.SerializeToString,
+            'Commit': grpc.unary_unary_rpc_method_handler(
+                    servicer.Commit,
+                    request_deserializer=niscope__pb2.CommitRequest.FromString,
+                    response_serializer=niscope__pb2.CommitResponse.SerializeToString,
+            ),
+            'Read': grpc.unary_unary_rpc_method_handler(
+                    servicer.Read,
+                    request_deserializer=niscope__pb2.ReadRequest.FromString,
+                    response_serializer=niscope__pb2.ReadResponse.SerializeToString,
             ),
             'Fetch': grpc.unary_unary_rpc_method_handler(
                     servicer.Fetch,
                     request_deserializer=niscope__pb2.FetchRequest.FromString,
                     response_serializer=niscope__pb2.FetchResponse.SerializeToString,
             ),
-            'FetchArrayMeasurement': grpc.unary_unary_rpc_method_handler(
-                    servicer.FetchArrayMeasurement,
-                    request_deserializer=niscope__pb2.FetchArrayMeasurementRequest.FromString,
-                    response_serializer=niscope__pb2.FetchArrayMeasurementResponse.SerializeToString,
+            'FetchBinary8': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchBinary8,
+                    request_deserializer=niscope__pb2.FetchBinary8Request.FromString,
+                    response_serializer=niscope__pb2.FetchBinary8Response.SerializeToString,
             ),
             'FetchBinary16': grpc.unary_unary_rpc_method_handler(
                     servicer.FetchBinary16,
@@ -1252,11 +1177,6 @@ def add_NiScopeServicer_to_server(servicer, server):
                     request_deserializer=niscope__pb2.FetchBinary32Request.FromString,
                     response_serializer=niscope__pb2.FetchBinary32Response.SerializeToString,
             ),
-            'FetchBinary8': grpc.unary_unary_rpc_method_handler(
-                    servicer.FetchBinary8,
-                    request_deserializer=niscope__pb2.FetchBinary8Request.FromString,
-                    response_serializer=niscope__pb2.FetchBinary8Response.SerializeToString,
-            ),
             'FetchComplex': grpc.unary_unary_rpc_method_handler(
                     servicer.FetchComplex,
                     request_deserializer=niscope__pb2.FetchComplexRequest.FromString,
@@ -1266,6 +1186,56 @@ def add_NiScopeServicer_to_server(servicer, server):
                     servicer.FetchComplexBinary16,
                     request_deserializer=niscope__pb2.FetchComplexBinary16Request.FromString,
                     response_serializer=niscope__pb2.FetchComplexBinary16Response.SerializeToString,
+            ),
+            'AcquisitionStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.AcquisitionStatus,
+                    request_deserializer=niscope__pb2.AcquisitionStatusRequest.FromString,
+                    response_serializer=niscope__pb2.AcquisitionStatusResponse.SerializeToString,
+            ),
+            'ActualNumWfms': grpc.unary_unary_rpc_method_handler(
+                    servicer.ActualNumWfms,
+                    request_deserializer=niscope__pb2.ActualNumWfmsRequest.FromString,
+                    response_serializer=niscope__pb2.ActualNumWfmsResponse.SerializeToString,
+            ),
+            'ActualMeasWfmSize': grpc.unary_unary_rpc_method_handler(
+                    servicer.ActualMeasWfmSize,
+                    request_deserializer=niscope__pb2.ActualMeasWfmSizeRequest.FromString,
+                    response_serializer=niscope__pb2.ActualMeasWfmSizeResponse.SerializeToString,
+            ),
+            'ActualRecordLength': grpc.unary_unary_rpc_method_handler(
+                    servicer.ActualRecordLength,
+                    request_deserializer=niscope__pb2.ActualRecordLengthRequest.FromString,
+                    response_serializer=niscope__pb2.ActualRecordLengthResponse.SerializeToString,
+            ),
+            'SampleRate': grpc.unary_unary_rpc_method_handler(
+                    servicer.SampleRate,
+                    request_deserializer=niscope__pb2.SampleRateRequest.FromString,
+                    response_serializer=niscope__pb2.SampleRateResponse.SerializeToString,
+            ),
+            'SampleMode': grpc.unary_unary_rpc_method_handler(
+                    servicer.SampleMode,
+                    request_deserializer=niscope__pb2.SampleModeRequest.FromString,
+                    response_serializer=niscope__pb2.SampleModeResponse.SerializeToString,
+            ),
+            'AddWaveformProcessing': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddWaveformProcessing,
+                    request_deserializer=niscope__pb2.AddWaveformProcessingRequest.FromString,
+                    response_serializer=niscope__pb2.AddWaveformProcessingResponse.SerializeToString,
+            ),
+            'ClearWaveformProcessing': grpc.unary_unary_rpc_method_handler(
+                    servicer.ClearWaveformProcessing,
+                    request_deserializer=niscope__pb2.ClearWaveformProcessingRequest.FromString,
+                    response_serializer=niscope__pb2.ClearWaveformProcessingResponse.SerializeToString,
+            ),
+            'ClearWaveformMeasurementStats': grpc.unary_unary_rpc_method_handler(
+                    servicer.ClearWaveformMeasurementStats,
+                    request_deserializer=niscope__pb2.ClearWaveformMeasurementStatsRequest.FromString,
+                    response_serializer=niscope__pb2.ClearWaveformMeasurementStatsResponse.SerializeToString,
+            ),
+            'ReadMeasurement': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReadMeasurement,
+                    request_deserializer=niscope__pb2.ReadMeasurementRequest.FromString,
+                    response_serializer=niscope__pb2.ReadMeasurementResponse.SerializeToString,
             ),
             'FetchMeasurement': grpc.unary_unary_rpc_method_handler(
                     servicer.FetchMeasurement,
@@ -1277,105 +1247,40 @@ def add_NiScopeServicer_to_server(servicer, server):
                     request_deserializer=niscope__pb2.FetchMeasurementStatsRequest.FromString,
                     response_serializer=niscope__pb2.FetchMeasurementStatsResponse.SerializeToString,
             ),
-            'GetAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAttributeViBoolean,
-                    request_deserializer=niscope__pb2.GetAttributeViBooleanRequest.FromString,
-                    response_serializer=niscope__pb2.GetAttributeViBooleanResponse.SerializeToString,
+            'FetchArrayMeasurement': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchArrayMeasurement,
+                    request_deserializer=niscope__pb2.FetchArrayMeasurementRequest.FromString,
+                    response_serializer=niscope__pb2.FetchArrayMeasurementResponse.SerializeToString,
             ),
-            'GetAttributeViInt32': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAttributeViInt32,
-                    request_deserializer=niscope__pb2.GetAttributeViInt32Request.FromString,
-                    response_serializer=niscope__pb2.GetAttributeViInt32Response.SerializeToString,
+            'Reset': grpc.unary_unary_rpc_method_handler(
+                    servicer.Reset,
+                    request_deserializer=niscope__pb2.ResetRequest.FromString,
+                    response_serializer=niscope__pb2.ResetResponse.SerializeToString,
             ),
-            'GetAttributeViInt64': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAttributeViInt64,
-                    request_deserializer=niscope__pb2.GetAttributeViInt64Request.FromString,
-                    response_serializer=niscope__pb2.GetAttributeViInt64Response.SerializeToString,
+            'SelfTest': grpc.unary_unary_rpc_method_handler(
+                    servicer.SelfTest,
+                    request_deserializer=niscope__pb2.SelfTestRequest.FromString,
+                    response_serializer=niscope__pb2.SelfTestResponse.SerializeToString,
             ),
-            'GetAttributeViReal64': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAttributeViReal64,
-                    request_deserializer=niscope__pb2.GetAttributeViReal64Request.FromString,
-                    response_serializer=niscope__pb2.GetAttributeViReal64Response.SerializeToString,
+            'Disable': grpc.unary_unary_rpc_method_handler(
+                    servicer.Disable,
+                    request_deserializer=niscope__pb2.DisableRequest.FromString,
+                    response_serializer=niscope__pb2.DisableResponse.SerializeToString,
             ),
-            'GetAttributeViSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAttributeViSession,
-                    request_deserializer=niscope__pb2.GetAttributeViSessionRequest.FromString,
-                    response_serializer=niscope__pb2.GetAttributeViSessionResponse.SerializeToString,
+            'ResetDevice': grpc.unary_unary_rpc_method_handler(
+                    servicer.ResetDevice,
+                    request_deserializer=niscope__pb2.ResetDeviceRequest.FromString,
+                    response_serializer=niscope__pb2.ResetDeviceResponse.SerializeToString,
             ),
-            'GetAttributeViString': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAttributeViString,
-                    request_deserializer=niscope__pb2.GetAttributeViStringRequest.FromString,
-                    response_serializer=niscope__pb2.GetAttributeViStringResponse.SerializeToString,
+            'CalSelfCalibrate': grpc.unary_unary_rpc_method_handler(
+                    servicer.CalSelfCalibrate,
+                    request_deserializer=niscope__pb2.CalSelfCalibrateRequest.FromString,
+                    response_serializer=niscope__pb2.CalSelfCalibrateResponse.SerializeToString,
             ),
-            'GetChannelName': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetChannelName,
-                    request_deserializer=niscope__pb2.GetChannelNameRequest.FromString,
-                    response_serializer=niscope__pb2.GetChannelNameResponse.SerializeToString,
-            ),
-            'GetChannelNameFromString': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetChannelNameFromString,
-                    request_deserializer=niscope__pb2.GetChannelNameFromStringRequest.FromString,
-                    response_serializer=niscope__pb2.GetChannelNameFromStringResponse.SerializeToString,
-            ),
-            'GetEqualizationFilterCoefficients': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetEqualizationFilterCoefficients,
-                    request_deserializer=niscope__pb2.GetEqualizationFilterCoefficientsRequest.FromString,
-                    response_serializer=niscope__pb2.GetEqualizationFilterCoefficientsResponse.SerializeToString,
-            ),
-            'GetError': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetError,
-                    request_deserializer=niscope__pb2.GetErrorRequest.FromString,
-                    response_serializer=niscope__pb2.GetErrorResponse.SerializeToString,
-            ),
-            'GetErrorMessage': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetErrorMessage,
-                    request_deserializer=niscope__pb2.GetErrorMessageRequest.FromString,
-                    response_serializer=niscope__pb2.GetErrorMessageResponse.SerializeToString,
-            ),
-            'GetFrequencyResponse': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetFrequencyResponse,
-                    request_deserializer=niscope__pb2.GetFrequencyResponseRequest.FromString,
-                    response_serializer=niscope__pb2.GetFrequencyResponseResponse.SerializeToString,
-            ),
-            'GetNormalizationCoefficients': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetNormalizationCoefficients,
-                    request_deserializer=niscope__pb2.GetNormalizationCoefficientsRequest.FromString,
-                    response_serializer=niscope__pb2.GetNormalizationCoefficientsResponse.SerializeToString,
-            ),
-            'GetScalingCoefficients': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetScalingCoefficients,
-                    request_deserializer=niscope__pb2.GetScalingCoefficientsRequest.FromString,
-                    response_serializer=niscope__pb2.GetScalingCoefficientsResponse.SerializeToString,
-            ),
-            'GetStreamEndpointHandle': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetStreamEndpointHandle,
-                    request_deserializer=niscope__pb2.GetStreamEndpointHandleRequest.FromString,
-                    response_serializer=niscope__pb2.GetStreamEndpointHandleResponse.SerializeToString,
-            ),
-            'ImportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
-                    servicer.ImportAttributeConfigurationBuffer,
-                    request_deserializer=niscope__pb2.ImportAttributeConfigurationBufferRequest.FromString,
-                    response_serializer=niscope__pb2.ImportAttributeConfigurationBufferResponse.SerializeToString,
-            ),
-            'ImportAttributeConfigurationFile': grpc.unary_unary_rpc_method_handler(
-                    servicer.ImportAttributeConfigurationFile,
-                    request_deserializer=niscope__pb2.ImportAttributeConfigurationFileRequest.FromString,
-                    response_serializer=niscope__pb2.ImportAttributeConfigurationFileResponse.SerializeToString,
-            ),
-            'Init': grpc.unary_unary_rpc_method_handler(
-                    servicer.Init,
-                    request_deserializer=niscope__pb2.InitRequest.FromString,
-                    response_serializer=niscope__pb2.InitResponse.SerializeToString,
-            ),
-            'InitWithOptions': grpc.unary_unary_rpc_method_handler(
-                    servicer.InitWithOptions,
-                    request_deserializer=niscope__pb2.InitWithOptionsRequest.FromString,
-                    response_serializer=niscope__pb2.InitWithOptionsResponse.SerializeToString,
-            ),
-            'InitiateAcquisition': grpc.unary_unary_rpc_method_handler(
-                    servicer.InitiateAcquisition,
-                    request_deserializer=niscope__pb2.InitiateAcquisitionRequest.FromString,
-                    response_serializer=niscope__pb2.InitiateAcquisitionResponse.SerializeToString,
+            'RevisionQuery': grpc.unary_unary_rpc_method_handler(
+                    servicer.RevisionQuery,
+                    request_deserializer=niscope__pb2.RevisionQueryRequest.FromString,
+                    response_serializer=niscope__pb2.RevisionQueryResponse.SerializeToString,
             ),
             'ProbeCompensationSignalStart': grpc.unary_unary_rpc_method_handler(
                     servicer.ProbeCompensationSignalStart,
@@ -1387,80 +1292,175 @@ def add_NiScopeServicer_to_server(servicer, server):
                     request_deserializer=niscope__pb2.ProbeCompensationSignalStopRequest.FromString,
                     response_serializer=niscope__pb2.ProbeCompensationSignalStopResponse.SerializeToString,
             ),
-            'Read': grpc.unary_unary_rpc_method_handler(
-                    servicer.Read,
-                    request_deserializer=niscope__pb2.ReadRequest.FromString,
-                    response_serializer=niscope__pb2.ReadResponse.SerializeToString,
+            'CableSenseSignalStart': grpc.unary_unary_rpc_method_handler(
+                    servicer.CableSenseSignalStart,
+                    request_deserializer=niscope__pb2.CableSenseSignalStartRequest.FromString,
+                    response_serializer=niscope__pb2.CableSenseSignalStartResponse.SerializeToString,
             ),
-            'ReadMeasurement': grpc.unary_unary_rpc_method_handler(
-                    servicer.ReadMeasurement,
-                    request_deserializer=niscope__pb2.ReadMeasurementRequest.FromString,
-                    response_serializer=niscope__pb2.ReadMeasurementResponse.SerializeToString,
+            'CableSenseSignalStop': grpc.unary_unary_rpc_method_handler(
+                    servicer.CableSenseSignalStop,
+                    request_deserializer=niscope__pb2.CableSenseSignalStopRequest.FromString,
+                    response_serializer=niscope__pb2.CableSenseSignalStopResponse.SerializeToString,
             ),
-            'Reset': grpc.unary_unary_rpc_method_handler(
-                    servicer.Reset,
-                    request_deserializer=niscope__pb2.ResetRequest.FromString,
-                    response_serializer=niscope__pb2.ResetResponse.SerializeToString,
+            'GetChannelName': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetChannelName,
+                    request_deserializer=niscope__pb2.GetChannelNameRequest.FromString,
+                    response_serializer=niscope__pb2.GetChannelNameResponse.SerializeToString,
             ),
-            'ResetDevice': grpc.unary_unary_rpc_method_handler(
-                    servicer.ResetDevice,
-                    request_deserializer=niscope__pb2.ResetDeviceRequest.FromString,
-                    response_serializer=niscope__pb2.ResetDeviceResponse.SerializeToString,
+            'GetChannelNameFromString': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetChannelNameFromString,
+                    request_deserializer=niscope__pb2.GetChannelNameFromStringRequest.FromString,
+                    response_serializer=niscope__pb2.GetChannelNameFromStringResponse.SerializeToString,
             ),
-            'RevisionQuery': grpc.unary_unary_rpc_method_handler(
-                    servicer.RevisionQuery,
-                    request_deserializer=niscope__pb2.RevisionQueryRequest.FromString,
-                    response_serializer=niscope__pb2.RevisionQueryResponse.SerializeToString,
+            'ErrorHandler': grpc.unary_unary_rpc_method_handler(
+                    servicer.ErrorHandler,
+                    request_deserializer=niscope__pb2.ErrorHandlerRequest.FromString,
+                    response_serializer=niscope__pb2.ErrorHandlerResponse.SerializeToString,
             ),
-            'SampleMode': grpc.unary_unary_rpc_method_handler(
-                    servicer.SampleMode,
-                    request_deserializer=niscope__pb2.SampleModeRequest.FromString,
-                    response_serializer=niscope__pb2.SampleModeResponse.SerializeToString,
+            'GetError': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetError,
+                    request_deserializer=niscope__pb2.GetErrorRequest.FromString,
+                    response_serializer=niscope__pb2.GetErrorResponse.SerializeToString,
             ),
-            'SampleRate': grpc.unary_unary_rpc_method_handler(
-                    servicer.SampleRate,
-                    request_deserializer=niscope__pb2.SampleRateRequest.FromString,
-                    response_serializer=niscope__pb2.SampleRateResponse.SerializeToString,
+            'GetErrorMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetErrorMessage,
+                    request_deserializer=niscope__pb2.GetErrorMessageRequest.FromString,
+                    response_serializer=niscope__pb2.GetErrorMessageResponse.SerializeToString,
             ),
-            'SelfTest': grpc.unary_unary_rpc_method_handler(
-                    servicer.SelfTest,
-                    request_deserializer=niscope__pb2.SelfTestRequest.FromString,
-                    response_serializer=niscope__pb2.SelfTestResponse.SerializeToString,
-            ),
-            'SendSoftwareTriggerEdge': grpc.unary_unary_rpc_method_handler(
-                    servicer.SendSoftwareTriggerEdge,
-                    request_deserializer=niscope__pb2.SendSoftwareTriggerEdgeRequest.FromString,
-                    response_serializer=niscope__pb2.SendSoftwareTriggerEdgeResponse.SerializeToString,
-            ),
-            'SetAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetAttributeViBoolean,
-                    request_deserializer=niscope__pb2.SetAttributeViBooleanRequest.FromString,
-                    response_serializer=niscope__pb2.SetAttributeViBooleanResponse.SerializeToString,
+            'GetAttributeViInt32': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAttributeViInt32,
+                    request_deserializer=niscope__pb2.GetAttributeViInt32Request.FromString,
+                    response_serializer=niscope__pb2.GetAttributeViInt32Response.SerializeToString,
             ),
             'SetAttributeViInt32': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAttributeViInt32,
                     request_deserializer=niscope__pb2.SetAttributeViInt32Request.FromString,
                     response_serializer=niscope__pb2.SetAttributeViInt32Response.SerializeToString,
             ),
+            'CheckAttributeViInt32': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckAttributeViInt32,
+                    request_deserializer=niscope__pb2.CheckAttributeViInt32Request.FromString,
+                    response_serializer=niscope__pb2.CheckAttributeViInt32Response.SerializeToString,
+            ),
+            'GetAttributeViInt64': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAttributeViInt64,
+                    request_deserializer=niscope__pb2.GetAttributeViInt64Request.FromString,
+                    response_serializer=niscope__pb2.GetAttributeViInt64Response.SerializeToString,
+            ),
             'SetAttributeViInt64': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAttributeViInt64,
                     request_deserializer=niscope__pb2.SetAttributeViInt64Request.FromString,
                     response_serializer=niscope__pb2.SetAttributeViInt64Response.SerializeToString,
+            ),
+            'CheckAttributeViInt64': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckAttributeViInt64,
+                    request_deserializer=niscope__pb2.CheckAttributeViInt64Request.FromString,
+                    response_serializer=niscope__pb2.CheckAttributeViInt64Response.SerializeToString,
+            ),
+            'GetAttributeViReal64': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAttributeViReal64,
+                    request_deserializer=niscope__pb2.GetAttributeViReal64Request.FromString,
+                    response_serializer=niscope__pb2.GetAttributeViReal64Response.SerializeToString,
             ),
             'SetAttributeViReal64': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAttributeViReal64,
                     request_deserializer=niscope__pb2.SetAttributeViReal64Request.FromString,
                     response_serializer=niscope__pb2.SetAttributeViReal64Response.SerializeToString,
             ),
-            'SetAttributeViSession': grpc.unary_unary_rpc_method_handler(
-                    servicer.SetAttributeViSession,
-                    request_deserializer=niscope__pb2.SetAttributeViSessionRequest.FromString,
-                    response_serializer=niscope__pb2.SetAttributeViSessionResponse.SerializeToString,
+            'CheckAttributeViReal64': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckAttributeViReal64,
+                    request_deserializer=niscope__pb2.CheckAttributeViReal64Request.FromString,
+                    response_serializer=niscope__pb2.CheckAttributeViReal64Response.SerializeToString,
+            ),
+            'GetAttributeViString': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAttributeViString,
+                    request_deserializer=niscope__pb2.GetAttributeViStringRequest.FromString,
+                    response_serializer=niscope__pb2.GetAttributeViStringResponse.SerializeToString,
             ),
             'SetAttributeViString': grpc.unary_unary_rpc_method_handler(
                     servicer.SetAttributeViString,
                     request_deserializer=niscope__pb2.SetAttributeViStringRequest.FromString,
                     response_serializer=niscope__pb2.SetAttributeViStringResponse.SerializeToString,
+            ),
+            'CheckAttributeViString': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckAttributeViString,
+                    request_deserializer=niscope__pb2.CheckAttributeViStringRequest.FromString,
+                    response_serializer=niscope__pb2.CheckAttributeViStringResponse.SerializeToString,
+            ),
+            'GetAttributeViSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAttributeViSession,
+                    request_deserializer=niscope__pb2.GetAttributeViSessionRequest.FromString,
+                    response_serializer=niscope__pb2.GetAttributeViSessionResponse.SerializeToString,
+            ),
+            'SetAttributeViSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetAttributeViSession,
+                    request_deserializer=niscope__pb2.SetAttributeViSessionRequest.FromString,
+                    response_serializer=niscope__pb2.SetAttributeViSessionResponse.SerializeToString,
+            ),
+            'CheckAttributeViSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckAttributeViSession,
+                    request_deserializer=niscope__pb2.CheckAttributeViSessionRequest.FromString,
+                    response_serializer=niscope__pb2.CheckAttributeViSessionResponse.SerializeToString,
+            ),
+            'GetAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAttributeViBoolean,
+                    request_deserializer=niscope__pb2.GetAttributeViBooleanRequest.FromString,
+                    response_serializer=niscope__pb2.GetAttributeViBooleanResponse.SerializeToString,
+            ),
+            'SetAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
+                    servicer.SetAttributeViBoolean,
+                    request_deserializer=niscope__pb2.SetAttributeViBooleanRequest.FromString,
+                    response_serializer=niscope__pb2.SetAttributeViBooleanResponse.SerializeToString,
+            ),
+            'CheckAttributeViBoolean': grpc.unary_unary_rpc_method_handler(
+                    servicer.CheckAttributeViBoolean,
+                    request_deserializer=niscope__pb2.CheckAttributeViBooleanRequest.FromString,
+                    response_serializer=niscope__pb2.CheckAttributeViBooleanResponse.SerializeToString,
+            ),
+            'ImportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
+                    servicer.ImportAttributeConfigurationBuffer,
+                    request_deserializer=niscope__pb2.ImportAttributeConfigurationBufferRequest.FromString,
+                    response_serializer=niscope__pb2.ImportAttributeConfigurationBufferResponse.SerializeToString,
+            ),
+            'ExportAttributeConfigurationBuffer': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExportAttributeConfigurationBuffer,
+                    request_deserializer=niscope__pb2.ExportAttributeConfigurationBufferRequest.FromString,
+                    response_serializer=niscope__pb2.ExportAttributeConfigurationBufferResponse.SerializeToString,
+            ),
+            'ImportAttributeConfigurationFile': grpc.unary_unary_rpc_method_handler(
+                    servicer.ImportAttributeConfigurationFile,
+                    request_deserializer=niscope__pb2.ImportAttributeConfigurationFileRequest.FromString,
+                    response_serializer=niscope__pb2.ImportAttributeConfigurationFileResponse.SerializeToString,
+            ),
+            'ExportAttributeConfigurationFile': grpc.unary_unary_rpc_method_handler(
+                    servicer.ExportAttributeConfigurationFile,
+                    request_deserializer=niscope__pb2.ExportAttributeConfigurationFileRequest.FromString,
+                    response_serializer=niscope__pb2.ExportAttributeConfigurationFileResponse.SerializeToString,
+            ),
+            'GetScalingCoefficients': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetScalingCoefficients,
+                    request_deserializer=niscope__pb2.GetScalingCoefficientsRequest.FromString,
+                    response_serializer=niscope__pb2.GetScalingCoefficientsResponse.SerializeToString,
+            ),
+            'GetNormalizationCoefficients': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNormalizationCoefficients,
+                    request_deserializer=niscope__pb2.GetNormalizationCoefficientsRequest.FromString,
+                    response_serializer=niscope__pb2.GetNormalizationCoefficientsResponse.SerializeToString,
+            ),
+            'GetStreamEndpointHandle': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetStreamEndpointHandle,
+                    request_deserializer=niscope__pb2.GetStreamEndpointHandleRequest.FromString,
+                    response_serializer=niscope__pb2.GetStreamEndpointHandleResponse.SerializeToString,
+            ),
+            'CalFetchDate': grpc.unary_unary_rpc_method_handler(
+                    servicer.CalFetchDate,
+                    request_deserializer=niscope__pb2.CalFetchDateRequest.FromString,
+                    response_serializer=niscope__pb2.CalFetchDateResponse.SerializeToString,
+            ),
+            'CalFetchTemperature': grpc.unary_unary_rpc_method_handler(
+                    servicer.CalFetchTemperature,
+                    request_deserializer=niscope__pb2.CalFetchTemperatureRequest.FromString,
+                    response_serializer=niscope__pb2.CalFetchTemperatureResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1473,7 +1473,7 @@ class NiScope(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def Abort(request,
+    def Init(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1483,14 +1483,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Abort',
-            niscope__pb2.AbortRequest.SerializeToString,
-            niscope__pb2.AbortResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Init',
+            niscope__pb2.InitRequest.SerializeToString,
+            niscope__pb2.InitResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def AcquisitionStatus(request,
+    def InitWithOptions(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1500,332 +1500,9 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AcquisitionStatus',
-            niscope__pb2.AcquisitionStatusRequest.SerializeToString,
-            niscope__pb2.AcquisitionStatusResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ActualMeasWfmSize(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ActualMeasWfmSize',
-            niscope__pb2.ActualMeasWfmSizeRequest.SerializeToString,
-            niscope__pb2.ActualMeasWfmSizeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ActualNumWfms(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ActualNumWfms',
-            niscope__pb2.ActualNumWfmsRequest.SerializeToString,
-            niscope__pb2.ActualNumWfmsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ActualRecordLength(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ActualRecordLength',
-            niscope__pb2.ActualRecordLengthRequest.SerializeToString,
-            niscope__pb2.ActualRecordLengthResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AddWaveformProcessing(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AddWaveformProcessing',
-            niscope__pb2.AddWaveformProcessingRequest.SerializeToString,
-            niscope__pb2.AddWaveformProcessingResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AdjustSampleClockRelativeDelay(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AdjustSampleClockRelativeDelay',
-            niscope__pb2.AdjustSampleClockRelativeDelayRequest.SerializeToString,
-            niscope__pb2.AdjustSampleClockRelativeDelayResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def AutoSetup(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AutoSetup',
-            niscope__pb2.AutoSetupRequest.SerializeToString,
-            niscope__pb2.AutoSetupResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CableSenseSignalStart(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CableSenseSignalStart',
-            niscope__pb2.CableSenseSignalStartRequest.SerializeToString,
-            niscope__pb2.CableSenseSignalStartResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CableSenseSignalStop(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CableSenseSignalStop',
-            niscope__pb2.CableSenseSignalStopRequest.SerializeToString,
-            niscope__pb2.CableSenseSignalStopResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CalFetchDate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalFetchDate',
-            niscope__pb2.CalFetchDateRequest.SerializeToString,
-            niscope__pb2.CalFetchDateResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CalFetchTemperature(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalFetchTemperature',
-            niscope__pb2.CalFetchTemperatureRequest.SerializeToString,
-            niscope__pb2.CalFetchTemperatureResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CalSelfCalibrate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalSelfCalibrate',
-            niscope__pb2.CalSelfCalibrateRequest.SerializeToString,
-            niscope__pb2.CalSelfCalibrateResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckAttributeViBoolean(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViBoolean',
-            niscope__pb2.CheckAttributeViBooleanRequest.SerializeToString,
-            niscope__pb2.CheckAttributeViBooleanResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckAttributeViInt32(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViInt32',
-            niscope__pb2.CheckAttributeViInt32Request.SerializeToString,
-            niscope__pb2.CheckAttributeViInt32Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckAttributeViInt64(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViInt64',
-            niscope__pb2.CheckAttributeViInt64Request.SerializeToString,
-            niscope__pb2.CheckAttributeViInt64Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckAttributeViReal64(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViReal64',
-            niscope__pb2.CheckAttributeViReal64Request.SerializeToString,
-            niscope__pb2.CheckAttributeViReal64Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckAttributeViSession(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViSession',
-            niscope__pb2.CheckAttributeViSessionRequest.SerializeToString,
-            niscope__pb2.CheckAttributeViSessionResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def CheckAttributeViString(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViString',
-            niscope__pb2.CheckAttributeViStringRequest.SerializeToString,
-            niscope__pb2.CheckAttributeViStringResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ClearWaveformMeasurementStats(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ClearWaveformMeasurementStats',
-            niscope__pb2.ClearWaveformMeasurementStatsRequest.SerializeToString,
-            niscope__pb2.ClearWaveformMeasurementStatsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ClearWaveformProcessing(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ClearWaveformProcessing',
-            niscope__pb2.ClearWaveformProcessingRequest.SerializeToString,
-            niscope__pb2.ClearWaveformProcessingResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/InitWithOptions',
+            niscope__pb2.InitWithOptionsRequest.SerializeToString,
+            niscope__pb2.InitWithOptionsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1847,7 +1524,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Commit(request,
+    def AutoSetup(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1857,14 +1534,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Commit',
-            niscope__pb2.CommitRequest.SerializeToString,
-            niscope__pb2.CommitResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AutoSetup',
+            niscope__pb2.AutoSetupRequest.SerializeToString,
+            niscope__pb2.AutoSetupResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfigureAcquisition(request,
+    def ConfigureVertical(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1874,9 +1551,9 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureAcquisition',
-            niscope__pb2.ConfigureAcquisitionRequest.SerializeToString,
-            niscope__pb2.ConfigureAcquisitionResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureVertical',
+            niscope__pb2.ConfigureVerticalRequest.SerializeToString,
+            niscope__pb2.ConfigureVerticalResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1898,40 +1575,6 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfigureClock(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureClock',
-            niscope__pb2.ConfigureClockRequest.SerializeToString,
-            niscope__pb2.ConfigureClockResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ConfigureEqualizationFilterCoefficients(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureEqualizationFilterCoefficients',
-            niscope__pb2.ConfigureEqualizationFilterCoefficientsRequest.SerializeToString,
-            niscope__pb2.ConfigureEqualizationFilterCoefficientsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def ConfigureHorizontalTiming(request,
             target,
             options=(),
@@ -1949,7 +1592,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfigureTriggerDigital(request,
+    def ConfigureClock(request,
             target,
             options=(),
             channel_credentials=None,
@@ -1959,9 +1602,43 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureTriggerDigital',
-            niscope__pb2.ConfigureTriggerDigitalRequest.SerializeToString,
-            niscope__pb2.ConfigureTriggerDigitalResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureClock',
+            niscope__pb2.ConfigureClockRequest.SerializeToString,
+            niscope__pb2.ConfigureClockResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExportSignal(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ExportSignal',
+            niscope__pb2.ExportSignalRequest.SerializeToString,
+            niscope__pb2.ExportSignalResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AdjustSampleClockRelativeDelay(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AdjustSampleClockRelativeDelay',
+            niscope__pb2.AdjustSampleClockRelativeDelayRequest.SerializeToString,
+            niscope__pb2.AdjustSampleClockRelativeDelayResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2017,6 +1694,57 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ConfigureTriggerWindow(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureTriggerWindow',
+            niscope__pb2.ConfigureTriggerWindowRequest.SerializeToString,
+            niscope__pb2.ConfigureTriggerWindowResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ConfigureTriggerSoftware(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureTriggerSoftware',
+            niscope__pb2.ConfigureTriggerSoftwareRequest.SerializeToString,
+            niscope__pb2.ConfigureTriggerSoftwareResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendSoftwareTriggerEdge(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SendSoftwareTriggerEdge',
+            niscope__pb2.SendSoftwareTriggerEdgeRequest.SerializeToString,
+            niscope__pb2.SendSoftwareTriggerEdgeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ConfigureTriggerImmediate(request,
             target,
             options=(),
@@ -2051,7 +1779,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfigureTriggerSoftware(request,
+    def ConfigureTriggerDigital(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2061,9 +1789,9 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureTriggerSoftware',
-            niscope__pb2.ConfigureTriggerSoftwareRequest.SerializeToString,
-            niscope__pb2.ConfigureTriggerSoftwareResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureTriggerDigital',
+            niscope__pb2.ConfigureTriggerDigitalRequest.SerializeToString,
+            niscope__pb2.ConfigureTriggerDigitalResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2102,7 +1830,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfigureTriggerWindow(request,
+    def ConfigureEqualizationFilterCoefficients(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2112,14 +1840,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureTriggerWindow',
-            niscope__pb2.ConfigureTriggerWindowRequest.SerializeToString,
-            niscope__pb2.ConfigureTriggerWindowResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureEqualizationFilterCoefficients',
+            niscope__pb2.ConfigureEqualizationFilterCoefficientsRequest.SerializeToString,
+            niscope__pb2.ConfigureEqualizationFilterCoefficientsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ConfigureVertical(request,
+    def GetEqualizationFilterCoefficients(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2129,14 +1857,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureVertical',
-            niscope__pb2.ConfigureVerticalRequest.SerializeToString,
-            niscope__pb2.ConfigureVerticalResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetEqualizationFilterCoefficients',
+            niscope__pb2.GetEqualizationFilterCoefficientsRequest.SerializeToString,
+            niscope__pb2.GetEqualizationFilterCoefficientsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Disable(request,
+    def GetFrequencyResponse(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2146,14 +1874,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Disable',
-            niscope__pb2.DisableRequest.SerializeToString,
-            niscope__pb2.DisableResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetFrequencyResponse',
+            niscope__pb2.GetFrequencyResponseRequest.SerializeToString,
+            niscope__pb2.GetFrequencyResponseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ErrorHandler(request,
+    def ConfigureAcquisition(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2163,14 +1891,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ErrorHandler',
-            niscope__pb2.ErrorHandlerRequest.SerializeToString,
-            niscope__pb2.ErrorHandlerResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ConfigureAcquisition',
+            niscope__pb2.ConfigureAcquisitionRequest.SerializeToString,
+            niscope__pb2.ConfigureAcquisitionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ExportAttributeConfigurationBuffer(request,
+    def InitiateAcquisition(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2180,14 +1908,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ExportAttributeConfigurationBuffer',
-            niscope__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
-            niscope__pb2.ExportAttributeConfigurationBufferResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/InitiateAcquisition',
+            niscope__pb2.InitiateAcquisitionRequest.SerializeToString,
+            niscope__pb2.InitiateAcquisitionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ExportAttributeConfigurationFile(request,
+    def Abort(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2197,14 +1925,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ExportAttributeConfigurationFile',
-            niscope__pb2.ExportAttributeConfigurationFileRequest.SerializeToString,
-            niscope__pb2.ExportAttributeConfigurationFileResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Abort',
+            niscope__pb2.AbortRequest.SerializeToString,
+            niscope__pb2.AbortResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ExportSignal(request,
+    def Commit(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2214,9 +1942,26 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ExportSignal',
-            niscope__pb2.ExportSignalRequest.SerializeToString,
-            niscope__pb2.ExportSignalResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Commit',
+            niscope__pb2.CommitRequest.SerializeToString,
+            niscope__pb2.CommitResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Read(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Read',
+            niscope__pb2.ReadRequest.SerializeToString,
+            niscope__pb2.ReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2238,7 +1983,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def FetchArrayMeasurement(request,
+    def FetchBinary8(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2248,9 +1993,9 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/FetchArrayMeasurement',
-            niscope__pb2.FetchArrayMeasurementRequest.SerializeToString,
-            niscope__pb2.FetchArrayMeasurementResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/FetchBinary8',
+            niscope__pb2.FetchBinary8Request.SerializeToString,
+            niscope__pb2.FetchBinary8Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2289,23 +2034,6 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def FetchBinary8(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/FetchBinary8',
-            niscope__pb2.FetchBinary8Request.SerializeToString,
-            niscope__pb2.FetchBinary8Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def FetchComplex(request,
             target,
             options=(),
@@ -2336,6 +2064,176 @@ class NiScope(object):
         return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/FetchComplexBinary16',
             niscope__pb2.FetchComplexBinary16Request.SerializeToString,
             niscope__pb2.FetchComplexBinary16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AcquisitionStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AcquisitionStatus',
+            niscope__pb2.AcquisitionStatusRequest.SerializeToString,
+            niscope__pb2.AcquisitionStatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ActualNumWfms(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ActualNumWfms',
+            niscope__pb2.ActualNumWfmsRequest.SerializeToString,
+            niscope__pb2.ActualNumWfmsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ActualMeasWfmSize(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ActualMeasWfmSize',
+            niscope__pb2.ActualMeasWfmSizeRequest.SerializeToString,
+            niscope__pb2.ActualMeasWfmSizeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ActualRecordLength(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ActualRecordLength',
+            niscope__pb2.ActualRecordLengthRequest.SerializeToString,
+            niscope__pb2.ActualRecordLengthResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SampleRate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SampleRate',
+            niscope__pb2.SampleRateRequest.SerializeToString,
+            niscope__pb2.SampleRateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SampleMode(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SampleMode',
+            niscope__pb2.SampleModeRequest.SerializeToString,
+            niscope__pb2.SampleModeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddWaveformProcessing(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/AddWaveformProcessing',
+            niscope__pb2.AddWaveformProcessingRequest.SerializeToString,
+            niscope__pb2.AddWaveformProcessingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ClearWaveformProcessing(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ClearWaveformProcessing',
+            niscope__pb2.ClearWaveformProcessingRequest.SerializeToString,
+            niscope__pb2.ClearWaveformProcessingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ClearWaveformMeasurementStats(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ClearWaveformMeasurementStats',
+            niscope__pb2.ClearWaveformMeasurementStatsRequest.SerializeToString,
+            niscope__pb2.ClearWaveformMeasurementStatsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReadMeasurement(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ReadMeasurement',
+            niscope__pb2.ReadMeasurementRequest.SerializeToString,
+            niscope__pb2.ReadMeasurementResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2374,7 +2272,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAttributeViBoolean(request,
+    def FetchArrayMeasurement(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2384,14 +2282,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViBoolean',
-            niscope__pb2.GetAttributeViBooleanRequest.SerializeToString,
-            niscope__pb2.GetAttributeViBooleanResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/FetchArrayMeasurement',
+            niscope__pb2.FetchArrayMeasurementRequest.SerializeToString,
+            niscope__pb2.FetchArrayMeasurementResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAttributeViInt32(request,
+    def Reset(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2401,14 +2299,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViInt32',
-            niscope__pb2.GetAttributeViInt32Request.SerializeToString,
-            niscope__pb2.GetAttributeViInt32Response.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Reset',
+            niscope__pb2.ResetRequest.SerializeToString,
+            niscope__pb2.ResetResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAttributeViInt64(request,
+    def SelfTest(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2418,14 +2316,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViInt64',
-            niscope__pb2.GetAttributeViInt64Request.SerializeToString,
-            niscope__pb2.GetAttributeViInt64Response.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SelfTest',
+            niscope__pb2.SelfTestRequest.SerializeToString,
+            niscope__pb2.SelfTestResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAttributeViReal64(request,
+    def Disable(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2435,14 +2333,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViReal64',
-            niscope__pb2.GetAttributeViReal64Request.SerializeToString,
-            niscope__pb2.GetAttributeViReal64Response.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Disable',
+            niscope__pb2.DisableRequest.SerializeToString,
+            niscope__pb2.DisableResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAttributeViSession(request,
+    def ResetDevice(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2452,14 +2350,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViSession',
-            niscope__pb2.GetAttributeViSessionRequest.SerializeToString,
-            niscope__pb2.GetAttributeViSessionResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ResetDevice',
+            niscope__pb2.ResetDeviceRequest.SerializeToString,
+            niscope__pb2.ResetDeviceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetAttributeViString(request,
+    def CalSelfCalibrate(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2469,14 +2367,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViString',
-            niscope__pb2.GetAttributeViStringRequest.SerializeToString,
-            niscope__pb2.GetAttributeViStringResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalSelfCalibrate',
+            niscope__pb2.CalSelfCalibrateRequest.SerializeToString,
+            niscope__pb2.CalSelfCalibrateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def GetChannelName(request,
+    def RevisionQuery(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2486,230 +2384,9 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetChannelName',
-            niscope__pb2.GetChannelNameRequest.SerializeToString,
-            niscope__pb2.GetChannelNameResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetChannelNameFromString(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetChannelNameFromString',
-            niscope__pb2.GetChannelNameFromStringRequest.SerializeToString,
-            niscope__pb2.GetChannelNameFromStringResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetEqualizationFilterCoefficients(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetEqualizationFilterCoefficients',
-            niscope__pb2.GetEqualizationFilterCoefficientsRequest.SerializeToString,
-            niscope__pb2.GetEqualizationFilterCoefficientsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetError(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetError',
-            niscope__pb2.GetErrorRequest.SerializeToString,
-            niscope__pb2.GetErrorResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetErrorMessage(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetErrorMessage',
-            niscope__pb2.GetErrorMessageRequest.SerializeToString,
-            niscope__pb2.GetErrorMessageResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetFrequencyResponse(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetFrequencyResponse',
-            niscope__pb2.GetFrequencyResponseRequest.SerializeToString,
-            niscope__pb2.GetFrequencyResponseResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetNormalizationCoefficients(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetNormalizationCoefficients',
-            niscope__pb2.GetNormalizationCoefficientsRequest.SerializeToString,
-            niscope__pb2.GetNormalizationCoefficientsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetScalingCoefficients(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetScalingCoefficients',
-            niscope__pb2.GetScalingCoefficientsRequest.SerializeToString,
-            niscope__pb2.GetScalingCoefficientsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetStreamEndpointHandle(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetStreamEndpointHandle',
-            niscope__pb2.GetStreamEndpointHandleRequest.SerializeToString,
-            niscope__pb2.GetStreamEndpointHandleResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ImportAttributeConfigurationBuffer(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ImportAttributeConfigurationBuffer',
-            niscope__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
-            niscope__pb2.ImportAttributeConfigurationBufferResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ImportAttributeConfigurationFile(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ImportAttributeConfigurationFile',
-            niscope__pb2.ImportAttributeConfigurationFileRequest.SerializeToString,
-            niscope__pb2.ImportAttributeConfigurationFileResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def Init(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Init',
-            niscope__pb2.InitRequest.SerializeToString,
-            niscope__pb2.InitResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def InitWithOptions(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/InitWithOptions',
-            niscope__pb2.InitWithOptionsRequest.SerializeToString,
-            niscope__pb2.InitWithOptionsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def InitiateAcquisition(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/InitiateAcquisition',
-            niscope__pb2.InitiateAcquisitionRequest.SerializeToString,
-            niscope__pb2.InitiateAcquisitionResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/RevisionQuery',
+            niscope__pb2.RevisionQueryRequest.SerializeToString,
+            niscope__pb2.RevisionQueryResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2748,7 +2425,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Read(request,
+    def CableSenseSignalStart(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2758,14 +2435,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Read',
-            niscope__pb2.ReadRequest.SerializeToString,
-            niscope__pb2.ReadResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CableSenseSignalStart',
+            niscope__pb2.CableSenseSignalStartRequest.SerializeToString,
+            niscope__pb2.CableSenseSignalStartResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ReadMeasurement(request,
+    def CableSenseSignalStop(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2775,14 +2452,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ReadMeasurement',
-            niscope__pb2.ReadMeasurementRequest.SerializeToString,
-            niscope__pb2.ReadMeasurementResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CableSenseSignalStop',
+            niscope__pb2.CableSenseSignalStopRequest.SerializeToString,
+            niscope__pb2.CableSenseSignalStopResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Reset(request,
+    def GetChannelName(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2792,14 +2469,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/Reset',
-            niscope__pb2.ResetRequest.SerializeToString,
-            niscope__pb2.ResetResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetChannelName',
+            niscope__pb2.GetChannelNameRequest.SerializeToString,
+            niscope__pb2.GetChannelNameResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def ResetDevice(request,
+    def GetChannelNameFromString(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2809,14 +2486,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ResetDevice',
-            niscope__pb2.ResetDeviceRequest.SerializeToString,
-            niscope__pb2.ResetDeviceResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetChannelNameFromString',
+            niscope__pb2.GetChannelNameFromStringRequest.SerializeToString,
+            niscope__pb2.GetChannelNameFromStringResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def RevisionQuery(request,
+    def ErrorHandler(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2826,14 +2503,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/RevisionQuery',
-            niscope__pb2.RevisionQueryRequest.SerializeToString,
-            niscope__pb2.RevisionQueryResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ErrorHandler',
+            niscope__pb2.ErrorHandlerRequest.SerializeToString,
+            niscope__pb2.ErrorHandlerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SampleMode(request,
+    def GetError(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2843,14 +2520,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SampleMode',
-            niscope__pb2.SampleModeRequest.SerializeToString,
-            niscope__pb2.SampleModeResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetError',
+            niscope__pb2.GetErrorRequest.SerializeToString,
+            niscope__pb2.GetErrorResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SampleRate(request,
+    def GetErrorMessage(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2860,14 +2537,14 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SampleRate',
-            niscope__pb2.SampleRateRequest.SerializeToString,
-            niscope__pb2.SampleRateResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetErrorMessage',
+            niscope__pb2.GetErrorMessageRequest.SerializeToString,
+            niscope__pb2.GetErrorMessageResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SelfTest(request,
+    def GetAttributeViInt32(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2877,43 +2554,9 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SelfTest',
-            niscope__pb2.SelfTestRequest.SerializeToString,
-            niscope__pb2.SelfTestResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def SendSoftwareTriggerEdge(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SendSoftwareTriggerEdge',
-            niscope__pb2.SendSoftwareTriggerEdgeRequest.SerializeToString,
-            niscope__pb2.SendSoftwareTriggerEdgeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def SetAttributeViBoolean(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SetAttributeViBoolean',
-            niscope__pb2.SetAttributeViBooleanRequest.SerializeToString,
-            niscope__pb2.SetAttributeViBooleanResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViInt32',
+            niscope__pb2.GetAttributeViInt32Request.SerializeToString,
+            niscope__pb2.GetAttributeViInt32Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2935,6 +2578,40 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def CheckAttributeViInt32(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViInt32',
+            niscope__pb2.CheckAttributeViInt32Request.SerializeToString,
+            niscope__pb2.CheckAttributeViInt32Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAttributeViInt64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViInt64',
+            niscope__pb2.GetAttributeViInt64Request.SerializeToString,
+            niscope__pb2.GetAttributeViInt64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def SetAttributeViInt64(request,
             target,
             options=(),
@@ -2948,6 +2625,40 @@ class NiScope(object):
         return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SetAttributeViInt64',
             niscope__pb2.SetAttributeViInt64Request.SerializeToString,
             niscope__pb2.SetAttributeViInt64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CheckAttributeViInt64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViInt64',
+            niscope__pb2.CheckAttributeViInt64Request.SerializeToString,
+            niscope__pb2.CheckAttributeViInt64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAttributeViReal64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViReal64',
+            niscope__pb2.GetAttributeViReal64Request.SerializeToString,
+            niscope__pb2.GetAttributeViReal64Response.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2969,7 +2680,7 @@ class NiScope(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def SetAttributeViSession(request,
+    def CheckAttributeViReal64(request,
             target,
             options=(),
             channel_credentials=None,
@@ -2979,9 +2690,26 @@ class NiScope(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SetAttributeViSession',
-            niscope__pb2.SetAttributeViSessionRequest.SerializeToString,
-            niscope__pb2.SetAttributeViSessionResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViReal64',
+            niscope__pb2.CheckAttributeViReal64Request.SerializeToString,
+            niscope__pb2.CheckAttributeViReal64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAttributeViString(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViString',
+            niscope__pb2.GetAttributeViStringRequest.SerializeToString,
+            niscope__pb2.GetAttributeViStringResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2999,5 +2727,277 @@ class NiScope(object):
         return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SetAttributeViString',
             niscope__pb2.SetAttributeViStringRequest.SerializeToString,
             niscope__pb2.SetAttributeViStringResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CheckAttributeViString(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViString',
+            niscope__pb2.CheckAttributeViStringRequest.SerializeToString,
+            niscope__pb2.CheckAttributeViStringResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAttributeViSession(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViSession',
+            niscope__pb2.GetAttributeViSessionRequest.SerializeToString,
+            niscope__pb2.GetAttributeViSessionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetAttributeViSession(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SetAttributeViSession',
+            niscope__pb2.SetAttributeViSessionRequest.SerializeToString,
+            niscope__pb2.SetAttributeViSessionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CheckAttributeViSession(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViSession',
+            niscope__pb2.CheckAttributeViSessionRequest.SerializeToString,
+            niscope__pb2.CheckAttributeViSessionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAttributeViBoolean(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetAttributeViBoolean',
+            niscope__pb2.GetAttributeViBooleanRequest.SerializeToString,
+            niscope__pb2.GetAttributeViBooleanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SetAttributeViBoolean(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/SetAttributeViBoolean',
+            niscope__pb2.SetAttributeViBooleanRequest.SerializeToString,
+            niscope__pb2.SetAttributeViBooleanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CheckAttributeViBoolean(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CheckAttributeViBoolean',
+            niscope__pb2.CheckAttributeViBooleanRequest.SerializeToString,
+            niscope__pb2.CheckAttributeViBooleanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ImportAttributeConfigurationBuffer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ImportAttributeConfigurationBuffer',
+            niscope__pb2.ImportAttributeConfigurationBufferRequest.SerializeToString,
+            niscope__pb2.ImportAttributeConfigurationBufferResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExportAttributeConfigurationBuffer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ExportAttributeConfigurationBuffer',
+            niscope__pb2.ExportAttributeConfigurationBufferRequest.SerializeToString,
+            niscope__pb2.ExportAttributeConfigurationBufferResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ImportAttributeConfigurationFile(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ImportAttributeConfigurationFile',
+            niscope__pb2.ImportAttributeConfigurationFileRequest.SerializeToString,
+            niscope__pb2.ImportAttributeConfigurationFileResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ExportAttributeConfigurationFile(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/ExportAttributeConfigurationFile',
+            niscope__pb2.ExportAttributeConfigurationFileRequest.SerializeToString,
+            niscope__pb2.ExportAttributeConfigurationFileResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetScalingCoefficients(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetScalingCoefficients',
+            niscope__pb2.GetScalingCoefficientsRequest.SerializeToString,
+            niscope__pb2.GetScalingCoefficientsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNormalizationCoefficients(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetNormalizationCoefficients',
+            niscope__pb2.GetNormalizationCoefficientsRequest.SerializeToString,
+            niscope__pb2.GetNormalizationCoefficientsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetStreamEndpointHandle(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/GetStreamEndpointHandle',
+            niscope__pb2.GetStreamEndpointHandleRequest.SerializeToString,
+            niscope__pb2.GetStreamEndpointHandleResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CalFetchDate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalFetchDate',
+            niscope__pb2.CalFetchDateRequest.SerializeToString,
+            niscope__pb2.CalFetchDateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CalFetchTemperature(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/niscope_grpc.NiScope/CalFetchTemperature',
+            niscope__pb2.CalFetchTemperatureRequest.SerializeToString,
+            niscope__pb2.CalFetchTemperatureResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

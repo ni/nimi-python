@@ -14,13 +14,13 @@ from nifake.custom_struct import CustomStruct  # noqa: F401
 
 from nifake.custom_struct import struct_CustomStruct  # noqa: F401
 
-from nifake.custom_struct_nested_typedef import CustomStructNestedTypedef  # noqa: F401
-
-from nifake.custom_struct_nested_typedef import struct_CustomStructNestedTypedef  # noqa: F401
-
 from nifake.custom_struct_typedef import CustomStructTypedef  # noqa: F401
 
 from nifake.custom_struct_typedef import struct_CustomStructTypedef  # noqa: F401
+
+from nifake.custom_struct_nested_typedef import CustomStructNestedTypedef  # noqa: F401
+
+from nifake.custom_struct_nested_typedef import struct_CustomStructNestedTypedef  # noqa: F401
 
 
 def get_diagnostic_information():

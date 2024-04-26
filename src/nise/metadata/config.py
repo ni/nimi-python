@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI Switch Executive API metadata version 23.0.0f50
+# This file is generated from NI Switch Executive API metadata version 24.3.0d13
 config = {
-    'api_version': '23.0.0f50',
+    'api_version': '24.3.0d13',
     'c_function_prefix': 'niSE_',
     'close_function': 'CloseSession',
     'context_manager_name': {

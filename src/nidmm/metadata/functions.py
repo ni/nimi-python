@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 23.5.0d140
+# This file is generated from NI-DMM API metadata version 24.3.0d105
 functions = {
     'Abort': {
         'documentation': {
@@ -1028,7 +1028,6 @@ functions = {
                         ]
                     ]
                 },
-                'grpc_enum': 'CalibrationType',
                 'name': 'calType',
                 'type': 'ViInt32'
             },
@@ -1286,7 +1285,6 @@ functions = {
                         ]
                     ]
                 },
-                'grpc_enum': 'CalibrationType',
                 'name': 'calType',
                 'type': 'ViInt32'
             },

@@ -680,7 +680,7 @@ class _SessionBase(object):
     Valid Values: The valid values for this property are defined by the values to which current_limit_range property is set.
 
     Note:
-    The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the output channel.
+    The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the channel.
 
     NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
@@ -2021,7 +2021,8 @@ class _SessionBase(object):
     Valid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.
     The PXIe-4162/4163 supports values from  256 to 1000192.
     The PXIe-4190 supports values from 102 to 6000048.
-    All other supported instruments support values from 1000 to 2147483647.
+    The PXIe-4112, PXIe-4113, and PXIe-4154 support values from 1000 to 178956970.
+    All other supported instruments support values from 1000 to 268435455.
     Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
     Note:
@@ -3491,7 +3492,7 @@ class _SessionBase(object):
     This property is applicable only if the output_function property is set to OutputFunction.PULSE_CURRENT.
     For valid ranges, refer to the specifications for your instrument.
 
-    Note: The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the output channel.
+    Note: The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the channel.
 
     Tip:
     This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -4383,7 +4384,7 @@ class _SessionBase(object):
 
     Valid Values: The valid values for this property are defined by the values to which the voltage_limit_range property is set.
 
-    Note: The channel must be enabled for the specified current level to take effect. Refer to the output_enabled property for more information about enabling the output channel.
+    Note: The channel must be enabled for the specified current level to take effect. Refer to the output_enabled property for more information about enabling the channel.
 
     NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
@@ -4595,7 +4596,7 @@ class _SessionBase(object):
         Uncommitted state. If a sequence is running, it is stopped. Any
         configuration methods called after this method are not applied until
         the initiate method is called. If power output is enabled
-        when you call the abort method, the output channels remain
+        when you call the abort method, the channels remain
         in their current state and continue providing power.
 
         Use the ConfigureOutputEnabled method to disable power
@@ -5549,7 +5550,7 @@ class _SessionBase(object):
     def measure_multiple_lcr(self):
         '''measure_multiple_lcr
 
-        Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
+        Measures and returns a list of LCRMeasurement instances on the specified channel(s).
 
         To use this method:
 
@@ -6345,7 +6346,7 @@ class _SessionBase(object):
     def _measure_multiple_lcr(self):
         r'''_measure_multiple_lcr
 
-        Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
+        Measures and returns a list of LCRMeasurement instances on the specified channel(s).
 
         To use this method:
 
@@ -6681,7 +6682,7 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.query_in_compliance`
 
         Returns:
-            in_compliance (bool): Returns whether the device output channel is in compliance.
+            in_compliance (bool): Returns whether the device channel is in compliance.
 
         '''
         in_compliance = self._interpreter.query_in_compliance(self._repeated_capability)
@@ -6808,7 +6809,7 @@ class _SessionBase(object):
 
 
         Returns:
-            max_voltage_level (float): Returns the maximum voltage level that can be set on an output channel
+            max_voltage_level (float): Returns the maximum voltage level that can be set on a channel
                 with the specified **currentLimit**.
 
         '''
@@ -6838,7 +6839,7 @@ class _SessionBase(object):
 
 
         Returns:
-            min_current_limit (float): Returns the minimum current limit that can be set on an output channel
+            min_current_limit (float): Returns the minimum current limit that can be set on a channel
                 with the specified **voltageLevel**.
 
         '''
@@ -6849,7 +6850,7 @@ class _SessionBase(object):
     def query_output_state(self, output_state):
         r'''query_output_state
 
-        Queries the specified output channel to determine if the output channel
+        Queries the specified channel to determine if the channel
         is currently in the state specified by **outputState**.
 
         **Related Topics:**
@@ -6871,7 +6872,7 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.query_output_state`
 
         Args:
-            output_state (enums.OutputStates): Specifies the output state of the output channel that is being queried.
+            output_state (enums.OutputStates): Specifies the output state of the channel that is being queried.
                 **Defined Values**:
 
                 +----------------------+-------------------------------------------------------------------+
@@ -6882,7 +6883,7 @@ class _SessionBase(object):
 
 
         Returns:
-            in_state (bool): Returns whether the device output channel is in the specified output
+            in_state (bool): Returns whether the device channel is in the specified output
                 state.
 
         '''
@@ -7445,7 +7446,7 @@ class Session(_SessionBase):
             channels (str, list, range, tuple): For new applications, use the default value of None
                 and specify the channels in **resource name**.
 
-                Specifies which output channel(s) to include in a new session. Specify multiple
+                Specifies which channel(s) to include in a new session. Specify multiple
                 channels by using a channel list or a channel range. A channel list is a comma (,)
                 separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).
                 A channel range is a lower bound channel followed by a hyphen (-) or colon (:)
@@ -7559,7 +7560,7 @@ class Session(_SessionBase):
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
-        method, the output channels remain in their existing state and
+        method, the channels remain in their existing state and
         continue providing power. Use the ConfigureOutputEnabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).
@@ -7769,7 +7770,7 @@ class Session(_SessionBase):
             channels (str, list, range, tuple): For new applications, use the default value of None
                 and specify the channels in **resource name**.
 
-                Specifies which output channel(s) to include in a new session. Specify multiple
+                Specifies which channel(s) to include in a new session. Specify multiple
                 channels by using a channel list or a channel range. A channel list is a comma (,)
                 separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).
                 A channel range is a lower bound channel followed by a hyphen (-) or colon (:)
@@ -7854,12 +7855,12 @@ class Session(_SessionBase):
         determine the upper bound of valid values for **index**.
 
         Args:
-            index (int): Specifies which output channel name to return. The index values begin at
+            index (int): Specifies which channel name to return. The index values begin at
                 1.
 
 
         Returns:
-            channel_name (str): Returns the output channel name that corresponds to **index**.
+            channel_name (str): Returns the channel name that corresponds to **index**.
 
         '''
         channel_name = self._interpreter.get_channel_name(index)
@@ -8152,13 +8153,13 @@ class Session(_SessionBase):
                 instrument's **resourceName**. **resourceName** can also be a logical
                 IVI name.
 
-            channels (str): Specifies which output channel(s) to include in a new session. Specify
+            channels (str): Specifies which channel(s) to include in a new session. Specify
                 multiple channels by using a channel list or a channel range. A channel
                 list is a comma (,) separated sequence of channel names (for example,
                 0,2 specifies channels 0 and 2). A channel range is a lower bound
                 channel followed by a hyphen (-) or colon (:) followed by an upper bound
                 channel (for example, 0-2 specifies channels 0, 1, and 2). In the
-                Running state, multiple output channel configurations are performed
+                Running state, multiple channel configurations are performed
                 sequentially based on the order specified in this parameter. If you do
                 not specify any channels, by default all channels on the device are
                 included in the session.
@@ -8345,7 +8346,7 @@ class Session(_SessionBase):
 
         Closes the session specified in **vi** and deallocates the resources
         that NI-DCPower reserves. If power output is enabled when you call this
-        method, the output channels remain in their existing state and
+        method, the channels remain in their existing state and
         continue providing power. Use the ConfigureOutputEnabled
         method to disable power output on a per channel basis. Use the
         reset method to disable power output on all channel(s).

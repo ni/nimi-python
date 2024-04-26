@@ -73,7 +73,7 @@ Session
         For new applications, use the default value of None
         and specify the channels in **resource name**.
 
-        Specifies which output channel(s) to include in a new session. Specify multiple
+        Specifies which channel(s) to include in a new session. Specify multiple
         channels by using a channel list or a channel range. A channel list is a comma (,)
         separated sequence of channel names (for example, 0,2 specifies channels 0 and 2).
         A channel range is a lower bound channel followed by a hyphen (-) or colon (:)
@@ -174,7 +174,7 @@ abort
             Uncommitted state. If a sequence is running, it is stopped. Any
             configuration methods called after this method are not applied until
             the :py:meth:`nidcpower.Session.initiate` method is called. If power output is enabled
-            when you call the :py:meth:`nidcpower.Session.abort` method, the output channels remain
+            when you call the :py:meth:`nidcpower.Session.abort` method, the channels remain
             in their current state and continue providing power.
 
             Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled` method to disable power
@@ -278,7 +278,7 @@ close
 
             Closes the session specified in **vi** and deallocates the resources
             that NI-DCPower reserves. If power output is enabled when you call this
-            method, the output channels remain in their existing state and
+            method, the channels remain in their existing state and
             continue providing power. Use the :py:meth:`nidcpower.Session.ConfigureOutputEnabled`
             method to disable power output on a per channel basis. Use the
             :py:meth:`nidcpower.Session.reset` method to disable power output on all channel(s).
@@ -1240,7 +1240,7 @@ get_channel_name
             :param index:
 
 
-                Specifies which output channel name to return. The index values begin at
+                Specifies which channel name to return. The index values begin at
                 1.
 
                 
@@ -1252,7 +1252,7 @@ get_channel_name
             :return:
 
 
-                    Returns the output channel name that corresponds to **index**.
+                    Returns the channel name that corresponds to **index**.
 
                     
 
@@ -1874,7 +1874,7 @@ measure_multiple_lcr
 
     .. py:method:: measure_multiple_lcr()
 
-            Measures and returns a list of LCRMeasurement instances on the specified output channel(s).
+            Measures and returns a list of LCRMeasurement instances on the specified channel(s).
 
             To use this method:
 
@@ -2227,7 +2227,7 @@ query_in_compliance
             :return:
 
 
-                    Returns whether the device output channel is in compliance.
+                    Returns whether the device channel is in compliance.
 
                     
 
@@ -2392,7 +2392,7 @@ query_max_voltage_level
             :return:
 
 
-                    Returns the maximum voltage level that can be set on an output channel
+                    Returns the maximum voltage level that can be set on a channel
                     with the specified **currentLimit**.
 
                     
@@ -2437,7 +2437,7 @@ query_min_current_limit
             :return:
 
 
-                    Returns the minimum current limit that can be set on an output channel
+                    Returns the minimum current limit that can be set on a channel
                     with the specified **voltageLevel**.
 
                     
@@ -2451,7 +2451,7 @@ query_output_state
 
     .. py:method:: query_output_state(output_state)
 
-            Queries the specified output channel to determine if the output channel
+            Queries the specified channel to determine if the channel
             is currently in the state specified by **outputState**.
 
             **Related Topics:**
@@ -2477,7 +2477,7 @@ query_output_state
             :param output_state:
 
 
-                Specifies the output state of the output channel that is being queried.
+                Specifies the output state of the channel that is being queried.
                 **Defined Values**:
 
                 +--------------------------------------------+-------------------------------------------------------------------+
@@ -2493,7 +2493,7 @@ query_output_state
             :return:
 
 
-                    Returns whether the device output channel is in the specified output
+                    Returns whether the device channel is in the specified output
                     state.
 
                     
@@ -4106,7 +4106,7 @@ current_limit
 
 
 
-        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
             NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
@@ -6871,7 +6871,8 @@ measure_buffer_size
         Valid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.
         The PXIe-4162/4163 supports values from  256 to 1000192.
         The PXIe-4190 supports values from 102 to 6000048.
-        All other supported instruments support values from 1000 to 2147483647.
+        The PXIe-4112, PXIe-4113, and PXIe-4154 support values from 1000 to 178956970.
+        All other supported instruments support values from 1000 to 268435455.
         Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
 
 
@@ -9687,7 +9688,7 @@ pulse_voltage_limit_range
 
 
 
-        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified current limit to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
 
         .. tip:: This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -11577,7 +11578,7 @@ voltage_limit
 
 
 
-        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the output channel.
+        .. note:: The channel must be enabled for the specified current level to take effect. Refer to the :py:attr:`nidcpower.Session.output_enabled` property for more information about enabling the channel.
 
             NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 

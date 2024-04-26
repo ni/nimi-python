@@ -9,9 +9,9 @@ from nifake._visatype import *  # noqa: F403,H303
 
 import nifake.custom_struct as custom_struct  # noqa: F401
 
-import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
-
 import nifake.custom_struct_typedef as custom_struct_typedef  # noqa: F401
+
+import nifake.custom_struct_nested_typedef as custom_struct_nested_typedef  # noqa: F401
 
 
 class Library(object):
