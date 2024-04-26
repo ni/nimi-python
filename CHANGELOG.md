@@ -54,12 +54,15 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nifgen` (NI-FGEN)
     * #### Added
-        * `started_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-        * `done_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-        * `marker_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-        * `started_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-        * `done_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-        * `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+        * Properties added:
+            * `started_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+            * `done_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+            * `marker_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+            * `started_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+            * `done_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+            * `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+        * Enum added:
+            * `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
     * #### Changed
     * #### Removed
 * ### `nimodinst` (NI-ModInst)
