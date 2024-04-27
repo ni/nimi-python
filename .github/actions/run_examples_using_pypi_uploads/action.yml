@@ -15,15 +15,24 @@ runs:
   steps:
     # The local wheel installation and single environment would have made using tox-system_tests.ini difficult.
     # To keep things simple, we just use pip and pytest directly for a single Python version.
-    - run: py -3.12 -m pip install ${{ inputs.module_name }}==${{ inputs.module_version }} pytest
-      shell: powershell
-    - if: ${{ inputs.module_name == 'nitclk' }}
-      run: py -3.12 -m pip install niscope==${{ inputs.module_version }}
-      shell: powershell
-    - if: ${{ inputs.module_name == 'niscope' }}
-      run: py -3.12 -m pip install numpy
+    - run: py -3.12 -m venv --clear .venv
       shell: powershell
     - run: |
+        .venv\Scripts\Activate.ps1
+        python -m pip install ${{ inputs.module_name }}==${{ inputs.module_version }} pytest
+      shell: powershell
+    - if: ${{ inputs.module_name == 'nitclk' }}
+      run: |
+        .venv\Scripts\Activate.ps1
+        python -m pip install niscope==${{ inputs.module_version }}
+      shell: powershell
+    - if: ${{ inputs.module_name == 'niscope' }}
+      run: |
+        .venv\Scripts\Activate.ps1
+        python -m pip install numpy
+      shell: powershell
+    - run: |
+        .venv\Scripts\Activate.ps1
         cd src/${{ inputs.module_name }}
-        py -3.12 -m pytest ./examples -v
+        python -m pytest ./examples -v
       shell: powershell
