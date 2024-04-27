@@ -1,6 +1,14 @@
 name: check_latest_release
 
 on:
+  pull_request:
+    branches:
+      - master
+      - releases/*
+    types:
+      - opened
+      - synchronize
+      - reopened
   release:
     types: [released]
 
@@ -45,4 +53,5 @@ jobs:
         uses: ./.github/actions/run_examples_using_pypi_uploads
         with:
           module_name: ${{ matrix.module_name }}
-          module_version: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.event.release.tag_name }}
+          module_version: 1.4.8
+          # module_version: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.event.release.tag_name }}
