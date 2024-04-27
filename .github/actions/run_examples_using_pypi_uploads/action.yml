@@ -17,8 +17,11 @@ runs:
     # To keep things simple, we just use pip and pytest directly for a single Python version.
     - run: py -3.12 -m pip install ${{ inputs.module_name }}==${{ inputs.module_version }} pytest
       shell: powershell
-    - if: ${{ inputs.module_name }} == "nitclk"
-      run: py -3.12 -m pip install niscope
+    - if: ${{ inputs.module_name == 'nitclk' }}
+      run: py -3.12 -m pip install niscope==${{ inputs.module_version }}
+      shell: powershell
+    - if: ${{ inputs.module_name == 'niscope' }}
+      run: py -3.12 -m pip install numpy
       shell: powershell
     - run: |
         cd src/${{ inputs.module_name }}
