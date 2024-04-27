@@ -6,7 +6,7 @@ on:
       - master
       - releases/*
     paths:
-      #- .github/workflows/github_actions_aws_windows_python64.yml
+      - .github/workflows/github_actions_aws_windows_python64.yml
       - .github/actions/windows
       - src
       - generated
