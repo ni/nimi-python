@@ -1,0 +1,48 @@
+name: check_latest_release
+
+on:
+  release:
+    types: [released]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: The GitHub release tag corresponding to the pypi releases to test
+        required: true
+        default: non-existent-tag
+  
+jobs:
+  install-module-and-run-examples:
+    name: example_test
+    if: github.repository == 'ni/nimi-python'
+    # Use win32 nimibot
+    # win64 already handles post-commit testing for coverage
+    # linux doesn't support all modules
+    runs-on:
+      - self-hosted
+      - windows
+      - x64
+      - rdss-nimibot-win-10-py32
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        module_name:
+          - nidigital
+          - nitclk
+          - nifgen
+          - nidcpower
+          - nidmm
+          - niscope
+          - nimodinst
+          - nise
+          - niswitch
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      # NOTE: we don't upload test coverage for this
+      - name: run examples using pypi uploads
+        uses: ./.github/actions/run_examples_using_pypi_uploads
+        with:
+          module_name: ${{ matrix.module_name }}
+          module_version: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.event.release.tag_name }}
