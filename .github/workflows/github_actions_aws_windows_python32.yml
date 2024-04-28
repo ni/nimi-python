@@ -5,12 +5,12 @@ on:
     branches:
       - master
       - releases/*
-    paths-ignore:
-      - CHANGELOG.md
-      - CONTRIBUTING.md
-      - .gitattributes
-      - LICENSE
-      - VERSION
+    paths:
+      - .github/workflows/github_actions_aws_windows_python32.yml
+      - .github/actions/windows
+      - src
+      - generated
+      - tools
     types:
       - opened
       - synchronize
