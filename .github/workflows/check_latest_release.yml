@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: The GitHub release tag corresponding to the pypi releases to test
+        description: The GitHub release tag corresponding to the PyPI releases to test
         required: true
         default: non-existent-tag
   
@@ -41,7 +41,7 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
       # NOTE: we don't upload test coverage for this
-      - name: run examples using pypi uploads
+      - name: run examples using PyPI uploads
         uses: ./.github/actions/run_examples_using_pypi_uploads
         with:
           module_name: ${{ matrix.module_name }}
