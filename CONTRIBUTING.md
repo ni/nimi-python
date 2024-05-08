@@ -172,6 +172,7 @@ Release Process
     1. Merge the pull request to origin/master
     1. Create a release on GitHub using the portion from the changelog for this release for the description
         * Add the ZIP files under `generated/examples` for each module as a release artifact.
+        * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
     1. Update the module versions

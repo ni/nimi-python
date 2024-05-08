@@ -1,0 +1,38 @@
+name: Run examples using PyPI uploads
+description: Install module(s) from PyPI and run examples. Intended for release validation.
+inputs:
+  module_name:
+    description: module name (e.g. "nidcpower")
+    required: true
+    default: ""
+  module_version:
+    description: module version (e.g. "1.8.1")
+    required: true
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    # The local wheel installation and single environment would have made using tox-system_tests.ini difficult.
+    # To keep things simple, we just use pip and pytest directly for a single Python version.
+    - run: py -3.12 -m venv --clear .venv
+      shell: powershell
+    - run: |
+        .venv\Scripts\Activate.ps1
+        python -m pip install ${{ inputs.module_name }}==${{ inputs.module_version }} pytest
+      shell: powershell
+    - if: ${{ inputs.module_name == 'nitclk' }}
+      run: |
+        .venv\Scripts\Activate.ps1
+        python -m pip install niscope==${{ inputs.module_version }}
+      shell: powershell
+    - if: ${{ inputs.module_name == 'niscope' }}
+      run: |
+        .venv\Scripts\Activate.ps1
+        python -m pip install numpy
+      shell: powershell
+    - run: |
+        .venv\Scripts\Activate.ps1
+        cd src/${{ inputs.module_name }}
+        python -m pytest ./examples -v
+      shell: powershell
