@@ -2,11 +2,11 @@ name: Run examples using PyPI uploads
 description: Install module(s) from PyPI and run examples. Intended for release validation.
 inputs:
   module_name:
-    description: module name
+    description: module name (e.g. "nidcpower")
     required: true
     default: ""
   module_version:
-    description: module version
+    description: module version (e.g. "1.8.1")
     required: true
     default: ""
 
