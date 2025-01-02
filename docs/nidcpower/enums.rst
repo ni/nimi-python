@@ -1166,7 +1166,7 @@ OutputStates
 
 .. py:class:: OutputStates
 
-    .. py:attribute:: OutputStates.VOLTAGE
+    .. py:attribute:: OutputStates.CONSTANT_VOLTAGE
 
 
 
@@ -1176,11 +1176,21 @@ OutputStates
 
 
 
-    .. py:attribute:: OutputStates.CURRENT
+    .. py:attribute:: OutputStates.CONSTANT_CURRENT
 
 
 
         The channel maintains a constant current by adjusting the voltage.
+
+        
+
+
+
+    .. py:attribute:: OutputStates.INHIBITED
+
+
+
+        The channel is in the inhibited state.
 
         
 

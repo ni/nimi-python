@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 24.3.0f264
+# This file is generated from NI-DCPower API metadata version 25.0.0d98
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -994,6 +994,13 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
                 'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'The channel is in the inhibited state.'
+                },
+                'name': 'NIDCPOWER_VAL_OUTPUT_INHIBITED',
+                'value': 1163
             }
         ]
     },

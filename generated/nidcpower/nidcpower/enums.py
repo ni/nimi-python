@@ -512,13 +512,17 @@ class OutputFunction(Enum):
 
 
 class OutputStates(Enum):
-    VOLTAGE = 0
+    CONSTANT_VOLTAGE = 0
     r'''
     The channel maintains a constant voltage by adjusting the current.
     '''
-    CURRENT = 1
+    CONSTANT_CURRENT = 1
     r'''
     The channel maintains a constant current by adjusting the voltage.
+    '''
+    INHIBITED = 1163
+    r'''
+    The channel is in the inhibited state.
     '''
 
 

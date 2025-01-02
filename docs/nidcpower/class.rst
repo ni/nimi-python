@@ -2480,11 +2480,13 @@ query_output_state
                 Specifies the output state of the channel that is being queried.
                 **Defined Values**:
 
-                +--------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.VOLTAGE` | The device maintains a constant voltage by adjusting the current. |
-                +--------------------------------------------+-------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.CURRENT` | The device maintains a constant current by adjusting the voltage. |
-                +--------------------------------------------+-------------------------------------------------------------------+
+                +-----------------------------------------------------+--------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CONSTANT_VOLTAGE` | The channel maintains a constant voltage by adjusting the current. |
+                +-----------------------------------------------------+--------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CONSTANT_CURRENT` | The channel maintains a constant current by adjusting the voltage. |
+                +-----------------------------------------------------+--------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.INHIBITED`        | The channel is in the inhibited state.                             |
+                +-----------------------------------------------------+--------------------------------------------------------------------+
 
 
             :type output_state: :py:data:`nidcpower.OutputStates`
@@ -6868,7 +6870,7 @@ measure_buffer_size
 
         Specifies the number of samples that the active channel measurement buffer can hold.
         The default value is the maximum number of samples that a device is capable of recording in one second.
-        Valid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.
+        Valid Values: The PXIe-4051, PXIe-4147, and PXIe-4150/4151 support values from 170 to 18000110.
         The PXIe-4162/4163 supports values from  256 to 1000192.
         The PXIe-4190 supports values from 102 to 6000048.
         The PXIe-4112, PXIe-4113, and PXIe-4154 support values from 1000 to 178956970.
@@ -6915,7 +6917,7 @@ measure_complete_event_delay
         Specifies the amount of time to delay the generation of the Measure Complete event, in seconds.
         Valid Values: The PXIe-4051 supports values from 0 seconds to 39 seconds.
         The PXIe-4147 supports values from 0 seconds to 26.5 seconds.
-        The PXIe-4151 supports values from 0 seconds to 42 seconds.
+        The PXIe-4150/4151 supports values from 0 seconds to 42 seconds.
         The PXIe-4162/4163 and PXIe-4190 support values from 0 seconds to 23 seconds.
         All other supported instruments support values from 0 to 167 seconds.
         Default Value: Varies by device. Refer to Supported Properties by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.
@@ -7372,10 +7374,9 @@ merged_channels
 
     .. py:attribute:: merged_channels
 
-        Specifies the channel(s) to merge with a designated primary channel of an instrument in order to increase the maximum current you can source from the instrument.
-        This property designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.
-        Note: You cannot change the merge configuration with this property when the session is in the Running state.
-        For complete information on using merged channels with this property, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.
+        Specifies the merge channel(s) to combine with a designated primary channel of an instrument in order to increase the maximum current you can source from the instrument.
+        Set this property on the primary channel only, and pass the merge channels as the value of this property.
+        Refer to the Merged Channels topic in your instrument user manual for more information about using merged channels.
 
 
 
@@ -11034,7 +11035,7 @@ source_delay
         Refer to the Single Point Source Mode and Sequence Source Mode topics for more information.
         Valid Values: The PXIe-4051 supports values from 0 to 39 seconds.
         The PXIe-4147 supports values from 0 to 26.5 seconds.
-        The PXIe-4151 supports values from 0 to 42 seconds.
+        The PXIe-4150/4151 supports values from 0 to 42 seconds.
         The PXIe-4162/4163 and PXIe-4190 support values from 0 to 23 seconds.
         All other supported instruments support values from 0 to 167 seconds.
         Default Value: 0.01667 seconds
