@@ -512,11 +512,11 @@ class OutputFunction(Enum):
 
 
 class OutputStates(Enum):
-    CONSTANT_VOLTAGE = 0
+    VOLTAGE = 0
     r'''
     The channel maintains a constant voltage by adjusting the current.
     '''
-    CONSTANT_CURRENT = 1
+    CURRENT = 1
     r'''
     The channel maintains a constant current by adjusting the voltage.
     '''

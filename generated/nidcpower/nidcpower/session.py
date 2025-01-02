@@ -6874,13 +6874,13 @@ class _SessionBase(object):
             output_state (enums.OutputStates): Specifies the output state of the channel that is being queried.
                 **Defined Values**:
 
-                +-------------------------------+--------------------------------------------------------------------+
-                | OutputStates.CONSTANT_VOLTAGE | The channel maintains a constant voltage by adjusting the current. |
-                +-------------------------------+--------------------------------------------------------------------+
-                | OutputStates.CONSTANT_CURRENT | The channel maintains a constant current by adjusting the voltage. |
-                +-------------------------------+--------------------------------------------------------------------+
-                | OutputStates.INHIBITED        | The channel is in the inhibited state.                             |
-                +-------------------------------+--------------------------------------------------------------------+
+                +------------------------+--------------------------------------------------------------------+
+                | OutputStates.VOLTAGE   | The channel maintains a constant voltage by adjusting the current. |
+                +------------------------+--------------------------------------------------------------------+
+                | OutputStates.CURRENT   | The channel maintains a constant current by adjusting the voltage. |
+                +------------------------+--------------------------------------------------------------------+
+                | OutputStates.INHIBITED | The channel is in the inhibited state.                             |
+                +------------------------+--------------------------------------------------------------------+
 
 
         Returns:
