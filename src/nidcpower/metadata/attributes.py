@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 24.3.0f264
+# This file is generated from NI-DCPower API metadata version 25.0.0d98
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -673,7 +673,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nSpecifies the amount of time to delay the generation of the Measure Complete event, in seconds.\nValid Values: The PXIe-4051 supports values from 0 seconds to 39 seconds.\nThe PXIe-4147 supports values from 0 seconds to 26.5 seconds.\nThe PXIe-4151 supports values from 0 seconds to 42 seconds.\nThe PXIe-4162/4163 and PXIe-4190 support values from 0 seconds to 23 seconds.\nAll other supported instruments support values from 0 to 167 seconds.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
+            'description': '\nSpecifies the amount of time to delay the generation of the Measure Complete event, in seconds.\nValid Values: The PXIe-4051 supports values from 0 seconds to 39 seconds.\nThe PXIe-4147 supports values from 0 seconds to 26.5 seconds.\nThe PXIe-4150/4151 supports values from 0 seconds to 42 seconds.\nThe PXIe-4162/4163 and PXIe-4190 support values from 0 seconds to 23 seconds.\nAll other supported instruments support values from 0 to 167 seconds.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Events:Measure Complete Event:Event Delay',
@@ -741,7 +741,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'documentation': {
-            'description': '\nDetermines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.\nRefer to the Single Point Source Mode and Sequence Source Mode topics for more information.\nValid Values: The PXIe-4051 supports values from 0 to 39 seconds.\nThe PXIe-4147 supports values from 0 to 26.5 seconds.\nThe PXIe-4151 supports values from 0 to 42 seconds.\nThe PXIe-4162/4163 and PXIe-4190 support values from 0 to 23 seconds.\nAll other supported instruments support values from 0 to 167 seconds.\nDefault Value: 0.01667 seconds\n',
+            'description': '\nDetermines when, in seconds, the device generates the Source Complete event, potentially starting a measurement if the NIDCPOWER_ATTR_MEASURE_WHEN attribute is set to NIDCPOWER_VAL_AUTOMATICALLY_AFTER_SOURCE_COMPLETE.\nRefer to the Single Point Source Mode and Sequence Source Mode topics for more information.\nValid Values: The PXIe-4051 supports values from 0 to 39 seconds.\nThe PXIe-4147 supports values from 0 to 26.5 seconds.\nThe PXIe-4150/4151 supports values from 0 to 42 seconds.\nThe PXIe-4162/4163 and PXIe-4190 support values from 0 to 23 seconds.\nAll other supported instruments support values from 0 to 167 seconds.\nDefault Value: 0.01667 seconds\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\n'
         },
         'lv_property': 'Source:Advanced:Source Delay',
@@ -1048,7 +1048,7 @@ attributes = {
     1150077: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nValid Values: The PXIe-4051, PXIe-4147, and PXIe-4151 support values from 170 to 18000110.\nThe PXIe-4162/4163 supports values from  256 to 1000192.\nThe PXIe-4190 supports values from 102 to 6000048.\nThe PXIe-4112, PXIe-4113, and PXIe-4154 support values from 1000 to 178956970.\nAll other supported instruments support values from 1000 to 268435455.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
+            'description': '\nSpecifies the number of samples that the active channel measurement buffer can hold.\nThe default value is the maximum number of samples that a device is capable of recording in one second.\nValid Values: The PXIe-4051, PXIe-4147, and PXIe-4150/4151 support values from 170 to 18000110.\nThe PXIe-4162/4163 supports values from  256 to 1000192.\nThe PXIe-4190 supports values from 102 to 6000048.\nThe PXIe-4112, PXIe-4113, and PXIe-4154 support values from 1000 to 178956970.\nAll other supported instruments support values from 1000 to 268435455.\nDefault Value: Varies by device. Refer to Supported Attributes by Device topic in the NI DC Power Supplies and SMUs Help for more information about default values.\n',
             'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Measurement:Advanced:Measure Buffer Size',
@@ -1994,7 +1994,7 @@ attributes = {
         'access': 'read-write',
         'attribute_class': 'AttributeViStringRepeatedCapability',
         'documentation': {
-            'description': '\nSpecifies the channel(s) to merge with a designated primary channel of an instrument in order to increase the maximum current you can source from the instrument.\nThis attribute designates the merge channels to combine with a primary channel. To designate the primary channel, initialize the session to the primary channel only.\nNote: You cannot change the merge configuration with this attribute when the session is in the Running state.\nFor complete information on using merged channels with this attribute, refer to Merged Channels in the NI DC Power Supplies and SMUs Help.\n',
+            'description': '\nSpecifies the merge channel(s) to combine with a designated primary channel of an instrument in order to increase the maximum current you can source from the instrument.\nSet this attribute on the primary channel only, and pass the merge channels as the value of this attribute.\nRefer to the Merged Channels topic in your instrument user manual for more information about using merged channels.\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device. Devices that do not support this property behave as if no channels were merged.\nDefault Value: Refer to the Supported Attributes by Device topic for the default value by device.\n'
         },
         'lv_property': 'Source:Advanced:Merged Channels',
