@@ -2480,13 +2480,13 @@ query_output_state
                 Specifies the output state of the channel that is being queried.
                 **Defined Values**:
 
-                +----------------------------------------------+--------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.VOLTAGE`   | The channel maintains a constant voltage by adjusting the current. |
-                +----------------------------------------------+--------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.CURRENT`   | The channel maintains a constant current by adjusting the voltage. |
-                +----------------------------------------------+--------------------------------------------------------------------+
-                | :py:data:`~nidcpower.OutputStates.INHIBITED` | The channel is in the inhibited state.                             |
-                +----------------------------------------------+--------------------------------------------------------------------+
+                +-----------------------------------------------------+--------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CONSTANT_VOLTAGE` | The channel maintains a constant voltage by adjusting the current. |
+                +-----------------------------------------------------+--------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.CONSTANT_CURRENT` | The channel maintains a constant current by adjusting the voltage. |
+                +-----------------------------------------------------+--------------------------------------------------------------------+
+                | :py:data:`~nidcpower.OutputStates.INHIBITED`        | The channel is in the inhibited state.                             |
+                +-----------------------------------------------------+--------------------------------------------------------------------+
 
 
             :type output_state: :py:data:`nidcpower.OutputStates`

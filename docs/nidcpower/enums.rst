@@ -1166,7 +1166,7 @@ OutputStates
 
 .. py:class:: OutputStates
 
-    .. py:attribute:: OutputStates.VOLTAGE
+    .. py:attribute:: OutputStates.CONSTANT_VOLTAGE
 
 
 
@@ -1176,7 +1176,7 @@ OutputStates
 
 
 
-    .. py:attribute:: OutputStates.CURRENT
+    .. py:attribute:: OutputStates.CONSTANT_CURRENT
 
 
 
