@@ -46,12 +46,6 @@ All notable changes to this project will be documented in this file.
             * Enum value added:
                 * `INHIBITED` added to enum `OutputStates`.
     * #### Changed
-        * Function documentation updated:
-            * `query_output_state`
-                * Updated enum descriptions for the `output_state` arg.
-        * Attribute documentation updated:
-            * `measure_buffer_size`, `measure_complete_event_delay`, and `source_delay` descriptions updated to specify `PXIe-4150/4151` instead of `PXIe-4151`.
-            * Updated `merged_channels` description wording.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
