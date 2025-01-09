@@ -46,6 +46,9 @@ All notable changes to this project will be documented in this file.
             * Enum value added:
                 * `INHIBITED` added to enum `OutputStates`.
     * #### Changed
+        * **[Source Breaker]:** Enum value names in `OutputStates` have been changed:
+            * `OutputStates.VOLTAGE` -> `OutputStates.CONSTANT_VOLTAGE`
+            * `OutputStates.CURRENT` -> `OutputStates.CONSTANT_CURRENT`
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
