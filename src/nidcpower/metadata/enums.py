@@ -986,7 +986,6 @@ enums = {
                     'description': 'The channel maintains a constant voltage by adjusting the current.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
-                'python_name': 'NIDCPOWER_VAL_OUTPUT_VOLTAGE',
                 'value': 0
             },
             {
@@ -994,7 +993,6 @@ enums = {
                     'description': 'The channel maintains a constant current by adjusting the voltage.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
-                'python_name': 'NIDCPOWER_VAL_OUTPUT_CURRENT',
                 'value': 1
             },
             {
@@ -1002,7 +1000,6 @@ enums = {
                     'description': 'The channel is in the inhibited state.'
                 },
                 'name': 'NIDCPOWER_VAL_OUTPUT_INHIBITED',
-                'python_name': 'NIDCPOWER_VAL_OUTPUT_INHIBITED',
                 'value': 1163
             }
         ]
