@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 24.3.0f264
+# This file is generated from NI-DCPower API metadata version 25.0.0d98
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -3236,11 +3236,15 @@ functions = {
                     'table_body': [
                         [
                             'NIDCPOWER_VAL_OUTPUT_CONSTANT_VOLTAGE',
-                            'The device maintains a constant voltage by adjusting the current.'
+                            'The channel maintains a constant voltage by adjusting the current.'
                         ],
                         [
                             'NIDCPOWER_VAL_OUTPUT_CONSTANT_CURRENT',
-                            'The device maintains a constant current by adjusting the voltage.'
+                            'The channel maintains a constant current by adjusting the voltage.'
+                        ],
+                        [
+                            'NIDCPOWER_VAL_OUTPUT_INHIBITED',
+                            'The channel is in the inhibited state.'
                         ]
                     ]
                 },

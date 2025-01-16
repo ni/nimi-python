@@ -175,8 +175,8 @@ class SystemTests:
     @pytest.mark.channels('0')
     def test_query_output_state(self, session):
         with session.initiate():
-            assert session.query_output_state(nidcpower.OutputStates.VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
-            assert session.query_output_state(nidcpower.OutputStates.CURRENT) is False
+            assert session.query_output_state(nidcpower.OutputStates.CONSTANT_VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
+            assert session.query_output_state(nidcpower.OutputStates.CONSTANT_CURRENT) is False
 
     @pytest.mark.channels('0')
     def test_config_aperture_time(self, session):

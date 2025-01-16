@@ -42,7 +42,11 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
     * #### Added
+        * API parity with NI-DCPower 2025 Q1.
+            * Enum value added:
+                * `INHIBITED` added to enum `OutputStates`.
     * #### Changed
+        * Fixed #2067: `nidcpower.OutputStates` values are incorrect.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
