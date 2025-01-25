@@ -40,6 +40,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
     * #### Changed
     * #### Removed
+        * Support for Python 3.8
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 2025 Q1.
