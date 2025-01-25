@@ -32,7 +32,6 @@ setup(
     install_requires=[
         'hightime>=0.2.0',
     ],
-    setup_requires=['pytest-runner', ],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

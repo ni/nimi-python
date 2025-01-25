@@ -39,7 +39,6 @@ setup(
             'protobuf>=4.21.6,<5.0'
         ],
     },
-    setup_requires=['pytest-runner', ],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

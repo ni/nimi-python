@@ -49,7 +49,6 @@ setup(
         ],
     },
     % endif
-    setup_requires=['pytest-runner', ],
     classifiers=[
         "Development Status :: ${helper.get_development_status(config)}",
         "Intended Audience :: Developers",
