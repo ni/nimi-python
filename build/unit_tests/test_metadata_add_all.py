@@ -870,6 +870,57 @@ enums_input = {
             }
         ]
     },
+    'EnumWithCommonPrefixInValueNames': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'COLOR_BRIGHT_RED',
+                'value': 1
+            },
+            {
+                'name': 'COLOR_BRIGHT_BLUE',
+                'value': 2
+            }
+        ]
+    },
+    'EnumWithHardcodedValueNames': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'THE_COLOR_RED',
+                'python_name': 'COLOR_DARK_RED',
+                'value': 1
+            },
+            {
+                'name': 'THE_COLOR_BLUE',
+                'python_name': 'COLOR_DARK_BLUE',
+                'value': 2
+            }
+        ]
+    },
+    'EnumWithHardcodedValueNamesMixedIn': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'DISTANCE_MILES',
+                'value': 1
+            },
+            {
+                'name': 'DISTANCE_KILOMETERS',
+                'python_name': 'DISTANCE_KILOMETERS',
+                'value': 2
+            },
+            {
+                'name': 'DISTANCE_METERS',
+                'python_name': 'DISTANCE_METERS',
+                'value': 5
+            },
+            {
+                'name': 'DISTANCE_YARDS',
+                'value': 42
+            }
+        ]
+    },
 }
 
 
@@ -893,7 +944,33 @@ enums_expected = {
             {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED'},
             {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE'},
             {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW'},
-            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK'}
+            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK', }
+        ]
+    },
+    'EnumWithCommonPrefixInValueNames': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithCommonPrefixInValueNames',
+        'values': [
+            {'name': 'COLOR_BRIGHT_RED', 'value': 1, 'python_name': 'RED', 'prefix': 'COLOR_BRIGHT_'},
+            {'name': 'COLOR_BRIGHT_BLUE', 'value': 2, 'python_name': 'BLUE', 'prefix': 'COLOR_BRIGHT_'}
+        ]
+    },
+    'EnumWithHardcodedValueNames': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithHardcodedValueNames',
+        'values': [
+            {'name': 'THE_COLOR_RED', 'value': 1, 'python_name': 'COLOR_DARK_RED'},
+            {'name': 'THE_COLOR_BLUE', 'value': 2, 'python_name': 'COLOR_DARK_BLUE'}
+        ]
+    },
+    'EnumWithHardcodedValueNamesMixedIn': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithHardcodedValueNamesMixedIn',
+        'values': [
+            {'name': 'DISTANCE_MILES', 'value': 1, 'python_name': 'MILES', 'prefix': 'DISTANCE_'},
+            {'name': 'DISTANCE_KILOMETERS', 'value': 2, 'python_name': 'DISTANCE_KILOMETERS'},
+            {'name': 'DISTANCE_METERS', 'value': 5, 'python_name': 'DISTANCE_METERS'},
+            {'name': 'DISTANCE_YARDS', 'value': 42, 'python_name': 'YARDS', 'prefix': 'DISTANCE_'}
         ]
     },
 }
@@ -1113,6 +1190,9 @@ def test_get_functions_that_use_enums():
     expected_output = {
         'Color': ['PythonOnlyMethod'],
         'EnumWithConverter': ['PublicMethod', 'PrivateMethod'],
+        'EnumWithCommonPrefixInValueNames': [],
+        'EnumWithHardcodedValueNames': [],
+        'EnumWithHardcodedValueNamesMixedIn': [],
     }
     actual_output = _get_functions_that_use_enums(actual_enums, actual_config)
     _compare_dicts(actual_output, expected_output)
@@ -1123,6 +1203,9 @@ def test_get_attributes_that_use_enums():
     expected_output = {
         'Color': ['1000002'],
         'EnumWithConverter': ['1000001', '1000003'],
+        'EnumWithCommonPrefixInValueNames': [],
+        'EnumWithHardcodedValueNames': [],
+        'EnumWithHardcodedValueNamesMixedIn': [],
     }
     actual_output = _get_attributes_that_use_enums(actual_enums, actual_config)
     _compare_dicts(actual_output, expected_output)
