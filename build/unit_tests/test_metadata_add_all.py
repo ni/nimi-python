@@ -929,10 +929,10 @@ enums_expected = {
         'codegen_method': 'no',
         'python_name': 'Color',
         'values': [
-            {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
-            {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
-            {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
-            {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
+            {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED', 'user_set_python_name': False},
+            {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE', 'user_set_python_name': False},
+            {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW', 'user_set_python_name': False},
+            {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK', 'user_set_python_name': False}
         ]
     },
     'EnumWithConverter': {
@@ -941,36 +941,36 @@ enums_expected = {
         'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
         'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
         'values': [
-            {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED'},
-            {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE'},
-            {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW'},
-            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK', }
+            {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED', 'user_set_python_name': False},
+            {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE', 'user_set_python_name': False},
+            {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW', 'user_set_python_name': False},
+            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK', 'user_set_python_name': False}
         ]
     },
     'EnumWithCommonPrefixInValueNames': {
         'codegen_method': 'public',
         'python_name': 'EnumWithCommonPrefixInValueNames',
         'values': [
-            {'name': 'COLOR_BRIGHT_RED', 'value': 1, 'python_name': 'RED', 'prefix': 'COLOR_BRIGHT_'},
-            {'name': 'COLOR_BRIGHT_BLUE', 'value': 2, 'python_name': 'BLUE', 'prefix': 'COLOR_BRIGHT_'}
+            {'name': 'COLOR_BRIGHT_RED', 'value': 1, 'python_name': 'RED', 'user_set_python_name': False, 'prefix': 'COLOR_BRIGHT_'},
+            {'name': 'COLOR_BRIGHT_BLUE', 'value': 2, 'python_name': 'BLUE', 'user_set_python_name': False, 'prefix': 'COLOR_BRIGHT_'}
         ]
     },
     'EnumWithHardcodedValueNames': {
         'codegen_method': 'public',
         'python_name': 'EnumWithHardcodedValueNames',
         'values': [
-            {'name': 'THE_COLOR_RED', 'value': 1, 'python_name': 'COLOR_DARK_RED'},
-            {'name': 'THE_COLOR_BLUE', 'value': 2, 'python_name': 'COLOR_DARK_BLUE'}
+            {'name': 'THE_COLOR_RED', 'value': 1, 'python_name': 'COLOR_DARK_RED', 'user_set_python_name': True},
+            {'name': 'THE_COLOR_BLUE', 'value': 2, 'python_name': 'COLOR_DARK_BLUE', 'user_set_python_name': True}
         ]
     },
     'EnumWithHardcodedValueNamesMixedIn': {
         'codegen_method': 'public',
         'python_name': 'EnumWithHardcodedValueNamesMixedIn',
         'values': [
-            {'name': 'DISTANCE_MILES', 'value': 1, 'python_name': 'MILES', 'prefix': 'DISTANCE_'},
-            {'name': 'DISTANCE_KILOMETERS', 'value': 2, 'python_name': 'DISTANCE_KILOMETERS'},
-            {'name': 'DISTANCE_METERS', 'value': 5, 'python_name': 'DISTANCE_METERS'},
-            {'name': 'DISTANCE_YARDS', 'value': 42, 'python_name': 'YARDS', 'prefix': 'DISTANCE_'}
+            {'name': 'DISTANCE_MILES', 'value': 1, 'python_name': 'MILES', 'user_set_python_name': False, 'prefix': 'DISTANCE_'},
+            {'name': 'DISTANCE_KILOMETERS', 'value': 2, 'python_name': 'DISTANCE_KILOMETERS', 'user_set_python_name': True},
+            {'name': 'DISTANCE_METERS', 'value': 5, 'python_name': 'DISTANCE_METERS', 'user_set_python_name': True},
+            {'name': 'DISTANCE_YARDS', 'value': 42, 'python_name': 'YARDS', 'user_set_python_name': False, 'prefix': 'DISTANCE_'}
         ]
     },
 }

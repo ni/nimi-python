@@ -609,10 +609,11 @@ def _get_least_restrictive_codegen_method(codegen_methods):
 def _add_enum_value_python_name(enum_info, config):
     '''Add 'python_name' for all values, removing any common prefixes and suffixes'''
     for v in enum_info['values']:
+        v['user_set_python_name'] = 'python_name' in v
         if 'python_name' not in v:
             v['python_name'] = v['name'].replace('{}_VAL_'.format(config['module_name'].upper()), '')
 
-    # We are using an os.path function do find any common prefix. So that we don't
+    # We are using an os.path function to find any common prefix. So that we don't
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
     names = [v['python_name'] for v in enum_info['values']]
     prefix = os.path.commonprefix(names)
@@ -627,13 +628,20 @@ def _add_enum_value_python_name(enum_info, config):
     # '_' only means the name starts with a number
     if len(prefix) > 0 and prefix != '_':
         for v in enum_info['values']:
+            if v['user_set_python_name']:
+                continue
             assert v['python_name'].startswith(prefix), '{} does not start with {}'.format(v['name'], prefix)
             v['prefix'] = prefix
             v['python_name'] = v['python_name'].replace(prefix, '')
 
     # Now we need to look for common suffixes
     # Using the slow method of reversing a string for readability
-    rev_names = [''.join(reversed(v['python_name'])) for v in enum_info['values']]
+    # We do not include hardcoded python names when looking for common suffixes
+    rev_names = [
+        ''.join(reversed(v['python_name']))
+        for v in enum_info['values']
+        if not v['user_set_python_name']
+    ]
     suffix = os.path.commonprefix(rev_names)
     while len(suffix) > 0 and suffix[-1] != '_':
         suffix = suffix[:-1]
@@ -649,12 +657,15 @@ def _add_enum_value_python_name(enum_info, config):
     # '_' only means the name starts with a number
     if len(suffix) > 0:
         for v in enum_info['values']:
+            if v['user_set_python_name']:
+                continue
             assert v['python_name'].endswith(suffix), '{} does not end with {}'.format(v['name'], suffix)
             v['suffix'] = suffix
             v['python_name'] = v['python_name'][:-len(suffix)]
 
     # We need to check again to see if we have any values that start with a digit
     # If we are not going to code generate this enum, we don't care about this
+    # Even hardcoded names should follow this rule
     for v in enum_info['values']:
         assert v['python_name'], enum_info
         if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
