@@ -883,7 +883,7 @@ enums_input = {
             }
         ]
     },
-    'EnumWithHardcodedValueNames': {
+    'EnumWithExplicitValueNames': {
         'codegen_method': 'public',
         'values': [
             {
@@ -898,7 +898,7 @@ enums_input = {
             }
         ]
     },
-    'EnumWithHardcodedValueNamesMixedIn': {
+    'EnumWithExplicitValueNamesMixedIn': {
         'codegen_method': 'public',
         'values': [
             {
@@ -921,6 +921,25 @@ enums_input = {
             }
         ]
     },
+    'EnumWithOneExpandedValueAndCommonPrefixSuffix': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX',
+                'value': 1
+            },
+            {
+                'name': 'COMMON_PREFIX_BASEBALL',
+                'python_name': 'BASEBALL',  # we want to test that this excludes it from common prefix/suffix calculations
+                'value': 2
+            },
+            {
+                'name': 'BASKETBALL_COMMON_SUFFIX',
+                'python_name': 'BASKETBALL',  # we want to test that this excludes it from common prefix/suffix calculations
+                'value': 3
+            },
+        ]
+    },
 }
 
 
@@ -929,10 +948,10 @@ enums_expected = {
         'codegen_method': 'no',
         'python_name': 'Color',
         'values': [
-            {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED', 'user_set_python_name': False},
-            {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE', 'user_set_python_name': False},
-            {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW', 'user_set_python_name': False},
-            {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK', 'user_set_python_name': False}
+            {'documentation': {'description': 'Like blood.'}, 'name': 'RED', 'value': 1, 'python_name': 'RED'},
+            {'documentation': {'description': 'Like the sky.'}, 'name': 'BLUE', 'value': 2, 'python_name': 'BLUE'},
+            {'documentation': {'description': 'Like a banana.'}, 'name': 'YELLOW', 'value': 2, 'python_name': 'YELLOW'},
+            {'documentation': {'description': "Like this developer's conscience."}, 'name': 'BLACK', 'value': 2, 'python_name': 'BLACK'}
         ]
     },
     'EnumWithConverter': {
@@ -941,36 +960,45 @@ enums_expected = {
         'converted_value_to_enum_function_name': 'convert_to_enum_with_converter_enum',
         'enum_to_converted_value_function_name': 'convert_from_enum_with_converter_enum',
         'values': [
-            {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED', 'user_set_python_name': False},
-            {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE', 'user_set_python_name': False},
-            {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW', 'user_set_python_name': False},
-            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK', 'user_set_python_name': False}
+            {'name': 'RED', 'value': 1, 'converts_to_value': True, 'python_name': 'RED'},
+            {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE'},
+            {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW'},
+            {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK'}
         ]
     },
     'EnumWithCommonPrefixInValueNames': {
         'codegen_method': 'public',
         'python_name': 'EnumWithCommonPrefixInValueNames',
         'values': [
-            {'name': 'COLOR_BRIGHT_RED', 'value': 1, 'python_name': 'RED', 'user_set_python_name': False, 'prefix': 'COLOR_BRIGHT_'},
-            {'name': 'COLOR_BRIGHT_BLUE', 'value': 2, 'python_name': 'BLUE', 'user_set_python_name': False, 'prefix': 'COLOR_BRIGHT_'}
+            {'name': 'COLOR_BRIGHT_RED', 'value': 1, 'python_name': 'RED', 'prefix': 'COLOR_BRIGHT_'},
+            {'name': 'COLOR_BRIGHT_BLUE', 'value': 2, 'python_name': 'BLUE', 'prefix': 'COLOR_BRIGHT_'}
         ]
     },
-    'EnumWithHardcodedValueNames': {
+    'EnumWithExplicitValueNames': {
         'codegen_method': 'public',
-        'python_name': 'EnumWithHardcodedValueNames',
+        'python_name': 'EnumWithExplicitValueNames',
         'values': [
-            {'name': 'THE_COLOR_RED', 'value': 1, 'python_name': 'COLOR_DARK_RED', 'user_set_python_name': True},
-            {'name': 'THE_COLOR_BLUE', 'value': 2, 'python_name': 'COLOR_DARK_BLUE', 'user_set_python_name': True}
+            {'name': 'THE_COLOR_RED', 'value': 1, 'python_name': 'COLOR_DARK_RED'},
+            {'name': 'THE_COLOR_BLUE', 'value': 2, 'python_name': 'COLOR_DARK_BLUE'}
         ]
     },
-    'EnumWithHardcodedValueNamesMixedIn': {
+    'EnumWithExplicitValueNamesMixedIn': {
         'codegen_method': 'public',
-        'python_name': 'EnumWithHardcodedValueNamesMixedIn',
+        'python_name': 'EnumWithExplicitValueNamesMixedIn',
         'values': [
-            {'name': 'DISTANCE_MILES', 'value': 1, 'python_name': 'MILES', 'user_set_python_name': False, 'prefix': 'DISTANCE_'},
-            {'name': 'DISTANCE_KILOMETERS', 'value': 2, 'python_name': 'DISTANCE_KILOMETERS', 'user_set_python_name': True},
-            {'name': 'DISTANCE_METERS', 'value': 5, 'python_name': 'DISTANCE_METERS', 'user_set_python_name': True},
-            {'name': 'DISTANCE_YARDS', 'value': 42, 'python_name': 'YARDS', 'user_set_python_name': False, 'prefix': 'DISTANCE_'}
+            {'name': 'DISTANCE_MILES', 'value': 1, 'python_name': 'MILES', 'prefix': 'DISTANCE_'},
+            {'name': 'DISTANCE_KILOMETERS', 'value': 2, 'python_name': 'DISTANCE_KILOMETERS'},  # explicitly set
+            {'name': 'DISTANCE_METERS', 'value': 5, 'python_name': 'DISTANCE_METERS'},  # explicitly set
+            {'name': 'DISTANCE_YARDS', 'value': 42, 'python_name': 'YARDS', 'prefix': 'DISTANCE_'}
+        ]
+    },
+    'EnumWithOneExpandedValueAndCommonPrefixSuffix': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithOneExpandedValueAndCommonPrefixSuffix',
+        'values': [
+            {'name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX', 'value': 1, 'python_name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX'},
+            {'name': 'COMMON_PREFIX_BASEBALL', 'value': 2, 'python_name': 'BASEBALL'},  # explicitly set
+            {'name': 'BASKETBALL_COMMON_SUFFIX', 'value': 3, 'python_name': 'BASKETBALL'},  # explicitly set
         ]
     },
 }
@@ -1191,8 +1219,9 @@ def test_get_functions_that_use_enums():
         'Color': ['PythonOnlyMethod'],
         'EnumWithConverter': ['PublicMethod', 'PrivateMethod'],
         'EnumWithCommonPrefixInValueNames': [],
-        'EnumWithHardcodedValueNames': [],
-        'EnumWithHardcodedValueNamesMixedIn': [],
+        'EnumWithExplicitValueNames': [],
+        'EnumWithExplicitValueNamesMixedIn': [],
+        'EnumWithOneExpandedValueAndCommonPrefixSuffix': [],
     }
     actual_output = _get_functions_that_use_enums(actual_enums, actual_config)
     _compare_dicts(actual_output, expected_output)
@@ -1204,8 +1233,9 @@ def test_get_attributes_that_use_enums():
         'Color': ['1000002'],
         'EnumWithConverter': ['1000001', '1000003'],
         'EnumWithCommonPrefixInValueNames': [],
-        'EnumWithHardcodedValueNames': [],
-        'EnumWithHardcodedValueNamesMixedIn': [],
+        'EnumWithExplicitValueNames': [],
+        'EnumWithExplicitValueNamesMixedIn': [],
+        'EnumWithOneExpandedValueAndCommonPrefixSuffix': [],
     }
     actual_output = _get_attributes_that_use_enums(actual_enums, actual_config)
     _compare_dicts(actual_output, expected_output)
