@@ -996,7 +996,7 @@ enums_expected = {
         'codegen_method': 'public',
         'python_name': 'EnumWithOneExpandedValueAndCommonPrefixSuffix',
         'values': [
-            {'name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX', 'value': 1, 'python_name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX'},
+            {'name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX', 'value': 1, 'python_name': 'SUFFIX', 'prefix': 'COMMON_PREFIX_FOOTBALL_COMMON_'},
             {'name': 'COMMON_PREFIX_BASEBALL', 'value': 2, 'python_name': 'BASEBALL'},  # explicitly set
             {'name': 'BASKETBALL_COMMON_SUFFIX', 'value': 3, 'python_name': 'BASKETBALL'},  # explicitly set
         ]

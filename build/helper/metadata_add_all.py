@@ -618,12 +618,9 @@ def _add_enum_value_python_name(enum_info, config):
     # get 'O' in 'ON' and 'OFF' we remove characters at the end until they are '_'
     # Exclude explicitly set names from the prefix calculation
     names = [v['_python_name'] for v in enum_info['values'] if '_python_name' in v]
-    if len(names) < 2:
-        prefix = ''
-    else:
-        prefix = os.path.commonprefix(names)
-        while len(prefix) > 0 and prefix[-1] != '_':
-            prefix = prefix[:-1]
+    prefix = os.path.commonprefix(names)
+    while len(prefix) > 0 and prefix[-1] != '_':
+        prefix = prefix[:-1]
 
     # If the prefix is in the whitelist, we don't want to remove it so set to empty string
     if 'enum_whitelist_prefix' in config and prefix in config['enum_whitelist_prefix']:
@@ -647,12 +644,9 @@ def _add_enum_value_python_name(enum_info, config):
         for v in enum_info['values']
         if '_python_name' in v
     ]
-    if len(rev_names) < 2:
-        suffix = ''
-    else:
-        suffix = os.path.commonprefix(rev_names)
-        while len(suffix) > 0 and suffix[-1] != '_':
-            suffix = suffix[:-1]
+    suffix = os.path.commonprefix(rev_names)
+    while len(suffix) > 0 and suffix[-1] != '_':
+        suffix = suffix[:-1]
 
     # Unreverse the suffix
     suffix = ''.join(reversed(suffix))
