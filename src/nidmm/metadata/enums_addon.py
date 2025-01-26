@@ -10,7 +10,6 @@ enums_override_metadata = {
                     'description': 'Custom'
                 },
                 'name': 'NIDMM_VAL_TEMP_THERMISTOR_CUSTOM',
-                'python_name': 'CUSTOM',
                 'value': 0
             },
             {
