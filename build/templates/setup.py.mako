@@ -8,19 +8,7 @@ grpc_supported = template_parameters['include_grpc_support']
 module_version = config['module_version']
 %>
 
-from setuptools.command.test import test as test_command
 from setuptools import setup
-
-
-class PyTest(test_command):
-    def finalize_options(self):
-        test_command.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        pytest.main(self.test_args)
 
 
 pypi_name = '${config['module_name']}'
@@ -61,9 +49,6 @@ setup(
         ],
     },
     % endif
-    setup_requires=['pytest-runner', ],
-    tests_require=['pytest'],
-    test_suite='tests',
     classifiers=[
         "Development Status :: ${helper.get_development_status(config)}",
         "Intended Audience :: Developers",
@@ -81,6 +66,5 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
-    cmdclass={'test': PyTest},
     package_data={pypi_name: ['VERSION']},
 )
