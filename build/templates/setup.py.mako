@@ -47,6 +47,7 @@ setup(
     license='MIT',
     include_package_data=True,
     packages=['${config['module_name']}'],
+    python_requires='>=3.9',
     install_requires=[
         'hightime>=0.2.0',
         % if config['uses_nitclk']:

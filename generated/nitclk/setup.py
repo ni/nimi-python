@@ -41,6 +41,7 @@ setup(
     license='MIT',
     include_package_data=True,
     packages=['nitclk'],
+    python_requires='>=3.9',
     install_requires=[
         'hightime>=0.2.0',
     ],
