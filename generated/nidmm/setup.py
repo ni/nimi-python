@@ -29,6 +29,7 @@ setup(
     license='MIT',
     include_package_data=True,
     packages=['nidmm'],
+    python_requires='>=3.9',
     install_requires=[
         'hightime>=0.2.0',
     ],
@@ -47,7 +48,6 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
