@@ -39,7 +39,9 @@ All notable changes to this project will be documented in this file.
 * ### ALL
     * #### Added
     * #### Changed
+        * Fix [#2069](https://github.com/ni/nimi-python/issues/2069)
     * #### Removed
+        * Support for Python 3.8
 * ### `nidcpower` (NI-DCPower)
     * #### Added
         * API parity with NI-DCPower 2025 Q1.

@@ -1,3 +1,12 @@
+---
+name: Bug report
+about: Create a report to help us improve
+title: ''
+labels: bug
+assignees: ''
+
+---
+
 <!--
 When filing an issue, please fill in the requested fields as thoroughly as you can and then delete this comment
 Note: For issues, assistance, and questions about using NI products, please visit ni.com/support. Issues opened here should be specifically related to these Python APIs.

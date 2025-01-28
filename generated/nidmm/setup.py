@@ -2,19 +2,7 @@
 # This file was generated
 
 
-from setuptools.command.test import test as test_command
 from setuptools import setup
-
-
-class PyTest(test_command):
-    def finalize_options(self):
-        test_command.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        import pytest
-        pytest.main(self.test_args)
 
 
 pypi_name = 'nidmm'
@@ -41,6 +29,7 @@ setup(
     license='MIT',
     include_package_data=True,
     packages=['nidmm'],
+    python_requires='>=3.9',
     install_requires=[
         'hightime>=0.2.0',
     ],
@@ -50,9 +39,6 @@ setup(
             'protobuf>=4.21.6,<5.0'
         ],
     },
-    setup_requires=['pytest-runner', ],
-    tests_require=['pytest'],
-    test_suite='tests',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -62,7 +48,6 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
@@ -70,6 +55,5 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
-    cmdclass={'test': PyTest},
     package_data={pypi_name: ['VERSION']},
 )
