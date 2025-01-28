@@ -545,7 +545,7 @@ All notable changes to this project will be documented in this file.
     * #### Added
         * Zip file per driver for all examples and any helper files
         * Link to zip file on examples documentation
-        * Support for Python 3.8
+        * Python 3.8 Classifier for PyPI (support was added in 1.1.4)
     * #### Changed
         * `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
         * `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
