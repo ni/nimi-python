@@ -9,7 +9,9 @@
     driver_name = config['driver_name']
     if config['uses_nitclk'] or module_name == 'nitclk':
         wheel_env_no_py = '{}-wheel_dep'.format(module_name)
-        wheel_env = 'py3-' + wheel_env_no_py + ','
+        # We only actually need to build it once, but we specify multiple versions here
+        # to prevent tox from trying to build the wheel with an unsupported (earlier) Python version
+        wheel_env = 'py{39,310,311,312}-' + wheel_env_no_py + ','
         uses_other_wheel = True
         if module_name == 'nitclk':
             # nitclk system tests use niscope
