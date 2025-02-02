@@ -72,6 +72,8 @@ class SideEffectsHelper(object):
         self._defaults['DeleteAllTimeSets']['return'] = 0
         self._defaults['DisableSites'] = {}
         self._defaults['DisableSites']['return'] = 0
+        self._defaults['EnableMatchFailCombination'] = {}
+        self._defaults['EnableMatchFailCombination']['return'] = 0
         self._defaults['EnableSites'] = {}
         self._defaults['EnableSites']['return'] = 0
         self._defaults['FetchCaptureWaveformU32'] = {}
@@ -406,6 +408,11 @@ class SideEffectsHelper(object):
         if self._defaults['DisableSites']['return'] != 0:
             return self._defaults['DisableSites']['return']
         return self._defaults['DisableSites']['return']
+
+    def niDigital_EnableMatchFailCombination(self, session_count, sessions, sync_session):  # noqa: N802
+        if self._defaults['EnableMatchFailCombination']['return'] != 0:
+            return self._defaults['EnableMatchFailCombination']['return']
+        return self._defaults['EnableMatchFailCombination']['return']
 
     def niDigital_EnableSites(self, vi, site_list):  # noqa: N802
         if self._defaults['EnableSites']['return'] != 0:
@@ -1179,6 +1186,8 @@ class SideEffectsHelper(object):
         mock_library.niDigital_DeleteAllTimeSets.return_value = 0
         mock_library.niDigital_DisableSites.side_effect = MockFunctionCallError("niDigital_DisableSites")
         mock_library.niDigital_DisableSites.return_value = 0
+        mock_library.niDigital_EnableMatchFailCombination.side_effect = MockFunctionCallError("niDigital_EnableMatchFailCombination")
+        mock_library.niDigital_EnableMatchFailCombination.return_value = 0
         mock_library.niDigital_EnableSites.side_effect = MockFunctionCallError("niDigital_EnableSites")
         mock_library.niDigital_EnableSites.return_value = 0
         mock_library.niDigital_FetchCaptureWaveformU32.side_effect = MockFunctionCallError("niDigital_FetchCaptureWaveformU32")
