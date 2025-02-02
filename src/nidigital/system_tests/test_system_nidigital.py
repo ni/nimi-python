@@ -1330,6 +1330,17 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(self):
         return {}
 
+    def test_enable_match_fail_combination(self, multi_instrument_session):
+        import nisync
+
+        test_files_folder = 'simple_pattern'
+        multi_instrument_session.load_pin_map(self.get_test_file_path(test_files_folder, "pin_map.pinmap"))
+        multi_instrument_session.load_pattern(self.get_test_file_path(test_files_folder, 'pattern.digipat'))
+        with nisync.Sesssion('6674T') as sync_session:
+            multi_instrument_session.enable_match_fail_combination(sync_session)
+            multi_instrument_session.burst_pattern(start_label='new_pattern')
+            multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG0)
+
 
 class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
