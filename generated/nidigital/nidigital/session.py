@@ -3436,6 +3436,7 @@ class Session(_SessionBase):
         Configures digital pattern instruments and the PXIe-6674T timing and synchronization instrument to combine pattern comparison results and control subsequent pattern execution across digital pattern instruments based on those results. You must initialize the PXIe-6674T using NI-Sync and call this method from a multi-instrument session.
         '''
         self._interpreter.enable_match_fail_combination([self._interpreter.get_session_handle()], sync_session.session_handle)
+
     @ivi_synchronized
     def load_specifications_levels_and_timing(self, specifications_file_paths=None, levels_file_paths=None, timing_file_paths=None):
         '''load_specifications_levels_and_timing
