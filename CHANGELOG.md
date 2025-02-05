@@ -38,6 +38,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### ALL
     * #### Added
+        * Support for Python 3.13
     * #### Changed
         * Fix [#2069](https://github.com/ni/nimi-python/issues/2069)
     * #### Removed
