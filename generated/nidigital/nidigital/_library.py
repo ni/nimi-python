@@ -49,6 +49,7 @@ class Library(object):
         self.niDigital_CreateTimeSet_cfunc = None
         self.niDigital_DeleteAllTimeSets_cfunc = None
         self.niDigital_DisableSites_cfunc = None
+        self.niDigital_EnableMatchFailCombination_cfunc = None
         self.niDigital_EnableSites_cfunc = None
         self.niDigital_FetchCaptureWaveformU32_cfunc = None
         self.niDigital_FetchHistoryRAMCycleInformation_cfunc = None
@@ -345,6 +346,14 @@ class Library(object):
                 self.niDigital_DisableSites_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niDigital_DisableSites_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_DisableSites_cfunc(vi, site_list)
+
+    def niDigital_EnableMatchFailCombination(self, session_count, sessions, sync_session):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_EnableMatchFailCombination_cfunc is None:
+                self.niDigital_EnableMatchFailCombination_cfunc = self._get_library_function('niDigital_EnableMatchFailCombination')
+                self.niDigital_EnableMatchFailCombination_cfunc.argtypes = [ViUInt32, ctypes.POINTER(ViSession), ViSession]  # noqa: F405
+                self.niDigital_EnableMatchFailCombination_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_EnableMatchFailCombination_cfunc(session_count, sessions, sync_session)
 
     def niDigital_EnableSites(self, vi, site_list):  # noqa: N802
         with self._func_lock:

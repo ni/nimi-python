@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PinMap xmlns="http://www.ni.com/TestStand/SemiconductorModule/PinMap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.2">
+	<Instruments>
+		<NIDigitalPatternInstrument name="PXI1Slot2" numberOfChannels="32" />
+		<NIDigitalPatternInstrument name="PXI1Slot5" numberOfChannels="32" />
+	</Instruments>
+	<Pins>
+		<DUTPin name="DUTPin1" />
+		<DUTPin name="DUTPin2" />
+		<DUTPin name="DUTPin3" />
+		<DUTPin name="DUTPin4" />
+	</Pins>
+	<PinGroups>
+		<PinGroup name="PinGroup1">
+			<PinReference pin="DUTPin1" />
+			<PinReference pin="DUTPin2" />
+			<PinReference pin="DUTPin3" />
+			<PinReference pin="DUTPin4" />
+		</PinGroup>
+	</PinGroups>
+	<Sites>
+		<Site siteNumber="0" />
+		<Site siteNumber="1" />
+	</Sites>
+	<Connections>
+		<Connection pin="DUTPin1" siteNumber="0" instrument="PXI1Slot2" channel="0" />
+		<Connection pin="DUTPin2" siteNumber="0" instrument="PXI1Slot2" channel="1" />
+		<Connection pin="DUTPin3" siteNumber="0" instrument="PXI1Slot2" channel="2" />
+		<Connection pin="DUTPin4" siteNumber="0" instrument="PXI1Slot2" channel="3" />
+		<Connection pin="DUTPin1" siteNumber="1" instrument="PXI1Slot5" channel="0" />
+		<Connection pin="DUTPin2" siteNumber="1" instrument="PXI1Slot5" channel="1" />
+		<Connection pin="DUTPin3" siteNumber="1" instrument="PXI1Slot5" channel="2" />
+		<Connection pin="DUTPin4" siteNumber="1" instrument="PXI1Slot5" channel="3" />
+	</Connections>
+</PinMap>

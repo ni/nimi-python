@@ -535,3 +535,84 @@ the levels and timing values that reference the updated specifications values.
         ],
     },
 }
+
+functions_additional_enable_match_fail_combination = {
+    'EnableMatchFailCombination': {
+        'codegen_method': 'yes',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'enable_match_fail_combination',
+                'method_python_name_suffix': '',
+                'session_filename': 'none',
+            }
+        ],
+        'documentation': {
+            'description': 'Configures digital pattern instruments and the PXIe-6674T timing and synchronization instrument to combine pattern comparison results and control subsequent pattern execution across digital pattern instruments based on those results. You must initialize the PXIe-6674T using NI-Sync and use the niTClk Synchronize function to synchronize instruments before calling the niDigital_EnableMatchFailCombination function.\n'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Number of sessions.\n'
+                },
+                'name': 'sessionCount',
+                'type': 'ViUInt32'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The specified array of sessions synchronized using NI-TClk.\n'
+                },
+                'name': 'sessions',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'sessionCount'
+                },
+                'type': 'ViSession[]'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The specified NI-Sync session.\n'
+                },
+                'name': 'syncSession',
+                'type': 'ViSession'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'FancyEnableMatchFailCombination': {
+        'python_name': 'enable_match_fail_combination',
+        'codegen_method': 'python-only',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_enable_match_fail_combination',
+            }
+        ],
+        'documentation': {
+            'description': 'Configures digital pattern instruments and the PXIe-6674T timing and synchronization instrument to combine pattern comparison results and control subsequent pattern execution across digital pattern instruments based on those results. You must initialize the PXIe-6674T using NI-Sync and call this method from a multi-instrument session.\n'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The specified NI-Sync session.\n'
+                },
+                'name': 'syncSession',
+                'type': 'ViSession'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+}
