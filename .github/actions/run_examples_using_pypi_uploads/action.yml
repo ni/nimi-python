@@ -15,7 +15,7 @@ runs:
   steps:
     # The local wheel installation and single environment would have made using tox-system_tests.ini difficult.
     # To keep things simple, we just use pip and pytest directly for a single Python version.
-    - run: py -3.12 -m venv --clear .venv
+    - run: py -3.13 -m venv --clear .venv
       shell: powershell
     - run: |
         .venv\Scripts\Activate.ps1

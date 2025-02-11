@@ -46,7 +46,7 @@ setup(
     extras_require={
         'grpc': [
             'grpcio>=1.59.0,<2.0',
-            'protobuf>=4.21.6,<5.0'
+            'protobuf>=4.21.6'
         ],
     },
     % endif
@@ -63,6 +63,7 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: Implementation :: CPython",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
