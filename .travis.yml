@@ -3,13 +3,14 @@ language: python
 dist: focal
 matrix:
     include:
-      # We run tests on the latest supported version of Python first.
+      # Historically, we've run tests on the latest supported version of Python first.
+      # For now, we're running Python 3.12 first, because it's the verions currently used for codegen.
       # This is where additional tests are run so we give it more time.
-      - python: "3.13"
+      - python: "3.12"
       - python: "3.9"
       - python: "3.10"
       - python: "3.11"
-      - python: "3.12"
+      - python: "3.13"
 
 install:
   - travis_retry sudo apt-get -y install python3-pip
