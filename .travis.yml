@@ -6,6 +6,7 @@ matrix:
       # Historically, we've run tests on the latest supported version of Python first.
       # For now, we're running Python 3.12 first, because it's the version currently used for codegen.
       # This is where additional tests are run so we give it more time.
+      # When the version used for codegen changes, the version that runs first should change to match.
       - python: "3.12"
       - python: "3.9"
       - python: "3.10"
