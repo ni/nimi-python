@@ -46,7 +46,7 @@ setup(
     extras_require={
         'grpc': [
             'grpcio>=1.59.0,<2.0',
-            'protobuf>=4.21.6,<6.0'
+            'protobuf>=4.21.6'
         ],
     },
     % endif
