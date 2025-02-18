@@ -11,7 +11,7 @@
         wheel_env_no_py = '{}-wheel_dep'.format(module_name)
         # We only actually need to build it once, but we specify multiple versions here
         # to prevent tox from trying to build the wheel with an unsupported (earlier) Python version
-        wheel_env = 'py{39,310,311,312}-' + wheel_env_no_py + ','
+        wheel_env = 'py{39,310,311,312,313}-' + wheel_env_no_py + ','
         uses_other_wheel = True
         if module_name == 'nitclk':
             # nitclk system tests use niscope
@@ -28,7 +28,7 @@
 # test suite on all supported python versions. To use it, "pip install tox"
 # and then run "tox -c tox-system_tests.ini" from the driver directory. (generated/${module_name})
 [tox]
-envlist = ${wheel_env}py{39,310,311,312}-${module_name}-system_tests, py312-${module_name}-coverage
+envlist = ${wheel_env}py{39,310,311,312,313}-${module_name}-system_tests, py313-${module_name}-coverage
 skip_missing_interpreters=True
 ignore_basepython_conflict=True
 # We put the .tox directory outside of the Jenkins workspace so that it isn't wiped with the rest of the repo
@@ -87,7 +87,7 @@ deps =
     ${module_name}-coverage: coverage
 
 depends =
-    ${module_name}-coverage: py{39,310,311,312}-${module_name}-system_tests
+    ${module_name}-coverage: py{39,310,311,312,313}-${module_name}-system_tests
 % if uses_other_wheel:
     ${module_name}-system_tests: ${wheel_env}
 % endif

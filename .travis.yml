@@ -3,12 +3,15 @@ language: python
 dist: focal
 matrix:
     include:
-      # We run tests on the latest supported version of Python first.
+      # Historically, we've run tests on the latest supported version of Python first.
+      # For now, we're running Python 3.12 first, because it's the version currently used for codegen.
       # This is where additional tests are run so we give it more time.
+      # When the version used for codegen changes, the version that runs first should change to match.
       - python: "3.12"
       - python: "3.9"
       - python: "3.10"
       - python: "3.11"
+      - python: "3.13"
 
 install:
   - travis_retry sudo apt-get -y install python3-pip
@@ -18,7 +21,8 @@ install:
   - travis_retry pip install --upgrade tox==3.* tox-travis
 
 before_script:
-  - python tools/ensure_codegen_up_to_date.py
+  # Python 3.13 is only supported by grpcio-tools >= 1.67.0, a later version than what we use in the tox.ini
+  - if [[ "$TRAVIS_PYTHON_VERSION" != "3.13" ]]; then python tools/ensure_codegen_up_to_date.py; fi
 
 script:
   - tox -c tox-travis.ini
