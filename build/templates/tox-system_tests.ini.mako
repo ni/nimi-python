@@ -74,6 +74,9 @@ deps =
     ${wheel_env_no_py}: build
 
 % endif
+% if module_name == 'nidigital':
+    ${module_name}-system_tests: nisync
+% endif
     ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy

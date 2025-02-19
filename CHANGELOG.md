@@ -53,6 +53,8 @@ All notable changes to this project will be documented in this file.
     * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
+        * Methods Added:
+            * `enable_match_fail_combination`
     * #### Changed
     * #### Removed
 * ### `nidmm` (NI-DMM)

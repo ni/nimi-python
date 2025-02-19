@@ -1326,6 +1326,19 @@ disable_sites
                 Example: :py:meth:`my_session.disable_sites`
 
 
+enable_match_fail_combination
+-----------------------------
+
+    .. py:currentmodule:: nidigital.Session
+
+    .. py:method:: enable_match_fail_combination()
+
+            Configures digital pattern instruments and the PXIe-6674T timing and synchronization instrument to combine pattern comparison results and control subsequent pattern execution across digital pattern instruments based on those results. You must initialize the PXIe-6674T using NI-Sync and call this method from a multi-instrument session.
+
+            
+
+
+
 enable_sites
 ------------
 
