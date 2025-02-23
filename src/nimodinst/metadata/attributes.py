@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-ModInst API metadata version 24.3.0f101
+# This file is generated from NI-ModInst API metadata version 25.0.0f85
 attributes = {
     0: {
         'access': 'read only',
