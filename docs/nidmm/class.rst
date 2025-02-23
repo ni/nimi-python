@@ -887,7 +887,7 @@ fetch
     .. py:method:: fetch(maximum_time=hightime.timedelta(milliseconds=-1))
 
             Returns the value from a previously initiated measurement. You must call
-            :py:meth:`nidmm.Session._initiate` before calling this method.
+            :py:meth:`nidmm.Session._initiate` before calling this method. Value is in base units.
 
             
 
@@ -935,7 +935,7 @@ fetch_multi_point
             measurement. The number of measurements the DMM makes is determined by
             the values you specify for the **Trigger_Count** and **Sample_Count**
             parameters of :py:meth:`nidmm.Session.configure_multi_point`. You must first call
-            :py:meth:`nidmm.Session._initiate` to initiate a measurement before calling this method.
+            :py:meth:`nidmm.Session._initiate` to initiate a measurement before calling this method. Values are in base units.
 
             
 
@@ -1548,7 +1548,7 @@ read
 
     .. py:method:: read(maximum_time=hightime.timedelta(milliseconds=-1))
 
-            Acquires a single measurement and returns the measured value.
+            Acquires a single measurement and returns the measured value in base units.
 
             
 

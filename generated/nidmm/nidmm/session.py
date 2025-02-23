@@ -1632,7 +1632,7 @@ class Session(_SessionBase):
         r'''fetch
 
         Returns the value from a previously initiated measurement. You must call
-        _initiate before calling this method.
+        _initiate before calling this method. Value is in base units.
 
         Args:
             maximum_time (hightime.timedelta, datetime.timedelta, or int in milliseconds): Specifies the **maximum_time** allowed for this method to complete in
@@ -1666,7 +1666,7 @@ class Session(_SessionBase):
         measurement. The number of measurements the DMM makes is determined by
         the values you specify for the **Trigger_Count** and **Sample_Count**
         parameters of configure_multi_point. You must first call
-        _initiate to initiate a measurement before calling this method.
+        _initiate to initiate a measurement before calling this method. Values are in base units.
 
         Args:
             array_size (int): Specifies the number of measurements to acquire. The maximum number of
@@ -2208,7 +2208,7 @@ class Session(_SessionBase):
     def read(self, maximum_time=hightime.timedelta(milliseconds=-1)):
         r'''read
 
-        Acquires a single measurement and returns the measured value.
+        Acquires a single measurement and returns the measured value in base units.
 
         Args:
             maximum_time (hightime.timedelta, datetime.timedelta, or int in milliseconds): Specifies the **maximum_time** allowed for this method to complete in
