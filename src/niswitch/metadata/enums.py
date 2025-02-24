@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.5.0d149
+# This file is generated from NI-SWITCH API metadata version 25.0.0f94
 enums = {
     'CabledModuleScanAdvancedBus': {
         'values': [
@@ -314,7 +314,8 @@ enums = {
                 'documentation': {
                     'description': 'Resource in use'
                 },
-                'name': 'NISWITCH_VAL_RESOURCE_IN_USE',
+                'name': 'NISWITCH_VAL_RSRC_IN_USE',
+                'python_name': 'RESOURCE_IN_USE',
                 'value': 4
             },
             {
@@ -348,6 +349,26 @@ enums = {
                 },
                 'name': 'NISWITCH_VAL_CLOSE_RELAY',
                 'value': 21
+            }
+        ]
+    },
+    'RelayContact': {
+        'values': [
+            {
+                'name': 'NISWITCH_VAL_RELAYTEST_RELAY_CONTACT_0',
+                'value': 0
+            },
+            {
+                'name': 'NISWITCH_VAL_RELAYTEST_RELAY_CONTACT_1',
+                'value': 1
+            },
+            {
+                'name': 'NISWITCH_VAL_RELAYTEST_RELAY_CONTACT_2',
+                'value': 2
+            },
+            {
+                'name': 'NISWITCH_VAL_RELAYTEST_RELAY_CONTACT_3',
+                'value': 3
             }
         ]
     },

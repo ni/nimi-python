@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-SWITCH API metadata version 23.0.0f167
+// This file is generated from NI-SWITCH API metadata version 25.0.0f94
 //---------------------------------------------------------------------
 // Proto file for the NI-SWITCH Metadata
 //---------------------------------------------------------------------
@@ -16,66 +16,64 @@ package niswitch_grpc;
 import "session.proto";
 
 service NiSwitch {
-  rpc AbortScan(AbortScanRequest) returns (AbortScanResponse);
-  rpc CanConnect(CanConnectRequest) returns (CanConnectResponse);
-  rpc CheckAttributeViBoolean(CheckAttributeViBooleanRequest) returns (CheckAttributeViBooleanResponse);
-  rpc CheckAttributeViInt32(CheckAttributeViInt32Request) returns (CheckAttributeViInt32Response);
-  rpc CheckAttributeViReal64(CheckAttributeViReal64Request) returns (CheckAttributeViReal64Response);
-  rpc CheckAttributeViSession(CheckAttributeViSessionRequest) returns (CheckAttributeViSessionResponse);
-  rpc CheckAttributeViString(CheckAttributeViStringRequest) returns (CheckAttributeViStringResponse);
-  rpc ClearError(ClearErrorRequest) returns (ClearErrorResponse);
-  rpc ClearInterchangeWarnings(ClearInterchangeWarningsRequest) returns (ClearInterchangeWarningsResponse);
-  rpc Close(CloseRequest) returns (CloseResponse);
-  rpc Commit(CommitRequest) returns (CommitResponse);
-  rpc ConfigureScanList(ConfigureScanListRequest) returns (ConfigureScanListResponse);
-  rpc ConfigureScanTrigger(ConfigureScanTriggerRequest) returns (ConfigureScanTriggerResponse);
-  rpc Connect(ConnectRequest) returns (ConnectResponse);
-  rpc ConnectMultiple(ConnectMultipleRequest) returns (ConnectMultipleResponse);
-  rpc Disable(DisableRequest) returns (DisableResponse);
-  rpc Disconnect(DisconnectRequest) returns (DisconnectResponse);
-  rpc DisconnectAll(DisconnectAllRequest) returns (DisconnectAllResponse);
-  rpc DisconnectMultiple(DisconnectMultipleRequest) returns (DisconnectMultipleResponse);
-  rpc ErrorMessage(ErrorMessageRequest) returns (ErrorMessageResponse);
-  rpc ErrorQuery(ErrorQueryRequest) returns (ErrorQueryResponse);
-  rpc GetAttributeViBoolean(GetAttributeViBooleanRequest) returns (GetAttributeViBooleanResponse);
-  rpc GetAttributeViInt32(GetAttributeViInt32Request) returns (GetAttributeViInt32Response);
-  rpc GetAttributeViReal64(GetAttributeViReal64Request) returns (GetAttributeViReal64Response);
-  rpc GetAttributeViSession(GetAttributeViSessionRequest) returns (GetAttributeViSessionResponse);
-  rpc GetAttributeViString(GetAttributeViStringRequest) returns (GetAttributeViStringResponse);
-  rpc GetChannelName(GetChannelNameRequest) returns (GetChannelNameResponse);
-  rpc GetError(GetErrorRequest) returns (GetErrorResponse);
-  rpc GetNextCoercionRecord(GetNextCoercionRecordRequest) returns (GetNextCoercionRecordResponse);
-  rpc GetNextInterchangeWarning(GetNextInterchangeWarningRequest) returns (GetNextInterchangeWarningResponse);
-  rpc GetPath(GetPathRequest) returns (GetPathResponse);
-  rpc GetRelayCount(GetRelayCountRequest) returns (GetRelayCountResponse);
-  rpc GetRelayName(GetRelayNameRequest) returns (GetRelayNameResponse);
-  rpc GetRelayPosition(GetRelayPositionRequest) returns (GetRelayPositionResponse);
   rpc Init(InitRequest) returns (InitResponse);
   rpc InitWithOptions(InitWithOptionsRequest) returns (InitWithOptionsResponse);
   rpc InitWithTopology(InitWithTopologyRequest) returns (InitWithTopologyResponse);
-  rpc InitiateScan(InitiateScanRequest) returns (InitiateScanResponse);
-  rpc InvalidateAllAttributes(InvalidateAllAttributesRequest) returns (InvalidateAllAttributesResponse);
+  rpc Close(CloseRequest) returns (CloseResponse);
+  rpc Connect(ConnectRequest) returns (ConnectResponse);
+  rpc ConnectMultiple(ConnectMultipleRequest) returns (ConnectMultipleResponse);
+  rpc Disconnect(DisconnectRequest) returns (DisconnectResponse);
+  rpc DisconnectMultiple(DisconnectMultipleRequest) returns (DisconnectMultipleResponse);
+  rpc DisconnectAll(DisconnectAllRequest) returns (DisconnectAllResponse);
+  rpc GetPath(GetPathRequest) returns (GetPathResponse);
+  rpc SetPath(SetPathRequest) returns (SetPathResponse);
+  rpc CanConnect(CanConnectRequest) returns (CanConnectResponse);
   rpc IsDebounced(IsDebouncedRequest) returns (IsDebouncedResponse);
-  rpc IsScanning(IsScanningRequest) returns (IsScanningResponse);
-  rpc RelayControl(RelayControlRequest) returns (RelayControlResponse);
-  rpc Reset(ResetRequest) returns (ResetResponse);
-  rpc ResetInterchangeCheck(ResetInterchangeCheckRequest) returns (ResetInterchangeCheckResponse);
-  rpc ResetWithDefaults(ResetWithDefaultsRequest) returns (ResetWithDefaultsResponse);
-  rpc RevisionQuery(RevisionQueryRequest) returns (RevisionQueryResponse);
-  rpc RouteScanAdvancedOutput(RouteScanAdvancedOutputRequest) returns (RouteScanAdvancedOutputResponse);
-  rpc RouteTriggerInput(RouteTriggerInputRequest) returns (RouteTriggerInputResponse);
+  rpc WaitForDebounce(WaitForDebounceRequest) returns (WaitForDebounceResponse);
   rpc Scan(ScanRequest) returns (ScanResponse);
-  rpc SelfTest(SelfTestRequest) returns (SelfTestResponse);
+  rpc InitiateScan(InitiateScanRequest) returns (InitiateScanResponse);
+  rpc AbortScan(AbortScanRequest) returns (AbortScanResponse);
+  rpc IsScanning(IsScanningRequest) returns (IsScanningResponse);
+  rpc WaitForScanComplete(WaitForScanCompleteRequest) returns (WaitForScanCompleteResponse);
   rpc SendSoftwareTrigger(SendSoftwareTriggerRequest) returns (SendSoftwareTriggerResponse);
-  rpc SetAttributeViBoolean(SetAttributeViBooleanRequest) returns (SetAttributeViBooleanResponse);
+  rpc ConfigureScanList(ConfigureScanListRequest) returns (ConfigureScanListResponse);
+  rpc ConfigureScanTrigger(ConfigureScanTriggerRequest) returns (ConfigureScanTriggerResponse);
+  rpc SetContinuousScan(SetContinuousScanRequest) returns (SetContinuousScanResponse);
+  rpc RouteTriggerInput(RouteTriggerInputRequest) returns (RouteTriggerInputResponse);
+  rpc RouteScanAdvancedOutput(RouteScanAdvancedOutputRequest) returns (RouteScanAdvancedOutputResponse);
+  rpc ErrorQuery(ErrorQueryRequest) returns (ErrorQueryResponse);
+  rpc GetError(GetErrorRequest) returns (GetErrorResponse);
+  rpc ClearError(ClearErrorRequest) returns (ClearErrorResponse);
+  rpc ErrorMessage(ErrorMessageRequest) returns (ErrorMessageResponse);
+  rpc GetChannelName(GetChannelNameRequest) returns (GetChannelNameResponse);
+  rpc GetRelayName(GetRelayNameRequest) returns (GetRelayNameResponse);
+  rpc GetRelayCount(GetRelayCountRequest) returns (GetRelayCountResponse);
+  rpc GetRelayPosition(GetRelayPositionRequest) returns (GetRelayPositionResponse);
+  rpc RelayControl(RelayControlRequest) returns (RelayControlResponse);
+  rpc ResetInterchangeCheck(ResetInterchangeCheckRequest) returns (ResetInterchangeCheckResponse);
+  rpc ClearInterchangeWarnings(ClearInterchangeWarningsRequest) returns (ClearInterchangeWarningsResponse);
+  rpc Commit(CommitRequest) returns (CommitResponse);
+  rpc ResetWithDefaults(ResetWithDefaultsRequest) returns (ResetWithDefaultsResponse);
+  rpc Disable(DisableRequest) returns (DisableResponse);
+  rpc Reset(ResetRequest) returns (ResetResponse);
+  rpc SelfTest(SelfTestRequest) returns (SelfTestResponse);
+  rpc RevisionQuery(RevisionQueryRequest) returns (RevisionQueryResponse);
+  rpc GetAttributeViInt32(GetAttributeViInt32Request) returns (GetAttributeViInt32Response);
+  rpc GetAttributeViReal64(GetAttributeViReal64Request) returns (GetAttributeViReal64Response);
+  rpc GetAttributeViString(GetAttributeViStringRequest) returns (GetAttributeViStringResponse);
+  rpc GetAttributeViSession(GetAttributeViSessionRequest) returns (GetAttributeViSessionResponse);
+  rpc GetAttributeViBoolean(GetAttributeViBooleanRequest) returns (GetAttributeViBooleanResponse);
   rpc SetAttributeViInt32(SetAttributeViInt32Request) returns (SetAttributeViInt32Response);
   rpc SetAttributeViReal64(SetAttributeViReal64Request) returns (SetAttributeViReal64Response);
-  rpc SetAttributeViSession(SetAttributeViSessionRequest) returns (SetAttributeViSessionResponse);
   rpc SetAttributeViString(SetAttributeViStringRequest) returns (SetAttributeViStringResponse);
-  rpc SetContinuousScan(SetContinuousScanRequest) returns (SetContinuousScanResponse);
-  rpc SetPath(SetPathRequest) returns (SetPathResponse);
-  rpc WaitForDebounce(WaitForDebounceRequest) returns (WaitForDebounceResponse);
-  rpc WaitForScanComplete(WaitForScanCompleteRequest) returns (WaitForScanCompleteResponse);
+  rpc SetAttributeViSession(SetAttributeViSessionRequest) returns (SetAttributeViSessionResponse);
+  rpc SetAttributeViBoolean(SetAttributeViBooleanRequest) returns (SetAttributeViBooleanResponse);
+  rpc CheckAttributeViInt32(CheckAttributeViInt32Request) returns (CheckAttributeViInt32Response);
+  rpc CheckAttributeViReal64(CheckAttributeViReal64Request) returns (CheckAttributeViReal64Response);
+  rpc CheckAttributeViString(CheckAttributeViStringRequest) returns (CheckAttributeViStringResponse);
+  rpc CheckAttributeViSession(CheckAttributeViSessionRequest) returns (CheckAttributeViSessionResponse);
+  rpc CheckAttributeViBoolean(CheckAttributeViBooleanRequest) returns (CheckAttributeViBooleanResponse);
+  rpc InvalidateAllAttributes(InvalidateAllAttributesRequest) returns (InvalidateAllAttributesResponse);
 }
 
 enum NiSwitchAttribute {
@@ -85,23 +83,48 @@ enum NiSwitchAttribute {
   NISWITCH_ATTRIBUTE_CACHE = 1050004;
   NISWITCH_ATTRIBUTE_SIMULATE = 1050005;
   NISWITCH_ATTRIBUTE_RECORD_COERCIONS = 1050006;
-  NISWITCH_ATTRIBUTE_DRIVER_SETUP = 1050007;
   NISWITCH_ATTRIBUTE_INTERCHANGE_CHECK = 1050021;
   NISWITCH_ATTRIBUTE_CHANNEL_COUNT = 1050203;
-  NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_PREFIX = 1050302;
-  NISWITCH_ATTRIBUTE_IO_RESOURCE_DESCRIPTOR = 1050304;
-  NISWITCH_ATTRIBUTE_LOGICAL_NAME = 1050305;
-  NISWITCH_ATTRIBUTE_SUPPORTED_INSTRUMENT_MODELS = 1050327;
   NISWITCH_ATTRIBUTE_GROUP_CAPABILITIES = 1050401;
-  NISWITCH_ATTRIBUTE_INSTRUMENT_FIRMWARE_REVISION = 1050510;
+  NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_PREFIX = 1050302;
+  NISWITCH_ATTRIBUTE_SUPPORTED_INSTRUMENT_MODELS = 1050327;
   NISWITCH_ATTRIBUTE_INSTRUMENT_MANUFACTURER = 1050511;
   NISWITCH_ATTRIBUTE_INSTRUMENT_MODEL = 1050512;
+  NISWITCH_ATTRIBUTE_INSTRUMENT_FIRMWARE_REVISION = 1050510;
+  NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_REVISION = 1050551;
   NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_VENDOR = 1050513;
-  NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_DESCRIPTION = 1050514;
   NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION = 1050515;
   NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION = 1050516;
-  NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_REVISION = 1050551;
-  NISWITCH_ATTRIBUTE_SERIAL_NUMBER_I32 = 1150001;
+  NISWITCH_ATTRIBUTE_SPECIFIC_DRIVER_DESCRIPTION = 1050514;
+  NISWITCH_ATTRIBUTE_DRIVER_SETUP = 1050007;
+  NISWITCH_ATTRIBUTE_LOGICAL_NAME = 1050305;
+  NISWITCH_ATTRIBUTE_IO_RESOURCE_DESCRIPTOR = 1050304;
+  NISWITCH_ATTRIBUTE_IS_SOURCE_CHANNEL = 1250001;
+  NISWITCH_ATTRIBUTE_IS_CONFIGURATION_CHANNEL = 1250003;
+  NISWITCH_ATTRIBUTE_IS_DEBOUNCED = 1250002;
+  NISWITCH_ATTRIBUTE_SETTLING_TIME = 1250004;
+  NISWITCH_ATTRIBUTE_BANDWIDTH = 1250005;
+  NISWITCH_ATTRIBUTE_MAX_DC_VOLTAGE = 1250006;
+  NISWITCH_ATTRIBUTE_MAX_AC_VOLTAGE = 1250007;
+  NISWITCH_ATTRIBUTE_MAX_SWITCHING_AC_CURRENT = 1250009;
+  NISWITCH_ATTRIBUTE_MAX_SWITCHING_DC_CURRENT = 1250008;
+  NISWITCH_ATTRIBUTE_MAX_CARRY_AC_CURRENT = 1250011;
+  NISWITCH_ATTRIBUTE_MAX_CARRY_DC_CURRENT = 1250010;
+  NISWITCH_ATTRIBUTE_MAX_SWITCHING_AC_POWER = 1250013;
+  NISWITCH_ATTRIBUTE_MAX_SWITCHING_DC_POWER = 1250012;
+  NISWITCH_ATTRIBUTE_MAX_CARRY_AC_POWER = 1250015;
+  NISWITCH_ATTRIBUTE_MAX_CARRY_DC_POWER = 1250014;
+  NISWITCH_ATTRIBUTE_CHARACTERISTIC_IMPEDANCE = 1250016;
+  NISWITCH_ATTRIBUTE_WIRE_MODE = 1250017;
+  NISWITCH_ATTRIBUTE_NUM_OF_ROWS = 1250018;
+  NISWITCH_ATTRIBUTE_NUM_OF_COLUMNS = 1250019;
+  NISWITCH_ATTRIBUTE_SCAN_LIST = 1250020;
+  NISWITCH_ATTRIBUTE_SCAN_MODE = 1250021;
+  NISWITCH_ATTRIBUTE_TRIGGER_INPUT = 1250022;
+  NISWITCH_ATTRIBUTE_SCAN_ADVANCED_OUTPUT = 1250023;
+  NISWITCH_ATTRIBUTE_SCAN_DELAY = 1250025;
+  NISWITCH_ATTRIBUTE_CONTINUOUS_SCAN = 1250026;
+  NISWITCH_ATTRIBUTE_IS_SCANNING = 1250024;
   NISWITCH_ATTRIBUTE_IS_WAITING_FOR_TRIG = 1150004;
   NISWITCH_ATTRIBUTE_TRIGGER_MODE = 1150005;
   NISWITCH_ATTRIBUTE_MASTER_SLAVE_TRIGGER_BUS = 1150006;
@@ -118,37 +141,122 @@ enum NiSwitchAttribute {
   NISWITCH_ATTRIBUTE_POWER_DOWN_LATCHING_RELAYS_AFTER_DEBOUNCE = 1150017;
   NISWITCH_ATTRIBUTE_ANALOG_BUS_SHARING_ENABLE = 1150018;
   NISWITCH_ATTRIBUTE_TEMPERATURE = 1150019;
-  NISWITCH_ATTRIBUTE_IS_SOURCE_CHANNEL = 1250001;
-  NISWITCH_ATTRIBUTE_IS_DEBOUNCED = 1250002;
-  NISWITCH_ATTRIBUTE_IS_CONFIGURATION_CHANNEL = 1250003;
-  NISWITCH_ATTRIBUTE_SETTLING_TIME = 1250004;
-  NISWITCH_ATTRIBUTE_BANDWIDTH = 1250005;
-  NISWITCH_ATTRIBUTE_MAX_DC_VOLTAGE = 1250006;
-  NISWITCH_ATTRIBUTE_MAX_AC_VOLTAGE = 1250007;
-  NISWITCH_ATTRIBUTE_MAX_SWITCHING_DC_CURRENT = 1250008;
-  NISWITCH_ATTRIBUTE_MAX_SWITCHING_AC_CURRENT = 1250009;
-  NISWITCH_ATTRIBUTE_MAX_CARRY_DC_CURRENT = 1250010;
-  NISWITCH_ATTRIBUTE_MAX_CARRY_AC_CURRENT = 1250011;
-  NISWITCH_ATTRIBUTE_MAX_SWITCHING_DC_POWER = 1250012;
-  NISWITCH_ATTRIBUTE_MAX_SWITCHING_AC_POWER = 1250013;
-  NISWITCH_ATTRIBUTE_MAX_CARRY_DC_POWER = 1250014;
-  NISWITCH_ATTRIBUTE_MAX_CARRY_AC_POWER = 1250015;
-  NISWITCH_ATTRIBUTE_CHARACTERISTIC_IMPEDANCE = 1250016;
-  NISWITCH_ATTRIBUTE_WIRE_MODE = 1250017;
-  NISWITCH_ATTRIBUTE_NUM_OF_ROWS = 1250018;
-  NISWITCH_ATTRIBUTE_NUM_OF_COLUMNS = 1250019;
-  NISWITCH_ATTRIBUTE_SCAN_LIST = 1250020;
-  NISWITCH_ATTRIBUTE_SCAN_MODE = 1250021;
-  NISWITCH_ATTRIBUTE_TRIGGER_INPUT = 1250022;
-  NISWITCH_ATTRIBUTE_SCAN_ADVANCED_OUTPUT = 1250023;
-  NISWITCH_ATTRIBUTE_IS_SCANNING = 1250024;
-  NISWITCH_ATTRIBUTE_SCAN_DELAY = 1250025;
-  NISWITCH_ATTRIBUTE_CONTINUOUS_SCAN = 1250026;
+  NISWITCH_ATTRIBUTE_SERIAL_NUMBER_I32 = 1150001;
+}
+
+enum ScanMode {
+  SCAN_MODE_NISWITCH_VAL_NONE = 0;
+  SCAN_MODE_NISWITCH_VAL_BREAK_BEFORE_MAKE = 1;
+  SCAN_MODE_NISWITCH_VAL_BREAK_AFTER_MAKE = 2;
+}
+
+enum TriggerInput {
+  TRIGGER_INPUT_UNSPECIFIED = 0;
+  TRIGGER_INPUT_NISWITCH_VAL_IMMEDIATE = 1;
+  TRIGGER_INPUT_NISWITCH_VAL_EXTERNAL = 2;
+  TRIGGER_INPUT_NISWITCH_VAL_SOFTWARE_TRIG = 3;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL0 = 111;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL1 = 112;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL2 = 113;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL3 = 114;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL4 = 115;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL5 = 116;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL6 = 117;
+  TRIGGER_INPUT_NISWITCH_VAL_TTL7 = 118;
+  TRIGGER_INPUT_NISWITCH_VAL_PXI_STAR = 125;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR = 1000;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR = 1001;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE1 = 1021;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE2 = 1022;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE3 = 1023;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE4 = 1024;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE5 = 1025;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE6 = 1026;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE7 = 1027;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE8 = 1028;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE9 = 1029;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE10 = 1030;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE11 = 1031;
+  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE12 = 1032;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE1 = 1041;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE2 = 1042;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE3 = 1043;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE4 = 1044;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE5 = 1045;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE6 = 1046;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE7 = 1047;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE8 = 1048;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE9 = 1049;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE10 = 1050;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE11 = 1051;
+  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE12 = 1052;
+}
+
+enum PathCapability {
+  PATH_CAPABILITY_UNSPECIFIED = 0;
+  PATH_CAPABILITY_NISWITCH_VAL_PATH_AVAILABLE = 1;
+  PATH_CAPABILITY_NISWITCH_VAL_PATH_EXISTS = 2;
+  PATH_CAPABILITY_NISWITCH_VAL_PATH_UNSUPPORTED = 3;
+  PATH_CAPABILITY_NISWITCH_VAL_RSRC_IN_USE = 4;
+  PATH_CAPABILITY_NISWITCH_VAL_SOURCE_CONFLICT = 5;
+  PATH_CAPABILITY_NISWITCH_VAL_CHANNEL_NOT_AVAILABLE = 6;
 }
 
 enum HandshakingInitiation {
   HANDSHAKING_INITIATION_NISWITCH_VAL_MEASUREMENT_DEVICE_INITIATED = 0;
   HANDSHAKING_INITIATION_NISWITCH_VAL_SWITCH_INITIATED = 1;
+}
+
+enum RelayPosition {
+  RELAY_POSITION_UNSPECIFIED = 0;
+  RELAY_POSITION_NISWITCH_VAL_OPEN = 10;
+  RELAY_POSITION_NISWITCH_VAL_CLOSED = 11;
+}
+
+enum RelayAction {
+  RELAY_ACTION_UNSPECIFIED = 0;
+  RELAY_ACTION_NISWITCH_VAL_OPEN_RELAY = 20;
+  RELAY_ACTION_NISWITCH_VAL_CLOSE_RELAY = 21;
+}
+
+enum ScanAdvancedOutput {
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_NONE = 0;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_EXTERNAL = 2;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL0 = 111;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL1 = 112;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL2 = 113;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL3 = 114;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL4 = 115;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL5 = 116;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL6 = 117;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL7 = 118;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_PXI_STAR = 125;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR = 1000;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR = 1001;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE1 = 1021;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE2 = 1022;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE3 = 1023;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE4 = 1024;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE5 = 1025;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE6 = 1026;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE7 = 1027;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE8 = 1028;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE9 = 1029;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE10 = 1030;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE11 = 1031;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE12 = 1032;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE1 = 1041;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE2 = 1042;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE3 = 1043;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE4 = 1044;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE5 = 1045;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE6 = 1046;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE7 = 1047;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE8 = 1048;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE9 = 1049;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE10 = 1050;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE11 = 1051;
+  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE12 = 1052;
 }
 
 enum NiSwitchInt32AttributeValues {
@@ -243,465 +351,6 @@ enum NiSwitchInt32AttributeValues {
   NISWITCH_INT32_WIRE_MODE_VAL_4_WIRE = 4;
 }
 
-enum PathCapability {
-  PATH_CAPABILITY_UNSPECIFIED = 0;
-  PATH_CAPABILITY_NISWITCH_VAL_PATH_AVAILABLE = 1;
-  PATH_CAPABILITY_NISWITCH_VAL_PATH_EXISTS = 2;
-  PATH_CAPABILITY_NISWITCH_VAL_PATH_UNSUPPORTED = 3;
-  PATH_CAPABILITY_NISWITCH_VAL_RESOURCE_IN_USE = 4;
-  PATH_CAPABILITY_NISWITCH_VAL_SOURCE_CONFLICT = 5;
-  PATH_CAPABILITY_NISWITCH_VAL_CHANNEL_NOT_AVAILABLE = 6;
-}
-
-enum RelayAction {
-  RELAY_ACTION_UNSPECIFIED = 0;
-  RELAY_ACTION_NISWITCH_VAL_OPEN_RELAY = 20;
-  RELAY_ACTION_NISWITCH_VAL_CLOSE_RELAY = 21;
-}
-
-enum RelayPosition {
-  RELAY_POSITION_UNSPECIFIED = 0;
-  RELAY_POSITION_NISWITCH_VAL_OPEN = 10;
-  RELAY_POSITION_NISWITCH_VAL_CLOSED = 11;
-}
-
-enum ScanAdvancedOutput {
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_NONE = 0;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_EXTERNAL = 2;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL0 = 111;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL1 = 112;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL2 = 113;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL3 = 114;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL4 = 115;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL5 = 116;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL6 = 117;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_TTL7 = 118;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_PXI_STAR = 125;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR = 1000;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR = 1001;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE1 = 1021;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE2 = 1022;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE3 = 1023;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE4 = 1024;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE5 = 1025;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE6 = 1026;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE7 = 1027;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE8 = 1028;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE9 = 1029;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE10 = 1030;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE11 = 1031;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_REARCONNECTOR_MODULE12 = 1032;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE1 = 1041;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE2 = 1042;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE3 = 1043;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE4 = 1044;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE5 = 1045;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE6 = 1046;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE7 = 1047;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE8 = 1048;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE9 = 1049;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE10 = 1050;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE11 = 1051;
-  SCAN_ADVANCED_OUTPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE12 = 1052;
-}
-
-enum ScanMode {
-  SCAN_MODE_NISWITCH_VAL_NONE = 0;
-  SCAN_MODE_NISWITCH_VAL_BREAK_BEFORE_MAKE = 1;
-  SCAN_MODE_NISWITCH_VAL_BREAK_AFTER_MAKE = 2;
-}
-
-enum TriggerInput {
-  TRIGGER_INPUT_UNSPECIFIED = 0;
-  TRIGGER_INPUT_NISWITCH_VAL_IMMEDIATE = 1;
-  TRIGGER_INPUT_NISWITCH_VAL_EXTERNAL = 2;
-  TRIGGER_INPUT_NISWITCH_VAL_SOFTWARE_TRIG = 3;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL0 = 111;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL1 = 112;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL2 = 113;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL3 = 114;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL4 = 115;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL5 = 116;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL6 = 117;
-  TRIGGER_INPUT_NISWITCH_VAL_TTL7 = 118;
-  TRIGGER_INPUT_NISWITCH_VAL_PXI_STAR = 125;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR = 1000;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR = 1001;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE1 = 1021;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE2 = 1022;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE3 = 1023;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE4 = 1024;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE5 = 1025;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE6 = 1026;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE7 = 1027;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE8 = 1028;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE9 = 1029;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE10 = 1030;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE11 = 1031;
-  TRIGGER_INPUT_NISWITCH_VAL_REARCONNECTOR_MODULE12 = 1032;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE1 = 1041;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE2 = 1042;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE3 = 1043;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE4 = 1044;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE5 = 1045;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE6 = 1046;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE7 = 1047;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE8 = 1048;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE9 = 1049;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE10 = 1050;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE11 = 1051;
-  TRIGGER_INPUT_NISWITCH_VAL_FRONTCONNECTOR_MODULE12 = 1052;
-}
-
-message AbortScanRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message AbortScanResponse {
-  int32 status = 1;
-}
-
-message CanConnectRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel1 = 2;
-  string channel2 = 3;
-}
-
-message CanConnectResponse {
-  int32 status = 1;
-  PathCapability path_capability = 2;
-  sint32 path_capability_raw = 3;
-}
-
-message CheckAttributeViBooleanRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-  bool attribute_value = 4;
-}
-
-message CheckAttributeViBooleanResponse {
-  int32 status = 1;
-}
-
-message CheckAttributeViInt32Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-  oneof attribute_value_enum {
-    sint32 attribute_value_raw = 4;
-    NiSwitchInt32AttributeValues attribute_value = 5;
-  }
-}
-
-message CheckAttributeViInt32Response {
-  int32 status = 1;
-}
-
-message CheckAttributeViReal64Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-  double attribute_value_raw = 4;
-}
-
-message CheckAttributeViReal64Response {
-  int32 status = 1;
-}
-
-message CheckAttributeViSessionRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-  nidevice_grpc.Session attribute_value = 4;
-}
-
-message CheckAttributeViSessionResponse {
-  int32 status = 1;
-}
-
-message CheckAttributeViStringRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-  string attribute_value_raw = 4;
-}
-
-message CheckAttributeViStringResponse {
-  int32 status = 1;
-}
-
-message ClearErrorRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ClearErrorResponse {
-  int32 status = 1;
-}
-
-message ClearInterchangeWarningsRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ClearInterchangeWarningsResponse {
-  int32 status = 1;
-}
-
-message CloseRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message CloseResponse {
-  int32 status = 1;
-}
-
-message CommitRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message CommitResponse {
-  int32 status = 1;
-}
-
-message ConfigureScanListRequest {
-  nidevice_grpc.Session vi = 1;
-  string scanlist = 2;
-  oneof scan_mode_enum {
-    ScanMode scan_mode = 3;
-    sint32 scan_mode_raw = 4;
-  }
-}
-
-message ConfigureScanListResponse {
-  int32 status = 1;
-}
-
-message ConfigureScanTriggerRequest {
-  nidevice_grpc.Session vi = 1;
-  double scan_delay = 2;
-  oneof trigger_input_enum {
-    TriggerInput trigger_input = 3;
-    sint32 trigger_input_raw = 4;
-  }
-  oneof scan_advanced_output_enum {
-    ScanAdvancedOutput scan_advanced_output = 5;
-    sint32 scan_advanced_output_raw = 6;
-  }
-}
-
-message ConfigureScanTriggerResponse {
-  int32 status = 1;
-}
-
-message ConnectRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel1 = 2;
-  string channel2 = 3;
-}
-
-message ConnectResponse {
-  int32 status = 1;
-}
-
-message ConnectMultipleRequest {
-  nidevice_grpc.Session vi = 1;
-  string connection_list = 2;
-}
-
-message ConnectMultipleResponse {
-  int32 status = 1;
-}
-
-message DisableRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message DisableResponse {
-  int32 status = 1;
-}
-
-message DisconnectRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel1 = 2;
-  string channel2 = 3;
-}
-
-message DisconnectResponse {
-  int32 status = 1;
-}
-
-message DisconnectAllRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message DisconnectAllResponse {
-  int32 status = 1;
-}
-
-message DisconnectMultipleRequest {
-  nidevice_grpc.Session vi = 1;
-  string disconnection_list = 2;
-}
-
-message DisconnectMultipleResponse {
-  int32 status = 1;
-}
-
-message ErrorMessageRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 error_code = 2;
-}
-
-message ErrorMessageResponse {
-  int32 status = 1;
-  string error_message = 2;
-}
-
-message ErrorQueryRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ErrorQueryResponse {
-  int32 status = 1;
-  sint32 error_code = 2;
-  string error_message = 3;
-}
-
-message GetAttributeViBooleanRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-}
-
-message GetAttributeViBooleanResponse {
-  int32 status = 1;
-  bool attribute_value = 2;
-}
-
-message GetAttributeViInt32Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-}
-
-message GetAttributeViInt32Response {
-  int32 status = 1;
-  sint32 attribute_value = 2;
-}
-
-message GetAttributeViReal64Request {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-}
-
-message GetAttributeViReal64Response {
-  int32 status = 1;
-  double attribute_value = 2;
-}
-
-message GetAttributeViSessionRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-}
-
-message GetAttributeViSessionResponse {
-  int32 status = 1;
-  nidevice_grpc.Session attribute_value = 2;
-}
-
-message GetAttributeViStringRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-}
-
-message GetAttributeViStringResponse {
-  int32 status = 1;
-  string attribute_value = 2;
-}
-
-message GetChannelNameRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 index = 2;
-}
-
-message GetChannelNameResponse {
-  int32 status = 1;
-  string channel_name_buffer = 2;
-}
-
-message GetErrorRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetErrorResponse {
-  int32 status = 1;
-  sint32 code = 2;
-  string description = 3;
-}
-
-message GetNextCoercionRecordRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetNextCoercionRecordResponse {
-  int32 status = 1;
-  string coercion_record = 2;
-}
-
-message GetNextInterchangeWarningRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message GetNextInterchangeWarningResponse {
-  int32 status = 1;
-  string interchange_warning = 2;
-}
-
-message GetPathRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel1 = 2;
-  string channel2 = 3;
-}
-
-message GetPathResponse {
-  int32 status = 1;
-  string path = 2;
-}
-
-message GetRelayCountRequest {
-  nidevice_grpc.Session vi = 1;
-  string relay_name = 2;
-}
-
-message GetRelayCountResponse {
-  int32 status = 1;
-  sint32 relay_count = 2;
-}
-
-message GetRelayNameRequest {
-  nidevice_grpc.Session vi = 1;
-  sint32 index = 2;
-}
-
-message GetRelayNameResponse {
-  int32 status = 1;
-  string relay_name_buffer = 2;
-}
-
-message GetRelayPositionRequest {
-  nidevice_grpc.Session vi = 1;
-  string relay_name = 2;
-}
-
-message GetRelayPositionResponse {
-  int32 status = 1;
-  RelayPosition relay_position = 2;
-  sint32 relay_position_raw = 3;
-}
-
 message InitRequest {
   string session_name = 1;
   string resource_name = 2;
@@ -749,20 +398,90 @@ message InitWithTopologyResponse {
   bool new_session_initialized = 4;
 }
 
-message InitiateScanRequest {
+message CloseRequest {
   nidevice_grpc.Session vi = 1;
 }
 
-message InitiateScanResponse {
+message CloseResponse {
   int32 status = 1;
 }
 
-message InvalidateAllAttributesRequest {
+message ConnectRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel1 = 2;
+  string channel2 = 3;
+}
+
+message ConnectResponse {
+  int32 status = 1;
+}
+
+message ConnectMultipleRequest {
+  nidevice_grpc.Session vi = 1;
+  string connection_list = 2;
+}
+
+message ConnectMultipleResponse {
+  int32 status = 1;
+}
+
+message DisconnectRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel1 = 2;
+  string channel2 = 3;
+}
+
+message DisconnectResponse {
+  int32 status = 1;
+}
+
+message DisconnectMultipleRequest {
+  nidevice_grpc.Session vi = 1;
+  string disconnection_list = 2;
+}
+
+message DisconnectMultipleResponse {
+  int32 status = 1;
+}
+
+message DisconnectAllRequest {
   nidevice_grpc.Session vi = 1;
 }
 
-message InvalidateAllAttributesResponse {
+message DisconnectAllResponse {
   int32 status = 1;
+}
+
+message GetPathRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel1 = 2;
+  string channel2 = 3;
+}
+
+message GetPathResponse {
+  int32 status = 1;
+  string path = 2;
+}
+
+message SetPathRequest {
+  nidevice_grpc.Session vi = 1;
+  string path_list = 2;
+}
+
+message SetPathResponse {
+  int32 status = 1;
+}
+
+message CanConnectRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel1 = 2;
+  string channel2 = 3;
+}
+
+message CanConnectResponse {
+  int32 status = 1;
+  PathCapability path_capability = 2;
+  sint32 path_capability_raw = 3;
 }
 
 message IsDebouncedRequest {
@@ -774,6 +493,44 @@ message IsDebouncedResponse {
   bool is_debounced = 2;
 }
 
+message WaitForDebounceRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 maximum_time_ms = 2;
+}
+
+message WaitForDebounceResponse {
+  int32 status = 1;
+}
+
+message ScanRequest {
+  nidevice_grpc.Session vi = 1;
+  string scan_list = 2;
+  oneof initiation_enum {
+    HandshakingInitiation initiation = 3;
+    sint32 initiation_raw = 4;
+  }
+}
+
+message ScanResponse {
+  int32 status = 1;
+}
+
+message InitiateScanRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message InitiateScanResponse {
+  int32 status = 1;
+}
+
+message AbortScanRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message AbortScanResponse {
+  int32 status = 1;
+}
+
 message IsScanningRequest {
   nidevice_grpc.Session vi = 1;
 }
@@ -783,67 +540,59 @@ message IsScanningResponse {
   bool is_scanning = 2;
 }
 
-message RelayControlRequest {
+message WaitForScanCompleteRequest {
   nidevice_grpc.Session vi = 1;
-  string relay_name = 2;
-  oneof relay_action_enum {
-    RelayAction relay_action = 3;
-    sint32 relay_action_raw = 4;
+  sint32 maximum_time_ms = 2;
+}
+
+message WaitForScanCompleteResponse {
+  int32 status = 1;
+}
+
+message SendSoftwareTriggerRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message SendSoftwareTriggerResponse {
+  int32 status = 1;
+}
+
+message ConfigureScanListRequest {
+  nidevice_grpc.Session vi = 1;
+  string scan_list = 2;
+  oneof scan_mode_enum {
+    ScanMode scan_mode = 3;
+    sint32 scan_mode_raw = 4;
   }
 }
 
-message RelayControlResponse {
+message ConfigureScanListResponse {
   int32 status = 1;
 }
 
-message ResetRequest {
+message ConfigureScanTriggerRequest {
   nidevice_grpc.Session vi = 1;
-}
-
-message ResetResponse {
-  int32 status = 1;
-}
-
-message ResetInterchangeCheckRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ResetInterchangeCheckResponse {
-  int32 status = 1;
-}
-
-message ResetWithDefaultsRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message ResetWithDefaultsResponse {
-  int32 status = 1;
-}
-
-message RevisionQueryRequest {
-  nidevice_grpc.Session vi = 1;
-}
-
-message RevisionQueryResponse {
-  int32 status = 1;
-  string instrument_driver_revision = 2;
-  string firmware_revision = 3;
-}
-
-message RouteScanAdvancedOutputRequest {
-  nidevice_grpc.Session vi = 1;
-  oneof scan_advanced_output_connector_enum {
-    ScanAdvancedOutput scan_advanced_output_connector = 2;
-    sint32 scan_advanced_output_connector_raw = 3;
+  double scan_delay = 2;
+  oneof trigger_input_enum {
+    TriggerInput trigger_input = 3;
+    sint32 trigger_input_raw = 4;
   }
-  oneof scan_advanced_output_bus_line_enum {
-    ScanAdvancedOutput scan_advanced_output_bus_line = 4;
-    sint32 scan_advanced_output_bus_line_raw = 5;
+  oneof scan_advanced_output_enum {
+    ScanAdvancedOutput scan_advanced_output = 5;
+    sint32 scan_advanced_output_raw = 6;
   }
-  bool invert = 6;
 }
 
-message RouteScanAdvancedOutputResponse {
+message ConfigureScanTriggerResponse {
+  int32 status = 1;
+}
+
+message SetContinuousScanRequest {
+  nidevice_grpc.Session vi = 1;
+  bool continuous_scan = 2;
+}
+
+message SetContinuousScanResponse {
   int32 status = 1;
 }
 
@@ -864,16 +613,160 @@ message RouteTriggerInputResponse {
   int32 status = 1;
 }
 
-message ScanRequest {
+message RouteScanAdvancedOutputRequest {
   nidevice_grpc.Session vi = 1;
-  string scanlist = 2;
-  oneof initiation_enum {
-    HandshakingInitiation initiation = 3;
-    sint32 initiation_raw = 4;
+  oneof scan_advanced_output_connector_enum {
+    ScanAdvancedOutput scan_advanced_output_connector = 2;
+    sint32 scan_advanced_output_connector_raw = 3;
+  }
+  oneof scan_advanced_output_bus_line_enum {
+    ScanAdvancedOutput scan_advanced_output_bus_line = 4;
+    sint32 scan_advanced_output_bus_line_raw = 5;
+  }
+  bool invert = 6;
+}
+
+message RouteScanAdvancedOutputResponse {
+  int32 status = 1;
+}
+
+message ErrorQueryRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ErrorQueryResponse {
+  int32 status = 1;
+  sint32 error_code = 2;
+  string error_message = 3;
+}
+
+message GetErrorRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message GetErrorResponse {
+  int32 status = 1;
+  sint32 code = 2;
+  string description = 3;
+}
+
+message ClearErrorRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ClearErrorResponse {
+  int32 status = 1;
+}
+
+message ErrorMessageRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 error_code = 2;
+}
+
+message ErrorMessageResponse {
+  int32 status = 1;
+  string error_message = 2;
+}
+
+message GetChannelNameRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 index = 2;
+}
+
+message GetChannelNameResponse {
+  int32 status = 1;
+  string channel_name_buffer = 2;
+}
+
+message GetRelayNameRequest {
+  nidevice_grpc.Session vi = 1;
+  sint32 index = 2;
+}
+
+message GetRelayNameResponse {
+  int32 status = 1;
+  string relay_name_buffer = 2;
+}
+
+message GetRelayCountRequest {
+  nidevice_grpc.Session vi = 1;
+  string relay_name = 2;
+}
+
+message GetRelayCountResponse {
+  int32 status = 1;
+  sint32 relay_count = 2;
+}
+
+message GetRelayPositionRequest {
+  nidevice_grpc.Session vi = 1;
+  string relay_name = 2;
+}
+
+message GetRelayPositionResponse {
+  int32 status = 1;
+  RelayPosition relay_position = 2;
+  sint32 relay_position_raw = 3;
+}
+
+message RelayControlRequest {
+  nidevice_grpc.Session vi = 1;
+  string relay_name = 2;
+  oneof relay_action_enum {
+    RelayAction relay_action = 3;
+    sint32 relay_action_raw = 4;
   }
 }
 
-message ScanResponse {
+message RelayControlResponse {
+  int32 status = 1;
+}
+
+message ResetInterchangeCheckRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ResetInterchangeCheckResponse {
+  int32 status = 1;
+}
+
+message ClearInterchangeWarningsRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ClearInterchangeWarningsResponse {
+  int32 status = 1;
+}
+
+message CommitRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message CommitResponse {
+  int32 status = 1;
+}
+
+message ResetWithDefaultsRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ResetWithDefaultsResponse {
+  int32 status = 1;
+}
+
+message DisableRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message DisableResponse {
+  int32 status = 1;
+}
+
+message ResetRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message ResetResponse {
   int32 status = 1;
 }
 
@@ -887,23 +780,69 @@ message SelfTestResponse {
   string self_test_message = 3;
 }
 
-message SendSoftwareTriggerRequest {
+message RevisionQueryRequest {
   nidevice_grpc.Session vi = 1;
 }
 
-message SendSoftwareTriggerResponse {
+message RevisionQueryResponse {
   int32 status = 1;
+  string instrument_driver_revision = 2;
+  string firmware_revision = 3;
 }
 
-message SetAttributeViBooleanRequest {
+message GetAttributeViInt32Request {
   nidevice_grpc.Session vi = 1;
   string channel_name = 2;
   NiSwitchAttribute attribute_id = 3;
-  bool attribute_value = 4;
 }
 
-message SetAttributeViBooleanResponse {
+message GetAttributeViInt32Response {
   int32 status = 1;
+  sint32 attribute_value = 2;
+}
+
+message GetAttributeViReal64Request {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+}
+
+message GetAttributeViReal64Response {
+  int32 status = 1;
+  double attribute_value = 2;
+}
+
+message GetAttributeViStringRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+}
+
+message GetAttributeViStringResponse {
+  int32 status = 1;
+  string attribute_value = 2;
+}
+
+message GetAttributeViSessionRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+}
+
+message GetAttributeViSessionResponse {
+  int32 status = 1;
+  nidevice_grpc.Session attribute_value = 2;
+}
+
+message GetAttributeViBooleanRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+}
+
+message GetAttributeViBooleanResponse {
+  int32 status = 1;
+  bool attribute_value = 2;
 }
 
 message SetAttributeViInt32Request {
@@ -931,17 +870,6 @@ message SetAttributeViReal64Response {
   int32 status = 1;
 }
 
-message SetAttributeViSessionRequest {
-  nidevice_grpc.Session vi = 1;
-  string channel_name = 2;
-  NiSwitchAttribute attribute_id = 3;
-  nidevice_grpc.Session attribute_value = 4;
-}
-
-message SetAttributeViSessionResponse {
-  int32 status = 1;
-}
-
 message SetAttributeViStringRequest {
   nidevice_grpc.Session vi = 1;
   string channel_name = 2;
@@ -953,38 +881,91 @@ message SetAttributeViStringResponse {
   int32 status = 1;
 }
 
-message SetContinuousScanRequest {
+message SetAttributeViSessionRequest {
   nidevice_grpc.Session vi = 1;
-  bool continuous_scan = 2;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  nidevice_grpc.Session attribute_value = 4;
 }
 
-message SetContinuousScanResponse {
+message SetAttributeViSessionResponse {
   int32 status = 1;
 }
 
-message SetPathRequest {
+message SetAttributeViBooleanRequest {
   nidevice_grpc.Session vi = 1;
-  string path_list = 2;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  bool attribute_value = 4;
 }
 
-message SetPathResponse {
+message SetAttributeViBooleanResponse {
   int32 status = 1;
 }
 
-message WaitForDebounceRequest {
+message CheckAttributeViInt32Request {
   nidevice_grpc.Session vi = 1;
-  sint32 maximum_time_ms = 2;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  oneof attribute_value_enum {
+    sint32 attribute_value_raw = 4;
+    NiSwitchInt32AttributeValues attribute_value = 5;
+  }
 }
 
-message WaitForDebounceResponse {
+message CheckAttributeViInt32Response {
   int32 status = 1;
 }
 
-message WaitForScanCompleteRequest {
+message CheckAttributeViReal64Request {
   nidevice_grpc.Session vi = 1;
-  sint32 maximum_time_ms = 2;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  double attribute_value_raw = 4;
 }
 
-message WaitForScanCompleteResponse {
+message CheckAttributeViReal64Response {
   int32 status = 1;
 }
+
+message CheckAttributeViStringRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  string attribute_value_raw = 4;
+}
+
+message CheckAttributeViStringResponse {
+  int32 status = 1;
+}
+
+message CheckAttributeViSessionRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  nidevice_grpc.Session attribute_value = 4;
+}
+
+message CheckAttributeViSessionResponse {
+  int32 status = 1;
+}
+
+message CheckAttributeViBooleanRequest {
+  nidevice_grpc.Session vi = 1;
+  string channel_name = 2;
+  NiSwitchAttribute attribute_id = 3;
+  bool attribute_value = 4;
+}
+
+message CheckAttributeViBooleanResponse {
+  int32 status = 1;
+}
+
+message InvalidateAllAttributesRequest {
+  nidevice_grpc.Session vi = 1;
+}
+
+message InvalidateAllAttributesResponse {
+  int32 status = 1;
+}
+
