@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SWITCH API metadata version 23.5.0d149
+# This file is generated from NI-SWITCH API metadata version 25.0.0f94
 functions = {
     'AbortScan': {
         'documentation': {
@@ -52,7 +52,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '\nIndicates whether a path is valid. Possible values include:\n\n- NISWITCH_VAL_PATH_AVAILABLE 1\n- NISWITCH_VAL_PATH_EXISTS 2\n- NISWITCH_VAL_PATH_UNSUPPORTED 3\n- NISWITCH_VAL_RESOURCE_IN_USE 4\n- NISWITCH_VAL_SOURCE_CONFLICT 5\n- NISWITCH_VAL_CHANNEL_NOT_AVAILABLE 6\n\nNotes: (1)\nNISWITCH_VAL_PATH_AVAILABLE indicates that the driver can create the\npath at this time. (2) NISWITCH_VAL_PATH_EXISTS indicates that the\npath already exists. (3) NISWITCH_VAL_PATH_UNSUPPORTED indicates that\nthe instrument is not capable of creating a path between the channels\nyou specify. (4) NISWITCH_VAL_RESOURCE_IN_USE indicates that although\nthe path is valid, the driver cannot create the path at this moment\nbecause the switch device is currently using one or more of the required\nchannels to create another path. You must destroy the other path before\ncreating this one. (5) NISWITCH_VAL_SOURCE_CONFLICT indicates that\nthe instrument cannot create a path because both channels are connected\nto a different source channel. (6)\nNISWITCH_VAL_CHANNEL_NOT_AVAILABLE indicates that the driver cannot\ncreate a path between the two channels because one of the channels is a\nconfiguration channel and thus unavailable for external connections.\n'
+                    'description': '\nIndicates whether a path is valid. Possible values include:\n\n- NISWITCH_VAL_PATH_AVAILABLE 1\n- NISWITCH_VAL_PATH_EXISTS 2\n- NISWITCH_VAL_PATH_UNSUPPORTED 3\n- NISWITCH_VAL_RSRC_IN_USE 4\n- NISWITCH_VAL_SOURCE_CONFLICT 5\n- NISWITCH_VAL_CHANNEL_NOT_AVAILABLE 6\n\nNotes: (1)\nNISWITCH_VAL_PATH_AVAILABLE indicates that the driver can create the\npath at this time. (2) NISWITCH_VAL_PATH_EXISTS indicates that the\npath already exists. (3) NISWITCH_VAL_PATH_UNSUPPORTED indicates that\nthe instrument is not capable of creating a path between the channels\nyou specify. (4) NISWITCH_VAL_RSRC_IN_USE indicates that although\nthe path is valid, the driver cannot create the path at this moment\nbecause the switch device is currently using one or more of the required\nchannels to create another path. You must destroy the other path before\ncreating this one. (5) NISWITCH_VAL_SOURCE_CONFLICT indicates that\nthe instrument cannot create a path because both channels are connected\nto a different source channel. (6)\nNISWITCH_VAL_CHANNEL_NOT_AVAILABLE indicates that the driver cannot\ncreate a path between the two channels because one of the channels is a\nconfiguration channel and thus unavailable for external connections.\n'
                 },
                 'enum': 'PathCapability',
                 'name': 'pathCapability',
