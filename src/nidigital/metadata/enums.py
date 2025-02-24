@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 24.3.0f175
+# This file is generated from NI-Digital Pattern Driver API metadata version 24.5.0f217
 enums = {
     'BitOrder': {
         'values': [
@@ -789,6 +789,22 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_SOFTWARE',
                 'value': 1702
+            }
+        ]
+    },
+    'VectorMemoryType': {
+        'values': [
+            {
+                'name': 'NIDIGITAL_VAL_FAST_VECTOR_MEMORY',
+                'value': 3800
+            },
+            {
+                'name': 'NIDIGITAL_VAL_CACHE_VECTOR_MEMORY',
+                'value': 3801
+            },
+            {
+                'name': 'NIDIGITAL_VAL_LARGE_VECTOR_MEMORY',
+                'value': 3802
             }
         ]
     },
