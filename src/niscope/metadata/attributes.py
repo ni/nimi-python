@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-SCOPE API metadata version 24.3.0d61
+# This file is generated from NI-SCOPE API metadata version 25.0.0f151
 attributes = {
     1050005: {
         'access': 'read-write',

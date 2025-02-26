@@ -1,6 +1,6 @@
 
 //---------------------------------------------------------------------
-// This file is generated from NI-DCPower API metadata version 24.3.0f264
+// This file is generated from NI-DCPower API metadata version 25.0.0f266
 //---------------------------------------------------------------------
 // Proto file for the NI-DCPower Metadata
 //---------------------------------------------------------------------
@@ -408,6 +408,7 @@ enum OutputStates {
   OUTPUT_STATES_NIDCPOWER_VAL_OUTPUT_OVER_VOLTAGE = 2;
   OUTPUT_STATES_NIDCPOWER_VAL_OUTPUT_OVER_CURRENT = 3;
   OUTPUT_STATES_NIDCPOWER_VAL_OUTPUT_UNREGULATED = 4;
+  OUTPUT_STATES_NIDCPOWER_VAL_OUTPUT_INHIBITED = 1163;
 }
 
 enum MeasurementTypes {

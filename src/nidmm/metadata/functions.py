@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DMM API metadata version 24.3.0d105
+# This file is generated from NI-DMM API metadata version 24.8.0f126
 functions = {
     'Abort': {
         'documentation': {
@@ -644,7 +644,7 @@ functions = {
     },
     'Fetch': {
         'documentation': {
-            'description': '\nReturns the value from a previously initiated measurement. You must call\nniDMM_Initiate before calling this function.\n'
+            'description': '\nReturns the value from a previously initiated measurement. You must call\nniDMM_Initiate before calling this function. Value is in base units.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -681,7 +681,7 @@ functions = {
     },
     'FetchMultiPoint': {
         'documentation': {
-            'description': '\nReturns an array of values from a previously initiated multipoint\nmeasurement. The number of measurements the DMM makes is determined by\nthe values you specify for the **Trigger_Count** and **Sample_Count**\nparameters of niDMM_ConfigureMultiPoint. You must first call\nniDMM_Initiate to initiate a measurement before calling this function.\n'
+            'description': '\nReturns an array of values from a previously initiated multipoint\nmeasurement. The number of measurements the DMM makes is determined by\nthe values you specify for the **Trigger_Count** and **Sample_Count**\nparameters of niDMM_ConfigureMultiPoint. You must first call\nniDMM_Initiate to initiate a measurement before calling this function. Values are in base units.\n'
         },
         'included_in_proto': True,
         'parameters': [
@@ -1654,7 +1654,7 @@ functions = {
     },
     'Read': {
         'documentation': {
-            'description': 'Acquires a single measurement and returns the measured value.'
+            'description': 'Acquires a single measurement and returns the measured value in base units.'
         },
         'included_in_proto': True,
         'parameters': [
