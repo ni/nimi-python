@@ -16,7 +16,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.4.9.dev0',
+    version='1.4.9',
     description='NI-TClk Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -34,7 +34,7 @@ setup(
         'hightime>=0.2.0',
     ],
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",

@@ -1,6 +1,6 @@
 # Changelog
 
-* [Unreleased](#unreleased)
+* [1.4.9](#149---2025-02-26)
 * [1.4.8](#148---2024-04-26)
 * [1.4.7](#147---2023-12-15)
 * [1.4.6](#146---2023-09-11)
@@ -35,7 +35,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 1.4.9 - 2025-02-26
 * ### ALL
     * #### Added
         * Support for Python 3.13
@@ -50,42 +50,10 @@ All notable changes to this project will be documented in this file.
                 * `INHIBITED` added to enum `OutputStates`.
     * #### Changed
         * Fixed #2067: `nidcpower.OutputStates` values are incorrect.
-    * #### Removed
 * ### `nidigital` (NI-Digital Pattern Driver)
     * #### Added
         * Methods Added:
             * `enable_match_fail_combination`
-    * #### Changed
-    * #### Removed
-* ### `nidmm` (NI-DMM)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nifgen` (NI-FGEN)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nimodinst` (NI-ModInst)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niscope` (NI-SCOPE)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `niswitch` (NI-SWITCH)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nise` (NI Switch Executive)
-    * #### Added
-    * #### Changed
-    * #### Removed
-* ### `nitclk` (NI-TClk)
-    * #### Added
-    * #### Changed
-    * #### Removed
-
 
 ## 1.4.8 - 2024-04-26
 * ### ALL
