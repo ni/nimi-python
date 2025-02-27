@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nimodinst examples here <https://github.com/ni/nimi-python/releases/download/1.4.9/nimodinst_examples.zip>`_
+`You can download all nimodinst examples for latest version here <https://github.com/ni/nimi-python/releases/download/1.4.9/nimodinst_examples.zip>`_
 
 nimodinst_all_devices.py
 ------------------------
@@ -10,5 +10,5 @@ nimodinst_all_devices.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nimodinst_all_devices.py) <https://github.com/ni/nimi-python/blob/1.4.9/src/nimodinst/examples/nimodinst_all_devices.py>`_
+   :caption: `(nimodinst_all_devices.py) <https://github.com/ni/nimi-python/blob/master/src/nimodinst/examples/nimodinst_all_devices.py>`_
 

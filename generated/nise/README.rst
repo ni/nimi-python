@@ -102,7 +102,7 @@ As a prerequisite to using the **nise** module, you must install the NI Switch E
 
 The nimi-python modules (i.e. for **NI Switch Executive**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nise~=1.4.9
+  $ python -m pip install nise
 
 
 Contributing
