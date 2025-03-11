@@ -36,4 +36,7 @@ commands.log
 .vscode/launch.json
 .vscode/settings.json
 
+pip_list.txt
+sorted_pip_list.txt
+
 .pytest_cache/
