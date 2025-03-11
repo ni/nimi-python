@@ -1099,7 +1099,9 @@ class TestLibrary(SystemTests):
 class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def grpc_channel(self):
-        with system_test_utilities.GrpcServerProcess() as proc:
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 

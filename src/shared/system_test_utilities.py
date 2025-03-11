@@ -8,9 +8,9 @@ import time
 
 
 class GrpcServerProcess:
-    def __init__(self):
+    def __init__(self, config_file_path):
         server_exe = self._get_grpc_server_exe()
-        self._proc = subprocess.Popen([str(server_exe)], stdout=subprocess.PIPE)
+        self._proc = subprocess.Popen([str(server_exe), config_file_path], stdout=subprocess.PIPE)
 
         # Read/parse output until we find the port number or the process exits; discard the rest.
         try:
