@@ -9,7 +9,7 @@ from subprocess import check_call
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
 default_python_cmd = ['python']
-drivers_to_upload = ['nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+drivers_to_upload = ['nirfsg', 'nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
 drivers_to_update = ['nifake'] + drivers_to_upload
 
 
