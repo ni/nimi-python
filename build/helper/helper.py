@@ -21,11 +21,11 @@ _type_map = {
     'ViReal64':      { 'array_type': 'd',      'python_type': 'float', 'numpy_type': 'float64',    },  # noqa: E201, E202, E241
     'ViStatus':      { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
     'ViSession':     { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViAttr':        { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViAttr':        { 'array_type': 'Q',     'python_type': 'int',   'numpy_type': 'uint64',         },  # noqa: E201, E202, E241
     'ViChar':        { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
     'ViChar[]':      { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
     'ViBoolean':     { 'array_type': None,     'python_type': 'bool',  'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViRsrc':        { 'array_type': None,     'python_type': 'str',   'numpy_type': 'bool_',      },  # noqa: E201, E202, E241
+    'ViRsrc':        { 'array_type': 's',     'python_type': 'str',   'numpy_type': 'bool_',      },  # noqa: E201, E202, E241
 }
 
 
