@@ -9,9 +9,6 @@ from subprocess import check_call
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
 default_python_cmd = ['python']
-drivers_to_upload = ['nidcpower', 'nidigital', 'nidmm', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
-drivers_to_update = ['nifake'] + drivers_to_upload
-
 
 class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
     '''We want the description to use the raw formatting but have the parameters be formatted as before
@@ -23,6 +20,9 @@ class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescri
 
 
 def main():
+    drivers_to_update = ['nidcpower', 'nidigital', 'nidmm', 'nifake','niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+
+
     # Setup the required arguments for this script
     usage = """Release script
 Prereqs
@@ -38,7 +38,9 @@ Steps: see "Release Process" section of CONTRIBUTING.md
     build_group.add_argument("--update", action="store_true", default=False, help="Update version in config.py files")
     build_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
     build_group.add_argument("--python-cmd", action="store", default=None, help=f"Command to use for invoking python. Default: {default_python_cmd}")
-
+    build_group.add_argument("--drivers",action="store",default=None,help="Comma-separated list of drivers to update. Default: All Drivers")
+    build_group.add_argument("--update-type",action="store",default=None,choices=["major", "minor", "patch"],help="Specify the type of update: major, minor, or patch."
+)
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
     verbosity_group.add_argument("--preview", action="store_true", default=False, help="Show what would happen when running with given parameters")
@@ -66,13 +68,24 @@ Steps: see "Release Process" section of CONTRIBUTING.md
         passthrough_params.append('--log-file').append(args.log_file)
     if args.release:
         passthrough_params.append('--release')
+    if args.update_type:
+        passthrough_params.append(f'--update-type={args.update_type}')
 
+    if args.drivers:
+        provided_drivers = args.drivers.split(",")
+        invalid_drivers = [driver for driver in provided_drivers if driver not in drivers_to_update]
+
+        if invalid_drivers:
+            raise ValueError(f"The following drivers are invalid: {', '.join(invalid_drivers)}. Valid drivers are: {','.join(drivers_to_update)}")
+        drivers_to_update = provided_drivers
+    
+    
     if args.update:
         logging.info('Updating versions')
 
         for d in drivers_to_update:
-            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-folder', f'src/{d}', ] + passthrough_params))
-            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-folder', f'src/{d}', ] + passthrough_params)
+            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py','--src-folder', f'src/{d}',] + passthrough_params))
+            check_call(python_cmd + ['tools/updateReleaseInfo.py','--src-folder', f'src/{d}', ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')
