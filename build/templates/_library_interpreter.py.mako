@@ -81,9 +81,16 @@ class LibraryInterpreter(object):
     * Converting errors returned by Library into Python exceptions.
     '''
 
+% if config.get('enable_warning_events', False):
+    def __init__(self, encoding, warning_event_handler: errors.DriverWarningEvent):
+% else:
     def __init__(self, encoding):
+% endif
         self._encoding = encoding
         self._library = _library_singleton.get()
+% if config.get('enable_warning_events', False):
+        self._warning_event_handler = warning_event_handler
+% endif
         % if 'SetRuntimeEnvironment' in functions:
         global _was_runtime_environment_set
         if _was_runtime_environment_set is None:
@@ -112,6 +119,16 @@ class LibraryInterpreter(object):
     def get_session_handle(self):
         return self._${config['session_handle_parameter_name']}
 
+% if config.get('enable_warning_events', False):
+    def generate_driver_warning_event(self, driverwarning: errors.DriverWarning):
+        '''generate_driver_warning_event
+
+        Generates a driver warning event.
+        '''
+        if self._warning_event_handler is not None:
+            self._warning_event_handler.notify(driverwarning)
+
+% endif
 <%include file="/_library_interpreter.py/_get_error_description.py.mako" args="config=config" />\
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:

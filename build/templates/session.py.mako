@@ -248,6 +248,19 @@ if grpc_supported:
 %>\
         ${helper.get_function_docstring(ctor_for_docs, False, config, indent=8)}
         '''
+% if config.get('enable_warning_events', False):
+        driver_warning_event = errors.DriverWarningEvent()
+
+% if grpc_supported:
+        if grpc_options:
+            import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, warning_event_handler=driver_warning_event)
+        else:
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
+% else:
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
+% endif
+% else:
 % if grpc_supported:
         if grpc_options:
             import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
@@ -256,6 +269,7 @@ if grpc_supported:
             interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 % else:
         interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+% endif
 % endif
 
         # Initialize the superclass with default values first, populate them later

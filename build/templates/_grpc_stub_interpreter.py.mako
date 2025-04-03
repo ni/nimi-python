@@ -31,10 +31,17 @@ from . import ${c['file_name']} as ${c['file_name']}  # noqa: F401
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
+% if config.get('enable_warning_events', False):
+    def __init__(self, grpc_options, warning_event_handler: errors.DriverWarningEvent):
+% else:
     def __init__(self, grpc_options):
+% endif
         self._grpc_options = grpc_options
         self._lock = threading.RLock()
         self._client = ${module_name}_grpc.${service_class_prefix}Stub(grpc_options.grpc_channel)
+% if config.get('enable_warning_events', False):
+        self._warning_event_handler = warning_event_handler
+% endif
         self.set_session_handle()
 
     def set_session_handle(self, value=session_grpc_types.Session()):
@@ -82,7 +89,14 @@ class GrpcStubInterpreter(object):
                     error_message = self.error_message(error_code)
                 except errors.Error:
                     error_message = 'Failed to retrieve error description.'
+% if config.get('enable_warning_events', False):
+            driver_warning = errors.DriverWarning(error_code, error_message)
+            if self._warning_event_handler is not None:
+                self._warning_event_handler.notify(driver_warning)
+            warnings.warn(driver_warning)
+% else:
             warnings.warn(errors.DriverWarning(error_code, error_message))
+% endif
         return response
 % for func_name in sorted(functions):
 % for method_template in functions[func_name]['method_templates']:

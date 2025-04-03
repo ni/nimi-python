@@ -698,11 +698,13 @@ class Session(_SessionBase):
             session (nifake.Session): A session object representing the device.
 
         '''
+        driver_warning_event = errors.DriverWarningEvent()
+
         if grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, warning_event_handler=driver_warning_event)
         else:
-            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(

@@ -39,11 +39,14 @@ class TestLibraryInterpreter:
         self.get_ctypes_pointer_for_buffer_side_effect_count = 0
         self.get_ctypes_pointer_for_buffer_side_effect_items = []
 
+        self.driver_warning_event = nifake.errors.DriverWarningEvent()
+        self.warning_at_callback = None
+
     def teardown_method(self, method):
         self.patched_library_singleton_get.stop()
 
     def get_initialized_library_interpreter(self):
-        interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251')
+        interpreter = nifake._library_interpreter.LibraryInterpreter('windows-1251', self.driver_warning_event)
         interpreter._vi = SESSION_NUM_FOR_TEST
         return interpreter
 
@@ -55,6 +58,9 @@ class TestLibraryInterpreter:
         ret_val = self.get_ctypes_pointer_for_buffer_side_effect_items[self.get_ctypes_pointer_for_buffer_side_effect_count]
         self.get_ctypes_pointer_for_buffer_side_effect_count += 1
         return ret_val
+
+    def warning_event_callback(self, driver_warning: nifake.DriverWarning):
+        self.warning_at_callback = driver_warning
 
     # Methods
 
@@ -388,6 +394,29 @@ class TestLibraryInterpreter:
             assert issubclass(w[0].category, nifake.DriverWarning)
             assert test_error_desc in str(w[0].message)
             assert f'Warning {test_error_code} occurred.' in str(w[0].message)
+
+    def test_method_with_warningevent(self):
+        # We want to ignore warnings.warn and validate only warning event
+        warnings.filterwarnings("ignore", category=nifake.DriverWarning)
+
+        # Register the callback to the warning event
+        self.driver_warning_event.subscribe(self.warning_event_callback)
+
+        test_error_code = 42
+        test_error_desc = "The answer to the ultimate question, only positive"
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = test_error_code
+        self.side_effects_helper['GetError']['description'] = test_error_desc
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.simple_function()
+        assert test_error_desc in str(self.warning_at_callback)
+        assert f'Warning {test_error_code} occurred.' in str(self.warning_at_callback)
+
+        # Unregister the callback to the warning event and clear warning
+        self.driver_warning_event.unsubscribe(self.warning_event_callback)
+        self.warning_at_callback = None
 
     def test_read_with_warning(self):
         # We want to capture all of our warnings, not just the first one
