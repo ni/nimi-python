@@ -2308,7 +2308,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'This value is valid on only the PXIe-5831/5832 with PXIe-5653.**PXIe-5831/5832 with PXIe-5653—**NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use %enum_value{reference clock source.pxi clk str} as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
+                    'description': 'This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 —** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use NIRFSG_VAL_PXI_CLK_STR %enum_value as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
                 },
                 'name': 'NIRFSG_VAL_PXI_CLK_MASTER_STR',
                 'value': 'PXI_ClkMaster'

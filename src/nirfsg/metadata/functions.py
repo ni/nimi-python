@@ -535,56 +535,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'CheckIfConfigurationListExists': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns whether the configuration list that you specify as NIRFSG_ATTR_LIST_NAME exists.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name of the configuration list. This string is case-insensitive.'
-                },
-                'name': 'listName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns VI_TRUE if the configuration list exists.'
-                },
-                'name': 'listExists',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'CheckIfScriptExists': {
         'codegen_method': 'public',
         'documentation': {
@@ -716,13 +666,12 @@ functions = {
         'use_session_lock': True
     },
     'ClearArbWaveform': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Deletes a specified waveform from the pool of currently defined waveforms. The NI-RFSG device must be in the Configuration state before you call this function.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'delete_waveform',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1001,56 +950,6 @@ functions = {
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'ConfigureDigitalEdgeConfigurationListStepTrigger': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Configures the Configuration List Step trigger for digital edge triggering. The NI-RFSG device must be in the Configuration state before you call this function.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the trigger source terminal for the digital edge Configuration List Step trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute to this value. Refer to this attribute for possible values.'
-                },
-                'name': 'source',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the active edge for the digital edge Configuration List Step trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_EDGE attribute to this value.'
-                },
-                'name': 'edge',
-                'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -1694,120 +1593,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'CreateConfigurationList': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Creates an empty configuration list. Use the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute to enable a configuration list created by this function. Call the niRFSG_CreateConfigurationListStep function to add steps to the configuration list.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name of the configuration list. This string is case-insensitive and alphanumeric, and it cannot contain spaces or use reserved words.'
-                },
-                'name': 'listName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies size of the NIRFSG_ATTR_CONFIGURATION_LIST_ATTRIBUTES parameter.'
-                },
-                'name': 'numberOfAttributes',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the attributes that you intend to change between configuration list steps. Calling the niRFSG_CreateConfigurationList function allocates space for each of the configuration list attributes. When you use an NI-RFSG Set attribute function to set one of the attributes in the configuration list, that attribute is set for one of the configuration list steps. Use the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attribute to specify which configuration list step to configure.'
-                },
-                'name': 'configurationListAttributes',
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberOfAttributes'
-                },
-                'type': 'ViAttr[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Sets this list as the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute when this parameter is enabled. NI recommends that you set this parameter to VI_TRUE when creating the list.'
-                },
-                'name': 'setAsActiveList',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'CreateConfigurationListStep': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Creates a new configuration list step in the configuration list specified by the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute. When you create a configuration list step, a new instance of each attribute specified by the configuration list attributes is created. Configuration list attributes are specified when a configuration list is created. The new instance of an attribute can be accessed with any Set attribute function using the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST and NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attributes.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Sets this step as the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attribute list specified by the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute. NI recommends that you set this parameter to VI_TRUE when creating the list steps.'
-                },
-                'name': 'setAsActiveStep',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
         'documentation': {
@@ -1908,46 +1693,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'DeleteConfigurationList': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': "Deletes a previously created configuration list and all the configuration list steps in the specified configuration list. When a configuration list step is deleted, all the instances of the attributes associated with the configuration list step are also removed. When you delete the active configuration list, NI-RFSG automatically resets the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute to '' (empty string), which indicates no list is active, and the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attribute to 0."
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name of the configuration list. This string is case-insensitive and alphanumeric, and it cannot contain spaces or use reserved words.'
-                },
-                'name': 'listName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
         'documentation': {
@@ -2002,36 +1747,6 @@ functions = {
         'codegen_method': 'public',
         'documentation': {
             'description': ' Places the instrument in a quiescent state where it has minimal or no impact on the system to which it is connected.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'DisableConfigurationListStepTrigger': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Configures the device not to receive triggers for the configuration list. The configuration list does not advance steps if this trigger is disabled. Call this function only if a previously configured trigger needs to be disabled. The NI-RFSG device must be in the Configuration state before you call this function.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2128,114 +1843,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ErrorMessage': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Converts an error code returned by an NI-RFSG function into a user-readable string.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'The ViSession handle that you obtain from niRFSG_Init or niRFSG_InitWithOptions. The handle identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the status parameter that is returned from any NI-RFSG function.'
-                },
-                'name': 'errorCode',
-                'type': 'ViStatus',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': ' Returns the user-readable message string that corresponds to the status code you specify.'
-                },
-                'name': 'errorMessage',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': False
-    },
-    'ErrorQuery': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Reads an error code and an error message from the instrument error queue.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the error code read from the instrument error queue.'
-                },
-                'name': 'errorCode',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': ' Returns the error message string read from the instrument error message queue.'
-                },
-                'name': 'errorMessage',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'ExportSignal': {
         'codegen_method': 'public',
         'documentation': {
@@ -2289,134 +1896,6 @@ functions = {
                 },
                 'name': 'outputTerminal',
                 'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'GetAllNamedWaveformNames': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': ' Return names of the waveforms present in the memory.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns a string having waveform names separated by commas.'
-                },
-                'name': 'waveformNames',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the number of bytes in the ViChar buffer you specify for the NIRFSG_ATTR_WAVEFORM_NAMES parameter.'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Fetch the number of bytes needed to pass in the NIRFSG_ATTR_BUFFER_SIZE parameter.'
-                },
-                'name': 'actualBufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'GetAllScriptNames': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Return names of the scripts present in the memory.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns a string having script names separated by commas.'
-                },
-                'name': 'scriptNames',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the number of bytes in the ViChar buffer you specify for the **waveformNames** parameter.'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Fetch the number of bytes needed to pass in the NIRFSG_ATTR_BUFFER_SIZE parameter.It can be fetch by passing VI_NULL in the NIRFSG_ATTR_SCRIPT_NAMES parameter.'
-                },
-                'name': 'actualBufferSize',
-                'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -2781,7 +2260,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'The buffer in which the function returns the current value of the attribute. The buffer must be of type ViChar and have at least as many bytes as indicated in the **bufferSize** parameter.'
                 },
@@ -2798,143 +2277,8 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetChannelName': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Returns the channel string that is in the channel table at an index you specify.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies a one-based index into the channel table.'
-                },
-                'name': 'index',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the buffer for the channel string.'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'yet to be defined.'
-                },
-                'name': 'name',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'GetDeembeddingSparameters': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Returns the S-parameters used for de-embedding a measurement on the selected port. This includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.',
-            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSG_ATTR_VI is obtained from the niRFSG_Init or niRFSG_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
-                },
-                'name': 'sparameters',
-                'type': 'ni complex number',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the array that is returned by the NIRFSG_ATTR_SPARAMETERS output.'
-                },
-                'name': 'sparametersArraySize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of S-parameters.'
-                },
-                'name': 'numberOfSparameters',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
-                },
-                'name': 'numberOfPorts',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'GetError': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Retrieves and then clears the IVI error information for the session or the current execution thread.',
             'note': 'If the **bufferSize** parameter is 0, this function does not clear the error information. By passing 0 to the **bufferSize** parameter, you can determine the buffer size required to obtain the entire NIRFSG_ATTR_ERROR_DESCRIPTION string. You can then call this function again with a sufficiently large buffer. If you specify a valid IVI session for the NIRFSG_ATTR_VI parameter, this function retrieves and clears the error information for the session. If you pass VI_NULL for the NIRFSG_ATTR_VI parameter, this function retrieves and clears the error information for the current execution thread. If the NIRFSG_ATTR_VI parameter is an invalid session, this function does nothing and returns an error. Normally, the error information describes the first error that occurred since the user last called this function or the niRFSG_ClearError function.'
@@ -3000,7 +2344,7 @@ functions = {
         'use_session_lock': False
     },
     'GetExternalCalibrationLastDateAndTime': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns 14 for the hours parameter and 30 for the minutes parameter.'
         },
@@ -3090,7 +2434,7 @@ functions = {
         'use_session_lock': True
     },
     'GetMaxSettablePower': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the maximum settable output power level for the current configuration.'
         },
@@ -3130,7 +2474,7 @@ functions = {
         'use_session_lock': True
     },
     'GetSelfCalibrationDateAndTime': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration. The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns 14 for the hours parameter and 30 for the minutes parameter.'
         },
@@ -3230,7 +2574,7 @@ functions = {
         'use_session_lock': True
     },
     'GetSelfCalibrationTemperature': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.'
         },
@@ -3280,7 +2624,7 @@ functions = {
         'use_session_lock': True
     },
     'GetStreamEndpointHandle': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Returns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.'
         },
@@ -3322,80 +2666,6 @@ functions = {
                 },
                 'name': 'readerHandle',
                 'type': 'ViUInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'GetTerminalName': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Returns the fully-qualified name of the specified signal. The fully-qualified name is helpful to automatically route signals in a multisegment chassis.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the signal to query.'
-                },
-                'name': 'signal',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': "Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to '' (empty string)."
-                },
-                'name': 'signalIdentifier',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the number of bytes in the ViChar buffer you specify for the NIRFSG_ATTR_TERMINAL_NAME parameter.'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns the string to use as the source for other devices.'
-                },
-                'name': 'terminalName',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -4132,104 +3402,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ResetWithOptions': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies a list of steps to skip during the reset process. The default value is NIRFSG_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset.'
-                },
-                'name': 'stepsToOmit',
-                'type': 'ViUInt64',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'RevisionQuery': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the revision numbers of the NI-RFSG driver and the instrument firmware.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns the value of the NIRFSG_ATTR_SPECIFIC_DRIVER_REVISION attribute in the form of a string.'
-                },
-                'name': 'instrumentDriverRevision',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns the value of the NIRFSG_ATTR_INSTRUMENT_FIRMWARE_REVISION attribute in the form of a string.'
-                },
-                'name': 'firmwareRevision',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
         'documentation': {
@@ -4521,7 +3693,7 @@ functions = {
         'use_session_lock': True
     },
     'SetArbWaveformNextWritePosition': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Configures the start position to use for writing a waveform before calling the niRFSG_WriteArbWaveform function. This function allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the niRFSG_AllocateArbWaveform function or the niRFSG_WriteArbWaveform function. Subsequent writes to that waveform begin where the last write ended, unless this function is called again.',
             'note': 'If you use this function to write the waveform that is currently generating, an undefined output may result.'
@@ -5200,188 +4372,6 @@ functions = {
                 },
                 'name': 'maxTimeMilliseconds',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'WriteArbWaveform': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Writes an arbitrary waveform to the NI-RFSG device. This function configures the I and Q vectors of a complex baseband signal. If the waveform to write is already allocated using the niRFSG_AllocateArbWaveform function, the NIRFSG_ATTR_MORE_DATA_PENDING parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.',
-            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the NIRFSG_ATTR_MORE_DATA_PENDING parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
-                },
-                'name': 'waveformName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in both the NIRFSG_ATTR_I_DATA and NIRFSG_ATTR_Q_DATA arrays. The NIRFSG_ATTR_I_DATA and NIRFSG_ATTR_Q_DATA arrays must have the same length. If the NIRFSG_ATTR_ARB_WAVEFORM_QUANTUM attribute value is *q*, then the number of samples should be a multiple of *q*. The specified number of samples cannot be 0.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the in-phase (I) component of the complex baseband signal.'
-                },
-                'name': 'iData',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ViReal64[]',
-                'use_array': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the quadrature (Q) component of the complex baseband signal.'
-                },
-                'name': 'qData',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ViReal64[]',
-                'use_array': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set NIRFSG_ATTR_MORE_DATA_PENDING to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
-                },
-                'name': 'moreDataPending',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'WriteArbWaveformF32': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Writes an arbitrary waveform to the NI-RFSG device. This function configures the I and Q vectors of a complex single baseband signal. If the waveform to write is already allocated using the niRFSG_AllocateArbWaveform function, the NIRFSG_ATTR_MORE_DATA_PENDING parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.',
-            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the NIRFSG_ATTR_MORE_DATA_PENDING parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the niRFSG_Init function or the niRFSG_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
-                },
-                'name': 'waveformName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in both the NIRFSG_ATTR_I_DATA and NIRFSG_ATTR_Q_DATA arrays. The NIRFSG_ATTR_I_DATA and NIRFSG_ATTR_Q_DATA arrays must have the same length. If the NIRFSG_ATTR_ARB_WAVEFORM_QUANTUM attribute value is *q*, then the number of samples should be a multiple of *q*. The specified number of samples cannot be 0.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the in-phase (I) component of the complex baseband signal.'
-                },
-                'name': 'iData',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ViReal32[]',
-                'use_array': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the quadrature (Q) component of the complex baseband signal.'
-                },
-                'name': 'qData',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ViReal32[]',
-                'use_array': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set NIRFSG_ATTR_MORE_DATA_PENDING to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
-                },
-                'name': 'moreDataPending',
-                'type': 'ViBoolean',
                 'use_array': False,
                 'use_in_python_api': True
             }

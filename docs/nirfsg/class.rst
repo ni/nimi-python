@@ -105,9 +105,11 @@ allocate_arb_waveform
 
     .. py:method:: allocate_arb_waveform(waveform_name, size_in_samples)
 
-            Allocates onboard memory space for the arbitrary waveform. Use this method to specify the total size of a waveform before writing the data. Use this method only if you are calling the :py:meth:`nirfsg.Session.write_arb_waveform` method multiple times to write a large waveform in smaller blocks. The NI-RFSG device must be in the Configuration state before you call this method.
+            Allocates onboard memory space for the arbitrary waveform. Use this method to specify the total size of a waveform before writing the data. Use this method only if you are calling the :py:meth:`nirfsg.Session.WriteArbWaveform` method multiple times to write a large waveform in smaller blocks. The NI-RFSG device must be in the Configuration state before you call this method.
 
             
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
 
 
@@ -428,41 +430,6 @@ check_generation_status
 
 
 
-check_if_configuration_list_exists
-----------------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_if_configuration_list_exists(list_name)
-
-            Returns whether the configuration list that you specify as :py:attr:`nirfsg.Session.LIST_NAME` exists.
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-            :param list_name:
-
-
-                Specifies the name of the configuration list. This string is case-insensitive.
-
-                
-
-
-            :type list_name: str
-
-            :rtype: bool
-            :return:
-
-
-                    Returns True if the configuration list exists.
-
-                    
-
-
-
 check_if_script_exists
 ----------------------
 
@@ -546,6 +513,29 @@ clear_all_arb_waveforms
 
 
 
+clear_arb_waveform
+------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: clear_arb_waveform(name)
+
+            Deletes a specified waveform from the pool of currently defined waveforms. The NI-RFSG device must be in the Configuration state before you call this method.
+
+            
+
+
+
+            :param name:
+
+
+                Name of the stored waveform to delete.
+
+                
+
+
+            :type name: str
+
 clear_error
 -----------
 
@@ -557,7 +547,7 @@ clear_error
 
             
 
-            .. note:: The :py:meth:`nirfsg.Session._get_error` method clears the error information after it is retrieved. A call to the :py:meth:`nirfsg.Session.clear_error` method is necessary only when you do not use a call to the :py:meth:`nirfsg.Session._get_error` method to retrieve error information.
+            .. note:: The :py:meth:`nirfsg.Session.get_error` method clears the error information after it is retrieved. A call to the :py:meth:`nirfsg.Session.clear_error` method is necessary only when you do not use a call to the :py:meth:`nirfsg.Session.get_error` method to retrieve error information.
 
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
@@ -712,38 +702,6 @@ configure_deembedding_table_interpolation_spline
 
 
             :type table_name: str
-
-configure_digital_edge_configuration_list_step_trigger
-------------------------------------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_digital_edge_configuration_list_step_trigger(source, edge)
-
-            Configures the Configuration List Step trigger for digital edge triggering. The NI-RFSG device must be in the Configuration state before you call this method.
-
-            
-
-
-
-            :param source:
-
-
-                Specifies the trigger source terminal for the digital edge Configuration List Step trigger. NI-RFSG sets the :py:attr:`nirfsg.Session.digital_edge_configuration_list_step_trigger_source` property to this value. Refer to this property for possible values.
-
-                
-
-
-            :type source: str
-            :param edge:
-
-
-                Specifies the active edge for the digital edge Configuration List Step trigger. NI-RFSG sets the :py:attr:`nirfsg.Session.digital_edge_configuration_list_step_trigger_edge` property to this value.
-
-                
-
-
-            :type edge: int
 
 configure_digital_edge_script_trigger
 -------------------------------------
@@ -1139,70 +1097,6 @@ configure_software_start_trigger
 
 
 
-create_configuration_list
--------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: create_configuration_list(list_name, configuration_list_attributes, set_as_active_list)
-
-            Creates an empty configuration list. Use the :py:attr:`nirfsg.Session.active_configuration_list` property to enable a configuration list created by this method. Call the :py:meth:`nirfsg.Session.create_configuration_list_step` method to add steps to the configuration list.
-
-            
-
-
-
-            :param list_name:
-
-
-                Specifies the name of the configuration list. This string is case-insensitive and alphanumeric, and it cannot contain spaces or use reserved words.
-
-                
-
-
-            :type list_name: str
-            :param configuration_list_attributes:
-
-
-                Specifies the properties that you intend to change between configuration list steps. Calling the :py:meth:`nirfsg.Session.create_configuration_list` method allocates space for each of the configuration list properties. When you use an NI-RFSG Set property method to set one of the properties in the configuration list, that property is set for one of the configuration list steps. Use the :py:attr:`nirfsg.Session.active_configuration_list_step` property to specify which configuration list step to configure.
-
-                
-
-
-            :type configuration_list_attributes: list of int
-            :param set_as_active_list:
-
-
-                Sets this list as the :py:attr:`nirfsg.Session.active_configuration_list` property when this parameter is enabled. NI recommends that you set this parameter to True when creating the list.
-
-                
-
-
-            :type set_as_active_list: bool
-
-create_configuration_list_step
-------------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: create_configuration_list_step(set_as_active_step)
-
-            Creates a new configuration list step in the configuration list specified by the :py:attr:`nirfsg.Session.active_configuration_list` property. When you create a configuration list step, a new instance of each property specified by the configuration list properties is created. Configuration list properties are specified when a configuration list is created. The new instance of a property can be accessed with any Set property method using the :py:attr:`nirfsg.Session.active_configuration_list` and :py:attr:`nirfsg.Session.active_configuration_list_step` properties.
-
-            
-
-
-
-            :param set_as_active_step:
-
-
-                Sets this step as the :py:attr:`nirfsg.Session.active_configuration_list_step` property list specified by the :py:attr:`nirfsg.Session.active_configuration_list` property. NI recommends that you set this parameter to True when creating the list steps.
-
-                
-
-
-            :type set_as_active_step: bool
-
 create_deembedding_sparameter_table_s2_p_file
 ---------------------------------------------
 
@@ -1266,29 +1160,6 @@ delete_all_deembedding_tables
 
 
 
-delete_configuration_list
--------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: delete_configuration_list(list_name)
-
-            Deletes a previously created configuration list and all the configuration list steps in the specified configuration list. When a configuration list step is deleted, all the instances of the properties associated with the configuration list step are also removed. When you delete the active configuration list, NI-RFSG automatically resets the :py:attr:`nirfsg.Session.active_configuration_list` property to '' (empty string), which indicates no list is active, and the :py:attr:`nirfsg.Session.active_configuration_list_step` property to 0.
-
-            
-
-
-
-            :param list_name:
-
-
-                Specifies the name of the configuration list. This string is case-insensitive and alphanumeric, and it cannot contain spaces or use reserved words.
-
-                
-
-
-            :type list_name: str
-
 delete_deembedding_table
 ------------------------
 
@@ -1334,19 +1205,6 @@ disable
 
 
 
-disable_configuration_list_step_trigger
----------------------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: disable_configuration_list_step_trigger()
-
-            Configures the device not to receive triggers for the configuration list. The configuration list does not advance steps if this trigger is disabled. Call this method only if a previously configured trigger needs to be disabled. The NI-RFSG device must be in the Configuration state before you call this method.
-
-            
-
-
-
 disable_script_trigger
 ----------------------
 
@@ -1380,39 +1238,6 @@ disable_start_trigger
             Configures the device not to wait for a Start Trigger. This method is necessary only if you previously configured a Start Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before calling this method.
 
             
-
-
-
-error_query
------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: error_query(error_message)
-
-            Reads an error code and an error message from the instrument error queue.
-
-            
-
-
-
-            :param error_message:
-
-
-                Returns the error message string read from the instrument error message queue.
-
-                
-
-
-            :type error_message: str
-
-            :rtype: int
-            :return:
-
-
-                    Returns the error code read from the instrument error queue.
-
-                    
 
 
 
@@ -1460,6 +1285,277 @@ export_signal
 
 
             :type output_terminal: str
+
+get_error
+---------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_error()
+
+            Retrieves and then clears the IVI error information for the session or the current execution thread.
+
+            
+
+            .. note:: If the **bufferSize** parameter is 0, this method does not clear the error information. By passing 0 to the **bufferSize** parameter, you can determine the buffer size required to obtain the entire :py:attr:`nirfsg.Session.ERROR_DESCRIPTION` string. You can then call this method again with a sufficiently large buffer. If you specify a valid IVI session for the :py:attr:`nirfsg.Session.VI` parameter, this method retrieves and clears the error information for the session. If you pass VI_NULL for the :py:attr:`nirfsg.Session.VI` parameter, this method retrieves and clears the error information for the current execution thread. If the :py:attr:`nirfsg.Session.VI` parameter is an invalid session, this method does nothing and returns an error. Normally, the error information describes the first error that occurred since the user last called this method or the :py:meth:`nirfsg.Session.clear_error` method.
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+            :rtype: tuple (error_code, error_description)
+
+                WHERE
+
+                error_code (int): 
+
+
+                    Returns the error code for the session or execution thread. If you pass 0 for the **BufferSize** parameter, you can pass VI_NULL for this parameter.
+
+                    
+
+
+                error_description (str): 
+
+
+                    Returns the :py:attr:`nirfsg.Session.ERROR_DESCRIPTION` for the IVI session or execution thread.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_external_calibration_last_date_and_time
+-------------------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_external_calibration_last_date_and_time()
+
+            Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
+
+            
+
+
+
+            :rtype: tuple (year, month, day, hour, minute, second)
+
+                WHERE
+
+                year (int): 
+
+
+                    Returns the year of the last successful calibration.
+
+                    
+
+
+                month (int): 
+
+
+                    Returns the month of the last successful calibration.
+
+                    
+
+
+                day (int): 
+
+
+                    Returns the day of the last successful calibration.
+
+                    
+
+
+                hour (int): 
+
+
+                    Returns the hour of the last successful calibration.
+
+                    
+
+
+                minute (int): 
+
+
+                    Returns the minute of the last successful calibration.
+
+                    
+
+
+                second (int): 
+
+
+                    Returns the second of the last successful calibration.
+
+                    
+
+
+
+get_max_settable_power
+----------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_max_settable_power()
+
+            Returns the maximum settable output power level for the current configuration.
+
+            
+
+
+
+            :rtype: float
+            :return:
+
+
+                    Returns maximum settable power level in dBm.
+
+                    
+
+
+
+get_self_calibration_date_and_time
+----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_self_calibration_date_and_time(module)
+
+            Returns the date and time of the last successful self-calibration. The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
+
+            
+
+
+
+            :param module:
+
+
+                Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.
+
+                
+
+
+            :type module: int
+
+            :rtype: tuple (year, month, day, hour, minute, second)
+
+                WHERE
+
+                year (int): 
+
+
+                    Returns the year of the last successful calibration.
+
+                    
+
+
+                month (int): 
+
+
+                    Returns the month of the last successful calibration.
+
+                    
+
+
+                day (int): 
+
+
+                    Returns the day of the last successful calibration.
+
+                    
+
+
+                hour (int): 
+
+
+                    Returns the hour of the last successful calibration.
+
+                    
+
+
+                minute (int): 
+
+
+                    Returns the minute of the last successful calibration.
+
+                    
+
+
+                second (int): 
+
+
+                    Returns the second of the last successful calibration.
+
+                    
+
+
+
+get_self_calibration_temperature
+--------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_self_calibration_temperature(module)
+
+            Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
+
+            
+
+
+
+            :param module:
+
+
+                Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.
+
+                
+
+
+            :type module: int
+
+            :rtype: float
+            :return:
+
+
+                    Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
+
+                    
+
+
+
+get_stream_endpoint_handle
+--------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_stream_endpoint_handle(stream_endpoint)
+
+            Returns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.
+
+            
+
+
+
+            :param stream_endpoint:
+
+
+                Specifies the stream endpoint FIFO to configure.
+
+                
+
+
+            :type stream_endpoint: str
+
+            :rtype: int
+            :return:
+
+
+                    Returns the reader endpoint handle that is used with NI-P2P to create a stream with the NI-RFSG device as an endpoint.
+
+                    
+
+
 
 initiate
 --------
@@ -1752,61 +1848,6 @@ reset_with_defaults
 
 
 
-reset_with_options
-------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: reset_with_options(steps_to_omit)
-
-            Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
-
-            
-
-
-
-            :param steps_to_omit:
-
-
-                Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsg.StepsToOmit.NONE`, which specifies that no step is omitted during reset.
-
-                
-
-
-            :type steps_to_omit: int
-
-revision_query
---------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: revision_query(instrument_driver_revision, firmware_revision)
-
-            Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
-
-            
-
-
-
-            :param instrument_driver_revision:
-
-
-                Returns the value of the :py:attr:`nirfsg.Session.specific_driver_revision` property in the form of a string.
-
-                
-
-
-            :type instrument_driver_revision: str
-            :param firmware_revision:
-
-
-                Returns the value of the :py:attr:`nirfsg.Session.instrument_firmware_revision` property in the form of a string.
-
-                
-
-
-            :type firmware_revision: str
-
 save_configurations_to_file
 ---------------------------
 
@@ -1990,6 +2031,53 @@ send_software_edge_trigger
 
             :type trigger_identifier: str
 
+set_arb_waveform_next_write_position
+------------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_arb_waveform_next_write_position(waveform_name, relative_to, offset)
+
+            Configures the start position to use for writing a waveform before calling the :py:meth:`nirfsg.Session.WriteArbWaveform` method. This method allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the :py:meth:`nirfsg.Session.allocate_arb_waveform` method or the :py:meth:`nirfsg.Session.WriteArbWaveform` method. Subsequent writes to that waveform begin where the last write ended, unless this method is called again.
+
+            
+
+            .. note:: If you use this method to write the waveform that is currently generating, an undefined output may result.
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
+
+
+            :param waveform_name:
+
+
+                Specifies the name of the waveform. This string is case-insensitive and alphanumeric, and it cannot use `reserved words <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_
+
+                
+
+
+            :type waveform_name: str
+            :param relative_to:
+
+
+                Specifies the reference position in the waveform. The position and :py:attr:`nirfsg.Session.OFFSET` together determine where to start loading data into the waveform.
+
+                
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            :type relative_to: int
+            :param offset:
+
+
+                Specifies the offset from the **relative to** parameter at which to start loading the data into the waveform.
+
+                
+
+
+            :type offset: int
+
 unlock
 ------
 
@@ -2023,140 +2111,6 @@ wait_until_settled
 
 
             :type max_time_milliseconds: int
-
-write_arb_waveform
-------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: write_arb_waveform(waveform_name, number_of_samples, i_data, q_data, more_data_pending)
-
-            Writes an arbitrary waveform to the NI-RFSG device. This method configures the I and Q vectors of a complex baseband signal. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform` method, the :py:attr:`nirfsg.Session.MORE_DATA_PENDING` parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-
-            
-
-            .. note:: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the :py:attr:`nirfsg.Session.MORE_DATA_PENDING` parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-            :param waveform_name:
-
-
-                Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-                
-
-
-            :type waveform_name: str
-            :param number_of_samples:
-
-
-                Specifies the number of samples in both the :py:attr:`nirfsg.Session.I_DATA` and :py:attr:`nirfsg.Session.Q_DATA` arrays. The :py:attr:`nirfsg.Session.I_DATA` and :py:attr:`nirfsg.Session.Q_DATA` arrays must have the same length. If the :py:attr:`nirfsg.Session.arb_waveform_quantum` property value is *q*, then the number of samples should be a multiple of *q*. The specified number of samples cannot be 0.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type number_of_samples: int
-            :param i_data:
-
-
-                Specifies the in-phase (I) component of the complex baseband signal.
-
-                
-
-
-            :type i_data: array.array("d")
-            :param q_data:
-
-
-                Specifies the quadrature (Q) component of the complex baseband signal.
-
-                
-
-
-            :type q_data: array.array("d")
-            :param more_data_pending:
-
-
-                Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set :py:attr:`nirfsg.Session.MORE_DATA_PENDING` to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type more_data_pending: bool
-
-write_arb_waveform_f32
-----------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: write_arb_waveform_f32(waveform_name, number_of_samples, i_data, q_data, more_data_pending)
-
-            Writes an arbitrary waveform to the NI-RFSG device. This method configures the I and Q vectors of a complex single baseband signal. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform` method, the :py:attr:`nirfsg.Session.MORE_DATA_PENDING` parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-
-            
-
-            .. note:: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the :py:attr:`nirfsg.Session.MORE_DATA_PENDING` parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-            :param waveform_name:
-
-
-                Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-                
-
-
-            :type waveform_name: str
-            :param number_of_samples:
-
-
-                Specifies the number of samples in both the :py:attr:`nirfsg.Session.I_DATA` and :py:attr:`nirfsg.Session.Q_DATA` arrays. The :py:attr:`nirfsg.Session.I_DATA` and :py:attr:`nirfsg.Session.Q_DATA` arrays must have the same length. If the :py:attr:`nirfsg.Session.arb_waveform_quantum` property value is *q*, then the number of samples should be a multiple of *q*. The specified number of samples cannot be 0.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type number_of_samples: int
-            :param i_data:
-
-
-                Specifies the in-phase (I) component of the complex baseband signal.
-
-                
-
-
-            :type i_data: array.array("f")
-            :param q_data:
-
-
-                Specifies the quadrature (Q) component of the complex baseband signal.
-
-                
-
-
-            :type q_data: array.array("f")
-            :param more_data_pending:
-
-
-                Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set :py:attr:`nirfsg.Session.MORE_DATA_PENDING` to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type more_data_pending: bool
 
 write_p2_p_endpoint_i16
 -----------------------
@@ -2266,90 +2220,6 @@ absolute_delay
 
                 - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Signal Path:Absolute Delay**
                 - C Attribute: **NIRFSG_ATTR_ABSOLUTE_DELAY**
-
-active_configuration_list
--------------------------
-
-    .. py:attribute:: active_configuration_list
-
-        Specifies the name of the configuration list to make active. When you get or set a property and it is in the configuration list configuration, the property is set to or read from the active list step of the active configuration list.
-
-                        If the :py:attr:`nirfsg.Session.active_configuration_list` property is set to "" (empty string), no list is active.
-
-                        **Default Value:** ""
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                        `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-
-                        **High-Level Methods**:
-
-                        - :py:meth:`nirfsg.Session.create_configuration_list`
-
-
-
-        .. note:: For the PXIe-5650/5651/5652 and PXIe-5673E, when this property is set to a valid list name, the :py:attr:`nirfsg.Session.frequency_settling_units` property supports only :py:data:`~nirfsg.FrequencySettlingUnits.TIME_AFTER_IO` as a valid value.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Active List**
-                - C Attribute: **NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST**
-
-active_configuration_list_step
-------------------------------
-
-    .. py:attribute:: active_configuration_list_step
-
-        Specifies the step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_ that you want to make active for configuration or initiation.
-
-                        Activating a list makes all properties in the list reflect the value of the properties that correspond to the set specified by the :py:attr:`nirfsg.Session.active_configuration_list` and the :py:attr:`nirfsg.Session.active_configuration_list_step` properties.
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                        `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-
-                        **High-Level Methods**:
-
-                        - :py:meth:`nirfsg.Session.create_configuration_list_step`
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Active Step**
-                - C Attribute: **NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST_STEP**
 
 ae_temperature
 --------------
@@ -3699,7 +3569,7 @@ arb_waveform_software_scaling_factor
 
     .. py:attribute:: arb_waveform_software_scaling_factor
 
-        Specifies how much to scale the data before writing it with the :py:meth:`nirfsg.Session.write_arb_waveform` method. The resulting waveform must be smaller than 1.0 in complex magnitude. This property is supported only if you set the :py:attr:`nirfsg.Session.power_level_type` property to :py:data:`~nirfsg.PowerLevelType.PEAK`.
+        Specifies how much to scale the data before writing it with the :py:meth:`nirfsg.Session.WriteArbWaveform` method. The resulting waveform must be smaller than 1.0 in complex magnitude. This property is supported only if you set the :py:attr:`nirfsg.Session.power_level_type` property to :py:data:`~nirfsg.PowerLevelType.PEAK`.
 
                         **Default Value:** 1.0
 
@@ -3880,6 +3750,7 @@ automatic_thermal_correction
                         `Temperature Monitoring <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5611_temperature_monitoring.html>`_
 
                         `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_
+
                     **Defined Values**:
 
         +-------------------------------------------------------+---------+-------------------------------------------+
@@ -4025,6 +3896,7 @@ cache
                         **Default Value:** True
 
                         **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
                     **Defined Values**:
 
         +-------+-------------------+
@@ -4065,6 +3937,7 @@ compensate_for_filter_group_delay
                         **Default Value:** False
 
                         **Supported Devices:** PXIe-5672
+
                     **Defined Values**:
 
         +-------+-----------------------------------------------+
@@ -4092,218 +3965,6 @@ compensate_for_filter_group_delay
 
                 - LabVIEW Property: **Arb:Advanced:Compensate for Filter Group Delay**
                 - C Attribute: **NIRFSG_ATTR_COMPENSATE_FOR_FILTER_GROUP_DELAY**
-
-configuration_list_is_done
---------------------------
-
-    .. py:attribute:: configuration_list_is_done
-
-        Returns whether the configuration list is still running or done. To read this property, the device must be in the Generation state.
-
-                        **Supported Devices:** PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                        `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-                    **Defined Values**:
-
-        +-------+------------------------------------------+
-        | Value | Description                              |
-        +=======+==========================================+
-        | True  | The configuration list is done.          |
-        +-------+------------------------------------------+
-        | False | The configuration list is still running. |
-        +-------+------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Configuration List Is Done**
-                - C Attribute: **NIRFSG_ATTR_CONFIGURATION_LIST_IS_DONE**
-
-configuration_list_repeat
--------------------------
-
-    .. py:attribute:: configuration_list_repeat
-
-        Specifies whether the configuration list runs only once or continuously.
-
-                        **Default Value:** :py:data:`~nirfsg.ConfigurationListRepeat.CONTINUOUS`
-
-                        **Supported Devices:** PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673E
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                        `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-                    **Defined Values**:
-
-        +-------------------------------------------------------+-------+---------------------------------------------------+
-        | Name                                                  | Value | Description                                       |
-        +=======================================================+=======+===================================================+
-        | :py:data:`~nirfsg.ConfigurationListRepeat.CONTINUOUS` | 0     | NI-RFSG runs the configuration list continuously. |
-        +-------------------------------------------------------+-------+---------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationListRepeat.SINGLE`     | 1     | NI-RFSG runs the configuration list only once.    |
-        +-------------------------------------------------------+-------+---------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-------------------------------+
-            | Characteristic        | Value                         |
-            +=======================+===============================+
-            | Datatype              | enums.ConfigurationListRepeat |
-            +-----------------------+-------------------------------+
-            | Permissions           | read-write                    |
-            +-----------------------+-------------------------------+
-            | Repeated Capabilities | None                          |
-            +-----------------------+-------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Configuration List Repeat**
-                - C Attribute: **NIRFSG_ATTR_CONFIGURATION_LIST_REPEAT**
-
-configuration_list_step_in_progress
------------------------------------
-
-    .. py:attribute:: configuration_list_step_in_progress
-
-        Returns the configuration list step that is currently programmed to the hardware. The list is zero-indexed. You can query this property only when a list is executed.
-
-                        PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673E: This property can be read only when a configuration list is running.
-
-                        PXIe-5644/5645/5646: This property always returns 0 when the configuration list is not running.
-
-                        PXIe-5820/5830/5831/5832/5840/5841/5842: If the configuration list is not running, this property returns the last step of a configuration list that is programmed to the hardware. If the device was last initiated without an active configuration list, this property returns 0.
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Step In Progress**
-                - C Attribute: **NIRFSG_ATTR_CONFIGURATION_LIST_STEP_IN_PROGRESS**
-
-configuration_list_step_trigger_terminal_name
----------------------------------------------
-
-    .. py:attribute:: configuration_list_step_trigger_terminal_name
-
-        Returns the fully-qualified signal name as a string.
-
-                        **Default Values**:
-
-                        PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696: /*ModuleName*/ConfigurationListStepTrigger, where *ModuleName* is the name of your device in MAX.
-
-                        PXIe-5673E: /*AWGName*/ConfigurationListStepTrigger, where *AWGName* is the name of your associated AWG module in MAX.
-
-                        PXIe-5820/5830/5831/5832/5840/5841/5842: /*ModuleName*/ao/0/ConfigurationListStepTrigger, where *ModuleName* is the name of your device in MAX.
-
-                        **Supported Devices:** PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
-
-                        `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_
-
-                        **High-Level Methods**:
-
-                        - :py:meth:`nirfsg.Session._get_terminal_name`
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Configuration List Step:Terminal Name**
-                - C Attribute: **NIRFSG_ATTR_CONFIGURATION_LIST_STEP_TRIGGER_TERMINAL_NAME**
-
-configuration_list_step_trigger_type
-------------------------------------
-
-    .. py:attribute:: configuration_list_step_trigger_type
-
-        Specifies the type of trigger to use as the Configuration List Step Trigger. To set this property, the NI-RFSG device must be in the Configuration state.
-
-                        **Default Value:** :py:data:`~nirfsg.ConfigListTrigType.NONE`
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-                    **Defined Values**:
-
-        +----------------------------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                               | Value   | Description                                                                                                                                                                                                                                      |
-        +====================================================+=========+==================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.ConfigListTrigType.DIGITAL_EDGE` | 1 (0x1) | Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the :py:attr:`nirfsg.Session.digital_edge_configuration_list_step_trigger_source` property, and the active edge is always rising. |
-        +----------------------------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigType.NONE`         | 0 (0x0) | Generation starts immediately, but the list does not advance.                                                                                                                                                                                    |
-        +----------------------------------------------------+---------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.ConfigListTrigType |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Configuration List Step:Edge**
-                - C Attribute: **NIRFSG_ATTR_CONFIGURATION_LIST_STEP_TRIGGER_TYPE**
 
 configuration_settled_event_terminal_name
 -----------------------------------------
@@ -4633,6 +4294,7 @@ deembedding_type
                         **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR`, :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR`, or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`. :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
                     **Defined Values**:
 
         +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
@@ -4775,143 +4437,6 @@ device_temperature
                 - LabVIEW Property: **Device Characteristics:Device Temperature (Degrees C)**
                 - C Attribute: **NIRFSG_ATTR_DEVICE_TEMPERATURE**
 
-digital_edge_configuration_list_step_trigger_edge
--------------------------------------------------
-
-    .. py:attribute:: digital_edge_configuration_list_step_trigger_edge
-
-        Specifies the active edge for the Configuration List Step trigger. This property is valid only when the :py:attr:`nirfsg.Session.configuration_list_step_trigger_type` property is set to digital edge. To set this property, the NI-RFSG device must be in the Configuration state.
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-                    **Defined Values**:
-
-        +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                              | Description                                                                                                                    |
-        +===================================================+================================================================================================================================+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeEdge.EDGE` | Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level. |
-        +---------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.ConfigListTrigDigEdgeEdge |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Configuration List Step:Digital Edge:Edge**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_EDGE**
-
-digital_edge_configuration_list_step_trigger_source
----------------------------------------------------
-
-    .. py:attribute:: digital_edge_configuration_list_step_trigger_source
-
-        Specifies the source terminal for the Configuration List Step Trigger. This property is valid only when the configuration list step type property is set to digital edge.
-
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                        `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
-
-                        `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-                        `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
-                    **Defined Values**:
-
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | Name                                                         | Value        | Description                                                                                                         |
-        +==============================================================+==============+=====================================================================================================================+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.MARKER0_EVENT` | Marker0Event | The trigger is received from the Marker Event 0.                                                                    |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.MARKER1_EVENT` | Marker1Event | The trigger is received from the Marker Event 1.                                                                    |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.MARKER2_EVENT` | Marker2Event | The trigger is received from the Marker Event 2.                                                                    |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.MARKER3_EVENT` | Marker3Event | The trigger is received from the Marker Event 3.                                                                    |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PFI0`          | PFI0         | The trigger is received on PFI 0.                                                                                   |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PFI1`          | PFI1         | The trigger is received on PFI 1.                                                                                   |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_STAR`      | PXI_Star     | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.          |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG0`     | PXI_Trig0    | The trigger is received on PXI trigger line 0.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG1`     | PXI_Trig1    | The trigger is received on PXI trigger line 1.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG2`     | PXI_Trig2    | The trigger is received on PXI trigger line 2.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG3`     | PXI_Trig3    | The trigger is received on PXI trigger line 3.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG4`     | PXI_Trig4    | The trigger is received on PXI trigger line 4.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG5`     | PXI_Trig5    | The trigger is received on PXI trigger line 5.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG6`     | PXI_Trig6    | The trigger is received on PXI trigger line 6.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXI_TRIG7`     | PXI_Trig7    | The trigger is received on PXI trigger line 7.                                                                      |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.PXIE_DSTARB`   | PXIe_DStarB  | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5840/5841/5842. |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.TIMER_EVENT`   | TimerEvent   | The trigger is received from the Timer Event.                                                                       |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.TRIG_IN`       | TrigIn       | The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696. |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO0`          | DIO/PFI0     | The trigger is received on PFI0 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO1`          | DIO/PFI1     | The trigger is received on PFI1 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO2`          | DIO/PFI2     | The trigger is received on PFI2 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO3`          | DIO/PFI3     | The trigger is received on PFI3 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO4`          | DIO/PFI4     | The trigger is received on PFI4 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO5`          | DIO/PFI5     | The trigger is received on PFI5 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO6`          | DIO/PFI6     | The trigger is received on PFI6 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigDigEdgeSource.DIO7`          | DIO/PFI7     | The trigger is received on PFI7 from the front panel DIO terminal.                                                  |
-        +--------------------------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------------------------------+
-            | Characteristic        | Value                             |
-            +=======================+===================================+
-            | Datatype              | enums.ConfigListTrigDigEdgeSource |
-            +-----------------------+-----------------------------------+
-            | Permissions           | read-write                        |
-            +-----------------------+-----------------------------------+
-            | Repeated Capabilities | None                              |
-            +-----------------------+-----------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Configuration List Step:Digital Edge:Source**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE**
-
 digital_edge_script_trigger_edge
 --------------------------------
 
@@ -4932,6 +4457,7 @@ digital_edge_script_trigger_edge
                         **High-Level Methods**:
 
                         - :py:meth:`nirfsg.Session.configure_digital_edge_script_trigger`
+
                     **Defined Values**:
 
         +--------------------------------------------------+---------+-------------------------------------------------------------------------------+
@@ -4992,6 +4518,7 @@ digital_edge_script_trigger_source
                         **High-Level Methods**:
 
                         - :py:meth:`nirfsg.Session.configure_digital_edge_script_trigger`
+
                     **Defined Values**:
 
         +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -5151,6 +4678,7 @@ digital_edge_start_trigger_source
                         **High-Level Methods**:
 
                         - :py:meth:`nirfsg.Session.configure_digital_edge_start_trigger`
+
                     **Defined Values**:
 
         +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
@@ -5716,7 +5244,7 @@ direct_download
 
     .. py:attribute:: direct_download
 
-        Specifies whether the :py:meth:`nirfsg.Session.write_arb_waveform` method immediately writes waveforms to the device or copies the waveform to host memory for later download. NI-RFSG reads and validates this property when an arbitrary waveform is first allocated.
+        Specifies whether the :py:meth:`nirfsg.Session.WriteArbWaveform` method immediately writes waveforms to the device or copies the waveform to host memory for later download. NI-RFSG reads and validates this property when an arbitrary waveform is first allocated.
 
                         For the PXI-5670, direct download is always disabled. For all other devices, direct download is always enabled.
 
@@ -5795,7 +5323,7 @@ done_event_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session._get_terminal_name`
+                        - :py:meth:`nirfsg.Session.GetTerminalName`
 
         The following table lists the characteristics of this property.
 
@@ -5861,89 +5389,6 @@ events_delay
 
                 - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Events:Events Delay**
                 - C Attribute: **NIRFSG_ATTR_EVENTS_DELAY**
-
-exported_configuration_list_step_trigger_output_terminal
---------------------------------------------------------
-
-    .. py:attribute:: exported_configuration_list_step_trigger_output_terminal
-
-        Specifies the destination terminal for exporting the Configuration List Step trigger. To set this property, the NI-RFSG device must be in the Configuration state.
-
-                        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        [RF List Mode](RFSG.chm/RF_List_Mode_Overview.html)
-
-                        [PFI Lines](RFSG.chm/integration_PFI_Lines.html)
-
-                        [PXI Trigger Lines](RFSG.chm/integration_PXI_Trigger.html)
-
-                    **Defined Values**:
-
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                            | Value       | Description                                                                                                                     |
-        +=================================================================+=============+=================================================================================================================================+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                                     |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PFI0`          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PFI1`          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.TRIG_OUT`      | TrigOut     | The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO0`          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO1`          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO2`          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO3`          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO4`          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO5`          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO6`          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigListTrigExportOutputTerm.DIO7`          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
-        +-----------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------------------------+
-            | Characteristic        | Value                                |
-            +=======================+======================================+
-            | Datatype              | enums.ConfigListTrigExportOutputTerm |
-            +-----------------------+--------------------------------------+
-            | Permissions           | read-write                           |
-            +-----------------------+--------------------------------------+
-            | Repeated Capabilities | None                                 |
-            +-----------------------+--------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Configuration List Step:Export Output Terminal**
-                - C Attribute: **NIRFSG_ATTR_EXPORTED_CONFIGURATION_LIST_STEP_TRIGGER_OUTPUT_TERMINAL**
 
 exported_configuration_settled_event_output_terminal
 ----------------------------------------------------
@@ -6769,7 +6214,7 @@ fast_tuning_option
 
                         **Related Topics**
 
-                        `Frequency Tuning Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_tuning_times_5654.html>`_
+                        `Frequency Tuning Times for 5654 <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_tuning_times.5654.html>`_
 
                     **Defined Values**:
 
@@ -7033,7 +6478,7 @@ frequency_settling_units
 
         Specifies the interpretation of the value passed to the :py:attr:`nirfsg.Session.frequency_settling` property.
 
-                        PXIe-5650/5651/5652/5653, PXIe-5673E: When the :py:attr:`nirfsg.Session.active_configuration_list` property is set to a valid list name, the :py:attr:`nirfsg.Session.frequency_settling_units` property supports only :py:data:`~nirfsg.FrequencySettlingUnits.TIME_AFTER_IO` as a valid value.
+                        PXIe-5650/5651/5652/5653, PXIe-5673E: When the :py:attr:`nirfsg.Session.ACTIVE_CONFIGURATION_LIST` property is set to a valid list name, the :py:attr:`nirfsg.Session.frequency_settling_units` property supports only :py:data:`~nirfsg.FrequencySettlingUnits.TIME_AFTER_IO` as a valid value.
 
                         PXIe-5654/5654 with PXIe-5696: The :py:attr:`nirfsg.Session.frequency_settling_units` property supports only :py:data:`~nirfsg.FrequencySettlingUnits.TIME_AFTER_IO` and :py:data:`~nirfsg.FrequencySettlingUnits.PPM` as valid values.
 
@@ -7058,6 +6503,8 @@ frequency_settling_units
         +-----------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+
 
         .. note:: If you set this property to :py:data:`~nirfsg.FrequencySettlingUnits.TIME_AFTER_IO`, the definition of settled for the Configuration Settled event changes.
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -7244,7 +6691,7 @@ instrument_firmware_revision
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.revision_query`
+                        - :py:meth:`nirfsg.Session.RevisionQuery`
 
         The following table lists the characteristics of this property.
 
@@ -7949,6 +7396,7 @@ iq_rate
                         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_—Refer to this topic for more information about using this property to associate an I/Q rate with a waveform.
 
                         `Digital Upconverter <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/duc.html>`_
+
                     **Valid Values**:
 
         +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -7966,7 +7414,7 @@ iq_rate
         +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         |                                                                          | 100 MS/s                                                                                                                                                                                                                                           |
         +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        |                                                                          | *(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.                                  |
+        |                                                                          | \*(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.                                 |
         +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | PXIe-5672                                                                | Up to 100 MS/s.                                                                                                                                                                                                                                    |
         +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -8882,7 +8330,7 @@ marker_event_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session._get_terminal_name`
+                        - :py:meth:`nirfsg.Session.GetTerminalName`
 
 
 
@@ -9107,7 +8555,9 @@ output_enabled
 
              - For the PXIe-5645, this property is ignored if you are using the I/Q ports.
 
-             - When the :py:attr:`nirfsg.Session.active_configuration_list` property is set to a valid list name, setting the :py:attr:`nirfsg.Session.output_enabled` property transitions the device to the Configuration state.
+             - When the :py:attr:`nirfsg.Session.ACTIVE_CONFIGURATION_LIST` property is set to a valid list name, setting the :py:attr:`nirfsg.Session.output_enabled` property transitions the device to the Configuration state.
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -10529,7 +9979,7 @@ rf_blanking_source
 
                         PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-                        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit**parameter.
+                        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
                         **Default Value:** "" (empty string)
 
@@ -10649,7 +10099,7 @@ script_trigger_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session._get_terminal_name`
+                        - :py:meth:`nirfsg.Session.GetTerminalName`
 
 
 
@@ -11194,7 +10644,7 @@ started_event_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session._get_terminal_name`
+                        - :py:meth:`nirfsg.Session.GetTerminalName`
 
         The following table lists the characteristics of this property.
 
@@ -11243,7 +10693,7 @@ start_trigger_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session._get_terminal_name`
+                        - :py:meth:`nirfsg.Session.GetTerminalName`
 
         The following table lists the characteristics of this property.
 
@@ -12214,7 +11664,7 @@ waveform_rf_blanking
         | :py:data:`~nirfsg.NIRFSG_VAL_MARKER0`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER1`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER2`, or :py:data:`~nirfsg.NIRFSG_VAL_MARKER3` | :py:data:`~nirfsg.RFBlanking.ENABLE`           | Error is shown.                                                                                           |
         +---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -12376,7 +11826,7 @@ write_waveform_burst_detection
 
                         **Default Value:** :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`
 
-                        **Supported Devices:**PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                     **Defined Values**:
 
@@ -12390,7 +11840,7 @@ write_waveform_burst_detection
 
         .. note:: - When you download a waveform using :py:meth:`nirfsg.Session.ReadAndDownloadWaveformFromFileTdms` method and if :py:attr:`nirfsg.Session.waveform_rf_blanking` property is enabled, you must set the :py:attr:`nirfsg.Session.write_waveform_burst_detection` property to :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`.
 
-             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 

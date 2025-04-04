@@ -112,48 +112,6 @@ class _SessionBase(object):
 
      - If this property is set, NI-TClk cannot perform any sub-Sample Clock adjustment.
     '''
-    active_configuration_list = _attributes.AttributeViString(1150096)
-    '''Type: str
-
-    Specifies the name of the configuration list to make active. When you get or set a property and it is in the configuration list configuration, the property is set to or read from the active list step of the active configuration list.
-
-                    If the active_configuration_list property is set to "" (empty string), no list is active.
-
-                    **Default Value:** ""
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                    `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-
-                    **High-Level Methods**:
-
-                    - create_configuration_list
-
-    Note: For the PXIe-5650/5651/5652 and PXIe-5673E, when this property is set to a valid list name, the frequency_settling_units property supports only FrequencySettlingUnits.TIME_AFTER_IO as a valid value.
-    '''
-    active_configuration_list_step = _attributes.AttributeViInt64(1150097)
-    '''Type: int
-
-    Specifies the step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_ that you want to make active for configuration or initiation.
-
-                    Activating a list makes all properties in the list reflect the value of the properties that correspond to the set specified by the active_configuration_list and the active_configuration_list_step properties.
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                    `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-
-                    **High-Level Methods**:
-
-                    - create_configuration_list_step
-    '''
     ae_temperature = _attributes.AttributeViReal64(1150182)
     '''Type: float
 
@@ -803,7 +761,7 @@ class _SessionBase(object):
     arb_waveform_software_scaling_factor = _attributes.AttributeViReal64(1150052)
     '''Type: float
 
-    Specifies how much to scale the data before writing it with the write_arb_waveform method. The resulting waveform must be smaller than 1.0 in complex magnitude. This property is supported only if you set the power_level_type property to PowerLevelType.PEAK.
+    Specifies how much to scale the data before writing it with the WriteArbWaveform method. The resulting waveform must be smaller than 1.0 in complex magnitude. This property is supported only if you set the power_level_type property to PowerLevelType.PEAK.
 
                     **Default Value:** 1.0
 
@@ -902,6 +860,7 @@ class _SessionBase(object):
                     `Temperature Monitoring <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5611_temperature_monitoring.html>`_
 
                     `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_
+
                 **Defined Values**:
 
     +------------------------------------+---------+-------------------------------------------+
@@ -969,6 +928,7 @@ class _SessionBase(object):
                     **Default Value:** True
 
                     **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
                 **Defined Values**:
 
     +-------+-------------------+
@@ -989,6 +949,7 @@ class _SessionBase(object):
                     **Default Value:** False
 
                     **Supported Devices:** PXIe-5672
+
                 **Defined Values**:
 
     +-------+-----------------------------------------------+
@@ -998,119 +959,6 @@ class _SessionBase(object):
     +-------+-----------------------------------------------+
     | False | Disables compensation for filter group delay. |
     +-------+-----------------------------------------------+
-    '''
-    configuration_list_is_done = _attributes.AttributeViBoolean(1150175)
-    '''Type: bool
-
-    Returns whether the configuration list is still running or done. To read this property, the device must be in the Generation state.
-
-                    **Supported Devices:** PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                    `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-                **Defined Values**:
-
-    +-------+------------------------------------------+
-    | Value | Description                              |
-    +=======+==========================================+
-    | True  | The configuration list is done.          |
-    +-------+------------------------------------------+
-    | False | The configuration list is still running. |
-    +-------+------------------------------------------+
-    '''
-    configuration_list_repeat = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ConfigurationListRepeat, 1150102)
-    '''Type: enums.ConfigurationListRepeat
-
-    Specifies whether the configuration list runs only once or continuously.
-
-                    **Default Value:** ConfigurationListRepeat.CONTINUOUS
-
-                    **Supported Devices:** PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673E
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                    `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_
-                **Defined Values**:
-
-    +------------------------------------+-------+---------------------------------------------------+
-    | Name                               | Value | Description                                       |
-    +====================================+=======+===================================================+
-    | ConfigurationListRepeat.CONTINUOUS | 0     | NI-RFSG runs the configuration list continuously. |
-    +------------------------------------+-------+---------------------------------------------------+
-    | ConfigurationListRepeat.SINGLE     | 1     | NI-RFSG runs the configuration list only once.    |
-    +------------------------------------+-------+---------------------------------------------------+
-    '''
-    configuration_list_step_in_progress = _attributes.AttributeViInt64(1150122)
-    '''Type: int
-
-    Returns the configuration list step that is currently programmed to the hardware. The list is zero-indexed. You can query this property only when a list is executed.
-
-                    PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673E: This property can be read only when a configuration list is running.
-
-                    PXIe-5644/5645/5646: This property always returns 0 when the configuration list is not running.
-
-                    PXIe-5820/5830/5831/5832/5840/5841/5842: If the configuration list is not running, this property returns the last step of a configuration list that is programmed to the hardware. If the device was last initiated without an active configuration list, this property returns 0.
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-    '''
-    configuration_list_step_trigger_terminal_name = _attributes.AttributeViString(1150117)
-    '''Type: str
-
-    Returns the fully-qualified signal name as a string.
-
-                    **Default Values**:
-
-                    PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696: /*ModuleName*/ConfigurationListStepTrigger, where *ModuleName* is the name of your device in MAX.
-
-                    PXIe-5673E: /*AWGName*/ConfigurationListStepTrigger, where *AWGName* is the name of your associated AWG module in MAX.
-
-                    PXIe-5820/5830/5831/5832/5840/5841/5842: /*ModuleName*/ao/0/ConfigurationListStepTrigger, where *ModuleName* is the name of your device in MAX.
-
-                    **Supported Devices:** PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
-
-                    `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_
-
-                    **High-Level Methods**:
-
-                    - _get_terminal_name
-    '''
-    configuration_list_step_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ConfigListTrigType, 1150098)
-    '''Type: enums.ConfigListTrigType
-
-    Specifies the type of trigger to use as the Configuration List Step Trigger. To set this property, the NI-RFSG device must be in the Configuration state.
-
-                    **Default Value:** ConfigListTrigType.NONE
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-                **Defined Values**:
-
-    +---------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                            | Value   | Description                                                                                                                                                                                                            |
-    +=================================+=========+========================================================================================================================================================================================================================+
-    | ConfigListTrigType.DIGITAL_EDGE | 1 (0x1) | Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the digital_edge_configuration_list_step_trigger_source property, and the active edge is always rising. |
-    +---------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigType.NONE         | 0 (0x0) | Generation starts immediately, but the list does not advance.                                                                                                                                                          |
-    +---------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     configuration_settled_event_terminal_name = _attributes.AttributeViString(1150194)
     '''Type: str
@@ -1270,6 +1118,7 @@ class _SessionBase(object):
                     **Valid Values for PXIe-5831** DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR, DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR, or DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE. DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
 
                     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
                 **Defined Values**:
 
     +-------------------------------------------------+----------------+------------------------------------------------------------------------+
@@ -1354,105 +1203,6 @@ class _SessionBase(object):
     | Second connected mmRH-5582 | SWITCHED TRX PORTS [0-7] | rf1switch1              |
     +----------------------------+--------------------------+-------------------------+
     '''
-    digital_edge_configuration_list_step_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ConfigListTrigDigEdgeEdge, 1150103)
-    '''Type: enums.ConfigListTrigDigEdgeEdge
-
-    Specifies the active edge for the Configuration List Step trigger. This property is valid only when the configuration_list_step_trigger_type property is set to digital edge. To set this property, the NI-RFSG device must be in the Configuration state.
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-                **Defined Values**:
-
-    +--------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
-    | Name                           | Description                                                                                                                    |
-    +================================+================================================================================================================================+
-    | ConfigListTrigDigEdgeEdge.EDGE | Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level. |
-    +--------------------------------+--------------------------------------------------------------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    digital_edge_configuration_list_step_trigger_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ConfigListTrigDigEdgeSource, 1150099)
-    '''Type: enums.ConfigListTrigDigEdgeSource
-
-    Specifies the source terminal for the Configuration List Step Trigger. This property is valid only when the configuration list step type property is set to digital edge.
-
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-                    `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
-
-                    `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-                    `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
-                **Defined Values**:
-
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | Name                                      | Value        | Description                                                                                                         |
-    +===========================================+==============+=====================================================================================================================+
-    | ConfigListTrigDigEdgeSource.MARKER0_EVENT | Marker0Event | The trigger is received from the Marker Event 0.                                                                    |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.MARKER1_EVENT | Marker1Event | The trigger is received from the Marker Event 1.                                                                    |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.MARKER2_EVENT | Marker2Event | The trigger is received from the Marker Event 2.                                                                    |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.MARKER3_EVENT | Marker3Event | The trigger is received from the Marker Event 3.                                                                    |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PFI0          | PFI0         | The trigger is received on PFI 0.                                                                                   |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PFI1          | PFI1         | The trigger is received on PFI 1.                                                                                   |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_STAR      | PXI_Star     | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.          |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG0     | PXI_Trig0    | The trigger is received on PXI trigger line 0.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG1     | PXI_Trig1    | The trigger is received on PXI trigger line 1.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG2     | PXI_Trig2    | The trigger is received on PXI trigger line 2.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG3     | PXI_Trig3    | The trigger is received on PXI trigger line 3.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG4     | PXI_Trig4    | The trigger is received on PXI trigger line 4.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG5     | PXI_Trig5    | The trigger is received on PXI trigger line 5.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG6     | PXI_Trig6    | The trigger is received on PXI trigger line 6.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXI_TRIG7     | PXI_Trig7    | The trigger is received on PXI trigger line 7.                                                                      |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.PXIE_DSTARB   | PXIe_DStarB  | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5840/5841/5842. |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.TIMER_EVENT   | TimerEvent   | The trigger is received from the Timer Event.                                                                       |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.TRIG_IN       | TrigIn       | The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696. |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO0          | DIO/PFI0     | The trigger is received on PFI0 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO1          | DIO/PFI1     | The trigger is received on PFI1 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO2          | DIO/PFI2     | The trigger is received on PFI2 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO3          | DIO/PFI3     | The trigger is received on PFI3 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO4          | DIO/PFI4     | The trigger is received on PFI4 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO5          | DIO/PFI5     | The trigger is received on PFI5 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO6          | DIO/PFI6     | The trigger is received on PFI6 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigDigEdgeSource.DIO7          | DIO/PFI7     | The trigger is received on PFI7 from the front panel DIO terminal.                                                  |
-    +-------------------------------------------+--------------+---------------------------------------------------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
     digital_edge_script_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigEdgeEdge, 1150021)
     '''Type: enums.ScriptTrigDigEdgeEdge
 
@@ -1471,6 +1221,7 @@ class _SessionBase(object):
                     **High-Level Methods**:
 
                     - configure_digital_edge_script_trigger
+
                 **Defined Values**:
 
     +-------------------------------+---------+-------------------------------------------------------------------------------+
@@ -1512,6 +1263,7 @@ class _SessionBase(object):
                     **High-Level Methods**:
 
                     - configure_digital_edge_script_trigger
+
                 **Defined Values**:
 
     +---------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
@@ -1633,6 +1385,7 @@ class _SessionBase(object):
                     **High-Level Methods**:
 
                     - configure_digital_edge_start_trigger
+
                 **Defined Values**:
 
     +---------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
@@ -1983,7 +1736,7 @@ class _SessionBase(object):
     direct_download = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DirectDownload, 1150042)
     '''Type: enums.DirectDownload
 
-    Specifies whether the write_arb_waveform method immediately writes waveforms to the device or copies the waveform to host memory for later download. NI-RFSG reads and validates this property when an arbitrary waveform is first allocated.
+    Specifies whether the WriteArbWaveform method immediately writes waveforms to the device or copies the waveform to host memory for later download. NI-RFSG reads and validates this property when an arbitrary waveform is first allocated.
 
                     For the PXI-5670, direct download is always disabled. For all other devices, direct download is always enabled.
 
@@ -2043,7 +1796,7 @@ class _SessionBase(object):
 
                     **High-Level Methods**:
 
-                    - _get_terminal_name
+                    - GetTerminalName
     '''
     events_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150154)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
@@ -2069,70 +1822,6 @@ class _SessionBase(object):
                     `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
 
     Note: If you decrease the event delay during generation, some markers may be dropped.
-    '''
-    exported_configuration_list_step_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ConfigListTrigExportOutputTerm, 1150105)
-    '''Type: enums.ConfigListTrigExportOutputTerm
-
-    Specifies the destination terminal for exporting the Configuration List Step trigger. To set this property, the NI-RFSG device must be in the Configuration state.
-
-                    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                    **Related Topics**
-
-                    [RF List Mode](RFSG.chm/RF_List_Mode_Overview.html)
-
-                    [PFI Lines](RFSG.chm/integration_PFI_Lines.html)
-
-                    [PXI Trigger Lines](RFSG.chm/integration_PXI_Trigger.html)
-
-                **Defined Values**:
-
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                         | Value       | Description                                                                                                                     |
-    +==============================================+=============+=================================================================================================================================+
-    | ConfigListTrigExportOutputTerm.DO_NOT_EXPORT |             | The signal is not exported.                                                                                                     |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PFI0          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PFI1          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG0     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG1     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG2     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG3     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG4     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG5     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXI_TRIG6     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.PXIE_DSTARC   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.TRIG_OUT      | TrigOut     | The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO0          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO1          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO2          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO3          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO4          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO5          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO6          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | ConfigListTrigExportOutputTerm.DIO7          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
-    +----------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     exported_configuration_settled_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ConfigurationSettledEventExportOutputTerm, 1150129)
     '''Type: enums.ConfigurationSettledEventExportOutputTerm
@@ -2703,7 +2392,7 @@ class _SessionBase(object):
 
                     **Related Topics**
 
-                    `Frequency Tuning Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_tuning_times_5654.html>`_
+                    `Frequency Tuning Times for 5654 <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_tuning_times.5654.html>`_
 
                 **Defined Values**:
 
@@ -2823,7 +2512,7 @@ class _SessionBase(object):
 
     Specifies the interpretation of the value passed to the frequency_settling property.
 
-                    PXIe-5650/5651/5652/5653, PXIe-5673E: When the active_configuration_list property is set to a valid list name, the frequency_settling_units property supports only FrequencySettlingUnits.TIME_AFTER_IO as a valid value.
+                    PXIe-5650/5651/5652/5653, PXIe-5673E: When the ACTIVE_CONFIGURATION_LIST property is set to a valid list name, the frequency_settling_units property supports only FrequencySettlingUnits.TIME_AFTER_IO as a valid value.
 
                     PXIe-5654/5654 with PXIe-5696: The frequency_settling_units property supports only FrequencySettlingUnits.TIME_AFTER_IO and FrequencySettlingUnits.PPM as valid values.
 
@@ -2848,6 +2537,9 @@ class _SessionBase(object):
     +----------------------------------------+-----------------------------------------------------------------------------------------------------------------+
 
     Note: If you set this property to FrequencySettlingUnits.TIME_AFTER_IO, the definition of settled for the Configuration Settled event changes.
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
     '''
     frequency_tolerance = _attributes.AttributeViReal64(1150006)
     '''Type: float
@@ -2933,7 +2625,7 @@ class _SessionBase(object):
 
                     **High-Level Methods**:
 
-                    - revision_query
+                    - RevisionQuery
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -3266,6 +2958,7 @@ class _SessionBase(object):
                     `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_—Refer to this topic for more information about using this property to associate an I/Q rate with a waveform.
 
                     `Digital Upconverter <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/duc.html>`_
+
                 **Valid Values**:
 
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3283,7 +2976,7 @@ class _SessionBase(object):
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |                                                                          | 100 MS/s                                                                                                                                                                                                                                           |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |                                                                          | *(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.                                  |
+    |                                                                          | \*(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.                                 |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | PXIe-5672                                                                | Up to 100 MS/s.                                                                                                                                                                                                                                    |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3797,7 +3490,7 @@ class _SessionBase(object):
 
                     **High-Level Methods**:
 
-                    - _get_terminal_name
+                    - GetTerminalName
 
     Tip:
     This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
@@ -3916,7 +3609,10 @@ class _SessionBase(object):
 
      - For the PXIe-5645, this property is ignored if you are using the I/Q ports.
 
-     - When the active_configuration_list property is set to a valid list name, setting the output_enabled property transitions the device to the Configuration state.
+     - When the ACTIVE_CONFIGURATION_LIST property is set to a valid list name, setting the output_enabled property transitions the device to the Configuration state.
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
     '''
     output_port = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.OutputPort, 1150144)
     '''Type: enums.OutputPort
@@ -4674,7 +4370,7 @@ class _SessionBase(object):
 
                     PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-                    For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit**parameter.
+                    For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
                     **Default Value:** "" (empty string)
 
@@ -4755,7 +4451,7 @@ class _SessionBase(object):
 
                     **High-Level Methods**:
 
-                    - _get_terminal_name
+                    - GetTerminalName
 
     Tip:
     This property can be set/get on specific script_triggers within your :py:class:`nirfsg.Session` instance.
@@ -4997,7 +4693,7 @@ class _SessionBase(object):
 
                     **High-Level Methods**:
 
-                    - _get_terminal_name
+                    - GetTerminalName
     '''
     start_trigger_terminal_name = _attributes.AttributeViString(1150114)
     '''Type: str
@@ -5026,7 +4722,7 @@ class _SessionBase(object):
 
                     **High-Level Methods**:
 
-                    - _get_terminal_name
+                    - GetTerminalName
     '''
     start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTrigType, 1250458)
     '''Type: enums.StartTrigType
@@ -5527,7 +5223,7 @@ class _SessionBase(object):
     | NIRFSG_VAL_MARKER0, NIRFSG_VAL_MARKER1, NIRFSG_VAL_MARKER2, or NIRFSG_VAL_MARKER3 | RFBlanking.ENABLE    | Error is shown.                                                                                           |
     +-----------------------------------------------------------------------------------+----------------------+-----------------------------------------------------------------------------------------------------------+
 
-    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5604,7 +5300,7 @@ class _SessionBase(object):
 
                     **Default Value:** WriteWaveformBurstDetection.DISABLE
 
-                    **Supported Devices:**PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                 **Defined Values**:
 
@@ -5618,7 +5314,7 @@ class _SessionBase(object):
 
     Note: - When you download a waveform using ReadAndDownloadWaveformFromFileTdms method and if waveform_rf_blanking property is enabled, you must set the write_waveform_burst_detection property to WriteWaveformBurstDetection.DISABLE.
 
-     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5888,19 +5584,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_string(self._repeated_capability, attribute, value)
 
-    def _error_message(self, error_code, error_message):
-        r'''_error_message
-
-        Converts an error code returned by an NI-RFSG method into a user-readable string.
-
-        Args:
-            error_code (int): Pass the status parameter that is returned from any NI-RFSG method.
-
-            error_message (str): Returns the user-readable message string that corresponds to the status code you specify.
-
-        '''
-        self._interpreter.error_message(error_code, error_message)
-
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute):
         r'''_get_attribute_vi_boolean
@@ -6042,7 +5725,7 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def _get_attribute_vi_string(self, attribute, buf_size):
+    def _get_attribute_vi_string(self, attribute):
         r'''_get_attribute_vi_string
 
         Queries the value of a ViString property.Use this low-level method to get the values of inherent IVI properties, class-defined properties, and instrument-specific properties.
@@ -6061,10 +5744,13 @@ class _SessionBase(object):
         Args:
             attribute (int): Pass the ID of a property.
 
-            buf_size (int): Pass the number of bytes in the ViChar buffer you specify for the **waveformNames** parameter.
+
+        Returns:
+            value (str): The buffer in which the method returns the current value of the property. The buffer must be of type ViChar and have at least as many bytes as indicated in the **bufferSize** parameter.
 
         '''
-        self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute, buf_size)
+        value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute)
+        return value
 
     @ivi_synchronized
     def _get_waveform_burst_start_locations(self, number_of_locations):
@@ -6683,7 +6369,10 @@ class Session(_SessionBase):
     def allocate_arb_waveform(self, waveform_name, size_in_samples):
         r'''allocate_arb_waveform
 
-        Allocates onboard memory space for the arbitrary waveform. Use this method to specify the total size of a waveform before writing the data. Use this method only if you are calling the write_arb_waveform method multiple times to write a large waveform in smaller blocks. The NI-RFSG device must be in the Configuration state before you call this method.
+        Allocates onboard memory space for the arbitrary waveform. Use this method to specify the total size of a waveform before writing the data. Use this method only if you are calling the WriteArbWaveform method multiple times to write a large waveform in smaller blocks. The NI-RFSG device must be in the Configuration state before you call this method.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
@@ -6719,26 +6408,6 @@ class Session(_SessionBase):
         '''
         is_done = self._interpreter.check_generation_status()
         return is_done
-
-    @ivi_synchronized
-    def check_if_configuration_list_exists(self, list_name):
-        r'''check_if_configuration_list_exists
-
-        Returns whether the configuration list that you specify as LIST_NAME exists.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Args:
-            list_name (str): Specifies the name of the configuration list. This string is case-insensitive.
-
-
-        Returns:
-            list_exists (bool): Returns True if the configuration list exists.
-
-        '''
-        list_exists = self._interpreter.check_if_configuration_list_exists(list_name)
-        return list_exists
 
     @ivi_synchronized
     def check_if_script_exists(self, script_name):
@@ -6789,8 +6458,8 @@ class Session(_SessionBase):
         self._interpreter.clear_all_arb_waveforms()
 
     @ivi_synchronized
-    def _clear_arb_waveform(self, name):
-        r'''_clear_arb_waveform
+    def clear_arb_waveform(self, name):
+        r'''clear_arb_waveform
 
         Deletes a specified waveform from the pool of currently defined waveforms. The NI-RFSG device must be in the Configuration state before you call this method.
 
@@ -6806,7 +6475,7 @@ class Session(_SessionBase):
 
         Clears the error information associated with the session. If you pass VI_NULL for the VI parameter, this method clears the error information for the current execution thread.
 
-        Note: The _get_error method clears the error information after it is retrieved. A call to the clear_error method is necessary only when you do not use a call to the _get_error method to retrieve error information.
+        Note: The get_error method clears the error information after it is retrieved. A call to the clear_error method is necessary only when you do not use a call to the get_error method to retrieve error information.
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -6874,20 +6543,6 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.configure_deembedding_table_interpolation_spline(port, table_name)
-
-    @ivi_synchronized
-    def configure_digital_edge_configuration_list_step_trigger(self, source, edge):
-        r'''configure_digital_edge_configuration_list_step_trigger
-
-        Configures the Configuration List Step trigger for digital edge triggering. The NI-RFSG device must be in the Configuration state before you call this method.
-
-        Args:
-            source (str): Specifies the trigger source terminal for the digital edge Configuration List Step trigger. NI-RFSG sets the digital_edge_configuration_list_step_trigger_source property to this value. Refer to this property for possible values.
-
-            edge (int): Specifies the active edge for the digital edge Configuration List Step trigger. NI-RFSG sets the digital_edge_configuration_list_step_trigger_edge property to this value.
-
-        '''
-        self._interpreter.configure_digital_edge_configuration_list_step_trigger(source, edge)
 
     @ivi_synchronized
     def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
@@ -7083,34 +6738,6 @@ class Session(_SessionBase):
         self._interpreter.configure_software_start_trigger()
 
     @ivi_synchronized
-    def create_configuration_list(self, list_name, configuration_list_attributes, set_as_active_list):
-        r'''create_configuration_list
-
-        Creates an empty configuration list. Use the active_configuration_list property to enable a configuration list created by this method. Call the create_configuration_list_step method to add steps to the configuration list.
-
-        Args:
-            list_name (str): Specifies the name of the configuration list. This string is case-insensitive and alphanumeric, and it cannot contain spaces or use reserved words.
-
-            configuration_list_attributes (list of int): Specifies the properties that you intend to change between configuration list steps. Calling the create_configuration_list method allocates space for each of the configuration list properties. When you use an NI-RFSG Set property method to set one of the properties in the configuration list, that property is set for one of the configuration list steps. Use the active_configuration_list_step property to specify which configuration list step to configure.
-
-            set_as_active_list (bool): Sets this list as the active_configuration_list property when this parameter is enabled. NI recommends that you set this parameter to True when creating the list.
-
-        '''
-        self._interpreter.create_configuration_list(list_name, configuration_list_attributes, set_as_active_list)
-
-    @ivi_synchronized
-    def create_configuration_list_step(self, set_as_active_step):
-        r'''create_configuration_list_step
-
-        Creates a new configuration list step in the configuration list specified by the active_configuration_list property. When you create a configuration list step, a new instance of each property specified by the configuration list properties is created. Configuration list properties are specified when a configuration list is created. The new instance of a property can be accessed with any Set property method using the active_configuration_list and active_configuration_list_step properties.
-
-        Args:
-            set_as_active_step (bool): Sets this step as the active_configuration_list_step property list specified by the active_configuration_list property. NI recommends that you set this parameter to True when creating the list steps.
-
-        '''
-        self._interpreter.create_configuration_list_step(set_as_active_step)
-
-    @ivi_synchronized
     def create_deembedding_sparameter_table_s2_p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
         r'''create_deembedding_sparameter_table_s2_p_file
 
@@ -7137,18 +6764,6 @@ class Session(_SessionBase):
         self._interpreter.delete_all_deembedding_tables()
 
     @ivi_synchronized
-    def delete_configuration_list(self, list_name):
-        r'''delete_configuration_list
-
-        Deletes a previously created configuration list and all the configuration list steps in the specified configuration list. When a configuration list step is deleted, all the instances of the properties associated with the configuration list step are also removed. When you delete the active configuration list, NI-RFSG automatically resets the active_configuration_list property to '' (empty string), which indicates no list is active, and the active_configuration_list_step property to 0.
-
-        Args:
-            list_name (str): Specifies the name of the configuration list. This string is case-insensitive and alphanumeric, and it cannot contain spaces or use reserved words.
-
-        '''
-        self._interpreter.delete_configuration_list(list_name)
-
-    @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):
         r'''delete_deembedding_table
 
@@ -7171,14 +6786,6 @@ class Session(_SessionBase):
         self._interpreter.disable()
 
     @ivi_synchronized
-    def disable_configuration_list_step_trigger(self):
-        r'''disable_configuration_list_step_trigger
-
-        Configures the device not to receive triggers for the configuration list. The configuration list does not advance steps if this trigger is disabled. Call this method only if a previously configured trigger needs to be disabled. The NI-RFSG device must be in the Configuration state before you call this method.
-        '''
-        self._interpreter.disable_configuration_list_step_trigger()
-
-    @ivi_synchronized
     def disable_script_trigger(self, trigger_id):
         r'''disable_script_trigger
 
@@ -7197,23 +6804,6 @@ class Session(_SessionBase):
         Configures the device not to wait for a Start Trigger. This method is necessary only if you previously configured a Start Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before calling this method.
         '''
         self._interpreter.disable_start_trigger()
-
-    @ivi_synchronized
-    def error_query(self, error_message):
-        r'''error_query
-
-        Reads an error code and an error message from the instrument error queue.
-
-        Args:
-            error_message (str): Returns the error message string read from the instrument error message queue.
-
-
-        Returns:
-            error_code (int): Returns the error code read from the instrument error queue.
-
-        '''
-        error_code = self._interpreter.error_query(error_message)
-        return error_code
 
     @ivi_synchronized
     def export_signal(self, signal, signal_identifier, output_terminal):
@@ -7238,91 +6828,8 @@ class Session(_SessionBase):
         self._interpreter.export_signal(signal, signal_identifier, output_terminal)
 
     @ivi_synchronized
-    def _get_all_named_waveform_names(self, buffer_size):
-        r'''_get_all_named_waveform_names
-
-        Return names of the waveforms present in the memory.
-
-        Args:
-            buffer_size (int): Pass the number of bytes in the ViChar buffer you specify for the WAVEFORM_NAMES parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-
-        Returns:
-            actual_buffer_size (int): Fetch the number of bytes needed to pass in the BUFFER_SIZE parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        actual_buffer_size = self._interpreter.get_all_named_waveform_names(buffer_size)
-        return actual_buffer_size
-
-    @ivi_synchronized
-    def _get_all_script_names(self, buffer_size):
-        r'''_get_all_script_names
-
-        Return names of the scripts present in the memory.
-
-        Args:
-            buffer_size (int): Pass the number of bytes in the ViChar buffer you specify for the **waveformNames** parameter.
-
-
-        Returns:
-            actual_buffer_size (int): Fetch the number of bytes needed to pass in the BUFFER_SIZE parameter.It can be fetch by passing VI_NULL in the SCRIPT_NAMES parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        actual_buffer_size = self._interpreter.get_all_script_names(buffer_size)
-        return actual_buffer_size
-
-    @ivi_synchronized
-    def _get_channel_name(self, index, buffer_size):
-        r'''_get_channel_name
-
-        Returns the channel string that is in the channel table at an index you specify.
-
-        Args:
-            index (int): Specifies a one-based index into the channel table.
-
-            buffer_size (int): Specifies the size of the buffer for the channel string.
-
-        '''
-        self._interpreter.get_channel_name(index, buffer_size)
-
-    @ivi_synchronized
-    def _get_deembedding_sparameters(self, sparameters_array_size):
-        r'''_get_deembedding_sparameters
-
-        Returns the S-parameters used for de-embedding a measurement on the selected port. This includes interpolation of the parameters based on the configured carrier frequency. This method returns an empty array if no de-embedding is done.
-
-        Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1.
-
-        Args:
-            sparameters_array_size (int): Specifies the size of the array that is returned by the SPARAMETERS output.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-
-        Returns:
-            sparameters (ni_complex_number): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
-
-            number_of_sparameters (int): Returns the number of S-parameters.
-
-            number_of_ports (int): Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
-
-        '''
-        sparameters, number_of_sparameters, number_of_ports = self._interpreter.get_deembedding_sparameters(sparameters_array_size)
-        return sparameters, number_of_sparameters, number_of_ports
-
-    @ivi_synchronized
-    def _get_external_calibration_last_date_and_time(self):
-        r'''_get_external_calibration_last_date_and_time
+    def get_external_calibration_last_date_and_time(self):
+        r'''get_external_calibration_last_date_and_time
 
         Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
 
@@ -7344,8 +6851,8 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
-    def _get_max_settable_power(self):
-        r'''_get_max_settable_power
+    def get_max_settable_power(self):
+        r'''get_max_settable_power
 
         Returns the maximum settable output power level for the current configuration.
 
@@ -7357,8 +6864,8 @@ class Session(_SessionBase):
         return value
 
     @ivi_synchronized
-    def _get_self_calibration_date_and_time(self, module):
-        r'''_get_self_calibration_date_and_time
+    def get_self_calibration_date_and_time(self, module):
+        r'''get_self_calibration_date_and_time
 
         Returns the date and time of the last successful self-calibration. The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
 
@@ -7384,8 +6891,8 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
-    def _get_self_calibration_temperature(self, module):
-        r'''_get_self_calibration_temperature
+    def get_self_calibration_temperature(self, module):
+        r'''get_self_calibration_temperature
 
         Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
@@ -7401,8 +6908,8 @@ class Session(_SessionBase):
         return temperature
 
     @ivi_synchronized
-    def _get_stream_endpoint_handle(self, stream_endpoint):
-        r'''_get_stream_endpoint_handle
+    def get_stream_endpoint_handle(self, stream_endpoint):
+        r'''get_stream_endpoint_handle
 
         Returns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.
 
@@ -7416,31 +6923,6 @@ class Session(_SessionBase):
         '''
         reader_handle = self._interpreter.get_stream_endpoint_handle(stream_endpoint)
         return reader_handle
-
-    @ivi_synchronized
-    def _get_terminal_name(self, signal, signal_identifier, buffer_size):
-        r'''_get_terminal_name
-
-        Returns the fully-qualified name of the specified signal. The fully-qualified name is helpful to automatically route signals in a multisegment chassis.
-
-        Args:
-            signal (int): Specifies the signal to query.
-
-            signal_identifier (str): Specifies which instance of the selected signal to query. This parameter is necessary when you set the SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the SIGNAL_IDENTIFIER parameter to '' (empty string).
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-            buffer_size (int): Pass the number of bytes in the ViChar buffer you specify for the TERMINAL_NAME parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        self._interpreter.get_terminal_name(signal, signal_identifier, buffer_size)
 
     def _init_with_options(self, resource_name, id_query, reset_device, option_string):
         r'''_init_with_options
@@ -7559,32 +7041,6 @@ class Session(_SessionBase):
         self._interpreter.reset_with_defaults()
 
     @ivi_synchronized
-    def reset_with_options(self, steps_to_omit):
-        r'''reset_with_options
-
-        Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
-
-        Args:
-            steps_to_omit (int): Specifies a list of steps to skip during the reset process. The default value is StepsToOmit.NONE, which specifies that no step is omitted during reset.
-
-        '''
-        self._interpreter.reset_with_options(steps_to_omit)
-
-    @ivi_synchronized
-    def revision_query(self, instrument_driver_revision, firmware_revision):
-        r'''revision_query
-
-        Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
-
-        Args:
-            instrument_driver_revision (str): Returns the value of the specific_driver_revision property in the form of a string.
-
-            firmware_revision (str): Returns the value of the instrument_firmware_revision property in the form of a string.
-
-        '''
-        self._interpreter.revision_query(instrument_driver_revision, firmware_revision)
-
-    @ivi_synchronized
     def select_arb_waveform(self, name):
         r'''select_arb_waveform
 
@@ -7649,12 +7105,15 @@ class Session(_SessionBase):
         return self_test_result
 
     @ivi_synchronized
-    def _set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
-        r'''_set_arb_waveform_next_write_position
+    def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
+        r'''set_arb_waveform_next_write_position
 
-        Configures the start position to use for writing a waveform before calling the write_arb_waveform method. This method allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the allocate_arb_waveform method or the write_arb_waveform method. Subsequent writes to that waveform begin where the last write ended, unless this method is called again.
+        Configures the start position to use for writing a waveform before calling the WriteArbWaveform method. This method allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the allocate_arb_waveform method or the WriteArbWaveform method. Subsequent writes to that waveform begin where the last write ended, unless this method is called again.
 
         Note: If you use this method to write the waveform that is currently generating, an undefined output may result.
+
+        Note:
+        One or more of the referenced methods are not in the Python API for this driver.
 
         Args:
             waveform_name (str): Specifies the name of the waveform. This string is case-insensitive and alphanumeric, and it cannot use `reserved words <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_
@@ -7680,72 +7139,6 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.wait_until_settled(max_time_milliseconds)
-
-    @ivi_synchronized
-    def write_arb_waveform(self, waveform_name, number_of_samples, i_data, q_data, more_data_pending):
-        r'''write_arb_waveform
-
-        Writes an arbitrary waveform to the NI-RFSG device. This method configures the I and Q vectors of a complex baseband signal. If the waveform to write is already allocated using the allocate_arb_waveform method, the MORE_DATA_PENDING parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the MORE_DATA_PENDING parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Args:
-            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-            number_of_samples (int): Specifies the number of samples in both the I_DATA and Q_DATA arrays. The I_DATA and Q_DATA arrays must have the same length. If the arb_waveform_quantum property value is *q*, then the number of samples should be a multiple of *q*. The specified number of samples cannot be 0.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            i_data (array.array("d")): Specifies the in-phase (I) component of the complex baseband signal.
-
-            q_data (array.array("d")): Specifies the quadrature (Q) component of the complex baseband signal.
-
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set MORE_DATA_PENDING to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        if q_data is not None and len(q_data) != len(i_data):  # case S160
-            raise ValueError("Length of q_data and i_data parameters do not match.")  # case S160
-        self._interpreter.write_arb_waveform(waveform_name, number_of_samples, i_data, q_data, more_data_pending)
-
-    @ivi_synchronized
-    def write_arb_waveform_f32(self, waveform_name, number_of_samples, i_data, q_data, more_data_pending):
-        r'''write_arb_waveform_f32
-
-        Writes an arbitrary waveform to the NI-RFSG device. This method configures the I and Q vectors of a complex single baseband signal. If the waveform to write is already allocated using the allocate_arb_waveform method, the MORE_DATA_PENDING parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the MORE_DATA_PENDING parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Args:
-            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-            number_of_samples (int): Specifies the number of samples in both the I_DATA and Q_DATA arrays. The I_DATA and Q_DATA arrays must have the same length. If the arb_waveform_quantum property value is *q*, then the number of samples should be a multiple of *q*. The specified number of samples cannot be 0.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            i_data (array.array("f")): Specifies the in-phase (I) component of the complex baseband signal.
-
-            q_data (array.array("f")): Specifies the quadrature (Q) component of the complex baseband signal.
-
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set MORE_DATA_PENDING to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        if q_data is not None and len(q_data) != len(i_data):  # case S160
-            raise ValueError("Length of q_data and i_data parameters do not match.")  # case S160
-        self._interpreter.write_arb_waveform_f32(waveform_name, number_of_samples, i_data, q_data, more_data_pending)
 
     @ivi_synchronized
     def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):

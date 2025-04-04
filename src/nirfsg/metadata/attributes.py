@@ -53,7 +53,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies whether to cache the value of attributes. When caching is enabled, NI-RFSG tracks the current NI-RFSG device settings and avoids sending redundant commands to the device. NI-RFSG can always cache or never cache particular attributes, regardless of the setting of this attribute. Call the nirfsg_InitWithOptions function to override the default value.\n\n                **Default Value:** VI_TRUE\n\n                **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n            **Defined Values**:\n            ',
+            'description': '                Specifies whether to cache the value of attributes. When caching is enabled, NI-RFSG tracks the current NI-RFSG device settings and avoids sending redundant commands to the device. NI-RFSG can always cache or never cache particular attributes, regardless of the setting of this attribute. Call the nirfsg_InitWithOptions function to override the default value.\n\n                **Default Value:** VI_TRUE\n\n                **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'VI_TRUE',
@@ -330,7 +330,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the source terminal for the Start Trigger. This attribute is used when the NIRFSG_ATTR_START_TRIGGER_TYPE attribute is set to digital edge. The NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute is not case-sensitive. To set the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeStartTrigger\n            **Defined Values**:\n            ',
+            'description': '                Specifies the source terminal for the Start Trigger. This attribute is used when the NIRFSG_ATTR_START_TRIGGER_TYPE attribute is set to digital edge. The NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute is not case-sensitive. To set the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeStartTrigger\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'NIRFSG_VAL_PFI0_STR',
@@ -678,7 +678,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Enables or disables automatic thermal correction. When this attribute is enabled, changes to settings cause NI-RFSG to check whether the device temperature has changed and adjusts the settings as needed. When this attribute is disabled, you must explicitly call the nirfsg_PerformThermalCorrection function to adjust the device for temperature changes.\n\n                **Default Value:** NIRFSG_VAL_ENABLE\n\n                **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Temperature Monitoring <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5611_temperature_monitoring.html>`_\n\n                `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_\n            **Defined Values**:\n            ',
+            'description': '                Enables or disables automatic thermal correction. When this attribute is enabled, changes to settings cause NI-RFSG to check whether the device temperature has changed and adjusts the settings as needed. When this attribute is disabled, you must explicitly call the nirfsg_PerformThermalCorrection function to adjust the device for temperature changes.\n\n                **Default Value:** NIRFSG_VAL_ENABLE\n\n                **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Temperature Monitoring <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5611_temperature_monitoring.html>`_\n\n                `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_\n\n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'NIRFSG_VAL_DISABLE',
@@ -994,7 +994,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the source terminal for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to digital edge. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeScriptTrigger\n            **Defined Values**:\n            ',
+            'description': '                Specifies the source terminal for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to digital edge. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeScriptTrigger\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'NIRFSG_VAL_PFI0_STR',
@@ -1135,7 +1135,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the active edge for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to digital edge. To set the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_RISING_EDGE\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeScriptTrigger\n            **Defined Values**:\n            ',
+            'description': '                Specifies the active edge for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to digital edge. To set the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_RISING_EDGE\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeScriptTrigger\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'NIRFSG_VAL_FALLING_EDGE',
@@ -2683,203 +2683,6 @@ attributes = {
         'name': 'ARB_OSCILLATOR_PHASE_DAC_VALUE',
         'type': 'ViInt32'
     },
-    1150096: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies the name of the configuration list to make active. When you get or set an attribute and it is in the configuration list configuration, the attribute is set to or read from the active list step of the active configuration list.\n\n                If the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute is set to "" (empty string), no list is active.\n\n                **Default Value:** ""\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n\n                `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_CreateConfigurationList\n                ',
-            'note': 'For the PXIe-5650/5651/5652 and PXIe-5673E, when this attribute is set to a valid list name, the NIRFSG_ATTR_FREQUENCY_SETTLING_UNITS attribute supports only NIRFSG_VAL_TIME_AFTER_IO as a valid value.'
-        },
-        'lv_property': 'Configuration List:Active List',
-        'name': 'ACTIVE_CONFIGURATION_LIST',
-        'type': 'ViString'
-    },
-    1150097: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies the step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_ that you want to make active for configuration or initiation.\n\n                Activating a list makes all attributes in the list reflect the value of the attributes that correspond to the set specified by the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST and the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attributes.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n\n                `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_CreateConfigurationListStep'
-        },
-        'lv_property': 'Configuration List:Active Step',
-        'name': 'ACTIVE_CONFIGURATION_LIST_STEP',
-        'type': 'ViInt64'
-    },
-    1150098: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies the type of trigger to use as the Configuration List Step Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_NONE\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n            **Defined Values**:\n            ',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_DIGITAL_EDGE',
-                    '1 (0x1)',
-                    'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute, and the active edge is always rising.'
-                ],
-                [
-                    'NIRFSG_VAL_NONE',
-                    '0 (0x0)',
-                    'Generation starts immediately, but the list does not advance.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'ConfigListTrigType',
-        'lv_property': 'Triggers:Configuration List Step:Edge',
-        'name': 'CONFIGURATION_LIST_STEP_TRIGGER_TYPE',
-        'type': 'ViInt32'
-    },
-    1150099: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies the source terminal for the Configuration List Step Trigger. This attribute is valid only when the configuration list step type attribute is set to digital edge.\n\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n                `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n            **Defined Values**:\n            ',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_MARKER0_EVENT_STR',
-                    'Marker0Event',
-                    'The trigger is received from the Marker Event 0.'
-                ],
-                [
-                    'NIRFSG_VAL_MARKER1_EVENT_STR',
-                    'Marker1Event',
-                    'The trigger is received from the Marker Event 1.'
-                ],
-                [
-                    'NIRFSG_VAL_MARKER2_EVENT_STR',
-                    'Marker2Event',
-                    'The trigger is received from the Marker Event 2.'
-                ],
-                [
-                    'NIRFSG_VAL_MARKER3_EVENT_STR',
-                    'Marker3Event',
-                    'The trigger is received from the Marker Event 3.'
-                ],
-                [
-                    'NIRFSG_VAL_PFI0_STR',
-                    'PFI0',
-                    'The trigger is received on PFI 0.'
-                ],
-                [
-                    'NIRFSG_VAL_PFI1_STR',
-                    'PFI1',
-                    'The trigger is received on PFI 1.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_STAR_STR',
-                    'PXI_Star',
-                    'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
-                    'PXI_Trig0',
-                    'The trigger is received on PXI trigger line 0.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
-                    'PXI_Trig1',
-                    'The trigger is received on PXI trigger line 1.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
-                    'PXI_Trig2',
-                    'The trigger is received on PXI trigger line 2.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
-                    'PXI_Trig3',
-                    'The trigger is received on PXI trigger line 3.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
-                    'PXI_Trig4',
-                    'The trigger is received on PXI trigger line 4.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
-                    'PXI_Trig5',
-                    'The trigger is received on PXI trigger line 5.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
-                    'PXI_Trig6',
-                    'The trigger is received on PXI trigger line 6.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG7_STR',
-                    'PXI_Trig7',
-                    'The trigger is received on PXI trigger line 7.'
-                ],
-                [
-                    'NIRFSG_VAL_PXIE_DSTARB_STR',
-                    'PXIe_DStarB',
-                    'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.'
-                ],
-                [
-                    'NIRFSG_VAL_TIMER_EVENT_STR',
-                    'TimerEvent',
-                    'The trigger is received from the Timer Event.'
-                ],
-                [
-                    'NIRFSG_VAL_TRIG_IN_STR',
-                    'TrigIn',
-                    'The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO0_STR',
-                    'DIO/PFI0',
-                    'The trigger is received on PFI0 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO1_STR',
-                    'DIO/PFI1',
-                    'The trigger is received on PFI1 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO2_STR',
-                    'DIO/PFI2',
-                    'The trigger is received on PFI2 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO3_STR',
-                    'DIO/PFI3',
-                    'The trigger is received on PFI3 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO4_STR',
-                    'DIO/PFI4',
-                    'The trigger is received on PFI4 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO5_STR',
-                    'DIO/PFI5',
-                    'The trigger is received on PFI5 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO6_STR',
-                    'DIO/PFI6',
-                    'The trigger is received on PFI6 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO7_STR',
-                    'DIO/PFI7',
-                    'The trigger is received on PFI7 from the front panel DIO terminal.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'ConfigListTrigDigEdgeSource',
-        'lv_property': 'Triggers:Configuration List Step:Digital Edge:Source',
-        'name': 'DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE',
-        'type': 'ViString'
-    },
     1150100: {
         'access': 'read-write',
         'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
@@ -2893,55 +2696,6 @@ attributes = {
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
-    1150102: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies whether the configuration list runs only once or continuously.\n\n                **Default Value:** NIRFSG_VAL_CONTINUOUS\n\n                **Supported Devices:** PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673E\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n\n                `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_\n            **Defined Values**:\n            ',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_CONTINUOUS',
-                    '0',
-                    'NI-RFSG runs the configuration list continuously.'
-                ],
-                [
-                    'NIRFSG_VAL_SINGLE',
-                    '1',
-                    'NI-RFSG runs the configuration list only once.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'ConfigurationListRepeat',
-        'lv_property': 'Configuration List:Configuration List Repeat',
-        'name': 'CONFIGURATION_LIST_REPEAT',
-        'type': 'ViInt32'
-    },
-    1150103: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies the active edge for the Configuration List Step trigger. This attribute is valid only when the NIRFSG_ATTR_CONFIGURATION_LIST_STEP_TRIGGER_TYPE attribute is set to digital edge. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n            **Defined Values**:\n            ',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_RISING_EDGE',
-                    'Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Description'
-            ]
-        },
-        'enum': 'ConfigListTrigDigEdgeEdge',
-        'lv_property': 'Triggers:Configuration List Step:Digital Edge:Edge',
-        'name': 'DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_EDGE',
-        'type': 'ViInt32'
-    },
     1150104: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -2952,124 +2706,6 @@ attributes = {
         'lv_property': 'RF:Advanced:Correction Temperature',
         'name': 'CORRECTION_TEMPERATURE',
         'type': 'ViReal64'
-    },
-    1150105: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Configuration List Step trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                [RF List Mode](RFSG.chm/RF_List_Mode_Overview.html)\n\n                [PFI Lines](RFSG.chm/integration_PFI_Lines.html)\n\n                [PXI Trigger Lines](RFSG.chm/integration_PXI_Trigger.html)\n\n            **Defined Values**:\n            ',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
-                    'The signal is not exported.'
-                ],
-                [
-                    'NIRFSG_VAL_PFI0_STR',
-                    'PFI0',
-                    'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
-                ],
-                [
-                    'NIRFSG_VAL_PFI1_STR',
-                    'PFI1',
-                    'The signal is exported to the PFI 1 connector.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
-                    'PXI_Trig0',
-                    'The trigger is received on PXI trigger line 0.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
-                    'PXI_Trig1',
-                    'The trigger is received on PXI trigger line 1.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
-                    'PXI_Trig2',
-                    'The trigger is received on PXI trigger line 2.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
-                    'PXI_Trig3',
-                    'The trigger is received on PXI trigger line 3.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
-                    'PXI_Trig4',
-                    'The trigger is received on PXI trigger line 4.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
-                    'PXI_Trig5',
-                    'The trigger is received on PXI trigger line 5.'
-                ],
-                [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
-                    'PXI_Trig6',
-                    'The trigger is received on PXI trigger line 6.'
-                ],
-                [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
-                    'PXIe_DStarC',
-                    'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.'
-                ],
-                [
-                    'NIRFSG_VAL_TRIG_OUT_STR',
-                    'TrigOut',
-                    'The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO0_STR',
-                    'DIO/PFI0',
-                    'The trigger is received on PFI0 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO1_STR',
-                    'DIO/PFI1',
-                    'The trigger is received on PFI1 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO2_STR',
-                    'DIO/PFI2',
-                    'The trigger is received on PFI2 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO3_STR',
-                    'DIO/PFI3',
-                    'The trigger is received on PFI3 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO4_STR',
-                    'DIO/PFI4',
-                    'The trigger is received on PFI4 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO5_STR',
-                    'DIO/PFI5',
-                    'The trigger is received on PFI5 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO6_STR',
-                    'DIO/PFI6',
-                    'The trigger is received on PFI6 from the front panel DIO terminal.'
-                ],
-                [
-                    'NIRFSG_VAL_DIO7_STR',
-                    'DIO/PFI7',
-                    'The trigger is received on PFI7 from the front panel DIO terminal.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'ConfigListTrigExportOutputTerm',
-        'lv_property': 'Triggers:Configuration List Step:Export Output Terminal',
-        'name': 'EXPORTED_CONFIGURATION_LIST_STEP_TRIGGER_OUTPUT_TERMINAL',
-        'type': 'ViString'
     },
     1150112: {
         'access': 'read only',
@@ -3128,16 +2764,6 @@ attributes = {
         ],
         'type': 'ViString'
     },
-    1150117: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Returns the fully-qualified signal name as a string.\n\n                **Default Values**:\n\n                PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696: /*ModuleName*/ConfigurationListStepTrigger, where *ModuleName* is the name of your device in MAX.\n\n                PXIe-5673E: /*AWGName*/ConfigurationListStepTrigger, where *AWGName* is the name of your associated AWG module in MAX.\n\n                PXIe-5820/5830/5831/5832/5840/5841/5842: /*ModuleName*/ao/0/ConfigurationListStepTrigger, where *ModuleName* is the name of your device in MAX.\n\n                **Supported Devices:** PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_GetTerminalName'
-        },
-        'lv_property': 'Triggers:Configuration List Step:Terminal Name',
-        'name': 'CONFIGURATION_LIST_STEP_TRIGGER_TERMINAL_NAME',
-        'type': 'ViString'
-    },
     1150118: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -3163,16 +2789,6 @@ attributes = {
         'lv_property': 'RF:Advanced:YIG Main Coil Drive',
         'name': 'YIG_MAIN_COIL_DRIVE',
         'type': 'ViInt32'
-    },
-    1150122: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Returns the configuration list step that is currently programmed to the hardware. The list is zero-indexed. You can query this attribute only when a list is executed.\n\n                PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673E: This attribute can be read only when a configuration list is running.\n\n                PXIe-5644/5645/5646: This attribute always returns 0 when the configuration list is not running.\n\n                PXIe-5820/5830/5831/5832/5840/5841/5842: If the configuration list is not running, this attribute returns the last step of a configuration list that is programmed to the hardware. If the device was last initiated without an active configuration list, this attribute returns 0.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n                '
-        },
-        'lv_property': 'Configuration List:Step In Progress',
-        'name': 'CONFIGURATION_LIST_STEP_IN_PROGRESS',
-        'type': 'ViInt64'
     },
     1150123: {
         'access': 'read-write',
@@ -3817,7 +3433,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the Marker Event at which RF blanking occurs. RF blanking quickly attenuates the RF OUT signal. Use Marker Events to toggle the state of RF blanking. The RF Output always starts in the unblanked state.\n\n                To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                You can specify Marker Events by using scripts to trigger blanking at a certain point in a waveform. For example, if you set this attribute to marker0 str}, and marker0 occurs on samples 1,000 and 2,000 of a script, then the RF Output will be blanked (attenuated) between samples 1,000 and 2,000.\n\n                PXIe-5645: This attribute is ignored if you are using the I/Q ports.\n\n                PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.\n\n                For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any nirfsg_Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking attributes. Alternatively, you can call nirfsg_ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit**parameter.\n\n                **Default Value:** "" (empty string)\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n            \n            **Valid Values**:\n            ',
+            'description': '                Specifies the Marker Event at which RF blanking occurs. RF blanking quickly attenuates the RF OUT signal. Use Marker Events to toggle the state of RF blanking. The RF Output always starts in the unblanked state.\n\n                To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                You can specify Marker Events by using scripts to trigger blanking at a certain point in a waveform. For example, if you set this attribute to marker0 str}, and marker0 occurs on samples 1,000 and 2,000 of a script, then the RF Output will be blanked (attenuated) between samples 1,000 and 2,000.\n\n                PXIe-5645: This attribute is ignored if you are using the I/Q ports.\n\n                PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.\n\n                For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any nirfsg_Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking attributes. Alternatively, you can call nirfsg_ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.\n\n                **Default Value:** "" (empty string)\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n            \n            **Valid Values**:\n            ',
             'note': 'The shortest supported blanking interval is eight microseconds.',
             'table_body': [
                 [
@@ -3935,30 +3551,6 @@ attributes = {
         'name': 'ATTENUATOR_SETTING',
         'type': 'ViReal64'
     },
-    1150175: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '                Returns whether the configuration list is still running or done. To read this attribute, the device must be in the Generation state.\n\n                **Supported Devices:** PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673E\n\n                **Related Topics**\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n\n                `Using RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode.html>`_\n            **Defined Values**:\n            ',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'The configuration list is done.'
-                ],
-                [
-                    'VI_FALSE',
-                    'The configuration list is still running.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Configuration List:Configuration List Is Done',
-        'name': 'CONFIGURATION_LIST_IS_DONE',
-        'type': 'ViBoolean'
-    },
     1150180: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -4046,7 +3638,7 @@ attributes = {
         'access': 'read only',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Returns whether the NI RF signal generator has the fast tuning option available.\n\n                **Supported Devices:** PXIe-5654/5654 with PXIe-5696\n\n                **Related Topics**\n\n                `Frequency Tuning Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_tuning_times_5654.html>`_\n\n            **Defined Values**:\n            ',
+            'description': '                Returns whether the NI RF signal generator has the fast tuning option available.\n\n                **Supported Devices:** PXIe-5654/5654 with PXIe-5696\n\n                **Related Topics**\n\n                `Frequency Tuning Times for 5654 <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_tuning_times.5654.html>`_\n\n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'VI_TRUE',
@@ -4633,7 +4225,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the type of de-embedding to apply to measurements on the specified port.\n\n                To use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\n                If you set this attribute to NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n                **Default Value**: NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n                **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_NONE\n\n                **Valid Values for PXIe-5831** NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR, NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR, or NIRFSG_VAL_DEEMBEDDING_TYPE_NONE. NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n            **Defined Values**:\n            ',
+            'description': '                Specifies the type of de-embedding to apply to measurements on the specified port.\n\n                To use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\n                If you set this attribute to NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n                **Default Value**: NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n                **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_NONE\n\n                **Valid Values for PXIe-5831** NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR, NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR, or NIRFSG_VAL_DEEMBEDDING_TYPE_NONE. NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_NONE',
@@ -4764,7 +4356,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using nirfsg_GetWaveformBurstStartLocations and nirfsg_GetWaveformBurstStopLocations functions respectively.\n\n                **Default Value:** NIRFSG_VAL_DISABLE\n\n                **Supported Devices:**PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n            \n            **Defined Values**:\n            ',
+            'description': '                Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using nirfsg_GetWaveformBurstStartLocations and nirfsg_GetWaveformBurstStopLocations functions respectively.\n\n                **Default Value:** NIRFSG_VAL_DISABLE\n\n                **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n            \n            **Defined Values**:\n            ',
             'note': '- When you download a waveform using nirfsg_ReadAndDownloadWaveformFromFileTdms function and if NIRFSG_ATTR_WAVEFORM_RF_BLANKING attribute is enabled, you must set the NIRFSG_ATTR_WRITE_WAVEFORM_BURST_DETECTION attribute to NIRFSG_VAL_DISABLE.\n\n - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any nirfsg_Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking attributes. Alternatively, you can call nirfsg_ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.',
             'table_body': [
                 [
@@ -5157,7 +4749,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Enables or disables compensation for filter group delay on the AWG module. This attribute also accounts for the upconverter group delay and aligns the RF output with the Started Event, Done Event, and Marker Events.\n\n                At a low I/Q rate, the group delay can become so large that some devices may not be able to align the events with the RF output, in which case you must increase the I/Q rate or disable this attribute.\n\n                **Default Value:** VI_FALSE\n\n                **Supported Devices:** PXIe-5672\n            **Defined Values**:\n            ',
+            'description': '                Enables or disables compensation for filter group delay on the AWG module. This attribute also accounts for the upconverter group delay and aligns the RF output with the Started Event, Done Event, and Marker Events.\n\n                At a low I/Q rate, the group delay can become so large that some devices may not be able to align the events with the RF output, in which case you must increase the I/Q rate or disable this attribute.\n\n                **Default Value:** VI_FALSE\n\n                **Supported Devices:** PXIe-5672\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
                     'VI_TRUE',
@@ -5333,7 +4925,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                This attribute specifies the I/Q rate of the arbitrary waveform. The I/Q rate is coerced to a value the hardware can achieve. Read this value back after setting it to see the actual I/Q rate. NI-RFSG internally uses an FIR filter with flat response up to (0.4 × IQ rate). Given a desired signal with the maximum frequency content *f*, sample the signal at an I/Q rate greater than or equal to ( *f*/0.4).\n\n                This attribute applies only when the NIRFSG_ATTR_GENERATION_MODE attribute is set to NIRFSG_VAL_ARB_WAVEFORM or NIRFSG_VAL_SCRIPT.\n\n                To set this attribute, the NI-RFSG device must be in the Configuration state.\n                \n                Setting this attribute to 50 MS/s on the PXI-5670/5671 and PXIe-5672 has the following implications:\n                - NI-RFSG is forced to place the carrier frequency at 18 MHz ± 1 MHz to avoid aliasing. This means that NI-RFSG cannot select a carrier frequency that could optimize waveform size if phase continuity is enabled.  \n                - Output signal bandwidth must be <5 MHz to avoid aliasing.  \n                - Close-in phase noise is higher.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_—Refer to this topic for more information about using this attribute to associate an I/Q rate with a waveform.\n\n                `Digital Upconverter <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/duc.html>`_\n            **Valid Values**:\n            ',
+            'description': '                This attribute specifies the I/Q rate of the arbitrary waveform. The I/Q rate is coerced to a value the hardware can achieve. Read this value back after setting it to see the actual I/Q rate. NI-RFSG internally uses an FIR filter with flat response up to (0.4 × IQ rate). Given a desired signal with the maximum frequency content *f*, sample the signal at an I/Q rate greater than or equal to ( *f*/0.4).\n\n                This attribute applies only when the NIRFSG_ATTR_GENERATION_MODE attribute is set to NIRFSG_VAL_ARB_WAVEFORM or NIRFSG_VAL_SCRIPT.\n\n                To set this attribute, the NI-RFSG device must be in the Configuration state.\n                \n                Setting this attribute to 50 MS/s on the PXI-5670/5671 and PXIe-5672 has the following implications:\n                - NI-RFSG is forced to place the carrier frequency at 18 MHz ± 1 MHz to avoid aliasing. This means that NI-RFSG cannot select a carrier frequency that could optimize waveform size if phase continuity is enabled.  \n                - Output signal bandwidth must be <5 MHz to avoid aliasing.  \n                - Close-in phase noise is higher.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_—Refer to this topic for more information about using this attribute to associate an I/Q rate with a waveform.\n\n                `Digital Upconverter <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/duc.html>`_\n            \n            **Valid Values**:\n            ',
             'note': 'Use this attribute to associate an I/Q rate with a waveform.',
             'table_body': [
                 [
@@ -5362,7 +4954,7 @@ attributes = {
                 ],
                 [
                     '',
-                    '*(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.'
+                    '\\*(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.'
                 ],
                 [
                     'PXIe-5672 ',
