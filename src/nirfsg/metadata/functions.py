@@ -2344,12 +2344,13 @@ functions = {
         'use_session_lock': False
     },
     'GetExternalCalibrationLastDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns 14 for the hours parameter and 30 for the minutes parameter.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
+        'method_name_for_documentation': 'get_external_calibration_last_date_and_time',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -2433,6 +2434,66 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'lastCalDatetime',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_external_calibration_last_date_and_time',
+        'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'GetLastSelfCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'lastCalDatetime',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_self_calibration_last_date_and_time',
+        'real_datetime_call': 'GetSelfCalibrationDateAndTime',
+        'returns': 'ViStatus'
+    },
     'GetMaxSettablePower': {
         'codegen_method': 'public',
         'documentation': {
@@ -2474,12 +2535,13 @@ functions = {
         'use_session_lock': True
     },
     'GetSelfCalibrationDateAndTime': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration. The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns 14 for the hours parameter and 30 for the minutes parameter.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
+        'method_name_for_documentation': 'get_self_calibration_date_and_time',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3605,7 +3667,7 @@ functions = {
         'use_session_lock': True
     },
     'SelfTest': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'Performs a self-test on the NI-RFSG device and returns the test results. This function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.'
         },
@@ -4509,48 +4571,5 @@ functions = {
         'python_name': '_close',
         'returns': 'ViStatus',
         'use_session_lock': False
-    },
-    'fancy_self_test': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': '\nRuns the instrument self-test routine and returns the test result(s).\n\nRaises `SelfTestError` on self test failure. Attributes on exception object:\n\n- code - failure code from driver\n- message - status message from driver\n',
-            'note': '\nWhen used on some signal generators, the device is reset after the\nniFgen_self_test function runs. If you use the niFgen_self_test\nfunction, your device may not be in its previously configured state\nafter the function runs.\n',
-            'table_body': [
-                [
-                    '0',
-                    'Passed self-test'
-                ],
-                [
-                    '1',
-                    'Self-test failed'
-                ]
-            ],
-            'table_header': [
-                'Self-Test Code',
-                'Description'
-            ]
-        },
-        'grpc_name': 'FancySelfTest',
-        'included_in_proto': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
-                'session_filename': 'fancy_self_test'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. **vi** is obtained from the niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels functions and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            }
-        ],
-        'python_name': 'self_test',
-        'returns': 'ViStatus'
     }
 }

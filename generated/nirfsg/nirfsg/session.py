@@ -6826,8 +6826,8 @@ class Session(_SessionBase):
         self._interpreter.export_signal(signal, signal_identifier, output_terminal)
 
     @ivi_synchronized
-    def get_external_calibration_last_date_and_time(self):
-        r'''get_external_calibration_last_date_and_time
+    def _get_external_calibration_last_date_and_time(self):
+        r'''_get_external_calibration_last_date_and_time
 
         Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
 
@@ -6849,6 +6849,32 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
+    def get_external_calibration_last_date_and_time(self):
+        '''get_external_calibration_last_date_and_time
+
+        TBD
+
+        Returns:
+            last_cal_datetime (hightime.datetime):
+
+        '''
+        year, month, day, hour, minute, second = self._get_external_calibration_last_date_and_time()
+        return hightime.datetime(year, month, day, hour, minute)
+
+    @ivi_synchronized
+    def get_self_calibration_last_date_and_time(self):
+        '''get_self_calibration_last_date_and_time
+
+        TBD
+
+        Returns:
+            last_cal_datetime (hightime.datetime):
+
+        '''
+        year, month, day, hour, minute, second = self._get_self_calibration_date_and_time()
+        return hightime.datetime(year, month, day, hour, minute)
+
+    @ivi_synchronized
     def get_max_settable_power(self):
         r'''get_max_settable_power
 
@@ -6862,8 +6888,8 @@ class Session(_SessionBase):
         return value
 
     @ivi_synchronized
-    def get_self_calibration_date_and_time(self, module):
-        r'''get_self_calibration_date_and_time
+    def _get_self_calibration_date_and_time(self, module):
+        r'''_get_self_calibration_date_and_time
 
         Returns the date and time of the last successful self-calibration. The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
 
@@ -7086,8 +7112,8 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
-    def _self_test(self, self_test_message):
-        r'''_self_test
+    def self_test(self, self_test_message):
+        r'''self_test
 
         Performs a self-test on the NI-RFSG device and returns the test results. This method performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.
 
@@ -7179,33 +7205,3 @@ class Session(_SessionBase):
         One or more of the referenced methods are not in the Python API for this driver.
         '''
         self._interpreter.close()
-
-    @ivi_synchronized
-    def self_test(self):
-        '''self_test
-
-        Runs the instrument self-test routine and returns the test result(s).
-
-        Raises `SelfTestError` on self test failure. Properties on exception object:
-
-        - code - failure code from driver
-        - message - status message from driver
-
-        +----------------+------------------+
-        | Self-Test Code | Description      |
-        +================+==================+
-        | 0              | Passed self-test |
-        +----------------+------------------+
-        | 1              | Self-test failed |
-        +----------------+------------------+
-
-        Note:
-        When used on some signal generators, the device is reset after the
-        niFgen_self_test method runs. If you use the niFgen_self_test
-        method, your device may not be in its previously configured state
-        after the method runs.
-        '''
-        code, msg = self._self_test()
-        if code:
-            raise errors.SelfTestError(code, msg)
-        return None
