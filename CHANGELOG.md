@@ -511,6 +511,8 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Added
   - Initial release
 
+---
+
 ### nidigital (NI-Digital Pattern Driver)
 
 - [nidigital (Unreleased)](#nidigital-unreleased)
@@ -711,6 +713,8 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [nidigital] 1.1.3 - 2019-10-21
 - Added
   - Initial support
+
+---
 
 ### nidmm (NI-DMM)
 
@@ -1030,7 +1034,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 #### [nidmm] 0.1.0 - 2017-09-01
 - Added
-Initial release
+  - Initial release
+
+---
 
 ### nifgen (NI-FGEN)
 
@@ -1412,6 +1418,7 @@ Initial release
 #### [nifgen] 0.4.0 - 2017-11-07
 - Added
   - Initial release
+---
 
 ### nimodinst (NI-ModInst)
 
@@ -1667,7 +1674,8 @@ Initial release
 
 #### [nimodinst] 0.1.0 - 2017-09-01
 - Added
-Initial release
+  - Initial release
+---
 
 ### niscope (NI-SCOPE)
 
@@ -2126,7 +2134,8 @@ Initial release
 
 #### [niscope] 0.5.0 - 2017-11-27
 - Added
-Initial release
+  - Initial release
+---
 
 ### nise (NI-Switch Executive)
 
@@ -2278,6 +2287,7 @@ Initial release
 #### [nise] 1.0.1 - 2018-10-17
 - Added
   - Initial Release
+---
 
 ### niswitch (NI-SWITCH)
 
@@ -2541,7 +2551,8 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 
 #### [niswitch] 0.2.0 - 2017-09-20
 - Added
-Initial release
+  - Initial release
+---
 
 ### nitclk (NI-TCLK)
 
