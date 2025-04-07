@@ -14,7 +14,7 @@
 ---
 
 ### nidcpower (NI-DCPOWER)
-- [nidcpower (Unreleased)](#nidcpower-unreleased)
+- [Unreleased](#nidcpower-unreleased)
 - [1.4.9](#nidcpower-149---2025-02-26)
 - [1.4.8](#nidcpower-148---2024-04-26)
 - [1.4.7](#nidcpower-147---2023-12-15)
@@ -55,8 +55,8 @@
 - Added
   - (Common) Support for Python 3.13
   - API parity with NI-DCPower 2025 Q1.
-      Enum value added:
-      - `INHIBITED` added to enum `OutputStates`.
+      - Enum value added:
+        - `INHIBITED` added to enum `OutputStates`.
 - Changed
   - (Common) Fix [#2069](https://github.com/ni/nimi-python/issues/2069)
   - Fixed #2067: `nidcpower.OutputStates` values are incorrect.
@@ -72,22 +72,19 @@
 #### [nidcpower] 1.4.7 - 2023-12-15
 - Added
   - API parity with NI-DCPower 2023 Q4.
-  
-      Properties added:
-      - `current_level_rising_slew_rate`
-      - `current_level_falling_slew_rate`
-      - `conduction_voltage_mode`
-      - `conduction_voltage_on_threshold`
-      - `conduction_voltage_off_threshold`
-      - `output_cutoff_voltage_measure_limit_high`
-      - `output_cutoff_voltage_measure_limit_low`
-      
-      Enum added:
-      - `ConductionVoltageMode`
-      
-      Enum values added:
-      - `E_LOAD` added to enum `InstrumentMode`
-      - `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
+      - Properties added:
+         - `current_level_rising_slew_rate`
+         - `current_level_falling_slew_rate`
+         - `conduction_voltage_mode`
+         - `conduction_voltage_on_threshold`
+         - `conduction_voltage_off_threshold`
+         - `output_cutoff_voltage_measure_limit_high`
+         - `output_cutoff_voltage_measure_limit_low`
+      - Enum added:
+         - `ConductionVoltageMode`
+      - Enum values added:
+         - `E_LOAD` added to enum `InstrumentMode`
+         - `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
 
 
 #### [nidcpower] 1.4.6 - 2023-09-11
@@ -107,34 +104,30 @@
   - (Common) Support for Python 3.11
   - Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
   - API parity with NI-DCPower 2023 Q2.
-
-      Properties added:
-      - `lcr_ac_dither_enabled`
-      - `lcr_ac_electrical_cable_length_delay`
-      - `lcr_dc_bias_transient_response`
-      - `lcr_source_aperture_time`
-      - `measure_complete_event_output_behavior`
-      - `measure_complete_event_toggle_initial_state`
-      - `sequence_engine_done_event_output_behavior`
-      - `sequence_engine_done_event_toggle_initial_state`
-      - `sequence_iteration_complete_event_output_behavior`
-      - `sequence_iteration_complete_event_toggle_initial_state`
-      - `source_complete_event_output_behavior`
-      - `source_complete_event_toggle_initial_state`
-
-      Enums added:
-      - `CurrentLimitBehavior`
-      - `EventOutputBehavior`
-      - `EventToggleInitialState`
-      - `LCRDCBiasTransientResponse`
-
-      Enum values added:
-      - `AS_CONFIGURED` added to enum `LCROpenShortLoadCompensationDataSource`
-      - `NI_STANDARD_0_5M` added to enum `CableLength`
-
-      Methods added:
-      - `configure_lcr_compensation`
-      - `get_lcr_compensation_data`
+      - Properties added:
+         - `lcr_ac_dither_enabled`
+         - `lcr_ac_electrical_cable_length_delay`
+         - `lcr_dc_bias_transient_response`
+         - `lcr_source_aperture_time`
+         - `measure_complete_event_output_behavior`
+         - `measure_complete_event_toggle_initial_state`
+         - `sequence_engine_done_event_output_behavior`
+         - `sequence_engine_done_event_toggle_initial_state`
+         - `sequence_iteration_complete_event_output_behavior`
+         - `sequence_iteration_complete_event_toggle_initial_state`
+         - `source_complete_event_output_behavior`
+         - `source_complete_event_toggle_initial_state`
+      - Enums added:
+         - `CurrentLimitBehavior`
+         - `EventOutputBehavior`
+         - `EventToggleInitialState`
+         - `LCRDCBiasTransientResponse`
+      - Enum values added:
+         - `AS_CONFIGURED` added to enum `LCROpenShortLoadCompensationDataSource`
+         - `NI_STANDARD_0_5M` added to enum `CableLength`
+      - Methods added:
+         - `configure_lcr_compensation`
+         - `get_lcr_compensation_data`
 - Changed
   - (Common) Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
   - Enums reordered:
@@ -153,77 +146,73 @@
 #### [nidcpower] 1.4.2 - 2022-08-03
 - Added
   - API parity with NI-DCPower 2022 Q3.
-      
-      Properties added:
-      - `aperture_time_auto_mode`
-      - `autorange_maximum_delay_after_range_change`
-      - `cable_length`
-      - `instrument_mode`
-      - `isolation_state`
-      - `lcr_actual_load_reactance`
-      - `lcr_actual_load_resistance`
-      - `lcr_automatic_level_control`
-      - `lcr_current_amplitude`
-      - `lcr_current_range`
-      - `lcr_custom_measurement_time`
-      - `lcr_dc_bias_automatic_level_control`
-      - `lcr_dc_bias_current_level`
-      - `lcr_dc_bias_current_range`
-      - `lcr_dc_bias_source`
-      - `lcr_dc_bias_voltage_level`
-      - `lcr_dc_bias_voltage_range`
-      - `lcr_frequency`
-      - `lcr_impedance_auto_range`
-      - `lcr_impedance_range`
-      - `lcr_impedance_range_source`
-      - `lcr_load_capacitance`
-      - `lcr_load_compensation_enabled`
-      - `lcr_load_inductance`
-      - `lcr_load_resistance`
-      - `lcr_measured_load_reactance`
-      - `lcr_measured_load_resistance`
-      - `lcr_measurement_time`
-      - `lcr_open_compensation_enabled`
-      - `lcr_open_conductance`
-      - `lcr_open_short_load_compensation_data_source`
-      - `lcr_open_susceptance`
-      - `lcr_short_compensation_enabled`
-      - `lcr_short_custom_cable_compensation_enabled`
-      - `lcr_short_reactance`
-      - `lcr_short_resistance`
-      - `lcr_source_delay_mode`
-      - `lcr_stimulus_function`
-      - `lcr_voltage_amplitude`
-      - `lcr_voltage_range`
-      
-      Enums added:
-      - `ApertureTimeAutoMode`
-      - `CableLength`
-      - `InstrumentMode`
-      - `LCRCompensationType`
-      - `LCRDCBiasSource`
-      - `LCRImpedanceRangeSource`
-      - `LCRMeasurementTime`
-      - `LCROpenShortLoadCompensationDataSource`
-      - `LCRReferenceValueType`
-      - `LCRSourceDelayMode`
-      - `LCRStimulusFunction`
-      
-      Methods added:
-      - `configure_lcr_custom_cable_compensation`
-      - `fetch_multiple_lcr`
-      - `get_lcr_compensation_last_date_and_time`
-      - `get_lcr_custom_cable_compensation_data`
-      - `measure_multiple_lcr`
-      - `perform_lcr_load_compensation`
-      - `perform_lcr_open_compensation`
-      - `perform_lcr_open_custom_cable_compensation`
-      - `perform_lcr_short_compensation`
-      - `perform_lcr_short_custom_cable_compensation`
-      
-      Custom types added:
-      - `LCRLoadCompensationSpot`
-      - `LCRMeasurement`
+      - Properties added:
+         - `aperture_time_auto_mode`
+         - `autorange_maximum_delay_after_range_change`
+         - `cable_length`
+         - `instrument_mode`
+         - `isolation_state`
+         - `lcr_actual_load_reactance`
+         - `lcr_actual_load_resistance`
+         - `lcr_automatic_level_control`
+         - `lcr_current_amplitude`
+         - `lcr_current_range`
+         - `lcr_custom_measurement_time`
+         - `lcr_dc_bias_automatic_level_control`
+         - `lcr_dc_bias_current_level`
+         - `lcr_dc_bias_current_range`
+         - `lcr_dc_bias_source`
+         - `lcr_dc_bias_voltage_level`
+         - `lcr_dc_bias_voltage_range`
+         - `lcr_frequency`
+         - `lcr_impedance_auto_range`
+         - `lcr_impedance_range`
+         - `lcr_impedance_range_source`
+         - `lcr_load_capacitance`
+         - `lcr_load_compensation_enabled`
+         - `lcr_load_inductance`
+         - `lcr_load_resistance`
+         - `lcr_measured_load_reactance`
+         - `lcr_measured_load_resistance`
+         - `lcr_measurement_time`
+         - `lcr_open_compensation_enabled`
+         - `lcr_open_conductance`
+         - `lcr_open_short_load_compensation_data_source`
+         - `lcr_open_susceptance`
+         - `lcr_short_compensation_enabled`
+         - `lcr_short_custom_cable_compensation_enabled`
+         - `lcr_short_reactance`
+         - `lcr_short_resistance`
+         - `lcr_source_delay_mode`
+         - `lcr_stimulus_function`
+         - `lcr_voltage_amplitude`
+         - `lcr_voltage_range`      
+      - Enums added:
+         - `ApertureTimeAutoMode`
+         - `CableLength`
+         - `InstrumentMode`
+         - `LCRCompensationType`
+         - `LCRDCBiasSource`
+         - `LCRImpedanceRangeSource`
+         - `LCRMeasurementTime`
+         - `LCROpenShortLoadCompensationDataSource`
+         - `LCRReferenceValueType`
+         - `LCRSourceDelayMode`
+         - `LCRStimulusFunction`    
+      - Methods added:
+         - `configure_lcr_custom_cable_compensation`
+         - `fetch_multiple_lcr`
+         - `get_lcr_compensation_last_date_and_time`
+         - `get_lcr_custom_cable_compensation_data`
+         - `measure_multiple_lcr`
+         - `perform_lcr_load_compensation`
+         - `perform_lcr_open_compensation`
+         - `perform_lcr_open_custom_cable_compensation`
+         - `perform_lcr_short_compensation`
+         - `perform_lcr_short_custom_cable_compensation`  
+      - Custom types added:
+         - `LCRLoadCompensationSpot`
+         - `LCRMeasurement`
   - `nidcpower_lcr_source_ac_voltage.py` example
 - Changed
   - Updated supported devices information in documentation for methods and properties
@@ -232,10 +221,9 @@
 #### [nidcpower] 1.4.1 - 2021-08-23
 - Added
   - (Common) Support for Python 3.9
-  - API parity with NI-DCPower 21.0.0.
-      
-      Properties added:
-      - `output_cutoff_delay`
+  - API parity with NI-DCPower 21.0.0.     
+      - Properties added:
+         - `output_cutoff_delay`
 - Removed
   - (Common) Support for Python 3.5
 
@@ -244,22 +232,20 @@
   - `get_channel_names` - [#1588](https://github.com/ni/nimi-python/issues/1588)
   - `create_advanced_sequence_commit_step` - [#1636](https://github.com/ni/nimi-python/issues/1636)
   - API parity with NI-DCPower 20.7.0 by adding Output Cutoff functionality.
-      
-      Properties added:
-      - `output_cutoff_current_change_limit_high`
-      - `output_cutoff_current_change_limit_low`
-      - `output_cutoff_current_measure_limit_high`
-      - `output_cutoff_current_measure_limit_low`
-      - `output_cutoff_current_overrange_enabled`
-      - `output_cutoff_enabled`
-      - `output_cutoff_voltage_change_limit_high`
-      - `output_cutoff_voltage_change_limit_low`
-      - `output_cutoff_voltage_output_limit_high`
-      - `output_cutoff_voltage_output_limit_low`
-      
-      Methods added:
-      - `clear_latched_output_cutoff_state`
-      - `query_latched_output_cutoff_state`
+       - Properties added:
+         - `output_cutoff_current_change_limit_high`
+         - `output_cutoff_current_change_limit_low`
+         - `output_cutoff_current_measure_limit_high`
+         - `output_cutoff_current_measure_limit_low`
+         - `output_cutoff_current_overrange_enabled`
+         - `output_cutoff_enabled`
+         - `output_cutoff_voltage_change_limit_high`
+         - `output_cutoff_voltage_change_limit_low`
+         - `output_cutoff_voltage_output_limit_high`
+         - `output_cutoff_voltage_output_limit_low`
+      - Methods added:
+         - `clear_latched_output_cutoff_state`
+         - `query_latched_output_cutoff_state`
   - Support for independent operation of instrument channels. Creating an `nidcpower.Session`
 with independent channels allows you to use multiple instruments in the same session. With
 independent channels, you can configure multiple channels of the same instrument, or of
@@ -515,7 +501,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### nidigital (NI-Digital Pattern Driver)
 
-- [nidigital (Unreleased)](#nidigital-unreleased)
+- [Unreleased](#nidigital-unreleased)
 - [1.4.9](#nidigital-149---2025-02-26)
 - [1.4.8](#nidigital-148---2024-04-26)
 - [1.4.6](#nidigital-146---2023-09-11)
@@ -585,19 +571,16 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Added
   - (Common) Support for Python 3.9
   - API parity with NI-Digital Pattern Driver 21.0.0.
-
-      Properties added:
-      - `digital_edge_rio_trigger_edge`
-      - `digital_edge_rio_trigger_source`
-      - `exported_rio_event_output_terminal`
-      - `rio_event_terminal_name`
-      - `rio_trigger_terminal_name`
-      - `rio_trigger_type`
-
-      Repeated Capabilities added:
-      - `rio_events`
-      - `rio_triggers`
-
+      - Properties added:
+         - `digital_edge_rio_trigger_edge`
+         - `digital_edge_rio_trigger_source`
+         - `exported_rio_event_output_terminal`
+         - `rio_event_terminal_name`
+         - `rio_trigger_terminal_name`
+         - `rio_trigger_type`
+      - Repeated Capabilities added:
+         - `rio_events`
+         - `rio_triggers`
 
 - Removed
   - (Common) Support for Python 3.5
@@ -619,8 +602,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
-
-
 
 #### [nidigital] 1.3.0 - 2020-05-21
 - Added
@@ -695,8 +676,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
 
-
-
 #### [nidigital] 1.1.4 - 2019-11-19
 - Added
   - (Common) Support for Python 3.8
@@ -718,7 +697,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### nidmm (NI-DMM)
 
-- [nidmm (Unreleased)](#nidmm-unreleased)
+- [Unreleased](#nidmm-unreleased)
 - [1.4.9](#nidmm-149---2025-02-26)
 - [1.4.8](#nidmm-148---2024-04-26)
 - [1.4.6](#nidmm-146---2023-09-11)
@@ -753,7 +732,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
 - Removed
 
-
 #### [nidmm] 1.4.9 - 2025-02-26
 - Added
   - (Common) Support for Python 3.13
@@ -772,7 +750,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1998](https://github.com/ni/nimi-python/issues/1998): nimi-python APIs inefficiently allocate Python arrays.
 - Removed
   - (Common) Support for Python 3.7
-
 
 #### [nidmm] 1.4.5 - 2023-06-12
 - Added
@@ -809,8 +786,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
 
-
-
 #### [nidmm] 1.3.0 - 2020-05-21
 - Changed
   - (Common) Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
@@ -842,8 +817,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
-
-
 
 #### [nidmm] 1.1.4 - 2019-11-19
 - Added
@@ -1040,7 +1013,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### nifgen (NI-FGEN)
 
-- [nifgen (Unreleased)](#nifgen-unreleased)
+- [Unreleased](#nifgen-unreleased)
 - [1.4.9](#nifgen-149---2025-02-26)
 - [1.4.8](#nifgen-148---2024-04-26)
 - [1.4.6](#nifgen-146---2023-09-11)
@@ -1096,14 +1069,12 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       Enum added:
       - `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
 
-
 #### [nifgen] 1.4.6 - 2023-09-11
 - Changed
   - (Common) Fix [#1970](https://github.com/ni/nimi-python/issues/1970): Incorrect error when driver runtime not installed.
   - (Common) Fix [#1998](https://github.com/ni/nimi-python/issues/1998): nimi-python APIs inefficiently allocate Python arrays.
 - Removed
   - (Common) Support for Python 3.7
-
 
 #### [nifgen] 1.4.5 - 2023-06-12
 - Added
@@ -1156,7 +1127,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
 
-
 #### [nifgen] 1.3.0 - 2020-05-21
 - Changed
   - (Common) Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
@@ -1197,8 +1167,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
-
-
 
 #### [nifgen] 1.1.4 - 2019-11-19
 - Added
@@ -1422,7 +1390,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### nimodinst (NI-ModInst)
 
-- [nimodinst (Unreleased)](#nimodinst-unreleased)
+- [Unreleased](#nimodinst-unreleased)
 - [1.4.9](#nimodinst-149---2025-02-26)
 - [1.4.8](#nimodinst-148---2024-04-26)
 - [1.4.6](#nimodinst-146---2023-09-11)
@@ -1475,7 +1443,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Removed
   - (Common) Support for Python 3.7
 
-
 #### [nimodinst] 1.4.5 - 2023-06-12
 - Removed
   - (Common) `easy_install` support
@@ -1508,8 +1475,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
 
-
-
 #### [nimodinst] 1.3.0 - 2020-05-21
 - Changed
   - (Common) Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
@@ -1541,8 +1506,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
-
-
 
 #### [nimodinst] 1.1.4 - 2019-11-19
 - Added
@@ -1679,7 +1642,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### niscope (NI-SCOPE)
 
-- [niscope (Unreleased)](#niscope-unreleased)
+- [Unreleased](#niscope-unreleased)
 - [1.4.9](#niscope-149---2025-02-26)
 - [1.4.8](#niscope-148---2024-04-26)
 - [1.4.6](#niscope-146---2023-09-11)
@@ -1746,7 +1709,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
   - Fix [#1941](https://github.com/ni/nimi-python/issues/1941): When calling niscope.Session.fetch_array_measurement in a MeasurementLink measurement plugin, meas_wfm_size cannot be set.
       Requires NI gRPC Device Server 2023 Q2 or later. Older versions do not support this parameter and return all available samples.
-
 
 #### [niscope] 1.4.3 - 2022-12-16
 - Added
@@ -1820,8 +1782,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
 
-
-
 #### [niscope] 1.3.0 - 2020-05-21
 - Added
   - API parity with NI-SCOPE 20.0 by adding the following properties:
@@ -1833,12 +1793,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `Session.ready_for_advance_event_terminal_name`
       - `Session.ready_for_ref_event_terminal_name`
       - `Session.ready_for_start_event_terminal_name`
-
-
 - Changed
   - (Common) Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.0.0 for all modules except `nidigital`, for which it is 19.0.1.
-
 #### [niscope] 1.2.1 - 2020-04-21
 - Added
   - (Common) Support for chained repeated capabilities. This allows things like
@@ -1865,8 +1822,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
-
-
 
 #### [niscope] 1.1.4 - 2019-11-19
 - Added
@@ -1896,15 +1851,12 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) New internal process for generating metadata
   - Fixed enum values for `TIME_HISTOGRAM_MEAN_PLUS_STDEV`, `TIME_HISTOGRAM_MEAN_PLUS_2_STDEV`, `HF_REJECT` and `LF_REJECT`
 
-
-
 #### [niscope] 1.1.0 - 2018-10-25
 - Added
   - import_attribute_configuration_file function
   - export_attribute_configuration_file function
   - import_attribute_configuration_buffer function
   - import_attribute_configuration_buffer function
-
 
 - Changed
   - (Common) Updated generated metadata
@@ -1936,7 +1888,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
       - ```
 
-
 #### [niscope] 0.9.0 - 2018-05-22
 - Added
   - (Common) Add `session.lock()` and `session.unlock()` to all drivers except `nimodinst` - [#846](https://github.com/ni/nimi-python/issues/846)
@@ -1964,38 +1915,38 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `query_instrument_status`
       - `cache`
       - `specific_driver_prefix`
-  - Properties removed
-      `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
-      `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
-      `mux_mode_register` [#825](https://github.com/ni/nimi-python/issues/825)
-      `ddc_center_frequency` [#823](https://github.com/ni/nimi-python/issues/823)
-      `ddc_data_processing_mode` [#823](https://github.com/ni/nimi-python/issues/823)
-      `ddc_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-      `ddc_frequency_translation_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-      `ddc_frequency_translation_phase_i` [#823](https://github.com/ni/nimi-python/issues/823)
-      `ddc_frequency_translation_phase_q` [#823](https://github.com/ni/nimi-python/issues/823)
-      `ddc_q_source` [#823](https://github.com/ni/nimi-python/issues/823)
-      `digital_gain` [#823](https://github.com/ni/nimi-python/issues/823)
-      `digital_offset` [#823](https://github.com/ni/nimi-python/issues/823)
-      `dither_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-      `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
-      `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-      `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
-      `adjust_pretrigger_samples_5102` [#822](https://github.com/ni/nimi-python/issues/822)
-      `five_v_out_output_terminal` [#822](https://github.com/ni/nimi-python/issues/822)
-      `clock_sync_pulse_source` [#822](https://github.com/ni/nimi-python/issues/822)
-      `device_number` [#822](https://github.com/ni/nimi-python/issues/822)
-      `fetch_interleaved_data` [#822](https://github.com/ni/nimi-python/issues/822)
-      `trigger_from_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      `trigger_from_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      `trigger_from_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      `trigger_to_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      `trigger_to_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      `trigger_to_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-  - Methods removed
-      `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
-      `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+      - Properties removed
+         - `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
+         - `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
+         - `mux_mode_register` [#825](https://github.com/ni/nimi-python/issues/825)
+         - `ddc_center_frequency` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `ddc_data_processing_mode` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `ddc_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `ddc_frequency_translation_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `ddc_frequency_translation_phase_i` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `ddc_frequency_translation_phase_q` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `ddc_q_source` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `digital_gain` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `digital_offset` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `dither_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `adjust_pretrigger_samples_5102` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `five_v_out_output_terminal` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `clock_sync_pulse_source` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `device_number` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `fetch_interleaved_data` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `trigger_from_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `trigger_from_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `trigger_from_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `trigger_to_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `trigger_to_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `trigger_to_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+         - `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - Methods removed
+         - `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
+         - `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
 
 #### [niscope] 0.8.0 - 2018-04-27
 - Changed
@@ -2004,41 +1955,41 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
      - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - `Session.fetch()`, `Session.read()` and `Session.fetch_into()` updated
-      Takes additional parameters that modify fetch behavior
-      Add resulting record as part of the waveform info
-      Channel name and record number added to waveform info
-      See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch),
+         - Takes additional parameters that modify fetch behavior
+         - Add resulting record as part of the waveform info
+         - Channel name and record number added to waveform info
+         - See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch),
       - [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read),
       - and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
   - Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
   - Enum values and attribute names that start with an underscore + digit have been renamed
-      `Session._5102_adjust_pretrigger_samples` --> `Session.adjust_pretrigger_samples_5102`
-      `Session._5v_out_output_terminal` --> `Session.five_v_out_output_terminal`
-      `ExportableSignals._5V_OUT` --> `ExportableSignals.FIVE_V_OUT`
-      `FlexFIRAntialiasFilterType._48_TAP_STANDARD` --> `FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_STANDARD`
-      `FlexFIRAntialiasFilterType._48_TAP_HANNING` --> `FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_HANNING`
-      `FlexFIRAntialiasFilterType._16_TAP_HANNING` --> `FlexFIRAntialiasFilterType.SIXTEEN_TAP_HANNING`
-      `FlexFIRAntialiasFilterType._8_TAP_HANNING` --> `FlexFIRAntialiasFilterType.EIGHT_TAP_HANNING`
-      `VideoSignalFormat._480I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_480I_59_94_FIELDS_PER_SECOND`
-      `VideoSignalFormat._480I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_480I_60_FIELDS_PER_SECOND`
-      `VideoSignalFormat._480P_59_94_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_480P_59_94_FRAMES_PER_SECOND`
-      `VideoSignalFormat._480P_60_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_480P_60_FRAMES_PER_SECOND`
-      `VideoSignalFormat._576I_50_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_576I_50_FIELDS_PER_SECOND`
-      `VideoSignalFormat._576P_50_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_576P_50_FRAMES_PER_SECOND`
-      `VideoSignalFormat._720P_50_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_50_FRAMES_PER_SECOND`
-      `VideoSignalFormat._720P_59_94_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_59_94_FRAMES_PER_SECOND`
-      `VideoSignalFormat._720P_60_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_60_FRAMES_PER_SECOND`
-      `VideoSignalFormat._1080I_50_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_50_FIELDS_PER_SECOND`
-      `VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND`
-      `VideoSignalFormat._1080I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND`
-      `VideoSignalFormat._1080P_24_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND`
+         - `Session._5102_adjust_pretrigger_samples` --> `Session.adjust_pretrigger_samples_5102`
+         - `Session._5v_out_output_terminal` --> `Session.five_v_out_output_terminal`
+         - `ExportableSignals._5V_OUT` --> `ExportableSignals.FIVE_V_OUT`
+         - `FlexFIRAntialiasFilterType._48_TAP_STANDARD` --> `FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_STANDARD`
+         - `FlexFIRAntialiasFilterType._48_TAP_HANNING` --> `FlexFIRAntialiasFilterType.FOURTYEIGHT_TAP_HANNING`
+         - `FlexFIRAntialiasFilterType._16_TAP_HANNING` --> `FlexFIRAntialiasFilterType.SIXTEEN_TAP_HANNING`
+         - `FlexFIRAntialiasFilterType._8_TAP_HANNING` --> `FlexFIRAntialiasFilterType.EIGHT_TAP_HANNING`
+         - `VideoSignalFormat._480I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_480I_59_94_FIELDS_PER_SECOND`
+         - `VideoSignalFormat._480I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_480I_60_FIELDS_PER_SECOND`
+         - `VideoSignalFormat._480P_59_94_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_480P_59_94_FRAMES_PER_SECOND`
+         - `VideoSignalFormat._480P_60_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_480P_60_FRAMES_PER_SECOND`
+         - `VideoSignalFormat._576I_50_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_576I_50_FIELDS_PER_SECOND`
+         - `VideoSignalFormat._576P_50_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_576P_50_FRAMES_PER_SECOND`
+         - `VideoSignalFormat._720P_50_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_50_FRAMES_PER_SECOND`
+         - `VideoSignalFormat._720P_59_94_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_59_94_FRAMES_PER_SECOND`
+         - `VideoSignalFormat._720P_60_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_720P_60_FRAMES_PER_SECOND`
+         - `VideoSignalFormat._1080I_50_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_50_FIELDS_PER_SECOND`
+         - `VideoSignalFormat._1080I_59_94_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_59_94_FIELDS_PER_SECOND`
+         - `VideoSignalFormat._1080I_60_FIELDS_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080I_60_FIELDS_PER_SECOND`
+         - `VideoSignalFormat._1080P_24_FRAMES_PER_SECOND` --> `VideoSignalFormat.VIDEO_1080P_24_FRAMES_PER_SECOND`
   - `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
 - Removed
   - Following properties are now removed (use parameters to fetch calls):
-      `fetch_relative_to`
-      `fetch_offset`
-      `fetch_record_number`
-      `fetch_num_records`
+      - `fetch_relative_to`
+      - `fetch_offset`
+      - `fetch_record_number`
+      - `fetch_num_records`
   - Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
   - Removed Measurement Library waveform methods and properties - issue [#809](https://github.com/ni/nimi-python/issues/809)
       - `actual_meas_wfm_size()`
@@ -2056,17 +2007,17 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `meas_last_acq_histogram_size`
       - `meas_voltage_histogram_size`
       - `meas_voltage_histogram_low_volts`
-      - - `meas_voltage_histogram_high_volts`
-      - - `meas_time_histogram_size`
-      - - `meas_time_histogram_low_volts`
-      - - `meas_time_histogram_high_volts`
-      - - `meas_time_histogram_low_time`
-      - - `meas_time_histogram_high_time`
-      - - `meas_polynomial_interpolation_order`
-      - - `meas_interpolation_sampling_factor`
-      - - `meas_filter_cutoff_freq`
-      - - `meas_filter_center_freq`
-      - - `meas_filter_ripple`
+      - `meas_voltage_histogram_high_volts`
+      - `meas_time_histogram_size`
+      - `meas_time_histogram_low_volts`
+      - `meas_time_histogram_high_volts`
+      - `meas_time_histogram_low_time`
+      - `meas_time_histogram_high_time`
+      - `meas_polynomial_interpolation_order`
+      - `meas_interpolation_sampling_factor`
+      - `meas_filter_cutoff_freq`
+      - `meas_filter_center_freq`
+      - `meas_filter_ripple`
       - `meas_filter_transient_waveform_percent`
       - `meas_filter_type`
       - `meas_filter_order`
@@ -2080,7 +2031,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `meas_array_offset`
       - `meas_percentage_method`
       - `fetch_meas_num_samples`
-
 
 #### [niscope] 0.7.0 - 2018-02-20
 - Added
@@ -2114,7 +2064,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       `BoolEnableDisableRealtime` - `HORZ_ENFORCE_REALTIME`
       `BoolEnableDisableTIS` - `ENABLE_TIME_INTERLEAVED_SAMPLING`
 
-
 #### [niscope] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
@@ -2131,7 +2080,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - `ClearWaveformProcessing` - See #667 for rationale
   - `FetchArrayMeasurement` - See #667 for rationale
 
-
 #### [niscope] 0.5.0 - 2017-11-27
 - Added
   - Initial release
@@ -2139,7 +2087,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### nise (NI-Switch Executive)
 
-- [nise (Unreleased)](#nise-unreleased)
+- [Unreleased](#nise-unreleased)
 - [1.4.9](#nise-149---2025-02-26)
 - [1.4.8](#nise-148---2024-04-26)
 - [1.4.6](#nise-146---2023-09-11)
@@ -2182,7 +2130,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix [#1998](https://github.com/ni/nimi-python/issues/1998): nimi-python APIs inefficiently allocate Python arrays.
 - Removed
   - (Common) Support for Python 3.7
-
 
 #### [nise] 1.4.5 - 2023-06-12
 - Removed
@@ -2229,7 +2176,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       ``` python
       session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
       ```
-
       The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
 
 #### [nise] 1.2.0 - 2020-03-06
@@ -2250,16 +2196,12 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
 
-
-
 #### [nise] 1.1.4 - 2019-11-19
 - Added
   - (Common) Support for Python 3.8
   - (Common) `ViUInt8` is now a valid type in APIs
 - Changed
   - Version updated to 1.1.4 to match other released nimi-python modules
-
-
 
 #### [nise] 1.1.3 - 2019-10-21
 - Changed
@@ -2291,7 +2233,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 ### niswitch (NI-SWITCH)
 
-- [niswitch (Unreleased)](#niswitch-unreleased)
+- [Unreleased](#niswitch-unreleased)
 - [1.4.9](#niswitch-149---2025-02-26)
 - [1.4.8](#niswitch-148---2024-04-26)
 - [1.4.6](#niswitch-146---2023-09-11)
@@ -2349,7 +2291,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [niswitch] 1.4.5 - 2023-06-12
 - Added
   - Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
-
 - Removed
   - (Common) `easy_install` support
 
@@ -2365,7 +2306,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - MeasurementLink support
 - Changed
   - Fix [#1652](https://github.com/ni/nimi-python/issues/1652): Topology constants haven't been updated on help page
-
 - Removed
   - (Common) Support for Python 3.6
 
@@ -2556,7 +2496,7 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 
 ### nitclk (NI-TCLK)
 
-- [nitclk (Unreleased)](#nitclk-unreleased)
+- [Unreleased](#nitclk-unreleased)
 - [1.4.9](#nitclk-149---2025-02-26)
 - [1.4.8](#nitclk-148---2024-04-26)
 - [1.4.6](#nitclk-146---2023-09-11)
@@ -2598,7 +2538,6 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 - Removed
   - (Common) Support for Python 3.7
 
-
 #### [nitclk] 1.4.5 - 2023-06-12
 - Removed
   - (Common) `easy_install` support
@@ -2627,8 +2566,6 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 - Removed
   - nitclk_configure.py as it did not do anything.
 
-
-
 #### [nitclk] 1.3.2 - 2020-09-18
 - Changed
   - (Common) Fix [#1491](https://github.com/ni/nimi-python/issues/1491): import_attribute_configuration_buffer() fails intermittently when `list` or `array.array` is passed in.
@@ -2638,7 +2575,6 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 - Changed
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
-
 
 #### [nitclk] 1.3.0 - 2020-05-21
 - Changed
@@ -2651,12 +2587,9 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
       ``` python
       session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
       ```
-
       The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
 - Changed
   - Version updated to 1.2.1 to match other released nimi-python modules
-
-
 
 #### [nitclk] 1.2.0 - 2020-03-06
 - Added
@@ -2674,14 +2607,10 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
   - Ability to pass an integer as a session / session reference
   - `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on `nitclk` attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
 
-
-
 #### [nitclk] 1.1.5 - 2019-11-22
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
-
-
 
 #### [nitclk] 1.1.4 - 2019-11-19
 - Added
@@ -2691,7 +2620,6 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 #### [nitclk] 1.1.3 - 2019-10-21
 - Added
   - Initial support
-
 
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
