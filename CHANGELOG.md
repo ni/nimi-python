@@ -439,7 +439,7 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
 - Changed
   - (Common) All exceptions raised by the Python bindings inherit from `<driver>.Error`
   - (Common) Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
-      (Common) This encapsulates any error that is returned by the underlying driver
+     - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - `Session.fetch_multiple()` and `Session.measure_multiple()` now return list of named tuples instead of multiple arrays. See [fetch_multiple](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.fetch_multiple) and [measure_multiple](http://nimi-python.readthedocs.io/en/master/nidcpower/functions.html#nidcpower.Session.measure_multiple)
   - `Session.cal_self_calibration()` renamed to `Session.self_cal()` to match other drivers - issue [#615](https://github.com/ni/nimi-python/issues/615)
@@ -816,7 +816,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Added
   - (Common) Support for chained repeated capabilities. This allows things like
       ``` python
-      session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
+        session.sites[0, 1].pins['PinA', 'PinB'].ppmu_voltage_level = 4
       ```
 
       The repeated capabilities will be expanded to `'site0/PinA,site0/PinB,site1/PinA,site1/PinB'`
@@ -931,7 +931,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) All exceptions raised by the Python bindings inherit from `<driver>.Error`
   - (Common) Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
-      (Common) This encapsulates any error that is returned by the underlying driver
+     - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - Enum values that start with an underscore + digit have been renamed
       - `Function._2_WIRE_RES` --> `Function.TWO_WIRE_RES`
@@ -1080,15 +1080,15 @@ Initial release
 - Added
   - (Common) Support for Python 3.12
   - Properties added:
-      `started_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-      `done_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-      `marker_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-      `started_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-      `done_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-      `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `started_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `done_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `marker_event_pulse_width` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `started_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `done_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
 
       Enum added:
-      `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
+      - `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
 
 
 #### [nifgen] 1.4.6 - 2023-09-11
@@ -1123,14 +1123,12 @@ Initial release
   - `data_markers` repeated capability support - [#1668](https://github.com/ni/nimi-python/issues/1668)
 - Changed
   - Addressed [#1627](https://github.com/ni/nimi-python/issues/1627) for attributes supporting the following repeated capabilities
-`channels`
-`markers`
-`data_markers`
-`script_triggers`
+      - `channels`
+      - `markers`
+      - `data_markers`
+      - `script_triggers`
   - Corrected multiple mistakes in repeated capability info of attribute metadata
       alters API behavior (repeated capability access of attributes) and documentation
-
-
 
 #### [nifgen] 1.4.1 - 2021-08-23
 - Added
@@ -1181,9 +1179,9 @@ Initial release
   - (Common) `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
   - (Common) `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
   - `nifgen.Session.send_software_edge_trigger()` now takes two parameters - `trigger` and `trigger_id`
-      See documentation on how to call this function
-      Calling the previous way will log a DeprecationWarning to the warning subsystem
-      [#1300](https://github.com/ni/nimi-python/issues/1300)
+      - See documentation on how to call this function
+      - Calling the previous way will log a DeprecationWarning to the warning subsystem
+      - [#1300](https://github.com/ni/nimi-python/issues/1300)
 - Removed
   - (Common) Python 2.7 support - [Python Software Foundation version status](https://devguide.python.org/#status-of-python-branches)
   - (Common) Python 3.4 support - [Python Software Foundation PEP 429](https://www.python.org/dev/peps/pep-0429/)
@@ -1238,20 +1236,20 @@ Initial release
 - Changed
   - `num_channels` attribute renamed to `channel_count` - now consistent with other drivers
   - `send_software_edge_trigger()` no longer takes any parameters.
-      To send a start software trigger, call it on the session directly:
-``` python
-session.send_software_edge_trigger()
-```
-      To send a script software trigger, call it on the script triggers container:
-``` python
-session.script_triggers[1].send_software_edge_trigger()
-```
+      - To send a start software trigger, call it on the session directly:
+        ``` python
+        session.send_software_edge_trigger()
+        ```
+      - To send a script software trigger, call it on the script triggers container:
+        ``` python
+        session.script_triggers[1].send_software_edge_trigger()
+        ```
 - Removed
   - (Common) Explicitly disallow using a repeated capability on Session. `session[0].vertical_range = 1.0` will no longer work. Instead use `session.channels[0].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
   - Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
-      `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
-      `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
-      `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
+      - `configure_digital_edge_script_trigger()` - use `session.digital_edge_script_trigger_source` & `session.digital_edge_script_trigger_edge`
+      - `configure_digital_level_script_trigger()` - use `session.digital_level_script_trigger_source` & `session.digital_level_script_trigger_active_level`
+      - `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_source` & `session.digital_edge_start_trigger_edge`
   - Removed `get_fir_filter_coefficients()` - [#535](https://github.com/ni/nimi-python/issues/535), [#596](https://github.com/ni/nimi-python/issues/596)
 
 #### [nifgen] 0.9.0 - 2018-05-22
@@ -1263,11 +1261,11 @@ session.script_triggers[1].send_software_edge_trigger()
   - (Common) `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
   - (Common) Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
   - Some functions missed setting repeated capabilities, leaving these as parameters instead of using the repeated capabilites object.
-      `session.configure_digital_edge_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
-      `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
+      - `session.configure_digital_edge_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_edge_script_trigger(source, ...)`
+      - `session.configure_digital_level_script_trigger('ScriptTrigger0', source, ...)` becomes `session.script_triggers[0].configure_digital_level_script_trigger(source, ...)`
   - Combined named and un-named waveform methods into one [#862](https://github.com/ni/nimi-python/issues/862)
-      `set_waveform_next_write_position()` and `set_named_waveform_next_write_position()` becomes `set_next_write_position()`
-      `clear_arb_waveform()` and `delete_named_waveform()` becomes `delete_waveform()`
+      - `set_waveform_next_write_position()` and `set_named_waveform_next_write_position()` becomes `set_next_write_position()`
+      - `clear_arb_waveform()` and `delete_named_waveform()` becomes `delete_waveform()`
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
       - `engine_major_version`
@@ -1363,7 +1361,7 @@ session.script_triggers[1].send_software_edge_trigger()
 - Changed
   - (Common) All exceptions raised by the Python bindings inherit from `<driver>.Error`
   - (Common) Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
-      (Common) This encapsulates any error that is returned by the underlying driver
+     - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - `Session.export_signal()` signal_identifier now has a default of "". This moves it to the end of the parameter list [#801](https://github.com/ni/nimi-python/issues/801)
   - `Session.get_ext_cal_recommended_interval()` now returns a `datetime.timedelta` for the interval [#794](https://github.com/ni/nimi-python/issues/794)
@@ -1386,25 +1384,25 @@ session.script_triggers[1].send_software_edge_trigger()
       `markers` repeated capability
       `script_triggers` repeated capability
   - The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
-      `adjust_sample_clock_relative_delay()`
-      `wait_until_done()`
+     - `adjust_sample_clock_relative_delay()`
+     - `wait_until_done()`
   - The following functions return a `datetime.datetime()` object representing the date and time
-      `get_ext_cal_last_date_and_time()`
-      `get_self_cal_last_date_and_time()`
+     - `get_ext_cal_last_date_and_time()`
+     - `get_self_cal_last_date_and_time()`
 
 #### [nifgen] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
-Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
-Support for calling `write_waveform` with a waveform handle (int) or a name (str).
-Support for calling `create_waveform` using list (float) or numpy.array (int16 or float64)
+     - Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
+     - Support for calling `write_waveform` with a waveform handle (int) or a name (str).
+     - Support for calling `create_waveform` using list (float) or numpy.array (int16 or float64)
 - Changed
-Renamed `create_waveform_f64` -> `create_waveform`
+  - Renamed `create_waveform_f64` -> `create_waveform`
 - Removed
-`create_waveform_i16`
-`write_binary16_waveform`: Use `write_waveform`
-`write_named_waveform_i16`: Use `write_waveform`
-`write_named_waveform_f64`: Use `write_waveform`
+  - `create_waveform_i16`
+  - `write_binary16_waveform`: Use `write_waveform`
+  - `write_named_waveform_i16`: Use `write_waveform`
+  - `write_named_waveform_f64`: Use `write_waveform`
 
 #### [nifgen] 0.5.0 - 2017-11-27
 - Removed
@@ -1413,31 +1411,9 @@ Renamed `create_waveform_f64` -> `create_waveform`
 
 #### [nifgen] 0.4.0 - 2017-11-07
 - Added
-Initial release
+  - Initial release
 
-- Changed
-(Common) Simplified examples by removing try/except
-(Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
-
-#### [nifgen] 0.3.0 - 2017-10-13
-- Added
-  - (Common) Support for ViInt64 (64-bit integers)
-- Changed
-  - (Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
-      ``` python
-      # Sets sequence on channels 0 through 3
-      session['0-3'].set_sequence(values, source_delays)
-      ```
-  - (Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
-
-#### [nifgen] 0.2.0 - 2017-09-20
-- Added
-(Common) Suport for channel-based properties
-- Changed
-(Common) Warnings no longer raise an exception
-(Common) Warnings are now added to warnings.warn()
-
-### nimodinst (NI-MODINST)
+### nimodinst (NI-ModInst)
 
 - [nimodinst (Unreleased)](#nimodinst-unreleased)
 - [1.4.9](#nimodinst-149---2025-02-26)
@@ -1638,7 +1614,7 @@ Initial release
 - Changed
   - (Common) All exceptions raised by the Python bindings inherit from `<driver>.Error`
   - (Common) Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
-      (Common) This encapsulates any error that is returned by the underlying driver
+     - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
 
 #### [nimodinst] 0.7.0 - 2018-02-20
@@ -1662,8 +1638,8 @@ Initial release
 
 #### [nimodinst] 0.4.0 - 2017-11-07
 - Changed
-(Common) Simplified examples by removing try/except
-(Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
+  - Simplified examples by removing try/except
+  - **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
 
 #### [nimodinst] 0.3.0 - 2017-10-13
 - Added
@@ -1678,16 +1654,16 @@ Initial release
 
 #### [nimodinst] 0.2.0 - 2017-09-20
 - Added
-(Common) Suport for channel-based properties
+  - (Common) Suport for channel-based properties
 - Changed
-(Common) Warnings no longer raise an exception
-(Common) Warnings are now added to warnings.warn()
-Device index is now on session not attribute. The correct way is now
-```python
-i = 0
-with nimodinst.Session('nidmm') as session:
-name = session[i].device_name
-```
+  - (Common) Warnings no longer raise an exception
+      -  Warnings are now added to warnings.warn()
+  - Device index is now on session not attribute. The correct way is now
+      ``` python
+         i = 0
+         with nimodinst.Session('nidmm') as session:
+         name = session[i].device_name
+      ``` 
 
 #### [nimodinst] 0.1.0 - 2017-09-01
 - Added
@@ -1780,49 +1756,49 @@ Initial release
 #### [niscope] 1.3.2 - 2020-09-18
 - Added
   - New methods for getting calibration information. - [#1463](https://github.com/ni/nimi-python/issues/1463)
-      `get_ext_cal_last_date_and_time`
-      `get_ext_cal_last_temp`
-      `get_self_cal_last_date_and_time`
-      `get_self_cal_last_temp`
+      - `get_ext_cal_last_date_and_time`
+      - `get_ext_cal_last_temp`
+      - `get_self_cal_last_date_and_time`
+      - `get_self_cal_last_temp`
   - Measurement library methods. - [#806](https://github.com/ni/nimi-python/issues/806)
-      `add_waveform_processing`
-      `clear_waveform_measurement_stats`
-      `clear_waveform_processing`
-      `fetch_array_measurement`
-      `fetch_measurement_stats`
+      - `add_waveform_processing`
+      - `clear_waveform_measurement_stats`
+      - `clear_waveform_processing`
+      - `fetch_array_measurement`
+      - `fetch_measurement_stats`
   - Measurement library properties.
-      `meas_array_gain`
-      `meas_array_offset`
-      `meas_chan_high_ref_level`
-      `meas_chan_low_ref_level`
-      `meas_chan_mid_ref_level`
-      `meas_filter_center_freq`
-      `meas_filter_cutoff_freq`
-      `meas_filter_order`
-      `meas_filter_ripple`
-      `meas_filter_taps`
-      `meas_filter_transient_waveform_percent`
-      `meas_filter_type`
-      `meas_filter_width`
-      `meas_fir_filter_window`
-      `meas_high_ref`
-      `meas_low_ref`
-      `meas_mid_ref`
-      `meas_hysteresis_percent`
-      `meas_interpolation_sampling_factor`
-      `meas_last_acq_histogram_size`
-      `meas_other_channel`
-      `meas_percentage_method`
-      `meas_polynomial_interpolation_order`
-      `meas_ref_level_units`
-      `meas_time_histogram_high_time`
-      `meas_time_histogram_high_volts`
-      `meas_time_histogram_low_time`
-      `meas_time_hisogram_low_volts`
-      `meas_time_histogram_size`
-      `meas_voltage_histogram_high_volts`
-      `meas_voltage_histogram_low_volts`
-      `meas_voltage_histogram_size`
+      - `meas_array_gain`
+      - `meas_array_offset`
+      - `meas_chan_high_ref_level`
+      - `meas_chan_low_ref_level`
+      - `meas_chan_mid_ref_level`
+      - `meas_filter_center_freq`
+      - `meas_filter_cutoff_freq`
+      - `meas_filter_order`
+      - `meas_filter_ripple`
+      - `meas_filter_taps`
+      - `meas_filter_transient_waveform_percent`
+      - `meas_filter_type`
+      - `meas_filter_width`
+      - `meas_fir_filter_window`
+      - `meas_high_ref`
+      - `meas_low_ref`
+      - `meas_mid_ref`
+      - `meas_hysteresis_percent`
+      - `meas_interpolation_sampling_factor`
+      - `meas_last_acq_histogram_size`
+      - `meas_other_channel`
+      - `meas_percentage_method`
+      - `meas_polynomial_interpolation_order`
+      - `meas_ref_level_units`
+      - `meas_time_histogram_high_time`
+      - `meas_time_histogram_high_volts`
+      - `meas_time_histogram_low_time`
+      - `meas_time_hisogram_low_volts`
+      - `meas_time_histogram_size`
+      - `meas_voltage_histogram_high_volts`
+      - `meas_voltage_histogram_low_volts`
+      - `meas_voltage_histogram_size`
 - Changed
   - (Common) Fix [#1491](https://github.com/ni/nimi-python/issues/1491): import_attribute_configuration_buffer() fails intermittently when `list` or `array.array` is passed in.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.5.0 for NI-DCPower, NI-SWITCH, and NI-DMM. no changes on other drivers.
@@ -1841,14 +1817,14 @@ Initial release
 #### [niscope] 1.3.0 - 2020-05-21
 - Added
   - API parity with NI-SCOPE 20.0 by adding the following properties:
-      `Session.end_of_acquisition_event_terminal_name`
-      `Session.end_of_record_event_terminal_name`
-      `Session.advance_trigger_terminal_name`
-      `Session.ref_trigger_terminal_name`
-      `Session.start_trigger_terminal_name`
-      `Session.ready_for_advance_event_terminal_name`
-      `Session.ready_for_ref_event_terminal_name`
-      `Session.ready_for_start_event_terminal_name`
+      - `Session.end_of_acquisition_event_terminal_name`
+      - `Session.end_of_record_event_terminal_name`
+      - `Session.advance_trigger_terminal_name`
+      - `Session.ref_trigger_terminal_name`
+      - `Session.start_trigger_terminal_name`
+      - `Session.ready_for_advance_event_terminal_name`
+      - `Session.ready_for_ref_event_terminal_name`
+      - `Session.ready_for_start_event_terminal_name`
 
 
 - Changed
@@ -2017,7 +1993,7 @@ Initial release
 - Changed
   - (Common) All exceptions raised by the Python bindings inherit from `<driver>.Error`
   - (Common) Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
-      (Common) This encapsulates any error that is returned by the underlying driver
+     - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - `Session.fetch()`, `Session.read()` and `Session.fetch_into()` updated
       Takes additional parameters that modify fetch behavior
@@ -2057,45 +2033,45 @@ Initial release
       `fetch_num_records`
   - Removed `number_of_coefficients` parameter from `get_equalization_filter_coefficients()`
   - Removed Measurement Library waveform methods and properties - issue [#809](https://github.com/ni/nimi-python/issues/809)
-      `actual_meas_wfm_size()`
-      `add_waveform_processing()`
-      `clear_waveform_processing()`
-      `fetch_array_measurement()`
-      `clear_waveform_measurement_stats()`
-      `fetch_measurement()`
-      `fetch_measurement_stats()`
-      `read_measurement()`
-      `configure_ref_levels()`
-      `meas_ref_level_units`
-      `meas_other_channel`
-      `meas_hysteresis_percent`
-      `meas_last_acq_histogram_size`
-      `meas_voltage_histogram_size`
-      `meas_voltage_histogram_low_volts`
-      `meas_voltage_histogram_high_volts`
-      `meas_time_histogram_size`
-      `meas_time_histogram_low_volts`
-      `meas_time_histogram_high_volts`
-      `meas_time_histogram_low_time`
-      `meas_time_histogram_high_time`
-      `meas_polynomial_interpolation_order`
-      `meas_interpolation_sampling_factor`
-      `meas_filter_cutoff_freq`
-      `meas_filter_center_freq`
-      `meas_filter_ripple`
-      `meas_filter_transient_waveform_percent`
-      `meas_filter_type`
-      `meas_filter_order`
-      `meas_filter_taps`
-      `meas_chan_low_ref_level`
-      `meas_chan_mid_ref_level`
-      `meas_chan_high_ref_level`
-      `meas_filter_width`
-      `meas_fir_filter_window`
-      `meas_array_gain`
-      `meas_array_offset`
-      `meas_percentage_method`
-      `fetch_meas_num_samples`
+      - `actual_meas_wfm_size()`
+      - `add_waveform_processing()`
+      - `clear_waveform_processing()`
+      - `fetch_array_measurement()`
+      - `clear_waveform_measurement_stats()`
+      - `fetch_measurement()`
+      - `fetch_measurement_stats()`
+      - `read_measurement()`
+      - `configure_ref_levels()`
+      - `meas_ref_level_units`
+      - `meas_other_channel`
+      - `meas_hysteresis_percent`
+      - `meas_last_acq_histogram_size`
+      - `meas_voltage_histogram_size`
+      - `meas_voltage_histogram_low_volts`
+      - - `meas_voltage_histogram_high_volts`
+      - - `meas_time_histogram_size`
+      - - `meas_time_histogram_low_volts`
+      - - `meas_time_histogram_high_volts`
+      - - `meas_time_histogram_low_time`
+      - - `meas_time_histogram_high_time`
+      - - `meas_polynomial_interpolation_order`
+      - - `meas_interpolation_sampling_factor`
+      - - `meas_filter_cutoff_freq`
+      - - `meas_filter_center_freq`
+      - - `meas_filter_ripple`
+      - `meas_filter_transient_waveform_percent`
+      - `meas_filter_type`
+      - `meas_filter_order`
+      - `meas_filter_taps`
+      - `meas_chan_low_ref_level`
+      - `meas_chan_mid_ref_level`
+      - `meas_chan_high_ref_level`
+      - `meas_filter_width`
+      - `meas_fir_filter_window`
+      - `meas_array_gain`
+      - `meas_array_offset`
+      - `meas_percentage_method`
+      - `fetch_meas_num_samples`
 
 
 #### [niscope] 0.7.0 - 2018-02-20
@@ -2152,7 +2128,7 @@ Initial release
 - Added
 Initial release
 
-### nise (NI-SE)
+### nise (NI-Switch Executive)
 
 - [nise (Unreleased)](#nise-unreleased)
 - [1.4.9](#nise-149---2025-02-26)
@@ -2514,7 +2490,7 @@ Initial release
 - Changed
   - (Common) All exceptions raised by the Python bindings inherit from `<driver>.Error`
   - (Common) Exception type formerly known as `<driver>.Error` is now known as `<driver>.DriverError`
-      (Common) This encapsulates any error that is returned by the underlying driver
+     - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
 
 #### [niswitch] 0.7.0 - 2018-02-20
@@ -2528,15 +2504,15 @@ Initial release
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - The following functions timeout, delay or holdoff parameters now is required to be a `datetime.timedelta()` object:
-      `configure_scan_trigger()`
-      `wait_for_debounce()`
-      `wait_for_scan_complete()`
+      - `configure_scan_trigger()`
+      - `wait_for_debounce()`
+      - `wait_for_scan_complete()`
 
 #### [niswitch] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 - Removed
-Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
+  - Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
 
 #### [niswitch] 0.5.0 - 2017-11-27
 - Removed
