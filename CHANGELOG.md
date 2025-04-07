@@ -511,7 +511,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Added
   - Initial release
 
-### nidigital (NI-DIGITAL)
+### nidigital (NI-Digital Pattern Driver)
 
 - [nidigital (Unreleased)](#nidigital-unreleased)
 - [1.4.9](#nidigital-149---2025-02-26)
@@ -540,7 +540,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Added
   - (Common) Support for Python 3.13
   - Methods Added:
-      `enable_match_fail_combination`
+      - `enable_match_fail_combination`
 
 - Changed
   - (Common) Fix [#2069](https://github.com/ni/nimi-python/issues/2069)
@@ -583,6 +583,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Added
   - (Common) Support for Python 3.9
   - API parity with NI-Digital Pattern Driver 21.0.0.
+
       Properties added:
       - `digital_edge_rio_trigger_edge`
       - `digital_edge_rio_trigger_source`
@@ -590,6 +591,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `rio_event_terminal_name`
       - `rio_trigger_terminal_name`
       - `rio_trigger_type`
+
       Repeated Capabilities added:
       - `rio_events`
       - `rio_triggers`
@@ -601,10 +603,10 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [nidigital] 1.3.3 - 2021-02-26
 - Added
   - 1.0.0 release:
-      API reference documentation and API usage examples
+      - API reference documentation and API usage examples
   - API parity with NI-Digital Pattern Driver 20.6.0 by adding support for configuration of frequency counter measurement mode. The following properties are added:
-      `frequency_counter_measurement_mode`
-      `frequency_counter_hysteresis_enabled`
+      - `frequency_counter_measurement_mode`
+      - `frequency_counter_hysteresis_enabled`
 
 #### [nidigital] 1.3.2 - 2020-09-18
 - Changed
@@ -621,9 +623,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [nidigital] 1.3.0 - 2020-05-21
 - Added
   - 0.9.0 release:
-      Public API is considered complete, stable, and tested
-      Parity with public API for other ADEs supported in NI-Digital Pattern Driver 19.0.1
-      API reference documentation and example code are not complete
+      - Public API is considered complete, stable, and tested
+      - Parity with public API for other ADEs supported in NI-Digital Pattern Driver 19.0.1
+      - API reference documentation and example code are not complete
 - Changed
   - (Common) Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.0.0 for all modules except `nidigital`, for which it is 19.0.1.
@@ -648,9 +650,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - `get_site_pass_fail` returns dictionary where each key is a site number and value is a bool indicating pass/fail - [#1297](https://github.com/ni/nimi-python/issues/1297)
   - `burst_pattern` returns dictionary where each key is a site number and value is a bool indicating pass/fail, if `wait_until_done` is specified as `True` - [#1296](https://github.com/ni/nimi-python/issues/1296)
   - Update enum types to match the API in other ADEs - [#1330](https://github.com/ni/nimi-python/issues/1330):
-      Update the names of many enum types. See [#1330](https://github.com/ni/nimi-python/issues/1330) for the full list.
-      Added `WriteStaticPinState` enum type and changed the parameter type of `write_static` method to the newly added enum.
-      Added `SoftwareTrigger` enum type and changed the parameter type of `send_software_edge_trigger` method to the newly added enum.
+      - Update the names of many enum types. See [#1330](https://github.com/ni/nimi-python/issues/1330) for the full list.
+      - Added `WriteStaticPinState` enum type and changed the parameter type of `write_static` method to the newly added enum.
+      - Added `SoftwareTrigger` enum type and changed the parameter type of `send_software_edge_trigger` method to the newly added enum.
   - Update `fetch_history_ram_cycle_information`, `get_history_ram_sample_count`, and `is_site_enabled` to use `sites` repeated capability - [#1337](https://github.com/ni/nimi-python/issues/1337)
   - Rename parameter `time_set` to `time_set_name` in applicable time set methods - [#1396](https://github.com/ni/nimi-python/issues/1396)
   - Modified `unload_specifications` to allow unloading of one or more specs files in a single call - [#1392](https://github.com/ni/nimi-python/issues/1392)
@@ -932,13 +934,13 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       (Common) This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - Enum values that start with an underscore + digit have been renamed
-      `Function._2_WIRE_RES` --> `Function.TWO_WIRE_RES`
-      `Function._4_WIRE_RES` --> `Function.FOUR_WIRE_RES`
-      `ThermistorType._44004` --> `ThermistorType.THERMISTOR_44004`
-      `ThermistorType._44006` --> `ThermistorType.THERMISTOR_44006`
-      `ThermistorType._44007` --> `ThermistorType.THERMISTOR_44007`
-      `TransducerType._2_WIRE_RTD` --> `TransducerType.TWO_WIRE_RTD`
-      `TransducerType._4_WIRE_RTD` --> `TransducerType.FOUR_WIRE_RTD`
+      - `Function._2_WIRE_RES` --> `Function.TWO_WIRE_RES`
+      - `Function._4_WIRE_RES` --> `Function.FOUR_WIRE_RES`
+      - `ThermistorType._44004` --> `ThermistorType.THERMISTOR_44004`
+      - `ThermistorType._44006` --> `ThermistorType.THERMISTOR_44006`
+      - `ThermistorType._44007` --> `ThermistorType.THERMISTOR_44007`
+      - `TransducerType._2_WIRE_RTD` --> `TransducerType.TWO_WIRE_RTD`
+      - `TransducerType._4_WIRE_RTD` --> `TransducerType.FOUR_WIRE_RTD`
   - `Session.get_ext_cal_recommended_interval()` now returns a `datetime.timedelta` for the interval [#794](https://github.com/ni/nimi-python/issues/794)
 
 #### [nidmm] 0.7.0 - 2018-02-20
@@ -953,78 +955,78 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - `nidmm.Session()` no longer takes id_query parameter (Fix [#670](https://github.com/ni/nimi-python/issues/670))
   - The following functions timeout or delay parameter now is required to be a `datetime.timedelta()` object:
-      `configure_multi_point()`
-      `configure_trigger()`
-      `fetch()`
-      `fetch_multi_point()`
-      `fetch_waveform()`
-      `read()`
-      `read_multi_point()`
-      `read_waveform()`
+      - `configure_multi_point()`
+      - `configure_trigger()`
+      - `fetch()`
+      - `fetch_multi_point()`
+      - `fetch_waveform()`
+      - `read()`
+      - `read_multi_point()`
+      - `read_waveform()`
   - The following functions return a `datetime.datetime()` object representing the date and time
-      `get_cal_date_and_time()`
+      - `get_cal_date_and_time()`
   - Metadata updated to NI-DMM 17.5
 - Removed
   - Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
-      `DCBias` - `DC_BIAS`
-      `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
+      - `DCBias` - `DC_BIAS`
+      - `OffsetCompensatedOhms` - `OFFSET_COMP_OHMS`
 
 #### [nidmm] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
-`fetch_waveform_into` for high-performance fetch using numpy.array of float64.
+      - `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
 - Changed
-Property powerline_freq no longer uses enum PowerlineFrequency.
-Property current_source no longer uses enum CurrentSource.
-Property input_resistance no longer uses enum InputResistance.
-Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
-Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
-Removed `actual_number_of_points` from `read_multi_point()` returned tuple
-Removed `actual_number_of_points` from `read_waveform()` returned tuple
+      - Property powerline_freq no longer uses enum PowerlineFrequency.
+      - Property current_source no longer uses enum CurrentSource.
+      - Property input_resistance no longer uses enum InputResistance.
+      - Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
+      - Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
+      - Removed `actual_number_of_points` from `read_multi_point()` returned tuple
+      - Removed `actual_number_of_points` from `read_waveform()` returned tuple
 
 #### [nidmm] 0.5.0 - 2017-11-27
 - Added
-`get_ext_cal_recommended_interval`
+  - `get_ext_cal_recommended_interval`
 - Removed
   - (Common) enum definitions that are not referenced by a function and/or an attributes
 
 #### [nidmm] 0.4.0 - 2017-11-07
 - Changed
-(Common) Simplified examples by removing try/except
-(Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
-Removed incorrect leading underscore from some enum values:
-`Function.AC_VOLTS_DC_COUPLED`
-`Function.WAVEFORM_CURRENT`
-`MeasurementCompleteDest.LBR_TRIG_0`
-`OperationMode.IVIDMM_MODE`
-`SampleTrigger.EXTERNAL`
-`SampleTrigger.TTL_3`
-`TriggerSource.TTL_0`
-`TriggerSource.TTL_3`
-`TriggerSource.TTL_7`
-`TriggerSource.PXI_STAR`
+  - (Common) Simplified examples by removing try/except
+  - (Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
+  - Removed incorrect leading underscore from some enum values:
+      - `Function.AC_VOLTS_DC_COUPLED`
+      - `Function.WAVEFORM_CURRENT`
+      - `MeasurementCompleteDest.LBR_TRIG_0`
+      - `OperationMode.IVIDMM_MODE`
+      - `SampleTrigger.EXTERNAL`
+      - `SampleTrigger.TTL_3`
+      - `TriggerSource.TTL_0`
+      - `TriggerSource.TTL_3`
+      - `TriggerSource.TTL_7`
+      - `TriggerSource.PXI_STAR`
 
 #### [nidmm] 0.3.0 - 2017-10-13
 - Added
-(Common) Support for ViInt64 (64-bit integers)
+  - (Common) Support for ViInt64 (64-bit integers)
 - Changed
-(Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
-```python
-# Sets sequence on channels 0 through 3
-session['0-3'].set_sequence(values, source_delays)
-```
-(Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
-Added default values to some parameters.
+  - (Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
+      ``` python
+      # Sets sequence on channels 0 through 3
+      session['0-3'].set_sequence(values, source_delays)
+      ```
+  - (Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
+  - Added default values to some parameters.
 - Removed
-Removed methods that aren’t useful in the Python bindings.
+  - Removed methods that aren’t useful in the Python bindings.
 
 #### [nidmm] 0.2.0 - 2017-09-20
 - Added
-(Common) Suport for channel-based properties
+  - (Common) Suport for channel-based properties
 - Changed
-(Common) Warnings no longer raise an exception
-(Common) Warnings are now added to warnings.warn()
-Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
+  - (Common) Warnings no longer raise an exception
+  - (Common) Warnings are now added to warnings.warn()
+  - Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
 
 #### [nidmm] 0.1.0 - 2017-09-01
 - Added
@@ -1084,7 +1086,8 @@ Initial release
       `started_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
       `done_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
       `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
-  - Enum added:
+
+      Enum added:
       `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
 
 
@@ -1418,14 +1421,14 @@ Initial release
 
 #### [nifgen] 0.3.0 - 2017-10-13
 - Added
-(Common) Support for ViInt64 (64-bit integers)
+  - (Common) Support for ViInt64 (64-bit integers)
 - Changed
-(Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
-```python
-# Sets sequence on channels 0 through 3
-session['0-3'].set_sequence(values, source_delays)
-```
-(Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
+  - (Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
+      ``` python
+      # Sets sequence on channels 0 through 3
+      session['0-3'].set_sequence(values, source_delays)
+      ```
+  - (Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
 
 #### [nifgen] 0.2.0 - 2017-09-20
 - Added
@@ -1664,14 +1667,14 @@ session['0-3'].set_sequence(values, source_delays)
 
 #### [nimodinst] 0.3.0 - 2017-10-13
 - Added
-(Common) Support for ViInt64 (64-bit integers)
+  - (Common) Support for ViInt64 (64-bit integers)
 - Changed
-(Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
-```python
-# Sets sequence on channels 0 through 3
-session['0-3'].set_sequence(values, source_delays)
-```
-(Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
+  - (Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
+      ``` python
+      # Sets sequence on channels 0 through 3
+      session['0-3'].set_sequence(values, source_delays)
+      ```
+  - (Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
 
 #### [nimodinst] 0.2.0 - 2017-09-20
 - Added
@@ -2548,17 +2551,17 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 
 #### [niswitch] 0.3.0 - 2017-10-13
 - Added
-(Common) Support for ViInt64 (64-bit integers)
+  - (Common) Support for ViInt64 (64-bit integers)
 - Changed
-(Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
-```python
-# Sets sequence on channels 0 through 3
-session['0-3'].set_sequence(values, source_delays)
-```
-(Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
-Added default values to some parameters.
+  - (Common) Modified how methods with repeated capabilities are invoked. There's no longer (for example) a `channel_name` input. Instead:
+      ``` python
+      # Sets sequence on channels 0 through 3
+      session['0-3'].set_sequence(values, source_delays)
+      ```
+  - (Common) Enum value documentation lists the fully qualified name - this is to allow easy copy/paste
+  - Added default values to some parameters.
 - Removed
-Removed methods that aren’t useful in the Python bindings.
+  - Removed methods that aren’t useful in the Python bindings.
 
 #### [niswitch] 0.2.0 - 2017-09-20
 - Added
