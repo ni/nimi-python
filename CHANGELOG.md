@@ -72,6 +72,7 @@
 #### [nidcpower] 1.4.7 - 2023-12-15
 - Added
   - API parity with NI-DCPower 2023 Q4.
+  
       Properties added:
       - `current_level_rising_slew_rate`
       - `current_level_falling_slew_rate`
@@ -80,8 +81,10 @@
       - `conduction_voltage_off_threshold`
       - `output_cutoff_voltage_measure_limit_high`
       - `output_cutoff_voltage_measure_limit_low`
+      
       Enum added:
       - `ConductionVoltageMode`
+      
       Enum values added:
       - `E_LOAD` added to enum `InstrumentMode`
       - `CURRENT_SATURATED`, `VOLTAGE_MEASURE_HIGH` and `VOLTAGE_MEASURE_LOW` added to enum `OutputCutoffReason`
@@ -104,6 +107,7 @@
   - (Common) Support for Python 3.11
   - Pass Python interpreter information if the driver runtime version supports it. This is used by NI in order to better understand client usage.
   - API parity with NI-DCPower 2023 Q2.
+
       Properties added:
       - `lcr_ac_dither_enabled`
       - `lcr_ac_electrical_cable_length_delay`
@@ -117,22 +121,25 @@
       - `sequence_iteration_complete_event_toggle_initial_state`
       - `source_complete_event_output_behavior`
       - `source_complete_event_toggle_initial_state`
+
       Enums added:
       - `CurrentLimitBehavior`
       - `EventOutputBehavior`
       - `EventToggleInitialState`
       - `LCRDCBiasTransientResponse`
+
       Enum values added:
       - `AS_CONFIGURED` added to enum `LCROpenShortLoadCompensationDataSource`
       - `NI_STANDARD_0_5M` added to enum `CableLength`
+
       Methods added:
       - `configure_lcr_compensation`
       - `get_lcr_compensation_data`
 - Changed
   - (Common) Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
   - Enums reordered:
-      `AutoZero`
-      `CableLength`
+    - `AutoZero`
+    - `CableLength`
 
 #### [nidcpower] 1.4.3 - 2022-12-16
 - Added
@@ -146,6 +153,7 @@
 #### [nidcpower] 1.4.2 - 2022-08-03
 - Added
   - API parity with NI-DCPower 2022 Q3.
+      
       Properties added:
       - `aperture_time_auto_mode`
       - `autorange_maximum_delay_after_range_change`
@@ -187,6 +195,7 @@
       - `lcr_stimulus_function`
       - `lcr_voltage_amplitude`
       - `lcr_voltage_range`
+      
       Enums added:
       - `ApertureTimeAutoMode`
       - `CableLength`
@@ -199,6 +208,7 @@
       - `LCRReferenceValueType`
       - `LCRSourceDelayMode`
       - `LCRStimulusFunction`
+      
       Methods added:
       - `configure_lcr_custom_cable_compensation`
       - `fetch_multiple_lcr`
@@ -210,6 +220,7 @@
       - `perform_lcr_open_custom_cable_compensation`
       - `perform_lcr_short_compensation`
       - `perform_lcr_short_custom_cable_compensation`
+      
       Custom types added:
       - `LCRLoadCompensationSpot`
       - `LCRMeasurement`
@@ -222,6 +233,7 @@
 - Added
   - (Common) Support for Python 3.9
   - API parity with NI-DCPower 21.0.0.
+      
       Properties added:
       - `output_cutoff_delay`
 - Removed
@@ -232,6 +244,7 @@
   - `get_channel_names` - [#1588](https://github.com/ni/nimi-python/issues/1588)
   - `create_advanced_sequence_commit_step` - [#1636](https://github.com/ni/nimi-python/issues/1636)
   - API parity with NI-DCPower 20.7.0 by adding Output Cutoff functionality.
+      
       Properties added:
       - `output_cutoff_current_change_limit_high`
       - `output_cutoff_current_change_limit_low`
@@ -243,6 +256,7 @@
       - `output_cutoff_voltage_change_limit_low`
       - `output_cutoff_voltage_output_limit_high`
       - `output_cutoff_voltage_output_limit_low`
+      
       Methods added:
       - `clear_latched_output_cutoff_state`
       - `query_latched_output_cutoff_state`
@@ -258,21 +272,21 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
 #### [nidcpower] 1.3.3 - 2021-02-26
 - Added
   - API parity with NI-DCPower 20.6.0 by adding Merged Channels and Shutdown Triggers support. The following properties are added:
-      `merged_channels`
-      `digital_edge_shutdown_trigger_input_terminal`
-      `shutdown_trigger_type`
+      - `merged_channels`
+      - `digital_edge_shutdown_trigger_input_terminal`
+      - `shutdown_trigger_type`
 
 #### [nidcpower] 1.3.2 - 2020-09-18
 - Added
   - API parity with NI-DCPower 20.5.0 by adding measurement autoranging threshold range support, for which the following properties are added:
-      `autorange`
-      `autorange_aperture_time_mode`
-      `autorange_behavior`
-      `autorange_minimum_aperture_time`
-      `autorange_minimum_aperture_time_units`
-      `autorange_minimum_current_range`
-      `autorange_minimum_voltage_range`
-      `autorange_threshold_mode`
+      - `autorange`
+      - `autorange_aperture_time_mode`
+      - `autorange_behavior`
+      - `autorange_minimum_aperture_time`
+      - `autorange_minimum_aperture_time_units`
+      - `autorange_minimum_current_range`
+      - `autorange_minimum_voltage_range`
+      - `autorange_threshold_mode`
 - Changed
   - (Common) Fix [#1491](https://github.com/ni/nimi-python/issues/1491): import_attribute_configuration_buffer() fails intermittently when `list` or `array.array` is passed in.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.5.0 for NI-DCPower, NI-SWITCH, and NI-DMM. no changes on other drivers.
@@ -340,12 +354,12 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
 #### [nidcpower] 1.1.3 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
   - Fix type of `sequence_step_delta_time_enabled ` property - [#1015](https://github.com/ni/nimi-python/issues/1015)
 
@@ -377,17 +391,17 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
 - Removed
   - (Common) Explicitly disallow using a repeated capability on Session. `session[0].vertical_range = 1.0` will no longer work. Instead use `session.channels[0].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
   - Remove trigger configuration methods, use attributes instead [#860](https://github.com/ni/nimi-python/issues/860)
-      `configure_digital_edge_measure_trigger()` - use `session.digital_edge_measure_trigger_edge` & `session.digital_edge_measure_trigger_input_terminal`
-      `configure_digital_edge_pulse_trigger()` - use `session.digital_edge_pulse_trigger_edge` & `session.digital_edge_pulse_trigger_input_terminal`
-      `configure_digital_edge_sequence_advance_trigger()` - use `session.digital_edge_sequence_advance_trigger_edge` & `session.digital_edge_sequence_advance_trigger_input_terminal`
-      `configure_digital_edge_source_trigger()` - use `session.digital_edge_source_trigger_edge` & `session.digital_edge_source_trigger_input_terminal`
-      `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_edge` & `session.digital_edge_start_trigger_input_terminal`
+      - `configure_digital_edge_measure_trigger()` - use `session.digital_edge_measure_trigger_edge` & `session.digital_edge_measure_trigger_input_terminal`
+      - `configure_digital_edge_pulse_trigger()` - use `session.digital_edge_pulse_trigger_edge` & `session.digital_edge_pulse_trigger_input_terminal`
+      - `configure_digital_edge_sequence_advance_trigger()` - use `session.digital_edge_sequence_advance_trigger_edge` & `session.digital_edge_sequence_advance_trigger_input_terminal`
+      - `configure_digital_edge_source_trigger()` - use `session.digital_edge_source_trigger_edge` & `session.digital_edge_source_trigger_input_terminal`
+      - `configure_digital_edge_start_trigger()` - use `session.digital_edge_start_trigger_edge` & `session.digital_edge_start_trigger_input_terminal`
   - Remove polarity attributes for triggers that are PXI backplane only (only support rising edge) [#860](https://github.com/ni/nimi-python/issues/860)
-      `digital_edge_measure_trigger_edge`
-      `digital_edge_pulse_trigger_edge`
-      `digital_edge_sequence_advance_trigger_edge`
-      `digital_edge_source_trigger_edge`
-      `digital_edge_start_trigger_edge`
+      - `digital_edge_measure_trigger_edge`
+      - `digital_edge_pulse_trigger_edge`
+      - `digital_edge_sequence_advance_trigger_edge`
+      - `digital_edge_source_trigger_edge`
+      - `digital_edge_start_trigger_edge`
 
 #### [nidcpower] 0.9.0 - 2018-05-22
 - Added
@@ -399,23 +413,23 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
   - (Common) Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
-      (Common) `engine_major_version`
-      (Common) `engine_minor_version`
-      (Common) `engine_revision`
-      (Common) `primary_error`
-      (Common) `secondary_error`
-      (Common) `error_elaboration`
-      (Common) `io_session_type`
-      (Common) `io_session` / `visa_rm_session`
-      (Common) `group_capabilities`
-      (Common) `interchange_check`
-      (Common) `range_check`
-      (Common) `record_coercions`
-      (Common) `specific_driver_class_spec_major_version`
-      (Common) `specific_driver_class_spec_minor_version`
-      (Common) `query_instrument_status`
-      (Common) `cache`
-      (Common) `specific_driver_prefix`
+      - `engine_major_version`
+      - `engine_minor_version`
+      - `engine_revision`
+      - `primary_error`
+      - `secondary_error`
+      - `error_elaboration`
+      - `io_session_type`
+      - `io_session` / `visa_rm_session`
+      - `group_capabilities`
+      - `interchange_check`
+      - `range_check`
+      - `record_coercions`
+      - `specific_driver_class_spec_major_version`
+      - `specific_driver_class_spec_minor_version`
+      - `query_instrument_status`
+      - `cache`
+      - `specific_driver_prefix`
   - `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
   - `active_advanced_sequence` [#832](https://github.com/ni/nimi-python/issues/832)
   - `active_advanced_sequence_step` [#832](https://github.com/ni/nimi-python/issues/832)
@@ -434,19 +448,19 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
   - `Session.get_ext_cal_recommended_interval()` now returns a `datetime.timedelta` for the interval [#794](https://github.com/ni/nimi-python/issues/794)
 - Removed
   - Advanced Sequence functions - until [#504](https://github.com/ni/nimi-python/issues/504) can be fixed in a proper way
-      `create_advanced_sequence()`
-      `create_advanced_sequence_step()`
-      `delete_advanced_sequence()`
+      - `create_advanced_sequence()`
+      - `create_advanced_sequence_step()`
+      - `delete_advanced_sequence()`
 
 #### [nidcpower] 0.7.0 - 2018-02-20
 - Added
   - `channel` repeated capability - See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
 - Changed
   - (Common) Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
-      (Common) Key/Value pairs approporiate for desired behavior
-      - ``` python
-      - session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
-      - ```
+      - Key/Value pairs approporiate for desired behavior
+       ``` python
+       session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+       ```
   - (Common) Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
@@ -466,37 +480,36 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
 
 #### [nidcpower] 0.6.0 - 2017-12-20
 - Added
-(Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 - Changed
 Property power_line_frequency no longer uses enum PowerLineFrequency.
 Removed `actual_count` from `fetch_multiple()` returned tuple
 
 #### [nidcpower] 0.5.0 - 2017-11-27
 - Added
-`get_ext_cal_last_date_and_time`
-`get_ext_cal_last_temp`
-`get_ext_cal_recommended_interval`
-`measure_multiple`
+  - `get_ext_cal_last_date_and_time`
+  - `get_ext_cal_last_temp`
+  - `get_ext_cal_recommended_interval`
+  - `measure_multiple`
 - Removed
-(Common) enum definitions that are not referenced by a function and/or an attributes
+  - (Common) enum definitions that are not referenced by a function and/or an attributes
 
 #### [nidcpower] 0.4.0 - 2017-11-07
 - Added
-New example `nidcpower_advanced_sequence.py`
+  - New example `nidcpower_advanced_sequence.py`
 - Changed
-(Common) Simplified examples by removing try/except
-(Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
-Fixed method signature for:
-`wait_for_event`
-`create_sequence`
-`create_advanced_sequence`
+  - (Common) Simplified examples by removing try/except
+  - (Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
+  - Fixed method signature for:
+      - `wait_for_event`
+      - `create_sequence`
+      - `create_advanced_sequence`
 - Removed
-Support for `measure_multiple` until issue #444 is addressed.
+  - Support for `measure_multiple` until issue #444 is addressed.
 
 #### [nidcpower] 0.3.0 - 2017-10-13
 - Added
-(Common) Support for ViInt64 (64-bit integers)
-Initial release
+  - Initial release
 
 ### nidigital (NI-DIGITAL)
 
@@ -834,12 +847,12 @@ Initial release
 #### [nidmm] 1.1.3 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
 
 #### [nidmm] 1.1.2 - 2019-06-06
@@ -894,23 +907,23 @@ Initial release
   - (Common) Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
-      (Common) `engine_major_version`
-      (Common) `engine_minor_version`
-      (Common) `engine_revision`
-      (Common) `primary_error`
-      (Common) `secondary_error`
-      (Common) `error_elaboration`
-      (Common) `io_session_type`
-      (Common) `io_session` / `visa_rm_session`
-      (Common) `group_capabilities`
-      (Common) `interchange_check`
-      (Common) `range_check`
-      (Common) `record_coercions`
-      (Common) `specific_driver_class_spec_major_version`
-      (Common) `specific_driver_class_spec_minor_version`
-      (Common) `query_instrument_status`
-      (Common) `cache`
-      (Common) `specific_driver_prefix`
+      - `engine_major_version`
+      - `engine_minor_version`
+      - `engine_revision`
+      - `primary_error`
+      - `secondary_error`
+      - `error_elaboration`
+      - `io_session_type`
+      - `io_session` / `visa_rm_session`
+      - `group_capabilities`
+      - `interchange_check`
+      - `range_check`
+      - `record_coercions`
+      - `specific_driver_class_spec_major_version`
+      - `specific_driver_class_spec_minor_version`
+      - `query_instrument_status`
+      - `cache`
+      - `specific_driver_prefix`
 
 #### [nidmm] 0.8.0 - 2018-04-27
 - Changed
@@ -931,10 +944,10 @@ Initial release
 #### [nidmm] 0.7.0 - 2018-02-20
 - Changed
   - (Common) Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
-      (Common) Key/Value pairs approporiate for desired behavior
-      - ``` python
-      - session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
-      - ```
+      - Key/Value pairs approporiate for desired behavior
+       ``` python
+       session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+       ```
   - (Common) Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
@@ -958,7 +971,7 @@ Initial release
 
 #### [nidmm] 0.6.0 - 2017-12-20
 - Added
-(Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
 - Changed
 Property powerline_freq no longer uses enum PowerlineFrequency.
@@ -973,7 +986,7 @@ Removed `actual_number_of_points` from `read_waveform()` returned tuple
 - Added
 `get_ext_cal_recommended_interval`
 - Removed
-(Common) enum definitions that are not referenced by a function and/or an attributes
+  - (Common) enum definitions that are not referenced by a function and/or an attributes
 
 #### [nidmm] 0.4.0 - 2017-11-07
 - Changed
@@ -1188,12 +1201,12 @@ Initial release
 #### [nifgen] 1.1.3 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
 - Removed
   - `configure_custom_fir_filter_coefficients()` - [#996](https://github.com/ni/nimi-python/issues/996) - Should have been removed as part of - [#891](https://github.com/ni/nimi-python/issues/891)
@@ -1254,23 +1267,23 @@ session.script_triggers[1].send_software_edge_trigger()
       `clear_arb_waveform()` and `delete_named_waveform()` becomes `delete_waveform()`
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
-      (Common) `engine_major_version`
-      (Common) `engine_minor_version`
-      (Common) `engine_revision`
-      (Common) `primary_error`
-      (Common) `secondary_error`
-      (Common) `error_elaboration`
-      (Common) `io_session_type`
-      (Common) `io_session` / `visa_rm_session`
-      (Common) `group_capabilities`
-      (Common) `interchange_check`
-      (Common) `range_check`
-      (Common) `record_coercions`
-      (Common) `specific_driver_class_spec_major_version`
-      (Common) `specific_driver_class_spec_minor_version`
-      (Common) `query_instrument_status`
-      (Common) `cache`
-      (Common) `specific_driver_prefix`
+      - `engine_major_version`
+      - `engine_minor_version`
+      - `engine_revision`
+      - `primary_error`
+      - `secondary_error`
+      - `error_elaboration`
+      - `io_session_type`
+      - `io_session` / `visa_rm_session`
+      - `group_capabilities`
+      - `interchange_check`
+      - `range_check`
+      - `record_coercions`
+      - `specific_driver_class_spec_major_version`
+      - `specific_driver_class_spec_minor_version`
+      - `query_instrument_status`
+      - `cache`
+      - `specific_driver_prefix`
   - `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
   - `osp_fir_filter_interpolation` - [#864](https://github.com/ni/nimi-python/issues/864)
   - `osp_fir_filter_gaussian_bt` - [#864](https://github.com/ni/nimi-python/issues/864)
@@ -1358,10 +1371,10 @@ session.script_triggers[1].send_software_edge_trigger()
 #### [nifgen] 0.7.0 - 2018-02-20
 - Changed
   - (Common) Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
-      (Common) Key/Value pairs approporiate for desired behavior
-      - ``` python
-      - session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
-      - ```
+      - Key/Value pairs approporiate for desired behavior
+       ``` python
+       session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+       ```
   - (Common) Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
@@ -1378,7 +1391,7 @@ session.script_triggers[1].send_software_edge_trigger()
 
 #### [nifgen] 0.6.0 - 2017-12-20
 - Added
-(Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
 Support for calling `write_waveform` with a waveform handle (int) or a name (str).
 Support for calling `create_waveform` using list (float) or numpy.array (int16 or float64)
@@ -1392,8 +1405,8 @@ Renamed `create_waveform_f64` -> `create_waveform`
 
 #### [nifgen] 0.5.0 - 2017-11-27
 - Removed
-(Common) enum definitions that are not referenced by a function and/or an attributes
-`adjust_sample_clock_relative_delay`
+  - (Common) enum definitions that are not referenced by a function and/or an attributes
+  - `adjust_sample_clock_relative_delay`
 
 #### [nifgen] 0.4.0 - 2017-11-07
 - Added
@@ -1553,12 +1566,12 @@ session['0-3'].set_sequence(values, source_delays)
 #### [nimodinst] 1.1.3 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
 
 #### [nimodinst] 1.1.2 - 2019-06-06
@@ -1600,23 +1613,23 @@ session['0-3'].set_sequence(values, source_delays)
 
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
-      (Common) `engine_major_version`
-      (Common) `engine_minor_version`
-      (Common) `engine_revision`
-      (Common) `primary_error`
-      (Common) `secondary_error`
-      (Common) `error_elaboration`
-      (Common) `io_session_type`
-      (Common) `io_session` / `visa_rm_session`
-      (Common) `group_capabilities`
-      (Common) `interchange_check`
-      (Common) `range_check`
-      (Common) `record_coercions`
-      (Common) `specific_driver_class_spec_major_version`
-      (Common) `specific_driver_class_spec_minor_version`
-      (Common) `query_instrument_status`
-      (Common) `cache`
-      (Common) `specific_driver_prefix`
+      - `engine_major_version`
+      - `engine_minor_version`
+      - `engine_revision`
+      - `primary_error`
+      - `secondary_error`
+      - `error_elaboration`
+      - `io_session_type`
+      - `io_session` / `visa_rm_session`
+      - `group_capabilities`
+      - `interchange_check`
+      - `range_check`
+      - `record_coercions`
+      - `specific_driver_class_spec_major_version`
+      - `specific_driver_class_spec_minor_version`
+      - `query_instrument_status`
+      - `cache`
+      - `specific_driver_prefix`
 
 #### [nimodinst] 0.8.0 - 2018-04-27
 - Changed
@@ -1628,21 +1641,21 @@ session['0-3'].set_sequence(values, source_delays)
 #### [nimodinst] 0.7.0 - 2018-02-20
 - Changed
   - (Common) Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
-      (Common) Key/Value pairs approporiate for desired behavior
-      - ``` python
-      - session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
-      - ```
+      - Key/Value pairs approporiate for desired behavior
+       ``` python
+       session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+       ```
   - (Common) Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
 
 #### [nimodinst] 0.6.0 - 2017-12-20
 - Added
-(Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 
 #### [nimodinst] 0.5.0 - 2017-11-27
 - Removed
-(Common) enum definitions that are not referenced by a function and/or an attributes
+  - (Common) enum definitions that are not referenced by a function and/or an attributes
 
 #### [nimodinst] 0.4.0 - 2017-11-07
 - Changed
@@ -1882,12 +1895,12 @@ Initial release
   - `width_condition`, `width_high_threshold`, `width_low_threshold`, `width_polarity` properties and associated enums
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
 
 #### [niscope] 1.1.2 - 2019-06-06
@@ -1947,23 +1960,23 @@ Initial release
   - (Common) Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
-      (Common) `engine_major_version`
-      (Common) `engine_minor_version`
-      (Common) `engine_revision`
-      (Common) `primary_error`
-      (Common) `secondary_error`
-      (Common) `error_elaboration`
-      (Common) `io_session_type`
-      (Common) `io_session` / `visa_rm_session`
-      (Common) `group_capabilities`
-      (Common) `interchange_check`
-      (Common) `range_check`
-      (Common) `record_coercions`
-      (Common) `specific_driver_class_spec_major_version`
-      (Common) `specific_driver_class_spec_minor_version`
-      (Common) `query_instrument_status`
-      (Common) `cache`
-      (Common) `specific_driver_prefix`
+      - `engine_major_version`
+      - `engine_minor_version`
+      - `engine_revision`
+      - `primary_error`
+      - `secondary_error`
+      - `error_elaboration`
+      - `io_session_type`
+      - `io_session` / `visa_rm_session`
+      - `group_capabilities`
+      - `interchange_check`
+      - `range_check`
+      - `record_coercions`
+      - `specific_driver_class_spec_major_version`
+      - `specific_driver_class_spec_minor_version`
+      - `query_instrument_status`
+      - `cache`
+      - `specific_driver_prefix`
   - Properties removed
       `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
       `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
@@ -2088,10 +2101,10 @@ Initial release
       `channel` repeated capability
 - Changed
   - (Common) Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
-      (Common) Key/Value pairs approporiate for desired behavior
-      - ``` python
-      - session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
-      - ```
+      - Key/Value pairs approporiate for desired behavior
+       ``` python
+       session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+       ```
   - (Common) Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
@@ -2117,19 +2130,19 @@ Initial release
 
 #### [niscope] 0.6.0 - 2017-12-20
 - Added
-(Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
-`fetch_into` for high-performance fetch using numpy.array. Supported element types:
-`numpy.float64`
-`numpy.int8`
-`numpy.int16`
-`numpy.int32`
+  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+  - `fetch_into` for high-performance fetch using numpy.array. Supported element types:
+      - `numpy.float64`
+      - `numpy.int8`
+      - `numpy.int16`
+      - `numpy.int32`
 - Changed
-Added default values for timeout on all fetch and read functions.
-Property input_impedance no longer uses enum InputImpedance.
+  - Added default values for timeout on all fetch and read functions.
+  - Property input_impedance no longer uses enum InputImpedance.
 - Removed
-`AddWaveformProcessing` - See #667 for rationale
-`ClearWaveformProcessing` - See #667 for rationale
-`FetchArrayMeasurement` - See #667 for rationale
+  - `AddWaveformProcessing` - See #667 for rationale
+  - `ClearWaveformProcessing` - See #667 for rationale
+  - `FetchArrayMeasurement` - See #667 for rationale
 
 
 #### [niscope] 0.5.0 - 2017-11-27
@@ -2263,12 +2276,12 @@ Initial release
 #### [nise] 1.1.3 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
   - Update to 1.0 - now ready for production use
 
@@ -2423,12 +2436,12 @@ Initial release
 #### [niswitch] 1.1.3 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
-      (Common) version >= 1.0
-      - (Common) .devN or .aN - Alpha
-      - (Common) .bN, .cN or .rcN - Beta
-      - (Common) \<nothing\> or .postN - Stable
-      (Common) version < 1.0 and version >= 0.5 - Beta
-      (Common) version < 0.5 - Alpha
+      - version >= 1.0
+        - .devN or .aN - Alpha
+        - .bN, .cN or .rcN - Beta
+        - \<nothing\> or .postN - Stable
+      - version < 1.0 and version >= 0.5 - Beta
+      - version < 0.5 - Alpha
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
 
 #### [niswitch] 1.1.2 - 2019-06-06
@@ -2476,23 +2489,23 @@ Initial release
   - (Common) Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
-      (Common) `engine_major_version`
-      (Common) `engine_minor_version`
-      (Common) `engine_revision`
-      (Common) `primary_error`
-      (Common) `secondary_error`
-      (Common) `error_elaboration`
-      (Common) `io_session_type`
-      (Common) `io_session` / `visa_rm_session`
-      (Common) `group_capabilities`
-      (Common) `interchange_check`
-      (Common) `range_check`
-      (Common) `record_coercions`
-      (Common) `specific_driver_class_spec_major_version`
-      (Common) `specific_driver_class_spec_minor_version`
-      (Common) `query_instrument_status`
-      (Common) `cache`
-      (Common) `specific_driver_prefix`
+      - `engine_major_version`
+      - `engine_minor_version`
+      - `engine_revision`
+      - `primary_error`
+      - `secondary_error`
+      - `error_elaboration`
+      - `io_session_type`
+      - `io_session` / `visa_rm_session`
+      - `group_capabilities`
+      - `interchange_check`
+      - `range_check`
+      - `record_coercions`
+      - `specific_driver_class_spec_major_version`
+      - `specific_driver_class_spec_minor_version`
+      - `query_instrument_status`
+      - `cache`
+      - `specific_driver_prefix`
 
 #### [niswitch] 0.8.0 - 2018-04-27
 - Changed
@@ -2504,10 +2517,10 @@ Initial release
 #### [niswitch] 0.7.0 - 2018-02-20
 - Changed
   - (Common) Option string can now be a python dictionary instead of a string. (Fix [#661](https://github.com/ni/nimi-python/issues/661))
-      (Common) Key/Value pairs approporiate for desired behavior
-      - ``` python
-      - session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
-      - ```
+      - Key/Value pairs approporiate for desired behavior
+       ``` python
+       session = nidmm.Session('Dev1', False, {'simulate': True, 'driver_setup': {'Model': '4071', 'BoardType': 'PXI'}})
+       ```
   - (Common) Repeated capabilities are handled differently. See [#737](https://github.com/ni/nimi-python/issues/737) for discussion
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
@@ -2518,13 +2531,13 @@ Initial release
 
 #### [niswitch] 0.6.0 - 2017-12-20
 - Added
-(Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
+  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 - Removed
 Removed `init_with_topology`. Clients should use `niswitch.Session` constructor. See [#660](https://github.com/ni/nimi-python/issues/660).
 
 #### [niswitch] 0.5.0 - 2017-11-27
 - Removed
-(Common) enum definitions that are not referenced by a function and/or an attributes
+  - (Common) enum definitions that are not referenced by a function and/or an attributes
 
 #### [niswitch] 0.4.0 - 2017-11-07
 - Changed
