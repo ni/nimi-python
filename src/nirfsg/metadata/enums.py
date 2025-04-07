@@ -714,7 +714,7 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG runs the configuration list continuously.'
                 },
-                'name': 'NIRFSG_VAL_CONTINUOUS',
+                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_REPEAT_CONTINUOUS',
                 'value': 0
             },
             {
@@ -725,7 +725,7 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG runs the configuration list only once.'
                 },
-                'name': 'NIRFSG_VAL_SINGLE',
+                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_REPEAT_SINGLE',
                 'value': 1
             },
             {
@@ -1491,7 +1491,7 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG loads all the configurations to the session.'
                 },
-                'name': 'NIRFSG_VAL_SKIP_NONE',
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE',
                 'value': 0
             },
             {
@@ -1502,7 +1502,7 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG skips loading the waveform configurations to the session.'
                 },
-                'name': 'NIRFSG_VAL_SKIP_WAVEFORM',
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM',
                 'value': 1
             },
             {
@@ -2341,8 +2341,8 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG skips resetting the waveform configurations.'
                 },
-                'name': 'NIRFSG_VAL_SKIP_WAVEFORMS',
-                'value': 0
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
+                'value': 1
             },
             {
                 'name': 'NIRFSG_VAL_MANUAL',
@@ -2352,8 +2352,8 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG skips resetting the de-embedding tables.'
                 },
-                'name': 'NIRFSG_VAL_SKIP_DEEMBEDDING_TABLES',
-                'value': 1
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
+                'value': 8
             },
             {
                 'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
@@ -2363,7 +2363,7 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG skips resetting the scripts.'
                 },
-                'name': 'NIRFSG_VAL_SKIP_SCRIPTS',
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
                 'value': 2
             },
             {
@@ -2374,8 +2374,8 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG resets all configurations.'
                 },
-                'name': 'NIRFSG_VAL_SKIP_NONE',
-                'value': 3
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
+                'value': 0
             },
             {
                 'name': 'NIRFSG_VAL_SELF_CAL_IMAGE_SUPPRESSION',

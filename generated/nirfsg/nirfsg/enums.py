@@ -361,12 +361,12 @@ class ConfigListTrigType(Enum):
 
 
 class ConfigurationListRepeat(Enum):
-    CONTINUOUS = 0
+    CONFIGURATION_LIST_REPEAT_CONTINUOUS = 0
     r'''
     NI-RFSG runs the configuration list continuously.
     '''
     MANUAL = 0
-    SINGLE = 1
+    CONFIGURATION_LIST_REPEAT_SINGLE = 1
     r'''
     NI-RFSG runs the configuration list only once.
     '''
@@ -755,12 +755,12 @@ class LoSource(Enum):
 
 
 class LoadOptions(Enum):
-    SKIP_NONE = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE = 0
     r'''
     NI-RFSG loads all the configurations to the session.
     '''
     MANUAL = 0
-    SKIP_WAVEFORM = 1
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM = 1
     r'''
     NI-RFSG skips loading the waveform configurations to the session.
     '''
@@ -1207,22 +1207,22 @@ class RelativeTo(Enum):
 
 
 class ResetOptions(Enum):
-    SKIP_WAVEFORMS = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS = 1
     r'''
     NI-RFSG skips resetting the waveform configurations.
     '''
     MANUAL = 0
-    SKIP_DEEMBEDDING_TABLES = 1
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES = 8
     r'''
     NI-RFSG skips resetting the de-embedding tables.
     '''
     SCRIPT_TRIGGER = 1
-    SKIP_SCRIPTS = 2
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS = 2
     r'''
     NI-RFSG skips resetting the scripts.
     '''
     MARKER_EVENT = 2
-    SKIP_NONE = 3
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE = 0
     r'''
     NI-RFSG resets all configurations.
     '''

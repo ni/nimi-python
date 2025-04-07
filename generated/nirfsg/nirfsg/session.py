@@ -1446,7 +1446,7 @@ class _SessionBase(object):
     digital_equalization_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalEqualizationEnabled, 1150012)
     '''Type: enums.DigitalEqualizationEnabled
 
-    When this property is enabled, NI-RFSG equalizes the waveform data to correct for variations in the response of the NI-RFSG device. Enabling digital equalization improves the modulation error rates (MER) and error vector magnitude (EVM) for signals with large bandwidths (\>500 kHz), but it increases tuning times.
+    When this property is enabled, NI-RFSG equalizes the waveform data to correct for variations in the response of the NI-RFSG device. Enabling digital equalization improves the modulation error rates (MER) and error vector magnitude (EVM) for signals with large bandwidths (>500 kHz), but it increases tuning times.
 
                     On the PXI-5670/5671, equalization is performed in the software, so tuning time is increased. On the PXIe-5672, equalization is performed in the hardware so that there is no compromise in performance.
 
@@ -1746,13 +1746,13 @@ class _SessionBase(object):
 
 
 
-                    1\. Set the I/Q rate to less than or equal to 8.33MS/s with the iq_rate property.
+                    1. Set the I/Q rate to less than or equal to 8.33MS/s with the iq_rate property.
 
-                    2\. Set the power_level_type property to PowerLevelType.PEAK.
+                    2. Set the power_level_type property to PowerLevelType.PEAK.
 
-                    3\. Disable the iq_swap_enabled property.
+                    3. Disable the iq_swap_enabled property.
 
-                    4\. Disable the digital_equalization_enabled property.
+                    4. Disable the digital_equalization_enabled property.
 
                     **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
 
@@ -2822,15 +2822,15 @@ class _SessionBase(object):
 
                     Refer to the specifications document for your device for allowable output levels.
 
-                    **Units:** Volts, peak-to-peak (V\ :sub:`pk-pk`\ )
+                    **Units:** Volts, peak-to-peak (V :sub:`pk-pk` )
 
                     **Valid Values:**
 
-                    PXIe-5645: 1V\ :sub:`pk-pk`\  maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.DIFFERENTIAL, and 0.5V\ :sub:`pk-pk`\
+                    PXIe-5645: 1V :sub:`pk-pk`  maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.DIFFERENTIAL, and 0.5V :sub:`pk-pk`
 
     maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.SINGLE_ENDED.
 
-                    PXIe-5820: 3.4V\ :sub:`pk-pk`\ maximum for signal bandwidth less than 160MHz, and 2V\ :sub:`pk-pk`\
+                    PXIe-5820: 3.4V :sub:`pk-pk` maximum for signal bandwidth less than 160MHz, and 2V :sub:`pk-pk`
 
     maximum for signal bandwidth greater than 160MHz.
 
@@ -2968,15 +2968,13 @@ class _SessionBase(object):
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | PXIe-5646                                                                | Up to 250 MS/s.                                                                                                                                                                                                                                    |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | PXI-5670                                                                 | 50 MS/s*                                                                                                                                                                                                                                           |
+    | PXI-5670                                                                 | 50 MS/s ((100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.)                         |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |                                                                          | 100 MS/s*                                                                                                                                                                                                                                          |
+    |                                                                          | 100 MS/s ((100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.)                        |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | PXI-5671                                                                 | 50 MS/s*                                                                                                                                                                                                                                           |
+    | PXI-5671                                                                 | 50 MS/s ((100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.)                         |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     |                                                                          | 100 MS/s                                                                                                                                                                                                                                           |
-    +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    |                                                                          | \*(100 MS/s)/n, where n is divisible by 2 between 12 to 512, and divisible by 4 between 512 to 1,024 (n = 12, 14, 16, ..., 512, 516, 520, ..., 1,024). Setting the I/Q rate to one of these value enables the DUC.                                 |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | PXIe-5672                                                                | Up to 100 MS/s.                                                                                                                                                                                                                                    |
     +--------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3036,19 +3034,19 @@ class _SessionBase(object):
 
     Specifies the configurations to skip while loading from a file.
 
-                    **Default Value:**  LoadOptions.SKIP_NONE
+                    **Default Value:**  NIRFSG_VAL_SKIP_NONE
 
                     **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                 **Defined Values**:
 
-    +---------------------------+-------------------------------------------------------------------+
-    | Value                     | Description                                                       |
-    +===========================+===================================================================+
-    | LoadOptions.SKIP_NONE     | NI-RFSG loads all the configurations to the session.              |
-    +---------------------------+-------------------------------------------------------------------+
-    | LoadOptions.SKIP_WAVEFORM | NI-RFSG skips loading the waveform configurations to the session. |
-    +---------------------------+-------------------------------------------------------------------+
+    +--------------------------+-------------------------------------------------------------------+
+    | Value                    | Description                                                       |
+    +==========================+===================================================================+
+    | NIRFSG_VAL_SKIP_NONE     | NI-RFSG loads all the configurations to the session.              |
+    +--------------------------+-------------------------------------------------------------------+
+    | NIRFSG_VAL_SKIP_WAVEFORM | NI-RFSG skips loading the waveform configurations to the session. |
+    +--------------------------+-------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3058,22 +3056,22 @@ class _SessionBase(object):
 
     Specifies the configurations to skip to reset while loading configurations from a file.
 
-                    **Default Value:**  ResetOptions.SKIP_NONE
+                    **Default Value:**  NIRFSG_VAL_SKIP_NONE
                     **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                 **Defined Values**:
 
-    +--------------------------------------+------------------------------------------------------+
-    | Value                                | Description                                          |
-    +======================================+======================================================+
-    | ResetOptions.SKIP_NONE               | NI-RFSG resets all configurations.                   |
-    +--------------------------------------+------------------------------------------------------+
-    | ResetOptions.SKIP_WAVEFORMS          | NI-RFSG skips resetting the waveform configurations. |
-    +--------------------------------------+------------------------------------------------------+
-    | ResetOptions.SKIP_SCRIPTS            | NI-RFSG skips resetting the scripts.                 |
-    +--------------------------------------+------------------------------------------------------+
-    | ResetOptions.SKIP_DEEMBEDDING_TABLES | NI-RFSG skips resetting the de-embedding tables.     |
-    +--------------------------------------+------------------------------------------------------+
+    +------------------------------------+------------------------------------------------------+
+    | Value                              | Description                                          |
+    +====================================+======================================================+
+    | NIRFSG_VAL_SKIP_NONE               | NI-RFSG resets all configurations.                   |
+    +------------------------------------+------------------------------------------------------+
+    | NIRFSG_VAL_SKIP_WAVEFORMS          | NI-RFSG skips resetting the waveform configurations. |
+    +------------------------------------+------------------------------------------------------+
+    | NIRFSG_VAL_SKIP_SCRIPTS            | NI-RFSG skips resetting the scripts.                 |
+    +------------------------------------+------------------------------------------------------+
+    | NIRFSG_VAL_SKIP_DEEMBEDDING_TABLES | NI-RFSG skips resetting the de-embedding tables.     |
+    +------------------------------------+------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3621,7 +3619,7 @@ class _SessionBase(object):
 
                     You must write complex I and Q data for all options. The Q data has no effect if you set this property to I Only and set the iq_out_port_carrier_frequency property to 0. If you set the iq_out_port_carrier_frequency property to a value other than 0, the onboard signal processing (OSP) frequency shifts I and Q as a complex value and outputs the real portion of the result on the I connector(s) of the device.
 
-                    If you set the output_port property to OutputPort.I_ONLY\_ONLY or OutputPort.IQ_OUT, the iq_out_port_terminal_configuration property applies.
+                    If you set the output_port property to OutputPort.I_ONLY or OutputPort.IQ_OUT, the iq_out_port_terminal_configuration property applies.
 
                     **Default Value:**
 
@@ -4575,7 +4573,7 @@ class _SessionBase(object):
 
     Specifies the bandwidth of the arbitrary signal. This value must be less than or equal to (0.8× iq_rate).
 
-                    NI-RFSG defines *signal bandwidth* as twice the maximum baseband signal deviation from 0 Hz. Usually, the baseband signal center frequency is 0 Hz. In such cases, the signal bandwidth is simply the baseband signal's minimum frequency subtracted from its maximum frequency, or *f*\ :sub:`max`\ - *f*\ :sub:`min`\ .
+                    NI-RFSG defines *signal bandwidth* as twice the maximum baseband signal deviation from 0 Hz. Usually, the baseband signal center frequency is 0 Hz. In such cases, the signal bandwidth is simply the baseband signal's minimum frequency subtracted from its maximum frequency, or *f* :sub:`max` - *f* :sub:`min` .
 
                     This property applies only when the generation_mode property is set to GenerationMode.ARB_WAVEFORM or GenerationMode.SCRIPT, except for when using the PXIe-5830/5831/5832/5840/5841, which supports setting this property in all supported generation modes. To set the signal_bandwidth property, the NI-RFSG device must be in the Configuration state.
 
@@ -7088,8 +7086,8 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
-    def self_test(self, self_test_message):
-        r'''self_test
+    def _self_test(self, self_test_message):
+        r'''_self_test
 
         Performs a self-test on the NI-RFSG device and returns the test results. This method performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.
 
@@ -7186,7 +7184,26 @@ class Session(_SessionBase):
     def self_test(self):
         '''self_test
 
-        TBD
+        Runs the instrument self-test routine and returns the test result(s).
+
+        Raises `SelfTestError` on self test failure. Properties on exception object:
+
+        - code - failure code from driver
+        - message - status message from driver
+
+        +----------------+------------------+
+        | Self-Test Code | Description      |
+        +================+==================+
+        | 0              | Passed self-test |
+        +----------------+------------------+
+        | 1              | Self-test failed |
+        +----------------+------------------+
+
+        Note:
+        When used on some signal generators, the device is reset after the
+        niFgen_self_test method runs. If you use the niFgen_self_test
+        method, your device may not be in its previously configured state
+        after the method runs.
         '''
         code, msg = self._self_test()
         if code:

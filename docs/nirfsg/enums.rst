@@ -861,7 +861,7 @@ ConfigurationListRepeat
 
 .. py:class:: ConfigurationListRepeat
 
-    .. py:attribute:: ConfigurationListRepeat.CONTINUOUS
+    .. py:attribute:: ConfigurationListRepeat.CONFIGURATION_LIST_REPEAT_CONTINUOUS
 
 
 
@@ -875,7 +875,7 @@ ConfigurationListRepeat
 
 
 
-    .. py:attribute:: ConfigurationListRepeat.SINGLE
+    .. py:attribute:: ConfigurationListRepeat.CONFIGURATION_LIST_REPEAT_SINGLE
 
 
 
@@ -1812,7 +1812,7 @@ LoadOptions
 
 .. py:class:: LoadOptions
 
-    .. py:attribute:: LoadOptions.SKIP_NONE
+    .. py:attribute:: LoadOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE
 
 
 
@@ -1826,7 +1826,7 @@ LoadOptions
 
 
 
-    .. py:attribute:: LoadOptions.SKIP_WAVEFORM
+    .. py:attribute:: LoadOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM
 
 
 
@@ -2886,7 +2886,7 @@ ResetOptions
 
 .. py:class:: ResetOptions
 
-    .. py:attribute:: ResetOptions.SKIP_WAVEFORMS
+    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS
 
 
 
@@ -2900,7 +2900,7 @@ ResetOptions
 
 
 
-    .. py:attribute:: ResetOptions.SKIP_DEEMBEDDING_TABLES
+    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES
 
 
 
@@ -2914,7 +2914,7 @@ ResetOptions
 
 
 
-    .. py:attribute:: ResetOptions.SKIP_SCRIPTS
+    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS
 
 
 
@@ -2928,7 +2928,7 @@ ResetOptions
 
 
 
-    .. py:attribute:: ResetOptions.SKIP_NONE
+    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE
 
 
 

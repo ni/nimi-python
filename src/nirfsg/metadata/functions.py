@@ -3605,6 +3605,7 @@ functions = {
         'use_session_lock': True
     },
     'SelfTest': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Performs a self-test on the NI-RFSG device and returns the test results. This function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.'
         },
@@ -4512,7 +4513,22 @@ functions = {
     'fancy_self_test': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'TBD'
+            'description': '\nRuns the instrument self-test routine and returns the test result(s).\n\nRaises `SelfTestError` on self test failure. Attributes on exception object:\n\n- code - failure code from driver\n- message - status message from driver\n',
+            'note': '\nWhen used on some signal generators, the device is reset after the\nniFgen_self_test function runs. If you use the niFgen_self_test\nfunction, your device may not be in its previously configured state\nafter the function runs.\n',
+            'table_body': [
+                [
+                    '0',
+                    'Passed self-test'
+                ],
+                [
+                    '1',
+                    'Self-test failed'
+                ]
+            ],
+            'table_header': [
+                'Self-Test Code',
+                'Description'
+            ]
         },
         'grpc_name': 'FancySelfTest',
         'included_in_proto': False,
@@ -4527,6 +4543,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. **vi** is obtained from the niFgen_init, nifgen_InitWithOptions, or nifgen_InitializeWithChannels functions and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession'
             }
