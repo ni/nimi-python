@@ -14,5 +14,6 @@ Driver specific installation instructions can be found on **Read the Docs**:
 * `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
 * `niswitch <https://niswitch.readthedocs.io/en/latest/niswitch.html#installation>`_
 * `nitclk <https://nitclk.readthedocs.io/en/latest/nitclk.html#installation>`_
+* `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 
 

@@ -14,5 +14,6 @@ Documentation is available on **Read the Docs**:
 - https://nise.readthedocs.io/en/stable
 - https://niswitch.readthedocs.io/en/stable
 - https://nitclk.readthedocs.io/en/stable
+- https://nirfsg.readthedocs.io/en/stable
 
 

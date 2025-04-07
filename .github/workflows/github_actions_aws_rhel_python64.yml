@@ -38,6 +38,7 @@ jobs:
           - niscope
           - niswitch
           - nitclk
+          - nirfsg
     steps:
       - name: checkout repository
         uses: actions/checkout@v3

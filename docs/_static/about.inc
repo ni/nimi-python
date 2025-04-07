@@ -15,6 +15,7 @@ following drivers are supported:
 * NI Switch Executive (Python module: nise)
 * NI-SWITCH (Python module: niswitch)
 * NI-TClk (Python module: nitclk)
+* NI-RFSG (Python module: nirfsg)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is
 called through its public C API using the `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.

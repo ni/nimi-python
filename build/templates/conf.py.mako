@@ -10,7 +10,7 @@ api_name = f"{config['driver_name']} Python API"
 api_name_no_spaces_or_hyphens = api_name.replace(" ", "").replace("-", "")
 api_name_no_spaces_or_hyphens_lower = api_name_no_spaces_or_hyphens.lower()
 
-all_modules = {'nidcpower', 'nidigital', 'nidmm', 'nifgen', 'nimodinst', 'niscope', 'niswitch', 'nise', 'nitclk'}
+all_modules = {'nidcpower', 'nidigital', 'nidmm', 'nifgen', 'nimodinst', 'niscope', 'niswitch', 'nise', 'nitclk', 'nirfsg'}
 module_name   = config['module_name']
 external_modules = all_modules - {module_name}
 %>\

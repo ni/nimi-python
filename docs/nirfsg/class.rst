@@ -1333,60 +1333,15 @@ get_external_calibration_last_date_and_time
 
     .. py:method:: get_external_calibration_last_date_and_time()
 
-            Returns the date and time of the last successful external calibration. The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
+            TBD
 
             
 
 
 
-            :rtype: tuple (year, month, day, hour, minute, second)
+            :rtype: hightime.datetime
+            :return:
 
-                WHERE
-
-                year (int): 
-
-
-                    Returns the year of the last successful calibration.
-
-                    
-
-
-                month (int): 
-
-
-                    Returns the month of the last successful calibration.
-
-                    
-
-
-                day (int): 
-
-
-                    Returns the day of the last successful calibration.
-
-                    
-
-
-                hour (int): 
-
-
-                    Returns the hour of the last successful calibration.
-
-                    
-
-
-                minute (int): 
-
-
-                    Returns the minute of the last successful calibration.
-
-                    
-
-
-                second (int): 
-
-
-                    Returns the second of the last successful calibration.
 
                     
 
@@ -1415,77 +1370,22 @@ get_max_settable_power
 
 
 
-get_self_calibration_date_and_time
-----------------------------------
+get_self_calibration_last_date_and_time
+---------------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_self_calibration_date_and_time(module)
+    .. py:method:: get_self_calibration_last_date_and_time()
 
-            Returns the date and time of the last successful self-calibration. The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this method returns 14 for the hours parameter and 30 for the minutes parameter.
+            TBD
 
             
 
 
 
-            :param module:
+            :rtype: hightime.datetime
+            :return:
 
-
-                Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.
-
-                
-
-
-            :type module: int
-
-            :rtype: tuple (year, month, day, hour, minute, second)
-
-                WHERE
-
-                year (int): 
-
-
-                    Returns the year of the last successful calibration.
-
-                    
-
-
-                month (int): 
-
-
-                    Returns the month of the last successful calibration.
-
-                    
-
-
-                day (int): 
-
-
-                    Returns the day of the last successful calibration.
-
-                    
-
-
-                hour (int): 
-
-
-                    Returns the hour of the last successful calibration.
-
-                    
-
-
-                minute (int): 
-
-
-                    Returns the minute of the last successful calibration.
-
-                    
-
-
-                second (int): 
-
-
-                    Returns the second of the last successful calibration.
 
                     
 
@@ -1987,27 +1887,31 @@ self_test
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: self_test()
+    .. py:method:: self_test(self_test_message)
 
-            Runs the instrument self-test routine and returns the test result(s).
+            Performs a self-test on the NI-RFSG device and returns the test results. This method performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.
 
-            Raises `SelfTestError` on self test failure. Properties on exception object:
+            
 
-            - code - failure code from driver
-            - message - status message from driver
 
-            +----------------+------------------+
-            | Self-Test Code | Description      |
-            +================+==================+
-            | 0              | Passed self-test |
-            +----------------+------------------+
-            | 1              | Self-test failed |
-            +----------------+------------------+
 
-            .. note:: When used on some signal generators, the device is reset after the
-                niFgen_self_test method runs. If you use the niFgen_self_test
-                method, your device may not be in its previously configured state
-                after the method runs.
+            :param self_test_message:
+
+
+                Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
+
+                
+
+
+            :type self_test_message: str
+
+            :rtype: int
+            :return:
+
+
+                    This parameter contains the value returned from the NI-RFSG device self test.
+
+                    
 
 
 

@@ -190,6 +190,7 @@ intersphinx_mapping = {
     'nidmm': ('https://nidmm.readthedocs.io/en/latest/', None),
     'nifgen': ('https://nifgen.readthedocs.io/en/latest/', None),
     'nimodinst': ('https://nimodinst.readthedocs.io/en/latest/', None),
+    'nirfsg': ('https://nirfsg.readthedocs.io/en/latest/', None),
     'niscope': ('https://niscope.readthedocs.io/en/latest/', None),
     'nise': ('https://nise.readthedocs.io/en/latest/', None),
     'niswitch': ('https://niswitch.readthedocs.io/en/latest/', None),
