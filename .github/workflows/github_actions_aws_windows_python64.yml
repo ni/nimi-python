@@ -55,6 +55,7 @@ jobs:
             - nimodinst
             - nise
             - niswitch
+            - nirfsg
       steps:
         - name: checkout repository
           uses: actions/checkout@v3
