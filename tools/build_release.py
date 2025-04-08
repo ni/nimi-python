@@ -55,9 +55,10 @@ Steps: see "Release Process" section of CONTRIBUTING.md
         args.increment_minor_version,
         args.increment_patch_version,
         args.increment_build_number,
+        args.update_for_release,
     ]
     if sum(version_flags) > 1:
-        raise ValueError("Only one of --increment-major-version, --increment-minor-version, --increment-patch-version or --increment-build-number can be provided.")
+        raise ValueError("Only one of --increment-major-version, --increment-minor-version, --increment-patch-version, --increment-build-number or --update-for-release can be provided.")
 
 
     if args.verbose > 1:
