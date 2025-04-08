@@ -155,8 +155,22 @@ Release Process
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
     1. Update release versions
-        * `python3 tools/build_release.py --update --release`
+        * `python3 tools/build_release.py --update-for-release`
             * For each module, this will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
+            * In case you need to release any specific module/modules, include `drivers` parameters. 
+            For Example: 
+                ```bash
+                python3 tools/build_release.py --drivers nidcpower --update-for-release
+                ```
+            * In case you need upgrade major,minor,patch version of release, include any of below parameters
+                --increment-major-version - To increment the major version of package.
+                --increment-minor-version - To increment the minor version of package.
+                --increment-patch-version - To increment the package version of package.
+            For Example: 
+                ```bash
+                python3 tools/build_release.py --drivers nidcpower --update-for-release  --increment-minor-version
+                ```
+        
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
@@ -168,6 +182,11 @@ Release Process
     1. Wait until the pull request has been approved
     1. Upload the releases to PyPI
         * `python3 tools/build_release.py --upload`
+        * In case you need to upload any specific module/modules, include `drivers` parameters. 
+            For Example: 
+                ```bash
+                python3 tools/build_release.py --drivers nidcpower --upload
+                ```
         * You will need to type in your PyPI credentials
     1. Merge the pull request to origin/master
     1. Create a release on GitHub using the portion from the changelog for this release for the description
@@ -175,9 +194,15 @@ Release Process
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module versions
-        * `python3 tools/build_release.py --update`
+    1. Update the module versions using any of below commands based on the change. You can also include drivers list if the changes are specific to some drivers.
+        * `python3 tools/build_release.py --increment-patch-version`
             * This will update the version to X.X.(N+1).dev0
+        * `python3 tools/build_release.py --increment-minor-version`
+            * This will update the version to X.(N+1).X.dev0
+        * `python3 tools/build_release.py --increment-major-version`
+            * This will update the version to (N+1).X.X.dev0
+        * `python3 tools/build_release.py --increment-build-number`
+            * This will update the version to X.X.X.dev(N+1)
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
