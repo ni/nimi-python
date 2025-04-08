@@ -191,10 +191,10 @@ Release Process
     1. Upload the releases to PyPI
         * `python3 tools/build_release.py --upload`
         * If you need to upload any specific module(s), include the `drivers` parameter. 
-            For example: 
-                ```bash
-                python3 tools/build_release.py --drivers nidcpower --upload
-                ```
+        For example: 
+             ```bash
+            python3 tools/build_release.py --drivers nidcpower --upload
+            ```
         * You will need to type in your PyPI credentials
     1. Merge the pull request to origin/master
     1. Create a release on GitHub using the portion from the changelog for this release for the description
