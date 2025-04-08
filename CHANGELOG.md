@@ -40,6 +40,15 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### ALL
     * #### Added
+        * Supported array versions of ViRsrc and ViAttr
+    * #### Changed
+        * Updated conf.py to include RTD link for nirfsg
+    * #### Removed
+* ### `nirfsg` (NI-RFSG)
+    * #### Added
+        * Enabled nirfsg module support and added metadata for public APIs
+        * Documentation for APIs
+        * Added basic system test for nirfsg
     * #### Changed
     * #### Removed
 * ### `nidcpower` (NI-DCPower)
