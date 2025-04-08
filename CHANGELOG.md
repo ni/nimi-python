@@ -2626,7 +2626,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Python Versioning](http://legacy.python.org/dev/peps/pep-0396/).
 
 <!--
-#### [nimodinst] Unreleased
+- [Unreleased](#nitclk-unreleased)
+
+#### [nitclk
+
+] Unreleased
 - Added
 - Changed
 - Removed

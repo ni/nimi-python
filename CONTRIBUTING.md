@@ -124,7 +124,7 @@ begin contributing to to the project.
 1. Make your change.
 1. Verify all tests, including the new ones, pass.
 1. Update CHANGELOG.md for customer-visible changes.
-    * If the change applies to all generated driver bindings, put the change into the **ALL** section
+    * If the change applies to all generated driver bindings, put the change into all drivers.
     * If it only applies to a single driver binding, put the change in the section associated with that driver
     * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. Commit modifications to generated files.
@@ -149,8 +149,25 @@ Release Process
         ```
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
+    1. Perform Version Bump (If Needed)
+        * If you need to upgrade the major, minor, patch or dev versions, include any of the following parameters:
+           * --increment-major-version - To increment the major version of package. This will update the version to (N+1).X.X.dev0
+           * --increment-minor-version - To increment the minor version of package. This will update the version to X.(N+1).X.dev0
+           * --increment-patch-version - To increment the patch version of package. This will update the version to X.X.(N+1).dev0
+           * --increment-build-number - To increment the development number of package. This will update the version to X.X.X.dev(N+1)
+            For example: 
+                ```bash
+                python3 tools/build_release.py --increment-minor-version
+                ```
+        * If you need to update the version for any specific driver(s), include the `drivers` parameter. By default, all drivers will be considered.
+        For example: 
+            ```bash
+            python3 tools/build_release.py --drivers nidcpower --increment-minor-version
+            ```
+        * Commit to branch
     1. Update [CHANGELOG.md](./CHANGELOG.md)
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
+        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section for each drivers.
+        * Remove the Unreleased section from the TOC if there are no changes for those drivers.
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
@@ -162,15 +179,6 @@ Release Process
                 ```bash
                 python3 tools/build_release.py --drivers nidcpower --update-for-release
                 ```
-            * If you need to upgrade the major, minor, or patch version of a release, include any of the following parameters:
-               * --increment-major-version - To increment the major version of package.
-               * --increment-minor-version - To increment the minor version of package.
-               * --increment-patch-version - To increment the package version of package.
-            For example: 
-                ```bash
-                python3 tools/build_release.py --drivers nidcpower --update-for-release  --increment-minor-version
-                ```
-        
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
@@ -194,21 +202,15 @@ Release Process
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module versions using any of below commands based on the change. You can also include drivers list if the changes are specific to some drivers.
-        * `python3 tools/build_release.py --increment-patch-version`
-            * This will update the version to X.X.(N+1).dev0
-        * `python3 tools/build_release.py --increment-minor-version`
-            * This will update the version to X.(N+1).X.dev0
-        * `python3 tools/build_release.py --increment-major-version`
-            * This will update the version to (N+1).X.X.dev0
-        * `python3 tools/build_release.py --increment-build-number`
-            * This will update the version to X.X.X.dev(N+1)
+    1. Update the module versions. 
+        * Refer to the "Perform Version Bump" section under "Pre-Release Steps."
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
+        * Ensure that all changes made as part of build command are specific to intended drivers.
         * Commit to branch
     1. Update changelog
-        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+        * Copy Unreleased section from the bottom of the changelog. Modify the driver name in the example and TOC. Paste the modified section at the top of each driver's changelog and add a corresponding link to it in the driver's TOC.
         * Commit to branch
     1. Create a pull request containing post-release changes and get it merged
 
