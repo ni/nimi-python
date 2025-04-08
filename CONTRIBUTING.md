@@ -157,12 +157,12 @@ Release Process
     1. Update release versions
         * `python3 tools/build_release.py --update-for-release`
             * For each module, this will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
-            * In case you need to release any specific module/modules, include `drivers` parameters. 
+            * If you need to release any specific module(s), include the `drivers` parameter. 
             For example: 
                 ```bash
                 python3 tools/build_release.py --drivers nidcpower --update-for-release
                 ```
-            * In case you need upgrade major,minor,patch version of release, include any of below parameters
+            * If you need to upgrade the major, minor, or patch version of a release, include any of the following parameters:
                * --increment-major-version - To increment the major version of package.
                * --increment-minor-version - To increment the minor version of package.
                * --increment-patch-version - To increment the package version of package.
@@ -182,7 +182,7 @@ Release Process
     1. Wait until the pull request has been approved
     1. Upload the releases to PyPI
         * `python3 tools/build_release.py --upload`
-        * In case you need to upload any specific module/modules, include `drivers` parameters. 
+        * If you need to upload any specific module(s), include the `drivers` parameter. 
             For example: 
                 ```bash
                 python3 tools/build_release.py --drivers nidcpower --upload
