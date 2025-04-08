@@ -32,7 +32,7 @@ Update version in files. Example: X.Y.Z.devN to X.Y.Z
     file_group = parser.add_argument_group("Input and Output files")
     file_group.add_argument("--src-folder", action="store", required=True, help="Source folder")
     file_group.add_argument("--release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. Error if not there")
-    file_group.add_argument("--update-type", action="store", default=None, choices=["major", "minor", "patch", "build"], help="Specify the type of update: major, minor, patch or build. Default:patch")
+    file_group.add_argument("--update-type", action="store", default=None, choices=["major", "minor", "patch", "build"], help="Specify the type of update: major, minor, patch or build. ")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
     verbosity_group.add_argument("-v", "--verbose", action="count", default=0, help="Verbose output")
