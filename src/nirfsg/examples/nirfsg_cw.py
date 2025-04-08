@@ -2,8 +2,8 @@ import nirfsg
 import numpy as np
  
 # RFSG session create
-options = "Simulate=1, DriverSetup=Model:5841"
-session  = nirfsg.Session(resource_name='PXI1Slot2', id_query=False, reset_device=False, options=options)
+options = "Simulate=0, DriverSetup=Model:5841"
+session  = nirfsg.Session('5841', id_query=False, reset_device=False, options=options)
 # session = nirfsg.Session("5841", id_query=False, reset_device=False, options=options)
  
 # configure frequency to 1Ghz, power level to -10db and iq rate to 1M
@@ -12,8 +12,8 @@ session.configure_rf(
     -10  # powerLevel
     )
 #session.iq_rate = 1e6
-#session.generation_mode = nirfsg.GenerationMode.CW
- 
+session.generation_mode = nirfsg.GenerationMode.CW
+
 # Start generation
 with session.initiate():
     # Generation context
