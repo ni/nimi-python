@@ -166,7 +166,7 @@ Release Process
             ```
         * Commit to branch
     1. Update [CHANGELOG.md](./CHANGELOG.md)
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section for each drivers.
+        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
         * Remove the Unreleased section from the TOC if there are no changes for those drivers.
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
@@ -210,7 +210,7 @@ Release Process
         * Ensure that all changes made as part of build command are specific to intended drivers.
         * Commit to branch
     1. Update changelog
-        * Copy Unreleased section from the bottom of the changelog. Modify the driver name in the example and TOC. Paste the modified section at the top of each driver's changelog and add a corresponding link to it in the driver's TOC.
+        * Copy Unreleased section from the bottom of the changelog. Modify the driver name in the example and TOC. Paste the modified section at the top of intended driver's changelog and add a corresponding link to it in the driver's TOC.
         * Commit to branch
     1. Create a pull request containing post-release changes and get it merged
 
