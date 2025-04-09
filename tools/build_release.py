@@ -10,6 +10,7 @@ pp = pprint.PrettyPrinter(indent=4, width=100)
 
 default_python_cmd = ['python']
 
+
 class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescriptionHelpFormatter):
     '''We want the description to use the raw formatting but have the parameters be formatted as before
 
@@ -20,8 +21,7 @@ class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescri
 
 
 def main():
-    drivers_to_update = ['nidcpower', 'nidigital', 'nidmm', 'nifake','niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
-
+    drivers_to_update = ['nidcpower', 'nidigital', 'nidmm', 'nifake', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
 
     # Setup the required arguments for this script
     usage = """Release script
@@ -36,7 +36,7 @@ Steps: see "Release Process" section of CONTRIBUTING.md
     build_group.add_argument("--upload", action="store_true", default=False, help="Upload build distributions to PyPI")
     build_group.add_argument("--build", action="store_true", default=False, help="Clean and build")
     build_group.add_argument("--python-cmd", action="store", default=None, help=f"Command to use for invoking python. Default: {default_python_cmd}")
-    build_group.add_argument("--drivers",action="store",default=None,help="Comma-separated list of drivers to update. Default: All Drivers")
+    build_group.add_argument("--drivers", action="store", default=None, help="Comma-separated list of drivers to update. Default: All Drivers")
     build_group.add_argument("--increment-major-version", action="store_true", default=False, help="Increment the major version")
     build_group.add_argument("--increment-minor-version", action="store_true", default=False, help="Increment the minor version")
     build_group.add_argument("--increment-patch-version", action="store_true", default=False, help="Increment the patch version")
@@ -60,7 +60,6 @@ Steps: see "Release Process" section of CONTRIBUTING.md
     if sum(version_flags) > 1:
         raise ValueError("Only one of --increment-major-version, --increment-minor-version, --increment-patch-version, --increment-build-number or --update-for-release can be provided.")
 
-
     if args.verbose > 1:
         configure_logging(logging.DEBUG, args.log_file)
     elif args.verbose == 1:
@@ -83,14 +82,13 @@ Steps: see "Release Process" section of CONTRIBUTING.md
     if args.update_for_release:
         passthrough_params.append('--release')
     if args.increment_build_number:
-        passthrough_params.append(f'--update-type=build')
+        passthrough_params.append('--update-type=build')
     if args.increment_patch_version:
-        passthrough_params.append(f'--update-type=patch')
+        passthrough_params.append('--update-type=patch')
     if args.increment_minor_version:
-        passthrough_params.append(f'--update-type=minor')
+        passthrough_params.append('--update-type=minor')
     if args.increment_major_version:
-        passthrough_params.append(f'--update-type=major')
-
+        passthrough_params.append('--update-type=major')
 
     if args.drivers:
         provided_drivers = args.drivers.split(",")
@@ -99,15 +97,13 @@ Steps: see "Release Process" section of CONTRIBUTING.md
         if invalid_drivers:
             raise ValueError(f"The following drivers are invalid: {', '.join(invalid_drivers)}. Valid drivers are: {','.join(drivers_to_update)}")
         drivers_to_update = provided_drivers
-          
-    
-    
+
     if any([args.increment_major_version, args.increment_minor_version, args.increment_patch_version, args.increment_build_number, args.update_for_release]):
         logging.info('Updating versions')
 
         for d in drivers_to_update:
-            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py','--src-folder', f'src/{d}',] + passthrough_params))
-            check_call(python_cmd + ['tools/updateReleaseInfo.py','--src-folder', f'src/{d}', ] + passthrough_params)
+            logging.info(pp.pformat(python_cmd + ['tools/updateReleaseInfo.py', '--src-folder', f'src/{d}',] + passthrough_params))
+            check_call(python_cmd + ['tools/updateReleaseInfo.py', '--src-folder', f'src/{d}', ] + passthrough_params)
 
     if args.build:
         logging.info('Clean and build')

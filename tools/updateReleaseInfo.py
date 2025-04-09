@@ -7,12 +7,13 @@ import re
 
 pp = pprint.PrettyPrinter(indent=4, width=100)
 
+
 # Increment version based on bump type ('major', 'minor', 'patch').
 def bump_version(version, bump_type):
     major, minor, patch = map(int, version.split('.'))
     logging.info(f"Parsed version: major={major}, minor={minor}, patch={patch}")
 
-    if bump_type == 'patch' :
+    if bump_type == 'patch':
         patch += 1
     elif bump_type == 'minor':
         minor += 1
@@ -21,8 +22,9 @@ def bump_version(version, bump_type):
         major += 1
         minor = 0
         patch = 0
-    
+
     return f"{major}.{minor}.{patch}"
+
 
 def main():
     usage = """
@@ -93,7 +95,7 @@ Update version in files. Example: X.Y.Z.devN to X.Y.Z
             logging.info(f"Release version found, updating {m.group(1)}{m.group(2)} to {new_version}.dev0")
             contents = module_version_re.sub(f"'module_version': '{new_version}.dev0'", contents)
             new_version = f"{new_version}.dev0"
-            
+
     if not args.preview:
         with open(metadata_file, 'w') as content_file:
             content_file.write(contents)
@@ -104,6 +106,7 @@ Update version in files. Example: X.Y.Z.devN to X.Y.Z
         if not args.preview:
             with open(latest_release_file, 'w') as content_file:
                 content_file.write(f'{new_version}\n')
+
 
 if __name__ == '__main__':
     main()
