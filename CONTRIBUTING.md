@@ -124,7 +124,7 @@ begin contributing to to the project.
 1. Make your change.
 1. Verify all tests, including the new ones, pass.
 1. Update CHANGELOG.md for customer-visible changes.
-    * If the change applies to all generated driver bindings, put the change into the **ALL** section
+    * If the change applies to all generated driver bindings, put the change into all drivers.
     * If it only applies to a single driver binding, put the change in the section associated with that driver
     * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. Commit modifications to generated files.
@@ -166,7 +166,8 @@ Release Process
             ```
         * Commit to branch
     1. Update [CHANGELOG.md](./CHANGELOG.md)
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
+        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section for each drivers.
+        * Remove the Unreleased section from the TOC if there are no changes for those drivers.
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
@@ -209,7 +210,7 @@ Release Process
         * Ensure that all changes made as part of build command are specific to intended drivers.
         * Commit to branch
     1. Update changelog
-        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+        * Copy Unreleased section from the bottom of the changelog. Modify the driver name in the example and TOC. Paste the modified section at the top of each driver's changelog and add a corresponding link to it in the driver's TOC.
         * Commit to branch
     1. Create a pull request containing post-release changes and get it merged
 
