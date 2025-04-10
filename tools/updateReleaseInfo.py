@@ -54,42 +54,47 @@ Update version in files. Example: X.Y.Z.devN to X.Y.Z
     with open(metadata_file) as content_file:
         contents = content_file.read()
 
-    module_version_re = re.compile(r"'module_version': '(\d+\.\d+\.\d+)(?:\.dev(\d+))?'")
-    m = module_version_re.search(contents)
-    logging.debug(f"Version regex match: {m}")
+    module_dev_version_re = re.compile(r"'module_version': '(\d+\.\d+\.\d+)\.dev(\d+)'")
+    m = module_dev_version_re.search(contents)
+    logging.debug(f"Dev version regex match: {m}")
 
     if m:
         base_version = m.group(1)
-        dev_number = int(m.group(2)) if m.group(2) else None
-
+        dev_number = int(m.group(2))
         if args.release:
-            if dev_number is not None:
-                logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {base_version}")
-                contents = module_version_re.sub(f"'module_version': '{base_version}'", contents)
-                new_version = base_version
+            if args.update_type != 'build':
+                bumped_version = bump_version(base_version, args.update_type)
+                logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {bumped_version}")
+                contents = module_dev_version_re.sub(f"'module_version': '{bumped_version}'", contents)
+                new_version = bumped_version
             else:
-                logging.error("Error: Attempting to release an already released version.")
-                return
+                logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {base_version}")
+                contents = module_dev_version_re.sub(f"'module_version': '{base_version}'", contents)
+                new_version = base_version
         else:
             if args.update_type == 'build':
-                if dev_number is not None:
-                    logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {base_version}.dev{dev_number + 1}")
-                    contents = module_version_re.sub(f"'module_version': '{base_version}.dev{dev_number + 1}'", contents)
-                    new_version = f"{base_version}.dev{dev_number + 1}"
-                else:
-                    logging.info(f"Release version found, updating {base_version} to {base_version}.dev0")
-                    contents = module_version_re.sub(f"'module_version': '{base_version}.dev0'", contents)
-                    new_version = f"{base_version}.dev0"
+                logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {base_version}.dev{dev_number + 1}")
+                contents = module_dev_version_re.sub(f"'module_version': '{base_version}.dev{dev_number + 1}'", contents)
+                new_version = f"{base_version}.dev{dev_number + 1}"
             else:
                 bumped_version = bump_version(base_version, args.update_type)
-                if dev_number is not None:
-                    logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {bumped_version}.dev0")
-                    contents = module_version_re.sub(f"'module_version': '{bumped_version}.dev0'", contents)
-                    new_version = f"{bumped_version}.dev0"
-                else:
-                    logging.info(f"Release version found, updating {base_version} to {bumped_version}.dev0")
-                    contents = module_version_re.sub(f"'module_version': '{bumped_version}.dev0'", contents)
-                    new_version = f"{bumped_version}.dev0"
+                logging.info(f"Dev version found, updating {base_version}.dev{dev_number} to {bumped_version}.dev0")
+                contents = module_dev_version_re.sub(f"'module_version': '{bumped_version}.dev0'", contents)
+                new_version = f"{bumped_version}.dev0"
+    else:
+        module_version_re = re.compile(r"'module_version': '(\d+\.\d+\.)(\d+)'")
+        m = module_version_re.search(contents)
+        logging.debug(f"Release version regex match: {m}")
+        if m:
+            if args.release:
+                logging.error("Error: Attempting to release an already released version for " + os.path.basename(args.src_folder) + ".")
+                return
+            if args.update_type == 'build':
+                args.update_type = 'patch'
+            new_version = bump_version(f"{m.group(1)}{m.group(2)}", args.update_type)
+            logging.info(f"Release version found, updating {m.group(1)}{m.group(2)} to {new_version}.dev0")
+            contents = module_version_re.sub(f"'module_version': '{new_version}.dev0'", contents)
+            new_version = f"{new_version}.dev0"
 
     if not args.preview:
         with open(metadata_file, 'w') as content_file:
