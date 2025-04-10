@@ -1568,91 +1568,6 @@ Lo1OutputFilter
 
 
 
-LoFilter
---------
-
-.. py:class:: LoFilter
-
-    .. py:attribute:: LoFilter.CONFIGURATION_SETTLED_EVENT
-
-
-
-        Exports a Configuration Settled Event.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.CONFIGURATION_LIST_STEP_TRIGGER
-
-
-
-        Exports a Configuration List Step Trigger.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.DONE_EVENT
-
-
-
-        Exports a Done Event.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.MARKER_EVENT
-
-
-
-        Exports a Marker Event.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.REF_CLOCK
-
-
-
-        Exports the Reference Clock.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.SCRIPT_TRIGGER
-
-
-
-        Exports a Script Trigger.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.START_TRIGGER
-
-
-
-        Exports a Start Trigger.
-
-        
-
-
-
-    .. py:attribute:: LoFilter.STARTED_EVENT
-
-
-
-        Exports a Started Event.
-
-        
-
-
-
 LoOutEnabled
 ------------
 
@@ -2942,6 +2857,61 @@ ResetOptions
 
 
 
+ResetWithOptionsStepsToOmit
+---------------------------
+
+.. py:class:: ResetWithOptionsStepsToOmit
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES
+
+
+
+        Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
+
+        
+
+
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.NONE
+
+
+
+        No step is omitted during reset.
+
+        
+
+
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.ROUTES
+
+
+
+        Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
+
+        
+
+
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.SCRIPTS
+
+
+
+        Omits clearing scripts.
+
+        
+
+
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.WAVEFORMS
+
+
+
+        Omits clearing waveforms.
+
+        
+
+
+
 ScriptTrigDigEdgeEdge
 ---------------------
 
@@ -3732,12 +3702,12 @@ ScriptTrigType
 
 
 
-SelfCalibrateRange
-------------------
+SelfCalibrateRangeStepsToOmit
+-----------------------------
 
-.. py:class:: SelfCalibrateRange
+.. py:class:: SelfCalibrateRangeStepsToOmit
 
-    .. py:attribute:: SelfCalibrateRange.IMAGE_SUPPRESSION
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION
 
 
 
@@ -3747,7 +3717,7 @@ SelfCalibrateRange
 
 
 
-    .. py:attribute:: SelfCalibrateRange.LO_SELF_CAL
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
 
 
 
@@ -3757,7 +3727,7 @@ SelfCalibrateRange
 
 
 
-    .. py:attribute:: SelfCalibrateRange.OMIT_NONE
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.OMIT_NONE
 
 
 
@@ -3767,7 +3737,7 @@ SelfCalibrateRange
 
 
 
-    .. py:attribute:: SelfCalibrateRange.POWER_LEVEL_ACCURACY
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.POWER_LEVEL_ACCURACY
 
 
 
@@ -3777,7 +3747,7 @@ SelfCalibrateRange
 
 
 
-    .. py:attribute:: SelfCalibrateRange.RESIDUAL_LO_POWER
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER
 
 
 
@@ -3787,11 +3757,96 @@ SelfCalibrateRange
 
 
 
-    .. py:attribute:: SelfCalibrateRange.SYNTHESIZER_ALIGNMENT
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT
 
 
 
         Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+Signal
+------
+
+.. py:class:: Signal
+
+    .. py:attribute:: Signal.CONFIGURATION_SETTLED_EVENT
+
+
+
+        Exports a Configuration Settled Event.
+
+        
+
+
+
+    .. py:attribute:: Signal.START_TRIGGER
+
+
+
+        Exports a Start Trigger.
+
+        
+
+
+
+    .. py:attribute:: Signal.SCRIPT_TRIGGER
+
+
+
+        Exports a Script Trigger.
+
+        
+
+
+
+    .. py:attribute:: Signal.MARKER_EVENT
+
+
+
+        Exports a Marker Event.
+
+        
+
+
+
+    .. py:attribute:: Signal.REF_CLOCK
+
+
+
+        Exports the Reference Clock.
+
+        
+
+
+
+    .. py:attribute:: Signal.STARTED_EVENT
+
+
+
+        Exports a Started Event.
+
+        
+
+
+
+    .. py:attribute:: Signal.DONE_EVENT
+
+
+
+        Exports a Done Event.
+
+        
+
+
+
+    .. py:attribute:: Signal.CONFIGURATION_LIST_STEP_TRIGGER
+
+
+
+        Exports a Configuration List Step Trigger.
 
         
 
@@ -3877,6 +3932,31 @@ SignalIdentifier
 
 
         Specifies Script Trigger 3.
+
+        
+
+
+
+SoftwareTriggerType
+-------------------
+
+.. py:class:: SoftwareTriggerType
+
+    .. py:attribute:: SoftwareTriggerType.SCRIPT
+
+
+
+        Specifies the Script Trigger.
+
+        
+
+
+
+    .. py:attribute:: SoftwareTriggerType.START
+
+
+
+        Specifies the Start Trigger.
 
         
 
@@ -4657,86 +4737,6 @@ StartedEventExportOutputTerm
 
 
         The trigger is received on PFI7 from the front panel DIO terminal.
-
-        
-
-
-
-StepsToOmit
------------
-
-.. py:class:: StepsToOmit
-
-    .. py:attribute:: StepsToOmit.DEEMBEDDING_TABLES
-
-
-
-        Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
-
-        
-
-
-
-    .. py:attribute:: StepsToOmit.NONE
-
-
-
-        No step is omitted during reset.
-
-        
-
-
-
-    .. py:attribute:: StepsToOmit.ROUTES
-
-
-
-        Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
-
-        
-
-
-
-    .. py:attribute:: StepsToOmit.SCRIPTS
-
-
-
-        Omits clearing scripts.
-
-        
-
-
-
-    .. py:attribute:: StepsToOmit.WAVEFORMS
-
-
-
-        Omits clearing waveforms.
-
-        
-
-
-
-Trigger
--------
-
-.. py:class:: Trigger
-
-    .. py:attribute:: Trigger.SCRIPT
-
-
-
-        Specifies the Script Trigger.
-
-        
-
-
-
-    .. py:attribute:: Trigger.START
-
-
-
-        Specifies the Start Trigger.
 
         
 

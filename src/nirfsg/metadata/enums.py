@@ -1290,67 +1290,6 @@ enums = {
             }
         ]
     },
-    'LoFilter': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Exports a Configuration Settled Event.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT',
-                'value': 7
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Configuration List Step Trigger.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER',
-                'value': 6
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Done Event.'
-                },
-                'name': 'NIRFSG_VAL_DONE_EVENT',
-                'value': 5
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Marker Event.'
-                },
-                'name': 'NIRFSG_VAL_MARKER_EVENT',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Exports the Reference Clock.'
-                },
-                'name': 'NIRFSG_VAL_REF_CLOCK',
-                'value': 3
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Script Trigger.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Start Trigger.'
-                },
-                'name': 'NIRFSG_VAL_START_TRIGGER',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Started Event.'
-                },
-                'name': 'NIRFSG_VAL_STARTED_EVENT',
-                'value': 4
-            }
-        ]
-    },
     'LoOutEnabled': {
         'codegen_method': 'public',
         'values': [
@@ -2383,6 +2322,46 @@ enums = {
             }
         ]
     },
+    'ResetWithOptionsStepsToOmit': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
+                },
+                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_DEEMBEDDING_TABLES',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'No step is omitted during reset.'
+                },
+                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
+                },
+                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Omits clearing scripts.'
+                },
+                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_SCRIPTS',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Omits clearing waveforms.'
+                },
+                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_WAVEFORMS',
+                'value': 1
+            }
+        ]
+    },
     'ScriptTrigDigEdgeEdge': {
         'codegen_method': 'public',
         'values': [
@@ -2945,7 +2924,7 @@ enums = {
             }
         ]
     },
-    'SelfCalibrateRange': {
+    'SelfCalibrateRangeStepsToOmit': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2989,6 +2968,67 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
                 'value': 16
+            }
+        ]
+    },
+    'Signal': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Exports a Configuration Settled Event.'
+                },
+                'name': 'NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT',
+                'value': 7
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a Start Trigger.'
+                },
+                'name': 'NIRFSG_VAL_START_TRIGGER',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a Script Trigger.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a Marker Event.'
+                },
+                'name': 'NIRFSG_VAL_MARKER_EVENT',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Exports the Reference Clock.'
+                },
+                'name': 'NIRFSG_VAL_REF_CLOCK',
+                'value': 3
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a Started Event.'
+                },
+                'name': 'NIRFSG_VAL_STARTED_EVENT',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a Done Event.'
+                },
+                'name': 'NIRFSG_VAL_DONE_EVENT',
+                'value': 5
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a Configuration List Step Trigger.'
+                },
+                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER',
+                'value': 6
             }
         ]
     },
@@ -3050,6 +3090,25 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SCRIPT_TRIGGER3',
                 'value': 'scriptTrigger3'
+            }
+        ]
+    },
+    'SoftwareTriggerType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies the Script Trigger.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies the Start Trigger.'
+                },
+                'name': 'NIRFSG_VAL_START_TRIGGER',
+                'value': 0
             }
         ]
     },
@@ -3632,46 +3691,6 @@ enums = {
             }
         ]
     },
-    'StepsToOmit': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
-                },
-                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_DEEMBEDDING_TABLES',
-                'value': 8
-            },
-            {
-                'documentation': {
-                    'description': 'No step is omitted during reset.'
-                },
-                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
-                },
-                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES',
-                'value': 4
-            },
-            {
-                'documentation': {
-                    'description': 'Omits clearing scripts.'
-                },
-                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_SCRIPTS',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Omits clearing waveforms.'
-                },
-                'name': 'NIRFSG_VAL_RESET_WITH_OPTIONS_WAVEFORMS',
-                'value': 1
-            }
-        ]
-    },
     'Sts5532SignalPath': {
         'values': [
             {
@@ -3701,25 +3720,6 @@ enums = {
             {
                 'name': 'NIRFSG_VAL_SCRIPTTRIGGER0',
                 'value': 'ScriptTrigger0'
-            }
-        ]
-    },
-    'Trigger': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the Script Trigger.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the Start Trigger.'
-                },
-                'name': 'NIRFSG_VAL_START_TRIGGER',
-                'value': 0
             }
         ]
     },

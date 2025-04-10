@@ -657,41 +657,6 @@ class Lo1OutputFilter(Enum):
     '''
 
 
-class LoFilter(Enum):
-    CONFIGURATION_SETTLED_EVENT = 7
-    r'''
-    Exports a Configuration Settled Event.
-    '''
-    CONFIGURATION_LIST_STEP_TRIGGER = 6
-    r'''
-    Exports a Configuration List Step Trigger.
-    '''
-    DONE_EVENT = 5
-    r'''
-    Exports a Done Event.
-    '''
-    MARKER_EVENT = 2
-    r'''
-    Exports a Marker Event.
-    '''
-    REF_CLOCK = 3
-    r'''
-    Exports the Reference Clock.
-    '''
-    SCRIPT_TRIGGER = 1
-    r'''
-    Exports a Script Trigger.
-    '''
-    START_TRIGGER = 0
-    r'''
-    Exports a Start Trigger.
-    '''
-    STARTED_EVENT = 4
-    r'''
-    Exports a Started Event.
-    '''
-
-
 class LoOutEnabled(Enum):
     DISABLE = 0
     r'''
@@ -1229,6 +1194,29 @@ class ResetOptions(Enum):
     SELF_CAL_IMAGE_SUPPRESSION = 8
 
 
+class ResetWithOptionsStepsToOmit(Enum):
+    DEEMBEDDING_TABLES = 8
+    r'''
+    Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
+    '''
+    NONE = 0
+    r'''
+    No step is omitted during reset.
+    '''
+    ROUTES = 4
+    r'''
+    Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
+    '''
+    SCRIPTS = 2
+    r'''
+    Omits clearing scripts.
+    '''
+    WAVEFORMS = 1
+    r'''
+    Omits clearing waveforms.
+    '''
+
+
 class ScriptTrigDigEdgeEdge(Enum):
     RISING = 0
     r'''
@@ -1551,7 +1539,7 @@ class ScriptTrigType(Enum):
     '''
 
 
-class SelfCalibrateRange(Enum):
+class SelfCalibrateRangeStepsToOmit(Enum):
     IMAGE_SUPPRESSION = 8
     r'''
     Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
@@ -1575,6 +1563,41 @@ class SelfCalibrateRange(Enum):
     SYNTHESIZER_ALIGNMENT = 16
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+
+
+class Signal(Enum):
+    CONFIGURATION_SETTLED_EVENT = 7
+    r'''
+    Exports a Configuration Settled Event.
+    '''
+    START_TRIGGER = 0
+    r'''
+    Exports a Start Trigger.
+    '''
+    SCRIPT_TRIGGER = 1
+    r'''
+    Exports a Script Trigger.
+    '''
+    MARKER_EVENT = 2
+    r'''
+    Exports a Marker Event.
+    '''
+    REF_CLOCK = 3
+    r'''
+    Exports the Reference Clock.
+    '''
+    STARTED_EVENT = 4
+    r'''
+    Exports a Started Event.
+    '''
+    DONE_EVENT = 5
+    r'''
+    Exports a Done Event.
+    '''
+    CONFIGURATION_LIST_STEP_TRIGGER = 6
+    r'''
+    Exports a Configuration List Step Trigger.
     '''
 
 
@@ -1610,6 +1633,17 @@ class SignalIdentifier(Enum):
     SCRIPT_TRIGGER3 = 'scriptTrigger3'
     r'''
     Specifies Script Trigger 3.
+    '''
+
+
+class SoftwareTriggerType(Enum):
+    SCRIPT = 1
+    r'''
+    Specifies the Script Trigger.
+    '''
+    START = 0
+    r'''
+    Specifies the Start Trigger.
     '''
 
 
@@ -1928,40 +1962,6 @@ class StartedEventExportOutputTerm(Enum):
     DIO7 = 'DIO/PFI7'
     r'''
     The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
-class StepsToOmit(Enum):
-    DEEMBEDDING_TABLES = 8
-    r'''
-    Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
-    '''
-    NONE = 0
-    r'''
-    No step is omitted during reset.
-    '''
-    ROUTES = 4
-    r'''
-    Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
-    '''
-    SCRIPTS = 2
-    r'''
-    Omits clearing scripts.
-    '''
-    WAVEFORMS = 1
-    r'''
-    Omits clearing waveforms.
-    '''
-
-
-class Trigger(Enum):
-    SCRIPT = 1
-    r'''
-    Specifies the Script Trigger.
-    '''
-    START = 0
-    r'''
-    Specifies the Start Trigger.
     '''
 
 

@@ -1984,7 +1984,7 @@ functions = {
                         'Description'
                     ]
                 },
-                'enum': 'LoFilter',
+                'enum': 'Signal',
                 'name': 'signal',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3868,7 +3868,7 @@ functions = {
                         'Description'
                     ]
                 },
-                'enum': 'SelfCalibrateRange',
+                'enum': 'SelfCalibrateRangeStepsToOmit',
                 'name': 'stepsToOmit',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -4004,7 +4004,7 @@ functions = {
                         'Description'
                     ]
                 },
-                'enum': 'Trigger',
+                'enum': 'SoftwareTriggerType',
                 'name': 'trigger',
                 'type': 'ViInt32',
                 'use_array': False,

@@ -5966,15 +5966,15 @@ class _SessionBase(object):
         Forces a trigger to occur. The specified trigger generates regardless of whether the trigger has been configured as a software trigger.
 
         Args:
-            trigger (enums.Trigger): Specifies the trigger to send. **Defined Values** :
+            trigger (enums.SoftwareTriggerType): Specifies the trigger to send. **Defined Values** :
 
-                +----------------+---------+-------------------------------+
-                | Name           | Value   | Description                   |
-                +================+=========+===============================+
-                | Trigger.START  | 0 (0x0) | Specifies the Start Trigger.  |
-                +----------------+---------+-------------------------------+
-                | Trigger.SCRIPT | 1 (0x1) | Specifies the Script Trigger. |
-                +----------------+---------+-------------------------------+
+                +----------------------------+---------+-------------------------------+
+                | Name                       | Value   | Description                   |
+                +============================+=========+===============================+
+                | SoftwareTriggerType.START  | 0 (0x0) | Specifies the Start Trigger.  |
+                +----------------------------+---------+-------------------------------+
+                | SoftwareTriggerType.SCRIPT | 1 (0x1) | Specifies the Script Trigger. |
+                +----------------------------+---------+-------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -6000,8 +6000,8 @@ class _SessionBase(object):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(trigger) is not enums.Trigger:
-            raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
+        if type(trigger) is not enums.SoftwareTriggerType:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTriggerType))
         if type(trigger_identifier) is not enums.TriggerIdentifier:
             raise TypeError('Parameter trigger_identifier must be of type ' + str(enums.TriggerIdentifier))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
@@ -6869,27 +6869,27 @@ class Session(_SessionBase):
         Routes signals (triggers, clocks, and events) to a specified output terminal. The NI-RFSG device must be in the Configuration state before you call this method.
 
         Args:
-            signal (enums.LoFilter): Specifies the type of signal to route. **Defined Values** :
+            signal (enums.Signal): Specifies the type of signal to route. **Defined Values** :
 
-                +------------------------------------------+---------+--------------------------------------------+
-                | Name                                     | Value   | Description                                |
-                +==========================================+=========+============================================+
-                | LoFilter.START_TRIGGER                   | 0 (0x0) | Exports a Start Trigger.                   |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.SCRIPT_TRIGGER                  | 1 (0x1) | Exports a Script Trigger.                  |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.MARKER_EVENT                    | 2 (0x2) | Exports a Marker Event.                    |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.REF_CLOCK                       | 3 (0x3) | Exports the Reference Clock.               |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.STARTED_EVENT                   | 4 (0x4) | Exports a Started Event.                   |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.DONE_EVENT                      | 5 (0x5) | Exports a Done Event.                      |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
-                +------------------------------------------+---------+--------------------------------------------+
-                | LoFilter.CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
-                +------------------------------------------+---------+--------------------------------------------+
+                +----------------------------------------+---------+--------------------------------------------+
+                | Name                                   | Value   | Description                                |
+                +========================================+=========+============================================+
+                | Signal.START_TRIGGER                   | 0 (0x0) | Exports a Start Trigger.                   |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.SCRIPT_TRIGGER                  | 1 (0x1) | Exports a Script Trigger.                  |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.MARKER_EVENT                    | 2 (0x2) | Exports a Marker Event.                    |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.REF_CLOCK                       | 3 (0x3) | Exports the Reference Clock.               |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.STARTED_EVENT                   | 4 (0x4) | Exports a Started Event.                   |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.DONE_EVENT                      | 5 (0x5) | Exports a Done Event.                      |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +----------------------------------------+---------+--------------------------------------------+
+                | Signal.CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +----------------------------------------+---------+--------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -6940,8 +6940,8 @@ class Session(_SessionBase):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
-        if type(signal) is not enums.LoFilter:
-            raise TypeError('Parameter signal must be of type ' + str(enums.LoFilter))
+        if type(signal) is not enums.Signal:
+            raise TypeError('Parameter signal must be of type ' + str(enums.Signal))
         if type(signal_identifier) is not enums.SignalIdentifier:
             raise TypeError('Parameter signal_identifier must be of type ' + str(enums.SignalIdentifier))
         if type(output_terminal) is not enums.ReferenceClockExportOutputTerminal:
@@ -7233,23 +7233,23 @@ class Session(_SessionBase):
         Note: If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate.
 
         Args:
-            steps_to_omit (enums.SelfCalibrateRange): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted. **Defined Values** :
+            steps_to_omit (enums.SelfCalibrateRangeStepsToOmit): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted. **Defined Values** :
 
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | Name                                     | Value     | Description                                                                                                         |
-                +==========================================+===========+=====================================================================================================================+
-                | SelfCalibrateRange.OMIT_NONE             | 0 (0x0)   | No calibration steps are omitted.                                                                                   |
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | SelfCalibrateRange.LO_SELF_CAL           | 1 (0x1)   | Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.                       |
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | SelfCalibrateRange.POWER_LEVEL_ACCURACY  | 2 (0x2)   | Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted. |
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | SelfCalibrateRange.RESIDUAL_LO_POWER     | 4 (0x4)   | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.         |
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | SelfCalibrateRange.IMAGE_SUPPRESSION     | 8 (0x8)   | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.   |
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | SelfCalibrateRange.SYNTHESIZER_ALIGNMENT | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
-                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | Name                                                | Value     | Description                                                                                                         |
+                +=====================================================+===========+=====================================================================================================================+
+                | SelfCalibrateRangeStepsToOmit.OMIT_NONE             | 0 (0x0)   | No calibration steps are omitted.                                                                                   |
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL           | 1 (0x1)   | Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.                       |
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRangeStepsToOmit.POWER_LEVEL_ACCURACY  | 2 (0x2)   | Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted. |
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER     | 4 (0x4)   | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.         |
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION     | 8 (0x8)   | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.   |
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
+                +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -7263,8 +7263,8 @@ class Session(_SessionBase):
             max_power_level (float): Specifies the maximum power level to calibrate.
 
         '''
-        if type(steps_to_omit) is not enums.SelfCalibrateRange:
-            raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRange))
+        if type(steps_to_omit) is not enums.SelfCalibrateRangeStepsToOmit:
+            raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRangeStepsToOmit))
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized

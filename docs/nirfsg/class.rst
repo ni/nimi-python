@@ -1281,30 +1281,30 @@ export_signal
 
                 Specifies the type of signal to route. **Defined Values** :
 
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | Name                                                        | Value   | Description                                |
-                +=============================================================+=========+============================================+
-                | :py:data:`~nirfsg.LoFilter.START_TRIGGER`                   | 0 (0x0) | Exports a Start Trigger.                   |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.SCRIPT_TRIGGER`                  | 1 (0x1) | Exports a Script Trigger.                  |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.MARKER_EVENT`                    | 2 (0x2) | Exports a Marker Event.                    |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.REF_CLOCK`                       | 3 (0x3) | Exports the Reference Clock.               |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.STARTED_EVENT`                   | 4 (0x4) | Exports a Started Event.                   |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.DONE_EVENT`                      | 5 (0x5) | Exports a Done Event.                      |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.CONFIGURATION_LIST_STEP_TRIGGER` | 6 (0x6) | Exports a Configuration List Step Trigger. |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.LoFilter.CONFIGURATION_SETTLED_EVENT`     | 7 (0x7) | Exports a Configuration Settled Event.     |
-                +-------------------------------------------------------------+---------+--------------------------------------------+
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | Name                                                      | Value   | Description                                |
+                +===========================================================+=========+============================================+
+                | :py:data:`~nirfsg.Signal.START_TRIGGER`                   | 0 (0x0) | Exports a Start Trigger.                   |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.SCRIPT_TRIGGER`                  | 1 (0x1) | Exports a Script Trigger.                  |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.MARKER_EVENT`                    | 2 (0x2) | Exports a Marker Event.                    |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.REF_CLOCK`                       | 3 (0x3) | Exports the Reference Clock.               |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.STARTED_EVENT`                   | 4 (0x4) | Exports a Started Event.                   |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.DONE_EVENT`                      | 5 (0x5) | Exports a Done Event.                      |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.CONFIGURATION_LIST_STEP_TRIGGER` | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.CONFIGURATION_SETTLED_EVENT`     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type signal: :py:data:`nirfsg.LoFilter`
+            :type signal: :py:data:`nirfsg.Signal`
             :param signal_identifier:
 
 
@@ -1921,26 +1921,26 @@ self_calibrate_range
 
                 Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted. **Defined Values** :
 
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | Name                                                        | Value     | Description                                                                                                         |
-                +=============================================================+===========+=====================================================================================================================+
-                | :py:data:`~nirfsg.SelfCalibrateRange.OMIT_NONE`             | 0 (0x0)   | No calibration steps are omitted.                                                                                   |
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.SelfCalibrateRange.LO_SELF_CAL`           | 1 (0x1)   | Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.                       |
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.SelfCalibrateRange.POWER_LEVEL_ACCURACY`  | 2 (0x2)   | Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted. |
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.SelfCalibrateRange.RESIDUAL_LO_POWER`     | 4 (0x4)   | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.         |
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.SelfCalibrateRange.IMAGE_SUPPRESSION`     | 8 (0x8)   | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.   |
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.SelfCalibrateRange.SYNTHESIZER_ALIGNMENT` | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
-                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | Name                                                                   | Value     | Description                                                                                                         |
+                +========================================================================+===========+=====================================================================================================================+
+                | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.OMIT_NONE`             | 0 (0x0)   | No calibration steps are omitted.                                                                                   |
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`           | 1 (0x1)   | Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.                       |
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.POWER_LEVEL_ACCURACY`  | 2 (0x2)   | Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted. |
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER`     | 4 (0x4)   | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.         |
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION`     | 8 (0x8)   | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.   |
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT` | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
+                +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type steps_to_omit: :py:data:`nirfsg.SelfCalibrateRange`
+            :type steps_to_omit: :py:data:`nirfsg.SelfCalibrateRangeStepsToOmit`
             :param min_frequency:
 
 
@@ -2029,18 +2029,18 @@ send_software_edge_trigger
 
                 Specifies the trigger to send. **Defined Values** :
 
-                +-----------------------------------+---------+-------------------------------+
-                | Name                              | Value   | Description                   |
-                +===================================+=========+===============================+
-                | :py:data:`~nirfsg.Trigger.START`  | 0 (0x0) | Specifies the Start Trigger.  |
-                +-----------------------------------+---------+-------------------------------+
-                | :py:data:`~nirfsg.Trigger.SCRIPT` | 1 (0x1) | Specifies the Script Trigger. |
-                +-----------------------------------+---------+-------------------------------+
+                +-----------------------------------------------+---------+-------------------------------+
+                | Name                                          | Value   | Description                   |
+                +===============================================+=========+===============================+
+                | :py:data:`~nirfsg.SoftwareTriggerType.START`  | 0 (0x0) | Specifies the Start Trigger.  |
+                +-----------------------------------------------+---------+-------------------------------+
+                | :py:data:`~nirfsg.SoftwareTriggerType.SCRIPT` | 1 (0x1) | Specifies the Script Trigger. |
+                +-----------------------------------------------+---------+-------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger: :py:data:`nirfsg.Trigger`
+            :type trigger: :py:data:`nirfsg.SoftwareTriggerType`
             :param trigger_identifier:
 
 
