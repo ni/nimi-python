@@ -632,9 +632,17 @@ configure_deembedding_table_interpolation_linear
             :param format:
 
 
-                Specifies the format of parameters to interpolate.
+                Specifies the format of parameters to interpolate. **Defined Values** :
 
-                
+                +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                             | Value          | Description                                                                                                                             |
+                +==================================================+================+=========================================================================================================================================+
+                | :py:data:`~nirfsg.Format.REAL_AND_IMAGINARY`     | 26000 (0x6590) | Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion. |
+                +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.Format.MAGNITUDE_AND_PHASE`    | 26001 (0x6591) | Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.                                    |
+                +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.Format.MAGNITUDE_DB_AND_PHASE` | 26002 (0x6592) | Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.                      |
+                +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 
             :type format: :py:data:`nirfsg.Format`
@@ -869,12 +877,20 @@ configure_generation_mode
             :param generation_mode:
 
 
-                Specifies the mode used by NI-RFSG for generating an RF output signal.
+                Specifies the mode used by NI-RFSG for generating an RF output signal. **Defined Values** :
 
-                
+                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                           | Value        | Description                                                                                                                                      |
+                +================================================+==============+==================================================================================================================================================+
+                | :py:data:`~nirfsg.GenerationMode.CW`           | 1000 (0x3e8) | Configures the RF signal generator to generate a CW signal.                                                                                      |
+                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM` | 1001 (0x3e9) | Configures the RF signal generator to generate the arbitrary waveform specified by the :py:attr:`nirfsg.Session.arb_selected_waveform` property. |
+                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.GenerationMode.SCRIPT`       | 1002 (0x3ea) | Configures the RF signal generator to generate arbitrary waveforms as directed by the :py:attr:`nirfsg.Session.selected_script` property.        |
+                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-            :type generation_mode: int
+            :type generation_mode: :py:data:`nirfsg.GenerationMode`
 
 configure_output_enabled
 ------------------------
@@ -1140,12 +1156,18 @@ create_deembedding_sparameter_table_s2_p_file
             :param sparameter_orientation:
 
 
-                yet to be defined
+                yet to be defined **Defined Values** :
 
-                
+                +------------------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                           | Value          | Description                                         |
+                +================================================+================+=====================================================+
+                | :py:data:`~nirfsg.SparameterOrientation.PORT1` | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------+----------------+-----------------------------------------------------+
+                | :py:data:`~nirfsg.SparameterOrientation.PORT2` | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------+----------------+-----------------------------------------------------+
 
 
-            :type sparameter_orientation: int
+            :type sparameter_orientation: :py:data:`nirfsg.SparameterOrientation`
 
 delete_all_deembedding_tables
 -----------------------------
@@ -1257,34 +1279,84 @@ export_signal
             :param signal:
 
 
-                Specifies the type of signal to route.
+                Specifies the type of signal to route. **Defined Values** :
 
-                
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | Name                                                        | Value   | Description                                |
+                +=============================================================+=========+============================================+
+                | :py:data:`~nirfsg.LoFilter.START_TRIGGER`                   | 0 (0x0) | Exports a Start Trigger.                   |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.SCRIPT_TRIGGER`                  | 1 (0x1) | Exports a Script Trigger.                  |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.MARKER_EVENT`                    | 2 (0x2) | Exports a Marker Event.                    |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.REF_CLOCK`                       | 3 (0x3) | Exports the Reference Clock.               |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.STARTED_EVENT`                   | 4 (0x4) | Exports a Started Event.                   |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.DONE_EVENT`                      | 5 (0x5) | Exports a Done Event.                      |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.CONFIGURATION_LIST_STEP_TRIGGER` | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.LoFilter.CONFIGURATION_SETTLED_EVENT`     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +-------------------------------------------------------------+---------+--------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type signal: int
+            :type signal: :py:data:`nirfsg.LoFilter`
             :param signal_identifier:
 
 
-                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string).
+                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Defined Values** :
 
-                
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | Name                                                | Value          | Description                 |
+                +=====================================================+================+=============================+
+                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT0`   |                | Specifies Marker 0.         |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT1`   |                | Specifies Marker 1.         |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT2`   |                | Specifies Marker 2.         |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT3`   |                | Specifies Marker 3.         |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER0` | scriptTrigger0 | Specifies Script Trigger 0. |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER1` | scriptTrigger1 | Specifies Script Trigger 1. |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER2` | scriptTrigger2 | Specifies Script Trigger 2. |
+                +-----------------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER3` | scriptTrigger3 | Specifies Script Trigger 3. |
+                +-----------------------------------------------------+----------------+-----------------------------+
 
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type signal_identifier: str
+            :type signal_identifier: :py:data:`nirfsg.SignalIdentifier`
             :param output_terminal:
 
 
-                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.
+                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Defined Values** :
 
-                
+                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                                                | Value   | Description                                                                                |                                                                                                                                                                       |
+                +=====================================================================+=========+============================================================================================+=======================================================================================================================================================================+
+                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.CLK_OUT`       | ClkOut  | Exports the Reference Clock signal to the CLK OUT connector of the device.                 | Supported on PXIe-5673, 5673E                                                                                                                                         |
+                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.DO_NOT_EXPORT` |         | The Reference Clock signal is not exported.                                                | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note) |
+                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT`       | RefOut  | Exports the Reference Clock signal to the REF OUT connector of the device.                 | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653,     |
+                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT2`      | RefOut2 | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. | Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696                                                                                               |
+                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type output_terminal: str
+            :type output_terminal: :py:data:`nirfsg.ReferenceClockExportOutputTerminal`
 
 get_error
 ---------
@@ -1407,12 +1479,20 @@ get_self_calibration_temperature
             :param module:
 
 
-                Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.
+                Specifies from which stand-alone module to retrieve the last successful self-calibration temperature. **Defined Values** :
 
-                
+                +------------------------------------------+----------------+---------------------------------------------------------------------+
+                | Name                                     | Value          | Description                                                         |
+                +==========================================+================+=====================================================================+
+                | :py:data:`~nirfsg.Module.PRIMARY_MODULE` | 13000 (0x32c8) | The stand-alone device or the main module in a multi-module device. |
+                +------------------------------------------+----------------+---------------------------------------------------------------------+
+                | :py:data:`~nirfsg.Module.AWG`            | 13001 (0x32c9) | The AWG associated with the primary module.                         |
+                +------------------------------------------+----------------+---------------------------------------------------------------------+
+                | :py:data:`~nirfsg.Module.LO`             | 13002 (0x32ca) | The LO associated with the primary module.                          |
+                +------------------------------------------+----------------+---------------------------------------------------------------------+
 
 
-            :type module: int
+            :type module: :py:data:`nirfsg.Module`
 
             :rtype: float
             :return:
@@ -1839,12 +1919,28 @@ self_calibrate_range
             :param steps_to_omit:
 
 
-                Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted.
+                Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted. **Defined Values** :
 
-                
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | Name                                                        | Value     | Description                                                                                                         |
+                +=============================================================+===========+=====================================================================================================================+
+                | :py:data:`~nirfsg.SelfCalibrateRange.OMIT_NONE`             | 0 (0x0)   | No calibration steps are omitted.                                                                                   |
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRange.LO_SELF_CAL`           | 1 (0x1)   | Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.                       |
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRange.POWER_LEVEL_ACCURACY`  | 2 (0x2)   | Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted. |
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRange.RESIDUAL_LO_POWER`     | 4 (0x4)   | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.         |
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRange.IMAGE_SUPPRESSION`     | 8 (0x8)   | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.   |
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.SelfCalibrateRange.SYNTHESIZER_ALIGNMENT` | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
+                +-------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type steps_to_omit: int
+            :type steps_to_omit: :py:data:`nirfsg.SelfCalibrateRange`
             :param min_frequency:
 
 
@@ -1931,25 +2027,43 @@ send_software_edge_trigger
             :param trigger:
 
 
-                Specifies the trigger to send.
+                Specifies the trigger to send. **Defined Values** :
 
-                
+                +-----------------------------------+---------+-------------------------------+
+                | Name                              | Value   | Description                   |
+                +===================================+=========+===============================+
+                | :py:data:`~nirfsg.Trigger.START`  | 0 (0x0) | Specifies the Start Trigger.  |
+                +-----------------------------------+---------+-------------------------------+
+                | :py:data:`~nirfsg.Trigger.SCRIPT` | 1 (0x1) | Specifies the Script Trigger. |
+                +-----------------------------------+---------+-------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger: int
+            :type trigger: :py:data:`nirfsg.Trigger`
             :param trigger_identifier:
 
 
-                Specifies the Script Trigger to configure. This parameter is valid only when you set the :py:attr:`nirfsg.Session.TRIGGER` parameter to :py:data:`~nirfsg.NIRFSG_VAL_START_TRIGGER`. Otherwise, set the :py:attr:`nirfsg.Session.TRIGGER_IDENTIFIER` parameter to '' (empty string).
+                Specifies the Script Trigger to configure. This parameter is valid only when you set the :py:attr:`nirfsg.Session.TRIGGER` parameter to :py:data:`~nirfsg.NIRFSG_VAL_START_TRIGGER`. Otherwise, set the :py:attr:`nirfsg.Session.TRIGGER_IDENTIFIER` parameter to '' (empty string). **Defined Values** :
 
-                
+                +-----------------------------------------------+----------------+-----------------------------+
+                | Name                                          | Value          | Description                 |
+                +===============================================+================+=============================+
+                | :py:data:`~nirfsg.TriggerIdentifier.TRIGGER0` | scriptTrigger0 | Specifies Script Trigger 0. |
+                +-----------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.TriggerIdentifier.TRIGGER1` | scriptTrigger1 | Specifies Script Trigger 1. |
+                +-----------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.TriggerIdentifier.TRIGGER2` | scriptTrigger2 | Specifies Script Trigger 2. |
+                +-----------------------------------------------+----------------+-----------------------------+
+                | :py:data:`~nirfsg.TriggerIdentifier.TRIGGER3` | scriptTrigger3 | Specifies Script Trigger 3. |
+                +-----------------------------------------------+----------------+-----------------------------+
 
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger_identifier: str
+            :type trigger_identifier: :py:data:`nirfsg.TriggerIdentifier`
 
 set_arb_waveform_next_write_position
 ------------------------------------
@@ -1980,14 +2094,20 @@ set_arb_waveform_next_write_position
             :param relative_to:
 
 
-                Specifies the reference position in the waveform. The position and :py:attr:`nirfsg.Session.OFFSET` together determine where to start loading data into the waveform.
+                Specifies the reference position in the waveform. The position and :py:attr:`nirfsg.Session.OFFSET` together determine where to start loading data into the waveform. **Defined Values** :
 
-                
+                +-------------------------------------------------+---------------+------------------------------------------------------------------+
+                | Name                                            | Value         | Description                                                      |
+                +=================================================+===============+==================================================================+
+                | :py:data:`~nirfsg.RelativeTo.START_OF_WAVEFORM` | 8000 (0x1f40) | The reference position is relative to the start of the waveform. |
+                +-------------------------------------------------+---------------+------------------------------------------------------------------+
+                | :py:data:`~nirfsg.RelativeTo.CURRENT_POSITION`  | 8001 (0x1f41) | The reference position is relative to the current position.      |
+                +-------------------------------------------------+---------------+------------------------------------------------------------------+
 
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-            :type relative_to: int
+            :type relative_to: :py:data:`nirfsg.RelativeTo`
             :param offset:
 
 

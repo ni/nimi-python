@@ -5966,9 +5966,32 @@ class _SessionBase(object):
         Forces a trigger to occur. The specified trigger generates regardless of whether the trigger has been configured as a software trigger.
 
         Args:
-            trigger (int): Specifies the trigger to send.
+            trigger (enums.Trigger): Specifies the trigger to send. **Defined Values** :
 
-            trigger_identifier (str): Specifies the Script Trigger to configure. This parameter is valid only when you set the TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the TRIGGER_IDENTIFIER parameter to '' (empty string).
+                +----------------+---------+-------------------------------+
+                | Name           | Value   | Description                   |
+                +================+=========+===============================+
+                | Trigger.START  | 0 (0x0) | Specifies the Start Trigger.  |
+                +----------------+---------+-------------------------------+
+                | Trigger.SCRIPT | 1 (0x1) | Specifies the Script Trigger. |
+                +----------------+---------+-------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            trigger_identifier (enums.TriggerIdentifier): Specifies the Script Trigger to configure. This parameter is valid only when you set the TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the TRIGGER_IDENTIFIER parameter to '' (empty string). **Defined Values** :
+
+                +----------------------------+----------------+-----------------------------+
+                | Name                       | Value          | Description                 |
+                +============================+================+=============================+
+                | TriggerIdentifier.TRIGGER0 | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.TRIGGER1 | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.TRIGGER2 | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.TRIGGER3 | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------------------+----------------+-----------------------------+
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -5977,6 +6000,10 @@ class _SessionBase(object):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
+        if type(trigger) is not enums.Trigger:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.Trigger))
+        if type(trigger_identifier) is not enums.TriggerIdentifier:
+            raise TypeError('Parameter trigger_identifier must be of type ' + str(enums.TriggerIdentifier))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
     @ivi_synchronized
@@ -6507,7 +6534,17 @@ class Session(_SessionBase):
 
             table_name (str): Specifies the name of the table.
 
-            format (enums.Format): Specifies the format of parameters to interpolate.
+            format (enums.Format): Specifies the format of parameters to interpolate. **Defined Values** :
+
+                +-------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                          | Value          | Description                                                                                                                             |
+                +===============================+================+=========================================================================================================================================+
+                | Format.REAL_AND_IMAGINARY     | 26000 (0x6590) | Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion. |
+                +-------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | Format.MAGNITUDE_AND_PHASE    | 26001 (0x6591) | Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.                                    |
+                +-------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | Format.MAGNITUDE_DB_AND_PHASE | 26002 (0x6592) | Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.                      |
+                +-------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
         if type(format) is not enums.Format:
@@ -6614,9 +6651,21 @@ class Session(_SessionBase):
         Configures the NI-RFSG device to generate a continuous sine tone (CW), apply I/Q (vector) modulation to the RF output signal, or generate arbitrary waveforms according to scripts. The NI-RFSG device must be in the Configuration state before you call this method.
 
         Args:
-            generation_mode (int): Specifies the mode used by NI-RFSG for generating an RF output signal.
+            generation_mode (enums.GenerationMode): Specifies the mode used by NI-RFSG for generating an RF output signal. **Defined Values** :
+
+                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
+                | Name                        | Value        | Description                                                                                                            |
+                +=============================+==============+========================================================================================================================+
+                | GenerationMode.CW           | 1000 (0x3e8) | Configures the RF signal generator to generate a CW signal.                                                            |
+                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
+                | GenerationMode.ARB_WAVEFORM | 1001 (0x3e9) | Configures the RF signal generator to generate the arbitrary waveform specified by the arb_selected_waveform property. |
+                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
+                | GenerationMode.SCRIPT       | 1002 (0x3ea) | Configures the RF signal generator to generate arbitrary waveforms as directed by the selected_script property.        |
+                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
 
         '''
+        if type(generation_mode) is not enums.GenerationMode:
+            raise TypeError('Parameter generation_mode must be of type ' + str(enums.GenerationMode))
         self._interpreter.configure_generation_mode(generation_mode)
 
     @ivi_synchronized
@@ -6748,9 +6797,19 @@ class Session(_SessionBase):
 
             s2p_file_path (str): yet to be defined
 
-            sparameter_orientation (int): yet to be defined
+            sparameter_orientation (enums.SparameterOrientation): yet to be defined **Defined Values** :
+
+                +-----------------------------+----------------+-----------------------------------------------------+
+                | Name                        | Value          | Description                                         |
+                +=============================+================+=====================================================+
+                | SparameterOrientation.PORT1 | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2 | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------+----------------+-----------------------------------------------------+
 
         '''
+        if type(sparameter_orientation) is not enums.SparameterOrientation:
+            raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
         self._interpreter.create_deembedding_sparameter_table_s2_p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
     @ivi_synchronized
@@ -6810,9 +6869,52 @@ class Session(_SessionBase):
         Routes signals (triggers, clocks, and events) to a specified output terminal. The NI-RFSG device must be in the Configuration state before you call this method.
 
         Args:
-            signal (int): Specifies the type of signal to route.
+            signal (enums.LoFilter): Specifies the type of signal to route. **Defined Values** :
 
-            signal_identifier (str): Specifies which instance of the selected signal to export. This parameter is useful when you set the SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the SIGNAL_IDENTIFIER parameter to '' (empty string).
+                +------------------------------------------+---------+--------------------------------------------+
+                | Name                                     | Value   | Description                                |
+                +==========================================+=========+============================================+
+                | LoFilter.START_TRIGGER                   | 0 (0x0) | Exports a Start Trigger.                   |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.SCRIPT_TRIGGER                  | 1 (0x1) | Exports a Script Trigger.                  |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.MARKER_EVENT                    | 2 (0x2) | Exports a Marker Event.                    |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.REF_CLOCK                       | 3 (0x3) | Exports the Reference Clock.               |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.STARTED_EVENT                   | 4 (0x4) | Exports a Started Event.                   |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.DONE_EVENT                      | 5 (0x5) | Exports a Done Event.                      |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +------------------------------------------+---------+--------------------------------------------+
+                | LoFilter.CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +------------------------------------------+---------+--------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+            signal_identifier (enums.SignalIdentifier): Specifies which instance of the selected signal to export. This parameter is useful when you set the SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the SIGNAL_IDENTIFIER parameter to '' (empty string). **Defined Values** :
+
+                +----------------------------------+----------------+-----------------------------+
+                | Name                             | Value          | Description                 |
+                +==================================+================+=============================+
+                | SignalIdentifier.MARKER_EVENT0   |                | Specifies Marker 0.         |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.MARKER_EVENT1   |                | Specifies Marker 1.         |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.MARKER_EVENT2   |                | Specifies Marker 2.         |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.MARKER_EVENT3   |                | Specifies Marker 3.         |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.SCRIPT_TRIGGER0 | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.SCRIPT_TRIGGER1 | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.SCRIPT_TRIGGER2 | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------------------------+----------------+-----------------------------+
+                | SignalIdentifier.SCRIPT_TRIGGER3 | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------------------------+----------------+-----------------------------+
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -6820,9 +6922,30 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            output_terminal (str): Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.
+            output_terminal (enums.ReferenceClockExportOutputTerminal): Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Defined Values** :
+
+                +--------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                             | Value   | Description                                                                                |                                                                                                                                                                       |
+                +==================================================+=========+============================================================================================+=======================================================================================================================================================================+
+                | ReferenceClockExportOutputTerminal.CLK_OUT       | ClkOut  | Exports the Reference Clock signal to the CLK OUT connector of the device.                 | Supported on PXIe-5673, 5673E                                                                                                                                         |
+                +--------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ReferenceClockExportOutputTerminal.DO_NOT_EXPORT |         | The Reference Clock signal is not exported.                                                | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note) |
+                +--------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ReferenceClockExportOutputTerminal.REF_OUT       | RefOut  | Exports the Reference Clock signal to the REF OUT connector of the device.                 | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653,     |
+                +--------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ReferenceClockExportOutputTerminal.REF_OUT2      | RefOut2 | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. | Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696                                                                                               |
+                +--------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
+        if type(signal) is not enums.LoFilter:
+            raise TypeError('Parameter signal must be of type ' + str(enums.LoFilter))
+        if type(signal_identifier) is not enums.SignalIdentifier:
+            raise TypeError('Parameter signal_identifier must be of type ' + str(enums.SignalIdentifier))
+        if type(output_terminal) is not enums.ReferenceClockExportOutputTerminal:
+            raise TypeError('Parameter output_terminal must be of type ' + str(enums.ReferenceClockExportOutputTerminal))
         self._interpreter.export_signal(signal, signal_identifier, output_terminal)
 
     @ivi_synchronized
@@ -6921,13 +7044,25 @@ class Session(_SessionBase):
         Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
         Args:
-            module (int): Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.
+            module (enums.Module): Specifies from which stand-alone module to retrieve the last successful self-calibration temperature. **Defined Values** :
+
+                +-----------------------+----------------+---------------------------------------------------------------------+
+                | Name                  | Value          | Description                                                         |
+                +=======================+================+=====================================================================+
+                | Module.PRIMARY_MODULE | 13000 (0x32c8) | The stand-alone device or the main module in a multi-module device. |
+                +-----------------------+----------------+---------------------------------------------------------------------+
+                | Module.AWG            | 13001 (0x32c9) | The AWG associated with the primary module.                         |
+                +-----------------------+----------------+---------------------------------------------------------------------+
+                | Module.LO             | 13002 (0x32ca) | The LO associated with the primary module.                          |
+                +-----------------------+----------------+---------------------------------------------------------------------+
 
 
         Returns:
             temperature (float): Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
         '''
+        if type(module) is not enums.Module:
+            raise TypeError('Parameter module must be of type ' + str(enums.Module))
         temperature = self._interpreter.get_self_calibration_temperature(module)
         return temperature
 
@@ -7098,7 +7233,26 @@ class Session(_SessionBase):
         Note: If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate.
 
         Args:
-            steps_to_omit (int): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted.
+            steps_to_omit (enums.SelfCalibrateRange): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted. **Defined Values** :
+
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | Name                                     | Value     | Description                                                                                                         |
+                +==========================================+===========+=====================================================================================================================+
+                | SelfCalibrateRange.OMIT_NONE             | 0 (0x0)   | No calibration steps are omitted.                                                                                   |
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRange.LO_SELF_CAL           | 1 (0x1)   | Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.                       |
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRange.POWER_LEVEL_ACCURACY  | 2 (0x2)   | Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted. |
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRange.RESIDUAL_LO_POWER     | 4 (0x4)   | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.         |
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRange.IMAGE_SUPPRESSION     | 8 (0x8)   | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.   |
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+                | SelfCalibrateRange.SYNTHESIZER_ALIGNMENT | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
+                +------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             min_frequency (float): Specifies the minimum frequency to calibrate.
 
@@ -7109,6 +7263,8 @@ class Session(_SessionBase):
             max_power_level (float): Specifies the maximum power level to calibrate.
 
         '''
+        if type(steps_to_omit) is not enums.SelfCalibrateRange:
+            raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRange))
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
@@ -7142,7 +7298,15 @@ class Session(_SessionBase):
         Args:
             waveform_name (str): Specifies the name of the waveform. This string is case-insensitive and alphanumeric, and it cannot use `reserved words <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_
 
-            relative_to (int): Specifies the reference position in the waveform. The position and OFFSET together determine where to start loading data into the waveform.
+            relative_to (enums.RelativeTo): Specifies the reference position in the waveform. The position and OFFSET together determine where to start loading data into the waveform. **Defined Values** :
+
+                +------------------------------+---------------+------------------------------------------------------------------+
+                | Name                         | Value         | Description                                                      |
+                +==============================+===============+==================================================================+
+                | RelativeTo.START_OF_WAVEFORM | 8000 (0x1f40) | The reference position is relative to the start of the waveform. |
+                +------------------------------+---------------+------------------------------------------------------------------+
+                | RelativeTo.CURRENT_POSITION  | 8001 (0x1f41) | The reference position is relative to the current position.      |
+                +------------------------------+---------------+------------------------------------------------------------------+
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -7150,6 +7314,8 @@ class Session(_SessionBase):
             offset (int): Specifies the offset from the **relative to** parameter at which to start loading the data into the waveform.
 
         '''
+        if type(relative_to) is not enums.RelativeTo:
+            raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
         self._interpreter.set_arb_waveform_next_write_position(waveform_name, relative_to, offset)
 
     @ivi_synchronized

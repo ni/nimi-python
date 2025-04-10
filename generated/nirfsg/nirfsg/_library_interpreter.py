@@ -271,7 +271,7 @@ class LibraryInterpreter(object):
 
     def configure_generation_mode(self, generation_mode):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        generation_mode_ctype = _visatype.ViInt32(generation_mode)  # case S150
+        generation_mode_ctype = _visatype.ViInt32(generation_mode.value)  # case S130
         error_code = self._library.niRFSG_ConfigureGenerationMode(vi_ctype, generation_mode_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -345,7 +345,7 @@ class LibraryInterpreter(object):
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
         table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
         s2p_file_path_ctype = ctypes.create_string_buffer(s2p_file_path.encode(self._encoding))  # case C020
-        sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation)  # case S150
+        sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation.value)  # case S130
         error_code = self._library.niRFSG_CreateDeembeddingSparameterTableS2PFile(vi_ctype, port_ctype, table_name_ctype, s2p_file_path_ctype, sparameter_orientation_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -385,9 +385,9 @@ class LibraryInterpreter(object):
 
     def export_signal(self, signal, signal_identifier, output_terminal):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_ctype = _visatype.ViInt32(signal)  # case S150
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
+        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
+        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.value.encode(self._encoding))  # case C030
+        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.value.encode(self._encoding))  # case C030
         error_code = self._library.niRFSG_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -498,7 +498,7 @@ class LibraryInterpreter(object):
 
     def get_self_calibration_temperature(self, module):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        module_ctype = _visatype.ViInt32(module)  # case S150
+        module_ctype = _visatype.ViInt32(module.value)  # case S130
         temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niRFSG_GetSelfCalibrationTemperature(vi_ctype, module_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -652,7 +652,7 @@ class LibraryInterpreter(object):
 
     def self_calibrate_range(self, steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        steps_to_omit_ctype = _visatype.ViInt64(steps_to_omit)  # case S150
+        steps_to_omit_ctype = _visatype.ViInt64(steps_to_omit.value)  # case S130
         min_frequency_ctype = _visatype.ViReal64(min_frequency)  # case S150
         max_frequency_ctype = _visatype.ViReal64(max_frequency)  # case S150
         min_power_level_ctype = _visatype.ViReal64(min_power_level)  # case S150
@@ -671,8 +671,8 @@ class LibraryInterpreter(object):
 
     def send_software_edge_trigger(self, trigger, trigger_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_ctype = _visatype.ViInt32(trigger)  # case S150
-        trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.encode(self._encoding))  # case C020
+        trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
+        trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.value.encode(self._encoding))  # case C030
         error_code = self._library.niRFSG_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_identifier_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -680,7 +680,7 @@ class LibraryInterpreter(object):
     def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        relative_to_ctype = _visatype.ViInt32(relative_to)  # case S150
+        relative_to_ctype = _visatype.ViInt32(relative_to.value)  # case S130
         offset_ctype = _visatype.ViInt32(offset)  # case S150
         error_code = self._library.niRFSG_SetArbWaveformNextWritePosition(vi_ctype, waveform_name_ctype, relative_to_ctype, offset_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

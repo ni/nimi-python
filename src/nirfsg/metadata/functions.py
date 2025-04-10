@@ -845,7 +845,29 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the format of parameters to interpolate.'
+                    'description': 'Specifies the format of parameters to interpolate. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_LINEAR_INTERPOLATION_FORMAT_REAL_AND_IMAGINARY',
+                            '26000 (0x6590)',
+                            'Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.'
+                        ],
+                        [
+                            'NIRFSG_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_AND_PHASE',
+                            '26001 (0x6591)',
+                            'Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.'
+                        ],
+                        [
+                            'NIRFSG_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_DB_AND_PHASE',
+                            '26002 (0x6592)',
+                            'Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
                 'enum': 'Format',
                 'name': 'format',
@@ -1211,8 +1233,31 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the mode used by NI-RFSG for generating an RF output signal.'
+                    'description': 'Specifies the mode used by NI-RFSG for generating an RF output signal. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_CW',
+                            '1000 (0x3e8)',
+                            'Configures the RF signal generator to generate a CW signal.'
+                        ],
+                        [
+                            'NIRFSG_VAL_ARB_WAVEFORM',
+                            '1001 (0x3e9)',
+                            'Configures the RF signal generator to generate the arbitrary waveform specified by the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT',
+                            '1002 (0x3ea)',
+                            'Configures the RF signal generator to generate arbitrary waveforms as directed by the NIRFSG_ATTR_SELECTED_SCRIPT attribute.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'GenerationMode',
                 'name': 'generationMode',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1652,8 +1697,26 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'yet to be defined'
+                    'description': 'yet to be defined **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'SparameterOrientation',
                 'name': 'sparameterOrientation',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1872,8 +1935,56 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': ' Specifies the type of signal to route.'
+                    'description': ' Specifies the type of signal to route. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_START_TRIGGER',
+                            '0 (0x0)',
+                            'Exports a Start Trigger.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER',
+                            '1 (0x1)',
+                            'Exports a Script Trigger.'
+                        ],
+                        [
+                            'NIRFSG_VAL_MARKER_EVENT',
+                            '2 (0x2)',
+                            'Exports a Marker Event.'
+                        ],
+                        [
+                            'NIRFSG_VAL_REF_CLOCK',
+                            '3 (0x3)',
+                            'Exports the Reference Clock.'
+                        ],
+                        [
+                            'NIRFSG_VAL_STARTED_EVENT',
+                            '4 (0x4)',
+                            'Exports a Started Event.'
+                        ],
+                        [
+                            'NIRFSG_VAL_DONE_EVENT',
+                            '5 (0x5)',
+                            'Exports a Done Event.'
+                        ],
+                        [
+                            'NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER',
+                            '6 (0x6)',
+                            'Exports a Configuration List Step Trigger.'
+                        ],
+                        [
+                            'NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT',
+                            '7 (0x7)',
+                            'Exports a Configuration Settled Event.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'LoFilter',
                 'name': 'signal',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1882,8 +1993,56 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "Specifies which instance of the selected signal to export. This parameter is useful when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to '' (empty string)."
+                    'description': "Specifies which instance of the selected signal to export. This parameter is useful when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to '' (empty string). **Defined Values** :",
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_MARKER_EVENT0',
+                            '',
+                            'Specifies Marker 0.'
+                        ],
+                        [
+                            'NIRFSG_VAL_MARKER_EVENT1',
+                            '',
+                            'Specifies Marker 1.'
+                        ],
+                        [
+                            'NIRFSG_VAL_MARKER_EVENT2',
+                            '',
+                            'Specifies Marker 2.'
+                        ],
+                        [
+                            'NIRFSG_VAL_MARKER_EVENT3',
+                            '',
+                            'Specifies Marker 3.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER0',
+                            'scriptTrigger0',
+                            'Specifies Script Trigger 0.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER1',
+                            'scriptTrigger1',
+                            'Specifies Script Trigger 1.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER2',
+                            'scriptTrigger2',
+                            'Specifies Script Trigger 2.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER3',
+                            'scriptTrigger3',
+                            'Specifies Script Trigger 3.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'SignalIdentifier',
                 'name': 'signalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1892,8 +2051,40 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.'
+                    'description': 'Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_CLK_OUT_STR',
+                            'ClkOut',
+                            'Exports the Reference Clock signal to the CLK OUT connector of the device.',
+                            'Supported on PXIe-5673, 5673E'
+                        ],
+                        [
+                            'NIRFSG_VAL_DO_NOT_EXPORT_STR',
+                            '',
+                            'The Reference Clock signal is not exported.',
+                            'Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note)'
+                        ],
+                        [
+                            'NIRFSG_VAL_REF_OUT_STR',
+                            'RefOut',
+                            'Exports the Reference Clock signal to the REF OUT connector of the device.',
+                            'Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653, '
+                        ],
+                        [
+                            'NIRFSG_VAL_REF_OUT2_STR',
+                            'RefOut2',
+                            'Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.',
+                            'Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'ReferenceClockExportOutputTerminal',
                 'name': 'outputTerminal',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2664,8 +2855,31 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.'
+                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration temperature. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_PRIMARY_MODULE',
+                            '13000 (0x32c8)',
+                            'The stand-alone device or the main module in a multi-module device.'
+                        ],
+                        [
+                            'NIRFSG_VAL_AWG',
+                            '13001 (0x32c9)',
+                            'The AWG associated with the primary module.'
+                        ],
+                        [
+                            'NIRFSG_VAL_LO',
+                            '13002 (0x32ca)',
+                            'The LO associated with the primary module.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'Module',
                 'name': 'module',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3615,8 +3829,46 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted.'
+                    'description': 'Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_SELF_CAL_OMIT_NONE',
+                            '0 (0x0)',
+                            'No calibration steps are omitted.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SELF_CAL_LO_SELF_CAL',
+                            '1 (0x1)',
+                            'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SELF_CAL_POWER_LEVEL_ACCURACY',
+                            '2 (0x2)',
+                            'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SELF_CAL_RESIDUAL_LO_POWER',
+                            '4 (0x4)',
+                            'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SELF_CAL_IMAGE_SUPPRESSION',
+                            '8 (0x8)',
+                            'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
+                            '16 (0x10)',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'SelfCalibrateRange',
                 'name': 'stepsToOmit',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -3733,8 +3985,26 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the trigger to send.'
+                    'description': 'Specifies the trigger to send. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_START_TRIGGER',
+                            '0 (0x0)',
+                            'Specifies the Start Trigger.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER',
+                            '1 (0x1)',
+                            'Specifies the Script Trigger.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'Trigger',
                 'name': 'trigger',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3743,8 +4013,36 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "Specifies the Script Trigger to configure. This parameter is valid only when you set the NIRFSG_ATTR_TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the NIRFSG_ATTR_TRIGGER_IDENTIFIER parameter to '' (empty string)."
+                    'description': "Specifies the Script Trigger to configure. This parameter is valid only when you set the NIRFSG_ATTR_TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the NIRFSG_ATTR_TRIGGER_IDENTIFIER parameter to '' (empty string). **Defined Values** :",
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER0',
+                            'scriptTrigger0',
+                            'Specifies Script Trigger 0.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER1',
+                            'scriptTrigger1',
+                            'Specifies Script Trigger 1.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER2',
+                            'scriptTrigger2',
+                            'Specifies Script Trigger 2.'
+                        ],
+                        [
+                            'NIRFSG_VAL_SCRIPT_TRIGGER3',
+                            'scriptTrigger3',
+                            'Specifies Script Trigger 3.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'TriggerIdentifier',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3795,8 +4093,26 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the reference position in the waveform. The position and NIRFSG_ATTR_OFFSET together determine where to start loading data into the waveform.'
+                    'description': 'Specifies the reference position in the waveform. The position and NIRFSG_ATTR_OFFSET together determine where to start loading data into the waveform. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_START_OF_WAVEFORM',
+                            '8000 (0x1f40)',
+                            'The reference position is relative to the start of the waveform.'
+                        ],
+                        [
+                            'NIRFSG_VAL_CURRENT_POSITION',
+                            '8001 (0x1f41)',
+                            'The reference position is relative to the current position.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'RelativeTo',
                 'name': 'relativeTo',
                 'type': 'ViInt32',
                 'use_array': False,
