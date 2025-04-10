@@ -201,7 +201,7 @@ Release Process
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module versions. 
+    1. Update the module versions(major or minor) if required. 
         * Refer to the "Perform Version Bump" section under "Pre-Release Steps."
         * Commit to branch
     1. Clean and build to update generated files with new version
