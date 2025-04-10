@@ -77,9 +77,10 @@ Update version in files. Example: X.Y.Z.devN to X.Y.Z
                     contents = module_version_re.sub(f"'module_version': '{base_version}.dev{dev_number + 1}'", contents)
                     new_version = f"{base_version}.dev{dev_number + 1}"
                 else:
-                    logging.info(f"Release version found, updating {base_version} to {base_version}.dev0")
-                    contents = module_version_re.sub(f"'module_version': '{base_version}.dev0'", contents)
-                    new_version = f"{base_version}.dev0"
+                    bumped_version = bump_version(base_version, 'patch')
+                    logging.info(f"Release version found, updating {base_version} to {bumped_version}.dev0")
+                    contents = module_version_re.sub(f"'module_version': '{bumped_version}.dev0'", contents)
+                    new_version = f"{bumped_version}.dev0"
             else:
                 bumped_version = bump_version(base_version, args.update_type)
                 if dev_number is not None:
