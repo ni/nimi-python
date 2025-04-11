@@ -7,9 +7,9 @@
 - [nifgen (NI-FGEN)](#nifgen-ni-fgen)
 - [nimodinst (NI-ModInst)](#nimodinst-ni-modinst)
 - [niscope (NI-SCOPE)](#niscope-ni-scope)
-- [nise (NI-Switch Executive)](#nise-ni-switch-executive)
+- [nise (NI Switch Executive)](#nise-ni-switch-executive)
 - [niswitch (NI-SWITCH)](#niswitch-ni-switch)
-- [nitclk (NI-TCLK)](#nitclk-ni-tclk)
+- [nitclk (NI-TClk)](#nitclk-ni-tclk)
 
 ---
 
@@ -2085,7 +2085,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - Initial release
 ---
 
-### nise (NI-Switch Executive)
+### nise (NI Switch Executive)
 
 - [Unreleased](#nise-unreleased)
 - [1.4.9](#nise-149---2025-02-26)
@@ -2494,7 +2494,7 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
   - Initial release
 ---
 
-### nitclk (NI-TCLK)
+### nitclk (NI-TClk)
 
 - [Unreleased](#nitclk-unreleased)
 - [1.4.9](#nitclk-149---2025-02-26)
