@@ -13,7 +13,7 @@
 
 ---
 
-### nidcpower (NI-DCPOWER)
+### nidcpower (NI-DCPower)
 - [Unreleased](#nidcpower-unreleased)
 - [1.4.9](#nidcpower-149---2025-02-26)
 - [1.4.8](#nidcpower-148---2024-04-26)
