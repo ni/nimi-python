@@ -46,11 +46,11 @@ following drivers are supported:
 * NI-DMM (Python module: nidmm)
 * NI-FGEN (Python module: nifgen)
 * NI-ModInst (Python module: nimodinst)
+* NI-RFSG (Python module: nirfsg)
 * NI-SCOPE (Python module: niscope)
 * NI Switch Executive (Python module: nise)
 * NI-SWITCH (Python module: niswitch)
 * NI-TClk (Python module: nitclk)
-* NI-RFSG (Python module: nirfsg)
 
 It is implemented as a set of `Mako templates <http://makotemplates.org>`_ and per-driver metafiles that produce a Python module for each driver. The driver is
 called through its public C API using the `ctypes <https://docs.python.org/2/library/ctypes.html>`_ Python library.
@@ -296,7 +296,7 @@ NI-RFSG Python API Status
 +-------------------------------+-----------------------+
 | NI-RFSG (nirfsg)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2023 Q1.1             |
+| Driver Version Tested Against | 2025 Q1               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsgLatestVersion| |
 +-------------------------------+-----------------------+
@@ -531,11 +531,11 @@ Driver specific installation instructions can be found on **Read the Docs**:
 * `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
 * `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
 * `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 * `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
 * `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
 * `niswitch <https://niswitch.readthedocs.io/en/latest/niswitch.html#installation>`_
 * `nitclk <https://nitclk.readthedocs.io/en/latest/nitclk.html#installation>`_
-* `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 
 
 Contributing
@@ -589,11 +589,12 @@ Documentation is available on **Read the Docs**:
 - https://nidmm.readthedocs.io/en/stable
 - https://nifgen.readthedocs.io/en/stable
 - https://nimodinst.readthedocs.io/en/stable
+- https://nirfsg.readthedocs.io/en/stable
 - https://niscope.readthedocs.io/en/stable
 - https://nise.readthedocs.io/en/stable
 - https://niswitch.readthedocs.io/en/stable
 - https://nitclk.readthedocs.io/en/stable
-- https://nirfsg.readthedocs.io/en/stable
+
 
 
 .. _license-section:
