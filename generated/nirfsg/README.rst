@@ -53,7 +53,7 @@ NI-RFSG Python API Status
 +-------------------------------+-----------------------+
 | NI-RFSG (nirfsg)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2023 Q1.1             |
+| Driver Version Tested Against | 2025 Q1               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsgLatestVersion| |
 +-------------------------------+-----------------------+
@@ -102,7 +102,7 @@ As a prerequisite to using the **nirfsg** module, you must install the NI-RFSG r
 
 The nimi-python modules (i.e. for **NI-RFSG**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nirfsg
+  $ python -m pip install nirfsg~=0.2.0
 
 
 Contributing
@@ -113,17 +113,26 @@ We welcome contributions! You can clone the project repository, build it, and in
 Usage
 ------
 
-The following is a basic example of using the **nirfsg** module to open a session to a Function Generator and generate a sine wave for 5 seconds.
+The following is a basic example of using the **nirfsg** module to open a session to an RF Signal Generator and generate a continuous wave (CW) signal.
 
 .. code-block:: python
 
     import nirfsg
-    with nirfsg.Session('SwitchExecutiveExample') as session:
-        session.connect('DIOToUUT')
 
-`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nirfsg/examples>`_
+    # Configure the session
+    with nirfsg.Session(resource_name='5841', id_query=False, reset_device=False, options='Simulate=1, DriverSetup=Model:5841') as session:
+        # Configure RF settings
+        session.configure_rf(
+            frequency=1e9,  # Frequency in Hz
+            power_level=-10.0  # Power level in dBm
+        )
+        session.generation_mode = nirfsg.GenerationMode.CW
 
-.. _support-section:
+        # Start signal generation
+        with session.initiate():
+            input("Press Enter to stop generation")
+
+`Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nirfsg/examples>`_.. _support-section:
 
 Support / Feedback
 ==================
