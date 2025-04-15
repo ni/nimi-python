@@ -14,7 +14,8 @@ def example(resource_name, options, frequency, power_level):
 
         # Start generation
         with session.initiate():
-            input("Press Enter to stop generation")
+            # input("Press Enter to stop generation")
+            pass
 
 
 def _main(argsv):
