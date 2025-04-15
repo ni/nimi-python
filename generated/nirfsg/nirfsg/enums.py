@@ -997,11 +997,11 @@ class PulseModulationMode(Enum):
 class PulseModulationOutputTerm(Enum):
     DO_NOT_EXPORT = ''
     r'''
-    yet to be defined
+    Pulse modulation video signal is not exported.
     '''
     PULSE_OUT = 'PulseOut'
     r'''
-    yet to be defined
+    Export the pulse modulation video signal on the pulse out terminal.
     '''
 
 

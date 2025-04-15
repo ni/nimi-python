@@ -2384,7 +2384,7 @@ PulseModulationOutputTerm
 
 
 
-        yet to be defined
+        Pulse modulation video signal is not exported.
 
         
 
@@ -2394,7 +2394,7 @@ PulseModulationOutputTerm
 
 
 
-        yet to be defined
+        Export the pulse modulation video signal on the pulse out terminal.
 
         
 

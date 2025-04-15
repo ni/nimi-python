@@ -4678,12 +4678,12 @@ attributes = {
                 [
                     'NIRFSG_VAL_DO_NOT_EXPORT_STR',
                     '',
-                    'yet to be defined'
+                    'Pulse modulation video signal is not exported.'
                 ],
                 [
                     'NIRFSG_VAL_PULSE_OUT_STR',
                     'PulseOut',
-                    'yet to be defined'
+                    'Export the pulse modulation video signal on the pulse out terminal.'
                 ]
             ],
             'table_header': [

@@ -1129,7 +1129,7 @@ create_deembedding_sparameter_table_s2_p_file
             :param port:
 
 
-                yet to be defined
+                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842 is empty string.
 
                 
 
@@ -1138,7 +1138,7 @@ create_deembedding_sparameter_table_s2_p_file
             :param table_name:
 
 
-                yet to be defined
+                Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
 
                 
 
@@ -1147,7 +1147,7 @@ create_deembedding_sparameter_table_s2_p_file
             :param s2p_file_path:
 
 
-                yet to be defined
+                Specifies the path to the S2P file that contains de-embedding information for the specified port.
 
                 
 
@@ -1156,7 +1156,7 @@ create_deembedding_sparameter_table_s2_p_file
             :param sparameter_orientation:
 
 
-                yet to be defined **Defined Values** :
+                Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :
 
                 +------------------------------------------------+----------------+-----------------------------------------------------+
                 | Name                                           | Value          | Description                                         |
@@ -5737,13 +5737,13 @@ exported_pulse_modulation_event_output_terminal
 
                     **Defined Values**:
 
-        +------------------------------------------------------------+----------+-------------------+
-        | Name                                                       | Value    | Description       |
-        +============================================================+==========+===================+
-        | :py:data:`~nirfsg.PulseModulationOutputTerm.DO_NOT_EXPORT` |          | yet to be defined |
-        +------------------------------------------------------------+----------+-------------------+
-        | :py:data:`~nirfsg.PulseModulationOutputTerm.PULSE_OUT`     | PulseOut | yet to be defined |
-        +------------------------------------------------------------+----------+-------------------+
+        +------------------------------------------------------------+----------+---------------------------------------------------------------------+
+        | Name                                                       | Value    | Description                                                         |
+        +============================================================+==========+=====================================================================+
+        | :py:data:`~nirfsg.PulseModulationOutputTerm.DO_NOT_EXPORT` |          | Pulse modulation video signal is not exported.                      |
+        +------------------------------------------------------------+----------+---------------------------------------------------------------------+
+        | :py:data:`~nirfsg.PulseModulationOutputTerm.PULSE_OUT`     | PulseOut | Export the pulse modulation video signal on the pulse out terminal. |
+        +------------------------------------------------------------+----------+---------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 

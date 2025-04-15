@@ -1934,14 +1934,14 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'yet to be defined'
+                    'description': 'Pulse modulation video signal is not exported.'
                 },
                 'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
                 'value': ''
             },
             {
                 'documentation': {
-                    'description': 'yet to be defined'
+                    'description': 'Export the pulse modulation video signal on the pulse out terminal.'
                 },
                 'name': 'NIRFSG_VAL_PULSE_OUT_STR',
                 'value': 'PulseOut'
