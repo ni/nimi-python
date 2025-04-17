@@ -4534,17 +4534,17 @@ attributes = {
             'table_body': [
                 [
                     'NIRFSG_VAL_10MHZ',
-                    '10000000 (0x989680)',
+                    '10000000.0',
                     'Uses a 10MHz Reference Clock rate.'
                 ],
                 [
                     'NIRFSG_VAL_100MHZ',
-                    '',
+                    '100000000.0',
                     'Uses a 100MHz Reference Clock rate.'
                 ],
                 [
                     'NIRFSG_VAL_1GHZ',
-                    '',
+                    '1000000000.0',
                     'Uses a 1GHz Reference Clock rate.'
                 ]
             ],

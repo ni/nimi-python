@@ -3753,6 +3753,13 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SCRIPT_TRIGGER3',
                 'value': 'scriptTrigger3'
+            },
+            {
+                'documentation': {
+                    'description': 'None (no signal to export)'
+                },
+                'name': 'NIRFSG_VAL_NONE_EMPTY_STRING',
+                'value': ''
             }
         ]
     },

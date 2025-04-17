@@ -1429,15 +1429,18 @@ functions = {
                     'description': '                        Specifies the way the driver interprets the value of the NIRFSG_ATTR_POWER_LEVEL attribute. NI-RFSG sets the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute to this value.\n                    ',
                     'table_body': [
                         [
-                            '**Average Power** (default)',
+                            'Average Power (default)',
+                            '7000',
                             'Indicates the desired power averaged in time. The driver maximizes the dynamic range by scaling the I/Q waveform so that its peak magnitude is equal to one. If you write more than one waveform, NI-RFSG scales each waveform without preserving the power level ratio between the waveforms. This value is not valid for the PXIe-5820.'
                         ],
                         [
-                            '**Peak Power**',
+                            'Peak Power',
+                            '7001',
                             'Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires the magnitude of the I/Q waveform to be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR attribute.'
                         ]
                     ],
                     'table_header': [
+                        'Name',
                         'Value',
                         'Description'
                     ]
@@ -1573,32 +1576,32 @@ functions = {
                     'description': '                        Specifies the source of Reference Clock signal.\n                    ',
                     'table_body': [
                         [
-                            '**NIRFSG_VAL_ONBOARD_CLOCK_STR (default)**',
+                            'NIRFSG_VAL_ONBOARD_CLOCK_STR (default)',
                             'OnboardClock',
                             ' Uses the onboard Reference Clock as the clock source.<br/>**PXIe-5830/5831/5832**:For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector.<br/>**PXIe-5831 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector.<br/>**PXIe-5832 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector.<br/>**PXIe-5841 with PXIe-5655**:Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.<br/>**PXIe-5842**:Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the Getting Started Guide for the instrument.'
                         ],
                         [
-                            '**NIRFSG_VAL_REF_IN_STR**',
+                            'NIRFSG_VAL_REF_IN_STR',
                             'RefIn',
                             'Uses the clock signal present at the front panel REF IN connector as the clock source.<br/>**PXIe-5830/5831/5832**:For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831, lock the external signal to the PXIe-3622 REF IN connector. For the PXIe-5832, lock the external signal to the PXIe-3623 REF IN connector.<br/>**PXIe-5831 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.<br/>**PXIe-5832 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.<br/>**PXIe-5841 with PXIe-5655**:Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector.<br/>**PXIe-5842**:Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the Getting Started Guide for the instrument.'
                         ],
                         [
-                            '**NIRFSG_VAL_PXI_CLK_STR**',
+                            'NIRFSG_VAL_PXI_CLK_STR',
                             'PXI_CLK',
                             'Uses the PXI_CLK signal, which is present on the PXI backplane, as the clock source.'
                         ],
                         [
-                            '**NIRFSG_VAL_CLK_IN_STR**',
+                            'NIRFSG_VAL_CLK_IN_STR',
                             'ClkIn',
                             'Uses the clock signal present at the front panel CLK IN connector as the clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655/5842.'
                         ],
                         [
-                            '**NIRFSG_VAL_REF_IN_2_STR**',
+                            'NIRFSG_VAL_REF_IN_2_STR',
                             'RefIn2',
                             '-'
                         ],
                         [
-                            '**NIRFSG_VAL_PXI_CLK_MASTER_STR**',
+                            'NIRFSG_VAL_PXI_CLK_MASTER_STR',
                             'PXI_ClkMaster',
                             'This value is valid on only the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.<br/>**PXIe-5831 with PXIe-5653**:NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.<br/>**PXIe-5832 with PXIe-5653**:NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3623 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
                         ]
@@ -4207,6 +4210,11 @@ functions = {
                             'NIRFSG_VAL_SCRIPT_TRIGGER3',
                             'scriptTrigger3',
                             'Specifies Script Trigger 3.'
+                        ],
+                        [
+                            ' "" (empty string)',
+                            '',
+                            'None (no signal to export)'
                         ]
                     ],
                     'table_header': [

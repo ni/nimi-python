@@ -4747,7 +4747,7 @@ TriggerIdentifier
 
 .. py:class:: TriggerIdentifier
 
-    .. py:attribute:: TriggerIdentifier.TRIGGER0
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER0
 
 
 
@@ -4757,7 +4757,7 @@ TriggerIdentifier
 
 
 
-    .. py:attribute:: TriggerIdentifier.TRIGGER1
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER1
 
 
 
@@ -4767,7 +4767,7 @@ TriggerIdentifier
 
 
 
-    .. py:attribute:: TriggerIdentifier.TRIGGER2
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER2
 
 
 
@@ -4777,11 +4777,21 @@ TriggerIdentifier
 
 
 
-    .. py:attribute:: TriggerIdentifier.TRIGGER3
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER3
 
 
 
         Specifies Script Trigger 3.
+
+        
+
+
+
+    .. py:attribute:: TriggerIdentifier.NONE_EMPTY_STRING
+
+
+
+        None (no signal to export)
 
         
 

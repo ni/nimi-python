@@ -1966,21 +1966,25 @@ class StartedEventExportOutputTerm(Enum):
 
 
 class TriggerIdentifier(Enum):
-    TRIGGER0 = 'scriptTrigger0'
+    SCRIPT_TRIGGER0 = 'scriptTrigger0'
     r'''
     Specifies Script Trigger 0.
     '''
-    TRIGGER1 = 'scriptTrigger1'
+    SCRIPT_TRIGGER1 = 'scriptTrigger1'
     r'''
     Specifies Script Trigger 1.
     '''
-    TRIGGER2 = 'scriptTrigger2'
+    SCRIPT_TRIGGER2 = 'scriptTrigger2'
     r'''
     Specifies Script Trigger 2.
     '''
-    TRIGGER3 = 'scriptTrigger3'
+    SCRIPT_TRIGGER3 = 'scriptTrigger3'
     r'''
     Specifies Script Trigger 3.
+    '''
+    NONE_EMPTY_STRING = ''
+    r'''
+    None (no signal to export)
     '''
 
 
