@@ -1,6 +1,6 @@
 # Changelog
  
-## Drivers
+## Packages
 - [nidcpower (NI-DCPower)](#nidcpower-ni-dcpower)
 - [nidigital (NI-Digital Pattern Driver)](#nidigital-ni-digital-pattern-driver)
 - [nidmm (NI-DMM)](#nidmm-ni-dmm)
@@ -247,11 +247,11 @@
          - `clear_latched_output_cutoff_state`
          - `query_latched_output_cutoff_state`
   - Support for independent operation of instrument channels. Creating an `nidcpower.Session`
-with independent channels allows you to use multiple instruments in the same session. With
-independent channels, you can configure multiple channels of the same instrument, or of
-multiple instruments, independently of one another within the same session. Requires NI-DCPower
-driver runtime 20.6.0 or later. In order to use with older runtime or to maintain old behavior,
-pass `independent_channels=False` to `nidcpower.Session` constructor.
+    with independent channels allows you to use multiple instruments in the same session. With
+    independent channels, you can configure multiple channels of the same instrument, or of
+    multiple instruments, independently of one another within the same session. Requires NI-DCPower
+    driver runtime 20.6.0 or later. In order to use with older runtime or to maintain old behavior,
+    pass `independent_channels=False` to `nidcpower.Session` constructor.
 
 
 
@@ -310,13 +310,13 @@ pass `independent_channels=False` to `nidcpower.Session` constructor.
   - (Common) Link to zip file on examples documentation
   - (Common) Support for Python 3.8
   - `create_advanced_sequence()` - [#504](https://github.com/ni/nimi-python/issues/504)
-      Instead of a list of attribute IDs, you pass in a list of property names as strings
-      Includes example to see how to use it
-      Additional methods and properties that were made public (rather than private)
-      - `create_advanced_sequence_step()`
-      - `delete_advanced_sequence()`
-      - `active_advanced_sequence`
-      - `active_advanced_sequence_step`
+      - Instead of a list of attribute IDs, you pass in a list of property names as strings
+      - Includes example to see how to use it
+      - Additional methods and properties that were made public (rather than private)
+        - `create_advanced_sequence_step()`
+        - `delete_advanced_sequence()`
+        - `active_advanced_sequence`
+        - `active_advanced_sequence_step`
 - Changed
   - (Common) `import_attribute_configuration_buffer()` now accepts `list` of numbers that are integers less than 255, `array.array('b')`, `bytes`, `bytearray` for configuration buffer - [#1013](https://github.com/ni/nimi-python/issues/1013)
   - (Common) `export_attribute_configuration_buffer()` now returns `bytes` as the buffer type - [#1013](https://github.com/ni/nimi-python/issues/1013)
@@ -485,7 +485,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - New example `nidcpower_advanced_sequence.py`
 - Changed
   - (Common) Simplified examples by removing try/except
-  - (Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
+  - (Common) **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
   - Fixed method signature for:
       - `wait_for_event`
       - `create_sequence`
@@ -509,15 +509,15 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - [1.4.4](#nidigital-144---2023-04-14)
 - [1.4.3](#nidigital-143---2022-12-16)
 - [1.4.1](#nidigital-141---2021-08-23)
-- [1.3.3](#nidigital-133---2021-02-26)
-- [1.3.2](#nidigital-132---2020-09-18)
-- [1.3.1](#nidigital-131---2020-06-08)
-- [1.3.0](#nidigital-130---2020-05-21)
-- [1.2.1](#nidigital-121---2020-04-21)
-- [1.2.0](#nidigital-120---2020-03-06)
-- [1.1.5](#nidigital-115---2019-11-22)
-- [1.1.4](#nidigital-114---2019-11-19)
-- [1.1.3](#nidigital-113---2019-10-21)
+- [1.0.0](#nidigital-100---2021-02-26)
+- [0.9.2](#nidigital-092---2020-09-18)
+- [0.9.1](#nidigital-091---2020-06-08)
+- [0.9.0](#nidigital-090---2020-05-21)
+- [0.5.0](#nidigital-050---2020-04-21)
+- [0.4.0](#nidigital-040---2020-03-06)
+- [0.2.1](#nidigital-021---2019-11-22)
+- [0.2.0](#nidigital-020---2019-11-19)
+- [0.1.1](#nidigital-011---2019-10-21)
 
 #### [nidigital] Unreleased
 - Added
@@ -585,30 +585,28 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Removed
   - (Common) Support for Python 3.5
 
-#### [nidigital] 1.3.3 - 2021-02-26
+#### [nidigital] 1.0.0 - 2021-02-26
 - Added
-  - 1.0.0 release:
-      - API reference documentation and API usage examples
+  - API reference documentation and API usage examples
   - API parity with NI-Digital Pattern Driver 20.6.0 by adding support for configuration of frequency counter measurement mode. The following properties are added:
       - `frequency_counter_measurement_mode`
       - `frequency_counter_hysteresis_enabled`
 
-#### [nidigital] 1.3.2 - 2020-09-18
+#### [nidigital] 0.9.2 - 2020-09-18
 - Changed
   - (Common) Fix [#1491](https://github.com/ni/nimi-python/issues/1491): import_attribute_configuration_buffer() fails intermittently when `list` or `array.array` is passed in.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.5.0 for NI-DCPower, NI-SWITCH, and NI-DMM. no changes on other drivers.
 
-#### [nidigital] 1.3.1 - 2020-06-08
+#### [nidigital] 0.9.1 - 2020-06-08
 - Changed
   - (Common) Fix [#1473](https://github.com/ni/nimi-python/issues/1473): Unintentional dependency on pytest
   - (Common) Fix [#1474](https://github.com/ni/nimi-python/issues/1474): Requires hightime>=0.2.0
 
-#### [nidigital] 1.3.0 - 2020-05-21
+#### [nidigital] 0.9.0 - 2020-05-21
 - Added
-  - 0.9.0 release:
-      - Public API is considered complete, stable, and tested
-      - Parity with public API for other ADEs supported in NI-Digital Pattern Driver 19.0.1
-      - API reference documentation and example code are not complete
+  - Public API is considered complete, stable, and tested
+  - Parity with public API for other ADEs supported in NI-Digital Pattern Driver 19.0.1
+  - API reference documentation and example code are not complete
 - Changed
   - (Common) Change the type of applicable properties and method parameters from `datetime.timedelta` to `hightime.timedelta` and from `datetime.datetime` to `hightime.datetime`. - [#744](https://github.com/ni/nimi-python/issues/744), [#1368](https://github.com/ni/nimi-python/issues/1368), [#1382](https://github.com/ni/nimi-python/issues/1382), [#1397](https://github.com/ni/nimi-python/issues/1397)
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot. The version is 20.0.0 for all modules except `nidigital`, for which it is 19.0.1.
@@ -616,7 +614,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - Changed HistoryRAMCycleInformation.__repr__ to include `__module__` - [#1426](https://github.com/ni/nimi-python/issues/1426)
   - Changed return type of `get_time_set_period` and `get_time_set_edge` to `datetime.timedelta` - [#1397](https://github.com/ni/nimi-python/issues/1397)
 
-#### [nidigital] 1.2.1 - 2020-04-21
+#### [nidigital] 0.5.0 - 2020-04-21
 - Added
   - (Common) Support for chained repeated capabilities. This allows things like
       ``` python
@@ -649,7 +647,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - `load_specifications`, `load_levels`, and `load_timing` - [#1392](https://github.com/ni/nimi-python/issues/1392)
   - `get_channel_name` and `get_channel_name_from_string` - [#1386](https://github.com/ni/nimi-python/issues/1386)
 
-#### [nidigital] 1.2.0 - 2020-03-06
+#### [nidigital] 0.4.0 - 2020-03-06
 - Added
   - (Common) Zip file per driver for all examples and any helper files
   - (Common) Link to zip file on examples documentation
@@ -671,12 +669,12 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - Removed `fetch_history_ram_cycle_pin_data` and `fetch_history_ram_scan_cycle_number`. They are not needed since `fetch_history_ram_cycle_information`
       was updated to return class instances that contains cycle pin data and scan cycle number - [#1071](https://github.com/ni/nimi-python/issues/1071)
 
-#### [nidigital] 1.1.5 - 2019-11-22
+#### [nidigital] 0.2.1 - 2019-11-22
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
 
-#### [nidigital] 1.1.4 - 2019-11-19
+#### [nidigital] 0.2.0 - 2019-11-19
 - Added
   - (Common) Support for Python 3.8
   - (Common) `ViUInt8` is now a valid type in APIs
@@ -689,9 +687,36 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - Renamed `write_source_waveform_broadcast_u32()` to `write_source_waveform_broadcast()`
   - `get_pin_results_pin_information()` - returns namedtuple `PinInfo(pin_indexes, site_numbers, channel_indexes)`
 
-#### [nidigital] 1.1.3 - 2019-10-21
+#### [nidigital] 0.1.1 - 2019-10-21
 - Added
   - Initial support
+  - Very basic at this point and subject to change
+  - Looking for any testing and/or feedback
+  - `get_channel_name_from_string()`
+- Changed
+  - (Common) The development status in `setup.py` will be based on the module version:
+    - version >= 1.0
+       - .devN or .aN - Alpha
+       - .bN, .cN or .rcN - Beta
+       - \<nothing\> or .postN - Stable
+    - version < 1.0 and version >= 0.5 - Beta
+    - version < 0.5 - Alpha
+  - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
+  - New enums:
+    | Enum name                  | Where used                                                                       |
+    |----------------------------|----------------------------------------------------------------------------------|
+    | `DigitalEdge`              | `digital_edge_conditional_jump_trigger_edge`, `digital_edge_start_trigger_edge`  |
+    | `ApertureTimeUnits`        | `ppmu_aperture_time_units`, `ppmu_configure_aperture_time(units)`                |
+    | `PPMUOutputFunction`       | `ppmu_output_function`                                                           |
+    | `SelectedFunction`         | `selected_function`                                                              |
+    | `TDREndpointTermination`   | `tdr_endpoint_termination`                                                       |
+    | `Signal`                   | `export_signal(signal)`                                                          |
+  - **[Source Breaker]** No longer return the "actual size" from functions that use 'ivi-dance-with-a-twist'. This only affects `nidigital`.
+- Removed
+  - Should be private - `get_session_state()`, `get_desired_attribute_*()`, `ppmu_measure_cached()`, `read_static_cached()`, `configure_ref_clock()`, `disable()`,
+       `get_number_of_vectors()`, `get_pattern_file_path()`, `get_pin_type()`, `get_time_set_compare_edges()`, `get_time_set_drive_edges()`,
+       `is_pattern_file_modified_since_load()`, `load_levels_internal()`, `load_pattern_internal()`, `load_timing_internal()`, `uncommit()`
+  - Need to determine how to generate this function - `fetch_capture_waveform_u32()`
 
 ---
 
@@ -951,15 +976,15 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [nidmm] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
-      - `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
+  - `fetch_waveform_into` for high-performance fetch using numpy.array of float64.
 - Changed
-      - Property powerline_freq no longer uses enum PowerlineFrequency.
-      - Property current_source no longer uses enum CurrentSource.
-      - Property input_resistance no longer uses enum InputResistance.
-      - Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
-      - Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
-      - Removed `actual_number_of_points` from `read_multi_point()` returned tuple
-      - Removed `actual_number_of_points` from `read_waveform()` returned tuple
+  - Property powerline_freq no longer uses enum PowerlineFrequency.
+  - Property current_source no longer uses enum CurrentSource.
+  - Property input_resistance no longer uses enum InputResistance.
+  - Removed `actual_number_of_points` from `fetch_waveform()` returned tuple
+  - Removed `actual_number_of_points` from `fetch_multi_point()` returned tuple
+  - Removed `actual_number_of_points` from `read_multi_point()` returned tuple
+  - Removed `actual_number_of_points` from `read_waveform()` returned tuple
 
 #### [nidmm] 0.5.0 - 2017-11-27
 - Added
@@ -970,7 +995,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [nidmm] 0.4.0 - 2017-11-07
 - Changed
   - (Common) Simplified examples by removing try/except
-  - (Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
+  - (Common) **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
   - Removed incorrect leading underscore from some enum values:
       - `Function.AC_VOLTS_DC_COUPLED`
       - `Function.WAVEFORM_CURRENT`
@@ -1002,7 +1027,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Suport for channel-based properties
 - Changed
   - (Common) Warnings no longer raise an exception
-  - (Common) Warnings are now added to warnings.warn()
+      -  Warnings are now added to warnings.warn()
   - Added support for enums with types other than ViInt32 (Fixes [#330](https://github.com/ni/nimi-python/issues/330))
 
 #### [nidmm] 0.1.0 - 2017-09-01
@@ -1066,7 +1091,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `done_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
       - `marker_event_pulse_width_units` - [#1873](https://github.com/ni/nimi-python/issues/1873)
 
-      Enum added:
+  - Enum added:
       - `EventPulseWidthUnits` - [#1873](https://github.com/ni/nimi-python/issues/1873)
 
 #### [nifgen] 1.4.6 - 2023-09-11
@@ -1105,7 +1130,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `data_markers`
       - `script_triggers`
   - Corrected multiple mistakes in repeated capability info of attribute metadata
-      alters API behavior (repeated capability access of attributes) and documentation
+      - alters API behavior (repeated capability access of attributes) and documentation
 
 #### [nifgen] 1.4.1 - 2021-08-23
 - Added
@@ -1354,9 +1379,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - Repeated capablilites - See [#737](https://github.com/ni/nimi-python/issues/737) for discussion:
-      `channel` repeated capability
-      `markers` repeated capability
-      `script_triggers` repeated capability
+     - `channel` repeated capability
+     - `markers` repeated capability
+     - `script_triggers` repeated capability
   - The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
      - `adjust_sample_clock_relative_delay()`
      - `wait_until_done()`
@@ -1367,9 +1392,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 #### [nifgen] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
-     - Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
-     - Support for calling `write_waveform` with a waveform handle (int) or a name (str).
-     - Support for calling `create_waveform` using list (float) or numpy.array (int16 or float64)
+  - Support for calling `write_waveform` using list (float) or numpy.array (int16 or float64)
+  - Support for calling `write_waveform` with a waveform handle (int) or a name (str).
+  - Support for calling `create_waveform` using list (float) or numpy.array (int16 or float64)
 - Changed
   - Renamed `create_waveform_f64` -> `create_waveform`
 - Removed
@@ -1413,7 +1438,6 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - [0.9.0](#nimodinst-090---2018-05-22)
 - [0.8.0](#nimodinst-080---2018-04-27)
 - [0.7.0](#nimodinst-070---2018-02-20)
-- [0.6.0](#nimodinst-060---2017-12-20)
 - [0.5.0](#nimodinst-050---2017-11-27)
 - [0.4.0](#nimodinst-040---2017-11-07)
 - [0.3.0](#nimodinst-030---2017-10-13)
@@ -1557,8 +1581,8 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) `SelfTestError` now inherits from `<driver>.Error` rather than `Exception` - [#830](https://github.com/ni/nimi-python/issues/830)
   - (Common) Warning class name changed to `<driver>.DriverWarning` for all drivers - [#658](https://github.com/ni/nimi-python/issues/658)
   - Indexing on `nimodinst.Session` is no longer allowed
-      `session[0].device_name` becomes `session.devices[0].device_name`
-      This is to be consistent with other drivers
+      - `session[0].device_name` becomes `session.devices[0].device_name`
+      - This is to be consistent with other drivers
 
 - Removed
   - (Common) IVI properties as applicable - some were already removed from some drivers [#824](https://github.com/ni/nimi-python/issues/824)
@@ -1598,18 +1622,14 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) All function parameters or attributes that represent time now use `datetime.timedelta()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
 
-#### [nimodinst] 0.6.0 - 2017-12-20
-- Added
-  - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
-
 #### [nimodinst] 0.5.0 - 2017-11-27
 - Removed
   - (Common) enum definitions that are not referenced by a function and/or an attributes
 
 #### [nimodinst] 0.4.0 - 2017-11-07
 - Changed
-  - Simplified examples by removing try/except
-  - **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
+  - (Common) Simplified examples by removing try/except
+  - (Common) **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
 
 #### [nimodinst] 0.3.0 - 2017-10-13
 - Added
@@ -1630,9 +1650,9 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       -  Warnings are now added to warnings.warn()
   - Device index is now on session not attribute. The correct way is now
       ``` python
-         i = 0
-         with nimodinst.Session('nidmm') as session:
-         name = session[i].device_name
+      i = 0
+      with nimodinst.Session('nidmm') as session:
+          name = session[i].device_name
       ``` 
 
 #### [nimodinst] 0.1.0 - 2017-09-01
@@ -2470,8 +2490,8 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 
 #### [niswitch] 0.4.0 - 2017-11-07
 - Changed
-(Common) Simplified examples by removing try/except
-(Common) **SOURCE BREAKER:** (Common) Changed names of enum value names to correspond to C #defines
+  - (Common) Simplified examples by removing try/except
+  - (Common) **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
 - Removed
 Support for `is_debounced` and `is_scanning` functions. Instead use the attribute of the same name.
 
