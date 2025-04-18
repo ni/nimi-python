@@ -149,12 +149,11 @@ Release Process
         ```
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
-    1. Perform Version Bump (If Needed)
+    1. Perform Version (major or minor) Bump (If Needed)
         * If you need to upgrade the major, minor, patch or dev versions, include any of the following parameters:
            * --increment-major-version - To increment the major version of package. This will update the version to (N+1).X.X.dev0
            * --increment-minor-version - To increment the minor version of package. This will update the version to X.(N+1).X.dev0
            * --increment-patch-version - To increment the patch version of package. This will update the version to X.X.(N+1).dev0
-           * --increment-build-number - To increment the development number of package. This will update the version to X.X.X.dev(N+1)
             For example: 
                 ```bash
                 python3 tools/build_release.py --increment-minor-version
@@ -201,8 +200,8 @@ Release Process
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module versions(major or minor) if required. 
-        * Refer to the "Perform Version Bump" section under "Pre-Release Steps."
+    1. Update the module version for a patch version upgrade. 
+        * Refer to the "Perform Version Bump" section under "Pre-Release Steps" to increment the patch version.
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`

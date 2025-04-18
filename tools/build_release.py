@@ -40,7 +40,6 @@ Steps: see "Release Process" section of CONTRIBUTING.md
     build_group.add_argument("--increment-major-version", action="store_true", default=False, help="Increment the major version")
     build_group.add_argument("--increment-minor-version", action="store_true", default=False, help="Increment the minor version")
     build_group.add_argument("--increment-patch-version", action="store_true", default=False, help="Increment the patch version")
-    build_group.add_argument("--increment-build-number", action="store_true", default=False, help="Increment the build number")
     build_group.add_argument("--update-for-release", action="store_true", default=False, help="This is a release build, so only remove '.devN'. build, then update with .dev0")
 
     verbosity_group = parser.add_argument_group("Verbosity, Logging & Debugging")
@@ -54,11 +53,10 @@ Steps: see "Release Process" section of CONTRIBUTING.md
         args.increment_major_version,
         args.increment_minor_version,
         args.increment_patch_version,
-        args.increment_build_number,
         args.update_for_release,
     ]
     if sum(version_flags) > 1:
-        raise ValueError("Only one of --increment-major-version, --increment-minor-version, --increment-patch-version, --increment-build-number or --update-for-release can be provided.")
+        raise ValueError("Only one of --increment-major-version, --increment-minor-version, --increment-patch-version or --update-for-release can be provided.")
 
     if args.verbose > 1:
         configure_logging(logging.DEBUG, args.log_file)
@@ -81,8 +79,6 @@ Steps: see "Release Process" section of CONTRIBUTING.md
         passthrough_params.append('--log-file').append(args.log_file)
     if args.update_for_release:
         passthrough_params.append('--release')
-    if args.increment_build_number:
-        passthrough_params.append('--update-type=build')
     if args.increment_patch_version:
         passthrough_params.append('--update-type=patch')
     if args.increment_minor_version:
@@ -98,7 +94,7 @@ Steps: see "Release Process" section of CONTRIBUTING.md
             raise ValueError(f"The following drivers are invalid: {', '.join(invalid_drivers)}. Valid drivers are: {','.join(drivers_to_update)}")
         drivers_to_update = provided_drivers
 
-    if any([args.increment_major_version, args.increment_minor_version, args.increment_patch_version, args.increment_build_number, args.update_for_release]):
+    if any([args.increment_major_version, args.increment_minor_version, args.increment_patch_version, args.update_for_release]):
         logging.info('Updating versions')
 
         for d in drivers_to_update:
