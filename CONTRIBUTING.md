@@ -210,7 +210,7 @@ Release Process
         * Ensure that all changes made as part of build command are specific to intended drivers.
         * Commit to branch
     1. Update changelog
-        * Copy Unreleased section from the bottom of the changelog. Modify the driver name in the example and TOC. Paste the modified section at the top of intended driver's changelog and add a corresponding link to it in the driver's TOC.
+        * Copy Unreleased section from the bottom of the changelog. Modify the package name in the example and TOC. Paste the modified section at the top of intended package's changelog and add a corresponding link to it in the package's TOC.
         * Commit to branch
     1. Create a pull request containing post-release changes and get it merged
 

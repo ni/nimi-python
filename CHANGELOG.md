@@ -1728,7 +1728,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - (Common) Fix [#1888](https://github.com/ni/nimi-python/issues/1888): Deadlock on multithreaded usage due to UnlockSession always being called with callerHasLock=False.
   - Fix [#1941](https://github.com/ni/nimi-python/issues/1941): When calling niscope.Session.fetch_array_measurement in a MeasurementLink measurement plugin, meas_wfm_size cannot be set.
-      Requires NI gRPC Device Server 2023 Q2 or later. Older versions do not support this parameter and return all available samples.
+      - Requires NI gRPC Device Server 2023 Q2 or later. Older versions do not support this parameter and return all available samples.
 
 #### [niscope] 1.4.3 - 2022-12-16
 - Added
@@ -1898,15 +1898,15 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Removed
   - (Common) Explicitly disallow using a repeated capability on Session. `session[0].vertical_range = 1.0` will no longer work. Instead use `session.channels[0].vertical_range = 1.0` - [#853](https://github.com/ni/nimi-python/issues/853)
   - Removed default value for `level` parameter on `configure_trigger_edge()`
-      parameter list is now
-      - ``` python
-      - configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
-      - ```
+      - parameter list is now
+        ``` python
+        configure_trigger_edge(self, trigger_source, level, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+        ```
   - Removed default values for `level` and `hysteresis` parameters on `configure_trigger_hysteresis()`
-      parameter list is now
-      - ``` python
-      - configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
-      - ```
+      - parameter list is now
+        ``` python
+        configure_trigger_hysteresis(self, trigger_source, level, hysteresis, trigger_coupling, slope=enums.TriggerSlope.POSITIVE, holdoff=datetime.timedelta(seconds=0.0), delay=datetime.timedelta(seconds=0.0))
+        ```
 
 #### [niscope] 0.9.0 - 2018-05-22
 - Added
@@ -1935,38 +1935,38 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
       - `query_instrument_status`
       - `cache`
       - `specific_driver_prefix`
-      - Properties removed
-         - `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
-         - `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
-         - `mux_mode_register` [#825](https://github.com/ni/nimi-python/issues/825)
-         - `ddc_center_frequency` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `ddc_data_processing_mode` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `ddc_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `ddc_frequency_translation_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `ddc_frequency_translation_phase_i` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `ddc_frequency_translation_phase_q` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `ddc_q_source` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `digital_gain` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `digital_offset` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `dither_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `adjust_pretrigger_samples_5102` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `five_v_out_output_terminal` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `clock_sync_pulse_source` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `device_number` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `fetch_interleaved_data` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `trigger_from_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `trigger_from_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `trigger_from_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `trigger_to_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `trigger_to_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `trigger_to_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-         - `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
-      - Methods removed
-         - `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
-         - `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
+  - Properties removed
+      - `stream_relative_to` [#825](https://github.com/ni/nimi-python/issues/825)
+      - `oscillator_phase_dac_value` [#825](https://github.com/ni/nimi-python/issues/825)
+      - `mux_mode_register` [#825](https://github.com/ni/nimi-python/issues/825)
+      - `ddc_center_frequency` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `ddc_data_processing_mode` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `ddc_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `ddc_frequency_translation_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `ddc_frequency_translation_phase_i` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `ddc_frequency_translation_phase_q` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `ddc_q_source` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `digital_gain` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `digital_offset` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `dither_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `fetch_interleaved_iq_data` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `fractional_resample_enabled` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `overflow_error_reporting` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `adjust_pretrigger_samples_5102` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `five_v_out_output_terminal` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `clock_sync_pulse_source` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `device_number` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `fetch_interleaved_data` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `trigger_from_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `trigger_from_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `trigger_from_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `trigger_to_pfi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `trigger_to_rtsi_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `trigger_to_star_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+      - `slave_trigger_delay` [#822](https://github.com/ni/nimi-python/issues/822)
+  - Methods removed
+      - `get_frequency_response()` [#823](https://github.com/ni/nimi-python/issues/823)
+      - `export_signal()` - [#828](https://github.com/ni/nimi-python/issues/828)
 
 #### [niscope] 0.8.0 - 2018-04-27
 - Changed
@@ -2122,10 +2122,10 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - [1.2.0](#nise-120---2020-03-06)
 - [1.1.5](#nise-115---2019-11-22)
 - [1.1.4](#nise-114---2019-11-19)
-- [1.1.3](#nise-113---2019-10-21)
-- [1.1.2](#nise-112---2019-06-06)
-- [1.1.0](#nise-110---2018-10-25)
-- [1.0.1](#nise-101---2018-10-17)
+- [1.0.0](#nise-100---2019-10-21)
+- [0.2.2](#nise-022---2019-06-06)
+- [0.2.0](#nise-020---2018-10-25)
+- [0.1.0](#nise-010---2018-10-17)
 
 #### [nise] Unreleased
 - Added
@@ -2235,18 +2235,18 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Improved installation instructions by not putting a version to pin to. This is confusing in master (what read the docs shows by default) since that version doesn't exist yet.
   - Update to 1.0 - now ready for production use
 
-#### [nise] 1.1.2 - 2019-06-06
+#### [nise] 0.2.2 - 2019-06-06
 - Changed
   - (Common) Switched to slightly different metadata format - Actual `True`/`False` instead of strings
   - (Common) New internal process for generating metadata
 
-#### [nise] 1.1.0 - 2018-10-25
+#### [nise] 0.2.0 - 2018-10-25
 - Changed
   - (Common) Updated generated metadata
   - (Common) Updated "Driver Version Tested Against"
   - (Common) Update visatype definitions to work on Linux as well as Windows - [#911](https://github.com/ni/nimi-python/issues/911)
 
-#### [nise] 1.0.1 - 2018-10-17
+#### [nise] 0.1.0 - 2018-10-17
 - Added
   - Initial Release
 ---
@@ -2493,7 +2493,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
   - (Common) Simplified examples by removing try/except
   - (Common) **SOURCE BREAKER:** Changed names of enum value names to correspond to C #defines
 - Removed
-Support for `is_debounced` and `is_scanning` functions. Instead use the attribute of the same name.
+  - Support for `is_debounced` and `is_scanning` functions. Instead use the attribute of the same name.
 
 #### [niswitch] 0.3.0 - 2017-10-13
 - Added
@@ -2529,10 +2529,10 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 - [1.3.1](#nitclk-131---2020-06-08)
 - [1.3.0](#nitclk-130---2020-05-21)
 - [1.2.1](#nitclk-121---2020-04-21)
-- [1.2.0](#nitclk-120---2020-03-06)
-- [1.1.5](#nitclk-115---2019-11-22)
-- [1.1.4](#nitclk-114---2019-11-19)
-- [1.1.3](#nitclk-113---2019-10-21)
+- [1.0.0](#nitclk-100---2020-03-06)
+- [0.3.1](#nitclk-031---2019-11-22)
+- [0.3.0](#nitclk-030---2019-11-19)
+- [0.1.0](#nitclk-010---2019-10-21)
 
 #### [nitclk] Unreleased
 - Added
@@ -2611,7 +2611,7 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
 - Changed
   - Version updated to 1.2.1 to match other released nimi-python modules
 
-#### [nitclk] 1.2.0 - 2020-03-06
+#### [nitclk] 1.0.0 - 2020-03-06
 - Added
   - (Common) Zip file per driver for all examples and any helper files
   - (Common) Link to zip file on examples documentation
@@ -2627,17 +2627,17 @@ Support for `is_debounced` and `is_scanning` functions. Instead use the attribut
   - Ability to pass an integer as a session / session reference
   - `nitclk.SessionReference.script_trigger_master_session` removed - repeated capabilities not supported on `nitclk` attributes - [#1221](https://github.com/ni/nimi-python/issues/1221)
 
-#### [nitclk] 1.1.5 - 2019-11-22
+#### [nitclk] 0.3.1 - 2019-11-22
 - Changed
   - (Common) Fix #1140: Linux support was accidentally broken.
   - (Common) Update "Driver Version Tested Against", in documentation, with latest versions installed on nimi-bot.
 
-#### [nitclk] 1.1.4 - 2019-11-19
+#### [nitclk] 0.3.0 - 2019-11-19
 - Added
   - (Common) Support for Python 3.8
   - (Common) `ViUInt8` is now a valid type in APIs
 
-#### [nitclk] 1.1.3 - 2019-10-21
+#### [nitclk] 0.1.0 - 2019-10-21
 - Added
   - Initial support
 
