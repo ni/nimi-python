@@ -1975,12 +1975,12 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
      - This encapsulates any error that is returned by the underlying driver
   - (Common) All timeout parameters can now also take a simple number in seconds. `timeout=datetime.timedelta(milliseconds=100)` and `timeout=0.1` are identical. [#796](https://github.com/ni/nimi-python/issues/796)
   - `Session.fetch()`, `Session.read()` and `Session.fetch_into()` updated
-         - Takes additional parameters that modify fetch behavior
-         - Add resulting record as part of the waveform info
-         - Channel name and record number added to waveform info
-         - See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch),
-      - [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read),
-      - and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
+      - Takes additional parameters that modify fetch behavior
+      - Add resulting record as part of the waveform info
+      - Channel name and record number added to waveform info
+      - See documentation for [fetch](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch),
+           [read](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.read),
+           and [fetch_into](http://nimi-python.readthedocs.io/en/master/niscope/functions.html#niscope.Session.fetch_into) for more details.
   - Rename `wfm` parameter to `waveform` in `fetch()` and `fetch_into()`
   - Enum values and attribute names that start with an underscore + digit have been renamed
          - `Session._5102_adjust_pretrigger_samples` --> `Session.adjust_pretrigger_samples_5102`
@@ -2223,7 +2223,7 @@ Removed `actual_count` from `fetch_multiple()` returned tuple
 - Changed
   - Version updated to 1.1.4 to match other released nimi-python modules
 
-#### [nise] 1.1.3 - 2019-10-21
+#### [nise] 1.0.0 - 2019-10-21
 - Changed
   - (Common) The development status in `setup.py` will be based on the module version:
       - version >= 1.0
