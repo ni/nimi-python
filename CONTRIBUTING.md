@@ -124,8 +124,7 @@ begin contributing to to the project.
 1. Make your change.
 1. Verify all tests, including the new ones, pass.
 1. Update CHANGELOG.md for customer-visible changes.
-    * If the change applies to all generated driver bindings, put the change into all drivers.
-    * If it only applies to a single driver binding, put the change in the section associated with that driver
+    * Put the change into the Unreleased section for each package that it applies to.
     * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. Commit modifications to generated files.
 1. On GitHub, send a New pull request to the main repository's master branch. GitHub
