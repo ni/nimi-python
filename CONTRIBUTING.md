@@ -173,10 +173,10 @@ Release Process
         * `python3 tools/build_release.py --update-for-release`
             * For each module, this will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
             * If you need to release any specific module(s), include the `drivers` parameter. 
-            For example: 
-                ```bash
-                python3 tools/build_release.py --drivers nidcpower --update-for-release
-                ```
+          For example: 
+              ```bash
+              python3 tools/build_release.py --drivers nidcpower --increment-minor-version
+              ```
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
