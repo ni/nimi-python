@@ -452,24 +452,24 @@
   - (Common) All functions that return calibration dates now return `datetime.datetime()`. See [#659](https://github.com/ni/nimi-python/issues/659) for discussion
   - Metadata updated to NI-DCPower 17.6.1
   - The following functions timeout parameter now is required to be a `datetime.timedelta()` object:
-      `fetch_multiple()`
-      `wait_for_event()`
+      - `fetch_multiple()`
+      - `wait_for_event()`
   - The following functions return a `datetime.datetime()` object representing the date and time
-      `get_ext_cal_last_date_and_time()`
-      `get_self_cal_last_date_and_time()`
+      - `get_ext_cal_last_date_and_time()`
+      - `get_self_cal_last_date_and_time()`
 - Removed
   - Removed these enums and disconnected them from the associated attribute (Fix [#666](https://github.com/ni/nimi-python/issues/666))
-      `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
-      `CurrentLevelAutorange` - `CURRENT_LEVEL_AUTORANGE`
-      `VoltageLevelAutorange` - `VOLTAGE_LEVEL_AUTORANGE`
-      `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
+      - `CurrentLimitAutorange` - `CURRENT_LIMIT_AUTORANGE`
+      - `CurrentLevelAutorange` - `CURRENT_LEVEL_AUTORANGE`
+      - `VoltageLevelAutorange` - `VOLTAGE_LEVEL_AUTORANGE`
+      - `VoltageLimitAutorange` - `VOLTAGE_LIMIT_AUTORANGE`
 
 #### [nidcpower] 0.6.0 - 2017-12-20
 - Added
   - (Common) `abort`. See [#660](https://github.com/ni/nimi-python/issues/655).
 - Changed
-Property power_line_frequency no longer uses enum PowerLineFrequency.
-Removed `actual_count` from `fetch_multiple()` returned tuple
+  - Property power_line_frequency no longer uses enum PowerLineFrequency.
+  - Removed `actual_count` from `fetch_multiple()` returned tuple
 
 #### [nidcpower] 0.5.0 - 2017-11-27
 - Added

@@ -167,6 +167,7 @@ Release Process
     1. Update [CHANGELOG.md](./CHANGELOG.md)
         * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
         * Remove the Unreleased section from the TOC if there are no changes for those drivers.
+        * If it's a common change for all the drivers, include the `(Common)` string before newly added changes in [CHANGELOG.md].
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
