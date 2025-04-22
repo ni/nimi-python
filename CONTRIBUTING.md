@@ -149,20 +149,19 @@ Release Process
         ```
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
-    1. Perform Version (major or minor) Bump (If Needed)
-        * If you need to upgrade the major, minor, patch or dev versions, include any of the following parameters:
+    1. Perform Version Bump (If Needed)
+        * If you need to upgrade the major or minor versions, include any of the following parameters:
            * --increment-major-version - To increment the major version of package. This will update the version to (N+1).X.X.dev0
            * --increment-minor-version - To increment the minor version of package. This will update the version to X.(N+1).X.dev0
-           * --increment-patch-version - To increment the patch version of package. This will update the version to X.X.(N+1).dev0
             For example: 
                 ```bash
                 python3 tools/build_release.py --increment-minor-version
                 ```
         * If you need to update the version for any specific driver(s), include the `drivers` parameter. By default, all drivers will be considered.
-        For example: 
-            ```bash
-            python3 tools/build_release.py --drivers nidcpower --increment-minor-version
-            ```
+          For example: 
+              ```bash
+              python3 tools/build_release.py --drivers nidcpower --increment-minor-version
+              ```
         * Commit to branch
     1. Update [CHANGELOG.md](./CHANGELOG.md)
         * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
@@ -175,7 +174,7 @@ Release Process
             * If you need to release any specific module(s), include the `drivers` parameter. 
           For example: 
               ```bash
-              python3 tools/build_release.py --drivers nidcpower --increment-minor-version
+              python3 tools/build_release.py --drivers nidcpower --update-for-release
               ```
         * Commit to branch
     1. Clean and build to update generated files with new version
@@ -195,13 +194,22 @@ Release Process
             ```
         * You will need to type in your PyPI credentials
     1. Merge the pull request to origin/master
-    1. Create a release on GitHub using the portion from the changelog for this release for the description
-        * Add the ZIP files under `generated/examples` for each module as a release artifact.
+    1. For each package released, create a release on GitHub using the module's portion from the changelog for this release for the description
+        * The release tag should be named as follows: `MODULE_NAME-version`.
+          * Example: `nidcpower-1.5.0`.
+          * This tag format allows the individual `Read the Docs` projects to determine whether a release applies to them.
+        * Add the ZIP files under `generated/examples` for each module (not just the releasing one) as a release artifact.
+          * Internal test code will only look for the latest release tag and expect it to have examples attached for any module
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module version for a patch version upgrade. 
-        * Refer to the "Perform Version Bump" section under "Pre-Release Steps" to increment the patch version.
+    1. Update the module version for a patch version upgrade. This will update the version to X.X.(N+1).dev0
+        * `python3 tools/build_release.py --increment-patch-version`
+        * If you need to update any specific module(s), include the `drivers` parameter. 
+        For example: 
+             ```bash
+            python3 tools/build_release.py --drivers nidcpower --increment-patch-version
+            ```
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
