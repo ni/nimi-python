@@ -14,13 +14,6 @@ import sys
 config['modules'] = sys.modules
 helper.add_all_metadata(functions, attributes, enums, config)
 
-#if 'note' not in config['functions']['_init_function']['parameters'][3]:
-#    config['functions']['_init_function']['parameters'][3]['note'] = []
-#if not isinstance(config['functions']['_init_function']['parameters'][3]['note'], list):
-#    config['functions']['_init_function']['parameters'][3]['note'] = [config['functions']['_init_function']['parameters'][3]['note']]
-#import pdb; pdb.set_trace()
-
-
 __version__ = config['module_version']
 
 

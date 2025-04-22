@@ -40,15 +40,12 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 * ### ALL
     * #### Added
-        * Added docs_static/nirfsg_*.inc files for nirfsg 
+        * Enabled nirfsg module support
     * #### Changed
-        * Updated conf.py.mako to include RTD link for nirfsg.
-        * Updated about.inc, installation.inc, documentation.inc, README.rst, makefile, tox.ini and tox-travis.ini files to have nirsg generated.
     * #### Removed
 * ### `nirfsg` (NI-RFSG)
     * #### Added
-        * Enabled nirfsg module support and added metadata for selected public APIs
-        * Added docs_static/nirfsg_*.inc files
+        * Added metadata for selected public APIs
         * Basic example
         * Documentation for APIs (not final) 
     * #### Changed

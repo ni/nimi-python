@@ -13,7 +13,6 @@ config = {
     ],
     'driver_name': 'NI-RFSG',
     'enum_whitelist_suffix': [
-        '_POINT_FIVE'
     ],
     'extra_errors_used': [
         'InvalidRepeatedCapabilityError',
@@ -58,7 +57,7 @@ config = {
             'python_name': 'deembedding_port'
         }
     ],
-    'session_class_description': 'An NI-RFSG session to the RFSG driver',
+    'session_class_description': 'An NI-RFSG session to the NI-RFSG driver',
     'session_handle_parameter_name': 'vi',
     'uses_nitclk': True
 }

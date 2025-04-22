@@ -5789,7 +5789,7 @@ class _SessionBase(object):
 
         Returns the burst start locations of the waveform stored in the NI-RFSG session.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -5826,7 +5826,7 @@ class _SessionBase(object):
 
         Returns the burst stop locations of the waveform stored in the NI-RFSG session.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -5863,7 +5863,7 @@ class _SessionBase(object):
 
         Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -5899,7 +5899,7 @@ class _SessionBase(object):
 
                         The VI does an implicit reset before loading the configurations from the file.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -5958,7 +5958,7 @@ class _SessionBase(object):
 
         Resets the property to its default value.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -5982,7 +5982,7 @@ class _SessionBase(object):
 
         Saves the configurations of the session to the specified file.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -6008,7 +6008,7 @@ class _SessionBase(object):
 
                         The specified trigger generates regardless of whether the trigger has been configured as a software trigger.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6038,19 +6038,19 @@ class _SessionBase(object):
 
                                         **Defined Values:**
 
-                +-----------------------------------+----------------+-----------------------------+
-                | Name                              | Value          | Description                 |
-                +===================================+================+=============================+
-                | TriggerIdentifier.SCRIPT_TRIGGER0 | scriptTrigger0 | Specifies Script Trigger 0. |
-                +-----------------------------------+----------------+-----------------------------+
-                | TriggerIdentifier.SCRIPT_TRIGGER1 | scriptTrigger1 | Specifies Script Trigger 1. |
-                +-----------------------------------+----------------+-----------------------------+
-                | TriggerIdentifier.SCRIPT_TRIGGER2 | scriptTrigger2 | Specifies Script Trigger 2. |
-                +-----------------------------------+----------------+-----------------------------+
-                | TriggerIdentifier.SCRIPT_TRIGGER3 | scriptTrigger3 | Specifies Script Trigger 3. |
-                +-----------------------------------+----------------+-----------------------------+
-                |  "" (empty string)                |                | None (no signal to export)  |
-                +-----------------------------------+----------------+-----------------------------+
+                +-------------------------------------+----------------+-----------------------------+
+                | Name                                | Value          | Description                 |
+                +=====================================+================+=============================+
+                | TriggerIdentifier.SCRIPT_TRIGGER0   | scriptTrigger0 | Specifies Script Trigger 0. |
+                +-------------------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.SCRIPT_TRIGGER1   | scriptTrigger1 | Specifies Script Trigger 1. |
+                +-------------------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.SCRIPT_TRIGGER2   | scriptTrigger2 | Specifies Script Trigger 2. |
+                +-------------------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.SCRIPT_TRIGGER3   | scriptTrigger3 | Specifies Script Trigger 3. |
+                +-------------------------------------+----------------+-----------------------------+
+                | TriggerIdentifier.NONE_EMPTY_STRING |                | None (no signal to export)  |
+                +-------------------------------------+----------------+-----------------------------+
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -6095,11 +6095,7 @@ class _SessionBase(object):
 
             value (bool): Pass the value to which you want to set the property.
 
-
-                                       <blockquote>
-                                        Some values may not be valid. The allowed values depend on the current settings of the instrument session.
-
-                                        </blockquote>
+                Note: Some values may not be valid. The allowed values depend on the current settings of the instrument session.
 
         '''
         self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute, value)
@@ -6134,10 +6130,7 @@ class _SessionBase(object):
 
             value (int): Specifies the value to which you want to set the property.
 
-
-                                        <blockquote>
-                                        Some values may not be valid. The allowed values depend on the current settings of the instrument session.
-                                        </blockquote>
+                Note: Some values may not be valid. The allowed values depend on the current settings of the instrument session.
 
         '''
         self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute, value)
@@ -6209,11 +6202,7 @@ class _SessionBase(object):
 
             value (float): Pass the value to which you want to set the property.
 
-
-                                        <blockquote>
-
-                                        Some values may not be valid. The allowed values depend on the current settings of the instrument session.
-                                        </blockquote>
+                Note: Some values may not be valid. The allowed values depend on the current settings of the instrument session.
 
         '''
         self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute, value)
@@ -6279,11 +6268,7 @@ class _SessionBase(object):
 
             value (str): Pass the value to which you want to set the property.
 
-
-                                        <blockquote>
-                                        Some values may not be valid. The allowed values depend on the current settings of the instrument session.
-
-                                        </blockquote>
+                Note: Some values may not be valid. The allowed values depend on the current settings of the instrument session.
 
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute, value)
@@ -6293,7 +6278,7 @@ class _SessionBase(object):
 
         Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -6325,7 +6310,7 @@ class _SessionBase(object):
 
         Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -6354,7 +6339,7 @@ class _SessionBase(object):
 
         Configures the marker locations associated with waveform and marker in the NI-RFSG session.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
@@ -6389,16 +6374,16 @@ class _SessionBase(object):
 
 
 class Session(_SessionBase):
-    '''An NI-RFSG session to the RFSG driver'''
+    '''An NI-RFSG session to the NI-RFSG driver'''
 
     def __init__(self, resource_name, id_query, reset_device, options={}):
-        r'''An NI-RFSG session to the RFSG driver
+        r'''An NI-RFSG session to the NI-RFSG driver
 
         Opens a session to the device you specify as the **RESOURCE_NAME** and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
                         This method also configures the device through the **OPTION_STRING** input.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6420,7 +6405,7 @@ class Session(_SessionBase):
 
             id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-----------+--------------------------+
                 | Value     | Description              |
@@ -6432,7 +6417,7 @@ class Session(_SessionBase):
 
             reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-----------+----------------------+
                 | Value     | Description          |
@@ -6528,7 +6513,7 @@ class Session(_SessionBase):
 
                         If the settings have not been committed to the device before you call this method, they are committed by this method. The operation returns when the RF output signal settles. To return to the Configuration state, call the abort method.
 
-                        **Supported Devices**: PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6544,7 +6529,7 @@ class Session(_SessionBase):
 
         Aborts any signal generation in progress and destroys the instrument driver session.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6569,7 +6554,7 @@ class Session(_SessionBase):
 
         Stops signal generation.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6586,7 +6571,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6622,7 +6607,7 @@ class Session(_SessionBase):
 
                         Call this method to check for any errors that might occur during the signal generation or to check whether the device has finished generating.
 
-                        **Supported Devices**: PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6633,7 +6618,7 @@ class Session(_SessionBase):
         Returns:
             is_done (bool): Returns information about the completion of signal generation.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-------+---------------------------------+
                 | Value | Description                     |
@@ -6652,7 +6637,7 @@ class Session(_SessionBase):
 
         Returns whether the script that you specify as **SCRIPT_NAME** exists.
 
-                        **Supported Devices**: PXIe-5673/5673E. PXIe-5830/5831/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5673/5673E. PXIe-5830/5831/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -6664,7 +6649,7 @@ class Session(_SessionBase):
         Returns:
             script_exists (bool): Returns True if the script exists.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-------+----------------------------+
                 | Value | Description                |
@@ -6683,7 +6668,7 @@ class Session(_SessionBase):
 
         Returns whether the waveform that you specify as **WAVEFORM_NAME** exists.
 
-                        **Supported Devices**: PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -6695,7 +6680,7 @@ class Session(_SessionBase):
         Returns:
             waveform_exists (bool): Returns True if the waveform exists.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-------+------------------------------+
                 | Value | Description                  |
@@ -6716,7 +6701,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.clear_all_arb_waveforms()
 
@@ -6727,7 +6712,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             name (str): Name of the stored waveform to delete.
@@ -6744,7 +6729,7 @@ class Session(_SessionBase):
 
                         The IVI Engine also maintains this error information separately for each thread. This feature of the IVI Engine is useful if you do not have a session handle to pass to the clear_error method or the get_error method, which occurs when a call to the Init method or the __init__ method fails.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
 
         Note: The get_error method clears the error information after it is retrieved. A call to the clear_error method is necessary only when you do not use a call to the get_error method to retrieve error information.
 
@@ -6758,7 +6743,7 @@ class Session(_SessionBase):
 
         Clears the data obtained from the self_calibrate_range method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
         '''
         self._interpreter.clear_self_calibrate_range()
 
@@ -6769,7 +6754,7 @@ class Session(_SessionBase):
 
                         Calling this method moves the NI-RFSG device from the Configuration state to the Committed state. After this method executes, a change to any property reverts the NI-RFSG device to the Configuration state.
 
-                        **Supported devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6784,7 +6769,7 @@ class Session(_SessionBase):
 
                         If the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -6815,7 +6800,7 @@ class Session(_SessionBase):
 
                         NI-RFSG uses the parameters of the table nearest to the carrier frequency for de-embedding.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -6832,7 +6817,7 @@ class Session(_SessionBase):
 
                         If the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -6851,7 +6836,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6876,7 +6861,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6901,7 +6886,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6924,7 +6909,7 @@ class Session(_SessionBase):
 
         Specifies the message signal used for digital modulation when the digital_modulation_waveform_type property is set to NIRFSG_VAL_USER_DEFINED.
 
-                        **Supported Devices**: PXI/PXIe-5650/5651/5652
+                        **Supported Devices** : PXI/PXIe-5650/5651/5652
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -6944,7 +6929,7 @@ class Session(_SessionBase):
 
                         The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -6955,7 +6940,7 @@ class Session(_SessionBase):
         Args:
             generation_mode (enums.GenerationMode): Specifies the mode used by NI-RFSG for generating an RF output signal.
 
-                                        **Default Value**: GenerationMode.CW
+                                        **Default Value** : GenerationMode.CW
 
                                         **Defined Values** :
 
@@ -6985,7 +6970,7 @@ class Session(_SessionBase):
 
                         Setting **output_enabled** to False while in the Generation state attenuates the generated signal so that no signal is output.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7008,7 +6993,7 @@ class Session(_SessionBase):
 
                         Generation begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the **P2P_ENDPOINT_FULLNESS_LEVEL** parameter. The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
 
                         **Related Topics**
 
@@ -7032,7 +7017,7 @@ class Session(_SessionBase):
 
                         In average power mode, NI-RFSG automatically scales waveform data to use the maximum dynamic range. In peak power mode, waveforms are scaled according to the arb_waveform_software_scaling_factor property.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7061,7 +7046,7 @@ class Session(_SessionBase):
 
                         This option can only be configured when the PXI-5610 is in Slot 2 of the PXI chassis. The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXI-5610, PXI-5670/5671
+                        **Supported Devices** : PXI-5610, PXI-5670/5671
 
                         **Related Topics**
 
@@ -7082,7 +7067,7 @@ class Session(_SessionBase):
 
                         The PXI-5670/5671, PXIe-5672, and PXIe-5860 device must be in the Configuration state before calling this method. The PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673/5673E, and PXIe-5830/5831/5832/5840/5841/5842 device can be in the Configuration or Generation state when you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7091,11 +7076,11 @@ class Session(_SessionBase):
         Args:
             frequency (float): Specifies the frequency of the generated RF signal, in hertz. For arbitrary waveform generation, this parameter specifies the center frequency of the signal.
 
-                                        **Units**: hertz (Hz)
+                                        **Units** : hertz (Hz)
 
             power_level (float): Specifies either the average power level or peak power level of the generated RF signal, depending on the power_level_type property.
 
-                                        **Units**: dBm
+                                        **Units** : dBm
 
         '''
         self._interpreter.configure_rf(frequency, power_level)
@@ -7107,7 +7092,7 @@ class Session(_SessionBase):
 
                         The Reference Clock ensures that the NI-RFSG devices are operating from a common timebase. The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXI-5610, PXIe-5644/5645/5646, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7124,21 +7109,21 @@ class Session(_SessionBase):
         Args:
             ref_clock_source (str): Specifies the source of Reference Clock signal.
 
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Reference Clock Constant               | Value         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-                +========================================+===============+===============================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-                | NIRFSG_VAL_ONBOARD_CLOCK_STR (default) | OnboardClock  |  Uses the onboard Reference Clock as the clock source.<br/>**PXIe-5830/5831/5832**:For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector.<br/>**PXIe-5831 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector.<br/>**PXIe-5832 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector.<br/>**PXIe-5841 with PXIe-5655**:Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.<br/>**PXIe-5842**:Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the Getting Started Guide for the instrument.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIRFSG_VAL_REF_IN_STR                  | RefIn         | Uses the clock signal present at the front panel REF IN connector as the clock source.<br/>**PXIe-5830/5831/5832**:For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831, lock the external signal to the PXIe-3622 REF IN connector. For the PXIe-5832, lock the external signal to the PXIe-3623 REF IN connector.<br/>**PXIe-5831 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.<br/>**PXIe-5832 with PXIe-5653**:Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.<br/>**PXIe-5841 with PXIe-5655**:Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector.<br/>**PXIe-5842**:Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the Getting Started Guide for the instrument. |
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | ReferenceClockSource.PXI_CLK           | PXI_CLK       | Uses the PXI_CLK signal, which is present on the PXI backplane, as the clock source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | NIRFSG_VAL_CLK_IN_STR                  | ClkIn         | Uses the clock signal present at the front panel CLK IN connector as the clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655/5842.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | ReferenceClockSource.REF_IN_2          | RefIn2        | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | ReferenceClockSource.PXI_CLK_MASTER    | PXI_ClkMaster | This value is valid on only the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.<br/>**PXIe-5831 with PXIe-5653**:NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.<br/>**PXIe-5832 with PXIe-5653**:NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3623 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-                +----------------------------------------+---------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Reference Clock Constant               | Value         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+                +========================================+===============+=================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+                | NIRFSG_VAL_ONBOARD_CLOCK_STR (default) | OnboardClock  |  Uses the onboard Reference Clock as the clock source. **PXIe-5830/5831/5832** :For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. **PXIe-5831 with PXIe-5653** :Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. **PXIe-5832 with PXIe-5653** :Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector. **PXIe-5841 with PXIe-5655** :Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector. **PXIe-5842** :Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the Getting Started Guide for the instrument.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | NIRFSG_VAL_REF_IN_STR                  | RefIn         | Uses the clock signal present at the front panel REF IN connector as the clock source. **PXIe-5830/5831/5832** :For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831, lock the external signal to the PXIe-3622 REF IN connector. For the PXIe-5832, lock the external signal to the PXIe-3623 REF IN connector. **PXIe-5831 with PXIe-5653** :Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector. **PXIe-5832 with PXIe-5653** :Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.  **PXIe-5841 with PXIe-5655** :Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector. **PXIe-5842** :Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the Getting Started Guide for the instrument. |
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ReferenceClockSource.PXI_CLK           | PXI_CLK       | Uses the PXI_CLK signal, which is present on the PXI backplane, as the clock source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | NIRFSG_VAL_CLK_IN_STR                  | ClkIn         | Uses the clock signal present at the front panel CLK IN connector as the clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655/5842.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ReferenceClockSource.REF_IN_2          | RefIn2        | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ReferenceClockSource.PXI_CLK_MASTER    | PXI_ClkMaster | This value is valid on only the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. **PXIe-5831 with PXIe-5653** :NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector. **PXIe-5832 with PXIe-5653** :NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3623 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+                +----------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -7160,7 +7145,7 @@ class Session(_SessionBase):
 
                        NI-RFSG defines *signal bandwidth* as twice the maximum baseband signal deviation from 0 Hz. Usually, the baseband signal center frequency is 0Hz. In such cases, the signal bandwidth is simply the baseband signal minimum frequency subtracted from its maximum frequency, or *f* <sub>max</sub> minus *f* <sub>min</sub>. NI-RFSG uses this value to optimally configure the center frequency of the upconverter to help minimize phase noise. The generated signal is not filtered to achieve the set bandwidth. However, specifying a bandwidth smaller than the actual bandwidth of the signal could potentially result in spectral distortion.
 
-                       **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                       **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note: Based on your signal bandwidth, NI-RFSG decides whether to configure the upconverter center frequency on the PXI-5670/5671 or PXIe-5672 in increments of 1MHz or 5MHz. Failure to configure signal bandwidth may result in the signal being placed outside the upconverter passband.
 
@@ -7177,7 +7162,7 @@ class Session(_SessionBase):
 
                         Refer to the send_software_edge_trigger method for more information about using the software Script Trigger. The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7198,7 +7183,7 @@ class Session(_SessionBase):
 
                         Refer to the send_software_edge_trigger method for more information about using a software trigger. The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
 
 
@@ -7217,7 +7202,7 @@ class Session(_SessionBase):
 
                         If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7252,7 +7237,7 @@ class Session(_SessionBase):
 
         Deletes all configured de-embedding tables for the session.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.delete_all_deembedding_tables()
 
@@ -7261,7 +7246,7 @@ class Session(_SessionBase):
 
         Deletes the selected de-embedding table for a given port.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -7276,7 +7261,7 @@ class Session(_SessionBase):
 
         Places the instrument in a quiescent state where it has minimal or no impact on the system to which it is connected.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXI-5670/5671, PXIe-5672/5673/5673E
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXI-5670/5671, PXIe-5672/5673/5673E
         '''
         self._interpreter.disable()
 
@@ -7287,7 +7272,7 @@ class Session(_SessionBase):
 
                         Call this method only if you previously configured a Script Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7306,7 +7291,7 @@ class Session(_SessionBase):
 
                         This method is necessary only if you previously configured a Start Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7323,7 +7308,7 @@ class Session(_SessionBase):
 
                         You can clear a previously routed signal by exporting the signal to "" (empty string).
 
-                        **Supported Devices**:PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7366,13 +7351,13 @@ class Session(_SessionBase):
                 +----------------------------------+----------------+-----------------------------+
                 | Name                             | Value          | Description                 |
                 +==================================+================+=============================+
-                | SignalIdentifier.MARKER_EVENT0   |                | Specifies Marker 0.         |
+                | SignalIdentifier.MARKER_EVENT0   | marker0        | Specifies Marker 0.         |
                 +----------------------------------+----------------+-----------------------------+
-                | SignalIdentifier.MARKER_EVENT1   |                | Specifies Marker 1.         |
+                | SignalIdentifier.MARKER_EVENT1   | marker1        | Specifies Marker 1.         |
                 +----------------------------------+----------------+-----------------------------+
-                | SignalIdentifier.MARKER_EVENT2   |                | Specifies Marker 2.         |
+                | SignalIdentifier.MARKER_EVENT2   | marker2        | Specifies Marker 2.         |
                 +----------------------------------+----------------+-----------------------------+
-                | SignalIdentifier.MARKER_EVENT3   |                | Specifies Marker 3.         |
+                | SignalIdentifier.MARKER_EVENT3   | marker3        | Specifies Marker 3.         |
                 +----------------------------------+----------------+-----------------------------+
                 | SignalIdentifier.SCRIPT_TRIGGER0 | scriptTrigger0 | Specifies Script Trigger 0. |
                 +----------------------------------+----------------+-----------------------------+
@@ -7426,7 +7411,7 @@ class Session(_SessionBase):
 
                         30 for the minutes parameter.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Returns:
             year (int): Returns the year of the last successful calibration.
@@ -7474,7 +7459,7 @@ class Session(_SessionBase):
 
         Returns the maximum settable output power level for the current configuration.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Returns:
             value (float): Returns maximum settable power level in dBm.
@@ -7494,7 +7479,7 @@ class Session(_SessionBase):
 
                         30 for the minutes parameter.
 
-                        **Supported Devices**: PXI-5610, PXIe-5644/5645/5646, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             module (int): Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.
@@ -7522,11 +7507,11 @@ class Session(_SessionBase):
 
         Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
-                        **Supported Devices**: PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
 
         Args:
             module (enums.Module): Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.
-                                    **Default Value**: Module.PRIMARY_MODULE
+                                    **Default Value** : Module.PRIMARY_MODULE
                                     **Defined Values** :
 
                 +-----------------------+----------------+---------------------------------------------------------------------+
@@ -7554,7 +7539,7 @@ class Session(_SessionBase):
 
         Returns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.
 
-                        **Supported Devices**: PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
 
                         **Related Topics**
 
@@ -7580,7 +7565,7 @@ class Session(_SessionBase):
 
                         This method also configures the device through the **OPTION_STRING** input.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7602,7 +7587,7 @@ class Session(_SessionBase):
 
             id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-----------+--------------------------+
                 | Value     | Description              |
@@ -7614,7 +7599,7 @@ class Session(_SessionBase):
 
             reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
 
-                                        **Defined Values**:
+                                        **Defined Values** :
 
                 +-----------+----------------------+
                 | Value     | Description          |
@@ -7665,7 +7650,7 @@ class Session(_SessionBase):
 
                         If the settings have not been committed to the device before you call this method, they are committed by this method. The operation returns when the RF output signal settles. To return to the Configuration state, call the abort method.
 
-                        **Supported Devices**: PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7680,7 +7665,7 @@ class Session(_SessionBase):
 
                         Calling this method disables modulation for a short time while the device levels the output signal.
 
-                        **Supported Devices**: PXIe-5654 with PXIe-5696
+                        **Supported Devices** : PXIe-5654 with PXIe-5696
 
                         **Related Topics**
 
@@ -7699,7 +7684,7 @@ class Session(_SessionBase):
 
                         Use this method when generating the same signal for an extended period of time in a temperature-fluctuating environment. The NI-RFSG device must be in the Generation state before calling this method.
 
-                        **Supported Devices**: PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7716,7 +7701,7 @@ class Session(_SessionBase):
 
                         These capabilities are related to the current device configuration. The NI-RFSG device must be in the Configuration or the Generation state before calling this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Returns:
             max_number_waveforms (int): Returns the value of the arb_max_number_waveforms property. This value is the maximum number of waveforms you can write.
@@ -7751,7 +7736,7 @@ class Session(_SessionBase):
 
                         If RF blanking marker locations are present in the file but burst locations are not present, burst locations are calculated from RF blanking marker locations and stored in the NI-RFSG session.
 
-                        **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Args:
             waveform_name (str): Specifies the name used to store the waveform. This string is case-insensitive.
@@ -7778,7 +7763,7 @@ class Session(_SessionBase):
 
                         To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the ResetWithOptions method, with **stepsToOmit** set to ResetWithOptionsStepsToOmit.ROUTES .
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note: This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG.
         '''
@@ -7800,7 +7785,7 @@ class Session(_SessionBase):
 
                         - PXI-5610, PXI-5670/5671, PXIe-5672-- After calling this method, the device requires 25 seconds before returning to full functionality. NI-RFSG enforces this condition by adding a wait, if needed, the next time you try to access the device.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E
 
                         **Related Topics**
 
@@ -7815,7 +7800,7 @@ class Session(_SessionBase):
 
         Performs a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E
         '''
         self._interpreter.reset_with_defaults()
 
@@ -7826,7 +7811,7 @@ class Session(_SessionBase):
 
                         You must specify a waveform using the NAME parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7850,7 +7835,7 @@ class Session(_SessionBase):
 
                         The PXIe-5841 maintains separate self-calibration data for both the PXIe-5841 standalone and when associated with the PXIe-5655. Use this method once for each intended configuration.
 
-                        **Supported Devices**: PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note: If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate.
         '''
@@ -7867,7 +7852,7 @@ class Session(_SessionBase):
 
                         For best results, NI recommends that you perform self-calibration without omitting any steps. However, if certain aspects of performance are less important for your application, you can omit certain steps for faster calibration.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Note: - This method does not update self-calibration date and temperature.
 
@@ -7878,7 +7863,7 @@ class Session(_SessionBase):
         Args:
             steps_to_omit (enums.SelfCalibrateRangeStepsToOmit): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted.
 
-                                        **Default Value**: SelfCalibrateRangeStepsToOmit.OMIT_NONE
+                                        **Default Value** : SelfCalibrateRangeStepsToOmit.OMIT_NONE
 
                                         **Defined Values:**
 
@@ -7923,7 +7908,7 @@ class Session(_SessionBase):
 
                         This method does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this method. The NI-RFSG device must be in the Configuration state before you call this method.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -7957,7 +7942,7 @@ class Session(_SessionBase):
 
                         This method allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the allocate_arb_waveform method or the WriteArbWaveform method. Subsequent writes to that waveform begin where the last write ended, unless this method is called again.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note: If you use this method to write the waveform that is currently generating, an undefined output may result.
 
@@ -7995,12 +7980,12 @@ class Session(_SessionBase):
 
                         You can also call this method after calling the commit method to wait for changes to settle. The wait_until_settled method is not required after calling the _initiate method because the _initiate automatically waits for the output to settle.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             max_time_milliseconds (int): Specifies the maximum time the method waits for the output to settle. If the maximum time is exceeded, this method returns an error. The units are expressed in milliseconds.
 
-                                        **Default Value**: 10000
+                                        **Default Value** : 10000
 
         '''
         self._interpreter.wait_until_settled(max_time_milliseconds)
@@ -8012,7 +7997,7 @@ class Session(_SessionBase):
 
                         Use this method to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.
 
-                        **Supported Devices**: PXIe-5673E
+                        **Supported Devices** : PXIe-5673E
 
                         **Related Topics**
 
@@ -8041,7 +8026,7 @@ class Session(_SessionBase):
 
                         First, configure your device for Script mode by calling the configure_generation_mode method. The NI-RFSG device must be in the Configuration state before calling the write_script method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
@@ -8062,7 +8047,7 @@ class Session(_SessionBase):
 
         Aborts any signal generation in progress and destroys the instrument driver session.
 
-                        **Supported Devices**: PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
