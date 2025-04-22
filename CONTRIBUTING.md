@@ -124,8 +124,8 @@ begin contributing to to the project.
 1. Make your change.
 1. Verify all tests, including the new ones, pass.
 1. Update CHANGELOG.md for customer-visible changes.
-    * If the change applies to all generated driver bindings, put the change into the **ALL** section
-    * If it only applies to a single driver binding, put the change in the section associated with that driver
+    * Put the change into the Unreleased section for each package that it applies to.
+    * If it's a common change for all the packages, include the `(Common)` string before the newly added change in [CHANGELOG.md].
     * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. Commit modifications to generated files.
 1. On GitHub, send a New pull request to the main repository's master branch. GitHub
@@ -150,9 +150,11 @@ Release Process
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
     1. Update [CHANGELOG.md](./CHANGELOG.md)
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
-        * Change the "Unreleased" header to the version of the release
-        * Change [Unreleased] in TOC to the version of the release
+        * For packages that are releasing:
+          * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
+          * Remove the Unreleased section from the TOC if there are no changes for the package.
+          * Change the "Unreleased" header to the version of the release
+          * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
     1. Update release versions
         * `python3 tools/build_release.py --update --release`
@@ -183,7 +185,7 @@ Release Process
         * `python3 tools/build_release.py --build`
         * Commit to branch
     1. Update changelog
-        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+        * Copy Unreleased section from the bottom of the changelog. Modify the package name in the example and TOC. Paste the modified section at the top of intended package's changelog and add a corresponding link to it in the package's TOC.
         * Commit to branch
     1. Create a pull request containing post-release changes and get it merged
 
