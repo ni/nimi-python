@@ -148,22 +148,6 @@ Release Process
         ```
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
-    1. Perform Version Bump (If Needed)
-        * If you need to upgrade the major, minor, patch or dev versions, include any of the following parameters:
-           * --increment-major-version - To increment the major version of package. This will update the version to (N+1).X.X.dev0
-           * --increment-minor-version - To increment the minor version of package. This will update the version to X.(N+1).X.dev0
-           * --increment-patch-version - To increment the patch version of package. This will update the version to X.X.(N+1).dev0
-           * --increment-build-number - To increment the development number of package. This will update the version to X.X.X.dev(N+1)
-            For example: 
-                ```bash
-                python3 tools/build_release.py --increment-minor-version
-                ```
-        * If you need to update the version for any specific driver(s), include the `drivers` parameter. By default, all drivers will be considered.
-        For example: 
-            ```bash
-            python3 tools/build_release.py --drivers nidcpower --increment-minor-version
-            ```
-        * Commit to branch
     1. Update [CHANGELOG.md](./CHANGELOG.md)
         * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
         * Remove the Unreleased section from the TOC if there are no changes for those drivers.
@@ -172,13 +156,8 @@ Release Process
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
     1. Update release versions
-        * `python3 tools/build_release.py --update-for-release`
+        * `python3 tools/build_release.py --update --release`
             * For each module, this will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
-            * If you need to release any specific module(s), include the `drivers` parameter. 
-            For example: 
-                ```bash
-                python3 tools/build_release.py --drivers nidcpower --update-for-release
-                ```
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
@@ -190,11 +169,6 @@ Release Process
     1. Wait until the pull request has been approved
     1. Upload the releases to PyPI
         * `python3 tools/build_release.py --upload`
-        * If you need to upload any specific module(s), include the `drivers` parameter. 
-        For example: 
-             ```bash
-            python3 tools/build_release.py --drivers nidcpower --upload
-            ```
         * You will need to type in your PyPI credentials
     1. Merge the pull request to origin/master
     1. Create a release on GitHub using the portion from the changelog for this release for the description
@@ -202,12 +176,12 @@ Release Process
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module versions. 
-        * Refer to the "Perform Version Bump" section under "Pre-Release Steps."
+    1. Update the module versions
+        * `python3 tools/build_release.py --update`
+            * This will update the version to X.X.(N+1).dev0
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
-        * Ensure that all changes made as part of build command are specific to intended drivers.
         * Commit to branch
     1. Update changelog
         * Copy Unreleased section from the bottom of the changelog. Modify the package name in the example and TOC. Paste the modified section at the top of intended package's changelog and add a corresponding link to it in the package's TOC.
