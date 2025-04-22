@@ -153,8 +153,8 @@ Release Process
         * For packages that are releasing:
           * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
           * Remove the Unreleased section from the TOC if there are no changes for the package.
-        * Change the "Unreleased" header to the version of the release
-        * Change [Unreleased] in TOC to the version of the release
+          * Change the "Unreleased" header to the version of the release
+          * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
     1. Update release versions
         * `python3 tools/build_release.py --update --release`
