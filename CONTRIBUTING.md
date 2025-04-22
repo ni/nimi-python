@@ -125,6 +125,7 @@ begin contributing to to the project.
 1. Verify all tests, including the new ones, pass.
 1. Update CHANGELOG.md for customer-visible changes.
     * Put the change into the Unreleased section for each package that it applies to.
+    * If it's a common change for all the packages, include the `(Common)` string before the newly added change in [CHANGELOG.md].
     * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. Commit modifications to generated files.
 1. On GitHub, send a New pull request to the main repository's master branch. GitHub
@@ -149,9 +150,9 @@ Release Process
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
     1. Update [CHANGELOG.md](./CHANGELOG.md)
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
-        * Remove the Unreleased section from the TOC if there are no changes for those drivers.
-        * If it's a common change for all the drivers, include the `(Common)` string before newly added changes in [CHANGELOG.md].
+        * For packages that are releasing:
+          * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
+          * Remove the Unreleased section from the TOC if there are no changes for the package.
         * Change the "Unreleased" header to the version of the release
         * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
