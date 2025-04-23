@@ -1673,14 +1673,6 @@
 - Changed
 - Removed
 
-#### [niscope] 1.4.9 - 2025-02-26
-- Added
-  - (Common) Support for Python 3.13
-- Changed
-  - (Common) Fix [#2069](https://github.com/ni/nimi-python/issues/2069)
-- Removed
-  - (Common) Support for Python 3.8
-
 ### niscope (NI-SCOPE)
 
 - [Unreleased](#niscope-unreleased)
