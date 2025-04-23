@@ -25,24 +25,21 @@ jobs:
       - x64
       - rdss-nimibot-win-10-py32
     timeout-minutes: 30
-    strategy:
-      matrix:
-        module_name:
-          - nidigital
-          - nitclk
-          - nifgen
-          - nidcpower
-          - nidmm
-          - niscope
-          - nimodinst
-          - nise
-          - niswitch
     steps:
       - name: checkout repository
         uses: actions/checkout@v3
-      # NOTE: we don't upload test coverage for this
+
+      - name: Extract module name and version from release tag
+        id: extract_tag
+        run: |
+          # Extract module name and version from the release tag
+          # Assuming the tag format is <module_name>-<version>, e.g., nidigital-1.4.0
+          TAG="${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.event.release.tag_name }}"
+          MODULE_NAME=$(echo "$TAG" | cut -d'-' -f1)
+          MODULE_VERSION=$(echo "$TAG" | cut -d'-' -f2-)
+
       - name: run examples using PyPI uploads
         uses: ./.github/actions/run_examples_using_pypi_uploads
         with:
-          module_name: ${{ matrix.module_name }}
-          module_version: ${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.event.release.tag_name }}
+          module_name: ${{ env.module_name }}
+          module_version: ${{ env.module_version }}
