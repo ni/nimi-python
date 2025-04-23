@@ -6,6 +6,7 @@
 - [nidmm (NI-DMM)](#nidmm-ni-dmm)
 - [nifgen (NI-FGEN)](#nifgen-ni-fgen)
 - [nimodinst (NI-ModInst)](#nimodinst-ni-modinst)
+- [nirfsg (NI-RFSG)](#nirfsg-ni-rfsg)
 - [niscope (NI-SCOPE)](#niscope-ni-scope)
 - [nise (NI Switch Executive)](#nise-ni-switch-executive)
 - [niswitch (NI-SWITCH)](#niswitch-ni-switch)
@@ -1659,6 +1660,26 @@
 - Added
   - Initial release
 ---
+
+### nirfsg (NI-RFSG)
+
+- [Unreleased](#nirfsg-unreleased)
+
+#### [nirfsg] Unreleased
+- Added
+  - Added metadata for selected public APIs
+  - Basic example
+  - Documentation for APIs (not final) 
+- Changed
+- Removed
+
+#### [niscope] 1.4.9 - 2025-02-26
+- Added
+  - (Common) Support for Python 3.13
+- Changed
+  - (Common) Fix [#2069](https://github.com/ni/nimi-python/issues/2069)
+- Removed
+  - (Common) Support for Python 3.8
 
 ### niscope (NI-SCOPE)
 
