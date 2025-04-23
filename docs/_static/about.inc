@@ -23,3 +23,5 @@ called through its public C API using the `ctypes <https://docs.python.org/2/lib
 
 **nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
 
+NI created and supports **nimi-python**.
+
