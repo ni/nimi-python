@@ -153,10 +153,7 @@ Release Process
         * If you need to upgrade the major or minor versions, include any of the following parameters:
            * --increment-major-version - To increment the major version of package. This will update the version to (N+1).X.X.dev0
            * --increment-minor-version - To increment the minor version of package. This will update the version to X.(N+1).X.dev0
-            For example: 
-                ```bash
-                python3 tools/build_release.py --increment-minor-version
-                ```
+             * Example: `python3 tools/build_release.py --increment-minor-version`
         * If you need to update the version for any specific driver(s), include the `drivers` parameter. By default, all drivers will be considered.
           For example: 
               ```bash

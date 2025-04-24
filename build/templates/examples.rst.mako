@@ -34,13 +34,13 @@
     # Check if the module name and version match the old tag formatting criteria
     use_old_tag_format = (
         module_name in ['nidcpower', 'nidigital', 'nidmm', 'nifake', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
-        and v.major <= 1 and v.minor <= 4 and v.micro <= 9
+        and latest_release_version == '1.4.9'
     )
 
-    if use_old_tag_format:
-        released_zip_url = 'https://github.com/ni/nimi-python/releases/download/v{}/{}_examples.zip'.format(latest_release_version, module_name)
-    else:
-        released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{}-{}/{}_examples.zip'.format(module_name, latest_release_version, module_name)
+    if not use_old_tag_format:
+        latest_release_version = module_name + '-' + latest_release_version
+    
+    released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{}/{}_examples.zip'.format(latest_release_version, module_name)
 
     example_url_base = 'https://github.com/ni/nimi-python/blob/'
 
