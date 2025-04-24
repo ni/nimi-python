@@ -29,20 +29,19 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v3
 
-      - name: Extract module name, version, and run examples using PyPI uploads
-        id: extract_and_run
+      - name: Extract module name and version from release tag
+        id: extract_tag
         run: |
           # Extract module name and version from the release tag
           # Assuming the tag format is <module_name>-<version>, e.g., nidigital-1.4.0
           TAG="${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.event.release.tag_name }}"
           MODULE_NAME=$(echo "$TAG" | cut -d'-' -f1)
           MODULE_VERSION=$(echo "$TAG" | cut -d'-' -f2-)
-          echo "Module Name: $MODULE_NAME"
-          echo "Module Version: $MODULE_VERSION"
-
-          # Export module name and version as environment variables
-          echo "module_name=$MODULE_NAME" >> $GITHUB_ENV
-          echo "module_version=$MODULE_VERSION" >> $GITHUB_ENV
-
-          # Run examples using PyPI uploads
-          python ./.github/actions/run_examples_using_pypi_uploads.py --module-name "$MODULE_NAME" --module-version "$MODULE_VERSION"
+          echo "module_name=$MODULE_NAME" >> "$GITHUB_OUTPUT"
+          echo "module_version=$MODULE_VERSION" >> "$GITHUB_OUTPUT"
+      # NOTE: we don't upload test coverage for this
+      - name: run examples using PyPI uploads
+        uses: ./.github/actions/run_examples_using_pypi_uploads
+        with:
+          module_name: ${{ steps.extract_tag.outputs.module_name }}
+          module_version: ${{ steps.extract_tag.outputs.module_version }}
