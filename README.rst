@@ -8,7 +8,7 @@ Overall Status
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 ===========  ============================================================================================================================
-Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
+Info         NI Modular Instrument driver APIs for Python.
 Author       NI
 ===========  ============================================================================================================================
 
@@ -58,6 +58,8 @@ called through its public C API using the `ctypes <https://docs.python.org/2/lib
 **nimi-python** supports all the Operating Systems supported by the underlying driver.
 
 **nimi-python** follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions.
+
+NI created and supports **nimi-python**.
 
 
 NI-DCPower Python API Status
