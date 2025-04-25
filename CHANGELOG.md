@@ -1667,7 +1667,7 @@
 
 #### [nirfsg] Unreleased
 - Added
-  - Added metadata for selected public APIs
+  - Enabled selected public APIs
   - Basic example
   - Documentation for APIs (not final) 
 - Changed
