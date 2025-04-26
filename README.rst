@@ -46,6 +46,7 @@ following drivers are supported:
 * NI-DMM (Python module: nidmm)
 * NI-FGEN (Python module: nifgen)
 * NI-ModInst (Python module: nimodinst)
+* NI-RFSG (Python module: nirfsg)
 * NI-SCOPE (Python module: niscope)
 * NI Switch Executive (Python module: nise)
 * NI-SWITCH (Python module: niswitch)
@@ -291,6 +292,52 @@ NI-ModInst Python API Status
 
 
 
+NI-RFSG Python API Status
+-------------------------
+
++-------------------------------+-----------------------+
+| NI-RFSG (nirfsg)              |                       |
++===============================+=======================+
+| Driver Version Tested Against | 2025 Q2               |
++-------------------------------+-----------------------+
+| PyPI Version                  | |nirfsgLatestVersion| |
++-------------------------------+-----------------------+
+| Supported Python Version      | |nirfsgPythonVersion| |
++-------------------------------+-----------------------+
+| Documentation                 | |nirfsgDocs|          |
++-------------------------------+-----------------------+
+| Open Issues                   | |nirfsgOpenIssues|    |
++-------------------------------+-----------------------+
+| Open Pull Requests            | |nirfsgOpenPRs|       |
++-------------------------------+-----------------------+
+
+
+.. |nirfsgLatestVersion| image:: http://img.shields.io/pypi/v/nirfsg.svg
+    :alt: Latest NI-RFSG Version
+    :target: http://pypi.python.org/pypi/nirfsg
+
+
+.. |nirfsgPythonVersion| image:: http://img.shields.io/pypi/pyversions/nirfsg.svg
+    :alt: NI-RFSG supported Python versions
+    :target: http://pypi.python.org/pypi/nirfsg
+
+
+.. |nirfsgDocs| image:: https://readthedocs.org/projects/nirfsg/badge/?version=latest
+    :alt: NI-RFSG Python API Documentation Status
+    :target: https://nirfsg.readthedocs.io/en/latest
+
+
+.. |nirfsgOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nirfsg.svg
+    :alt: Open Issues + Pull Requests for NI-RFSG
+    :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anirfsg
+
+
+.. |nirfsgOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nirfsg.svg
+    :alt: Pull Requests for NI-RFSG
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anirfsg
+
+
+
 NI-SCOPE Python API Status
 --------------------------
 
@@ -486,6 +533,7 @@ Driver specific installation instructions can be found on **Read the Docs**:
 * `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
 * `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
 * `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 * `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
 * `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
 * `niswitch <https://niswitch.readthedocs.io/en/latest/niswitch.html#installation>`_
@@ -543,10 +591,12 @@ Documentation is available on **Read the Docs**:
 - https://nidmm.readthedocs.io/en/stable
 - https://nifgen.readthedocs.io/en/stable
 - https://nimodinst.readthedocs.io/en/stable
+- https://nirfsg.readthedocs.io/en/stable
 - https://niscope.readthedocs.io/en/stable
 - https://nise.readthedocs.io/en/stable
 - https://niswitch.readthedocs.io/en/stable
 - https://nitclk.readthedocs.io/en/stable
+
 
 
 .. _license-section:

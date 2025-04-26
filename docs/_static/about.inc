@@ -11,6 +11,7 @@ following drivers are supported:
 * NI-DMM (Python module: nidmm)
 * NI-FGEN (Python module: nifgen)
 * NI-ModInst (Python module: nimodinst)
+* NI-RFSG (Python module: nirfsg)
 * NI-SCOPE (Python module: niscope)
 * NI Switch Executive (Python module: nise)
 * NI-SWITCH (Python module: niswitch)

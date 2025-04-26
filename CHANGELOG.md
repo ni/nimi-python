@@ -6,6 +6,7 @@
 - [nidmm (NI-DMM)](#nidmm-ni-dmm)
 - [nifgen (NI-FGEN)](#nifgen-ni-fgen)
 - [nimodinst (NI-ModInst)](#nimodinst-ni-modinst)
+- [nirfsg (NI-RFSG)](#nirfsg-ni-rfsg)
 - [niscope (NI-SCOPE)](#niscope-ni-scope)
 - [nise (NI Switch Executive)](#nise-ni-switch-executive)
 - [niswitch (NI-SWITCH)](#niswitch-ni-switch)
@@ -1659,6 +1660,18 @@
 - Added
   - Initial release
 ---
+
+### nirfsg (NI-RFSG)
+
+- [Unreleased](#nirfsg-unreleased)
+
+#### [nirfsg] Unreleased
+- Added
+  - Enabled selected public APIs
+  - Basic example
+  - Documentation for APIs (not final) 
+- Changed
+- Removed
 
 ### niscope (NI-SCOPE)
 
