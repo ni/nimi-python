@@ -27,12 +27,22 @@
 
     with open(f'./src/{module_name}/LATEST_RELEASE') as vf:
         latest_release_version = vf.read().strip()
-    released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{}/{}_examples.zip'.format(latest_release_version, module_name)
-
-    example_url_base = 'https://github.com/ni/nimi-python/blob/'
 
     from packaging.version import Version
     v = Version(module_version)
+
+    # Check if the module name and version match the old tag formatting criteria
+    use_old_tag_format = (
+        module_name in ['nidcpower', 'nidigital', 'nidmm', 'nifake', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+        and latest_release_version == '1.4.9'
+    )
+
+    if not use_old_tag_format:
+        latest_release_version = module_name + '-' + latest_release_version
+    
+    released_zip_url = 'https://github.com/ni/nimi-python/releases/download/{}/{}_examples.zip'.format(latest_release_version, module_name)
+
+    example_url_base = 'https://github.com/ni/nimi-python/blob/'
 
     if v.dev is None and v.pre is None:
         examples_zip_url_text = '`You can download all {} examples here <{}>`_'.format(module_name, released_zip_url)
