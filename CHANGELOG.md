@@ -7,6 +7,7 @@
 - [nifgen (NI-FGEN)](#nifgen-ni-fgen)
 - [nimodinst (NI-ModInst)](#nimodinst-ni-modinst)
 - [nirfsg (NI-RFSG)](#nirfsg-ni-rfsg)
+- [nirfsg (NI-RFSG)](#nirfsg-ni-rfsg)
 - [niscope (NI-SCOPE)](#niscope-ni-scope)
 - [nise (NI Switch Executive)](#nise-ni-switch-executive)
 - [niswitch (NI-SWITCH)](#niswitch-ni-switch)
@@ -1667,7 +1668,7 @@
 
 #### [nirfsg] Unreleased
 - Added
-  - Added metadata for selected public APIs
+  - Enabled selected public APIs
   - Basic example
   - Documentation for APIs (not final) 
 - Changed

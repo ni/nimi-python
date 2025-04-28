@@ -8,7 +8,11 @@ Overall Status
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 ===========  ============================================================================================================================
+<<<<<<< HEAD
 Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
+=======
+Info         NI Modular Instrument driver APIs for Python.
+>>>>>>> upstream/master
 Author       NI
 ===========  ============================================================================================================================
 
@@ -46,6 +50,11 @@ Support Policy
 
 It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 
+<<<<<<< HEAD
+=======
+NI created and supports **nirfsg**.
+
+>>>>>>> upstream/master
 
 NI-RFSG Python API Status
 -------------------------
@@ -53,7 +62,7 @@ NI-RFSG Python API Status
 +-------------------------------+-----------------------+
 | NI-RFSG (nirfsg)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2025 Q1               |
+| Driver Version Tested Against | 2025 Q2               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsgLatestVersion| |
 +-------------------------------+-----------------------+
