@@ -124,8 +124,8 @@ begin contributing to to the project.
 1. Make your change.
 1. Verify all tests, including the new ones, pass.
 1. Update CHANGELOG.md for customer-visible changes.
-    * If the change applies to all generated driver bindings, put the change into the **ALL** section
-    * If it only applies to a single driver binding, put the change in the section associated with that driver
+    * Put the change into the Unreleased section for each package that it applies to.
+    * If it's a common change for all the packages, include the `(Common)` string before the newly added change in [CHANGELOG.md].
     * DO NOT MENTION: Internal-only changes like refactors or test improvements.
 1. Commit modifications to generated files.
 1. On GitHub, send a New pull request to the main repository's master branch. GitHub
@@ -149,14 +149,32 @@ Release Process
         ```
     1. Ensure no commits are made on ni/nimi-python/master until the release is complete
     1. Create and checkout a branch for release-related changes
+    1. Perform Version Bump (If Needed)
+        * If you need to upgrade the major or minor versions, include any of the following parameters:
+           * --increment-major-version - To increment the major version of package. This will update the version to (N+1).X.X.dev0
+           * --increment-minor-version - To increment the minor version of package. This will update the version to X.(N+1).X.dev0
+             * Example: `python3 tools/build_release.py --increment-minor-version`
+        * If you need to update the version for any specific driver(s), include the `drivers` parameter. By default, all drivers will be considered.
+          For example: 
+              ```bash
+              python3 tools/build_release.py --drivers nidcpower --increment-minor-version
+              ```
+        * Commit to branch
     1. Update [CHANGELOG.md](./CHANGELOG.md)
-        * Delete empty (i.e. No changes) sub-sections under "Unreleased" section
-        * Change the "Unreleased" header to the version of the release
-        * Change [Unreleased] in TOC to the version of the release
+        * For packages that are releasing:
+          * Delete empty (i.e. No changes) sub-sections under "Unreleased" section 
+          * Remove the Unreleased section from the TOC if there are no changes for the package.
+          * Change the "Unreleased" header to the version of the release
+          * Change [Unreleased] in TOC to the version of the release
         * Commit to branch
     1. Update release versions
-        * `python3 tools/build_release.py --update --release`
+        * `python3 tools/build_release.py --update-for-release`
             * For each module, this will drop the .devN from our versions in config_addon.py and update the LATEST_RELEASE versions to match.
+            * If you need to release any specific module(s), include the `drivers` parameter. 
+          For example: 
+              ```bash
+              python3 tools/build_release.py --drivers nidcpower --update-for-release
+              ```
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
@@ -168,22 +186,36 @@ Release Process
     1. Wait until the pull request has been approved
     1. Upload the releases to PyPI
         * `python3 tools/build_release.py --upload`
+        * If you need to upload any specific module(s), include the `drivers` parameter. 
+        For example: 
+             ```bash
+            python3 tools/build_release.py --drivers nidcpower --upload
+            ```
         * You will need to type in your PyPI credentials
     1. Merge the pull request to origin/master
-    1. Create a release on GitHub using the portion from the changelog for this release for the description
-        * Add the ZIP files under `generated/examples` for each module as a release artifact.
+    1. For each package released, create a release on GitHub using the module's portion from the changelog for this release for the description
+        * The release tag should be named as follows: `MODULE_NAME-version`.
+          * Example: `nidcpower-1.5.0`.
+          * This tag format allows the individual `Read the Docs` projects to determine whether a release applies to them.
+        * Add the ZIP files under `generated/examples` for each module (not just the releasing one) as a release artifact.
+          * Internal test code will only look for the latest release tag and expect it to have examples attached for any module
         * This should trigger the [check_latest_release](.github/workflows/check_latest_release.yml) workflow. Check the [results](https://github.com/ni/nimi-python/actions/workflows/check_latest_release.yml) before continuing.
 1. Post-Release Steps
     1. Create and checkout another branch for post-release changes
-    1. Update the module versions
-        * `python3 tools/build_release.py --update`
-            * This will update the version to X.X.(N+1).dev0
+    1. Update the module version for a patch version upgrade. This will update the version to X.X.(N+1).dev0
+        * `python3 tools/build_release.py --increment-patch-version`
+        * If you need to update any specific module(s), include the `drivers` parameter. 
+        For example: 
+             ```bash
+            python3 tools/build_release.py --drivers nidcpower --increment-patch-version
+            ```
         * Commit to branch
     1. Clean and build to update generated files with new version
         * `python3 tools/build_release.py --build`
+        * Ensure that all changes made as part of build command are specific to intended drivers.
         * Commit to branch
     1. Update changelog
-        * Copy Unreleased section from bottom of changelog to the top and add a link to it in the TOC
+        * Copy Unreleased section from the bottom of the changelog. Modify the package name in the example and TOC. Paste the modified section at the top of intended package's changelog and add a corresponding link to it in the package's TOC.
         * Commit to branch
     1. Create a pull request containing post-release changes and get it merged
 

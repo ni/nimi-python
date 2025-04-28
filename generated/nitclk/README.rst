@@ -8,7 +8,7 @@ Overall Status
 +----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 ===========  ============================================================================================================================
-Info         Python bindings for NI Modular Instrument drivers. See `GitHub <https://github.com/ni/nimi-python/>`_ for the latest source.
+Info         NI Modular Instrument driver APIs for Python.
 Author       NI
 ===========  ============================================================================================================================
 
@@ -45,6 +45,8 @@ Support Policy
 **nitclk** supports all the Operating Systems supported by NI-TClk.
 
 It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
+
+NI created and supports **nitclk**.
 
 
 NI-TClk Python API Status

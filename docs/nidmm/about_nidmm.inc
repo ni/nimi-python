@@ -11,3 +11,5 @@ Support Policy
 
 It follows `Python Software Foundation <https://devguide.python.org/#status-of-python-branches>`_ support policy for different versions of CPython.
 
+NI created and supports **nidmm**.
+
