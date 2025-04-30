@@ -50,7 +50,6 @@ class _Lock(object):
     def __exit__(self, exc_type, exc_value, traceback):
         self._session.unlock()
 
-
 class _SessionBase(object):
     '''Base class for all NI-DMM sessions.'''
 
