@@ -5,6 +5,7 @@ import ctypes
 import nimodinst.errors as errors
 import threading
 
+from nimodinst._complextype import *  # noqa: F401,F403,H303
 from nimodinst._visatype import *  # noqa: F403,H303
 
 

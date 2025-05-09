@@ -5,6 +5,7 @@ import ctypes
 import nidcpower.errors as errors
 import threading
 
+from nidcpower._complextype import *  # noqa: F401,F403,H303
 from nidcpower._visatype import *  # noqa: F403,H303
 
 import nidcpower.lcr_measurement as lcr_measurement  # noqa: F401

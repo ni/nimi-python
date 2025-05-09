@@ -18,6 +18,7 @@ import ctypes
 import ${module_name}.errors as errors
 import threading
 
+from ${module_name}._complextype import *  # noqa: F401,F403,H303
 from ${module_name}._visatype import *  # noqa: F403,H303
 % for c in config['custom_types']:
 

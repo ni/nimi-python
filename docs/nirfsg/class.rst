@@ -2690,6 +2690,46 @@ wait_until_settled
 
             :type max_time_milliseconds: int
 
+write_arb_waveform
+------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: write_arb_waveform(waveform_name, waveform_data_array, more_data_pending)
+
+            Writes data to the waveform in onboard memory.
+
+            By default, subsequent calls to this method
+            continue writing data from the position of the last sample written. You
+            can set the write position and offset by calling the :py:meth:`nirfsg.Session.SetNamedWaveformNextWritePosition`
+            :py:meth:`nirfsg.Session.SetWaveformNextWritePosition` method.
+
+            
+
+
+
+            :param waveform_name:
+
+
+                
+
+
+            :type waveform_name: str
+            :param waveform_data_array:
+
+
+                
+
+
+            :type waveform_data_array: list of ComplexViReal64
+            :param more_data_pending:
+
+
+                
+
+
+            :type more_data_pending: bool
+
 write_p2_p_endpoint_i16
 -----------------------
 

@@ -56,6 +56,23 @@ class TestLibraryInterpreter:
         self.get_ctypes_pointer_for_buffer_side_effect_count += 1
         return ret_val
 
+    def test_write_numpy_complex128_valid_input(self):
+        waveform_data = numpy.array([1 + 2j, 3 + 4j], dtype=numpy.complex128)  # NumPy array of complex128
+
+        with patch.object(self.patched_library, 'niFake_WriteArbWaveformComplexF64', wraps=self.patched_library.niFake_WriteArbWaveformComplexF64) as mock_write_waveform:
+            interpreter = self.get_initialized_library_interpreter()
+
+            # Act
+            interpreter.write_arb_waveform_complex_f64( waveform_data)
+
+            # Assert
+            self.patched_library.get_ctypes_pointer.assert_called_once_with(
+                value=waveform_data,
+                library_type=nifake._complextype.ComplexViReal64,
+                complex_type='numpy'
+            )
+            mock_write_waveform.assert_called_once()
+
     # Methods
 
     def test_simple_function(self):
