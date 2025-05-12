@@ -54,9 +54,9 @@ class _Lock(object):
 
 # Dynamically handle repeated capabilities
 
-class _RepCapMarkers(object):
-    exported_marker_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.MarkerEventExportOutputTerm, 1150064)
-    '''Type: enums.MarkerEventExportOutputTerm
+class _RepeatedCapabilityMarkers(object):
+    exported_marker_event_output_terminal = _attributes.AttributeViString(1150064)
+    '''Type: str
 
     Specifies the destination terminal for exporting the Marker Event. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -350,7 +350,7 @@ class _RepCapMarkers(object):
         repeated_capability = ','.join(self._current_repeated_capability_list)
         self._session._interpreter.set_attribute_vi_string(repeated_capability, attribute, value)
 
-class _RepCapScript_triggers(object):
+class _RepeatedCapabilityScript_triggers(object):
     digital_edge_script_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigEdgeEdge, 1150021)
     '''Type: enums.ScriptTrigDigEdgeEdge
 
@@ -813,7 +813,7 @@ class _RepCapScript_triggers(object):
         repeated_capability = ','.join(self._current_repeated_capability_list)
         self._session._interpreter.set_attribute_vi_string(repeated_capability, attribute, value)
 
-class _RepCapWaveform(object):
+class _RepeatedCapabilityWaveform(object):
     waveform_iq_rate = _attributes.AttributeViReal64(1150263)
     '''Type: float
 
@@ -1011,7 +1011,7 @@ class _RepCapWaveform(object):
         repeated_capability = ','.join(self._current_repeated_capability_list)
         self._session._interpreter.set_attribute_vi_string(repeated_capability, attribute, value)
 
-class _RepCapDeembedding_port(object):
+class _RepeatedCapabilityDeembedding_port(object):
     deembedding_compensation_gain = _attributes.AttributeViReal64(1150289)
     '''Type: float
 
@@ -2947,54 +2947,134 @@ class _SessionBase(object):
 
                 **Defined Values**:
 
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                    | Value       | Description                                                                                                                     |
-    +=========================================+=============+=================================================================================================================================+
-    | DoneEventExportOutputTerm.DO_NOT_EXPORT |             | The signal is not exported.                                                                                                     |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PFI0          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PFI1          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PFI4          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PFI5          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG0     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG1     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG2     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG3     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG4     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG5     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXI_TRIG6     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.PXIE_DSTARC   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO0          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO1          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO2          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO3          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO4          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO5          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO6          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-    | DoneEventExportOutputTerm.DIO7          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
-    +-----------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | Name                         | Value       | Description                                                                                                                     |
+    +==============================+=============+=================================================================================================================================+
+    | NIRFSG_VAL_DO_NOT_EXPORT_STR |             | The signal is not exported.                                                                                                     |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI0_STR          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI1_STR          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI4_STR          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI5_STR          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG0_STR     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG1_STR     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG2_STR     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG3_STR     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG4_STR     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG5_STR     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG6_STR     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXIE_DSTARC_STR   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO0_STR          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO1_STR          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO2_STR          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO3_STR          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO4_STR          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO5_STR          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO6_STR          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO7_STR          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    '''
+    exported_marker_event_output_terminal = _attributes.AttributeViString(1150064)
+    '''Type: str
+
+    Specifies the destination terminal for exporting the Marker Event. To set this property, the NI-RFSG device must be in the Configuration state.
+
+                    **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                    **Related Topics**
+
+                    `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
+
+                    `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
+
+                    `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
+
+                    **High-Level Methods**:
+
+                    - export_signal
+
+                **Defined Values**:
+
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | Name                         | Value       | Description                                                                                                                     |
+    +==============================+=============+=================================================================================================================================+
+    | NIRFSG_VAL_DO_NOT_EXPORT_STR |             | The signal is not exported.                                                                                                     |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI0_STR          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI1_STR          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI4_STR          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PFI5_STR          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG0_STR     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG1_STR     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG2_STR     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG3_STR     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG4_STR     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG5_STR     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXI_TRIG6_STR     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_PXIE_DSTARC_STR   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO0_STR          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO1_STR          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO2_STR          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO3_STR          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO4_STR          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO5_STR          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO6_STR          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+    | NIRFSG_VAL_DIO7_STR          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
+    +------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].exported_marker_event_output_terminal`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.exported_marker_event_output_terminal`
     '''
     exported_pulse_modulation_event_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigLevelActiveLevel, 1150310)
     '''Type: enums.ScriptTrigDigLevelActiveLevel
@@ -4346,6 +4426,169 @@ class _SessionBase(object):
                     **Default Value**: 1 MHz
 
                     **Supported Devices**: PXIe-5830/5831/5832
+    '''
+    marker_event_output_behavior = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventOutputBehavior, 1150206)
+    '''Type: enums.MarkerEventOutputBehavior
+
+    Specifies the output behavior for the Marker Event. To set this property, the NI-RFSG device must be in the Configuration state.
+
+                    **Default Value:** MarkerEventOutputBehavior.PULSE
+
+                    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
+
+                    **Related Topics**
+
+                    `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
+
+                **Defined Values**:
+
+    +----------------------------------+----------------+-------------------------------------------------------+
+    | Name                             | Value          | Description                                           |
+    +==================================+================+=======================================================+
+    | MarkerEventOutputBehavior.PULSE  | 23000 (0x59d8) | Specifies the Marker Event output behavior as pulse.  |
+    +----------------------------------+----------------+-------------------------------------------------------+
+    | MarkerEventOutputBehavior.TOGGLE | 23001 (0x59d9) | Specifies the Marker Event output behavior as toggle. |
+    +----------------------------------+----------------+-------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_output_behavior`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.marker_event_output_behavior`
+    '''
+    marker_event_pulse_width = _attributes.AttributeViReal64(1150207)
+    '''Type: float
+
+    Specifies the pulse width value for the Marker Event. Use the marker_event_pulse_width_units property to set the units for the pulse width value. This property is valid only when the marker_event_output_behavior property is set to MarkerEventOutputBehavior.PULSE.
+
+                    To set this property, the NI-RFSG device must be in the Configuration state.
+
+                    **Default Value:** 200 ns
+
+                    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
+
+                    **Related Topics**
+
+                    `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_pulse_width`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.marker_event_pulse_width`
+    '''
+    marker_event_pulse_width_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventPulseWidthUnits, 1150208)
+    '''Type: enums.MarkerEventPulseWidthUnits
+
+    Specifies the pulse width units for the Marker Event. This property is valid only when the marker_event_output_behavior property is set to MarkerEventOutputBehavior.PULSE.
+
+                    To set this property, the NI-RFSG device must be in the Configuration state.
+
+                    **Default Value:** MarkerEventPulseWidthUnits.SECONDS
+
+                    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
+
+                    **Related Topics**
+
+                    `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
+
+                **Defined Values**:
+
+    +----------------------------------+----------------+-------------------------------------------------------+
+    | Name                             | Value          | Description                                           |
+    +==================================+================+=======================================================+
+    | MarkerEventOutputBehavior.PULSE  | 23000 (0x59d8) | Specifies the Marker Event output behavior as pulse.  |
+    +----------------------------------+----------------+-------------------------------------------------------+
+    | MarkerEventOutputBehavior.TOGGLE | 23001 (0x59d9) | Specifies the Marker Event output behavior as toggle. |
+    +----------------------------------+----------------+-------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_pulse_width_units`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.marker_event_pulse_width_units`
+    '''
+    marker_event_terminal_name = _attributes.AttributeViString(1150115)
+    '''Type: str
+
+    Returns the name of the fully qualified signal name as a string.
+
+                    **Default Values**:
+
+                    PXI-5670/5671, PXIe-5672/5673/5673E: /*AWGName*/Marker *X* Event, where *AWGName* is the name of your associated AWG module in MAX and *X* is Marker Event 0 through 3.
+
+                    PXIe-5830/5831/5832: /*BasebandModule*/ao/0/Marker *X* Event, where *BasebandModule* is the name of the baseband module of your device in MAX and *X* is Marker Event 0 through 3.
+
+                    PXIe-5820/5840/5841: /*ModuleName*/ao/0/Marker *X* Event, where *ModuleName* is the name of your device in MAX and *X* is Marker Event 0 through 3.
+
+                    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+                    **Related Topics**
+
+                    `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+                    `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_
+
+                    **High-Level Methods**:
+
+                    - GetTerminalName
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_terminal_name`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.marker_event_terminal_name`
+    '''
+    marker_event_toggle_initial_state = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.MarkerEventToggleInitialState, 1150209)
+    '''Type: enums.MarkerEventToggleInitialState
+
+    Specifies the initial state for the Marker Event when the marker_event_output_behavior property is set to MarkerEventOutputBehavior.TOGGLE.
+
+                    To set this property, the NI-RFSG device must be in the Configuration state.
+
+                    **Default Value:** MarkerEventToggleInitialState.LOW
+
+                    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
+
+                    **Related Topics**
+
+                    `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_
+
+                **Defined Values**:
+
+    +------------------------------------+----------------+----------------------------------------------------------------------------------+
+    | Name                               | Value          | Description                                                                      |
+    +====================================+================+==================================================================================+
+    | MarkerEventToggleInitialState.HIGH | 21001 (0x5209) | Specifies the initial state of the Marker Event toggle behavior as digital high. |
+    +------------------------------------+----------------+----------------------------------------------------------------------------------+
+    | MarkerEventToggleInitialState.LOW  | 21000 (0x5208) | Specifies the initial state of the Marker Event toggle behavior as digital low.  |
+    +------------------------------------+----------------+----------------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container markers to specify a subset.
+
+    Example: :py:attr:`my_session.markers[ ... ].marker_event_toggle_initial_state`
+
+    To set/get on all markers, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.marker_event_toggle_initial_state`
     '''
     memory_size = _attributes.AttributeViInt64(1150061)
     '''Type: int
@@ -6227,10 +6470,10 @@ class _SessionBase(object):
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
-        self.markers = _RepCapMarkers(self, repeated_capability_list)
-        self.script_triggers = _RepCapScript_triggers(self, repeated_capability_list)
-        self.waveform = _RepCapWaveform(self, repeated_capability_list)
-        self.deembedding_port = _RepCapDeembedding_port(self, repeated_capability_list)
+        self.markers = _RepeatedCapabilityMarkers(self, repeated_capability_list)
+        self.script_triggers = _RepeatedCapabilityScript_triggers(self, repeated_capability_list)
+        self.waveform = _RepeatedCapabilityWaveform(self, repeated_capability_list)
+        self.deembedding_port = _RepeatedCapabilityDeembedding_port(self, repeated_capability_list)
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.

@@ -91,11 +91,11 @@ class _Lock(object):
 % endif
 % if len(config['repeated_capabilities']) > 0:
 
-% if config['rep_cap_expansion'] == 'custom':
+% if config.get('repeated_capability_object_type', {}).get('python', 'session') == 'custom':
 # Dynamically handle repeated capabilities
 % for rep_cap in config['repeated_capabilities']:
 
-class _RepCap${rep_cap['python_name'].capitalize()}(object):
+class _RepeatedCapability${rep_cap['python_name'].capitalize()}(object):
     % for attribute in helper.sorted_attrs(helper.filter_rep_cap_supported_attributes(attributes, rep_cap['python_name'])):
 <%
 helper.add_attribute_rep_cap_tip(attributes[attribute], config)
@@ -219,7 +219,7 @@ class _SessionBase(object):
 # Skip attributes with repeated capability expansion set to "custom"
 if 'repeated_capability_type' in attributes[attribute]:
     rep_cap_type = attributes[attribute]['repeated_capability_type']
-    if any(rep_cap.get('python_name') == rep_cap_type and config['rep_cap_expansion'] == 'custom' for rep_cap in config['repeated_capabilities']):
+    if any(rep_cap.get('python_name') == rep_cap_type and config['repeated_capability_object_type'] == 'custom' for rep_cap in config['repeated_capabilities']):
         continue
 helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %>\
@@ -263,8 +263,8 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 % if len(config['repeated_capabilities']) > 0:
         # Instantiate any repeated capability objects
 % for rep_cap in config['repeated_capabilities']:
-% if config['rep_cap_expansion'] == 'custom':
-        self.${rep_cap['python_name']} = _RepCap${rep_cap['python_name'].capitalize()}(self, repeated_capability_list)
+% if config.get('repeated_capability_object_type', {}).get('python', 'session') == 'custom':
+        self.${rep_cap['python_name']} = _RepeatedCapability${rep_cap['python_name'].capitalize()}(self, repeated_capability_list)
 % else:
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}', repeated_capability_list)
 % endif
