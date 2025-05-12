@@ -91,7 +91,7 @@ class _Lock(object):
 % endif
 % if len(config['repeated_capabilities']) > 0:
 
-% if config.get('repeated_capability_object_type', {}).get('python', 'session') == 'custom':
+% if config['repeated_capability_object_type']['python'] == 'custom':
 # Dynamically handle repeated capabilities
 % for rep_cap in config['repeated_capabilities']:
 
@@ -263,7 +263,7 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
 % if len(config['repeated_capabilities']) > 0:
         # Instantiate any repeated capability objects
 % for rep_cap in config['repeated_capabilities']:
-% if config.get('repeated_capability_object_type', {}).get('python', 'session') == 'custom':
+% if config['repeated_capability_object_type']['python'] == 'custom':
         self.${rep_cap['python_name']} = _RepeatedCapability${rep_cap['python_name'].capitalize()}(self, repeated_capability_list)
 % else:
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}', repeated_capability_list)

@@ -722,8 +722,8 @@ def add_all_config_metadata(config):
     if 'uses_nitclk' not in config:
         config['uses_nitclk'] = False
 
-    if 'rep_cap_expansion' not in config:
-        config['rep_cap_expansion'] = 'session'
+    if 'repeated_capability_object_type' not in config:
+        config['repeated_capability_object_type'] = {'python': 'session'}
 
     return config
 
