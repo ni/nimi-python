@@ -107,10 +107,10 @@ class Library(object):
         self.niRFSG_UnlockSession_cfunc = None
         self.niRFSG_WaitUntilSettled_cfunc = None
         self.niRFSG_WriteArbWaveformComplexF32_cfunc = None
-        self.niRFSG_WriteArbWaveformComplexF64_cfunc = None
         self.niRFSG_WriteArbWaveformComplexI16_cfunc = None
         self.niRFSG_WriteP2PEndpointI16_cfunc = None
         self.niRFSG_WriteScript_cfunc = None
+        self.niRFSG_WriteWaveformComplexF64_cfunc = None
         self.niRFSG_close_cfunc = None
 
     def _get_library_function(self, name):
@@ -816,14 +816,6 @@ class Library(object):
                 self.niRFSG_WriteArbWaveformComplexF32_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_WriteArbWaveformComplexF32_cfunc(vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending)
 
-    def niRFSG_WriteArbWaveformComplexF64(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_WriteArbWaveformComplexF64_cfunc is None:
-                self.niRFSG_WriteArbWaveformComplexF64_cfunc = self._get_library_function('niRFSG_WriteArbWaveformComplexF64')
-                self.niRFSG_WriteArbWaveformComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ComplexViReal64), ViBoolean]  # noqa: F405
-                self.niRFSG_WriteArbWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_WriteArbWaveformComplexF64_cfunc(vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending)
-
     def niRFSG_WriteArbWaveformComplexI16(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_WriteArbWaveformComplexI16_cfunc is None:
@@ -847,6 +839,14 @@ class Library(object):
                 self.niRFSG_WriteScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_WriteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_WriteScript_cfunc(vi, script)
+
+    def niRFSG_WriteWaveformComplexF64(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_WriteWaveformComplexF64_cfunc is None:
+                self.niRFSG_WriteWaveformComplexF64_cfunc = self._get_library_function('niRFSG_WriteWaveformComplexF64')
+                self.niRFSG_WriteWaveformComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ComplexViReal64), ViBoolean]  # noqa: F405
+                self.niRFSG_WriteWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_WriteWaveformComplexF64_cfunc(vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending)
 
     def niRFSG_close(self, vi):  # noqa: N802
         with self._func_lock:

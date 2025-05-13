@@ -4944,7 +4944,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'WriteArbWaveformDispatcher': {
+    'WriteWaveformDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Writes data to the waveform in onboard memory.\n\nBy default, subsequent calls to this function\ncontinue writing data from the position of the last sample written. You\ncan set the write position and offset by calling the nirfsg_SetNamedWaveformNextWritePosition\nnirfsg_SetWaveformNextWritePosition function.'
@@ -5001,7 +5001,7 @@ functions = {
         'python_name': 'write_arb_waveform',
         'returns': 'ViStatus'
     },
-    'WriteArbWaveformComplexF64': {
+    'WriteWaveformComplexF64': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'

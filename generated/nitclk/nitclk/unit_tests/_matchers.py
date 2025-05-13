@@ -5,6 +5,7 @@ These work well with our visatype definitions.
 '''
 
 import ctypes
+import nitclk._complextype as _complextype
 import nitclk._visatype as _visatype
 import pprint
 
@@ -270,6 +271,25 @@ class ViReal64PointerMatcher(_PointerMatcher):
     def __init__(self):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
 
+
+class ComplexViReal64PointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.ComplexViReal64)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+
+        for i in range(self.expected_size):
+            expected_value = self.expected_data[i]
+            actual_value = other[i]
+            if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
+                return False
+        return True
+
+    def __repr__(self):
+        return f"ComplexViReal64PointerMatcher({self.expected_data})"
 
 # Buffers
 
