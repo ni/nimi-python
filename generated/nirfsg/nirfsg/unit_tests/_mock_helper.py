@@ -231,16 +231,16 @@ class SideEffectsHelper(object):
         self._defaults['UnlockSession']['callerHasLock'] = None
         self._defaults['WaitUntilSettled'] = {}
         self._defaults['WaitUntilSettled']['return'] = 0
-        self._defaults['WriteArbWaveformComplexF32'] = {}
-        self._defaults['WriteArbWaveformComplexF32']['return'] = 0
-        self._defaults['WriteArbWaveformComplexI16'] = {}
-        self._defaults['WriteArbWaveformComplexI16']['return'] = 0
         self._defaults['WriteP2PEndpointI16'] = {}
         self._defaults['WriteP2PEndpointI16']['return'] = 0
         self._defaults['WriteScript'] = {}
         self._defaults['WriteScript']['return'] = 0
+        self._defaults['WriteWaveformComplexF32'] = {}
+        self._defaults['WriteWaveformComplexF32']['return'] = 0
         self._defaults['WriteWaveformComplexF64'] = {}
         self._defaults['WriteWaveformComplexF64']['return'] = 0
+        self._defaults['WriteWaveformComplexI16'] = {}
+        self._defaults['WriteWaveformComplexI16']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
 
@@ -897,16 +897,6 @@ class SideEffectsHelper(object):
             return self._defaults['WaitUntilSettled']['return']
         return self._defaults['WaitUntilSettled']['return']
 
-    def niRFSG_WriteArbWaveformComplexF32(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
-        if self._defaults['WriteArbWaveformComplexF32']['return'] != 0:
-            return self._defaults['WriteArbWaveformComplexF32']['return']
-        return self._defaults['WriteArbWaveformComplexF32']['return']
-
-    def niRFSG_WriteArbWaveformComplexI16(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
-        if self._defaults['WriteArbWaveformComplexI16']['return'] != 0:
-            return self._defaults['WriteArbWaveformComplexI16']['return']
-        return self._defaults['WriteArbWaveformComplexI16']['return']
-
     def niRFSG_WriteP2PEndpointI16(self, vi, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
         if self._defaults['WriteP2PEndpointI16']['return'] != 0:
             return self._defaults['WriteP2PEndpointI16']['return']
@@ -917,10 +907,20 @@ class SideEffectsHelper(object):
             return self._defaults['WriteScript']['return']
         return self._defaults['WriteScript']['return']
 
+    def niRFSG_WriteWaveformComplexF32(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
+        if self._defaults['WriteWaveformComplexF32']['return'] != 0:
+            return self._defaults['WriteWaveformComplexF32']['return']
+        return self._defaults['WriteWaveformComplexF32']['return']
+
     def niRFSG_WriteWaveformComplexF64(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
         if self._defaults['WriteWaveformComplexF64']['return'] != 0:
             return self._defaults['WriteWaveformComplexF64']['return']
         return self._defaults['WriteWaveformComplexF64']['return']
+
+    def niRFSG_WriteWaveformComplexI16(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
+        if self._defaults['WriteWaveformComplexI16']['return'] != 0:
+            return self._defaults['WriteWaveformComplexI16']['return']
+        return self._defaults['WriteWaveformComplexI16']['return']
 
     def niRFSG_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -1101,15 +1101,15 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_UnlockSession.return_value = 0
         mock_library.niRFSG_WaitUntilSettled.side_effect = MockFunctionCallError("niRFSG_WaitUntilSettled")
         mock_library.niRFSG_WaitUntilSettled.return_value = 0
-        mock_library.niRFSG_WriteArbWaveformComplexF32.side_effect = MockFunctionCallError("niRFSG_WriteArbWaveformComplexF32")
-        mock_library.niRFSG_WriteArbWaveformComplexF32.return_value = 0
-        mock_library.niRFSG_WriteArbWaveformComplexI16.side_effect = MockFunctionCallError("niRFSG_WriteArbWaveformComplexI16")
-        mock_library.niRFSG_WriteArbWaveformComplexI16.return_value = 0
         mock_library.niRFSG_WriteP2PEndpointI16.side_effect = MockFunctionCallError("niRFSG_WriteP2PEndpointI16")
         mock_library.niRFSG_WriteP2PEndpointI16.return_value = 0
         mock_library.niRFSG_WriteScript.side_effect = MockFunctionCallError("niRFSG_WriteScript")
         mock_library.niRFSG_WriteScript.return_value = 0
+        mock_library.niRFSG_WriteWaveformComplexF32.side_effect = MockFunctionCallError("niRFSG_WriteWaveformComplexF32")
+        mock_library.niRFSG_WriteWaveformComplexF32.return_value = 0
         mock_library.niRFSG_WriteWaveformComplexF64.side_effect = MockFunctionCallError("niRFSG_WriteWaveformComplexF64")
         mock_library.niRFSG_WriteWaveformComplexF64.return_value = 0
+        mock_library.niRFSG_WriteWaveformComplexI16.side_effect = MockFunctionCallError("niRFSG_WriteWaveformComplexI16")
+        mock_library.niRFSG_WriteWaveformComplexI16.return_value = 0
         mock_library.niRFSG_close.side_effect = MockFunctionCallError("niRFSG_close")
         mock_library.niRFSG_close.return_value = 0

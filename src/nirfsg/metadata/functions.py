@@ -5063,7 +5063,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'WriteArbWaveformComplexI16': {
+    'WriteWaveformComplexI16': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
@@ -5125,7 +5125,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'WriteArbWaveformComplexF32': {
+    'WriteWaveformComplexF32': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'

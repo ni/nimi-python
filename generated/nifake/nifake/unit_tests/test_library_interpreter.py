@@ -35,9 +35,6 @@ class TestLibraryInterpreter:
         self.side_effects_helper = _mock_helper.SideEffectsHelper()
         self.side_effects_helper.set_side_effects_and_return_values(self.patched_library)
         self.patched_library.niFake_SetRuntimeEnvironment.side_effect = self.side_effects_helper.niFake_SetRuntimeEnvironment
-
-        self.patched_library.niFake_WriteWaveformComplexF64.side_effect = self.side_effects_helper.niFake_WriteWaveformComplexF64
-
         self.get_ctypes_pointer_for_buffer_side_effect_count = 0
         self.get_ctypes_pointer_for_buffer_side_effect_items = []
 
@@ -864,6 +861,50 @@ class TestLibraryInterpreter:
             _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
             _matchers.ViInt32Matcher(number_of_samples),
             _matchers.ComplexViReal64PointerMatcher(waveform_data_pointer, number_of_samples)
+        )
+
+    def test_write_waveform_complex_f64_invalid_input(self):
+        import numpy as np
+
+        invalid_waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex128)
+        expected_error_message = "Invalid waveform data provided. Expected a non-empty array of complex64."
+        interpreter = self.get_initialized_library_interpreter()
+        self.patched_library.niFake_WriteWaveformComplexF32.side_effect = ValueError("Invalid waveform data provided. Expected a non-empty array of complex64.")
+        with pytest.raises(ValueError) as exc_info:
+            interpreter.write_waveform_complex_f32(invalid_waveform_data)
+
+        assert str(exc_info.value) == expected_error_message
+
+    def test_write_interleaved_complexi16_invalid_input(self):
+        import numpy as np
+
+        invalid_waveform_data = np.array([], dtype=np.complex64)
+        expected_error_message = "Invalid waveform data provided. Expected a non-empty array of Int16."
+
+        interpreter = self.get_initialized_library_interpreter()
+        self.patched_library.niFake_WriteWaveformComplexI16.side_effect = ValueError("Invalid waveform data provided. Expected a non-empty array of Int16.")
+        with pytest.raises(ValueError) as exc_info:
+            interpreter.write_waveform_complex_i16(invalid_waveform_data)
+        assert str(exc_info.value) == expected_error_message
+
+    def test_write_interleaved_complexi16_valid_input(self):
+        import ctypes
+        import numpy as np
+
+        from nifake._complextype import ComplexViInt16
+
+        waveform_data = np.array([32767, 0] * 1000, dtype=np.int16)
+        number_of_samples = len(waveform_data) // 2
+        complex_dtype = numpy.dtype(ComplexViInt16)
+        structured_array = waveform_data.view(complex_dtype)
+        waveform_data_pointer = structured_array.ctypes.data_as(ctypes.POINTER(ComplexViInt16))
+        self.patched_library.niFake_WriteWaveformComplexI16.side_effect = self.side_effects_helper.niFake_WriteWaveformComplexI16
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.write_waveform_complex_i16(waveform_data)
+        self.patched_library.niFake_WriteWaveformComplexI16.assert_called_once_with(
+            _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+            _matchers.ViInt32Matcher(number_of_samples),
+            _matchers.ComplexViInt16PointerMatcher(waveform_data_pointer, number_of_samples)
         )
 
     def test_matcher_prints(self):

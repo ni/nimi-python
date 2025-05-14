@@ -1671,8 +1671,28 @@ class Session(_SessionBase):
         self._interpreter.write_waveform_numpy(waveform)
 
     @ivi_synchronized
-    def write_waveform_complex_f64(self, waveform_data_array):
-        r'''write_waveform_complex_f64
+    def _write_waveform_complex_f32(self, waveform_data_array):
+        r'''_write_waveform_complex_f32
+
+        TBD
+
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.complex64)):
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('complex64'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_waveform_complex_f32(waveform_data_array)
+
+    @ivi_synchronized
+    def _write_waveform_complex_f64(self, waveform_data_array):
+        r'''_write_waveform_complex_f64
 
         TBD
 
@@ -1689,6 +1709,26 @@ class Session(_SessionBase):
         if waveform_data_array.dtype is not numpy.dtype('complex128'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
         self._interpreter.write_waveform_complex_f64(waveform_data_array)
+
+    @ivi_synchronized
+    def _write_waveform_complex_i16(self, waveform_data_array):
+        r'''_write_waveform_complex_i16
+
+        TBD
+
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.int16)):
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_waveform_complex_i16(waveform_data_array)
 
     def _close(self):
         r'''_close

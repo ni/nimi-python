@@ -93,7 +93,9 @@ class Library(object):
         self.niFake_UnlockSession_cfunc = None
         self.niFake_Use64BitNumber_cfunc = None
         self.niFake_WriteWaveform_cfunc = None
+        self.niFake_WriteWaveformComplexF32_cfunc = None
         self.niFake_WriteWaveformComplexF64_cfunc = None
+        self.niFake_WriteWaveformComplexI16_cfunc = None
         self.niFake_close_cfunc = None
         self.niFake_error_message_cfunc = None
         self.niFake_self_test_cfunc = None
@@ -641,6 +643,14 @@ class Library(object):
                 self.niFake_WriteWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_WriteWaveform_cfunc(vi, number_of_samples, waveform)
 
+    def niFake_WriteWaveformComplexF32(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_WriteWaveformComplexF32_cfunc is None:
+                self.niFake_WriteWaveformComplexF32_cfunc = self._get_library_function('niFake_WriteWaveformComplexF32')
+                self.niFake_WriteWaveformComplexF32_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ComplexViReal32)]  # noqa: F405
+                self.niFake_WriteWaveformComplexF32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_WriteWaveformComplexF32_cfunc(vi, number_of_samples, waveform_data_array)
+
     def niFake_WriteWaveformComplexF64(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
         with self._func_lock:
             if self.niFake_WriteWaveformComplexF64_cfunc is None:
@@ -648,6 +658,14 @@ class Library(object):
                 self.niFake_WriteWaveformComplexF64_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ComplexViReal64)]  # noqa: F405
                 self.niFake_WriteWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_WriteWaveformComplexF64_cfunc(vi, number_of_samples, waveform_data_array)
+
+    def niFake_WriteWaveformComplexI16(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_WriteWaveformComplexI16_cfunc is None:
+                self.niFake_WriteWaveformComplexI16_cfunc = self._get_library_function('niFake_WriteWaveformComplexI16')
+                self.niFake_WriteWaveformComplexI16_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ComplexViInt16)]  # noqa: F405
+                self.niFake_WriteWaveformComplexI16_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_WriteWaveformComplexI16_cfunc(vi, number_of_samples, waveform_data_array)
 
     def niFake_close(self, vi):  # noqa: N802
         with self._func_lock:

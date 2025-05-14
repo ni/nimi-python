@@ -378,6 +378,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'WriteWaveformComplexF64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'TBD'
         },
@@ -422,6 +423,96 @@ functions = {
             },
         ],
         'returns': 'ViStatus'
+    },
+    'WriteWaveformComplexI16': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+            },
+            {
+                'direction': 'in',
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'ComplexViInt16[]',
+                'use_numpy_array': True,
+                'complex_type': 'interleaved',
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+    },
+    'WriteWaveformComplexF32': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'ComplexViReal32[]',
+                'complex_type': 'numpy',
+                'use_numpy_array': True,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
     },
     'GetABoolean': {
         'codegen_method': 'public',
