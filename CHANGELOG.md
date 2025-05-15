@@ -1676,7 +1676,7 @@
   - Basic example
   - Documentation for APIs (not final) 
   - (Common) Allow functions to have parameters that take in numpy.complex types.
-  - Enabled write_arb_waveform funtions along with examples.
+  - Enabled write_arb_waveform functions along with examples.
 - Changed
 - Removed
 

@@ -852,9 +852,10 @@ class TestLibraryInterpreter:
         waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex128)
         number_of_samples = len(waveform_data)
 
-        complex_dtype = numpy.dtype(ComplexViReal64)
-        structured_array = waveform_data.view(complex_dtype)
-        waveform_data_pointer = structured_array.ctypes.data_as(ctypes.POINTER(ComplexViReal64))
+        waveform_data_ctypes = (ComplexViReal64 * number_of_samples)(
+            *[ComplexViReal64(real=0.707, imag=0.707) for _ in range(number_of_samples)]
+        )
+        waveform_data_pointer = ctypes.cast(waveform_data_ctypes, ctypes.POINTER(ComplexViReal64))
         self.patched_library.niFake_WriteWaveformComplexF64.side_effect = self.side_effects_helper.niFake_WriteWaveformComplexF64
         interpreter = self.get_initialized_library_interpreter()
         interpreter.write_waveform_complex_f64(waveform_data)
@@ -896,9 +897,10 @@ class TestLibraryInterpreter:
 
         waveform_data = np.array([32767, 0] * 1000, dtype=np.int16)
         number_of_samples = len(waveform_data) // 2
-        complex_dtype = numpy.dtype(ComplexViInt16)
-        structured_array = waveform_data.view(complex_dtype)
-        waveform_data_pointer = structured_array.ctypes.data_as(ctypes.POINTER(ComplexViInt16))
+        waveform_data_ctypes = (ComplexViInt16 * number_of_samples)(
+            *[ComplexViInt16(real=32767, imag=0) for _ in range(number_of_samples)]
+        )
+        waveform_data_pointer = ctypes.cast(waveform_data_ctypes, ctypes.POINTER(ComplexViInt16))
         self.patched_library.niFake_WriteWaveformComplexI16.side_effect = self.side_effects_helper.niFake_WriteWaveformComplexI16
         interpreter = self.get_initialized_library_interpreter()
         interpreter.write_waveform_complex_i16(waveform_data)
