@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query, reset_device, options={})
+.. py:class:: Session(self, resource_name, options={}, id_query=False, reset_device=False)
 
     
 
@@ -41,6 +41,40 @@ Session
 
     :type resource_name: str
 
+    :param options:
+        
+
+        Specifies the initial value of certain properties for the session. The
+        syntax for **options** is a dictionary of properties with an assigned
+        value. For example:
+
+        { 'simulate': False }
+
+        You do not have to specify a value for all the properties. If you do not
+        specify a value for a property, the default value is used.
+
+        Advanced Example:
+        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+        +-------------------------+---------+
+        | Property                | Default |
+        +=========================+=========+
+        | range_check             | True    |
+        +-------------------------+---------+
+        | query_instrument_status | False   |
+        +-------------------------+---------+
+        | cache                   | True    |
+        +-------------------------+---------+
+        | simulate                | False   |
+        +-------------------------+---------+
+        | record_value_coersions  | False   |
+        +-------------------------+---------+
+        | driver_setup            | {}      |
+        +-------------------------+---------+
+
+
+    :type options: str
+
     :param id_query:
         
 
@@ -76,40 +110,6 @@ Session
 
 
     :type reset_device: bool
-
-    :param options:
-        
-
-        Specifies the initial value of certain properties for the session. The
-        syntax for **options** is a dictionary of properties with an assigned
-        value. For example:
-
-        { 'simulate': False }
-
-        You do not have to specify a value for all the properties. If you do not
-        specify a value for a property, the default value is used.
-
-        Advanced Example:
-        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
-
-        +-------------------------+---------+
-        | Property                | Default |
-        +=========================+=========+
-        | range_check             | True    |
-        +-------------------------+---------+
-        | query_instrument_status | False   |
-        +-------------------------+---------+
-        | cache                   | True    |
-        +-------------------------+---------+
-        | simulate                | False   |
-        +-------------------------+---------+
-        | record_value_coersions  | False   |
-        +-------------------------+---------+
-        | driver_setup            | {}      |
-        +-------------------------+---------+
-
-
-    :type options: str
 
 
 Methods
@@ -2699,9 +2699,9 @@ write_arb_waveform
 
             Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-                            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform` method, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-                            ----
-                            **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform` method, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, this method can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+
+                            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                             **Related Topics**
 
@@ -2710,6 +2710,8 @@ write_arb_waveform
                             `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
             
+
+            .. note:: This method only supports :py:data:`~nirfsg.PowerLevelType.PEAK` mode as specified in the :py:attr:`nirfsg.Session.power_level_type` property. If you download a waveform when using this method, you cannot set the :py:attr:`nirfsg.Session.power_level_type` to :py:data:`~nirfsg.PowerLevelType.AVERAGE` without causing error in the output.
 
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 

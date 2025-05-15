@@ -5434,6 +5434,7 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def check_attribute_vi_boolean(self, attribute, value):
         r'''check_attribute_vi_boolean
 
@@ -5460,6 +5461,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def check_attribute_vi_int32(self, attribute, value):
         r'''check_attribute_vi_int32
 
@@ -5486,6 +5488,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_int32(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def check_attribute_vi_int64(self, attribute, value):
         r'''check_attribute_vi_int64
 
@@ -5512,6 +5515,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_int64(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def check_attribute_vi_real64(self, attribute, value):
         r'''check_attribute_vi_real64
 
@@ -5538,6 +5542,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_real64(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def check_attribute_vi_session(self, attribute):
         r'''check_attribute_vi_session
 
@@ -5560,6 +5565,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_session(self._repeated_capability, attribute)
 
+    @ivi_synchronized
     def check_attribute_vi_string(self, attribute, value):
         r'''check_attribute_vi_string
 
@@ -5586,6 +5592,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_string(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute):
         r'''_get_attribute_vi_boolean
 
@@ -5618,6 +5625,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute):
         r'''_get_attribute_vi_int32
 
@@ -5650,6 +5658,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_int32(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute):
         r'''_get_attribute_vi_int64
 
@@ -5682,6 +5691,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_int64(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute):
         r'''_get_attribute_vi_real64
 
@@ -5714,6 +5724,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_real64(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     def _get_attribute_vi_session(self, attribute):
         r'''_get_attribute_vi_session
 
@@ -5746,6 +5757,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_session(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute):
         r'''_get_attribute_vi_string
 
@@ -5784,6 +5796,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     def _get_waveform_burst_start_locations(self, number_of_locations):
         r'''_get_waveform_burst_start_locations
 
@@ -5821,6 +5834,7 @@ class _SessionBase(object):
         locations, required_size = self._interpreter.get_waveform_burst_start_locations(self._repeated_capability, number_of_locations)
         return locations, required_size
 
+    @ivi_synchronized
     def _get_waveform_burst_stop_locations(self, number_of_locations):
         r'''_get_waveform_burst_stop_locations
 
@@ -5858,6 +5872,7 @@ class _SessionBase(object):
         locations, required_size = self._interpreter.get_waveform_burst_stop_locations(self._repeated_capability, number_of_locations)
         return locations, required_size
 
+    @ivi_synchronized
     def _get_waveform_marker_event_locations(self, number_of_locations):
         r'''_get_waveform_marker_event_locations
 
@@ -5892,6 +5907,7 @@ class _SessionBase(object):
         locations, required_size = self._interpreter.get_waveform_marker_event_locations(self._repeated_capability, number_of_locations)
         return locations, required_size
 
+    @ivi_synchronized
     def load_configurations_from_file(self, file_path):
         r'''load_configurations_from_file
 
@@ -5953,6 +5969,7 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
+    @ivi_synchronized
     def reset_attribute(self, attribute_id):
         r'''reset_attribute
 
@@ -5977,6 +5994,7 @@ class _SessionBase(object):
         '''
         self._interpreter.reset_attribute(self._repeated_capability, attribute_id)
 
+    @ivi_synchronized
     def save_configurations_to_file(self, file_path):
         r'''save_configurations_to_file
 
@@ -6001,6 +6019,7 @@ class _SessionBase(object):
         '''
         self._interpreter.save_configurations_to_file(self._repeated_capability, file_path)
 
+    @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_identifier):
         r'''send_software_edge_trigger
 
@@ -6065,6 +6084,7 @@ class _SessionBase(object):
             raise TypeError('Parameter trigger_identifier must be of type ' + str(enums.TriggerIdentifier))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
+    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute, value):
         r'''_set_attribute_vi_boolean
 
@@ -6100,6 +6120,7 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute, value):
         r'''_set_attribute_vi_int32
 
@@ -6135,6 +6156,7 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute, value):
         r'''_set_attribute_vi_int64
 
@@ -6172,6 +6194,7 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_int64(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute, value):
         r'''_set_attribute_vi_real64
 
@@ -6207,6 +6230,7 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     def _set_attribute_vi_session(self, attribute):
         r'''_set_attribute_vi_session
 
@@ -6238,6 +6262,7 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_session(self._repeated_capability, attribute)
 
+    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute, value):
         r'''_set_attribute_vi_string
 
@@ -6273,7 +6298,8 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute, value)
 
-    def _set_waveform_burst_start_locations(self, number_of_locations):
+    @ivi_synchronized
+    def _set_waveform_burst_start_locations(self, number_of_locations, locations):
         r'''_set_waveform_burst_start_locations
 
         Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.
@@ -6294,18 +6320,16 @@ class _SessionBase(object):
         Args:
             number_of_locations (int): Specifies the size of the burst start locations array.
 
-
-        Returns:
             locations (float): Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the **CHANNEL_NAME** parameter. This value is expressed in samples.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
         '''
-        locations = self._interpreter.set_waveform_burst_start_locations(self._repeated_capability, number_of_locations)
-        return locations
+        self._interpreter.set_waveform_burst_start_locations(self._repeated_capability, number_of_locations, locations)
 
-    def _set_waveform_burst_stop_locations(self, number_of_locations):
+    @ivi_synchronized
+    def _set_waveform_burst_stop_locations(self, number_of_locations, locations):
         r'''_set_waveform_burst_stop_locations
 
         Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.
@@ -6326,15 +6350,13 @@ class _SessionBase(object):
         Args:
             number_of_locations (int): Specifies the size of the burst stop locations array.
 
-
-        Returns:
             locations (float): Specifies the burst stop locations, in samples, to store in the NI-RFSG session.
 
         '''
-        locations = self._interpreter.set_waveform_burst_stop_locations(self._repeated_capability, number_of_locations)
-        return locations
+        self._interpreter.set_waveform_burst_stop_locations(self._repeated_capability, number_of_locations, locations)
 
-    def _set_waveform_marker_event_locations(self, number_of_locations):
+    @ivi_synchronized
+    def _set_waveform_marker_event_locations(self, number_of_locations, locations):
         r'''_set_waveform_marker_event_locations
 
         Configures the marker locations associated with waveform and marker in the NI-RFSG session.
@@ -6355,13 +6377,10 @@ class _SessionBase(object):
         Args:
             number_of_locations (int): Specifies the size of the locations array.
 
-
-        Returns:
             locations (float): Specifies the marker location, in samples, to store in the NI-RFSG database.
 
         '''
-        locations = self._interpreter.set_waveform_marker_event_locations(self._repeated_capability, number_of_locations)
-        return locations
+        self._interpreter.set_waveform_marker_event_locations(self._repeated_capability, number_of_locations, locations)
 
     def unlock(self):
         '''unlock
@@ -6376,7 +6395,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-RFSG session to the NI-RFSG driver'''
 
-    def __init__(self, resource_name, id_query, reset_device, options={}):
+    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
         r'''An NI-RFSG session to the NI-RFSG driver
 
         Opens a session to the device you specify as the **RESOURCE_NAME** and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -6402,30 +6421,6 @@ class Session(_SessionBase):
                                         You can also specify the name of an IVI logical name configured with the IVI Configuration utility. Refer to the *IVI* topic of the *Measurement & Automation Explorer Help* for more information.
 
                 Note: NI-RFSG device names are not case-sensitive. However, all IVI names, such as logical names, are case-sensitive. If you use an IVI logical name, make sure the name is identical to the name shown in the IVI Configuration Utility.
-
-            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
-
-                                        **Defined Values** :
-
-                +-----------+--------------------------+
-                | Value     | Description              |
-                +===========+==========================+
-                | True (1)  | Perform ID query.        |
-                +-----------+--------------------------+
-                | False (0) | Do not perform ID query. |
-                +-----------+--------------------------+
-
-            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
-
-                                        **Defined Values** :
-
-                +-----------+----------------------+
-                | Value     | Description          |
-                +===========+======================+
-                | True (1)  | Reset device.        |
-                +-----------+----------------------+
-                | False (0) | Do not reset device. |
-                +-----------+----------------------+
 
             options (str): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
@@ -6455,6 +6450,30 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
+
+                                        **Defined Values** :
+
+                +-----------+--------------------------+
+                | Value     | Description              |
+                +===========+==========================+
+                | True (1)  | Perform ID query.        |
+                +-----------+--------------------------+
+                | False (0) | Do not perform ID query. |
+                +-----------+--------------------------+
+
+            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
+
+                                        **Defined Values** :
+
+                +-----------+----------------------+
+                | Value     | Description          |
+                +===========+======================+
+                | True (1)  | Reset device.        |
+                +-----------+----------------------+
+                | False (0) | Do not reset device. |
+                +-----------+----------------------+
+
 
         Returns:
             new_vi (int): Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -6475,16 +6494,16 @@ class Session(_SessionBase):
         # if _init_with_options fails, the error handler can reference it.
         # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, options, id_query, reset_device))
 
         self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("options=" + pp.pformat(options))
         param_list.append("id_query=" + pp.pformat(id_query))
         param_list.append("reset_device=" + pp.pformat(reset_device))
-        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         # Store the list of channels in the Session which is needed by some nimi-python modules.
@@ -6549,6 +6568,7 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
     def abort(self):
         r'''abort
 
@@ -6562,6 +6582,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.abort()
 
+    @ivi_synchronized
     def allocate_arb_waveform(self, waveform_name, size_in_samples):
         r'''allocate_arb_waveform
 
@@ -6585,6 +6606,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.allocate_arb_waveform(waveform_name, size_in_samples)
 
+    @ivi_synchronized
     def change_external_calibration_password(self, old_password, new_password):
         r'''change_external_calibration_password
 
@@ -6600,6 +6622,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.change_external_calibration_password(old_password, new_password)
 
+    @ivi_synchronized
     def check_generation_status(self):
         r'''check_generation_status
 
@@ -6632,6 +6655,7 @@ class Session(_SessionBase):
         is_done = self._interpreter.check_generation_status()
         return is_done
 
+    @ivi_synchronized
     def check_if_script_exists(self, script_name):
         r'''check_if_script_exists
 
@@ -6663,6 +6687,7 @@ class Session(_SessionBase):
         script_exists = self._interpreter.check_if_script_exists(script_name)
         return script_exists
 
+    @ivi_synchronized
     def check_if_waveform_exists(self, waveform_name):
         r'''check_if_waveform_exists
 
@@ -6694,6 +6719,7 @@ class Session(_SessionBase):
         waveform_exists = self._interpreter.check_if_waveform_exists(waveform_name)
         return waveform_exists
 
+    @ivi_synchronized
     def clear_all_arb_waveforms(self):
         r'''clear_all_arb_waveforms
 
@@ -6705,6 +6731,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_all_arb_waveforms()
 
+    @ivi_synchronized
     def clear_arb_waveform(self, name):
         r'''clear_arb_waveform
 
@@ -6720,6 +6747,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_arb_waveform(name)
 
+    @ivi_synchronized
     def clear_error(self):
         r'''clear_error
 
@@ -6738,6 +6766,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_error()
 
+    @ivi_synchronized
     def clear_self_calibrate_range(self):
         r'''clear_self_calibrate_range
 
@@ -6747,6 +6776,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_self_calibrate_range()
 
+    @ivi_synchronized
     def commit(self):
         r'''commit
 
@@ -6762,6 +6792,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.commit()
 
+    @ivi_synchronized
     def configure_deembedding_table_interpolation_linear(self, port, table_name, format):
         r'''configure_deembedding_table_interpolation_linear
 
@@ -6793,6 +6824,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter format must be of type ' + str(enums.Format))
         self._interpreter.configure_deembedding_table_interpolation_linear(port, table_name, format)
 
+    @ivi_synchronized
     def configure_deembedding_table_interpolation_nearest(self, port, table_name):
         r'''configure_deembedding_table_interpolation_nearest
 
@@ -6810,6 +6842,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_deembedding_table_interpolation_nearest(port, table_name)
 
+    @ivi_synchronized
     def configure_deembedding_table_interpolation_spline(self, port, table_name):
         r'''configure_deembedding_table_interpolation_spline
 
@@ -6827,6 +6860,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_deembedding_table_interpolation_spline(port, table_name)
 
+    @ivi_synchronized
     def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
         r'''configure_digital_edge_script_trigger
 
@@ -6854,6 +6888,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_edge_script_trigger(trigger_id, source, edge)
 
+    @ivi_synchronized
     def configure_digital_edge_start_trigger(self, source, edge):
         r'''configure_digital_edge_start_trigger
 
@@ -6879,6 +6914,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
+    @ivi_synchronized
     def configure_digital_level_script_trigger(self, trigger_id, source, level):
         r'''configure_digital_level_script_trigger
 
@@ -6904,6 +6940,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_level_script_trigger(trigger_id, source, level)
 
+    @ivi_synchronized
     def configure_digital_modulation_user_defined_waveform(self, number_of_samples, user_defined_waveform):
         r'''configure_digital_modulation_user_defined_waveform
 
@@ -6922,6 +6959,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_modulation_user_defined_waveform(number_of_samples, user_defined_waveform)
 
+    @ivi_synchronized
     def configure_generation_mode(self, generation_mode):
         r'''configure_generation_mode
 
@@ -6963,6 +7001,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter generation_mode must be of type ' + str(enums.GenerationMode))
         self._interpreter.configure_generation_mode(generation_mode)
 
+    @ivi_synchronized
     def configure_output_enabled(self, output_enabled):
         r'''configure_output_enabled
 
@@ -6986,6 +7025,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_output_enabled(output_enabled)
 
+    @ivi_synchronized
     def configure_p2_p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):
         r'''configure_p2_p_endpoint_fullness_start_trigger
 
@@ -7010,6 +7050,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
+    @ivi_synchronized
     def configure_power_level_type(self, power_level_type):
         r'''configure_power_level_type
 
@@ -7039,6 +7080,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_power_level_type(power_level_type)
 
+    @ivi_synchronized
     def configure_pxi_chassis_clk10(self, pxi_clk10_source):
         r'''configure_pxi_chassis_clk10
 
@@ -7060,6 +7102,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_pxi_chassis_clk10(pxi_clk10_source)
 
+    @ivi_synchronized
     def configure_rf(self, frequency, power_level):
         r'''configure_rf
 
@@ -7085,6 +7128,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_rf(frequency, power_level)
 
+    @ivi_synchronized
     def configure_ref_clock(self, ref_clock_source, ref_clock_rate):
         r'''configure_ref_clock
 
@@ -7136,6 +7180,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_ref_clock(ref_clock_source, ref_clock_rate)
 
+    @ivi_synchronized
     def configure_signal_bandwidth(self, signal_bandwidth):
         r'''configure_signal_bandwidth
 
@@ -7155,6 +7200,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_signal_bandwidth(signal_bandwidth)
 
+    @ivi_synchronized
     def configure_software_script_trigger(self, trigger_id):
         r'''configure_software_script_trigger
 
@@ -7176,6 +7222,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_software_script_trigger(trigger_id)
 
+    @ivi_synchronized
     def configure_software_start_trigger(self):
         r'''configure_software_start_trigger
 
@@ -7195,6 +7242,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_software_start_trigger()
 
+    @ivi_synchronized
     def create_deembedding_sparameter_table_s2_p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
         r'''create_deembedding_sparameter_table_s2_p_file
 
@@ -7232,6 +7280,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
         self._interpreter.create_deembedding_sparameter_table_s2_p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
+    @ivi_synchronized
     def delete_all_deembedding_tables(self):
         r'''delete_all_deembedding_tables
 
@@ -7241,6 +7290,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.delete_all_deembedding_tables()
 
+    @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):
         r'''delete_deembedding_table
 
@@ -7256,6 +7306,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.delete_deembedding_table(port, table_name)
 
+    @ivi_synchronized
     def disable(self):
         r'''disable
 
@@ -7265,6 +7316,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable()
 
+    @ivi_synchronized
     def disable_script_trigger(self, trigger_id):
         r'''disable_script_trigger
 
@@ -7284,6 +7336,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable_script_trigger(trigger_id)
 
+    @ivi_synchronized
     def disable_start_trigger(self):
         r'''disable_start_trigger
 
@@ -7299,6 +7352,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable_start_trigger()
 
+    @ivi_synchronized
     def export_signal(self, signal, signal_identifier, output_terminal):
         r'''export_signal
 
@@ -7400,6 +7454,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter output_terminal must be of type ' + str(enums.ReferenceClockExportOutputTerminal))
         self._interpreter.export_signal(signal, signal_identifier, output_terminal)
 
+    @ivi_synchronized
     def _get_external_calibration_last_date_and_time(self):
         r'''_get_external_calibration_last_date_and_time
 
@@ -7430,6 +7485,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._interpreter.get_external_calibration_last_date_and_time()
         return year, month, day, hour, minute, second
 
+    @ivi_synchronized
     def get_external_calibration_last_date_and_time(self):
         '''get_external_calibration_last_date_and_time
 
@@ -7442,6 +7498,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._get_external_calibration_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def get_self_calibration_last_date_and_time(self):
         '''get_self_calibration_last_date_and_time
 
@@ -7454,6 +7511,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._get_self_calibration_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     def get_max_settable_power(self):
         r'''get_max_settable_power
 
@@ -7468,6 +7526,7 @@ class Session(_SessionBase):
         value = self._interpreter.get_max_settable_power()
         return value
 
+    @ivi_synchronized
     def _get_self_calibration_date_and_time(self, module):
         r'''_get_self_calibration_date_and_time
 
@@ -7502,6 +7561,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._interpreter.get_self_calibration_date_and_time(module)
         return year, month, day, hour, minute, second
 
+    @ivi_synchronized
     def get_self_calibration_temperature(self, module):
         r'''get_self_calibration_temperature
 
@@ -7534,6 +7594,7 @@ class Session(_SessionBase):
         temperature = self._interpreter.get_self_calibration_temperature(module)
         return temperature
 
+    @ivi_synchronized
     def get_stream_endpoint_handle(self, stream_endpoint):
         r'''get_stream_endpoint_handle
 
@@ -7558,7 +7619,7 @@ class Session(_SessionBase):
         reader_handle = self._interpreter.get_stream_endpoint_handle(stream_endpoint)
         return reader_handle
 
-    def _init_with_options(self, resource_name, id_query, reset_device, option_string):
+    def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
         r'''_init_with_options
 
         Opens a session to the device you specify as the **RESOURCE_NAME** and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -7584,30 +7645,6 @@ class Session(_SessionBase):
                                         You can also specify the name of an IVI logical name configured with the IVI Configuration utility. Refer to the *IVI* topic of the *Measurement & Automation Explorer Help* for more information.
 
                 Note: NI-RFSG device names are not case-sensitive. However, all IVI names, such as logical names, are case-sensitive. If you use an IVI logical name, make sure the name is identical to the name shown in the IVI Configuration Utility.
-
-            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
-
-                                        **Defined Values** :
-
-                +-----------+--------------------------+
-                | Value     | Description              |
-                +===========+==========================+
-                | True (1)  | Perform ID query.        |
-                +-----------+--------------------------+
-                | False (0) | Do not perform ID query. |
-                +-----------+--------------------------+
-
-            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
-
-                                        **Defined Values** :
-
-                +-----------+----------------------+
-                | Value     | Description          |
-                +===========+======================+
-                | True (1)  | Reset device.        |
-                +-----------+----------------------+
-                | False (0) | Do not reset device. |
-                +-----------+----------------------+
 
             option_string (str): Specifies the initial value of certain properties for the session. The following table lists the properties and the name you pass in this parameter to identify the property.
 
@@ -7635,6 +7672,30 @@ class Session(_SessionBase):
                 | Simulate         | simulate                |
                 +------------------+-------------------------+
 
+            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
+
+                                        **Defined Values** :
+
+                +-----------+--------------------------+
+                | Value     | Description              |
+                +===========+==========================+
+                | True (1)  | Perform ID query.        |
+                +-----------+--------------------------+
+                | False (0) | Do not perform ID query. |
+                +-----------+--------------------------+
+
+            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
+
+                                        **Defined Values** :
+
+                +-----------+----------------------+
+                | Value     | Description          |
+                +===========+======================+
+                | True (1)  | Reset device.        |
+                +-----------+----------------------+
+                | False (0) | Do not reset device. |
+                +-----------+----------------------+
+
 
         Returns:
             new_vi (int): Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -7643,6 +7704,7 @@ class Session(_SessionBase):
         new_vi = self._interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
         return new_vi
 
+    @ivi_synchronized
     def _initiate(self):
         r'''_initiate
 
@@ -7658,6 +7720,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.initiate()
 
+    @ivi_synchronized
     def perform_power_search(self):
         r'''perform_power_search
 
@@ -7675,6 +7738,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.perform_power_search()
 
+    @ivi_synchronized
     def perform_thermal_correction(self):
         r'''perform_thermal_correction
 
@@ -7694,6 +7758,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.perform_thermal_correction()
 
+    @ivi_synchronized
     def query_arb_waveform_capabilities(self):
         r'''query_arb_waveform_capabilities
 
@@ -7716,6 +7781,7 @@ class Session(_SessionBase):
         max_number_waveforms, waveform_quantum, min_waveform_size, max_waveform_size = self._interpreter.query_arb_waveform_capabilities()
         return max_number_waveforms, waveform_quantum, min_waveform_size, max_waveform_size
 
+    @ivi_synchronized
     def read_and_download_waveform_from_file_tdms(self, waveform_name, file_path, waveform_index):
         r'''read_and_download_waveform_from_file_tdms
 
@@ -7752,6 +7818,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.read_and_download_waveform_from_file_tdms(waveform_name, file_path, waveform_index)
 
+    @ivi_synchronized
     def reset(self):
         r'''reset
 
@@ -7769,6 +7836,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset()
 
+    @ivi_synchronized
     def reset_device(self):
         r'''reset_device
 
@@ -7795,6 +7863,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset_device()
 
+    @ivi_synchronized
     def reset_with_defaults(self):
         r'''reset_with_defaults
 
@@ -7804,6 +7873,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset_with_defaults()
 
+    @ivi_synchronized
     def select_arb_waveform(self, name):
         r'''select_arb_waveform
 
@@ -7826,6 +7896,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.select_arb_waveform(name)
 
+    @ivi_synchronized
     def self_cal(self):
         r'''self_cal
 
@@ -7841,6 +7912,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.self_cal()
 
+    @ivi_synchronized
     def self_calibrate_range(self, steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level):
         r'''self_calibrate_range
 
@@ -7899,6 +7971,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRangeStepsToOmit))
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
+    @ivi_synchronized
     def self_test(self, self_test_message):
         r'''self_test
 
@@ -7935,6 +8008,7 @@ class Session(_SessionBase):
         self_test_result = self._interpreter.self_test(self_test_message)
         return self_test_result
 
+    @ivi_synchronized
     def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
         r'''set_arb_waveform_next_write_position
 
@@ -7971,6 +8045,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
         self._interpreter.set_arb_waveform_next_write_position(waveform_name, relative_to, offset)
 
+    @ivi_synchronized
     def wait_until_settled(self, max_time_milliseconds):
         r'''wait_until_settled
 
@@ -7990,6 +8065,122 @@ class Session(_SessionBase):
         '''
         self._interpreter.wait_until_settled(max_time_milliseconds)
 
+    @ivi_synchronized
+    def _write_arb_waveform_complex_f32(self, waveform_name, waveform_data_array, more_data_pending):
+        r'''_write_arb_waveform_complex_f32
+
+        Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
+
+                        This method accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the allocate_arb_waveform method, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_
+
+                        `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
+
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Args:
+            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
+
+            waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
+
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the WAVEFORM_NAME parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('complex64'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_arb_waveform_complex_f32(waveform_name, waveform_data_array, more_data_pending)
+
+    @ivi_synchronized
+    def _write_arb_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):
+        r'''_write_arb_waveform_complex_f64
+
+        Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
+
+                        This method accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the allocate_arb_waveform, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.
+
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+                        **Related Topics**
+
+                        `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_
+
+                        `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
+
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+
+        Args:
+            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
+
+            waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
+
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('complex128'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
+
+    @ivi_synchronized
+    def _write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):
+        r'''_write_arb_waveform_complex_i16
+
+        Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
+
+                        This method accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, this method can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_
+
+                        `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
+
+        Note: This method only supports PowerLevelType.PEAK mode as specified in the power_level_type property. If you download a waveform when using this method, you cannot set the power_level_type to PowerLevelType.AVERAGE without causing error in the output.
+
+        Args:
+            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
+
+            waveform_data_array (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
+
+    @ivi_synchronized
     def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
         r'''write_p2_p_endpoint_i16
 
@@ -8019,6 +8210,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.write_p2_p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
 
+    @ivi_synchronized
     def write_script(self, script):
         r'''write_script
 
@@ -8042,145 +8234,22 @@ class Session(_SessionBase):
         '''
         self._interpreter.write_script(script)
 
-    @ivi_synchronized
-    def _write_waveform_complex_f32(self, waveform_name, waveform_data_array, more_data_pending):
-        r'''_write_waveform_complex_f32
-
-        Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
-
-                        This method accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the %method{allocate arb waveform} method, the **%parameter{more data pending}** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-                        ----
-                        **Note**
-                        On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **%parameter{more data pending}** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-                        ----
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)
-
-                        [Assigning Properties or Properties to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html)
-
-        Args:
-            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-            waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
-
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        import numpy
-
-        if type(waveform_data_array) is not numpy.ndarray:
-            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
-        if numpy.isfortran(waveform_data_array) is True:
-            raise TypeError('waveform_data_array must be in C-order')
-        if waveform_data_array.dtype is not numpy.dtype('complex64'):
-            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data_array.dtype))
-        self._interpreter.write_waveform_complex_f32(waveform_name, waveform_data_array, more_data_pending)
-
-    @ivi_synchronized
-    def _write_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):
-        r'''_write_waveform_complex_f64
-
-        Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
-
-                        This method accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the %method{allocate arb waveform}, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.
-                        ----
-                        **Note**
-                        On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-                        ----
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-                        **Related Topics**
-
-                        [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)
-
-                        [Assigning Properties or Properties to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html)
-
-        Args:
-            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-            waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
-
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        import numpy
-
-        if type(waveform_data_array) is not numpy.ndarray:
-            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
-        if numpy.isfortran(waveform_data_array) is True:
-            raise TypeError('waveform_data_array must be in C-order')
-        if waveform_data_array.dtype is not numpy.dtype('complex128'):
-            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
-        self._interpreter.write_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
-
-    @ivi_synchronized
-    def _write_waveform_complex_i16(self, waveform_name, waveform_data_array, more_data_pending):
-        r'''_write_waveform_complex_i16
-
-        Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
-
-                        This method accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, this method can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-                        ----
-                        **Note**
-                        This method only supports %enum_value{power level type.peak power} mode as specified in the %property{power level type} property. If you download a waveform when using this method, you cannot set the %property{power level type} to %enum_value{power level type.average power} without causing error in the output.
-                        ----
-
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)
-
-                        [Assigning Properties or Properties to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html)
-
-        Args:
-            waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
-
-            waveform_data_array (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
-
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        import numpy
-
-        if type(waveform_data_array) is not numpy.ndarray:
-            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
-        if numpy.isfortran(waveform_data_array) is True:
-            raise TypeError('waveform_data_array must be in C-order')
-        if waveform_data_array.dtype is not numpy.dtype('int16'):
-            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
-        self._interpreter.write_waveform_complex_i16(waveform_name, waveform_data_array, more_data_pending)
-
-    @ivi_synchronized
     def write_arb_waveform(self, waveform_name, waveform_data_array, more_data_pending):
         '''write_arb_waveform
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-                        This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the allocate_arb_waveform method, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
-                        ----
-                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+                        This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the allocate_arb_waveform method, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, this method can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+
+                        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                         **Related Topics**
 
                         `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_
 
                         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
+
+        Note: This method only supports PowerLevelType.PEAK mode as specified in the power_level_type property. If you download a waveform when using this method, you cannot set the power_level_type to PowerLevelType.AVERAGE without causing error in the output.
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.

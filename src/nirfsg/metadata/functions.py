@@ -29,7 +29,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'AllocateArbWaveform': {
         'codegen_method': 'public',
@@ -79,7 +79,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ChangeExternalCalibrationPassword': {
         'codegen_method': 'public',
@@ -129,7 +129,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckAttributeViBoolean': {
         'codegen_method': 'public',
@@ -190,7 +190,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckAttributeViInt32': {
         'codegen_method': 'public',
@@ -252,7 +252,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckAttributeViInt64': {
         'codegen_method': 'public',
@@ -314,7 +314,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckAttributeViReal64': {
         'codegen_method': 'public',
@@ -376,7 +376,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckAttributeViSession': {
         'codegen_method': 'public',
@@ -437,7 +437,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckAttributeViString': {
         'codegen_method': 'public',
@@ -499,7 +499,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckGenerationStatus': {
         'codegen_method': 'public',
@@ -553,7 +553,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckIfScriptExists': {
         'codegen_method': 'public',
@@ -617,7 +617,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CheckIfWaveformExists': {
         'codegen_method': 'public',
@@ -681,7 +681,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ClearAllArbWaveforms': {
         'codegen_method': 'public',
@@ -711,7 +711,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ClearArbWaveform': {
         'codegen_method': 'public',
@@ -751,7 +751,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ClearError': {
         'codegen_method': 'public',
@@ -782,7 +782,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ClearSelfCalibrateRange': {
         'codegen_method': 'public',
@@ -812,7 +812,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'Commit': {
         'codegen_method': 'public',
@@ -842,7 +842,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
@@ -925,7 +925,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
@@ -975,7 +975,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
@@ -1025,7 +1025,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDigitalEdgeScriptTrigger': {
         'codegen_method': 'public',
@@ -1085,7 +1085,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDigitalEdgeStartTrigger': {
         'codegen_method': 'public',
@@ -1136,7 +1136,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDigitalLevelScriptTrigger': {
         'codegen_method': 'public',
@@ -1196,7 +1196,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureDigitalModulationUserDefinedWaveform': {
         'codegen_method': 'public',
@@ -1250,7 +1250,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureGenerationMode': {
         'codegen_method': 'public',
@@ -1314,7 +1314,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureOutputEnabled': {
         'codegen_method': 'public',
@@ -1354,7 +1354,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureP2PEndpointFullnessStartTrigger': {
         'codegen_method': 'public',
@@ -1395,7 +1395,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigurePowerLevelType': {
         'codegen_method': 'public',
@@ -1452,7 +1452,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigurePxiChassisClk10': {
         'codegen_method': 'public',
@@ -1492,7 +1492,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureRF': {
         'codegen_method': 'public',
@@ -1542,7 +1542,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureRefClock': {
         'codegen_method': 'public',
@@ -1629,7 +1629,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureSignalBandwidth': {
         'codegen_method': 'public',
@@ -1670,7 +1670,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureSoftwareScriptTrigger': {
         'codegen_method': 'public',
@@ -1710,7 +1710,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ConfigureSoftwareStartTrigger': {
         'codegen_method': 'public',
@@ -1740,7 +1740,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
@@ -1828,7 +1828,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'DeleteAllDeembeddingTables': {
         'codegen_method': 'public',
@@ -1858,7 +1858,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
@@ -1908,7 +1908,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'Disable': {
         'codegen_method': 'public',
@@ -1938,7 +1938,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'DisableScriptTrigger': {
         'codegen_method': 'public',
@@ -1978,7 +1978,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'DisableStartTrigger': {
         'codegen_method': 'public',
@@ -2008,7 +2008,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ExportSignal': {
         'codegen_method': 'public',
@@ -2196,7 +2196,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetAttributeViBoolean': {
         'codegen_method': 'private',
@@ -2256,7 +2256,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetAttributeViInt32': {
         'codegen_method': 'private',
@@ -2316,7 +2316,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetAttributeViInt64': {
         'codegen_method': 'private',
@@ -2376,7 +2376,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetAttributeViReal64': {
         'codegen_method': 'private',
@@ -2436,7 +2436,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetAttributeViSession': {
         'codegen_method': 'private',
@@ -2496,7 +2496,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetAttributeViString': {
         'codegen_method': 'private',
@@ -2570,7 +2570,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetError': {
         'codegen_method': 'public',
@@ -2727,7 +2727,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetLastExtCalLastDateAndTime': {
         'codegen_method': 'python-only',
@@ -2758,7 +2758,7 @@ functions = {
         'python_name': 'get_external_calibration_last_date_and_time',
         'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetLastSelfCalLastDateAndTime': {
         'codegen_method': 'python-only',
@@ -2789,7 +2789,7 @@ functions = {
         'python_name': 'get_self_calibration_last_date_and_time',
         'real_datetime_call': 'GetSelfCalibrationDateAndTime',
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetMaxSettablePower': {
         'codegen_method': 'public',
@@ -2829,7 +2829,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetSelfCalibrationDateAndTime': {
         'codegen_method': 'private',
@@ -2930,7 +2930,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetSelfCalibrationTemperature': {
         'codegen_method': 'public',
@@ -3003,7 +3003,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetStreamEndpointHandle': {
         'codegen_method': 'public',
@@ -3053,7 +3053,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetWaveformBurstStartLocations': {
         'codegen_method': 'private',
@@ -3123,7 +3123,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetWaveformBurstStopLocations': {
         'codegen_method': 'private',
@@ -3193,7 +3193,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'GetWaveformMarkerEventLocations': {
         'codegen_method': 'private',
@@ -3263,7 +3263,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'InitWithOptions': {
         'codegen_method': 'private',
@@ -3295,6 +3295,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'documentation': {
                     'description': '                        Specifies whether you want NI-RFSG to perform an ID query.\n\n                        **Defined Values** :\n                    ',
@@ -3319,6 +3320,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'documentation': {
                     'description': '                        Specifies whether you want to reset the NI-RFSG device during the initialization procedure.\n\n                        **Defined Values** :\n\n                    ',
@@ -3412,7 +3414,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'LoadConfigurationsFromFile': {
         'codegen_method': 'public',
@@ -3462,7 +3464,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'LockSession': {
         'codegen_method': 'public',
@@ -3535,7 +3537,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'PerformThermalCorrection': {
         'codegen_method': 'public',
@@ -3565,7 +3567,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'QueryArbWaveformCapabilities': {
         'codegen_method': 'public',
@@ -3635,7 +3637,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ReadAndDownloadWaveformFromFileTDMS': {
         'codegen_method': 'public',
@@ -3695,7 +3697,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'Reset': {
         'codegen_method': 'public',
@@ -3726,7 +3728,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ResetAttribute': {
         'codegen_method': 'public',
@@ -3776,7 +3778,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ResetDevice': {
         'codegen_method': 'public',
@@ -3807,7 +3809,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'ResetWithDefaults': {
         'codegen_method': 'public',
@@ -3837,7 +3839,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
@@ -3887,7 +3889,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SelectArbWaveform': {
         'codegen_method': 'public',
@@ -3927,7 +3929,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SelfCal': {
         'codegen_method': 'public',
@@ -3958,7 +3960,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SelfCalibrateRange': {
         'codegen_method': 'public',
@@ -4077,7 +4079,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SelfTest': {
         'codegen_method': 'public',
@@ -4130,7 +4132,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SendSoftwareEdgeTrigger': {
         'codegen_method': 'public',
@@ -4232,7 +4234,7 @@ functions = {
         ],
         'render_in_session_base': True,
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetArbWaveformNextWritePosition': {
         'codegen_method': 'public',
@@ -4311,7 +4313,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetAttributeViBoolean': {
         'codegen_method': 'private',
@@ -4372,7 +4374,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetAttributeViInt32': {
         'codegen_method': 'private',
@@ -4434,7 +4436,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetAttributeViInt64': {
         'codegen_method': 'private',
@@ -4495,7 +4497,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetAttributeViReal64': {
         'codegen_method': 'private',
@@ -4557,7 +4559,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetAttributeViSession': {
         'codegen_method': 'private',
@@ -4618,7 +4620,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetAttributeViString': {
         'codegen_method': 'private',
@@ -4680,7 +4682,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetWaveformBurstStartLocations': {
         'codegen_method': 'private',
@@ -4729,7 +4731,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'out',
+                'direction': 'in',
                 'documentation': {
                     'description': 'Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the **NIRFSG_ATTR_CHANNEL_NAME** parameter. This value is expressed in samples.'
                 },
@@ -4740,7 +4742,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetWaveformBurstStopLocations': {
         'codegen_method': 'private',
@@ -4789,7 +4791,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'out',
+                'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the burst stop locations, in samples, to store in the NI-RFSG session.'
                 },
@@ -4800,7 +4802,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'SetWaveformMarkerEventLocations': {
         'codegen_method': 'private',
@@ -4849,7 +4851,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'out',
+                'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the marker location, in samples, to store in the NI-RFSG database.'
                 },
@@ -4860,7 +4862,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'UnlockSession': {
         'codegen_method': 'public',
@@ -4942,88 +4944,17 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
-    'WriteWaveformDispatcher': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n                ----\n                **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n                '
-        },
-        'included_in_proto': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
-                'session_filename': 'write_arb_waveform'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
-                },
-                'name': 'waveformName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in the message signal.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
-                },
-                'name': 'waveformDataArray',
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ComplexViReal64[]',
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
-                },
-                'name': 'moreDataPending',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': 'write_arb_waveform',
-        'returns': 'ViStatus'
-    },
-    'WriteWaveformComplexF64': {
+    'WriteArbWaveformComplexF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the %function{allocate arb waveform}, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n                ----\n                **Note**\n                On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)\n\n                [Assigning Properties or Attributes to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html)\n                '
+            'description': '               \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n            ',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -5032,7 +4963,6 @@ functions = {
                 'session_filename': 'numpy_write_method'
             }
         ],
-        'method_name_for_documentation': 'write_arb_waveform',
         'parameters': [
             {
                 'direction': 'in',
@@ -5046,7 +4976,6 @@ functions = {
             },
             {
                 'direction': 'in',
-                'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
                 },
@@ -5058,7 +4987,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the number of samples in the message signal.'
+                    'description': 'Specifies the number of samples in both of the data arrays.'
                 },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
@@ -5066,160 +4995,7 @@ functions = {
                 'use_in_python_api': False
             },
             {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
-                },
-                'name': 'waveformDataArray',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ComplexViReal64[]',
                 'complex_type': 'numpy',
-                'use_numpy_array': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
-                },
-                'name': 'moreDataPending',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'WriteWaveformComplexI16': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n                ----\n                **Note**\n                This function only supports %enum_value{power level type.peak power} mode as specified in the %attribute{power level type} attribute. If you download a waveform when using this function, you cannot set the %attribute{power level type} to %enum_value{power level type.average power} without causing error in the output.\n                ----\n\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)\n\n                [Assigning Properties or Attributes to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html)\n                '
-        },
-        'included_in_proto': False,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_write_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'numpy_write_method'
-            }
-        ],
-        'method_name_for_documentation': 'write_arb_waveform',
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
-                },
-                'name': 'waveformName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in the message signal.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
-                },
-                'name': 'waveformDataArray',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ComplexViInt16[]',
-                'use_numpy_array': True,
-                'complex_type': 'interleaved',
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
-                },
-                'name': 'moreDataPending',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'WriteWaveformComplexF32': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the %function{allocate arb waveform} function, the **%parameter{more data pending}** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n                ----\n                **Note**\n                On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **%parameter{more data pending}** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)\n\n                [Assigning Properties or Attributes to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html)\n                '
-        },
-        'included_in_proto': False,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_write_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'numpy_write_method'
-            }
-        ],
-        'method_name_for_documentation': 'write_arb_waveform',
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
-                },
-                'name': 'waveformName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in the message signal.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
@@ -5231,9 +5007,86 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'ComplexViReal32[]',
-                'complex_type': 'numpy',
-                'use_numpy_array': True,
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the NIRFSG_ATTR_WAVEFORM_NAME parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
+                'name': 'moreDataPending',
+                'type': 'ViBoolean',
+                'use_array': False,
                 'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'WriteArbWaveformComplexF64': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '              \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n            ',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the data array.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'ComplexViReal64[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
             },
             {
                 'direction': 'in',
@@ -5244,6 +5097,74 @@ functions = {
                 'type': 'ViBoolean',
                 'use_array': False,
                 'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'WriteArbWaveformComplexI16': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '              \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n            ',
+            'note': 'This function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the data array.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'interleaved',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'ComplexViInt16[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
             }
         ],
         'returns': 'ViStatus',
@@ -5311,7 +5232,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': False
+        'use_session_lock': True
     },
     'WriteScript': {
         'codegen_method': 'public',
@@ -5351,6 +5272,84 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'WriteWaveformDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '              \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n            ',
+            'note': 'This function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'write_arb_waveform'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the data array.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'ComplexViReal64[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
+                'name': 'moreDataPending',
+                'type': 'ViBoolean',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'write_arb_waveform',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
