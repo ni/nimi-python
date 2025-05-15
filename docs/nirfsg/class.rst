@@ -2697,19 +2697,28 @@ write_arb_waveform
 
     .. py:method:: write_arb_waveform(waveform_name, waveform_data_array, more_data_pending)
 
-            Writes data to the waveform in onboard memory.
+            Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-            By default, subsequent calls to this method
-            continue writing data from the position of the last sample written. You
-            can set the write position and offset by calling the :py:meth:`nirfsg.Session.SetNamedWaveformNextWritePosition`
-            :py:meth:`nirfsg.Session.SetWaveformNextWritePosition` method.
+                            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform` method, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+                            ----
+                            **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                            **Related Topics**
+
+                            `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_
+
+                            `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
             
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
 
             :param waveform_name:
 
+
+                Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
                 
 
@@ -2718,6 +2727,8 @@ write_arb_waveform
             :param waveform_data_array:
 
 
+                Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the :py:meth:`nirfsg.Session.allocate_arb_waveform` method.
+
                 
 
 
@@ -2725,7 +2736,11 @@ write_arb_waveform
             :param more_data_pending:
 
 
+                Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
+
                 
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
             :type more_data_pending: bool

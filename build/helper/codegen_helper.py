@@ -574,4 +574,3 @@ def get_enum_value_snippet(value):
     '''Returns value formatted into string, surrounding it with single quotes if it is of str type'''
     return ("'{}'" if type(value) is str else "{}").format(value)
 
-

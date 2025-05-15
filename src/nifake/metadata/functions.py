@@ -380,7 +380,7 @@ functions = {
     'WriteWaveformComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': 'A function that writes a waveform of complex128 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -403,6 +403,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -410,6 +413,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
                 'name': 'waveformDataArray',
                 'numpy': True,
                 'size': {
@@ -427,7 +433,7 @@ functions = {
     'WriteWaveformComplexI16': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': 'A function that writes a waveform of i16 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -442,11 +448,17 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
                 'name': 'vi',
-                'type': 'ViSession',
+                'type': 'ViSession'
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -454,6 +466,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
                 'name': 'waveformDataArray',
                 'numpy': True,
                 'size': {
@@ -471,7 +486,7 @@ functions = {
     'WriteWaveformComplexF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': 'A function that writes a waveform of complex64 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -486,13 +501,19 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
                 'name': 'vi',
-                'type': 'ViSession',
+                'type': 'ViSession'
                 'use_array': False,
                 'use_in_python_api': True
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -500,6 +521,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
                 'name': 'waveformDataArray',
                 'numpy': True,
                 'size': {

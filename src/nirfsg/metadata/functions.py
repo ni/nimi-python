@@ -4947,9 +4947,9 @@ functions = {
     'WriteWaveformDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Writes data to the waveform in onboard memory.\n\nBy default, subsequent calls to this function\ncontinue writing data from the position of the last sample written. You\ncan set the write position and offset by calling the nirfsg_SetNamedWaveformNextWritePosition\nnirfsg_SetWaveformNextWritePosition function.'
+            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n                ----\n                **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n                '
         },
-        'included_in_proto': True,
+        'included_in_proto': False,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -4961,6 +4961,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,
@@ -4968,6 +4971,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4975,6 +4981,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -4982,6 +4991,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
                 'name': 'waveformDataArray',
                 'size': {
                     'mechanism': 'len',
@@ -4992,6 +5004,10 @@ functions = {
             },
             {
                 'direction': 'in',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
                 'use_array': False,
@@ -5004,9 +5020,9 @@ functions = {
     'WriteWaveformComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the %function{allocate arb waveform}, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n                ----\n                **Note**\n                On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)\n\n                [Assigning Properties or Attributes to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html)\n                '
         },
-        'included_in_proto': True,
+        'included_in_proto': False,
         'is_error_handling': False,
         'method_templates': [
             {
@@ -5020,6 +5036,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,
@@ -5027,6 +5046,10 @@ functions = {
             },
             {
                 'direction': 'in',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5034,6 +5057,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -5041,6 +5067,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
                 'name': 'waveformDataArray',
                 'numpy': True,
                 'size': {
@@ -5054,6 +5083,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
                 'use_array': False,
@@ -5066,9 +5098,9 @@ functions = {
     'WriteWaveformComplexI16': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n                ----\n                **Note**\n                This function only supports %enum_value{power level type.peak power} mode as specified in the %attribute{power level type} attribute. If you download a waveform when using this function, you cannot set the %attribute{power level type} to %enum_value{power level type.average power} without causing error in the output.\n                ----\n\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)\n\n                [Assigning Properties or Attributes to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html)\n                '
         },
-        'included_in_proto': True,
+        'included_in_proto': False,
         'is_error_handling': False,
         'method_templates': [
             {
@@ -5082,6 +5114,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,
@@ -5089,6 +5124,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5096,6 +5134,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -5103,6 +5144,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
                 'name': 'waveformDataArray',
                 'numpy': True,
                 'size': {
@@ -5116,6 +5160,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
                 'use_array': False,
@@ -5128,9 +5175,9 @@ functions = {
     'WriteWaveformComplexF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'TBD'
+            'description': '                \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the %function{allocate arb waveform} function, the **%parameter{more data pending}** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n                ----\n                **Note**\n                On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **%parameter{more data pending}** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                [Streaming](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html)\n\n                [Assigning Properties or Attributes to a Waveform](https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html)\n                '
         },
-        'included_in_proto': True,
+        'included_in_proto': False,
         'is_error_handling': False,
         'method_templates': [
             {
@@ -5144,6 +5191,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,
@@ -5151,6 +5201,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
                 'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5158,6 +5211,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -5165,6 +5221,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
                 'name': 'waveformDataArray',
                 'numpy': True,
                 'size': {
@@ -5178,6 +5237,9 @@ functions = {
             },
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
                 'use_array': False,
