@@ -6,6 +6,7 @@ import ctypes
 import hightime  # noqa: F401
 import platform
 
+import nifake._complextype as _complextype  # noqa: F401
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums  # noqa: F401
@@ -22,14 +23,19 @@ _was_runtime_environment_set = None
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None, complex_type='none'):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        return numpy.ctypeslib.as_ctypes(value)
+        if complex_type == 'none':
+            return numpy.ctypeslib.as_ctypes(value)
+        else:
+            complex_dtype = numpy.dtype(library_type)
+            structured_array = value.view(complex_dtype)
+            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
@@ -729,6 +735,30 @@ class LibraryInterpreter(object):
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform is None else len(waveform))  # case S160
         waveform_ctype = _get_ctypes_pointer_for_buffer(value=waveform)  # case B510
         error_code = self._library.niFake_WriteWaveform(vi_ctype, number_of_samples_ctype, waveform_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def write_waveform_complex_f32(self, waveform_data_array):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViReal32, complex_type='numpy')  # case B510
+        error_code = self._library.niFake_WriteWaveformComplexF32(vi_ctype, number_of_samples_ctype, waveform_data_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def write_waveform_complex_f64(self, waveform_data_array):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViReal64, complex_type='numpy')  # case B510
+        error_code = self._library.niFake_WriteWaveformComplexF64(vi_ctype, number_of_samples_ctype, waveform_data_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def write_waveform_complex_i16(self, waveform_data_array):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array) // 2)  # case S160
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViInt16, complex_type='interleaved')  # case B510
+        error_code = self._library.niFake_WriteWaveformComplexI16(vi_ctype, number_of_samples_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
