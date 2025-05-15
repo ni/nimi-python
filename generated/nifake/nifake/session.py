@@ -1674,7 +1674,7 @@ class Session(_SessionBase):
     def _write_waveform_complex_f32(self, waveform_data_array):
         r'''_write_waveform_complex_f32
 
-        TBD
+        A method that writes a waveform of complex64 numbers.
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.complex64)):
@@ -1694,7 +1694,7 @@ class Session(_SessionBase):
     def _write_waveform_complex_f64(self, waveform_data_array):
         r'''_write_waveform_complex_f64
 
-        TBD
+        A method that writes a waveform of complex128 numbers.
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.complex128)):
@@ -1714,7 +1714,7 @@ class Session(_SessionBase):
     def _write_waveform_complex_i16(self, waveform_data_array):
         r'''_write_waveform_complex_i16
 
-        TBD
+        A method that writes a waveform of i16 numbers.
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.int16)):
