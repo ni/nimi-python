@@ -3295,7 +3295,6 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'default_value': False,
                 'direction': 'in',
                 'documentation': {
                     'description': '                        Specifies whether you want NI-RFSG to perform an ID query.\n\n                        **Defined Values** :\n                    ',
@@ -3320,7 +3319,6 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'default_value': False,
                 'direction': 'in',
                 'documentation': {
                     'description': '                        Specifies whether you want to reset the NI-RFSG device during the initialization procedure.\n\n                        **Defined Values** :\n\n                    ',
@@ -4731,7 +4729,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the **NIRFSG_ATTR_CHANNEL_NAME** parameter. This value is expressed in samples.'
                 },
@@ -4791,7 +4789,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'Specifies the burst stop locations, in samples, to store in the NI-RFSG session.'
                 },
@@ -4851,7 +4849,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'Specifies the marker location, in samples, to store in the NI-RFSG database.'
                 },
@@ -5022,7 +5020,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'WriteArbWaveformComplexF64': {
         'codegen_method': 'private',
@@ -5100,7 +5098,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'WriteArbWaveformComplexI16': {
         'codegen_method': 'private',
@@ -5232,7 +5230,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'WriteScript': {
         'codegen_method': 'public',

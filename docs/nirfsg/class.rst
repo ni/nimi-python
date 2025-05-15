@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, options={}, id_query=False, reset_device=False)
+.. py:class:: Session(self, resource_name, id_query, reset_device, options={})
 
     
 
@@ -41,40 +41,6 @@ Session
 
     :type resource_name: str
 
-    :param options:
-        
-
-        Specifies the initial value of certain properties for the session. The
-        syntax for **options** is a dictionary of properties with an assigned
-        value. For example:
-
-        { 'simulate': False }
-
-        You do not have to specify a value for all the properties. If you do not
-        specify a value for a property, the default value is used.
-
-        Advanced Example:
-        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
-
-        +-------------------------+---------+
-        | Property                | Default |
-        +=========================+=========+
-        | range_check             | True    |
-        +-------------------------+---------+
-        | query_instrument_status | False   |
-        +-------------------------+---------+
-        | cache                   | True    |
-        +-------------------------+---------+
-        | simulate                | False   |
-        +-------------------------+---------+
-        | record_value_coersions  | False   |
-        +-------------------------+---------+
-        | driver_setup            | {}      |
-        +-------------------------+---------+
-
-
-    :type options: str
-
     :param id_query:
         
 
@@ -110,6 +76,40 @@ Session
 
 
     :type reset_device: bool
+
+    :param options:
+        
+
+        Specifies the initial value of certain properties for the session. The
+        syntax for **options** is a dictionary of properties with an assigned
+        value. For example:
+
+        { 'simulate': False }
+
+        You do not have to specify a value for all the properties. If you do not
+        specify a value for a property, the default value is used.
+
+        Advanced Example:
+        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+        +-------------------------+---------+
+        | Property                | Default |
+        +=========================+=========+
+        | range_check             | True    |
+        +-------------------------+---------+
+        | query_instrument_status | False   |
+        +-------------------------+---------+
+        | cache                   | True    |
+        +-------------------------+---------+
+        | simulate                | False   |
+        +-------------------------+---------+
+        | record_value_coersions  | False   |
+        +-------------------------+---------+
+        | driver_setup            | {}      |
+        +-------------------------+---------+
+
+
+    :type options: str
 
 
 Methods

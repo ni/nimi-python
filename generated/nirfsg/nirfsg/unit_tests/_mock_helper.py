@@ -219,10 +219,13 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetWaveformBurstStartLocations'] = {}
         self._defaults['SetWaveformBurstStartLocations']['return'] = 0
+        self._defaults['SetWaveformBurstStartLocations']['locations'] = None
         self._defaults['SetWaveformBurstStopLocations'] = {}
         self._defaults['SetWaveformBurstStopLocations']['return'] = 0
+        self._defaults['SetWaveformBurstStopLocations']['locations'] = None
         self._defaults['SetWaveformMarkerEventLocations'] = {}
         self._defaults['SetWaveformMarkerEventLocations']['return'] = 0
+        self._defaults['SetWaveformMarkerEventLocations']['locations'] = None
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
@@ -852,16 +855,31 @@ class SideEffectsHelper(object):
     def niRFSG_SetWaveformBurstStartLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
         if self._defaults['SetWaveformBurstStartLocations']['return'] != 0:
             return self._defaults['SetWaveformBurstStartLocations']['return']
+        # locations
+        if self._defaults['SetWaveformBurstStartLocations']['locations'] is None:
+            raise MockFunctionCallError("niRFSG_SetWaveformBurstStartLocations", param='locations')
+        if locations is not None:
+            locations.contents.value = self._defaults['SetWaveformBurstStartLocations']['locations']
         return self._defaults['SetWaveformBurstStartLocations']['return']
 
     def niRFSG_SetWaveformBurstStopLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
         if self._defaults['SetWaveformBurstStopLocations']['return'] != 0:
             return self._defaults['SetWaveformBurstStopLocations']['return']
+        # locations
+        if self._defaults['SetWaveformBurstStopLocations']['locations'] is None:
+            raise MockFunctionCallError("niRFSG_SetWaveformBurstStopLocations", param='locations')
+        if locations is not None:
+            locations.contents.value = self._defaults['SetWaveformBurstStopLocations']['locations']
         return self._defaults['SetWaveformBurstStopLocations']['return']
 
     def niRFSG_SetWaveformMarkerEventLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
         if self._defaults['SetWaveformMarkerEventLocations']['return'] != 0:
             return self._defaults['SetWaveformMarkerEventLocations']['return']
+        # locations
+        if self._defaults['SetWaveformMarkerEventLocations']['locations'] is None:
+            raise MockFunctionCallError("niRFSG_SetWaveformMarkerEventLocations", param='locations')
+        if locations is not None:
+            locations.contents.value = self._defaults['SetWaveformMarkerEventLocations']['locations']
         return self._defaults['SetWaveformMarkerEventLocations']['return']
 
     def niRFSG_UnlockSession(self, vi, caller_has_lock):  # noqa: N802

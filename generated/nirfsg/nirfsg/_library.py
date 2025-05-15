@@ -772,7 +772,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSG_SetWaveformBurstStartLocations_cfunc is None:
                 self.niRFSG_SetWaveformBurstStartLocations_cfunc = self._get_library_function('niRFSG_SetWaveformBurstStartLocations')
-                self.niRFSG_SetWaveformBurstStartLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64]  # noqa: F405
+                self.niRFSG_SetWaveformBurstStartLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niRFSG_SetWaveformBurstStartLocations_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_SetWaveformBurstStartLocations_cfunc(vi, channel_name, number_of_locations, locations)
 
@@ -780,7 +780,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSG_SetWaveformBurstStopLocations_cfunc is None:
                 self.niRFSG_SetWaveformBurstStopLocations_cfunc = self._get_library_function('niRFSG_SetWaveformBurstStopLocations')
-                self.niRFSG_SetWaveformBurstStopLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64]  # noqa: F405
+                self.niRFSG_SetWaveformBurstStopLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niRFSG_SetWaveformBurstStopLocations_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_SetWaveformBurstStopLocations_cfunc(vi, channel_name, number_of_locations, locations)
 
@@ -788,7 +788,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSG_SetWaveformMarkerEventLocations_cfunc is None:
                 self.niRFSG_SetWaveformMarkerEventLocations_cfunc = self._get_library_function('niRFSG_SetWaveformMarkerEventLocations')
-                self.niRFSG_SetWaveformMarkerEventLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ViReal64]  # noqa: F405
+                self.niRFSG_SetWaveformMarkerEventLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niRFSG_SetWaveformMarkerEventLocations_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_SetWaveformMarkerEventLocations_cfunc(vi, channel_name, number_of_locations, locations)
 
