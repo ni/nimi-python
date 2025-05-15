@@ -29,7 +29,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'AllocateArbWaveform': {
         'codegen_method': 'public',
@@ -79,7 +79,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ChangeExternalCalibrationPassword': {
         'codegen_method': 'public',
@@ -129,7 +129,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckAttributeViBoolean': {
         'codegen_method': 'public',
@@ -190,7 +190,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckAttributeViInt32': {
         'codegen_method': 'public',
@@ -252,7 +252,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckAttributeViInt64': {
         'codegen_method': 'public',
@@ -314,7 +314,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckAttributeViReal64': {
         'codegen_method': 'public',
@@ -376,7 +376,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckAttributeViSession': {
         'codegen_method': 'public',
@@ -437,7 +437,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckAttributeViString': {
         'codegen_method': 'public',
@@ -499,7 +499,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckGenerationStatus': {
         'codegen_method': 'public',
@@ -553,7 +553,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckIfScriptExists': {
         'codegen_method': 'public',
@@ -617,7 +617,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CheckIfWaveformExists': {
         'codegen_method': 'public',
@@ -681,7 +681,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ClearAllArbWaveforms': {
         'codegen_method': 'public',
@@ -711,7 +711,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ClearArbWaveform': {
         'codegen_method': 'public',
@@ -751,7 +751,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ClearError': {
         'codegen_method': 'public',
@@ -782,7 +782,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ClearSelfCalibrateRange': {
         'codegen_method': 'public',
@@ -812,7 +812,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'Commit': {
         'codegen_method': 'public',
@@ -842,7 +842,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
@@ -925,7 +925,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
@@ -975,7 +975,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
@@ -1025,7 +1025,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDigitalEdgeScriptTrigger': {
         'codegen_method': 'public',
@@ -1085,7 +1085,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDigitalEdgeStartTrigger': {
         'codegen_method': 'public',
@@ -1136,7 +1136,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDigitalLevelScriptTrigger': {
         'codegen_method': 'public',
@@ -1196,7 +1196,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureDigitalModulationUserDefinedWaveform': {
         'codegen_method': 'public',
@@ -1250,7 +1250,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureGenerationMode': {
         'codegen_method': 'public',
@@ -1314,7 +1314,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureOutputEnabled': {
         'codegen_method': 'public',
@@ -1354,7 +1354,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureP2PEndpointFullnessStartTrigger': {
         'codegen_method': 'public',
@@ -1395,7 +1395,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigurePowerLevelType': {
         'codegen_method': 'public',
@@ -1452,7 +1452,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigurePxiChassisClk10': {
         'codegen_method': 'public',
@@ -1492,7 +1492,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureRF': {
         'codegen_method': 'public',
@@ -1542,7 +1542,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureRefClock': {
         'codegen_method': 'public',
@@ -1629,7 +1629,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureSignalBandwidth': {
         'codegen_method': 'public',
@@ -1670,7 +1670,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureSoftwareScriptTrigger': {
         'codegen_method': 'public',
@@ -1710,7 +1710,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ConfigureSoftwareStartTrigger': {
         'codegen_method': 'public',
@@ -1740,7 +1740,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
@@ -1828,7 +1828,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'DeleteAllDeembeddingTables': {
         'codegen_method': 'public',
@@ -1858,7 +1858,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
@@ -1908,7 +1908,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'Disable': {
         'codegen_method': 'public',
@@ -1938,7 +1938,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'DisableScriptTrigger': {
         'codegen_method': 'public',
@@ -1978,7 +1978,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'DisableStartTrigger': {
         'codegen_method': 'public',
@@ -2008,7 +2008,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ExportSignal': {
         'codegen_method': 'public',
@@ -2196,7 +2196,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetAttributeViBoolean': {
         'codegen_method': 'private',
@@ -2256,7 +2256,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetAttributeViInt32': {
         'codegen_method': 'private',
@@ -2316,7 +2316,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetAttributeViInt64': {
         'codegen_method': 'private',
@@ -2376,7 +2376,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetAttributeViReal64': {
         'codegen_method': 'private',
@@ -2436,7 +2436,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetAttributeViSession': {
         'codegen_method': 'private',
@@ -2496,7 +2496,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetAttributeViString': {
         'codegen_method': 'private',
@@ -2570,7 +2570,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetError': {
         'codegen_method': 'public',
@@ -2727,7 +2727,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetLastExtCalLastDateAndTime': {
         'codegen_method': 'python-only',
@@ -2758,7 +2758,7 @@ functions = {
         'python_name': 'get_external_calibration_last_date_and_time',
         'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetLastSelfCalLastDateAndTime': {
         'codegen_method': 'python-only',
@@ -2789,7 +2789,7 @@ functions = {
         'python_name': 'get_self_calibration_last_date_and_time',
         'real_datetime_call': 'GetSelfCalibrationDateAndTime',
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetMaxSettablePower': {
         'codegen_method': 'public',
@@ -2829,7 +2829,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetSelfCalibrationDateAndTime': {
         'codegen_method': 'private',
@@ -2930,7 +2930,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetSelfCalibrationTemperature': {
         'codegen_method': 'public',
@@ -3003,7 +3003,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetStreamEndpointHandle': {
         'codegen_method': 'public',
@@ -3053,7 +3053,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetWaveformBurstStartLocations': {
         'codegen_method': 'private',
@@ -3123,7 +3123,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetWaveformBurstStopLocations': {
         'codegen_method': 'private',
@@ -3193,7 +3193,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'GetWaveformMarkerEventLocations': {
         'codegen_method': 'private',
@@ -3263,7 +3263,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'InitWithOptions': {
         'codegen_method': 'private',
@@ -3414,7 +3414,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'LoadConfigurationsFromFile': {
         'codegen_method': 'public',
@@ -3464,7 +3464,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'LockSession': {
         'codegen_method': 'public',
@@ -3537,7 +3537,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'PerformThermalCorrection': {
         'codegen_method': 'public',
@@ -3567,7 +3567,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'QueryArbWaveformCapabilities': {
         'codegen_method': 'public',
@@ -3637,7 +3637,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ReadAndDownloadWaveformFromFileTDMS': {
         'codegen_method': 'public',
@@ -3697,7 +3697,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'Reset': {
         'codegen_method': 'public',
@@ -3728,7 +3728,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ResetAttribute': {
         'codegen_method': 'public',
@@ -3778,7 +3778,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ResetDevice': {
         'codegen_method': 'public',
@@ -3809,7 +3809,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ResetWithDefaults': {
         'codegen_method': 'public',
@@ -3839,7 +3839,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
@@ -3889,7 +3889,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SelectArbWaveform': {
         'codegen_method': 'public',
@@ -3929,7 +3929,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SelfCal': {
         'codegen_method': 'public',
@@ -3960,7 +3960,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SelfCalibrateRange': {
         'codegen_method': 'public',
@@ -4079,7 +4079,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SelfTest': {
         'codegen_method': 'public',
@@ -4132,7 +4132,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SendSoftwareEdgeTrigger': {
         'codegen_method': 'public',
@@ -4234,7 +4234,7 @@ functions = {
         ],
         'render_in_session_base': True,
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetArbWaveformNextWritePosition': {
         'codegen_method': 'public',
@@ -4313,7 +4313,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetAttributeViBoolean': {
         'codegen_method': 'private',
@@ -4374,7 +4374,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetAttributeViInt32': {
         'codegen_method': 'private',
@@ -4436,7 +4436,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetAttributeViInt64': {
         'codegen_method': 'private',
@@ -4497,7 +4497,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetAttributeViReal64': {
         'codegen_method': 'private',
@@ -4559,7 +4559,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetAttributeViSession': {
         'codegen_method': 'private',
@@ -4620,7 +4620,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetAttributeViString': {
         'codegen_method': 'private',
@@ -4682,7 +4682,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetWaveformBurstStartLocations': {
         'codegen_method': 'private',
@@ -4742,7 +4742,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetWaveformBurstStopLocations': {
         'codegen_method': 'private',
@@ -4802,7 +4802,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'SetWaveformMarkerEventLocations': {
         'codegen_method': 'private',
@@ -4862,7 +4862,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'UnlockSession': {
         'codegen_method': 'public',
@@ -4944,7 +4944,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'WriteArbWaveformComplexF32': {
         'codegen_method': 'private',
@@ -5168,7 +5168,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'WriteP2PEndpointI16': {
         'codegen_method': 'public',
@@ -5273,9 +5273,9 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
-    'WriteWaveformDispatcher': {
+    'WriteArbWaveformDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': '              \n                Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory. \n                \n                This function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n                `Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_\n            ',

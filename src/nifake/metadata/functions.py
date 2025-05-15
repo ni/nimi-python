@@ -2798,7 +2798,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'WriteWaveformComplexF32': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of complex64 numbers.'
         },
@@ -2853,7 +2853,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'WriteWaveformComplexF64': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of complex128 numbers'
         },
@@ -2908,7 +2908,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'WriteWaveformComplexI16': {
-        'codegen_method': 'private',
+        'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of i16 numbers.'
         },

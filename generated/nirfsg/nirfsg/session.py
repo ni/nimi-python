@@ -5434,7 +5434,6 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
-    @ivi_synchronized
     def check_attribute_vi_boolean(self, attribute, value):
         r'''check_attribute_vi_boolean
 
@@ -5461,7 +5460,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def check_attribute_vi_int32(self, attribute, value):
         r'''check_attribute_vi_int32
 
@@ -5488,7 +5486,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_int32(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def check_attribute_vi_int64(self, attribute, value):
         r'''check_attribute_vi_int64
 
@@ -5515,7 +5512,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_int64(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def check_attribute_vi_real64(self, attribute, value):
         r'''check_attribute_vi_real64
 
@@ -5542,7 +5538,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_real64(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def check_attribute_vi_session(self, attribute):
         r'''check_attribute_vi_session
 
@@ -5565,7 +5560,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_session(self._repeated_capability, attribute)
 
-    @ivi_synchronized
     def check_attribute_vi_string(self, attribute, value):
         r'''check_attribute_vi_string
 
@@ -5592,7 +5586,6 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_string(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute):
         r'''_get_attribute_vi_boolean
 
@@ -5625,7 +5618,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_boolean(self._repeated_capability, attribute)
         return value
 
-    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute):
         r'''_get_attribute_vi_int32
 
@@ -5658,7 +5650,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_int32(self._repeated_capability, attribute)
         return value
 
-    @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute):
         r'''_get_attribute_vi_int64
 
@@ -5691,7 +5682,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_int64(self._repeated_capability, attribute)
         return value
 
-    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute):
         r'''_get_attribute_vi_real64
 
@@ -5724,7 +5714,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_real64(self._repeated_capability, attribute)
         return value
 
-    @ivi_synchronized
     def _get_attribute_vi_session(self, attribute):
         r'''_get_attribute_vi_session
 
@@ -5757,7 +5746,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_session(self._repeated_capability, attribute)
         return value
 
-    @ivi_synchronized
     def _get_attribute_vi_string(self, attribute):
         r'''_get_attribute_vi_string
 
@@ -5796,7 +5784,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute)
         return value
 
-    @ivi_synchronized
     def _get_waveform_burst_start_locations(self, number_of_locations):
         r'''_get_waveform_burst_start_locations
 
@@ -5834,7 +5821,6 @@ class _SessionBase(object):
         locations, required_size = self._interpreter.get_waveform_burst_start_locations(self._repeated_capability, number_of_locations)
         return locations, required_size
 
-    @ivi_synchronized
     def _get_waveform_burst_stop_locations(self, number_of_locations):
         r'''_get_waveform_burst_stop_locations
 
@@ -5872,7 +5858,6 @@ class _SessionBase(object):
         locations, required_size = self._interpreter.get_waveform_burst_stop_locations(self._repeated_capability, number_of_locations)
         return locations, required_size
 
-    @ivi_synchronized
     def _get_waveform_marker_event_locations(self, number_of_locations):
         r'''_get_waveform_marker_event_locations
 
@@ -5907,7 +5892,6 @@ class _SessionBase(object):
         locations, required_size = self._interpreter.get_waveform_marker_event_locations(self._repeated_capability, number_of_locations)
         return locations, required_size
 
-    @ivi_synchronized
     def load_configurations_from_file(self, file_path):
         r'''load_configurations_from_file
 
@@ -5969,7 +5953,6 @@ class _SessionBase(object):
         # that will handle the unlock for them
         return _Lock(self)
 
-    @ivi_synchronized
     def reset_attribute(self, attribute_id):
         r'''reset_attribute
 
@@ -5994,7 +5977,6 @@ class _SessionBase(object):
         '''
         self._interpreter.reset_attribute(self._repeated_capability, attribute_id)
 
-    @ivi_synchronized
     def save_configurations_to_file(self, file_path):
         r'''save_configurations_to_file
 
@@ -6019,7 +6001,6 @@ class _SessionBase(object):
         '''
         self._interpreter.save_configurations_to_file(self._repeated_capability, file_path)
 
-    @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_identifier):
         r'''send_software_edge_trigger
 
@@ -6084,7 +6065,6 @@ class _SessionBase(object):
             raise TypeError('Parameter trigger_identifier must be of type ' + str(enums.TriggerIdentifier))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
-    @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute, value):
         r'''_set_attribute_vi_boolean
 
@@ -6120,7 +6100,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute, value):
         r'''_set_attribute_vi_int32
 
@@ -6156,7 +6135,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def _set_attribute_vi_int64(self, attribute, value):
         r'''_set_attribute_vi_int64
 
@@ -6194,7 +6172,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_int64(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def _set_attribute_vi_real64(self, attribute, value):
         r'''_set_attribute_vi_real64
 
@@ -6230,7 +6207,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def _set_attribute_vi_session(self, attribute):
         r'''_set_attribute_vi_session
 
@@ -6262,7 +6238,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_session(self._repeated_capability, attribute)
 
-    @ivi_synchronized
     def _set_attribute_vi_string(self, attribute, value):
         r'''_set_attribute_vi_string
 
@@ -6298,7 +6273,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute, value)
 
-    @ivi_synchronized
     def _set_waveform_burst_start_locations(self, number_of_locations, locations):
         r'''_set_waveform_burst_start_locations
 
@@ -6328,7 +6302,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_waveform_burst_start_locations(self._repeated_capability, number_of_locations, locations)
 
-    @ivi_synchronized
     def _set_waveform_burst_stop_locations(self, number_of_locations, locations):
         r'''_set_waveform_burst_stop_locations
 
@@ -6355,7 +6328,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_waveform_burst_stop_locations(self._repeated_capability, number_of_locations, locations)
 
-    @ivi_synchronized
     def _set_waveform_marker_event_locations(self, number_of_locations, locations):
         r'''_set_waveform_marker_event_locations
 
@@ -6568,7 +6540,6 @@ class Session(_SessionBase):
 
     ''' These are code-generated '''
 
-    @ivi_synchronized
     def abort(self):
         r'''abort
 
@@ -6582,7 +6553,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.abort()
 
-    @ivi_synchronized
     def allocate_arb_waveform(self, waveform_name, size_in_samples):
         r'''allocate_arb_waveform
 
@@ -6606,7 +6576,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.allocate_arb_waveform(waveform_name, size_in_samples)
 
-    @ivi_synchronized
     def change_external_calibration_password(self, old_password, new_password):
         r'''change_external_calibration_password
 
@@ -6622,7 +6591,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.change_external_calibration_password(old_password, new_password)
 
-    @ivi_synchronized
     def check_generation_status(self):
         r'''check_generation_status
 
@@ -6655,7 +6623,6 @@ class Session(_SessionBase):
         is_done = self._interpreter.check_generation_status()
         return is_done
 
-    @ivi_synchronized
     def check_if_script_exists(self, script_name):
         r'''check_if_script_exists
 
@@ -6687,7 +6654,6 @@ class Session(_SessionBase):
         script_exists = self._interpreter.check_if_script_exists(script_name)
         return script_exists
 
-    @ivi_synchronized
     def check_if_waveform_exists(self, waveform_name):
         r'''check_if_waveform_exists
 
@@ -6719,7 +6685,6 @@ class Session(_SessionBase):
         waveform_exists = self._interpreter.check_if_waveform_exists(waveform_name)
         return waveform_exists
 
-    @ivi_synchronized
     def clear_all_arb_waveforms(self):
         r'''clear_all_arb_waveforms
 
@@ -6731,7 +6696,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_all_arb_waveforms()
 
-    @ivi_synchronized
     def clear_arb_waveform(self, name):
         r'''clear_arb_waveform
 
@@ -6747,7 +6711,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_arb_waveform(name)
 
-    @ivi_synchronized
     def clear_error(self):
         r'''clear_error
 
@@ -6766,7 +6729,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_error()
 
-    @ivi_synchronized
     def clear_self_calibrate_range(self):
         r'''clear_self_calibrate_range
 
@@ -6776,7 +6738,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_self_calibrate_range()
 
-    @ivi_synchronized
     def commit(self):
         r'''commit
 
@@ -6792,7 +6753,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.commit()
 
-    @ivi_synchronized
     def configure_deembedding_table_interpolation_linear(self, port, table_name, format):
         r'''configure_deembedding_table_interpolation_linear
 
@@ -6824,7 +6784,6 @@ class Session(_SessionBase):
             raise TypeError('Parameter format must be of type ' + str(enums.Format))
         self._interpreter.configure_deembedding_table_interpolation_linear(port, table_name, format)
 
-    @ivi_synchronized
     def configure_deembedding_table_interpolation_nearest(self, port, table_name):
         r'''configure_deembedding_table_interpolation_nearest
 
@@ -6842,7 +6801,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_deembedding_table_interpolation_nearest(port, table_name)
 
-    @ivi_synchronized
     def configure_deembedding_table_interpolation_spline(self, port, table_name):
         r'''configure_deembedding_table_interpolation_spline
 
@@ -6860,7 +6818,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_deembedding_table_interpolation_spline(port, table_name)
 
-    @ivi_synchronized
     def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
         r'''configure_digital_edge_script_trigger
 
@@ -6888,7 +6845,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_edge_script_trigger(trigger_id, source, edge)
 
-    @ivi_synchronized
     def configure_digital_edge_start_trigger(self, source, edge):
         r'''configure_digital_edge_start_trigger
 
@@ -6914,7 +6870,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
-    @ivi_synchronized
     def configure_digital_level_script_trigger(self, trigger_id, source, level):
         r'''configure_digital_level_script_trigger
 
@@ -6940,7 +6895,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_level_script_trigger(trigger_id, source, level)
 
-    @ivi_synchronized
     def configure_digital_modulation_user_defined_waveform(self, number_of_samples, user_defined_waveform):
         r'''configure_digital_modulation_user_defined_waveform
 
@@ -6959,7 +6913,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_modulation_user_defined_waveform(number_of_samples, user_defined_waveform)
 
-    @ivi_synchronized
     def configure_generation_mode(self, generation_mode):
         r'''configure_generation_mode
 
@@ -7001,7 +6954,6 @@ class Session(_SessionBase):
             raise TypeError('Parameter generation_mode must be of type ' + str(enums.GenerationMode))
         self._interpreter.configure_generation_mode(generation_mode)
 
-    @ivi_synchronized
     def configure_output_enabled(self, output_enabled):
         r'''configure_output_enabled
 
@@ -7025,7 +6977,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_output_enabled(output_enabled)
 
-    @ivi_synchronized
     def configure_p2_p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):
         r'''configure_p2_p_endpoint_fullness_start_trigger
 
@@ -7050,7 +7001,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
-    @ivi_synchronized
     def configure_power_level_type(self, power_level_type):
         r'''configure_power_level_type
 
@@ -7080,7 +7030,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_power_level_type(power_level_type)
 
-    @ivi_synchronized
     def configure_pxi_chassis_clk10(self, pxi_clk10_source):
         r'''configure_pxi_chassis_clk10
 
@@ -7102,7 +7051,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_pxi_chassis_clk10(pxi_clk10_source)
 
-    @ivi_synchronized
     def configure_rf(self, frequency, power_level):
         r'''configure_rf
 
@@ -7128,7 +7076,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_rf(frequency, power_level)
 
-    @ivi_synchronized
     def configure_ref_clock(self, ref_clock_source, ref_clock_rate):
         r'''configure_ref_clock
 
@@ -7180,7 +7127,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_ref_clock(ref_clock_source, ref_clock_rate)
 
-    @ivi_synchronized
     def configure_signal_bandwidth(self, signal_bandwidth):
         r'''configure_signal_bandwidth
 
@@ -7200,7 +7146,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_signal_bandwidth(signal_bandwidth)
 
-    @ivi_synchronized
     def configure_software_script_trigger(self, trigger_id):
         r'''configure_software_script_trigger
 
@@ -7222,7 +7167,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_software_script_trigger(trigger_id)
 
-    @ivi_synchronized
     def configure_software_start_trigger(self):
         r'''configure_software_start_trigger
 
@@ -7242,7 +7186,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_software_start_trigger()
 
-    @ivi_synchronized
     def create_deembedding_sparameter_table_s2_p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
         r'''create_deembedding_sparameter_table_s2_p_file
 
@@ -7280,7 +7223,6 @@ class Session(_SessionBase):
             raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
         self._interpreter.create_deembedding_sparameter_table_s2_p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
-    @ivi_synchronized
     def delete_all_deembedding_tables(self):
         r'''delete_all_deembedding_tables
 
@@ -7290,7 +7232,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.delete_all_deembedding_tables()
 
-    @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):
         r'''delete_deembedding_table
 
@@ -7306,7 +7247,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.delete_deembedding_table(port, table_name)
 
-    @ivi_synchronized
     def disable(self):
         r'''disable
 
@@ -7316,7 +7256,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable()
 
-    @ivi_synchronized
     def disable_script_trigger(self, trigger_id):
         r'''disable_script_trigger
 
@@ -7336,7 +7275,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable_script_trigger(trigger_id)
 
-    @ivi_synchronized
     def disable_start_trigger(self):
         r'''disable_start_trigger
 
@@ -7352,7 +7290,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable_start_trigger()
 
-    @ivi_synchronized
     def export_signal(self, signal, signal_identifier, output_terminal):
         r'''export_signal
 
@@ -7454,7 +7391,6 @@ class Session(_SessionBase):
             raise TypeError('Parameter output_terminal must be of type ' + str(enums.ReferenceClockExportOutputTerminal))
         self._interpreter.export_signal(signal, signal_identifier, output_terminal)
 
-    @ivi_synchronized
     def _get_external_calibration_last_date_and_time(self):
         r'''_get_external_calibration_last_date_and_time
 
@@ -7485,7 +7421,6 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._interpreter.get_external_calibration_last_date_and_time()
         return year, month, day, hour, minute, second
 
-    @ivi_synchronized
     def get_external_calibration_last_date_and_time(self):
         '''get_external_calibration_last_date_and_time
 
@@ -7498,7 +7433,6 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._get_external_calibration_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
-    @ivi_synchronized
     def get_self_calibration_last_date_and_time(self):
         '''get_self_calibration_last_date_and_time
 
@@ -7511,7 +7445,6 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._get_self_calibration_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
-    @ivi_synchronized
     def get_max_settable_power(self):
         r'''get_max_settable_power
 
@@ -7526,7 +7459,6 @@ class Session(_SessionBase):
         value = self._interpreter.get_max_settable_power()
         return value
 
-    @ivi_synchronized
     def _get_self_calibration_date_and_time(self, module):
         r'''_get_self_calibration_date_and_time
 
@@ -7561,7 +7493,6 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._interpreter.get_self_calibration_date_and_time(module)
         return year, month, day, hour, minute, second
 
-    @ivi_synchronized
     def get_self_calibration_temperature(self, module):
         r'''get_self_calibration_temperature
 
@@ -7594,7 +7525,6 @@ class Session(_SessionBase):
         temperature = self._interpreter.get_self_calibration_temperature(module)
         return temperature
 
-    @ivi_synchronized
     def get_stream_endpoint_handle(self, stream_endpoint):
         r'''get_stream_endpoint_handle
 
@@ -7704,7 +7634,6 @@ class Session(_SessionBase):
         new_vi = self._interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
         return new_vi
 
-    @ivi_synchronized
     def _initiate(self):
         r'''_initiate
 
@@ -7720,7 +7649,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.initiate()
 
-    @ivi_synchronized
     def perform_power_search(self):
         r'''perform_power_search
 
@@ -7738,7 +7666,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.perform_power_search()
 
-    @ivi_synchronized
     def perform_thermal_correction(self):
         r'''perform_thermal_correction
 
@@ -7758,7 +7685,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.perform_thermal_correction()
 
-    @ivi_synchronized
     def query_arb_waveform_capabilities(self):
         r'''query_arb_waveform_capabilities
 
@@ -7781,7 +7707,6 @@ class Session(_SessionBase):
         max_number_waveforms, waveform_quantum, min_waveform_size, max_waveform_size = self._interpreter.query_arb_waveform_capabilities()
         return max_number_waveforms, waveform_quantum, min_waveform_size, max_waveform_size
 
-    @ivi_synchronized
     def read_and_download_waveform_from_file_tdms(self, waveform_name, file_path, waveform_index):
         r'''read_and_download_waveform_from_file_tdms
 
@@ -7818,7 +7743,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.read_and_download_waveform_from_file_tdms(waveform_name, file_path, waveform_index)
 
-    @ivi_synchronized
     def reset(self):
         r'''reset
 
@@ -7836,7 +7760,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset()
 
-    @ivi_synchronized
     def reset_device(self):
         r'''reset_device
 
@@ -7863,7 +7786,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset_device()
 
-    @ivi_synchronized
     def reset_with_defaults(self):
         r'''reset_with_defaults
 
@@ -7873,7 +7795,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset_with_defaults()
 
-    @ivi_synchronized
     def select_arb_waveform(self, name):
         r'''select_arb_waveform
 
@@ -7896,7 +7817,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.select_arb_waveform(name)
 
-    @ivi_synchronized
     def self_cal(self):
         r'''self_cal
 
@@ -7912,7 +7832,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.self_cal()
 
-    @ivi_synchronized
     def self_calibrate_range(self, steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level):
         r'''self_calibrate_range
 
@@ -7971,7 +7890,6 @@ class Session(_SessionBase):
             raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRangeStepsToOmit))
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
-    @ivi_synchronized
     def self_test(self, self_test_message):
         r'''self_test
 
@@ -8008,7 +7926,6 @@ class Session(_SessionBase):
         self_test_result = self._interpreter.self_test(self_test_message)
         return self_test_result
 
-    @ivi_synchronized
     def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
         r'''set_arb_waveform_next_write_position
 
@@ -8045,7 +7962,6 @@ class Session(_SessionBase):
             raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
         self._interpreter.set_arb_waveform_next_write_position(waveform_name, relative_to, offset)
 
-    @ivi_synchronized
     def wait_until_settled(self, max_time_milliseconds):
         r'''wait_until_settled
 
@@ -8146,7 +8062,6 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
         self._interpreter.write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
-    @ivi_synchronized
     def _write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):
         r'''_write_arb_waveform_complex_i16
 
@@ -8179,60 +8094,6 @@ class Session(_SessionBase):
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
         self._interpreter.write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
-
-    @ivi_synchronized
-    def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
-        r'''write_p2_p_endpoint_i16
-
-        Writes an array of 16-bit integer data to the peer-to-peer endpoint.
-
-                        Use this method to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.
-
-                        **Supported Devices** : PXIe-5673E
-
-                        **Related Topics**
-
-                        `Peer-to-Peer Data Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_streaming.html>`_--Refer to this topic for more information about configuring a stream.
-
-                        `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-                        `Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_
-
-                        `Reconfiguring a Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_reconfiguring_stream.html>`_
-
-        Args:
-            stream_endpoint (str): Specifies the stream endpoint FIFO to configure.
-
-            number_of_samples (int): Specifies the number of samples to write into the endpoint FIFO.
-
-            endpoint_data (list of int): Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.
-
-        '''
-        self._interpreter.write_p2_p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
-
-    @ivi_synchronized
-    def write_script(self, script):
-        r'''write_script
-
-        Writes a script to the device to control waveform generation in Script mode.
-
-                        First, configure your device for Script mode by calling the configure_generation_mode method. The NI-RFSG device must be in the Configuration state before calling the write_script method.
-
-                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.
-
-                        `Common Scripting Use Cases <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_use_cases.html>`_
-
-        Note: If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.
-
-        Args:
-            script (str): Specifies a string containing a syntactically correct script. NI-RFSG supports multiple scripts that are selected with the selected_script property. Refer to `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_ for more information about using scripts.
-
-        '''
-        self._interpreter.write_script(script)
 
     def write_arb_waveform(self, waveform_name, waveform_data_array, more_data_pending):
         '''write_arb_waveform
@@ -8279,6 +8140,59 @@ class Session(_SessionBase):
             raise TypeError("Unsupported dtype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
 
         return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
+
+    @ivi_synchronized
+    def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
+        r'''write_p2_p_endpoint_i16
+
+        Writes an array of 16-bit integer data to the peer-to-peer endpoint.
+
+                        Use this method to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.
+
+                        **Supported Devices** : PXIe-5673E
+
+                        **Related Topics**
+
+                        `Peer-to-Peer Data Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_streaming.html>`_--Refer to this topic for more information about configuring a stream.
+
+                        `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
+
+                        `Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_
+
+                        `Reconfiguring a Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_reconfiguring_stream.html>`_
+
+        Args:
+            stream_endpoint (str): Specifies the stream endpoint FIFO to configure.
+
+            number_of_samples (int): Specifies the number of samples to write into the endpoint FIFO.
+
+            endpoint_data (list of int): Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.
+
+        '''
+        self._interpreter.write_p2_p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
+
+    def write_script(self, script):
+        r'''write_script
+
+        Writes a script to the device to control waveform generation in Script mode.
+
+                        First, configure your device for Script mode by calling the configure_generation_mode method. The NI-RFSG device must be in the Configuration state before calling the write_script method.
+
+                        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.
+
+                        `Common Scripting Use Cases <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_use_cases.html>`_
+
+        Note: If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.
+
+        Args:
+            script (str): Specifies a string containing a syntactically correct script. NI-RFSG supports multiple scripts that are selected with the selected_script property. Refer to `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_ for more information about using scripts.
+
+        '''
+        self._interpreter.write_script(script)
 
     def _close(self):
         r'''_close

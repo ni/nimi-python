@@ -1671,8 +1671,8 @@ class Session(_SessionBase):
         self._interpreter.write_waveform_numpy(waveform)
 
     @ivi_synchronized
-    def _write_waveform_complex_f32(self, waveform_data_array):
-        r'''_write_waveform_complex_f32
+    def write_waveform_complex_f32(self, waveform_data_array):
+        r'''write_waveform_complex_f32
 
         A method that writes a waveform of complex64 numbers.
 
@@ -1691,8 +1691,8 @@ class Session(_SessionBase):
         self._interpreter.write_waveform_complex_f32(waveform_data_array)
 
     @ivi_synchronized
-    def _write_waveform_complex_f64(self, waveform_data_array):
-        r'''_write_waveform_complex_f64
+    def write_waveform_complex_f64(self, waveform_data_array):
+        r'''write_waveform_complex_f64
 
         A method that writes a waveform of complex128 numbers
 
@@ -1711,8 +1711,8 @@ class Session(_SessionBase):
         self._interpreter.write_waveform_complex_f64(waveform_data_array)
 
     @ivi_synchronized
-    def _write_waveform_complex_i16(self, waveform_data_array):
-        r'''_write_waveform_complex_i16
+    def write_waveform_complex_i16(self, waveform_data_array):
+        r'''write_waveform_complex_i16
 
         A method that writes a waveform of i16 numbers.
 
