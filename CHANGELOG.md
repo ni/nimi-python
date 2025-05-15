@@ -49,7 +49,7 @@
 
 #### [nidcpower] Unreleased
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -523,7 +523,7 @@
 
 #### [nidigital] Unreleased
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -757,7 +757,7 @@
 
 #### [nidmm] Unreleased
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -1073,7 +1073,7 @@
 
 #### [nifgen] Unreleased
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -1450,7 +1450,7 @@
 
 #### [nimodinst] Unreleased
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -1675,7 +1675,7 @@
   - Enabled selected public APIs
   - Basic example
   - Documentation for APIs (not final) 
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
   - Enabled write_arb_waveform funtions along with examples.
 - Changed
 - Removed
@@ -1710,7 +1710,7 @@
 
 #### [niscope] Unreleased
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -2149,7 +2149,7 @@
 - [0.1.0](#nise-010---2018-10-17)
 
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -2305,7 +2305,7 @@
 - [0.2.0](#niswitch-020---2017-09-20)
 
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
@@ -2556,7 +2556,7 @@
 - [0.1.0](#nitclk-010---2019-10-21)
 
 - Added
-  - (Common) All functions should have parameters that take in numpy.complex types.
+  - (Common) Allow functions to have parameters that take in numpy.complex types.
 - Changed
 - Removed
 
