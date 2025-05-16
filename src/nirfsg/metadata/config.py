@@ -39,6 +39,9 @@ config = {
         }
     },
     'module_name': 'nirfsg',
+    'repeated_capability_object_type': {
+        'python': 'custom'
+    },
     'repeated_capabilities': [
         {
             'prefix': 'marker',
