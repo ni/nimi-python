@@ -52,9 +52,10 @@ class LibraryInterpreter(object):
     * Converting errors returned by Library into Python exceptions.
     '''
 
-    def __init__(self, encoding):
+    def __init__(self, encoding, warning_event_handler: errors.DriverWarningEvent):
         self._encoding = encoding
         self._library = _library_singleton.get()
+        self._warning_event_handler = warning_event_handler
         # Initialize _handle to 0 for now.
         # Session will directly update it once the driver runtime init function has been called and
         # we have a valid session handle.
@@ -65,6 +66,14 @@ class LibraryInterpreter(object):
 
     def get_session_handle(self):
         return self._handle
+
+    def generate_driver_warning_event(self, driverwarning: errors.DriverWarning):
+        '''generate_driver_warning_event
+
+        Generates a driver warning event.
+        '''
+        if self._warning_event_handler is not None:
+            self._warning_event_handler.notify(driverwarning)
 
     def get_error_description(self, error_code):
         '''get_error_description

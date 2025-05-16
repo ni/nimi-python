@@ -122,10 +122,12 @@ class Session(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
+    driver_warning_event = errors.DriverWarningEvent()
+
     def __init__(self, driver):
         self._item_count = 0
         self._current_item = 0
-        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251', self.driver_warning_event)
         # Note that _library_interpreter clears the session handle in its constructor, so that if
         # _open_installed_devices_session fails, the error handler can reference it.
         # And then once _open_installed_devices_session succeeds, we can call this again with the

@@ -5,6 +5,7 @@ import hightime
 import nitclk._attributes as _attributes
 import nitclk._converters as _converters
 import nitclk._library_interpreter as _library_interpreter
+import nitclk.errors as errors
 
 # Used for __repr__ and __str__
 import pprint
@@ -19,6 +20,8 @@ class SessionReference(object):
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
+
+    driver_warning_event = errors.DriverWarningEvent()
 
     exported_sync_pulse_output_terminal = _attributes.AttributeViString(2)
     '''Type: str
@@ -130,7 +133,7 @@ class SessionReference(object):
     '''
 
     def __init__(self, session_number, encoding='windows-1251'):
-        self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
+        self._interpreter = _library_interpreter.LibraryInterpreter(encoding, self.driver_warning_event)
         self._interpreter.set_session_handle(session_number)
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
@@ -352,8 +355,10 @@ class _Session(object):
     indentation.
     '''
 
+    driver_warning_event = errors.DriverWarningEvent()
+
     def __init__(self):
-        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251', self.driver_warning_event)
 
         # Instantiate any repeated capability objects
 

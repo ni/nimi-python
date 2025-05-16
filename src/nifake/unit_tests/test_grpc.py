@@ -77,13 +77,15 @@ class TestGrpcStubInterpreter:
         self.get_ctypes_pointer_for_buffer_side_effect_count = 0
         self.get_ctypes_pointer_for_buffer_side_effect_items = []
 
+        self.driver_warning_event = nifake.errors.DriverWarningEvent()
+
     def teardown_method(self, method):
         self.grpc_stub_patch.stop()
         self.grpc_types_patch.stop()
 
     def _get_initialized_stub_interpreter(self, grpc_channel=object()):
         session_options = nifake.GrpcSessionOptions(grpc_channel, '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
-        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(session_options)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(session_options, self.driver_warning_event)
         assert interpreter._client is self.patched_grpc_stub
         assert interpreter.get_session_handle().id == 0
         assert interpreter.get_session_handle().name == ""
@@ -174,7 +176,7 @@ class TestGrpcStubInterpreter:
         expected_error_message = 'Failed to connect to server'
         self._set_side_effect(library_func, side_effect=MyRpcError(None, '', grpc_error=grpc_error))
         grpc_options = nifake.GrpcSessionOptions(object(), '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
-        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, self.driver_warning_event)
         try:
             interpreter.init_with_options('dev1', False, False, '')
             assert False
@@ -207,7 +209,7 @@ class TestGrpcStubInterpreter:
         response_object = self._set_side_effect(library_func, new_session_initialized=True, vi=grpc_session_object)
         init_behavior = nifake.SessionInitializationBehavior.AUTO
         grpc_options = nifake.GrpcSessionOptions(object(), '', initialization_behavior=init_behavior)
-        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, self.driver_warning_event)
         interpreter.init_with_options('dev1', False, False, '')
         self._assert_call(library_func, response_object, metadata=expected_metadata).assert_called_once_with(
             resource_name='dev1', id_query=False, reset_device=False, option_string='', session_name='', initialization_behavior=init_behavior,
@@ -221,7 +223,7 @@ class TestGrpcStubInterpreter:
         self._set_side_effect(library_func, side_effect=MyRpcError(None, error_message, grpc_error=grpc_error))
         init_behavior = nifake.SessionInitializationBehavior.INITIALIZE_SERVER_SESSION
         grpc_options = nifake.GrpcSessionOptions(object(), session_name, initialization_behavior=init_behavior)
-        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, self.driver_warning_event)
         try:
             interpreter.init_with_options('dev1', False, False, '')
             assert False
@@ -238,7 +240,7 @@ class TestGrpcStubInterpreter:
         self._set_side_effect(library_func, side_effect=MyRpcError(None, error_message, grpc_error=grpc_error))
         init_behavior = nifake.SessionInitializationBehavior.ATTACH_TO_SERVER_SESSION
         grpc_options = nifake.GrpcSessionOptions(object(), session_name, initialization_behavior=init_behavior)
-        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, self.driver_warning_event)
         try:
             interpreter.init_with_options('dev1', False, False, '')
             assert False

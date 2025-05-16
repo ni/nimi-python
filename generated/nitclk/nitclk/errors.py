@@ -71,6 +71,28 @@ class DriverTooNewError(Error):
         super(DriverTooNewError, self).__init__('The NI-TClk runtime returned an unexpected value. This can occur if it is too new for the nitclk Python module. Upgrade the nitclk Python module.')
 
 
+class DriverWarningEvent:
+    '''Event handler for driver warnings.'''
+
+    def __init__(self):
+        self.subscribers = []
+
+    def subscribe(self, callback):
+        """Subscribe to warning events."""
+        if callback not in self.subscribers:
+            self.subscribers.append(callback)
+
+    def unsubscribe(self, callback):
+        """Unsubscribe from warning events."""
+        if callback in self.subscribers:
+            self.subscribers.remove(callback)
+
+    def notify(self, driver_warning: DriverWarning):
+        """Notify all subscribers about the warning."""
+        for callback in self.subscribers:
+            callback(driver_warning)
+
+
 def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
     '''handle_error
 
@@ -93,4 +115,6 @@ def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
         raise DriverError(code, description)
 
     assert _is_warning(code)
-    warnings.warn(DriverWarning(code, description))
+    driver_warning = DriverWarning(code, description)
+    library_interpreter.generate_driver_warning_event(driver_warning)
+    warnings.warn(driver_warning)

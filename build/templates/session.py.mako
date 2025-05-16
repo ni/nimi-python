@@ -227,9 +227,9 @@ class Session(_SessionBase):
 
 <%
 ctor_for_docs = init_function
+import copy
+ctor_for_docs = copy.deepcopy(ctor_for_docs)
 if grpc_supported:
-    import copy
-    ctor_for_docs = copy.deepcopy(ctor_for_docs)
     ctor_for_docs['parameters'].append(
         {
             'default_value': None,
@@ -245,17 +245,34 @@ if grpc_supported:
             'use_in_python_api': False,
         },
     )
+
+ctor_for_docs['parameters'].append(
+    {
+        'default_value': None,
+        'direction': 'in',
+        'documentation': { 'description': 'Driver warning event which can be subscribed to, with a callback method.\nSample callback method:\n\ndef sample_callback_method(driver_warning: ' + module_name + '.DriverWarning):\n    print(str(driver_warning))\n' },
+        'enum': None,
+        'is_repeated_capability': False,
+        'is_session_handle': False,
+        'python_name': 'driver_warning_event',
+        'size': {'mechanism': 'fixed', 'value': 1},
+        'type_in_documentation': module_name + '.DriverWarningEvent',
+        'type_in_documentation_was_calculated': False,
+        'use_in_python_api': False,
+    },
+)
 %>\
         ${helper.get_function_docstring(ctor_for_docs, False, config, indent=8)}
         '''
+        driver_warning_event = errors.DriverWarningEvent()
 % if grpc_supported:
         if grpc_options:
             import ${module_name}._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, warning_event_handler=driver_warning_event)
         else:
-            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
 % else:
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
 % endif
 
         # Initialize the superclass with default values first, populate them later
