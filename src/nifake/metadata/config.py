@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 24.8.0f100
+# This file is generated from NI-FAKE API metadata version 25.5.0d9999
 config = {
-    'api_version': '24.8.0f100',
+    'api_version': '25.5.0d9999',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
     'context_manager_name': {
@@ -72,6 +72,9 @@ config = {
             'python_name': 'instruments'
         }
     ],
+    'repeated_capability_object_type': {
+        'python': 'session'
+    },
     'session_class_description': 'An NI-FAKE session to a fake MI driver whose sole purpose is to test nimi-python code generation',
     'session_handle_parameter_name': 'vi',
     'uses_nitclk': True
