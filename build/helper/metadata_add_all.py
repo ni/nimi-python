@@ -12,6 +12,7 @@ from .helper import get_numpy_type_for_api_type
 from .helper import get_python_type_for_api_type
 from .metadata_filters import filter_codegen_attributes
 from .metadata_filters import filter_codegen_functions
+from .metadata_filters import filter_rep_cap_supported_attributes
 from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
 from .metadata_merge_dicts import merge_helper
@@ -720,6 +721,9 @@ def add_all_config_metadata(config):
 
     if 'uses_nitclk' not in config:
         config['uses_nitclk'] = False
+
+    if 'repeated_capability_object_type' not in config:
+        config['repeated_capability_object_type'] = {'python': 'session'}
 
     return config
 
