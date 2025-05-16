@@ -693,13 +693,18 @@ class Session(_SessionBase):
 
             grpc_options (nifake.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
 
+            driver_warning_event (nifake.DriverWarningEvent): Driver warning event which can be subscribed to, with a callback method.
+                Sample callback method:
+
+                def sample_callback_method(driver_warning: nifake.DriverWarning):
+                    print(str(driver_warning))
+
 
         Returns:
             session (nifake.Session): A session object representing the device.
 
         '''
         driver_warning_event = errors.DriverWarningEvent()
-
         if grpc_options:
             import nifake._grpc_stub_interpreter as _grpc_stub_interpreter
             interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options, warning_event_handler=driver_warning_event)

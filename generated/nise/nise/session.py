@@ -99,12 +99,19 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            driver_warning_event (nise.DriverWarningEvent): Driver warning event which can be subscribed to, with a callback method.
+                Sample callback method:
+
+                def sample_callback_method(driver_warning: nise.DriverWarning):
+                    print(str(driver_warning))
+
 
         Returns:
             session (nise.Session): A session object representing the device.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        driver_warning_event = errors.DriverWarningEvent()
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(

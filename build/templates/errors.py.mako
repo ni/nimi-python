@@ -120,7 +120,6 @@ class SelfTestError(Error):
 
 
 % endif
-% if config.get('enable_warning_events', False):
 class DriverWarningEvent:
     '''Event handler for driver warnings.'''
 
@@ -143,7 +142,6 @@ class DriverWarningEvent:
             callback(driver_warning)
 
 
-% endif
 def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
     '''handle_error
 
@@ -166,10 +164,6 @@ def handle_error(library_interpreter, code, ignore_warnings, is_error_handling):
         raise DriverError(code, description)
 
     assert _is_warning(code)
-% if config.get('enable_warning_events', False):
     driver_warning = DriverWarning(code, description)
     library_interpreter.generate_driver_warning_event(driver_warning)
     warnings.warn(driver_warning)
-% else:
-    warnings.warn(DriverWarning(code, description))
-% endif

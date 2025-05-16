@@ -402,7 +402,7 @@ class TestLibraryInterpreter:
         # Register the callback to the warning event
         self.driver_warning_event.subscribe(self.warning_event_callback)
 
-        test_error_code = 42
+        test_error_code = 43
         test_error_desc = "The answer to the ultimate question, only positive"
         self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
         self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
@@ -424,7 +424,7 @@ class TestLibraryInterpreter:
 
         test_maximum_time_s = 10.0
         test_reading = float('nan')
-        test_error_code = 42
+        test_error_code = 44
         test_error_desc = "The answer to the ultimate question, only positive"
         self.patched_library.niFake_Read.side_effect = self.niFake_read_warning
         self.error_code_return = test_error_code

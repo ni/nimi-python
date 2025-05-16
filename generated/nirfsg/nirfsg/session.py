@@ -6455,12 +6455,19 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
+            driver_warning_event (nirfsg.DriverWarningEvent): Driver warning event which can be subscribed to, with a callback method.
+                Sample callback method:
+
+                def sample_callback_method(driver_warning: nirfsg.DriverWarning):
+                    print(str(driver_warning))
+
 
         Returns:
             new_vi (int): Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
         '''
-        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        driver_warning_event = errors.DriverWarningEvent()
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251', warning_event_handler=driver_warning_event)
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
