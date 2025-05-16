@@ -1668,7 +1668,7 @@
 #### [nirfsg] Unreleased
 - Added
   - Enabled selected public APIs
-  - Enabled custom object expansion for repeated capability
+  - Enabled custom object expansion for repeated capabilities
   - Basic example
   - Documentation for APIs (not final) 
 - Changed

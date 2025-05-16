@@ -40,7 +40,7 @@ config = {
     },
     'module_name': 'nirfsg',
     'repeated_capability_object_type': {
-        'python': 'custom'
+        'python': 'applicable-attributes-only'
     },
     'repeated_capabilities': [
         {
