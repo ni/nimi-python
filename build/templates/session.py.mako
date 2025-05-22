@@ -3,6 +3,7 @@ ${template_parameters['encoding_tag']}
 <%
     import build.helper as helper
     import os
+    from string import capwords
 
     grpc_supported = template_parameters['include_grpc_support']
 
@@ -33,7 +34,9 @@ from functools import wraps
 % if attributes:
 import ${module_name}._attributes as _attributes
 % endif
+% if config['repeated_capability_object_type']['python'] != 'applicable-attributes-only':
 import ${module_name}._converters as _converters
+% endif
 import ${module_name}._library_interpreter as _library_interpreter
 import ${module_name}.enums as enums
 import ${module_name}.errors as errors
@@ -92,35 +95,58 @@ class _Lock(object):
 % endif
 % if len(config['repeated_capabilities']) > 0:
 % if config['repeated_capability_object_type']['python'] == 'applicable-attributes-only':
-% for rep_cap in config['repeated_capabilities']:
+class _RepeatedCapabilityAttributeOnlyBase(object):
+    def __init__(self, session, prefix):
+        object.__setattr__(self, '_session', session)
+        object.__setattr__(self, '_prefix', prefix)
+        object.__setattr__(self, '_repeated_capability', '')
 
-class _RepeatedCapability${rep_cap['python_name'].capitalize()}(object):
-    % for attribute in helper.sorted_attrs(helper.filter_rep_cap_supported_attributes(attributes, rep_cap['python_name'])):
+    def _get_attribute_vi_real64(self, attribute):
+        value = self._session._interpreter.get_attribute_vi_real64(self._prefix + self._repeated_capability, attribute)
+        return value
+
+    def _set_attribute_vi_real64(self, attribute, value):
+        self._session._interpreter.set_attribute_vi_real64(self._prefix + self._repeated_capability, attribute, value)
+
+    def _get_attribute_vi_int32(self, attribute):
+        value = self._session._interpreter.get_attribute_vi_int32(self._prefix + self._repeated_capability, attribute)
+        return value
+
+    def _set_attribute_vi_int32(self, attribute, value):
+        self._session._interpreter.set_attribute_vi_int32(self._prefix + self._repeated_capability, attribute, value)
+
+    def _get_attribute_vi_string(self, attribute):
+        value = self._session._interpreter.get_attribute_vi_string(self._prefix + self._repeated_capability, attribute)
+        return value
+
+    def _set_attribute_vi_string(self, attribute, value):
+        self._session._interpreter.set_attribute_vi_string(self._prefix + self._repeated_capability, attribute, value)
+
+
+    % for rep_cap in config['repeated_capabilities']:
+class _RepeatedCapability${capwords(rep_cap['python_name'].replace('_', ' ')).replace(' ', '')}(_RepeatedCapabilityAttributeOnlyBase):
+            % for attribute in helper.sorted_attrs(helper.filter_rep_cap_supported_attributes(attributes, rep_cap['python_name'])):
 <%
 helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %>\
-    % if attributes[attribute]['enum']:
-        % if helper.enum_uses_converter(enums[attributes[attribute]['enum']]):
+                % if attributes[attribute]['enum']:
+                    % if helper.enum_uses_converter(enums[attributes[attribute]['enum']]):
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnumWithConverter(_attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute}), _converters.${enums[attributes[attribute]['enum']]['enum_to_converted_value_function_name']}, _converters.${enums[attributes[attribute]['enum']]['converted_value_to_enum_function_name']})
-        % else:
+                    % else:
     ${attributes[attribute]['python_name']} = _attributes.AttributeEnum(_attributes.Attribute${attributes[attribute]['type']}, enums.${enums[attributes[attribute]['enum']]['python_name']}, ${attribute})
-        % endif
-    % else:
+                    % endif
+                % else:
     ${attributes[attribute]['python_name']} = _attributes.${attributes[attribute]['attribute_class']}(${attribute})
-    % endif
-%   if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
+                % endif
+                % if 'documentation' in attributes[attribute] and len(helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4).strip()) > 0:
     '''Type: ${attributes[attribute]['type_in_documentation']}
 
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''
-%   endif
-% endfor
-    def __init__(self, session, repeated_capability_list):
-        object.__setattr__(self, '_session', session)
-        object.__setattr__(self, '_repeated_capability_list', repeated_capability_list)
-        object.__setattr__(self, '_prefix', '${rep_cap["prefix"]}')
-        object.__setattr__(self, '_current_repeated_capability_list', repeated_capability_list if len(repeated_capability_list) > 0 else [''])
-        object.__setattr__(self, '_separator', '')
+                % endif
+            % endfor
+    def __init__(self, session):
+        super(_RepeatedCapability${capwords(rep_cap['python_name'].replace('_', ' ')).replace(' ', '')}, self).__init__(session, '${rep_cap["prefix"]}')
 
     def __setattr__(self, key, value):
         if key not in dir(self):
@@ -128,46 +154,12 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
         object.__setattr__(self, key, value)
 
     def __getitem__(self, repeated_capability):
-        '''Set/get properties or call methods with a repeated capability (i.e. channels)'''
-        rep_caps_list = _converters.convert_repeated_capabilities(repeated_capability, self._prefix)
-        complete_rep_cap_list = [
-            current_rep_cap + self._separator + rep_cap
-            for current_rep_cap in self._current_repeated_capability_list
-            for rep_cap in rep_caps_list
-        ]
-        object.__setattr__(self, '_current_repeated_capability_list', complete_rep_cap_list)
-        self._current_repeated_capability_list = complete_rep_cap_list
-
+        super(_RepeatedCapability${capwords(rep_cap['python_name'].replace('_', ' ')).replace(' ', '')}, self).__setattr__('_repeated_capability', repeated_capability)
         return self
 
-    def _get_attribute_vi_real64(self, attribute):
-        repeated_capability = ','.join(self._current_repeated_capability_list)
-        value = self._session._interpreter.get_attribute_vi_real64(repeated_capability, attribute)
-        return value
 
-    def _set_attribute_vi_real64(self, attribute, value):
-        repeated_capability = ','.join(self._current_repeated_capability_list)
-        self._session._interpreter.set_attribute_vi_real64(repeated_capability, attribute, value)
-
-    def _get_attribute_vi_int32(self, attribute):
-        repeated_capability = ','.join(self._current_repeated_capability_list)
-        value = self._session._interpreter.get_attribute_vi_int32(repeated_capability, attribute)
-        return value
-
-    def _set_attribute_vi_int32(self, attribute, value):
-        repeated_capability = ','.join(self._current_repeated_capability_list)
-        self._session._interpreter.set_attribute_vi_int32(repeated_capability, attribute, value)
-
-    def _get_attribute_vi_string(self, attribute):
-        repeated_capability = ','.join(self._current_repeated_capability_list)
-        value = self._session._interpreter.get_attribute_vi_string(repeated_capability, attribute)
-        return value
-
-    def _set_attribute_vi_string(self, attribute, value):
-        repeated_capability = ','.join(self._current_repeated_capability_list)
-        self._session._interpreter.set_attribute_vi_string(repeated_capability, attribute, value)
-% endfor
-% else:
+    % endfor
+    % else:
 class _RepeatedCapabilities(object):
     def __init__(self, session, prefix, current_repeated_capability_list):
         self._session = session
@@ -205,7 +197,7 @@ class _NoChannel(object):
         self._session._repeated_capability = self._repeated_capability_cache
 
 
-% endif
+    % endif
 % endif
 class _SessionBase(object):
     '''Base class for all ${config['driver_name']} sessions.'''
@@ -214,12 +206,8 @@ class _SessionBase(object):
     _is_frozen = False
 
 % for attribute in helper.sorted_attrs(helper.filter_codegen_attributes(attributes)):
+% if not ('supported_rep_caps' in attributes[attribute] and len(attributes[attribute]['supported_rep_caps']) > 0 and config['repeated_capability_object_type']['python'] == 'applicable-attributes-only'):
 <%
-# Skip attributes with repeated capability expansion set to "applicable-attributes-only"
-if 'repeated_capability_type' in attributes[attribute]:
-    rep_cap_type = attributes[attribute]['repeated_capability_type']
-    if any(rep_cap.get('python_name') == rep_cap_type and config['repeated_capability_object_type'] == 'applicable-attributes-only' for rep_cap in config['repeated_capabilities']):
-        continue
 helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 %>\
     %if attributes[attribute]['enum']:
@@ -237,6 +225,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
     ${helper.get_documentation_for_node_docstring(attributes[attribute], config, indent=4)}
     '''
 %   endif
+% endif
 % endfor
 <%
 init_function = config['functions']['_init_function']
@@ -263,7 +252,7 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
         # Instantiate any repeated capability objects
 %   for rep_cap in config['repeated_capabilities']:
 %   if config['repeated_capability_object_type']['python'] == 'applicable-attributes-only':
-        self.${rep_cap['python_name']} = _RepeatedCapability${rep_cap['python_name'].capitalize()}(self, repeated_capability_list)
+        self.${rep_cap['python_name']} = _RepeatedCapability${capwords(rep_cap['python_name'].replace('_', ' ')).replace(' ', '')}(self)
 %   else:
         self.${rep_cap['python_name']} = _RepeatedCapabilities(self, '${rep_cap["prefix"]}', repeated_capability_list)
 %   endif

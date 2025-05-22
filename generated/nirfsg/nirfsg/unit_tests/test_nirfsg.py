@@ -1,11 +1,12 @@
-import hightime
 import nirfsg
 
 from unittest.mock import MagicMock
 from unittest.mock import patch
+
 import _mock_helper
 
 SESSION_NUM_FOR_TEST = 42
+
 
 class TestSession:
 
@@ -41,8 +42,14 @@ class TestSession:
     def test_attribute_get_for_repeated_capability_custom_object(self):
         string = 'markerterminal'
         self.patched_library_interpreter.get_attribute_vi_string.side_effect = [string]
-        with nirfsg.Session('dev1',id_query = False, reset_device = False) as session:
-            # Custom expansion: Specify marker '0'
-            value = session.markers['0'].marker_event_terminal_name
+        with nirfsg.Session('dev1', id_query=False, reset_device=False) as session:
+            value = session.markers['0'].marker_event_terminal_name  # noqa: F841
         # Verify that the repeated capability string is '0'
         self.patched_library_interpreter.get_attribute_vi_string.assert_called_once_with('marker0', 1150115)
+
+    def test_invalid_attribute_set_for_repeated_capability_custom_object(self):
+        with nirfsg.Session('dev1', id_query=False, reset_device=False) as session:
+            try:
+                session.deembedding_port['port0'].amplitude_settling = 2
+            except AttributeError:
+                pass
