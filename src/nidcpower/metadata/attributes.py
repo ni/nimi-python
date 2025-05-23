@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 25.0.0f266
+# This file is generated from NI-DCPower API metadata version 25.3.0f265
 attributes = {
     1050003: {
         'access': 'read-write',
@@ -233,7 +233,7 @@ attributes = {
     1150008: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nConfigures the function to generate on the specified channel(s).\nWhen NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. You can use the following attributes to configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:\nNIDCPOWER_ATTR_VOLTAGE_LEVEL\nNIDCPOWER_ATTR_CURRENT_LIMIT\nNIDCPOWER_ATTR_CURRENT_LIMIT_HIGH\nNIDCPOWER_ATTR_CURRENT_LIMIT_LOW\nNIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE\nNIDCPOWER_ATTR_CURRENT_LIMIT_RANGE\nNIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\nWhen NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. You can use the following attributes to configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:\nNIDCPOWER_ATTR_CURRENT_LEVEL\nNIDCPOWER_ATTR_VOLTAGE_LIMIT\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW\nNIDCPOWER_ATTR_CURRENT_LEVEL_RANGE\nNIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE\nNIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n',
+            'description': '\nConfigures the function to generate on the specified channel(s).\n\nWhen NIDCPOWER_VAL_DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. Use the following attributes to configure the channel when NIDCPOWER_VAL_DC_VOLTAGE is selected:\n - NIDCPOWER_ATTR_VOLTAGE_LEVEL\n - NIDCPOWER_ATTR_CURRENT_LIMIT\n - NIDCPOWER_ATTR_CURRENT_LIMIT_HIGH\n - NIDCPOWER_ATTR_CURRENT_LIMIT_LOW\n - NIDCPOWER_ATTR_VOLTAGE_LEVEL_RANGE\n - NIDCPOWER_ATTR_CURRENT_LIMIT_RANGE\n - NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n\nWhen NIDCPOWER_VAL_DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. Use the following attributes to configure the channel when NIDCPOWER_VAL_DC_CURRENT is selected:\n - NIDCPOWER_ATTR_CURRENT_LEVEL\n - NIDCPOWER_ATTR_VOLTAGE_LIMIT\n - NIDCPOWER_ATTR_VOLTAGE_LIMIT_HIGH\n - NIDCPOWER_ATTR_VOLTAGE_LIMIT_LOW\n - NIDCPOWER_ATTR_CURRENT_LEVEL_RANGE\n - NIDCPOWER_ATTR_VOLTAGE_LIMIT_RANGE\n - NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n\nWhen NIDCPOWER_VAL_PULSE_VOLTAGE is selected, the device generates pulses at the desired pulse voltage levels on the output as long as the output current is below the pulse current limit. Use the following attributes to configure the channel when NIDCPOWER_VAL_PULSE_VOLTAGE is selected:\n - NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL\n - NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LEVEL\n - NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT\n - NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_HIGH\n - NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_LOW\n - NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT\n - NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT_HIGH\n - NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LIMIT_LOW\n - NIDCPOWER_ATTR_PULSE_VOLTAGE_LEVEL_RANGE\n - NIDCPOWER_ATTR_PULSE_CURRENT_LIMIT_RANGE\n - NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n\nWhen NIDCPOWER_VAL_PULSE_CURRENT is selected, the device generates pulses at the desired pulse current levels on the output as long as the output voltage is below the pulse voltage limit. Use the following attributes to configure the channel when NIDCPOWER_VAL_PULSE_CURRENT is selected:\n - NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL\n - NIDCPOWER_ATTR_PULSE_BIAS_CURRENT_LEVEL\n - NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT\n - NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_HIGH\n - NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_LOW\n - NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT\n - NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT_HIGH\n - NIDCPOWER_ATTR_PULSE_BIAS_VOLTAGE_LIMIT_LOW\n - NIDCPOWER_ATTR_PULSE_CURRENT_LEVEL_RANGE\n - NIDCPOWER_ATTR_PULSE_VOLTAGE_LIMIT_RANGE\n - NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY\n\nWhen NIDCPOWER_VAL_CONSTANT_RESISTANCE is selected, the device generates the desired resistance level on the output as long as the output current is below the current limit. Use the following attributes to configure the channel when NIDCPOWER_VAL_CONSTANT_RESISTANCE is selected:\n - NIDCPOWER_ATTR_CONSTANT_RESISTANCE_LEVEL\n - NIDCPOWER_ATTR_CONSTANT_RESISTANCE_CURRENT_LIMIT\n - NIDCPOWER_ATTR_CONSTANT_RESISTANCE_LEVEL_RANGE\n\nWhen NIDCPOWER_VAL_CONSTANT_POWER is selected, the device generates the desired power level on the output as long as the output current is below the current limit. Use the following attributes to configure the channel when NIDCPOWER_VAL_CONSTANT_POWER is selected:\n - NIDCPOWER_ATTR_CONSTANT_POWER_LEVEL\n - NIDCPOWER_ATTR_CONSTANT_POWER_CURRENT_LIMIT\n - NIDCPOWER_ATTR_CONSTANT_POWER_LEVEL_RANGE\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'enum': 'OutputFunction',
@@ -848,8 +848,8 @@ attributes = {
     1150061: {
         'access': 'read-write',
         'documentation': {
-            'description': "\nSpecifies the output resistance that the device attempts to generate for the specified channel(s). This attribute is available only when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.\nabout supported devices.\nDefault Value: 0.0\n",
-            'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+            'description': '\nSpecifies the output resistance that the device attempts to generate for the specified channel(s).\n\nDepending on the instrument, output resistance is configurable only if you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION of the channel as follows:\n - PXIe-4141, PXIe-4143, PXIe-4145: NIDCPOWER_VAL_DC_VOLTAGE\n - PXIe-4135, PXIe-4137, PXIe-4139, PXIe-4147: NIDCPOWER_VAL_DC_CURRENT or NIDCPOWER_VAL_DC_VOLTAGE\n\n**Valid Values**: Vary by device. Refer to the device specifications for your device for more information about supported values.\n\n**Default Value:** Search ni.com for Supported Attributes by Device for the default value by device.\n',
+            'note': '\nThe channel must be enabled for the specified output resistance to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nUsing the NIDCPOWER_ATTR_MERGED_CHANNELS attribute to merge instrument outputs affects the valid output resistance range you can program. Refer to the Merged Channels topic for your device for details.\n\nTo specify the resistance level that the device attempts to generate when NIDCPOWER_ATTR_OUTPUT_FUNCTION is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE, use the NIDCPOWER_ATTR_CONSTANT_RESISTANCE_LEVEL attribute.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
         },
         'lv_property': 'Source:Output Resistance',
         'name': 'OUTPUT_RESISTANCE',
@@ -2750,6 +2750,175 @@ attributes = {
         ],
         'type': 'ViReal64'
     },
+    1150360: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nThe frequency at which a pole-zero pair is added to the system when the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_POWER and the output current is below the current limit.\n\nDefault Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Custom Transient Response:Constant Power:Compensation Frequency',
+        'name': 'CONSTANT_POWER_COMPENSATION_FREQUENCY',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150361: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the current limit, in amps, that the output cannot exceed when generating the desired power level on the specified channel(s).\nThe device will operate in Constant Current mode if the current exceeds the specified limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_POWER and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\n\nValid Values: The valid values for this attribute are determined by the selected value for NIDCPOWER_ATTR_CONSTANT_POWER_LEVEL_RANGE.\n',
+            'note': '\nThe channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Constant Power:Current Limit',
+        'name': 'CONSTANT_POWER_CURRENT_LIMIT',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150362: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nThe frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This attribute takes effect when the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_POWER and the output current is below the current limit.\n\nDefault Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Custom Transient Response:Constant Power:Gain Bandwidth',
+        'name': 'CONSTANT_POWER_GAIN_BANDWIDTH',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150363: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the power level, in watts, that the device attempts to generate on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_POWER.\n\nValid Values: The valid values for this attribute are determined by the selected value for NIDCPOWER_ATTR_CONSTANT_POWER_LEVEL_RANGE.\n',
+            'note': '\nThe channel must be enabled for the specified power level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Constant Power:Level',
+        'name': 'CONSTANT_POWER_LEVEL',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150364: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the power level range, in watts, for the specified channel(s).\nThe range defines the valid values to which you can set the power level.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_POWER.\n\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': '\nThe voltage range and current range used by the instrument are automatically determined by the selected power level range. For more information, refer to the specifications for your instrument.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Constant Power:Level Range',
+        'name': 'CONSTANT_POWER_LEVEL_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150365: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nThe ratio of the pole frequency to the zero frequency when the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_POWER and the output current is below the current limit.\n\nDefault Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Custom Transient Response:Constant Power:Pole-Zero Ratio',
+        'name': 'CONSTANT_POWER_POLE_ZERO_RATIO',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150366: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nThe frequency at which a pole-zero pair is added to the system when the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE and the output current is below the current limit.\n\nDefault Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Custom Transient Response:Constant Resistance:Compensation Frequency',
+        'name': 'CONSTANT_RESISTANCE_COMPENSATION_FREQUENCY',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150367: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the current limit, in amps, that the output cannot exceed when generating the desired resistance level on the specified channel(s).\nThe device will operate in Constant Current mode if the current exceeds the specified limit.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE and the NIDCPOWER_ATTR_COMPLIANCE_LIMIT_SYMMETRY attribute is set to NIDCPOWER_VAL_COMPLIANCE_LIMIT_SYMMETRY_SYMMETRIC.\n\nValid Values: The valid values for this attribute are determined by the selected value for NIDCPOWER_ATTR_CONSTANT_RESISTANCE_LEVEL_RANGE.\n',
+            'note': '\nThe channel must be enabled for the specified current limit to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Constant Resistance:Current Limit',
+        'name': 'CONSTANT_RESISTANCE_CURRENT_LIMIT',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150368: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nThe frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This attribute takes effect when the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE and the output current is below the current limit.\n\nDefault Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Custom Transient Response:Constant Resistance:Gain Bandwidth',
+        'name': 'CONSTANT_RESISTANCE_GAIN_BANDWIDTH',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150369: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the resistance level, in ohms, that the device attempts to generate on the specified channel(s).\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE.\n\nValid Values: The valid values for this attribute are determined by the selected value for NIDCPOWER_ATTR_CONSTANT_RESISTANCE_LEVEL_RANGE.\n',
+            'note': '\nThe channel must be enabled for the specified resistance level to take effect. Refer to the NIDCPOWER_ATTR_OUTPUT_ENABLED attribute for more information about enabling the channel.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Constant Resistance:Level',
+        'name': 'CONSTANT_RESISTANCE_LEVEL',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150370: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies the resistance level range, in ohms, for the specified channel(s).\nThe range defines the valid values to which you can set the resistance level.\nThis attribute is applicable only if the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE.\n\nFor valid ranges, refer to the specifications for your instrument.\n',
+            'note': '\nThe voltage range and current range used by the instrument are automatically determined by the selected resistance level range. For more information, refer to the specifications for your instrument.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Constant Resistance:Level Range',
+        'name': 'CONSTANT_RESISTANCE_LEVEL_RANGE',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150371: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nThe ratio of the pole frequency to the zero frequency when the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute is set to NIDCPOWER_VAL_CONSTANT_RESISTANCE and the output current is below the current limit.\n\nDefault Value: Determined by the value of the NIDCPOWER_VAL_NORMAL setting of the NIDCPOWER_ATTR_TRANSIENT_RESPONSE attribute.\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
+        },
+        'lv_property': 'Source:Custom Transient Response:Constant Resistance:Pole-Zero Ratio',
+        'name': 'CONSTANT_RESISTANCE_POLE_ZERO_RATIO',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViReal64'
+    },
+    1150372: {
+        'access': 'read-write',
+        'documentation': {
+            'description': '\nSpecifies whether the input of the instrument simulates a short circuit.\nWhen this attribute is set to VI_TRUE, the electronic load will simulate a short circuit across the channel/input terminals. The electronic load uses the maximum rated current and range to simulate the short circuit. This attribute will only take effect when both NIDCPOWER_ATTR_OUTPUT_ENABLED and NIDCPOWER_ATTR_OUTPUT_CONNECTED are VI_TRUE.\n\nWhen this attribute is set to VI_FALSE, the instrument will resume normal operation based on its existing settings on the specified channel(s).\n',
+            'note': '\nThis attribute is not supported on all devices. For more information about supported devices, search ni.com for Supported Attributes by Device.\n'
+        },
+        'lv_property': 'Source:Advanced:Output Shorted',
+        'name': 'OUTPUT_SHORTED',
+        'supported_rep_caps': [
+            'channels'
+        ],
+        'type': 'ViBoolean'
+    },
     1250001: {
         'access': 'read-write',
         'documentation': {
@@ -2814,7 +2983,7 @@ attributes = {
     1250006: {
         'access': 'read-write',
         'documentation': {
-            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute, you also must set the voltage level or current level in addition to enabling the output\n\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithChannels function to open the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
+            'description': '\nSpecifies whether the output is enabled (VI_TRUE) or disabled (VI_FALSE).\n\nDepending on the value you specify for the NIDCPOWER_ATTR_OUTPUT_FUNCTION property, you also must set the corresponding level properties or NIDCPOWER_ATTR_OUTPUT_RESISTANCE in addition to enabling the output to generate the desired level.\nFor more information about configuring the output level, refer to the NIDCPOWER_ATTR_OUTPUT_FUNCTION property.\n\nDefault Value: The default value is VI_TRUE if you use the niDCPower_InitializeWithIndependentChannels function to open the session. Otherwise the default value is VI_FALSE, including when you use a calibration session or the deprecated programming model.\n',
             'note': '\nIf the session is in the Committed or Uncommitted states, enabling the output does not take effect until you call the niDCPower_InitiateWithChannels function. Refer to the Programming States topic in the NI DC Power Supplies and SMUs Help for more information about NI-DCPower programming states.\n\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'lv_property': 'Source:Output Enabled',

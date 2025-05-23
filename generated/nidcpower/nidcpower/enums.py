@@ -155,7 +155,7 @@ class ComplianceLimitSymmetry(Enum):
 class ConductionVoltageMode(Enum):
     AUTOMATIC = 1155
     r'''
-    The conduction voltage feature is only enabled when you set the output_function property to OutputFunction.DC_CURRENT.
+    The conduction voltage feature is only enabled when you set the output_function property to OutputFunction.DC_CURRENT or OutputFunction.CONSTANT_POWER.
     '''
     ENABLED = 1156
     r'''
@@ -508,6 +508,14 @@ class OutputFunction(Enum):
     PULSE_CURRENT = 1050
     r'''
     Sets the output method to pulse current.
+    '''
+    CONSTANT_RESISTANCE = 1161
+    r'''
+    Sets the output method to constant resistance.
+    '''
+    CONSTANT_POWER = 1162
+    r'''
+    Sets the output method to constant power.
     '''
 
 

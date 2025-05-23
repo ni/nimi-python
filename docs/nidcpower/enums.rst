@@ -365,7 +365,7 @@ ConductionVoltageMode
 
 
 
-        The conduction voltage feature is only enabled when you set the :py:attr:`nidcpower.Session.output_function` property to :py:data:`~nidcpower.OutputFunction.DC_CURRENT`.
+        The conduction voltage feature is only enabled when you set the :py:attr:`nidcpower.Session.output_function` property to :py:data:`~nidcpower.OutputFunction.DC_CURRENT` or :py:data:`~nidcpower.OutputFunction.CONSTANT_POWER`.
 
         
 
@@ -1156,6 +1156,26 @@ OutputFunction
 
 
         Sets the output method to pulse current.
+
+        
+
+
+
+    .. py:attribute:: OutputFunction.CONSTANT_RESISTANCE
+
+
+
+        Sets the output method to constant resistance.
+
+        
+
+
+
+    .. py:attribute:: OutputFunction.CONSTANT_POWER
+
+
+
+        Sets the output method to constant power.
 
         
 
