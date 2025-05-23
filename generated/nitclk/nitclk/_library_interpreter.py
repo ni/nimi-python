@@ -4,20 +4,26 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import nitclk._complextype as _complextype  # noqa: F401
 import nitclk._library_singleton as _library_singleton
 import nitclk._visatype as _visatype
 import nitclk.errors as errors
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None, complex_type='none'):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        return numpy.ctypeslib.as_ctypes(value)
+        if complex_type == 'none':
+            return numpy.ctypeslib.as_ctypes(value)
+        else:
+            complex_dtype = numpy.dtype(library_type)
+            structured_array = value.view(complex_dtype)
+            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
