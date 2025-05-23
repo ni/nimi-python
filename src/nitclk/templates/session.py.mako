@@ -17,6 +17,7 @@ import hightime
 import ${module_name}._attributes as _attributes
 import ${module_name}._converters as _converters
 import ${module_name}._library_interpreter as _library_interpreter
+import ${module_name}.errors as errors
 
 # Used for __repr__ and __str__
 import pprint
@@ -31,6 +32,8 @@ class SessionReference(object):
 
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
+
+    driver_warning_event = errors.DriverWarningEvent()
 
 % for attribute in helper.sorted_attrs(attributes):
 <%
@@ -50,7 +53,7 @@ helper.add_attribute_rep_cap_tip(attributes[attribute], config)
 % endfor
 
     def __init__(self, ${config['session_handle_parameter_name']}, encoding='windows-1251'):
-        self._interpreter = _library_interpreter.LibraryInterpreter(encoding)
+        self._interpreter = _library_interpreter.LibraryInterpreter(encoding, self.driver_warning_event)
         self._interpreter.set_session_handle(${config['session_handle_parameter_name']})
         # We need a self._repeated_capability string for passing down to function calls on the LibraryInterpreter class. We just need to set it to empty string.
         self._repeated_capability = ''
@@ -92,8 +95,10 @@ class _Session(object):
     indentation.
     '''
 
+    driver_warning_event = errors.DriverWarningEvent()
+
     def __init__(self):
-        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251')
+        self._interpreter = _library_interpreter.LibraryInterpreter('windows-1251', self.driver_warning_event)
 
         # Instantiate any repeated capability objects
 % for rep_cap in config['repeated_capabilities']:

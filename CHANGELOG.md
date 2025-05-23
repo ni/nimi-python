@@ -49,6 +49,7 @@
 
 #### [nidcpower] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -522,6 +523,7 @@
 
 #### [nidigital] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -755,6 +757,7 @@
 
 #### [nidmm] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -1070,6 +1073,7 @@
 
 #### [nifgen] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -1446,6 +1450,7 @@
 
 #### [nimodinst] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -1670,6 +1675,7 @@
   - Enabled selected public APIs
   - Basic example
   - Documentation for APIs (not final) 
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -1703,6 +1709,7 @@
 
 #### [niscope] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -2142,6 +2149,7 @@
 
 #### [nise] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -2298,6 +2306,7 @@
 
 #### [niswitch] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 
@@ -2549,6 +2558,7 @@
 
 #### [nitclk] Unreleased
 - Added
+  - (Common) Driver warning subscription mechanism (fixes [#2088](https://github.com/ni/nimi-python/issues/2088))
 - Changed
 - Removed
 

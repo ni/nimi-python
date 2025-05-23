@@ -22,10 +22,11 @@ from . import custom_struct_nested_typedef as custom_struct_nested_typedef  # no
 class GrpcStubInterpreter(object):
     '''Interpreter for interacting with a gRPC Stub class'''
 
-    def __init__(self, grpc_options):
+    def __init__(self, grpc_options, warning_event_handler: errors.DriverWarningEvent):
         self._grpc_options = grpc_options
         self._lock = threading.RLock()
         self._client = nifake_grpc.NiFakeStub(grpc_options.grpc_channel)
+        self._warning_event_handler = warning_event_handler
         self.set_session_handle()
 
     def set_session_handle(self, value=session_grpc_types.Session()):
@@ -73,7 +74,10 @@ class GrpcStubInterpreter(object):
                     error_message = self.error_message(error_code)
                 except errors.Error:
                     error_message = 'Failed to retrieve error description.'
-            warnings.warn(errors.DriverWarning(error_code, error_message))
+            driver_warning = errors.DriverWarning(error_code, error_message)
+            if self._warning_event_handler is not None:
+                self._warning_event_handler.notify(driver_warning)
+            warnings.warn(driver_warning)
         return response
 
     def abort(self):  # noqa: N802

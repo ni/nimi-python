@@ -17,13 +17,14 @@ GRPC_SESSION_OBJECT_FOR_TEST = object()
 class TestSession:
 
     class PatchedLibraryInterpreter(nifake._library_interpreter.LibraryInterpreter):
-        def __init__(self, encoding):
+        def __init__(self, encoding, driver_warning_event: nifake.errors.DriverWarningEvent()):
             for f in dir(self):
-                if not f.startswith("_") and f not in {'get_session_handle', 'set_session_handle'}:
+                if not f.startswith("_") and f not in {'get_session_handle', 'set_session_handle', 'generate_driver_warning_event'}:
                     setattr(self, f, MagicMock(spec_set=getattr(self, f), side_effect=_mock_helper.MockFunctionCallError(f)))
 
     def setup_method(self, method):
-        self.patched_library_interpreter = self.PatchedLibraryInterpreter(None)
+        self.driver_warning_event = nifake.errors.DriverWarningEvent()
+        self.patched_library_interpreter = self.PatchedLibraryInterpreter(None, self.driver_warning_event)
         self.patched_library_interpreter_ctor = patch('nifake.session._library_interpreter.LibraryInterpreter', return_value=self.patched_library_interpreter)
         self.patched_library_interpreter_ctor.start()
 
@@ -841,13 +842,14 @@ class TestSession:
 class TestGrpcSession:
 
     class PatchedGrpcInterpreter(nifake._grpc_stub_interpreter.GrpcStubInterpreter):
-        def __init__(self, grpc_options):
+        def __init__(self, grpc_options, driver_warning_event: nifake.errors.DriverWarningEvent):
             for f in dir(self):
                 if not f.startswith("_") and f not in {'get_session_handle', 'set_session_handle'}:
                     setattr(self, f, MagicMock(spec_set=getattr(self, f), side_effect=_mock_helper.MockFunctionCallError(f)))
 
     def setup_method(self, method):
-        self.patched_grpc_interpreter = self.PatchedGrpcInterpreter(None)
+        self.driver_warning_event = nifake.errors.DriverWarningEvent()
+        self.patched_grpc_interpreter = self.PatchedGrpcInterpreter(None, self.driver_warning_event)
         self.patched_grpc_constructor = patch('nifake._grpc_stub_interpreter.GrpcStubInterpreter', return_value=self.patched_grpc_interpreter)
         self.patched_grpc_constructor.start()
 
