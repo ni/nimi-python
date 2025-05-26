@@ -2,6 +2,7 @@
 # This file was generated
 
 from enum import Enum
+from enum import Flag
 
 
 class AllowOutOfSpecificationUserSettings(Enum):
@@ -385,9 +386,11 @@ class LoadConfigurationResetOptions(Enum):
 
 class LoadOptions(Enum):
     NONE = 0
+    NONE = 0
     r'''
     NI-RFSG loads all the configurations to the session.
     '''
+    WAVEFORMS = 1
     WAVEFORMS = 1
     r'''
     NI-RFSG skips loading the waveform configurations to the session.
@@ -662,8 +665,31 @@ class RelativeTo(Enum):
     '''
 
 
-class ResetWithOptionsStepsToOmit(Enum):
-    DEEMBEDDING_TABLES = 8
+class ResetOptions(Enum):
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS = 1
+    r'''
+    NI-RFSG skips resetting the waveform configurations.
+    '''
+    MANUAL = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES = 8
+    r'''
+    NI-RFSG skips resetting the de-embedding tables.
+    '''
+    SCRIPT_TRIGGER = 1
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS = 2
+    r'''
+    NI-RFSG skips resetting the scripts.
+    '''
+    MARKER_EVENT = 2
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE = 0
+    r'''
+    NI-RFSG resets all configurations.
+    '''
+    SELF_CAL_IMAGE_SUPPRESSION = 8
+
+
+class ResetWithOptionsStepsToOmit(Flag):
+    DEEMBEDDING_TABLES = 1<<3
     r'''
     Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
     '''
@@ -671,15 +697,15 @@ class ResetWithOptionsStepsToOmit(Enum):
     r'''
     No step is omitted during reset.
     '''
-    ROUTES = 4
+    ROUTES = 1<<2
     r'''
     Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
     '''
-    SCRIPTS = 2
+    SCRIPTS = 1<<1
     r'''
     Omits clearing scripts.
     '''
-    WAVEFORMS = 1
+    WAVEFORMS = 1<<0
     r'''
     Omits clearing waveforms.
     '''
@@ -726,12 +752,12 @@ class ScriptTrigType(Enum):
     '''
 
 
-class SelfCalibrateRangeStepsToOmit(Enum):
-    IMAGE_SUPPRESSION = 8
+class SelfCalibrateRangeStepsToOmit(Flag):
+    IMAGE_SUPPRESSION = 1<<3
     r'''
     Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
     '''
-    LO_SELF_CAL = 1
+    LO_SELF_CAL = 1<<0
     r'''
     Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
     '''
@@ -739,15 +765,15 @@ class SelfCalibrateRangeStepsToOmit(Enum):
     r'''
     No calibration steps are omitted.
     '''
-    POWER_LEVEL_ACCURACY = 2
+    POWER_LEVEL_ACCURACY = 1<<1
     r'''
     Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
     '''
-    RESIDUAL_LO_POWER = 4
+    RESIDUAL_LO_POWER = 1<<2
     r'''
     Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
     '''
-    SYNTHESIZER_ALIGNMENT = 16
+    SYNTHESIZER_ALIGNMENT = 1<<4
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''

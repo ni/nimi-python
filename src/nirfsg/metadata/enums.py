@@ -1038,6 +1038,114 @@ enums = {
             }
         ]
     },
+    'OutputTerminal': {
+        'values': [
+            {
+                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
+                'value': ''
+            },
+            {
+                'name': 'NIRFSG_VAL_REF_OUT_STR',
+                'value': 'RefOut'
+            },
+            {
+                'name': 'NIRFSG_VAL_REF_OUT2_STR',
+                'value': 'RefOut2'
+            },
+            {
+                'name': 'NIRFSG_VAL_CLK_OUT_STR',
+                'value': 'ClkOut'
+            },
+            {
+                'name': 'NIRFSG_VAL_PFI0_STR',
+                'value': 'PFI0'
+            },
+            {
+                'name': 'NIRFSG_VAL_PFI1_STR',
+                'value': 'PFI1'
+            },
+            {
+                'name': 'NIRFSG_VAL_PFI4_STR',
+                'value': 'PFI4'
+            },
+            {
+                'name': 'NIRFSG_VAL_PFI5_STR',
+                'value': 'PFI5'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
+                'value': 'PXI_Trig0'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
+                'value': 'PXI_Trig1'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
+                'value': 'PXI_Trig2'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
+                'value': 'PXI_Trig3'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
+                'value': 'PXI_Trig4'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
+                'value': 'PXI_Trig5'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
+                'value': 'PXI_Trig6'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXI_STAR_STR',
+                'value': 'PXI_Star'
+            },
+            {
+                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
+                'value': 'PXIe_DStarC'
+            },
+            {
+                'name': 'NIRFSG_VAL_TRIG_OUT_STR',
+                'value': 'TrigOut'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO0_STR',
+                'value': 'DIO/PFI0'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO1_STR',
+                'value': 'DIO/PFI1'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO2_STR',
+                'value': 'DIO/PFI2'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO3_STR',
+                'value': 'DIO/PFI3'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO4_STR',
+                'value': 'DIO/PFI4'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO5_STR',
+                'value': 'DIO/PFI5'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO6_STR',
+                'value': 'DIO/PFI6'
+            },
+            {
+                'name': 'NIRFSG_VAL_DIO7_STR',
+                'value': 'DIO/PFI7'
+            }
+        ]
+    },
     'OverflowErrorReporting': {
         'codegen_method': 'public',
         'values': [
@@ -1371,6 +1479,7 @@ enums = {
     },
     'ResetWithOptionsStepsToOmit': {
         'codegen_method': 'public',
+        'enum_class': 'Flag',
         'values': [
             {
                 'documentation': {
@@ -1482,6 +1591,7 @@ enums = {
     },
     'SelfCalibrateRangeStepsToOmit': {
         'codegen_method': 'public',
+        'enum_class': 'Flag',
         'values': [
             {
                 'documentation': {
