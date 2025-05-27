@@ -704,13 +704,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def revision_query(self):  # noqa: N802
+    def reset_with_options(self, steps_to_omit):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        instrument_driver_revision_ctype = (_visatype.ViChar * 256)()  # case C070
-        firmware_revision_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niRFSG_RevisionQuery(vi_ctype, instrument_driver_revision_ctype, firmware_revision_ctype)
+        steps_to_omit_ctype = _visatype.ViUInt64(steps_to_omit.value)  # case S130
+        error_code = self._library.niRFSG_ResetWithOptions(vi_ctype, steps_to_omit_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
+        return
 
     def save_configurations_to_file(self, channel_name, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

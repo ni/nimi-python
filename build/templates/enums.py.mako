@@ -7,7 +7,7 @@ enums = config['enums']
 %>
 from enum import Enum
 % if any(enums[e].get('enum_class', 'Enum') == 'Flag' for e in enums):
-from enum import Flag
+from enum import IntFlag as Flag
 % endif
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
@@ -21,8 +21,8 @@ class ${enums[enum_name]['python_name']}(${enums[enum_name].get('enum_class', 'E
     ${enum_value['python_name']} = 0
     % elif type(enum_value['value']) is str:
     ${enum_value['python_name']} = '${enum_value['value']}'
-    % elif enums[enum_name].get('enum_class', 'Enum') == 'Flag' and isinstance(enum_value['value'], int) and enum_value['value'] > 0 and (enum_value['value'] & (enum_value['value'] - 1)) == 0:
-    ${enum_value['python_name']} = 1<<${int(enum_value['value']).bit_length() - 1}
+    % elif enums[enum_name].get('enum_class', 'Enum') == 'Flag' and isinstance(enum_value['value'], int):
+    ${enum_value['python_name']} = ${enum_value['value']}
     % else:
     ${enum_value['python_name']} = ${enum_value['value']}
     % endif
