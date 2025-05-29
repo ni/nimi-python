@@ -17,11 +17,11 @@ class ${enums[enum_name]['python_name']}(${enums[enum_name].get('enum_class', 'E
     print_list = []
 %>\
     % for i, enum_value in enumerate(enums[enum_name]['values']):
-    % if enums[enum_name].get('enum_class', 'Enum') == 'Flag' and enum_value['value'] == 0:
+    % if enums[enum_name].get('enum_class', 'Enum') == 'IntFlag' and enum_value['value'] == 0:
     ${enum_value['python_name']} = 0
     % elif type(enum_value['value']) is str:
     ${enum_value['python_name']} = '${enum_value['value']}'
-    % elif enums[enum_name].get('enum_class', 'Enum') == 'Flag' and isinstance(enum_value['value'], int):
+    % elif enums[enum_name].get('enum_class', 'Enum') == 'IntFlag' and isinstance(enum_value['value'], int):
     ${enum_value['python_name']} = ${enum_value['value']}
     % else:
     ${enum_value['python_name']} = ${enum_value['value']}

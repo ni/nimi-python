@@ -147,7 +147,7 @@ class GrpcStubInterpreter(object):
     def function_with_int_flag_parameter(self, flag):  # noqa: N802
         self._invoke(
             self._client.FunctionWithIntFlagParameter,
-            grpc_types.FunctionWithIntFlagParameterRequest(flag=flag.value),
+            grpc_types.FunctionWithIntFlagParameterRequest(vi=self._vi, flag=flag.value),
         )
 
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802

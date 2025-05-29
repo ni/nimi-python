@@ -949,10 +949,10 @@ class Session(_SessionBase):
     def function_with_int_flag_parameter(self, flag):
         r'''function_with_int_flag_parameter
 
-        TBD
+        Calls a method that takes a flag parameter which can be OR'd from multiple enum values.
 
         Args:
-            flag (enums.IntFlagEnum):
+            flag (enums.IntFlagEnum): A flag parameter that can be a combination (bitwise OR) of IntFlagEnum values.
 
         '''
         if type(flag) is not enums.IntFlagEnum:

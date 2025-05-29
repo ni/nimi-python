@@ -188,13 +188,13 @@ class Library(object):
                 self.niFake_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FetchWaveform_cfunc(vi, number_of_samples, waveform_data, actual_number_of_samples)
 
-    def niFake_FunctionWithIntFlagParameter(self, flag):  # noqa: N802
+    def niFake_FunctionWithIntFlagParameter(self, vi, flag):  # noqa: N802
         with self._func_lock:
             if self.niFake_FunctionWithIntFlagParameter_cfunc is None:
                 self.niFake_FunctionWithIntFlagParameter_cfunc = self._get_library_function('niFake_FunctionWithIntFlagParameter')
-                self.niFake_FunctionWithIntFlagParameter_cfunc.argtypes = [ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_FunctionWithIntFlagParameter_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niFake_FunctionWithIntFlagParameter_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_FunctionWithIntFlagParameter_cfunc(flag)
+        return self.niFake_FunctionWithIntFlagParameter_cfunc(vi, flag)
 
     def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
         with self._func_lock:

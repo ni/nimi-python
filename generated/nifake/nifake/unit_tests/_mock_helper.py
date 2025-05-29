@@ -339,7 +339,7 @@ class SideEffectsHelper(object):
             actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
         return self._defaults['FetchWaveform']['return']
 
-    def niFake_FunctionWithIntFlagParameter(self, flag):  # noqa: N802
+    def niFake_FunctionWithIntFlagParameter(self, vi, flag):  # noqa: N802
         if self._defaults['FunctionWithIntFlagParameter']['return'] != 0:
             return self._defaults['FunctionWithIntFlagParameter']['return']
         return self._defaults['FunctionWithIntFlagParameter']['return']

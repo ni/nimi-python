@@ -351,12 +351,23 @@ functions = {
     'FunctionWithIntFlagParameter': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'TBD'
+            'description': "Calls a function that takes a flag parameter which can be OR'd from multiple enum values."
         },
         'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'The VI.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A flag parameter that can be a combination (bitwise OR) of IntFlagEnum values.'
+                },
                 'enum': 'IntFlagEnum',
                 'grpc_enum': None,
                 'name': 'flag',

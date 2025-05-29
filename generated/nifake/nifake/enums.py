@@ -56,8 +56,17 @@ class FloatEnum(Enum):
 
 class IntFlagEnum(IntFlag):
     A = 1
+    r'''
+    Flag A option.
+    '''
     B = 2
+    r'''
+    Flag B option.
+    '''
     C = 4
+    r'''
+    Flag C option.
+    '''
 
 
 class MobileOSNames(Enum):
