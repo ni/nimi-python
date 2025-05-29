@@ -2,6 +2,7 @@
 # This file was generated
 
 from enum import Enum
+from enum import IntFlag
 
 
 class Color(Enum):
@@ -51,6 +52,12 @@ class FloatEnum(Enum):
     r'''
     Specifies 7.5 digits resolution.
     '''
+
+
+class IntFlagEnum(IntFlag):
+    A = 1
+    B = 2
+    C = 4
 
 
 class MobileOSNames(Enum):

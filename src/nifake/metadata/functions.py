@@ -348,6 +348,23 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'FunctionWithIntFlagParameter': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'enum': 'IntFlagEnum',
+                'grpc_enum': None,
+                'name': 'flag',
+                'type': 'ViString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'FunctionWithRepeatedCapabilityType': {
         'documentation': {
             'description': 'A function with a parameter that specifies repeated_capability_type.'

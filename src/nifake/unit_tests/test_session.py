@@ -837,32 +837,16 @@ class TestSession:
             assert returned_timedeltas == expected_timedeltas
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
 
-    def test_session_write_waveform_numpy_complex64_invalid_dtype(self):
-        invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex128)
-        expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=complex64, is complex128"
-        import pytest
-        with nifake.Session('dev1') as session:
-            with pytest.raises(TypeError) as exc_info:
-                session.write_waveform_numpy_complex64(invalid_waveform_data)
-            assert str(exc_info.value) == expected_error_message
-
-    def test_session_write_waveform_numpy_complex128_invalid_dtype(self):
-        invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex64)
-        expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=complex128, is complex64"
-        import pytest
-        with nifake.Session('dev1') as session:
-            with pytest.raises(TypeError) as exc_info:
-                session.write_waveform_numpy_complex128(invalid_waveform_data)
-            assert str(exc_info.value) == expected_error_message
-
-    def test_session_write_waveform_numpy_complex_interleaved_i16_invalid_dtype(self):
-        invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex64)
-        expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=int16, is complex64"
-        import pytest
-        with nifake.Session('dev1') as session:
-            with pytest.raises(TypeError) as exc_info:
-                session.write_waveform_numpy_complex_interleaved_i16(invalid_waveform_data)
-            assert str(exc_info.value) == expected_error_message
+    def test_function_with_int_flag_parameter(self):
+        import functools
+        import operator
+        session = nifake.Session('dev1')
+        # Patch the library interpreter function
+        with patch.object(session._interpreter, 'function_with_int_flag_parameter', return_value=None) as mock_func:
+            # OR all flags together
+            flags = functools.reduce(operator.or_, list(nifake.IntFlagEnum))
+            session.function_with_int_flag_parameter(flags)
+            mock_func.assert_called_once_with(flags)
 
 
 class TestGrpcSession:

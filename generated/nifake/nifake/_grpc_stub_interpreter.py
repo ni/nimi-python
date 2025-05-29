@@ -144,6 +144,12 @@ class GrpcStubInterpreter(object):
     def fetch_waveform_into(self, number_of_samples):  # noqa: N802
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
+    def function_with_int_flag_parameter(self, flag):  # noqa: N802
+        self._invoke(
+            self._client.FunctionWithIntFlagParameter,
+            grpc_types.FunctionWithIntFlagParameterRequest(flag=flag.value),
+        )
+
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802
         raise NotImplementedError('function_with_repeated_capability_type is not supported over gRPC')
 

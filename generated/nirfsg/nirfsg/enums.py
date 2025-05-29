@@ -2,7 +2,7 @@
 # This file was generated
 
 from enum import Enum
-from enum import IntFlag as Flag
+from enum import IntFlag
 
 
 class AllowOutOfSpecificationUserSettings(Enum):
@@ -385,14 +385,16 @@ class LoadConfigurationResetOptions(Enum):
 
 
 class LoadOptions(Enum):
-    NONE = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE = 0
     r'''
     NI-RFSG loads all the configurations to the session.
     '''
-    WAVEFORMS = 1
+    MANUAL = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM = 1
     r'''
     NI-RFSG skips loading the waveform configurations to the session.
     '''
+    SCRIPT_TRIGGER = 1
 
 
 class LoopBandwidth(Enum):
@@ -663,7 +665,30 @@ class RelativeTo(Enum):
     '''
 
 
-class ResetWithOptionsStepsToOmit(Flag):
+class ResetOptions(Enum):
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS = 1
+    r'''
+    NI-RFSG skips resetting the waveform configurations.
+    '''
+    MANUAL = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES = 8
+    r'''
+    NI-RFSG skips resetting the de-embedding tables.
+    '''
+    SCRIPT_TRIGGER = 1
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS = 2
+    r'''
+    NI-RFSG skips resetting the scripts.
+    '''
+    MARKER_EVENT = 2
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE = 0
+    r'''
+    NI-RFSG resets all configurations.
+    '''
+    SELF_CAL_IMAGE_SUPPRESSION = 8
+
+
+class ResetWithOptionsStepsToOmit(IntFlag):
     DEEMBEDDING_TABLES = 8
     r'''
     Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
@@ -727,7 +752,7 @@ class ScriptTrigType(Enum):
     '''
 
 
-class SelfCalibrateRangeStepsToOmit(Flag):
+class SelfCalibrateRangeStepsToOmit(IntFlag):
     IMAGE_SUPPRESSION = 8
     r'''
     Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.

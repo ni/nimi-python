@@ -6,8 +6,8 @@ config = template_parameters['metadata'].config
 enums = config['enums']
 %>
 from enum import Enum
-% if any(enums[e].get('enum_class', 'Enum') == 'Flag' for e in enums):
-from enum import IntFlag as Flag
+% if any(enums[e].get('enum_class', 'Enum') == 'IntFlag' for e in enums):
+from enum import IntFlag
 % endif
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
