@@ -438,7 +438,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
         if parameter['complex_type'] == 'none':
             definition = '_get_ctypes_pointer_for_buffer(value={})  # case B510'.format(parameter['python_name'])
         else:
-            definition = '_get_ctypes_pointer_for_buffer(value={}, library_type={}.{}, complex_type=\'{}\')  # case B510'.format(parameter['python_name'], module_name, parameter['ctypes_type'], parameter['complex_type'])
+            definition = '_get_ctypes_pointer_for_buffer(value={}, library_type={}.{})  # case B510'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
     elif parameter['direction'] == 'in':
         if custom_type is not None:
             definition = '_get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'])

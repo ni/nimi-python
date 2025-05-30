@@ -11,19 +11,19 @@ import nitclk.errors as errors
 
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
-def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None, complex_type='none'):
+def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     if isinstance(value, array.array):
         assert library_type is not None, 'library_type is required for array.array'
         addr, _ = value.buffer_info()
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        if complex_type == 'none':
-            return numpy.ctypeslib.as_ctypes(value)
-        else:
+        if library_type in (_complextype.ComplexViInt16, _complextype.ComplexViReal32, _complextype.ComplexViReal64):
             complex_dtype = numpy.dtype(library_type)
             structured_array = value.view(complex_dtype)
             return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+        else:
+            return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
