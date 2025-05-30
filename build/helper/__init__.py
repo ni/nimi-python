@@ -51,6 +51,7 @@ from build.helper.metadata_filters import filter_len_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_library_functions  # noqa: F401
 from build.helper.metadata_filters import filter_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_public_functions  # noqa: F401
+from build.helper.metadata_filters import filter_rep_cap_supported_attributes  # noqa: F401
 
 from build.helper.metadata_find import find_custom_type  # noqa: F401
 from build.helper.metadata_find import find_session_handle_parameter  # noqa: F401
