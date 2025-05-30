@@ -50,7 +50,7 @@
 #### [nidcpower] Unreleased
 - Added
   - API parity with NI-DCPower 2025 Q2.
-      - Properties added:
+      - Properties:
         - `constant_power_compensation_frequency`
         - `constant_power_current_limit`
         - `constant_power_gain_bandwidth`
@@ -64,7 +64,7 @@
         - `constant_resistance_level_range`
         - `constant_resistance_pole_zero_ratio`
         - `output_shorted`
-      - Enum values added:
+      - Enum values:
         - `CONSTANT_RESISTANCE` and `CONSTANT_POWER` added to enum `OutputFunction`
 - Changed
 - Removed
