@@ -5,6 +5,7 @@ import ctypes
 import niswitch.errors as errors
 import threading
 
+from niswitch._complextype import *  # noqa: F401,F403,H303
 from niswitch._visatype import *  # noqa: F403,H303
 
 

@@ -4,6 +4,7 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import nise._complextype as _complextype  # noqa: F401
 import nise._library_singleton as _library_singleton
 import nise._visatype as _visatype
 import nise.enums as enums  # noqa: F401
@@ -18,7 +19,12 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        return numpy.ctypeslib.as_ctypes(value)
+        if library_type in (_complextype.ComplexViInt16, _complextype.ComplexViReal32, _complextype.ComplexViReal64):
+            complex_dtype = numpy.dtype(library_type)
+            structured_array = value.view(complex_dtype)
+            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+        else:
+            return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
