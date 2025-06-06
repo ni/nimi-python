@@ -2141,6 +2141,7 @@
 - [0.2.0](#nise-020---2018-10-25)
 - [0.1.0](#nise-010---2018-10-17)
 
+#### [nise] Unreleased
 - Added
 - Changed
 - Removed
@@ -2296,6 +2297,7 @@
 - [0.3.0](#niswitch-030---2017-10-13)
 - [0.2.0](#niswitch-020---2017-09-20)
 
+#### [niswitch] Unreleased
 - Added
 - Changed
 - Removed
@@ -2546,6 +2548,7 @@
 - [0.3.0](#nitclk-030---2019-11-19)
 - [0.1.0](#nitclk-010---2019-10-21)
 
+#### [nitclk] Unreleased
 - Added
 - Changed
 - Removed
