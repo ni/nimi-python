@@ -19,7 +19,7 @@ def example(
 ):
     assert output_function in (
         nidcpower.OutputFunction.CONSTANT_RESISTANCE, nidcpower.OutputFunction.CONSTANT_POWER
-    ), 'This example only supports constant resistance and constant power output functions.'
+    ), 'This example only supports CONSTANT_RESISTANCE and CONSTANT_POWER output functions.'
 
     with nidcpower.Session(resource_name=resource_name, options=options) as session:
         # Configure the session.
