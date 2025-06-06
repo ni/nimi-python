@@ -12666,7 +12666,7 @@ write_waveform_burst_detection
 
     .. py:attribute:: write_waveform_burst_detection
 
-        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session._get_waveform_burst_start_locations` and :py:meth:`nirfsg.Session._get_waveform_burst_stop_locations` methods respectively.
+        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.GetWaveformBurstStartLocations` and :py:meth:`nirfsg.Session.GetWaveformBurstStopLocations` methods respectively.
 
                         **Default Value:** :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`
 

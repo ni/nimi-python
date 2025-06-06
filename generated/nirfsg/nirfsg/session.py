@@ -5267,7 +5267,7 @@ class _SessionBase(object):
     write_waveform_burst_detection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.WriteWaveformBurstDetection, 1150273)
     '''Type: enums.WriteWaveformBurstDetection
 
-    Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using _get_waveform_burst_start_locations and _get_waveform_burst_stop_locations methods respectively.
+    Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using GetWaveformBurstStartLocations and GetWaveformBurstStopLocations methods respectively.
 
                     **Default Value:** WriteWaveformBurstDetection.DISABLE
 
@@ -5770,117 +5770,6 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def _get_waveform_burst_start_locations(self, number_of_locations):
-        r'''_get_waveform_burst_start_locations
-
-        Returns the burst start locations of the waveform stored in the NI-RFSG session.
-
-                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._get_waveform_burst_start_locations`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session._get_waveform_burst_start_locations`
-
-        Args:
-            number_of_locations (int): Specifies the size of the burst start locations array.
-
-
-        Returns:
-            locations (float): Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the CHANNEL_NAME parameter. This value is expressed in samples.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            required_size (int): Returns the required size for the output array if you pass NULL to LOCATIONS parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        locations, required_size = self._interpreter.get_waveform_burst_start_locations(self._repeated_capability, number_of_locations)
-        return locations, required_size
-
-    @ivi_synchronized
-    def _get_waveform_burst_stop_locations(self, number_of_locations):
-        r'''_get_waveform_burst_stop_locations
-
-        Returns the burst stop locations of the waveform stored in the NI-RFSG session.
-
-                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._get_waveform_burst_stop_locations`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session._get_waveform_burst_stop_locations`
-
-        Args:
-            number_of_locations (int): Specifies the size of the burst start locations array.
-
-
-        Returns:
-            locations (float): Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the CHANNEL_NAME parameter. This value is expressed in samples.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            required_size (int): Returns the required size for the output array if you pass NULL to LOCATIONS parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        locations, required_size = self._interpreter.get_waveform_burst_stop_locations(self._repeated_capability, number_of_locations)
-        return locations, required_size
-
-    @ivi_synchronized
-    def _get_waveform_marker_event_locations(self, number_of_locations):
-        r'''_get_waveform_marker_event_locations
-
-        Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.
-
-                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._get_waveform_marker_event_locations`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session._get_waveform_marker_event_locations`
-
-        Args:
-            number_of_locations (int): Specifies the size of the locations array.
-
-
-        Returns:
-            locations (float): Returns the marker locations stored in the NI-RFSG database for the channel you specified in the CHANNEL_NAME parameter. This value is expressed in samples.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            required_size (int): Returns the required size for the output array if you pass NULL to **Locations** parameter.
-
-        '''
-        locations, required_size = self._interpreter.get_waveform_marker_event_locations(self._repeated_capability, number_of_locations)
-        return locations, required_size
-
-    @ivi_synchronized
     def load_configurations_from_file(self, file_path):
         r'''load_configurations_from_file
 
@@ -6268,90 +6157,6 @@ class _SessionBase(object):
 
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute, value)
-
-    @ivi_synchronized
-    def _set_waveform_burst_start_locations(self, number_of_locations, locations):
-        r'''_set_waveform_burst_start_locations
-
-        Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.
-
-                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._set_waveform_burst_start_locations`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session._set_waveform_burst_start_locations`
-
-        Args:
-            number_of_locations (int): Specifies the size of the burst start locations array.
-
-            locations (float): Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the CHANNEL_NAME parameter. This value is expressed in samples.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        self._interpreter.set_waveform_burst_start_locations(self._repeated_capability, number_of_locations, locations)
-
-    @ivi_synchronized
-    def _set_waveform_burst_stop_locations(self, number_of_locations, locations):
-        r'''_set_waveform_burst_stop_locations
-
-        Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.
-
-                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._set_waveform_burst_stop_locations`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session._set_waveform_burst_stop_locations`
-
-        Args:
-            number_of_locations (int): Specifies the size of the burst stop locations array.
-
-            locations (float): Specifies the burst stop locations, in samples, to store in the NI-RFSG session.
-
-        '''
-        self._interpreter.set_waveform_burst_stop_locations(self._repeated_capability, number_of_locations, locations)
-
-    @ivi_synchronized
-    def _set_waveform_marker_event_locations(self, number_of_locations, locations):
-        r'''_set_waveform_marker_event_locations
-
-        Configures the marker locations associated with waveform and marker in the NI-RFSG session.
-
-                        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._set_waveform_marker_event_locations`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session._set_waveform_marker_event_locations`
-
-        Args:
-            number_of_locations (int): Specifies the size of the locations array.
-
-            locations (float): Specifies the marker location, in samples, to store in the NI-RFSG database.
-
-        '''
-        self._interpreter.set_waveform_marker_event_locations(self._repeated_capability, number_of_locations, locations)
 
     def unlock(self):
         '''unlock
