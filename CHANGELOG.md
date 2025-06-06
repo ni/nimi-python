@@ -66,6 +66,7 @@
         - `output_shorted`
       - Enum values:
         - `CONSTANT_RESISTANCE` and `CONSTANT_POWER` added to enum `OutputFunction`
+  - `nidcpower_constant_resistance_and_constant_power.py` and `nidcpower_sink_dc_current_into_electronic_load.py` examples
 - Changed
 - Removed
 

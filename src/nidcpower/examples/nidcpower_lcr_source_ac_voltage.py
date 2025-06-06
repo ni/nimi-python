@@ -61,7 +61,7 @@ def _main(argsv):
     parser.add_argument('-ct', '--lcr-custom-measurement-time', default=10.0e-3, type=float, help='LCR custom measurement time (s)')
     parser.add_argument('-sm', '--lcr-source-delay-mode', default='AUTOMATIC', type=str, choices=tuple(nidcpower.LCRSourceDelayMode.__members__.keys()), help='LCR source delay mode')
     parser.add_argument('-s', '--source-delay', default=16.66e-3, type=float, help='Source delay (s)')
-    parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
+    parser.add_argument('-op', '--option-string', default='', type=str, help='Option String')
     args = parser.parse_args(argsv)
     example(
         resource_name=args.resource_name,
