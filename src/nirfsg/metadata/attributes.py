@@ -281,47 +281,39 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the Reference Clock source. To set this attribute, the NI-RFSG device must be in the Configuration state. Only certain combinations of this attribute and the NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute are valid, as shown in the following table.\n\n                **Default Value:** NIRFSG_VAL_ONBOARD_CLOCK_STR\n\n                **Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureRefClock\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the Reference Clock source. To set this attribute, the NI-RFSG device must be in the Configuration state. Only certain combinations of this attribute and the NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute are valid, as shown in the following table.\n\n                **Default Value:** NIRFSG_VAL_ONBOARD_CLOCK_STR\n\n                **Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureRefClock\n            \n            **Possible Values**:\n            ',
             'note': 'The PXI-5670/5671 and PXIe-5672 devices also allow you to drive the PXI 10 MHz backplane clock on PXI chassis *only* using the NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute.',
             'table_body': [
                 [
-                    'NIRFSG_VAL_ONBOARD_CLOCK_STR',
                     'OnboardClock',
                     'Uses the onboard Reference Clock as the clock source. **PXIe-5830/5831** —For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. ** PXIe-5831/5832 with PXIe-5653** —Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. **PXIe-5841 with PXIe-5655** —Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.'
                 ],
                 [
-                    'NIRFSG_VAL_CLK_IN_STR',
                     'ClkIn',
                     'Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.'
                 ],
                 [
-                    'NIRFSG_VAL_REF_IN_STR',
                     'RefIn',
                     'Uses the clock signal present at the front panel REF IN connector as the Reference Clock source. **PXIe-5830/5831** —For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector. **PXIe-5831/5832 with PXIe-5653** —Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector. **PXIe-5841 with PXIe-5655** —Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_CLK_STR',
                     'PXI_CLK',
                     'Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.'
                 ],
                 [
-                    'NIRFSG_VAL_REF_IN_2_STR',
                     'RefIn2',
                     'This value is not valid on any supported devices.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_CLK_MASTER_STR',
                     'PXI_ClkMaster',
                     'This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653** —NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use NIRFSG_VAL_PXI_CLK_STR as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'ReferenceClockSource',
         'lv_property': 'Clock:Reference Clock Source',
         'name': 'REF_CLOCK_SOURCE',
         'type': 'ViString'
@@ -330,136 +322,110 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the source terminal for the Start Trigger. This attribute is used when the NIRFSG_ATTR_START_TRIGGER_TYPE attribute is set to digital edge. The NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute is not case-sensitive. To set the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeStartTrigger\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the source terminal for the Start Trigger. This attribute is used when the NIRFSG_ATTR_START_TRIGGER_TYPE attribute is set to digital edge. The NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute is not case-sensitive. To set the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeStartTrigger\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The trigger is received on PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The trigger is received on PFI 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI2_STR',
                     'PFI2',
                     'The trigger is received on PFI 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI3_STR',
                     'PFI3',
                     'The trigger is received on PFI 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_STAR_STR',
                     'PXI_Star',
                     'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG7_STR',
                     'PXI_Trig7',
                     'The trigger is received on PXI trigger line 7.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARB_STR',
                     'PXIe_DStarB',
                     'The trigger is received on the PXI DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
                 ],
                 [
-                    'NIRFSG_VAL_TRIG_IN_STR',
                     'TrigIn',
                     'The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_SYNC_SCRIPT_TRIGGER_STR',
                     'Sync_Script',
                     'The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'StartTrigDigEdgeSource',
         'lv_property': 'Triggers:Start:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_START_TRIGGER_SOURCE',
         'type': 'ViString'
@@ -468,126 +434,102 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Start Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Start Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The signal is exported to the PFI 1 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI4_STR',
                     'PFI4',
                     'The signal is exported to the PFI 4 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI5_STR',
                     'PFI5',
                     'The signal is exported to the PFI 5 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
                     'PXIe_DStarC',
                     'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
                 ],
                 [
-                    'NIRFSG_VAL_TRIG_OUT_STR',
                     'TrigOut',
                     'The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'StartTrigExportOutputTerm',
         'lv_property': 'Triggers:Start:Export Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -596,19 +538,19 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the clock source for driving the PXI 10 MHz backplane Reference Clock. This attribute is configurable if the PXI-5610 upconverter module is installed in *only* Slot 2 of a PXI chassis. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Defined Values**:\n\nName (Value): Description\n\nNIRFSG_VAL_NONE (0) :Do not drive the PXI_CLK10 signal.\n\nNIRFSG_VAL_ONBOARD_CLOCK_STR (OnboardClock) :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.\n\nNIRFSG_VAL_REF_IN_STR (RefIn) :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.\n\n                **Default Value:** NIRFSG_VAL_NONE\n\n                **Supported Devices:** PXI-5610, PXI-5670/5671\n\n                **Related Topics**\n\n                `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n                `System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigurePxiChassisClk10\n            \n            \n                Only certain combinations of this attribute and the NIRFSG_ATTR_REF_CLOCK_SOURCE attribute are valid, as shown in the following table.\n            ',
+            'description': '                Specifies the clock source for driving the PXI 10 MHz backplane Reference Clock. This attribute is configurable if the PXI-5610 upconverter module is installed in *only* Slot 2 of a PXI chassis. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Possible Values**:\n\nPossible Value: Description\n\nempty :Do not drive the PXI_CLK10 signal.\n\nOnboardClock :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.\n\nRefIn :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.\n\n                **Default Value:** empty\n\n                **Supported Devices:** PXI-5610, PXI-5670/5671\n\n                **Related Topics**\n\n                `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n                `System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigurePxiChassisClk10\n            \n            \n                Only certain combinations of this attribute and the NIRFSG_ATTR_REF_CLOCK_SOURCE attribute are valid, as shown in the following table.\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_NONE, NIRFSG_VAL_ONBOARD_CLOCK_STR',
-                    'NIRFSG_VAL_ONBOARD_CLOCK_STR'
+                    'empty, OnboardClock',
+                    'OnboardClock'
                 ],
                 [
-                    'NIRFSG_VAL_NONE, NIRFSG_VAL_REF_IN_STR',
-                    'NIRFSG_VAL_REF_IN_STR'
+                    'empty, RefIn',
+                    'RefIn'
                 ],
                 [
-                    'NIRFSG_VAL_NONE, NIRFSG_VAL_REF_IN_STR',
-                    'NIRFSG_VAL_PXI_CLK_STR'
+                    'empty, RefIn',
+                    'PXI_CLK'
                 ]
             ],
             'table_header': [
@@ -616,7 +558,6 @@ attributes = {
                 'NIRFSG_ATTR_REF_CLOCK_SOURCE Setting'
             ]
         },
-        'enum': 'PxiChassisClk10Source',
         'lv_property': 'Clock:PXI Chassis Clk 10 Source',
         'name': 'PXI_CHASSIS_CLK10_SOURCE',
         'type': 'ViString'
@@ -994,136 +935,110 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the source terminal for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to digital edge. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeScriptTrigger\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the source terminal for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to digital edge. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ConfigureDigitalEdgeScriptTrigger\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The trigger is received on PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The trigger is received on PFI 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI2_STR',
                     'PFI2',
                     'The trigger is received on PFI 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI3_STR',
                     'PFI3',
                     'The trigger is received on PFI 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_STAR_STR',
                     'PXI_Star',
                     'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG7_STR',
                     'PXI_Trig7',
                     'The trigger is received on PXI trigger line 7.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARB_STR',
                     'PXIe_DStarB',
                     'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
                 ],
                 [
-                    'NIRFSG_VAL_PULSE_IN_STR',
                     'PulseIn',
                     'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_SYNC_SCRIPT_TRIGGER_STR',
                     'Sync_Script',
                     'The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigDigEdgeSource',
         'lv_property': 'Triggers:Script:Digital Edge:Source',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE',
         'supported_rep_caps': [
@@ -1166,121 +1081,98 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Script Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_ —Refer to this topic for information about trigger delay.\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Script Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_ —Refer to this topic for information about trigger delay.\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The signal is exported to the PFI 1 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI4_STR',
                     'PFI4',
                     'The signal is exported to the PFI 4 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI5_STR',
                     'PFI5',
                     'The signal is exported to the PFI 5 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
                     'PXIe_DStarC',
                     'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigExportOutputTerm',
         'lv_property': 'Triggers:Script:Export Output Terminal',
         'name': 'EXPORTED_SCRIPT_TRIGGER_OUTPUT_TERMINAL',
         'supported_rep_caps': [
@@ -1392,26 +1284,22 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the Sample Clock source for the device. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: NIRFSG_VAL_ONBOARD_CLOCK_STR is the only supported value for this device.\n\n                **Default Value:** NIRFSG_VAL_ONBOARD_CLOCK_STR\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the Sample Clock source for the device. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: NIRFSG_VAL_ONBOARD_CLOCK_STR is the only supported value for this device.\n\n                **Default Value:** NIRFSG_VAL_ONBOARD_CLOCK_STR\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_CLK_IN_STR',
                     'ClkIn',
                     'Uses the external clock as the Sample Clock source.'
                 ],
                 [
-                    'NIRFSG_VAL_ONBOARD_CLOCK_STR',
                     'OnboardClock',
                     'Uses the AWG module onboard clock as the Sample Clock source.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'ArbSampleClockSource',
         'lv_property': 'Clock:Arb Sample Clock Source',
         'name': 'ARB_SAMPLE_CLOCK_SOURCE',
         'type': 'ViString'
@@ -1773,7 +1661,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Reference Clock on the RF signal generators. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_DO_NOT_EXPORT_STR\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Interconnecting Multiple NI 5673E Modules <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/interconnecting_multiple_ni_5673_modules.html>`_\n             \n            **Defined Values**:\n\nName (Value): Description\n\nNIRFSG_VAL_DO_NOT_EXPORT_STR () :The Reference Clock signal is not exported.\n\nNIRFSG_VAL_REF_OUT_STR (RefOut) :Exports the Reference Clock signal to the REF OUT connector of the device.\n\nNIRFSG_VAL_REF_OUT2_STR (RefOut2) :Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.\n\nNIRFSG_VAL_CLK_OUT_STR (ClkOut) :Exports the Reference Clock signal to the CLK OUT connector of the device.\n            ',
+            'description': '                Specifies the destination terminal for exporting the Reference Clock on the RF signal generators. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Possible Values**:\n\nPossible Value: Description\n\n"" :The Reference Clock signal is not exported.\n\nRefOut :Exports the Reference Clock signal to the REF OUT connector of the device.\n\nRefOut2 :Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.\n\nClkOut :Exports the Reference Clock signal to the CLK OUT connector of the device.\n\n                **Default Value:** NIRFSG_VAL_DO_NOT_EXPORT_STR\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Interconnecting Multiple NI 5673E Modules <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/interconnecting_multiple_ni_5673_modules.html>`_\n            ',
             'note': 'The NIRFSG_VAL_REF_OUT2_STR output terminal value is valid for only the PXIe-5650/5651/5652, not the PXI-5650/5651/5652.',
             'table_body': [
                 [
@@ -1784,7 +1672,7 @@ attributes = {
                 ],
                 [
                     'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The Reference Clock signal is not exported.',
                     'Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note)'
                 ],
@@ -1808,7 +1696,6 @@ attributes = {
                 'Supported devices'
             ]
         },
-        'enum': 'ReferenceClockExportOutputTerminal',
         'lv_property': 'Clock:Reference Clock Export Output Terminal',
         'name': 'EXPORTED_REF_CLOCK_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -1817,131 +1704,106 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the source terminal for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to NIRFSG_VAL_DIGITAL_LEVEL. The NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute is not case-sensitive.\n\n                To set the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the source terminal for the Script Trigger. This attribute is used when the NIRFSG_ATTR_SCRIPT_TRIGGER_TYPE attribute is set to NIRFSG_VAL_DIGITAL_LEVEL. The NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute is not case-sensitive.\n\n                To set the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The trigger is received on PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The trigger is received on PFI 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI2_STR',
                     'PFI2',
                     'The trigger is received on PFI 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI3_STR',
                     'PFI3',
                     'The trigger is received on PFI 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_STAR_STR',
                     'PXI_Star',
                     'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG7_STR',
                     'PXI_Trig7',
                     'The trigger is received on PXI trigger line 7.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARB_STR',
                     'PXIe_DStarB',
                     'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
                 ],
                 [
-                    'NIRFSG_VAL_PULSE_IN_STR',
                     'PulseIn',
                     'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigDigLevelSource',
         'lv_property': 'Triggers:Script:Digital Level:Source',
         'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE',
         'supported_rep_caps': [
@@ -2058,121 +1920,98 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Done event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Done event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The signal is exported to the PFI 1 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI4_STR',
                     'PFI4',
                     'The signal is exported to the PFI 4 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI5_STR',
                     'PFI5',
                     'The signal is exported to the PFI 5 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
                     'PXIe_DStarC',
                     'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Posible Value',
                 'Description'
             ]
         },
-        'enum': 'DoneEventExportOutputTerm',
         'lv_property': 'Events:Done Event Export Output Terminal',
         'name': 'EXPORTED_DONE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2181,121 +2020,98 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Marker Event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Marker Event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The signal is exported to the PFI 1 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI4_STR',
                     'PFI4',
                     'The signal is exported to the PFI 4 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI5_STR',
                     'PFI5',
                     'The signal is exported to the PFI 5 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
                     'PXIe_DStarC',
                     'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'MarkerEventExportOutputTerm',
         'lv_property': 'Events:Marker:Output Terminal',
         'name': 'EXPORTED_MARKER_EVENT_OUTPUT_TERMINAL',
         'repeated_capability_type': 'markers',
@@ -2308,121 +2124,98 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Started event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Started event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n                \n                **High-Level Functions**:\n\n                - nirfsg_ExportSignal\n                \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI0_STR',
                     'PFI0',
                     'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI1_STR',
                     'PFI1',
                     'The signal is exported to the PFI 1 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI4_STR',
                     'PFI4',
                     'The signal is exported to the PFI 4 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PFI5_STR',
                     'PFI5',
                     'The signal is exported to the PFI 5 connector.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
                     'PXIe_DStarC',
                     'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO0_STR',
                     'DIO/PFI0',
                     'The trigger is received on PFI0 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO1_STR',
                     'DIO/PFI1',
                     'The trigger is received on PFI1 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO2_STR',
                     'DIO/PFI2',
                     'The trigger is received on PFI2 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO3_STR',
                     'DIO/PFI3',
                     'The trigger is received on PFI3 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO4_STR',
                     'DIO/PFI4',
                     'The trigger is received on PFI4 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO5_STR',
                     'DIO/PFI5',
                     'The trigger is received on PFI5 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO6_STR',
                     'DIO/PFI6',
                     'The trigger is received on PFI6 from the front panel DIO terminal.'
                 ],
                 [
-                    'NIRFSG_VAL_DIO7_STR',
                     'DIO/PFI7',
                     'The trigger is received on PFI7 from the front panel DIO terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'StartedEventExportOutputTerm',
         'lv_property': 'Events:Started Event Export Output Terminal',
         'name': 'EXPORTED_STARTED_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2869,66 +2662,54 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Configuration Settled event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5654/5654 with PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Configuration Settled event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                **Supported Devices:** PXIe-5654/5654 with PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n                `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                    '',
+                    'empty',
                     'The signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG0_STR',
                     'PXI_Trig0',
                     'The trigger is received on PXI trigger line 0.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG1_STR',
                     'PXI_Trig1',
                     'The trigger is received on PXI trigger line 1.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG2_STR',
                     'PXI_Trig2',
                     'The trigger is received on PXI trigger line 2.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG3_STR',
                     'PXI_Trig3',
                     'The trigger is received on PXI trigger line 3.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG4_STR',
                     'PXI_Trig4',
                     'The trigger is received on PXI trigger line 4.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG5_STR',
                     'PXI_Trig5',
                     'The trigger is received on PXI trigger line 5.'
                 ],
                 [
-                    'NIRFSG_VAL_PXI_TRIG6_STR',
                     'PXI_Trig6',
                     'The trigger is received on PXI trigger line 6.'
                 ],
                 [
-                    'NIRFSG_VAL_PXIE_DSTARC_STR',
                     'PXIe_DStarC',
                     'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.'
                 ],
                 [
-                    'NIRFSG_VAL_TRIG_OUT_STR',
                     'TrigOut',
                     'TRIG IN/OUT terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'ConfigurationSettledEventExportOutputTerm',
         'lv_property': 'Events:Configuration Settled Event Export Output Terminal',
         'name': 'EXPORTED_CONFIGURATION_SETTLED_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -3199,42 +2980,35 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies whether to use the internal or external local oscillator (LO) source. If the NIRFSG_ATTR_LO_SOURCE attribute is set to "" (empty string), NI-RFSG uses the internal LO source. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                To use this attribute for the PXIe-5830/5831/5832, you must use the channelName parameter of the nirfsg_SetAttributeViString function to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).\n\n                **Default Value:** NIRFSG_VAL_LO_SOURCE_ONBOARD_STR\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/lo_sharing_using_rfsa_rfsg.html>`_\n\n                `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/lo_sharing_using_rfsa_rfsg.html>`_\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies whether to use the internal or external local oscillator (LO) source. If the NIRFSG_ATTR_LO_SOURCE attribute is set to "" (empty string), NI-RFSG uses the internal LO source. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n                To use this attribute for the PXIe-5830/5831/5832, you must use the channelName parameter of the nirfsg_SetAttributeViString function to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).\n\n                **Default Value:** NIRFSG_VAL_LO_SOURCE_ONBOARD_STR\n\n                **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/lo_sharing_using_rfsa_rfsg.html>`_\n\n                `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/lo_sharing_using_rfsa_rfsg.html>`_\n            \n            **Possible Values**:\n            ',
             'note': 'For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this attribute is set to NIRFSG_VAL_LO_SOURCE_SG_SA_SHARED_STR.',
             'table_body': [
                 [
-                    'NIRFSG_VAL_LO_SOURCE_AUTOMATIC_SG_SA_SHARED_STR',
                     'Automatic_SG_SA_Shared',
                     'NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.'
                 ],
                 [
-                    'NIRFSG_VAL_LO_SOURCE_LO_IN_STR',
                     'LO_In',
                     'Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the NIRFSG_ATTR_UPCONVERTER_CENTER_FREQUENCY attribute to specify the LO frequency.'
                 ],
                 [
-                    'NIRFSG_VAL_LO_SOURCE_ONBOARD_STR',
                     'Onboard',
                     'Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.'
                 ],
                 [
-                    'NIRFSG_VAL_LO_SOURCE_SG_SA_SHARED_STR',
                     'SG_SA_Shared',
                     'Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.'
                 ],
                 [
-                    'NIRFSG_VAL_LO_SOURCE_SECONDARY_STR',
                     'Secondary',
                     'Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'LoSource',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Source',
         'name': 'LO_SOURCE',
         'type': 'ViString'
@@ -4475,11 +4249,11 @@ attributes = {
             'description': '                Specifies the configurations to skip while loading from a file.\n\n                **Default Value:**  NIRFSG_VAL_SKIP_NONE\n                \n                **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_SKIP_NONE',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE',
                     'NI-RFSG loads all the configurations to the session.'
                 ],
                 [
-                    'NIRFSG_VAL_SKIP_WAVEFORM',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                     'NI-RFSG skips loading the waveform configurations to the session.'
                 ]
             ],
@@ -4500,19 +4274,19 @@ attributes = {
             'description': '                Specifies the configurations to skip to reset while loading configurations from a file.\n\n                **Default Value:**  NIRFSG_VAL_SKIP_NONE\n                **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n            \n            **Defined Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_SKIP_NONE',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
                     'NI-RFSG resets all configurations.'
                 ],
                 [
-                    'NIRFSG_VAL_SKIP_WAVEFORMS',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
                     'NI-RFSG skips resetting the waveform configurations.'
                 ],
                 [
-                    'NIRFSG_VAL_SKIP_SCRIPTS',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
                     'NI-RFSG skips resetting the scripts.'
                 ],
                 [
-                    'NIRFSG_VAL_SKIP_DEEMBEDDING_TABLES',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
                     'NI-RFSG skips resetting the de-embedding tables.'
                 ]
             ],
@@ -4630,41 +4404,34 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the source of the pulse modulation signal. When Pulse In in used, the pulse modulation is applied with the lowest latency and jitter, but is not aligned to any particular waveform sample. When a marker is used, the RF pulse is aligned to a specific sample in the arbitrary waveform. To set this property, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_PULSE_IN_STR\n\n                **Supported Devices:**  PXIe-5842\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the source of the pulse modulation signal. When Pulse In in used, the pulse modulation is applied with the lowest latency and jitter, but is not aligned to any particular waveform sample. When a marker is used, the RF pulse is aligned to a specific sample in the arbitrary waveform. To set this property, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_PULSE_IN_STR\n\n                **Supported Devices:**  PXIe-5842\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_PULSE_IN_STR',
                     'PulseIn',
                     'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
                 ],
                 [
-                    'NIRFSG_VAL_MARKER0_STR',
-                    '',
+                    'Marker0',
                     'The trigger is received from the Marker 0.'
                 ],
                 [
-                    'NIRFSG_VAL_MARKER1_STR',
-                    '',
+                    'Marker1',
                     'The trigger is received from the Marker 1.'
                 ],
                 [
-                    'NIRFSG_VAL_MARKER2_STR',
-                    '',
+                    'Marker2',
                     'The trigger is received from the Marker 2.'
                 ],
                 [
-                    'NIRFSG_VAL_MARKER3_STR',
-                    '',
+                    'Marker3',
                     'The trigger is received from the Marker 3.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'PulseModulationSource',
         'lv_property': 'Modulation:Pulse:Pulse Modulation Source',
         'name': 'PULSE_MODULATION_SOURCE',
         'type': 'ViString'
@@ -4673,26 +4440,22 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': '                Specifies the destination terminal for exporting the Pulse Modulation Event. The Pulse Modulation Event tracks the RF Envelope when Pulse Modulation is Enabled. If this property is set to a value other than `do not export str`, calling NI-RFSG Commit will cause the output terminal to be pulled to the logic level that is the inverse of `exported pulse modulation event active level`. You can tri-state this terminal by setting this property to `do not export str` or by calling `niRFSG Reset`. To set this property, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_PULSE_OUT_STR\n\n                **Supported Devices:**  PXIe-5842\n            \n            **Defined Values**:\n            ',
+            'description': '                Specifies the destination terminal for exporting the Pulse Modulation Event. The Pulse Modulation Event tracks the RF Envelope when Pulse Modulation is Enabled. If this property is set to a value other than `do not export str`, calling NI-RFSG Commit will cause the output terminal to be pulled to the logic level that is the inverse of `exported pulse modulation event active level`. You can tri-state this terminal by setting this property to `do not export str` or by calling `niRFSG Reset`. To set this property, the NI-RFSG device must be in the Configuration state.\n\n                **Default Value:** NIRFSG_VAL_PULSE_OUT_STR\n\n                **Supported Devices:**  PXIe-5842\n            \n            **Possible Values**:\n            ',
             'table_body': [
                 [
-                    'NIRFSG_VAL_DO_NOT_EXPORT_STR',
                     '',
                     'Pulse modulation video signal is not exported.'
                 ],
                 [
-                    'NIRFSG_VAL_PULSE_OUT_STR',
                     'PulseOut',
                     'Export the pulse modulation video signal on the pulse out terminal.'
                 ]
             ],
             'table_header': [
-                'Name',
-                'Value',
+                'Possible Value',
                 'Description'
             ]
         },
-        'enum': 'PulseModulationOutputTerm',
         'lv_property': 'Events:Pulse Modulation:Exported Pulse Modulation Event Output Terminal',
         'name': 'EXPORTED_PULSE_MODULATION_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
