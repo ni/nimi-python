@@ -3,9 +3,19 @@ ${template_parameters['encoding_tag']}
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''
+<%
+import build.helper as helper
+
+config = template_parameters['metadata'].config
+functions = config['functions']
+functions = helper.filter_codegen_functions(functions)
+are_complex_parameters_used = helper.are_complex_parameters_used(functions)
+%>\
 
 import ctypes
+% if are_complex_parameters_used:
 import ${template_parameters['metadata'].config['module_name']}._complextype as _complextype
+% endif
 import ${template_parameters['metadata'].config['module_name']}._visatype as _visatype
 import pprint
 
@@ -271,6 +281,7 @@ class ViReal64PointerMatcher(_PointerMatcher):
     def __init__(self):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
 
+% if are_complex_parameters_used:
 
 class ComplexViReal64PointerMatcher(_PointerMatcher):
     def __init__(self, expected_data, expected_size):
@@ -331,6 +342,7 @@ class ComplexViInt16PointerMatcher(_PointerMatcher):
     def __repr__(self):
         return f"ComplexViInt16PointerMatcher({self.expected_data})"
 
+% endif
 # Buffers
 
 

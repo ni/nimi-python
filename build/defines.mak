@@ -59,7 +59,6 @@ DEFAULT_PY_FILES_TO_GENERATE := \
     unit_tests/_matchers.py \
     __init__.py \
     _converters.py \
-    _complextype.py \
     VERSION \
     $(if $(GRPC_SUPPORTED), \
         _grpc_stub_interpreter.py \
