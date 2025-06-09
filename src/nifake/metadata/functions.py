@@ -2845,7 +2845,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'numberOfSamples'
                 },
-                'type': 'ComplexViReal32[]',
+                'type': 'NIComplexNumberF32[]',
                 'use_in_python_api': True,
                 'use_numpy_array': True
             }
@@ -2900,7 +2900,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'numberOfSamples'
                 },
-                'type': 'ComplexViReal64[]',
+                'type': 'NIComplexNumber[]',
                 'use_in_python_api': True,
                 'use_numpy_array': True
             }
@@ -2955,7 +2955,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'numberOfSamples'
                 },
-                'type': 'ComplexViInt16[]',
+                'type': 'NIComplexI16[]',
                 'use_in_python_api': True,
                 'use_numpy_array': True
             }

@@ -366,8 +366,8 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             definition = '{}.{}({})  # case S150'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameters and corresponding_buffer_parameters[0]['direction'] == 'in':  # We are only looking at the first one to see if it is 'in'. Assumes all are the same here, assert below if not
             # Parameter denotes the size of another (the "corresponding") parameter.
-
-            # Interleaved array length is going to be double the length of number of samples
+            # Interleaved array length is going to be double the length of number of samples.
+            # This is used for complex waveforms, where the real and imaginary parts are interleaved in the array.
             if 'interleaved' in corresponding_buffer_parameters[0]['complex_type']:
                 definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}) // 2)  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
             else:

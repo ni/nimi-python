@@ -272,9 +272,9 @@ class ViReal64PointerMatcher(_PointerMatcher):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
 
 
-class ComplexViReal64PointerMatcher(_PointerMatcher):
+class NIComplexNumberPointerMatcher(_PointerMatcher):
     def __init__(self, expected_data, expected_size):
-        _PointerMatcher.__init__(self, _complextype.ComplexViReal64)
+        _PointerMatcher.__init__(self, _complextype.NIComplexNumber)
         self.expected_data = expected_data
         self.expected_size = expected_size
 
@@ -289,12 +289,12 @@ class ComplexViReal64PointerMatcher(_PointerMatcher):
         return True
 
     def __repr__(self):
-        return f"ComplexViReal64PointerMatcher({self.expected_data})"
+        return f"NIComplexNumberPointerMatcher({self.expected_data})"
 
 
-class ComplexViReal32PointerMatcher(_PointerMatcher):
+class NIComplexNumberF32PointerMatcher(_PointerMatcher):
     def __init__(self, expected_data, expected_size):
-        _PointerMatcher.__init__(self, _complextype.ComplexViReal32)
+        _PointerMatcher.__init__(self, _complextype.NIComplexNumberF32)
         self.expected_data = expected_data
         self.expected_size = expected_size
 
@@ -309,12 +309,12 @@ class ComplexViReal32PointerMatcher(_PointerMatcher):
         return True
 
     def __repr__(self):
-        return f"ComplexViReal32PointerMatcher({self.expected_data})"
+        return f"NIComplexNumberF32PointerMatcher({self.expected_data})"
 
 
-class ComplexViInt16PointerMatcher(_PointerMatcher):
+class NIComplexI16PointerMatcher(_PointerMatcher):
     def __init__(self, expected_data, expected_size):
-        _PointerMatcher.__init__(self, _complextype.ComplexViInt16)
+        _PointerMatcher.__init__(self, _complextype.NIComplexI16)
         self.expected_data = expected_data
         self.expected_size = expected_size
 
@@ -329,7 +329,7 @@ class ComplexViInt16PointerMatcher(_PointerMatcher):
         return True
 
     def __repr__(self):
-        return f"ComplexViInt16PointerMatcher({self.expected_data})"
+        return f"NIComplexI16PointerMatcher({self.expected_data})"
 
 
 # Buffers

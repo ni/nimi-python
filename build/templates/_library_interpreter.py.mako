@@ -51,7 +51,7 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
         % if are_complex_parameters_used:
-        if library_type in (_complextype.ComplexViInt16, _complextype.ComplexViReal32, _complextype.ComplexViReal64):
+        if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
             complex_dtype = numpy.dtype(library_type)
             structured_array = value.view(complex_dtype)
             return structured_array.ctypes.data_as(ctypes.POINTER(library_type))

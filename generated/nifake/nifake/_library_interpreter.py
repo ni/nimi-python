@@ -30,7 +30,7 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        if library_type in (_complextype.ComplexViInt16, _complextype.ComplexViReal32, _complextype.ComplexViReal64):
+        if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
             complex_dtype = numpy.dtype(library_type)
             structured_array = value.view(complex_dtype)
             return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
@@ -741,7 +741,7 @@ class LibraryInterpreter(object):
     def write_waveform_complex_f32(self, waveform_data_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViReal32)  # case B510
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.NIComplexNumberF32)  # case B510
         error_code = self._library.niFake_WriteWaveformComplexF32(vi_ctype, number_of_samples_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -749,7 +749,7 @@ class LibraryInterpreter(object):
     def write_waveform_complex_f64(self, waveform_data_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViReal64)  # case B510
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.NIComplexNumber)  # case B510
         error_code = self._library.niFake_WriteWaveformComplexF64(vi_ctype, number_of_samples_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -757,7 +757,7 @@ class LibraryInterpreter(object):
     def write_waveform_complex_i16(self, waveform_data_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array) // 2)  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViInt16)  # case B510
+        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.NIComplexI16)  # case B510
         error_code = self._library.niFake_WriteWaveformComplexI16(vi_ctype, number_of_samples_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
