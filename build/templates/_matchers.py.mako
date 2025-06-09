@@ -281,8 +281,8 @@ class ViReal64PointerMatcher(_PointerMatcher):
     def __init__(self):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
 
-% if are_complex_parameters_used:
 
+% if are_complex_parameters_used:
 class ComplexViReal64PointerMatcher(_PointerMatcher):
     def __init__(self, expected_data, expected_size):
         _PointerMatcher.__init__(self, _complextype.ComplexViReal64)
@@ -341,6 +341,7 @@ class ComplexViInt16PointerMatcher(_PointerMatcher):
 
     def __repr__(self):
         return f"ComplexViInt16PointerMatcher({self.expected_data})"
+
 
 % endif
 # Buffers

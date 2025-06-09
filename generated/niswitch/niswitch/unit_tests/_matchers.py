@@ -270,6 +270,7 @@ class ViReal64PointerMatcher(_PointerMatcher):
     def __init__(self):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
 
+
 # Buffers
 
 
