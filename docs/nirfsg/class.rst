@@ -5149,27 +5149,27 @@ deembedding_type
 
                         To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the port to configure for de-embedding.
 
-                        If you set this property to :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+                        If you set this property to :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
-                        **Default Value**: :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR`
+                        **Default Value**: :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR`
 
-                        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`
+                        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`
 
-                        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR`, :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR`, or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`. :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
+                        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR`, :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR`, or :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`. :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
                     **Defined Values**:
 
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | Name                                                               | Value          | Description                                                            |
-        +====================================================================+================+========================================================================+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | Name                                              | Value          | Description                                                            |
+        +===================================================+================+========================================================================+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.

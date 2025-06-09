@@ -399,7 +399,7 @@ DeembeddingTypeAttrVals
 
 .. py:class:: DeembeddingTypeAttrVals
 
-    .. py:attribute:: DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE
+    .. py:attribute:: DeembeddingTypeAttrVals.NONE
 
 
 
@@ -409,11 +409,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.NONE
-
-
-
-    .. py:attribute:: DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR
+    .. py:attribute:: DeembeddingTypeAttrVals.SCALAR
 
 
 
@@ -423,7 +419,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR
+    .. py:attribute:: DeembeddingTypeAttrVals.VECTOR
 
 
 

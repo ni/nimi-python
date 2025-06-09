@@ -418,10 +418,6 @@ enums = {
                 'value': 25000
             },
             {
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'De-embeds the measurement using only the gain term.'
                 },
