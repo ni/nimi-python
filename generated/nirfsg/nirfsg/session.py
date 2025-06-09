@@ -1109,27 +1109,27 @@ class _SessionBase(object):
 
                     To use this property, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the port to configure for de-embedding.
 
-                    If you set this property to DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR or DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+                    If you set this property to DeembeddingTypeAttrVals.SCALAR or DeembeddingTypeAttrVals.VECTOR, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
-                    **Default Value**: DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR
+                    **Default Value**: DeembeddingTypeAttrVals.SCALAR
 
-                    **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR or DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE
+                    **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : DeembeddingTypeAttrVals.SCALAR or DeembeddingTypeAttrVals.NONE
 
-                    **Valid Values for PXIe-5831** DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR, DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR, or DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE. DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
+                    **Valid Values for PXIe-5831** DeembeddingTypeAttrVals.SCALAR, DeembeddingTypeAttrVals.VECTOR, or DeembeddingTypeAttrVals.NONE. DeembeddingTypeAttrVals.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
 
                     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
                 **Defined Values**:
 
-    +-------------------------------------------------+----------------+------------------------------------------------------------------------+
-    | Name                                            | Value          | Description                                                            |
-    +=================================================+================+========================================================================+
-    | DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
-    +-------------------------------------------------+----------------+------------------------------------------------------------------------+
-    | DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
-    +-------------------------------------------------+----------------+------------------------------------------------------------------------+
-    | DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
-    +-------------------------------------------------+----------------+------------------------------------------------------------------------+
+    +--------------------------------+----------------+------------------------------------------------------------------------+
+    | Name                           | Value          | Description                                                            |
+    +================================+================+========================================================================+
+    | DeembeddingTypeAttrVals.NONE   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
+    +--------------------------------+----------------+------------------------------------------------------------------------+
+    | DeembeddingTypeAttrVals.SCALAR | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
+    +--------------------------------+----------------+------------------------------------------------------------------------+
+    | DeembeddingTypeAttrVals.VECTOR | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
+    +--------------------------------+----------------+------------------------------------------------------------------------+
 
     Tip:
     This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.

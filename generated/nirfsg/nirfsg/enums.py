@@ -173,16 +173,15 @@ class ConfigurationListRepeat(Enum):
 
 
 class DeembeddingTypeAttrVals(Enum):
-    DEEMBEDDING_TYPE_NONE = 25000
+    NONE = 25000
     r'''
     De-embedding is not applied to the measurement.
     '''
-    NONE = 0
-    DEEMBEDDING_TYPE_SCALAR = 25001
+    SCALAR = 25001
     r'''
     De-embeds the measurement using only the gain term.
     '''
-    DEEMBEDDING_TYPE_VECTOR = 25002
+    VECTOR = 25002
     r'''
     De-embeds the measurement using the gain term and the reflection term.
     '''
