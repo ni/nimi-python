@@ -51,7 +51,7 @@ class TestLibraryInterpreter:
         reading.contents.value = self.reading
         return self.error_code_return
 
-    def get_ctypes_pointer_for_buffer_side_effect(self, value, library_type=None, complex_type=None):
+    def get_ctypes_pointer_for_buffer_side_effect(self, value, library_type=None):
         ret_val = self.get_ctypes_pointer_for_buffer_side_effect_items[self.get_ctypes_pointer_for_buffer_side_effect_count]
         self.get_ctypes_pointer_for_buffer_side_effect_count += 1
         return ret_val

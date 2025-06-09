@@ -5,7 +5,6 @@ import ctypes
 import nifake.errors as errors
 import threading
 
-import nifake._complextype as _complextype  # noqa: F401
 from nifake._visatype import *  # noqa: F403,H303
 
 import nifake.custom_struct as custom_struct  # noqa: F401

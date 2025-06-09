@@ -14,7 +14,6 @@ CUSTOM_TYPES_TO_COPY += \
     custom_struct.py \
     custom_struct_typedef.py \
     custom_struct_nested_typedef.py \
-    _complextype.py \
 
 include $(BUILD_HELPER_DIR)/rules.mak
 
