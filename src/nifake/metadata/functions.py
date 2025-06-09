@@ -2907,7 +2907,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'WriteWaveformComplexI16': {
+    'WriteWaveformNumpyComplexI16': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of i16 numbers.'

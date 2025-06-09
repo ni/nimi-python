@@ -943,7 +943,7 @@ class TestGrpcSession:
         import pytest
         with nifake.Session('dev1', grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
             with pytest.raises(TypeError) as exc_info:
-                session.write_waveform_complex_i16(invalid_waveform_data)
+                session.write_waveform_numpy_complex_i16(invalid_waveform_data)
             assert str(exc_info.value) == expected_error_message
 
     # Attributes

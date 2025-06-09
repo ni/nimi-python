@@ -1711,8 +1711,8 @@ class Session(_SessionBase):
         self._interpreter.write_waveform_complex_f64(waveform_data_array)
 
     @ivi_synchronized
-    def write_waveform_complex_i16(self, waveform_data_array):
-        r'''write_waveform_complex_i16
+    def write_waveform_numpy_complex_i16(self, waveform_data_array):
+        r'''write_waveform_numpy_complex_i16
 
         A method that writes a waveform of i16 numbers.
 
@@ -1728,7 +1728,7 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
-        self._interpreter.write_waveform_complex_i16(waveform_data_array)
+        self._interpreter.write_waveform_numpy_complex_i16(waveform_data_array)
 
     def _close(self):
         r'''_close

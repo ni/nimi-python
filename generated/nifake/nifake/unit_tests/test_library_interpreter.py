@@ -877,10 +877,10 @@ class TestLibraryInterpreter:
             *[NIComplexI16(real=32767, imag=0) for _ in range(number_of_samples)]
         )
         waveform_data_pointer = ctypes.cast(waveform_data_ctypes, ctypes.POINTER(NIComplexI16))
-        self.patched_library.niFake_WriteWaveformComplexI16.side_effect = self.side_effects_helper.niFake_WriteWaveformComplexI16
+        self.patched_library.niFake_WriteWaveformNumpyComplexI16.side_effect = self.side_effects_helper.niFake_WriteWaveformNumpyComplexI16
         interpreter = self.get_initialized_library_interpreter()
-        interpreter.write_waveform_complex_i16(waveform_data)
-        self.patched_library.niFake_WriteWaveformComplexI16.assert_called_once_with(
+        interpreter.write_waveform_numpy_complex_i16(waveform_data)
+        self.patched_library.niFake_WriteWaveformNumpyComplexI16.assert_called_once_with(
             _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
             _matchers.ViInt32Matcher(number_of_samples),
             _matchers.NIComplexI16PointerMatcher(waveform_data_pointer, number_of_samples)
