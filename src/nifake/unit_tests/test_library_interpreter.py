@@ -889,7 +889,7 @@ class TestLibraryInterpreter:
             interpreter.write_waveform_complex_i16(invalid_waveform_data)
         assert str(exc_info.value) == expected_error_message
 
-    def test_write_interleaved_complexi16_valid_input(self):
+    def test_write_waveform_complexi16_valid_input(self):
         import ctypes
         import numpy as np
 
