@@ -1670,7 +1670,6 @@
   - Enabled selected public APIs
   - Basic example
   - Documentation for APIs (not final) 
-  - Enabled write_arb_waveform functions along with examples.
 - Changed
 - Removed
 
