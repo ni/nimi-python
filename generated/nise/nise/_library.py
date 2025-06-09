@@ -5,7 +5,6 @@ import ctypes
 import nise.errors as errors
 import threading
 
-from nise._complextype import *  # noqa: F401,F403,H303
 from nise._visatype import *  # noqa: F403,H303
 
 

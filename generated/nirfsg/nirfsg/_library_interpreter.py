@@ -4,7 +4,6 @@
 import array
 import ctypes
 import hightime  # noqa: F401
-import nirfsg._complextype as _complextype  # noqa: F401
 import nirfsg._library_singleton as _library_singleton
 import nirfsg._visatype as _visatype
 import nirfsg.enums as enums  # noqa: F401
@@ -19,12 +18,7 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        if library_type in (_complextype.ComplexViInt16, _complextype.ComplexViReal32, _complextype.ComplexViReal64):
-            complex_dtype = numpy.dtype(library_type)
-            structured_array = value.view(complex_dtype)
-            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
-        else:
-            return numpy.ctypeslib.as_ctypes(value)
+        return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
@@ -783,35 +777,6 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         max_time_milliseconds_ctype = _visatype.ViInt32(max_time_milliseconds)  # case S150
         error_code = self._library.niRFSG_WaitUntilSettled(vi_ctype, max_time_milliseconds_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_arb_waveform_complex_f32(self, waveform_name, waveform_data_array, more_data_pending):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViReal32)  # case B510
-        more_data_pending_ctype = _visatype.ViBoolean(more_data_pending)  # case S150
-        error_code = self._library.niRFSG_WriteArbWaveformComplexF32(vi_ctype, waveform_name_ctype, number_of_samples_ctype, waveform_data_array_ctype, more_data_pending_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_arb_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array))  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViReal64)  # case B510
-        more_data_pending_ctype = _visatype.ViBoolean(more_data_pending)  # case S150
-        error_code = self._library.niRFSG_WriteArbWaveformComplexF64(vi_ctype, waveform_name_ctype, number_of_samples_ctype, waveform_data_array_ctype, more_data_pending_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
-        number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array) // 2)  # case S160
-        waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.ComplexViInt16)  # case B510
-        error_code = self._library.niRFSG_WriteArbWaveformComplexI16(vi_ctype, waveform_name_ctype, number_of_samples_ctype, waveform_data_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

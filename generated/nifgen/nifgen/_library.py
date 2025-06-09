@@ -5,7 +5,6 @@ import ctypes
 import nifgen.errors as errors
 import threading
 
-from nifgen._complextype import *  # noqa: F401,F403,H303
 from nifgen._visatype import *  # noqa: F403,H303
 
 

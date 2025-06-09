@@ -5,7 +5,6 @@ import ctypes
 import nidigital.errors as errors
 import threading
 
-from nidigital._complextype import *  # noqa: F401,F403,H303
 from nidigital._visatype import *  # noqa: F403,H303
 
 import nidigital.history_ram_cycle_information as history_ram_cycle_information  # noqa: F401

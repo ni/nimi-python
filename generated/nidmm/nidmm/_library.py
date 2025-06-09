@@ -5,7 +5,6 @@ import ctypes
 import nidmm.errors as errors
 import threading
 
-from nidmm._complextype import *  # noqa: F401,F403,H303
 from nidmm._visatype import *  # noqa: F403,H303
 
 

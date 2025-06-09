@@ -5,7 +5,6 @@ import ctypes
 import nitclk.errors as errors
 import threading
 
-from nitclk._complextype import *  # noqa: F401,F403,H303
 from nitclk._visatype import *  # noqa: F403,H303
 
 
