@@ -6,7 +6,7 @@ import ctypes
 import hightime  # noqa: F401
 import platform
 
-import nifake._complextype as _complextype  # noqa: F401
+import nifake._complextype as _complextype
 import nifake._library_singleton as _library_singleton
 import nifake._visatype as _visatype
 import nifake.enums as enums  # noqa: F401

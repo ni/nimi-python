@@ -320,7 +320,6 @@ _ParameterUsageOptionsFiltering = {
         'mechanism': 'any',
         'python_api_list': True,
         'skip_all_except_complex_type_parameters': True,
-        'skip_all_except_complex_type_parameters': True,
     },
 }
 

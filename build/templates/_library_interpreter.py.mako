@@ -23,7 +23,7 @@ import platform
 
 % endif
 % if are_complex_parameters_used:
-import ${module_name}._complextype as _complextype  # noqa: F401
+import ${module_name}._complextype as _complextype
 % endif
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
