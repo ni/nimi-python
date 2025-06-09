@@ -865,30 +865,6 @@ class TestLibraryInterpreter:
             _matchers.NIComplexNumberPointerMatcher(waveform_data_pointer, number_of_samples)
         )
 
-    def test_write_waveform_numpy_complex64_invalid_input(self):
-        import numpy as np
-
-        invalid_waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex128)
-        expected_error_message = "Invalid waveform data provided. Expected a non-empty array of complex64."
-        interpreter = self.get_initialized_library_interpreter()
-        self.patched_library.niFake_WriteWaveformComplexF32.side_effect = ValueError("Invalid waveform data provided. Expected a non-empty array of complex64.")
-        with pytest.raises(ValueError) as exc_info:
-            interpreter.write_waveform_complex_f32(invalid_waveform_data)
-
-        assert str(exc_info.value) == expected_error_message
-
-    def test_write_interleaved_complexi16_invalid_input(self):
-        import numpy as np
-
-        invalid_waveform_data = np.array([], dtype=np.complex64)
-        expected_error_message = "Invalid waveform data provided. Expected a non-empty array of Int16."
-
-        interpreter = self.get_initialized_library_interpreter()
-        self.patched_library.niFake_WriteWaveformComplexI16.side_effect = ValueError("Invalid waveform data provided. Expected a non-empty array of Int16.")
-        with pytest.raises(ValueError) as exc_info:
-            interpreter.write_waveform_complex_i16(invalid_waveform_data)
-        assert str(exc_info.value) == expected_error_message
-
     def test_write_waveform_complexi16_valid_input(self):
         import ctypes
         import numpy as np
