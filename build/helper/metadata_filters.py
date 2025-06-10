@@ -489,7 +489,7 @@ def filter_codegen_enums(enums):
 
 
 def are_complex_parameters_used(functions):
-    '''Returns function metadata only for those functions to included the library layer (library.py and mock_helper.py)'''
+    '''Returns bool based on whether any complex parameters are used in the functions metadata.'''
     are_complex_parameters_used = False
     complex_parameters = []
     for k, v in functions.items():
