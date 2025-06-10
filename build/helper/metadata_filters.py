@@ -384,7 +384,7 @@ def filter_parameters(parameters, parameter_usage_options):
             skip = False
         if not options_to_use['python_api_list'] and not x['use_in_python_api']:
             skip = True
-        if options_to_use['skip_all_except_complex_type_parameters'] and x['complex_type'] == 'none':
+        if options_to_use['skip_all_except_complex_type_parameters'] and x['complex_type'] is None:
             skip = True
         if not skip:
             parameters_to_use.append(x)

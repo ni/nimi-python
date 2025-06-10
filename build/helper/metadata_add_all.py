@@ -129,7 +129,7 @@ def _add_ctypes_type(parameter, config):
 def _add_complex_type(parameter):
     '''Adds a complex_type parameter to the metadata for complex numbers'''
     if 'complex_type' not in parameter:
-        parameter['complex_type'] = 'none'
+        parameter['complex_type'] = None
 
 
 def _add_numpy_info(parameter, parameters, config):

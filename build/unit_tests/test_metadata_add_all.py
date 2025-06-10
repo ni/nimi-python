@@ -259,7 +259,7 @@ functions_expected = {
                 'grpc_request_snippet': 'vi=self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'name_ctype',
@@ -293,7 +293,7 @@ functions_expected = {
                 'grpc_request_snippet': 'name=name',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'name',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'pin_data_buffer_size_ctype',
@@ -330,7 +330,7 @@ functions_expected = {
                 'grpc_request_snippet': 'pin_data_buffer_size=pin_data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'pin_data_buffer_size',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'python_code_input_ctype',
@@ -367,7 +367,7 @@ functions_expected = {
                 'grpc_request_snippet': 'python_code_input=2 ** 14',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'python_code_input',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
@@ -404,7 +404,7 @@ functions_expected = {
                 'grpc_request_snippet': 'actual_num_pin_data=actual_num_pin_data',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'actual_num_pin_data',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'expected_pin_states_ctype',
@@ -443,7 +443,7 @@ functions_expected = {
                 'grpc_request_snippet': 'expected_pin_states=expected_pin_states',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'custom_type_input_ctype',
@@ -480,7 +480,7 @@ functions_expected = {
                 'grpc_request_snippet': 'custom_type_input=custom_type_input._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_input',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'None if custom_type_output_ctype is None else (ctypes.pointer(custom_type_output_ctype))',
@@ -517,7 +517,7 @@ functions_expected = {
                 'grpc_request_snippet': 'custom_type_output=custom_type_output._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_output',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'custom_type_without_struct_prefix_input_ctype',
@@ -554,7 +554,7 @@ functions_expected = {
                 'grpc_request_snippet': 'custom_type_without_struct_prefix_input=custom_type_without_struct_prefix_input._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
@@ -591,7 +591,7 @@ functions_expected = {
                 'grpc_request_snippet': 'custom_type_without_struct_prefix_output=custom_type_without_struct_prefix_output._create_copy(grpc_types.CustomStruct)',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
-                'complex_type': 'none',
+                'complex_type': None,
             },
         ],
         'python_name': 'make_a_foo',
@@ -639,7 +639,7 @@ functions_expected = {
                 'grpc_request_snippet': 'vi=self._vi',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'status_ctype',
@@ -676,7 +676,7 @@ functions_expected = {
                 'grpc_request_snippet': 'status=status',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'data_buffer_size_ctype',
@@ -713,7 +713,7 @@ functions_expected = {
                 'grpc_request_snippet': 'data_buffer_size=data_buffer_size',
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'data_buffer_size',
-                'complex_type': 'none',
+                'complex_type': None,
             },
             {
                 'ctypes_method_call_snippet': 'data_ctype',
@@ -751,7 +751,7 @@ functions_expected = {
                 'grpc_request_snippet': 'data=data',
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'data',
-                'complex_type': 'none',
+                'complex_type': None,
             },
         ],
         'documentation': {
