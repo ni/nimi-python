@@ -27,23 +27,27 @@ def example(
         session.current_level = current_level
         session.current_level_range = current_level_range
         session.voltage_limit_range = voltage_limit_range
-        # Note that the Voltage Limit property is not applicable for electronic loads and is not
-        # configured in this example. If you change the Output Function, configure the appropriate
-        # level, limit and range properties corresponding to your selected Output Function.
+        # Note that the voltage_limit property is not applicable for electronic loads and is not
+        # configured in this example. If you change the output_function, configure the appropriate
+        # level, limit and range properties corresponding to your selected output_function.
 
         session.source_delay = source_delay
 
-        # Configure the Output Shorted property to specify whether to simulate a short circuit in
+        # Configure the output_shorted property to specify whether to simulate a short circuit in
         # the electronic load.
         session.output_shorted = output_shorted
 
-        # If you are using the DC Current or Constant Power Output Functions, set the Conduction
-        # Voltage Mode to "Automatic" or "Enabled" to enable Conduction Voltage.
-        # If you are using the DC Voltage or Constant Resistance Output Functions, set the
-        # Conduction Voltage Mode to "Automatic" or "Disabled" to disable Conduction Voltage.
-        # If Conduction Voltage is enabled, set the Conduction Voltage On Threshold to configure the
+        # If you set the output_function property to nidcpower.OutputFunction.DC_CURRENT or
+        # nidcpower.OutputFunction.CONSTANT_POWER, set the conduction_voltage_mode to
+        # nidcpower.ConductionVoltageMode.AUTOMATIC or nidcpower.ConductionVoltageMode.ENABLED to
+        # enable Conduction Voltage.
+        # If you set the output_function property to nidcpower.OutputFunction.DC_VOLTAGE or
+        # nidcpower.OutputFunction.CONSTANT_RESISTANCE, set the conduction_voltage_mode to
+        # nidcpower.ConductionVoltageMode.AUTOMATIC or nidcpower.ConductionVoltageMode.DISABLED to
+        # disable Conduction Voltage.
+        # If Conduction Voltage is enabled, set the conduction_voltage_on_threshold to configure the
         # electronic load to start sinking current when the input voltage exceeds the configured
-        # threshold, and set the Conduction Voltage Off Threshold to configure the electronic load
+        # threshold, and set the conduction_voltage_off_threshold to configure the electronic load
         # to stop sinking current when the input voltage falls below the threshold.
         # If Conduction Voltage is disabled, the electronic load attempts to sink the desired level
         # regardless of the input voltage.
@@ -51,10 +55,12 @@ def example(
         session.conduction_voltage_on_threshold = conduction_voltage_on_threshold
         session.conduction_voltage_off_threshold = conduction_voltage_off_threshold
 
-        # If you are using the DC Current Output Function, configure the Current Level Rising Slew
-        # Rate and Current Level Falling Slew Rate, in amps per microsecond, to control the rising
-        # and falling current slew rates of the electronic load while sinking current.
-        # When using Output Functions besides DC Current, these properties have no effect.
+        # If you set the output_function property to nidcpower.OutputFunction.DC_CURRENT, configure
+        # the current_level_rising_slew_rate and current_level_falling_slew_rate, in amps per
+        # microsecond, to control the rising and falling current slew rates of the electronic load
+        # while sinking current.
+        # When the output_function property is set to a value other than
+        # nidcpower.OutputFunction.DC_CURRENT, these properties have no effect.
         session.current_level_rising_slew_rate = current_level_rising_slew_rate
         session.current_level_falling_slew_rate = current_level_falling_slew_rate
 

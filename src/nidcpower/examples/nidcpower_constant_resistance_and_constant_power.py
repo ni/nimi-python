@@ -33,10 +33,10 @@ def example(
             session.constant_power_level = constant_power_level
             session.constant_power_level_range = constant_power_level_range
             session.constant_power_current_limit = constant_power_current_limit
-        # Configure the source delay to allow for sufficient startup delay for the input to reach
-        # the desired sinking level. When starting from a 0 A or Off state, the electronic load
-        # requires additional startup delay before the input begins to sink the desired level. The
-        # default source_delay in this example takes this startup delay into account. In cases where
+        # Configure the source_delay to allow for sufficient startup delay for the input to sink to
+        # the desired level. When starting from a 0 A or Off state, the electronic load requires
+        # additional startup delay before the input begins to sink the desired level. The default
+        # source_delay in this example takes this startup delay into account. In cases where
         # the electronic load is already sinking, less settling time may be needed.
         session.source_delay = source_delay
 
