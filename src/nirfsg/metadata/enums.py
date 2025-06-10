@@ -1379,7 +1379,6 @@ enums = {
     },
     'ResetWithOptionsStepsToOmit': {
         'codegen_method': 'public',
-        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -1491,7 +1490,6 @@ enums = {
     },
     'SelfCalibrateRangeStepsToOmit': {
         'codegen_method': 'public',
-        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
