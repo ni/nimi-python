@@ -1,5 +1,5 @@
 # Changelog
- 
+
 ## Packages
 - [nidcpower (NI-DCPower)](#nidcpower-ni-dcpower)
 - [nidigital (NI-Digital Pattern Driver)](#nidigital-ni-digital-pattern-driver)
@@ -49,6 +49,23 @@
 
 #### [nidcpower] Unreleased
 - Added
+  - API parity with NI-DCPower 2025 Q2.
+      - Properties:
+        - `constant_power_compensation_frequency`
+        - `constant_power_current_limit`
+        - `constant_power_gain_bandwidth`
+        - `constant_power_level`
+        - `constant_power_level_range`
+        - `constant_power_pole_zero_ratio`
+        - `constant_resistance_compensation_frequency`
+        - `constant_resistance_current_limit`
+        - `constant_resistance_gain_bandwidth`
+        - `constant_resistance_level`
+        - `constant_resistance_level_range`
+        - `constant_resistance_pole_zero_ratio`
+        - `output_shorted`
+      - Enum values:
+        - `CONSTANT_RESISTANCE` and `CONSTANT_POWER` added to enum `OutputFunction`
 - Changed
 - Removed
 
@@ -187,7 +204,7 @@
          - `lcr_source_delay_mode`
          - `lcr_stimulus_function`
          - `lcr_voltage_amplitude`
-         - `lcr_voltage_range`      
+         - `lcr_voltage_range`
       - Enums added:
          - `ApertureTimeAutoMode`
          - `CableLength`
@@ -199,7 +216,7 @@
          - `LCROpenShortLoadCompensationDataSource`
          - `LCRReferenceValueType`
          - `LCRSourceDelayMode`
-         - `LCRStimulusFunction`    
+         - `LCRStimulusFunction`
       - Methods added:
          - `configure_lcr_custom_cable_compensation`
          - `fetch_multiple_lcr`
@@ -210,7 +227,7 @@
          - `perform_lcr_open_compensation`
          - `perform_lcr_open_custom_cable_compensation`
          - `perform_lcr_short_compensation`
-         - `perform_lcr_short_custom_cable_compensation`  
+         - `perform_lcr_short_custom_cable_compensation`
       - Custom types added:
          - `LCRLoadCompensationSpot`
          - `LCRMeasurement`
@@ -222,7 +239,7 @@
 #### [nidcpower] 1.4.1 - 2021-08-23
 - Added
   - (Common) Support for Python 3.9
-  - API parity with NI-DCPower 21.0.0.     
+  - API parity with NI-DCPower 21.0.0.
       - Properties added:
          - `output_cutoff_delay`
 - Removed
@@ -1654,7 +1671,7 @@
       i = 0
       with nimodinst.Session('nidmm') as session:
           name = session[i].device_name
-      ``` 
+      ```
 
 #### [nimodinst] 0.1.0 - 2017-09-01
 - Added
@@ -1669,7 +1686,7 @@
 - Added
   - Enabled selected public APIs
   - Basic example
-  - Documentation for APIs (not final) 
+  - Documentation for APIs (not final)
 - Changed
 - Removed
 

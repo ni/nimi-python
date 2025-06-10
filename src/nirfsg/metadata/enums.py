@@ -256,25 +256,6 @@ enums = {
             }
         ]
     },
-    'ArbSampleClockSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Uses the AWG module onboard clock as the Sample Clock source.'
-                },
-                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
-                'value': 'OnboardClock'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the external clock as the Sample Clock source.'
-                },
-                'name': 'NIRFSG_VAL_CLK_IN_STR',
-                'value': 'ClkIn'
-            }
-        ]
-    },
     'AutomaticLevelControl': {
         'codegen_method': 'public',
         'values': [
@@ -356,338 +337,6 @@ enums = {
             }
         ]
     },
-    'ConfigListTrigDigEdgeSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 1.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 7.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG7_STR',
-                'value': 'PXI_Trig7'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
-                },
-                'name': 'NIRFSG_VAL_PXI_STAR_STR',
-                'value': 'PXI_Star'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARB_STR',
-                'value': 'PXIe_DStarB'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker Event 0.'
-                },
-                'name': 'NIRFSG_VAL_MARKER0_EVENT_STR',
-                'value': 'Marker0Event'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker Event 1.'
-                },
-                'name': 'NIRFSG_VAL_MARKER1_EVENT_STR',
-                'value': 'Marker1Event'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker Event 2.'
-                },
-                'name': 'NIRFSG_VAL_MARKER2_EVENT_STR',
-                'value': 'Marker2Event'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker Event 3.'
-                },
-                'name': 'NIRFSG_VAL_MARKER3_EVENT_STR',
-                'value': 'Marker3Event'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Timer Event.'
-                },
-                'name': 'NIRFSG_VAL_TIMER_EVENT_STR',
-                'value': 'TimerEvent'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
-                },
-                'name': 'NIRFSG_VAL_TRIG_IN_STR',
-                'value': 'TrigIn'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            }
-        ]
-    },
-    'ConfigListTrigExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. '
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported on PFI 1 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 0. .'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 0. '
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
-                },
-                'name': 'NIRFSG_VAL_TRIG_OUT_STR',
-                'value': 'TrigOut'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            }
-        ]
-    },
     'ConfigListTrigType': {
         'codegen_method': 'public',
         'values': [
@@ -700,7 +349,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the %attribute{digital edge configuration list step trigger source} attribute, and the active edge is always rising.'
+                    'description': 'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute, and the active edge is always rising.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_EDGE',
                 'value': 1
@@ -731,81 +380,6 @@ enums = {
             {
                 'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
                 'value': 1
-            }
-        ]
-    },
-    'ConfigurationSettledEventExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'TRIG IN/OUT terminal.'
-                },
-                'name': 'NIRFSG_VAL_TRIG_OUT_STR',
-                'value': 'TrigOut'
             }
         ]
     },
@@ -842,10 +416,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_NONE',
                 'value': 25000
-            },
-            {
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
             },
             {
                 'documentation': {
@@ -908,7 +478,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the %function{configure digital modulation user defined waveform} function.'
+                    'description': 'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the nirfsg_ConfigureDigitalModulationUserDefinedWaveform function.'
                 },
                 'name': 'NIRFSG_VAL_USER_DEFINED',
                 'value': 5001
@@ -960,158 +530,6 @@ enums = {
             }
         ]
     },
-    'DoneEventExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 1 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 4 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI4_STR',
-                'value': 'PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 5 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI5_STR',
-                'value': 'PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            }
-        ]
-    },
     'FilterType': {
         'codegen_method': 'public',
         'values': [
@@ -1124,14 +542,14 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Applies a root-raised cosine filter to the data with the alpha value specified with the %attribute{arb filter root raised cosine alpha} attribute.'
+                    'description': 'Applies a root-raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.'
                 },
                 'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_ROOT_RAISED_COSINE',
                 'value': 10001
             },
             {
                 'documentation': {
-                    'description': 'Applies a raised cosine filter to the data with the alpha value specified with the %attribute{arb filter raised cosine alpha} attribute.'
+                    'description': 'Applies a raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA attribute.'
                 },
                 'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_RAISED_COSINE',
                 'value': 10002
@@ -1226,14 +644,14 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Configures the RF signal generator to generate the arbitrary waveform specified by the %attribute{arb selected waveform} attribute.'
+                    'description': 'Configures the RF signal generator to generate the arbitrary waveform specified by the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute.'
                 },
                 'name': 'NIRFSG_VAL_ARB_WAVEFORM',
                 'value': 1001
             },
             {
                 'documentation': {
-                    'description': 'Configures the RF signal generator to generate arbitrary waveforms as directed by the %attribute{selected script} attribute.'
+                    'description': 'Configures the RF signal generator to generate arbitrary waveforms as directed by the NIRFSG_ATTR_SELECTED_SCRIPT attribute.'
                 },
                 'name': 'NIRFSG_VAL_SCRIPT',
                 'value': 1002
@@ -1383,46 +801,6 @@ enums = {
             }
         ]
     },
-    'LoSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.'
-                },
-                'name': 'NIRFSG_VAL_LO_SOURCE_ONBOARD_STR',
-                'value': 'Onboard'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the %attribute{upconverter center frequency} attribute to specify the LO frequency.'
-                },
-                'name': 'NIRFSG_VAL_LO_SOURCE_LO_IN_STR',
-                'value': 'LO_In'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.'
-                },
-                'name': 'NIRFSG_VAL_LO_SOURCE_SECONDARY_STR',
-                'value': 'Secondary'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.'
-                },
-                'name': 'NIRFSG_VAL_LO_SOURCE_SG_SA_SHARED_STR',
-                'value': 'SG_SA_Shared'
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.'
-                },
-                'name': 'NIRFSG_VAL_LO_SOURCE_AUTOMATIC_SG_SA_SHARED_STR',
-                'value': 'Automatic_SG_SA_Shared'
-            }
-        ]
-    },
     'LoadOptions': {
         'codegen_method': 'public',
         'values': [
@@ -1434,18 +812,10 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'NI-RFSG skips loading the waveform configurations to the session.'
                 },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                 'value': 1
             }
         ]
@@ -1473,158 +843,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_WIDE',
                 'value': 2
-            }
-        ]
-    },
-    'MarkerEventExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 1 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 4 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI4_STR',
-                'value': 'PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 5 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI5_STR',
-                'value': 'PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
             }
         ]
     },
@@ -1863,7 +1081,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the %attribute{arb waveform software scaling factor} attribute. You can use the %attribute{peak power adjustment} attribute in conjunction with the %attribute{power level} attribute when the %attribute{power level type} attribute is set to %enum_value{power level type.peak power}.'
+                    'description': 'Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR attribute. You can use the NIRFSG_ATTR_PEAK_POWER_ADJUSTMENT attribute in conjunction with the NIRFSG_ATTR_POWER_LEVEL attribute when the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute is set to NIRFSG_VAL_PEAK_POWER.'
                 },
                 'name': 'NIRFSG_VAL_PEAK_POWER',
                 'value': 7001
@@ -1926,95 +1144,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_DIGITAL',
                 'value': 20003
-            }
-        ]
-    },
-    'PulseModulationOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Pulse modulation video signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'Export the pulse modulation video signal on the pulse out terminal.'
-                },
-                'name': 'NIRFSG_VAL_PULSE_OUT_STR',
-                'value': 'PulseOut'
-            }
-        ]
-    },
-    'PulseModulationSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
-                },
-                'name': 'NIRFSG_VAL_PULSE_IN_STR',
-                'value': 'PulseIn'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker  0.'
-                },
-                'name': 'NIRFSG_VAL_MARKER0_STR',
-                'value': 'Marker0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker 1.'
-                },
-                'name': 'NIRFSG_VAL_MARKER1_STR',
-                'value': 'Marker1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker 2.'
-                },
-                'name': 'NIRFSG_VAL_MARKER2_STR',
-                'value': 'Marker2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received from the Marker 3.'
-                },
-                'name': 'NIRFSG_VAL_MARKER3_STR',
-                'value': 'Marker3'
-            }
-        ]
-    },
-    'PxiChassisClk10Source': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Do not drive the PXI_CLK10 signal.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.'
-                },
-                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
-                'value': 'OnboardClock'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.'
-                },
-                'name': 'NIRFSG_VAL_REF_IN_STR',
-                'value': 'RefIn'
             }
         ]
     },
@@ -2125,39 +1254,6 @@ enums = {
             }
         ]
     },
-    'ReferenceClockExportOutputTerminal': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The Reference Clock signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'Exports the Reference Clock signal to the REF OUT connector of the device.'
-                },
-                'name': 'NIRFSG_VAL_REF_OUT_STR',
-                'value': 'RefOut'
-            },
-            {
-                'documentation': {
-                    'description': 'Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.'
-                },
-                'name': 'NIRFSG_VAL_REF_OUT2_STR',
-                'value': 'RefOut2'
-            },
-            {
-                'documentation': {
-                    'description': 'Exports the Reference Clock signal to the CLK OUT connector of the device.'
-                },
-                'name': 'NIRFSG_VAL_CLK_OUT_STR',
-                'value': 'ClkOut'
-            }
-        ]
-    },
     'ReferenceClockExportedRate': {
         'codegen_method': 'public',
         'values': [
@@ -2204,53 +1300,6 @@ enums = {
                 'name': 'NIRFSG_VAL_10MHZ',
                 'python_name': '_10mhz',
                 'value': 10000000
-            }
-        ]
-    },
-    'ReferenceClockSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Uses the onboard Reference Clock as the clock source.'
-                },
-                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
-                'value': 'OnboardClock'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the clock signal present at the front panel REF IN connector as the Reference Clock source.'
-                },
-                'name': 'NIRFSG_VAL_REF_IN_STR',
-                'value': 'RefIn'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.'
-                },
-                'name': 'NIRFSG_VAL_PXI_CLK_STR',
-                'value': 'PXI_CLK'
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.'
-                },
-                'name': 'NIRFSG_VAL_CLK_IN_STR',
-                'value': 'ClkIn'
-            },
-            {
-                'documentation': {
-                    'description': 'This value is not valid on any supported devices.'
-                },
-                'name': 'NIRFSG_VAL_REF_IN_2_STR',
-                'value': 'RefIn2'
-            },
-            {
-                'documentation': {
-                    'description': 'This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 —** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use NIRFSG_VAL_PXI_CLK_STR %enum_value as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
-                },
-                'name': 'NIRFSG_VAL_PXI_CLK_MASTER_STR',
-                'value': 'PXI_ClkMaster'
             }
         ]
     },
@@ -2381,179 +1430,6 @@ enums = {
             }
         ]
     },
-    'ScriptTrigDigEdgeSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 1.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 2.'
-                },
-                'name': 'NIRFSG_VAL_PFI2_STR',
-                'value': 'PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 3.'
-                },
-                'name': 'NIRFSG_VAL_PFI3_STR',
-                'value': 'PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 7.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG7_STR',
-                'value': 'PXI_Trig7'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXI star trigger line. This value is not valid on the PXIe-5644/5645/5646.'
-                },
-                'name': 'NIRFSG_VAL_PXI_STAR_STR',
-                'value': 'PXI_Star'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARB_STR',
-                'value': 'PXIe_DStarB'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
-                },
-                'name': 'NIRFSG_VAL_PULSE_IN_STR',
-                'value': 'PulseIn'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.'
-                },
-                'name': 'NIRFSG_VAL_SYNC_SCRIPT_TRIGGER_STR',
-                'value': 'Sync_Script'
-            }
-        ]
-    },
     'ScriptTrigDigLevelActiveLevel': {
         'codegen_method': 'public',
         'values': [
@@ -2573,324 +1449,6 @@ enums = {
             }
         ]
     },
-    'ScriptTrigDigLevelSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 1.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 2.'
-                },
-                'name': 'NIRFSG_VAL_PFI2_STR',
-                'value': 'PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 3.'
-                },
-                'name': 'NIRFSG_VAL_PFI3_STR',
-                'value': 'PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 7.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG7_STR',
-                'value': 'PXI_Trig7'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXI star trigger line. This value is not valid on the PXIe-5644/5645/5646.'
-                },
-                'name': 'NIRFSG_VAL_PXI_STAR_STR',
-                'value': 'PXI_Star'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARB_STR',
-                'value': 'PXIe_DStarB'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
-                },
-                'name': 'NIRFSG_VAL_PULSE_IN_STR',
-                'value': 'PulseIn'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            }
-        ]
-    },
-    'ScriptTrigExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 1 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 4 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI4_STR',
-                'value': 'PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 5 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI5_STR',
-                'value': 'PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            }
-        ]
-    },
     'ScriptTrigType': {
         'codegen_method': 'public',
         'values': [
@@ -2903,21 +1461,21 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the %attribute{digital edge start trigger source} attribute, and the active edge is specified with the %attribute{digital edge start trigger edge} attribute.'
+                    'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, and the active edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_EDGE',
                 'value': 1
             },
             {
                 'documentation': {
-                    'description': 'The data operation does not start until the digital level is detected. The source of the digital level is specified in the %attribute{digital level script trigger source} attribute, and the active level is specified in the %attribute{digital level script trigger active level} attribute.'
+                    'description': 'The data operation does not start until the digital level is detected. The source of the digital level is specified in the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute, and the active level is specified in the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL attribute.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_LEVEL',
                 'value': 8000
             },
             {
                 'documentation': {
-                    'description': 'The data operation does not start until a software trigger occurs. You can create a software event by calling the %function{send software edge trigger} function.'
+                    'description': 'The data operation does not start until a software trigger occurs. You can create a software event by calling the nirfsg_SendSoftwareEdgeTrigger function.'
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
@@ -3032,67 +1590,6 @@ enums = {
             }
         ]
     },
-    'SignalIdentifier': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies Marker 0.'
-                },
-                'name': 'NIRFSG_VAL_MARKER_EVENT0',
-                'value': 'marker0'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Marker 1.'
-                },
-                'name': 'NIRFSG_VAL_MARKER_EVENT1',
-                'value': 'marker1'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Marker 2.'
-                },
-                'name': 'NIRFSG_VAL_MARKER_EVENT2',
-                'value': 'marker2'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Marker 3.'
-                },
-                'name': 'NIRFSG_VAL_MARKER_EVENT3',
-                'value': 'marker3'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 0.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER0',
-                'value': 'scriptTrigger0'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 1.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER1',
-                'value': 'scriptTrigger1'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 2.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER2',
-                'value': 'scriptTrigger2'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 3.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER3',
-                'value': 'scriptTrigger3'
-            }
-        ]
-    },
     'SoftwareTriggerType': {
         'codegen_method': 'public',
         'values': [
@@ -3150,338 +1647,6 @@ enums = {
             }
         ]
     },
-    'StartTrigDigEdgeSource': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 1.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 2.'
-                },
-                'name': 'NIRFSG_VAL_PFI2_STR',
-                'value': 'PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI 3.'
-                },
-                'name': 'NIRFSG_VAL_PFI3_STR',
-                'value': 'PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PXI trigger line 7.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG7_STR',
-                'value': 'PXI_Trig7'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXI star trigger line. This value is not valid on the PXIe-5644/5645/5646.'
-                },
-                'name': 'NIRFSG_VAL_PXI_STAR_STR',
-                'value': 'PXI_Star'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the PXI DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARB_STR',
-                'value': 'PXIe_DStarB'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
-                },
-                'name': 'NIRFSG_VAL_TRIG_IN_STR',
-                'value': 'TrigIn'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on the Sync Start trigger line. This value is valid on only the PXIe-5644/5645/5646.'
-                },
-                'name': 'NIRFSG_VAL_SYNC_START_TRIGGER_STR',
-                'value': 'Sync_Start'
-            }
-        ]
-    },
-    'StartTrigExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 1 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 4 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI4_STR',
-                'value': 'PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 5 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI5_STR',
-                'value': 'PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.'
-                },
-                'name': 'NIRFSG_VAL_TRIG_OUT_STR',
-                'value': 'TrigOut'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
-            }
-        ]
-    },
     'StartTrigType': {
         'codegen_method': 'public',
         'values': [
@@ -3494,176 +1659,24 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the %attribute{digital edge start trigger source} attribute, and the active edge is specified in the %attribute{digital edge start trigger edge} attribute.'
+                    'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, and the active edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_EDGE',
                 'value': 1
             },
             {
                 'documentation': {
-                    'description': 'The data operation does not start until a software event occurs. You may create a software trigger by calling the %function{send software edge trigger} function.'
+                    'description': 'The data operation does not start until a software event occurs. You may create a software trigger by calling the nirfsg_SendSoftwareEdgeTrigger function.'
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
             },
             {
                 'documentation': {
-                    'description': 'The data operation does not start until the endpoint reaches the threshold specified in the %attribute{p2p endpoint fullness start trigger level} attribute.'
+                    'description': 'The data operation does not start until the endpoint reaches the threshold specified in the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL attribute.'
                 },
                 'name': 'NIRFSG_VAL_P2P_ENDPOINT_FULLNESS',
                 'value': 3
-            }
-        ]
-    },
-    'StartedEventExportOutputTerm': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The signal is not exported.'
-                },
-                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
-                'value': ''
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.'
-                },
-                'name': 'NIRFSG_VAL_PFI0_STR',
-                'value': 'PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 1 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI1_STR',
-                'value': 'PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 4 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI4_STR',
-                'value': 'PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PFI 5 connector.'
-                },
-                'name': 'NIRFSG_VAL_PFI5_STR',
-                'value': 'PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 0.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG0_STR',
-                'value': 'PXI_Trig0'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 1.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG1_STR',
-                'value': 'PXI_Trig1'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 2.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG2_STR',
-                'value': 'PXI_Trig2'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 3.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG3_STR',
-                'value': 'PXI_Trig3'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 4.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG4_STR',
-                'value': 'PXI_Trig4'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 5.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG5_STR',
-                'value': 'PXI_Trig5'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXI trigger line 6.'
-                },
-                'name': 'NIRFSG_VAL_PXI_TRIG6_STR',
-                'value': 'PXI_Trig6'
-            },
-            {
-                'documentation': {
-                    'description': 'The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.'
-                },
-                'name': 'NIRFSG_VAL_PXIE_DSTARC_STR',
-                'value': 'PXIe_DStarC'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO0_STR',
-                'value': 'DIO/PFI0'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO1_STR',
-                'value': 'DIO/PFI1'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO2_STR',
-                'value': 'DIO/PFI2'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO3_STR',
-                'value': 'DIO/PFI3'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO4_STR',
-                'value': 'DIO/PFI4'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO5_STR',
-                'value': 'DIO/PFI5'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO6_STR',
-                'value': 'DIO/PFI6'
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
-                },
-                'name': 'NIRFSG_VAL_DIO7_STR',
-                'value': 'DIO/PFI7'
             }
         ]
     },
@@ -3723,74 +1736,26 @@ enums = {
             }
         ]
     },
-    'TriggerIdentifier': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 0.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER0',
-                'value': 'scriptTrigger0'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 1.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER1',
-                'value': 'scriptTrigger1'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 2.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER2',
-                'value': 'scriptTrigger2'
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies Script Trigger 3.'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER3',
-                'value': 'scriptTrigger3'
-            },
-            {
-                'documentation': {
-                    'description': 'None (no signal to export)'
-                },
-                'name': 'NIRFSG_VAL_NONE_EMPTY_STRING',
-                'value': ''
-            }
-        ]
-    },
     'UpconverterFrequencyOffsetMode': {
         'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
-                    'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the %attribute{signal bandwidth} attribute has been set and can be avoided.'
+                    'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has been set and can be avoided.'
                 },
                 'name': 'NIRFSG_VAL_AUTO',
                 'value': -1
             },
             {
-                'name': 'NIRFSG_VAL_AUTOMATIC',
-                'value': -1
-            },
-            {
                 'documentation': {
-                    'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the %attribute{signal bandwidth} attribute has been set and can be avoided. NI-RFSG returns an error if the %attribute{signal bandwidth} attribute has not been set, or if the signal bandwidth is too large.'
+                    'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has been set and can be avoided. NI-RFSG returns an error if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has not been set, or if the signal bandwidth is too large.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
                 'value': 1
             },
             {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            },
-            {
                 'documentation': {
-                    'description': 'NI-RFSG uses the offset that you specified with the %attribute{upconverter frequency offset} or %attribute{upconverter center frequency} attributes.'
+                    'description': 'NI-RFSG uses the offset that you specified with the NIRFSG_ATTR_UPCONVERTER_FREQUENCY_OFFSET or NIRFSG_ATTR_UPCONVERTER_CENTER_FREQUENCY attributes.'
                 },
                 'name': 'NIRFSG_VAL_USER_DEFINED',
                 'value': 5001

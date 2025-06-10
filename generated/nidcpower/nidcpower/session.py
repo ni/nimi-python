@@ -535,6 +535,280 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.conduction_voltage_on_threshold`
     '''
+    constant_power_compensation_frequency = _attributes.AttributeViReal64(1150360)
+    '''Type: float
+
+    The frequency at which a pole-zero pair is added to the system when the output_function property is set to OutputFunction.CONSTANT_POWER and the output current is below the current limit.
+
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_power_compensation_frequency`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_power_compensation_frequency`
+    '''
+    constant_power_current_limit = _attributes.AttributeViReal64(1150361)
+    '''Type: float
+
+    Specifies the current limit, in amps, that the output cannot exceed when generating the desired power level on the specified channel(s).
+    The device will operate in Constant Current mode if the current exceeds the specified limit.
+    This property is applicable only if the output_function property is set to OutputFunction.CONSTANT_POWER and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
+
+    Valid Values: The valid values for this property are determined by the selected value for constant_power_level_range.
+
+    Note:
+    The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the channel.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_power_current_limit`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_power_current_limit`
+    '''
+    constant_power_gain_bandwidth = _attributes.AttributeViReal64(1150362)
+    '''Type: float
+
+    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the output_function property is set to OutputFunction.CONSTANT_POWER and the output current is below the current limit.
+
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_power_gain_bandwidth`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_power_gain_bandwidth`
+    '''
+    constant_power_level = _attributes.AttributeViReal64(1150363)
+    '''Type: float
+
+    Specifies the power level, in watts, that the device attempts to generate on the specified channel(s).
+    This property is applicable only if the output_function property is set to OutputFunction.CONSTANT_POWER.
+
+    Valid Values: The valid values for this property are determined by the selected value for constant_power_level_range.
+
+    Note:
+    The channel must be enabled for the specified power level to take effect. Refer to the output_enabled property for more information about enabling the channel.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_power_level`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_power_level`
+    '''
+    constant_power_level_range = _attributes.AttributeViReal64(1150364)
+    '''Type: float
+
+    Specifies the power level range, in watts, for the specified channel(s).
+    The range defines the valid values to which you can set the power level.
+    This property is applicable only if the output_function property is set to OutputFunction.CONSTANT_POWER.
+
+    For valid ranges, refer to the specifications for your instrument.
+
+    Note:
+    The voltage range and current range used by the instrument are automatically determined by the selected power level range. For more information, refer to the specifications for your instrument.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_power_level_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_power_level_range`
+    '''
+    constant_power_pole_zero_ratio = _attributes.AttributeViReal64(1150365)
+    '''Type: float
+
+    The ratio of the pole frequency to the zero frequency when the output_function property is set to OutputFunction.CONSTANT_POWER and the output current is below the current limit.
+
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_power_pole_zero_ratio`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_power_pole_zero_ratio`
+    '''
+    constant_resistance_compensation_frequency = _attributes.AttributeViReal64(1150366)
+    '''Type: float
+
+    The frequency at which a pole-zero pair is added to the system when the output_function property is set to OutputFunction.CONSTANT_RESISTANCE and the output current is below the current limit.
+
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_resistance_compensation_frequency`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_resistance_compensation_frequency`
+    '''
+    constant_resistance_current_limit = _attributes.AttributeViReal64(1150367)
+    '''Type: float
+
+    Specifies the current limit, in amps, that the output cannot exceed when generating the desired resistance level on the specified channel(s).
+    The device will operate in Constant Current mode if the current exceeds the specified limit.
+    This property is applicable only if the output_function property is set to OutputFunction.CONSTANT_RESISTANCE and the compliance_limit_symmetry property is set to ComplianceLimitSymmetry.SYMMETRIC.
+
+    Valid Values: The valid values for this property are determined by the selected value for constant_resistance_level_range.
+
+    Note:
+    The channel must be enabled for the specified current limit to take effect. Refer to the output_enabled property for more information about enabling the channel.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_resistance_current_limit`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_resistance_current_limit`
+    '''
+    constant_resistance_gain_bandwidth = _attributes.AttributeViReal64(1150368)
+    '''Type: float
+
+    The frequency at which the unloaded loop gain extrapolates to 0 dB in the absence of additional poles and zeroes. This property takes effect when the output_function property is set to OutputFunction.CONSTANT_RESISTANCE and the output current is below the current limit.
+
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_resistance_gain_bandwidth`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_resistance_gain_bandwidth`
+    '''
+    constant_resistance_level = _attributes.AttributeViReal64(1150369)
+    '''Type: float
+
+    Specifies the resistance level, in ohms, that the device attempts to generate on the specified channel(s).
+    This property is applicable only if the output_function property is set to OutputFunction.CONSTANT_RESISTANCE.
+
+    Valid Values: The valid values for this property are determined by the selected value for constant_resistance_level_range.
+
+    Note:
+    The channel must be enabled for the specified resistance level to take effect. Refer to the output_enabled property for more information about enabling the channel.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_resistance_level`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_resistance_level`
+    '''
+    constant_resistance_level_range = _attributes.AttributeViReal64(1150370)
+    '''Type: float
+
+    Specifies the resistance level range, in ohms, for the specified channel(s).
+    The range defines the valid values to which you can set the resistance level.
+    This property is applicable only if the output_function property is set to OutputFunction.CONSTANT_RESISTANCE.
+
+    For valid ranges, refer to the specifications for your instrument.
+
+    Note:
+    The voltage range and current range used by the instrument are automatically determined by the selected resistance level range. For more information, refer to the specifications for your instrument.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_resistance_level_range`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_resistance_level_range`
+    '''
+    constant_resistance_pole_zero_ratio = _attributes.AttributeViReal64(1150371)
+    '''Type: float
+
+    The ratio of the pole frequency to the zero frequency when the output_function property is set to OutputFunction.CONSTANT_RESISTANCE and the output current is below the current limit.
+
+    Default Value: Determined by the value of the TransientResponse.NORMAL setting of the transient_response property.
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].constant_resistance_pole_zero_ratio`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.constant_resistance_pole_zero_ratio`
+    '''
     current_compensation_frequency = _attributes.AttributeViReal64(1150071)
     '''Type: float
 
@@ -2637,7 +2911,9 @@ class _SessionBase(object):
     '''Type: bool
 
     Specifies whether the output is enabled (True) or disabled (False).
-    Depending on the value you specify for the output_function property, you also must set the voltage level or current level in addition to enabling the output
+
+    Depending on the value you specify for the output_function property, you also must set the corresponding level properties or output_resistance in addition to enabling the output to generate the desired level.
+    For more information about configuring the output level, refer to the output_function property.
 
     Default Value: The default value is True if you use the __init__ method to open the session. Otherwise the default value is False, including when you use a calibration session or the deprecated programming model.
 
@@ -2660,22 +2936,60 @@ class _SessionBase(object):
     '''Type: enums.OutputFunction
 
     Configures the method to generate on the specified channel(s).
-    When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. You can use the following properties to configure the channel when OutputFunction.DC_VOLTAGE is selected:
-    voltage_level
-    current_limit
-    current_limit_high
-    current_limit_low
-    voltage_level_range
-    current_limit_range
-    compliance_limit_symmetry
-    When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. You can use the following properties to configure the channel when OutputFunction.DC_CURRENT is selected:
-    current_level
-    voltage_limit
-    voltage_limit_high
-    voltage_limit_low
-    current_level_range
-    voltage_limit_range
-    compliance_limit_symmetry
+
+    When OutputFunction.DC_VOLTAGE is selected, the device generates the desired voltage level on the output as long as the output current is below the current limit. Use the following properties to configure the channel when OutputFunction.DC_VOLTAGE is selected:
+     - voltage_level
+     - current_limit
+     - current_limit_high
+     - current_limit_low
+     - voltage_level_range
+     - current_limit_range
+     - compliance_limit_symmetry
+
+    When OutputFunction.DC_CURRENT is selected, the device generates the desired current level on the output as long as the output voltage is below the voltage limit. Use the following properties to configure the channel when OutputFunction.DC_CURRENT is selected:
+     - current_level
+     - voltage_limit
+     - voltage_limit_high
+     - voltage_limit_low
+     - current_level_range
+     - voltage_limit_range
+     - compliance_limit_symmetry
+
+    When OutputFunction.PULSE_VOLTAGE is selected, the device generates pulses at the desired pulse voltage levels on the output as long as the output current is below the pulse current limit. Use the following properties to configure the channel when OutputFunction.PULSE_VOLTAGE is selected:
+     - pulse_voltage_level
+     - pulse_bias_voltage_level
+     - pulse_current_limit
+     - pulse_current_limit_high
+     - pulse_current_limit_low
+     - pulse_bias_current_limit
+     - pulse_bias_current_limit_high
+     - pulse_bias_current_limit_low
+     - pulse_voltage_level_range
+     - pulse_current_limit_range
+     - compliance_limit_symmetry
+
+    When OutputFunction.PULSE_CURRENT is selected, the device generates pulses at the desired pulse current levels on the output as long as the output voltage is below the pulse voltage limit. Use the following properties to configure the channel when OutputFunction.PULSE_CURRENT is selected:
+     - pulse_current_level
+     - pulse_bias_current_level
+     - pulse_voltage_limit
+     - pulse_voltage_limit_high
+     - pulse_voltage_limit_low
+     - pulse_bias_voltage_limit
+     - pulse_bias_voltage_limit_high
+     - pulse_bias_voltage_limit_low
+     - pulse_current_level_range
+     - pulse_voltage_limit_range
+     - compliance_limit_symmetry
+
+    When OutputFunction.CONSTANT_RESISTANCE is selected, the device generates the desired resistance level on the output as long as the output current is below the current limit. Use the following properties to configure the channel when OutputFunction.CONSTANT_RESISTANCE is selected:
+     - constant_resistance_level
+     - constant_resistance_current_limit
+     - constant_resistance_level_range
+
+    When OutputFunction.CONSTANT_POWER is selected, the device generates the desired power level on the output as long as the output current is below the current limit. Use the following properties to configure the channel when OutputFunction.CONSTANT_POWER is selected:
+     - constant_power_level
+     - constant_power_current_limit
+     - constant_power_level_range
 
     Note:
     NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
@@ -2693,11 +3007,23 @@ class _SessionBase(object):
     output_resistance = _attributes.AttributeViReal64(1150061)
     '''Type: float
 
-    Specifies the output resistance that the device attempts to generate for the specified channel(s). This property is available only when you set the output_function property on a support device. Refer to a supported device's topic about output resistance for more information about selecting an output resistance.
-    about supported devices.
-    Default Value: 0.0
+    Specifies the output resistance that the device attempts to generate for the specified channel(s).
+
+    Depending on the instrument, output resistance is configurable only if you set the output_function of the channel as follows:
+     - PXIe-4141, PXIe-4143, PXIe-4145: OutputFunction.DC_VOLTAGE
+     - PXIe-4135, PXIe-4137, PXIe-4139, PXIe-4147: OutputFunction.DC_CURRENT or OutputFunction.DC_VOLTAGE
+
+    **Valid Values**: Vary by device. Refer to the device specifications for your device for more information about supported values.
+
+    **Default Value:** Search ni.com for Supported Properties by Device for the default value by device.
 
     Note:
+    The channel must be enabled for the specified output resistance to take effect. Refer to the output_enabled property for more information about enabling the channel.
+
+    Using the merged_channels property to merge instrument outputs affects the valid output resistance range you can program. Refer to the Merged Channels topic for your device for details.
+
+    To specify the resistance level that the device attempts to generate when output_function is set to OutputFunction.CONSTANT_RESISTANCE, use the constant_resistance_level property.
+
     NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
 
     This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
@@ -2711,6 +3037,27 @@ class _SessionBase(object):
     To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
 
     Example: :py:attr:`my_session.output_resistance`
+    '''
+    output_shorted = _attributes.AttributeViBoolean(1150372)
+    '''Type: bool
+
+    Specifies whether the input of the instrument simulates a short circuit.
+    When this property is set to True, the electronic load will simulate a short circuit across the channel/input terminals. The electronic load uses the maximum rated current and range to simulate the short circuit. This property will only take effect when both output_enabled and output_connected are True.
+
+    When this property is set to False, the instrument will resume normal operation based on its existing settings on the specified channel(s).
+
+    Note:
+    This property is not supported on all devices. For more information about supported devices, search ni.com for Supported Properties by Device.
+
+    Tip:
+    This property can be set/get on specific channels within your :py:class:`nidcpower.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
+
+    Example: :py:attr:`my_session.channels[ ... ].output_shorted`
+
+    To set/get on all channels, you can call the property directly on the :py:class:`nidcpower.Session`.
+
+    Example: :py:attr:`my_session.output_shorted`
     '''
     overranging_enabled = _attributes.AttributeViBoolean(1150007)
     '''Type: bool
@@ -5141,171 +5488,7 @@ class _SessionBase(object):
         Args:
             sequence_name (str): Specifies the name of the sequence to create.
 
-            property_names (list of str): Specifies the names of the properties you reconfigure per step in the advanced sequence. The following table lists which properties can be configured in an advanced sequence for each NI-DCPower device that supports advanced sequencing. A Yes indicates that the property can be configured in advanced sequencing. An No indicates that the property cannot be configured in advanced sequencing.
-
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | Property                       | PXIe-4135 | PXIe-4136 | PXIe-4137 | PXIe-4138 | PXIe-4139 | PXIe-4140/4142/4144 | PXIe-4141/4143/4145 | PXIe-4147 | PXIe-4162/4163 | PXIe-4190 |
-                +================================+===========+===========+===========+===========+===========+=====================+=====================+===========+================+===========+
-                | aperture_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | dc_noise_rejection             | Yes       | No        | Yes       | No        | Yes       | No                  | No                  | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | instrument_mode                | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_actual_load_reactance      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_actual_load_resistance     | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_current_amplitude          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_current_range              | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_custom_measurement_time    | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_current_level      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_current_range      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_source             | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_voltage_level      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_dc_bias_voltage_range      | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_frequency                  | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_impedance_auto_range       | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_impedance_range            | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_load_compensation_enabled  | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_measured_load_reactance    | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_measured_load_resistance   | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_measurement_time           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_open_compensation_enabled  | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_open_conductance           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_open_susceptance           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_short_compensation_enabled | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_short_reactance            | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_short_resistance           | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_source_delay_mode          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_stimulus_function          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_voltage_amplitude          | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | lcr_voltage_range              | No        | No        | No        | No        | No        | No                  | No                  | No        | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | measure_record_length          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | sense                          | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | ovp_enabled                    | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | ovp_limit                      | Yes       | Yes       | Yes       | No        | No        | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_delay               | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_off_time                 | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_on_time                  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | source_delay                   | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_compensation_frequency | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_gain_bandwidth         | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_pole_zero_ratio        | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit_high             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit_low              | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | No             | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | current_limit_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_level                  | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | voltage_level_range            | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | output_enabled                 | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | output_function                | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | output_resistance              | Yes       | No        | Yes       | No        | Yes       | No                  | Yes                 | Yes       | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_limit       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_limit_high  | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_current_limit_low   | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_bias_voltage_level       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit_high       | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit_low        | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_current_limit_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_level            | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | pulse_voltage_level_range      | Yes       | Yes       | Yes       | Yes       | Yes       | No                  | No                  | No        | No             | No        |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
-                | transient_response             | Yes       | Yes       | Yes       | Yes       | Yes       | Yes                 | Yes                 | Yes       | Yes            | Yes       |
-                +--------------------------------+-----------+-----------+-----------+-----------+-----------+---------------------+---------------------+-----------+----------------+-----------+
+            property_names (list of str): Specifies the names of the properties you reconfigure per step in the advanced sequence. For more information about properties that can be configured in an advanced sequence for each NI-DCPower device that supports advanced sequencing, search ni.com for Supported Properties by Device.
 
             set_as_active_sequence (bool): Specifies that this current sequence is active.
 
@@ -6642,32 +6825,16 @@ class _SessionBase(object):
     def query_in_compliance(self):
         r'''query_in_compliance
 
-        Queries the specified output device to determine if it is operating at
-        the `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.
+        Queries the specified channel to determine if it is operating at the compliance limit.
 
-        The compliance limit is the current limit when the output method is
-        set to OutputFunction.DC_VOLTAGE. If the output is operating at the
-        compliance limit, the output reaches the current limit before the
-        desired voltage level. Refer to the ConfigureOutputFunction
-        method and the ConfigureCurrentLimit method for more
-        information about output method and current limit, respectively.
+        The compliance limit is the current limit when the output_function property is set to OutputFunction.DC_VOLTAGE, OutputFunction.PULSE_VOLTAGE, OutputFunction.CONSTANT_RESISTANCE or OutputFunction.CONSTANT_POWER. If the output is operating at the compliance limit, the output reaches the current limit before the desired voltage, resistance or power level.
 
-        The compliance limit is the voltage limit when the output method is
-        set to OutputFunction.DC_CURRENT. If the output is operating at the
-        compliance limit, the output reaches the voltage limit before the
-        desired current level. Refer to the ConfigureOutputFunction
-        method and the ConfigureVoltageLimit method for more
-        information about output method and voltage limit, respectively.
+        The compliance limit is the voltage limit when the output_function property is set to OutputFunction.DC_CURRENT or OutputFunction.PULSE_CURRENT. If the output is operating at the compliance limit, the output reaches the voltage limit before the desired current level.
 
-        **Related Topics:**
-
-        `Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__
+        Refer to the output_function property for more information about the applicable properties to configure for each output method.
 
         Note:
         NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
-
-        Note:
-        One or more of the referenced methods are not in the Python API for this driver.
 
         Tip:
         This method can be called on specific channels within your :py:class:`nidcpower.Session` instance.
@@ -7247,21 +7414,14 @@ class _SessionBase(object):
     def set_sequence(self, values, source_delays):
         r'''set_sequence
 
-        Configures a series of voltage or current outputs and corresponding
-        source delays. The source mode must be set to
-        `Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this
-        method to take effect.
+        Configures a series of voltage, current, resistance or power outputs and corresponding source delays. The source mode must be set to SourceMode.SEQUENCE for this method to take effect.
 
-        Refer to the `Configuring the Source
-        Unit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic
-        in the *NI DC Power Supplies and SMUs Help* for more information about
-        how to configure your device.
+        Refer to the Configuring the Source Unit topic in the *NI DC Power Supplies and SMUs Help* for more information about how to configure your device.
 
         Use this method in the Uncommitted or Committed programming states.
-        Refer to the `Programming
-        States <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in
-        the *NI DC Power Supplies and SMUs Help* for more information about
-        NI-DCPower programming states.
+        Refer to the Programming States topic in the *NI DC Power Supplies and SMUs Help* for more information about NI-DCPower programming states.
+
+        Using this method with Advanced Sequence methods for the same channel in the same session is not supported.
 
         Note:
         NI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.
@@ -7280,12 +7440,8 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.set_sequence`
 
         Args:
-            values (list of float): Specifies the series of voltage levels or current levels, depending on
-                the configured `output
-                method <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.
-                **Valid values**:
-                The valid values for this parameter are defined by the voltage level
-                range or current level range.
+            values (list of float): Specifies the series of voltage, current, resistance or power levels, depending on the configured output_function.
+                **Valid values**: The valid values for this parameter are defined by the voltage level range, current level range, constant resistance level range or constant power level range.
 
             source_delays (list of float): Specifies the source delay that follows the configuration of each value
                 in the sequence.

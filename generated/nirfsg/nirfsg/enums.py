@@ -108,17 +108,6 @@ class ArbOnboardSampleClockMode(Enum):
     '''
 
 
-class ArbSampleClockSource(Enum):
-    ONBOARD_CLOCK = 'OnboardClock'
-    r'''
-    Uses the AWG module onboard clock as the Sample Clock source.
-    '''
-    CLK_IN = 'ClkIn'
-    r'''
-    Uses the external clock as the Sample Clock source.
-    '''
-
-
 class AutomaticLevelControl(Enum):
     DISABLE = 0
     r'''
@@ -159,196 +148,6 @@ class ConfigListTrigDigEdgeEdge(Enum):
     '''
 
 
-class ConfigListTrigDigEdgeSource(Enum):
-    PFI0 = 'PFI0'
-    r'''
-    The trigger is received on PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The trigger is received on PFI 1.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The trigger is received on PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The trigger is received on PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The trigger is received on PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The trigger is received on PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The trigger is received on PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The trigger is received on PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The trigger is received on PXI trigger line 6.
-    '''
-    PXI_TRIG7 = 'PXI_Trig7'
-    r'''
-    The trigger is received on PXI trigger line 7.
-    '''
-    PXI_STAR = 'PXI_Star'
-    r'''
-    The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.
-    '''
-    PXIE_DSTARB = 'PXIe_DStarB'
-    r'''
-    The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.
-    '''
-    MARKER0_EVENT = 'Marker0Event'
-    r'''
-    The trigger is received from the Marker Event 0.
-    '''
-    MARKER1_EVENT = 'Marker1Event'
-    r'''
-    The trigger is received from the Marker Event 1.
-    '''
-    MARKER2_EVENT = 'Marker2Event'
-    r'''
-    The trigger is received from the Marker Event 2.
-    '''
-    MARKER3_EVENT = 'Marker3Event'
-    r'''
-    The trigger is received from the Marker Event 3.
-    '''
-    TIMER_EVENT = 'TimerEvent'
-    r'''
-    The trigger is received from the Timer Event.
-    '''
-    TRIG_IN = 'TrigIn'
-    r'''
-    The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
-class ConfigListTrigExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PFI0 = 'PFI0'
-    r'''
-    The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The signal is exported on PFI 1 connector.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The signal is exported to the PXI trigger line 0. .
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The signal is exported to the PXI trigger line 0.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The signal is exported to the PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The signal is exported to the PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The signal is exported to the PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The signal is exported to the PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The signal is exported to the PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842.
-    '''
-    TRIG_OUT = 'TrigOut'
-    r'''
-    The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
 class ConfigListTrigType(Enum):
     NONE = 0
     r'''
@@ -356,7 +155,7 @@ class ConfigListTrigType(Enum):
     '''
     DIGITAL_EDGE = 1
     r'''
-    Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the %property{digital edge configuration list step trigger source} property, and the active edge is always rising.
+    Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE property, and the active edge is always rising.
     '''
 
 
@@ -373,60 +172,16 @@ class ConfigurationListRepeat(Enum):
     SCRIPT_TRIGGER = 1
 
 
-class ConfigurationSettledEventExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842.
-    '''
-    TRIG_OUT = 'TrigOut'
-    r'''
-    TRIG IN/OUT terminal.
-    '''
-
-
 class DeembeddingTypeAttrVals(Enum):
-    DEEMBEDDING_TYPE_NONE = 25000
+    NONE = 25000
     r'''
     De-embedding is not applied to the measurement.
     '''
-    NONE = 0
-    DEEMBEDDING_TYPE_SCALAR = 25001
+    SCALAR = 25001
     r'''
     De-embeds the measurement using only the gain term.
     '''
-    DEEMBEDDING_TYPE_VECTOR = 25002
+    VECTOR = 25002
     r'''
     De-embeds the measurement using the gain term and the reflection term.
     '''
@@ -458,7 +213,7 @@ class DigModWfmType(Enum):
     '''
     USER_DEFINED = 5001
     r'''
-    Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the %method{configure digital modulation user defined waveform} method.
+    Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the configure_digital_modulation_user_defined_waveform method.
     '''
 
 
@@ -488,93 +243,6 @@ class DirectDownload(Enum):
     '''
 
 
-class DoneEventExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PFI0 = 'PFI0'
-    r'''
-    The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The signal is exported to the PFI 1 connector.
-    '''
-    PFI4 = 'PFI4'
-    r'''
-    The signal is exported to the PFI 4 connector.
-    '''
-    PFI5 = 'PFI5'
-    r'''
-    The signal is exported to the PFI 5 connector.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The signal is exported to the PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The signal is exported to the PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The signal is exported to the PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The signal is exported to the PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The signal is exported to the PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The signal is exported to the PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The signal is exported to the PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
 class FilterType(Enum):
     NONE = 0
     r'''
@@ -582,11 +250,11 @@ class FilterType(Enum):
     '''
     ARB_FILTER_TYPE_ROOT_RAISED_COSINE = 10001
     r'''
-    Applies a root-raised cosine filter to the data with the alpha value specified with the %property{arb filter root raised cosine alpha} property.
+    Applies a root-raised cosine filter to the data with the alpha value specified with the arb_filter_root_raised_cosine_alpha property.
     '''
     ARB_FILTER_TYPE_RAISED_COSINE = 10002
     r'''
-    Applies a raised cosine filter to the data with the alpha value specified with the %property{arb filter raised cosine alpha} property.
+    Applies a raised cosine filter to the data with the alpha value specified with the arb_filter_raised_cosine_alpha property.
     '''
 
 
@@ -627,11 +295,11 @@ class GenerationMode(Enum):
     '''
     ARB_WAVEFORM = 1001
     r'''
-    Configures the RF signal generator to generate the arbitrary waveform specified by the %property{arb selected waveform} property.
+    Configures the RF signal generator to generate the arbitrary waveform specified by the arb_selected_waveform property.
     '''
     SCRIPT = 1002
     r'''
-    Configures the RF signal generator to generate arbitrary waveforms as directed by the %property{selected script} property.
+    Configures the RF signal generator to generate arbitrary waveforms as directed by the selected_script property.
     '''
 
 
@@ -696,40 +364,15 @@ class LoPlLfractionalModeEnabled(Enum):
     SCRIPT_TRIGGER = 1
 
 
-class LoSource(Enum):
-    ONBOARD = 'Onboard'
-    r'''
-    Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.
-    '''
-    LO_IN = 'LO_In'
-    r'''
-    Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the %property{upconverter center frequency} property to specify the LO frequency.
-    '''
-    SECONDARY = 'Secondary'
-    r'''
-    Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.
-    '''
-    SG_SA_SHARED = 'SG_SA_Shared'
-    r'''
-    Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.
-    '''
-    AUTOMATIC_SG_SA_SHARED = 'Automatic_SG_SA_Shared'
-    r'''
-    NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.
-    '''
-
-
 class LoadOptions(Enum):
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE = 0
+    NONE = 0
     r'''
     NI-RFSG loads all the configurations to the session.
     '''
-    MANUAL = 0
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM = 1
+    WAVEFORMS = 1
     r'''
     NI-RFSG skips loading the waveform configurations to the session.
     '''
-    SCRIPT_TRIGGER = 1
 
 
 class LoopBandwidth(Enum):
@@ -744,93 +387,6 @@ class LoopBandwidth(Enum):
     WIDE = 2
     r'''
     Uses the widest loop bandwidth setting for the PLL.
-    '''
-
-
-class MarkerEventExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PFI0 = 'PFI0'
-    r'''
-    The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The signal is exported to the PFI 1 connector.
-    '''
-    PFI4 = 'PFI4'
-    r'''
-    The signal is exported to the PFI 4 connector.
-    '''
-    PFI5 = 'PFI5'
-    r'''
-    The signal is exported to the PFI 5 connector.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The signal is exported to PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The signal is exported to PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The signal is exported to PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The signal is exported to PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The signal is exported to PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The signal is exported to PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The signal is exported to PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
     '''
 
 
@@ -956,7 +512,7 @@ class PowerLevelType(Enum):
     '''
     PEAK = 7001
     r'''
-    Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the %property{arb waveform software scaling factor} property. You can use the %property{peak power adjustment} property in conjunction with the %property{power level} property when the %property{power level type} property is set to %enum_value{power level type.peak power}.
+    Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the arb_waveform_software_scaling_factor property. You can use the peak_power_adjustment property in conjunction with the power_level property when the power_level_type property is set to PowerLevelType.PEAK.
     '''
 
 
@@ -991,56 +547,6 @@ class PulseModulationMode(Enum):
     DIGITAL = 20003
     r'''
     Digital only modulation. Provides the best on/off switching speed of the pulsed signal at the cost of signal isolation.
-    '''
-
-
-class PulseModulationOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    Pulse modulation video signal is not exported.
-    '''
-    PULSE_OUT = 'PulseOut'
-    r'''
-    Export the pulse modulation video signal on the pulse out terminal.
-    '''
-
-
-class PulseModulationSource(Enum):
-    PULSE_IN = 'PulseIn'
-    r'''
-    The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.
-    '''
-    MARKER0 = 'Marker0'
-    r'''
-    The trigger is received from the Marker  0.
-    '''
-    MARKER1 = 'Marker1'
-    r'''
-    The trigger is received from the Marker 1.
-    '''
-    MARKER2 = 'Marker2'
-    r'''
-    The trigger is received from the Marker 2.
-    '''
-    MARKER3 = 'Marker3'
-    r'''
-    The trigger is received from the Marker 3.
-    '''
-
-
-class PxiChassisClk10Source(Enum):
-    NONE = 0
-    r'''
-    Do not drive the PXI_CLK10 signal.
-    '''
-    DO_NOT_EXPORT_STR = ''
-    ONBOARD_CLOCK_STR = 'OnboardClock'
-    r'''
-    Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.
-    '''
-    REF_IN_STR = 'RefIn'
-    r'''
-    Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.
     '''
 
 
@@ -1088,25 +594,6 @@ class RFInLoExportEnabled(Enum):
     SCRIPT_TRIGGER = 1
 
 
-class ReferenceClockExportOutputTerminal(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The Reference Clock signal is not exported.
-    '''
-    REF_OUT = 'RefOut'
-    r'''
-    Exports the Reference Clock signal to the REF OUT connector of the device.
-    '''
-    REF_OUT2 = 'RefOut2'
-    r'''
-    Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.
-    '''
-    CLK_OUT = 'ClkOut'
-    r'''
-    Exports the Reference Clock signal to the CLK OUT connector of the device.
-    '''
-
-
 class ReferenceClockExportedRate(Enum):
     _10mhz = 10000000
     r'''
@@ -1130,33 +617,6 @@ class ReferenceClockRate(Enum):
     _10mhz = 10000000
     r'''
     Uses a 10MHz Reference Clock rate.
-    '''
-
-
-class ReferenceClockSource(Enum):
-    ONBOARD_CLOCK = 'OnboardClock'
-    r'''
-    Uses the onboard Reference Clock as the clock source.
-    '''
-    REF_IN = 'RefIn'
-    r'''
-    Uses the clock signal present at the front panel REF IN connector as the Reference Clock source.
-    '''
-    PXI_CLK = 'PXI_CLK'
-    r'''
-    Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.
-    '''
-    CLK_IN = 'ClkIn'
-    r'''
-    Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.
-    '''
-    REF_IN_2 = 'RefIn2'
-    r'''
-    This value is not valid on any supported devices.
-    '''
-    PXI_CLK_MASTER = 'PXI_ClkMaster'
-    r'''
-    This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 —** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use ReferenceClockSource.PXI_CLK %enum_value as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.
     '''
 
 
@@ -1228,105 +688,6 @@ class ScriptTrigDigEdgeEdge(Enum):
     '''
 
 
-class ScriptTrigDigEdgeSource(Enum):
-    PFI0 = 'PFI0'
-    r'''
-    The trigger is received on PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The trigger is received on PFI 1.
-    '''
-    PFI2 = 'PFI2'
-    r'''
-    The trigger is received on PFI 2.
-    '''
-    PFI3 = 'PFI3'
-    r'''
-    The trigger is received on PFI 3.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The trigger is received on PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The trigger is received on PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The trigger is received on PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The trigger is received on PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The trigger is received on PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The trigger is received on PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The trigger is received on PXI trigger line 6.
-    '''
-    PXI_TRIG7 = 'PXI_Trig7'
-    r'''
-    The trigger is received on PXI trigger line 7.
-    '''
-    PXI_STAR = 'PXI_Star'
-    r'''
-    The trigger is received on the PXI star trigger line. This value is not valid on the PXIe-5644/5645/5646.
-    '''
-    PXIE_DSTARB = 'PXIe_DStarB'
-    r'''
-    The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/
-    '''
-    PULSE_IN = 'PulseIn'
-    r'''
-    The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-    SYNC_SCRIPT_TRIGGER = 'Sync_Script'
-    r'''
-    The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.
-    '''
-
-
 class ScriptTrigDigLevelActiveLevel(Enum):
     HIGH = 9000
     r'''
@@ -1338,188 +699,6 @@ class ScriptTrigDigLevelActiveLevel(Enum):
     '''
 
 
-class ScriptTrigDigLevelSource(Enum):
-    PFI0 = 'PFI0'
-    r'''
-    The trigger is received on PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The trigger is received on PFI 1.
-    '''
-    PFI2 = 'PFI2'
-    r'''
-    The trigger is received on PFI 2.
-    '''
-    PFI3 = 'PFI3'
-    r'''
-    The trigger is received on PFI 3.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The trigger is received on PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The trigger is received on PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The trigger is received on PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The trigger is received on PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The trigger is received on PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The trigger is received on PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The trigger is received on PXI trigger line 6.
-    '''
-    PXI_TRIG7 = 'PXI_Trig7'
-    r'''
-    The trigger is received on PXI trigger line 7.
-    '''
-    PXI_STAR = 'PXI_Star'
-    r'''
-    The trigger is received on the PXI star trigger line. This value is not valid on the PXIe-5644/5645/5646.
-    '''
-    PXIE_DSTARB = 'PXIe_DStarB'
-    r'''
-    The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/
-    '''
-    PULSE_IN = 'PulseIn'
-    r'''
-    The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
-class ScriptTrigExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PFI0 = 'PFI0'
-    r'''
-    The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The signal is exported to the PFI 1 connector.
-    '''
-    PFI4 = 'PFI4'
-    r'''
-    The signal is exported to the PFI 4 connector.
-    '''
-    PFI5 = 'PFI5'
-    r'''
-    The signal is exported to the PFI 5 connector.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The signal is exported to the PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The signal is exported to the PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The signal is exported to the PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The signal is exported to the PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The signal is exported to the PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The signal is exported to the PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The signal is exported to the PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
 class ScriptTrigType(Enum):
     NONE = 0
     r'''
@@ -1527,15 +706,15 @@ class ScriptTrigType(Enum):
     '''
     DIGITAL_EDGE = 1
     r'''
-    The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the %property{digital edge start trigger source} property, and the active edge is specified with the %property{digital edge start trigger edge} property.
+    The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the digital_edge_start_trigger_source property, and the active edge is specified with the digital_edge_start_trigger_edge property.
     '''
     DIGITAL_LEVEL = 8000
     r'''
-    The data operation does not start until the digital level is detected. The source of the digital level is specified in the %property{digital level script trigger source} property, and the active level is specified in the %property{digital level script trigger active level} property.
+    The data operation does not start until the digital level is detected. The source of the digital level is specified in the digital_level_script_trigger_source property, and the active level is specified in the digital_level_script_trigger_active_level property.
     '''
     SOFTWARE = 2
     r'''
-    The data operation does not start until a software trigger occurs. You can create a software event by calling the %method{send software edge trigger} method.
+    The data operation does not start until a software trigger occurs. You can create a software event by calling the send_software_edge_trigger method.
     '''
 
 
@@ -1601,41 +780,6 @@ class Signal(Enum):
     '''
 
 
-class SignalIdentifier(Enum):
-    MARKER_EVENT0 = 'marker0'
-    r'''
-    Specifies Marker 0.
-    '''
-    MARKER_EVENT1 = 'marker1'
-    r'''
-    Specifies Marker 1.
-    '''
-    MARKER_EVENT2 = 'marker2'
-    r'''
-    Specifies Marker 2.
-    '''
-    MARKER_EVENT3 = 'marker3'
-    r'''
-    Specifies Marker 3.
-    '''
-    SCRIPT_TRIGGER0 = 'scriptTrigger0'
-    r'''
-    Specifies Script Trigger 0.
-    '''
-    SCRIPT_TRIGGER1 = 'scriptTrigger1'
-    r'''
-    Specifies Script Trigger 1.
-    '''
-    SCRIPT_TRIGGER2 = 'scriptTrigger2'
-    r'''
-    Specifies Script Trigger 2.
-    '''
-    SCRIPT_TRIGGER3 = 'scriptTrigger3'
-    r'''
-    Specifies Script Trigger 3.
-    '''
-
-
 class SoftwareTriggerType(Enum):
     SCRIPT = 1
     r'''
@@ -1669,196 +813,6 @@ class StartTrigDigEdgeEdge(Enum):
     '''
 
 
-class StartTrigDigEdgeSource(Enum):
-    PFI0 = 'PFI0'
-    r'''
-    The trigger is received on PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The trigger is received on PFI 1.
-    '''
-    PFI2 = 'PFI2'
-    r'''
-    The trigger is received on PFI 2.
-    '''
-    PFI3 = 'PFI3'
-    r'''
-    The trigger is received on PFI 3.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The trigger is received on PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The trigger is received on PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The trigger is received on PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The trigger is received on PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The trigger is received on PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The trigger is received on PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The trigger is received on PXI trigger line 6.
-    '''
-    PXI_TRIG7 = 'PXI_Trig7'
-    r'''
-    The trigger is received on PXI trigger line 7.
-    '''
-    PXI_STAR = 'PXI_Star'
-    r'''
-    The trigger is received on the PXI star trigger line. This value is not valid on the PXIe-5644/5645/5646.
-    '''
-    PXIE_DSTARB = 'PXIe_DStarB'
-    r'''
-    The trigger is received on the PXI DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-    '''
-    TRIG_IN = 'TrigIn'
-    r'''
-    The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-    SYNC_START_TRIGGER = 'Sync_Start'
-    r'''
-    The trigger is received on the Sync Start trigger line. This value is valid on only the PXIe-5644/5645/5646.
-    '''
-
-
-class StartTrigExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PFI0 = 'PFI0'
-    r'''
-    The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The signal is exported to the PFI 1 connector.
-    '''
-    PFI4 = 'PFI4'
-    r'''
-    The signal is exported to the PFI 4 connector.
-    '''
-    PFI5 = 'PFI5'
-    r'''
-    The signal is exported to the PFI 5 connector.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The signal is exported to the PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The signal is exported to the PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The signal is exported to the PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The signal is exported to the PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The signal is exported to the PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The signal is exported to the PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The signal is exported to the PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-    '''
-    TRIG_OUT = 'TrigOut'
-    r'''
-    The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
 class StartTrigType(Enum):
     NONE = 0
     r'''
@@ -1866,142 +820,30 @@ class StartTrigType(Enum):
     '''
     DIGITAL_EDGE = 1
     r'''
-    The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the %property{digital edge start trigger source} property, and the active edge is specified in the %property{digital edge start trigger edge} property.
+    The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the digital_edge_start_trigger_source property, and the active edge is specified in the digital_edge_start_trigger_edge property.
     '''
     SOFTWARE = 2
     r'''
-    The data operation does not start until a software event occurs. You may create a software trigger by calling the %method{send software edge trigger} method.
+    The data operation does not start until a software event occurs. You may create a software trigger by calling the send_software_edge_trigger method.
     '''
     P2P_ENDPOINT_FULLNESS = 3
     r'''
-    The data operation does not start until the endpoint reaches the threshold specified in the %property{p2p endpoint fullness start trigger level} property.
-    '''
-
-
-class StartedEventExportOutputTerm(Enum):
-    DO_NOT_EXPORT = ''
-    r'''
-    The signal is not exported.
-    '''
-    PFI0 = 'PFI0'
-    r'''
-    The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.
-    '''
-    PFI1 = 'PFI1'
-    r'''
-    The signal is exported to the PFI 1 connector.
-    '''
-    PFI4 = 'PFI4'
-    r'''
-    The signal is exported to the PFI 4 connector.
-    '''
-    PFI5 = 'PFI5'
-    r'''
-    The signal is exported to the PFI 5 connector.
-    '''
-    PXI_TRIG0 = 'PXI_Trig0'
-    r'''
-    The signal is exported to the PXI trigger line 0.
-    '''
-    PXI_TRIG1 = 'PXI_Trig1'
-    r'''
-    The signal is exported to the PXI trigger line 1.
-    '''
-    PXI_TRIG2 = 'PXI_Trig2'
-    r'''
-    The signal is exported to the PXI trigger line 2.
-    '''
-    PXI_TRIG3 = 'PXI_Trig3'
-    r'''
-    The signal is exported to the PXI trigger line 3.
-    '''
-    PXI_TRIG4 = 'PXI_Trig4'
-    r'''
-    The signal is exported to the PXI trigger line 4.
-    '''
-    PXI_TRIG5 = 'PXI_Trig5'
-    r'''
-    The signal is exported to the PXI trigger line 5.
-    '''
-    PXI_TRIG6 = 'PXI_Trig6'
-    r'''
-    The signal is exported to the PXI trigger line 6.
-    '''
-    PXIE_DSTARC = 'PXIe_DStarC'
-    r'''
-    The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-    '''
-    DIO0 = 'DIO/PFI0'
-    r'''
-    The trigger is received on PFI0 from the front panel DIO terminal.
-    '''
-    DIO1 = 'DIO/PFI1'
-    r'''
-    The trigger is received on PFI1 from the front panel DIO terminal.
-    '''
-    DIO2 = 'DIO/PFI2'
-    r'''
-    The trigger is received on PFI2 from the front panel DIO terminal.
-    '''
-    DIO3 = 'DIO/PFI3'
-    r'''
-    The trigger is received on PFI3 from the front panel DIO terminal.
-    '''
-    DIO4 = 'DIO/PFI4'
-    r'''
-    The trigger is received on PFI4 from the front panel DIO terminal.
-    '''
-    DIO5 = 'DIO/PFI5'
-    r'''
-    The trigger is received on PFI5 from the front panel DIO terminal.
-    '''
-    DIO6 = 'DIO/PFI6'
-    r'''
-    The trigger is received on PFI6 from the front panel DIO terminal.
-    '''
-    DIO7 = 'DIO/PFI7'
-    r'''
-    The trigger is received on PFI7 from the front panel DIO terminal.
-    '''
-
-
-class TriggerIdentifier(Enum):
-    SCRIPT_TRIGGER0 = 'scriptTrigger0'
-    r'''
-    Specifies Script Trigger 0.
-    '''
-    SCRIPT_TRIGGER1 = 'scriptTrigger1'
-    r'''
-    Specifies Script Trigger 1.
-    '''
-    SCRIPT_TRIGGER2 = 'scriptTrigger2'
-    r'''
-    Specifies Script Trigger 2.
-    '''
-    SCRIPT_TRIGGER3 = 'scriptTrigger3'
-    r'''
-    Specifies Script Trigger 3.
-    '''
-    NONE_EMPTY_STRING = ''
-    r'''
-    None (no signal to export)
+    The data operation does not start until the endpoint reaches the threshold specified in the p2p_endpoint_fullness_start_trigger_level property.
     '''
 
 
 class UpconverterFrequencyOffsetMode(Enum):
     AUTO = -1
     r'''
-    NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the %property{signal bandwidth} property has been set and can be avoided.
+    NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the signal_bandwidth property has been set and can be avoided.
     '''
-    AUTOMATIC = -1
     ENABLE = 1
     r'''
-    NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the %property{signal bandwidth} property has been set and can be avoided. NI-RFSG returns an error if the %property{signal bandwidth} property has not been set, or if the signal bandwidth is too large.
+    NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the signal_bandwidth property has been set and can be avoided. NI-RFSG returns an error if the signal_bandwidth property has not been set, or if the signal bandwidth is too large.
     '''
-    SCRIPT_TRIGGER = 1
     USER_DEFINED = 5001
     r'''
-    NI-RFSG uses the offset that you specified with the %property{upconverter frequency offset} or %property{upconverter center frequency} properties.
+    NI-RFSG uses the offset that you specified with the upconverter_frequency_offset or upconverter_center_frequency properties.
     '''
 
 

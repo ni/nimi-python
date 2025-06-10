@@ -3,13 +3,13 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query, reset_device, options={})
+.. py:class:: Session(self, resource_name, options={}, id_query=False, reset_device=False)
 
     
 
-    Opens a session to the device you specify as the **:py:attr:`nirfsg.Session.RESOURCE_NAME`** and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
+    Opens a session to the device you specify as the :py:attr:`nirfsg.Session.RESOURCE_NAME` and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
-                    This method also configures the device through the **:py:attr:`nirfsg.Session.OPTION_STRING`** input.
+                    This method also configures the device through the :py:attr:`nirfsg.Session.OPTION_STRING` input.
 
                     **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -40,6 +40,40 @@ Session
 
 
     :type resource_name: str
+
+    :param options:
+        
+
+        Specifies the initial value of certain properties for the session. The
+        syntax for **options** is a dictionary of properties with an assigned
+        value. For example:
+
+        { 'simulate': False }
+
+        You do not have to specify a value for all the properties. If you do not
+        specify a value for a property, the default value is used.
+
+        Advanced Example:
+        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+        +-------------------------+---------+
+        | Property                | Default |
+        +=========================+=========+
+        | range_check             | True    |
+        +-------------------------+---------+
+        | query_instrument_status | False   |
+        +-------------------------+---------+
+        | cache                   | True    |
+        +-------------------------+---------+
+        | simulate                | False   |
+        +-------------------------+---------+
+        | record_value_coersions  | False   |
+        +-------------------------+---------+
+        | driver_setup            | {}      |
+        +-------------------------+---------+
+
+
+    :type options: str
 
     :param id_query:
         
@@ -76,40 +110,6 @@ Session
 
 
     :type reset_device: bool
-
-    :param options:
-        
-
-        Specifies the initial value of certain properties for the session. The
-        syntax for **options** is a dictionary of properties with an assigned
-        value. For example:
-
-        { 'simulate': False }
-
-        You do not have to specify a value for all the properties. If you do not
-        specify a value for a property, the default value is used.
-
-        Advanced Example:
-        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
-
-        +-------------------------+---------+
-        | Property                | Default |
-        +=========================+=========+
-        | range_check             | True    |
-        +-------------------------+---------+
-        | query_instrument_status | False   |
-        +-------------------------+---------+
-        | cache                   | True    |
-        +-------------------------+---------+
-        | simulate                | False   |
-        +-------------------------+---------+
-        | record_value_coersions  | False   |
-        +-------------------------+---------+
-        | driver_setup            | {}      |
-        +-------------------------+---------+
-
-
-    :type options: str
 
 
 Methods
@@ -511,7 +511,7 @@ check_if_script_exists
 
     .. py:method:: check_if_script_exists(script_name)
 
-            Returns whether the script that you specify as **:py:attr:`nirfsg.Session.SCRIPT_NAME`** exists.
+            Returns whether the script that you specify as :py:attr:`nirfsg.Session.SCRIPT_NAME` exists.
 
                             **Supported Devices** : PXIe-5673/5673E. PXIe-5830/5831/5840/5841/5842/5860
 
@@ -556,7 +556,7 @@ check_if_waveform_exists
 
     .. py:method:: check_if_waveform_exists(waveform_name)
 
-            Returns whether the waveform that you specify as **:py:attr:`nirfsg.Session.WAVEFORM_NAME`** exists.
+            Returns whether the waveform that you specify as :py:attr:`nirfsg.Session.WAVEFORM_NAME` exists.
 
                             **Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860
 
@@ -1087,7 +1087,7 @@ configure_output_enabled
 
             Enables or disables signal output.
 
-                            Setting **:py:attr:`nirfsg.Session.output_enabled`** to False while in the Generation state attenuates the generated signal so that no signal is output.
+                            Setting :py:attr:`nirfsg.Session.output_enabled` to False while in the Generation state attenuates the generated signal so that no signal is output.
 
                             **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1122,7 +1122,7 @@ configure_p2_p_endpoint_fullness_start_trigger
 
             Configures the Start Trigger to detect peer-to-peer endpoint fullness.
 
-                            Generation begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the **:py:attr:`nirfsg.Session.P2P_ENDPOINT_FULLNESS_LEVEL`** parameter. The NI-RFSG device must be in the Configuration state before calling this method.
+                            Generation begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the :py:attr:`nirfsg.Session.P2P_ENDPOINT_FULLNESS_LEVEL` parameter. The NI-RFSG device must be in the Configuration state before calling this method.
 
                             **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
 
@@ -1261,13 +1261,13 @@ configure_ref_clock
                 +-----------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_STR`                  | RefIn         | Uses the clock signal present at the front panel REF IN connector as the clock source. **PXIe-5830/5831/5832** :For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5832, connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831, lock the external signal to the PXIe-3622 REF IN connector. For the PXIe-5832, lock the external signal to the PXIe-3623 REF IN connector. **PXIe-5831 with PXIe-5653** :Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector. **PXIe-5832 with PXIe-5653** :Connect the PXIe-5820 REF IN connector to the PXIe-3623 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3623 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.  **PXIe-5841 with PXIe-5655** :Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector. **PXIe-5842** :Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the Getting Started Guide for the instrument. |
                 +-----------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK`           | PXI_CLK       | Uses the PXI_CLK signal, which is present on the PXI backplane, as the clock source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+                | :py:data:`~nirfsg.NIRFSG_VAL_PXI_CLK_STR`                 | PXI_CLK       | Uses the PXI_CLK signal, which is present on the PXI backplane, as the clock source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
                 +-----------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nirfsg.NIRFSG_VAL_CLK_IN_STR`                  | ClkIn         | Uses the clock signal present at the front panel CLK IN connector as the clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655/5842.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
                 +-----------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockSource.REF_IN_2`          | RefIn2        | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+                | :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_2_STR`                | RefIn2        | \-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
                 +-----------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK_MASTER`    | PXI_ClkMaster | This value is valid on only the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. **PXIe-5831 with PXIe-5653** :NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector. **PXIe-5832 with PXIe-5653** :NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3623 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+                | :py:data:`~nirfsg.NIRFSG_VAL_PXI_CLK_MASTER_STR`          | PXI_ClkMaster | This value is valid on only the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. **PXIe-5831 with PXIe-5653** :NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector. **PXIe-5832 with PXIe-5653** :NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3623 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
                 +-----------------------------------------------------------+---------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1277,7 +1277,7 @@ configure_ref_clock
             :param ref_clock_rate:
 
 
-                Specifies the Reference Clock rate, in hertz (Hz), of the signal present at the REF IN or CLK IN connector. The default value is :py:data:`~nirfsg.NIRFSG_VAL_AUTO`, which allows NI-RFSG to use the default Reference Clock rate for the device or automatically detect the Reference Clock rate, if supported. This parameter is only valid when the **:py:attr:`nirfsg.Session.ref_clock_source`** parameter is set to :py:data:`~nirfsg.NIRFSG_VAL_CLK_IN_STR`, :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_STR` or :py:data:`~nirfsg.ReferenceClockSource.REF_IN_2`. Refer to the :py:attr:`nirfsg.Session.ref_clock_rate` property for possible values.
+                Specifies the Reference Clock rate, in hertz (Hz), of the signal present at the REF IN or CLK IN connector. The default value is :py:data:`~nirfsg.NIRFSG_VAL_AUTO`, which allows NI-RFSG to use the default Reference Clock rate for the device or automatically detect the Reference Clock rate, if supported. This parameter is only valid when the :py:attr:`nirfsg.Session.ref_clock_source` parameter is set to :py:data:`~nirfsg.NIRFSG_VAL_CLK_IN_STR`, :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_STR` or :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_2_STR`. Refer to the :py:attr:`nirfsg.Session.ref_clock_rate` property for possible values.
 
                 
 
@@ -1662,55 +1662,168 @@ export_signal
             :param signal_identifier:
 
 
-                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Defined Values** :
+                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Possible Values** :
 
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | Name                                                | Value          | Description                 |
-                +=====================================================+================+=============================+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT0`   | marker0        | Specifies Marker 0.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT1`   | marker1        | Specifies Marker 1.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT2`   | marker2        | Specifies Marker 2.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT3`   | marker3        | Specifies Marker 3.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER0` | scriptTrigger0 | Specifies Script Trigger 0. |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER1` | scriptTrigger1 | Specifies Script Trigger 1. |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER2` | scriptTrigger2 | Specifies Script Trigger 2. |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER3` | scriptTrigger3 | Specifies Script Trigger 3. |
-                +-----------------------------------------------------+----------------+-----------------------------+
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | marker0        | Specifies Marker 0.         |
+                +----------------+-----------------------------+
+                | marker1        | Specifies Marker 1.         |
+                +----------------+-----------------------------+
+                | marker2        | Specifies Marker 2.         |
+                +----------------+-----------------------------+
+                | marker3        | Specifies Marker 3.         |
+                +----------------+-----------------------------+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
 
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type signal_identifier: :py:data:`nirfsg.SignalIdentifier`
+            :type signal_identifier: str
             :param output_terminal:
 
 
-                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Defined Values** :
+                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :
 
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Name                                                                | Value   | Description                                                                                |                                                                                                                                                                       |
-                +=====================================================================+=========+============================================================================================+=======================================================================================================================================================================+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.CLK_OUT`       | ClkOut  | Exports the Reference Clock signal to the CLK OUT connector of the device.                 | Supported on PXIe-5673, 5673E                                                                                                                                         |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.DO_NOT_EXPORT` |         | The Reference Clock signal is not exported.                                                | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note) |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT`       | RefOut  | Exports the Reference Clock signal to the REF OUT connector of the device.                 | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653,     |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT2`      | RefOut2 | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. | Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696                                                                                               |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                +----------------+--------------------------------------------------------------------------------------------+
+                | Possible Value | Description                                                                                |
+                +================+============================================================================================+
+                | ClkOut         | Exports the Reference Clock signal to the CLK OUT connector of the device.                 |
+                +----------------+--------------------------------------------------------------------------------------------+
+                |                | The Reference Clock signal is not exported.                                                |
+                +----------------+--------------------------------------------------------------------------------------------+
+                | RefOut         | Exports the Reference Clock signal to the REF OUT connector of the device.                 |
+                +----------------+--------------------------------------------------------------------------------------------+
+                | RefOut2        | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. |
+                +----------------+--------------------------------------------------------------------------------------------+
 
 
-            :type output_terminal: :py:data:`nirfsg.ReferenceClockExportOutputTerminal`
+            :type output_terminal: str
+
+get_all_named_waveform_names
+----------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_all_named_waveform_names()
+
+            Return names of the waveforms present in the memory.
+
+                            **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
+
+            
+
+
+
+            :rtype: tuple (waveform_names, actual_buffer_size)
+
+                WHERE
+
+                waveform_names (str): 
+
+
+                    Returns a string having waveform names separated by commas.
+
+                    
+
+
+                actual_buffer_size (int): 
+
+
+                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
+
+                                            It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.WAVEFORM_NAMES` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_all_script_names
+--------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_all_script_names()
+
+            Return names of the scripts present in the memory.
+
+                            **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
+
+            
+
+
+
+            :rtype: tuple (script_names, actual_buffer_size)
+
+                WHERE
+
+                script_names (str): 
+
+
+                    Returns a string having script names separated by commas.
+
+                    
+
+
+                actual_buffer_size (int): 
+
+
+                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
+
+                                            It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.SCRIPT_NAMES` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_channel_name
+----------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_channel_name(index)
+
+            Returns the channel string that is in the channel table at an index you specify.
+
+                            **Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E
+
+            
+
+
+
+            :param index:
+
+
+                Specifies a one-based index into the channel table.
+
+                
+
+
+            :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns a channel string from the channel table at the index you specify in the Index parameter. Do not modify the contents of the channel string.
+
+                    
+
+
 
 get_error
 ---------
@@ -1904,6 +2017,102 @@ get_stream_endpoint_handle
 
 
                     Returns the reader endpoint handle that is used with NI-P2P to create a stream with the NI-RFSG device as an endpoint.
+
+                    
+
+
+
+get_terminal_name
+-----------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_terminal_name(signal, signal_identifier)
+
+            Returns the fully-qualified name of the specified signal.
+
+                            The fully-qualified name is helpful to automatically route signals in a multisegment chassis.
+
+                            **Supported Devices** : PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                            **Related Topics**
+
+                            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+                            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+                            `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_
+
+            
+
+
+
+            :param signal:
+
+
+                Specifies the signal to query. **Defined Values** :
+
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | Name                                                      | Value   | Description                                |
+                +===========================================================+=========+============================================+
+                | :py:data:`~nirfsg.Signal.START_TRIGGER`                   | 0 (0x0) | Exports a Start Trigger.                   |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.SCRIPT_TRIGGER`                  | 1 (0x1) | Exports a Script Trigger.                  |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.MARKER_EVENT`                    | 2 (0x2) | Exports a Marker Event.                    |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.REF_CLOCK`                       | 3 (0x3) | Exports the Reference Clock.               |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.STARTED_EVENT`                   | 4 (0x4) | Exports a Started Event.                   |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.DONE_EVENT`                      | 5 (0x5) | Exports a Done Event.                      |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.CONFIGURATION_LIST_STEP_TRIGGER` | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.CONFIGURATION_SETTLED_EVENT`     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type signal: :py:data:`nirfsg.Signal`
+            :param signal_identifier:
+
+
+                Specifies which instance of the selected signal to query. This parameter is necessary when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`  . Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Possible Values** :
+
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | marker0        | Specifies Marker 0.         |
+                +----------------+-----------------------------+
+                | marker1        | Specifies Marker 1.         |
+                +----------------+-----------------------------+
+                | marker2        | Specifies Marker 2.         |
+                +----------------+-----------------------------+
+                | marker3        | Specifies Marker 3.         |
+                +----------------+-----------------------------+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type signal_identifier: str
+
+            :rtype: str
+            :return:
+
+
+                    Returns the string to use as the source for other devices.
 
                     
 
@@ -2194,7 +2403,7 @@ reset
 
                             Generally, calling this method instead of the :py:meth:`nirfsg.Session.reset_device` method is acceptable. The :py:meth:`nirfsg.Session.reset` method executes faster than the :py:meth:`nirfsg.Session.reset_device` method.
 
-                            To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the :py:meth:`nirfsg.Session.ResetWithOptions` method, with **stepsToOmit** set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` .
+                            To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the :py:meth:`nirfsg.Session.reset_with_options` method, with **stepsToOmit** set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` .
 
                             **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -2285,6 +2494,59 @@ reset_with_defaults
             
 
 
+
+reset_with_options
+------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: reset_with_options(steps_to_omit)
+
+            Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
+
+                            By default, this method exhibits the same behavior as :py:meth:`nirfsg.Session.reset`. You can specify steps to omit using the steps to omit parameter. For example, if you specify :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` for the :py:attr:`nirfsg.Session.STEPS_TO_OMIT` parameter, this method does not release signal routes during the reset process.
+
+                            When routes of signals between two devices are released, they are released regardless of which device created the route.
+
+                            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this method instead of :py:meth:`nirfsg.Session.reset`, with :py:attr:`nirfsg.Session.STEPS_TO_OMIT` set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`.
+
+                            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                            **Related Topics**
+
+                            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+                            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+            
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+            :param steps_to_omit:
+
+
+                Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`, which specifies that no step is omitted during reset. **Defined Values** :
+
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                                              | Value   | Description                                                                                                                                                                                                |
+                +===================================================================+=========+============================================================================================================================================================================================================+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`               | 0 (0x0) | No step is omitted during reset.                                                                                                                                                                           |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.WAVEFORMS`          | 1 (0x1) | Omits clearing waveforms.                                                                                                                                                                                  |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.SCRIPTS`            | 2 (0x2) | Omits clearing scripts.                                                                                                                                                                                    |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`             | 4 (0x4) | Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset. |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES` | 8 (0x8) | Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.                                                                                                              |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
+
+
+            :type steps_to_omit: :py:data:`nirfsg.ResetWithOptionsStepsToOmit`
 
 save_configurations_to_file
 ---------------------------
@@ -2564,32 +2826,32 @@ send_software_edge_trigger
             :param trigger_identifier:
 
 
-                Specifies the Script Trigger to configure. This parameter is valid only when you set the :py:attr:`nirfsg.Session.TRIGGER` parameter to :py:data:`~nirfsg.NIRFSG_VAL_START_TRIGGER`. Otherwise, set the **:py:attr:`nirfsg.Session.TRIGGER_IDENTIFIER`** parameter to "" (empty string).
+                Specifies the Script Trigger to configure. This parameter is valid only when you set the :py:attr:`nirfsg.Session.TRIGGER` parameter to :py:data:`~nirfsg.NIRFSG_VAL_START_TRIGGER`. Otherwise, set the :py:attr:`nirfsg.Session.TRIGGER_IDENTIFIER` parameter to "" (empty string).
 
                                         **Default Value:** "" (empty string)
 
-                                        **Defined Values:**
+                                        **Possible Values:**
 
-                +--------------------------------------------------------+----------------+-----------------------------+
-                | Name                                                   | Value          | Description                 |
-                +========================================================+================+=============================+
-                | :py:data:`~nirfsg.TriggerIdentifier.SCRIPT_TRIGGER0`   | scriptTrigger0 | Specifies Script Trigger 0. |
-                +--------------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.TriggerIdentifier.SCRIPT_TRIGGER1`   | scriptTrigger1 | Specifies Script Trigger 1. |
-                +--------------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.TriggerIdentifier.SCRIPT_TRIGGER2`   | scriptTrigger2 | Specifies Script Trigger 2. |
-                +--------------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.TriggerIdentifier.SCRIPT_TRIGGER3`   | scriptTrigger3 | Specifies Script Trigger 3. |
-                +--------------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.TriggerIdentifier.NONE_EMPTY_STRING` |                | None (no signal to export)  |
-                +--------------------------------------------------------+----------------+-----------------------------+
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
+                |                | None (no signal to export)  |
+                +----------------+-----------------------------+
 
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger_identifier: :py:data:`nirfsg.TriggerIdentifier`
+            :type trigger_identifier: str
 
 set_arb_waveform_next_write_position
 ------------------------------------
@@ -3887,9 +4149,9 @@ arb_sample_clock_source
 
         Specifies the Sample Clock source for the device. To set this property, the NI-RFSG device must be in the Configuration state.
 
-                        PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: :py:data:`~nirfsg.ArbSampleClockSource.ONBOARD_CLOCK` is the only supported value for this device.
+                        PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: :py:data:`~nirfsg.NIRFSG_VAL_ONBOARD_CLOCK_STR` is the only supported value for this device.
 
-                        **Default Value:** :py:data:`~nirfsg.ArbSampleClockSource.ONBOARD_CLOCK`
+                        **Default Value:** :py:data:`~nirfsg.NIRFSG_VAL_ONBOARD_CLOCK_STR`
 
                         **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -3897,29 +4159,29 @@ arb_sample_clock_source
 
                         `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +-------------------------------------------------------+--------------+---------------------------------------------------------------+
-        | Name                                                  | Value        | Description                                                   |
-        +=======================================================+==============+===============================================================+
-        | :py:data:`~nirfsg.ArbSampleClockSource.CLK_IN`        | ClkIn        | Uses the external clock as the Sample Clock source.           |
-        +-------------------------------------------------------+--------------+---------------------------------------------------------------+
-        | :py:data:`~nirfsg.ArbSampleClockSource.ONBOARD_CLOCK` | OnboardClock | Uses the AWG module onboard clock as the Sample Clock source. |
-        +-------------------------------------------------------+--------------+---------------------------------------------------------------+
+        +----------------+---------------------------------------------------------------+
+        | Possible Value | Description                                                   |
+        +================+===============================================================+
+        | ClkIn          | Uses the external clock as the Sample Clock source.           |
+        +----------------+---------------------------------------------------------------+
+        | OnboardClock   | Uses the AWG module onboard clock as the Sample Clock source. |
+        +----------------+---------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------+
-            | Characteristic        | Value                      |
-            +=======================+============================+
-            | Datatype              | enums.ArbSampleClockSource |
-            +-----------------------+----------------------------+
-            | Permissions           | read-write                 |
-            +-----------------------+----------------------------+
-            | Repeated Capabilities | None                       |
-            +-----------------------+----------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4887,27 +5149,27 @@ deembedding_type
 
                         To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the port to configure for de-embedding.
 
-                        If you set this property to :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+                        If you set this property to :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
-                        **Default Value**: :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR`
+                        **Default Value**: :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR`
 
-                        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`
+                        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`
 
-                        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR`, :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR`, or :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`. :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
+                        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR`, :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR`, or :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`. :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
                     **Defined Values**:
 
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | Name                                                               | Value          | Description                                                            |
-        +====================================================================+================+========================================================================+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.DEEMBEDDING_TYPE_VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
-        +--------------------------------------------------------------------+----------------+------------------------------------------------------------------------+
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | Name                                              | Value          | Description                                                            |
+        +===================================================+================+========================================================================+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
@@ -5121,61 +5383,59 @@ digital_edge_script_trigger_source
 
                         - :py:meth:`nirfsg.Session.configure_digital_edge_script_trigger`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                           | Value       | Description                                                                                                                             |
-        +================================================================+=============+=========================================================================================================================================+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PFI0`                | PFI0        | The trigger is received on PFI 0.                                                                                                       |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PFI1`                | PFI1        | The trigger is received on PFI 1.                                                                                                       |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PFI2`                | PFI2        | The trigger is received on PFI 2.                                                                                                       |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PFI3`                | PFI3        | The trigger is received on PFI 3.                                                                                                       |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_STAR`            | PXI_Star    | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.                              |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG0`           | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG1`           | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG2`           | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG3`           | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG4`           | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG5`           | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG6`           | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXI_TRIG7`           | PXI_Trig7   | The trigger is received on PXI trigger line 7.                                                                                          |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PXIE_DSTARB`         | PXIe_DStarB | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.PULSE_IN`            | PulseIn     | The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.                                            |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO0`                | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO1`                | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO2`                | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO3`                | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO4`                | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO5`                | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO6`                | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.DIO7`                | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                                      |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.SYNC_SCRIPT_TRIGGER` | Sync_Script | The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.                           |
-        +----------------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                             |
+        +================+=========================================================================================================================================+
+        | PFI0           | The trigger is received on PFI 0.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The trigger is received on PFI 1.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI2           | The trigger is received on PFI 2.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI3           | The trigger is received on PFI 3.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Star       | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.                              |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig7      | The trigger is received on PXI trigger line 7.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarB    | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PulseIn        | The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.                                            |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | Sync_Script    | The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.                           |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nirfsg.Session` instance.
@@ -5189,15 +5449,15 @@ digital_edge_script_trigger_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------+
-            | Characteristic        | Value                         |
-            +=======================+===============================+
-            | Datatype              | enums.ScriptTrigDigEdgeSource |
-            +-----------------------+-------------------------------+
-            | Permissions           | read-write                    |
-            +-----------------------+-------------------------------+
-            | Repeated Capabilities | script_triggers               |
-            +-----------------------+-------------------------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5281,73 +5541,71 @@ digital_edge_start_trigger_source
 
                         - :py:meth:`nirfsg.Session.configure_digital_edge_start_trigger`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                           | Value       | Description                                                                                                                            |
-        +================================================================+=============+========================================================================================================================================+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PFI0`                 | PFI0        | The trigger is received on PFI 0.                                                                                                      |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PFI1`                 | PFI1        | The trigger is received on PFI 1.                                                                                                      |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PFI2`                 | PFI2        | The trigger is received on PFI 2.                                                                                                      |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PFI3`                 | PFI3        | The trigger is received on PFI 3.                                                                                                      |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_STAR`             | PXI_Star    | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.                             |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG0`            | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG1`            | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG2`            | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG3`            | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG4`            | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG5`            | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG6`            | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXI_TRIG7`            | PXI_Trig7   | The trigger is received on PXI trigger line 7.                                                                                         |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.PXIE_DSTARB`          | PXIe_DStarB | The trigger is received on the PXI DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.TRIG_IN`              | TrigIn      | The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.                    |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO0`                 | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO1`                 | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO2`                 | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO3`                 | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO4`                 | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO5`                 | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO6`                 | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeSource.DIO7`                 | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeSource.SYNC_SCRIPT_TRIGGER` | Sync_Script | The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.                          |
-        +----------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                            |
+        +================+========================================================================================================================================+
+        | PFI0           | The trigger is received on PFI 0.                                                                                                      |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The trigger is received on PFI 1.                                                                                                      |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI2           | The trigger is received on PFI 2.                                                                                                      |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI3           | The trigger is received on PFI 3.                                                                                                      |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Star       | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.                             |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig7      | The trigger is received on PXI trigger line 7.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarB    | The trigger is received on the PXI DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | TrigIn         | The trigger is received on the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.                    |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | Sync_Script    | The trigger is received on the Sync Script trigger line. This value is valid on only the PXIe-5644/5645/5646.                          |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------------+
-            | Characteristic        | Value                        |
-            +=======================+==============================+
-            | Datatype              | enums.StartTrigDigEdgeSource |
-            +-----------------------+------------------------------+
-            | Permissions           | read-write                   |
-            +-----------------------+------------------------------+
-            | Repeated Capabilities | None                         |
-            +-----------------------+------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5488,59 +5746,57 @@ digital_level_script_trigger_source
 
                         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                    | Value       | Description                                                                                                                             |
-        +=========================================================+=============+=========================================================================================================================================+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PFI0`        | PFI0        | The trigger is received on PFI 0.                                                                                                       |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PFI1`        | PFI1        | The trigger is received on PFI 1.                                                                                                       |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PFI2`        | PFI2        | The trigger is received on PFI 2.                                                                                                       |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PFI3`        | PFI3        | The trigger is received on PFI 3.                                                                                                       |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_STAR`    | PXI_Star    | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.                              |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG0`   | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG1`   | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG2`   | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG3`   | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG4`   | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG5`   | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG6`   | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXI_TRIG7`   | PXI_Trig7   | The trigger is received on PXI trigger line 7.                                                                                          |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PXIE_DSTARB` | PXIe_DStarB | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.PULSE_IN`    | PulseIn     | The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.                                            |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO0`        | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO1`        | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO2`        | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO3`        | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO4`        | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO5`        | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO6`        | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelSource.DIO7`        | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                                      |
-        +---------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                             |
+        +================+=========================================================================================================================================+
+        | PFI0           | The trigger is received on PFI 0.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The trigger is received on PFI 1.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI2           | The trigger is received on PFI 2.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI3           | The trigger is received on PFI 3.                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Star       | The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.                              |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig7      | The trigger is received on PXI trigger line 7.                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarB    | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | PulseIn        | The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.                                            |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nirfsg.Session` instance.
@@ -5554,15 +5810,15 @@ digital_level_script_trigger_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------------+
-            | Characteristic        | Value                          |
-            +=======================+================================+
-            | Datatype              | enums.ScriptTrigDigLevelSource |
-            +-----------------------+--------------------------------+
-            | Permissions           | read-write                     |
-            +-----------------------+--------------------------------+
-            | Repeated Capabilities | script_triggers                |
-            +-----------------------+--------------------------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5925,7 +6181,7 @@ done_event_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.GetTerminalName`
+                        - :py:meth:`nirfsg.Session.get_terminal_name`
 
         The following table lists the characteristics of this property.
 
@@ -6011,45 +6267,43 @@ exported_configuration_settled_event_output_terminal
 
                         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | Name                                                                       | Value       | Description                                                                                                        |
-        +============================================================================+=============+====================================================================================================================+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                        |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                     |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842. |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ConfigurationSettledEventExportOutputTerm.TRIG_OUT`      | TrigOut     | TRIG IN/OUT terminal.                                                                                              |
-        +----------------------------------------------------------------------------+-------------+--------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                        |
+        +================+====================================================================================================================+
+        | empty          | The signal is not exported.                                                                                        |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                     |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarC    | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5840/5841/5842. |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
+        | TrigOut        | TRIG IN/OUT terminal.                                                                                              |
+        +----------------+--------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------+
-            | Characteristic        | Value                                           |
-            +=======================+=================================================+
-            | Datatype              | enums.ConfigurationSettledEventExportOutputTerm |
-            +-----------------------+-------------------------------------------------+
-            | Permissions           | read-write                                      |
-            +-----------------------+-------------------------------------------------+
-            | Repeated Capabilities | None                                            |
-            +-----------------------+-------------------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6080,67 +6334,65 @@ exported_done_event_output_terminal
 
                         - :py:meth:`nirfsg.Session.export_signal`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                       | Value       | Description                                                                                                                     |
-        +============================================================+=============+=================================================================================================================================+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                                     |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PFI0`          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PFI1`          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PFI4`          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PFI5`          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO0`          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO1`          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO2`          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO3`          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO4`          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO5`          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO6`          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DoneEventExportOutputTerm.DIO7`          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
-        +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | Posible Value | Description                                                                                                                     |
+        +===============+=================================================================================================================================+
+        | empty         | The signal is not exported.                                                                                                     |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI0          | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1          | The signal is exported to the PFI 1 connector.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI4          | The signal is exported to the PFI 4 connector.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI5          | The signal is exported to the PFI 5 connector.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0     | The trigger is received on PXI trigger line 0.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1     | The trigger is received on PXI trigger line 1.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2     | The trigger is received on PXI trigger line 2.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3     | The trigger is received on PXI trigger line 3.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4     | The trigger is received on PXI trigger line 4.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5     | The trigger is received on PXI trigger line 5.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6     | The trigger is received on PXI trigger line 6.                                                                                  |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarC   | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0      | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1      | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2      | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3      | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4      | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5      | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6      | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7      | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
+        +---------------+---------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.DoneEventExportOutputTerm |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6169,55 +6421,53 @@ exported_marker_event_output_terminal
 
                         - :py:meth:`nirfsg.Session.export_signal`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                         | Value       | Description                                                                                                                     |
-        +==============================================================+=============+=================================================================================================================================+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                                     |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PFI0`          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PFI1`          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PFI4`          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PFI5`          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO0`          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO1`          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO2`          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO3`          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO4`          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO5`          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO6`          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.MarkerEventExportOutputTerm.DIO7`          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
-        +--------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                     |
+        +================+=================================================================================================================================+
+        | empty          | The signal is not exported.                                                                                                     |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI0           | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The signal is exported to the PFI 1 connector.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI4           | The signal is exported to the PFI 4 connector.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI5           | The signal is exported to the PFI 5 connector.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarC    | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific markers within your :py:class:`nirfsg.Session` instance.
@@ -6231,15 +6481,15 @@ exported_marker_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------------+
-            | Characteristic        | Value                             |
-            +=======================+===================================+
-            | Datatype              | enums.MarkerEventExportOutputTerm |
-            +-----------------------+-----------------------------------+
-            | Permissions           | read-write                        |
-            +-----------------------+-----------------------------------+
-            | Repeated Capabilities | markers                           |
-            +-----------------------+-----------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | markers    |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6293,33 +6543,33 @@ exported_pulse_modulation_event_output_terminal
 
         Specifies the destination terminal for exporting the Pulse Modulation Event. The Pulse Modulation Event tracks the RF Envelope when Pulse Modulation is Enabled. If this property is set to a value other than `do not export str`, calling NI-RFSG Commit will cause the output terminal to be pulled to the logic level that is the inverse of `exported pulse modulation event active level`. You can tri-state this terminal by setting this property to `do not export str` or by calling `niRFSG Reset`. To set this property, the NI-RFSG device must be in the Configuration state.
 
-                        **Default Value:** :py:data:`~nirfsg.PulseModulationOutputTerm.PULSE_OUT`
+                        **Default Value:** :py:data:`~nirfsg.NIRFSG_VAL_PULSE_OUT_STR`
 
                         **Supported Devices:**  PXIe-5842
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +------------------------------------------------------------+----------+---------------------------------------------------------------------+
-        | Name                                                       | Value    | Description                                                         |
-        +============================================================+==========+=====================================================================+
-        | :py:data:`~nirfsg.PulseModulationOutputTerm.DO_NOT_EXPORT` |          | Pulse modulation video signal is not exported.                      |
-        +------------------------------------------------------------+----------+---------------------------------------------------------------------+
-        | :py:data:`~nirfsg.PulseModulationOutputTerm.PULSE_OUT`     | PulseOut | Export the pulse modulation video signal on the pulse out terminal. |
-        +------------------------------------------------------------+----------+---------------------------------------------------------------------+
+        +----------------+---------------------------------------------------------------------+
+        | Possible Value | Description                                                         |
+        +================+=====================================================================+
+        |                | Pulse modulation video signal is not exported.                      |
+        +----------------+---------------------------------------------------------------------+
+        | PulseOut       | Export the pulse modulation video signal on the pulse out terminal. |
+        +----------------+---------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.PulseModulationOutputTerm |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6334,7 +6584,19 @@ exported_ref_clock_output_terminal
 
         Specifies the destination terminal for exporting the Reference Clock on the RF signal generators. To set this property, the NI-RFSG device must be in the Configuration state.
 
-                        **Default Value:** :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.DO_NOT_EXPORT`
+                        **Possible Values**:
+
+        Possible Value: Description
+
+        "" :The Reference Clock signal is not exported.
+
+        RefOut :Exports the Reference Clock signal to the REF OUT connector of the device.
+
+        RefOut2 :Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.
+
+        ClkOut :Exports the Reference Clock signal to the CLK OUT connector of the device.
+
+                        **Default Value:** :py:data:`~nirfsg.NIRFSG_VAL_DO_NOT_EXPORT_STR`
 
                         **Supported Devices:** PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6342,45 +6604,33 @@ exported_ref_clock_output_terminal
 
                         `Interconnecting Multiple NI 5673E Modules <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/interconnecting_multiple_ni_5673_modules.html>`_
 
-                    **Defined Values**:
+        +-------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Name                                            | Value   | Description                                                                                | Supported devices                                                                                                                                                     |
+        +=================================================+=========+============================================================================================+=======================================================================================================================================================================+
+        | :py:data:`~nirfsg.NIRFSG_VAL_CLK_OUT_STR`       | ClkOut  | Exports the Reference Clock signal to the CLK OUT connector of the device.                 | Supported on PXIe-5673, 5673E                                                                                                                                         |
+        +-------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.NIRFSG_VAL_DO_NOT_EXPORT_STR` | empty   | The Reference Clock signal is not exported.                                                | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note) |
+        +-------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.NIRFSG_VAL_REF_OUT_STR`       | RefOut  | Exports the Reference Clock signal to the REF OUT connector of the device.                 | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653,     |
+        +-------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.NIRFSG_VAL_REF_OUT2_STR`      | RefOut2 | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. | Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696                                                                                               |
+        +-------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        Name (Value): Description
-
-        :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.DO_NOT_EXPORT` () :The Reference Clock signal is not exported.
-
-        :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT` (RefOut) :Exports the Reference Clock signal to the REF OUT connector of the device.
-
-        :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT2` (RefOut2) :Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.
-
-        :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.CLK_OUT` (ClkOut) :Exports the Reference Clock signal to the CLK OUT connector of the device.
-
-        +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                                | Value   | Description                                                                                | Supported devices                                                                                                                                                     |
-        +=====================================================================+=========+============================================================================================+=======================================================================================================================================================================+
-        | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.CLK_OUT`       | ClkOut  | Exports the Reference Clock signal to the CLK OUT connector of the device.                 | Supported on PXIe-5673, 5673E                                                                                                                                         |
-        +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.DO_NOT_EXPORT` |         | The Reference Clock signal is not exported.                                                | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note) |
-        +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT`       | RefOut  | Exports the Reference Clock signal to the REF OUT connector of the device.                 | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653,     |
-        +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT2`      | RefOut2 | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. | Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696                                                                                               |
-        +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: The :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT2` output terminal value is valid for only the PXIe-5650/5651/5652, not the PXI-5650/5651/5652.
+        .. note:: The :py:data:`~nirfsg.NIRFSG_VAL_REF_OUT2_STR` output terminal value is valid for only the PXIe-5650/5651/5652, not the PXI-5650/5651/5652.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------------------------+
-            | Characteristic        | Value                                    |
-            +=======================+==========================================+
-            | Datatype              | enums.ReferenceClockExportOutputTerminal |
-            +-----------------------+------------------------------------------+
-            | Permissions           | read-write                               |
-            +-----------------------+------------------------------------------+
-            | Repeated Capabilities | None                                     |
-            +-----------------------+------------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6452,55 +6702,53 @@ exported_script_trigger_output_terminal
 
                         - :py:meth:`nirfsg.Session.export_signal`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                        | Value       | Description                                                                                                                     |
-        +=============================================================+=============+=================================================================================================================================+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                                     |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PFI0`          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PFI1`          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PFI4`          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PFI5`          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                  |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO0`          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO1`          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO2`          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO3`          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO4`          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO5`          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO6`          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigExportOutputTerm.DIO7`          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
-        +-------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                     |
+        +================+=================================================================================================================================+
+        | empty          | The signal is not exported.                                                                                                     |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI0           | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0. |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The signal is exported to the PFI 1 connector.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI4           | The signal is exported to the PFI 4 connector.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PFI5           | The signal is exported to the PFI 5 connector.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                  |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarC    | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.    |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                              |
+        +----------------+---------------------------------------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nirfsg.Session` instance.
@@ -6514,15 +6762,15 @@ exported_script_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------------+
-            | Characteristic        | Value                            |
-            +=======================+==================================+
-            | Datatype              | enums.ScriptTrigExportOutputTerm |
-            +-----------------------+----------------------------------+
-            | Permissions           | read-write                       |
-            +-----------------------+----------------------------------+
-            | Repeated Capabilities | script_triggers                  |
-            +-----------------------+----------------------------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6551,67 +6799,65 @@ exported_started_event_output_terminal
 
                         - :py:meth:`nirfsg.Session.export_signal`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                          | Value       | Description                                                                                                                            |
-        +===============================================================+=============+========================================================================================================================================+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                                            |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PFI0`          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.        |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PFI1`          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PFI4`          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PFI5`          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                         |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO0`          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO1`          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO2`          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO3`          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO4`          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO5`          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO6`          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartedEventExportOutputTerm.DIO7`          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
-        +---------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                            |
+        +================+========================================================================================================================================+
+        | empty          | The signal is not exported.                                                                                                            |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI0           | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.        |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The signal is exported to the PFI 1 connector.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI4           | The signal is exported to the PFI 4 connector.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI5           | The signal is exported to the PFI 5 connector.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarC    | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------------------+
-            | Characteristic        | Value                              |
-            +=======================+====================================+
-            | Datatype              | enums.StartedEventExportOutputTerm |
-            +-----------------------+------------------------------------+
-            | Permissions           | read-write                         |
-            +-----------------------+------------------------------------+
-            | Repeated Capabilities | None                               |
-            +-----------------------+------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6638,69 +6884,67 @@ exported_start_trigger_output_terminal
 
                         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                       | Value       | Description                                                                                                                            |
-        +============================================================+=============+========================================================================================================================================+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DO_NOT_EXPORT` |             | The signal is not exported.                                                                                                            |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PFI0`          | PFI0        | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.        |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PFI1`          | PFI1        | The signal is exported to the PFI 1 connector.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PFI4`          | PFI4        | The signal is exported to the PFI 4 connector.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PFI5`          | PFI5        | The signal is exported to the PFI 5 connector.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG0`     | PXI_Trig0   | The trigger is received on PXI trigger line 0.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG1`     | PXI_Trig1   | The trigger is received on PXI trigger line 1.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG2`     | PXI_Trig2   | The trigger is received on PXI trigger line 2.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG3`     | PXI_Trig3   | The trigger is received on PXI trigger line 3.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG4`     | PXI_Trig4   | The trigger is received on PXI trigger line 4.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG5`     | PXI_Trig5   | The trigger is received on PXI trigger line 5.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXI_TRIG6`     | PXI_Trig6   | The trigger is received on PXI trigger line 6.                                                                                         |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.PXIE_DSTARC`   | PXIe_DStarC | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.TRIG_OUT`      | TrigOut     | The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO0`          | DIO/PFI0    | The trigger is received on PFI0 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO1`          | DIO/PFI1    | The trigger is received on PFI1 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO2`          | DIO/PFI2    | The trigger is received on PFI2 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO3`          | DIO/PFI3    | The trigger is received on PFI3 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO4`          | DIO/PFI4    | The trigger is received on PFI4 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO5`          | DIO/PFI5    | The trigger is received on PFI5 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO6`          | DIO/PFI6    | The trigger is received on PFI6 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigExportOutputTerm.DIO7`          | DIO/PFI7    | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
-        +------------------------------------------------------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                            |
+        +================+========================================================================================================================================+
+        | empty          | The signal is not exported.                                                                                                            |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI0           | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.        |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI1           | The signal is exported to the PFI 1 connector.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI4           | The signal is exported to the PFI 4 connector.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PFI5           | The signal is exported to the PFI 5 connector.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig0      | The trigger is received on PXI trigger line 0.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig1      | The trigger is received on PXI trigger line 1.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig2      | The trigger is received on PXI trigger line 2.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig3      | The trigger is received on PXI trigger line 3.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig4      | The trigger is received on PXI trigger line 4.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig5      | The trigger is received on PXI trigger line 5.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_Trig6      | The trigger is received on PXI trigger line 6.                                                                                         |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | PXIe_DStarC    | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | TrigOut        | The signal is exported to the TRIG IN/OUT terminal. This value is valid on only the PXIe-5654/5654 with PXIe-5696.                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI0       | The trigger is received on PFI0 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI1       | The trigger is received on PFI1 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI2       | The trigger is received on PFI2 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI3       | The trigger is received on PFI3 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI4       | The trigger is received on PFI4 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI5       | The trigger is received on PFI5 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI6       | The trigger is received on PFI6 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
+        | DIO/PFI7       | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
+        +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.StartTrigExportOutputTerm |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8139,13 +8383,13 @@ load_configurations_from_file_load_options
 
                     **Defined Values**:
 
-        +---------------------------------------------+-------------------------------------------------------------------+
-        | Value                                       | Description                                                       |
-        +=============================================+===================================================================+
-        | :py:data:`~nirfsg.NIRFSG_VAL_SKIP_NONE`     | NI-RFSG loads all the configurations to the session.              |
-        +---------------------------------------------+-------------------------------------------------------------------+
-        | :py:data:`~nirfsg.NIRFSG_VAL_SKIP_WAVEFORM` | NI-RFSG skips loading the waveform configurations to the session. |
-        +---------------------------------------------+-------------------------------------------------------------------+
+        +--------------------------------------------------------------------+-------------------------------------------------------------------+
+        | Value                                                              | Description                                                       |
+        +====================================================================+===================================================================+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE      | NI-RFSG loads all the configurations to the session.              |
+        +--------------------------------------------------------------------+-------------------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS | NI-RFSG skips loading the waveform configurations to the session. |
+        +--------------------------------------------------------------------+-------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -8179,17 +8423,17 @@ load_configurations_from_file_reset_options
 
                     **Defined Values**:
 
-        +-------------------------------------------------------+------------------------------------------------------+
-        | Value                                                 | Description                                          |
-        +=======================================================+======================================================+
-        | :py:data:`~nirfsg.NIRFSG_VAL_SKIP_NONE`               | NI-RFSG resets all configurations.                   |
-        +-------------------------------------------------------+------------------------------------------------------+
-        | :py:data:`~nirfsg.NIRFSG_VAL_SKIP_WAVEFORMS`          | NI-RFSG skips resetting the waveform configurations. |
-        +-------------------------------------------------------+------------------------------------------------------+
-        | :py:data:`~nirfsg.NIRFSG_VAL_SKIP_SCRIPTS`            | NI-RFSG skips resetting the scripts.                 |
-        +-------------------------------------------------------+------------------------------------------------------+
-        | :py:data:`~nirfsg.NIRFSG_VAL_SKIP_DEEMBEDDING_TABLES` | NI-RFSG skips resetting the de-embedding tables.     |
-        +-------------------------------------------------------+------------------------------------------------------+
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | Value                                                                        | Description                                          |
+        +==============================================================================+======================================================+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE               | NI-RFSG resets all configurations.                   |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS          | NI-RFSG skips resetting the waveform configurations. |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS            | NI-RFSG skips resetting the scripts.                 |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES | NI-RFSG skips resetting the de-embedding tables.     |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -8585,7 +8829,7 @@ lo_pll_fractional_mode_enabled
 
         Specifies whether to use fractional mode for the local oscillator (LO) phase-locked loop (PLL). This property enables or disables fractional frequency tuning in the LO. Fractional mode provides a finer frequency step resolution and allows smaller values for the :py:attr:`nirfsg.Session.lo_frequency_step_size` property. However, fractional mode may introduce non-harmonic spurs.
 
-                        This property applies only if you set the :py:attr:`nirfsg.Session.lo_source` property to :py:data:`~nirfsg.LoSource.ONBOARD`.
+                        This property applies only if you set the :py:attr:`nirfsg.Session.lo_source` property to :py:data:`~nirfsg.NIRFSG_VAL_LO_SOURCE_ONBOARD_STR`.
 
                         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
@@ -8638,7 +8882,7 @@ lo_source
 
                         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_string` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
-                        **Default Value:** :py:data:`~nirfsg.LoSource.ONBOARD`
+                        **Default Value:** :py:data:`~nirfsg.NIRFSG_VAL_LO_SOURCE_ONBOARD_STR`
 
                         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -8648,35 +8892,37 @@ lo_source
 
                         `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/lo_sharing_using_rfsa_rfsg.html>`_
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +----------------------------------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                               | Value                  | Description                                                                                                                                                                                                                                                      |
-        +====================================================+========================+==================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.LoSource.AUTOMATIC_SG_SA_SHARED` | Automatic_SG_SA_Shared | NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.                                                                                                 |
-        +----------------------------------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.LoSource.LO_IN`                  | LO_In                  | Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the :py:attr:`nirfsg.Session.upconverter_center_frequency` property to specify the LO frequency.                                                             |
-        +----------------------------------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.LoSource.ONBOARD`                | Onboard                | Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.                                                                                                                                        |
-        +----------------------------------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.LoSource.SG_SA_SHARED`           | SG_SA_Shared           | Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842. |
-        +----------------------------------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.LoSource.SECONDARY`              | Secondary              | Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.                                                                                                                     |
-        +----------------------------------------------------+------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value         | Description                                                                                                                                                                                                                                                      |
+        +========================+==================================================================================================================================================================================================================================================================+
+        | Automatic_SG_SA_Shared | NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.                                                                                                 |
+        +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | LO_In                  | Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the :py:attr:`nirfsg.Session.upconverter_center_frequency` property to specify the LO frequency.                                                             |
+        +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Onboard                | Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.                                                                                                                                        |
+        +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | SG_SA_Shared           | Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842. |
+        +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Secondary              | Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.                                                                                                                     |
+        +------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        .. note:: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to :py:data:`~nirfsg.LoSource.SG_SA_SHARED`.
+        .. note:: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to :py:data:`~nirfsg.NIRFSG_VAL_LO_SOURCE_SG_SA_SHARED_STR`.
+
+        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------+
-            | Characteristic        | Value          |
-            +=======================+================+
-            | Datatype              | enums.LoSource |
-            +-----------------------+----------------+
-            | Permissions           | read-write     |
-            +-----------------------+----------------+
-            | Repeated Capabilities | None           |
-            +-----------------------+----------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8930,7 +9176,7 @@ marker_event_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.GetTerminalName`
+                        - :py:meth:`nirfsg.Session.get_terminal_name`
 
 
 
@@ -10117,39 +10363,39 @@ pulse_modulation_source
 
         Specifies the source of the pulse modulation signal. When Pulse In in used, the pulse modulation is applied with the lowest latency and jitter, but is not aligned to any particular waveform sample. When a marker is used, the RF pulse is aligned to a specific sample in the arbitrary waveform. To set this property, the NI-RFSG device must be in the Configuration state.
 
-                        **Default Value:** :py:data:`~nirfsg.PulseModulationSource.PULSE_IN`
+                        **Default Value:** :py:data:`~nirfsg.NIRFSG_VAL_PULSE_IN_STR`
 
                         **Supported Devices:**  PXIe-5842
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +---------------------------------------------------+---------+----------------------------------------------------------------------------------------------+
-        | Name                                              | Value   | Description                                                                                  |
-        +===================================================+=========+==============================================================================================+
-        | :py:data:`~nirfsg.PulseModulationSource.PULSE_IN` | PulseIn | The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842. |
-        +---------------------------------------------------+---------+----------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.PulseModulationSource.MARKER0`  |         | The trigger is received from the Marker 0.                                                   |
-        +---------------------------------------------------+---------+----------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.PulseModulationSource.MARKER1`  |         | The trigger is received from the Marker 1.                                                   |
-        +---------------------------------------------------+---------+----------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.PulseModulationSource.MARKER2`  |         | The trigger is received from the Marker 2.                                                   |
-        +---------------------------------------------------+---------+----------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.PulseModulationSource.MARKER3`  |         | The trigger is received from the Marker 3.                                                   |
-        +---------------------------------------------------+---------+----------------------------------------------------------------------------------------------+
+        +----------------+----------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                  |
+        +================+==============================================================================================+
+        | PulseIn        | The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842. |
+        +----------------+----------------------------------------------------------------------------------------------+
+        | Marker0        | The trigger is received from the Marker 0.                                                   |
+        +----------------+----------------------------------------------------------------------------------------------+
+        | Marker1        | The trigger is received from the Marker 1.                                                   |
+        +----------------+----------------------------------------------------------------------------------------------+
+        | Marker2        | The trigger is received from the Marker 2.                                                   |
+        +----------------+----------------------------------------------------------------------------------------------+
+        | Marker3        | The trigger is received from the Marker 3.                                                   |
+        +----------------+----------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.PulseModulationSource |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10164,17 +10410,17 @@ pxi_chassis_clk10_source
 
         Specifies the clock source for driving the PXI 10 MHz backplane Reference Clock. This property is configurable if the PXI-5610 upconverter module is installed in *only* Slot 2 of a PXI chassis. To set this property, the NI-RFSG device must be in the Configuration state.
 
-                        **Defined Values**:
+                        **Possible Values**:
 
-        Name (Value): Description
+        Possible Value: Description
 
-        :py:data:`~nirfsg.PxiChassisClk10Source.NONE` (0) :Do not drive the PXI_CLK10 signal.
+        empty :Do not drive the PXI_CLK10 signal.
 
-        :py:data:`~nirfsg.PxiChassisClk10Source.ONBOARD_CLOCK_STR` (OnboardClock) :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.
+        OnboardClock :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.
 
-        :py:data:`~nirfsg.PxiChassisClk10Source.REF_IN_STR` (RefIn) :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.
+        RefIn :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.
 
-                        **Default Value:** :py:data:`~nirfsg.PxiChassisClk10Source.NONE`
+                        **Default Value:** empty
 
                         **Supported Devices:** PXI-5610, PXI-5670/5671
 
@@ -10191,29 +10437,27 @@ pxi_chassis_clk10_source
 
                         Only certain combinations of this property and the :py:attr:`nirfsg.Session.ref_clock_source` property are valid, as shown in the following table.
 
-        +-----------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
-        | :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` Setting                                                | :py:attr:`nirfsg.Session.ref_clock_source` Setting         |
-        +===========================================================================================================+============================================================+
-        | :py:data:`~nirfsg.PxiChassisClk10Source.NONE`, :py:data:`~nirfsg.PxiChassisClk10Source.ONBOARD_CLOCK_STR` | :py:data:`~nirfsg.PxiChassisClk10Source.ONBOARD_CLOCK_STR` |
-        +-----------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
-        | :py:data:`~nirfsg.PxiChassisClk10Source.NONE`, :py:data:`~nirfsg.PxiChassisClk10Source.REF_IN_STR`        | :py:data:`~nirfsg.PxiChassisClk10Source.REF_IN_STR`        |
-        +-----------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
-        | :py:data:`~nirfsg.PxiChassisClk10Source.NONE`, :py:data:`~nirfsg.PxiChassisClk10Source.REF_IN_STR`        | :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK`            |
-        +-----------------------------------------------------------------------------------------------------------+------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +------------------------------------------------------------+----------------------------------------------------+
+        | :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` Setting | :py:attr:`nirfsg.Session.ref_clock_source` Setting |
+        +============================================================+====================================================+
+        | empty, OnboardClock                                        | OnboardClock                                       |
+        +------------------------------------------------------------+----------------------------------------------------+
+        | empty, RefIn                                               | RefIn                                              |
+        +------------------------------------------------------------+----------------------------------------------------+
+        | empty, RefIn                                               | PXI_CLK                                            |
+        +------------------------------------------------------------+----------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.PxiChassisClk10Source |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10347,7 +10591,7 @@ ref_clock_rate
 
     .. py:attribute:: ref_clock_rate
 
-        Specifies the Reference Clock rate, in Hz, of the signal present at the REF IN or CLK IN connector. This property is only valid when the :py:attr:`nirfsg.Session.ref_clock_source` property is set to :py:data:`~nirfsg.NIRFSG_VAL_CLK_IN_STR`, :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_STR`, or :py:data:`~nirfsg.ReferenceClockSource.REF_IN_2`
+        Specifies the Reference Clock rate, in Hz, of the signal present at the REF IN or CLK IN connector. This property is only valid when the :py:attr:`nirfsg.Session.ref_clock_source` property is set to :py:data:`~nirfsg.NIRFSG_VAL_CLK_IN_STR`, :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_STR`, or :py:data:`~nirfsg.NIRFSG_VAL_REF_IN_2_STR`
 
                         To set this property, the NI-RFSG device must be in the Configuration state. If you are using the PXIe-5654/5654 with PXIe-5696, the NI-RFSG device must be in the Committed state to read this property. When you read this property, it returns the frequency the device is locked to during the Committed state.
 
@@ -10418,7 +10662,7 @@ ref_clock_source
 
         Specifies the Reference Clock source. To set this property, the NI-RFSG device must be in the Configuration state. Only certain combinations of this property and the :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` property are valid, as shown in the following table.
 
-                        **Default Value:** :py:data:`~nirfsg.ReferenceClockSource.ONBOARD_CLOCK`
+                        **Default Value:** :py:data:`~nirfsg.NIRFSG_VAL_ONBOARD_CLOCK_STR`
 
                         **Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -10430,23 +10674,23 @@ ref_clock_source
 
                         - :py:meth:`nirfsg.Session.configure_ref_clock`
 
-                    **Defined Values**:
+                    **Possible Values**:
 
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                   | Value         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-        +========================================================+===============+=========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.ReferenceClockSource.ONBOARD_CLOCK`  | OnboardClock  | Uses the onboard Reference Clock as the clock source. **PXIe-5830/5831** —For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. ** PXIe-5831/5832 with PXIe-5653** —Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. **PXIe-5841 with PXIe-5655** —Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.                                                                                                                                                                                                                                                                                                      |
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockSource.CLK_IN`         | ClkIn         | Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockSource.REF_IN`         | RefIn         | Uses the clock signal present at the front panel REF IN connector as the Reference Clock source. **PXIe-5830/5831** —For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector. **PXIe-5831/5832 with PXIe-5653** —Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector. **PXIe-5841 with PXIe-5655** —Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector. |
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK`        | PXI_CLK       | Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockSource.REF_IN_2`       | RefIn2        | This value is not valid on any supported devices.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK_MASTER` | PXI_ClkMaster | This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653** —NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK` as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-        +--------------------------------------------------------+---------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Possible Value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+        +================+=========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
+        | OnboardClock   | Uses the onboard Reference Clock as the clock source. **PXIe-5830/5831** —For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. ** PXIe-5831/5832 with PXIe-5653** —Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. **PXIe-5841 with PXIe-5655** —Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.                                                                                                                                                                                                                                                                                                      |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | ClkIn          | Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | RefIn          | Uses the clock signal present at the front panel REF IN connector as the Reference Clock source. **PXIe-5830/5831** —For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector. **PXIe-5831/5832 with PXIe-5653** —Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector. **PXIe-5841 with PXIe-5655** —Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the PXIe-5655 REF OUT connector to the PXIe-5841 REF IN connector. |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_CLK        | Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | RefIn2         | This value is not valid on any supported devices.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | PXI_ClkMaster  | This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653** —NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use :py:data:`~nirfsg.NIRFSG_VAL_PXI_CLK_STR` as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+        +----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: The PXI-5670/5671 and PXIe-5672 devices also allow you to drive the PXI 10 MHz backplane clock on PXI chassis *only* using the :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` property.
 
@@ -10454,15 +10698,15 @@ ref_clock_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------+
-            | Characteristic        | Value                      |
-            +=======================+============================+
-            | Datatype              | enums.ReferenceClockSource |
-            +-----------------------+----------------------------+
-            | Permissions           | read-write                 |
-            +-----------------------+----------------------------+
-            | Repeated Capabilities | None                       |
-            +-----------------------+----------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10579,7 +10823,7 @@ rf_blanking_source
 
                         PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-                        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+                        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
                         **Default Value:** "" (empty string)
 
@@ -10634,7 +10878,7 @@ rf_in_lo_export_enabled
 
                         Set this property to :py:data:`~nirfsg.RFInLoExportEnabled.ENABLE` to export the LO signal from the RF IN LO OUT terminal.
 
-                        When this property is enabled, if the :py:attr:`nirfsg.Session.lo_source` property is set to :py:data:`~nirfsg.LoSource.LO_IN` and you do not set the :py:attr:`nirfsg.Session.lo_frequency` or :py:attr:`nirfsg.Session.upconverter_center_frequency` properties, NI-RFSG rounds the LO frequency to approximately an LO step size as if the source was :py:data:`~nirfsg.NIRFSG_VAL_ONBOARD_CLOCK_STR`. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
+                        When this property is enabled, if the :py:attr:`nirfsg.Session.lo_source` property is set to :py:data:`~nirfsg.NIRFSG_VAL_LO_SOURCE_LO_IN_STR` and you do not set the :py:attr:`nirfsg.Session.lo_frequency` or :py:attr:`nirfsg.Session.upconverter_center_frequency` properties, NI-RFSG rounds the LO frequency to approximately an LO step size as if the source was :py:data:`~nirfsg.NIRFSG_VAL_ONBOARD_CLOCK_STR`. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
 
                         **Default Value:** :py:data:`~nirfsg.RFInLoExportEnabled.UNSPECIFIED`
 
@@ -10699,7 +10943,7 @@ script_trigger_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.GetTerminalName`
+                        - :py:meth:`nirfsg.Session.get_terminal_name`
 
 
 
@@ -11244,7 +11488,7 @@ started_event_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.GetTerminalName`
+                        - :py:meth:`nirfsg.Session.get_terminal_name`
 
         The following table lists the characteristics of this property.
 
@@ -11293,7 +11537,7 @@ start_trigger_terminal_name
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.GetTerminalName`
+                        - :py:meth:`nirfsg.Session.get_terminal_name`
 
         The following table lists the characteristics of this property.
 
@@ -12264,7 +12508,7 @@ waveform_rf_blanking
         | :py:data:`~nirfsg.NIRFSG_VAL_MARKER0`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER1`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER2`, or :py:data:`~nirfsg.NIRFSG_VAL_MARKER3` | :py:data:`~nirfsg.RFBlanking.ENABLE`           | Error is shown.                                                                                           |
         +---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -12422,7 +12666,7 @@ write_waveform_burst_detection
 
     .. py:attribute:: write_waveform_burst_detection
 
-        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session._get_waveform_burst_start_locations` and :py:meth:`nirfsg.Session._get_waveform_burst_stop_locations` methods respectively.
+        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.GetWaveformBurstStartLocations` and :py:meth:`nirfsg.Session.GetWaveformBurstStopLocations` methods respectively.
 
                         **Default Value:** :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`
 
@@ -12440,7 +12684,7 @@ write_waveform_burst_detection
 
         .. note:: - When you download a waveform using :py:meth:`nirfsg.Session.ReadAndDownloadWaveformFromFileTdms` method and if :py:attr:`nirfsg.Session.waveform_rf_blanking` property is enabled, you must set the :py:attr:`nirfsg.Session.write_waveform_burst_detection` property to :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`.
 
-             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
