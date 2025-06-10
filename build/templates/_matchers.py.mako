@@ -283,6 +283,15 @@ class ViReal64PointerMatcher(_PointerMatcher):
 
 
 % if are_complex_parameters_used:
+def _compare_complex_number_arrays(expected, actual):
+    for i in range(expected.expected_size):
+        expected_value = expected.expected_data[i]
+        actual_value = actual[i]
+        if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
+            return False
+    return True
+
+
 class NIComplexNumberPointerMatcher(_PointerMatcher):
     def __init__(self, expected_data, expected_size):
         _PointerMatcher.__init__(self, _complextype.NIComplexNumber)
@@ -291,13 +300,7 @@ class NIComplexNumberPointerMatcher(_PointerMatcher):
 
     def __eq__(self, other):
         _PointerMatcher.__eq__(self, other)
-
-        for i in range(self.expected_size):
-            expected_value = self.expected_data[i]
-            actual_value = other[i]
-            if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
-                return False
-        return True
+        return _compare_complex_number_arrays(self, other)
 
     def __repr__(self):
         return f"NIComplexNumberPointerMatcher({self.expected_data})"
@@ -311,13 +314,7 @@ class NIComplexNumberF32PointerMatcher(_PointerMatcher):
 
     def __eq__(self, other):
         _PointerMatcher.__eq__(self, other)
-
-        for i in range(self.expected_size):
-            expected_value = self.expected_data[i]
-            actual_value = other[i]
-            if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
-                return False
-        return True
+        return _compare_complex_number_arrays(self, other)
 
     def __repr__(self):
         return f"NIComplexNumberF32PointerMatcher({self.expected_data})"
@@ -331,13 +328,7 @@ class NIComplexI16PointerMatcher(_PointerMatcher):
 
     def __eq__(self, other):
         _PointerMatcher.__eq__(self, other)
-
-        for i in range(self.expected_size):
-            expected_value = self.expected_data[i]
-            actual_value = other[i]
-            if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
-                return False
-        return True
+        return _compare_complex_number_arrays(self, other)
 
     def __repr__(self):
         return f"NIComplexI16PointerMatcher({self.expected_data})"

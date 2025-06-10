@@ -1217,7 +1217,7 @@ def test_get_ctype_variable_declaration_snippet_case_s220():
 
 def test_get_ctype_variable_declaration_snippet_case_b510():
     snippet = get_ctype_variable_declaration_snippet(parameters_for_testing[7], parameters_for_testing, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=True)
-    assert snippet == ["output_ctype = _get_ctypes_pointer_for_buffer(value=output, library_type=numpy.ViInt64)  # case B510"]
+    assert snippet == ["output_ctype = _get_ctypes_pointer_for_buffer(value=output)  # case B510"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_b540():
