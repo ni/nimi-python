@@ -865,7 +865,7 @@ class TestLibraryInterpreter:
             _matchers.NIComplexNumberPointerMatcher(waveform_data_pointer, number_of_samples)
         )
 
-    def test_write_waveform_complexi16_valid_input(self):
+    def test_write_waveform_numpy_complexi16_valid_input(self):
         import ctypes
         import numpy as np
 

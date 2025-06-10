@@ -2800,7 +2800,7 @@ functions = {
     'WriteWaveformComplexF32': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of complex64 numbers.'
+            'description': 'A function that writes a waveform of numpy complex64 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2855,7 +2855,7 @@ functions = {
     'WriteWaveformComplexF64': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of complex128 numbers'
+            'description': 'A function that writes a waveform of numpy complex128 numbers'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2910,7 +2910,7 @@ functions = {
     'WriteWaveformNumpyComplexI16': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of i16 numbers.'
+            'description': 'A function that writes a waveform of numpy complex i16 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
