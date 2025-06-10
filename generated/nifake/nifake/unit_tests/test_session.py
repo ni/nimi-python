@@ -926,6 +926,26 @@ class TestGrpcSession:
             assert actual_configuration == bytes(expected_buffer)
         self.patched_grpc_interpreter.export_attribute_configuration_buffer.assert_called_once_with()
 
+    def test_session_write_waveform_complex_f32_invalid_dtype(self):
+        import numpy as np
+        invalid_waveform_data = np.full(10, 1.0 + 1.0j, dtype=np.complex128)
+        expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=complex64, is complex128"
+        import pytest
+        with nifake.Session('dev1', grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
+            with pytest.raises(TypeError) as exc_info:
+                session.write_waveform_complex_f32(invalid_waveform_data)
+            assert str(exc_info.value) == expected_error_message
+
+    def test_session_write_waveform_complex_i16_invalid_dtype(self):
+        import numpy as np
+        invalid_waveform_data = np.full(10, 1.0 + 1.0j, dtype=np.complex64)
+        expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=int16, is complex64"
+        import pytest
+        with nifake.Session('dev1', grpc_options=nifake.GrpcSessionOptions(object(), '')) as session:
+            with pytest.raises(TypeError) as exc_info:
+                session.write_waveform_numpy_complex_i16(invalid_waveform_data)
+            assert str(exc_info.value) == expected_error_message
+
     # Attributes
 
     def test_get_attribute_int32(self):

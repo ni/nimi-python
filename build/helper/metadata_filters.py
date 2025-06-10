@@ -19,6 +19,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
         'skip_session_handle': True,
@@ -33,6 +34,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
@@ -47,6 +49,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',
         'python_api_list': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
@@ -61,6 +64,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',
         'python_api_list': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.SESSION_METHOD_CALL: {
         'skip_session_handle': True,
@@ -75,6 +79,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
         'skip_session_handle': True,
@@ -89,6 +94,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_session_handle': False,
@@ -103,6 +109,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
         'skip_session_handle': False,
@@ -117,6 +124,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.GRPC_REQUEST_PARAMETERS: {
         'skip_session_handle': False,
@@ -131,6 +139,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.CTYPES_ARGTYPES: {
         'skip_session_handle': False,
@@ -145,6 +154,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION: {
         'skip_session_handle': True,
@@ -159,6 +169,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -173,6 +184,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -187,6 +199,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.API_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -201,6 +214,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -215,6 +229,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.GRPC_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -229,6 +244,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.NUMPY_PARAMETERS: {
         'skip_session_handle': True,
@@ -243,6 +259,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': True,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.IVI_DANCE_PARAMETER: {
         'skip_session_handle': True,
@@ -257,6 +274,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'ivi-dance, ivi-dance-with-a-twist',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LEN_PARAMETER: {
         'skip_session_handle': True,
@@ -271,6 +289,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'len',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INPUT_ENUM_PARAMETERS: {
         'skip_session_handle': True,
@@ -285,6 +304,22 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
+        'skip_all_except_complex_type_parameters': False,
+    },
+    ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS: {
+        'skip_session_handle': True,
+        'skip_input_parameters': False,
+        'skip_output_parameters': False,
+        'but_keep_output_numpy_array_parameters': True,
+        'skip_size_parameter': True,
+        'reordered_for_default_values': False,
+        'skip_repeated_capability_parameter': True,
+        'skip_non_enum_parameter': False,
+        'skip_numpy_parameters': False,
+        'skip_all_except_numpy_parameters': True,
+        'mechanism': 'any',
+        'python_api_list': True,
+        'skip_all_except_complex_type_parameters': True,
     },
 }
 
@@ -348,6 +383,8 @@ def filter_parameters(parameters, parameter_usage_options):
         if options_to_use['but_keep_output_numpy_array_parameters'] is True and x['numpy'] is True:
             skip = False
         if not options_to_use['python_api_list'] and not x['use_in_python_api']:
+            skip = True
+        if options_to_use['skip_all_except_complex_type_parameters'] and x['complex_type'] is None:
             skip = True
         if not skip:
             parameters_to_use.append(x)
@@ -451,3 +488,13 @@ def filter_codegen_enums(enums):
     return {k: v for k, v in enums.items() if v['codegen_method'] != 'no'}
 
 
+def are_complex_parameters_used(functions):
+    '''Returns bool based on whether any complex parameters are used in the functions metadata.'''
+    are_complex_parameters_used = False
+    complex_parameters = []
+    for k, v in functions.items():
+        complex_parameters = filter_parameters(v['parameters'], ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS)
+        if complex_parameters != []:
+            are_complex_parameters_used = True
+            break
+    return are_complex_parameters_used

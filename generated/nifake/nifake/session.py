@@ -1670,6 +1670,66 @@ class Session(_SessionBase):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
         self._interpreter.write_waveform_numpy(waveform)
 
+    @ivi_synchronized
+    def write_waveform_complex_f32(self, waveform_data_array):
+        r'''write_waveform_complex_f32
+
+        A method that writes a waveform of numpy complex64 numbers.
+
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('complex64'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_waveform_complex_f32(waveform_data_array)
+
+    @ivi_synchronized
+    def write_waveform_complex_f64(self, waveform_data_array):
+        r'''write_waveform_complex_f64
+
+        A method that writes a waveform of numpy complex128 numbers
+
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('complex128'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_waveform_complex_f64(waveform_data_array)
+
+    @ivi_synchronized
+    def write_waveform_numpy_complex_i16(self, waveform_data_array):
+        r'''write_waveform_numpy_complex_i16
+
+        A method that writes a waveform of numpy complex i16 numbers.
+
+        Args:
+            waveform_data_array (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.
+
+        '''
+        import numpy
+
+        if type(waveform_data_array) is not numpy.ndarray:
+            raise TypeError('waveform_data_array must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data_array)))
+        if numpy.isfortran(waveform_data_array) is True:
+            raise TypeError('waveform_data_array must be in C-order')
+        if waveform_data_array.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        self._interpreter.write_waveform_numpy_complex_i16(waveform_data_array)
+
     def _close(self):
         r'''_close
 

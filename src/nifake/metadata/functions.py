@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 24.8.0f100
+# This file is generated from NI-FAKE API metadata version 25.5.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2793,6 +2793,171 @@ functions = {
                 },
                 'type': 'ViReal64[]',
                 'use_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'WriteWaveformComplexF32': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'A function that writes a waveform of numpy complex64 numbers.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexNumberF32[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'WriteWaveformComplexF64': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'A function that writes a waveform of numpy complex128 numbers'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexNumber[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'WriteWaveformNumpyComplexI16': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'A function that writes a waveform of numpy complex i16 numbers.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'interleaved',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexI16[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
             }
         ],
         'returns': 'ViStatus'
