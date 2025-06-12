@@ -99,6 +99,12 @@ class SideEffectsHelper(object):
         self._defaults['DisableScriptTrigger']['return'] = 0
         self._defaults['DisableStartTrigger'] = {}
         self._defaults['DisableStartTrigger']['return'] = 0
+        self._defaults['ErrorMessage'] = {}
+        self._defaults['ErrorMessage']['return'] = 0
+        self._defaults['ErrorQuery'] = {}
+        self._defaults['ErrorQuery']['return'] = 0
+        self._defaults['ErrorQuery']['errorCode'] = None
+        self._defaults['ErrorQuery']['errorMessage'] = None
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
         self._defaults['GetAttributeViBoolean'] = {}
@@ -190,6 +196,10 @@ class SideEffectsHelper(object):
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
+        self._defaults['RevisionQuery'] = {}
+        self._defaults['RevisionQuery']['return'] = 0
+        self._defaults['RevisionQuery']['instrumentDriverRevision'] = None
+        self._defaults['RevisionQuery']['firmwareRevision'] = None
         self._defaults['SaveConfigurationsToFile'] = {}
         self._defaults['SaveConfigurationsToFile']['return'] = 0
         self._defaults['SelectArbWaveform'] = {}
@@ -219,13 +229,10 @@ class SideEffectsHelper(object):
         self._defaults['SetAttributeViString']['return'] = 0
         self._defaults['SetWaveformBurstStartLocations'] = {}
         self._defaults['SetWaveformBurstStartLocations']['return'] = 0
-        self._defaults['SetWaveformBurstStartLocations']['locations'] = None
         self._defaults['SetWaveformBurstStopLocations'] = {}
         self._defaults['SetWaveformBurstStopLocations']['return'] = 0
-        self._defaults['SetWaveformBurstStopLocations']['locations'] = None
         self._defaults['SetWaveformMarkerEventLocations'] = {}
         self._defaults['SetWaveformMarkerEventLocations']['return'] = 0
-        self._defaults['SetWaveformMarkerEventLocations']['locations'] = None
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
@@ -459,6 +466,30 @@ class SideEffectsHelper(object):
             return self._defaults['DisableStartTrigger']['return']
         return self._defaults['DisableStartTrigger']['return']
 
+    def niRFSG_ErrorMessage(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['ErrorMessage']['return'] != 0:
+            return self._defaults['ErrorMessage']['return']
+        return self._defaults['ErrorMessage']['return']
+
+    def niRFSG_ErrorQuery(self, vi, error_code, error_message):  # noqa: N802
+        if self._defaults['ErrorQuery']['return'] != 0:
+            return self._defaults['ErrorQuery']['return']
+        # error_code
+        if self._defaults['ErrorQuery']['errorCode'] is None:
+            raise MockFunctionCallError("niRFSG_ErrorQuery", param='errorCode')
+        if error_code is not None:
+            error_code.contents.value = self._defaults['ErrorQuery']['errorCode']
+        # error_message
+        if self._defaults['ErrorQuery']['errorMessage'] is None:
+            raise MockFunctionCallError("niRFSG_ErrorQuery", param='errorMessage')
+        test_value = self._defaults['ErrorQuery']['errorMessage']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_message) >= len(test_value)
+        for i in range(len(test_value)):
+            error_message[i] = test_value[i]
+        return self._defaults['ErrorQuery']['return']
+
     def niRFSG_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         if self._defaults['ExportSignal']['return'] != 0:
             return self._defaults['ExportSignal']['return']
@@ -647,8 +678,14 @@ class SideEffectsHelper(object):
         # locations
         if self._defaults['GetWaveformBurstStartLocations']['locations'] is None:
             raise MockFunctionCallError("niRFSG_GetWaveformBurstStartLocations", param='locations')
-        if locations is not None:
-            locations.contents.value = self._defaults['GetWaveformBurstStartLocations']['locations']
+        test_value = self._defaults['GetWaveformBurstStartLocations']['locations']
+        try:
+            locations_ref = locations.contents
+        except AttributeError:
+            locations_ref = locations
+        assert len(locations_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            locations_ref[i] = test_value[i]
         # required_size
         if self._defaults['GetWaveformBurstStartLocations']['requiredSize'] is None:
             raise MockFunctionCallError("niRFSG_GetWaveformBurstStartLocations", param='requiredSize')
@@ -662,8 +699,14 @@ class SideEffectsHelper(object):
         # locations
         if self._defaults['GetWaveformBurstStopLocations']['locations'] is None:
             raise MockFunctionCallError("niRFSG_GetWaveformBurstStopLocations", param='locations')
-        if locations is not None:
-            locations.contents.value = self._defaults['GetWaveformBurstStopLocations']['locations']
+        test_value = self._defaults['GetWaveformBurstStopLocations']['locations']
+        try:
+            locations_ref = locations.contents
+        except AttributeError:
+            locations_ref = locations
+        assert len(locations_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            locations_ref[i] = test_value[i]
         # required_size
         if self._defaults['GetWaveformBurstStopLocations']['requiredSize'] is None:
             raise MockFunctionCallError("niRFSG_GetWaveformBurstStopLocations", param='requiredSize')
@@ -677,8 +720,14 @@ class SideEffectsHelper(object):
         # locations
         if self._defaults['GetWaveformMarkerEventLocations']['locations'] is None:
             raise MockFunctionCallError("niRFSG_GetWaveformMarkerEventLocations", param='locations')
-        if locations is not None:
-            locations.contents.value = self._defaults['GetWaveformMarkerEventLocations']['locations']
+        test_value = self._defaults['GetWaveformMarkerEventLocations']['locations']
+        try:
+            locations_ref = locations.contents
+        except AttributeError:
+            locations_ref = locations
+        assert len(locations_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            locations_ref[i] = test_value[i]
         # required_size
         if self._defaults['GetWaveformMarkerEventLocations']['requiredSize'] is None:
             raise MockFunctionCallError("niRFSG_GetWaveformMarkerEventLocations", param='requiredSize')
@@ -776,6 +825,29 @@ class SideEffectsHelper(object):
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
 
+    def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
+        if self._defaults['RevisionQuery']['return'] != 0:
+            return self._defaults['RevisionQuery']['return']
+        # instrument_driver_revision
+        if self._defaults['RevisionQuery']['instrumentDriverRevision'] is None:
+            raise MockFunctionCallError("niRFSG_RevisionQuery", param='instrumentDriverRevision')
+        test_value = self._defaults['RevisionQuery']['instrumentDriverRevision']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(instrument_driver_revision) >= len(test_value)
+        for i in range(len(test_value)):
+            instrument_driver_revision[i] = test_value[i]
+        # firmware_revision
+        if self._defaults['RevisionQuery']['firmwareRevision'] is None:
+            raise MockFunctionCallError("niRFSG_RevisionQuery", param='firmwareRevision')
+        test_value = self._defaults['RevisionQuery']['firmwareRevision']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(firmware_revision) >= len(test_value)
+        for i in range(len(test_value)):
+            firmware_revision[i] = test_value[i]
+        return self._defaults['RevisionQuery']['return']
+
     def niRFSG_SaveConfigurationsToFile(self, vi, channel_name, file_path):  # noqa: N802
         if self._defaults['SaveConfigurationsToFile']['return'] != 0:
             return self._defaults['SaveConfigurationsToFile']['return']
@@ -849,31 +921,16 @@ class SideEffectsHelper(object):
     def niRFSG_SetWaveformBurstStartLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
         if self._defaults['SetWaveformBurstStartLocations']['return'] != 0:
             return self._defaults['SetWaveformBurstStartLocations']['return']
-        # locations
-        if self._defaults['SetWaveformBurstStartLocations']['locations'] is None:
-            raise MockFunctionCallError("niRFSG_SetWaveformBurstStartLocations", param='locations')
-        if locations is not None:
-            locations.contents.value = self._defaults['SetWaveformBurstStartLocations']['locations']
         return self._defaults['SetWaveformBurstStartLocations']['return']
 
     def niRFSG_SetWaveformBurstStopLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
         if self._defaults['SetWaveformBurstStopLocations']['return'] != 0:
             return self._defaults['SetWaveformBurstStopLocations']['return']
-        # locations
-        if self._defaults['SetWaveformBurstStopLocations']['locations'] is None:
-            raise MockFunctionCallError("niRFSG_SetWaveformBurstStopLocations", param='locations')
-        if locations is not None:
-            locations.contents.value = self._defaults['SetWaveformBurstStopLocations']['locations']
         return self._defaults['SetWaveformBurstStopLocations']['return']
 
     def niRFSG_SetWaveformMarkerEventLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
         if self._defaults['SetWaveformMarkerEventLocations']['return'] != 0:
             return self._defaults['SetWaveformMarkerEventLocations']['return']
-        # locations
-        if self._defaults['SetWaveformMarkerEventLocations']['locations'] is None:
-            raise MockFunctionCallError("niRFSG_SetWaveformMarkerEventLocations", param='locations')
-        if locations is not None:
-            locations.contents.value = self._defaults['SetWaveformMarkerEventLocations']['locations']
         return self._defaults['SetWaveformMarkerEventLocations']['return']
 
     def niRFSG_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
@@ -988,6 +1045,10 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_DisableScriptTrigger.return_value = 0
         mock_library.niRFSG_DisableStartTrigger.side_effect = MockFunctionCallError("niRFSG_DisableStartTrigger")
         mock_library.niRFSG_DisableStartTrigger.return_value = 0
+        mock_library.niRFSG_ErrorMessage.side_effect = MockFunctionCallError("niRFSG_ErrorMessage")
+        mock_library.niRFSG_ErrorMessage.return_value = 0
+        mock_library.niRFSG_ErrorQuery.side_effect = MockFunctionCallError("niRFSG_ErrorQuery")
+        mock_library.niRFSG_ErrorQuery.return_value = 0
         mock_library.niRFSG_ExportSignal.side_effect = MockFunctionCallError("niRFSG_ExportSignal")
         mock_library.niRFSG_ExportSignal.return_value = 0
         mock_library.niRFSG_GetAttributeViBoolean.side_effect = MockFunctionCallError("niRFSG_GetAttributeViBoolean")
@@ -1044,6 +1105,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ResetDevice.return_value = 0
         mock_library.niRFSG_ResetWithDefaults.side_effect = MockFunctionCallError("niRFSG_ResetWithDefaults")
         mock_library.niRFSG_ResetWithDefaults.return_value = 0
+        mock_library.niRFSG_RevisionQuery.side_effect = MockFunctionCallError("niRFSG_RevisionQuery")
+        mock_library.niRFSG_RevisionQuery.return_value = 0
         mock_library.niRFSG_SaveConfigurationsToFile.side_effect = MockFunctionCallError("niRFSG_SaveConfigurationsToFile")
         mock_library.niRFSG_SaveConfigurationsToFile.return_value = 0
         mock_library.niRFSG_SelectArbWaveform.side_effect = MockFunctionCallError("niRFSG_SelectArbWaveform")

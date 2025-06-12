@@ -1601,20 +1601,92 @@ disable_start_trigger
 
 
 
-export_signal
+error_message
 -------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: export_signal(signal, signal_identifier, output_terminal)
+    .. py:method:: error_message(error_code, error_message)
 
-            Routes signals (triggers, clocks, and events) to a specified output terminal.
+            Converts an error code returned by an NI-RFSG method into a user-readable string.
 
-                            The NI-RFSG device must be in the Configuration state before you call this method.
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                            You can clear a previously routed signal by exporting the signal to "" (empty string).
+            
 
-                            **Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+
+            :param error_code:
+
+
+                Pass the status parameter that is returned from any NI-RFSG method.
+
+                                        **Default Value** : 0 (VI_SUCCESS)
+
+                
+
+
+            :type error_code: int
+            :param error_message:
+
+
+                Returns the user-readable message string that corresponds to the status code you specify.
+
+                                        You must pass a ViChar array with at least 256 bytes to this parameter.
+
+                
+
+
+            :type error_message: str
+
+error_query
+-----------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: error_query()
+
+            Reads an error code and an error message from the instrument error queue.
+
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
+
+            
+
+
+
+            :rtype: tuple (error_code, error_message)
+
+                WHERE
+
+                error_code (int): 
+
+
+                    Returns the error code read from the instrument error queue.
+
+                    
+
+
+                error_message (str): 
+
+
+                    Returns the error message string read from the instrument error message queue.
+
+                                            You must pass a ViChar array with at least 256 bytes.
+
+                    
+
+
+
+error_message
+-------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: error_message(error_code, error_message)
+
+            Converts an error code returned by an NI-RFSG method into a user-readable string.
+
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
                             **Related Topics**
 
@@ -1662,55 +1734,168 @@ export_signal
             :param signal_identifier:
 
 
-                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Defined Values** :
+                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Possible Values** :
 
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | Name                                                | Value          | Description                 |
-                +=====================================================+================+=============================+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT0`   | marker0        | Specifies Marker 0.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT1`   | marker1        | Specifies Marker 1.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT2`   | marker2        | Specifies Marker 2.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.MARKER_EVENT3`   | marker3        | Specifies Marker 3.         |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER0` | scriptTrigger0 | Specifies Script Trigger 0. |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER1` | scriptTrigger1 | Specifies Script Trigger 1. |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER2` | scriptTrigger2 | Specifies Script Trigger 2. |
-                +-----------------------------------------------------+----------------+-----------------------------+
-                | :py:data:`~nirfsg.SignalIdentifier.SCRIPT_TRIGGER3` | scriptTrigger3 | Specifies Script Trigger 3. |
-                +-----------------------------------------------------+----------------+-----------------------------+
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | marker0        | Specifies Marker 0.         |
+                +----------------+-----------------------------+
+                | marker1        | Specifies Marker 1.         |
+                +----------------+-----------------------------+
+                | marker2        | Specifies Marker 2.         |
+                +----------------+-----------------------------+
+                | marker3        | Specifies Marker 3.         |
+                +----------------+-----------------------------+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
 
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type signal_identifier: :py:data:`nirfsg.SignalIdentifier`
+            :type signal_identifier: str
             :param output_terminal:
 
 
-                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Defined Values** :
+                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :
 
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Name                                                                | Value   | Description                                                                                |                                                                                                                                                                       |
-                +=====================================================================+=========+============================================================================================+=======================================================================================================================================================================+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.CLK_OUT`       | ClkOut  | Exports the Reference Clock signal to the CLK OUT connector of the device.                 | Supported on PXIe-5673, 5673E                                                                                                                                         |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.DO_NOT_EXPORT` |         | The Reference Clock signal is not exported.                                                | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5652, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5652 (See Note) |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT`       | RefOut  | Exports the Reference Clock signal to the REF OUT connector of the device.                 | Supported on PXIe-5644/5645/5646, 5820/5830/5831/5832/5840/5841/5842/5860, 5650/5651/5653, 5653, 5654, 5673, 5673E, PXIe-5654 with PXIe-5696, PXI-5650/5651/5653,     |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ReferenceClockExportOutputTerminal.REF_OUT2`      | RefOut2 | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. | Supported on PXIe-5650/5651/5652, 5654, 5673E, PXIe-5654 with PXIe-5696                                                                                               |
-                +---------------------------------------------------------------------+---------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+                +----------------+--------------------------------------------------------------------------------------------+
+                | Possible Value | Description                                                                                |
+                +================+============================================================================================+
+                | ClkOut         | Exports the Reference Clock signal to the CLK OUT connector of the device.                 |
+                +----------------+--------------------------------------------------------------------------------------------+
+                |                | The Reference Clock signal is not exported.                                                |
+                +----------------+--------------------------------------------------------------------------------------------+
+                | RefOut         | Exports the Reference Clock signal to the REF OUT connector of the device.                 |
+                +----------------+--------------------------------------------------------------------------------------------+
+                | RefOut2        | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. |
+                +----------------+--------------------------------------------------------------------------------------------+
 
 
-            :type output_terminal: :py:data:`nirfsg.ReferenceClockExportOutputTerminal`
+            :type output_terminal: str
+
+get_all_named_waveform_names
+----------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_all_named_waveform_names()
+
+            Return names of the waveforms present in the memory.
+
+                            **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
+
+            
+
+
+
+            :rtype: tuple (waveform_names, actual_buffer_size)
+
+                WHERE
+
+                waveform_names (str): 
+
+
+                    Returns a string having waveform names separated by commas.
+
+                    
+
+
+                actual_buffer_size (int): 
+
+
+                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
+
+                                            It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.WAVEFORM_NAMES` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_all_script_names
+--------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_all_script_names()
+
+            Return names of the scripts present in the memory.
+
+                            **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
+
+            
+
+
+
+            :rtype: tuple (script_names, actual_buffer_size)
+
+                WHERE
+
+                script_names (str): 
+
+
+                    Returns a string having script names separated by commas.
+
+                    
+
+
+                actual_buffer_size (int): 
+
+
+                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
+
+                                            It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.SCRIPT_NAMES` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_channel_name
+----------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_channel_name(index)
+
+            Returns the channel string that is in the channel table at an index you specify.
+
+                            **Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E
+
+            
+
+
+
+            :param index:
+
+
+                Specifies a one-based index into the channel table.
+
+                
+
+
+            :type index: int
+
+            :rtype: str
+            :return:
+
+
+                    Returns a channel string from the channel table at the index you specify in the Index parameter. Do not modify the contents of the channel string.
+
+                    
+
+
 
 get_error
 ---------
@@ -1904,6 +2089,280 @@ get_stream_endpoint_handle
 
 
                     Returns the reader endpoint handle that is used with NI-P2P to create a stream with the NI-RFSG device as an endpoint.
+
+                    
+
+
+
+get_terminal_name
+-----------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_terminal_name(signal, signal_identifier)
+
+            Returns the fully-qualified name of the specified signal.
+
+                            The fully-qualified name is helpful to automatically route signals in a multisegment chassis.
+
+                            **Supported Devices** : PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                            **Related Topics**
+
+                            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+                            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+                            `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_
+
+            
+
+
+
+            :param signal:
+
+
+                Specifies the signal to query. **Defined Values** :
+
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | Name                                                      | Value   | Description                                |
+                +===========================================================+=========+============================================+
+                | :py:data:`~nirfsg.Signal.START_TRIGGER`                   | 0 (0x0) | Exports a Start Trigger.                   |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.SCRIPT_TRIGGER`                  | 1 (0x1) | Exports a Script Trigger.                  |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.MARKER_EVENT`                    | 2 (0x2) | Exports a Marker Event.                    |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.REF_CLOCK`                       | 3 (0x3) | Exports the Reference Clock.               |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.STARTED_EVENT`                   | 4 (0x4) | Exports a Started Event.                   |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.DONE_EVENT`                      | 5 (0x5) | Exports a Done Event.                      |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.CONFIGURATION_LIST_STEP_TRIGGER` | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+                | :py:data:`~nirfsg.Signal.CONFIGURATION_SETTLED_EVENT`     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +-----------------------------------------------------------+---------+--------------------------------------------+
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type signal: :py:data:`nirfsg.Signal`
+            :param signal_identifier:
+
+
+                Specifies which instance of the selected signal to query. This parameter is necessary when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.NIRFSG_VAL_MARKER_EVENT`  . Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to '' (empty string). **Possible Values** :
+
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | marker0        | Specifies Marker 0.         |
+                +----------------+-----------------------------+
+                | marker1        | Specifies Marker 1.         |
+                +----------------+-----------------------------+
+                | marker2        | Specifies Marker 2.         |
+                +----------------+-----------------------------+
+                | marker3        | Specifies Marker 3.         |
+                +----------------+-----------------------------+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+
+            :type signal_identifier: str
+
+            :rtype: str
+            :return:
+
+
+                    Returns the string to use as the source for other devices.
+
+                    
+
+
+
+get_waveform_burst_start_locations
+----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_waveform_burst_start_locations(number_of_locations)
+
+            Returns the burst start locations of the waveform stored in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_waveform_burst_start_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.get_waveform_burst_start_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst start locations array.
+
+                
+
+
+            :type number_of_locations: int
+
+            :rtype: tuple (locations, required_size)
+
+                WHERE
+
+                locations (array.array("d")): 
+
+
+                    Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+                required_size (int): 
+
+
+                    Returns the required size for the output array if you pass NULL to :py:attr:`nirfsg.Session.LOCATIONS` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_waveform_burst_stop_locations
+---------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_waveform_burst_stop_locations(number_of_locations)
+
+            Returns the burst stop locations of the waveform stored in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_waveform_burst_stop_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.get_waveform_burst_stop_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst start locations array.
+
+                
+
+
+            :type number_of_locations: int
+
+            :rtype: tuple (locations, required_size)
+
+                WHERE
+
+                locations (array.array("d")): 
+
+
+                    Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+                required_size (int): 
+
+
+                    Returns the required size for the output array if you pass NULL to :py:attr:`nirfsg.Session.LOCATIONS` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_waveform_marker_event_locations
+-----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_waveform_marker_event_locations(number_of_locations)
+
+            Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_waveform_marker_event_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.get_waveform_marker_event_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the locations array.
+
+                
+
+
+            :type number_of_locations: int
+
+            :rtype: tuple (locations, required_size)
+
+                WHERE
+
+                locations (array.array("d")): 
+
+
+                    Returns the marker locations stored in the NI-RFSG database for the channel you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+                required_size (int): 
+
+
+                    Returns the required size for the output array if you pass NULL to **Locations** parameter.
 
                     
 
@@ -2286,6 +2745,99 @@ reset_with_defaults
 
 
 
+reset_with_options
+------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: reset_with_options(steps_to_omit)
+
+            Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
+
+                            By default, this method exhibits the same behavior as :py:meth:`nirfsg.Session.reset`. You can specify steps to omit using the steps to omit parameter. For example, if you specify :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` for the :py:attr:`nirfsg.Session.STEPS_TO_OMIT` parameter, this method does not release signal routes during the reset process.
+
+                            When routes of signals between two devices are released, they are released regardless of which device created the route.
+
+                            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this method instead of :py:meth:`nirfsg.Session.reset`, with :py:attr:`nirfsg.Session.STEPS_TO_OMIT` set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`.
+
+                            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                            **Related Topics**
+
+                            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+                            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+            
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+            :param steps_to_omit:
+
+
+                Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`, which specifies that no step is omitted during reset. **Defined Values** :
+
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                                              | Value   | Description                                                                                                                                                                                                |
+                +===================================================================+=========+============================================================================================================================================================================================================+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`               | 0 (0x0) | No step is omitted during reset.                                                                                                                                                                           |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.WAVEFORMS`          | 1 (0x1) | Omits clearing waveforms.                                                                                                                                                                                  |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.SCRIPTS`            | 2 (0x2) | Omits clearing scripts.                                                                                                                                                                                    |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`             | 4 (0x4) | Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset. |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES` | 8 (0x8) | Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.                                                                                                              |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
+
+
+            :type steps_to_omit: :py:data:`nirfsg.ResetWithOptionsStepsToOmit`
+
+revision_query
+--------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: revision_query()
+
+            Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
+
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+
+            :rtype: tuple (instrument_driver_revision, firmware_revision)
+
+                WHERE
+
+                instrument_driver_revision (str): 
+
+
+                    Returns the value of the :py:attr:`nirfsg.Session.specific_driver_revision` property in the form of a string.
+
+                                            You must pass a ViChar array with at least 256 bytes.
+
+                    
+
+
+                firmware_revision (str): 
+
+
+                    Returns the value of the :py:attr:`nirfsg.Session.instrument_firmware_revision` property in the form of a string.
+
+                                            You must pass a ViChar array with at least 256 bytes.
+
+                    
+
+
+
 save_configurations_to_file
 ---------------------------
 
@@ -2647,6 +3199,140 @@ set_arb_waveform_next_write_position
 
 
             :type offset: int
+
+set_waveform_burst_start_locations
+----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_waveform_burst_start_locations(number_of_locations, locations)
+
+            Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_waveform_burst_start_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_burst_start_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst start locations array.
+
+                
+
+
+            :type number_of_locations: int
+            :param locations:
+
+
+                Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            :type locations: array.array("d")
+
+set_waveform_burst_stop_locations
+---------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_waveform_burst_stop_locations(number_of_locations, locations)
+
+            Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_waveform_burst_stop_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_burst_stop_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst stop locations array.
+
+                
+
+
+            :type number_of_locations: int
+            :param locations:
+
+
+                Specifies the burst stop locations, in samples, to store in the NI-RFSG session.
+
+                
+
+
+            :type locations: array.array("d")
+
+set_waveform_marker_event_locations
+-----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_waveform_marker_event_locations(number_of_locations, locations)
+
+            Configures the marker locations associated with waveform and marker in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_waveform_marker_event_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_marker_event_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the locations array.
+
+                
+
+
+            :type number_of_locations: int
+            :param locations:
+
+
+                Specifies the marker location, in samples, to store in the NI-RFSG database.
+
+                
+
+
+            :type locations: array.array("d")
 
 unlock
 ------
@@ -7293,7 +7979,7 @@ instrument_firmware_revision
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.RevisionQuery`
+                        - :py:meth:`nirfsg.Session.revision_query`
 
         The following table lists the characteristics of this property.
 
@@ -12422,7 +13108,7 @@ write_waveform_burst_detection
 
     .. py:attribute:: write_waveform_burst_detection
 
-        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session._get_waveform_burst_start_locations` and :py:meth:`nirfsg.Session._get_waveform_burst_stop_locations` methods respectively.
+        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.get_waveform_burst_start_locations` and :py:meth:`nirfsg.Session.get_waveform_burst_stop_locations` methods respectively.
 
                         **Default Value:** :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`
 

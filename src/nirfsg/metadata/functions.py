@@ -2010,6 +2010,112 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
+    'ErrorMessage': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '               \n\n                Converts an error code returned by an NI-RFSG function into a user-readable string.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n                '
+        },
+        'included_in_proto': True,
+        'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        The ViSession handle that you obtain from nirfsg_Init or nirfsg_InitWithOptions. The handle identifies a particular instrument session.\n\n                        You can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsg_Init or nirfsg_InitWithOptions fails.\n\n                        **Default Value** : VI_NULL\n\n                        '
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Pass the status parameter that is returned from any NI-RFSG function.\n\n                        **Default Value** : 0 (VI_SUCCESS)\n\n                        '
+                },
+                'name': 'errorCode',
+                'type': 'ViStatus',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Returns the user-readable message string that corresponds to the status code you specify.\n\n                        You must pass a ViChar array with at least 256 bytes to this parameter.\n\n                        '
+                },
+                'name': 'errorMessage',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'ErrorQuery': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '                \n\n                Reads an error code and an error message from the instrument error queue.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the error code read from the instrument error queue.'
+                },
+                'name': 'errorCode',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '                        Returns the error message string read from the instrument error message queue.\n\n                        You must pass a ViChar array with at least 256 bytes.\n                        '
+                },
+                'name': 'errorMessage',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'ExportSignal': {
         'codegen_method': 'public',
         'documentation': {
@@ -3265,6 +3371,222 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
+    'GetWaveformBurstStartLocations': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '                \n                Returns the burst start locations of the waveform stored in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the burst start locations array.'
+                },
+                'name': 'numberOfLocations',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the NIRFSG_ATTR_CHANNEL_NAME parameter. This value is expressed in samples.'
+                },
+                'name': 'locations',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfLocations'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the required size for the output array if you pass NULL to NIRFSG_ATTR_LOCATIONS parameter.'
+                },
+                'name': 'requiredSize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetWaveformBurstStopLocations': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '               \n\n                Returns the burst stop locations of the waveform stored in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the burst start locations array.'
+                },
+                'name': 'numberOfLocations',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the NIRFSG_ATTR_CHANNEL_NAME parameter. This value is expressed in samples.'
+                },
+                'name': 'locations',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfLocations'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the required size for the output array if you pass NULL to NIRFSG_ATTR_LOCATIONS parameter.'
+                },
+                'name': 'requiredSize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetWaveformMarkerEventLocations': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '               \n                Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Specifies the waveform name and the marker name.\n\n                        Example:\n\n                        "waveform::waveform0/marker0"\n                        '
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the locations array.'
+                },
+                'name': 'numberOfLocations',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the marker locations stored in the NI-RFSG database for the channel you specified in the NIRFSG_ATTR_CHANNEL_NAME parameter. This value is expressed in samples.'
+                },
+                'name': 'locations',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfLocations'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the required size for the output array if you pass NULL to **Locations** parameter.'
+                },
+                'name': 'requiredSize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'InitWithOptions': {
         'codegen_method': 'private',
         'documentation': {
@@ -3838,6 +4160,62 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': False
+    },
+    'RevisionQuery': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '              \n\n                Returns the revision numbers of the NI-RFSG driver and the instrument firmware.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '                        Returns the value of the NIRFSG_ATTR_SPECIFIC_DRIVER_REVISION attribute in the form of a string.\n\n                        You must pass a ViChar array with at least 256 bytes.\n\n                        '
+                },
+                'name': 'instrumentDriverRevision',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': '                        Returns the value of the NIRFSG_ATTR_INSTRUMENT_FIRMWARE_REVISION attribute in the form of a string.\n\n                        You must pass a ViChar array with at least 256 bytes.\n\n                        '
+                },
+                'name': 'firmwareRevision',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
     },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
@@ -4861,6 +5239,192 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': False
+    },
+    'SetWaveformBurstStartLocations': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '               \n                Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the burst start locations array.'
+                },
+                'name': 'numberOfLocations',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the NIRFSG_ATTR_CHANNEL_NAME parameter. This value is expressed in samples.'
+                },
+                'name': 'locations',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfLocations'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'SetWaveformBurstStopLocations': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '               \n\n                Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Specifies the waveform name and the marker name.\n\n                        Example:\n\n                        "waveform::waveform0/marker0"\n                        '
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the burst stop locations array.'
+                },
+                'name': 'numberOfLocations',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the burst stop locations, in samples, to store in the NI-RFSG session.'
+                },
+                'name': 'locations',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfLocations'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'SetWaveformMarkerEventLocations': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '              \n\n                Configures the marker locations associated with waveform and marker in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Specifies the waveform name and the marker name.\n\n                        Example:\n\n                        "waveform::waveform0/marker0"\n                        '
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the locations array.'
+                },
+                'name': 'numberOfLocations',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the marker location, in samples, to store in the NI-RFSG database.'
+                },
+                'name': 'locations',
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfLocations'
+                },
+                'type': 'ViReal64[]',
+                'use_array': True,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
     },
     'UnlockSession': {
         'codegen_method': 'public',

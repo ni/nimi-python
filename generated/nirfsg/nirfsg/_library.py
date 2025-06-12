@@ -59,6 +59,8 @@ class Library(object):
         self.niRFSG_Disable_cfunc = None
         self.niRFSG_DisableScriptTrigger_cfunc = None
         self.niRFSG_DisableStartTrigger_cfunc = None
+        self.niRFSG_ErrorMessage_cfunc = None
+        self.niRFSG_ErrorQuery_cfunc = None
         self.niRFSG_ExportSignal_cfunc = None
         self.niRFSG_GetAttributeViBoolean_cfunc = None
         self.niRFSG_GetAttributeViInt32_cfunc = None
@@ -87,6 +89,7 @@ class Library(object):
         self.niRFSG_ResetAttribute_cfunc = None
         self.niRFSG_ResetDevice_cfunc = None
         self.niRFSG_ResetWithDefaults_cfunc = None
+        self.niRFSG_RevisionQuery_cfunc = None
         self.niRFSG_SaveConfigurationsToFile_cfunc = None
         self.niRFSG_SelectArbWaveform_cfunc = None
         self.niRFSG_SelfCal_cfunc = None
@@ -436,6 +439,22 @@ class Library(object):
                 self.niRFSG_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_DisableStartTrigger_cfunc(vi)
 
+    def niRFSG_ErrorMessage(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ErrorMessage_cfunc is None:
+                self.niRFSG_ErrorMessage_cfunc = self._get_library_function('niRFSG_ErrorMessage')
+                self.niRFSG_ErrorMessage_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_ErrorMessage_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ErrorMessage_cfunc(vi, error_code, error_message)
+
+    def niRFSG_ErrorQuery(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ErrorQuery_cfunc is None:
+                self.niRFSG_ErrorQuery_cfunc = self._get_library_function('niRFSG_ErrorQuery')
+                self.niRFSG_ErrorQuery_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_ErrorQuery_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ErrorQuery_cfunc(vi, error_code, error_message)
+
     def niRFSG_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_ExportSignal_cfunc is None:
@@ -659,6 +678,14 @@ class Library(object):
                 self.niRFSG_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ResetWithDefaults_cfunc(vi)
+
+    def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_RevisionQuery_cfunc is None:
+                self.niRFSG_RevisionQuery_cfunc = self._get_library_function('niRFSG_RevisionQuery')
+                self.niRFSG_RevisionQuery_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_RevisionQuery_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_RevisionQuery_cfunc(vi, instrument_driver_revision, firmware_revision)
 
     def niRFSG_SaveConfigurationsToFile(self, vi, channel_name, file_path):  # noqa: N802
         with self._func_lock:
