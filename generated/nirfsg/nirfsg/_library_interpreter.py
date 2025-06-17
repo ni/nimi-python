@@ -402,11 +402,37 @@ class LibraryInterpreter(object):
     def export_signal(self, signal, signal_identifier, output_terminal):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         signal_ctype = _visatype.ViInt32(signal.value)  # case S130
-        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.value.encode(self._encoding))  # case C030
-        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.value.encode(self._encoding))  # case C030
+        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
+        output_terminal_ctype = ctypes.create_string_buffer(output_terminal.encode(self._encoding))  # case C020
         error_code = self._library.niRFSG_ExportSignal(vi_ctype, signal_ctype, signal_identifier_ctype, output_terminal_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def get_all_named_waveform_names(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        waveform_names_ctype = None  # case C050
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        actual_buffer_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSG_GetAllNamedWaveformNames(vi_ctype, waveform_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        waveform_names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niRFSG_GetAllNamedWaveformNames(vi_ctype, waveform_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return waveform_names_ctype.value.decode(self._encoding), int(actual_buffer_size_ctype.value)
+
+    def get_all_script_names(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        script_names_ctype = None  # case C050
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        actual_buffer_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSG_GetAllScriptNames(vi_ctype, script_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        script_names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niRFSG_GetAllScriptNames(vi_ctype, script_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return script_names_ctype.value.decode(self._encoding), int(actual_buffer_size_ctype.value)
 
     def get_attribute_vi_boolean(self, channel_name, attribute):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -466,6 +492,19 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSG_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
+
+    def get_channel_name(self, index):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        index_ctype = _visatype.ViInt32(index)  # case S150
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        name_ctype = None  # case C050
+        error_code = self._library.niRFSG_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niRFSG_GetChannelName(vi_ctype, index_ctype, buffer_size_ctype, name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return name_ctype.value.decode(self._encoding)
 
     def get_error(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -702,7 +741,7 @@ class LibraryInterpreter(object):
     def send_software_edge_trigger(self, trigger, trigger_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.value.encode(self._encoding))  # case C030
+        trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.encode(self._encoding))  # case C020
         error_code = self._library.niRFSG_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_identifier_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

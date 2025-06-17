@@ -56,7 +56,7 @@ def _main(argsv):
     parser.add_argument('-v', '--voltage-max', default=1.0, type=float, help='Maximum voltage (V)')
     parser.add_argument('-i', '--current-max', default=0.001, type=float, help='Maximum Current (I)')
     parser.add_argument('-d', '--delay', default=0.05, type=float, help='Source delay (s)')
-    parser.add_argument('-op', '--option-string', default='', type=str, help='Option string')
+    parser.add_argument('-op', '--option-string', default='', type=str, help='Option String')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.voltage_max, args.current_max, args.number_steps, args.delay)
 

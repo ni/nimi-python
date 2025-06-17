@@ -62,12 +62,15 @@ class Library(object):
         self.niRFSG_ErrorMessage_cfunc = None
         self.niRFSG_ErrorQuery_cfunc = None
         self.niRFSG_ExportSignal_cfunc = None
+        self.niRFSG_GetAllNamedWaveformNames_cfunc = None
+        self.niRFSG_GetAllScriptNames_cfunc = None
         self.niRFSG_GetAttributeViBoolean_cfunc = None
         self.niRFSG_GetAttributeViInt32_cfunc = None
         self.niRFSG_GetAttributeViInt64_cfunc = None
         self.niRFSG_GetAttributeViReal64_cfunc = None
         self.niRFSG_GetAttributeViSession_cfunc = None
         self.niRFSG_GetAttributeViString_cfunc = None
+        self.niRFSG_GetChannelName_cfunc = None
         self.niRFSG_GetError_cfunc = None
         self.niRFSG_GetExternalCalibrationLastDateAndTime_cfunc = None
         self.niRFSG_GetMaxSettablePower_cfunc = None
@@ -463,6 +466,22 @@ class Library(object):
                 self.niRFSG_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
+    def niRFSG_GetAllNamedWaveformNames(self, vi, waveform_names, buffer_size, actual_buffer_size):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetAllNamedWaveformNames_cfunc is None:
+                self.niRFSG_GetAllNamedWaveformNames_cfunc = self._get_library_function('niRFSG_GetAllNamedWaveformNames')
+                self.niRFSG_GetAllNamedWaveformNames_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetAllNamedWaveformNames_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetAllNamedWaveformNames_cfunc(vi, waveform_names, buffer_size, actual_buffer_size)
+
+    def niRFSG_GetAllScriptNames(self, vi, script_names, buffer_size, actual_buffer_size):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetAllScriptNames_cfunc is None:
+                self.niRFSG_GetAllScriptNames_cfunc = self._get_library_function('niRFSG_GetAllScriptNames')
+                self.niRFSG_GetAllScriptNames_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetAllScriptNames_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetAllScriptNames_cfunc(vi, script_names, buffer_size, actual_buffer_size)
+
     def niRFSG_GetAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_GetAttributeViBoolean_cfunc is None:
@@ -510,6 +529,14 @@ class Library(object):
                 self.niRFSG_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetAttributeViString_cfunc(vi, channel_name, attribute, buf_size, value)
+
+    def niRFSG_GetChannelName(self, vi, index, buffer_size, name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetChannelName_cfunc is None:
+                self.niRFSG_GetChannelName_cfunc = self._get_library_function('niRFSG_GetChannelName')
+                self.niRFSG_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetChannelName_cfunc(vi, index, buffer_size, name)
 
     def niRFSG_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:
@@ -678,6 +705,14 @@ class Library(object):
                 self.niRFSG_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ResetWithDefaults_cfunc(vi)
+
+    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ResetWithOptions_cfunc is None:
+                self.niRFSG_ResetWithOptions_cfunc = self._get_library_function('niRFSG_ResetWithOptions')
+                self.niRFSG_ResetWithOptions_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
+                self.niRFSG_ResetWithOptions_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ResetWithOptions_cfunc(vi, steps_to_omit)
 
     def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         with self._func_lock:

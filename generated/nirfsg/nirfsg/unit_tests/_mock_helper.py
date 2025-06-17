@@ -107,6 +107,14 @@ class SideEffectsHelper(object):
         self._defaults['ErrorQuery']['errorMessage'] = None
         self._defaults['ExportSignal'] = {}
         self._defaults['ExportSignal']['return'] = 0
+        self._defaults['GetAllNamedWaveformNames'] = {}
+        self._defaults['GetAllNamedWaveformNames']['return'] = 0
+        self._defaults['GetAllNamedWaveformNames']['actualBufferSize'] = None
+        self._defaults['GetAllNamedWaveformNames']['waveformNames'] = None
+        self._defaults['GetAllScriptNames'] = {}
+        self._defaults['GetAllScriptNames']['return'] = 0
+        self._defaults['GetAllScriptNames']['actualBufferSize'] = None
+        self._defaults['GetAllScriptNames']['scriptNames'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['value'] = None
@@ -125,6 +133,9 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['value'] = None
+        self._defaults['GetChannelName'] = {}
+        self._defaults['GetChannelName']['return'] = 0
+        self._defaults['GetChannelName']['name'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -495,6 +506,38 @@ class SideEffectsHelper(object):
             return self._defaults['ExportSignal']['return']
         return self._defaults['ExportSignal']['return']
 
+    def niRFSG_GetAllNamedWaveformNames(self, vi, waveform_names, buffer_size, actual_buffer_size):  # noqa: N802
+        if self._defaults['GetAllNamedWaveformNames']['return'] != 0:
+            return self._defaults['GetAllNamedWaveformNames']['return']
+        # actual_buffer_size
+        if self._defaults['GetAllNamedWaveformNames']['actualBufferSize'] is None:
+            raise MockFunctionCallError("niRFSG_GetAllNamedWaveformNames", param='actualBufferSize')
+        if actual_buffer_size is not None:
+            actual_buffer_size.contents.value = self._defaults['GetAllNamedWaveformNames']['actualBufferSize']
+        # waveform_names
+        if self._defaults['GetAllNamedWaveformNames']['waveformNames'] is None:
+            raise MockFunctionCallError("niRFSG_GetAllNamedWaveformNames", param='waveformNames')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetAllNamedWaveformNames']['waveformNames'])
+        waveform_names.value = self._defaults['GetAllNamedWaveformNames']['waveformNames'].encode('ascii')
+        return self._defaults['GetAllNamedWaveformNames']['return']
+
+    def niRFSG_GetAllScriptNames(self, vi, script_names, buffer_size, actual_buffer_size):  # noqa: N802
+        if self._defaults['GetAllScriptNames']['return'] != 0:
+            return self._defaults['GetAllScriptNames']['return']
+        # actual_buffer_size
+        if self._defaults['GetAllScriptNames']['actualBufferSize'] is None:
+            raise MockFunctionCallError("niRFSG_GetAllScriptNames", param='actualBufferSize')
+        if actual_buffer_size is not None:
+            actual_buffer_size.contents.value = self._defaults['GetAllScriptNames']['actualBufferSize']
+        # script_names
+        if self._defaults['GetAllScriptNames']['scriptNames'] is None:
+            raise MockFunctionCallError("niRFSG_GetAllScriptNames", param='scriptNames')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetAllScriptNames']['scriptNames'])
+        script_names.value = self._defaults['GetAllScriptNames']['scriptNames'].encode('ascii')
+        return self._defaults['GetAllScriptNames']['return']
+
     def niRFSG_GetAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
             return self._defaults['GetAttributeViBoolean']['return']
@@ -555,6 +598,17 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['value'])
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niRFSG_GetChannelName(self, vi, index, buffer_size, name):  # noqa: N802
+        if self._defaults['GetChannelName']['return'] != 0:
+            return self._defaults['GetChannelName']['return']
+        # name
+        if self._defaults['GetChannelName']['name'] is None:
+            raise MockFunctionCallError("niRFSG_GetChannelName", param='name')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetChannelName']['name'])
+        name.value = self._defaults['GetChannelName']['name'].encode('ascii')
+        return self._defaults['GetChannelName']['return']
 
     def niRFSG_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -1051,6 +1105,10 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ErrorQuery.return_value = 0
         mock_library.niRFSG_ExportSignal.side_effect = MockFunctionCallError("niRFSG_ExportSignal")
         mock_library.niRFSG_ExportSignal.return_value = 0
+        mock_library.niRFSG_GetAllNamedWaveformNames.side_effect = MockFunctionCallError("niRFSG_GetAllNamedWaveformNames")
+        mock_library.niRFSG_GetAllNamedWaveformNames.return_value = 0
+        mock_library.niRFSG_GetAllScriptNames.side_effect = MockFunctionCallError("niRFSG_GetAllScriptNames")
+        mock_library.niRFSG_GetAllScriptNames.return_value = 0
         mock_library.niRFSG_GetAttributeViBoolean.side_effect = MockFunctionCallError("niRFSG_GetAttributeViBoolean")
         mock_library.niRFSG_GetAttributeViBoolean.return_value = 0
         mock_library.niRFSG_GetAttributeViInt32.side_effect = MockFunctionCallError("niRFSG_GetAttributeViInt32")
@@ -1063,6 +1121,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_GetAttributeViSession.return_value = 0
         mock_library.niRFSG_GetAttributeViString.side_effect = MockFunctionCallError("niRFSG_GetAttributeViString")
         mock_library.niRFSG_GetAttributeViString.return_value = 0
+        mock_library.niRFSG_GetChannelName.side_effect = MockFunctionCallError("niRFSG_GetChannelName")
+        mock_library.niRFSG_GetChannelName.return_value = 0
         mock_library.niRFSG_GetError.side_effect = MockFunctionCallError("niRFSG_GetError")
         mock_library.niRFSG_GetError.return_value = 0
         mock_library.niRFSG_GetExternalCalibrationLastDateAndTime.side_effect = MockFunctionCallError("niRFSG_GetExternalCalibrationLastDateAndTime")
