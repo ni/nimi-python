@@ -4341,7 +4341,7 @@ class _SessionBase(object):
 
                     PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-                    For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+                    For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
                     **Default Value:** "" (empty string)
 
@@ -5194,7 +5194,7 @@ class _SessionBase(object):
     | NIRFSG_VAL_MARKER0, NIRFSG_VAL_MARKER1, NIRFSG_VAL_MARKER2, or NIRFSG_VAL_MARKER3 | RFBlanking.ENABLE    | Error is shown.                                                                                           |
     +-----------------------------------------------------------------------------------+----------------------+-----------------------------------------------------------------------------------------------------------+
 
-    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5285,7 +5285,7 @@ class _SessionBase(object):
 
     Note: - When you download a waveform using ReadAndDownloadWaveformFromFileTdms method and if waveform_rf_blanking property is enabled, you must set the write_waveform_burst_detection property to WriteWaveformBurstDetection.DISABLE.
 
-     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -7975,7 +7975,7 @@ class Session(_SessionBase):
 
                         Generally, calling this method instead of the reset_device method is acceptable. The reset method executes faster than the reset_device method.
 
-                        To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to ResetWithOptionsStepsToOmit.ROUTES .
+                        To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the ResetWithOptions method, with **stepsToOmit** set to ResetWithOptionsStepsToOmit.ROUTES .
 
                         **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8041,6 +8041,7 @@ class Session(_SessionBase):
         instrument_driver_revision, firmware_revision = self._interpreter.revision_query()
         return instrument_driver_revision, firmware_revision
 
+    @ivi_synchronized
     def select_arb_waveform(self, name):
         r'''select_arb_waveform
 

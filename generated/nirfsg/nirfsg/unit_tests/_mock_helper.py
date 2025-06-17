@@ -165,6 +165,9 @@ class SideEffectsHelper(object):
         self._defaults['GetStreamEndpointHandle'] = {}
         self._defaults['GetStreamEndpointHandle']['return'] = 0
         self._defaults['GetStreamEndpointHandle']['readerHandle'] = None
+        self._defaults['GetTerminalName'] = {}
+        self._defaults['GetTerminalName']['return'] = 0
+        self._defaults['GetTerminalName']['terminalName'] = None
         self._defaults['GetWaveformBurstStartLocations'] = {}
         self._defaults['GetWaveformBurstStartLocations']['return'] = 0
         self._defaults['GetWaveformBurstStartLocations']['locations'] = None
@@ -726,6 +729,17 @@ class SideEffectsHelper(object):
             reader_handle.contents.value = self._defaults['GetStreamEndpointHandle']['readerHandle']
         return self._defaults['GetStreamEndpointHandle']['return']
 
+    def niRFSG_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
+        if self._defaults['GetTerminalName']['return'] != 0:
+            return self._defaults['GetTerminalName']['return']
+        # terminal_name
+        if self._defaults['GetTerminalName']['terminalName'] is None:
+            raise MockFunctionCallError("niRFSG_GetTerminalName", param='terminalName')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetTerminalName']['terminalName'])
+        terminal_name.value = self._defaults['GetTerminalName']['terminalName'].encode('ascii')
+        return self._defaults['GetTerminalName']['return']
+
     def niRFSG_GetWaveformBurstStartLocations(self, vi, channel_name, number_of_locations, locations, required_size):  # noqa: N802
         if self._defaults['GetWaveformBurstStartLocations']['return'] != 0:
             return self._defaults['GetWaveformBurstStartLocations']['return']
@@ -1135,6 +1149,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_GetSelfCalibrationTemperature.return_value = 0
         mock_library.niRFSG_GetStreamEndpointHandle.side_effect = MockFunctionCallError("niRFSG_GetStreamEndpointHandle")
         mock_library.niRFSG_GetStreamEndpointHandle.return_value = 0
+        mock_library.niRFSG_GetTerminalName.side_effect = MockFunctionCallError("niRFSG_GetTerminalName")
+        mock_library.niRFSG_GetTerminalName.return_value = 0
         mock_library.niRFSG_GetWaveformBurstStartLocations.side_effect = MockFunctionCallError("niRFSG_GetWaveformBurstStartLocations")
         mock_library.niRFSG_GetWaveformBurstStartLocations.return_value = 0
         mock_library.niRFSG_GetWaveformBurstStopLocations.side_effect = MockFunctionCallError("niRFSG_GetWaveformBurstStopLocations")

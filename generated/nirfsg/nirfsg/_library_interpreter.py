@@ -567,6 +567,20 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(reader_handle_ctype.value)
 
+    def get_terminal_name(self, signal, signal_identifier):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
+        signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
+        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        terminal_name_ctype = None  # case C050
+        error_code = self._library.niRFSG_GetTerminalName(vi_ctype, signal_ctype, signal_identifier_ctype, buffer_size_ctype, terminal_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        terminal_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niRFSG_GetTerminalName(vi_ctype, signal_ctype, signal_identifier_ctype, buffer_size_ctype, terminal_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return terminal_name_ctype.value.decode(self._encoding)
+
     def get_waveform_burst_start_locations(self, channel_name, number_of_locations):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010

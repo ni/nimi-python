@@ -77,6 +77,7 @@ class Library(object):
         self.niRFSG_GetSelfCalibrationDateAndTime_cfunc = None
         self.niRFSG_GetSelfCalibrationTemperature_cfunc = None
         self.niRFSG_GetStreamEndpointHandle_cfunc = None
+        self.niRFSG_GetTerminalName_cfunc = None
         self.niRFSG_GetWaveformBurstStartLocations_cfunc = None
         self.niRFSG_GetWaveformBurstStopLocations_cfunc = None
         self.niRFSG_GetWaveformMarkerEventLocations_cfunc = None
@@ -586,6 +587,14 @@ class Library(object):
                 self.niRFSG_GetStreamEndpointHandle_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetStreamEndpointHandle_cfunc(vi, stream_endpoint, reader_handle)
 
+    def niRFSG_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetTerminalName_cfunc is None:
+                self.niRFSG_GetTerminalName_cfunc = self._get_library_function('niRFSG_GetTerminalName')
+                self.niRFSG_GetTerminalName_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_GetTerminalName_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetTerminalName_cfunc(vi, signal, signal_identifier, buffer_size, terminal_name)
+
     def niRFSG_GetWaveformBurstStartLocations(self, vi, channel_name, number_of_locations, locations, required_size):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_GetWaveformBurstStartLocations_cfunc is None:
@@ -705,14 +714,6 @@ class Library(object):
                 self.niRFSG_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ResetWithDefaults_cfunc(vi)
-
-    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ResetWithOptions_cfunc is None:
-                self.niRFSG_ResetWithOptions_cfunc = self._get_library_function('niRFSG_ResetWithOptions')
-                self.niRFSG_ResetWithOptions_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
-                self.niRFSG_ResetWithOptions_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ResetWithOptions_cfunc(vi, steps_to_omit)
 
     def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         with self._func_lock:
