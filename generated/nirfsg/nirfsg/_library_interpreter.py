@@ -283,7 +283,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_p2_p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):  # noqa: N802
+    def configure_p2p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         p2p_endpoint_fullness_level_ctype = _visatype.ViInt64(p2p_endpoint_fullness_level)  # case S150
         error_code = self._library.niRFSG_ConfigureP2PEndpointFullnessStartTrigger(vi_ctype, p2p_endpoint_fullness_level_ctype)
@@ -340,7 +340,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_deembedding_sparameter_table_s2_p_file(self, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
+    def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
         table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
@@ -866,11 +866,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
+    def write_p2p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         stream_endpoint_ctype = ctypes.create_string_buffer(stream_endpoint.encode(self._encoding))  # case C020
         number_of_samples_ctype = _visatype.ViInt32(0 if endpoint_data is None else len(endpoint_data))  # case S160
-        endpoint_data_ctype = _get_ctypes_pointer_for_buffer(value=endpoint_data, library_type=_visatype.ViInt16)  # case B550
+        endpoint_data_array = _convert_to_array(value=endpoint_data, array_type="h")  # case B550
+        endpoint_data_ctype = _get_ctypes_pointer_for_buffer(value=endpoint_data_array, library_type=_visatype.ViInt16)  # case B550
         error_code = self._library.niRFSG_WriteP2PEndpointI16(vi_ctype, stream_endpoint_ctype, number_of_samples_ctype, endpoint_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

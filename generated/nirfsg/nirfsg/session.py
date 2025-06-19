@@ -7016,8 +7016,8 @@ class Session(_SessionBase):
         self._interpreter.configure_output_enabled(output_enabled)
 
     @ivi_synchronized
-    def configure_p2_p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):
-        r'''configure_p2_p_endpoint_fullness_start_trigger
+    def configure_p2p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):
+        r'''configure_p2p_endpoint_fullness_start_trigger
 
         Configures the Start Trigger to detect peer-to-peer endpoint fullness.
 
@@ -7038,7 +7038,7 @@ class Session(_SessionBase):
             p2p_endpoint_fullness_level (int): Specifies the quantity of data in the FIFO endpoint that asserts the trigger. Units are samples per channel. The default value is -1, which allows NI-RFSG to select the appropriate fullness value.
 
         '''
-        self._interpreter.configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
+        self._interpreter.configure_p2p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
     @ivi_synchronized
     def configure_power_level_type(self, power_level_type):
@@ -7233,8 +7233,8 @@ class Session(_SessionBase):
         self._interpreter.configure_software_start_trigger()
 
     @ivi_synchronized
-    def create_deembedding_sparameter_table_s2_p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
-        r'''create_deembedding_sparameter_table_s2_p_file
+    def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
+        r'''create_deembedding_sparameter_table_s2p_file
 
         Creates an S-parameter de-embedding table for the port based on the specified S2P file.
 
@@ -7268,7 +7268,7 @@ class Session(_SessionBase):
         '''
         if type(sparameter_orientation) is not enums.SparameterOrientation:
             raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
-        self._interpreter.create_deembedding_sparameter_table_s2_p_file(port, table_name, s2p_file_path, sparameter_orientation)
+        self._interpreter.create_deembedding_sparameter_table_s2p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
     @ivi_synchronized
     def delete_all_deembedding_tables(self):
@@ -8234,8 +8234,8 @@ class Session(_SessionBase):
         self._interpreter.wait_until_settled(max_time_milliseconds)
 
     @ivi_synchronized
-    def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
-        r'''write_p2_p_endpoint_i16
+    def write_p2p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
+        r'''write_p2p_endpoint_i16
 
         Writes an array of 16-bit integer data to the peer-to-peer endpoint.
 
@@ -8258,10 +8258,10 @@ class Session(_SessionBase):
 
             number_of_samples (int): Specifies the number of samples to write into the endpoint FIFO.
 
-            endpoint_data (list of int): Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.
+            endpoint_data (array.array("h")): Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.
 
         '''
-        self._interpreter.write_p2_p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
+        self._interpreter.write_p2p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
 
     @ivi_synchronized
     def write_script(self, script):

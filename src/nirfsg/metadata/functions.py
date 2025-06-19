@@ -5317,12 +5317,13 @@ functions = {
                     'description': 'Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.'
                 },
                 'name': 'endpointData',
+                'numpy': True,
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
                 },
                 'type': 'ViInt16[]',
-                'use_array': False,
+                'use_array': True,
                 'use_in_python_api': True
             }
         ],

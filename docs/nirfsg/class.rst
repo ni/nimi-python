@@ -1113,12 +1113,12 @@ configure_output_enabled
 
             :type output_enabled: bool
 
-configure_p2_p_endpoint_fullness_start_trigger
-----------------------------------------------
+configure_p2p_endpoint_fullness_start_trigger
+---------------------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
+    .. py:method:: configure_p2p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
             Configures the Start Trigger to detect peer-to-peer endpoint fullness.
 
@@ -1419,12 +1419,12 @@ configure_software_start_trigger
 
 
 
-create_deembedding_sparameter_table_s2_p_file
----------------------------------------------
+create_deembedding_sparameter_table_s2p_file
+--------------------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: create_deembedding_sparameter_table_s2_p_file(port, table_name, s2p_file_path, sparameter_orientation)
+    .. py:method:: create_deembedding_sparameter_table_s2p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
             Creates an S-parameter de-embedding table for the port based on the specified S2P file.
 
@@ -3327,12 +3327,12 @@ wait_until_settled
 
             :type max_time_milliseconds: int
 
-write_p2_p_endpoint_i16
------------------------
+write_p2p_endpoint_i16
+----------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: write_p2_p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
+    .. py:method:: write_p2p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
 
             Writes an array of 16-bit integer data to the peer-to-peer endpoint.
 
@@ -3380,7 +3380,7 @@ write_p2_p_endpoint_i16
                 
 
 
-            :type endpoint_data: list of int
+            :type endpoint_data: array.array("h")
 
 write_script
 ------------

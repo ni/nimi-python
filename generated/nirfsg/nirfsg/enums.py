@@ -566,7 +566,6 @@ class RFFilter(Enum):
     r'''
     yet to be defined
     '''
-    CONFIGURATION_SETTLED_EVENT = 7
     LO_FREQ_MOD_4000 = '1'
     r'''
     yet to be defined
