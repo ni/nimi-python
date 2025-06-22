@@ -538,6 +538,7 @@ functions = {
     'CheckIfScriptExists': {
         'codegen_method': 'public',
         'documentation': {
+            'description': '                \n                Returns whether the script that you specify as NIRFSG_ATTR_SCRIPT_NAME exists.\n\n                **Supported Devices** : PXIe-5673/5673E. PXIe-5830/5831/5840/5841/5842/5860\n                '
             'description': '\nReturns whether the script that you specify as NIRFSG_ATTR_SCRIPT_NAME exists.\n\n**Supported Devices** : PXIe-5673/5673E. PXIe-5830/5831/5840/5841/5842/5860'
         },
         'included_in_proto': True,
@@ -600,7 +601,7 @@ functions = {
     'CheckIfWaveformExists': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReturns whether the waveform that you specify as NIRFSG_ATTR_WAVEFORM_NAME exists.\n\n**Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860'
+            'description': '                \n\n                Returns whether the waveform that you specify as NIRFSG_ATTR_WAVEFORM_NAME exists.\n\n                **Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1269,7 +1270,7 @@ functions = {
     'ConfigureOutputEnabled': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nEnables or disables signal output. \n\nSetting NIRFSG_ATTR_OUTPUT_ENABLED to VI_FALSE while in the Generation state attenuates the generated signal so that no signal is output.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_'
+            'description': '               \n\n                Enables or disables signal output. \n                \n                Setting NIRFSG_ATTR_OUTPUT_ENABLED to VI_FALSE while in the Generation state attenuates the generated signal so that no signal is output.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_\n\n                `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1307,7 +1308,7 @@ functions = {
     'ConfigureP2PEndpointFullnessStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nConfigures the Start Trigger to detect peer-to-peer endpoint fullness. \n\nGeneration begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_LEVEL parameter. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_',
+            'description': '               \n                Configures the Start Trigger to detect peer-to-peer endpoint fullness. \n                \n                Generation begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_LEVEL parameter. The NI-RFSG device must be in the Configuration state before calling this function.\n\n                **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n\n                `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n            ',
             'note': 'Due to an additional internal FIFO in the RF signal generator, the writer peer actually writes 2,304 bytes more than the quantity of data specified by this function to satisfy the trigger level.'
         },
         'included_in_proto': True,
@@ -1531,7 +1532,8 @@ functions = {
                             'Uses the clock signal present at the front panel CLK IN connector as the clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655/5842.'
                         ],
                         [
-                            '"RefIn2"',
+                            'NIRFSG_VAL_REF_IN_2_STR',
+                            'RefIn2',
                             '\\-'
                         ],
                         [
@@ -1552,7 +1554,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the Reference Clock rate, in hertz (Hz), of the signal present at the REF IN or CLK IN connector. The default value is NIRFSG_VAL_AUTO, which allows NI-RFSG to use the default Reference Clock rate for the device or automatically detect the Reference Clock rate, if supported. This parameter is only valid when the NIRFSG_ATTR_REF_CLOCK_SOURCE parameter is set to ClkIn, RefIn or RefIn2. Refer to the NIRFSG_ATTR_REF_CLOCK_RATE attribute for possible values.'
+                    'description': 'Specifies the Reference Clock rate, in hertz (Hz), of the signal present at the REF IN or CLK IN connector. The default value is NIRFSG_VAL_AUTO, which allows NI-RFSG to use the default Reference Clock rate for the device or automatically detect the Reference Clock rate, if supported. This parameter is only valid when the NIRFSG_ATTR_REF_CLOCK_SOURCE parameter is set to NIRFSG_VAL_CLK_IN_STR, NIRFSG_VAL_REF_IN_STR or NIRFSG_VAL_REF_IN_2_STR. Refer to the NIRFSG_ATTR_REF_CLOCK_RATE attribute for possible values.'
                 },
                 'name': 'refClockRate',
                 'type': 'ViReal64',
@@ -2009,38 +2011,38 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': "Specifies which instance of the selected signal to export. This parameter is useful when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to '' (empty string).\n\n**Possible Values** :",
+                    'description': "Specifies which instance of the selected signal to export. This parameter is useful when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to '' (empty string). **Possible Values** :",
                     'table_body': [
                         [
-                            '"marker0"',
+                            'marker0',
                             'Specifies Marker 0.'
                         ],
                         [
-                            '"marker1"',
+                            'marker1',
                             'Specifies Marker 1.'
                         ],
                         [
-                            '"marker2"',
+                            'marker2',
                             'Specifies Marker 2.'
                         ],
                         [
-                            '"marker3"',
+                            'marker3',
                             'Specifies Marker 3.'
                         ],
                         [
-                            '"scriptTrigger0"',
+                            'scriptTrigger0',
                             'Specifies Script Trigger 0.'
                         ],
                         [
-                            '"scriptTrigger1"',
+                            'scriptTrigger1',
                             'Specifies Script Trigger 1.'
                         ],
                         [
-                            '"scriptTrigger2"',
+                            'scriptTrigger2',
                             'Specifies Script Trigger 2.'
                         ],
                         [
-                            '"scriptTrigger3"',
+                            'scriptTrigger3',
                             'Specifies Script Trigger 3.'
                         ]
                     ],
@@ -2060,19 +2062,19 @@ functions = {
                     'description': 'Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :',
                     'table_body': [
                         [
-                            '"ClkOut"',
+                            'ClkOut',
                             'Exports the Reference Clock signal to the CLK OUT connector of the device.'
                         ],
                         [
-                            '""',
+                            '',
                             'The Reference Clock signal is not exported.'
                         ],
                         [
-                            '"RefOut"',
+                            'RefOut',
                             'Exports the Reference Clock signal to the REF OUT connector of the device.'
                         ],
                         [
-                            '"RefOut2"',
+                            'RefOut2',
                             'Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.'
                         ]
                     ],
@@ -2092,7 +2094,7 @@ functions = {
     'GetAllNamedWaveformNames': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nReturn names of the waveforms present in the memory.\n\n**Supported Devices** :PXIe-5830/5831/5840/5841/5842E'
+            'description': '\n                Return names of the waveforms present in the memory.\n\n                **Supported Devices** :PXIe-5830/5831/5840/5841/5842E\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2132,7 +2134,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Pass the number of bytes in the ViChar buffer you specify for the NIRFSG_ATTR_WAVEFORM_NAMES parameter.\n\nIf you pass 0, you can pass VI_NULL for the NIRFSG_ATTR_WAVEFORM_NAMES parameter.'
+                    'description': '                        Pass the number of bytes in the ViChar buffer you specify for the NIRFSG_ATTR_WAVEFORM_NAMES parameter.\n\n                        If you pass 0, you can pass VI_NULL for the NIRFSG_ATTR_WAVEFORM_NAMES parameter.\n                        '
                 },
                 'name': 'bufferSize',
                 'type': 'ViInt32',
@@ -2142,7 +2144,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Fetch the number of bytes needed to pass in the NIRFSG_ATTR_BUFFER_SIZE parameter.\n\nIt can be fetch by passing VI_NULL in the NIRFSG_ATTR_WAVEFORM_NAMES parameter.'
+                    'description': '                        Fetch the number of bytes needed to pass in the NIRFSG_ATTR_BUFFER_SIZE parameter.\n\n                        It can be fetch by passing VI_NULL in the NIRFSG_ATTR_WAVEFORM_NAMES parameter.\n                        '
                 },
                 'name': 'actualBufferSize',
                 'type': 'ViInt32',
@@ -2155,7 +2157,7 @@ functions = {
     'GetAllScriptNames': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReturn names of the scripts present in the memory.\n\n**Supported Devices** :PXIe-5830/5831/5840/5841/5842E'
+            'description': '               \n\n                Return names of the scripts present in the memory.\n\n                **Supported Devices** :PXIe-5830/5831/5840/5841/5842E\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2194,7 +2196,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Pass the number of bytes in the ViChar buffer you specify for the **waveformNames** parameter.\n\nIf you pass 0, you can pass VI_NULL for the **waveformNames** parameter.'
+                    'description': '                        Pass the number of bytes in the ViChar buffer you specify for the **waveformNames** parameter.\n\n                        If you pass 0, you can pass VI_NULL for the **waveformNames** parameter.\n                        '
                 },
                 'name': 'bufferSize',
                 'type': 'ViInt32',
@@ -2204,7 +2206,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Fetch the number of bytes needed to pass in the NIRFSG_ATTR_BUFFER_SIZE parameter.\n\nIt can be fetch by passing VI_NULL in the NIRFSG_ATTR_SCRIPT_NAMES parameter.'
+                    'description': '                        Fetch the number of bytes needed to pass in the NIRFSG_ATTR_BUFFER_SIZE parameter.\n\n                        It can be fetch by passing VI_NULL in the NIRFSG_ATTR_SCRIPT_NAMES parameter.\n                        '
                 },
                 'name': 'actualBufferSize',
                 'type': 'ViInt32',
@@ -2579,7 +2581,7 @@ functions = {
     'GetChannelName': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the channel string that is in the channel table at an index you specify.\n\n**Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E'
+            'description': '                Returns the channel string that is in the channel table at an index you specify.\n\n                **Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3096,7 +3098,7 @@ functions = {
     'GetTerminalName': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nReturns the fully-qualified name of the specified signal. \n\nThe fully-qualified name is helpful to automatically route signals in a multisegment chassis.\n\n**Supported Devices** : PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_'
+            'description': '\n                Returns the fully-qualified name of the specified signal. \n                \n                The fully-qualified name is helpful to automatically route signals in a multisegment chassis.\n\n                **Supported Devices** : PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n                `Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3179,38 +3181,38 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to "" (empty string). **Possible Values** :\n                    ',
+                    'description': "Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to '' (empty string). **Possible Values** :\n                    ",
                     'table_body': [
                         [
-                            '"marker0"',
+                            'marker0',
                             'Specifies Marker 0.'
                         ],
                         [
-                            '"marker1"',
+                            'marker1',
                             'Specifies Marker 1.'
                         ],
                         [
-                            '"marker2"',
+                            'marker2',
                             'Specifies Marker 2.'
                         ],
                         [
-                            '"marker3"',
+                            'marker3',
                             'Specifies Marker 3.'
                         ],
                         [
-                            '"scriptTrigger0"',
+                            'scriptTrigger0',
                             'Specifies Script Trigger 0.'
                         ],
                         [
-                            '"scriptTrigger1"',
+                            'scriptTrigger1',
                             'Specifies Script Trigger 1.'
                         ],
                         [
-                            '"scriptTrigger2"',
+                            'scriptTrigger2',
                             'Specifies Script Trigger 2.'
                         ],
                         [
-                            '"scriptTrigger3"',
+                            'scriptTrigger3',
                             'Specifies Script Trigger 3.'
                         ]
                     ],
@@ -3227,7 +3229,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Pass the number of bytes in the ViChar buffer you specify for the **NIRFSG_ATTR_TERMINAL_NAME** parameter.\n\nIf you pass 0, you can pass VI_NULL for the **NIRFSG_ATTR_TERMINAL_NAME** parameter.'
+                    'description': '                        Pass the number of bytes in the ViChar buffer you specify for the **NIRFSG_ATTR_TERMINAL_NAME** parameter.\n\n                        If you pass 0, you can pass VI_NULL for the **NIRFSG_ATTR_TERMINAL_NAME** parameter.\n                        '
                 },
                 'name': 'bufferSize',
                 'type': 'ViInt32',
@@ -3254,7 +3256,7 @@ functions = {
     'InitWithOptions': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nOpens a session to the device you specify as the NIRFSG_ATTR_RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG function calls. \n\nThis function also configures the device through the NIRFSG_ATTR_OPTION_STRING input.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Simulating an NI RF Signal Generator <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/simulate.html>`_',
+            'description': '\n                Opens a session to the device you specify as the NIRFSG_ATTR_RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG function calls. \n                \n                This function also configures the device through the NIRFSG_ATTR_OPTION_STRING input.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Simulating an NI RF Signal Generator <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/simulate.html>`_\n            ',
             'note': 'For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending /*ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.'
         },
         'included_in_proto': True,
@@ -3450,7 +3452,7 @@ functions = {
     'LockSession': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nObtains a multithread lock on the instrument session. \n\nBefore doing so, this function waits until all other execution threads have released their locks on the instrument session.\n\nOther threads might have obtained a lock on this session in the following ways:\n\n- Your application already called the nirfsg_LockSession function.\n- A call to NI-RFSG locked the session.\n\nAfter the call to this function returns successfully, no other threads can access the instrument session until you call the nirfsg_UnlockSession function. Use the nirfsg_LockSession function and the nirfsg_UnlockSession function around a sequence of calls to NI-RFSG functions if you require that the NI-RFSG device retain its settings through the end of the sequence.\n\nYou can safely make nested calls to the nirfsg_LockSession function within the same thread. To completely unlock the session, balance each call to the nirfsg_LockSession function with a call to the nirfsg_UnlockSession function. If, however, you use the NIRFSG_ATTR_CALLER_HAS_LOCK parameter in all calls to the nirfsg_LockSession function and the nirfsg_UnlockSession function within a function, the IVI Library locks the session only once within the function regardless of the number of calls you make to the nirfsg_LockSession function. Locking the session only once allows you to call nirfsg_UnlockSession just once at the end of the function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
+            'description': '             \n                Obtains a multithread lock on the instrument session. \n                \n                Before doing so, this function waits until all other execution threads have released their locks on the instrument session.\n\n                Other threads might have obtained a lock on this session in the following ways:\n\n                - Your application already called the nirfsg_LockSession function.\n                - A call to NI-RFSG locked the session.\n\n                After the call to this function returns successfully, no other threads can access the instrument session until you call the nirfsg_UnlockSession function. Use the nirfsg_LockSession function and the nirfsg_UnlockSession function around a sequence of calls to NI-RFSG functions if you require that the NI-RFSG device retain its settings through the end of the sequence.\n\n                You can safely make nested calls to the nirfsg_LockSession function within the same thread. To completely unlock the session, balance each call to the nirfsg_LockSession function with a call to the nirfsg_UnlockSession function. If, however, you use the NIRFSG_ATTR_CALLER_HAS_LOCK parameter in all calls to the nirfsg_LockSession function and the nirfsg_UnlockSession function within a function, the IVI Library locks the session only once within the function regardless of the number of calls you make to the nirfsg_LockSession function. Locking the session only once allows you to call nirfsg_UnlockSession just once at the end of the function.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860\n                '
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3805,6 +3807,78 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'ResetWithOptions': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '              \n                Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\n                By default, this function exhibits the same behavior as nirfsg_Reset. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES for the NIRFSG_ATTR_STEPS_TO_OMIT parameter, this function does not release signal routes during the reset process.\n\n                When routes of signals between two devices are released, they are released regardless of which device created the route.\n\n                To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this function instead of nirfsg_Reset, with NIRFSG_ATTR_STEPS_TO_OMIT set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies a list of steps to skip during the reset process. The default value is NIRFSG_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset. **Defined Values** :',
+                    'note': 'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES is not supported in external calibration or alignment sessions.',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_NONE',
+                            '0 (0x0)',
+                            'No step is omitted during reset.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_WAVEFORMS',
+                            '1 (0x1)',
+                            'Omits clearing waveforms.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_SCRIPTS',
+                            '2 (0x2)',
+                            'Omits clearing scripts.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES',
+                            '4 (0x4)',
+                            'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_DEEMBEDDING_TABLES',
+                            '8 (0x8)',
+                            'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'ResetWithOptionsStepsToOmit',
+                'name': 'stepsToOmit',
+                'type': 'ViUInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
         'documentation': {
@@ -4145,7 +4219,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the Script Trigger to configure. This parameter is valid only when you set the NIRFSG_ATTR_TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the NIRFSG_ATTR_TRIGGER_IDENTIFIER parameter to "" (empty string).\n\n**Default Value:** "" (empty string)\n\n**Possible Values:**',
+                    'description': '                        Specifies the Script Trigger to configure. This parameter is valid only when you set the NIRFSG_ATTR_TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the NIRFSG_ATTR_TRIGGER_IDENTIFIER parameter to "" (empty string).\n\n                        **Default Value:** "" (empty string)\n\n                        **Possible Values:**\n                    ',
                     'table_body': [
                         [
                             'scriptTrigger0',

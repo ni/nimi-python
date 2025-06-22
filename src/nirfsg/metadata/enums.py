@@ -350,6 +350,7 @@ enums = {
             {
                 'documentation': {
                     'description': 'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute, and the active edge is always rising.'
+                    'description': 'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute, and the active edge is always rising.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_EDGE',
                 'value': 1
@@ -479,6 +480,7 @@ enums = {
             {
                 'documentation': {
                     'description': 'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the nirfsg_ConfigureDigitalModulationUserDefinedWaveform function.'
+                    'description': 'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the nirfsg_ConfigureDigitalModulationUserDefinedWaveform function.'
                 },
                 'name': 'NIRFSG_VAL_USER_DEFINED',
                 'value': 5001
@@ -543,12 +545,14 @@ enums = {
             {
                 'documentation': {
                     'description': 'Applies a root-raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.'
+                    'description': 'Applies a root-raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.'
                 },
                 'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_ROOT_RAISED_COSINE',
                 'value': 10001
             },
             {
                 'documentation': {
+                    'description': 'Applies a raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA attribute.'
                     'description': 'Applies a raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA attribute.'
                 },
                 'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_RAISED_COSINE',
@@ -645,12 +649,14 @@ enums = {
             {
                 'documentation': {
                     'description': 'Configures the RF signal generator to generate the arbitrary waveform specified by the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute.'
+                    'description': 'Configures the RF signal generator to generate the arbitrary waveform specified by the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute.'
                 },
                 'name': 'NIRFSG_VAL_ARB_WAVEFORM',
                 'value': 1001
             },
             {
                 'documentation': {
+                    'description': 'Configures the RF signal generator to generate arbitrary waveforms as directed by the NIRFSG_ATTR_SELECTED_SCRIPT attribute.'
                     'description': 'Configures the RF signal generator to generate arbitrary waveforms as directed by the NIRFSG_ATTR_SELECTED_SCRIPT attribute.'
                 },
                 'name': 'NIRFSG_VAL_SCRIPT',
@@ -848,6 +854,7 @@ enums = {
                 'documentation': {
                     'description': 'NI-RFSG skips loading the waveform configurations to the session.'
                 },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                 'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                 'value': 1
             }
@@ -1114,6 +1121,7 @@ enums = {
             },
             {
                 'documentation': {
+                    'description': 'Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR attribute. You can use the NIRFSG_ATTR_PEAK_POWER_ADJUSTMENT attribute in conjunction with the NIRFSG_ATTR_POWER_LEVEL attribute when the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute is set to NIRFSG_VAL_PEAK_POWER.'
                     'description': 'Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR attribute. You can use the NIRFSG_ATTR_PEAK_POWER_ADJUSTMENT attribute in conjunction with the NIRFSG_ATTR_POWER_LEVEL attribute when the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute is set to NIRFSG_VAL_PEAK_POWER.'
                 },
                 'name': 'NIRFSG_VAL_PEAK_POWER',
@@ -1464,6 +1472,7 @@ enums = {
             {
                 'documentation': {
                     'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, and the active edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute.'
+                    'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, and the active edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_EDGE',
                 'value': 1
@@ -1471,12 +1480,14 @@ enums = {
             {
                 'documentation': {
                     'description': 'The data operation does not start until the digital level is detected. The source of the digital level is specified in the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute, and the active level is specified in the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL attribute.'
+                    'description': 'The data operation does not start until the digital level is detected. The source of the digital level is specified in the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE attribute, and the active level is specified in the NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL attribute.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_LEVEL',
                 'value': 8000
             },
             {
                 'documentation': {
+                    'description': 'The data operation does not start until a software trigger occurs. You can create a software event by calling the nirfsg_SendSoftwareEdgeTrigger function.'
                     'description': 'The data operation does not start until a software trigger occurs. You can create a software event by calling the nirfsg_SendSoftwareEdgeTrigger function.'
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
@@ -1662,6 +1673,7 @@ enums = {
             {
                 'documentation': {
                     'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, and the active edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute.'
+                    'description': 'The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute, and the active edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute.'
                 },
                 'name': 'NIRFSG_VAL_DIGITAL_EDGE',
                 'value': 1
@@ -1669,12 +1681,14 @@ enums = {
             {
                 'documentation': {
                     'description': 'The data operation does not start until a software event occurs. You may create a software trigger by calling the nirfsg_SendSoftwareEdgeTrigger function.'
+                    'description': 'The data operation does not start until a software event occurs. You may create a software trigger by calling the nirfsg_SendSoftwareEdgeTrigger function.'
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
             },
             {
                 'documentation': {
+                    'description': 'The data operation does not start until the endpoint reaches the threshold specified in the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL attribute.'
                     'description': 'The data operation does not start until the endpoint reaches the threshold specified in the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL attribute.'
                 },
                 'name': 'NIRFSG_VAL_P2P_ENDPOINT_FULLNESS',
@@ -1744,6 +1758,7 @@ enums = {
             {
                 'documentation': {
                     'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has been set and can be avoided.'
+                    'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has been set and can be avoided.'
                 },
                 'name': 'NIRFSG_VAL_AUTO',
                 'value': -1
@@ -1751,12 +1766,14 @@ enums = {
             {
                 'documentation': {
                     'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has been set and can be avoided. NI-RFSG returns an error if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has not been set, or if the signal bandwidth is too large.'
+                    'description': 'NI-RFSG places the upconverter center frequency outside of the signal bandwidth if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has been set and can be avoided. NI-RFSG returns an error if the NIRFSG_ATTR_SIGNAL_BANDWIDTH attribute has not been set, or if the signal bandwidth is too large.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
                 'value': 1
             },
             {
                 'documentation': {
+                    'description': 'NI-RFSG uses the offset that you specified with the NIRFSG_ATTR_UPCONVERTER_FREQUENCY_OFFSET or NIRFSG_ATTR_UPCONVERTER_CENTER_FREQUENCY attributes.'
                     'description': 'NI-RFSG uses the offset that you specified with the NIRFSG_ATTR_UPCONVERTER_FREQUENCY_OFFSET or NIRFSG_ATTR_UPCONVERTER_CENTER_FREQUENCY attributes.'
                 },
                 'name': 'NIRFSG_VAL_USER_DEFINED',

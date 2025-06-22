@@ -4,12 +4,15 @@ Session
 =======
 
 .. py:class:: Session(self, resource_name, options={}, id_query=False, reset_device=False)
+.. py:class:: Session(self, resource_name, options={}, id_query=False, reset_device=False)
 
     
 
     Opens a session to the device you specify as the :py:attr:`nirfsg.Session.RESOURCE_NAME` and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
+    Opens a session to the device you specify as the :py:attr:`nirfsg.Session.RESOURCE_NAME` and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
     This method also configures the device through the :py:attr:`nirfsg.Session.OPTION_STRING` input.
+                    This method also configures the device through the :py:attr:`nirfsg.Session.OPTION_STRING` input.
 
     **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -40,6 +43,40 @@ Session
 
 
     :type resource_name: str
+
+    :param options:
+        
+
+        Specifies the initial value of certain properties for the session. The
+        syntax for **options** is a dictionary of properties with an assigned
+        value. For example:
+
+        { 'simulate': False }
+
+        You do not have to specify a value for all the properties. If you do not
+        specify a value for a property, the default value is used.
+
+        Advanced Example:
+        { 'simulate': True, 'driver_setup': { 'Model': '<model number>',  'BoardType': '<type>' } }
+
+        +-------------------------+---------+
+        | Property                | Default |
+        +=========================+=========+
+        | range_check             | True    |
+        +-------------------------+---------+
+        | query_instrument_status | False   |
+        +-------------------------+---------+
+        | cache                   | True    |
+        +-------------------------+---------+
+        | simulate                | False   |
+        +-------------------------+---------+
+        | record_value_coersions  | False   |
+        +-------------------------+---------+
+        | driver_setup            | {}      |
+        +-------------------------+---------+
+
+
+    :type options: str
 
     :param options:
         
@@ -512,6 +549,7 @@ check_if_script_exists
     .. py:method:: check_if_script_exists(script_name)
 
             Returns whether the script that you specify as :py:attr:`nirfsg.Session.SCRIPT_NAME` exists.
+            Returns whether the script that you specify as :py:attr:`nirfsg.Session.SCRIPT_NAME` exists.
 
             **Supported Devices** : PXIe-5673/5673E. PXIe-5830/5831/5840/5841/5842/5860
 
@@ -556,6 +594,7 @@ check_if_waveform_exists
 
     .. py:method:: check_if_waveform_exists(waveform_name)
 
+            Returns whether the waveform that you specify as :py:attr:`nirfsg.Session.WAVEFORM_NAME` exists.
             Returns whether the waveform that you specify as :py:attr:`nirfsg.Session.WAVEFORM_NAME` exists.
 
             **Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860
@@ -1087,7 +1126,7 @@ configure_output_enabled
 
             Enables or disables signal output.
 
-            Setting :py:attr:`nirfsg.Session.output_enabled` to False while in the Generation state attenuates the generated signal so that no signal is output.
+            Setting :py:attr :`nirfsg.Session.output_enabled` to False while in the Generation state attenuates the generated signal so that no signal is output.
 
             **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1688,9 +1727,11 @@ export_signal
 
 
             :type signal_identifier: str
+            :type signal_identifier: str
             :param output_terminal:
 
 
+                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :
                 Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :
 
                 +----------------+--------------------------------------------------------------------------------------------+
@@ -2493,6 +2534,59 @@ reset_with_defaults
 
 
 
+reset_with_options
+------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: reset_with_options(steps_to_omit)
+
+            Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
+
+                            By default, this method exhibits the same behavior as :py:meth:`nirfsg.Session.reset`. You can specify steps to omit using the steps to omit parameter. For example, if you specify :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` for the :py:attr:`nirfsg.Session.STEPS_TO_OMIT` parameter, this method does not release signal routes during the reset process.
+
+                            When routes of signals between two devices are released, they are released regardless of which device created the route.
+
+                            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this method instead of :py:meth:`nirfsg.Session.reset`, with :py:attr:`nirfsg.Session.STEPS_TO_OMIT` set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`.
+
+                            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                            **Related Topics**
+
+                            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+                            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+            
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+            :param steps_to_omit:
+
+
+                Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`, which specifies that no step is omitted during reset. **Defined Values** :
+
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                                              | Value   | Description                                                                                                                                                                                                |
+                +===================================================================+=========+============================================================================================================================================================================================================+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`               | 0 (0x0) | No step is omitted during reset.                                                                                                                                                                           |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.WAVEFORMS`          | 1 (0x1) | Omits clearing waveforms.                                                                                                                                                                                  |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.SCRIPTS`            | 2 (0x2) | Omits clearing scripts.                                                                                                                                                                                    |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`             | 4 (0x4) | Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset. |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES` | 8 (0x8) | Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.                                                                                                              |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
+
+
+            :type steps_to_omit: :py:data:`nirfsg.ResetWithOptionsStepsToOmit`
+
 save_configurations_to_file
 ---------------------------
 
@@ -2770,11 +2864,25 @@ send_software_edge_trigger
 
 
                 Specifies the Script Trigger to configure. This parameter is valid only when you set the :py:attr:`nirfsg.Session.TRIGGER` parameter to :py:data:`~nirfsg.NIRFSG_VAL_START_TRIGGER`. Otherwise, set the :py:attr:`nirfsg.Session.TRIGGER_IDENTIFIER` parameter to "" (empty string).
+                Specifies the Script Trigger to configure. This parameter is valid only when you set the :py:attr:`nirfsg.Session.TRIGGER` parameter to :py:data:`~nirfsg.NIRFSG_VAL_START_TRIGGER`. Otherwise, set the :py:attr:`nirfsg.Session.TRIGGER_IDENTIFIER` parameter to "" (empty string).
 
                 **Default Value:** "" (empty string)
 
                 **Possible Values:**
 
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
+                |                | None (no signal to export)  |
+                +----------------+-----------------------------+
                 +----------------+-----------------------------+
                 | Possible Value | Description                 |
                 +================+=============================+
@@ -2794,6 +2902,7 @@ send_software_edge_trigger
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
+            :type trigger_identifier: str
             :type trigger_identifier: str
 
 set_arb_waveform_next_write_position
@@ -4119,6 +4228,15 @@ arb_sample_clock_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5106,6 +5224,15 @@ deembedding_type
         +---------------------------------------------------+----------------+------------------------------------------------------------------------+
         | :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
         +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | Name                                              | Value          | Description                                                            |
+        +===================================================+================+========================================================================+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
+        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
@@ -5394,6 +5521,15 @@ digital_edge_script_trigger_source
             +-----------------------+-----------------+
             | Repeated Capabilities | script_triggers |
             +-----------------------+-----------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5533,6 +5669,15 @@ digital_edge_start_trigger_source
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -5744,6 +5889,15 @@ digital_level_script_trigger_source
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
             +-----------------------+-----------------+
             | Characteristic        | Value           |
             +=======================+=================+
@@ -6236,6 +6390,15 @@ exported_configuration_settled_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6316,6 +6479,15 @@ exported_done_event_output_terminal
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -6422,6 +6594,15 @@ exported_marker_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | markers    |
             +-----------------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | markers    |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6500,6 +6681,15 @@ exported_pulse_modulation_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6550,6 +6740,15 @@ exported_ref_clock_output_terminal
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -6699,6 +6898,15 @@ exported_script_trigger_output_terminal
             +-----------------------+-----------------+
             | Repeated Capabilities | script_triggers |
             +-----------------------+-----------------+
+            +-----------------------+-----------------+
+            | Characteristic        | Value           |
+            +=======================+=================+
+            | Datatype              | str             |
+            +-----------------------+-----------------+
+            | Permissions           | read-write      |
+            +-----------------------+-----------------+
+            | Repeated Capabilities | script_triggers |
+            +-----------------------+-----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6786,6 +6994,15 @@ exported_started_event_output_terminal
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6864,6 +7081,15 @@ exported_start_trigger_output_terminal
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -8310,6 +8536,13 @@ load_configurations_from_file_load_options
         +--------------------------------------------------------------------+-------------------------------------------------------------------+
         | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS | NI-RFSG skips loading the waveform configurations to the session. |
         +--------------------------------------------------------------------+-------------------------------------------------------------------+
+        +--------------------------------------------------------------------+-------------------------------------------------------------------+
+        | Value                                                              | Description                                                       |
+        +====================================================================+===================================================================+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE      | NI-RFSG loads all the configurations to the session.              |
+        +--------------------------------------------------------------------+-------------------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS | NI-RFSG skips loading the waveform configurations to the session. |
+        +--------------------------------------------------------------------+-------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -8343,6 +8576,17 @@ load_configurations_from_file_reset_options
 
         **Defined Values**:
 
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | Value                                                                        | Description                                          |
+        +==============================================================================+======================================================+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE               | NI-RFSG resets all configurations.                   |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS          | NI-RFSG skips resetting the waveform configurations. |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS            | NI-RFSG skips resetting the scripts.                 |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
+        | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES | NI-RFSG skips resetting the de-embedding tables.     |
+        +------------------------------------------------------------------------------+------------------------------------------------------+
         +------------------------------------------------------------------------------+------------------------------------------------------+
         | Value                                                                        | Description                                          |
         +==============================================================================+======================================================+
@@ -8834,6 +9078,15 @@ lo_source
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -10311,6 +10564,15 @@ pulse_modulation_source
             +-----------------------+------------+
             | Repeated Capabilities | None       |
             +-----------------------+------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10327,6 +10589,7 @@ pxi_chassis_clk10_source
 
         **Possible Values**:
 
+        Possible Value: Description
         Possible Value: Description
 
         "" :Do not drive the PXI_CLK10 signal.
@@ -10364,6 +10627,15 @@ pxi_chassis_clk10_source
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -10611,6 +10883,15 @@ ref_clock_source
 
         The following table lists the characteristics of this property.
 
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
             +-----------------------+------------+
             | Characteristic        | Value      |
             +=======================+============+
@@ -12423,7 +12704,7 @@ waveform_rf_blanking
         | :py:data:`~nirfsg.NIRFSG_VAL_MARKER0`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER1`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER2`, or :py:data:`~nirfsg.NIRFSG_VAL_MARKER3` | :py:data:`~nirfsg.RFBlanking.ENABLE`           | Error is shown.                                                                                           |
         +---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -12582,6 +12863,7 @@ write_waveform_burst_detection
     .. py:attribute:: write_waveform_burst_detection
 
         Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.GetWaveformBurstStartLocations` and :py:meth:`nirfsg.Session.GetWaveformBurstStopLocations` methods respectively.
+        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.GetWaveformBurstStartLocations` and :py:meth:`nirfsg.Session.GetWaveformBurstStopLocations` methods respectively.
 
         **Default Value:** :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`
 
@@ -12599,7 +12881,7 @@ write_waveform_burst_detection
 
         .. note:: - When you download a waveform using :py:meth:`nirfsg.Session.ReadAndDownloadWaveformFromFileTdms` method and if :py:attr:`nirfsg.Session.waveform_rf_blanking` property is enabled, you must set the :py:attr:`nirfsg.Session.write_waveform_burst_detection` property to :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`.
 
-             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 

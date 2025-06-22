@@ -1123,6 +1123,15 @@ class _SessionBase(object):
     +--------------------------------+----------------+------------------------------------------------------------------------+
     | DeembeddingTypeAttrVals.VECTOR | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
     +--------------------------------+----------------+------------------------------------------------------------------------+
+    +--------------------------------+----------------+------------------------------------------------------------------------+
+    | Name                           | Value          | Description                                                            |
+    +================================+================+========================================================================+
+    | DeembeddingTypeAttrVals.NONE   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
+    +--------------------------------+----------------+------------------------------------------------------------------------+
+    | DeembeddingTypeAttrVals.SCALAR | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
+    +--------------------------------+----------------+------------------------------------------------------------------------+
+    | DeembeddingTypeAttrVals.VECTOR | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
+    +--------------------------------+----------------+------------------------------------------------------------------------+
 
     Tip:
     This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
@@ -2995,6 +3004,13 @@ class _SessionBase(object):
     +--------------------------------------------------------------------+-------------------------------------------------------------------+
     | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS | NI-RFSG skips loading the waveform configurations to the session. |
     +--------------------------------------------------------------------+-------------------------------------------------------------------+
+    +--------------------------------------------------------------------+-------------------------------------------------------------------+
+    | Value                                                              | Description                                                       |
+    +====================================================================+===================================================================+
+    | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE      | NI-RFSG loads all the configurations to the session.              |
+    +--------------------------------------------------------------------+-------------------------------------------------------------------+
+    | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS | NI-RFSG skips loading the waveform configurations to the session. |
+    +--------------------------------------------------------------------+-------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3009,6 +3025,17 @@ class _SessionBase(object):
 
     **Defined Values**:
 
+    +------------------------------------------------------------------------------+------------------------------------------------------+
+    | Value                                                                        | Description                                          |
+    +==============================================================================+======================================================+
+    | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE               | NI-RFSG resets all configurations.                   |
+    +------------------------------------------------------------------------------+------------------------------------------------------+
+    | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS          | NI-RFSG skips resetting the waveform configurations. |
+    +------------------------------------------------------------------------------+------------------------------------------------------+
+    | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS            | NI-RFSG skips resetting the scripts.                 |
+    +------------------------------------------------------------------------------+------------------------------------------------------+
+    | RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES | NI-RFSG skips resetting the de-embedding tables.     |
+    +------------------------------------------------------------------------------+------------------------------------------------------+
     +------------------------------------------------------------------------------+------------------------------------------------------+
     | Value                                                                        | Description                                          |
     +==============================================================================+======================================================+
@@ -5163,7 +5190,7 @@ class _SessionBase(object):
     | NIRFSG_VAL_MARKER0, NIRFSG_VAL_MARKER1, NIRFSG_VAL_MARKER2, or NIRFSG_VAL_MARKER3 | RFBlanking.ENABLE    | Error is shown.                                                                                           |
     +-----------------------------------------------------------------------------------+----------------------+-----------------------------------------------------------------------------------------------------------+
 
-    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5237,6 +5264,7 @@ class _SessionBase(object):
     '''Type: enums.WriteWaveformBurstDetection
 
     Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using GetWaveformBurstStartLocations and GetWaveformBurstStopLocations methods respectively.
+    Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using GetWaveformBurstStartLocations and GetWaveformBurstStopLocations methods respectively.
 
     **Default Value:** WriteWaveformBurstDetection.DISABLE
 
@@ -5254,7 +5282,7 @@ class _SessionBase(object):
 
     Note: - When you download a waveform using ReadAndDownloadWaveformFromFileTdms method and if waveform_rf_blanking property is enabled, you must set the write_waveform_burst_detection property to WriteWaveformBurstDetection.DISABLE.
 
-     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5377,6 +5405,7 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
+    @ivi_synchronized
     def check_attribute_vi_boolean(self, attribute, value):
         r'''check_attribute_vi_boolean
 
@@ -5403,6 +5432,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     @ivi_synchronized
     def check_attribute_vi_int32(self, attribute, value):
         r'''check_attribute_vi_int32
@@ -5431,6 +5461,7 @@ class _SessionBase(object):
         self._interpreter.check_attribute_vi_int32(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
+    @ivi_synchronized
     def check_attribute_vi_int64(self, attribute, value):
         r'''check_attribute_vi_int64
 
@@ -5457,6 +5488,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_int64(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     @ivi_synchronized
     def check_attribute_vi_real64(self, attribute, value):
         r'''check_attribute_vi_real64
@@ -5485,6 +5517,7 @@ class _SessionBase(object):
         self._interpreter.check_attribute_vi_real64(self._repeated_capability, attribute, value)
 
     @ivi_synchronized
+    @ivi_synchronized
     def check_attribute_vi_session(self, attribute):
         r'''check_attribute_vi_session
 
@@ -5507,6 +5540,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_session(self._repeated_capability, attribute)
 
+    @ivi_synchronized
     @ivi_synchronized
     def check_attribute_vi_string(self, attribute, value):
         r'''check_attribute_vi_string
@@ -5534,6 +5568,7 @@ class _SessionBase(object):
         '''
         self._interpreter.check_attribute_vi_string(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute):
         r'''_get_attribute_vi_boolean
@@ -5568,6 +5603,7 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
+    @ivi_synchronized
     def _get_attribute_vi_int32(self, attribute):
         r'''_get_attribute_vi_int32
 
@@ -5600,6 +5636,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_int32(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     @ivi_synchronized
     def _get_attribute_vi_int64(self, attribute):
         r'''_get_attribute_vi_int64
@@ -5634,6 +5671,7 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
+    @ivi_synchronized
     def _get_attribute_vi_real64(self, attribute):
         r'''_get_attribute_vi_real64
 
@@ -5667,6 +5705,7 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
+    @ivi_synchronized
     def _get_attribute_vi_session(self, attribute):
         r'''_get_attribute_vi_session
 
@@ -5699,6 +5738,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_session(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     @ivi_synchronized
     def _get_attribute_vi_string(self, attribute):
         r'''_get_attribute_vi_string
@@ -5738,6 +5778,7 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute)
         return value
 
+    @ivi_synchronized
     @ivi_synchronized
     def load_configurations_from_file(self, file_path):
         r'''load_configurations_from_file
@@ -5801,6 +5842,7 @@ class _SessionBase(object):
         return _Lock(self)
 
     @ivi_synchronized
+    @ivi_synchronized
     def reset_attribute(self, attribute_id):
         r'''reset_attribute
 
@@ -5826,6 +5868,7 @@ class _SessionBase(object):
         self._interpreter.reset_attribute(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
+    @ivi_synchronized
     def save_configurations_to_file(self, file_path):
         r'''save_configurations_to_file
 
@@ -5850,6 +5893,7 @@ class _SessionBase(object):
         '''
         self._interpreter.save_configurations_to_file(self._repeated_capability, file_path)
 
+    @ivi_synchronized
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_identifier):
         r'''send_software_edge_trigger
@@ -5883,11 +5927,25 @@ class _SessionBase(object):
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             trigger_identifier (str): Specifies the Script Trigger to configure. This parameter is valid only when you set the TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the TRIGGER_IDENTIFIER parameter to "" (empty string).
+            trigger_identifier (str): Specifies the Script Trigger to configure. This parameter is valid only when you set the TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the TRIGGER_IDENTIFIER parameter to "" (empty string).
 
                 **Default Value:** "" (empty string)
 
                 **Possible Values:**
 
+                +----------------+-----------------------------+
+                | Possible Value | Description                 |
+                +================+=============================+
+                | scriptTrigger0 | Specifies Script Trigger 0. |
+                +----------------+-----------------------------+
+                | scriptTrigger1 | Specifies Script Trigger 1. |
+                +----------------+-----------------------------+
+                | scriptTrigger2 | Specifies Script Trigger 2. |
+                +----------------+-----------------------------+
+                | scriptTrigger3 | Specifies Script Trigger 3. |
+                +----------------+-----------------------------+
+                |                | None (no signal to export)  |
+                +----------------+-----------------------------+
                 +----------------+-----------------------------+
                 | Possible Value | Description                 |
                 +================+=============================+
@@ -5913,6 +5971,7 @@ class _SessionBase(object):
             raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTriggerType))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
+    @ivi_synchronized
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute, value):
         r'''_set_attribute_vi_boolean
@@ -5949,6 +6008,7 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute, value)
 
+    @ivi_synchronized
     @ivi_synchronized
     def _set_attribute_vi_int32(self, attribute, value):
         r'''_set_attribute_vi_int32
@@ -6144,6 +6204,7 @@ class Session(_SessionBase):
         r'''An NI-RFSG session to the NI-RFSG driver
 
         Opens a session to the device you specify as the RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
+        Opens a session to the device you specify as the RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
         This method also configures the device through the OPTION_STRING input.
 
@@ -6240,12 +6301,14 @@ class Session(_SessionBase):
         # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
         self._interpreter.set_session_handle(self._init_with_options(resource_name, options, id_query, reset_device))
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, options, id_query, reset_device))
 
         self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
+        param_list.append("options=" + pp.pformat(options))
         param_list.append("options=" + pp.pformat(options))
         param_list.append("id_query=" + pp.pformat(id_query))
         param_list.append("reset_device=" + pp.pformat(reset_device))
@@ -6314,6 +6377,7 @@ class Session(_SessionBase):
     ''' These are code-generated '''
 
     @ivi_synchronized
+    @ivi_synchronized
     def abort(self):
         r'''abort
 
@@ -6327,6 +6391,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.abort()
 
+    @ivi_synchronized
     @ivi_synchronized
     def allocate_arb_waveform(self, waveform_name, size_in_samples):
         r'''allocate_arb_waveform
@@ -6352,6 +6417,7 @@ class Session(_SessionBase):
         self._interpreter.allocate_arb_waveform(waveform_name, size_in_samples)
 
     @ivi_synchronized
+    @ivi_synchronized
     def change_external_calibration_password(self, old_password, new_password):
         r'''change_external_calibration_password
 
@@ -6367,6 +6433,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.change_external_calibration_password(old_password, new_password)
 
+    @ivi_synchronized
     @ivi_synchronized
     def check_generation_status(self):
         r'''check_generation_status
@@ -6512,6 +6579,7 @@ class Session(_SessionBase):
         self._interpreter.clear_error()
 
     @ivi_synchronized
+    @ivi_synchronized
     def clear_self_calibrate_range(self):
         r'''clear_self_calibrate_range
 
@@ -6570,6 +6638,7 @@ class Session(_SessionBase):
         self._interpreter.configure_deembedding_table_interpolation_linear(port, table_name, format)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_deembedding_table_interpolation_nearest(self, port, table_name):
         r'''configure_deembedding_table_interpolation_nearest
 
@@ -6588,6 +6657,7 @@ class Session(_SessionBase):
         self._interpreter.configure_deembedding_table_interpolation_nearest(port, table_name)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_deembedding_table_interpolation_spline(self, port, table_name):
         r'''configure_deembedding_table_interpolation_spline
 
@@ -6605,6 +6675,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_deembedding_table_interpolation_spline(port, table_name)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
         r'''configure_digital_edge_script_trigger
@@ -6660,6 +6731,7 @@ class Session(_SessionBase):
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_digital_level_script_trigger(self, trigger_id, source, level):
         r'''configure_digital_level_script_trigger
 
@@ -6686,6 +6758,7 @@ class Session(_SessionBase):
         self._interpreter.configure_digital_level_script_trigger(trigger_id, source, level)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_digital_modulation_user_defined_waveform(self, number_of_samples, user_defined_waveform):
         r'''configure_digital_modulation_user_defined_waveform
 
@@ -6704,6 +6777,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_digital_modulation_user_defined_waveform(number_of_samples, user_defined_waveform)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_generation_mode(self, generation_mode):
         r'''configure_generation_mode
@@ -6746,6 +6820,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter generation_mode must be of type ' + str(enums.GenerationMode))
         self._interpreter.configure_generation_mode(generation_mode)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_output_enabled(self, output_enabled):
         r'''configure_output_enabled
@@ -6796,6 +6871,7 @@ class Session(_SessionBase):
         self._interpreter.configure_p2p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_power_level_type(self, power_level_type):
         r'''configure_power_level_type
 
@@ -6826,6 +6902,7 @@ class Session(_SessionBase):
         self._interpreter.configure_power_level_type(power_level_type)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_pxi_chassis_clk10(self, pxi_clk10_source):
         r'''configure_pxi_chassis_clk10
 
@@ -6847,6 +6924,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_pxi_chassis_clk10(pxi_clk10_source)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_rf(self, frequency, power_level):
         r'''configure_rf
@@ -6873,6 +6951,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_rf(frequency, power_level)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_ref_clock(self, ref_clock_source, ref_clock_rate):
         r'''configure_ref_clock
@@ -6923,6 +7002,7 @@ class Session(_SessionBase):
         self._interpreter.configure_ref_clock(ref_clock_source, ref_clock_rate)
 
     @ivi_synchronized
+    @ivi_synchronized
     def configure_signal_bandwidth(self, signal_bandwidth):
         r'''configure_signal_bandwidth
 
@@ -6942,6 +7022,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_signal_bandwidth(signal_bandwidth)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_software_script_trigger(self, trigger_id):
         r'''configure_software_script_trigger
@@ -6964,6 +7045,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_software_script_trigger(trigger_id)
 
+    @ivi_synchronized
     @ivi_synchronized
     def configure_software_start_trigger(self):
         r'''configure_software_start_trigger
@@ -7021,6 +7103,7 @@ class Session(_SessionBase):
         self._interpreter.create_deembedding_sparameter_table_s2p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
     @ivi_synchronized
+    @ivi_synchronized
     def delete_all_deembedding_tables(self):
         r'''delete_all_deembedding_tables
 
@@ -7030,6 +7113,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.delete_all_deembedding_tables()
 
+    @ivi_synchronized
     @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):
         r'''delete_deembedding_table
@@ -7047,6 +7131,7 @@ class Session(_SessionBase):
         self._interpreter.delete_deembedding_table(port, table_name)
 
     @ivi_synchronized
+    @ivi_synchronized
     def disable(self):
         r'''disable
 
@@ -7056,6 +7141,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable()
 
+    @ivi_synchronized
     @ivi_synchronized
     def disable_script_trigger(self, trigger_id):
         r'''disable_script_trigger
@@ -7077,6 +7163,7 @@ class Session(_SessionBase):
         self._interpreter.disable_script_trigger(trigger_id)
 
     @ivi_synchronized
+    @ivi_synchronized
     def disable_start_trigger(self):
         r'''disable_start_trigger
 
@@ -7092,6 +7179,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.disable_start_trigger()
 
+    @ivi_synchronized
     @ivi_synchronized
     def export_signal(self, signal, signal_identifier, output_terminal):
         r'''export_signal
@@ -7170,6 +7258,7 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+            output_terminal (str): Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :
             output_terminal (str): Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841. **Possible Values** :
 
                 +----------------+--------------------------------------------------------------------------------------------+
@@ -7284,6 +7373,7 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
+    @ivi_synchronized
     def get_external_calibration_last_date_and_time(self):
         '''get_external_calibration_last_date_and_time
 
@@ -7297,6 +7387,7 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
+    @ivi_synchronized
     def get_self_calibration_last_date_and_time(self):
         '''get_self_calibration_last_date_and_time
 
@@ -7309,6 +7400,7 @@ class Session(_SessionBase):
         year, month, day, hour, minute, second = self._get_self_calibration_date_and_time()
         return hightime.datetime(year, month, day, hour, minute)
 
+    @ivi_synchronized
     @ivi_synchronized
     def get_max_settable_power(self):
         r'''get_max_settable_power
@@ -7324,6 +7416,7 @@ class Session(_SessionBase):
         value = self._interpreter.get_max_settable_power()
         return value
 
+    @ivi_synchronized
     @ivi_synchronized
     def _get_self_calibration_date_and_time(self, module):
         r'''_get_self_calibration_date_and_time
@@ -7360,6 +7453,7 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
+    @ivi_synchronized
     def get_self_calibration_temperature(self, module):
         r'''get_self_calibration_temperature
 
@@ -7392,6 +7486,7 @@ class Session(_SessionBase):
         temperature = self._interpreter.get_self_calibration_temperature(module)
         return temperature
 
+    @ivi_synchronized
     @ivi_synchronized
     def get_stream_endpoint_handle(self, stream_endpoint):
         r'''get_stream_endpoint_handle
@@ -7503,6 +7598,7 @@ class Session(_SessionBase):
         r'''_init_with_options
 
         Opens a session to the device you specify as the RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
+        Opens a session to the device you specify as the RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
         This method also configures the device through the OPTION_STRING input.
 
@@ -7585,6 +7681,7 @@ class Session(_SessionBase):
         return new_vi
 
     @ivi_synchronized
+    @ivi_synchronized
     def _initiate(self):
         r'''_initiate
 
@@ -7600,6 +7697,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.initiate()
 
+    @ivi_synchronized
     @ivi_synchronized
     def perform_power_search(self):
         r'''perform_power_search
@@ -7618,6 +7716,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.perform_power_search()
 
+    @ivi_synchronized
     @ivi_synchronized
     def perform_thermal_correction(self):
         r'''perform_thermal_correction
@@ -7638,6 +7737,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.perform_thermal_correction()
 
+    @ivi_synchronized
     @ivi_synchronized
     def query_arb_waveform_capabilities(self):
         r'''query_arb_waveform_capabilities
@@ -7661,6 +7761,7 @@ class Session(_SessionBase):
         max_number_waveforms, waveform_quantum, min_waveform_size, max_waveform_size = self._interpreter.query_arb_waveform_capabilities()
         return max_number_waveforms, waveform_quantum, min_waveform_size, max_waveform_size
 
+    @ivi_synchronized
     @ivi_synchronized
     def read_and_download_waveform_from_file_tdms(self, waveform_name, file_path, waveform_index):
         r'''read_and_download_waveform_from_file_tdms
@@ -7699,6 +7800,7 @@ class Session(_SessionBase):
         self._interpreter.read_and_download_waveform_from_file_tdms(waveform_name, file_path, waveform_index)
 
     @ivi_synchronized
+    @ivi_synchronized
     def reset(self):
         r'''reset
 
@@ -7716,6 +7818,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset()
 
+    @ivi_synchronized
     @ivi_synchronized
     def reset_device(self):
         r'''reset_device
@@ -7743,6 +7846,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.reset_device()
 
+    @ivi_synchronized
     @ivi_synchronized
     def reset_with_defaults(self):
         r'''reset_with_defaults
@@ -7777,6 +7881,7 @@ class Session(_SessionBase):
         self._interpreter.select_arb_waveform(name)
 
     @ivi_synchronized
+    @ivi_synchronized
     def self_cal(self):
         r'''self_cal
 
@@ -7792,6 +7897,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.self_cal()
 
+    @ivi_synchronized
     @ivi_synchronized
     def self_calibrate_range(self, steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level):
         r'''self_calibrate_range
@@ -7849,6 +7955,7 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
+    @ivi_synchronized
     def self_test(self, self_test_message):
         r'''self_test
 
@@ -7886,6 +7993,7 @@ class Session(_SessionBase):
         return self_test_result
 
     @ivi_synchronized
+    @ivi_synchronized
     def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
         r'''set_arb_waveform_next_write_position
 
@@ -7922,6 +8030,7 @@ class Session(_SessionBase):
             raise TypeError('Parameter relative_to must be of type ' + str(enums.RelativeTo))
         self._interpreter.set_arb_waveform_next_write_position(waveform_name, relative_to, offset)
 
+    @ivi_synchronized
     @ivi_synchronized
     def wait_until_settled(self, max_time_milliseconds):
         r'''wait_until_settled
@@ -7972,6 +8081,7 @@ class Session(_SessionBase):
         '''
         self._interpreter.write_p2p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
 
+    @ivi_synchronized
     @ivi_synchronized
     def write_script(self, script):
         r'''write_script

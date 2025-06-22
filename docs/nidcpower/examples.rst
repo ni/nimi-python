@@ -12,6 +12,15 @@ nidcpower_advanced_sequence.py
    :encoding: utf8
    :caption: `(nidcpower_advanced_sequence.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_advanced_sequence.py>`_
 
+nidcpower_constant_resistance_and_constant_power.py
+---------------------------------------------------
+
+.. literalinclude:: ../../src/nidcpower/examples/nidcpower_constant_resistance_and_constant_power.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidcpower_constant_resistance_and_constant_power.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_constant_resistance_and_constant_power.py>`_
+
 nidcpower_lcr_source_ac_voltage.py
 ----------------------------------
 
@@ -29,6 +38,15 @@ nidcpower_measure_record.py
    :linenos:
    :encoding: utf8
    :caption: `(nidcpower_measure_record.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_measure_record.py>`_
+
+nidcpower_sink_dc_current_into_electronic_load.py
+-------------------------------------------------
+
+.. literalinclude:: ../../src/nidcpower/examples/nidcpower_sink_dc_current_into_electronic_load.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidcpower_sink_dc_current_into_electronic_load.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_sink_dc_current_into_electronic_load.py>`_
 
 nidcpower_source_delay_measure.py
 ---------------------------------

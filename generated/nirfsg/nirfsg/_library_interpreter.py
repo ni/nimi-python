@@ -652,6 +652,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def reset_with_options(self, steps_to_omit):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        steps_to_omit_ctype = _visatype.ViUInt64(steps_to_omit.value)  # case S130
+        error_code = self._library.niRFSG_ResetWithOptions(vi_ctype, steps_to_omit_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def save_configurations_to_file(self, channel_name, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010

@@ -311,6 +311,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -423,6 +424,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -526,6 +528,7 @@ attributes = {
                 ]
             ],
             'table_header': [
+                'Possible Value',
                 'Possible Value',
                 'Description'
             ]
@@ -1036,6 +1039,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -1170,6 +1174,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -1296,6 +1301,7 @@ attributes = {
                 ]
             ],
             'table_header': [
+                'Possible Value',
                 'Possible Value',
                 'Description'
             ]
@@ -1796,6 +1802,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -2004,6 +2011,7 @@ attributes = {
             ],
             'table_header': [
                 'Posible Value',
+                'Posible Value',
                 'Description'
             ]
         },
@@ -2103,6 +2111,7 @@ attributes = {
                 ]
             ],
             'table_header': [
+                'Possible Value',
                 'Possible Value',
                 'Description'
             ]
@@ -2207,6 +2216,7 @@ attributes = {
                 ]
             ],
             'table_header': [
+                'Possible Value',
                 'Possible Value',
                 'Description'
             ]
@@ -2702,6 +2712,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -3000,6 +3011,7 @@ attributes = {
                 ]
             ],
             'table_header': [
+                'Possible Value',
                 'Possible Value',
                 'Description'
             ]
@@ -4245,9 +4257,11 @@ attributes = {
             'table_body': [
                 [
                     'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE',
                     'NI-RFSG loads all the configurations to the session.'
                 ],
                 [
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                     'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                     'NI-RFSG skips loading the waveform configurations to the session.'
                 ]
@@ -4270,17 +4284,21 @@ attributes = {
             'table_body': [
                 [
                     'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
                     'NI-RFSG resets all configurations.'
                 ],
                 [
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
                     'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
                     'NI-RFSG skips resetting the waveform configurations.'
                 ],
                 [
                     'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
                     'NI-RFSG skips resetting the scripts.'
                 ],
                 [
+                    'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
                     'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
                     'NI-RFSG skips resetting the de-embedding tables.'
                 ]
@@ -4424,6 +4442,7 @@ attributes = {
             ],
             'table_header': [
                 'Possible Value',
+                'Possible Value',
                 'Description'
             ]
         },
@@ -4447,6 +4466,7 @@ attributes = {
                 ]
             ],
             'table_header': [
+                'Possible Value',
                 'Possible Value',
                 'Description'
             ]
