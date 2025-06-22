@@ -927,7 +927,7 @@ LoopBandwidth
 
 
 
-        Uses the narrowest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_NARROW` allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
+        Uses the narrowest loop bandwidth setting for the PLL.
 
         
 
@@ -1431,7 +1431,7 @@ RefPllBandwidth
 
 
 
-        Uses the narrowest loop bandwidth setting for the PLL.
+        Uses the narrowest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_NARROW` allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
 
         
 
@@ -1451,7 +1451,7 @@ RefPllBandwidth
 
 
 
-        Uses the widest loop bandwidth setting for the PLL.
+        Uses the widest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_WIDE` on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
 
         
 

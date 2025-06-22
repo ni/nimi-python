@@ -397,7 +397,7 @@ class LoadOptions(Enum):
 class LoopBandwidth(Enum):
     NARROW = 0
     r'''
-    Uses the narrowest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
+    Uses the narrowest loop bandwidth setting for the PLL.
     '''
     MEDIUM = 1
     r'''
@@ -614,7 +614,7 @@ class RFInLoExportEnabled(Enum):
 class RefPllBandwidth(Enum):
     NARROW = 0
     r'''
-    Uses the narrowest loop bandwidth setting for the PLL.
+    Uses the narrowest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
     '''
     MEDIUM = 1
     r'''
@@ -622,7 +622,7 @@ class RefPllBandwidth(Enum):
     '''
     WIDE = 2
     r'''
-    Uses the widest loop bandwidth setting for the PLL.
+    Uses the widest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
     '''
 
 
