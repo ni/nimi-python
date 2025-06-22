@@ -1688,6 +1688,7 @@
   - Basic example
   - Documentation for APIs (not final)
 - Changed
+  - (Common) Updated helper script to not split names when uppercase follows a number
 - Removed
 
 ### niscope (NI-SCOPE)
