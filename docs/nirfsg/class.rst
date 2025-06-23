@@ -852,8 +852,6 @@ configure_digital_edge_script_trigger
 
     .. py:method:: configure_digital_edge_script_trigger(trigger_id, source, edge)
 
-            Purpose
-
             Configures the specified Script Trigger for digital edge triggering.
 
             The NI-RFSG device must be in the Configuration state before calling this method.

@@ -1210,10 +1210,6 @@ enums = {
                 'value': '0'
             },
             {
-                'name': 'NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT',
-                'value': 7
-            },
-            {
                 'documentation': {
                     'description': 'yet to be defined'
                 },

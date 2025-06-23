@@ -6609,8 +6609,6 @@ class Session(_SessionBase):
     def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
         r'''configure_digital_edge_script_trigger
 
-        Purpose
-
         Configures the specified Script Trigger for digital edge triggering.
 
         The NI-RFSG device must be in the Configuration state before calling this method.
