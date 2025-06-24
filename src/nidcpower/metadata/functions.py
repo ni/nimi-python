@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 25.0.0f266
+# This file is generated from NI-DCPower API metadata version 25.3.0f265
 functions = {
     'AbortWithChannels': {
         'documentation': {
@@ -2948,7 +2948,7 @@ functions = {
     },
     'QueryInCompliance': {
         'documentation': {
-            'description': '\nQueries the specified output device to determine if it is operating at\nthe `compliance <REPLACE_DRIVER_SPECIFIC_URL_2(compliance)>`__ limit.\n\nThe compliance limit is the current limit when the output function is\nset to NIDCPOWER_VAL_DC_VOLTAGE. If the output is operating at the\ncompliance limit, the output reaches the current limit before the\ndesired voltage level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureCurrentLimit function for more\ninformation about output function and current limit, respectively.\n\nThe compliance limit is the voltage limit when the output function is\nset to NIDCPOWER_VAL_DC_CURRENT. If the output is operating at the\ncompliance limit, the output reaches the voltage limit before the\ndesired current level. Refer to the niDCPower_ConfigureOutputFunction\nfunction and the niDCPower_ConfigureVoltageLimit function for more\ninformation about output function and voltage limit, respectively.\n\n**Related Topics:**\n\n`Compliance <REPLACE_DRIVER_SPECIFIC_URL_1(compliance)>`__\n',
+            'description': '\nQueries the specified channel to determine if it is operating at the compliance limit.\n\nThe compliance limit is the current limit when the NIDCPOWER_ATTR_OUTPUT_FUNCTION property is set to NIDCPOWER_VAL_DC_VOLTAGE, NIDCPOWER_VAL_PULSE_VOLTAGE, NIDCPOWER_VAL_CONSTANT_RESISTANCE or NIDCPOWER_VAL_CONSTANT_POWER. If the output is operating at the compliance limit, the output reaches the current limit before the desired voltage, resistance or power level.\n\nThe compliance limit is the voltage limit when the NIDCPOWER_ATTR_OUTPUT_FUNCTION property is set to NIDCPOWER_VAL_DC_CURRENT or NIDCPOWER_VAL_PULSE_CURRENT. If the output is operating at the compliance limit, the output reaches the voltage limit before the desired current level.\n\nRefer to the NIDCPOWER_ATTR_OUTPUT_FUNCTION property for more information about the applicable properties to configure for each output function.\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n'
         },
         'included_in_proto': True,
@@ -3664,7 +3664,7 @@ functions = {
     },
     'SetSequence': {
         'documentation': {
-            'description': '\nConfigures a series of voltage or current outputs and corresponding\nsource delays. The source mode must be set to\n`Sequence <REPLACE_DRIVER_SPECIFIC_URL_1(sequencing)>`__ for this\nfunction to take effect.\n\nRefer to the `Configuring the Source\nUnit <REPLACE_DRIVER_SPECIFIC_URL_1(configuringthesourceunit)>`__ topic\nin the *NI DC Power Supplies and SMUs Help* for more information about\nhow to configure your device.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the `Programming\nStates <REPLACE_DRIVER_SPECIFIC_URL_1(programmingstates)>`__ topic in\nthe *NI DC Power Supplies and SMUs Help* for more information about\nNI-DCPower programming states.\n',
+            'description': '\nConfigures a series of voltage, current, resistance or power outputs and corresponding source delays. The source mode must be set to NIDCPOWER_VAL_SEQUENCE for this function to take effect.\n\nRefer to the Configuring the Source Unit topic in the *NI DC Power Supplies and SMUs Help* for more information about how to configure your device.\n\nUse this function in the Uncommitted or Committed programming states.\nRefer to the Programming States topic in the *NI DC Power Supplies and SMUs Help* for more information about NI-DCPower programming states.\n\nUsing this function with Advanced Sequence functions for the same channel in the same session is not supported.\n',
             'note': '\nNI-DCPower uses the terms "source" and "output". However, while sinking with electronic loads and SMUs these correspond to "sinking" and "input", respectively.\n\nThis function is not supported on all devices. For more information about supported devices, search ni.com for Supported Functions by Device.\n'
         },
         'included_in_proto': True,
@@ -3688,7 +3688,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '\nSpecifies the series of voltage levels or current levels, depending on\nthe configured `output\nfunction <REPLACE_DRIVER_SPECIFIC_URL_1(programming_output)>`__.\n**Valid values**:\nThe valid values for this parameter are defined by the voltage level\nrange or current level range.\n'
+                    'description': '\nSpecifies the series of voltage, current, resistance or power levels, depending on the configured NIDCPOWER_ATTR_OUTPUT_FUNCTION.\n**Valid values**: The valid values for this parameter are defined by the voltage level range, current level range, constant resistance level range or constant power level range.\n'
                 },
                 'name': 'values',
                 'size': {

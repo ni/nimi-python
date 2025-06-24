@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-DCPower API metadata version 25.0.0f266
+# This file is generated from NI-DCPower API metadata version 25.3.0f265
 enums = {
     'ApertureTimeAutoMode': {
         'values': [
@@ -256,7 +256,7 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'The conduction voltage feature is only enabled when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute to NIDCPOWER_VAL_DC_CURRENT.'
+                    'description': 'The conduction voltage feature is only enabled when you set the NIDCPOWER_ATTR_OUTPUT_FUNCTION attribute to NIDCPOWER_VAL_DC_CURRENT or NIDCPOWER_VAL_CONSTANT_POWER.'
                 },
                 'name': 'NIDCPOWER_VAL_CONDUCTION_VOLTAGE_MODE_AUTOMATIC',
                 'value': 1155
@@ -976,6 +976,20 @@ enums = {
                 },
                 'name': 'NIDCPOWER_VAL_PULSE_CURRENT',
                 'value': 1050
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the output function to constant resistance.'
+                },
+                'name': 'NIDCPOWER_VAL_CONSTANT_RESISTANCE',
+                'value': 1161
+            },
+            {
+                'documentation': {
+                    'description': 'Sets the output function to constant power.'
+                },
+                'name': 'NIDCPOWER_VAL_CONSTANT_POWER',
+                'value': 1162
             }
         ]
     },
