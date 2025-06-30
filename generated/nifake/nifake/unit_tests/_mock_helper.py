@@ -210,12 +210,12 @@ class SideEffectsHelper(object):
         self._defaults['Use64BitNumber']['output'] = None
         self._defaults['WriteWaveform'] = {}
         self._defaults['WriteWaveform']['return'] = 0
-        self._defaults['WriteWaveformComplexF32'] = {}
-        self._defaults['WriteWaveformComplexF32']['return'] = 0
-        self._defaults['WriteWaveformComplexF64'] = {}
-        self._defaults['WriteWaveformComplexF64']['return'] = 0
-        self._defaults['WriteWaveformNumpyComplexI16'] = {}
-        self._defaults['WriteWaveformNumpyComplexI16']['return'] = 0
+        self._defaults['WriteWaveformNumpyComplex128'] = {}
+        self._defaults['WriteWaveformNumpyComplex128']['return'] = 0
+        self._defaults['WriteWaveformNumpyComplex64'] = {}
+        self._defaults['WriteWaveformNumpyComplex64']['return'] = 0
+        self._defaults['WriteWaveformNumpyComplexInterleavedI16'] = {}
+        self._defaults['WriteWaveformNumpyComplexInterleavedI16']['return'] = 0
         self._defaults['close'] = {}
         self._defaults['close']['return'] = 0
         self._defaults['error_message'] = {}
@@ -961,20 +961,20 @@ class SideEffectsHelper(object):
             return self._defaults['WriteWaveform']['return']
         return self._defaults['WriteWaveform']['return']
 
-    def niFake_WriteWaveformComplexF32(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
-        if self._defaults['WriteWaveformComplexF32']['return'] != 0:
-            return self._defaults['WriteWaveformComplexF32']['return']
-        return self._defaults['WriteWaveformComplexF32']['return']
+    def niFake_WriteWaveformNumpyComplex128(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
+        if self._defaults['WriteWaveformNumpyComplex128']['return'] != 0:
+            return self._defaults['WriteWaveformNumpyComplex128']['return']
+        return self._defaults['WriteWaveformNumpyComplex128']['return']
 
-    def niFake_WriteWaveformComplexF64(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
-        if self._defaults['WriteWaveformComplexF64']['return'] != 0:
-            return self._defaults['WriteWaveformComplexF64']['return']
-        return self._defaults['WriteWaveformComplexF64']['return']
+    def niFake_WriteWaveformNumpyComplex64(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
+        if self._defaults['WriteWaveformNumpyComplex64']['return'] != 0:
+            return self._defaults['WriteWaveformNumpyComplex64']['return']
+        return self._defaults['WriteWaveformNumpyComplex64']['return']
 
-    def niFake_WriteWaveformNumpyComplexI16(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
-        if self._defaults['WriteWaveformNumpyComplexI16']['return'] != 0:
-            return self._defaults['WriteWaveformNumpyComplexI16']['return']
-        return self._defaults['WriteWaveformNumpyComplexI16']['return']
+    def niFake_WriteWaveformNumpyComplexInterleavedI16(self, vi, number_of_samples, waveform_data_array):  # noqa: N802
+        if self._defaults['WriteWaveformNumpyComplexInterleavedI16']['return'] != 0:
+            return self._defaults['WriteWaveformNumpyComplexInterleavedI16']['return']
+        return self._defaults['WriteWaveformNumpyComplexInterleavedI16']['return']
 
     def niFake_close(self, vi):  # noqa: N802
         if self._defaults['close']['return'] != 0:
@@ -1150,12 +1150,12 @@ class SideEffectsHelper(object):
         mock_library.niFake_Use64BitNumber.return_value = 0
         mock_library.niFake_WriteWaveform.side_effect = MockFunctionCallError("niFake_WriteWaveform")
         mock_library.niFake_WriteWaveform.return_value = 0
-        mock_library.niFake_WriteWaveformComplexF32.side_effect = MockFunctionCallError("niFake_WriteWaveformComplexF32")
-        mock_library.niFake_WriteWaveformComplexF32.return_value = 0
-        mock_library.niFake_WriteWaveformComplexF64.side_effect = MockFunctionCallError("niFake_WriteWaveformComplexF64")
-        mock_library.niFake_WriteWaveformComplexF64.return_value = 0
-        mock_library.niFake_WriteWaveformNumpyComplexI16.side_effect = MockFunctionCallError("niFake_WriteWaveformNumpyComplexI16")
-        mock_library.niFake_WriteWaveformNumpyComplexI16.return_value = 0
+        mock_library.niFake_WriteWaveformNumpyComplex128.side_effect = MockFunctionCallError("niFake_WriteWaveformNumpyComplex128")
+        mock_library.niFake_WriteWaveformNumpyComplex128.return_value = 0
+        mock_library.niFake_WriteWaveformNumpyComplex64.side_effect = MockFunctionCallError("niFake_WriteWaveformNumpyComplex64")
+        mock_library.niFake_WriteWaveformNumpyComplex64.return_value = 0
+        mock_library.niFake_WriteWaveformNumpyComplexInterleavedI16.side_effect = MockFunctionCallError("niFake_WriteWaveformNumpyComplexInterleavedI16")
+        mock_library.niFake_WriteWaveformNumpyComplexInterleavedI16.return_value = 0
         mock_library.niFake_close.side_effect = MockFunctionCallError("niFake_close")
         mock_library.niFake_close.return_value = 0
         mock_library.niFake_error_message.side_effect = MockFunctionCallError("niFake_error_message")

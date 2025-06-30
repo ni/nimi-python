@@ -2797,7 +2797,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'WriteWaveformComplexF32': {
+    'WriteWaveformNumpyComplex64': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of numpy complex64 numbers.'
@@ -2852,7 +2852,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'WriteWaveformComplexF64': {
+    'WriteWaveformNumpyComplex128': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of numpy complex128 numbers'
@@ -2907,7 +2907,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'WriteWaveformNumpyComplexI16': {
+    'WriteWaveformNumpyComplexInterleavedI16': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'A function that writes a waveform of numpy complex i16 numbers.'
