@@ -15,7 +15,7 @@
 ---
 
 ### nidcpower (NI-DCPower)
-- [Unreleased](#nidcpower-unreleased)
+- [1.5.0](#nidcpower-150---2025-06-30)
 - [1.4.9](#nidcpower-149---2025-02-26)
 - [1.4.8](#nidcpower-148---2024-04-26)
 - [1.4.7](#nidcpower-147---2023-12-15)
@@ -47,7 +47,7 @@
 - [0.4.0](#nidcpower-040---2017-11-07)
 - [0.3.0](#nidcpower-030---2017-10-13)
 
-#### [nidcpower] Unreleased
+#### [nidcpower] 1.5.0 - 2025-06-30
 - Added
   - API parity with NI-DCPower 2025 Q2.
       - Properties:
@@ -67,8 +67,6 @@
       - Enum values:
         - `CONSTANT_RESISTANCE` and `CONSTANT_POWER` added to enum `OutputFunction`
   - `nidcpower_constant_resistance_and_constant_power.py` and `nidcpower_sink_dc_current_into_electronic_load.py` examples
-- Changed
-- Removed
 
 #### [nidcpower] 1.4.9 - 2025-02-26
 - Added
