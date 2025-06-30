@@ -844,12 +844,9 @@ class TestLibraryInterpreter:
         self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
 
     def test_write_waveform_numpy_complex128_valid_input(self):
-        import ctypes
-        import numpy as np
-
         from nifake._complextype import NIComplexNumber
 
-        waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex128)
+        waveform_data = numpy.full(1000, 0.707 + 0.707j, dtype=numpy.complex128)
         number_of_samples = len(waveform_data)
 
         waveform_data_ctypes = (NIComplexNumber * number_of_samples)(
@@ -866,12 +863,9 @@ class TestLibraryInterpreter:
         )
 
     def test_write_waveform_numpy_complexi16_valid_input(self):
-        import ctypes
-        import numpy as np
-
         from nifake._complextype import NIComplexI16
 
-        waveform_data = np.array([32767, 0] * 1000, dtype=np.int16)
+        waveform_data = numpy.array([32767, 0] * 1000, dtype=numpy.int16)
         number_of_samples = len(waveform_data) // 2
         waveform_data_ctypes = (NIComplexI16 * number_of_samples)(
             *[NIComplexI16(real=32767, imag=0) for _ in range(number_of_samples)]
