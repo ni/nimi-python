@@ -1113,12 +1113,12 @@ configure_output_enabled
 
             :type output_enabled: bool
 
-configure_p2_p_endpoint_fullness_start_trigger
-----------------------------------------------
+configure_p2p_endpoint_fullness_start_trigger
+---------------------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: configure_p2_p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
+    .. py:method:: configure_p2p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
 
             Configures the Start Trigger to detect peer-to-peer endpoint fullness.
 
@@ -1419,12 +1419,12 @@ configure_software_start_trigger
 
 
 
-create_deembedding_sparameter_table_s2_p_file
----------------------------------------------
+create_deembedding_sparameter_table_s2p_file
+--------------------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: create_deembedding_sparameter_table_s2_p_file(port, table_name, s2p_file_path, sparameter_orientation)
+    .. py:method:: create_deembedding_sparameter_table_s2p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
             Creates an S-parameter de-embedding table for the port based on the specified S2P file.
 
@@ -1598,6 +1598,82 @@ disable_start_trigger
                             `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_
 
             
+
+
+
+error_message
+-------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: error_message(error_code, error_message)
+
+            Converts an error code returned by an NI-RFSG method into a user-readable string.
+
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+
+            :param error_code:
+
+
+                Pass the status parameter that is returned from any NI-RFSG method.
+
+                                        **Default Value** : 0 (VI_SUCCESS)
+
+                
+
+
+            :type error_code: int
+            :param error_message:
+
+
+                Returns the user-readable message string that corresponds to the status code you specify.
+
+                                        You must pass a ViChar array with at least 256 bytes to this parameter.
+
+                
+
+
+            :type error_message: str
+
+error_query
+-----------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: error_query()
+
+            Reads an error code and an error message from the instrument error queue.
+
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
+
+            
+
+
+
+            :rtype: tuple (error_code, error_message)
+
+                WHERE
+
+                error_code (int): 
+
+
+                    Returns the error code read from the instrument error queue.
+
+                    
+
+
+                error_message (str): 
+
+
+                    Returns the error message string read from the instrument error message queue.
+
+                                            You must pass a ViChar array with at least 256 bytes.
+
+                    
 
 
 
@@ -2118,6 +2194,184 @@ get_terminal_name
 
 
 
+get_waveform_burst_start_locations
+----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_waveform_burst_start_locations(number_of_locations)
+
+            Returns the burst start locations of the waveform stored in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_waveform_burst_start_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.get_waveform_burst_start_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst start locations array.
+
+                
+
+
+            :type number_of_locations: int
+
+            :rtype: tuple (locations, required_size)
+
+                WHERE
+
+                locations (array.array("d")): 
+
+
+                    Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+                required_size (int): 
+
+
+                    Returns the required size for the output array if you pass NULL to :py:attr:`nirfsg.Session.LOCATIONS` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_waveform_burst_stop_locations
+---------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_waveform_burst_stop_locations(number_of_locations)
+
+            Returns the burst stop locations of the waveform stored in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_waveform_burst_stop_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.get_waveform_burst_stop_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst start locations array.
+
+                
+
+
+            :type number_of_locations: int
+
+            :rtype: tuple (locations, required_size)
+
+                WHERE
+
+                locations (array.array("d")): 
+
+
+                    Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+                required_size (int): 
+
+
+                    Returns the required size for the output array if you pass NULL to :py:attr:`nirfsg.Session.LOCATIONS` parameter.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+get_waveform_marker_event_locations
+-----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_waveform_marker_event_locations(number_of_locations)
+
+            Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_waveform_marker_event_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.get_waveform_marker_event_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the locations array.
+
+                
+
+
+            :type number_of_locations: int
+
+            :rtype: tuple (locations, required_size)
+
+                WHERE
+
+                locations (array.array("d")): 
+
+
+                    Returns the marker locations stored in the NI-RFSG database for the channel you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                    
+
+                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+                required_size (int): 
+
+
+                    Returns the required size for the output array if you pass NULL to **Locations** parameter.
+
+                    
+
+
+
 initiate
 --------
 
@@ -2403,7 +2657,7 @@ reset
 
                             Generally, calling this method instead of the :py:meth:`nirfsg.Session.reset_device` method is acceptable. The :py:meth:`nirfsg.Session.reset` method executes faster than the :py:meth:`nirfsg.Session.reset_device` method.
 
-                            To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the :py:meth:`nirfsg.Session.reset_with_options` method, with **stepsToOmit** set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` .
+                            To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the :py:meth:`nirfsg.Session.ResetWithOptions` method, with **stepsToOmit** set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` .
 
                             **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -2495,58 +2749,45 @@ reset_with_defaults
 
 
 
-reset_with_options
-------------------
+revision_query
+--------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: reset_with_options(steps_to_omit)
+    .. py:method:: revision_query()
 
-            Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
+            Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
 
-                            By default, this method exhibits the same behavior as :py:meth:`nirfsg.Session.reset`. You can specify steps to omit using the steps to omit parameter. For example, if you specify :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` for the :py:attr:`nirfsg.Session.STEPS_TO_OMIT` parameter, this method does not release signal routes during the reset process.
-
-                            When routes of signals between two devices are released, they are released regardless of which device created the route.
-
-                            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this method instead of :py:meth:`nirfsg.Session.reset`, with :py:attr:`nirfsg.Session.STEPS_TO_OMIT` set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`.
-
-                            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
-
-                            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+                            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
             
 
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
+            :rtype: tuple (instrument_driver_revision, firmware_revision)
 
-            :param steps_to_omit:
+                WHERE
 
-
-                Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`, which specifies that no step is omitted during reset. **Defined Values** :
-
-                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Name                                                              | Value   | Description                                                                                                                                                                                                |
-                +===================================================================+=========+============================================================================================================================================================================================================+
-                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`               | 0 (0x0) | No step is omitted during reset.                                                                                                                                                                           |
-                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.WAVEFORMS`          | 1 (0x1) | Omits clearing waveforms.                                                                                                                                                                                  |
-                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.SCRIPTS`            | 2 (0x2) | Omits clearing scripts.                                                                                                                                                                                    |
-                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`             | 4 (0x4) | Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset. |
-                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES` | 8 (0x8) | Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.                                                                                                              |
-                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                .. note:: :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
+                instrument_driver_revision (str): 
 
 
-            :type steps_to_omit: :py:data:`nirfsg.ResetWithOptionsStepsToOmit`
+                    Returns the value of the :py:attr:`nirfsg.Session.specific_driver_revision` property in the form of a string.
+
+                                            You must pass a ViChar array with at least 256 bytes.
+
+                    
+
+
+                firmware_revision (str): 
+
+
+                    Returns the value of the :py:attr:`nirfsg.Session.instrument_firmware_revision` property in the form of a string.
+
+                                            You must pass a ViChar array with at least 256 bytes.
+
+                    
+
+
 
 save_configurations_to_file
 ---------------------------
@@ -2910,6 +3151,140 @@ set_arb_waveform_next_write_position
 
             :type offset: int
 
+set_waveform_burst_start_locations
+----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_waveform_burst_start_locations(number_of_locations, locations)
+
+            Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_waveform_burst_start_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_burst_start_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst start locations array.
+
+                
+
+
+            :type number_of_locations: int
+            :param locations:
+
+
+                Returns the burst start locations stored in the NI-RFSG session for the waveform that you specified in the :py:attr:`nirfsg.Session.CHANNEL_NAME` parameter. This value is expressed in samples.
+
+                
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            :type locations: array.array("d")
+
+set_waveform_burst_stop_locations
+---------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_waveform_burst_stop_locations(number_of_locations, locations)
+
+            Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_waveform_burst_stop_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_burst_stop_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the burst stop locations array.
+
+                
+
+
+            :type number_of_locations: int
+            :param locations:
+
+
+                Specifies the burst stop locations, in samples, to store in the NI-RFSG session.
+
+                
+
+
+            :type locations: array.array("d")
+
+set_waveform_marker_event_locations
+-----------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: set_waveform_marker_event_locations(number_of_locations, locations)
+
+            Configures the marker locations associated with waveform and marker in the NI-RFSG session.
+
+                            **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].set_waveform_marker_event_locations`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_marker_event_locations`
+
+
+            :param number_of_locations:
+
+
+                Specifies the size of the locations array.
+
+                
+
+
+            :type number_of_locations: int
+            :param locations:
+
+
+                Specifies the marker location, in samples, to store in the NI-RFSG database.
+
+                
+
+
+            :type locations: array.array("d")
+
 unlock
 ------
 
@@ -2952,12 +3327,12 @@ wait_until_settled
 
             :type max_time_milliseconds: int
 
-write_p2_p_endpoint_i16
------------------------
+write_p2p_endpoint_i16
+----------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: write_p2_p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
+    .. py:method:: write_p2p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
 
             Writes an array of 16-bit integer data to the peer-to-peer endpoint.
 
@@ -3005,7 +3380,7 @@ write_p2_p_endpoint_i16
                 
 
 
-            :type endpoint_data: list of int
+            :type endpoint_data: array.array("h")
 
 write_script
 ------------
@@ -7537,7 +7912,7 @@ instrument_firmware_revision
 
                         **High-Level Methods**:
 
-                        - :py:meth:`nirfsg.Session.RevisionQuery`
+                        - :py:meth:`nirfsg.Session.revision_query`
 
         The following table lists the characteristics of this property.
 
@@ -10823,7 +11198,7 @@ rf_blanking_source
 
                         PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-                        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+                        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
                         **Default Value:** "" (empty string)
 
@@ -12508,7 +12883,7 @@ waveform_rf_blanking
         | :py:data:`~nirfsg.NIRFSG_VAL_MARKER0`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER1`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER2`, or :py:data:`~nirfsg.NIRFSG_VAL_MARKER3` | :py:data:`~nirfsg.RFBlanking.ENABLE`           | Error is shown.                                                                                           |
         +---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -12666,7 +13041,7 @@ write_waveform_burst_detection
 
     .. py:attribute:: write_waveform_burst_detection
 
-        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.GetWaveformBurstStartLocations` and :py:meth:`nirfsg.Session.GetWaveformBurstStopLocations` methods respectively.
+        Enables the detection of burst start and burst stop locations in the waveform. You can read the detected burst start and burst stop locations using :py:meth:`nirfsg.Session.get_waveform_burst_start_locations` and :py:meth:`nirfsg.Session.get_waveform_burst_stop_locations` methods respectively.
 
                         **Default Value:** :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`
 
@@ -12684,7 +13059,7 @@ write_waveform_burst_detection
 
         .. note:: - When you download a waveform using :py:meth:`nirfsg.Session.ReadAndDownloadWaveformFromFileTdms` method and if :py:attr:`nirfsg.Session.waveform_rf_blanking` property is enabled, you must set the :py:attr:`nirfsg.Session.write_waveform_burst_detection` property to :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`.
 
-             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
