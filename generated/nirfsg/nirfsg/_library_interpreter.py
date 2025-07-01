@@ -283,7 +283,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_p2_p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):  # noqa: N802
+    def configure_p2p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         p2p_endpoint_fullness_level_ctype = _visatype.ViInt64(p2p_endpoint_fullness_level)  # case S150
         error_code = self._library.niRFSG_ConfigureP2PEndpointFullnessStartTrigger(vi_ctype, p2p_endpoint_fullness_level_ctype)
@@ -340,7 +340,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_deembedding_sparameter_table_s2_p_file(self, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
+    def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
         table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
@@ -382,6 +382,22 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSG_DisableStartTrigger(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def error_message(self, error_code, error_message):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
+        error_message_ctype = ctypes.create_string_buffer(error_message.encode(self._encoding))  # case C020
+        error_code = self._library.niRFSG_ErrorMessage(vi_ctype, error_code_ctype, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
+        return
+
+    def error_query(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code_ctype = _visatype.ViInt32()  # case S220
+        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
+        error_code = self._library.niRFSG_ErrorQuery(vi_ctype, None if error_code_ctype is None else (ctypes.pointer(error_code_ctype)), error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(error_code_ctype.value), error_message_ctype.value.decode(self._encoding)
 
     def export_signal(self, signal, signal_identifier, output_terminal):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -565,6 +581,42 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return terminal_name_ctype.value.decode(self._encoding)
 
+    def get_waveform_burst_start_locations(self, channel_name, number_of_locations):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        number_of_locations_ctype = _visatype.ViInt32(number_of_locations)  # case S210
+        locations_size = number_of_locations  # case B600
+        locations_array = array.array("d", [0]) * locations_size  # case B600
+        locations_ctype = _get_ctypes_pointer_for_buffer(value=locations_array, library_type=_visatype.ViReal64)  # case B600
+        required_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSG_GetWaveformBurstStartLocations(vi_ctype, channel_name_ctype, number_of_locations_ctype, locations_ctype, None if required_size_ctype is None else (ctypes.pointer(required_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return locations_array, int(required_size_ctype.value)
+
+    def get_waveform_burst_stop_locations(self, channel_name, number_of_locations):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        number_of_locations_ctype = _visatype.ViInt32(number_of_locations)  # case S210
+        locations_size = number_of_locations  # case B600
+        locations_array = array.array("d", [0]) * locations_size  # case B600
+        locations_ctype = _get_ctypes_pointer_for_buffer(value=locations_array, library_type=_visatype.ViReal64)  # case B600
+        required_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSG_GetWaveformBurstStopLocations(vi_ctype, channel_name_ctype, number_of_locations_ctype, locations_ctype, None if required_size_ctype is None else (ctypes.pointer(required_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return locations_array, int(required_size_ctype.value)
+
+    def get_waveform_marker_event_locations(self, channel_name, number_of_locations):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        number_of_locations_ctype = _visatype.ViInt32(number_of_locations)  # case S210
+        locations_size = number_of_locations  # case B600
+        locations_array = array.array("d", [0]) * locations_size  # case B600
+        locations_ctype = _get_ctypes_pointer_for_buffer(value=locations_array, library_type=_visatype.ViReal64)  # case B600
+        required_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSG_GetWaveformMarkerEventLocations(vi_ctype, channel_name_ctype, number_of_locations_ctype, locations_ctype, None if required_size_ctype is None else (ctypes.pointer(required_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return locations_array, int(required_size_ctype.value)
+
     def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
@@ -652,12 +704,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def reset_with_options(self, steps_to_omit):  # noqa: N802
+    def revision_query(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        steps_to_omit_ctype = _visatype.ViUInt64(steps_to_omit.value)  # case S130
-        error_code = self._library.niRFSG_ResetWithOptions(vi_ctype, steps_to_omit_ctype)
+        instrument_driver_revision_ctype = (_visatype.ViChar * 256)()  # case C070
+        firmware_revision_ctype = (_visatype.ViChar * 256)()  # case C070
+        error_code = self._library.niRFSG_RevisionQuery(vi_ctype, instrument_driver_revision_ctype, firmware_revision_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
+        return instrument_driver_revision_ctype.value.decode(self._encoding), firmware_revision_ctype.value.decode(self._encoding)
 
     def save_configurations_to_file(self, channel_name, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -770,6 +823,36 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def set_waveform_burst_start_locations(self, channel_name, number_of_locations, locations):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        number_of_locations_ctype = _visatype.ViInt32(0 if locations is None else len(locations))  # case S160
+        locations_array = _convert_to_array(value=locations, array_type="d")  # case B550
+        locations_ctype = _get_ctypes_pointer_for_buffer(value=locations_array, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niRFSG_SetWaveformBurstStartLocations(vi_ctype, channel_name_ctype, number_of_locations_ctype, locations_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_waveform_burst_stop_locations(self, channel_name, number_of_locations, locations):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        number_of_locations_ctype = _visatype.ViInt32(0 if locations is None else len(locations))  # case S160
+        locations_array = _convert_to_array(value=locations, array_type="d")  # case B550
+        locations_ctype = _get_ctypes_pointer_for_buffer(value=locations_array, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niRFSG_SetWaveformBurstStopLocations(vi_ctype, channel_name_ctype, number_of_locations_ctype, locations_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def set_waveform_marker_event_locations(self, channel_name, number_of_locations, locations):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        number_of_locations_ctype = _visatype.ViInt32(0 if locations is None else len(locations))  # case S160
+        locations_array = _convert_to_array(value=locations, array_type="d")  # case B550
+        locations_ctype = _get_ctypes_pointer_for_buffer(value=locations_array, library_type=_visatype.ViReal64)  # case B550
+        error_code = self._library.niRFSG_SetWaveformMarkerEventLocations(vi_ctype, channel_name_ctype, number_of_locations_ctype, locations_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def unlock(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSG_UnlockSession(vi_ctype, None)
@@ -783,11 +866,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def write_p2_p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
+    def write_p2p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         stream_endpoint_ctype = ctypes.create_string_buffer(stream_endpoint.encode(self._encoding))  # case C020
         number_of_samples_ctype = _visatype.ViInt32(0 if endpoint_data is None else len(endpoint_data))  # case S160
-        endpoint_data_ctype = _get_ctypes_pointer_for_buffer(value=endpoint_data, library_type=_visatype.ViInt16)  # case B550
+        endpoint_data_array = _convert_to_array(value=endpoint_data, array_type="h")  # case B550
+        endpoint_data_ctype = _get_ctypes_pointer_for_buffer(value=endpoint_data_array, library_type=_visatype.ViInt16)  # case B550
         error_code = self._library.niRFSG_WriteP2PEndpointI16(vi_ctype, stream_endpoint_ctype, number_of_samples_ctype, endpoint_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

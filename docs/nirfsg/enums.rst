@@ -1318,10 +1318,6 @@ RFFilter
 
 
 
-    .. py:attribute:: RFFilter.CONFIGURATION_SETTLED_EVENT
-
-
-
     .. py:attribute:: RFFilter.LO_FREQ_MOD_4000
 
 

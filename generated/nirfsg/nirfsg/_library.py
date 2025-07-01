@@ -59,6 +59,8 @@ class Library(object):
         self.niRFSG_Disable_cfunc = None
         self.niRFSG_DisableScriptTrigger_cfunc = None
         self.niRFSG_DisableStartTrigger_cfunc = None
+        self.niRFSG_ErrorMessage_cfunc = None
+        self.niRFSG_ErrorQuery_cfunc = None
         self.niRFSG_ExportSignal_cfunc = None
         self.niRFSG_GetAllNamedWaveformNames_cfunc = None
         self.niRFSG_GetAllScriptNames_cfunc = None
@@ -76,6 +78,9 @@ class Library(object):
         self.niRFSG_GetSelfCalibrationTemperature_cfunc = None
         self.niRFSG_GetStreamEndpointHandle_cfunc = None
         self.niRFSG_GetTerminalName_cfunc = None
+        self.niRFSG_GetWaveformBurstStartLocations_cfunc = None
+        self.niRFSG_GetWaveformBurstStopLocations_cfunc = None
+        self.niRFSG_GetWaveformMarkerEventLocations_cfunc = None
         self.niRFSG_InitWithOptions_cfunc = None
         self.niRFSG_Initiate_cfunc = None
         self.niRFSG_LoadConfigurationsFromFile_cfunc = None
@@ -88,7 +93,7 @@ class Library(object):
         self.niRFSG_ResetAttribute_cfunc = None
         self.niRFSG_ResetDevice_cfunc = None
         self.niRFSG_ResetWithDefaults_cfunc = None
-        self.niRFSG_ResetWithOptions_cfunc = None
+        self.niRFSG_RevisionQuery_cfunc = None
         self.niRFSG_SaveConfigurationsToFile_cfunc = None
         self.niRFSG_SelectArbWaveform_cfunc = None
         self.niRFSG_SelfCal_cfunc = None
@@ -102,6 +107,9 @@ class Library(object):
         self.niRFSG_SetAttributeViReal64_cfunc = None
         self.niRFSG_SetAttributeViSession_cfunc = None
         self.niRFSG_SetAttributeViString_cfunc = None
+        self.niRFSG_SetWaveformBurstStartLocations_cfunc = None
+        self.niRFSG_SetWaveformBurstStopLocations_cfunc = None
+        self.niRFSG_SetWaveformMarkerEventLocations_cfunc = None
         self.niRFSG_UnlockSession_cfunc = None
         self.niRFSG_WaitUntilSettled_cfunc = None
         self.niRFSG_WriteP2PEndpointI16_cfunc = None
@@ -435,6 +443,22 @@ class Library(object):
                 self.niRFSG_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_DisableStartTrigger_cfunc(vi)
 
+    def niRFSG_ErrorMessage(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ErrorMessage_cfunc is None:
+                self.niRFSG_ErrorMessage_cfunc = self._get_library_function('niRFSG_ErrorMessage')
+                self.niRFSG_ErrorMessage_cfunc.argtypes = [ViSession, ViStatus, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_ErrorMessage_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ErrorMessage_cfunc(vi, error_code, error_message)
+
+    def niRFSG_ErrorQuery(self, vi, error_code, error_message):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ErrorQuery_cfunc is None:
+                self.niRFSG_ErrorQuery_cfunc = self._get_library_function('niRFSG_ErrorQuery')
+                self.niRFSG_ErrorQuery_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_ErrorQuery_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ErrorQuery_cfunc(vi, error_code, error_message)
+
     def niRFSG_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_ExportSignal_cfunc is None:
@@ -571,6 +595,30 @@ class Library(object):
                 self.niRFSG_GetTerminalName_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetTerminalName_cfunc(vi, signal, signal_identifier, buffer_size, terminal_name)
 
+    def niRFSG_GetWaveformBurstStartLocations(self, vi, channel_name, number_of_locations, locations, required_size):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetWaveformBurstStartLocations_cfunc is None:
+                self.niRFSG_GetWaveformBurstStartLocations_cfunc = self._get_library_function('niRFSG_GetWaveformBurstStartLocations')
+                self.niRFSG_GetWaveformBurstStartLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetWaveformBurstStartLocations_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetWaveformBurstStartLocations_cfunc(vi, channel_name, number_of_locations, locations, required_size)
+
+    def niRFSG_GetWaveformBurstStopLocations(self, vi, channel_name, number_of_locations, locations, required_size):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetWaveformBurstStopLocations_cfunc is None:
+                self.niRFSG_GetWaveformBurstStopLocations_cfunc = self._get_library_function('niRFSG_GetWaveformBurstStopLocations')
+                self.niRFSG_GetWaveformBurstStopLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetWaveformBurstStopLocations_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetWaveformBurstStopLocations_cfunc(vi, channel_name, number_of_locations, locations, required_size)
+
+    def niRFSG_GetWaveformMarkerEventLocations(self, vi, channel_name, number_of_locations, locations, required_size):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetWaveformMarkerEventLocations_cfunc is None:
+                self.niRFSG_GetWaveformMarkerEventLocations_cfunc = self._get_library_function('niRFSG_GetWaveformMarkerEventLocations')
+                self.niRFSG_GetWaveformMarkerEventLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetWaveformMarkerEventLocations_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetWaveformMarkerEventLocations_cfunc(vi, channel_name, number_of_locations, locations, required_size)
+
     def niRFSG_InitWithOptions(self, resource_name, id_query, reset_device, option_string, new_vi):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_InitWithOptions_cfunc is None:
@@ -667,13 +715,13 @@ class Library(object):
                 self.niRFSG_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ResetWithDefaults_cfunc(vi)
 
-    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
+    def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         with self._func_lock:
-            if self.niRFSG_ResetWithOptions_cfunc is None:
-                self.niRFSG_ResetWithOptions_cfunc = self._get_library_function('niRFSG_ResetWithOptions')
-                self.niRFSG_ResetWithOptions_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
-                self.niRFSG_ResetWithOptions_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ResetWithOptions_cfunc(vi, steps_to_omit)
+            if self.niRFSG_RevisionQuery_cfunc is None:
+                self.niRFSG_RevisionQuery_cfunc = self._get_library_function('niRFSG_RevisionQuery')
+                self.niRFSG_RevisionQuery_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_RevisionQuery_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_RevisionQuery_cfunc(vi, instrument_driver_revision, firmware_revision)
 
     def niRFSG_SaveConfigurationsToFile(self, vi, channel_name, file_path):  # noqa: N802
         with self._func_lock:
@@ -778,6 +826,30 @@ class Library(object):
                 self.niRFSG_SetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_SetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_SetAttributeViString_cfunc(vi, channel_name, attribute, value)
+
+    def niRFSG_SetWaveformBurstStartLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_SetWaveformBurstStartLocations_cfunc is None:
+                self.niRFSG_SetWaveformBurstStartLocations_cfunc = self._get_library_function('niRFSG_SetWaveformBurstStartLocations')
+                self.niRFSG_SetWaveformBurstStartLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niRFSG_SetWaveformBurstStartLocations_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_SetWaveformBurstStartLocations_cfunc(vi, channel_name, number_of_locations, locations)
+
+    def niRFSG_SetWaveformBurstStopLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_SetWaveformBurstStopLocations_cfunc is None:
+                self.niRFSG_SetWaveformBurstStopLocations_cfunc = self._get_library_function('niRFSG_SetWaveformBurstStopLocations')
+                self.niRFSG_SetWaveformBurstStopLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niRFSG_SetWaveformBurstStopLocations_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_SetWaveformBurstStopLocations_cfunc(vi, channel_name, number_of_locations, locations)
+
+    def niRFSG_SetWaveformMarkerEventLocations(self, vi, channel_name, number_of_locations, locations):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_SetWaveformMarkerEventLocations_cfunc is None:
+                self.niRFSG_SetWaveformMarkerEventLocations_cfunc = self._get_library_function('niRFSG_SetWaveformMarkerEventLocations')
+                self.niRFSG_SetWaveformMarkerEventLocations_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niRFSG_SetWaveformMarkerEventLocations_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_SetWaveformMarkerEventLocations_cfunc(vi, channel_name, number_of_locations, locations)
 
     def niRFSG_UnlockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
