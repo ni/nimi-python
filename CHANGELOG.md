@@ -15,7 +15,7 @@
 ---
 
 ### nidcpower (NI-DCPower)
-- [1.5.0](#nidcpower-150---2025-06-30)
+- [1.5.0](#nidcpower-150---2025-07-01)
 - [1.4.9](#nidcpower-149---2025-02-26)
 - [1.4.8](#nidcpower-148---2024-04-26)
 - [1.4.7](#nidcpower-147---2023-12-15)
@@ -47,7 +47,7 @@
 - [0.4.0](#nidcpower-040---2017-11-07)
 - [0.3.0](#nidcpower-030---2017-10-13)
 
-#### [nidcpower] 1.5.0 - 2025-06-30
+#### [nidcpower] 1.5.0 - 2025-07-01
 - Added
   - API parity with NI-DCPower 2025 Q2.
       - Properties:
