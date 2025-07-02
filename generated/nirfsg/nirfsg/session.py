@@ -2580,7 +2580,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - RevisionQuery
+    - revision_query
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -7997,9 +7997,13 @@ class Session(_SessionBase):
         **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Returns:
-            instrument_driver_revision (str): Returns the value of the specific_driver_revision property in the form of a string. You must pass a ViChar array with at least 256 bytes.
+            instrument_driver_revision (str): Returns the value of the specific_driver_revision property in the form of a string.
 
-            firmware_revision (str): Returns the value of the instrument_firmware_revision property in the form of a string. You must pass a ViChar array with at least 256 bytes.
+                You must pass a ViChar array with at least 256 bytes.
+
+            firmware_revision (str): Returns the value of the instrument_firmware_revision property in the form of a string.
+
+                You must pass a ViChar array with at least 256 bytes.
 
         '''
         instrument_driver_revision, firmware_revision = self._interpreter.revision_query()

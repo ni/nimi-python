@@ -2758,7 +2758,7 @@ revision_query
 
             Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
 
-                    **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
             
 
@@ -2771,7 +2771,9 @@ revision_query
                 instrument_driver_revision (str): 
 
 
-                    Returns the value of the :py:attr:`nirfsg.Session.specific_driver_revision` property in the form of a string. You must pass a ViChar array with at least 256 bytes.
+                    Returns the value of the :py:attr:`nirfsg.Session.specific_driver_revision` property in the form of a string.
+
+                    You must pass a ViChar array with at least 256 bytes.
 
                     
 
@@ -2779,7 +2781,9 @@ revision_query
                 firmware_revision (str): 
 
 
-                    Returns the value of the :py:attr:`nirfsg.Session.instrument_firmware_revision` property in the form of a string. You must pass a ViChar array with at least 256 bytes.
+                    Returns the value of the :py:attr:`nirfsg.Session.instrument_firmware_revision` property in the form of a string.
+
+                    You must pass a ViChar array with at least 256 bytes.
 
                     
 
@@ -7890,7 +7894,7 @@ instrument_firmware_revision
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsg.Session.RevisionQuery`
+        - :py:meth:`nirfsg.Session.revision_query`
 
         The following table lists the characteristics of this property.
 
