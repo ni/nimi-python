@@ -2683,9 +2683,7 @@ and this project adheres to [Python Versioning](http://legacy.python.org/dev/pep
 <!--
 - [Unreleased](#nitclk-unreleased)
 
-#### [nitclk
-
-] Unreleased
+#### [nitclk] Unreleased
 - Added
 - Changed
 - Removed
