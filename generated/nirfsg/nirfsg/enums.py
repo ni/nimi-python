@@ -364,6 +364,25 @@ class LoPlLfractionalModeEnabled(Enum):
     SCRIPT_TRIGGER = 1
 
 
+class LoadConfigurationResetOptions(Enum):
+    WAVEFORMS = 1
+    r'''
+    NI-RFSG skips resetting the waveform configurations.
+    '''
+    DEEMBEDDING_TABLES = 8
+    r'''
+    NI-RFSG skips resetting the de-embedding tables.
+    '''
+    SCRIPTS = 2
+    r'''
+    NI-RFSG skips resetting the scripts.
+    '''
+    NONE = 0
+    r'''
+    NI-RFSG resets all configurations.
+    '''
+
+
 class LoadOptions(Enum):
     NONE = 0
     r'''
@@ -585,12 +604,25 @@ class RFInLoExportEnabled(Enum):
     r'''
     The RF In local oscillator signal is not present at the front panel LO OUT connector.
     '''
-    MANUAL = 0
     ENABLE = 1
     r'''
     The RF In local oscillator signal is present at the front panel LO OUT connector.
     '''
-    SCRIPT_TRIGGER = 1
+
+
+class RefPllBandwidth(Enum):
+    NARROW = 0
+    r'''
+    Uses the narrowest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
+    '''
+    MEDIUM = 1
+    r'''
+    Uses the medium loop bandwidth setting for the PLL.
+    '''
+    WIDE = 2
+    r'''
+    Uses the widest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
+    '''
 
 
 class ReferenceClockExportedRate(Enum):
@@ -628,29 +660,6 @@ class RelativeTo(Enum):
     r'''
     The reference position is relative to the start of the waveform.
     '''
-
-
-class ResetOptions(Enum):
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS = 1
-    r'''
-    NI-RFSG skips resetting the waveform configurations.
-    '''
-    MANUAL = 0
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES = 8
-    r'''
-    NI-RFSG skips resetting the de-embedding tables.
-    '''
-    SCRIPT_TRIGGER = 1
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS = 2
-    r'''
-    NI-RFSG skips resetting the scripts.
-    '''
-    MARKER_EVENT = 2
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE = 0
-    r'''
-    NI-RFSG resets all configurations.
-    '''
-    SELF_CAL_IMAGE_SUPPRESSION = 8
 
 
 class ResetWithOptionsStepsToOmit(Enum):

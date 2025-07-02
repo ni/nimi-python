@@ -848,6 +848,51 @@ LoPlLfractionalModeEnabled
 
 
 
+LoadConfigurationResetOptions
+-----------------------------
+
+.. py:class:: LoadConfigurationResetOptions
+
+    .. py:attribute:: LoadConfigurationResetOptions.WAVEFORMS
+
+
+
+        NI-RFSG skips resetting the waveform configurations.
+
+        
+
+
+
+    .. py:attribute:: LoadConfigurationResetOptions.DEEMBEDDING_TABLES
+
+
+
+        NI-RFSG skips resetting the de-embedding tables.
+
+        
+
+
+
+    .. py:attribute:: LoadConfigurationResetOptions.SCRIPTS
+
+
+
+        NI-RFSG skips resetting the scripts.
+
+        
+
+
+
+    .. py:attribute:: LoadConfigurationResetOptions.NONE
+
+
+
+        NI-RFSG resets all configurations.
+
+        
+
+
+
 LoadOptions
 -----------
 
@@ -1363,10 +1408,6 @@ RFInLoExportEnabled
 
 
 
-    .. py:attribute:: RFInLoExportEnabled.MANUAL
-
-
-
     .. py:attribute:: RFInLoExportEnabled.ENABLE
 
 
@@ -1377,7 +1418,38 @@ RFInLoExportEnabled
 
 
 
-    .. py:attribute:: RFInLoExportEnabled.SCRIPT_TRIGGER
+RefPllBandwidth
+---------------
+
+.. py:class:: RefPllBandwidth
+
+    .. py:attribute:: RefPllBandwidth.NARROW
+
+
+
+        Uses the narrowest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_NARROW` allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
+
+        
+
+
+
+    .. py:attribute:: RefPllBandwidth.MEDIUM
+
+
+
+        Uses the medium loop bandwidth setting for the PLL.
+
+        
+
+
+
+    .. py:attribute:: RefPllBandwidth.WIDE
+
+
+
+        Uses the widest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_WIDE` on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
+
+        
 
 
 
@@ -1463,67 +1535,6 @@ RelativeTo
         The reference position is relative to the start of the waveform.
 
         
-
-
-
-ResetOptions
-------------
-
-.. py:class:: ResetOptions
-
-    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS
-
-
-
-        NI-RFSG skips resetting the waveform configurations.
-
-        
-
-
-
-    .. py:attribute:: ResetOptions.MANUAL
-
-
-
-    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES
-
-
-
-        NI-RFSG skips resetting the de-embedding tables.
-
-        
-
-
-
-    .. py:attribute:: ResetOptions.SCRIPT_TRIGGER
-
-
-
-    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS
-
-
-
-        NI-RFSG skips resetting the scripts.
-
-        
-
-
-
-    .. py:attribute:: ResetOptions.MARKER_EVENT
-
-
-
-    .. py:attribute:: ResetOptions.RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE
-
-
-
-        NI-RFSG resets all configurations.
-
-        
-
-
-
-    .. py:attribute:: ResetOptions.SELF_CAL_IMAGE_SUPPRESSION
 
 
 

@@ -801,6 +801,39 @@ enums = {
             }
         ]
     },
+    'LoadConfigurationResetOptions': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips resetting the waveform configurations.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips resetting the de-embedding tables.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips resetting the scripts.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG resets all configurations.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
+                'value': 0
+            }
+        ]
+    },
     'LoadOptions': {
         'codegen_method': 'public',
         'values': [
@@ -1210,18 +1243,10 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'The RF In local oscillator signal is present at the front panel LO OUT connector.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
                 'value': 1
             }
         ]
@@ -1247,6 +1272,32 @@ enums = {
             {
                 'name': 'NIRFSG_VAL_ENABLED',
                 'value': 1
+            }
+        ]
+    },
+    'RefPllBandwidth': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the narrowest loop bandwidth setting for the PLL. Setting this attribute to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.'
+                },
+                'name': 'NIRFSG_VAL_NARROW',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the medium loop bandwidth setting for the PLL.'
+                },
+                'name': 'NIRFSG_VAL_MEDIUM',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the widest loop bandwidth setting for the PLL. Setting this attribute to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.'
+                },
+                'name': 'NIRFSG_VAL_WIDE',
+                'value': 2
             }
         ]
     },
@@ -1315,55 +1366,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_START_OF_WAVEFORM',
                 'value': 8000
-            }
-        ]
-    },
-    'ResetOptions': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'NI-RFSG skips resetting the waveform configurations.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG skips resetting the de-embedding tables.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
-                'value': 8
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG skips resetting the scripts.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
-                'value': 2
-            },
-            {
-                'name': 'NIRFSG_VAL_MARKER_EVENT',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG resets all configurations.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_SELF_CAL_IMAGE_SUPPRESSION',
-                'value': 8
             }
         ]
     },
