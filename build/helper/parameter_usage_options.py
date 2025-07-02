@@ -62,3 +62,5 @@ class ParameterUsageOptions(AutoNumber):
     '''Get the len parameter'''
     INPUT_ENUM_PARAMETERS = ()
     '''Get any input parameters whose type is enum'''
+    COMPLEX_NUMBER_PARAMETERS = ()
+    '''Get all parameters of complex type'''

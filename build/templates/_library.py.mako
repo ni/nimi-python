@@ -12,12 +12,16 @@ driver_name = config['driver_name']
 
 functions = config['functions']
 functions = helper.filter_library_functions(functions)
+are_complex_parameters_used = helper.are_complex_parameters_used(functions)
 %>\
 
 import ctypes
 import ${module_name}.errors as errors
 import threading
 
+% if are_complex_parameters_used:
+from ${module_name}._complextype import *  # noqa: F403
+% endif
 from ${module_name}._visatype import *  # noqa: F403,H303
 % for c in config['custom_types']:
 

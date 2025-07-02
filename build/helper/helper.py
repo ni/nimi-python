@@ -7,25 +7,28 @@ pp = pprint.PrettyPrinter(indent=4)
 
 # noqa statements because we want to format the table in a readable way
 _type_map = {
-    'ViConstString': { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViString':      { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViInt8':        { 'array_type': 'b',      'python_type': 'int',   'numpy_type': 'int8',       },  # noqa: E201, E202, E241
-    'ViUInt8':       { 'array_type': 'B',      'python_type': 'int',   'numpy_type': 'uint8',      },  # noqa: E201, E202, E241
-    'ViInt16':       { 'array_type': 'h',      'python_type': 'int',   'numpy_type': 'int16',      },  # noqa: E201, E202, E241
-    'ViUInt16':      { 'array_type': 'H',      'python_type': 'int',   'numpy_type': 'uint16',     },  # noqa: E201, E202, E241
-    'ViInt32':       { 'array_type': 'l',      'python_type': 'int',   'numpy_type': 'int32',      },  # noqa: E201, E202, E241
-    'ViUInt32':      { 'array_type': 'L',      'python_type': 'int',   'numpy_type': 'uint32',     },  # noqa: E201, E202, E241
-    'ViInt64':       { 'array_type': 'q',      'python_type': 'int',   'numpy_type': 'int64',      },  # noqa: E201, E202, E241
-    'ViUInt64':      { 'array_type': 'Q',      'python_type': 'int',   'numpy_type': 'uint64',     },  # noqa: E201, E202, E241
-    'ViReal32':      { 'array_type': 'f',      'python_type': 'float', 'numpy_type': 'float32',    },  # noqa: E201, E202, E241
-    'ViReal64':      { 'array_type': 'd',      'python_type': 'float', 'numpy_type': 'float64',    },  # noqa: E201, E202, E241
-    'ViStatus':      { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViSession':     { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViAttr':        { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViChar':        { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViChar[]':      { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViBoolean':     { 'array_type': None,     'python_type': 'bool',  'numpy_type': None,         },  # noqa: E201, E202, E241
-    'ViRsrc':        { 'array_type': None,     'python_type': 'str',   'numpy_type': 'bool_',      },  # noqa: E201, E202, E241
+    'ViConstString':      { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViString':           { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViInt8':             { 'array_type': 'b',      'python_type': 'int',   'numpy_type': 'int8',       },  # noqa: E201, E202, E241
+    'ViUInt8':            { 'array_type': 'B',      'python_type': 'int',   'numpy_type': 'uint8',      },  # noqa: E201, E202, E241
+    'ViInt16':            { 'array_type': 'h',      'python_type': 'int',   'numpy_type': 'int16',      },  # noqa: E201, E202, E241
+    'ViUInt16':           { 'array_type': 'H',      'python_type': 'int',   'numpy_type': 'uint16',     },  # noqa: E201, E202, E241
+    'ViInt32':            { 'array_type': 'l',      'python_type': 'int',   'numpy_type': 'int32',      },  # noqa: E201, E202, E241
+    'ViUInt32':           { 'array_type': 'L',      'python_type': 'int',   'numpy_type': 'uint32',     },  # noqa: E201, E202, E241
+    'ViInt64':            { 'array_type': 'q',      'python_type': 'int',   'numpy_type': 'int64',      },  # noqa: E201, E202, E241
+    'ViUInt64':           { 'array_type': 'Q',      'python_type': 'int',   'numpy_type': 'uint64',     },  # noqa: E201, E202, E241
+    'ViReal32':           { 'array_type': 'f',      'python_type': 'float', 'numpy_type': 'float32',    },  # noqa: E201, E202, E241
+    'ViReal64':           { 'array_type': 'd',      'python_type': 'float', 'numpy_type': 'float64',    },  # noqa: E201, E202, E241
+    'ViStatus':           { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViSession':          { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViAttr':             { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViChar':             { 'array_type': None,     'python_type': 'int',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViChar[]':           { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViBoolean':          { 'array_type': None,     'python_type': 'bool',  'numpy_type': None,         },  # noqa: E201, E202, E241
+    'ViRsrc':             { 'array_type': None,     'python_type': 'str',   'numpy_type': 'bool_',      },  # noqa: E201, E202, E241
+    'NIComplexNumber':    { 'array_type': None,     'python_type': None,    'numpy_type': 'complex128', },  # noqa: E201, E202, E241
+    'NIComplexNumberF32': { 'array_type': None,     'python_type': None,    'numpy_type': 'complex64',  },  # noqa: E201, E202, E241
+    'NIComplexI16':       { 'array_type': None,     'python_type': None,    'numpy_type': 'int16',      },  # noqa: E201, E202, E241
 }
 
 

@@ -256,6 +256,10 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
     else:
         module_name = '_visatype'
 
+    # Use _complextype.py file for complex parameter
+    if parameter['complex_type'] is not None:
+        module_name = '_complextype'
+
     if parameter['is_string'] is True:
         definitions = _get_ctype_variable_definition_snippet_for_string(parameter, parameters, ivi_dance_step, module_name)
     elif parameter['is_buffer'] is True:
@@ -362,7 +366,12 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             definition = '{}.{}({})  # case S150'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
         elif corresponding_buffer_parameters and corresponding_buffer_parameters[0]['direction'] == 'in':  # We are only looking at the first one to see if it is 'in'. Assumes all are the same here, assert below if not
             # Parameter denotes the size of another (the "corresponding") parameter.
-            definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
+            # Interleaved array length is going to be double the length of number of samples.
+            # This is used for complex waveforms, where the real and imaginary parts are interleaved in the array.
+            if corresponding_buffer_parameters[0]['complex_type'] == 'interleaved':
+                definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}) // 2)  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
+            else:
+                definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
         else:
             if corresponding_buffer_parameters[0]['size']['mechanism'] == 'ivi-dance':  # We are only looking at the first one. Assumes all are the same here, assert below if not
                 # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance'
@@ -426,7 +435,10 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
     definition = None
 
     if parameter['numpy'] is True and use_numpy_array is True:
-        definition = '_get_ctypes_pointer_for_buffer(value={})  # case B510'.format(parameter['python_name'])
+        if parameter['complex_type'] is None:
+            definition = '_get_ctypes_pointer_for_buffer(value={})  # case B510'.format(parameter['python_name'])
+        else:
+            definition = '_get_ctypes_pointer_for_buffer(value={}, library_type={}.{})  # case B510'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
     elif parameter['direction'] == 'in':
         if custom_type is not None:
             definition = '_get_ctypes_pointer_for_buffer([{0}.{1}(c) for c in {2}], library_type={0}.{1})  # case B540'.format(module_name, parameter['ctypes_type'], parameter['python_name'])
