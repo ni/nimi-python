@@ -4,6 +4,7 @@ from .documentation_snippets import attr_note_text
 from .documentation_snippets import enum_note_text
 from .documentation_snippets import func_note_text
 from .documentation_snippets import rep_cap_attr_desc
+from .documentation_snippets import rep_cap_attr_desc_without_global
 from .documentation_snippets import rep_cap_method_desc
 from .helper import get_array_type_for_api_type
 from .helper import get_numpy_type_for_api_type
@@ -116,7 +117,10 @@ def add_attribute_rep_cap_tip(attr, config):
 
         multi_capability = get_attribute_repeated_caps_with_conjunction(attr)
         single_capability = attr['supported_rep_caps'][0]
-        attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'], multi_capability, single_capability, attr['python_name'])
+        if config['repeated_capability_object_type']['python'] != 'applicable-attributes-only':
+            attr['documentation']['tip'] = rep_cap_attr_desc.format(config['module_name'], multi_capability, single_capability, attr['python_name'])
+        else:
+            attr['documentation']['tip'] = rep_cap_attr_desc_without_global.format(config['module_name'], multi_capability, single_capability, attr['python_name'])
 
 
 def get_documentation_for_node_rst(node, config, indent=0):

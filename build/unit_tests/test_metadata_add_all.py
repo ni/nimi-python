@@ -979,6 +979,9 @@ config_expected = {
         },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
+    'repeated_capability_object_type': {
+        'python': 'session'
+    },
     'repeated_capabilities': [
         {'python_name': 'channels', 'prefix': '', },
     ],

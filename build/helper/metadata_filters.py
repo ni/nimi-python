@@ -451,3 +451,16 @@ def filter_codegen_enums(enums):
     return {k: v for k, v in enums.items() if v['codegen_method'] != 'no'}
 
 
+def filter_rep_cap_supported_attributes(attributes, rep_cap_name):
+    '''Returns attribute metadata only for those attributes that support the specified repeated capability.
+
+    Args:
+        attributes: Dictionary of attribute metadata.
+
+        rep_cap_name: The name of the repeated capability to filter by.
+
+    Returns:
+        Dictionary of attributes that support the specified repeated capability.
+    '''
+    return {k: v for k, v in attributes.items() if rep_cap_name in v.get('supported_rep_caps', [])}
+

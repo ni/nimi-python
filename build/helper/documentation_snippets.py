@@ -24,6 +24,13 @@ To set/get on all {1}, you can call the property directly on the :py:class:`{0}.
 Example: :py:attr:`my_session.{3}`
 '''
 
+rep_cap_attr_desc_without_global = '''
+This property can be set/get on specific {1} within your :py:class:`{0}.Session` instance.
+Use Python index notation on the repeated capabilities container {1} to specify a subset.
+
+Example: :py:attr:`my_session.{2}[ ... ].{3}`
+'''
+
 func_note_text = '''
 One or more of the referenced functions are not in the Python API for this driver.
 '''
