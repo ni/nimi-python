@@ -15,6 +15,7 @@
 ---
 
 ### nidcpower (NI-DCPower)
+- [Unreleased](#nidcpower-unreleased)
 - [1.5.0](#nidcpower-150---2025-07-01)
 - [1.4.9](#nidcpower-149---2025-02-26)
 - [1.4.8](#nidcpower-148---2024-04-26)
@@ -46,6 +47,11 @@
 - [0.5.0](#nidcpower-050---2017-11-27)
 - [0.4.0](#nidcpower-040---2017-11-07)
 - [0.3.0](#nidcpower-030---2017-10-13)
+
+#### [nidcpower] Unreleased
+- Added
+- Changed
+- Removed
 
 #### [nidcpower] 1.5.0 - 2025-07-01
 - Added
