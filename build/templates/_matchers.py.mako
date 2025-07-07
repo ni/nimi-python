@@ -3,8 +3,19 @@ ${template_parameters['encoding_tag']}
 '''Matcher classes used by unit tests in order to set mock expectations.
 These work well with our visatype definitions.
 '''
+<%
+import build.helper as helper
+
+config = template_parameters['metadata'].config
+functions = config['functions']
+functions = helper.filter_codegen_functions(functions)
+are_complex_parameters_used = helper.are_complex_parameters_used(functions)
+%>\
 
 import ctypes
+% if are_complex_parameters_used:
+import ${template_parameters['metadata'].config['module_name']}._complextype as _complextype
+% endif
 import ${template_parameters['metadata'].config['module_name']}._visatype as _visatype
 import pprint
 
@@ -271,6 +282,59 @@ class ViReal64PointerMatcher(_PointerMatcher):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
 
 
+% if are_complex_parameters_used:
+def _compare_complex_number_arrays(expected, actual):
+    for i in range(expected.expected_size):
+        expected_value = expected.expected_data[i]
+        actual_value = actual[i]
+        if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
+            return False
+    return True
+
+
+class NIComplexNumberPointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.NIComplexNumber)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+        return _compare_complex_number_arrays(self, other)
+
+    def __repr__(self):
+        return f"NIComplexNumberPointerMatcher({self.expected_data})"
+
+
+class NIComplexNumberF32PointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.NIComplexNumberF32)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+        return _compare_complex_number_arrays(self, other)
+
+    def __repr__(self):
+        return f"NIComplexNumberF32PointerMatcher({self.expected_data})"
+
+
+class NIComplexI16PointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.NIComplexI16)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+        return _compare_complex_number_arrays(self, other)
+
+    def __repr__(self):
+        return f"NIComplexI16PointerMatcher({self.expected_data})"
+
+
+% endif
 # Buffers
 
 

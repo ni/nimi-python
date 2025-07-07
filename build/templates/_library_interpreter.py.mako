@@ -12,6 +12,7 @@ driver_name = config['driver_name']
 
 functions = config['functions']
 functions = helper.filter_codegen_functions(functions)
+are_complex_parameters_used = helper.are_complex_parameters_used(functions)
 %>\
 
 import array
@@ -20,6 +21,9 @@ import hightime  # noqa: F401
 % if 'SetRuntimeEnvironment' in functions:
 import platform
 
+% endif
+% if are_complex_parameters_used:
+import ${module_name}._complextype as _complextype
 % endif
 import ${module_name}._library_singleton as _library_singleton
 import ${module_name}._visatype as _visatype
@@ -46,7 +50,16 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
+        % if are_complex_parameters_used:
+        if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
+            complex_dtype = numpy.dtype(library_type)
+            structured_array = value.view(complex_dtype)
+            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+        else:
+            return numpy.ctypeslib.as_ctypes(value)
+        % else:
         return numpy.ctypeslib.as_ctypes(value)
+        % endif
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):

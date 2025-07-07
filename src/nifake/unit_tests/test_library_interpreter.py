@@ -843,6 +843,62 @@ class TestLibraryInterpreter:
             interpreter.import_attribute_configuration_buffer(configuration)
         self.patched_library.niFake_ImportAttributeConfigurationBuffer.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(len(configuration)), _matchers.ViInt8BufferMatcher(expected_list))
 
+    def test_write_waveform_numpy_complex128_valid_input(self):
+        from nifake._complextype import NIComplexNumber
+
+        waveform_data = numpy.full(1000, 0.707 + 0.707j, dtype=numpy.complex128)
+        number_of_samples = len(waveform_data)
+
+        waveform_data_ctypes = (NIComplexNumber * number_of_samples)(
+            *[NIComplexNumber(real=0.707, imag=0.707) for _ in range(number_of_samples)]
+        )
+        waveform_data_pointer = ctypes.cast(waveform_data_ctypes, ctypes.POINTER(NIComplexNumber))
+        self.patched_library.niFake_WriteWaveformNumpyComplex128.side_effect = self.side_effects_helper.niFake_WriteWaveformNumpyComplex128
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.write_waveform_numpy_complex128(waveform_data)
+        self.patched_library.niFake_WriteWaveformNumpyComplex128.assert_called_once_with(
+            _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+            _matchers.ViInt32Matcher(number_of_samples),
+            _matchers.NIComplexNumberPointerMatcher(waveform_data_pointer, number_of_samples)
+        )
+
+    def test_write_waveform_numpy_complex64_valid_input(self):
+        from nifake._complextype import NIComplexNumberF32
+
+        waveform_data = numpy.full(1000, 0.707 + 0.707j, dtype=numpy.complex64)
+        number_of_samples = len(waveform_data)
+
+        waveform_data_ctypes = (NIComplexNumberF32 * number_of_samples)(
+            *[NIComplexNumberF32(real=0.707, imag=0.707) for _ in range(number_of_samples)]
+        )
+        waveform_data_pointer = ctypes.cast(waveform_data_ctypes, ctypes.POINTER(NIComplexNumberF32))
+        self.patched_library.niFake_WriteWaveformNumpyComplex64.side_effect = self.side_effects_helper.niFake_WriteWaveformNumpyComplex64
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.write_waveform_numpy_complex64(waveform_data)
+        self.patched_library.niFake_WriteWaveformNumpyComplex64.assert_called_once_with(
+            _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+            _matchers.ViInt32Matcher(number_of_samples),
+            _matchers.NIComplexNumberF32PointerMatcher(waveform_data_pointer, number_of_samples)
+        )
+
+    def test_write_waveform_numpy_complex_interleaved_i16_valid_input(self):
+        from nifake._complextype import NIComplexI16
+
+        waveform_data = numpy.array([32767, 0] * 1000, dtype=numpy.int16)
+        number_of_samples = len(waveform_data) // 2
+        waveform_data_ctypes = (NIComplexI16 * number_of_samples)(
+            *[NIComplexI16(real=32767, imag=0) for _ in range(number_of_samples)]
+        )
+        waveform_data_pointer = ctypes.cast(waveform_data_ctypes, ctypes.POINTER(NIComplexI16))
+        self.patched_library.niFake_WriteWaveformNumpyComplexInterleavedI16.side_effect = self.side_effects_helper.niFake_WriteWaveformNumpyComplexInterleavedI16
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.write_waveform_numpy_complex_interleaved_i16(waveform_data)
+        self.patched_library.niFake_WriteWaveformNumpyComplexInterleavedI16.assert_called_once_with(
+            _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+            _matchers.ViInt32Matcher(number_of_samples),
+            _matchers.NIComplexI16PointerMatcher(waveform_data_pointer, number_of_samples)
+        )
+
     def test_matcher_prints(self):
         assert _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViSessionMatcher(" + str(nifake._visatype.ViSession) + ", 42)"
         assert _matchers.ViAttrMatcher(SESSION_NUM_FOR_TEST).__repr__() == "ViAttrMatcher(" + str(nifake._visatype.ViAttr) + ", 42)"

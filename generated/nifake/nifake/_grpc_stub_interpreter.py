@@ -489,6 +489,15 @@ class GrpcStubInterpreter(object):
     def write_waveform_numpy(self, waveform):  # noqa: N802
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
+    def write_waveform_numpy_complex128(self, waveform_data_array):  # noqa: N802
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+
+    def write_waveform_numpy_complex64(self, waveform_data_array):  # noqa: N802
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+
+    def write_waveform_numpy_complex_interleaved_i16(self, waveform_data_array):  # noqa: N802
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+
     def close(self):  # noqa: N802
         self._invoke(
             self._client.Close,
