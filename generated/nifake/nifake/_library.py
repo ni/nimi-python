@@ -192,7 +192,7 @@ class Library(object):
         with self._func_lock:
             if self.niFake_FunctionWithIntFlagParameter_cfunc is None:
                 self.niFake_FunctionWithIntFlagParameter_cfunc = self._get_library_function('niFake_FunctionWithIntFlagParameter')
-                self.niFake_FunctionWithIntFlagParameter_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niFake_FunctionWithIntFlagParameter_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
                 self.niFake_FunctionWithIntFlagParameter_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FunctionWithIntFlagParameter_cfunc(vi, flag)
 

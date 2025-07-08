@@ -371,7 +371,7 @@ functions = {
                 'enum': 'IntFlagEnum',
                 'grpc_enum': None,
                 'name': 'flag',
-                'type': 'ViString'
+                'type': 'ViUInt64'
             }
         ],
         'returns': 'ViStatus'
