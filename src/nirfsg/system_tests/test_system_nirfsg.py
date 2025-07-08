@@ -110,7 +110,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
     def test_get_self_calibration_last_date_and_time(self, test_rfsg_device_session):
-        dt = test_rfsg_device_session.get_self_calibration_last_date_and_time()
+        dt = test_rfsg_device_session.get_self_calibration_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
         assert isinstance(dt, hightime.datetime)
 
     def test_get_terminal_name(self, test_rfsg_device_session):
@@ -333,14 +333,14 @@ class SystemTests:
         assert test_rfsg_device_session.script_triggers[0].script_trigger_type == nirfsg.ScriptTrigType.SOFTWARE
 
     def test_configure_digital_edge_trigger(self, test_rfsg_device_session):
-        test_rfsg_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsg.ScriptTrigDigEdgeEdge.RISING)
+        test_rfsg_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsg.StartTrigDigEdgeEdge.RISING)
         test_rfsg_device_session.configure_digital_edge_script_trigger('scriptTrigger1', 'PXI_Trig2', nirfsg.ScriptTrigDigEdgeEdge.FALLING)
         assert test_rfsg_device_session.start_trigger_type == nirfsg.StartTrigType.DIGITAL_EDGE
-        assert test_rfsg_device_session.start_trigger_terminal_name == 'PXI_Trig1'
+        assert test_rfsg_device_session.digital_edge_start_trigger_source == 'PXI_Trig1'
         assert test_rfsg_device_session.digital_edge_start_trigger_edge == nirfsg.StartTrigDigEdgeEdge.RISING
         assert test_rfsg_device_session.script_triggers[1].script_trigger_type == nirfsg.ScriptTrigType.DIGITAL_EDGE
-        assert test_rfsg_device_session.script_triggers[1].script_trigger_terminal_name == 'PXI_Trig2'
-        assert test_rfsg_device_session.digital_edge_script_trigger_edge == nirfsg.ScriptTrigDigEdgeEdge.FALLING
+        assert test_rfsg_device_session.script_triggers[1].digital_edge_script_trigger_source == 'PXI_Trig2'
+        assert test_rfsg_device_session.script_triggers[1].digital_edge_script_trigger_edge == nirfsg.ScriptTrigDigEdgeEdge.FALLING
 
     def test_disable_trigger(self, test_rfsg_device_session):
         test_rfsg_device_session.configure_software_start_trigger()
@@ -386,14 +386,14 @@ class SystemTests:
     def test_save_load_configuration(self, test_rfsg_device_session):
         test_rfsg_device_session.configure_rf(2e9, -5.0)
         test_rfsg_device_session.iq_rate = 1e6
-        test_rfsg_device_session.save_configurations_to_file(get_test_file_path('tempConfiguration.json'))
+        test_rfsg_device_session.save_configurations_to_file('', get_test_file_path('tempConfiguration.json'))
         assert os.path.exists(get_test_file_path('tempConfiguration.json'))
         test_rfsg_device_session.configure_rf(3e9, -15.0)
         test_rfsg_device_session.iq_rate = 2e6
         assert test_rfsg_device_session.frequency == 3e9
         assert test_rfsg_device_session.power_level == -15.0
         assert test_rfsg_device_session.iq_rate == 2e6
-        test_rfsg_device_session.load_configurations_from_file(get_test_file_path('tempConfiguration.json'))
+        test_rfsg_device_session.load_configurations_from_file('', get_test_file_path('tempConfiguration.json'))
         assert test_rfsg_device_session.frequency == 2e9
         assert test_rfsg_device_session.power_level == -5.0
         assert test_rfsg_device_session.iq_rate == 1e6
@@ -519,8 +519,8 @@ class SystemTests:
             test_rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
 
     def test_deembedding_table_with_s2p_file(self, test_rfsg_device_session):
-        test_rfsg_device_session.create_deembedding_sparameter_table_s2_p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2)
-        test_rfsg_device_session.create_deembedding_sparameter_table_s2_p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1)
+        test_rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2)
+        test_rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1)
         test_rfsg_device_session.configure_deembedding_table_interpolation_linear('', 'myTable1', nirfsg.Format.MAGNITUDE_AND_PHASE)
         test_rfsg_device_session.deembedding_port[''].deembedding_selected_table = 'myTable1'
         with test_rfsg_device_session.initiate():

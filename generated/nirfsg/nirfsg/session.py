@@ -8265,20 +8265,20 @@ class Session(_SessionBase):
                 One or more of the referenced properties are not in the Python API for this driver.
 
         '''
+        import numpy
         if str(type(waveform_data_array)).find("'numpy.ndarray'") != -1:
-            import numpy
             if waveform_data_array.dtype == numpy.complex128:
-                self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
+                return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
             elif waveform_data_array.dtype == numpy.complex64:
-                self._write_arb_waveform_complex_f32(waveform_name, waveform_data_array, more_data_pending)
+                return self._write_arb_waveform_complex_f32(waveform_name, waveform_data_array, more_data_pending)
             elif waveform_data_array.dtype == numpy.int16:
-                self._write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
+                return self._write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported dtype. Expected {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
-        self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
+        return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
     @ivi_synchronized
     def write_p2p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
