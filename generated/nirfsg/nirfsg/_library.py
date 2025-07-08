@@ -93,6 +93,7 @@ class Library(object):
         self.niRFSG_ResetAttribute_cfunc = None
         self.niRFSG_ResetDevice_cfunc = None
         self.niRFSG_ResetWithDefaults_cfunc = None
+        self.niRFSG_ResetWithOptions_cfunc = None
         self.niRFSG_RevisionQuery_cfunc = None
         self.niRFSG_SaveConfigurationsToFile_cfunc = None
         self.niRFSG_SelectArbWaveform_cfunc = None
@@ -714,6 +715,14 @@ class Library(object):
                 self.niRFSG_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ResetWithDefaults_cfunc(vi)
+
+    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ResetWithOptions_cfunc is None:
+                self.niRFSG_ResetWithOptions_cfunc = self._get_library_function('niRFSG_ResetWithOptions')
+                self.niRFSG_ResetWithOptions_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
+                self.niRFSG_ResetWithOptions_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ResetWithOptions_cfunc(vi, steps_to_omit)
 
     def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         with self._func_lock:

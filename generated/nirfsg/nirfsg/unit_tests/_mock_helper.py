@@ -210,6 +210,8 @@ class SideEffectsHelper(object):
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
+        self._defaults['ResetWithOptions'] = {}
+        self._defaults['ResetWithOptions']['return'] = 0
         self._defaults['RevisionQuery'] = {}
         self._defaults['RevisionQuery']['return'] = 0
         self._defaults['RevisionQuery']['instrumentDriverRevision'] = None
@@ -893,6 +895,11 @@ class SideEffectsHelper(object):
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
 
+    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
+        if self._defaults['ResetWithOptions']['return'] != 0:
+            return self._defaults['ResetWithOptions']['return']
+        return self._defaults['ResetWithOptions']['return']
+
     def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         if self._defaults['RevisionQuery']['return'] != 0:
             return self._defaults['RevisionQuery']['return']
@@ -1181,6 +1188,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ResetDevice.return_value = 0
         mock_library.niRFSG_ResetWithDefaults.side_effect = MockFunctionCallError("niRFSG_ResetWithDefaults")
         mock_library.niRFSG_ResetWithDefaults.return_value = 0
+        mock_library.niRFSG_ResetWithOptions.side_effect = MockFunctionCallError("niRFSG_ResetWithOptions")
+        mock_library.niRFSG_ResetWithOptions.return_value = 0
         mock_library.niRFSG_RevisionQuery.side_effect = MockFunctionCallError("niRFSG_RevisionQuery")
         mock_library.niRFSG_RevisionQuery.return_value = 0
         mock_library.niRFSG_SaveConfigurationsToFile.side_effect = MockFunctionCallError("niRFSG_SaveConfigurationsToFile")

@@ -14,6 +14,7 @@ ViUInt16 = ctypes.c_uint16
 ViInt32 = ctypes.c_int32
 ViUInt32 = ctypes.c_uint32
 ViInt64 = ctypes.c_int64
+ViUInt64 = ctypes.c_uint64
 ViString = ctypes.c_char_p
 ViReal32 = ctypes.c_float
 ViReal64 = ctypes.c_double

@@ -384,14 +384,16 @@ class LoadConfigurationResetOptions(Enum):
 
 
 class LoadOptions(Enum):
-    NONE = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_NONE = 0
     r'''
     NI-RFSG loads all the configurations to the session.
     '''
-    WAVEFORMS = 1
+    MANUAL = 0
+    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM = 1
     r'''
     NI-RFSG skips loading the waveform configurations to the session.
     '''
+    SCRIPT_TRIGGER = 1
 
 
 class LoopBandwidth(Enum):

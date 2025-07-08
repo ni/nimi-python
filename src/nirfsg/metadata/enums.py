@@ -845,10 +845,18 @@ enums = {
                 'value': 0
             },
             {
+                'name': 'NIRFSG_VAL_MANUAL',
+                'value': 0
+            },
+            {
                 'documentation': {
                     'description': 'NI-RFSG skips loading the waveform configurations to the session.'
                 },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORM',
+                'value': 1
+            },
+            {
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
                 'value': 1
             }
         ]

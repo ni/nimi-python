@@ -6,16 +6,23 @@ config = template_parameters['metadata'].config
 enums = config['enums']
 %>
 from enum import Enum
+% if any(enums[e].get('enum_class', 'Enum') == 'IntFlag' for e in enums):
+from enum import IntFlag
+% endif
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
 
-class ${enums[enum_name]['python_name']}(Enum):
+class ${enums[enum_name]['python_name']}(${enums[enum_name].get('enum_class', 'Enum')}):
 <%
     print_list = []
 %>\
-    % for enum_value in enums[enum_name]['values']:
-    % if type(enum_value['value']) is str:
+    % for i, enum_value in enumerate(enums[enum_name]['values']):
+    % if enums[enum_name].get('enum_class', 'Enum') == 'IntFlag' and enum_value['value'] == 0:
+    ${enum_value['python_name']} = 0
+    % elif type(enum_value['value']) is str:
     ${enum_value['python_name']} = '${enum_value['value']}'
+    % elif enums[enum_name].get('enum_class', 'Enum') == 'IntFlag' and isinstance(enum_value['value'], int):
+    ${enum_value['python_name']} = ${enum_value['value']}
     % else:
     ${enum_value['python_name']} = ${enum_value['value']}
     % endif

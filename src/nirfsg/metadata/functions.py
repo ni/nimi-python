@@ -4105,6 +4105,7 @@ functions = {
             'description': '\nPerforms a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E'
         },
         'included_in_proto': True,
+        'is_error_handling': False,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -4182,6 +4183,208 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
+    },
+    'ResetWithOptions': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '              \n                Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\n                By default, this function exhibits the same behavior as nirfsg_Reset. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES for the **NIRFSG_ATTR_STEPS_TO_OMIT** parameter, this function does not release signal routes during the reset process.\n\n                When routes of signals between two devices are released, they are released regardless of which device created the route.\n\n                To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this function instead of nirfsg_Reset, with **NIRFSG_ATTR_STEPS_TO_OMIT** set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n                '
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Specifies a bitwise combination of integer flags (IntFlag) that indicate which reset steps to skip during the reset process. Multiple steps can be omitted by combining values using bitwise OR (|). The default value is NIRFSG_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset.\n\n                        **Defined Values:**\n                    ',
+                    'note': 'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES is not supported in external calibration or alignment sessions.',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_NONE',
+                            '0 (0x0)',
+                            'No step is omitted during reset.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_WAVEFORMS',
+                            '1 (0x1)',
+                            'Omits clearing waveforms.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_SCRIPTS',
+                            '2 (0x2)',
+                            'Omits clearing scripts.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES',
+                            '4 (0x4)',
+                            'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_DEEMBEDDING_TABLES',
+                            '8 (0x8)',
+                            'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'ResetWithOptionsStepsToOmit',
+                'name': 'stepsToOmit',
+                'type': 'ViUInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'RevisionQuery': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nReturns the revision numbers of the NI-RFSG driver and the instrument firmware.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the value of the NIRFSG_ATTR_SPECIFIC_DRIVER_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
+                },
+                'name': 'instrumentDriverRevision',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the value of the NIRFSG_ATTR_INSTRUMENT_FIRMWARE_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
+                },
+                'name': 'firmwareRevision',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ResetWithOptions': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '              \n                Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\n                By default, this function exhibits the same behavior as nirfsg_Reset. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES for the **NIRFSG_ATTR_STEPS_TO_OMIT** parameter, this function does not release signal routes during the reset process.\n\n                When routes of signals between two devices are released, they are released regardless of which device created the route.\n\n                To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this function instead of nirfsg_Reset, with **NIRFSG_ATTR_STEPS_TO_OMIT** set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n                **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n                '
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '                        Specifies a bitwise combination of integer flags (IntFlag) that indicate which reset steps to skip during the reset process. Multiple steps can be omitted by combining values using bitwise OR (|). The default value is NIRFSG_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset.\n\n                        **Defined Values:**\n                    ',
+                    'note': 'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES is not supported in external calibration or alignment sessions.',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_NONE',
+                            '0 (0x0)',
+                            'No step is omitted during reset.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_WAVEFORMS',
+                            '1 (0x1)',
+                            'Omits clearing waveforms.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_SCRIPTS',
+                            '2 (0x2)',
+                            'Omits clearing scripts.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES',
+                            '4 (0x4)',
+                            'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
+                        ],
+                        [
+                            'NIRFSG_VAL_RESET_WITH_OPTIONS_DEEMBEDDING_TABLES',
+                            '8 (0x8)',
+                            'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'ResetWithOptionsStepsToOmit',
+                'name': 'stepsToOmit',
+                'type': 'ViUInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',

@@ -218,6 +218,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def function_with_int_flag_parameter(self, flag):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        flag_ctype = ctypes.create_string_buffer(flag.value.encode(self._encoding))  # case C030
+        error_code = self._library.niFake_FunctionWithIntFlagParameter(vi_ctype, flag_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         site_list_ctype = ctypes.create_string_buffer(site_list.encode(self._encoding))  # case C010
