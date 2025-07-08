@@ -43,7 +43,7 @@ def main():
 
 def test_example():
     options = "Simulate=1, DriverSetup=Model:5841"
-    example('5841', options, 1e9, -10.0)
+    example('5841', options, 1e9, -10.0, 1000)
 
 
 def test_main():
