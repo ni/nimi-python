@@ -5,6 +5,7 @@ import ctypes
 import nirfsg.errors as errors
 import threading
 
+from nirfsg._complextype import *  # noqa: F403
 from nirfsg._visatype import *  # noqa: F403,H303
 
 
@@ -89,7 +90,6 @@ class Library(object):
         self.niRFSG_PerformThermalCorrection_cfunc = None
         self.niRFSG_QueryArbWaveformCapabilities_cfunc = None
         self.niRFSG_ReadAndDownloadWaveformFromFileTDMS_cfunc = None
-        self.niRFSG_Reset_cfunc = None
         self.niRFSG_ResetAttribute_cfunc = None
         self.niRFSG_ResetDevice_cfunc = None
         self.niRFSG_ResetWithDefaults_cfunc = None
@@ -112,9 +112,13 @@ class Library(object):
         self.niRFSG_SetWaveformMarkerEventLocations_cfunc = None
         self.niRFSG_UnlockSession_cfunc = None
         self.niRFSG_WaitUntilSettled_cfunc = None
+        self.niRFSG_WriteArbWaveformComplexF32_cfunc = None
+        self.niRFSG_WriteArbWaveformComplexF64_cfunc = None
+        self.niRFSG_WriteArbWaveformComplexI16_cfunc = None
         self.niRFSG_WriteP2PEndpointI16_cfunc = None
         self.niRFSG_WriteScript_cfunc = None
         self.niRFSG_close_cfunc = None
+        self.niRFSG_reset_cfunc = None
 
     def _get_library_function(self, name):
         try:
@@ -683,14 +687,6 @@ class Library(object):
                 self.niRFSG_ReadAndDownloadWaveformFromFileTDMS_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ReadAndDownloadWaveformFromFileTDMS_cfunc(vi, waveform_name, file_path, waveform_index)
 
-    def niRFSG_Reset(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_Reset_cfunc is None:
-                self.niRFSG_Reset_cfunc = self._get_library_function('niRFSG_Reset')
-                self.niRFSG_Reset_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niRFSG_Reset_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_Reset_cfunc(vi)
-
     def niRFSG_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_ResetAttribute_cfunc is None:
@@ -867,6 +863,30 @@ class Library(object):
                 self.niRFSG_WaitUntilSettled_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_WaitUntilSettled_cfunc(vi, max_time_milliseconds)
 
+    def niRFSG_WriteArbWaveformComplexF32(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_WriteArbWaveformComplexF32_cfunc is None:
+                self.niRFSG_WriteArbWaveformComplexF32_cfunc = self._get_library_function('niRFSG_WriteArbWaveformComplexF32')
+                self.niRFSG_WriteArbWaveformComplexF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexNumberF32), ViBoolean]  # noqa: F405
+                self.niRFSG_WriteArbWaveformComplexF32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_WriteArbWaveformComplexF32_cfunc(vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending)
+
+    def niRFSG_WriteArbWaveformComplexF64(self, vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_WriteArbWaveformComplexF64_cfunc is None:
+                self.niRFSG_WriteArbWaveformComplexF64_cfunc = self._get_library_function('niRFSG_WriteArbWaveformComplexF64')
+                self.niRFSG_WriteArbWaveformComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexNumber), ViBoolean]  # noqa: F405
+                self.niRFSG_WriteArbWaveformComplexF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_WriteArbWaveformComplexF64_cfunc(vi, waveform_name, number_of_samples, waveform_data_array, more_data_pending)
+
+    def niRFSG_WriteArbWaveformComplexI16(self, vi, waveform_name, number_of_samples, waveform_data_array):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_WriteArbWaveformComplexI16_cfunc is None:
+                self.niRFSG_WriteArbWaveformComplexI16_cfunc = self._get_library_function('niRFSG_WriteArbWaveformComplexI16')
+                self.niRFSG_WriteArbWaveformComplexI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexI16)]  # noqa: F405
+                self.niRFSG_WriteArbWaveformComplexI16_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_WriteArbWaveformComplexI16_cfunc(vi, waveform_name, number_of_samples, waveform_data_array)
+
     def niRFSG_WriteP2PEndpointI16(self, vi, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_WriteP2PEndpointI16_cfunc is None:
@@ -890,3 +910,11 @@ class Library(object):
                 self.niRFSG_close_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_close_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_close_cfunc(vi)
+
+    def niRFSG_reset(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_reset_cfunc is None:
+                self.niRFSG_reset_cfunc = self._get_library_function('niRFSG_reset')
+                self.niRFSG_reset_cfunc.argtypes = [ViSession]  # noqa: F405
+                self.niRFSG_reset_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_reset_cfunc(vi)

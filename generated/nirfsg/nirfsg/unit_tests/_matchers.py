@@ -5,6 +5,7 @@ These work well with our visatype definitions.
 '''
 
 import ctypes
+import nirfsg._complextype as _complextype
 import nirfsg._visatype as _visatype
 import pprint
 
@@ -269,6 +270,57 @@ class ViInt64PointerMatcher(_PointerMatcher):
 class ViReal64PointerMatcher(_PointerMatcher):
     def __init__(self):
         _PointerMatcher.__init__(self, _visatype.ViReal64)
+
+
+def _compare_complex_number_arrays(expected, actual):
+    for i in range(expected.expected_size):
+        expected_value = expected.expected_data[i]
+        actual_value = actual[i]
+        if expected_value.real != actual_value.real or expected_value.imag != actual_value.imag:
+            return False
+    return True
+
+
+class NIComplexNumberPointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.NIComplexNumber)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+        return _compare_complex_number_arrays(self, other)
+
+    def __repr__(self):
+        return f"NIComplexNumberPointerMatcher({self.expected_data})"
+
+
+class NIComplexNumberF32PointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.NIComplexNumberF32)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+        return _compare_complex_number_arrays(self, other)
+
+    def __repr__(self):
+        return f"NIComplexNumberF32PointerMatcher({self.expected_data})"
+
+
+class NIComplexI16PointerMatcher(_PointerMatcher):
+    def __init__(self, expected_data, expected_size):
+        _PointerMatcher.__init__(self, _complextype.NIComplexI16)
+        self.expected_data = expected_data
+        self.expected_size = expected_size
+
+    def __eq__(self, other):
+        _PointerMatcher.__eq__(self, other)
+        return _compare_complex_number_arrays(self, other)
+
+    def __repr__(self):
+        return f"NIComplexI16PointerMatcher({self.expected_data})"
 
 
 # Buffers
