@@ -664,29 +664,6 @@ class RelativeTo(Enum):
     '''
 
 
-class ResetOptions(Enum):
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS = 1
-    r'''
-    NI-RFSG skips resetting the waveform configurations.
-    '''
-    MANUAL = 0
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES = 8
-    r'''
-    NI-RFSG skips resetting the de-embedding tables.
-    '''
-    SCRIPT_TRIGGER = 1
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS = 2
-    r'''
-    NI-RFSG skips resetting the scripts.
-    '''
-    MARKER_EVENT = 2
-    RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE = 0
-    r'''
-    NI-RFSG resets all configurations.
-    '''
-    SELF_CAL_IMAGE_SUPPRESSION = 8
-
-
 class ResetWithOptionsStepsToOmit(Enum):
     DEEMBEDDING_TABLES = 8
     r'''
