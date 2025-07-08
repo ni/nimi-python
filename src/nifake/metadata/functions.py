@@ -358,7 +358,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The VI.'
+                    'description': 'Identifies a particular instrument session.'
                 },
                 'name': 'vi',
                 'type': 'ViSession'
