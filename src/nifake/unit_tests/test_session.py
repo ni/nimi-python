@@ -837,16 +837,22 @@ class TestSession:
             assert returned_timedeltas == expected_timedeltas
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
 
-    def test_function_with_int_flag_parameter(self):
-        import functools
-        import operator
-        session = nifake.Session('dev1')
-        # Patch the library interpreter function
-        with patch.object(session._interpreter, 'function_with_int_flag_parameter', return_value=None) as mock_func:
-            # OR all flags together
-            flags = functools.reduce(operator.or_, list(nifake.IntFlagEnum))
+    def test_function_with_int_flag_parameter_with_specific_flags(self):
+        flags = nifake.IntFlagEnum.A | nifake.IntFlagEnum.B
+        self.patched_library_interpreter.function_with_int_flag_parameter.side_effect = None
+        self.patched_library_interpreter.function_with_int_flag_parameter.return_value = None
+        with nifake.Session('dev1') as session:
             session.function_with_int_flag_parameter(flags)
-            mock_func.assert_called_once_with(flags)
+        self.patched_library_interpreter.function_with_int_flag_parameter.assert_called_once_with(flags)
+
+    def test_function_with_int_flag_parameter_invalid_type(self):
+        invalid_flag = "not_an_intflag"
+        import pytest
+        with nifake.Session('dev1') as session:
+            with pytest.raises(TypeError) as exc_info:
+                session.function_with_int_flag_parameter(invalid_flag)
+            assert "Parameter flag must be of type" in str(exc_info.value)
+            assert "IntFlagEnum" in str(exc_info.value)
 
     def test_session_write_waveform_numpy_complex64_invalid_dtype(self):
         invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex128)

@@ -348,7 +348,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-        'FunctionWithIntFlagParameter': {
+    'FunctionWithIntFlagParameter': {
         'codegen_method': 'public',
         'documentation': {
             'description': "Calls a function that takes a flag parameter which can be OR'd from multiple enum values."
