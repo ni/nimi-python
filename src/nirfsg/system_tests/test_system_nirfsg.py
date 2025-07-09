@@ -268,10 +268,10 @@ class SystemTests:
         test_rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         startlocations = [1, 100, 200]
         stoplocations = [50, 175, 750]
-        test_rfsg_device_session.set_waveform_burst_start_locations('waveform::mywaveform1', startlocations)
-        test_rfsg_device_session.set_waveform_burst_stop_locations('waveform::mywaveform1', stoplocations)
-        startlocations_out = test_rfsg_device_session.get_waveform_burst_start_locations('waveform::mywaveform1')
-        stoplocations_out = test_rfsg_device_session.get_waveform_burst_stop_locations('waveform::mywaveform1')
+        test_rfsg_device_session.waveform['mywaveform1'].set_waveform_burst_start_locations(startlocations)
+        test_rfsg_device_session.waveform['mywaveform1'].set_waveform_burst_stop_locations(stoplocations)
+        startlocations_out = test_rfsg_device_session.waveform['mywaveform1'].get_waveform_burst_start_locations()
+        stoplocations_out = test_rfsg_device_session.waveform['mywaveform1'].get_waveform_burst_stop_locations()
         assert startlocations_out == startlocations
         assert stoplocations_out == stoplocations
 
@@ -280,8 +280,8 @@ class SystemTests:
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         test_rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         markerlocations = [1, 100, 200]
-        test_rfsg_device_session.set_waveform_marker_event_locations('waveform::mywaveform1/marker0', markerlocations)
-        markerlocations_out = test_rfsg_device_session.get_waveform_marker_event_locations('waveform::mywaveform1/marker0')
+        test_rfsg_device_session.waveform['mywaveform1'].markers[0].set_waveform_marker_event_locations(markerlocations)
+        markerlocations_out = test_rfsg_device_session.waveform['mywaveform1'].markers[0].get_waveform_marker_event_locations()
         assert markerlocations_out == markerlocations
 
     def test_write_script(self, test_rfsg_device_session):
@@ -386,14 +386,14 @@ class SystemTests:
     def test_save_load_configuration(self, test_rfsg_device_session):
         test_rfsg_device_session.configure_rf(2e9, -5.0)
         test_rfsg_device_session.iq_rate = 1e6
-        test_rfsg_device_session.save_configurations_to_file('', get_test_file_path('tempConfiguration.json'))
+        test_rfsg_device_session.save_configurations_to_file(get_test_file_path('tempConfiguration.json'))
         assert os.path.exists(get_test_file_path('tempConfiguration.json'))
         test_rfsg_device_session.configure_rf(3e9, -15.0)
         test_rfsg_device_session.iq_rate = 2e6
         assert test_rfsg_device_session.frequency == 3e9
         assert test_rfsg_device_session.power_level == -15.0
         assert test_rfsg_device_session.iq_rate == 2e6
-        test_rfsg_device_session.load_configurations_from_file('', get_test_file_path('tempConfiguration.json'))
+        test_rfsg_device_session.load_configurations_from_file(get_test_file_path('tempConfiguration.json'))
         assert test_rfsg_device_session.frequency == 2e9
         assert test_rfsg_device_session.power_level == -5.0
         assert test_rfsg_device_session.iq_rate == 1e6
@@ -518,6 +518,7 @@ class SystemTests:
             test_rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.START, '')
             test_rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
 
+    @pytest.mark.skipif(sys.platform == "linux", reason="Function not supported on Linux OS")
     def test_deembedding_table_with_s2p_file(self, test_rfsg_device_session):
         test_rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2)
         test_rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1)

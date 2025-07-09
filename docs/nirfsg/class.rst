@@ -2223,7 +2223,7 @@ get_waveform_burst_start_locations
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_waveform_burst_start_locations(channel_name)
+    .. py:method:: get_waveform_burst_start_locations()
 
             Returns the burst start locations of the waveform stored in the NI-RFSG session.
 
@@ -2232,16 +2232,16 @@ get_waveform_burst_start_locations
             
 
 
+            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.waveform[ ... ].get_waveform_burst_start_locations`
 
+                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"
+                Example: :py:meth:`my_session.get_waveform_burst_start_locations`
 
-                
-
-
-            :type channel_name: str
 
             :rtype: list of float
             :return:
@@ -2260,7 +2260,7 @@ get_waveform_burst_stop_locations
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_waveform_burst_stop_locations(channel_name)
+    .. py:method:: get_waveform_burst_stop_locations()
 
             Returns the burst stop locations of the waveform stored in the NI-RFSG session.
 
@@ -2269,16 +2269,16 @@ get_waveform_burst_stop_locations
             
 
 
+            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.waveform[ ... ].get_waveform_burst_stop_locations`
 
+                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"
+                Example: :py:meth:`my_session.get_waveform_burst_stop_locations`
 
-                
-
-
-            :type channel_name: str
 
             :rtype: list of float
             :return:
@@ -2297,7 +2297,7 @@ get_waveform_marker_event_locations
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_waveform_marker_event_locations(channel_name)
+    .. py:method:: get_waveform_marker_event_locations()
 
             Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.
 
@@ -2306,20 +2306,16 @@ get_waveform_marker_event_locations
             
 
 
+            .. tip:: This method can be called on specific markers within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container markers to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.markers[ ... ].get_waveform_marker_event_locations`
 
+                To call the method on all markers, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the waveform name and the marker name.
+                Example: :py:meth:`my_session.get_waveform_marker_event_locations`
 
-                        Example:
-
-                        "waveform::waveform0/marker0"
-
-                
-
-
-            :type channel_name: str
 
             :rtype: list of float
             :return:
@@ -2361,7 +2357,7 @@ load_configurations_from_file
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: load_configurations_from_file(channel_name, file_path)
+    .. py:method:: load_configurations_from_file(file_path)
 
             Loads the configurations from the specified file to the NI-RFSG driver session.
 
@@ -2372,16 +2368,17 @@ load_configurations_from_file
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.channels[ ... ].load_configurations_from_file`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.load_configurations_from_file`
 
 
-                Specifies the name of the channel.
-
-                
-
-
-            :type channel_name: str
             :param file_path:
 
 
@@ -2754,7 +2751,7 @@ save_configurations_to_file
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: save_configurations_to_file(channel_name, file_path)
+    .. py:method:: save_configurations_to_file(file_path)
 
             Saves the configurations of the session to the specified file.
 
@@ -2763,16 +2760,17 @@ save_configurations_to_file
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.channels[ ... ].save_configurations_to_file`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.save_configurations_to_file`
 
 
-                Specifies the name of the channel.
-
-                
-
-
-            :type channel_name: str
             :param file_path:
 
 
@@ -3113,7 +3111,7 @@ set_waveform_burst_start_locations
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: set_waveform_burst_start_locations(channel_name, locations)
+    .. py:method:: set_waveform_burst_start_locations(locations)
 
             Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.
 
@@ -3122,16 +3120,17 @@ set_waveform_burst_start_locations
             
 
 
+            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.waveform[ ... ].set_waveform_burst_start_locations`
+
+                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.set_waveform_burst_start_locations`
 
 
-                Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"
-
-                
-
-
-            :type channel_name: str
             :param locations:
 
 
@@ -3149,7 +3148,7 @@ set_waveform_burst_stop_locations
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: set_waveform_burst_stop_locations(channel_name, locations)
+    .. py:method:: set_waveform_burst_stop_locations(locations)
 
             Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.
 
@@ -3158,20 +3157,17 @@ set_waveform_burst_stop_locations
             
 
 
+            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.waveform[ ... ].set_waveform_burst_stop_locations`
 
+                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the waveform name and the marker name.
-
-                        Example:
-
-                        "waveform::waveform0/marker0"
-
-                
+                Example: :py:meth:`my_session.set_waveform_burst_stop_locations`
 
 
-            :type channel_name: str
             :param locations:
 
 
@@ -3187,7 +3183,7 @@ set_waveform_marker_event_locations
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: set_waveform_marker_event_locations(channel_name, locations)
+    .. py:method:: set_waveform_marker_event_locations(locations)
 
             Configures the marker locations associated with waveform and marker in the NI-RFSG session.
 
@@ -3196,20 +3192,17 @@ set_waveform_marker_event_locations
             
 
 
+            .. tip:: This method can be called on specific markers within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container markers to specify a subset,
+                and then call this method on the result.
 
-            :param channel_name:
+                Example: :py:meth:`my_session.markers[ ... ].set_waveform_marker_event_locations`
 
+                To call the method on all markers, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the waveform name and the marker name.
-
-                        Example:
-
-                        "waveform::waveform0/marker0"
-
-                
+                Example: :py:meth:`my_session.set_waveform_marker_event_locations`
 
 
-            :type channel_name: str
             :param locations:
 
 

@@ -3403,7 +3403,8 @@ functions = {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3476,7 +3477,8 @@ functions = {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3549,7 +3551,8 @@ functions = {
                     'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'markers',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3770,7 +3773,6 @@ functions = {
                     'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4233,7 +4235,6 @@ functions = {
                     'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5045,7 +5046,8 @@ functions = {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5107,7 +5109,8 @@ functions = {
                     'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5169,7 +5172,8 @@ functions = {
                     'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'markers',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
