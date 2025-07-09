@@ -45,6 +45,7 @@ jobs:
               event = json.load(event_file)
             tag = event["release"]["tag_name"]
 
+          print(dict(os.environ))
           assert tag.count("-") == 1, f"Invalid tag format: {tag}. Expected format: <module_name>-<version>"
           module_name, module_version = tag.split("-")
           with open(os.getenv("GITHUB_OUTPUT"), "a", encoding="utf-8") as output_file:
