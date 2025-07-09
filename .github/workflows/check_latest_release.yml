@@ -38,11 +38,11 @@ jobs:
 
           # Extract module name and version from the release tag
           # Assuming the tag format is <module_name>-<version>, e.g., nidigital-1.4.0
+          with open(os.getenv("GITHUB_EVENT_PATH"), "r", encoding="utf-8") as event_file:
+            event = json.load(event_file)
           if os.getenv("GITHUB_EVENT_NAME") == "workflow_dispatch":
-            tag = os.getenv("INPUT_RELEASE_TAG")
+            tag = event["inputs"]["release_tag"]
           else:
-            with open(os.getenv("GITHUB_EVENT_PATH"), "r", encoding="utf-8") as event_file:
-              event = json.load(event_file)
             tag = event["release"]["tag_name"]
 
           assert tag.count("-") == 1, f"Invalid tag format: {tag}. Expected format: <module_name>-<version>"
