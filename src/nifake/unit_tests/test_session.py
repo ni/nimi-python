@@ -838,13 +838,15 @@ class TestSession:
             assert returned_timedeltas == expected_timedeltas
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
 
-    def test_function_with_int_flag_parameter_with_specific_flags(self):
-        flags = nifake.IntFlagEnum.A | nifake.IntFlagEnum.B
+    def test_function_with_int_flag_parameter_with_specific_flag(self):
+        flags = nifake.IntFlagEnum.C
         self.patched_library_interpreter.function_with_int_flag_parameter.side_effect = None
         self.patched_library_interpreter.function_with_int_flag_parameter.return_value = None
         with nifake.Session('dev1') as session:
             session.function_with_int_flag_parameter(flags)
         self.patched_library_interpreter.function_with_int_flag_parameter.assert_called_once_with(flags)
+        called_arg = self.patched_library_interpreter.function_with_int_flag_parameter.call_args[0][0]
+        assert called_arg == 1 or called_arg.value == 4
 
     def test_function_with_int_flag_parameter_invalid_type(self):
         invalid_flag = "not_an_intflag"
