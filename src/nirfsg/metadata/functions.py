@@ -32,7 +32,7 @@ functions = {
     'AllocateArbWaveform': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Allocates onboard memory space for the arbitrary waveform. \n\nUse this function to specify the total size of a waveform before writing the data. Use this function only if you are calling the nirfsg_WriteArbWaveform function multiple times to write a large waveform in smaller blocks.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming Waveform Data <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/streaming_waveform_data.html>`_'
+            'description': 'Allocates onboard memory space for the arbitrary waveform.\n\nUse this function to specify the total size of a waveform before writing the data. Use this function only if you are calling the nirfsg_WriteArbWaveform function multiple times to write a large waveform in smaller blocks.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming Waveform Data <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/streaming_waveform_data.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -486,7 +486,7 @@ functions = {
     'CheckGenerationStatus': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nChecks the status of the generation. \n\nCall this function to check for any errors that might occur during the signal generation or to check whether the device has finished generating.\n\n**Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n`Stopping Pear-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_stopping_generation.html>`_'
+            'description': '\nChecks the status of the generation.\n\nCall this function to check for any errors that might occur during the signal generation or to check whether the device has finished generating.\n\n**Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n`Stopping Pear-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_stopping_generation.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -600,7 +600,7 @@ functions = {
     'CheckIfWaveformExists': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReturns whether the waveform that you specify as NIRFSG_ATTR_WAVEFORM_NAME exists.\n\n**Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860'
+            'description': '\nReturns whether the waveform that you specify as NIRFSG_ATTR_WAVEFORM_NAME exists.\n\n**Supported Devices** : PXIe-5673/5673E, PXIe-5830/5831/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -662,7 +662,7 @@ functions = {
     'ClearAllArbWaveforms': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nDeletes all currently defined waveforms and scripts. \n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nDeletes all currently defined waveforms and scripts.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -690,7 +690,7 @@ functions = {
     'ClearArbWaveform': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nDeletes a specified waveform from the pool of currently defined waveforms. \n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nDeletes a specified waveform from the pool of currently defined waveforms.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -728,7 +728,7 @@ functions = {
     'ClearError': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nClears the error information associated with the session. \n\nIf you pass VI_NULL for the NIRFSG_ATTR_VI parameter, this function clears the error information for the current execution thread.\n\nThe IVI Engine also maintains this error information separately for each thread. This feature of the IVI Engine is useful if you do not have a session handle to pass to the nirfsg_ClearError function or the nirfsg_GetError function, which occurs when a call to the nirfsg_Init function or the nirfsg_InitWithOptions function fails.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860',
+            'description': '\nClears the error information associated with the session.\n\nIf you pass VI_NULL for the NIRFSG_ATTR_VI parameter, this function clears the error information for the current execution thread.\n\nThe IVI Engine also maintains this error information separately for each thread. This feature of the IVI Engine is useful if you do not have a session handle to pass to the nirfsg_ClearError function or the nirfsg_GetError function, which occurs when a call to the nirfsg_Init function or the nirfsg_InitWithOptions function fails.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860',
             'note': 'The nirfsg_GetError function clears the error information after it is retrieved. A call to the nirfsg_ClearError function is necessary only when you do not use a call to the nirfsg_GetError function to retrieve error information.'
         },
         'included_in_proto': True,
@@ -785,7 +785,7 @@ functions = {
     'Commit': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nPrograms the device with the correct settings. \n\nCalling this function moves the NI-RFSG device from the Configuration state to the Committed state. After this function executes, a change to any attribute reverts the NI-RFSG device to the Configuration state.\n\n**Supported devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Programming State Model <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5670_programming_state_model.html>`_'
+            'description': '\nPrograms the device with the correct settings.\n\nCalling this function moves the NI-RFSG device from the Configuration state to the Committed state. After this function executes, a change to any attribute reverts the NI-RFSG device to the Configuration state.\n\n**Supported devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Programming State Model <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5670_programming_state_model.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -813,7 +813,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the linear interpolation method. \n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the linear interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -894,7 +894,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the nearest interpolation method. \n\nNI-RFSG uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the nearest interpolation method.\n\nNI-RFSG uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -942,7 +942,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the spline interpolation method. \n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the spline interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -990,7 +990,7 @@ functions = {
     'ConfigureDigitalEdgeScriptTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures the specified Script Trigger for digital edge triggering. \n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_'
+            'description': '\nConfigures the specified Script Trigger for digital edge triggering.\n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1038,6 +1038,7 @@ functions = {
                     'description': 'Specifies the active edge for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE attribute to this value.'
                 },
                 'name': 'edge',
+                'enum': 'ScriptTrigDigEdgeEdge',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1048,7 +1049,7 @@ functions = {
     'ConfigureDigitalEdgeStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures the Start Trigger for digital edge triggering. \n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n`Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_',
+            'description': '\nConfigures the Start Trigger for digital edge triggering.\n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n`Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_',
             'note': 'For the PXIe-5654/5654 with PXIe-5696, the Start Trigger is valid only with a timer-based list when RF list mode is enabled.'
         },
         'included_in_proto': True,
@@ -1087,6 +1088,7 @@ functions = {
                     'description': 'Specifies the active edge for the Start Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute to this value.'
                 },
                 'name': 'edge',
+                'enum': 'StartTrigDigEdgeEdge',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1097,7 +1099,7 @@ functions = {
     'ConfigureDigitalLevelScriptTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures a specified Script Trigger for digital level triggering. \n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Digital Level Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_level.html>`_'
+            'description': '\nConfigures a specified Script Trigger for digital level triggering.\n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Digital Level Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_level.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1207,7 +1209,7 @@ functions = {
     'ConfigureGenerationMode': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nConfigures the NI-RFSG device to generate a continuous sine tone (CW), apply I/Q (vector) modulation to the RF output signal, or generate arbitrary waveforms according to scripts. \n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.'
+            'description': '\nConfigures the NI-RFSG device to generate a continuous sine tone (CW), apply I/Q (vector) modulation to the RF output signal, or generate arbitrary waveforms according to scripts.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1232,7 +1234,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the mode used by NI-RFSG for generating an RF output signal.\n\n                        **Default Value** : NIRFSG_VAL_CW\n\n                        **Defined Values** :\n                    ',
+                    'description': 'Specifies the mode used by NI-RFSG for generating an RF output signal.\n\n        **Default Value** : NIRFSG_VAL_CW\n\n        **Defined Values** :    ',
                     'note': '- For the PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, only NIRFSG_VAL_CW is supported.\n\n - If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.',
                     'table_body': [
                         [
@@ -1269,7 +1271,7 @@ functions = {
     'ConfigureOutputEnabled': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nEnables or disables signal output. \n\nSetting NIRFSG_ATTR_OUTPUT_ENABLED to VI_FALSE while in the Generation state attenuates the generated signal so that no signal is output.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_'
+            'description': '\nEnables or disables signal output.\n\nSetting NIRFSG_ATTR_OUTPUT_ENABLED to VI_FALSE while in the Generation state attenuates the generated signal so that no signal is output.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1307,7 +1309,7 @@ functions = {
     'ConfigureP2PEndpointFullnessStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nConfigures the Start Trigger to detect peer-to-peer endpoint fullness. \n\nGeneration begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_LEVEL parameter. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_',
+            'description': '\nConfigures the Start Trigger to detect peer-to-peer endpoint fullness.\n\nGeneration begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_LEVEL parameter. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_',
             'note': 'Due to an additional internal FIFO in the RF signal generator, the writer peer actually writes 2,304 bytes more than the quantity of data specified by this function to satisfy the trigger level.'
         },
         'included_in_proto': True,
@@ -1346,7 +1348,7 @@ functions = {
     'ConfigurePowerLevelType': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nSpecifies the way the driver interprets the NIRFSG_ATTR_POWER_LEVEL attribute. \n\nIn average power mode, NI-RFSG automatically scales waveform data to use the maximum dynamic range. In peak power mode, waveforms are scaled according to the NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR attribute.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_\n\n`Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_'
+            'description': '\nSpecifies the way the driver interprets the NIRFSG_ATTR_POWER_LEVEL attribute.\n\nIn average power mode, NI-RFSG automatically scales waveform data to use the maximum dynamic range. In peak power mode, waveforms are scaled according to the NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR attribute.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_\n\n`Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1391,6 +1393,7 @@ functions = {
                     ]
                 },
                 'name': 'powerLevelType',
+                'enum': 'PowerLevelType',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1401,7 +1404,7 @@ functions = {
     'ConfigurePxiChassisClk10': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nSpecifies the signal to drive the 10MHz Reference Clock on the PXI backplane. \n\nThis option can only be configured when the PXI-5610 is in Slot 2 of the PXI chassis. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXI-5670/5671\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_'
+            'description': '\nSpecifies the signal to drive the 10MHz Reference Clock on the PXI backplane.\n\nThis option can only be configured when the PXI-5610 is in Slot 2 of the PXI chassis. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXI-5670/5671\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1439,7 +1442,7 @@ functions = {
     'ConfigureRF': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nConfigures the frequency and power level of the RF output signal. \n\nThe PXI-5670/5671, PXIe-5672, and PXIe-5860 device must be in the Configuration state before calling this function. The PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673/5673E, and PXIe-5830/5831/5832/5840/5841/5842 device can be in the Configuration or Generation state when you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_'
+            'description': '\nConfigures the frequency and power level of the RF output signal.\n\nThe PXI-5670/5671, PXIe-5672, and PXIe-5860 device must be in the Configuration state before calling this function. The PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXIe-5673/5673E, and PXIe-5830/5831/5832/5840/5841/5842 device can be in the Configuration or Generation state when you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1487,7 +1490,7 @@ functions = {
     'ConfigureRefClock': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures the NI-RFSG device Reference Clock. \n\nThe Reference Clock ensures that the NI-RFSG devices are operating from a common timebase. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`PXIe-5672 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`PXIe-5673 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/10mhzreference_phase1.html>`_\n\n`PXIe-5673E Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/10mhzreference.html>`_\n\n`PXIe-5830 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_'
+            'description': '\nConfigures the NI-RFSG device Reference Clock.\n\nThe Reference Clock ensures that the NI-RFSG devices are operating from a common timebase. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`PXIe-5672 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`PXIe-5673 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/10mhzreference_phase1.html>`_\n\n`PXIe-5673E Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/10mhzreference.html>`_\n\n`PXIe-5830 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1604,7 +1607,7 @@ functions = {
     'ConfigureSoftwareScriptTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nConfigures the Script Trigger for software triggering. \n\nRefer to the nirfsg_SendSoftwareEdgeTrigger function for more information about using the software Script Trigger. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_'
+            'description': '\nConfigures the Script Trigger for software triggering.\n\nRefer to the nirfsg_SendSoftwareEdgeTrigger function for more information about using the software Script Trigger. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1642,7 +1645,7 @@ functions = {
     'ConfigureSoftwareStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures the Start Trigger for software triggering. \n\nRefer to the nirfsg_SendSoftwareEdgeTrigger function for more information about using a software trigger. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n`Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_'
+            'description': '\nConfigures the Start Trigger for software triggering.\n\nRefer to the nirfsg_SendSoftwareEdgeTrigger function for more information about using a software trigger. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_\n\n`Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1860,7 +1863,7 @@ functions = {
     'DisableScriptTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nConfigures the device not to wait for the specified Script Trigger. \n\nCall this function only if you previously configured a Script Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_'
+            'description': '\nConfigures the device not to wait for the specified Script Trigger.\n\nCall this function only if you previously configured a Script Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1898,7 +1901,7 @@ functions = {
     'DisableStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures the device not to wait for a Start Trigger. \n\nThis function is necessary only if you previously configured a Start Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_'
+            'description': '\nConfigures the device not to wait for a Start Trigger.\n\nThis function is necessary only if you previously configured a Start Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1926,7 +1929,7 @@ functions = {
     'ErrorMessage': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '               \n\n                Converts an error code returned by an NI-RFSG function into a user-readable string.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n                '
+            'description': '\nConverts an error code returned by an NI-RFSG function into a user-readable string.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': True,
@@ -1942,7 +1945,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        The ViSession handle that you obtain from nirfsg_Init or nirfsg_InitWithOptions. The handle identifies a particular instrument session.\n\n                        You can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsg_Init or nirfsg_InitWithOptions fails.\n\n                        **Default Value** : VI_NULL\n\n                        '
+                    'description': '                        The ViSession handle that you obtain from nirfsg_Init or nirfsg_InitWithOptions. The handle identifies a particular instrument session.\n\n        You can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsg_Init or nirfsg_InitWithOptions fails.\n\n        **Default Value** : VI_NULL\n\n        '
                 },
                 'name': 'vi',
                 'type': 'ViSession',
@@ -1952,7 +1955,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Pass the status parameter that is returned from any NI-RFSG function.\n\n                        **Default Value** : 0 (VI_SUCCESS)\n\n                        '
+                    'description': '                        Pass the status parameter that is returned from any NI-RFSG function.\n\n        **Default Value** : 0 (VI_SUCCESS)\n\n        '
                 },
                 'name': 'errorCode',
                 'type': 'ViStatus',
@@ -1962,7 +1965,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Returns the user-readable message string that corresponds to the status code you specify.\n\n                        You must pass a ViChar array with at least 256 bytes to this parameter.\n\n                        '
+                    'description': '                        Returns the user-readable message string that corresponds to the status code you specify.\n\n        You must pass a ViChar array with at least 256 bytes to this parameter.\n\n        '
                 },
                 'name': 'errorMessage',
                 'size': {
@@ -1980,7 +1983,7 @@ functions = {
     'ErrorQuery': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '                \n\n                Reads an error code and an error message from the instrument error queue.\n\n                **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860\n                '
+            'description': '\nReads an error code and an error message from the instrument error queue.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2015,7 +2018,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '                        Returns the error message string read from the instrument error message queue.\n\n                        You must pass a ViChar array with at least 256 bytes.\n                        '
+                    'description': '                        Returns the error message string read from the instrument error message queue.\n\n        You must pass a ViChar array with at least 256 bytes.        '
                 },
                 'name': 'errorMessage',
                 'size': {
@@ -2032,7 +2035,7 @@ functions = {
     'ExportSignal': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nRoutes signals (triggers, clocks, and events) to a specified output terminal. \n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\nYou can clear a previously routed signal by exporting the signal to "" (empty string).\n\n**Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_'
+            'description': '\nRoutes signals (triggers, clocks, and events) to a specified output terminal.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\nYou can clear a previously routed signal by exporting the signal to "" (empty string).\n\n**Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2261,7 +2264,7 @@ functions = {
     'GetAllScriptNames': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReturn names of the scripts present in the memory.\n\n**Supported Devices** :PXIe-5830/5831/5840/5841/5842E'
+            'description': '\nReturn names of the scripts present in the memory.\n\n**Supported Devices** :PXIe-5830/5831/5840/5841/5842E'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2381,7 +2384,7 @@ functions = {
     'GetAttributeViInt32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\n\nQueries the value of a ViInt32 attribute.\n\nUse this low-level function to get the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid.'
+            'description': '\nQueries the value of a ViInt32 attribute.\n\nUse this low-level function to get the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid.'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2497,7 +2500,7 @@ functions = {
     'GetAttributeViReal64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\n\nQueries the value of a ViReal64 attribute.\n\nUse this low-level function to get the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid.'
+            'description': '\nQueries the value of a ViReal64 attribute.\n\nUse this low-level function to get the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid.'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2613,7 +2616,7 @@ functions = {
     'GetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\n\n\nQueries the value of a ViString attribute.\n\nUse this low-level function to get the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid.\n\nYou must provide a ViString (ViChar array) to serve as a buffer for the value. Pass the number of bytes in the buffer as the Buffer Size parameter. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the buffer size parameter, the function copies buffer size-1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7.\n\nTo call this function to get only the required buffer size, pass 0 for the buffer size and VI_NULL for the attribute value buffer.'
+            'description': '\nQueries the value of a ViString attribute.\n\nUse this low-level function to get the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid.\n\nYou must provide a ViString (ViChar array) to serve as a buffer for the value. Pass the number of bytes in the buffer as the Buffer Size parameter. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the buffer size parameter, the function copies buffer size-1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7.\n\nTo call this function to get only the required buffer size, pass 0 for the buffer size and VI_NULL for the attribute value buffer.'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2813,7 +2816,7 @@ functions = {
     'GetExternalCalibrationLastDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nReturns the date and time of the last successful external calibration. \n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_name_for_documentation': 'get_external_calibration_last_date_and_time',
@@ -2894,7 +2897,7 @@ functions = {
     'GetLastExtCalLastDateAndTime': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'TBD'
+            'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2924,7 +2927,7 @@ functions = {
     'GetLastSelfCalLastDateAndTime': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'TBD'
+            'description': '\nReturns the date and time of the last successful self-calibration.\n\nThe time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2942,6 +2945,17 @@ functions = {
                 'type': 'ViSession'
             },
             {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
+                },
+                'name': 'module',
+                'enum': 'Module',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
                 'direction': 'out',
                 'name': 'lastCalDatetime',
                 'type': 'hightime.datetime'
@@ -2954,7 +2968,7 @@ functions = {
     'GetMaxSettablePower': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReturns the maximum settable output power level for the current configuration.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nReturns the maximum settable output power level for the current configuration.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -2992,7 +3006,7 @@ functions = {
     'GetSelfCalibrationDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nReturns the date and time of the last successful self-calibration. \n\nThe time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nReturns the date and time of the last successful self-calibration.\n\nThe time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5644/5645/5646, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_name_for_documentation': 'get_self_calibration_date_and_time',
@@ -3013,6 +3027,7 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'name': 'module',
+                'enum': 'Module',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3108,7 +3123,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration temperature. \n                    **Default Value** : NIRFSG_VAL_PRIMARY_MODULE\n                    **Defined Values** :\n                    ',
+                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.     **Default Value** : NIRFSG_VAL_PRIMARY_MODULE    **Defined Values** :    ',
                     'table_body': [
                         [
                             'NIRFSG_VAL_PRIMARY_MODULE',
@@ -3154,7 +3169,7 @@ functions = {
     'GetStreamEndpointHandle': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReturns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.\n\n**Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/configuring_a_p2p_stream.html>`_\n\n`Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_'
+            'description': '\nReturns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.\n\n**Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/configuring_a_p2p_stream.html>`_\n\n`Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3202,7 +3217,7 @@ functions = {
     'GetTerminalName': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nReturns the fully-qualified name of the specified signal. \n\nThe fully-qualified name is helpful to automatically route signals in a multisegment chassis.\n\n**Supported Devices** : PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_'
+            'description': '\nReturns the fully-qualified name of the specified signal.\n\nThe fully-qualified name is helpful to automatically route signals in a multisegment chassis.\n\n**Supported Devices** : PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`Syntax for Terminal Names <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/syntax_for_terminal_names.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3227,7 +3242,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the signal to query. **Defined Values** :\n                    ',
+                    'description': 'Specifies the signal to query. **Defined Values** :    ',
                     'table_body': [
                         [
                             'NIRFSG_VAL_START_TRIGGER',
@@ -3285,7 +3300,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to "" (empty string). **Possible Values** :\n                    ',
+                    'description': 'Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to "" (empty string). **Possible Values** :    ',
                     'table_body': [
                         [
                             '"marker0"',
@@ -3360,7 +3375,7 @@ functions = {
     'GetWaveformBurstStartLocations': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '                \n                Returns the burst start locations of the waveform stored in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+            'description': '\nReturns the burst start locations of the waveform stored in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3388,6 +3403,8 @@ functions = {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
                 'name': 'channelName',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3409,11 +3426,11 @@ functions = {
                 },
                 'name': 'locations',
                 'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfLocations'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'numberOfLocations',
+                    'value_twist': 'requiredSize'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -3432,7 +3449,7 @@ functions = {
     'GetWaveformBurstStopLocations': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '               \n\n                Returns the burst stop locations of the waveform stored in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+            'description': '\nReturns the burst stop locations of the waveform stored in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3460,6 +3477,8 @@ functions = {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
                 'name': 'channelName',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3481,11 +3500,11 @@ functions = {
                 },
                 'name': 'locations',
                 'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfLocations'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'numberOfLocations',
+                    'value_twist': 'requiredSize'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -3504,7 +3523,7 @@ functions = {
     'GetWaveformMarkerEventLocations': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '               \n                Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+            'description': 'Returns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3529,9 +3548,11 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Specifies the waveform name and the marker name.\n\n                        Example:\n\n                        "waveform::waveform0/marker0"\n                        '
+                    'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
                 },
                 'name': 'channelName',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'markers',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3553,11 +3574,11 @@ functions = {
                 },
                 'name': 'locations',
                 'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfLocations'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'numberOfLocations',
+                    'value_twist': 'requiredSize'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -3576,7 +3597,7 @@ functions = {
     'InitWithOptions': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nOpens a session to the device you specify as the NIRFSG_ATTR_RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG function calls. \n\nThis function also configures the device through the NIRFSG_ATTR_OPTION_STRING input.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Simulating an NI RF Signal Generator <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/simulate.html>`_',
+            'description': '\nOpens a session to the device you specify as the NIRFSG_ATTR_RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG function calls.\n\nThis function also configures the device through the NIRFSG_ATTR_OPTION_STRING input.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Simulating an NI RF Signal Generator <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/simulate.html>`_',
             'note': 'For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending /*ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.'
         },
         'included_in_proto': True,
@@ -3652,6 +3673,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the initial value of certain attributes for the session. The following table lists the attributes and the name you pass in this parameter to identify the attribute.\n\nThe format of this string consists of the following relations:\n"AttributeName=Value"\n\nwhere\n*AttributeName* is the name of the attribute and *Value* is the value to which the attribute is set. To set multiple attributes, separate their assignments with a comma, as shown in the following option string:\n\n"RangeCheck=1,QueryInstrStatus=0,Cache=1,DriverSetup=AWG:pxi1slot4"\n\nThe `DriverSetup string <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/driver_setup_string.html>`_ is required in order to simulate a specific device.',
@@ -3683,9 +3705,9 @@ functions = {
                     ]
                 },
                 'name': 'optionString',
+                'python_api_converter_name': 'convert_init_with_options_dictionary',
                 'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
+                'type_in_documentation': 'dict'
             },
             {
                 'direction': 'out',
@@ -3704,7 +3726,7 @@ functions = {
     'Initiate': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\n\nInitiates signal generation, causing the NI-RFSG device to leave the Configuration state and enter the Generation state. \n\nIf the settings have not been committed to the device before you call this function, they are committed by this function. The operation returns when the RF output signal settles. To return to the Configuration state, call the nirfsg_Abort function.\n\n**Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_'
+            'description': '\nInitiates signal generation, causing the NI-RFSG device to leave the Configuration state and enter the Generation state.\n\nIf the settings have not been committed to the device before you call this function, they are committed by this function. The operation returns when the RF output signal settles. To return to the Configuration state, call the nirfsg_Abort function.\n\n**Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_'
         },
         'included_in_proto': True,
         'parameters': [
@@ -3724,7 +3746,7 @@ functions = {
     'LoadConfigurationsFromFile': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nLoads the configurations from the specified file to the NI-RFSG driver session. \n\nThe VI does an implicit reset before loading the configurations from the file.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nLoads the configurations from the specified file to the NI-RFSG driver session.\n\nThe VI does an implicit reset before loading the configurations from the file.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3749,7 +3771,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
+                    'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString',
@@ -3772,7 +3794,7 @@ functions = {
     'LockSession': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nObtains a multithread lock on the instrument session. \n\nBefore doing so, this function waits until all other execution threads have released their locks on the instrument session.\n\nOther threads might have obtained a lock on this session in the following ways:\n\n- Your application already called the nirfsg_LockSession function.\n- A call to NI-RFSG locked the session.\n\nAfter the call to this function returns successfully, no other threads can access the instrument session until you call the nirfsg_UnlockSession function. Use the nirfsg_LockSession function and the nirfsg_UnlockSession function around a sequence of calls to NI-RFSG functions if you require that the NI-RFSG device retain its settings through the end of the sequence.\n\nYou can safely make nested calls to the nirfsg_LockSession function within the same thread. To completely unlock the session, balance each call to the nirfsg_LockSession function with a call to the nirfsg_UnlockSession function. If, however, you use the NIRFSG_ATTR_CALLER_HAS_LOCK parameter in all calls to the nirfsg_LockSession function and the nirfsg_UnlockSession function within a function, the IVI Library locks the session only once within the function regardless of the number of calls you make to the nirfsg_LockSession function. Locking the session only once allows you to call nirfsg_UnlockSession just once at the end of the function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
+            'description': '\nObtains a multithread lock on the instrument session.\n\nBefore doing so, this function waits until all other execution threads have released their locks on the instrument session.\n\nOther threads might have obtained a lock on this session in the following ways:\n\n- Your application already called the nirfsg_LockSession function.\n- A call to NI-RFSG locked the session.\n\nAfter the call to this function returns successfully, no other threads can access the instrument session until you call the nirfsg_UnlockSession function. Use the nirfsg_LockSession function and the nirfsg_UnlockSession function around a sequence of calls to NI-RFSG functions if you require that the NI-RFSG device retain its settings through the end of the sequence.\n\nYou can safely make nested calls to the nirfsg_LockSession function within the same thread. To completely unlock the session, balance each call to the nirfsg_LockSession function with a call to the nirfsg_UnlockSession function. If, however, you use the NIRFSG_ATTR_CALLER_HAS_LOCK parameter in all calls to the nirfsg_LockSession function and the nirfsg_UnlockSession function within a function, the IVI Library locks the session only once within the function regardless of the number of calls you make to the nirfsg_LockSession function. Locking the session only once allows you to call nirfsg_UnlockSession just once at the end of the function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3813,7 +3835,7 @@ functions = {
     'PerformPowerSearch': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nPerforms a power search if the NIRFSG_ATTR_ALC_CONTROL attribute is disabled. \n\nCalling this function disables modulation for a short time while the device levels the output signal.\n\n**Supported Devices** : PXIe-5654 with PXIe-5696\n\n**Related Topics**\n\n`Power Search <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5654_power_search.html>`_',
+            'description': '\nPerforms a power search if the NIRFSG_ATTR_ALC_CONTROL attribute is disabled.\n\nCalling this function disables modulation for a short time while the device levels the output signal.\n\n**Supported Devices** : PXIe-5654 with PXIe-5696\n\n**Related Topics**\n\n`Power Search <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5654_power_search.html>`_',
             'note': 'Power search temporarily enables the ALC, so ensure the appropriate included cable is connected between the PXIe-5654 ALCIN connector and the PXIe-5696 ALCOUT connector to successfully perform a power search.'
         },
         'included_in_proto': True,
@@ -3842,7 +3864,7 @@ functions = {
     'PerformThermalCorrection': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nCorrects for any signal drift due to environmental temperature variation when generating the same signal for extended periods of time without a parameter change. \n\nUnder normal circumstances of short-term signal generation, NI-RFSG performs thermal correction automatically by ensuring stable power levels, and you do not need to call this function.\n\nUse this function when generating the same signal for an extended period of time in a temperature-fluctuating environment. The NI-RFSG device must be in the Generation state before calling this function.\n\n**Supported Devices** : PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Thermal Management <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/thermal_management.html>`_\n\n`Impairment Calibration <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/vector_calibration.html>`_'
+            'description': '\nCorrects for any signal drift due to environmental temperature variation when generating the same signal for extended periods of time without a parameter change.\n\nUnder normal circumstances of short-term signal generation, NI-RFSG performs thermal correction automatically by ensuring stable power levels, and you do not need to call this function.\n\nUse this function when generating the same signal for an extended period of time in a temperature-fluctuating environment. The NI-RFSG device must be in the Generation state before calling this function.\n\n**Supported Devices** : PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Thermal Management <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/thermal_management.html>`_\n\n`Impairment Calibration <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/vector_calibration.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3870,7 +3892,7 @@ functions = {
     'QueryArbWaveformCapabilities': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nQueries and returns the waveform capabilities of the NI-RFSG device. \n\nThese capabilities are related to the current device configuration. The NI-RFSG device must be in the Configuration or the Generation state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nQueries and returns the waveform capabilities of the NI-RFSG device.\n\nThese capabilities are related to the current device configuration. The NI-RFSG device must be in the Configuration or the Generation state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3993,10 +4015,10 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'Reset': {
+    'reset': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nResets all attributes to their default values and moves the NI-RFSG device to the Configuration state. \n\nThis function aborts the generation, deletes all de-embedding tables, clears all routes, and resets session attributes to their initial values. During a reset, routes of signals between this and other devices are released, regardless of which device created the route.\n\nGenerally, calling this function instead of the nirfsg_ResetDevice function is acceptable. The nirfsg_Reset function executes faster than the nirfsg_ResetDevice function.\n\nTo avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the nirfsg_ResetWithOptions function, with **stepsToOmit** set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES .\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
+            'description': '\nResets all attributes to their default values and moves the NI-RFSG device to the Configuration state.\n\nThis function aborts the generation, deletes all de-embedding tables, clears all routes, and resets session attributes to their initial values. During a reset, routes of signals between this and other devices are released, regardless of which device created the route.\n\nGenerally, calling this function instead of the nirfsg_ResetDevice function is acceptable. The nirfsg_Reset function executes faster than the nirfsg_ResetDevice function.\n\nTo avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the nirfsg_ResetWithOptions function, with **stepsToOmit** set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES .\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
             'note': 'This function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG.'
         },
         'included_in_proto': True,
@@ -4025,7 +4047,7 @@ functions = {
     'ResetAttribute': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nResets the attribute to its default value.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nResets the attribute to its default value.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4050,7 +4072,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
+                    'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString',
@@ -4186,7 +4208,7 @@ functions = {
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nSaves the configurations of the session to the specified file.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nSaves the configurations of the session to the specified file.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4211,7 +4233,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
+                    'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
                 'type': 'ViConstString',
@@ -4234,7 +4256,7 @@ functions = {
     'SelectArbWaveform': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nSpecifies the waveform that is generated upon a call to the nirfsg_Initiate function when the **generationMode** parameter of the nirfsg_ConfigureGenerationMode function is set to NIRFSG_VAL_ARB_WAVEFORM. \n\nYou must specify a waveform using the NIRFSG_ATTR_NAME parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_'
+            'description': '\nSpecifies the waveform that is generated upon a call to the nirfsg_Initiate function when the **generationMode** parameter of the nirfsg_ConfigureGenerationMode function is set to NIRFSG_VAL_ARB_WAVEFORM.\n\nYou must specify a waveform using the NIRFSG_ATTR_NAME parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4272,7 +4294,7 @@ functions = {
     'SelfCal': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nPerforms an internal self-calibration on the device and associated modules that support self-calibration. \n\nIf the calibration is successful, new calibration data and constants are stored in the onboard nonvolatile memory of the module.\n\nThe PXIe-5841 maintains separate self-calibration data for both the PXIe-5841 standalone and when associated with the PXIe-5655. Use this function once for each intended configuration.\n\n**Supported Devices** : PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
+            'description': '\nPerforms an internal self-calibration on the device and associated modules that support self-calibration.\n\nIf the calibration is successful, new calibration data and constants are stored in the onboard nonvolatile memory of the module.\n\nThe PXIe-5841 maintains separate self-calibration data for both the PXIe-5841 standalone and when associated with the PXIe-5655. Use this function once for each intended configuration.\n\n**Supported Devices** : PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
             'note': 'If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this function runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate.'
         },
         'included_in_proto': True,
@@ -4418,7 +4440,7 @@ functions = {
     'SelfTest': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results. \n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_'
+            'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_'
         },
         'included_in_proto': True,
         'parameters': [
@@ -4470,7 +4492,7 @@ functions = {
     'SendSoftwareEdgeTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nForces a trigger to occur. \n\nThe specified trigger generates regardless of whether the trigger has been configured as a software trigger.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_'
+            'description': '\nForces a trigger to occur.\n\nThe specified trigger generates regardless of whether the trigger has been configured as a software trigger.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4563,7 +4585,7 @@ functions = {
     'SetArbWaveformNextWritePosition': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nConfigures the start position to use for writing a waveform before calling the nirfsg_WriteArbWaveform function. \n\nThis function allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the nirfsg_AllocateArbWaveform function or the nirfsg_WriteArbWaveform function. Subsequent writes to that waveform begin where the last write ended, unless this function is called again.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
+            'description': '\nConfigures the start position to use for writing a waveform before calling the nirfsg_WriteArbWaveform function.\n\nThis function allows you to write to arbitrary locations within the waveform. These settings apply only to the next write to the waveform specified by the **name** input of the nirfsg_AllocateArbWaveform function or the nirfsg_WriteArbWaveform function. Subsequent writes to that waveform begin where the last write ended, unless this function is called again.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
             'note': 'If you use this function to write the waveform that is currently generating, an undefined output may result.'
         },
         'included_in_proto': True,
@@ -4640,7 +4662,7 @@ functions = {
     'SetAttributeViBoolean': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\n\nSets the value of a ViBoolean attribute.\n\nUse this low-level function to set the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid or is different than the value you specify.\n\nNI-RFSG contains high-level functions that set most of the instrument attributes. Use the high-level driver functions as much as possible, as they handle order dependencies and multithread locking. The high-level functions also perform status checking only after setting all of the attributes. In contrast, when you set multiple attributes using the SetAttribute functions, the functions check the instrument status after each call.\n\nAlso, when state caching is enabled, the high-level functions that configure multiple attributes perform instrument I/O only for the attributes whose value you change. Thus, you can safely call the high-level functions without the penalty of redundant instrument I/O.'
+            'description': '\nSets the value of a ViBoolean attribute.\n\nUse this low-level function to set the values of inherent IVI attributes, class-defined attributes, and instrument-specific attributes. If the attribute represents an instrument state, this function performs instrument I/O in the following cases:\n\n- State caching is disabled for the entire session or for the particular attribute.\n- State caching is enabled, and the currently cached value is invalid or is different than the value you specify.\n\nNI-RFSG contains high-level functions that set most of the instrument attributes. Use the high-level driver functions as much as possible, as they handle order dependencies and multithread locking. The high-level functions also perform status checking only after setting all of the attributes. In contrast, when you set multiple attributes using the SetAttribute functions, the functions check the instrument status after each call.\n\nAlso, when state caching is enabled, the high-level functions that configure multiple attributes perform instrument I/O only for the attributes whose value you change. Thus, you can safely call the high-level functions without the penalty of redundant instrument I/O.'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4997,7 +5019,7 @@ functions = {
     'SetWaveformBurstStartLocations': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '               \n                Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+            'description': 'Configures the start location of the burst in samples where the burst refers to the active portion of a waveform.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -5025,6 +5047,8 @@ functions = {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
                 'name': 'channelName',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5046,11 +5070,10 @@ functions = {
                 },
                 'name': 'locations',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'numberOfLocations'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             }
         ],
@@ -5059,7 +5082,7 @@ functions = {
     'SetWaveformBurstStopLocations': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '               \n\n                Configures the stop location of the burst in samples where the burst refers to the active portion of a waveform.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+            'description': '\nConfigures the stop location of the burst in samples where the burst refers to the active portion of a waveform.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -5084,9 +5107,11 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Specifies the waveform name and the marker name.\n\n                        Example:\n\n                        "waveform::waveform0/marker0"\n                        '
+                    'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
                 },
                 'name': 'channelName',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'waveform',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5108,11 +5133,10 @@ functions = {
                 },
                 'name': 'locations',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'numberOfLocations'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             }
         ],
@@ -5121,7 +5145,7 @@ functions = {
     'SetWaveformMarkerEventLocations': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '              \n\n                Configures the marker locations associated with waveform and marker in the NI-RFSG session.\n\n                **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842\n                '
+            'description': '\nConfigures the marker locations associated with waveform and marker in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -5146,9 +5170,11 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Specifies the waveform name and the marker name.\n\n                        Example:\n\n                        "waveform::waveform0/marker0"\n                        '
+                    'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
                 },
                 'name': 'channelName',
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'markers',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5170,11 +5196,10 @@ functions = {
                 },
                 'name': 'locations',
                 'size': {
-                    'mechanism': 'passed-in',
+                    'mechanism': 'len',
                     'value': 'numberOfLocations'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             }
         ],
@@ -5183,7 +5208,7 @@ functions = {
     'UnlockSession': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nReleases a lock obtained on an NI-RFSG device session by calling the nirfsg_LockSession function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
+            'description': '\nReleases a lock obtained on an NI-RFSG device session by calling the nirfsg_LockSession function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -5224,7 +5249,7 @@ functions = {
     'WaitUntilSettled': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nWaits until the RF output signal has settled. This function is useful for devices that support changes while in the Generation state. \n\nCall this function after making a dynamic change to wait for the output signal to settle.\n\nYou can also call this function after calling the nirfsg_Commit function to wait for changes to settle. The nirfsg_WaitUntilSettled function is not required after calling the nirfsg_Initiate function because the nirfsg_Initiate automatically waits for the output to settle.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nWaits until the RF output signal has settled. This function is useful for devices that support changes while in the Generation state.\n\nCall this function after making a dynamic change to wait for the output signal to settle.\n\nYou can also call this function after calling the nirfsg_Commit function to wait for changes to settle. The nirfsg_WaitUntilSettled function is not required after calling the nirfsg_Initiate function because the nirfsg_Initiate automatically waits for the output to settle.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -5262,7 +5287,7 @@ functions = {
     'WriteP2PEndpointI16': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nWrites an array of 16-bit integer data to the peer-to-peer endpoint. \n\nUse this function to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.\n\n**Supported Devices** : PXIe-5673E\n\n**Related Topics**\n\n`Peer-to-Peer Data Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_streaming.html>`_--Refer to this topic for more information about configuring a stream.\n\n`Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_\n\n`Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_\n\n`Reconfiguring a Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_reconfiguring_stream.html>`_'
+            'description': '\nWrites an array of 16-bit integer data to the peer-to-peer endpoint.\n\nUse this function to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.\n\n**Supported Devices** : PXIe-5673E\n\n**Related Topics**\n\n`Peer-to-Peer Data Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_streaming.html>`_--Refer to this topic for more information about configuring a stream.\n\n`Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_\n\n`Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_\n\n`Reconfiguring a Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_reconfiguring_stream.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -5322,10 +5347,314 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+     'WriteArbWaveformComplexF32': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in both of the data arrays.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexNumberF32[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the NIRFSG_ATTR_WAVEFORM_NAME parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
+                'name': 'moreDataPending',
+                'type': 'ViBoolean',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'WriteArbWaveformComplexF64': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the data array.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexNumber[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
+                'name': 'moreDataPending',
+                'type': 'ViBoolean',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'WriteArbWaveformComplexI16': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'This function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the data array.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'interleaved',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexI16[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'WriteArbWaveformDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'This function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'write_arb_waveform'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.'
+                },
+                'name': 'waveformName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the data array.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
+                },
+                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexNumber[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                },
+                'name': 'moreDataPending',
+                'type': 'ViBoolean',
+                'default_value': False,
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'write_arb_waveform',
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
     'WriteScript': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\n\nWrites a script to the device to control waveform generation in Script mode. \n\nFirst, configure your device for Script mode by calling the nirfsg_ConfigureGenerationMode function. The NI-RFSG device must be in the Configuration state before calling the nirfsg_WriteScript function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.\n\n`Common Scripting Use Cases <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_use_cases.html>`_',
+            'description': '\nWrites a script to the device to control waveform generation in Script mode.\n\nFirst, configure your device for Script mode by calling the nirfsg_ConfigureGenerationMode function. The NI-RFSG device must be in the Configuration state before calling the nirfsg_WriteScript function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.\n\n`Common Scripting Use Cases <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_use_cases.html>`_',
             'note': 'If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.'
         },
         'included_in_proto': True,
