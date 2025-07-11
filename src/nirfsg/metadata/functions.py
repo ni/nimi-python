@@ -3673,6 +3673,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the initial value of certain attributes for the session. The following table lists the attributes and the name you pass in this parameter to identify the attribute.\n\nThe format of this string consists of the following relations:\n"AttributeName=Value"\n\nwhere\n*AttributeName* is the name of the attribute and *Value* is the value to which the attribute is set. To set multiple attributes, separate their assignments with a comma, as shown in the following option string:\n\n"RangeCheck=1,QueryInstrStatus=0,Cache=1,DriverSetup=AWG:pxi1slot4"\n\nThe `DriverSetup string <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/driver_setup_string.html>`_ is required in order to simulate a specific device.',
@@ -3704,9 +3705,9 @@ functions = {
                     ]
                 },
                 'name': 'optionString',
+                'python_api_converter_name': 'convert_init_with_options_dictionary',
                 'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
+                'type_in_documentation': 'dict'
             },
             {
                 'direction': 'out',

@@ -6324,7 +6324,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-RFSG session to the NI-RFSG driver'''
 
-    def __init__(self, resource_name, options={}, id_query=False, reset_device=False):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
         r'''An NI-RFSG session to the NI-RFSG driver
 
         Opens a session to the device you specify as the RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -6351,7 +6351,31 @@ class Session(_SessionBase):
 
                 Note: NI-RFSG device names are not case-sensitive. However, all IVI names, such as logical names, are case-sensitive. If you use an IVI logical name, make sure the name is identical to the name shown in the IVI Configuration Utility.
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
+
+                **Defined Values** :
+
+                +-----------+--------------------------+
+                | Value     | Description              |
+                +===========+==========================+
+                | True (1)  | Perform ID query.        |
+                +-----------+--------------------------+
+                | False (0) | Do not perform ID query. |
+                +-----------+--------------------------+
+
+            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
+
+                **Defined Values** :
+
+                +-----------+----------------------+
+                | Value     | Description          |
+                +===========+======================+
+                | True (1)  | Reset device.        |
+                +-----------+----------------------+
+                | False (0) | Do not reset device. |
+                +-----------+----------------------+
+
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -6379,30 +6403,6 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
-            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
-
-                **Defined Values** :
-
-                +-----------+--------------------------+
-                | Value     | Description              |
-                +===========+==========================+
-                | True (1)  | Perform ID query.        |
-                +-----------+--------------------------+
-                | False (0) | Do not perform ID query. |
-                +-----------+--------------------------+
-
-            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
-
-                **Defined Values** :
-
-                +-----------+----------------------+
-                | Value     | Description          |
-                +===========+======================+
-                | True (1)  | Reset device.        |
-                +-----------+----------------------+
-                | False (0) | Do not reset device. |
-                +-----------+----------------------+
-
 
         Returns:
             new_vi (int): Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -6417,22 +6417,23 @@ class Session(_SessionBase):
             freeze_it=False,
             all_channels_in_session=None
         )
+        options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
         # Note that _interpreter default-initializes the session handle in its constructor, so that
         # if _init_with_options fails, the error handler can reference it.
         # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self._init_with_options(resource_name, options, id_query, reset_device))
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
         self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
-        param_list.append("options=" + pp.pformat(options))
         param_list.append("id_query=" + pp.pformat(id_query))
         param_list.append("reset_device=" + pp.pformat(reset_device))
+        param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
         # Store the list of channels in the Session which is needed by some nimi-python modules.
@@ -7730,7 +7731,7 @@ class Session(_SessionBase):
         terminal_name = self._interpreter.get_terminal_name(signal, signal_identifier)
         return terminal_name
 
-    def _init_with_options(self, resource_name, option_string, id_query=False, reset_device=False):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         r'''_init_with_options
 
         Opens a session to the device you specify as the RESOURCE_NAME and returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -7757,7 +7758,31 @@ class Session(_SessionBase):
 
                 Note: NI-RFSG device names are not case-sensitive. However, all IVI names, such as logical names, are case-sensitive. If you use an IVI logical name, make sure the name is identical to the name shown in the IVI Configuration Utility.
 
-            option_string (str): Specifies the initial value of certain properties for the session. The following table lists the properties and the name you pass in this parameter to identify the property.
+            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
+
+                **Defined Values** :
+
+                +-----------+--------------------------+
+                | Value     | Description              |
+                +===========+==========================+
+                | True (1)  | Perform ID query.        |
+                +-----------+--------------------------+
+                | False (0) | Do not perform ID query. |
+                +-----------+--------------------------+
+
+            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
+
+                **Defined Values** :
+
+                +-----------+----------------------+
+                | Value     | Description          |
+                +===========+======================+
+                | True (1)  | Reset device.        |
+                +-----------+----------------------+
+                | False (0) | Do not reset device. |
+                +-----------+----------------------+
+
+            option_string (dict): Specifies the initial value of certain properties for the session. The following table lists the properties and the name you pass in this parameter to identify the property.
 
                 The format of this string consists of the following relations:
                 "AttributeName=Value"
@@ -7783,35 +7808,12 @@ class Session(_SessionBase):
                 | Simulate         | simulate                |
                 +------------------+-------------------------+
 
-            id_query (bool): Specifies whether you want NI-RFSG to perform an ID query.
-
-                **Defined Values** :
-
-                +-----------+--------------------------+
-                | Value     | Description              |
-                +===========+==========================+
-                | True (1)  | Perform ID query.        |
-                +-----------+--------------------------+
-                | False (0) | Do not perform ID query. |
-                +-----------+--------------------------+
-
-            reset_device (bool): Specifies whether you want to reset the NI-RFSG device during the initialization procedure.
-
-                **Defined Values** :
-
-                +-----------+----------------------+
-                | Value     | Description          |
-                +===========+======================+
-                | True (1)  | Reset device.        |
-                +-----------+----------------------+
-                | False (0) | Do not reset device. |
-                +-----------+----------------------+
-
 
         Returns:
             new_vi (int): Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
 
         '''
+        option_string = _converters.convert_init_with_options_dictionary(option_string)
         new_vi = self._interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
         return new_vi
 
@@ -8328,9 +8330,9 @@ class Session(_SessionBase):
             elif waveform_data_array.dtype == numpy.int16:
                 return self._write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
             else:
-                raise TypeError("Unsupported dtype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
+                raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
-            raise TypeError("Unsupported dtype. Expected {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+            raise TypeError("Unsupported datatype. Expected {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
         return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 

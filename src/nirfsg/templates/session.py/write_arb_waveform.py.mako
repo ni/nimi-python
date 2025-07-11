@@ -17,8 +17,8 @@
             elif waveform_data_array.dtype == numpy.int16:
                 return self._write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
             else:
-                raise TypeError("Unsupported dtype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
+                raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
-            raise TypeError("Unsupported dtype. Expected {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+            raise TypeError("Unsupported datatype. Expected {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
         return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
