@@ -4,6 +4,7 @@ import hightime
 import nifake
 import nifake.errors
 import numpy
+import pytest
 
 from unittest.mock import MagicMock
 from unittest.mock import patch
@@ -837,10 +838,27 @@ class TestSession:
             assert returned_timedeltas == expected_timedeltas
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
 
+    def test_function_with_int_flag_parameter_with_specific_flag(self):
+        flags = nifake.IntFlagEnum.C
+        self.patched_library_interpreter.function_with_int_flag_parameter.side_effect = None
+        self.patched_library_interpreter.function_with_int_flag_parameter.return_value = None
+        with nifake.Session('dev1') as session:
+            session.function_with_int_flag_parameter(flags)
+        self.patched_library_interpreter.function_with_int_flag_parameter.assert_called_once_with(flags)
+        called_arg = self.patched_library_interpreter.function_with_int_flag_parameter.call_args[0][0]
+        assert called_arg == 1 or called_arg.value == 4
+
+    def test_function_with_int_flag_parameter_invalid_type(self):
+        invalid_flag = "not_an_intflag"
+        with nifake.Session('dev1') as session:
+            with pytest.raises(TypeError) as exc_info:
+                session.function_with_int_flag_parameter(invalid_flag)
+            assert "Parameter flag must be of type" in str(exc_info.value)
+            assert "IntFlagEnum" in str(exc_info.value)
+
     def test_session_write_waveform_numpy_complex64_invalid_dtype(self):
         invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex128)
         expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=complex64, is complex128"
-        import pytest
         with nifake.Session('dev1') as session:
             with pytest.raises(TypeError) as exc_info:
                 session.write_waveform_numpy_complex64(invalid_waveform_data)
@@ -849,7 +867,6 @@ class TestSession:
     def test_session_write_waveform_numpy_complex128_invalid_dtype(self):
         invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex64)
         expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=complex128, is complex64"
-        import pytest
         with nifake.Session('dev1') as session:
             with pytest.raises(TypeError) as exc_info:
                 session.write_waveform_numpy_complex128(invalid_waveform_data)
@@ -858,7 +875,6 @@ class TestSession:
     def test_session_write_waveform_numpy_complex_interleaved_i16_invalid_dtype(self):
         invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex64)
         expected_error_message = "waveform_data_array must be numpy.ndarray of dtype=int16, is complex64"
-        import pytest
         with nifake.Session('dev1') as session:
             with pytest.raises(TypeError) as exc_info:
                 session.write_waveform_numpy_complex_interleaved_i16(invalid_waveform_data)
