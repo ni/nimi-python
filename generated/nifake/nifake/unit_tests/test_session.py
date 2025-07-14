@@ -846,6 +846,7 @@ class TestSession:
             session.function_with_intflag_parameter(flags)
         self.patched_library_interpreter.function_with_intflag_parameter.assert_called_once_with(flags)
         called_arg = self.patched_library_interpreter.function_with_intflag_parameter.call_args[0][0]
+        # Check if the called argument is an IntFlagEnum or its value with OR operation
         assert called_arg == 9223372036854775809 or (hasattr(called_arg, "value") and called_arg.value == 9223372036854775809)
 
     def test_with_intflag_parameter_invalid(self):
