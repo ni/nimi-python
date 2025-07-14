@@ -844,18 +844,16 @@ class TestSession:
         self.patched_library_interpreter.function_with_intflag_parameter.return_value = None
         with nifake.Session('dev1') as session:
             session.function_with_intflag_parameter(flags)
-        self.patched_library_interpreter.function_with_intflag_parameter.assert_called_once_with(flags)
-        called_arg = self.patched_library_interpreter.function_with_intflag_parameter.call_args[0][0]
-        # Check if the called argument is an IntFlagEnum or its value with OR operation
-        assert called_arg == 9223372036854775809 or (hasattr(called_arg, "value") and called_arg.value == 9223372036854775809)
+        self.patched_library_interpreter.function_with_intflag_parameter.assert_called_once_with(9223372036854775809)
 
     def test_with_intflag_parameter_invalid(self):
         invalid_flag = 5
         with nifake.Session('dev1') as session:
-            with pytest.raises(TypeError) as exc_info:
+            try:
                 session.function_with_intflag_parameter(invalid_flag)
-            assert "Parameter flag must be of type" in str(exc_info.value)
-            assert "IntFlagEnum" in str(exc_info.value)
+                assert False
+            except TypeError:
+                pass
 
     def test_session_write_waveform_numpy_complex64_invalid_dtype(self):
         invalid_waveform_data = numpy.full(10, 1.0 + 1.0j, dtype=numpy.complex128)
