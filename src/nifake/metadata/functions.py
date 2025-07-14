@@ -348,6 +348,34 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'FunctionWithIntflagParameter': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': "Calls a function that takes a flag parameter which can be OR'd from multiple enum values."
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'A flag parameter that can be a combination (bitwise OR) of IntFlagEnum values.'
+                },
+                'enum': 'IntFlagEnum',
+                'grpc_enum': None,
+                'name': 'flag',
+                'type': 'ViUInt64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'FunctionWithRepeatedCapabilityType': {
         'documentation': {
             'description': 'A function with a parameter that specifies repeated_capability_type.'

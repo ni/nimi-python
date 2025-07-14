@@ -946,6 +946,20 @@ class Session(_SessionBase):
         self._interpreter.fetch_waveform_into(waveform_data)
 
     @ivi_synchronized
+    def function_with_intflag_parameter(self, flag):
+        r'''function_with_intflag_parameter
+
+        Calls a method that takes a flag parameter which can be OR'd from multiple enum values.
+
+        Args:
+            flag (enums.IntFlagEnum): A flag parameter that can be a combination (bitwise OR) of IntFlagEnum values.
+
+        '''
+        if type(flag) is not enums.IntFlagEnum:
+            raise TypeError('Parameter flag must be of type ' + str(enums.IntFlagEnum))
+        self._interpreter.function_with_intflag_parameter(flag)
+
+    @ivi_synchronized
     def get_a_boolean(self):
         r'''get_a_boolean
 

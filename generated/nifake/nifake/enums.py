@@ -2,6 +2,7 @@
 # This file was generated
 
 from enum import Enum
+from enum import IntFlag
 
 
 class Color(Enum):
@@ -50,6 +51,21 @@ class FloatEnum(Enum):
     SEVEN_POINT_FIVE = 7.5
     r'''
     Specifies 7.5 digits resolution.
+    '''
+
+
+class IntFlagEnum(IntFlag):
+    A = 1
+    r'''
+    Flag A option.
+    '''
+    B = 2
+    r'''
+    Flag B option.
+    '''
+    C = 9223372036854775808
+    r'''
+    Flag C option.
     '''
 
 

@@ -239,6 +239,33 @@ enums = {
             }
         ]
     },
+    'IntFlagEnum': {
+        'codegen_method': 'public',
+        'enum_class': 'IntFlag',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Flag A option.'
+                },
+                'name': 'NIFAKE_VAL_FLAG_A',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Flag B option.'
+                },
+                'name': 'NIFAKE_VAL_FLAG_B',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Flag C option.'
+                },
+                'name': 'NIFAKE_VAL_FLAG_C',
+                'value': 9223372036854775808
+            }
+        ]
+    },
     'MobileOSNames': {
         'values': [
             {
