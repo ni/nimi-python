@@ -262,7 +262,7 @@ enums = {
                     'description': 'Flag C option.'
                 },
                 'name': 'NIFAKE_VAL_FLAG_C',
-                'value': 4
+                'value': 9223372036854775808
             }
         ]
     },

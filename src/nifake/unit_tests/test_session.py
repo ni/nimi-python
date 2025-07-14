@@ -838,19 +838,21 @@ class TestSession:
             assert returned_timedeltas == expected_timedeltas
             self.patched_library_interpreter.return_list_of_durations_in_seconds.assert_called_once_with(len(time_values))
 
-    def test_function_with_int_flag_parameter_with_specific_flag(self):
-        flags = nifake.IntFlagEnum.C
-        self.patched_library_interpreter.function_with_int_flag_parameter.side_effect = None
-        self.patched_library_interpreter.function_with_int_flag_parameter.return_value = None
+    def test_with_valid_intflag_parameter(self):
+        flags = nifake.IntFlagEnum.C | nifake.IntFlagEnum.A
+        self.patched_library_interpreter.function_with_intflag_parameter.side_effect = None
+        self.patched_library_interpreter.function_with_intflag_parameter.return_value = None
         with nifake.Session('dev1') as session:
-            session.function_with_int_flag_parameter(flags)
-        self.patched_library_interpreter.function_with_int_flag_parameter.assert_called_once_with(flags)
+            session.function_with_intflag_parameter(flags)
+        self.patched_library_interpreter.function_with_intflag_parameter.assert_called_once_with(flags)
+        called_arg = self.patched_library_interpreter.function_with_intflag_parameter.call_args[0][0]
+        assert called_arg == 9223372036854775809 or (hasattr(called_arg, "value") and called_arg.value == 9223372036854775809)
 
-    def test_function_with_int_flag_parameter_invalid_type(self):
-        invalid_flag = "not_an_intflag"
+    def test_with_intflag_parameter_invalid(self):
+        invalid_flag = 5
         with nifake.Session('dev1') as session:
             with pytest.raises(TypeError) as exc_info:
-                session.function_with_int_flag_parameter(invalid_flag)
+                session.function_with_intflag_parameter(invalid_flag)
             assert "Parameter flag must be of type" in str(exc_info.value)
             assert "IntFlagEnum" in str(exc_info.value)
 

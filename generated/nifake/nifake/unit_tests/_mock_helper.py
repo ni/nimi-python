@@ -42,8 +42,8 @@ class SideEffectsHelper(object):
         self._defaults['FetchWaveform']['return'] = 0
         self._defaults['FetchWaveform']['waveformData'] = None
         self._defaults['FetchWaveform']['actualNumberOfSamples'] = None
-        self._defaults['FunctionWithIntFlagParameter'] = {}
-        self._defaults['FunctionWithIntFlagParameter']['return'] = 0
+        self._defaults['FunctionWithIntflagParameter'] = {}
+        self._defaults['FunctionWithIntflagParameter']['return'] = 0
         self._defaults['FunctionWithRepeatedCapabilityType'] = {}
         self._defaults['FunctionWithRepeatedCapabilityType']['return'] = 0
         self._defaults['GetABoolean'] = {}
@@ -339,10 +339,10 @@ class SideEffectsHelper(object):
             actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
         return self._defaults['FetchWaveform']['return']
 
-    def niFake_FunctionWithIntFlagParameter(self, vi, flag):  # noqa: N802
-        if self._defaults['FunctionWithIntFlagParameter']['return'] != 0:
-            return self._defaults['FunctionWithIntFlagParameter']['return']
-        return self._defaults['FunctionWithIntFlagParameter']['return']
+    def niFake_FunctionWithIntflagParameter(self, vi, flag):  # noqa: N802
+        if self._defaults['FunctionWithIntflagParameter']['return'] != 0:
+            return self._defaults['FunctionWithIntflagParameter']['return']
+        return self._defaults['FunctionWithIntflagParameter']['return']
 
     def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
         if self._defaults['FunctionWithRepeatedCapabilityType']['return'] != 0:
@@ -1043,8 +1043,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ExportAttributeConfigurationBuffer.return_value = 0
         mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
         mock_library.niFake_FetchWaveform.return_value = 0
-        mock_library.niFake_FunctionWithIntFlagParameter.side_effect = MockFunctionCallError("niFake_FunctionWithIntFlagParameter")
-        mock_library.niFake_FunctionWithIntFlagParameter.return_value = 0
+        mock_library.niFake_FunctionWithIntflagParameter.side_effect = MockFunctionCallError("niFake_FunctionWithIntflagParameter")
+        mock_library.niFake_FunctionWithIntflagParameter.return_value = 0
         mock_library.niFake_FunctionWithRepeatedCapabilityType.side_effect = MockFunctionCallError("niFake_FunctionWithRepeatedCapabilityType")
         mock_library.niFake_FunctionWithRepeatedCapabilityType.return_value = 0
         mock_library.niFake_GetABoolean.side_effect = MockFunctionCallError("niFake_GetABoolean")

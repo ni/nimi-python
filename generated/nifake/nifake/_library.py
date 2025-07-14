@@ -36,7 +36,7 @@ class Library(object):
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
         self.niFake_ExportAttributeConfigurationBuffer_cfunc = None
         self.niFake_FetchWaveform_cfunc = None
-        self.niFake_FunctionWithIntFlagParameter_cfunc = None
+        self.niFake_FunctionWithIntflagParameter_cfunc = None
         self.niFake_FunctionWithRepeatedCapabilityType_cfunc = None
         self.niFake_GetABoolean_cfunc = None
         self.niFake_GetANumber_cfunc = None
@@ -188,13 +188,13 @@ class Library(object):
                 self.niFake_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FetchWaveform_cfunc(vi, number_of_samples, waveform_data, actual_number_of_samples)
 
-    def niFake_FunctionWithIntFlagParameter(self, vi, flag):  # noqa: N802
+    def niFake_FunctionWithIntflagParameter(self, vi, flag):  # noqa: N802
         with self._func_lock:
-            if self.niFake_FunctionWithIntFlagParameter_cfunc is None:
-                self.niFake_FunctionWithIntFlagParameter_cfunc = self._get_library_function('niFake_FunctionWithIntFlagParameter')
-                self.niFake_FunctionWithIntFlagParameter_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
-                self.niFake_FunctionWithIntFlagParameter_cfunc.restype = ViStatus  # noqa: F405
-        return self.niFake_FunctionWithIntFlagParameter_cfunc(vi, flag)
+            if self.niFake_FunctionWithIntflagParameter_cfunc is None:
+                self.niFake_FunctionWithIntflagParameter_cfunc = self._get_library_function('niFake_FunctionWithIntflagParameter')
+                self.niFake_FunctionWithIntflagParameter_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
+                self.niFake_FunctionWithIntflagParameter_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_FunctionWithIntflagParameter_cfunc(vi, flag)
 
     def niFake_FunctionWithRepeatedCapabilityType(self, vi, site_list):  # noqa: N802
         with self._func_lock:
