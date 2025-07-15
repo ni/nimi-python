@@ -3027,7 +3027,7 @@ functions = {
                 'numpy': True,
                 'use_numpy_array': True,
                 'use_in_python_api': True,
-                'multidimension': 3
+                'array_dimension': 3
             },
         ],
         'returns': 'ViStatus',

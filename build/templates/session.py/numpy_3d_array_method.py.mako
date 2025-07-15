@@ -28,8 +28,8 @@
             raise TypeError('${parameter['python_name']} must be {0}, is {1}'.format(numpy.ndarray, type(${parameter['python_name']})))
         if numpy.isfortran(${parameter['python_name']}) is True:
             raise TypeError('${parameter['python_name']} must be in C-order')
-        if ${parameter['python_name']}.ndim != ${parameter['multidimension']}:
-            raise TypeError('${parameter['python_name']} must be numpy.ndarray of dimension=${parameter['multidimension']}, is ' + str(${parameter['python_name']}.ndim))
+        if ${parameter['python_name']}.ndim != ${parameter['array_dimension']}:
+            raise TypeError('${parameter['python_name']} must be numpy.ndarray of dimension=${parameter['array_dimension']}, is ' + str(${parameter['python_name']}.ndim))
 % endfor
 % for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.INTERPRETER_METHOD_CALL):
 %   if 'python_api_converter_name' in p:

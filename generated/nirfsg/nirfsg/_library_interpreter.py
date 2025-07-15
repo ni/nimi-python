@@ -22,11 +22,11 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
             complex_dtype = numpy.dtype(library_type)
             if value.ndim > 1:
-                flattened_array = value.ravel().view(complex_dtype)
-                return flattened_array.ctypes.data_as(ctypes.POINTER(library_type))
+                # we create a flattened view of the multi-dimensional numpy array
+                structured_array = value.reshape(-1).view(complex_dtype)
             else:
                 structured_array = value.view(complex_dtype)
-                return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
         else:
             return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
