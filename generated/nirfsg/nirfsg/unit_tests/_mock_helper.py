@@ -67,22 +67,12 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
         self._defaults['ConfigureDigitalModulationUserDefinedWaveform'] = {}
         self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return'] = 0
-        self._defaults['ConfigureGenerationMode'] = {}
-        self._defaults['ConfigureGenerationMode']['return'] = 0
-        self._defaults['ConfigureOutputEnabled'] = {}
-        self._defaults['ConfigureOutputEnabled']['return'] = 0
-        self._defaults['ConfigureP2PEndpointFullnessStartTrigger'] = {}
-        self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return'] = 0
-        self._defaults['ConfigurePowerLevelType'] = {}
-        self._defaults['ConfigurePowerLevelType']['return'] = 0
         self._defaults['ConfigurePxiChassisClk10'] = {}
         self._defaults['ConfigurePxiChassisClk10']['return'] = 0
         self._defaults['ConfigureRF'] = {}
         self._defaults['ConfigureRF']['return'] = 0
         self._defaults['ConfigureRefClock'] = {}
         self._defaults['ConfigureRefClock']['return'] = 0
-        self._defaults['ConfigureSignalBandwidth'] = {}
-        self._defaults['ConfigureSignalBandwidth']['return'] = 0
         self._defaults['ConfigureSoftwareScriptTrigger'] = {}
         self._defaults['ConfigureSoftwareScriptTrigger']['return'] = 0
         self._defaults['ConfigureSoftwareStartTrigger'] = {}
@@ -162,9 +152,6 @@ class SideEffectsHelper(object):
         self._defaults['GetSelfCalibrationTemperature'] = {}
         self._defaults['GetSelfCalibrationTemperature']['return'] = 0
         self._defaults['GetSelfCalibrationTemperature']['temperature'] = None
-        self._defaults['GetStreamEndpointHandle'] = {}
-        self._defaults['GetStreamEndpointHandle']['return'] = 0
-        self._defaults['GetStreamEndpointHandle']['readerHandle'] = None
         self._defaults['GetTerminalName'] = {}
         self._defaults['GetTerminalName']['return'] = 0
         self._defaults['GetTerminalName']['terminalName'] = None
@@ -208,6 +195,8 @@ class SideEffectsHelper(object):
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
+        self._defaults['ResetWithOptions'] = {}
+        self._defaults['ResetWithOptions']['return'] = 0
         self._defaults['RevisionQuery'] = {}
         self._defaults['RevisionQuery']['return'] = 0
         self._defaults['RevisionQuery']['instrumentDriverRevision'] = None
@@ -256,8 +245,6 @@ class SideEffectsHelper(object):
         self._defaults['WriteArbWaveformComplexF64']['return'] = 0
         self._defaults['WriteArbWaveformComplexI16'] = {}
         self._defaults['WriteArbWaveformComplexI16']['return'] = 0
-        self._defaults['WriteP2PEndpointI16'] = {}
-        self._defaults['WriteP2PEndpointI16']['return'] = 0
         self._defaults['WriteScript'] = {}
         self._defaults['WriteScript']['return'] = 0
         self._defaults['close'] = {}
@@ -406,26 +393,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return']
         return self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return']
 
-    def niRFSG_ConfigureGenerationMode(self, vi, generation_mode):  # noqa: N802
-        if self._defaults['ConfigureGenerationMode']['return'] != 0:
-            return self._defaults['ConfigureGenerationMode']['return']
-        return self._defaults['ConfigureGenerationMode']['return']
-
-    def niRFSG_ConfigureOutputEnabled(self, vi, output_enabled):  # noqa: N802
-        if self._defaults['ConfigureOutputEnabled']['return'] != 0:
-            return self._defaults['ConfigureOutputEnabled']['return']
-        return self._defaults['ConfigureOutputEnabled']['return']
-
-    def niRFSG_ConfigureP2PEndpointFullnessStartTrigger(self, vi, p2p_endpoint_fullness_level):  # noqa: N802
-        if self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return'] != 0:
-            return self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return']
-        return self._defaults['ConfigureP2PEndpointFullnessStartTrigger']['return']
-
-    def niRFSG_ConfigurePowerLevelType(self, vi, power_level_type):  # noqa: N802
-        if self._defaults['ConfigurePowerLevelType']['return'] != 0:
-            return self._defaults['ConfigurePowerLevelType']['return']
-        return self._defaults['ConfigurePowerLevelType']['return']
-
     def niRFSG_ConfigurePxiChassisClk10(self, vi, pxi_clk10_source):  # noqa: N802
         if self._defaults['ConfigurePxiChassisClk10']['return'] != 0:
             return self._defaults['ConfigurePxiChassisClk10']['return']
@@ -440,11 +407,6 @@ class SideEffectsHelper(object):
         if self._defaults['ConfigureRefClock']['return'] != 0:
             return self._defaults['ConfigureRefClock']['return']
         return self._defaults['ConfigureRefClock']['return']
-
-    def niRFSG_ConfigureSignalBandwidth(self, vi, signal_bandwidth):  # noqa: N802
-        if self._defaults['ConfigureSignalBandwidth']['return'] != 0:
-            return self._defaults['ConfigureSignalBandwidth']['return']
-        return self._defaults['ConfigureSignalBandwidth']['return']
 
     def niRFSG_ConfigureSoftwareScriptTrigger(self, vi, trigger_id):  # noqa: N802
         if self._defaults['ConfigureSoftwareScriptTrigger']['return'] != 0:
@@ -725,16 +687,6 @@ class SideEffectsHelper(object):
             temperature.contents.value = self._defaults['GetSelfCalibrationTemperature']['temperature']
         return self._defaults['GetSelfCalibrationTemperature']['return']
 
-    def niRFSG_GetStreamEndpointHandle(self, vi, stream_endpoint, reader_handle):  # noqa: N802
-        if self._defaults['GetStreamEndpointHandle']['return'] != 0:
-            return self._defaults['GetStreamEndpointHandle']['return']
-        # reader_handle
-        if self._defaults['GetStreamEndpointHandle']['readerHandle'] is None:
-            raise MockFunctionCallError("niRFSG_GetStreamEndpointHandle", param='readerHandle')
-        if reader_handle is not None:
-            reader_handle.contents.value = self._defaults['GetStreamEndpointHandle']['readerHandle']
-        return self._defaults['GetStreamEndpointHandle']['return']
-
     def niRFSG_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
         if self._defaults['GetTerminalName']['return'] != 0:
             return self._defaults['GetTerminalName']['return']
@@ -894,6 +846,11 @@ class SideEffectsHelper(object):
             return self._defaults['ResetWithDefaults']['return']
         return self._defaults['ResetWithDefaults']['return']
 
+    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
+        if self._defaults['ResetWithOptions']['return'] != 0:
+            return self._defaults['ResetWithOptions']['return']
+        return self._defaults['ResetWithOptions']['return']
+
     def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         if self._defaults['RevisionQuery']['return'] != 0:
             return self._defaults['RevisionQuery']['return']
@@ -1032,11 +989,6 @@ class SideEffectsHelper(object):
             return self._defaults['WriteArbWaveformComplexI16']['return']
         return self._defaults['WriteArbWaveformComplexI16']['return']
 
-    def niRFSG_WriteP2PEndpointI16(self, vi, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
-        if self._defaults['WriteP2PEndpointI16']['return'] != 0:
-            return self._defaults['WriteP2PEndpointI16']['return']
-        return self._defaults['WriteP2PEndpointI16']['return']
-
     def niRFSG_WriteScript(self, vi, script):  # noqa: N802
         if self._defaults['WriteScript']['return'] != 0:
             return self._defaults['WriteScript']['return']
@@ -1102,22 +1054,12 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ConfigureDigitalLevelScriptTrigger.return_value = 0
         mock_library.niRFSG_ConfigureDigitalModulationUserDefinedWaveform.side_effect = MockFunctionCallError("niRFSG_ConfigureDigitalModulationUserDefinedWaveform")
         mock_library.niRFSG_ConfigureDigitalModulationUserDefinedWaveform.return_value = 0
-        mock_library.niRFSG_ConfigureGenerationMode.side_effect = MockFunctionCallError("niRFSG_ConfigureGenerationMode")
-        mock_library.niRFSG_ConfigureGenerationMode.return_value = 0
-        mock_library.niRFSG_ConfigureOutputEnabled.side_effect = MockFunctionCallError("niRFSG_ConfigureOutputEnabled")
-        mock_library.niRFSG_ConfigureOutputEnabled.return_value = 0
-        mock_library.niRFSG_ConfigureP2PEndpointFullnessStartTrigger.side_effect = MockFunctionCallError("niRFSG_ConfigureP2PEndpointFullnessStartTrigger")
-        mock_library.niRFSG_ConfigureP2PEndpointFullnessStartTrigger.return_value = 0
-        mock_library.niRFSG_ConfigurePowerLevelType.side_effect = MockFunctionCallError("niRFSG_ConfigurePowerLevelType")
-        mock_library.niRFSG_ConfigurePowerLevelType.return_value = 0
         mock_library.niRFSG_ConfigurePxiChassisClk10.side_effect = MockFunctionCallError("niRFSG_ConfigurePxiChassisClk10")
         mock_library.niRFSG_ConfigurePxiChassisClk10.return_value = 0
         mock_library.niRFSG_ConfigureRF.side_effect = MockFunctionCallError("niRFSG_ConfigureRF")
         mock_library.niRFSG_ConfigureRF.return_value = 0
         mock_library.niRFSG_ConfigureRefClock.side_effect = MockFunctionCallError("niRFSG_ConfigureRefClock")
         mock_library.niRFSG_ConfigureRefClock.return_value = 0
-        mock_library.niRFSG_ConfigureSignalBandwidth.side_effect = MockFunctionCallError("niRFSG_ConfigureSignalBandwidth")
-        mock_library.niRFSG_ConfigureSignalBandwidth.return_value = 0
         mock_library.niRFSG_ConfigureSoftwareScriptTrigger.side_effect = MockFunctionCallError("niRFSG_ConfigureSoftwareScriptTrigger")
         mock_library.niRFSG_ConfigureSoftwareScriptTrigger.return_value = 0
         mock_library.niRFSG_ConfigureSoftwareStartTrigger.side_effect = MockFunctionCallError("niRFSG_ConfigureSoftwareStartTrigger")
@@ -1168,8 +1110,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_GetSelfCalibrationDateAndTime.return_value = 0
         mock_library.niRFSG_GetSelfCalibrationTemperature.side_effect = MockFunctionCallError("niRFSG_GetSelfCalibrationTemperature")
         mock_library.niRFSG_GetSelfCalibrationTemperature.return_value = 0
-        mock_library.niRFSG_GetStreamEndpointHandle.side_effect = MockFunctionCallError("niRFSG_GetStreamEndpointHandle")
-        mock_library.niRFSG_GetStreamEndpointHandle.return_value = 0
         mock_library.niRFSG_GetTerminalName.side_effect = MockFunctionCallError("niRFSG_GetTerminalName")
         mock_library.niRFSG_GetTerminalName.return_value = 0
         mock_library.niRFSG_GetWaveformBurstStartLocations.side_effect = MockFunctionCallError("niRFSG_GetWaveformBurstStartLocations")
@@ -1200,6 +1140,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ResetDevice.return_value = 0
         mock_library.niRFSG_ResetWithDefaults.side_effect = MockFunctionCallError("niRFSG_ResetWithDefaults")
         mock_library.niRFSG_ResetWithDefaults.return_value = 0
+        mock_library.niRFSG_ResetWithOptions.side_effect = MockFunctionCallError("niRFSG_ResetWithOptions")
+        mock_library.niRFSG_ResetWithOptions.return_value = 0
         mock_library.niRFSG_RevisionQuery.side_effect = MockFunctionCallError("niRFSG_RevisionQuery")
         mock_library.niRFSG_RevisionQuery.return_value = 0
         mock_library.niRFSG_SaveConfigurationsToFile.side_effect = MockFunctionCallError("niRFSG_SaveConfigurationsToFile")
@@ -1244,8 +1186,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_WriteArbWaveformComplexF64.return_value = 0
         mock_library.niRFSG_WriteArbWaveformComplexI16.side_effect = MockFunctionCallError("niRFSG_WriteArbWaveformComplexI16")
         mock_library.niRFSG_WriteArbWaveformComplexI16.return_value = 0
-        mock_library.niRFSG_WriteP2PEndpointI16.side_effect = MockFunctionCallError("niRFSG_WriteP2PEndpointI16")
-        mock_library.niRFSG_WriteP2PEndpointI16.return_value = 0
         mock_library.niRFSG_WriteScript.side_effect = MockFunctionCallError("niRFSG_WriteScript")
         mock_library.niRFSG_WriteScript.return_value = 0
         mock_library.niRFSG_close.side_effect = MockFunctionCallError("niRFSG_close")

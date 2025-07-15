@@ -54,7 +54,11 @@ config = {
         },
         {
             'prefix': '',
-            'python_name': 'deembedding_port'
+            'python_name': 'port'
+        },
+        {
+            'prefix': 'LO',
+            'python_name': 'lo'
         }
     ],
     'session_class_description': 'An NI-RFSG session to the NI-RFSG driver',

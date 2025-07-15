@@ -739,6 +739,9 @@ attributes = {
         },
         'lv_property': 'RF:LO Out Enabled',
         'name': 'LO_OUT_ENABLED',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViBoolean'
     },
     1150014: {
@@ -860,13 +863,16 @@ attributes = {
         },
         'lv_property': 'Device Characteristics:Device Temperature (Degrees C)',
         'name': 'DEVICE_TEMPERATURE',
+        'supported_rep_caps': [
+            'port'
+        ],
         'type': 'ViReal64'
     },
     1150018: {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether to generate a continuous wave (CW) signal, the arbitrary waveform specified by the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute, or the script specified by the NIRFSG_ATTR_SELECTED_SCRIPT attribute, upon calling the nirfsg_Initiate function.\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** NIRFSG_VAL_CW\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696 (CW support only), PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_—Refer to this topic for more information about scripting.\n\n**High-Level Functions**:\n\n- nirfsg_ConfigureGenerationMode\n\n**Defined Values**:',
+            'description': 'Specifies whether to generate a continuous wave (CW) signal, the arbitrary waveform specified by the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute, or the script specified by the NIRFSG_ATTR_SELECTED_SCRIPT attribute, upon calling the nirfsg_Initiate function.\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** NIRFSG_VAL_CW\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696 (CW support only), PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_—Refer to this topic for more information about scripting.\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSG_VAL_ARB_WAVEFORM',
@@ -923,7 +929,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigType',
+        'enum': 'ScriptTriggerType',
         'lv_property': 'Triggers:Script:Type',
         'name': 'SCRIPT_TRIGGER_TYPE',
         'supported_rep_caps': [
@@ -1069,7 +1075,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigDigEdgeEdge',
+        'enum': 'ScriptTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Script:Digital Edge:Edge',
         'name': 'DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE',
         'supported_rep_caps': [
@@ -1252,6 +1258,9 @@ attributes = {
         'enum': 'LoopBandwidth',
         'lv_property': 'RF:Loop Bandwidth',
         'name': 'LOOP_BANDWIDTH',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViInt32'
     },
     1150029: {
@@ -1347,7 +1356,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'AnlgModType',
+        'enum': 'AnalogModulationType',
         'lv_property': 'Modulation:Analog:Modulation Type',
         'name': 'ANALOG_MODULATION_TYPE',
         'type': 'ViInt32'
@@ -1380,7 +1389,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'AnlgModWfmType',
+        'enum': 'AnalogModulationWaveformType',
         'lv_property': 'Modulation:Analog:Waveform Type',
         'name': 'ANALOG_MODULATION_WAVEFORM_TYPE',
         'type': 'ViInt32'
@@ -1438,7 +1447,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'DigModType',
+        'enum': 'DigitalModulationType',
         'lv_property': 'Modulation:Digital:Modulation Type',
         'name': 'DIGITAL_MODULATION_TYPE',
         'type': 'ViInt32'
@@ -1476,7 +1485,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'DigModWfmType',
+        'enum': 'DigitalModulationWaveformType',
         'lv_property': 'Modulation:Digital:Waveform Type',
         'name': 'DIGITAL_MODULATION_WAVEFORM_TYPE',
         'type': 'ViInt32'
@@ -1548,7 +1557,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies how NI-RFSG interprets the value of the NIRFSG_ATTR_POWER_LEVEL attribute. The NIRFSG_ATTR_POWER_LEVEL_TYPE attribute also affects how waveforms are scaled.\n\nPXI-5670/5671: While in Script generation mode, if this attribute is set to NIRFSG_VAL_AVERAGE_POWER, NI-RFSG scales each waveform so that all waveforms have the same average power. The average power level of each waveform matches the value set with the NIRFSG_ATTR_POWER_LEVEL attribute. You can disable this scaling operation by setting the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute to NIRFSG_VAL_PEAK_POWER.\n\nPXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: While in Script generation mode, this attribute must be set to NIRFSG_VAL_PEAK_POWER.\n\nConverting from Average Power to Peak Power\n\nTypically, this attribute is set to NIRFSG_VAL_AVERAGE_POWER. However, some instrument modes require this attribute to be set to NIRFSG_VAL_PEAK_POWER. Use the following equations to calculate the equivalent peak power given the desired average power for your waveform:\n\nWhere 1 is the highest possible magnitude in the waveform.\n\n**Default Value:**\n\nPXIe-5820: NIRFSG_VAL_PEAK_POWER\n\nAll other devices: NIRFSG_VAL_AVERAGE_POWER\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_\n\n`Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigurePowerLevelType   \n\n**Defined Values**:',
+            'description': 'Specifies how NI-RFSG interprets the value of the NIRFSG_ATTR_POWER_LEVEL attribute. The NIRFSG_ATTR_POWER_LEVEL_TYPE attribute also affects how waveforms are scaled.\n\nPXI-5670/5671: While in Script generation mode, if this attribute is set to NIRFSG_VAL_AVERAGE_POWER, NI-RFSG scales each waveform so that all waveforms have the same average power. The average power level of each waveform matches the value set with the NIRFSG_ATTR_POWER_LEVEL attribute. You can disable this scaling operation by setting the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute to NIRFSG_VAL_PEAK_POWER.\n\nPXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: While in Script generation mode, this attribute must be set to NIRFSG_VAL_PEAK_POWER.\n\nConverting from Average Power to Peak Power\n\nTypically, this attribute is set to NIRFSG_VAL_AVERAGE_POWER. However, some instrument modes require this attribute to be set to NIRFSG_VAL_PEAK_POWER. Use the following equations to calculate the equivalent peak power given the desired average power for your waveform:\n\nWhere 1 is the highest possible magnitude in the waveform.\n\n**Default Value:**\n\nPXIe-5820: NIRFSG_VAL_PEAK_POWER\n\nAll other devices: NIRFSG_VAL_AVERAGE_POWER\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_\n\n`Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSG_VAL_AVERAGE_POWER',
@@ -1829,7 +1838,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigDigLevelActiveLevel',
+        'enum': 'ScriptTriggerDigitalLevelActiveLevel',
         'lv_property': 'Triggers:Script:Digital Level:Active Level',
         'name': 'DIGITAL_LEVEL_SCRIPT_TRIGGER_ACTIVE_LEVEL',
         'supported_rep_caps': [
@@ -2109,7 +2118,6 @@ attributes = {
         },
         'lv_property': 'Events:Marker:Output Terminal',
         'name': 'EXPORTED_MARKER_EVENT_OUTPUT_TERMINAL',
-        'repeated_capability_type': 'markers',
         'supported_rep_caps': [
             'markers'
         ],
@@ -2224,6 +2232,9 @@ attributes = {
         },
         'lv_property': 'RF:LO Out Power (dBm)',
         'name': 'LO_OUT_POWER',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViReal64'
     },
     1150067: {
@@ -2235,6 +2246,9 @@ attributes = {
         },
         'lv_property': 'RF:LO In Power (dBm)',
         'name': 'LO_IN_POWER',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViReal64'
     },
     1150068: {
@@ -2533,7 +2547,6 @@ attributes = {
         },
         'lv_property': 'Events:Marker:Terminal Name',
         'name': 'MARKER_EVENT_TERMINAL_NAME',
-        'repeated_capability_type': 'markers',
         'supported_rep_caps': [
             'markers'
         ],
@@ -2577,81 +2590,6 @@ attributes = {
         'lv_property': 'RF:Advanced:YIG Main Coil Drive',
         'name': 'YIG_MAIN_COIL_DRIVE',
         'type': 'ViInt32'
-    },
-    1150123: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the RF signal generator reads data from the peer-to-peer endpoint. This attribute is endpoint-based.\n\n**Default Value**: VI_FALSE\n\n**Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Peer-to-peer data streaming is enabled.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Peer-to-peer data streaming is disabled.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Peer-to-Peer:Enabled',
-        'name': 'P2P_ENABLED',
-        'type': 'ViBoolean'
-    },
-    1150124: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the size, in samples, of the device endpoint. This attribute is endpoint-based.\n\n**Units**: samples (s)\n\n**Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Endpoint Size',
-        'name': 'P2P_ENDPOINT_SIZE',
-        'type': 'ViInt64'
-    },
-    1150125: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the current space available in the endpoint. You can use this attribute when priming the endpoint with initial data using the nirfsg_WriteP2pEndpointI16 function to determine how many samples you can write. You also can use this attribute to characterize the performance and measure the latency of the peer-to-peer stream as data moves across the bus. This attribute is endpoint-based.\n\n**Units**: samples per channel\n\n**Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_\n\n`Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Space Available In Endpoint',
-        'name': 'P2P_SPACE_AVAILABLE_IN_ENDPOINT',
-        'type': 'ViInt64'
-    },
-    1150126: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the largest number of samples per channel available in the endpoint since this attribute was last read. You can use this attribute to determine how much endpoint space to use as a buffer against bus traffic latencies by reading the attribute and keeping track of the largest value returned. This attribute is endpoint-based.\n\nIf you want to minimize the latency for data to move through the endpoint and be generated by the RF signal generator, use the NIRFSG_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS attribute to grant fewer initial credits than the default of the entire endpoint size.\n\n**Units**: samples per channel\n\n**Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Most Space Available in Endpoint',
-        'name': 'P2P_MOST_SPACE_AVAILABLE_IN_ENDPOINT',
-        'type': 'ViInt64'
-    },
-    1150127: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the number of peer-to-peer FIFO endpoints supported by the device.\n\n**Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Endpoint Count',
-        'name': 'P2P_ENDPOINT_COUNT',
-        'type': 'ViInt32'
-    },
-    1150128: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the number of samples the endpoint must receive before the device starts generation. If no level is specified, NI-RFSG automatically sets this value to -1. This attribute applies only when the NIRFSG_ATTR_START_TRIGGER_TYPE attribute is set to NIRFSG_VAL_P2P_ENDPOINT_FULLNESS\n\n**Default Value:** -1, which allows NI-RFSG to select the appropriate fullness value.\n\n**Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_',
-            'note': 'Due to an additional internal FIFO in the RF signal generator, the writer peer actually needs to write 2,304 bytes more than the quantity of data specified by this attribute to satisfy the trigger level.'
-        },
-        'lv_property': 'Triggers:Start:P2P Endpoint Fullness:Level',
-        'name': 'P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL',
-        'type': 'ViInt64'
     },
     1150129: {
         'access': 'read-write',
@@ -2744,30 +2682,10 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'RefPllBandwidth',
+        'enum': 'ReferencePllBandwidth',
         'lv_property': 'RF:Advanced:Ref PLL Bandwidth',
         'name': 'REF_PLL_BANDWIDTH',
         'type': 'ViInt32'
-    },
-    1150134: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the interval at which the RF signal generator issues credits to allow the writer peer to transfer data over the bus into the configured endpoint. This attribute is coerced up by NI-RFSG to the nearest 128-byte boundary. This attribute is endpoint-based.\n\n**Units**: samples per channel\n\n**Supported Devices:** PXIe-5673E\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_\n\n`Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Data Transfer Permission Interval',
-        'name': 'P2P_DATA_TRANSFER_PERMISSION_INTERVAL',
-        'type': 'ViInt64'
-    },
-    1150135: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the initial amount of data that the writer peer can transfer over the bus into the configured endpoint when the peer-to-peer data stream is enabled. If this attribute is not set and the endpoint is empty, credits equal to the full endpoint size are issued to the writer peer. If data is written to the endpoint using the nirfsg_WriteP2pEndpointI16 function prior to enabling the stream, credits equal to the remaining space available in the endpoint are issued to the writer peer. This attribute is coerced up by NI-RFSG to 8-byte boundaries. This attribute is endpoint-based.\n\n**Units**: samples per channel\n\n**Default Value:** 1,024\n\n**Supported Devices:** PXIe-5673E\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_\n\n`Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Data Transfer Permission Initial Credits',
-        'name': 'P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS',
-        'type': 'ViInt64'
     },
     1150136: {
         'access': 'read only',
@@ -2936,6 +2854,9 @@ attributes = {
         'enum': 'IQOutPortTermCfg',
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Terminal Configuration',
         'name': 'IQ_OUT_PORT_TERMINAL_CONFIGURATION',
+        'supported_rep_caps': [
+            'port'
+        ],
         'type': 'ViInt32'
     },
     1150147: {
@@ -2947,6 +2868,9 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Level',
         'name': 'IQ_OUT_PORT_LEVEL',
+        'supported_rep_caps': [
+            'port'
+        ],
         'type': 'ViReal64'
     },
     1150148: {
@@ -2958,6 +2882,9 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Common Mode Offset',
         'name': 'IQ_OUT_PORT_COMMON_MODE_OFFSET',
+        'supported_rep_caps': [
+            'port'
+        ],
         'type': 'ViReal64'
     },
     1150149: {
@@ -2969,6 +2896,9 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Offset',
         'name': 'IQ_OUT_PORT_OFFSET',
+        'supported_rep_caps': [
+            'port'
+        ],
         'type': 'ViReal64'
     },
     1150150: {
@@ -3006,6 +2936,9 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Source',
         'name': 'LO_SOURCE',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViString'
     },
     1150151: {
@@ -3083,6 +3016,9 @@ attributes = {
         'enum': 'LoPlLfractionalModeEnabled',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO PLL Fractional Mode Enabled',
         'name': 'LO_PLL_FRACTIONAL_MODE_ENABLED',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViInt32'
     },
     1150153: {
@@ -3244,6 +3180,9 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Load Impedance',
         'name': 'IQ_OUT_PORT_LOAD_IMPEDANCE',
+        'supported_rep_caps': [
+            'port'
+        ],
         'type': 'ViReal64'
     },
     1150165: {
@@ -3274,7 +3213,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'AnlgModFmNarrowbandIntegrator',
+        'enum': 'AnalogModulationFmNarrowbandIntegrator',
         'lv_property': 'Modulation:Analog:FM Narrowband Integrator',
         'name': 'ANALOG_MODULATION_FM_NARROWBAND_INTEGRATOR',
         'type': 'ViInt32'
@@ -3483,7 +3422,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'AnlgModFmBand',
+        'enum': 'AnalogModulationFmBand',
         'lv_property': 'Modulation:Analog:FM Band',
         'name': 'ANALOG_MODULATION_FM_BAND',
         'type': 'ViInt32'
@@ -3511,7 +3450,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'AnlgModPmMode',
+        'enum': 'AnalogModulationPmMode',
         'lv_property': 'Modulation:Analog:PM Mode',
         'name': 'ANALOG_MODULATION_PM_MODE',
         'type': 'ViInt32'
@@ -3591,6 +3530,9 @@ attributes = {
         },
         'lv_property': 'RF:LO Frequency (Hz)',
         'name': 'LO_FREQUENCY',
+        'supported_rep_caps': [
+            'lo'
+        ],
         'type': 'ViReal64'
     },
     1150204: {
@@ -3628,7 +3570,6 @@ attributes = {
         'enum': 'MarkerEventOutputBehavior',
         'lv_property': 'Events:Marker:Output Behavior',
         'name': 'MARKER_EVENT_OUTPUT_BEHAVIOR',
-        'repeated_capability_type': 'markers',
         'supported_rep_caps': [
             'markers'
         ],
@@ -3642,7 +3583,6 @@ attributes = {
         },
         'lv_property': 'Events:Marker:Pulse:Width Value',
         'name': 'MARKER_EVENT_PULSE_WIDTH',
-        'repeated_capability_type': 'markers',
         'supported_rep_caps': [
             'markers'
         ],
@@ -3674,7 +3614,6 @@ attributes = {
         'enum': 'MarkerEventPulseWidthUnits',
         'lv_property': 'Events:Marker:Pulse:Width Units',
         'name': 'MARKER_EVENT_PULSE_WIDTH_UNITS',
-        'repeated_capability_type': 'markers',
         'supported_rep_caps': [
             'markers'
         ],
@@ -3706,7 +3645,6 @@ attributes = {
         'enum': 'MarkerEventToggleInitialState',
         'lv_property': 'Events:Marker:Toggle:Initial State',
         'name': 'MARKER_EVENT_TOGGLE_INITIAL_STATE',
-        'repeated_capability_type': 'markers',
         'supported_rep_caps': [
             'markers'
         ],
@@ -3745,50 +3683,6 @@ attributes = {
         'name': 'TEMPERATURE_READ_INTERVAL',
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
-    },
-    1150217: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether peer-to-peer should continuously generate data from the peer-to-peer stream or from only a finite number of samples, according to the NIRFSG_ATTR_P2P_NUMBER_OF_SAMPLES_TO_GENERATE attribute. To use this attribute, peer-to-peer must be enabled. This attribute is endpoint-based.\n\n**Default Value**: VI_FALSE\n\n**Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Data is generated from only a finite number of samples.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Data is continuously generated from the peer-to-peer stream.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Peer-to-Peer:Is Finite Generation',
-        'name': 'P2P_IS_FINITE_GENERATION',
-        'type': 'ViBoolean'
-    },
-    1150218: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies how many samples are generated from the peer-to-peer subsystem when it is enabled. To use this attribute, peer-to-peer must be enabled and set to finite generation. This attribute is endpoint-based.\n\n**Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_'
-        },
-        'lv_property': 'Peer-to-Peer:Number Of Samples To Generate',
-        'name': 'P2P_NUMBER_OF_SAMPLES_TO_GENERATE',
-        'type': 'ViInt64'
-    },
-    1150219: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns how many samples NI-RFSG pulls from the peer-to-peer FIFO per read. You can use this attribute to determine how many samples to send across the peer-to-peer bus to ensure that no samples are ignored. If you send a number of samples that is not a multiple of this value, the remaining samples are not read from the FIFO during generation. This attribute is endpoint-based.\n\n**Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Generation FIFO Sample Quantum',
-        'name': 'P2P_GENERATION_FIFO_SAMPLE_QUANTUM',
-        'type': 'ViInt64'
     },
     1150220: {
         'access': 'read-write',
@@ -4022,7 +3916,7 @@ attributes = {
         'lv_property': 'De-embedding:Type',
         'name': 'DEEMBEDDING_TYPE',
         'supported_rep_caps': [
-            'deembedding_port'
+            'port'
         ],
         'type': 'ViInt32'
     },
@@ -4035,7 +3929,7 @@ attributes = {
         'lv_property': 'De-embedding:Selected Table',
         'name': 'DEEMBEDDING_SELECTED_TABLE',
         'supported_rep_caps': [
-            'deembedding_port'
+            'port'
         ],
         'type': 'ViString'
     },
@@ -4233,7 +4127,7 @@ attributes = {
         'lv_property': 'De-embedding:Compensation Gain',
         'name': 'DEEMBEDDING_COMPENSATION_GAIN',
         'supported_rep_caps': [
-            'deembedding_port'
+            'port'
         ],
         'type': 'ViReal64'
     },
@@ -4390,7 +4284,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigDigLevelActiveLevel',
+        'enum': 'ScriptTriggerDigitalLevelActiveLevel',
         'lv_property': 'RF:Advanced:Pulse Modulation Active Level',
         'name': 'PULSE_MODULATION_ACTIVE_LEVEL',
         'type': 'ViInt32'
@@ -4478,7 +4372,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ScriptTrigDigLevelActiveLevel',
+        'enum': 'ScriptTriggerDigitalLevelActiveLevel',
         'lv_property': 'Events:Pulse Modulation:Exported Pulse Modulation Event Active Level',
         'name': 'EXPORTED_PULSE_MODULATION_EVENT_ACTIVE_LEVEL',
         'type': 'ViInt32'
@@ -4575,7 +4469,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether signal output is enabled. Setting the NIRFSG_ATTR_OUTPUT_ENABLED attribute to VI_FALSE while in the Generation state stops signal output, although generation continues internally. For the PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, and PXIe-5672/5673/5673E, setting the NIRFSG_ATTR_OUTPUT_ENABLED attribute while in the Committed state does not transition the device to the Configuration state, but output changes immediately.\n\n**Default Value:** VI_TRUE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigureOutputEnabled\n\n**Defined Values**:',
+            'description': 'Specifies whether signal output is enabled. Setting the NIRFSG_ATTR_OUTPUT_ENABLED attribute to VI_FALSE while in the Generation state stops signal output, although generation continues internally. For the PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, and PXIe-5672/5673/5673E, setting the NIRFSG_ATTR_OUTPUT_ENABLED attribute while in the Committed state does not transition the device to the Configuration state, but output changes immediately.\n\n**Default Value:** VI_TRUE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n**Defined Values**:',
             'note': '- For the PXIe-5653, this attribute controls only the LO1 terminal.\n\n - For the PXIe-5645, this attribute is ignored if you are using the I/Q ports.\n\n - When the NIRFSG_ATTR_ACTIVE_CONFIGURATION_LIST attribute is set to a valid list name, setting the NIRFSG_ATTR_OUTPUT_ENABLED attribute transitions the device to the Configuration state.',
             'table_body': [
                 [
@@ -4813,7 +4707,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'StartTrigType',
+        'enum': 'StartTriggerType',
         'lv_property': 'Triggers:Start:Type',
         'name': 'START_TRIGGER_TYPE',
         'type': 'ViInt32'
@@ -4841,7 +4735,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'StartTrigDigEdgeEdge',
+        'enum': 'StartTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Start:Digital Edge',
         'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
         'type': 'ViInt32'

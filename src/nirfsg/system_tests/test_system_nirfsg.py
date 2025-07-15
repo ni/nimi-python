@@ -35,6 +35,11 @@ class SystemTests:
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
+    @pytest.fixture(scope='function')
+    def simulated_5831_device_session(self, session_creation_kwargs):
+        with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+            yield sim_5831_session
+
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsg_device_session):
         value = rfsg_device_session.power_level
@@ -90,17 +95,40 @@ class SystemTests:
 
 # Utility method tests
     def test_reset(self, rfsg_device_session):
-        # Save the original value of an attribute, change it, reset, and check it returns to default
         default_power_level = rfsg_device_session.power_level
         rfsg_device_session.power_level = default_power_level + 1.0
         assert rfsg_device_session.power_level == default_power_level + 1.0
         rfsg_device_session.reset()
-        # After reset, attribute should return to default
         assert rfsg_device_session.power_level == default_power_level
+
+    def test_reset_with_options(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
+        default_power_level = rfsg_device_session.power_level
+        rfsg_device_session.power_level = default_power_level + 1.0
+        assert rfsg_device_session.power_level == default_power_level + 1.0
+        steps_to_omit_without_waveforms = nirfsg.ResetWithOptionsStepsToOmit.ROUTES
+        steps_to_omit_with_waveforms = nirfsg.ResetWithOptionsStepsToOmit.WAVEFORMS | nirfsg.ResetWithOptionsStepsToOmit.ROUTES
+        rfsg_device_session.reset_with_options(steps_to_omit_with_waveforms)
+        assert rfsg_device_session.power_level == default_power_level
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
+        assert waveform_exists is True
+        rfsg_device_session.reset_with_options(steps_to_omit_without_waveforms)
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
+        assert waveform_exists is False
 
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
     def test_self_cal(self, rfsg_device_session):
         rfsg_device_session.self_cal()
+
+    @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
+    def test_self_cal_range(self, rfsg_device_session):
+        steps_to_omit = nirfsg.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL | nirfsg.SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION
+        rfsg_device_session.self_calibrate_range(steps_to_omit, 1e9, 2e9, -20, 0)
+
+    def test_clear_self_calibrate_range(self, rfsg_device_session):
+        rfsg_device_session.clear_self_calibrate_range()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
     def test_get_external_calibration_last_date_and_time(self, rfsg_device_session):
@@ -137,18 +165,22 @@ class SystemTests:
         assert trigger.exported_script_trigger_output_terminal == requested_terminal_name
 
     def test_waveform_rep_cap(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
         requested_waveform_iq_rate = 1e6
         rfsg_device_session.waveform['mywaveform'].waveform_iq_rate = requested_waveform_iq_rate
         assert rfsg_device_session.waveform['mywaveform'].waveform_iq_rate == requested_waveform_iq_rate
 
-    def test_deembedding_port_rep_cap(self, rfsg_device_session):
-        port = rfsg_device_session.deembedding_port['']
+    def test_port_rep_cap(self, simulated_5831_device_session):
         requested_deembedding_type = nirfsg.DeembeddingTypeAttrVals.SCALAR
-        port.deembedding_type = requested_deembedding_type
-        assert port.deembedding_type == requested_deembedding_type
+        simulated_5831_device_session.port['if1'].deembedding_type = requested_deembedding_type
+        assert simulated_5831_device_session.port['if1'].deembedding_type == requested_deembedding_type
+
+    def test_lo_rep_cap(self, simulated_5831_device_session):
+        requested_lo_source = "SG_SA_Shared"
+        simulated_5831_device_session.lo[2].lo_source = requested_lo_source
+        assert simulated_5831_device_session.lo[2].lo_source == requested_lo_source
 
 # Configuration methods related tests
     def test_configure_rf(self, rfsg_device_session):
@@ -156,31 +188,8 @@ class SystemTests:
         assert rfsg_device_session.power_level == -5.0
         assert rfsg_device_session.frequency == 2e9
 
-    def test_configure_output_enabled(self, rfsg_device_session):
-        rfsg_device_session.configure_output_enabled(True)
-        assert rfsg_device_session.output_enabled is True
-        rfsg_device_session.configure_output_enabled(False)
-        assert rfsg_device_session.output_enabled is False
-
-    def test_configure_generation_mode(self, rfsg_device_session):
-        # Test CW mode
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.CW)
-        assert rfsg_device_session.generation_mode == nirfsg.GenerationMode.CW
-        # Test ARB_WAVEFORM mode
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
-        assert rfsg_device_session.generation_mode == nirfsg.GenerationMode.ARB_WAVEFORM
-        # Test SCRIPT mode
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
-        assert rfsg_device_session.generation_mode == nirfsg.GenerationMode.SCRIPT
-
-    def test_configure_signalbandwidth_and_powerleveltype(self, rfsg_device_session):
-        rfsg_device_session.configure_signal_bandwidth(8e5)
-        assert rfsg_device_session.signal_bandwidth == 8e5
-        rfsg_device_session.configure_power_level_type(nirfsg.PowerLevelType.PEAK)
-        assert rfsg_device_session.power_level_type == nirfsg.PowerLevelType.PEAK
-
     def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform1')
@@ -189,7 +198,7 @@ class SystemTests:
         assert waveform_exists is False
 
     def test_write_arb_waveform_numpy_complex64(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1600, 1 + 0j, dtype=np.complex64)
         rfsg_device_session.write_arb_waveform('mywaveform2', waveform_data, False)
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
@@ -198,7 +207,7 @@ class SystemTests:
         assert waveform_exists is False
 
     def test_write_arb_waveform_numpy_interleaved_int16(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # Needed for writing unscaled int16 data
         waveform_data = np.array([1, 0] * 3000, dtype=np.int16)
         rfsg_device_session.write_arb_waveform('mywaveform3', waveform_data, False)
@@ -208,7 +217,7 @@ class SystemTests:
         assert waveform_exists is False
 
     def test_write_arb_waveform_with_wrong_datatype(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data_wrong_numpy_type = np.array([1, 0] * 3000, dtype=np.int32)
         waveform_data_non_numpy_type = array.array('h', [1, 0] * 3000)
         try:
@@ -223,7 +232,7 @@ class SystemTests:
             pass
 
     def test_clear_arb_waveform(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform1')
@@ -233,7 +242,7 @@ class SystemTests:
         assert waveform_exists is False
 
     def test_clear_all_arb_waveforms(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         rfsg_device_session.write_arb_waveform('mywaveform2', waveform_data, False)
@@ -248,7 +257,7 @@ class SystemTests:
         assert waveform_exists is False
 
     def test_allocate_arb_waveform(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # To be able to call write multiple times on same waveform
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.allocate_arb_waveform('foo', len(waveform_data) * 2)
@@ -256,7 +265,7 @@ class SystemTests:
         rfsg_device_session.write_arb_waveform('foo', waveform_data, False)
 
     def test_set_arb_waveform_next_write_position(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # To be able to call write multiple times on same waveform
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, True)
@@ -265,7 +274,7 @@ class SystemTests:
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data_new_second_half, False)
 
     def test_set_get_burst_start_stop_locations(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         startlocations = [1, 100, 200]
@@ -278,7 +287,7 @@ class SystemTests:
         assert stoplocations_out == stoplocations
 
     def test_set_get_marker_event_locations(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         markerlocations = [1, 100, 200]
@@ -287,7 +296,7 @@ class SystemTests:
         assert markerlocations_out == markerlocations
 
     def test_write_script(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
         waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex64)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         script = '''script myScript1
@@ -299,7 +308,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
     def test_check_if_script_exists(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
         waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex64)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         script = '''script myScript1
@@ -315,7 +324,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
     def test_write_script_with_bad_script(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
         script = '''script myScript1
         repeat forever
         generate mywaveform1
@@ -330,29 +339,29 @@ class SystemTests:
 
     def test_configure_software_trigger(self, rfsg_device_session):
         rfsg_device_session.configure_software_start_trigger()
-        assert rfsg_device_session.start_trigger_type == nirfsg.StartTrigType.SOFTWARE
-        rfsg_device_session.configure_software_script_trigger('scriptTrigger0')
-        assert rfsg_device_session.script_triggers[0].script_trigger_type == nirfsg.ScriptTrigType.SOFTWARE
+        assert rfsg_device_session.start_trigger_type == nirfsg.StartTriggerType.SOFTWARE
+        rfsg_device_session.script_triggers[0].configure_software_script_trigger()
+        assert rfsg_device_session.script_triggers[0].script_trigger_type == nirfsg.ScriptTriggerType.SOFTWARE
 
     def test_configure_digital_edge_trigger(self, rfsg_device_session):
-        rfsg_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsg.StartTrigDigEdgeEdge.RISING)
-        rfsg_device_session.configure_digital_edge_script_trigger('scriptTrigger1', 'PXI_Trig2', nirfsg.ScriptTrigDigEdgeEdge.FALLING)
-        assert rfsg_device_session.start_trigger_type == nirfsg.StartTrigType.DIGITAL_EDGE
+        rfsg_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsg.StartTriggerDigitalEdgeEdge.RISING)
+        rfsg_device_session.script_triggers[1].configure_digital_edge_script_trigger('PXI_Trig2', nirfsg.ScriptTriggerDigitalEdgeEdge.FALLING)
+        assert rfsg_device_session.start_trigger_type == nirfsg.StartTriggerType.DIGITAL_EDGE
         assert rfsg_device_session.digital_edge_start_trigger_source == 'PXI_Trig1'
-        assert rfsg_device_session.digital_edge_start_trigger_edge == nirfsg.StartTrigDigEdgeEdge.RISING
-        assert rfsg_device_session.script_triggers[1].script_trigger_type == nirfsg.ScriptTrigType.DIGITAL_EDGE
+        assert rfsg_device_session.digital_edge_start_trigger_edge == nirfsg.StartTriggerDigitalEdgeEdge.RISING
+        assert rfsg_device_session.script_triggers[1].script_trigger_type == nirfsg.ScriptTriggerType.DIGITAL_EDGE
         assert rfsg_device_session.script_triggers[1].digital_edge_script_trigger_source == 'PXI_Trig2'
-        assert rfsg_device_session.script_triggers[1].digital_edge_script_trigger_edge == nirfsg.ScriptTrigDigEdgeEdge.FALLING
+        assert rfsg_device_session.script_triggers[1].digital_edge_script_trigger_edge == nirfsg.ScriptTriggerDigitalEdgeEdge.FALLING
 
     def test_disable_trigger(self, rfsg_device_session):
         rfsg_device_session.configure_software_start_trigger()
-        assert rfsg_device_session.start_trigger_type == nirfsg.StartTrigType.SOFTWARE
+        assert rfsg_device_session.start_trigger_type == nirfsg.StartTriggerType.SOFTWARE
         rfsg_device_session.disable_start_trigger()
-        assert rfsg_device_session.start_trigger_type == nirfsg.StartTrigType.NONE
-        rfsg_device_session.configure_software_script_trigger('scriptTrigger3')
-        assert rfsg_device_session.script_triggers[3].script_trigger_type == nirfsg.ScriptTrigType.SOFTWARE
-        rfsg_device_session.disable_script_trigger('scriptTrigger3')
-        assert rfsg_device_session.script_triggers[3].script_trigger_type == nirfsg.ScriptTrigType.NONE
+        assert rfsg_device_session.start_trigger_type == nirfsg.StartTriggerType.NONE
+        rfsg_device_session.script_triggers[3].configure_software_script_trigger()
+        assert rfsg_device_session.script_triggers[3].script_trigger_type == nirfsg.ScriptTriggerType.SOFTWARE
+        rfsg_device_session.script_triggers[3].disable_script_trigger()
+        assert rfsg_device_session.script_triggers[3].script_trigger_type == nirfsg.ScriptTriggerType.NONE
 
     def test_export_signal(self, rfsg_device_session):
         rfsg_device_session.export_signal(nirfsg.Signal.START_TRIGGER, '', 'PXI_Trig0')
@@ -432,7 +441,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is False, reason="Test executed with status check in real hw")
     def test_multiple_arb_waveform_generation(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data1, False)
         waveform_data2 = np.full(8000, 1 + 0j, dtype=np.complex128)
@@ -446,7 +455,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="is_done is always True on simulated device")
     def test_multiple_arb_waveform_generation_with_status(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data1, False)
         waveform_data2 = np.full(8000, 1 + 0j, dtype=np.complex128)
@@ -462,7 +471,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is False, reason="Test executed with status check in real hw")
     def test_multiple_script_generation(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
         waveform_data = np.full(2000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
         script0 = '''script myScript0
@@ -486,7 +495,7 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="is_done is always True on simulated device")
     def test_multiple_script_generation_with_status(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
         waveform_data = np.full(2000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
         script0 = '''script myScript0
@@ -512,7 +521,7 @@ class SystemTests:
             assert is_done is False  # is_done will never be True since we are repeating forever
 
     def test_send_software_edge_trigger(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.SCRIPT)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
         waveform_data = np.full(2000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
         script0 = '''script myScript0
@@ -521,7 +530,7 @@ class SystemTests:
         end script'''
         rfsg_device_session.write_script(script0)
         rfsg_device_session.configure_software_start_trigger()
-        rfsg_device_session.configure_software_script_trigger('scriptTrigger0')
+        rfsg_device_session.script_triggers[0].configure_software_script_trigger()
         with rfsg_device_session.initiate():
             rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.START, '')
             rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
@@ -531,11 +540,11 @@ class SystemTests:
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2)
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1)
         rfsg_device_session.configure_deembedding_table_interpolation_linear('', 'myTable1', nirfsg.Format.MAGNITUDE_AND_PHASE)
-        rfsg_device_session.deembedding_port[''].deembedding_selected_table = 'myTable1'
+        rfsg_device_session.port[''].deembedding_selected_table = 'myTable1'
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
         rfsg_device_session.delete_deembedding_table('', 'myTable1')
-        rfsg_device_session.deembedding_port[''].deembedding_selected_table = 'myTable2'
+        rfsg_device_session.port[''].deembedding_selected_table = 'myTable2'
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
         rfsg_device_session.delete_all_deembedding_tables()
@@ -545,12 +554,12 @@ class SystemTests:
         except nirfsg.Error as e:
             assert e.code == -1074097772
             assert 'The specified de-embedding table cannot be found' in e.description
-        rfsg_device_session.deembedding_port[''].deembedding_selected_table = ''
+        rfsg_device_session.port[''].deembedding_selected_table = ''
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
 
     def test_read_and_download_waveform_from_file_tdms(self, rfsg_device_session):
-        rfsg_device_session.configure_generation_mode(nirfsg.GenerationMode.ARB_WAVEFORM)
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         rfsg_device_session.read_and_download_waveform_from_file_tdms('mywaveform', get_test_file_path('ValidWaveformTDMSFile.tdms'), 0)
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is True

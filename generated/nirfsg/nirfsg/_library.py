@@ -44,14 +44,9 @@ class Library(object):
         self.niRFSG_ConfigureDigitalEdgeStartTrigger_cfunc = None
         self.niRFSG_ConfigureDigitalLevelScriptTrigger_cfunc = None
         self.niRFSG_ConfigureDigitalModulationUserDefinedWaveform_cfunc = None
-        self.niRFSG_ConfigureGenerationMode_cfunc = None
-        self.niRFSG_ConfigureOutputEnabled_cfunc = None
-        self.niRFSG_ConfigureP2PEndpointFullnessStartTrigger_cfunc = None
-        self.niRFSG_ConfigurePowerLevelType_cfunc = None
         self.niRFSG_ConfigurePxiChassisClk10_cfunc = None
         self.niRFSG_ConfigureRF_cfunc = None
         self.niRFSG_ConfigureRefClock_cfunc = None
-        self.niRFSG_ConfigureSignalBandwidth_cfunc = None
         self.niRFSG_ConfigureSoftwareScriptTrigger_cfunc = None
         self.niRFSG_ConfigureSoftwareStartTrigger_cfunc = None
         self.niRFSG_CreateDeembeddingSparameterTableS2PFile_cfunc = None
@@ -77,7 +72,6 @@ class Library(object):
         self.niRFSG_GetMaxSettablePower_cfunc = None
         self.niRFSG_GetSelfCalibrationDateAndTime_cfunc = None
         self.niRFSG_GetSelfCalibrationTemperature_cfunc = None
-        self.niRFSG_GetStreamEndpointHandle_cfunc = None
         self.niRFSG_GetTerminalName_cfunc = None
         self.niRFSG_GetWaveformBurstStartLocations_cfunc = None
         self.niRFSG_GetWaveformBurstStopLocations_cfunc = None
@@ -93,6 +87,7 @@ class Library(object):
         self.niRFSG_ResetAttribute_cfunc = None
         self.niRFSG_ResetDevice_cfunc = None
         self.niRFSG_ResetWithDefaults_cfunc = None
+        self.niRFSG_ResetWithOptions_cfunc = None
         self.niRFSG_RevisionQuery_cfunc = None
         self.niRFSG_SaveConfigurationsToFile_cfunc = None
         self.niRFSG_SelectArbWaveform_cfunc = None
@@ -115,7 +110,6 @@ class Library(object):
         self.niRFSG_WriteArbWaveformComplexF32_cfunc = None
         self.niRFSG_WriteArbWaveformComplexF64_cfunc = None
         self.niRFSG_WriteArbWaveformComplexI16_cfunc = None
-        self.niRFSG_WriteP2PEndpointI16_cfunc = None
         self.niRFSG_WriteScript_cfunc = None
         self.niRFSG_close_cfunc = None
         self.niRFSG_reset_cfunc = None
@@ -319,38 +313,6 @@ class Library(object):
                 self.niRFSG_ConfigureDigitalModulationUserDefinedWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ConfigureDigitalModulationUserDefinedWaveform_cfunc(vi, number_of_samples, user_defined_waveform)
 
-    def niRFSG_ConfigureGenerationMode(self, vi, generation_mode):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ConfigureGenerationMode_cfunc is None:
-                self.niRFSG_ConfigureGenerationMode_cfunc = self._get_library_function('niRFSG_ConfigureGenerationMode')
-                self.niRFSG_ConfigureGenerationMode_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niRFSG_ConfigureGenerationMode_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ConfigureGenerationMode_cfunc(vi, generation_mode)
-
-    def niRFSG_ConfigureOutputEnabled(self, vi, output_enabled):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ConfigureOutputEnabled_cfunc is None:
-                self.niRFSG_ConfigureOutputEnabled_cfunc = self._get_library_function('niRFSG_ConfigureOutputEnabled')
-                self.niRFSG_ConfigureOutputEnabled_cfunc.argtypes = [ViSession, ViBoolean]  # noqa: F405
-                self.niRFSG_ConfigureOutputEnabled_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ConfigureOutputEnabled_cfunc(vi, output_enabled)
-
-    def niRFSG_ConfigureP2PEndpointFullnessStartTrigger(self, vi, p2p_endpoint_fullness_level):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ConfigureP2PEndpointFullnessStartTrigger_cfunc is None:
-                self.niRFSG_ConfigureP2PEndpointFullnessStartTrigger_cfunc = self._get_library_function('niRFSG_ConfigureP2PEndpointFullnessStartTrigger')
-                self.niRFSG_ConfigureP2PEndpointFullnessStartTrigger_cfunc.argtypes = [ViSession, ViInt64]  # noqa: F405
-                self.niRFSG_ConfigureP2PEndpointFullnessStartTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ConfigureP2PEndpointFullnessStartTrigger_cfunc(vi, p2p_endpoint_fullness_level)
-
-    def niRFSG_ConfigurePowerLevelType(self, vi, power_level_type):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ConfigurePowerLevelType_cfunc is None:
-                self.niRFSG_ConfigurePowerLevelType_cfunc = self._get_library_function('niRFSG_ConfigurePowerLevelType')
-                self.niRFSG_ConfigurePowerLevelType_cfunc.argtypes = [ViSession, ViInt32]  # noqa: F405
-                self.niRFSG_ConfigurePowerLevelType_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ConfigurePowerLevelType_cfunc(vi, power_level_type)
-
     def niRFSG_ConfigurePxiChassisClk10(self, vi, pxi_clk10_source):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_ConfigurePxiChassisClk10_cfunc is None:
@@ -374,14 +336,6 @@ class Library(object):
                 self.niRFSG_ConfigureRefClock_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64]  # noqa: F405
                 self.niRFSG_ConfigureRefClock_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ConfigureRefClock_cfunc(vi, ref_clock_source, ref_clock_rate)
-
-    def niRFSG_ConfigureSignalBandwidth(self, vi, signal_bandwidth):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ConfigureSignalBandwidth_cfunc is None:
-                self.niRFSG_ConfigureSignalBandwidth_cfunc = self._get_library_function('niRFSG_ConfigureSignalBandwidth')
-                self.niRFSG_ConfigureSignalBandwidth_cfunc.argtypes = [ViSession, ViReal64]  # noqa: F405
-                self.niRFSG_ConfigureSignalBandwidth_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ConfigureSignalBandwidth_cfunc(vi, signal_bandwidth)
 
     def niRFSG_ConfigureSoftwareScriptTrigger(self, vi, trigger_id):  # noqa: N802
         with self._func_lock:
@@ -583,14 +537,6 @@ class Library(object):
                 self.niRFSG_GetSelfCalibrationTemperature_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetSelfCalibrationTemperature_cfunc(vi, module, temperature)
 
-    def niRFSG_GetStreamEndpointHandle(self, vi, stream_endpoint, reader_handle):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_GetStreamEndpointHandle_cfunc is None:
-                self.niRFSG_GetStreamEndpointHandle_cfunc = self._get_library_function('niRFSG_GetStreamEndpointHandle')
-                self.niRFSG_GetStreamEndpointHandle_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViUInt32)]  # noqa: F405
-                self.niRFSG_GetStreamEndpointHandle_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_GetStreamEndpointHandle_cfunc(vi, stream_endpoint, reader_handle)
-
     def niRFSG_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_GetTerminalName_cfunc is None:
@@ -710,6 +656,14 @@ class Library(object):
                 self.niRFSG_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ResetWithDefaults_cfunc(vi)
+
+    def niRFSG_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_ResetWithOptions_cfunc is None:
+                self.niRFSG_ResetWithOptions_cfunc = self._get_library_function('niRFSG_ResetWithOptions')
+                self.niRFSG_ResetWithOptions_cfunc.argtypes = [ViSession, ViUInt64]  # noqa: F405
+                self.niRFSG_ResetWithOptions_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_ResetWithOptions_cfunc(vi, steps_to_omit)
 
     def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
         with self._func_lock:
@@ -886,14 +840,6 @@ class Library(object):
                 self.niRFSG_WriteArbWaveformComplexI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(NIComplexI16)]  # noqa: F405
                 self.niRFSG_WriteArbWaveformComplexI16_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_WriteArbWaveformComplexI16_cfunc(vi, waveform_name, number_of_samples, waveform_data_array)
-
-    def niRFSG_WriteP2PEndpointI16(self, vi, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_WriteP2PEndpointI16_cfunc is None:
-                self.niRFSG_WriteP2PEndpointI16_cfunc = self._get_library_function('niRFSG_WriteP2PEndpointI16')
-                self.niRFSG_WriteP2PEndpointI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt16)]  # noqa: F405
-                self.niRFSG_WriteP2PEndpointI16_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_WriteP2PEndpointI16_cfunc(vi, stream_endpoint, number_of_samples, endpoint_data)
 
     def niRFSG_WriteScript(self, vi, script):  # noqa: N802
         with self._func_lock:

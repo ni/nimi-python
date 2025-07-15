@@ -101,16 +101,42 @@ waveform
         passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
 
 
-deembedding_port
-----------------
+port
+----
 
-    .. py:attribute:: nirfsg.Session.deembedding_port[]
+    .. py:attribute:: nirfsg.Session.port[]
 
         .. code:: python
 
-            session.deembedding_port['0-2'].channel_enabled = True
+            session.port['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+lo
+--
+
+    .. py:attribute:: nirfsg.Session.lo[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.lo['0-2'].channel_enabled = True
+
+        passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.lo['LO0-LO2'].channel_enabled = True
+
+        passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
 
 
 

@@ -850,7 +850,7 @@ configure_digital_edge_script_trigger
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: configure_digital_edge_script_trigger(trigger_id, source, edge)
+    .. py:method:: configure_digital_edge_script_trigger(source, edge)
 
             Configures the specified Script Trigger for digital edge triggering.
 
@@ -867,16 +867,17 @@ configure_digital_edge_script_trigger
             
 
 
+            .. tip:: This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+                and then call this method on the result.
 
-            :param trigger_id:
+                Example: :py:meth:`my_session.script_triggers[ ... ].configure_digital_edge_script_trigger`
+
+                To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.configure_digital_edge_script_trigger`
 
 
-                Specifies the Script Trigger to configure.
-
-                
-
-
-            :type trigger_id: str
             :param source:
 
 
@@ -894,7 +895,7 @@ configure_digital_edge_script_trigger
                 
 
 
-            :type edge: :py:data:`nirfsg.ScriptTrigDigEdgeEdge`
+            :type edge: :py:data:`nirfsg.ScriptTriggerDigitalEdgeEdge`
 
 configure_digital_edge_start_trigger
 ------------------------------------
@@ -938,7 +939,7 @@ configure_digital_edge_start_trigger
                 
 
 
-            :type edge: :py:data:`nirfsg.StartTrigDigEdgeEdge`
+            :type edge: :py:data:`nirfsg.StartTriggerDigitalEdgeEdge`
 
 configure_digital_level_script_trigger
 --------------------------------------
@@ -1026,164 +1027,6 @@ configure_digital_modulation_user_defined_waveform
 
 
             :type user_defined_waveform: list of int
-
-configure_generation_mode
--------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_generation_mode(generation_mode)
-
-            Configures the NI-RFSG device to generate a continuous sine tone (CW), apply I/Q (vector) modulation to the RF output signal, or generate arbitrary waveforms according to scripts.
-
-            The NI-RFSG device must be in the Configuration state before you call this method.
-
-            **Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            **Related Topics**
-
-            `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_
-
-            `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.
-
-            
-
-
-
-            :param generation_mode:
-
-
-                Specifies the mode used by NI-RFSG for generating an RF output signal.
-
-                        **Default Value** : :py:data:`~nirfsg.GenerationMode.CW`
-
-                        **Defined Values** :
-
-                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Name                                           | Value        | Description                                                                                                                                      |
-                +================================================+==============+==================================================================================================================================================+
-                | :py:data:`~nirfsg.GenerationMode.CW`           | 1000 (0x3e8) | Configures the RF signal generator to generate a CW signal.                                                                                      |
-                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM` | 1001 (0x3e9) | Configures the RF signal generator to generate the arbitrary waveform specified by the :py:attr:`nirfsg.Session.arb_selected_waveform` property. |
-                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-                | :py:data:`~nirfsg.GenerationMode.SCRIPT`       | 1002 (0x3ea) | Configures the RF signal generator to generate arbitrary waveforms as directed by the :py:attr:`nirfsg.Session.selected_script` property.        |
-                +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
-
-                .. note:: - For the PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, only :py:data:`~nirfsg.GenerationMode.CW` is supported.
-
-                     - If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.
-
-
-            :type generation_mode: :py:data:`nirfsg.GenerationMode`
-
-configure_output_enabled
-------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_output_enabled(output_enabled)
-
-            Enables or disables signal output.
-
-            Setting :py:attr:`nirfsg.Session.output_enabled` to False while in the Generation state attenuates the generated signal so that no signal is output.
-
-            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            **Related Topics**
-
-            `Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_
-
-            `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_
-
-            `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-            
-
-
-
-            :param output_enabled:
-
-
-                Specifies whether you want to enable or disable the output.
-
-                
-
-
-            :type output_enabled: bool
-
-configure_p2p_endpoint_fullness_start_trigger
----------------------------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_p2p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
-
-            Configures the Start Trigger to detect peer-to-peer endpoint fullness.
-
-            Generation begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the :py:attr:`nirfsg.Session.P2P_ENDPOINT_FULLNESS_LEVEL` parameter. The NI-RFSG device must be in the Configuration state before calling this method.
-
-            **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-            **Related Topics**
-
-            `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_
-
-            
-
-            .. note:: Due to an additional internal FIFO in the RF signal generator, the writer peer actually writes 2,304 bytes more than the quantity of data specified by this method to satisfy the trigger level.
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-            :param p2p_endpoint_fullness_level:
-
-
-                Specifies the quantity of data in the FIFO endpoint that asserts the trigger. Units are samples per channel. The default value is -1, which allows NI-RFSG to select the appropriate fullness value.
-
-                
-
-
-            :type p2p_endpoint_fullness_level: int
-
-configure_power_level_type
---------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_power_level_type(power_level_type)
-
-            Specifies the way the driver interprets the :py:attr:`nirfsg.Session.power_level` property.
-
-            In average power mode, NI-RFSG automatically scales waveform data to use the maximum dynamic range. In peak power mode, waveforms are scaled according to the :py:attr:`nirfsg.Session.arb_waveform_software_scaling_factor` property.
-
-            **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            **Related Topics**
-
-            `Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_
-
-            `Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_
-
-            
-
-
-
-            :param power_level_type:
-
-
-                Specifies the way the driver interprets the value of the :py:attr:`nirfsg.Session.power_level` property. NI-RFSG sets the :py:attr:`nirfsg.Session.power_level_type` property to this value.
-
-                +-------------------------+-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Name                    | Value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-                +=========================+=======+==================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-                | Average Power (default) | 7000  | Indicates the desired power averaged in time. The driver maximizes the dynamic range by scaling the I/Q waveform so that its peak magnitude is equal to one. If you write more than one waveform, NI-RFSG scales each waveform without preserving the power level ratio between the waveforms. This value is not valid for the PXIe-5820.                                                                                                                                                                                                                                                                        |
-                +-------------------------+-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Peak Power              | 7001  | Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires the magnitude of the I/Q waveform to be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the :py:attr:`nirfsg.Session.arb_waveform_software_scaling_factor` property. |
-                +-------------------------+-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-            :type power_level_type: :py:data:`nirfsg.PowerLevelType`
 
 configure_pxi_chassis_clk10
 ---------------------------
@@ -1326,43 +1169,12 @@ configure_rf
 
             :type power_level: float
 
-configure_signal_bandwidth
---------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_signal_bandwidth(signal_bandwidth)
-
-            Configures the signal bandwidth of the arbitrary waveform.
-
-            The NI-RFSG device must be in the Configuration state before you call this method.
-
-            NI-RFSG defines *signal bandwidth* as twice the maximum baseband signal deviation from 0 Hz. Usually, the baseband signal center frequency is 0Hz. In such cases, the signal bandwidth is simply the baseband signal minimum frequency subtracted from its maximum frequency, or *f* <sub>max</sub> minus *f* <sub>min</sub>. NI-RFSG uses this value to optimally configure the center frequency of the upconverter to help minimize phase noise. The generated signal is not filtered to achieve the set bandwidth. However, specifying a bandwidth smaller than the actual bandwidth of the signal could potentially result in spectral distortion.
-
-            **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-            .. note:: Based on your signal bandwidth, NI-RFSG decides whether to configure the upconverter center frequency on the PXI-5670/5671 or PXIe-5672 in increments of 1MHz or 5MHz. Failure to configure signal bandwidth may result in the signal being placed outside the upconverter passband.
-
-
-
-            :param signal_bandwidth:
-
-
-                Specifies the signal bandwidth used by NI-RFSG to generate an RF output signal. NI-RFSG sets the :py:attr:`nirfsg.Session.signal_bandwidth` property to this value.
-
-                
-
-
-            :type signal_bandwidth: float
-
 configure_software_script_trigger
 ---------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: configure_software_script_trigger(trigger_id)
+    .. py:method:: configure_software_script_trigger()
 
             Configures the Script Trigger for software triggering.
 
@@ -1379,16 +1191,16 @@ configure_software_script_trigger
             
 
 
+            .. tip:: This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+                and then call this method on the result.
 
-            :param trigger_id:
+                Example: :py:meth:`my_session.script_triggers[ ... ].configure_software_script_trigger`
 
+                To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the Script Trigger to configure.
+                Example: :py:meth:`my_session.configure_software_script_trigger`
 
-                
-
-
-            :type trigger_id: str
 
 configure_software_start_trigger
 --------------------------------
@@ -1548,7 +1360,7 @@ disable_script_trigger
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: disable_script_trigger(trigger_id)
+    .. py:method:: disable_script_trigger()
 
             Configures the device not to wait for the specified Script Trigger.
 
@@ -1563,16 +1375,16 @@ disable_script_trigger
             
 
 
+            .. tip:: This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+                and then call this method on the result.
 
-            :param trigger_id:
+                Example: :py:meth:`my_session.script_triggers[ ... ].disable_script_trigger`
 
+                To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
 
-                Specifies the Script trigger to configure.
+                Example: :py:meth:`my_session.disable_script_trigger`
 
-                
-
-
-            :type trigger_id: str
 
 disable_start_trigger
 ---------------------
@@ -2081,47 +1893,6 @@ get_self_calibration_temperature
 
 
 
-get_stream_endpoint_handle
---------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: get_stream_endpoint_handle(stream_endpoint)
-
-            Returns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.
-
-            **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-            **Related Topics**
-
-            `Configuring a Peer-to-Peer Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/configuring_a_p2p_stream.html>`_
-
-            `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-            
-
-
-
-            :param stream_endpoint:
-
-
-                Specifies the stream endpoint FIFO to configure.
-
-                
-
-
-            :type stream_endpoint: str
-
-            :rtype: int
-            :return:
-
-
-                    Returns the reader endpoint handle that is used with NI-P2P to create a stream with the NI-RFSG device as an endpoint.
-
-                    
-
-
-
 get_terminal_name
 -----------------
 
@@ -2614,7 +2385,7 @@ reset
 
             Generally, calling this method instead of the :py:meth:`nirfsg.Session.reset_device` method is acceptable. The :py:meth:`nirfsg.Session.Reset` method executes faster than the :py:meth:`nirfsg.Session.reset_device` method.
 
-            To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the :py:meth:`nirfsg.Session.ResetWithOptions` method, with **stepsToOmit** set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` .
+            To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the :py:meth:`nirfsg.Session.reset_with_options` method, with **stepsToOmit** set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` .
 
             **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -2706,6 +2477,58 @@ reset_with_defaults
 
 
 
+reset_with_options
+------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: reset_with_options(steps_to_omit)
+
+            Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
+
+            By default, this method exhibits the same behavior as :py:meth:`nirfsg.Session.Reset`. You can specify steps to omit using the steps to omit parameter. For example, if you specify :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` for the :py:attr:`nirfsg.Session.STEPS_TO_OMIT` parameter, this method does not release signal routes during the reset process.
+
+            When routes of signals between two devices are released, they are released regardless of which device created the route.
+
+            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this method instead of :py:meth:`nirfsg.Session.Reset`, with :py:attr:`nirfsg.Session.STEPS_TO_OMIT` set to :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`.
+
+            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            **Related Topics**
+
+            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>``Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+            
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+
+            :param steps_to_omit:
+
+
+                Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`, which specifies that no step is omitted during reset. **Defined Values** :
+
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                                              | Value   | Description                                                                                                                                                                                                |
+                +===================================================================+=========+============================================================================================================================================================================================================+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.NONE`               | 0 (0x0) | No step is omitted during reset.                                                                                                                                                                           |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.WAVEFORMS`          | 1 (0x1) | Omits clearing waveforms.                                                                                                                                                                                  |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.SCRIPTS`            | 2 (0x2) | Omits clearing scripts.                                                                                                                                                                                    |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES`             | 4 (0x4) | Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset. |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES` | 8 (0x8) | Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.                                                                                                              |
+                +-------------------------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: :py:data:`~nirfsg.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
+                    You can combine multiple enums.ResetWithOptionsStepsToOmit flags using the bitwise OR (|) operator.
+
+
+            :type steps_to_omit: :py:data:`nirfsg.ResetWithOptionsStepsToOmit`
+
 revision_query
 --------------
 
@@ -2788,7 +2611,7 @@ select_arb_waveform
 
     .. py:method:: select_arb_waveform(name)
 
-            Specifies the waveform that is generated upon a call to the :py:meth:`nirfsg.Session._initiate` method when the **generationMode** parameter of the :py:meth:`nirfsg.Session.configure_generation_mode` method is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM`.
+            Specifies the waveform that is generated upon a call to the :py:meth:`nirfsg.Session._initiate` method when the **generationMode** parameter of the :py:meth:`nirfsg.Session.ConfigureGenerationMode` method is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM`.
 
             You must specify a waveform using the :py:attr:`nirfsg.Session.NAME` parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this method.
 
@@ -2886,6 +2709,8 @@ self_calibrate_range
                 +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
                 | :py:data:`~nirfsg.SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT` | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
                 +------------------------------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+
+                .. note:: You can combine multiple enums.SelfCalibrateRangeStepsToOmit flags using the bitwise OR (|) operator.
 
 
             :type steps_to_omit: :py:data:`nirfsg.SelfCalibrateRangeStepsToOmit`
@@ -3312,61 +3137,6 @@ write_arb_waveform
 
             :type more_data_pending: bool
 
-write_p2p_endpoint_i16
-----------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: write_p2p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
-
-            Writes an array of 16-bit integer data to the peer-to-peer endpoint.
-
-            Use this method to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.
-
-            **Supported Devices** : PXIe-5673E
-
-            **Related Topics**
-
-            `Peer-to-Peer Data Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_streaming.html>`_--Refer to this topic for more information about configuring a stream.
-
-            `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-            `Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_
-
-            `Reconfiguring a Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_reconfiguring_stream.html>`_
-
-            
-
-
-
-            :param stream_endpoint:
-
-
-                Specifies the stream endpoint FIFO to configure.
-
-                
-
-
-            :type stream_endpoint: str
-            :param number_of_samples:
-
-
-                Specifies the number of samples to write into the endpoint FIFO.
-
-                
-
-
-            :type number_of_samples: int
-            :param endpoint_data:
-
-
-                Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.
-
-                
-
-
-            :type endpoint_data: array.array("h")
-
 write_script
 ------------
 
@@ -3376,7 +3146,7 @@ write_script
 
             Writes a script to the device to control waveform generation in Script mode.
 
-            First, configure your device for Script mode by calling the :py:meth:`nirfsg.Session.configure_generation_mode` method. The NI-RFSG device must be in the Configuration state before calling the :py:meth:`nirfsg.Session.write_script` method.
+            First, configure your device for Script mode by calling the :py:meth:`nirfsg.Session.ConfigureGenerationMode` method. The NI-RFSG device must be in the Configuration state before calling the :py:meth:`nirfsg.Session.write_script` method.
 
             **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -3724,7 +3494,7 @@ analog_modulation_fm_band
 
         Specifies the analog modulation frequency modulation (FM) band to use. Wideband FM allows for modulating signals higher than 100kHz. Narrowband FM allows for modulating lower frequency signals.
 
-        **Default Value:** :py:data:`~nirfsg.AnlgModFmBand.WIDEBAND`
+        **Default Value:** :py:data:`~nirfsg.AnalogModulationFmBand.WIDEBAND`
 
         **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -3734,25 +3504,25 @@ analog_modulation_fm_band
 
         **Defined Values**:
 
-        +---------------------------------------------+----------------+--------------------------------------------+
-        | Name                                        | Value          | Description                                |
-        +=============================================+================+============================================+
-        | :py:data:`~nirfsg.AnlgModFmBand.NARROWBAND` | 17000 (0x4268) | Specifies narrowband frequency modulation. |
-        +---------------------------------------------+----------------+--------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModFmBand.WIDEBAND`   | 17001 (0x4269) | Specifies wideband frequency modulation.   |
-        +---------------------------------------------+----------------+--------------------------------------------+
+        +------------------------------------------------------+----------------+--------------------------------------------+
+        | Name                                                 | Value          | Description                                |
+        +======================================================+================+============================================+
+        | :py:data:`~nirfsg.AnalogModulationFmBand.NARROWBAND` | 17000 (0x4268) | Specifies narrowband frequency modulation. |
+        +------------------------------------------------------+----------------+--------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationFmBand.WIDEBAND`   | 17001 (0x4269) | Specifies wideband frequency modulation.   |
+        +------------------------------------------------------+----------------+--------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------+
-            | Characteristic        | Value               |
-            +=======================+=====================+
-            | Datatype              | enums.AnlgModFmBand |
-            +-----------------------+---------------------+
-            | Permissions           | read-write          |
-            +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
+            +-----------------------+------------------------------+
+            | Characteristic        | Value                        |
+            +=======================+==============================+
+            | Datatype              | enums.AnalogModulationFmBand |
+            +-----------------------+------------------------------+
+            | Permissions           | read-write                   |
+            +-----------------------+------------------------------+
+            | Repeated Capabilities | None                         |
+            +-----------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3802,9 +3572,9 @@ analog_modulation_fm_narrowband_integrator
 
         Specifies the narrowband frequency modulation (FM) range to apply by sending the signal through an integrator.
 
-        This property is valid only when you set the :py:attr:`nirfsg.Session.analog_modulation_type` property to :py:data:`~nirfsg.AnlgModType.FM` and the :py:attr:`nirfsg.Session.analog_modulation_fm_band` property to :py:data:`~nirfsg.AnlgModFmBand.NARROWBAND`.
+        This property is valid only when you set the :py:attr:`nirfsg.Session.analog_modulation_type` property to :py:data:`~nirfsg.AnalogModulationType.FM` and the :py:attr:`nirfsg.Session.analog_modulation_fm_band` property to :py:data:`~nirfsg.AnalogModulationFmBand.NARROWBAND`.
 
-        **Default Value:** :py:data:`~nirfsg.AnlgModFmNarrowbandIntegrator._100hzto1khz`
+        **Default Value:** :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._100hzto1khz`
 
         **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -3814,27 +3584,27 @@ analog_modulation_fm_narrowband_integrator
 
         **Defined Values**:
 
-        +-----------------------------------------------------------------+----------------+---------------------------------------------+
-        | Name                                                            | Value          | Description                                 |
-        +=================================================================+================+=============================================+
-        | :py:data:`~nirfsg.AnlgModFmNarrowbandIntegrator._100hzto1khz`   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
-        +-----------------------------------------------------------------+----------------+---------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModFmNarrowbandIntegrator._10khzto100khz` | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
-        +-----------------------------------------------------------------+----------------+---------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModFmNarrowbandIntegrator._1khzto10khz`   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
-        +-----------------------------------------------------------------+----------------+---------------------------------------------+
+        +--------------------------------------------------------------------------+----------------+---------------------------------------------+
+        | Name                                                                     | Value          | Description                                 |
+        +==========================================================================+================+=============================================+
+        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._100hzto1khz`   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
+        +--------------------------------------------------------------------------+----------------+---------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._10khzto100khz` | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
+        +--------------------------------------------------------------------------+----------------+---------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._1khzto10khz`   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
+        +--------------------------------------------------------------------------+----------------+---------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------+
-            | Characteristic        | Value                               |
-            +=======================+=====================================+
-            | Datatype              | enums.AnlgModFmNarrowbandIntegrator |
-            +-----------------------+-------------------------------------+
-            | Permissions           | read-write                          |
-            +-----------------------+-------------------------------------+
-            | Repeated Capabilities | None                                |
-            +-----------------------+-------------------------------------+
+            +-----------------------+----------------------------------------------+
+            | Characteristic        | Value                                        |
+            +=======================+==============================================+
+            | Datatype              | enums.AnalogModulationFmNarrowbandIntegrator |
+            +-----------------------+----------------------------------------------+
+            | Permissions           | read-write                                   |
+            +-----------------------+----------------------------------------------+
+            | Repeated Capabilities | None                                         |
+            +-----------------------+----------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3919,7 +3689,7 @@ analog_modulation_pm_mode
 
         Specifies the phase modulation (PM) mode to use.
 
-        **Default Value:** :py:data:`~nirfsg.AnlgModPmMode.LOW_PHASE_NOISE`
+        **Default Value:** :py:data:`~nirfsg.AnalogModulationPmMode.LOW_PHASE_NOISE`
 
         **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -3929,25 +3699,25 @@ analog_modulation_pm_mode
 
         **Defined Values**:
 
-        +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
-        | Name                                             | Value          | Description                                                                                   |
-        +==================================================+================+===============================================================================================+
-        | :py:data:`~nirfsg.AnlgModPmMode.HIGH_DEVIATION`  | 19000 (0x4a38) | Specifies high deviation. High deviation comes at the expense of a higher phase noise.        |
-        +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModPmMode.LOW_PHASE_NOISE` | 19001 (0x4a39) | Specifies low phase noise. Low phase noise comes at the expense of a lower maximum deviation. |
-        +--------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
+        +-----------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
+        | Name                                                      | Value          | Description                                                                                   |
+        +===========================================================+================+===============================================================================================+
+        | :py:data:`~nirfsg.AnalogModulationPmMode.HIGH_DEVIATION`  | 19000 (0x4a38) | Specifies high deviation. High deviation comes at the expense of a higher phase noise.        |
+        +-----------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationPmMode.LOW_PHASE_NOISE` | 19001 (0x4a39) | Specifies low phase noise. Low phase noise comes at the expense of a lower maximum deviation. |
+        +-----------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------+
-            | Characteristic        | Value               |
-            +=======================+=====================+
-            | Datatype              | enums.AnlgModPmMode |
-            +-----------------------+---------------------+
-            | Permissions           | read-write          |
-            +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
+            +-----------------------+------------------------------+
+            | Characteristic        | Value                        |
+            +=======================+==============================+
+            | Datatype              | enums.AnalogModulationPmMode |
+            +-----------------------+------------------------------+
+            | Permissions           | read-write                   |
+            +-----------------------+------------------------------+
+            | Repeated Capabilities | None                         |
+            +-----------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3997,7 +3767,7 @@ analog_modulation_type
 
         Specifies the analog modulation format to use.
 
-        **Default Value:** :py:data:`~nirfsg.AnlgModType.NONE`
+        **Default Value:** :py:data:`~nirfsg.AnalogModulationType.NONE`
 
         **Supported Devices:** PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696
 
@@ -4011,31 +3781,31 @@ analog_modulation_type
 
         **Defined Values**:
 
-        +-------------------------------------+--------------+--------------------------------------------------+
-        | Name                                | Value        | Description                                      |
-        +=====================================+==============+==================================================+
-        | :py:data:`~nirfsg.AnlgModType.AM`   | 2002 (0x7d2) | Specifies that the analog modulation type is AM. |
-        +-------------------------------------+--------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModType.FM`   | 2000 (0x7d0) | Specifies that the analog modulation type is FM. |
-        +-------------------------------------+--------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModType.NONE` | 0 (0x0)      | Disables analog modulation.                      |
-        +-------------------------------------+--------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModType.PM`   | 2001 (0x7d1) | Specifies that the analog modulation type is PM. |
-        +-------------------------------------+--------------+--------------------------------------------------+
+        +----------------------------------------------+--------------+--------------------------------------------------+
+        | Name                                         | Value        | Description                                      |
+        +==============================================+==============+==================================================+
+        | :py:data:`~nirfsg.AnalogModulationType.AM`   | 2002 (0x7d2) | Specifies that the analog modulation type is AM. |
+        +----------------------------------------------+--------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationType.FM`   | 2000 (0x7d0) | Specifies that the analog modulation type is FM. |
+        +----------------------------------------------+--------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationType.NONE` | 0 (0x0)      | Disables analog modulation.                      |
+        +----------------------------------------------+--------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationType.PM`   | 2001 (0x7d1) | Specifies that the analog modulation type is PM. |
+        +----------------------------------------------+--------------+--------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------+
-            | Characteristic        | Value             |
-            +=======================+===================+
-            | Datatype              | enums.AnlgModType |
-            +-----------------------+-------------------+
-            | Permissions           | read-write        |
-            +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.AnalogModulationType |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4085,7 +3855,7 @@ analog_modulation_waveform_type
 
         Specifies the type of waveform to use as the message signal for analog modulation.
 
-        **Default Value:** :py:data:`~nirfsg.AnlgModWfmType.SINE`
+        **Default Value:** :py:data:`~nirfsg.AnalogModulationWaveformType.SINE`
 
         **Supported Devices:** PXI/PXIe-5650/5651/5652
 
@@ -4095,27 +3865,27 @@ analog_modulation_waveform_type
 
         **Defined Values**:
 
-        +--------------------------------------------+--------------+-----------------------------------------------------------------+
-        | Name                                       | Value        | Description                                                     |
-        +============================================+==============+=================================================================+
-        | :py:data:`~nirfsg.AnlgModWfmType.SINE`     | 3000 (0xbb8) | Specifies that the analog modulation waveform type is sine.     |
-        +--------------------------------------------+--------------+-----------------------------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModWfmType.SQUARE`   | 3001 (0xbb9) | Specifies that the analog modulation waveform type is square.   |
-        +--------------------------------------------+--------------+-----------------------------------------------------------------+
-        | :py:data:`~nirfsg.AnlgModWfmType.TRIANGLE` | 3002 (0xbba) | Specifies that the analog modulation waveform type is triangle. |
-        +--------------------------------------------+--------------+-----------------------------------------------------------------+
+        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
+        | Name                                                     | Value        | Description                                                     |
+        +==========================================================+==============+=================================================================+
+        | :py:data:`~nirfsg.AnalogModulationWaveformType.SINE`     | 3000 (0xbb8) | Specifies that the analog modulation waveform type is sine.     |
+        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationWaveformType.SQUARE`   | 3001 (0xbb9) | Specifies that the analog modulation waveform type is square.   |
+        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
+        | :py:data:`~nirfsg.AnalogModulationWaveformType.TRIANGLE` | 3002 (0xbba) | Specifies that the analog modulation waveform type is triangle. |
+        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.AnlgModWfmType |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+------------------------------------+
+            | Characteristic        | Value                              |
+            +=======================+====================================+
+            | Datatype              | enums.AnalogModulationWaveformType |
+            +-----------------------+------------------------------------+
+            | Permissions           | read-write                         |
+            +-----------------------+------------------------------------+
+            | Repeated Capabilities | None                               |
+            +-----------------------+------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5421,26 +5191,26 @@ deembedding_compensation_gain
 
 
 
-        .. tip:: This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container deembedding_port to specify a subset.
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
 
-            Example: :py:attr:`my_session.deembedding_port[ ... ].deembedding_compensation_gain`
+            Example: :py:attr:`my_session.port[ ... ].deembedding_compensation_gain`
 
-            To set/get on all deembedding_port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.deembedding_compensation_gain`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------+
-            | Characteristic        | Value            |
-            +=======================+==================+
-            | Datatype              | float            |
-            +-----------------------+------------------+
-            | Permissions           | read only        |
-            +-----------------------+------------------+
-            | Repeated Capabilities | deembedding_port |
-            +-----------------------+------------------+
+            +-----------------------+-----------+
+            | Characteristic        | Value     |
+            +=======================+===========+
+            | Datatype              | float     |
+            +-----------------------+-----------+
+            | Permissions           | read only |
+            +-----------------------+-----------+
+            | Repeated Capabilities | port      |
+            +-----------------------+-----------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5466,26 +5236,26 @@ deembedding_selected_table
 
 
 
-        .. tip:: This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container deembedding_port to specify a subset.
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
 
-            Example: :py:attr:`my_session.deembedding_port[ ... ].deembedding_selected_table`
+            Example: :py:attr:`my_session.port[ ... ].deembedding_selected_table`
 
-            To set/get on all deembedding_port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.deembedding_selected_table`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------+
-            | Characteristic        | Value            |
-            +=======================+==================+
-            | Datatype              | str              |
-            +-----------------------+------------------+
-            | Permissions           | read-write       |
-            +-----------------------+------------------+
-            | Repeated Capabilities | deembedding_port |
-            +-----------------------+------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | port       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5525,12 +5295,12 @@ deembedding_type
         +---------------------------------------------------+----------------+------------------------------------------------------------------------+
 
 
-        .. tip:: This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container deembedding_port to specify a subset.
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
 
-            Example: :py:attr:`my_session.deembedding_port[ ... ].deembedding_type`
+            Example: :py:attr:`my_session.port[ ... ].deembedding_type`
 
-            To set/get on all deembedding_port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.deembedding_type`
 
@@ -5543,7 +5313,7 @@ deembedding_type
             +-----------------------+-------------------------------+
             | Permissions           | read-write                    |
             +-----------------------+-------------------------------+
-            | Repeated Capabilities | deembedding_port              |
+            | Repeated Capabilities | port                          |
             +-----------------------+-------------------------------+
 
         .. tip::
@@ -5636,6 +5406,16 @@ device_temperature
         | Second connected mmRH-5582 | SWITCHED TRX PORTS [0-7] | rf1switch1              |
         +----------------------------+--------------------------+-------------------------+
 
+
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
+
+            Example: :py:attr:`my_session.port[ ... ].device_temperature`
+
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.device_temperature`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------+
@@ -5645,7 +5425,7 @@ device_temperature
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | None      |
+            | Repeated Capabilities | port      |
             +-----------------------+-----------+
 
         .. tip::
@@ -5661,7 +5441,7 @@ digital_edge_script_trigger_edge
 
         Specifies the active edge for the Script Trigger. This property is used when the :py:attr:`nirfsg.Session.script_trigger_type` property is set to digital edge. To set the :py:attr:`nirfsg.Session.digital_edge_script_trigger_edge` property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ScriptTrigDigEdgeEdge.RISING`
+        **Default Value:** :py:data:`~nirfsg.ScriptTriggerDigitalEdgeEdge.RISING`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -5677,13 +5457,13 @@ digital_edge_script_trigger_edge
 
         **Defined Values**:
 
-        +--------------------------------------------------+---------+-------------------------------------------------------------------------------+
-        | Name                                             | Value   | Description                                                                   |
-        +==================================================+=========+===============================================================================+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeEdge.FALLING` | 1 (0x1) | Asserts the trigger when the signal transitions from high level to low level. |
-        +--------------------------------------------------+---------+-------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigEdgeEdge.RISING`  | 0 (0x0) | Asserts the trigger when the signal transitions from low level to high level. |
-        +--------------------------------------------------+---------+-------------------------------------------------------------------------------+
+        +---------------------------------------------------------+---------+-------------------------------------------------------------------------------+
+        | Name                                                    | Value   | Description                                                                   |
+        +=========================================================+=========+===============================================================================+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalEdgeEdge.FALLING` | 1 (0x1) | Asserts the trigger when the signal transitions from high level to low level. |
+        +---------------------------------------------------------+---------+-------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalEdgeEdge.RISING`  | 0 (0x0) | Asserts the trigger when the signal transitions from low level to high level. |
+        +---------------------------------------------------------+---------+-------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -5699,15 +5479,15 @@ digital_edge_script_trigger_edge
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.ScriptTrigDigEdgeEdge |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | script_triggers             |
-            +-----------------------+-----------------------------+
+            +-----------------------+------------------------------------+
+            | Characteristic        | Value                              |
+            +=======================+====================================+
+            | Datatype              | enums.ScriptTriggerDigitalEdgeEdge |
+            +-----------------------+------------------------------------+
+            | Permissions           | read-write                         |
+            +-----------------------+------------------------------------+
+            | Repeated Capabilities | script_triggers                    |
+            +-----------------------+------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5827,7 +5607,7 @@ digital_edge_start_trigger_edge
 
         PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.
 
-        **Default Value:** :py:data:`~nirfsg.StartTrigDigEdgeEdge.RISING`
+        **Default Value:** :py:data:`~nirfsg.StartTriggerDigitalEdgeEdge.RISING`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -5843,27 +5623,27 @@ digital_edge_start_trigger_edge
 
         **Defined Values**:
 
-        +-------------------------------------------------+---------+------------------------------------------------------------------+
-        | Name                                            | Value   | Description                                                      |
-        +=================================================+=========+==================================================================+
-        | :py:data:`~nirfsg.StartTrigDigEdgeEdge.FALLING` | 1 (0x1) | Occurs when the signal transitions from high level to low level. |
-        +-------------------------------------------------+---------+------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigDigEdgeEdge.RISING`  | 0 (0x0) | Occurs when the signal transitions from low level to high level. |
-        +-------------------------------------------------+---------+------------------------------------------------------------------+
+        +--------------------------------------------------------+---------+------------------------------------------------------------------+
+        | Name                                                   | Value   | Description                                                      |
+        +========================================================+=========+==================================================================+
+        | :py:data:`~nirfsg.StartTriggerDigitalEdgeEdge.FALLING` | 1 (0x1) | Occurs when the signal transitions from high level to low level. |
+        +--------------------------------------------------------+---------+------------------------------------------------------------------+
+        | :py:data:`~nirfsg.StartTriggerDigitalEdgeEdge.RISING`  | 0 (0x0) | Occurs when the signal transitions from low level to high level. |
+        +--------------------------------------------------------+---------+------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------+
-            | Characteristic        | Value                      |
-            +=======================+============================+
-            | Datatype              | enums.StartTrigDigEdgeEdge |
-            +-----------------------+----------------------------+
-            | Permissions           | read-write                 |
-            +-----------------------+----------------------------+
-            | Repeated Capabilities | None                       |
-            +-----------------------+----------------------------+
+            +-----------------------+-----------------------------------+
+            | Characteristic        | Value                             |
+            +=======================+===================================+
+            | Datatype              | enums.StartTriggerDigitalEdgeEdge |
+            +-----------------------+-----------------------------------+
+            | Permissions           | read-write                        |
+            +-----------------------+-----------------------------------+
+            | Repeated Capabilities | None                              |
+            +-----------------------+-----------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6028,9 +5808,9 @@ digital_level_script_trigger_active_level
 
     .. py:attribute:: digital_level_script_trigger_active_level
 
-        Specifies the active level for the Script Trigger. This property is used when the :py:attr:`nirfsg.Session.script_trigger_type` property is set to :py:data:`~nirfsg.ScriptTrigType.DIGITAL_LEVEL`.
+        Specifies the active level for the Script Trigger. This property is used when the :py:attr:`nirfsg.Session.script_trigger_type` property is set to :py:data:`~nirfsg.ScriptTriggerType.DIGITAL_LEVEL`.
 
-        **Default Value:** :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.HIGH`
+        **Default Value:** :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.HIGH`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6042,13 +5822,13 @@ digital_level_script_trigger_active_level
 
         **Defined Values**:
 
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
-        | Name                                                  | Value         | Description                                      |
-        +=======================================================+===============+==================================================+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.HIGH` | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.LOW`  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
+        | Name                                                         | Value         | Description                                      |
+        +==============================================================+===============+==================================================+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.HIGH` | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.LOW`  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific script_triggers within your :py:class:`nirfsg.Session` instance.
@@ -6062,15 +5842,15 @@ digital_level_script_trigger_active_level
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------+
-            | Characteristic        | Value                               |
-            +=======================+=====================================+
-            | Datatype              | enums.ScriptTrigDigLevelActiveLevel |
-            +-----------------------+-------------------------------------+
-            | Permissions           | read-write                          |
-            +-----------------------+-------------------------------------+
-            | Repeated Capabilities | script_triggers                     |
-            +-----------------------+-------------------------------------+
+            +-----------------------+--------------------------------------------+
+            | Characteristic        | Value                                      |
+            +=======================+============================================+
+            | Datatype              | enums.ScriptTriggerDigitalLevelActiveLevel |
+            +-----------------------+--------------------------------------------+
+            | Permissions           | read-write                                 |
+            +-----------------------+--------------------------------------------+
+            | Repeated Capabilities | script_triggers                            |
+            +-----------------------+--------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6083,7 +5863,7 @@ digital_level_script_trigger_source
 
     .. py:attribute:: digital_level_script_trigger_source
 
-        Specifies the source terminal for the Script Trigger. This property is used when the :py:attr:`nirfsg.Session.script_trigger_type` property is set to :py:data:`~nirfsg.ScriptTrigType.DIGITAL_LEVEL`. The :py:attr:`nirfsg.Session.digital_level_script_trigger_source` property is not case-sensitive.
+        Specifies the source terminal for the Script Trigger. This property is used when the :py:attr:`nirfsg.Session.script_trigger_type` property is set to :py:data:`~nirfsg.ScriptTriggerType.DIGITAL_LEVEL`. The :py:attr:`nirfsg.Session.digital_level_script_trigger_source` property is not case-sensitive.
 
         To set the :py:attr:`nirfsg.Session.digital_level_script_trigger_source` property, the NI-RFSG device must be in the Configuration state.
 
@@ -6320,7 +6100,7 @@ digital_modulation_type
 
         Specifies the digital modulation format to use.
 
-        **Default Value:** :py:data:`~nirfsg.DigModType.NONE`
+        **Default Value:** :py:data:`~nirfsg.DigitalModulationType.NONE`
 
         **Supported Devices:** PXI/PXIe-5650/5651/5652
 
@@ -6330,31 +6110,31 @@ digital_modulation_type
 
         **Defined Values**:
 
-        +------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | Name                               | Value        | Description                                                                 |
-        +====================================+==============+=============================================================================+
-        | :py:data:`~nirfsg.DigModType.FSK`  | 4000 (0xfa0) | Specifies that the digital modulation type is frequency-shift keying (FSK). |
-        +------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigModType.NONE` | 0 (0x0)      | Disables digital modulation.                                                |
-        +------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigModType.OOK`  | 4001 (0xfa1) | Specifies that the digital modulation type is on-off keying (OOK).          |
-        +------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigModType.PSK`  | 4002 (0xfa2) | Specifies that the digital modulation type is phase-shift keying (PSK).     |
-        +------------------------------------+--------------+-----------------------------------------------------------------------------+
+        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
+        | Name                                          | Value        | Description                                                                 |
+        +===============================================+==============+=============================================================================+
+        | :py:data:`~nirfsg.DigitalModulationType.FSK`  | 4000 (0xfa0) | Specifies that the digital modulation type is frequency-shift keying (FSK). |
+        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DigitalModulationType.NONE` | 0 (0x0)      | Disables digital modulation.                                                |
+        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DigitalModulationType.OOK`  | 4001 (0xfa1) | Specifies that the digital modulation type is on-off keying (OOK).          |
+        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DigitalModulationType.PSK`  | 4002 (0xfa2) | Specifies that the digital modulation type is phase-shift keying (PSK).     |
+        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------+
-            | Characteristic        | Value            |
-            +=======================+==================+
-            | Datatype              | enums.DigModType |
-            +-----------------------+------------------+
-            | Permissions           | read-write       |
-            +-----------------------+------------------+
-            | Repeated Capabilities | None             |
-            +-----------------------+------------------+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.DigitalModulationType |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | None                        |
+            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6369,7 +6149,7 @@ digital_modulation_waveform_type
 
         Specifies the type of waveform to use as the message signal in digital modulation.
 
-        **Default Value:** :py:data:`~nirfsg.DigModWfmType.PRBS`
+        **Default Value:** :py:data:`~nirfsg.DigitalModulationWaveformType.PRBS`
 
         **Supported Devices:** PXI/PXIe-5650/5651/5652
 
@@ -6379,27 +6159,27 @@ digital_modulation_waveform_type
 
         **Defined Values**:
 
-        +-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                          | Value         | Description                                                                                                                                                                                              |
-        +===============================================+===============+==========================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.DigModWfmType.PRBS`         | 5000 (0x1388) | Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).                                                                                                                 |
-        +-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigModWfmType.USER_DEFINED` | 5001 (0x1389) | Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the :py:meth:`nirfsg.Session.configure_digital_modulation_user_defined_waveform` method. |
-        +-----------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Name                                                          | Value         | Description                                                                                                                                                                                              |
+        +===============================================================+===============+==========================================================================================================================================================================================================+
+        | :py:data:`~nirfsg.DigitalModulationWaveformType.PRBS`         | 5000 (0x1388) | Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).                                                                                                                 |
+        +---------------------------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DigitalModulationWaveformType.USER_DEFINED` | 5001 (0x1389) | Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the :py:meth:`nirfsg.Session.configure_digital_modulation_user_defined_waveform` method. |
+        +---------------------------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------+
-            | Characteristic        | Value               |
-            +=======================+=====================+
-            | Datatype              | enums.DigModWfmType |
-            +-----------------------+---------------------+
-            | Permissions           | read-write          |
-            +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
+            +-----------------------+-------------------------------------+
+            | Characteristic        | Value                               |
+            +=======================+=====================================+
+            | Datatype              | enums.DigitalModulationWaveformType |
+            +-----------------------+-------------------------------------+
+            | Permissions           | read-write                          |
+            +-----------------------+-------------------------------------+
+            | Repeated Capabilities | None                                |
+            +-----------------------+-------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6853,31 +6633,31 @@ exported_pulse_modulation_event_active_level
 
         Specifies the active level of the exported Pulse Modulation Event. When `property pulse modulation enabled` is Enabled, `pulse modulation active level` is `active high`, `exported pulse modulation event output terminal` is `PulseOut`, and this property is `active high`, then the Pulse Modulation Event will transition from Low to High after the the Pulse In signal is set to logic high, and the RF Output has settled. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.HIGH`
+        **Default Value:** :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.HIGH`
 
         **Supported Devices:**  PXIe-5842
 
         **Defined Values**:
 
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
-        | Name                                                  | Value         | Description                                      |
-        +=======================================================+===============+==================================================+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.HIGH` | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.LOW`  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
+        | Name                                                         | Value         | Description                                      |
+        +==============================================================+===============+==================================================+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.HIGH` | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.LOW`  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------+
-            | Characteristic        | Value                               |
-            +=======================+=====================================+
-            | Datatype              | enums.ScriptTrigDigLevelActiveLevel |
-            +-----------------------+-------------------------------------+
-            | Permissions           | read-write                          |
-            +-----------------------+-------------------------------------+
-            | Repeated Capabilities | None                                |
-            +-----------------------+-------------------------------------+
+            +-----------------------+--------------------------------------------+
+            | Characteristic        | Value                                      |
+            +=======================+============================================+
+            | Datatype              | enums.ScriptTriggerDigitalLevelActiveLevel |
+            +-----------------------+--------------------------------------------+
+            | Permissions           | read-write                                 |
+            +-----------------------+--------------------------------------------+
+            | Repeated Capabilities | None                                       |
+            +-----------------------+--------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7776,10 +7556,6 @@ generation_mode
 
         `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_—Refer to this topic for more information about scripting.
 
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.configure_generation_mode`
-
         **Defined Values**:
 
         +------------------------------------------------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -8289,6 +8065,16 @@ iq_out_port_common_mode_offset
 
              - The valid range is dependent on the load impedance.
 
+
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
+
+            Example: :py:attr:`my_session.port[ ... ].iq_out_port_common_mode_offset`
+
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.iq_out_port_common_mode_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -8298,7 +8084,7 @@ iq_out_port_common_mode_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | port       |
             +-----------------------+------------+
 
         .. tip::
@@ -8342,6 +8128,16 @@ iq_out_port_level
 
              - The valid values are only applicable when you set the :py:attr:`nirfsg.Session.iq_out_port_load_impedance` property to 50 Ω and when you set the :py:attr:`nirfsg.Session.iq_out_port_offset` property to 0.
 
+
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
+
+            Example: :py:attr:`my_session.port[ ... ].iq_out_port_level`
+
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.iq_out_port_level`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -8351,7 +8147,7 @@ iq_out_port_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | port       |
             +-----------------------+------------+
 
         .. tip::
@@ -8381,6 +8177,16 @@ iq_out_port_load_impedance
 
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
+
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
+
+            Example: :py:attr:`my_session.port[ ... ].iq_out_port_load_impedance`
+
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.iq_out_port_load_impedance`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -8390,7 +8196,7 @@ iq_out_port_load_impedance
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | port       |
             +-----------------------+------------+
 
         .. tip::
@@ -8420,6 +8226,16 @@ iq_out_port_offset
 
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
+
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
+
+            Example: :py:attr:`my_session.port[ ... ].iq_out_port_offset`
+
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.iq_out_port_offset`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -8429,7 +8245,7 @@ iq_out_port_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | port       |
             +-----------------------+------------+
 
         .. tip::
@@ -8506,6 +8322,16 @@ iq_out_port_terminal_configuration
 
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
+
+        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container port to specify a subset.
+
+            Example: :py:attr:`my_session.port[ ... ].iq_out_port_terminal_configuration`
+
+            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.iq_out_port_terminal_configuration`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------------------+
@@ -8515,7 +8341,7 @@ iq_out_port_terminal_configuration
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
+            | Repeated Capabilities | port                   |
             +-----------------------+------------------------+
 
         .. tip::
@@ -8860,6 +8686,16 @@ loop_bandwidth
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].loop_bandwidth`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.loop_bandwidth`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+---------------------+
@@ -8869,7 +8705,7 @@ loop_bandwidth
             +-----------------------+---------------------+
             | Permissions           | read-write          |
             +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
+            | Repeated Capabilities | lo                  |
             +-----------------------+---------------------+
 
         .. tip::
@@ -8899,6 +8735,16 @@ lo_frequency
 
         .. note:: This property is read/write if you are using an external LO. Otherwise, this property is read-only.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].lo_frequency`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.lo_frequency`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -8908,7 +8754,7 @@ lo_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | lo         |
             +-----------------------+------------+
 
         .. tip::
@@ -9014,6 +8860,16 @@ lo_in_power
 
              - For the PXIe-5644/5645/5646, this property is always read-only.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].lo_in_power`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.lo_in_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -9023,7 +8879,7 @@ lo_in_power
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | lo         |
             +-----------------------+------------+
 
         .. tip::
@@ -9061,6 +8917,16 @@ lo_out_enabled
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].lo_out_enabled`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.lo_out_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -9070,7 +8936,7 @@ lo_out_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | lo         |
             +-----------------------+------------+
 
         .. tip::
@@ -9143,6 +9009,16 @@ lo_out_power
 
         .. note:: For the PXIe-5644/5645/5646 and PXIe-5673/5673E, this property is always read-only.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].lo_out_power`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.lo_out_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -9152,7 +9028,7 @@ lo_out_power
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | lo         |
             +-----------------------+------------+
 
         .. tip::
@@ -9194,6 +9070,16 @@ lo_pll_fractional_mode_enabled
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].lo_pll_fractional_mode_enabled`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------------------------+
@@ -9203,7 +9089,7 @@ lo_pll_fractional_mode_enabled
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
+            | Repeated Capabilities | lo                               |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -9249,6 +9135,16 @@ lo_source
 
         .. note:: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to SG_SA_Shared.
 
+
+        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+            Example: :py:attr:`my_session.lo[ ... ].lo_source`
+
+            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+            Example: :py:attr:`my_session.lo_source`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -9258,7 +9154,7 @@ lo_source
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | lo         |
             +-----------------------+------------+
 
         .. tip::
@@ -9720,10 +9616,6 @@ output_enabled
 
         `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_
 
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.configure_output_enabled`
-
         **Defined Values**:
 
         +-------+-------------------------+
@@ -9849,389 +9741,6 @@ overflow_error_reporting
 
                 - LabVIEW Property: **Arb:Advanced:Overflow Error Reporting**
                 - C Attribute: **NIRFSG_ATTR_OVERFLOW_ERROR_REPORTING**
-
-p2p_data_transfer_permission_initial_credits
---------------------------------------------
-
-    .. py:attribute:: p2p_data_transfer_permission_initial_credits
-
-        Specifies the initial amount of data that the writer peer can transfer over the bus into the configured endpoint when the peer-to-peer data stream is enabled. If this property is not set and the endpoint is empty, credits equal to the full endpoint size are issued to the writer peer. If data is written to the endpoint using the :py:meth:`nirfsg.Session.WriteP2pEndpointI16` method prior to enabling the stream, credits equal to the remaining space available in the endpoint are issued to the writer peer. This property is coerced up by NI-RFSG to 8-byte boundaries. This property is endpoint-based.
-
-        **Units**: samples per channel
-
-        **Default Value:** 1,024
-
-        **Supported Devices:** PXIe-5673E
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Data Transfer Permission Initial Credits**
-                - C Attribute: **NIRFSG_ATTR_P2P_DATA_TRANSFER_PERMISSION_INITIAL_CREDITS**
-
-p2p_data_transfer_permission_interval
--------------------------------------
-
-    .. py:attribute:: p2p_data_transfer_permission_interval
-
-        Specifies the interval at which the RF signal generator issues credits to allow the writer peer to transfer data over the bus into the configured endpoint. This property is coerced up by NI-RFSG to the nearest 128-byte boundary. This property is endpoint-based.
-
-        **Units**: samples per channel
-
-        **Supported Devices:** PXIe-5673E
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Data Transfer Permission Interval**
-                - C Attribute: **NIRFSG_ATTR_P2P_DATA_TRANSFER_PERMISSION_INTERVAL**
-
-p2p_enabled
------------
-
-    .. py:attribute:: p2p_enabled
-
-        Specifies whether the RF signal generator reads data from the peer-to-peer endpoint. This property is endpoint-based.
-
-        **Default Value**: False
-
-        **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        **Defined Values**:
-
-        +-------+------------------------------------------+
-        | Value | Description                              |
-        +=======+==========================================+
-        | True  | Peer-to-peer data streaming is enabled.  |
-        +-------+------------------------------------------+
-        | False | Peer-to-peer data streaming is disabled. |
-        +-------+------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Enabled**
-                - C Attribute: **NIRFSG_ATTR_P2P_ENABLED**
-
-p2p_endpoint_count
-------------------
-
-    .. py:attribute:: p2p_endpoint_count
-
-        Returns the number of peer-to-peer FIFO endpoints supported by the device.
-
-        **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Endpoint Count**
-                - C Attribute: **NIRFSG_ATTR_P2P_ENDPOINT_COUNT**
-
-p2p_endpoint_fullness_start_trigger_level
------------------------------------------
-
-    .. py:attribute:: p2p_endpoint_fullness_start_trigger_level
-
-        Specifies the number of samples the endpoint must receive before the device starts generation. If no level is specified, NI-RFSG automatically sets this value to -1. This property applies only when the :py:attr:`nirfsg.Session.start_trigger_type` property is set to :py:data:`~nirfsg.StartTrigType.P2P_ENDPOINT_FULLNESS`
-
-        **Default Value:** -1, which allows NI-RFSG to select the appropriate fullness value.
-
-        **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_
-
-
-
-        .. note:: Due to an additional internal FIFO in the RF signal generator, the writer peer actually needs to write 2,304 bytes more than the quantity of data specified by this property to satisfy the trigger level.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Start:P2P Endpoint Fullness:Level**
-                - C Attribute: **NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL**
-
-p2p_endpoint_size
------------------
-
-    .. py:attribute:: p2p_endpoint_size
-
-        Returns the size, in samples, of the device endpoint. This property is endpoint-based.
-
-        **Units**: samples (s)
-
-        **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Endpoint Size**
-                - C Attribute: **NIRFSG_ATTR_P2P_ENDPOINT_SIZE**
-
-p2p_generation_fifo_sample_quantum
-----------------------------------
-
-    .. py:attribute:: p2p_generation_fifo_sample_quantum
-
-        Returns how many samples NI-RFSG pulls from the peer-to-peer FIFO per read. You can use this property to determine how many samples to send across the peer-to-peer bus to ensure that no samples are ignored. If you send a number of samples that is not a multiple of this value, the remaining samples are not read from the FIFO during generation. This property is endpoint-based.
-
-        **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Generation FIFO Sample Quantum**
-                - C Attribute: **NIRFSG_ATTR_P2P_GENERATION_FIFO_SAMPLE_QUANTUM**
-
-p2p_is_finite_generation
-------------------------
-
-    .. py:attribute:: p2p_is_finite_generation
-
-        Specifies whether peer-to-peer should continuously generate data from the peer-to-peer stream or from only a finite number of samples, according to the :py:attr:`nirfsg.Session.p2p_number_of_samples_to_generate` property. To use this property, peer-to-peer must be enabled. This property is endpoint-based.
-
-        **Default Value**: False
-
-        **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Defined Values**:
-
-        +-------+--------------------------------------------------------------+
-        | Value | Description                                                  |
-        +=======+==============================================================+
-        | True  | Data is generated from only a finite number of samples.      |
-        +-------+--------------------------------------------------------------+
-        | False | Data is continuously generated from the peer-to-peer stream. |
-        +-------+--------------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Is Finite Generation**
-                - C Attribute: **NIRFSG_ATTR_P2P_IS_FINITE_GENERATION**
-
-p2p_most_space_available_in_endpoint
-------------------------------------
-
-    .. py:attribute:: p2p_most_space_available_in_endpoint
-
-        Returns the largest number of samples per channel available in the endpoint since this property was last read. You can use this property to determine how much endpoint space to use as a buffer against bus traffic latencies by reading the property and keeping track of the largest value returned. This property is endpoint-based.
-
-        If you want to minimize the latency for data to move through the endpoint and be generated by the RF signal generator, use the :py:attr:`nirfsg.Session.p2p_data_transfer_permission_initial_credits` property to grant fewer initial credits than the default of the entire endpoint size.
-
-        **Units**: samples per channel
-
-        **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Most Space Available in Endpoint**
-                - C Attribute: **NIRFSG_ATTR_P2P_MOST_SPACE_AVAILABLE_IN_ENDPOINT**
-
-p2p_number_of_samples_to_generate
----------------------------------
-
-    .. py:attribute:: p2p_number_of_samples_to_generate
-
-        Specifies how many samples are generated from the peer-to-peer subsystem when it is enabled. To use this property, peer-to-peer must be enabled and set to finite generation. This property is endpoint-based.
-
-        **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Number Of Samples To Generate**
-                - C Attribute: **NIRFSG_ATTR_P2P_NUMBER_OF_SAMPLES_TO_GENERATE**
-
-p2p_space_available_in_endpoint
--------------------------------
-
-    .. py:attribute:: p2p_space_available_in_endpoint
-
-        Returns the current space available in the endpoint. You can use this property when priming the endpoint with initial data using the :py:meth:`nirfsg.Session.WriteP2pEndpointI16` method to determine how many samples you can write. You also can use this property to characterize the performance and measure the latency of the peer-to-peer stream as data moves across the bus. This property is endpoint-based.
-
-        **Units**: samples per channel
-
-        **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-        `Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Space Available In Endpoint**
-                - C Attribute: **NIRFSG_ATTR_P2P_SPACE_AVAILABLE_IN_ENDPOINT**
 
 peak_envelope_power
 -------------------
@@ -10523,10 +10032,6 @@ power_level_type
 
         `Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_
 
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.configure_power_level_type`
-
         **Defined Values**:
 
         +-------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -10562,31 +10067,31 @@ pulse_modulation_active_level
 
         Specifies the active level of the pulse modulation signal when pulse modulation is enabled. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.HIGH`
+        **Default Value:** :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.HIGH`
 
         **Supported Devices:**  PXIe-5842
 
         **Defined Values**:
 
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
-        | Name                                                  | Value         | Description                                      |
-        +=======================================================+===============+==================================================+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.HIGH` | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigDigLevelActiveLevel.LOW`  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
-        +-------------------------------------------------------+---------------+--------------------------------------------------+
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
+        | Name                                                         | Value         | Description                                      |
+        +==============================================================+===============+==================================================+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.HIGH` | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerDigitalLevelActiveLevel.LOW`  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
+        +--------------------------------------------------------------+---------------+--------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------+
-            | Characteristic        | Value                               |
-            +=======================+=====================================+
-            | Datatype              | enums.ScriptTrigDigLevelActiveLevel |
-            +-----------------------+-------------------------------------+
-            | Permissions           | read-write                          |
-            +-----------------------+-------------------------------------+
-            | Repeated Capabilities | None                                |
-            +-----------------------+-------------------------------------+
+            +-----------------------+--------------------------------------------+
+            | Characteristic        | Value                                      |
+            +=======================+============================================+
+            | Datatype              | enums.ScriptTriggerDigitalLevelActiveLevel |
+            +-----------------------+--------------------------------------------+
+            | Permissions           | read-write                                 |
+            +-----------------------+--------------------------------------------+
+            | Repeated Capabilities | None                                       |
+            +-----------------------+--------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11051,7 +10556,7 @@ ref_pll_bandwidth
 
         Configures the loop bandwidth of the reference PLL.
 
-        **Default Value:** :py:data:`~nirfsg.RefPllBandwidth.NARROW`
+        **Default Value:** :py:data:`~nirfsg.ReferencePllBandwidth.NARROW`
 
         **Supported Devices:** PXIe-5653
 
@@ -11061,29 +10566,29 @@ ref_pll_bandwidth
 
         **Defined Values**:
 
-        +-------------------------------------------+--------------------------------------------------------+
-        | Value                                     | Description                                            |
-        +===========================================+========================================================+
-        | :py:data:`~nirfsg.RefPllBandwidth.NARROW` | Uses the narrowest loop bandwidth setting for the PLL. |
-        +-------------------------------------------+--------------------------------------------------------+
-        | :py:data:`~nirfsg.RefPllBandwidth.MEDIUM` | Uses the medium loop bandwidth setting for the PLL.    |
-        +-------------------------------------------+--------------------------------------------------------+
-        | :py:data:`~nirfsg.RefPllBandwidth.WIDE`   | Uses the widest loop bandwidth setting for the PLL.    |
-        +-------------------------------------------+--------------------------------------------------------+
+        +-------------------------------------------------+--------------------------------------------------------+
+        | Value                                           | Description                                            |
+        +=================================================+========================================================+
+        | :py:data:`~nirfsg.ReferencePllBandwidth.NARROW` | Uses the narrowest loop bandwidth setting for the PLL. |
+        +-------------------------------------------------+--------------------------------------------------------+
+        | :py:data:`~nirfsg.ReferencePllBandwidth.MEDIUM` | Uses the medium loop bandwidth setting for the PLL.    |
+        +-------------------------------------------------+--------------------------------------------------------+
+        | :py:data:`~nirfsg.ReferencePllBandwidth.WIDE`   | Uses the widest loop bandwidth setting for the PLL.    |
+        +-------------------------------------------------+--------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------+
-            | Characteristic        | Value                 |
-            +=======================+=======================+
-            | Datatype              | enums.RefPllBandwidth |
-            +-----------------------+-----------------------+
-            | Permissions           | read-write            |
-            +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.ReferencePllBandwidth |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | None                        |
+            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11155,7 +10660,7 @@ rf_blanking_source
 
         PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.Reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+        For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.Reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         **Default Value:** "" (empty string)
 
@@ -11314,7 +10819,7 @@ script_trigger_type
 
         Specifies the Script Trigger type. Depending upon the value of this property, more properties may be needed to fully configure the trigger. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ScriptTrigType.NONE`
+        **Default Value:** :py:data:`~nirfsg.ScriptTriggerType.NONE`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -11330,17 +10835,17 @@ script_trigger_type
 
         **Defined Values**:
 
-        +-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Value                                           | Description                                                                                                                                                                                                                                                                                                               |
-        +=================================================+===========================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.ScriptTrigType.NONE`          | No trigger is configured. Signal generation starts immediately.                                                                                                                                                                                                                                                           |
-        +-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigType.DIGITAL_EDGE`  | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_source` property, and the active edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_edge` property.              |
-        +-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigType.DIGITAL_LEVEL` | The data operation does not start until the digital level is detected. The source of the digital level is specified in the :py:attr:`nirfsg.Session.digital_level_script_trigger_source` property, and the active level is specified in the :py:attr:`nirfsg.Session.digital_level_script_trigger_active_level` property. |
-        +-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ScriptTrigType.SOFTWARE`      | The data operation does not start until a software trigger occurs. You can create a software event by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.                                                                                                                                            |
-        +-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Value                                              | Description                                                                                                                                                                                                                                                                                                               |
+        +====================================================+===========================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nirfsg.ScriptTriggerType.NONE`          | No trigger is configured. Signal generation starts immediately.                                                                                                                                                                                                                                                           |
+        +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerType.DIGITAL_EDGE`  | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_source` property, and the active edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_edge` property.              |
+        +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerType.DIGITAL_LEVEL` | The data operation does not start until the digital level is detected. The source of the digital level is specified in the :py:attr:`nirfsg.Session.digital_level_script_trigger_source` property, and the active level is specified in the :py:attr:`nirfsg.Session.digital_level_script_trigger_active_level` property. |
+        +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.ScriptTriggerType.SOFTWARE`      | The data operation does not start until a software trigger occurs. You can create a software event by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.                                                                                                                                            |
+        +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -11356,15 +10861,15 @@ script_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.ScriptTrigType |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | script_triggers      |
-            +-----------------------+----------------------+
+            +-----------------------+-------------------------+
+            | Characteristic        | Value                   |
+            +=======================+=========================+
+            | Datatype              | enums.ScriptTriggerType |
+            +-----------------------+-------------------------+
+            | Permissions           | read-write              |
+            +-----------------------+-------------------------+
+            | Repeated Capabilities | script_triggers         |
+            +-----------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11896,7 +11401,7 @@ start_trigger_type
 
         Specifies the Start Trigger type. Depending upon the value of this property, more properties may be needed to fully configure the trigger. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.StartTrigType.NONE`
+        **Default Value:** :py:data:`~nirfsg.StartTriggerType.NONE`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -11914,31 +11419,33 @@ start_trigger_type
 
         **Defined Values**:
 
-        +--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Value                                                  | Description                                                                                                                                                                                                                                                                                                |
-        +========================================================+============================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.StartTrigType.NONE`                  | No trigger is configured.                                                                                                                                                                                                                                                                                  |
-        +--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigType.DIGITAL_EDGE`          | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_source` property, and the active edge is specified in the :py:attr:`nirfsg.Session.digital_edge_start_trigger_edge` property. |
-        +--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigType.SOFTWARE`              | The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.                                                                                                                             |
-        +--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTrigType.P2P_ENDPOINT_FULLNESS` | The data operation does not start until the endpoint reaches the threshold specified in the :py:attr:`nirfsg.Session.p2p_endpoint_fullness_start_trigger_level` property.                                                                                                                                  |
-        +--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Value                                                     | Description                                                                                                                                                                                                                                                                                                |
+        +===========================================================+============================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nirfsg.StartTriggerType.NONE`                  | No trigger is configured.                                                                                                                                                                                                                                                                                  |
+        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.StartTriggerType.DIGITAL_EDGE`          | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_source` property, and the active edge is specified in the :py:attr:`nirfsg.Session.digital_edge_start_trigger_edge` property. |
+        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.StartTriggerType.SOFTWARE`              | The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.                                                                                                                             |
+        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.StartTriggerType.P2P_ENDPOINT_FULLNESS` | The data operation does not start until the endpoint reaches the threshold specified in the :py:attr:`nirfsg.Session.P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL` property.                                                                                                                                  |
+        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------+
-            | Characteristic        | Value               |
-            +=======================+=====================+
-            | Datatype              | enums.StartTrigType |
-            +-----------------------+---------------------+
-            | Permissions           | read-write          |
-            +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
+            +-----------------------+------------------------+
+            | Characteristic        | Value                  |
+            +=======================+========================+
+            | Datatype              | enums.StartTriggerType |
+            +-----------------------+------------------------+
+            | Permissions           | read-write             |
+            +-----------------------+------------------------+
+            | Repeated Capabilities | None                   |
+            +-----------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -12840,7 +12347,7 @@ waveform_rf_blanking
         | :py:data:`~nirfsg.NIRFSG_VAL_MARKER0`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER1`, :py:data:`~nirfsg.NIRFSG_VAL_MARKER2`, or :py:data:`~nirfsg.NIRFSG_VAL_MARKER3` | :py:data:`~nirfsg.RFBlanking.ENABLE`           | Error is shown.                                                                                           |
         +---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
-        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.Reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+        .. note:: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.Reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -13016,7 +12523,7 @@ write_waveform_burst_detection
 
         .. note:: - When you download a waveform using :py:meth:`nirfsg.Session.ReadAndDownloadWaveformFromFileTdms` method and if :py:attr:`nirfsg.Session.waveform_rf_blanking` property is enabled, you must set the :py:attr:`nirfsg.Session.write_waveform_burst_detection` property to :py:data:`~nirfsg.WriteWaveformBurstDetection.DISABLE`.
 
-             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.Reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.ResetWithOptions` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+             - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any :py:meth:`nirfsg.Session.Reset` or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call :py:meth:`nirfsg.Session.reset_with_options` or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 

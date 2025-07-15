@@ -2,6 +2,7 @@
 # This file was generated
 
 from enum import Enum
+from enum import IntFlag
 
 
 class AllowOutOfSpecificationUserSettings(Enum):
@@ -26,7 +27,7 @@ class AmpPath(Enum):
     '''
 
 
-class AnlgModFmBand(Enum):
+class AnalogModulationFmBand(Enum):
     NARROWBAND = 17000
     r'''
     Specifies narrowband frequency modulation.
@@ -37,7 +38,7 @@ class AnlgModFmBand(Enum):
     '''
 
 
-class AnlgModFmNarrowbandIntegrator(Enum):
+class AnalogModulationFmNarrowbandIntegrator(Enum):
     _100hzto1khz = 18000
     r'''
     Specifies a range from 100Hz to 1kHz.
@@ -52,7 +53,7 @@ class AnlgModFmNarrowbandIntegrator(Enum):
     '''
 
 
-class AnlgModPmMode(Enum):
+class AnalogModulationPmMode(Enum):
     HIGH_DEVIATION = 19000
     r'''
     Specifies high deviation. High deviation comes at the expense of a higher phase noise.
@@ -63,7 +64,7 @@ class AnlgModPmMode(Enum):
     '''
 
 
-class AnlgModType(Enum):
+class AnalogModulationType(Enum):
     NONE = 0
     r'''
     Disables analog modulation.
@@ -82,7 +83,7 @@ class AnlgModType(Enum):
     '''
 
 
-class AnlgModWfmType(Enum):
+class AnalogModulationWaveformType(Enum):
     SINE = 3000
     r'''
     Specifies that the analog modulation waveform type is sine.
@@ -141,37 +142,6 @@ class AutomaticThermalCorrection(Enum):
     '''
 
 
-class ConfigListTrigDigEdgeEdge(Enum):
-    EDGE = 0
-    r'''
-    Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level.
-    '''
-
-
-class ConfigListTrigType(Enum):
-    NONE = 0
-    r'''
-    Generation starts immediately, but the list does not advance.
-    '''
-    DIGITAL_EDGE = 1
-    r'''
-    Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE property, and the active edge is always rising.
-    '''
-
-
-class ConfigurationListRepeat(Enum):
-    CONFIGURATION_LIST_REPEAT_CONTINUOUS = 0
-    r'''
-    NI-RFSG runs the configuration list continuously.
-    '''
-    MANUAL = 0
-    CONFIGURATION_LIST_REPEAT_SINGLE = 1
-    r'''
-    NI-RFSG runs the configuration list only once.
-    '''
-    SCRIPT_TRIGGER = 1
-
-
 class DeembeddingTypeAttrVals(Enum):
     NONE = 25000
     r'''
@@ -187,7 +157,18 @@ class DeembeddingTypeAttrVals(Enum):
     '''
 
 
-class DigModType(Enum):
+class DigitalEqualizationEnabled(Enum):
+    DISABLE = 0
+    r'''
+    Filter is not applied
+    '''
+    ENABLE = 1
+    r'''
+    Filter is applied.
+    '''
+
+
+class DigitalModulationType(Enum):
     NONE = 0
     r'''
     Disables digital modulation.
@@ -206,7 +187,7 @@ class DigModType(Enum):
     '''
 
 
-class DigModWfmType(Enum):
+class DigitalModulationWaveformType(Enum):
     PRBS = 5000
     r'''
     Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).
@@ -214,17 +195,6 @@ class DigModWfmType(Enum):
     USER_DEFINED = 5001
     r'''
     Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the configure_digital_modulation_user_defined_waveform method.
-    '''
-
-
-class DigitalEqualizationEnabled(Enum):
-    DISABLE = 0
-    r'''
-    Filter is not applied
-    '''
-    ENABLE = 1
-    r'''
-    Filter is applied.
     '''
 
 
@@ -315,11 +285,11 @@ class IQOutPortTermCfg(Enum):
 
 
 class Lo1OutputFilter(Enum):
-    MANUAL = 0
+    HIGH = 0
     r'''
     yet to be defined
     '''
-    SCRIPT_TRIGGER = 1
+    LOW = 1
     r'''
     yet to be defined
     '''
@@ -330,12 +300,10 @@ class LoOutEnabled(Enum):
     r'''
     The local oscillator signal is present at the LO OUT front panel connector.
     '''
-    MANUAL = 0
     ENABLE = 1
     r'''
     The local oscillator signal is  not present at the LO OUT front panel connector..
     '''
-    SCRIPT_TRIGGER = 1
 
 
 class LoOutExportConfigureFromRFSaEnable(Enum):
@@ -343,12 +311,10 @@ class LoOutExportConfigureFromRFSaEnable(Enum):
     r'''
     Do not allow NI-RFSA to control the NI-RFSG local oscillator export.
     '''
-    MANUAL = 0
     ENABLE = 1
     r'''
     Allow NI-RFSA to control the NI-RFSG local oscillator export.
     '''
-    SCRIPT_TRIGGER = 1
 
 
 class LoPlLfractionalModeEnabled(Enum):
@@ -356,12 +322,10 @@ class LoPlLfractionalModeEnabled(Enum):
     r'''
     Disables fractional mode for the LO PLL.
     '''
-    MANUAL = 0
     ENABLE = 1
     r'''
     Enables fractional mode for the LO PLL.
     '''
-    SCRIPT_TRIGGER = 1
 
 
 class LoadConfigurationResetOptions(Enum):
@@ -610,21 +574,6 @@ class RFInLoExportEnabled(Enum):
     '''
 
 
-class RefPllBandwidth(Enum):
-    NARROW = 0
-    r'''
-    Uses the narrowest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
-    '''
-    MEDIUM = 1
-    r'''
-    Uses the medium loop bandwidth setting for the PLL.
-    '''
-    WIDE = 2
-    r'''
-    Uses the widest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
-    '''
-
-
 class ReferenceClockExportedRate(Enum):
     _10mhz = 10000000
     r'''
@@ -651,6 +600,21 @@ class ReferenceClockRate(Enum):
     '''
 
 
+class ReferencePllBandwidth(Enum):
+    NARROW = 0
+    r'''
+    Uses the narrowest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
+    '''
+    MEDIUM = 1
+    r'''
+    Uses the medium loop bandwidth setting for the PLL.
+    '''
+    WIDE = 2
+    r'''
+    Uses the widest loop bandwidth setting for the PLL. Setting this property to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
+    '''
+
+
 class RelativeTo(Enum):
     CURRENT_POSITION = 8001
     r'''
@@ -662,7 +626,7 @@ class RelativeTo(Enum):
     '''
 
 
-class ResetWithOptionsStepsToOmit(Enum):
+class ResetWithOptionsStepsToOmit(IntFlag):
     DEEMBEDDING_TABLES = 8
     r'''
     Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
@@ -685,7 +649,7 @@ class ResetWithOptionsStepsToOmit(Enum):
     '''
 
 
-class ScriptTrigDigEdgeEdge(Enum):
+class ScriptTriggerDigitalEdgeEdge(Enum):
     RISING = 0
     r'''
     Asserts the trigger when the signal transitions from low level to high level.
@@ -696,7 +660,7 @@ class ScriptTrigDigEdgeEdge(Enum):
     '''
 
 
-class ScriptTrigDigLevelActiveLevel(Enum):
+class ScriptTriggerDigitalLevelActiveLevel(Enum):
     HIGH = 9000
     r'''
     Trigger when the digital trigger signal is high.
@@ -707,7 +671,7 @@ class ScriptTrigDigLevelActiveLevel(Enum):
     '''
 
 
-class ScriptTrigType(Enum):
+class ScriptTriggerType(Enum):
     NONE = 0
     r'''
     No trigger is configured. Signal generation starts immediately.
@@ -726,7 +690,7 @@ class ScriptTrigType(Enum):
     '''
 
 
-class SelfCalibrateRangeStepsToOmit(Enum):
+class SelfCalibrateRangeStepsToOmit(IntFlag):
     IMAGE_SUPPRESSION = 8
     r'''
     Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
@@ -810,7 +774,7 @@ class SparameterOrientation(Enum):
     '''
 
 
-class StartTrigDigEdgeEdge(Enum):
+class StartTriggerDigitalEdgeEdge(Enum):
     RISING = 0
     r'''
     Occurs when the signal transitions from low level to high level.
@@ -821,7 +785,7 @@ class StartTrigDigEdgeEdge(Enum):
     '''
 
 
-class StartTrigType(Enum):
+class StartTriggerType(Enum):
     NONE = 0
     r'''
     No trigger is configured.
@@ -836,7 +800,7 @@ class StartTrigType(Enum):
     '''
     P2P_ENDPOINT_FULLNESS = 3
     r'''
-    The data operation does not start until the endpoint reaches the threshold specified in the p2p_endpoint_fullness_start_trigger_level property.
+    The data operation does not start until the endpoint reaches the threshold specified in the P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL property.
     '''
 
 

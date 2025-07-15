@@ -266,12 +266,12 @@ class _SessionBase(object):
 
     `Amplitude Modulation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5654_5696_amplitude_modulation.html>`_
     '''
-    analog_modulation_fm_band = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnlgModFmBand, 1150191)
-    '''Type: enums.AnlgModFmBand
+    analog_modulation_fm_band = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationFmBand, 1150191)
+    '''Type: enums.AnalogModulationFmBand
 
     Specifies the analog modulation frequency modulation (FM) band to use. Wideband FM allows for modulating signals higher than 100kHz. Narrowband FM allows for modulating lower frequency signals.
 
-    **Default Value:** AnlgModFmBand.WIDEBAND
+    **Default Value:** AnalogModulationFmBand.WIDEBAND
 
     **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -281,13 +281,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +--------------------------+----------------+--------------------------------------------+
-    | Name                     | Value          | Description                                |
-    +==========================+================+============================================+
-    | AnlgModFmBand.NARROWBAND | 17000 (0x4268) | Specifies narrowband frequency modulation. |
-    +--------------------------+----------------+--------------------------------------------+
-    | AnlgModFmBand.WIDEBAND   | 17001 (0x4269) | Specifies wideband frequency modulation.   |
-    +--------------------------+----------------+--------------------------------------------+
+    +-----------------------------------+----------------+--------------------------------------------+
+    | Name                              | Value          | Description                                |
+    +===================================+================+============================================+
+    | AnalogModulationFmBand.NARROWBAND | 17000 (0x4268) | Specifies narrowband frequency modulation. |
+    +-----------------------------------+----------------+--------------------------------------------+
+    | AnalogModulationFmBand.WIDEBAND   | 17001 (0x4269) | Specifies wideband frequency modulation.   |
+    +-----------------------------------+----------------+--------------------------------------------+
     '''
     analog_modulation_fm_deviation = _attributes.AttributeViReal64(1150035)
     '''Type: float
@@ -304,14 +304,14 @@ class _SessionBase(object):
 
     `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
     '''
-    analog_modulation_fm_narrowband_integrator = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnlgModFmNarrowbandIntegrator, 1150165)
-    '''Type: enums.AnlgModFmNarrowbandIntegrator
+    analog_modulation_fm_narrowband_integrator = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationFmNarrowbandIntegrator, 1150165)
+    '''Type: enums.AnalogModulationFmNarrowbandIntegrator
 
     Specifies the narrowband frequency modulation (FM) range to apply by sending the signal through an integrator.
 
-    This property is valid only when you set the analog_modulation_type property to AnlgModType.FM and the analog_modulation_fm_band property to AnlgModFmBand.NARROWBAND.
+    This property is valid only when you set the analog_modulation_type property to AnalogModulationType.FM and the analog_modulation_fm_band property to AnalogModulationFmBand.NARROWBAND.
 
-    **Default Value:** AnlgModFmNarrowbandIntegrator._100hzto1khz
+    **Default Value:** AnalogModulationFmNarrowbandIntegrator._100hzto1khz
 
     **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -321,15 +321,15 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +----------------------------------------------+----------------+---------------------------------------------+
-    | Name                                         | Value          | Description                                 |
-    +==============================================+================+=============================================+
-    | AnlgModFmNarrowbandIntegrator._100hzto1khz   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
-    +----------------------------------------------+----------------+---------------------------------------------+
-    | AnlgModFmNarrowbandIntegrator._10khzto100khz | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
-    +----------------------------------------------+----------------+---------------------------------------------+
-    | AnlgModFmNarrowbandIntegrator._1khzto10khz   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
-    +----------------------------------------------+----------------+---------------------------------------------+
+    +-------------------------------------------------------+----------------+---------------------------------------------+
+    | Name                                                  | Value          | Description                                 |
+    +=======================================================+================+=============================================+
+    | AnalogModulationFmNarrowbandIntegrator._100hzto1khz   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
+    +-------------------------------------------------------+----------------+---------------------------------------------+
+    | AnalogModulationFmNarrowbandIntegrator._10khzto100khz | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
+    +-------------------------------------------------------+----------------+---------------------------------------------+
+    | AnalogModulationFmNarrowbandIntegrator._1khzto10khz   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
+    +-------------------------------------------------------+----------------+---------------------------------------------+
     '''
     analog_modulation_fm_sensitivity = _attributes.AttributeViReal64(1150166)
     '''Type: float
@@ -361,12 +361,12 @@ class _SessionBase(object):
 
     `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
     '''
-    analog_modulation_pm_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnlgModPmMode, 1150192)
-    '''Type: enums.AnlgModPmMode
+    analog_modulation_pm_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationPmMode, 1150192)
+    '''Type: enums.AnalogModulationPmMode
 
     Specifies the phase modulation (PM) mode to use.
 
-    **Default Value:** AnlgModPmMode.LOW_PHASE_NOISE
+    **Default Value:** AnalogModulationPmMode.LOW_PHASE_NOISE
 
     **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -376,13 +376,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-------------------------------+----------------+-----------------------------------------------------------------------------------------------+
-    | Name                          | Value          | Description                                                                                   |
-    +===============================+================+===============================================================================================+
-    | AnlgModPmMode.HIGH_DEVIATION  | 19000 (0x4a38) | Specifies high deviation. High deviation comes at the expense of a higher phase noise.        |
-    +-------------------------------+----------------+-----------------------------------------------------------------------------------------------+
-    | AnlgModPmMode.LOW_PHASE_NOISE | 19001 (0x4a39) | Specifies low phase noise. Low phase noise comes at the expense of a lower maximum deviation. |
-    +-------------------------------+----------------+-----------------------------------------------------------------------------------------------+
+    +----------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
+    | Name                                   | Value          | Description                                                                                   |
+    +========================================+================+===============================================================================================+
+    | AnalogModulationPmMode.HIGH_DEVIATION  | 19000 (0x4a38) | Specifies high deviation. High deviation comes at the expense of a higher phase noise.        |
+    +----------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
+    | AnalogModulationPmMode.LOW_PHASE_NOISE | 19001 (0x4a39) | Specifies low phase noise. Low phase noise comes at the expense of a lower maximum deviation. |
+    +----------------------------------------+----------------+-----------------------------------------------------------------------------------------------+
     '''
     analog_modulation_pm_sensitivity = _attributes.AttributeViReal64(1150168)
     '''Type: float
@@ -399,12 +399,12 @@ class _SessionBase(object):
 
     `Phase Modulation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5654_5696_phase_modulation.html>`_
     '''
-    analog_modulation_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnlgModType, 1150032)
-    '''Type: enums.AnlgModType
+    analog_modulation_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationType, 1150032)
+    '''Type: enums.AnalogModulationType
 
     Specifies the analog modulation format to use.
 
-    **Default Value:** AnlgModType.NONE
+    **Default Value:** AnalogModulationType.NONE
 
     **Supported Devices:** PXI/PXIe-5650/5651/5652, PXIe-5654/5654 with PXIe-5696
 
@@ -418,17 +418,17 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +------------------+--------------+--------------------------------------------------+
-    | Name             | Value        | Description                                      |
-    +==================+==============+==================================================+
-    | AnlgModType.AM   | 2002 (0x7d2) | Specifies that the analog modulation type is AM. |
-    +------------------+--------------+--------------------------------------------------+
-    | AnlgModType.FM   | 2000 (0x7d0) | Specifies that the analog modulation type is FM. |
-    +------------------+--------------+--------------------------------------------------+
-    | AnlgModType.NONE | 0 (0x0)      | Disables analog modulation.                      |
-    +------------------+--------------+--------------------------------------------------+
-    | AnlgModType.PM   | 2001 (0x7d1) | Specifies that the analog modulation type is PM. |
-    +------------------+--------------+--------------------------------------------------+
+    +---------------------------+--------------+--------------------------------------------------+
+    | Name                      | Value        | Description                                      |
+    +===========================+==============+==================================================+
+    | AnalogModulationType.AM   | 2002 (0x7d2) | Specifies that the analog modulation type is AM. |
+    +---------------------------+--------------+--------------------------------------------------+
+    | AnalogModulationType.FM   | 2000 (0x7d0) | Specifies that the analog modulation type is FM. |
+    +---------------------------+--------------+--------------------------------------------------+
+    | AnalogModulationType.NONE | 0 (0x0)      | Disables analog modulation.                      |
+    +---------------------------+--------------+--------------------------------------------------+
+    | AnalogModulationType.PM   | 2001 (0x7d1) | Specifies that the analog modulation type is PM. |
+    +---------------------------+--------------+--------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -448,12 +448,12 @@ class _SessionBase(object):
 
     `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
     '''
-    analog_modulation_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnlgModWfmType, 1150033)
-    '''Type: enums.AnlgModWfmType
+    analog_modulation_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationWaveformType, 1150033)
+    '''Type: enums.AnalogModulationWaveformType
 
     Specifies the type of waveform to use as the message signal for analog modulation.
 
-    **Default Value:** AnlgModWfmType.SINE
+    **Default Value:** AnalogModulationWaveformType.SINE
 
     **Supported Devices:** PXI/PXIe-5650/5651/5652
 
@@ -463,15 +463,15 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-------------------------+--------------+-----------------------------------------------------------------+
-    | Name                    | Value        | Description                                                     |
-    +=========================+==============+=================================================================+
-    | AnlgModWfmType.SINE     | 3000 (0xbb8) | Specifies that the analog modulation waveform type is sine.     |
-    +-------------------------+--------------+-----------------------------------------------------------------+
-    | AnlgModWfmType.SQUARE   | 3001 (0xbb9) | Specifies that the analog modulation waveform type is square.   |
-    +-------------------------+--------------+-----------------------------------------------------------------+
-    | AnlgModWfmType.TRIANGLE | 3002 (0xbba) | Specifies that the analog modulation waveform type is triangle. |
-    +-------------------------+--------------+-----------------------------------------------------------------+
+    +---------------------------------------+--------------+-----------------------------------------------------------------+
+    | Name                                  | Value        | Description                                                     |
+    +=======================================+==============+=================================================================+
+    | AnalogModulationWaveformType.SINE     | 3000 (0xbb8) | Specifies that the analog modulation waveform type is sine.     |
+    +---------------------------------------+--------------+-----------------------------------------------------------------+
+    | AnalogModulationWaveformType.SQUARE   | 3001 (0xbb9) | Specifies that the analog modulation waveform type is square.   |
+    +---------------------------------------+--------------+-----------------------------------------------------------------+
+    | AnalogModulationWaveformType.TRIANGLE | 3002 (0xbba) | Specifies that the analog modulation waveform type is triangle. |
+    +---------------------------------------+--------------+-----------------------------------------------------------------+
     '''
     arb_carrier_frequency = _attributes.AttributeViReal64(1150015)
     '''Type: float
@@ -1063,12 +1063,12 @@ class _SessionBase(object):
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
     Tip:
-    This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container deembedding_port to specify a subset.
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
 
-    Example: :py:attr:`my_session.deembedding_port[ ... ].deembedding_compensation_gain`
+    Example: :py:attr:`my_session.port[ ... ].deembedding_compensation_gain`
 
-    To set/get on all deembedding_port, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.deembedding_compensation_gain`
     '''
@@ -1086,12 +1086,12 @@ class _SessionBase(object):
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
     Tip:
-    This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container deembedding_port to specify a subset.
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
 
-    Example: :py:attr:`my_session.deembedding_port[ ... ].deembedding_selected_table`
+    Example: :py:attr:`my_session.port[ ... ].deembedding_selected_table`
 
-    To set/get on all deembedding_port, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.deembedding_selected_table`
     '''
@@ -1125,12 +1125,12 @@ class _SessionBase(object):
     +--------------------------------+----------------+------------------------------------------------------------------------+
 
     Tip:
-    This property can be set/get on specific deembedding_port within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container deembedding_port to specify a subset.
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
 
-    Example: :py:attr:`my_session.deembedding_port[ ... ].deembedding_type`
+    Example: :py:attr:`my_session.port[ ... ].deembedding_type`
 
-    To set/get on all deembedding_port, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.deembedding_type`
     '''
@@ -1195,13 +1195,23 @@ class _SessionBase(object):
     +----------------------------+--------------------------+-------------------------+
     | Second connected mmRH-5582 | SWITCHED TRX PORTS [0-7] | rf1switch1              |
     +----------------------------+--------------------------+-------------------------+
+
+    Tip:
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
+
+    Example: :py:attr:`my_session.port[ ... ].device_temperature`
+
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.device_temperature`
     '''
-    digital_edge_script_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigEdgeEdge, 1150021)
-    '''Type: enums.ScriptTrigDigEdgeEdge
+    digital_edge_script_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerDigitalEdgeEdge, 1150021)
+    '''Type: enums.ScriptTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Script Trigger. This property is used when the script_trigger_type property is set to digital edge. To set the digital_edge_script_trigger_edge property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** ScriptTrigDigEdgeEdge.RISING
+    **Default Value:** ScriptTriggerDigitalEdgeEdge.RISING
 
     **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1217,13 +1227,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-------------------------------+---------+-------------------------------------------------------------------------------+
-    | Name                          | Value   | Description                                                                   |
-    +===============================+=========+===============================================================================+
-    | ScriptTrigDigEdgeEdge.FALLING | 1 (0x1) | Asserts the trigger when the signal transitions from high level to low level. |
-    +-------------------------------+---------+-------------------------------------------------------------------------------+
-    | ScriptTrigDigEdgeEdge.RISING  | 0 (0x0) | Asserts the trigger when the signal transitions from low level to high level. |
-    +-------------------------------+---------+-------------------------------------------------------------------------------+
+    +--------------------------------------+---------+-------------------------------------------------------------------------------+
+    | Name                                 | Value   | Description                                                                   |
+    +======================================+=========+===============================================================================+
+    | ScriptTriggerDigitalEdgeEdge.FALLING | 1 (0x1) | Asserts the trigger when the signal transitions from high level to low level. |
+    +--------------------------------------+---------+-------------------------------------------------------------------------------+
+    | ScriptTriggerDigitalEdgeEdge.RISING  | 0 (0x0) | Asserts the trigger when the signal transitions from low level to high level. |
+    +--------------------------------------+---------+-------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1321,14 +1331,14 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.digital_edge_script_trigger_source`
     '''
-    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTrigDigEdgeEdge, 1250459)
-    '''Type: enums.StartTrigDigEdgeEdge
+    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1250459)
+    '''Type: enums.StartTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Start Trigger. This property is used when the start_trigger_type property is set to digital edge. To set the digital_edge_start_trigger_edge property, the NI-RFSG device must be in the Configuration state.
 
     PXIe-5654/5654 with PXIe-5696: The Start Trigger is valid only with a timer-based list when RF list mode is enabled.
 
-    **Default Value:** StartTrigDigEdgeEdge.RISING
+    **Default Value:** StartTriggerDigitalEdgeEdge.RISING
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1344,13 +1354,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +------------------------------+---------+------------------------------------------------------------------+
-    | Name                         | Value   | Description                                                      |
-    +==============================+=========+==================================================================+
-    | StartTrigDigEdgeEdge.FALLING | 1 (0x1) | Occurs when the signal transitions from high level to low level. |
-    +------------------------------+---------+------------------------------------------------------------------+
-    | StartTrigDigEdgeEdge.RISING  | 0 (0x0) | Occurs when the signal transitions from low level to high level. |
-    +------------------------------+---------+------------------------------------------------------------------+
+    +-------------------------------------+---------+------------------------------------------------------------------+
+    | Name                                | Value   | Description                                                      |
+    +=====================================+=========+==================================================================+
+    | StartTriggerDigitalEdgeEdge.FALLING | 1 (0x1) | Occurs when the signal transitions from high level to low level. |
+    +-------------------------------------+---------+------------------------------------------------------------------+
+    | StartTriggerDigitalEdgeEdge.RISING  | 0 (0x0) | Occurs when the signal transitions from low level to high level. |
+    +-------------------------------------+---------+------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1468,12 +1478,12 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    digital_level_script_trigger_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigLevelActiveLevel, 1150055)
-    '''Type: enums.ScriptTrigDigLevelActiveLevel
+    digital_level_script_trigger_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150055)
+    '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
 
-    Specifies the active level for the Script Trigger. This property is used when the script_trigger_type property is set to ScriptTrigType.DIGITAL_LEVEL.
+    Specifies the active level for the Script Trigger. This property is used when the script_trigger_type property is set to ScriptTriggerType.DIGITAL_LEVEL.
 
-    **Default Value:** ScriptTrigDigLevelActiveLevel.HIGH
+    **Default Value:** ScriptTriggerDigitalLevelActiveLevel.HIGH
 
     **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1485,13 +1495,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +------------------------------------+---------------+--------------------------------------------------+
-    | Name                               | Value         | Description                                      |
-    +====================================+===============+==================================================+
-    | ScriptTrigDigLevelActiveLevel.HIGH | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
-    +------------------------------------+---------------+--------------------------------------------------+
-    | ScriptTrigDigLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
-    +------------------------------------+---------------+--------------------------------------------------+
+    +-------------------------------------------+---------------+--------------------------------------------------+
+    | Name                                      | Value         | Description                                      |
+    +===========================================+===============+==================================================+
+    | ScriptTriggerDigitalLevelActiveLevel.HIGH | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
+    +-------------------------------------------+---------------+--------------------------------------------------+
+    | ScriptTriggerDigitalLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
+    +-------------------------------------------+---------------+--------------------------------------------------+
 
     Tip:
     This property can be set/get on specific script_triggers within your :py:class:`nirfsg.Session` instance.
@@ -1506,7 +1516,7 @@ class _SessionBase(object):
     digital_level_script_trigger_source = _attributes.AttributeViString(1150054)
     '''Type: str
 
-    Specifies the source terminal for the Script Trigger. This property is used when the script_trigger_type property is set to ScriptTrigType.DIGITAL_LEVEL. The digital_level_script_trigger_source property is not case-sensitive.
+    Specifies the source terminal for the Script Trigger. This property is used when the script_trigger_type property is set to ScriptTriggerType.DIGITAL_LEVEL. The digital_level_script_trigger_source property is not case-sensitive.
 
     To set the digital_level_script_trigger_source property, the NI-RFSG device must be in the Configuration state.
 
@@ -1638,12 +1648,12 @@ class _SessionBase(object):
 
     `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
     '''
-    digital_modulation_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigModType, 1150036)
-    '''Type: enums.DigModType
+    digital_modulation_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalModulationType, 1150036)
+    '''Type: enums.DigitalModulationType
 
     Specifies the digital modulation format to use.
 
-    **Default Value:** DigModType.NONE
+    **Default Value:** DigitalModulationType.NONE
 
     **Supported Devices:** PXI/PXIe-5650/5651/5652
 
@@ -1653,27 +1663,27 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-----------------+--------------+-----------------------------------------------------------------------------+
-    | Name            | Value        | Description                                                                 |
-    +=================+==============+=============================================================================+
-    | DigModType.FSK  | 4000 (0xfa0) | Specifies that the digital modulation type is frequency-shift keying (FSK). |
-    +-----------------+--------------+-----------------------------------------------------------------------------+
-    | DigModType.NONE | 0 (0x0)      | Disables digital modulation.                                                |
-    +-----------------+--------------+-----------------------------------------------------------------------------+
-    | DigModType.OOK  | 4001 (0xfa1) | Specifies that the digital modulation type is on-off keying (OOK).          |
-    +-----------------+--------------+-----------------------------------------------------------------------------+
-    | DigModType.PSK  | 4002 (0xfa2) | Specifies that the digital modulation type is phase-shift keying (PSK).     |
-    +-----------------+--------------+-----------------------------------------------------------------------------+
+    +----------------------------+--------------+-----------------------------------------------------------------------------+
+    | Name                       | Value        | Description                                                                 |
+    +============================+==============+=============================================================================+
+    | DigitalModulationType.FSK  | 4000 (0xfa0) | Specifies that the digital modulation type is frequency-shift keying (FSK). |
+    +----------------------------+--------------+-----------------------------------------------------------------------------+
+    | DigitalModulationType.NONE | 0 (0x0)      | Disables digital modulation.                                                |
+    +----------------------------+--------------+-----------------------------------------------------------------------------+
+    | DigitalModulationType.OOK  | 4001 (0xfa1) | Specifies that the digital modulation type is on-off keying (OOK).          |
+    +----------------------------+--------------+-----------------------------------------------------------------------------+
+    | DigitalModulationType.PSK  | 4002 (0xfa2) | Specifies that the digital modulation type is phase-shift keying (PSK).     |
+    +----------------------------+--------------+-----------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    digital_modulation_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigModWfmType, 1150038)
-    '''Type: enums.DigModWfmType
+    digital_modulation_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalModulationWaveformType, 1150038)
+    '''Type: enums.DigitalModulationWaveformType
 
     Specifies the type of waveform to use as the message signal in digital modulation.
 
-    **Default Value:** DigModWfmType.PRBS
+    **Default Value:** DigitalModulationWaveformType.PRBS
 
     **Supported Devices:** PXI/PXIe-5650/5651/5652
 
@@ -1683,13 +1693,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +----------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                       | Value         | Description                                                                                                                                                                    |
-    +============================+===============+================================================================================================================================================================================+
-    | DigModWfmType.PRBS         | 5000 (0x1388) | Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).                                                                                       |
-    +----------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | DigModWfmType.USER_DEFINED | 5001 (0x1389) | Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the configure_digital_modulation_user_defined_waveform method. |
-    +----------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +--------------------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                                       | Value         | Description                                                                                                                                                                    |
+    +============================================+===============+================================================================================================================================================================================+
+    | DigitalModulationWaveformType.PRBS         | 5000 (0x1388) | Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).                                                                                       |
+    +--------------------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | DigitalModulationWaveformType.USER_DEFINED | 5001 (0x1389) | Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the configure_digital_modulation_user_defined_waveform method. |
+    +--------------------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1992,24 +2002,24 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.exported_marker_event_output_terminal`
     '''
-    exported_pulse_modulation_event_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigLevelActiveLevel, 1150310)
-    '''Type: enums.ScriptTrigDigLevelActiveLevel
+    exported_pulse_modulation_event_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150310)
+    '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
 
     Specifies the active level of the exported Pulse Modulation Event. When `property pulse modulation enabled` is Enabled, `pulse modulation active level` is `active high`, `exported pulse modulation event output terminal` is `PulseOut`, and this property is `active high`, then the Pulse Modulation Event will transition from Low to High after the the Pulse In signal is set to logic high, and the RF Output has settled. To set this property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** ScriptTrigDigLevelActiveLevel.HIGH
+    **Default Value:** ScriptTriggerDigitalLevelActiveLevel.HIGH
 
     **Supported Devices:**  PXIe-5842
 
     **Defined Values**:
 
-    +------------------------------------+---------------+--------------------------------------------------+
-    | Name                               | Value         | Description                                      |
-    +====================================+===============+==================================================+
-    | ScriptTrigDigLevelActiveLevel.HIGH | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
-    +------------------------------------+---------------+--------------------------------------------------+
-    | ScriptTrigDigLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
-    +------------------------------------+---------------+--------------------------------------------------+
+    +-------------------------------------------+---------------+--------------------------------------------------+
+    | Name                                      | Value         | Description                                      |
+    +===========================================+===============+==================================================+
+    | ScriptTriggerDigitalLevelActiveLevel.HIGH | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
+    +-------------------------------------------+---------------+--------------------------------------------------+
+    | ScriptTriggerDigitalLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
+    +-------------------------------------------+---------------+--------------------------------------------------+
     '''
     exported_pulse_modulation_event_output_terminal = _attributes.AttributeViString(1150309)
     '''Type: str
@@ -2535,10 +2545,6 @@ class _SessionBase(object):
 
     `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_—Refer to this topic for more information about scripting.
 
-    **High-Level Methods**:
-
-    - configure_generation_mode
-
     **Defined Values**:
 
     +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
@@ -2763,6 +2769,16 @@ class _SessionBase(object):
     Note: - For the PXIe-5645, this property is ignored if you are using the RF ports.
 
      - The valid range is dependent on the load impedance.
+
+    Tip:
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
+
+    Example: :py:attr:`my_session.port[ ... ].iq_out_port_common_mode_offset`
+
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.iq_out_port_common_mode_offset`
     '''
     iq_out_port_level = _attributes.AttributeViReal64(1150147)
     '''Type: float
@@ -2794,6 +2810,16 @@ class _SessionBase(object):
     Note: - For the PXIe-5645, this property is ignored if you are using the RF ports.
 
      - The valid values are only applicable when you set the iq_out_port_load_impedance property to 50 Ω and when you set the iq_out_port_offset property to 0.
+
+    Tip:
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
+
+    Example: :py:attr:`my_session.port[ ... ].iq_out_port_level`
+
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.iq_out_port_level`
     '''
     iq_out_port_load_impedance = _attributes.AttributeViReal64(1150163)
     '''Type: float
@@ -2811,6 +2837,16 @@ class _SessionBase(object):
     **Supported Devices:** PXIe-5645, PXIe-5820
 
     Note: For the PXIe-5645, this property is ignored if you are using the RF ports.
+
+    Tip:
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
+
+    Example: :py:attr:`my_session.port[ ... ].iq_out_port_load_impedance`
+
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.iq_out_port_load_impedance`
     '''
     iq_out_port_offset = _attributes.AttributeViReal64(1150149)
     '''Type: float
@@ -2828,6 +2864,16 @@ class _SessionBase(object):
     **Supported Devices:** PXIe-5645, PXIe-5820
 
     Note: For the PXIe-5645, this property is ignored if you are using the RF ports.
+
+    Tip:
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
+
+    Example: :py:attr:`my_session.port[ ... ].iq_out_port_offset`
+
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.iq_out_port_offset`
     '''
     iq_out_port_temperature = _attributes.AttributeViReal64(1150161)
     '''Type: float
@@ -2872,6 +2918,16 @@ class _SessionBase(object):
     +-------------------------------+----------------+--------------------------------------------------+
 
     Note: For the PXIe-5645, this property is ignored if you are using the RF ports.
+
+    Tip:
+    This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container port to specify a subset.
+
+    Example: :py:attr:`my_session.port[ ... ].iq_out_port_terminal_configuration`
+
+    To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.iq_out_port_terminal_configuration`
     '''
     iq_q_offset = _attributes.AttributeViReal64(1150071)
     '''Type: float
@@ -3070,6 +3126,16 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].loop_bandwidth`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.loop_bandwidth`
     '''
     lo_frequency = _attributes.AttributeViReal64(1150199)
     '''Type: float
@@ -3087,6 +3153,16 @@ class _SessionBase(object):
     `PXIe-5831/5832 Frequency and Bandwidth Configuration <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_and_bandwidth_configuration.html>`_
 
     Note: This property is read/write if you are using an external LO. Otherwise, this property is read-only.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].lo_frequency`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.lo_frequency`
     '''
     lo_frequency_step_size = _attributes.AttributeViReal64(1150151)
     '''Type: float
@@ -3160,6 +3236,16 @@ class _SessionBase(object):
     Note: - This property is read/write if you are using an external LO. Otherwise, this property is read-only.
 
      - For the PXIe-5644/5645/5646, this property is always read-only.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].lo_in_power`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.lo_in_power`
     '''
     lo_out_enabled = _attributes.AttributeViBoolean(1150013)
     '''Type: bool
@@ -3188,6 +3274,16 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].lo_out_enabled`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.lo_out_enabled`
     '''
     lo_out_export_configure_from_rfsa = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoOutExportConfigureFromRFSaEnable, 1150242)
     '''Type: enums.LoOutExportConfigureFromRFSaEnable
@@ -3229,6 +3325,16 @@ class _SessionBase(object):
     `LO OUT <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/loout.html>`_
 
     Note: For the PXIe-5644/5645/5646 and PXIe-5673/5673E, this property is always read-only.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].lo_out_power`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.lo_out_power`
     '''
     lo_pll_fractional_mode_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoPlLfractionalModeEnabled, 1150152)
     '''Type: enums.LoPlLfractionalModeEnabled
@@ -3261,6 +3367,16 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].lo_pll_fractional_mode_enabled`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
     '''
     lo_source = _attributes.AttributeViString(1150150)
     '''Type: str
@@ -3296,6 +3412,16 @@ class _SessionBase(object):
     +--------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to SG_SA_Shared.
+
+    Tip:
+    This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container lo to specify a subset.
+
+    Example: :py:attr:`my_session.lo[ ... ].lo_source`
+
+    To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+
+    Example: :py:attr:`my_session.lo_source`
     '''
     lo_temperature = _attributes.AttributeViReal64(1150075)
     '''Type: float
@@ -3540,10 +3666,6 @@ class _SessionBase(object):
 
     `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_
 
-    **High-Level Methods**:
-
-    - configure_output_enabled
-
     **Defined Values**:
 
     +-------+-------------------------+
@@ -3612,167 +3734,6 @@ class _SessionBase(object):
     +---------------------------------+--------------+----------------------------------------------------------------------------+
     | OverflowErrorReporting.WARNING  | 1301 (0x515) | NI-RFSG returns a warning when an OSP overflow occurs.                     |
     +---------------------------------+--------------+----------------------------------------------------------------------------+
-    '''
-    p2p_data_transfer_permission_initial_credits = _attributes.AttributeViInt64(1150135)
-    '''Type: int
-
-    Specifies the initial amount of data that the writer peer can transfer over the bus into the configured endpoint when the peer-to-peer data stream is enabled. If this property is not set and the endpoint is empty, credits equal to the full endpoint size are issued to the writer peer. If data is written to the endpoint using the WriteP2pEndpointI16 method prior to enabling the stream, credits equal to the remaining space available in the endpoint are issued to the writer peer. This property is coerced up by NI-RFSG to 8-byte boundaries. This property is endpoint-based.
-
-    **Units**: samples per channel
-
-    **Default Value:** 1,024
-
-    **Supported Devices:** PXIe-5673E
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-    `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-    '''
-    p2p_data_transfer_permission_interval = _attributes.AttributeViInt64(1150134)
-    '''Type: int
-
-    Specifies the interval at which the RF signal generator issues credits to allow the writer peer to transfer data over the bus into the configured endpoint. This property is coerced up by NI-RFSG to the nearest 128-byte boundary. This property is endpoint-based.
-
-    **Units**: samples per channel
-
-    **Supported Devices:** PXIe-5673E
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-    `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-    '''
-    p2p_enabled = _attributes.AttributeViBoolean(1150123)
-    '''Type: bool
-
-    Specifies whether the RF signal generator reads data from the peer-to-peer endpoint. This property is endpoint-based.
-
-    **Default Value**: False
-
-    **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-    **Defined Values**:
-
-    +-------+------------------------------------------+
-    | Value | Description                              |
-    +=======+==========================================+
-    | True  | Peer-to-peer data streaming is enabled.  |
-    +-------+------------------------------------------+
-    | False | Peer-to-peer data streaming is disabled. |
-    +-------+------------------------------------------+
-    '''
-    p2p_endpoint_count = _attributes.AttributeViInt32(1150127)
-    '''Type: int
-
-    Returns the number of peer-to-peer FIFO endpoints supported by the device.
-
-    **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-    '''
-    p2p_endpoint_fullness_start_trigger_level = _attributes.AttributeViInt64(1150128)
-    '''Type: int
-
-    Specifies the number of samples the endpoint must receive before the device starts generation. If no level is specified, NI-RFSG automatically sets this value to -1. This property applies only when the start_trigger_type property is set to StartTrigType.P2P_ENDPOINT_FULLNESS
-
-    **Default Value:** -1, which allows NI-RFSG to select the appropriate fullness value.
-
-    **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_
-
-    Note: Due to an additional internal FIFO in the RF signal generator, the writer peer actually needs to write 2,304 bytes more than the quantity of data specified by this property to satisfy the trigger level.
-    '''
-    p2p_endpoint_size = _attributes.AttributeViInt64(1150124)
-    '''Type: int
-
-    Returns the size, in samples, of the device endpoint. This property is endpoint-based.
-
-    **Units**: samples (s)
-
-    **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-    '''
-    p2p_generation_fifo_sample_quantum = _attributes.AttributeViInt64(1150219)
-    '''Type: int
-
-    Returns how many samples NI-RFSG pulls from the peer-to-peer FIFO per read. You can use this property to determine how many samples to send across the peer-to-peer bus to ensure that no samples are ignored. If you send a number of samples that is not a multiple of this value, the remaining samples are not read from the FIFO during generation. This property is endpoint-based.
-
-    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_is_finite_generation = _attributes.AttributeViBoolean(1150217)
-    '''Type: bool
-
-    Specifies whether peer-to-peer should continuously generate data from the peer-to-peer stream or from only a finite number of samples, according to the p2p_number_of_samples_to_generate property. To use this property, peer-to-peer must be enabled. This property is endpoint-based.
-
-    **Default Value**: False
-
-    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Defined Values**:
-
-    +-------+--------------------------------------------------------------+
-    | Value | Description                                                  |
-    +=======+==============================================================+
-    | True  | Data is generated from only a finite number of samples.      |
-    +-------+--------------------------------------------------------------+
-    | False | Data is continuously generated from the peer-to-peer stream. |
-    +-------+--------------------------------------------------------------+
-    '''
-    p2p_most_space_available_in_endpoint = _attributes.AttributeViInt64(1150126)
-    '''Type: int
-
-    Returns the largest number of samples per channel available in the endpoint since this property was last read. You can use this property to determine how much endpoint space to use as a buffer against bus traffic latencies by reading the property and keeping track of the largest value returned. This property is endpoint-based.
-
-    If you want to minimize the latency for data to move through the endpoint and be generated by the RF signal generator, use the p2p_data_transfer_permission_initial_credits property to grant fewer initial credits than the default of the entire endpoint size.
-
-    **Units**: samples per channel
-
-    **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-    '''
-    p2p_number_of_samples_to_generate = _attributes.AttributeViInt64(1150218)
-    '''Type: int
-
-    Specifies how many samples are generated from the peer-to-peer subsystem when it is enabled. To use this property, peer-to-peer must be enabled and set to finite generation. This property is endpoint-based.
-
-    **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-    '''
-    p2p_space_available_in_endpoint = _attributes.AttributeViInt64(1150125)
-    '''Type: int
-
-    Returns the current space available in the endpoint. You can use this property when priming the endpoint with initial data using the WriteP2pEndpointI16 method to determine how many samples you can write. You also can use this property to characterize the performance and measure the latency of the peer-to-peer stream as data moves across the bus. This property is endpoint-based.
-
-    **Units**: samples per channel
-
-    **Supported Devices:** PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-    **Related Topics**
-
-    `Configuring a Peer-to-Peer Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-    `Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_
     '''
     peak_envelope_power = _attributes.AttributeViReal64(1150011)
     '''Type: float
@@ -3937,10 +3898,6 @@ class _SessionBase(object):
 
     `Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_
 
-    **High-Level Methods**:
-
-    - configure_power_level_type
-
     **Defined Values**:
 
     +------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -3951,24 +3908,24 @@ class _SessionBase(object):
     | PowerLevelType.PEAK    | Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the arb_waveform_software_scaling_factor property. You can use the peak_power_adjustment property in conjunction with the power_level property when the power_level_type property is set to PowerLevelType.PEAK. |
     +------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     '''
-    pulse_modulation_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigDigLevelActiveLevel, 1150307)
-    '''Type: enums.ScriptTrigDigLevelActiveLevel
+    pulse_modulation_active_level = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerDigitalLevelActiveLevel, 1150307)
+    '''Type: enums.ScriptTriggerDigitalLevelActiveLevel
 
     Specifies the active level of the pulse modulation signal when pulse modulation is enabled. To set this property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** ScriptTrigDigLevelActiveLevel.HIGH
+    **Default Value:** ScriptTriggerDigitalLevelActiveLevel.HIGH
 
     **Supported Devices:**  PXIe-5842
 
     **Defined Values**:
 
-    +------------------------------------+---------------+--------------------------------------------------+
-    | Name                               | Value         | Description                                      |
-    +====================================+===============+==================================================+
-    | ScriptTrigDigLevelActiveLevel.HIGH | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
-    +------------------------------------+---------------+--------------------------------------------------+
-    | ScriptTrigDigLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
-    +------------------------------------+---------------+--------------------------------------------------+
+    +-------------------------------------------+---------------+--------------------------------------------------+
+    | Name                                      | Value         | Description                                      |
+    +===========================================+===============+==================================================+
+    | ScriptTriggerDigitalLevelActiveLevel.HIGH | 9000 (0x2328) | Trigger when the digital trigger signal is high. |
+    +-------------------------------------------+---------------+--------------------------------------------------+
+    | ScriptTriggerDigitalLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
+    +-------------------------------------------+---------------+--------------------------------------------------+
     '''
     pulse_modulation_enabled = _attributes.AttributeViBoolean(1250051)
     '''Type: bool
@@ -4242,12 +4199,12 @@ class _SessionBase(object):
 
     Note: The PXI-5670/5671 and PXIe-5672 devices also allow you to drive the PXI 10 MHz backplane clock on PXI chassis *only* using the pxi_chassis_clk10_source property.
     '''
-    ref_pll_bandwidth = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefPllBandwidth, 1150133)
-    '''Type: enums.RefPllBandwidth
+    ref_pll_bandwidth = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferencePllBandwidth, 1150133)
+    '''Type: enums.ReferencePllBandwidth
 
     Configures the loop bandwidth of the reference PLL.
 
-    **Default Value:** RefPllBandwidth.NARROW
+    **Default Value:** ReferencePllBandwidth.NARROW
 
     **Supported Devices:** PXIe-5653
 
@@ -4257,15 +4214,15 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +------------------------+--------------------------------------------------------+
-    | Value                  | Description                                            |
-    +========================+========================================================+
-    | RefPllBandwidth.NARROW | Uses the narrowest loop bandwidth setting for the PLL. |
-    +------------------------+--------------------------------------------------------+
-    | RefPllBandwidth.MEDIUM | Uses the medium loop bandwidth setting for the PLL.    |
-    +------------------------+--------------------------------------------------------+
-    | RefPllBandwidth.WIDE   | Uses the widest loop bandwidth setting for the PLL.    |
-    +------------------------+--------------------------------------------------------+
+    +------------------------------+--------------------------------------------------------+
+    | Value                        | Description                                            |
+    +==============================+========================================================+
+    | ReferencePllBandwidth.NARROW | Uses the narrowest loop bandwidth setting for the PLL. |
+    +------------------------------+--------------------------------------------------------+
+    | ReferencePllBandwidth.MEDIUM | Uses the medium loop bandwidth setting for the PLL.    |
+    +------------------------------+--------------------------------------------------------+
+    | ReferencePllBandwidth.WIDE   | Uses the widest loop bandwidth setting for the PLL.    |
+    +------------------------------+--------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4310,7 +4267,7 @@ class _SessionBase(object):
 
     PXIe-5840/5841: RF blanking does not occur for frequencies below 120MHz.
 
-    For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+    For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     **Default Value:** "" (empty string)
 
@@ -4403,12 +4360,12 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.script_trigger_terminal_name`
     '''
-    script_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTrigType, 1150019)
-    '''Type: enums.ScriptTrigType
+    script_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ScriptTriggerType, 1150019)
+    '''Type: enums.ScriptTriggerType
 
     Specifies the Script Trigger type. Depending upon the value of this property, more properties may be needed to fully configure the trigger. To set this property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** ScriptTrigType.NONE
+    **Default Value:** ScriptTriggerType.NONE
 
     **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -4424,17 +4381,17 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Value                        | Description                                                                                                                                                                                                                                                           |
-    +==============================+=======================================================================================================================================================================================================================================================================+
-    | ScriptTrigType.NONE          | No trigger is configured. Signal generation starts immediately.                                                                                                                                                                                                       |
-    +------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ScriptTrigType.DIGITAL_EDGE  | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the digital_edge_start_trigger_source property, and the active edge is specified with the digital_edge_start_trigger_edge property.              |
-    +------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ScriptTrigType.DIGITAL_LEVEL | The data operation does not start until the digital level is detected. The source of the digital level is specified in the digital_level_script_trigger_source property, and the active level is specified in the digital_level_script_trigger_active_level property. |
-    +------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ScriptTrigType.SOFTWARE      | The data operation does not start until a software trigger occurs. You can create a software event by calling the send_software_edge_trigger method.                                                                                                                  |
-    +------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Value                           | Description                                                                                                                                                                                                                                                           |
+    +=================================+=======================================================================================================================================================================================================================================================================+
+    | ScriptTriggerType.NONE          | No trigger is configured. Signal generation starts immediately.                                                                                                                                                                                                       |
+    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ScriptTriggerType.DIGITAL_EDGE  | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the digital_edge_start_trigger_source property, and the active edge is specified with the digital_edge_start_trigger_edge property.              |
+    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ScriptTriggerType.DIGITAL_LEVEL | The data operation does not start until the digital level is detected. The source of the digital level is specified in the digital_level_script_trigger_source property, and the active level is specified in the digital_level_script_trigger_active_level property. |
+    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ScriptTriggerType.SOFTWARE      | The data operation does not start until a software trigger occurs. You can create a software event by calling the send_software_edge_trigger method.                                                                                                                  |
+    +---------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4664,12 +4621,12 @@ class _SessionBase(object):
 
     - get_terminal_name
     '''
-    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTrigType, 1250458)
-    '''Type: enums.StartTrigType
+    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1250458)
+    '''Type: enums.StartTriggerType
 
     Specifies the Start Trigger type. Depending upon the value of this property, more properties may be needed to fully configure the trigger. To set this property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** StartTrigType.NONE
+    **Default Value:** StartTriggerType.NONE
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -4687,17 +4644,20 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Value                               | Description                                                                                                                                                                                                                                            |
-    +=====================================+========================================================================================================================================================================================================================================================+
-    | StartTrigType.NONE                  | No trigger is configured.                                                                                                                                                                                                                              |
-    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | StartTrigType.DIGITAL_EDGE          | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the digital_edge_start_trigger_source property, and the active edge is specified in the digital_edge_start_trigger_edge property. |
-    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | StartTrigType.SOFTWARE              | The data operation does not start until a software event occurs. You may create a software trigger by calling the send_software_edge_trigger method.                                                                                                   |
-    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | StartTrigType.P2P_ENDPOINT_FULLNESS | The data operation does not start until the endpoint reaches the threshold specified in the p2p_endpoint_fullness_start_trigger_level property.                                                                                                        |
-    +-------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Value                                  | Description                                                                                                                                                                                                                                            |
+    +========================================+========================================================================================================================================================================================================================================================+
+    | StartTriggerType.NONE                  | No trigger is configured.                                                                                                                                                                                                                              |
+    +----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | StartTriggerType.DIGITAL_EDGE          | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the digital_edge_start_trigger_source property, and the active edge is specified in the digital_edge_start_trigger_edge property. |
+    +----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | StartTriggerType.SOFTWARE              | The data operation does not start until a software event occurs. You may create a software trigger by calling the send_software_edge_trigger method.                                                                                                   |
+    +----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | StartTriggerType.P2P_ENDPOINT_FULLNESS | The data operation does not start until the endpoint reaches the threshold specified in the P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL property.                                                                                                        |
+    +----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5163,7 +5123,7 @@ class _SessionBase(object):
     | NIRFSG_VAL_MARKER0, NIRFSG_VAL_MARKER1, NIRFSG_VAL_MARKER2, or NIRFSG_VAL_MARKER3 | RFBlanking.ENABLE    | Error is shown.                                                                                           |
     +-----------------------------------------------------------------------------------+----------------------+-----------------------------------------------------------------------------------------------------------+
 
-    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+    Note: For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5254,7 +5214,7 @@ class _SessionBase(object):
 
     Note: - When you download a waveform using ReadAndDownloadWaveformFromFileTdms method and if waveform_rf_blanking property is enabled, you must set the write_waveform_burst_detection property to WriteWaveformBurstDetection.DISABLE.
 
-     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call ResetWithOptions or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
+     - For PXIe-5830/5831/5832: The RF Blanking reserves a PXI trigger line. If you are calling any Reset or `niRFSA_reset <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_reset.html>`_ on the same device, NI recommends calling it before committing blanking properties. Alternatively, you can call reset_with_options or `niRFSA_ResetWithOptions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/cvinirfsa_resetwithoptions.html>`_. Select **Routes** in the **steps to omit** parameter.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5360,7 +5320,8 @@ class _SessionBase(object):
         self.markers = _RepeatedCapabilities(self, 'marker', repeated_capability_list)
         self.script_triggers = _RepeatedCapabilities(self, 'scripttrigger', repeated_capability_list)
         self.waveform = _RepeatedCapabilities(self, 'waveform::', repeated_capability_list)
-        self.deembedding_port = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.port = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.lo = _RepeatedCapabilities(self, 'LO', repeated_capability_list)
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
@@ -5533,6 +5494,99 @@ class _SessionBase(object):
 
         '''
         self._interpreter.check_attribute_vi_string(self._repeated_capability, attribute, value)
+
+    @ivi_synchronized
+    def configure_digital_edge_script_trigger(self, source, edge):
+        r'''configure_digital_edge_script_trigger
+
+        Configures the specified Script Trigger for digital edge triggering.
+
+        The NI-RFSG device must be in the Configuration state before calling this method.
+
+        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
+
+        `Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_
+
+        Tip:
+        This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+        Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.script_triggers[ ... ].configure_digital_edge_script_trigger`
+
+        To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
+
+        Example: :py:meth:`my_session.configure_digital_edge_script_trigger`
+
+        Args:
+            source (str): Specifies the source terminal for the digital edge Script Trigger. NI-RFSG sets the digital_edge_script_trigger_source property to this value.
+
+            edge (enums.ScriptTriggerDigitalEdgeEdge): Specifies the active edge for the digital edge Script Trigger. NI-RFSG sets the digital_edge_script_trigger_edge property to this value.
+
+        '''
+        if type(edge) is not enums.ScriptTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.ScriptTriggerDigitalEdgeEdge))
+        self._interpreter.configure_digital_edge_script_trigger(self._repeated_capability, source, edge)
+
+    @ivi_synchronized
+    def configure_software_script_trigger(self):
+        r'''configure_software_script_trigger
+
+        Configures the Script Trigger for software triggering.
+
+        Refer to the send_software_edge_trigger method for more information about using the software Script Trigger. The NI-RFSG device must be in the Configuration state before calling this method.
+
+        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
+
+        `Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_
+
+        Tip:
+        This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+        Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.script_triggers[ ... ].configure_software_script_trigger`
+
+        To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
+
+        Example: :py:meth:`my_session.configure_software_script_trigger`
+        '''
+        self._interpreter.configure_software_script_trigger(self._repeated_capability)
+
+    @ivi_synchronized
+    def disable_script_trigger(self):
+        r'''disable_script_trigger
+
+        Configures the device not to wait for the specified Script Trigger.
+
+        Call this method only if you previously configured a Script Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before you call this method.
+
+        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
+
+        Tip:
+        This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+        Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.script_triggers[ ... ].disable_script_trigger`
+
+        To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
+
+        Example: :py:meth:`my_session.disable_script_trigger`
+        '''
+        self._interpreter.disable_script_trigger(self._repeated_capability)
 
     def error_message(self, error_code, error_message):
         r'''error_message
@@ -6791,34 +6845,6 @@ class Session(_SessionBase):
         self._interpreter.configure_deembedding_table_interpolation_spline(port, table_name)
 
     @ivi_synchronized
-    def configure_digital_edge_script_trigger(self, trigger_id, source, edge):
-        r'''configure_digital_edge_script_trigger
-
-        Configures the specified Script Trigger for digital edge triggering.
-
-        The NI-RFSG device must be in the Configuration state before calling this method.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
-
-        `Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger to configure.
-
-            source (str): Specifies the source terminal for the digital edge Script Trigger. NI-RFSG sets the digital_edge_script_trigger_source property to this value.
-
-            edge (enums.ScriptTrigDigEdgeEdge): Specifies the active edge for the digital edge Script Trigger. NI-RFSG sets the digital_edge_script_trigger_edge property to this value.
-
-        '''
-        if type(edge) is not enums.ScriptTrigDigEdgeEdge:
-            raise TypeError('Parameter edge must be of type ' + str(enums.ScriptTrigDigEdgeEdge))
-        self._interpreter.configure_digital_edge_script_trigger(trigger_id, source, edge)
-
-    @ivi_synchronized
     def configure_digital_edge_start_trigger(self, source, edge):
         r'''configure_digital_edge_start_trigger
 
@@ -6839,11 +6865,11 @@ class Session(_SessionBase):
         Args:
             source (str): Specifies the source terminal for the digital edge trigger. NI-RFSG sets the digital_edge_start_trigger_source property to this value.
 
-            edge (enums.StartTrigDigEdgeEdge): Specifies the active edge for the Start Trigger. NI-RFSG sets the digital_edge_start_trigger_edge property to this value.
+            edge (enums.StartTriggerDigitalEdgeEdge): Specifies the active edge for the Start Trigger. NI-RFSG sets the digital_edge_start_trigger_edge property to this value.
 
         '''
-        if type(edge) is not enums.StartTrigDigEdgeEdge:
-            raise TypeError('Parameter edge must be of type ' + str(enums.StartTrigDigEdgeEdge))
+        if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
     @ivi_synchronized
@@ -6890,129 +6916,6 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.configure_digital_modulation_user_defined_waveform(number_of_samples, user_defined_waveform)
-
-    @ivi_synchronized
-    def configure_generation_mode(self, generation_mode):
-        r'''configure_generation_mode
-
-        Configures the NI-RFSG device to generate a continuous sine tone (CW), apply I/Q (vector) modulation to the RF output signal, or generate arbitrary waveforms according to scripts.
-
-        The NI-RFSG device must be in the Configuration state before you call this method.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_
-
-        `Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.
-
-        Args:
-            generation_mode (enums.GenerationMode): Specifies the mode used by NI-RFSG for generating an RF output signal.
-
-                        **Default Value** : GenerationMode.CW
-
-                        **Defined Values** :
-
-                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
-                | Name                        | Value        | Description                                                                                                            |
-                +=============================+==============+========================================================================================================================+
-                | GenerationMode.CW           | 1000 (0x3e8) | Configures the RF signal generator to generate a CW signal.                                                            |
-                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
-                | GenerationMode.ARB_WAVEFORM | 1001 (0x3e9) | Configures the RF signal generator to generate the arbitrary waveform specified by the arb_selected_waveform property. |
-                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
-                | GenerationMode.SCRIPT       | 1002 (0x3ea) | Configures the RF signal generator to generate arbitrary waveforms as directed by the selected_script property.        |
-                +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
-
-                Note: - For the PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, only GenerationMode.CW is supported.
-
-                 - If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.
-
-        '''
-        if type(generation_mode) is not enums.GenerationMode:
-            raise TypeError('Parameter generation_mode must be of type ' + str(enums.GenerationMode))
-        self._interpreter.configure_generation_mode(generation_mode)
-
-    @ivi_synchronized
-    def configure_output_enabled(self, output_enabled):
-        r'''configure_output_enabled
-
-        Enables or disables signal output.
-
-        Setting output_enabled to False while in the Generation state attenuates the generated signal so that no signal is output.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Output Enabled <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/outputenable.html>`_
-
-        `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_
-
-        `RF List Mode <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/rf_list_mode_overview.html>`_
-
-        Args:
-            output_enabled (bool): Specifies whether you want to enable or disable the output.
-
-        '''
-        self._interpreter.configure_output_enabled(output_enabled)
-
-    @ivi_synchronized
-    def configure_p2p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):
-        r'''configure_p2p_endpoint_fullness_start_trigger
-
-        Configures the Start Trigger to detect peer-to-peer endpoint fullness.
-
-        Generation begins when the number of samples in the peer-to-peer endpoint reaches the threshold specified by the P2P_ENDPOINT_FULLNESS_LEVEL parameter. The NI-RFSG device must be in the Configuration state before calling this method.
-
-        **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_
-
-        Note: Due to an additional internal FIFO in the RF signal generator, the writer peer actually writes 2,304 bytes more than the quantity of data specified by this method to satisfy the trigger level.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Args:
-            p2p_endpoint_fullness_level (int): Specifies the quantity of data in the FIFO endpoint that asserts the trigger. Units are samples per channel. The default value is -1, which allows NI-RFSG to select the appropriate fullness value.
-
-        '''
-        self._interpreter.configure_p2p_endpoint_fullness_start_trigger(p2p_endpoint_fullness_level)
-
-    @ivi_synchronized
-    def configure_power_level_type(self, power_level_type):
-        r'''configure_power_level_type
-
-        Specifies the way the driver interprets the power_level property.
-
-        In average power mode, NI-RFSG automatically scales waveform data to use the maximum dynamic range. In peak power mode, waveforms are scaled according to the arb_waveform_software_scaling_factor property.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_
-
-        `Optimizing for Low Power Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/optimizing_for_low_power_generation.html>`_
-
-        Args:
-            power_level_type (enums.PowerLevelType): Specifies the way the driver interprets the value of the power_level property. NI-RFSG sets the power_level_type property to this value.
-
-                +-------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Name                    | Value | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-                +=========================+=======+========================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================+
-                | Average Power (default) | 7000  | Indicates the desired power averaged in time. The driver maximizes the dynamic range by scaling the I/Q waveform so that its peak magnitude is equal to one. If you write more than one waveform, NI-RFSG scales each waveform without preserving the power level ratio between the waveforms. This value is not valid for the PXIe-5820.                                                                                                                                                                                                                                              |
-                +-------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-                | Peak Power              | 7001  | Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires the magnitude of the I/Q waveform to be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the arb_waveform_software_scaling_factor property. |
-                +-------------------------+-------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        '''
-        if type(power_level_type) is not enums.PowerLevelType:
-            raise TypeError('Parameter power_level_type must be of type ' + str(enums.PowerLevelType))
-        self._interpreter.configure_power_level_type(power_level_type)
 
     @ivi_synchronized
     def configure_pxi_chassis_clk10(self, pxi_clk10_source):
@@ -7112,48 +7015,6 @@ class Session(_SessionBase):
         self._interpreter.configure_ref_clock(ref_clock_source, ref_clock_rate)
 
     @ivi_synchronized
-    def configure_signal_bandwidth(self, signal_bandwidth):
-        r'''configure_signal_bandwidth
-
-        Configures the signal bandwidth of the arbitrary waveform.
-
-        The NI-RFSG device must be in the Configuration state before you call this method.
-
-        NI-RFSG defines *signal bandwidth* as twice the maximum baseband signal deviation from 0 Hz. Usually, the baseband signal center frequency is 0Hz. In such cases, the signal bandwidth is simply the baseband signal minimum frequency subtracted from its maximum frequency, or *f* <sub>max</sub> minus *f* <sub>min</sub>. NI-RFSG uses this value to optimally configure the center frequency of the upconverter to help minimize phase noise. The generated signal is not filtered to achieve the set bandwidth. However, specifying a bandwidth smaller than the actual bandwidth of the signal could potentially result in spectral distortion.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note: Based on your signal bandwidth, NI-RFSG decides whether to configure the upconverter center frequency on the PXI-5670/5671 or PXIe-5672 in increments of 1MHz or 5MHz. Failure to configure signal bandwidth may result in the signal being placed outside the upconverter passband.
-
-        Args:
-            signal_bandwidth (float): Specifies the signal bandwidth used by NI-RFSG to generate an RF output signal. NI-RFSG sets the signal_bandwidth property to this value.
-
-        '''
-        self._interpreter.configure_signal_bandwidth(signal_bandwidth)
-
-    @ivi_synchronized
-    def configure_software_script_trigger(self, trigger_id):
-        r'''configure_software_script_trigger
-
-        Configures the Script Trigger for software triggering.
-
-        Refer to the send_software_edge_trigger method for more information about using the software Script Trigger. The NI-RFSG device must be in the Configuration state before calling this method.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
-
-        `Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger to configure.
-
-        '''
-        self._interpreter.configure_software_script_trigger(trigger_id)
-
-    @ivi_synchronized
     def configure_software_start_trigger(self):
         r'''configure_software_start_trigger
 
@@ -7244,26 +7105,6 @@ class Session(_SessionBase):
         **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXI-5670/5671, PXIe-5672/5673/5673E
         '''
         self._interpreter.disable()
-
-    @ivi_synchronized
-    def disable_script_trigger(self, trigger_id):
-        r'''disable_script_trigger
-
-        Configures the device not to wait for the specified Script Trigger.
-
-        Call this method only if you previously configured a Script Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before you call this method.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
-
-        Args:
-            trigger_id (str): Specifies the Script trigger to configure.
-
-        '''
-        self._interpreter.disable_script_trigger(trigger_id)
 
     @ivi_synchronized
     def disable_start_trigger(self):
@@ -7625,31 +7466,6 @@ class Session(_SessionBase):
         return temperature
 
     @ivi_synchronized
-    def get_stream_endpoint_handle(self, stream_endpoint):
-        r'''get_stream_endpoint_handle
-
-        Returns a reader endpoint handle that can be used with NI-P2P to configure a peer-to-peer stream with an RF signal generator endpoint.
-
-        **Supported Devices** : PXIe-5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        **Related Topics**
-
-        `Configuring a Peer-to-Peer Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/configuring_a_p2p_stream.html>`_
-
-        `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-        Args:
-            stream_endpoint (str): Specifies the stream endpoint FIFO to configure.
-
-
-        Returns:
-            reader_handle (int): Returns the reader endpoint handle that is used with NI-P2P to create a stream with the NI-RFSG device as an endpoint.
-
-        '''
-        reader_handle = self._interpreter.get_stream_endpoint_handle(stream_endpoint)
-        return reader_handle
-
-    @ivi_synchronized
     def get_terminal_name(self, signal, signal_identifier):
         r'''get_terminal_name
 
@@ -7969,6 +7785,52 @@ class Session(_SessionBase):
         self._interpreter.reset_with_defaults()
 
     @ivi_synchronized
+    def reset_with_options(self, steps_to_omit):
+        r'''reset_with_options
+
+        Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
+
+        By default, this method exhibits the same behavior as Reset. You can specify steps to omit using the steps to omit parameter. For example, if you specify ResetWithOptionsStepsToOmit.ROUTES for the STEPS_TO_OMIT parameter, this method does not release signal routes during the reset process.
+
+        When routes of signals between two devices are released, they are released regardless of which device created the route.
+
+        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this method instead of Reset, with STEPS_TO_OMIT set to ResetWithOptionsStepsToOmit.ROUTES.
+
+        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>``Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Args:
+            steps_to_omit (Bitwise combination of enums.ResetWithOptionsStepsToOmit flags): Specifies a list of steps to skip during the reset process. The default value is ResetWithOptionsStepsToOmit.NONE, which specifies that no step is omitted during reset. **Defined Values** :
+
+                +------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                           | Value   | Description                                                                                                                                                                                                |
+                +================================================+=========+============================================================================================================================================================================================================+
+                | ResetWithOptionsStepsToOmit.NONE               | 0 (0x0) | No step is omitted during reset.                                                                                                                                                                           |
+                +------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ResetWithOptionsStepsToOmit.WAVEFORMS          | 1 (0x1) | Omits clearing waveforms.                                                                                                                                                                                  |
+                +------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ResetWithOptionsStepsToOmit.SCRIPTS            | 2 (0x2) | Omits clearing scripts.                                                                                                                                                                                    |
+                +------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ResetWithOptionsStepsToOmit.ROUTES             | 4 (0x4) | Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset. |
+                +------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+                | ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES | 8 (0x8) | Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.                                                                                                              |
+                +------------------------------------------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+                Note: ResetWithOptionsStepsToOmit.ROUTES is not supported in external calibration or alignment sessions.
+                You can combine multiple enums.ResetWithOptionsStepsToOmit flags using the bitwise OR (|) operator.
+
+        '''
+        if type(steps_to_omit) is not enums.ResetWithOptionsStepsToOmit:
+            raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.ResetWithOptionsStepsToOmit))
+        self._interpreter.reset_with_options(steps_to_omit)
+
+    @ivi_synchronized
     def revision_query(self):
         r'''revision_query
 
@@ -7993,7 +7855,7 @@ class Session(_SessionBase):
     def select_arb_waveform(self, name):
         r'''select_arb_waveform
 
-        Specifies the waveform that is generated upon a call to the _initiate method when the **generationMode** parameter of the configure_generation_mode method is set to GenerationMode.ARB_WAVEFORM.
+        Specifies the waveform that is generated upon a call to the _initiate method when the **generationMode** parameter of the ConfigureGenerationMode method is set to GenerationMode.ARB_WAVEFORM.
 
         You must specify a waveform using the NAME parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this method.
 
@@ -8049,7 +7911,7 @@ class Session(_SessionBase):
          - If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate.
 
         Args:
-            steps_to_omit (enums.SelfCalibrateRangeStepsToOmit): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted.
+            steps_to_omit (Bitwise combination of enums.SelfCalibrateRangeStepsToOmit flags): Specifies which calibration steps to skip during the self-calibration process. The default value is an empty array, which indicates that no calibration steps are omitted.
 
                 **Default Value** : SelfCalibrateRangeStepsToOmit.OMIT_NONE
 
@@ -8070,6 +7932,8 @@ class Session(_SessionBase):
                 +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
                 | SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT | 16 (0x10) | Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.    |
                 +-----------------------------------------------------+-----------+---------------------------------------------------------------------------------------------------------------------+
+
+                Note: You can combine multiple enums.SelfCalibrateRangeStepsToOmit flags using the bitwise OR (|) operator.
 
             min_frequency (float): Specifies the minimum frequency to calibrate.
 
@@ -8337,42 +8201,12 @@ class Session(_SessionBase):
         return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
     @ivi_synchronized
-    def write_p2p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):
-        r'''write_p2p_endpoint_i16
-
-        Writes an array of 16-bit integer data to the peer-to-peer endpoint.
-
-        Use this method to write initial data from the host to the endpoint before starting generation to avoid an underflow when you start the generation.
-
-        **Supported Devices** : PXIe-5673E
-
-        **Related Topics**
-
-        `Peer-to-Peer Data Streaming <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_streaming.html>`_--Refer to this topic for more information about configuring a stream.
-
-        `Configuring Flow Control <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_flow_control.html>`_
-
-        `Starting Peer-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_starting_generation.html>`_
-
-        `Reconfiguring a Stream <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_reconfiguring_stream.html>`_
-
-        Args:
-            stream_endpoint (str): Specifies the stream endpoint FIFO to configure.
-
-            number_of_samples (int): Specifies the number of samples to write into the endpoint FIFO.
-
-            endpoint_data (array.array("h")): Specifies the array of data to write into the endpoint FIFO. The binary data is left-justified.
-
-        '''
-        self._interpreter.write_p2p_endpoint_i16(stream_endpoint, number_of_samples, endpoint_data)
-
-    @ivi_synchronized
     def write_script(self, script):
         r'''write_script
 
         Writes a script to the device to control waveform generation in Script mode.
 
-        First, configure your device for Script mode by calling the configure_generation_mode method. The NI-RFSG device must be in the Configuration state before calling the write_script method.
+        First, configure your device for Script mode by calling the ConfigureGenerationMode method. The NI-RFSG device must be in the Configuration state before calling the write_script method.
 
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8415,7 +8249,7 @@ class Session(_SessionBase):
 
         Generally, calling this method instead of the reset_device method is acceptable. The Reset method executes faster than the reset_device method.
 
-        To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the ResetWithOptions method, with **stepsToOmit** set to ResetWithOptionsStepsToOmit.ROUTES .
+        To avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to ResetWithOptionsStepsToOmit.ROUTES .
 
         **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 

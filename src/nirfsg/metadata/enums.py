@@ -99,7 +99,7 @@ enums = {
             }
         ]
     },
-    'AnlgModFmBand': {
+    'AnalogModulationFmBand': {
         'codegen_method': 'public',
         'values': [
             {
@@ -118,7 +118,7 @@ enums = {
             }
         ]
     },
-    'AnlgModFmNarrowbandIntegrator': {
+    'AnalogModulationFmNarrowbandIntegrator': {
         'codegen_method': 'public',
         'values': [
             {
@@ -147,7 +147,7 @@ enums = {
             }
         ]
     },
-    'AnlgModPmMode': {
+    'AnalogModulationPmMode': {
         'codegen_method': 'public',
         'values': [
             {
@@ -166,7 +166,7 @@ enums = {
             }
         ]
     },
-    'AnlgModType': {
+    'AnalogModulationType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -199,7 +199,7 @@ enums = {
             }
         ]
     },
-    'AnlgModWfmType': {
+    'AnalogModulationWaveformType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -325,64 +325,6 @@ enums = {
             }
         ]
     },
-    'ConfigListTrigDigEdgeEdge': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level.'
-                },
-                'name': 'NIRFSG_VAL_RISING_EDGE',
-                'value': 0
-            }
-        ]
-    },
-    'ConfigListTrigType': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Generation starts immediately, but the list does not advance.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute, and the active edge is always rising.'
-                },
-                'name': 'NIRFSG_VAL_DIGITAL_EDGE',
-                'value': 1
-            }
-        ]
-    },
-    'ConfigurationListRepeat': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'NI-RFSG runs the configuration list continuously.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_REPEAT_CONTINUOUS',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG runs the configuration list only once.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_REPEAT_SINGLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            }
-        ]
-    },
     'DacDecoderMode': {
         'values': [
             {
@@ -433,7 +375,7 @@ enums = {
             }
         ]
     },
-    'DigModType': {
+    'DigitalModulationType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -466,7 +408,7 @@ enums = {
             }
         ]
     },
-    'DigModWfmType': {
+    'DigitalModulationWaveformType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -696,14 +638,14 @@ enums = {
                 'documentation': {
                     'description': 'yet to be defined'
                 },
-                'name': 'NIRFSG_VAL_MANUAL',
+                'name': 'NIRFSG_VAL_5.5GHz_HIGH_PASS',
                 'value': 0
             },
             {
                 'documentation': {
                     'description': 'yet to be defined'
                 },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
+                'name': 'NIRFSG_VAL_5.5GHz_LOW_PASS',
                 'value': 1
             }
         ]
@@ -719,18 +661,10 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'The local oscillator signal is  not present at the LO OUT front panel connector..'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
                 'value': 1
             }
         ]
@@ -746,18 +680,10 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'Allow NI-RFSA to control the NI-RFSG local oscillator export.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
                 'value': 1
             }
         ]
@@ -785,18 +711,10 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'Enables fractional mode for the LO PLL.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
                 'value': 1
             }
         ]
@@ -1275,7 +1193,7 @@ enums = {
             }
         ]
     },
-    'RefPllBandwidth': {
+    'ReferencePllBandwidth': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1371,6 +1289,7 @@ enums = {
     },
     'ResetWithOptionsStepsToOmit': {
         'codegen_method': 'public',
+        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -1409,7 +1328,7 @@ enums = {
             }
         ]
     },
-    'ScriptTrigDigEdgeEdge': {
+    'ScriptTriggerDigitalEdgeEdge': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1428,7 +1347,7 @@ enums = {
             }
         ]
     },
-    'ScriptTrigDigLevelActiveLevel': {
+    'ScriptTriggerDigitalLevelActiveLevel': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1447,7 +1366,7 @@ enums = {
             }
         ]
     },
-    'ScriptTrigType': {
+    'ScriptTriggerType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1482,6 +1401,7 @@ enums = {
     },
     'SelfCalibrateRangeStepsToOmit': {
         'codegen_method': 'public',
+        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -1626,7 +1546,7 @@ enums = {
             }
         ]
     },
-    'StartTrigDigEdgeEdge': {
+    'StartTriggerDigitalEdgeEdge': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1645,7 +1565,7 @@ enums = {
             }
         ]
     },
-    'StartTrigType': {
+    'StartTriggerType': {
         'codegen_method': 'public',
         'values': [
             {
