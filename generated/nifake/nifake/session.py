@@ -959,6 +959,25 @@ class Session(_SessionBase):
             raise TypeError('Parameter flag must be of type ' + str(enums.IntFlagEnum))
         self._interpreter.function_with_intflag_parameter(flag)
 
+    def function_with_numpy3d_array_input_parameter(self, frequency):
+        r'''function_with_numpy3d_array_input_parameter
+
+        Method that takes a 3D numpy array as an input parameter.
+
+        Args:
+            frequency (numpy.array(dtype=numpy.complex128)): Specifies the 3D array of complex numbers to write.
+
+        '''
+        import numpy
+
+        if type(frequency) is not numpy.ndarray:
+            raise TypeError('frequency must be {0}, is {1}'.format(numpy.ndarray, type(frequency)))
+        if numpy.isfortran(frequency) is True:
+            raise TypeError('frequency must be in C-order')
+        if frequency.ndim != 3:
+            raise TypeError('frequency must be numpy.ndarray of dimension=3, is ' + str(frequency.ndim))
+        self._interpreter.function_with_numpy3d_array_input_parameter(frequency)
+
     @ivi_synchronized
     def get_a_boolean(self):
         r'''get_a_boolean

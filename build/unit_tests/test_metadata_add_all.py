@@ -260,6 +260,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'name_ctype',
@@ -294,6 +295,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'name',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'pin_data_buffer_size_ctype',
@@ -331,6 +333,7 @@ functions_expected = {
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'pin_data_buffer_size',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'python_code_input_ctype',
@@ -368,6 +371,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'python_code_input',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'None if actual_num_pin_data_ctype is None else (ctypes.pointer(actual_num_pin_data_ctype))',
@@ -405,6 +409,7 @@ functions_expected = {
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'actual_num_pin_data',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'expected_pin_states_ctype',
@@ -444,6 +449,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'expected_pin_states',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'custom_type_input_ctype',
@@ -481,6 +487,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_input',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'None if custom_type_output_ctype is None else (ctypes.pointer(custom_type_output_ctype))',
@@ -518,6 +525,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_output',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'custom_type_without_struct_prefix_input_ctype',
@@ -555,6 +563,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_input',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'None if custom_type_without_struct_prefix_output_ctype is None else (ctypes.pointer(custom_type_without_struct_prefix_output_ctype))',
@@ -592,6 +601,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'custom_type_without_struct_prefix_output',
                 'complex_type': None,
+                'multidimension': 0,
             },
         ],
         'python_name': 'make_a_foo',
@@ -640,6 +650,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'vi',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'status_ctype',
@@ -677,6 +688,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'status',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'data_buffer_size_ctype',
@@ -714,6 +726,7 @@ functions_expected = {
                 'use_in_python_api': False,
                 'python_name_or_default_for_init': 'data_buffer_size',
                 'complex_type': None,
+                'multidimension': 0,
             },
             {
                 'ctypes_method_call_snippet': 'data_ctype',
@@ -752,6 +765,7 @@ functions_expected = {
                 'use_in_python_api': True,
                 'python_name_or_default_for_init': 'data',
                 'complex_type': None,
+                'multidimension': 0,
             },
         ],
         'documentation': {

@@ -132,6 +132,12 @@ def _add_complex_type(parameter):
         parameter['complex_type'] = None
 
 
+def _add_multidimension(parameter):
+    '''Adds a multidimension parameter to the metadata for 3d arrays'''
+    if 'multidimension' not in parameter:
+        parameter['multidimension'] = 0
+
+
 def _add_numpy_info(parameter, parameters, config):
     '''Adds the following numpy-related information:
 
@@ -457,6 +463,7 @@ def add_all_function_metadata(functions, config):
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
             _add_complex_type(p)
+            _add_multidimension(p)
             _add_numpy_info(p, functions[f]['parameters'], config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])

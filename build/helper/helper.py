@@ -26,7 +26,7 @@ _type_map = {
     'ViChar[]':           { 'array_type': None,     'python_type': 'str',   'numpy_type': None,         },  # noqa: E201, E202, E241
     'ViBoolean':          { 'array_type': None,     'python_type': 'bool',  'numpy_type': None,         },  # noqa: E201, E202, E241
     'ViRsrc':             { 'array_type': None,     'python_type': 'str',   'numpy_type': 'bool_',      },  # noqa: E201, E202, E241
-    'NIComplexNumber':    { 'array_type': None,     'python_type': None,    'numpy_type': 'complex128', },  # noqa: E201, E202, E241
+    'NIComplexNumber':    { 'array_type': 'P',      'python_type': None,    'numpy_type': 'complex128', },  # noqa: E201, E202, E241
     'NIComplexNumberF32': { 'array_type': None,     'python_type': None,    'numpy_type': 'complex64',  },  # noqa: E201, E202, E241
     'NIComplexI16':       { 'array_type': None,     'python_type': None,    'numpy_type': 'int16',      },  # noqa: E201, E202, E241
 }

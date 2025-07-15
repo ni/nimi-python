@@ -32,8 +32,12 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         import numpy
         if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
             complex_dtype = numpy.dtype(library_type)
-            structured_array = value.view(complex_dtype)
-            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+            if value.ndim > 1:
+                flattened_array = value.ravel().view(complex_dtype)
+                return flattened_array.ctypes.data_as(ctypes.POINTER(library_type))
+            else:
+                structured_array = value.view(complex_dtype)
+                return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
         else:
             return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
@@ -222,6 +226,13 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         flag_ctype = _visatype.ViUInt64(flag.value)  # case S130
         error_code = self._library.niFake_FunctionWithIntflagParameter(vi_ctype, flag_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def function_with_numpy3d_array_input_parameter(self, frequency):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        frequency_ctype = _get_ctypes_pointer_for_buffer(value=frequency, library_type=_complextype.NIComplexNumber)  # case B510
+        error_code = self._library.niFake_FunctionWithNumpy3dArrayInputParameter(vi_ctype, frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

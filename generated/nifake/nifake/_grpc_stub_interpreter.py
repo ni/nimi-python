@@ -150,6 +150,9 @@ class GrpcStubInterpreter(object):
             grpc_types.FunctionWithIntflagParameterRequest(vi=self._vi, flag=flag.value),
         )
 
+    def function_with_numpy3d_array_input_parameter(self, frequency):  # noqa: N802
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802
         raise NotImplementedError('function_with_repeated_capability_type is not supported over gRPC')
 

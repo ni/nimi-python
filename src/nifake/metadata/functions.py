@@ -2990,6 +2990,49 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'FunctionWithNumpy3dArrayInputParameter': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Function that takes a 3D numpy array as an input parameter.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_3d_array_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the 3D array of complex numbers to write. '
+                },
+                'name': 'frequency',
+                'type': 'NIComplexNumber[]',
+                'numpy': True,
+                'use_numpy_array': True,
+                'use_in_python_api': True,
+                'multidimension': 3
+            },
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
     'close': {
         'codegen_method': 'private',
         'documentation': {
