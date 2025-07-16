@@ -740,7 +740,7 @@ attributes = {
         'lv_property': 'RF:LO Out Enabled',
         'name': 'LO_OUT_ENABLED',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViBoolean'
     },
@@ -864,7 +864,7 @@ attributes = {
         'lv_property': 'Device Characteristics:Device Temperature (Degrees C)',
         'name': 'DEVICE_TEMPERATURE',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViReal64'
     },
@@ -1259,7 +1259,7 @@ attributes = {
         'lv_property': 'RF:Loop Bandwidth',
         'name': 'LOOP_BANDWIDTH',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViInt32'
     },
@@ -2233,7 +2233,7 @@ attributes = {
         'lv_property': 'RF:LO Out Power (dBm)',
         'name': 'LO_OUT_POWER',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViReal64'
     },
@@ -2247,7 +2247,7 @@ attributes = {
         'lv_property': 'RF:LO In Power (dBm)',
         'name': 'LO_IN_POWER',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViReal64'
     },
@@ -2855,7 +2855,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Terminal Configuration',
         'name': 'IQ_OUT_PORT_TERMINAL_CONFIGURATION',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViInt32'
     },
@@ -2869,7 +2869,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Level',
         'name': 'IQ_OUT_PORT_LEVEL',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViReal64'
     },
@@ -2883,7 +2883,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Common Mode Offset',
         'name': 'IQ_OUT_PORT_COMMON_MODE_OFFSET',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViReal64'
     },
@@ -2897,7 +2897,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Offset',
         'name': 'IQ_OUT_PORT_OFFSET',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViReal64'
     },
@@ -2937,7 +2937,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Source',
         'name': 'LO_SOURCE',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViString'
     },
@@ -3017,7 +3017,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO PLL Fractional Mode Enabled',
         'name': 'LO_PLL_FRACTIONAL_MODE_ENABLED',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViInt32'
     },
@@ -3181,7 +3181,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Load Impedance',
         'name': 'IQ_OUT_PORT_LOAD_IMPEDANCE',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViReal64'
     },
@@ -3531,7 +3531,7 @@ attributes = {
         'lv_property': 'RF:LO Frequency (Hz)',
         'name': 'LO_FREQUENCY',
         'supported_rep_caps': [
-            'lo'
+            'lo_channels'
         ],
         'type': 'ViReal64'
     },
@@ -3912,11 +3912,11 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'DeembeddingTypeAttrVals',
+        'enum': 'DeembeddingType',
         'lv_property': 'De-embedding:Type',
         'name': 'DEEMBEDDING_TYPE',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViInt32'
     },
@@ -3929,7 +3929,7 @@ attributes = {
         'lv_property': 'De-embedding:Selected Table',
         'name': 'DEEMBEDDING_SELECTED_TABLE',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViString'
     },
@@ -3962,7 +3962,7 @@ attributes = {
         'lv_property': 'Arb:Waveform Attributes:Waveform IQ Rate (S/s)',
         'name': 'WAVEFORM_IQ_RATE',
         'supported_rep_caps': [
-            'waveform'
+            'waveforms'
         ],
         'type': 'ViReal64'
     },
@@ -3975,7 +3975,7 @@ attributes = {
         'lv_property': 'Arb:Waveform Attributes:Waveform Signal Bandwidth (Hz)',
         'name': 'WAVEFORM_SIGNAL_BANDWIDTH',
         'supported_rep_caps': [
-            'waveform'
+            'waveforms'
         ],
         'type': 'ViReal64'
     },
@@ -3988,7 +3988,7 @@ attributes = {
         'lv_property': 'Arb:Waveform Attributes:Waveform Runtime Scaling',
         'name': 'WAVEFORM_RUNTIME_SCALING',
         'supported_rep_caps': [
-            'waveform'
+            'waveforms'
         ],
         'type': 'ViReal64'
     },
@@ -4001,7 +4001,7 @@ attributes = {
         'lv_property': 'Arb:Waveform Attributes:Waveform PAPR (dB)',
         'name': 'WAVEFORM_PAPR',
         'supported_rep_caps': [
-            'waveform'
+            'waveforms'
         ],
         'type': 'ViReal64'
     },
@@ -4114,7 +4114,7 @@ attributes = {
         'lv_property': 'Arb:Waveform Attributes:Waveform RF Blanking',
         'name': 'WAVEFORM_RF_BLANKING',
         'supported_rep_caps': [
-            'waveform'
+            'waveforms'
         ],
         'type': 'ViInt32'
     },
@@ -4127,7 +4127,7 @@ attributes = {
         'lv_property': 'De-embedding:Compensation Gain',
         'name': 'DEEMBEDDING_COMPENSATION_GAIN',
         'supported_rep_caps': [
-            'port'
+            'ports'
         ],
         'type': 'ViReal64'
     },
@@ -4257,7 +4257,7 @@ attributes = {
         'lv_property': 'Arb:Waveform Attributes:Waveform Size',
         'name': 'WAVEFORM_WAVEFORM_SIZE',
         'supported_rep_caps': [
-            'waveform'
+            'waveforms'
         ],
         'type': 'ViInt32'
     },
@@ -4696,10 +4696,6 @@ attributes = {
                 [
                     'NIRFSG_VAL_SOFTWARE',
                     'The data operation does not start until a software event occurs. You may create a software trigger by calling the niRFSG_SendSoftwareEdgeTrigger function.'
-                ],
-                [
-                    'NIRFSG_VAL_P2P_ENDPOINT_FULLNESS',
-                    'The data operation does not start until the endpoint reaches the threshold specified in the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL attribute.'
                 ]
             ],
             'table_header': [

@@ -349,7 +349,7 @@ enums = {
             }
         ]
     },
-    'DeembeddingTypeAttrVals': {
+    'DeembeddingType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1588,13 +1588,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'The data operation does not start until the endpoint reaches the threshold specified in the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL attribute.'
-                },
-                'name': 'NIRFSG_VAL_P2P_ENDPOINT_FULLNESS',
-                'value': 3
             }
         ]
     },
@@ -1713,10 +1706,6 @@ enums = {
             {
                 'name': 'NIRFSG_VAL_WGEN',
                 'value': 27000
-            },
-            {
-                'name': 'NIRFSG_VAL_P2P',
-                'value': 27001
             },
             {
                 'name': 'NIRFSG_VAL_USER',

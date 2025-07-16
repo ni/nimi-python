@@ -321,12 +321,12 @@ AutomaticThermalCorrection
 
 
 
-DeembeddingTypeAttrVals
------------------------
+DeembeddingType
+---------------
 
-.. py:class:: DeembeddingTypeAttrVals
+.. py:class:: DeembeddingType
 
-    .. py:attribute:: DeembeddingTypeAttrVals.NONE
+    .. py:attribute:: DeembeddingType.NONE
 
 
 
@@ -336,7 +336,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.SCALAR
+    .. py:attribute:: DeembeddingType.SCALAR
 
 
 
@@ -346,7 +346,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.VECTOR
+    .. py:attribute:: DeembeddingType.VECTOR
 
 
 
@@ -1846,16 +1846,6 @@ StartTriggerType
 
 
         The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.
-
-        
-
-
-
-    .. py:attribute:: StartTriggerType.P2P_ENDPOINT_FULLNESS
-
-
-
-        The data operation does not start until the endpoint reaches the threshold specified in the :py:attr:`nirfsg.Session.P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL` property.
 
         
 

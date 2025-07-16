@@ -169,18 +169,18 @@ class SystemTests:
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
         requested_waveform_iq_rate = 1e6
-        rfsg_device_session.waveform['mywaveform'].waveform_iq_rate = requested_waveform_iq_rate
-        assert rfsg_device_session.waveform['mywaveform'].waveform_iq_rate == requested_waveform_iq_rate
+        rfsg_device_session.waveforms['mywaveform'].waveform_iq_rate = requested_waveform_iq_rate
+        assert rfsg_device_session.waveforms['mywaveform'].waveform_iq_rate == requested_waveform_iq_rate
 
     def test_port_rep_cap(self, simulated_5831_device_session):
-        requested_deembedding_type = nirfsg.DeembeddingTypeAttrVals.SCALAR
-        simulated_5831_device_session.port['if1'].deembedding_type = requested_deembedding_type
-        assert simulated_5831_device_session.port['if1'].deembedding_type == requested_deembedding_type
+        requested_deembedding_type = nirfsg.DeembeddingType.SCALAR
+        simulated_5831_device_session.ports['if1'].deembedding_type = requested_deembedding_type
+        assert simulated_5831_device_session.ports['if1'].deembedding_type == requested_deembedding_type
 
     def test_lo_rep_cap(self, simulated_5831_device_session):
         requested_lo_source = "SG_SA_Shared"
-        simulated_5831_device_session.lo[2].lo_source = requested_lo_source
-        assert simulated_5831_device_session.lo[2].lo_source == requested_lo_source
+        simulated_5831_device_session.lo_channels[2].lo_source = requested_lo_source
+        assert simulated_5831_device_session.lo_channels[2].lo_source == requested_lo_source
 
 # Configuration methods related tests
     def test_configure_rf(self, rfsg_device_session):
@@ -279,10 +279,10 @@ class SystemTests:
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         startlocations = [1, 100, 200]
         stoplocations = [50, 175, 750]
-        rfsg_device_session.waveform['mywaveform1'].set_waveform_burst_start_locations(startlocations)
-        rfsg_device_session.waveform['mywaveform1'].set_waveform_burst_stop_locations(stoplocations)
-        startlocations_out = rfsg_device_session.waveform['mywaveform1'].get_waveform_burst_start_locations()
-        stoplocations_out = rfsg_device_session.waveform['mywaveform1'].get_waveform_burst_stop_locations()
+        rfsg_device_session.waveforms['mywaveform1'].set_waveform_burst_start_locations(startlocations)
+        rfsg_device_session.waveforms['mywaveform1'].set_waveform_burst_stop_locations(stoplocations)
+        startlocations_out = rfsg_device_session.waveforms['mywaveform1'].get_waveform_burst_start_locations()
+        stoplocations_out = rfsg_device_session.waveforms['mywaveform1'].get_waveform_burst_stop_locations()
         assert startlocations_out == startlocations
         assert stoplocations_out == stoplocations
 
@@ -291,8 +291,8 @@ class SystemTests:
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
         markerlocations = [1, 100, 200]
-        rfsg_device_session.waveform['mywaveform1'].markers[0].set_waveform_marker_event_locations(markerlocations)
-        markerlocations_out = rfsg_device_session.waveform['mywaveform1'].markers[0].get_waveform_marker_event_locations()
+        rfsg_device_session.waveforms['mywaveform1'].markers[0].set_waveform_marker_event_locations(markerlocations)
+        markerlocations_out = rfsg_device_session.waveforms['mywaveform1'].markers[0].get_waveform_marker_event_locations()
         assert markerlocations_out == markerlocations
 
     def test_write_script(self, rfsg_device_session):
@@ -540,11 +540,11 @@ class SystemTests:
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2)
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1)
         rfsg_device_session.configure_deembedding_table_interpolation_linear('', 'myTable1', nirfsg.Format.MAGNITUDE_AND_PHASE)
-        rfsg_device_session.port[''].deembedding_selected_table = 'myTable1'
+        rfsg_device_session.ports[''].deembedding_selected_table = 'myTable1'
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
         rfsg_device_session.delete_deembedding_table('', 'myTable1')
-        rfsg_device_session.port[''].deembedding_selected_table = 'myTable2'
+        rfsg_device_session.ports[''].deembedding_selected_table = 'myTable2'
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
         rfsg_device_session.delete_all_deembedding_tables()
@@ -554,7 +554,7 @@ class SystemTests:
         except nirfsg.Error as e:
             assert e.code == -1074097772
             assert 'The specified de-embedding table cannot be found' in e.description
-        rfsg_device_session.port[''].deembedding_selected_table = ''
+        rfsg_device_session.ports[''].deembedding_selected_table = ''
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
 

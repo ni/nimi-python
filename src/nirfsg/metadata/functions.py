@@ -486,7 +486,7 @@ functions = {
     'CheckGenerationStatus': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nChecks the status of the generation.\n\nCall this function to check for any errors that might occur during the signal generation or to check whether the device has finished generating.\n\n**Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_\n\n`Stopping Pear-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_stopping_generation.html>`_'
+            'description': '\nChecks the status of the generation.\n\nCall this function to check for any errors that might occur during the signal generation or to check whether the device has finished generating.\n\n**Supported Devices** : PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -3128,7 +3128,7 @@ functions = {
                 },
                 'name': 'channelName',
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'waveform',
+                'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3202,7 +3202,7 @@ functions = {
                 },
                 'name': 'channelName',
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'waveform',
+                'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4053,7 +4053,7 @@ functions = {
     'SelectArbWaveform': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSpecifies the waveform that is generated upon a call to the nirfsg_Initiate function when the **generationMode** parameter of the nirfsg_ConfigureGenerationMode function is set to NIRFSG_VAL_ARB_WAVEFORM.\n\nYou must specify a waveform using the NIRFSG_ATTR_NAME parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_'
+            'description': '\nSpecifies the waveform that is generated upon a call to the nirfsg_Initiate function when the generation_mode property is set to NIRFSG_VAL_ARB_WAVEFORM.\n\nYou must specify a waveform using the NIRFSG_ATTR_NAME parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4847,7 +4847,7 @@ functions = {
                 },
                 'name': 'channelName',
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'waveform',
+                'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4910,7 +4910,7 @@ functions = {
                 },
                 'name': 'channelName',
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'waveform',
+                'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5390,7 +5390,7 @@ functions = {
     'WriteScript': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nWrites a script to the device to control waveform generation in Script mode.\n\nFirst, configure your device for Script mode by calling the nirfsg_ConfigureGenerationMode function. The NI-RFSG device must be in the Configuration state before calling the nirfsg_WriteScript function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.\n\n`Common Scripting Use Cases <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_use_cases.html>`_',
+            'description': '\nWrites a script to the device to control waveform generation in Script mode.\n\nFirst, configure your device for Script mode by setting the generation_mode property. The NI-RFSG device must be in the Configuration state before calling the nirfsg_WriteScript function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Scripting Instructions <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_instructions.html>`_--Refer to this topic for more information about VST restrictions on scripts.\n\n`Common Scripting Use Cases <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/scripting_use_cases.html>`_',
             'note': 'If you are using an RF vector signal transceiver (VST) device, some script instructions may not be supported.'
         },
         'included_in_proto': True,

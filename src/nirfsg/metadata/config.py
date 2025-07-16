@@ -50,15 +50,15 @@ config = {
         },
         {
             'prefix': 'waveform::',
-            'python_name': 'waveform'
+            'python_name': 'waveforms'
         },
         {
             'prefix': '',
-            'python_name': 'port'
+            'python_name': 'ports'
         },
         {
             'prefix': 'LO',
-            'python_name': 'lo'
+            'python_name': 'lo_channels'
         }
     ],
     'session_class_description': 'An NI-RFSG session to the NI-RFSG driver',

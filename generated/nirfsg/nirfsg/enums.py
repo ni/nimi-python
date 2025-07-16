@@ -142,7 +142,7 @@ class AutomaticThermalCorrection(Enum):
     '''
 
 
-class DeembeddingTypeAttrVals(Enum):
+class DeembeddingType(Enum):
     NONE = 25000
     r'''
     De-embedding is not applied to the measurement.
@@ -797,10 +797,6 @@ class StartTriggerType(Enum):
     SOFTWARE = 2
     r'''
     The data operation does not start until a software event occurs. You may create a software trigger by calling the send_software_edge_trigger method.
-    '''
-    P2P_ENDPOINT_FULLNESS = 3
-    r'''
-    The data operation does not start until the endpoint reaches the threshold specified in the P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL property.
     '''
 
 

@@ -478,9 +478,7 @@ check_generation_status
 
             **Related Topics**
 
-            `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`_
-
-            `Stopping Pear-to-Peer Generation <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_stopping_generation.html>`_
+            `NI-RFSG Instrument Driver Programming Flow <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/progflow.html>`
 
             
 
@@ -2003,13 +2001,13 @@ get_waveform_burst_start_locations
             
 
 
-            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+            .. tip:: This method can be called on specific waveforms within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveforms to specify a subset,
                 and then call this method on the result.
 
-                Example: :py:meth:`my_session.waveform[ ... ].get_waveform_burst_start_locations`
+                Example: :py:meth:`my_session.waveforms[ ... ].get_waveform_burst_start_locations`
 
-                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
+                To call the method on all waveforms, you can call it directly on the :py:class:`nirfsg.Session`.
 
                 Example: :py:meth:`my_session.get_waveform_burst_start_locations`
 
@@ -2040,13 +2038,13 @@ get_waveform_burst_stop_locations
             
 
 
-            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+            .. tip:: This method can be called on specific waveforms within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveforms to specify a subset,
                 and then call this method on the result.
 
-                Example: :py:meth:`my_session.waveform[ ... ].get_waveform_burst_stop_locations`
+                Example: :py:meth:`my_session.waveforms[ ... ].get_waveform_burst_stop_locations`
 
-                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
+                To call the method on all waveforms, you can call it directly on the :py:class:`nirfsg.Session`.
 
                 Example: :py:meth:`my_session.get_waveform_burst_stop_locations`
 
@@ -2611,7 +2609,7 @@ select_arb_waveform
 
     .. py:method:: select_arb_waveform(name)
 
-            Specifies the waveform that is generated upon a call to the :py:meth:`nirfsg.Session._initiate` method when the **generationMode** parameter of the :py:meth:`nirfsg.Session.ConfigureGenerationMode` method is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM`.
+            Specifies the waveform that is generated upon a call to the :py:meth:`nirfsg.Session._initiate` method when the generation_mode property is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM`.
 
             You must specify a waveform using the :py:attr:`nirfsg.Session.NAME` parameter if you have written multiple waveforms. The NI-RFSG device must be in the Configuration state before you call this method.
 
@@ -2945,13 +2943,13 @@ set_waveform_burst_start_locations
             
 
 
-            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+            .. tip:: This method can be called on specific waveforms within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveforms to specify a subset,
                 and then call this method on the result.
 
-                Example: :py:meth:`my_session.waveform[ ... ].set_waveform_burst_start_locations`
+                Example: :py:meth:`my_session.waveforms[ ... ].set_waveform_burst_start_locations`
 
-                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
+                To call the method on all waveforms, you can call it directly on the :py:class:`nirfsg.Session`.
 
                 Example: :py:meth:`my_session.set_waveform_burst_start_locations`
 
@@ -2982,13 +2980,13 @@ set_waveform_burst_stop_locations
             
 
 
-            .. tip:: This method can be called on specific waveform within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container waveform to specify a subset,
+            .. tip:: This method can be called on specific waveforms within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container waveforms to specify a subset,
                 and then call this method on the result.
 
-                Example: :py:meth:`my_session.waveform[ ... ].set_waveform_burst_stop_locations`
+                Example: :py:meth:`my_session.waveforms[ ... ].set_waveform_burst_stop_locations`
 
-                To call the method on all waveform, you can call it directly on the :py:class:`nirfsg.Session`.
+                To call the method on all waveforms, you can call it directly on the :py:class:`nirfsg.Session`.
 
                 Example: :py:meth:`my_session.set_waveform_burst_stop_locations`
 
@@ -3146,7 +3144,7 @@ write_script
 
             Writes a script to the device to control waveform generation in Script mode.
 
-            First, configure your device for Script mode by calling the :py:meth:`nirfsg.Session.ConfigureGenerationMode` method. The NI-RFSG device must be in the Configuration state before calling the :py:meth:`nirfsg.Session.write_script` method.
+            First, configure your device for Script mode by setting the generation_mode property. The NI-RFSG device must be in the Configuration state before calling the :py:meth:`nirfsg.Session.write_script` method.
 
             **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -5191,12 +5189,12 @@ deembedding_compensation_gain
 
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].deembedding_compensation_gain`
+            Example: :py:attr:`my_session.ports[ ... ].deembedding_compensation_gain`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.deembedding_compensation_gain`
 
@@ -5209,7 +5207,7 @@ deembedding_compensation_gain
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | port      |
+            | Repeated Capabilities | ports     |
             +-----------------------+-----------+
 
         .. tip::
@@ -5236,12 +5234,12 @@ deembedding_selected_table
 
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].deembedding_selected_table`
+            Example: :py:attr:`my_session.ports[ ... ].deembedding_selected_table`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.deembedding_selected_table`
 
@@ -5254,7 +5252,7 @@ deembedding_selected_table
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | port       |
+            | Repeated Capabilities | ports      |
             +-----------------------+------------+
 
         .. tip::
@@ -5272,49 +5270,49 @@ deembedding_type
 
         To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the port to configure for de-embedding.
 
-        If you set this property to :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+        If you set this property to :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
-        **Default Value**: :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR`
+        **Default Value**: :py:data:`~nirfsg.DeembeddingType.SCALAR`
 
-        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`
+        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.NONE`
 
-        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR`, :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR`, or :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`. :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
+        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingType.SCALAR`, :py:data:`~nirfsg.DeembeddingType.VECTOR`, or :py:data:`~nirfsg.DeembeddingType.NONE`. :py:data:`~nirfsg.DeembeddingType.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         **Defined Values**:
 
-        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | Name                                              | Value          | Description                                                            |
-        +===================================================+================+========================================================================+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
-        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
-        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingTypeAttrVals.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
-        +---------------------------------------------------+----------------+------------------------------------------------------------------------+
+        +-------------------------------------------+----------------+------------------------------------------------------------------------+
+        | Name                                      | Value          | Description                                                            |
+        +===========================================+================+========================================================================+
+        | :py:data:`~nirfsg.DeembeddingType.NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
+        +-------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
+        +-------------------------------------------+----------------+------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
+        +-------------------------------------------+----------------+------------------------------------------------------------------------+
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].deembedding_type`
+            Example: :py:attr:`my_session.ports[ ... ].deembedding_type`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.deembedding_type`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------+
-            | Characteristic        | Value                         |
-            +=======================+===============================+
-            | Datatype              | enums.DeembeddingTypeAttrVals |
-            +-----------------------+-------------------------------+
-            | Permissions           | read-write                    |
-            +-----------------------+-------------------------------+
-            | Repeated Capabilities | port                          |
-            +-----------------------+-------------------------------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | enums.DeembeddingType |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | ports                 |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5407,12 +5405,12 @@ device_temperature
         +----------------------------+--------------------------+-------------------------+
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].device_temperature`
+            Example: :py:attr:`my_session.ports[ ... ].device_temperature`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.device_temperature`
 
@@ -5425,7 +5423,7 @@ device_temperature
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | port      |
+            | Repeated Capabilities | ports     |
             +-----------------------+-----------+
 
         .. tip::
@@ -8066,12 +8064,12 @@ iq_out_port_common_mode_offset
              - The valid range is dependent on the load impedance.
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].iq_out_port_common_mode_offset`
+            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_common_mode_offset`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_common_mode_offset`
 
@@ -8084,7 +8082,7 @@ iq_out_port_common_mode_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | port       |
+            | Repeated Capabilities | ports      |
             +-----------------------+------------+
 
         .. tip::
@@ -8129,12 +8127,12 @@ iq_out_port_level
              - The valid values are only applicable when you set the :py:attr:`nirfsg.Session.iq_out_port_load_impedance` property to 50 Ω and when you set the :py:attr:`nirfsg.Session.iq_out_port_offset` property to 0.
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].iq_out_port_level`
+            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_level`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_level`
 
@@ -8147,7 +8145,7 @@ iq_out_port_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | port       |
+            | Repeated Capabilities | ports      |
             +-----------------------+------------+
 
         .. tip::
@@ -8178,12 +8176,12 @@ iq_out_port_load_impedance
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].iq_out_port_load_impedance`
+            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_load_impedance`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_load_impedance`
 
@@ -8196,7 +8194,7 @@ iq_out_port_load_impedance
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | port       |
+            | Repeated Capabilities | ports      |
             +-----------------------+------------+
 
         .. tip::
@@ -8227,12 +8225,12 @@ iq_out_port_offset
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].iq_out_port_offset`
+            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_offset`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_offset`
 
@@ -8245,7 +8243,7 @@ iq_out_port_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | port       |
+            | Repeated Capabilities | ports      |
             +-----------------------+------------+
 
         .. tip::
@@ -8323,12 +8321,12 @@ iq_out_port_terminal_configuration
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
 
-        .. tip:: This property can be set/get on specific port within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container port to specify a subset.
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
 
-            Example: :py:attr:`my_session.port[ ... ].iq_out_port_terminal_configuration`
+            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_terminal_configuration`
 
-            To set/get on all port, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_terminal_configuration`
 
@@ -8341,7 +8339,7 @@ iq_out_port_terminal_configuration
             +-----------------------+------------------------+
             | Permissions           | read-write             |
             +-----------------------+------------------------+
-            | Repeated Capabilities | port                   |
+            | Repeated Capabilities | ports                  |
             +-----------------------+------------------------+
 
         .. tip::
@@ -8687,12 +8685,12 @@ loop_bandwidth
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].loop_bandwidth`
+            Example: :py:attr:`my_session.lo_channels[ ... ].loop_bandwidth`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.loop_bandwidth`
 
@@ -8705,7 +8703,7 @@ loop_bandwidth
             +-----------------------+---------------------+
             | Permissions           | read-write          |
             +-----------------------+---------------------+
-            | Repeated Capabilities | lo                  |
+            | Repeated Capabilities | lo_channels         |
             +-----------------------+---------------------+
 
         .. tip::
@@ -8736,26 +8734,26 @@ lo_frequency
         .. note:: This property is read/write if you are using an external LO. Otherwise, this property is read-only.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].lo_frequency`
+            Example: :py:attr:`my_session.lo_channels[ ... ].lo_frequency`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_frequency`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | lo         |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | float       |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | lo_channels |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8861,26 +8859,26 @@ lo_in_power
              - For the PXIe-5644/5645/5646, this property is always read-only.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].lo_in_power`
+            Example: :py:attr:`my_session.lo_channels[ ... ].lo_in_power`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_in_power`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | lo         |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | float       |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | lo_channels |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8918,26 +8916,26 @@ lo_out_enabled
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].lo_out_enabled`
+            Example: :py:attr:`my_session.lo_channels[ ... ].lo_out_enabled`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_out_enabled`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | lo         |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | bool        |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | lo_channels |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9010,26 +9008,26 @@ lo_out_power
         .. note:: For the PXIe-5644/5645/5646 and PXIe-5673/5673E, this property is always read-only.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].lo_out_power`
+            Example: :py:attr:`my_session.lo_channels[ ... ].lo_out_power`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_out_power`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | lo         |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | float       |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | lo_channels |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9071,12 +9069,12 @@ lo_pll_fractional_mode_enabled
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].lo_pll_fractional_mode_enabled`
+            Example: :py:attr:`my_session.lo_channels[ ... ].lo_pll_fractional_mode_enabled`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
 
@@ -9089,7 +9087,7 @@ lo_pll_fractional_mode_enabled
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | lo                               |
+            | Repeated Capabilities | lo_channels                      |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -9136,26 +9134,26 @@ lo_source
         .. note:: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to SG_SA_Shared.
 
 
-        .. tip:: This property can be set/get on specific lo within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo to specify a subset.
+        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
 
-            Example: :py:attr:`my_session.lo[ ... ].lo_source`
+            Example: :py:attr:`my_session.lo_channels[ ... ].lo_source`
 
-            To set/get on all lo, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_source`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | lo         |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | str         |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | lo_channels |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11419,19 +11417,15 @@ start_trigger_type
 
         **Defined Values**:
 
-        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Value                                                     | Description                                                                                                                                                                                                                                                                                                |
-        +===========================================================+============================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.StartTriggerType.NONE`                  | No trigger is configured.                                                                                                                                                                                                                                                                                  |
-        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTriggerType.DIGITAL_EDGE`          | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_source` property, and the active edge is specified in the :py:attr:`nirfsg.Session.digital_edge_start_trigger_edge` property. |
-        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTriggerType.SOFTWARE`              | The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.                                                                                                                             |
-        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.StartTriggerType.P2P_ENDPOINT_FULLNESS` | The data operation does not start until the endpoint reaches the threshold specified in the :py:attr:`nirfsg.Session.P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL` property.                                                                                                                                  |
-        +-----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced properties are not in the Python API for this driver.
+        +--------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Value                                            | Description                                                                                                                                                                                                                                                                                                |
+        +==================================================+============================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nirfsg.StartTriggerType.NONE`         | No trigger is configured.                                                                                                                                                                                                                                                                                  |
+        +--------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.StartTriggerType.DIGITAL_EDGE` | The data operation does not start until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsg.Session.digital_edge_start_trigger_source` property, and the active edge is specified in the :py:attr:`nirfsg.Session.digital_edge_start_trigger_edge` property. |
+        +--------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.StartTriggerType.SOFTWARE`     | The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.                                                                                                                             |
+        +--------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -12246,12 +12240,12 @@ waveform_iq_rate
 
 
 
-        .. tip:: This property can be set/get on specific waveform within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container waveform to specify a subset.
+        .. tip:: This property can be set/get on specific waveforms within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container waveforms to specify a subset.
 
-            Example: :py:attr:`my_session.waveform[ ... ].waveform_iq_rate`
+            Example: :py:attr:`my_session.waveforms[ ... ].waveform_iq_rate`
 
-            To set/get on all waveform, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all waveforms, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.waveform_iq_rate`
 
@@ -12264,7 +12258,7 @@ waveform_iq_rate
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | waveform   |
+            | Repeated Capabilities | waveforms  |
             +-----------------------+------------+
 
         .. tip::
@@ -12285,12 +12279,12 @@ waveform_papr
 
 
 
-        .. tip:: This property can be set/get on specific waveform within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container waveform to specify a subset.
+        .. tip:: This property can be set/get on specific waveforms within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container waveforms to specify a subset.
 
-            Example: :py:attr:`my_session.waveform[ ... ].waveform_papr`
+            Example: :py:attr:`my_session.waveforms[ ... ].waveform_papr`
 
-            To set/get on all waveform, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all waveforms, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.waveform_papr`
 
@@ -12303,7 +12297,7 @@ waveform_papr
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | waveform   |
+            | Repeated Capabilities | waveforms  |
             +-----------------------+------------+
 
         .. tip::
@@ -12352,12 +12346,12 @@ waveform_rf_blanking
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific waveform within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container waveform to specify a subset.
+        .. tip:: This property can be set/get on specific waveforms within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container waveforms to specify a subset.
 
-            Example: :py:attr:`my_session.waveform[ ... ].waveform_rf_blanking`
+            Example: :py:attr:`my_session.waveforms[ ... ].waveform_rf_blanking`
 
-            To set/get on all waveform, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all waveforms, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.waveform_rf_blanking`
 
@@ -12370,7 +12364,7 @@ waveform_rf_blanking
             +-----------------------+------------------+
             | Permissions           | read-write       |
             +-----------------------+------------------+
-            | Repeated Capabilities | waveform         |
+            | Repeated Capabilities | waveforms        |
             +-----------------------+------------------+
 
         .. tip::
@@ -12393,12 +12387,12 @@ waveform_runtime_scaling
 
 
 
-        .. tip:: This property can be set/get on specific waveform within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container waveform to specify a subset.
+        .. tip:: This property can be set/get on specific waveforms within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container waveforms to specify a subset.
 
-            Example: :py:attr:`my_session.waveform[ ... ].waveform_runtime_scaling`
+            Example: :py:attr:`my_session.waveforms[ ... ].waveform_runtime_scaling`
 
-            To set/get on all waveform, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all waveforms, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.waveform_runtime_scaling`
 
@@ -12411,7 +12405,7 @@ waveform_runtime_scaling
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | waveform   |
+            | Repeated Capabilities | waveforms  |
             +-----------------------+------------+
 
         .. tip::
@@ -12434,12 +12428,12 @@ waveform_signal_bandwidth
 
 
 
-        .. tip:: This property can be set/get on specific waveform within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container waveform to specify a subset.
+        .. tip:: This property can be set/get on specific waveforms within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container waveforms to specify a subset.
 
-            Example: :py:attr:`my_session.waveform[ ... ].waveform_signal_bandwidth`
+            Example: :py:attr:`my_session.waveforms[ ... ].waveform_signal_bandwidth`
 
-            To set/get on all waveform, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all waveforms, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.waveform_signal_bandwidth`
 
@@ -12452,7 +12446,7 @@ waveform_signal_bandwidth
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | waveform   |
+            | Repeated Capabilities | waveforms  |
             +-----------------------+------------+
 
         .. tip::
@@ -12473,12 +12467,12 @@ waveform_waveform_size
 
 
 
-        .. tip:: This property can be set/get on specific waveform within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container waveform to specify a subset.
+        .. tip:: This property can be set/get on specific waveforms within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container waveforms to specify a subset.
 
-            Example: :py:attr:`my_session.waveform[ ... ].waveform_waveform_size`
+            Example: :py:attr:`my_session.waveforms[ ... ].waveform_waveform_size`
 
-            To set/get on all waveform, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all waveforms, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.waveform_waveform_size`
 
@@ -12491,7 +12485,7 @@ waveform_waveform_size
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | waveform  |
+            | Repeated Capabilities | waveforms |
             +-----------------------+-----------+
 
         .. tip::
