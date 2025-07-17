@@ -56,12 +56,12 @@ AmpPath
 
 
 
-AnlgModFmBand
--------------
+AnalogModulationFmBand
+----------------------
 
-.. py:class:: AnlgModFmBand
+.. py:class:: AnalogModulationFmBand
 
-    .. py:attribute:: AnlgModFmBand.NARROWBAND
+    .. py:attribute:: AnalogModulationFmBand.NARROWBAND
 
 
 
@@ -71,7 +71,7 @@ AnlgModFmBand
 
 
 
-    .. py:attribute:: AnlgModFmBand.WIDEBAND
+    .. py:attribute:: AnalogModulationFmBand.WIDEBAND
 
 
 
@@ -81,12 +81,12 @@ AnlgModFmBand
 
 
 
-AnlgModFmNarrowbandIntegrator
------------------------------
+AnalogModulationFmNarrowbandIntegrator
+--------------------------------------
 
-.. py:class:: AnlgModFmNarrowbandIntegrator
+.. py:class:: AnalogModulationFmNarrowbandIntegrator
 
-    .. py:attribute:: AnlgModFmNarrowbandIntegrator._100hzto1khz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator.RANGE_100_HERTZ_TO_1_KILOHERTZ
 
 
 
@@ -96,7 +96,7 @@ AnlgModFmNarrowbandIntegrator
 
 
 
-    .. py:attribute:: AnlgModFmNarrowbandIntegrator._1khzto10khz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator.RANGE_1_KILOHERTZ_TO_10_KILOHERTZ
 
 
 
@@ -106,7 +106,7 @@ AnlgModFmNarrowbandIntegrator
 
 
 
-    .. py:attribute:: AnlgModFmNarrowbandIntegrator._10khzto100khz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator.RANGE_10_KILOHERTZ_TO_100_KILOHERTZ
 
 
 
@@ -116,12 +116,12 @@ AnlgModFmNarrowbandIntegrator
 
 
 
-AnlgModPmMode
--------------
+AnalogModulationPmMode
+----------------------
 
-.. py:class:: AnlgModPmMode
+.. py:class:: AnalogModulationPmMode
 
-    .. py:attribute:: AnlgModPmMode.HIGH_DEVIATION
+    .. py:attribute:: AnalogModulationPmMode.HIGH_DEVIATION
 
 
 
@@ -131,7 +131,7 @@ AnlgModPmMode
 
 
 
-    .. py:attribute:: AnlgModPmMode.LOW_PHASE_NOISE
+    .. py:attribute:: AnalogModulationPmMode.LOW_PHASE_NOISE
 
 
 
@@ -141,12 +141,12 @@ AnlgModPmMode
 
 
 
-AnlgModType
------------
+AnalogModulationType
+--------------------
 
-.. py:class:: AnlgModType
+.. py:class:: AnalogModulationType
 
-    .. py:attribute:: AnlgModType.NONE
+    .. py:attribute:: AnalogModulationType.NONE
 
 
 
@@ -156,7 +156,7 @@ AnlgModType
 
 
 
-    .. py:attribute:: AnlgModType.FM
+    .. py:attribute:: AnalogModulationType.FM
 
 
 
@@ -166,7 +166,7 @@ AnlgModType
 
 
 
-    .. py:attribute:: AnlgModType.PM
+    .. py:attribute:: AnalogModulationType.PM
 
 
 
@@ -176,7 +176,7 @@ AnlgModType
 
 
 
-    .. py:attribute:: AnlgModType.AM
+    .. py:attribute:: AnalogModulationType.AM
 
 
 
@@ -186,12 +186,12 @@ AnlgModType
 
 
 
-AnlgModWfmType
---------------
+AnalogModulationWaveformType
+----------------------------
 
-.. py:class:: AnlgModWfmType
+.. py:class:: AnalogModulationWaveformType
 
-    .. py:attribute:: AnlgModWfmType.SINE
+    .. py:attribute:: AnalogModulationWaveformType.SINE
 
 
 
@@ -201,7 +201,7 @@ AnlgModWfmType
 
 
 
-    .. py:attribute:: AnlgModWfmType.SQUARE
+    .. py:attribute:: AnalogModulationWaveformType.SQUARE
 
 
 
@@ -211,7 +211,7 @@ AnlgModWfmType
 
 
 
-    .. py:attribute:: AnlgModWfmType.TRIANGLE
+    .. py:attribute:: AnalogModulationWaveformType.TRIANGLE
 
 
 
@@ -321,85 +321,12 @@ AutomaticThermalCorrection
 
 
 
-ConfigListTrigDigEdgeEdge
--------------------------
+DeembeddingType
+---------------
 
-.. py:class:: ConfigListTrigDigEdgeEdge
+.. py:class:: DeembeddingType
 
-    .. py:attribute:: ConfigListTrigDigEdgeEdge.EDGE
-
-
-
-        Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level.
-
-        
-
-
-
-ConfigListTrigType
-------------------
-
-.. py:class:: ConfigListTrigType
-
-    .. py:attribute:: ConfigListTrigType.NONE
-
-
-
-        Generation starts immediately, but the list does not advance.
-
-        
-
-
-
-    .. py:attribute:: ConfigListTrigType.DIGITAL_EDGE
-
-
-
-        Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the :py:attr:`nirfsg.Session.DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE` property, and the active edge is always rising.
-
-        
-
-
-
-ConfigurationListRepeat
------------------------
-
-.. py:class:: ConfigurationListRepeat
-
-    .. py:attribute:: ConfigurationListRepeat.CONFIGURATION_LIST_REPEAT_CONTINUOUS
-
-
-
-        NI-RFSG runs the configuration list continuously.
-
-        
-
-
-
-    .. py:attribute:: ConfigurationListRepeat.MANUAL
-
-
-
-    .. py:attribute:: ConfigurationListRepeat.CONFIGURATION_LIST_REPEAT_SINGLE
-
-
-
-        NI-RFSG runs the configuration list only once.
-
-        
-
-
-
-    .. py:attribute:: ConfigurationListRepeat.SCRIPT_TRIGGER
-
-
-
-DeembeddingTypeAttrVals
------------------------
-
-.. py:class:: DeembeddingTypeAttrVals
-
-    .. py:attribute:: DeembeddingTypeAttrVals.NONE
+    .. py:attribute:: DeembeddingType.NONE
 
 
 
@@ -409,7 +336,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.SCALAR
+    .. py:attribute:: DeembeddingType.SCALAR
 
 
 
@@ -419,81 +346,11 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.VECTOR
+    .. py:attribute:: DeembeddingType.VECTOR
 
 
 
         De-embeds the measurement using the gain term and the reflection term.
-
-        
-
-
-
-DigModType
-----------
-
-.. py:class:: DigModType
-
-    .. py:attribute:: DigModType.NONE
-
-
-
-        Disables digital modulation.
-
-        
-
-
-
-    .. py:attribute:: DigModType.FSK
-
-
-
-        Specifies that the digital modulation type is frequency-shift keying (FSK).
-
-        
-
-
-
-    .. py:attribute:: DigModType.OOK
-
-
-
-        Specifies that the digital modulation type is on-off keying (OOK).
-
-        
-
-
-
-    .. py:attribute:: DigModType.PSK
-
-
-
-        Specifies that the digital modulation type is phase-shift keying (PSK).
-
-        
-
-
-
-DigModWfmType
--------------
-
-.. py:class:: DigModWfmType
-
-    .. py:attribute:: DigModWfmType.PRBS
-
-
-
-        Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).
-
-        
-
-
-
-    .. py:attribute:: DigModWfmType.USER_DEFINED
-
-
-
-        Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the :py:meth:`nirfsg.Session.configure_digital_modulation_user_defined_waveform` method.
 
         
 
@@ -519,6 +376,76 @@ DigitalEqualizationEnabled
 
 
         Filter is applied.
+
+        
+
+
+
+DigitalModulationType
+---------------------
+
+.. py:class:: DigitalModulationType
+
+    .. py:attribute:: DigitalModulationType.NONE
+
+
+
+        Disables digital modulation.
+
+        
+
+
+
+    .. py:attribute:: DigitalModulationType.FSK
+
+
+
+        Specifies that the digital modulation type is frequency-shift keying (FSK).
+
+        
+
+
+
+    .. py:attribute:: DigitalModulationType.OOK
+
+
+
+        Specifies that the digital modulation type is on-off keying (OOK).
+
+        
+
+
+
+    .. py:attribute:: DigitalModulationType.PSK
+
+
+
+        Specifies that the digital modulation type is phase-shift keying (PSK).
+
+        
+
+
+
+DigitalModulationWaveformType
+-----------------------------
+
+.. py:class:: DigitalModulationWaveformType
+
+    .. py:attribute:: DigitalModulationWaveformType.PRBS
+
+
+
+        Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).
+
+        
+
+
+
+    .. py:attribute:: DigitalModulationWaveformType.USER_DEFINED
+
+
+
+        Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the :py:meth:`nirfsg.Session.configure_digital_modulation_user_defined_waveform` method.
 
         
 
@@ -724,64 +651,6 @@ IQOutPortTermCfg
 
 
 
-Lo1OutputFilter
----------------
-
-.. py:class:: Lo1OutputFilter
-
-    .. py:attribute:: Lo1OutputFilter.MANUAL
-
-
-
-        yet to be defined
-
-        
-
-
-
-    .. py:attribute:: Lo1OutputFilter.SCRIPT_TRIGGER
-
-
-
-        yet to be defined
-
-        
-
-
-
-LoOutEnabled
-------------
-
-.. py:class:: LoOutEnabled
-
-    .. py:attribute:: LoOutEnabled.DISABLE
-
-
-
-        The local oscillator signal is present at the LO OUT front panel connector.
-
-        
-
-
-
-    .. py:attribute:: LoOutEnabled.MANUAL
-
-
-
-    .. py:attribute:: LoOutEnabled.ENABLE
-
-
-
-        The local oscillator signal is  not present at the LO OUT front panel connector..
-
-        
-
-
-
-    .. py:attribute:: LoOutEnabled.SCRIPT_TRIGGER
-
-
-
 LoOutExportConfigureFromRFSaEnable
 ----------------------------------
 
@@ -797,10 +666,6 @@ LoOutExportConfigureFromRFSaEnable
 
 
 
-    .. py:attribute:: LoOutExportConfigureFromRFSaEnable.MANUAL
-
-
-
     .. py:attribute:: LoOutExportConfigureFromRFSaEnable.ENABLE
 
 
@@ -808,10 +673,6 @@ LoOutExportConfigureFromRFSaEnable
         Allow NI-RFSA to control the NI-RFSG local oscillator export.
 
         
-
-
-
-    .. py:attribute:: LoOutExportConfigureFromRFSaEnable.SCRIPT_TRIGGER
 
 
 
@@ -830,10 +691,6 @@ LoPlLfractionalModeEnabled
 
 
 
-    .. py:attribute:: LoPlLfractionalModeEnabled.MANUAL
-
-
-
     .. py:attribute:: LoPlLfractionalModeEnabled.ENABLE
 
 
@@ -841,10 +698,6 @@ LoPlLfractionalModeEnabled
         Enables fractional mode for the LO PLL.
 
         
-
-
-
-    .. py:attribute:: LoPlLfractionalModeEnabled.SCRIPT_TRIGGER
 
 
 
@@ -1193,31 +1046,6 @@ PhaseContinuityEnabled
 
 
 
-PortTypes
----------
-
-.. py:class:: PortTypes
-
-    .. py:attribute:: PortTypes.OUT
-
-
-
-        Specifies the PXIe-5840 RF OUT port.
-
-        
-
-
-
-    .. py:attribute:: PortTypes.IN
-
-
-
-        Specifies the PXIe-5840 RF IN port. This value is not supported as the first element of an array.
-
-        
-
-
-
 PowerLevelType
 --------------
 
@@ -1348,41 +1176,6 @@ RFBlanking
 
 
 
-RFFilter
---------
-
-.. py:class:: RFFilter
-
-    .. py:attribute:: RFFilter.HI_FREQ_MOD
-
-
-
-        yet to be defined
-
-        
-
-
-
-    .. py:attribute:: RFFilter.LO_FREQ_MOD_4000
-
-
-
-        yet to be defined
-
-        
-
-
-
-    .. py:attribute:: RFFilter.LO_FREQ_MOD_2500
-
-
-
-        yet to be defined
-
-        
-
-
-
 RFInLoExportEnabled
 -------------------
 
@@ -1418,47 +1211,12 @@ RFInLoExportEnabled
 
 
 
-RefPllBandwidth
----------------
-
-.. py:class:: RefPllBandwidth
-
-    .. py:attribute:: RefPllBandwidth.NARROW
-
-
-
-        Uses the narrowest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_NARROW` allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
-
-        
-
-
-
-    .. py:attribute:: RefPllBandwidth.MEDIUM
-
-
-
-        Uses the medium loop bandwidth setting for the PLL.
-
-        
-
-
-
-    .. py:attribute:: RefPllBandwidth.WIDE
-
-
-
-        Uses the widest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_WIDE` on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
-
-        
-
-
-
 ReferenceClockExportedRate
 --------------------------
 
 .. py:class:: ReferenceClockExportedRate
 
-    .. py:attribute:: ReferenceClockExportedRate._10mhz
+    .. py:attribute:: ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ
 
 
 
@@ -1468,7 +1226,7 @@ ReferenceClockExportedRate
 
 
 
-    .. py:attribute:: ReferenceClockExportedRate._100mhz
+    .. py:attribute:: ReferenceClockExportedRate.CLOCK_RATE_100_MEGAHERTZ
 
 
 
@@ -1478,7 +1236,7 @@ ReferenceClockExportedRate
 
 
 
-    .. py:attribute:: ReferenceClockExportedRate._1ghz
+    .. py:attribute:: ReferenceClockExportedRate.CLOCK_RATE_1_GIGAHERTZ
 
 
 
@@ -1503,11 +1261,46 @@ ReferenceClockRate
 
 
 
-    .. py:attribute:: ReferenceClockRate._10mhz
+    .. py:attribute:: ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ
 
 
 
         Uses a 10MHz Reference Clock rate.
+
+        
+
+
+
+ReferencePllBandwidth
+---------------------
+
+.. py:class:: ReferencePllBandwidth
+
+    .. py:attribute:: ReferencePllBandwidth.NARROW
+
+
+
+        Uses the narrowest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_NARROW` allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.
+
+        
+
+
+
+    .. py:attribute:: ReferencePllBandwidth.MEDIUM
+
+
+
+        Uses the medium loop bandwidth setting for the PLL.
+
+        
+
+
+
+    .. py:attribute:: ReferencePllBandwidth.WIDE
+
+
+
+        Uses the widest loop bandwidth setting for the PLL. Setting this property to :py:data:`~nirfsg.NIRFSG_VAL_WIDE` on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.
 
         
 
@@ -1593,12 +1386,12 @@ ResetWithOptionsStepsToOmit
 
 
 
-ScriptTrigDigEdgeEdge
----------------------
+ScriptTriggerDigitalEdgeEdge
+----------------------------
 
-.. py:class:: ScriptTrigDigEdgeEdge
+.. py:class:: ScriptTriggerDigitalEdgeEdge
 
-    .. py:attribute:: ScriptTrigDigEdgeEdge.RISING
+    .. py:attribute:: ScriptTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -1608,7 +1401,7 @@ ScriptTrigDigEdgeEdge
 
 
 
-    .. py:attribute:: ScriptTrigDigEdgeEdge.FALLING
+    .. py:attribute:: ScriptTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -1618,12 +1411,12 @@ ScriptTrigDigEdgeEdge
 
 
 
-ScriptTrigDigLevelActiveLevel
------------------------------
+ScriptTriggerDigitalLevelActiveLevel
+------------------------------------
 
-.. py:class:: ScriptTrigDigLevelActiveLevel
+.. py:class:: ScriptTriggerDigitalLevelActiveLevel
 
-    .. py:attribute:: ScriptTrigDigLevelActiveLevel.HIGH
+    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.HIGH
 
 
 
@@ -1633,7 +1426,7 @@ ScriptTrigDigLevelActiveLevel
 
 
 
-    .. py:attribute:: ScriptTrigDigLevelActiveLevel.LOW
+    .. py:attribute:: ScriptTriggerDigitalLevelActiveLevel.LOW
 
 
 
@@ -1643,12 +1436,12 @@ ScriptTrigDigLevelActiveLevel
 
 
 
-ScriptTrigType
---------------
+ScriptTriggerType
+-----------------
 
-.. py:class:: ScriptTrigType
+.. py:class:: ScriptTriggerType
 
-    .. py:attribute:: ScriptTrigType.NONE
+    .. py:attribute:: ScriptTriggerType.NONE
 
 
 
@@ -1658,7 +1451,7 @@ ScriptTrigType
 
 
 
-    .. py:attribute:: ScriptTrigType.DIGITAL_EDGE
+    .. py:attribute:: ScriptTriggerType.DIGITAL_EDGE
 
 
 
@@ -1668,7 +1461,7 @@ ScriptTrigType
 
 
 
-    .. py:attribute:: ScriptTrigType.DIGITAL_LEVEL
+    .. py:attribute:: ScriptTriggerType.DIGITAL_LEVEL
 
 
 
@@ -1678,7 +1471,7 @@ ScriptTrigType
 
 
 
-    .. py:attribute:: ScriptTrigType.SOFTWARE
+    .. py:attribute:: ScriptTriggerType.SOFTWARE
 
 
 
@@ -1758,16 +1551,6 @@ Signal
 
 .. py:class:: Signal
 
-    .. py:attribute:: Signal.CONFIGURATION_SETTLED_EVENT
-
-
-
-        Exports a Configuration Settled Event.
-
-        
-
-
-
     .. py:attribute:: Signal.START_TRIGGER
 
 
@@ -1828,16 +1611,6 @@ Signal
 
 
 
-    .. py:attribute:: Signal.CONFIGURATION_LIST_STEP_TRIGGER
-
-
-
-        Exports a Configuration List Step Trigger.
-
-        
-
-
-
 SoftwareTriggerType
 -------------------
 
@@ -1868,7 +1641,7 @@ SparameterOrientation
 
 .. py:class:: SparameterOrientation
 
-    .. py:attribute:: SparameterOrientation.PORT1
+    .. py:attribute:: SparameterOrientation.PORT1_TOWARDS_DUT
 
 
 
@@ -1878,7 +1651,7 @@ SparameterOrientation
 
 
 
-    .. py:attribute:: SparameterOrientation.PORT2
+    .. py:attribute:: SparameterOrientation.PORT2_TOWARDS_DUT
 
 
 
@@ -1888,12 +1661,12 @@ SparameterOrientation
 
 
 
-StartTrigDigEdgeEdge
---------------------
+StartTriggerDigitalEdgeEdge
+---------------------------
 
-.. py:class:: StartTrigDigEdgeEdge
+.. py:class:: StartTriggerDigitalEdgeEdge
 
-    .. py:attribute:: StartTrigDigEdgeEdge.RISING
+    .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -1903,7 +1676,7 @@ StartTrigDigEdgeEdge
 
 
 
-    .. py:attribute:: StartTrigDigEdgeEdge.FALLING
+    .. py:attribute:: StartTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -1913,12 +1686,12 @@ StartTrigDigEdgeEdge
 
 
 
-StartTrigType
--------------
+StartTriggerType
+----------------
 
-.. py:class:: StartTrigType
+.. py:class:: StartTriggerType
 
-    .. py:attribute:: StartTrigType.NONE
+    .. py:attribute:: StartTriggerType.NONE
 
 
 
@@ -1928,7 +1701,7 @@ StartTrigType
 
 
 
-    .. py:attribute:: StartTrigType.DIGITAL_EDGE
+    .. py:attribute:: StartTriggerType.DIGITAL_EDGE
 
 
 
@@ -1938,21 +1711,11 @@ StartTrigType
 
 
 
-    .. py:attribute:: StartTrigType.SOFTWARE
+    .. py:attribute:: StartTriggerType.SOFTWARE
 
 
 
         The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.
-
-        
-
-
-
-    .. py:attribute:: StartTrigType.P2P_ENDPOINT_FULLNESS
-
-
-
-        The data operation does not start until the endpoint reaches the threshold specified in the :py:attr:`nirfsg.Session.p2p_endpoint_fullness_start_trigger_level` property.
 
         
 

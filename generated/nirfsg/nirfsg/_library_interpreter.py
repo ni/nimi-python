@@ -243,7 +243,7 @@ class LibraryInterpreter(object):
 
     def configure_digital_edge_script_trigger(self, trigger_id, source, edge):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C010
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
         edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niRFSG_ConfigureDigitalEdgeScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, edge_ctype)
@@ -275,34 +275,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_generation_mode(self, generation_mode):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        generation_mode_ctype = _visatype.ViInt32(generation_mode.value)  # case S130
-        error_code = self._library.niRFSG_ConfigureGenerationMode(vi_ctype, generation_mode_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_output_enabled(self, output_enabled):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        output_enabled_ctype = _visatype.ViBoolean(output_enabled)  # case S150
-        error_code = self._library.niRFSG_ConfigureOutputEnabled(vi_ctype, output_enabled_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_p2p_endpoint_fullness_start_trigger(self, p2p_endpoint_fullness_level):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        p2p_endpoint_fullness_level_ctype = _visatype.ViInt64(p2p_endpoint_fullness_level)  # case S150
-        error_code = self._library.niRFSG_ConfigureP2PEndpointFullnessStartTrigger(vi_ctype, p2p_endpoint_fullness_level_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def configure_power_level_type(self, power_level_type):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        power_level_type_ctype = _visatype.ViInt32(power_level_type.value)  # case S130
-        error_code = self._library.niRFSG_ConfigurePowerLevelType(vi_ctype, power_level_type_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_pxi_chassis_clk10(self, pxi_clk10_source):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         pxi_clk10_source_ctype = ctypes.create_string_buffer(pxi_clk10_source.encode(self._encoding))  # case C020
@@ -326,16 +298,9 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def configure_signal_bandwidth(self, signal_bandwidth):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_bandwidth_ctype = _visatype.ViReal64(signal_bandwidth)  # case S150
-        error_code = self._library.niRFSG_ConfigureSignalBandwidth(vi_ctype, signal_bandwidth_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def configure_software_script_trigger(self, trigger_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C010
         error_code = self._library.niRFSG_ConfigureSoftwareScriptTrigger(vi_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -378,7 +343,7 @@ class LibraryInterpreter(object):
 
     def disable_script_trigger(self, trigger_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C010
         error_code = self._library.niRFSG_DisableScriptTrigger(vi_ctype, trigger_id_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -565,14 +530,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
-    def get_stream_endpoint_handle(self, stream_endpoint):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        stream_endpoint_ctype = ctypes.create_string_buffer(stream_endpoint.encode(self._encoding))  # case C020
-        reader_handle_ctype = _visatype.ViUInt32()  # case S220
-        error_code = self._library.niRFSG_GetStreamEndpointHandle(vi_ctype, stream_endpoint_ctype, None if reader_handle_ctype is None else (ctypes.pointer(reader_handle_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(reader_handle_ctype.value)
-
     def get_terminal_name(self, signal, signal_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         signal_ctype = _visatype.ViInt32(signal.value)  # case S130
@@ -710,6 +667,13 @@ class LibraryInterpreter(object):
     def reset_with_defaults(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSG_ResetWithDefaults(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def reset_with_options(self, steps_to_omit):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        steps_to_omit_ctype = _visatype.ViUInt64(steps_to_omit.value)  # case S130
+        error_code = self._library.niRFSG_ResetWithOptions(vi_ctype, steps_to_omit_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -898,16 +862,6 @@ class LibraryInterpreter(object):
         number_of_samples_ctype = _visatype.ViInt32(0 if waveform_data_array is None else len(waveform_data_array) // 2)  # case S160
         waveform_data_array_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data_array, library_type=_complextype.NIComplexI16)  # case B510
         error_code = self._library.niRFSG_WriteArbWaveformComplexI16(vi_ctype, waveform_name_ctype, number_of_samples_ctype, waveform_data_array_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def write_p2p_endpoint_i16(self, stream_endpoint, number_of_samples, endpoint_data):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        stream_endpoint_ctype = ctypes.create_string_buffer(stream_endpoint.encode(self._encoding))  # case C020
-        number_of_samples_ctype = _visatype.ViInt32(0 if endpoint_data is None else len(endpoint_data))  # case S160
-        endpoint_data_array = _convert_to_array(value=endpoint_data, array_type="h")  # case B550
-        endpoint_data_ctype = _get_ctypes_pointer_for_buffer(value=endpoint_data_array, library_type=_visatype.ViInt16)  # case B550
-        error_code = self._library.niRFSG_WriteP2PEndpointI16(vi_ctype, stream_endpoint_ctype, number_of_samples_ctype, endpoint_data_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

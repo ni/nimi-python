@@ -39,6 +39,17 @@ config = {
         }
     },
     'module_name': 'nirfsg',
+    'enum_whitelist_prefix': [
+        'RANGE_',
+        'CLOCK_RATE_'
+    ],
+    'enum_whitelist_suffix': [
+        '_HERTZ',
+        '_KILOHERTZ',
+        '_MEGAHERTZ',
+        '_GIGAHERTZ',
+        '_TOWARDS_DUT'
+    ],
     'repeated_capabilities': [
         {
             'prefix': 'marker',
@@ -50,11 +61,15 @@ config = {
         },
         {
             'prefix': 'waveform::',
-            'python_name': 'waveform'
+            'python_name': 'waveforms'
         },
         {
             'prefix': '',
-            'python_name': 'deembedding_port'
+            'python_name': 'ports'
+        },
+        {
+            'prefix': 'LO',
+            'python_name': 'lo_channels'
         }
     ],
     'session_class_description': 'An NI-RFSG session to the NI-RFSG driver',

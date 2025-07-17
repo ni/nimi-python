@@ -1,68 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file is generated from NI-RFSG API metadata version 25.5.0d9999
 enums = {
-    '5696AmpBand': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_250_KHZ_-_250_MHZ',
-                'value': 96000
-            },
-            {
-                'name': 'NIRFSG_VAL_250_MHZ_-_1_GHZ',
-                'value': 96001
-            },
-            {
-                'name': 'NIRFSG_VAL_1_GHZ_-_2.4_GHZ',
-                'value': 96002
-            },
-            {
-                'name': 'NIRFSG_VAL_2.4_GHZ_-_3.86_GHZ',
-                'value': 96003
-            },
-            {
-                'name': 'NIRFSG_VAL_3.86_GHZ_-_5.37_GHZ',
-                'value': 96004
-            },
-            {
-                'name': 'NIRFSG_VAL_5.37_GHZ_-_7.45_GHZ',
-                'value': 96005
-            },
-            {
-                'name': 'NIRFSG_VAL_7.45_GHZ_-_10.4_GHZ',
-                'value': 96006
-            },
-            {
-                'name': 'NIRFSG_VAL_10.4_GHZ_-_14.4_GHZ',
-                'value': 96007
-            },
-            {
-                'name': 'NIRFSG_VAL_14.4GHZ_-_20_GHZ',
-                'value': 96008
-            },
-            {
-                'name': 'NIRFSG_VAL_LOW_GROUP_DELAY_14.4_GHZ_-_17_GHZ',
-                'value': 96009
-            },
-            {
-                'name': 'NIRFSG_VAL_LOW_GROUP_DELAY_17_GHZ_-_20_GHZ',
-                'value': 96010
-            }
-        ]
-    },
-    '5840Modulator': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_BYPASS',
-                'value': 95000
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 95001
-            }
-        ]
-    },
     'AllowOutOfSpecificationUserSettings': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -81,7 +20,6 @@ enums = {
         ]
     },
     'AmpPath': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -99,8 +37,7 @@ enums = {
             }
         ]
     },
-    'AnlgModFmBand': {
-        'codegen_method': 'public',
+    'AnalogModulationFmBand': {
         'values': [
             {
                 'documentation': {
@@ -118,15 +55,14 @@ enums = {
             }
         ]
     },
-    'AnlgModFmNarrowbandIntegrator': {
-        'codegen_method': 'public',
+    'AnalogModulationFmNarrowbandIntegrator': {
         'values': [
             {
                 'documentation': {
                     'description': 'Specifies a range from 100Hz to 1kHz.'
                 },
                 'name': 'NIRFSG_VAL_100HZ_TO_1KHZ',
-                'python_name': '_100hzto1khz',
+                'python_name': 'RANGE_100_HERTZ_TO_1_KILOHERTZ',
                 'value': 18000
             },
             {
@@ -134,7 +70,7 @@ enums = {
                     'description': 'Specifies a range from 1kHz to 10kHz.'
                 },
                 'name': 'NIRFSG_VAL_1KHZ_TO_10KHZ',
-                'python_name': '_1khzto10khz',
+                'python_name': 'RANGE_1_KILOHERTZ_TO_10_KILOHERTZ',
                 'value': 18001
             },
             {
@@ -142,13 +78,12 @@ enums = {
                     'description': 'Specifies a range from 10kHz to 100kHz.'
                 },
                 'name': 'NIRFSG_VAL_10KHZ_TO_100KHZ',
-                'python_name': '_10khzto100khz',
+                'python_name': 'RANGE_10_KILOHERTZ_TO_100_KILOHERTZ',
                 'value': 18002
             }
         ]
     },
-    'AnlgModPmMode': {
-        'codegen_method': 'public',
+    'AnalogModulationPmMode': {
         'values': [
             {
                 'documentation': {
@@ -166,8 +101,7 @@ enums = {
             }
         ]
     },
-    'AnlgModType': {
-        'codegen_method': 'public',
+    'AnalogModulationType': {
         'values': [
             {
                 'documentation': {
@@ -199,8 +133,7 @@ enums = {
             }
         ]
     },
-    'AnlgModWfmType': {
-        'codegen_method': 'public',
+    'AnalogModulationWaveformType': {
         'values': [
             {
                 'documentation': {
@@ -225,20 +158,7 @@ enums = {
             }
         ]
     },
-    'ArbAmplitudeCorrectionMethod': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_ANALOG',
-                'value': 98000
-            },
-            {
-                'name': 'NIRFSG_VAL_DIGITAL',
-                'value': 98001
-            }
-        ]
-    },
     'ArbOnboardSampleClockMode': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -257,7 +177,6 @@ enums = {
         ]
     },
     'AutomaticLevelControl': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -276,7 +195,6 @@ enums = {
         ]
     },
     'AutomaticPowerSearch': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -295,7 +213,6 @@ enums = {
         ]
     },
     'AutomaticThermalCorrection': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -313,102 +230,7 @@ enums = {
             }
         ]
     },
-    'CoercePowerLevelToMaxPower': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'ConfigListTrigDigEdgeEdge': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the rising edge as the active edge. The rising edge occurs when the signal transitions from low level to high level.'
-                },
-                'name': 'NIRFSG_VAL_RISING_EDGE',
-                'value': 0
-            }
-        ]
-    },
-    'ConfigListTrigType': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Generation starts immediately, but the list does not advance.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Data operation does not start until a digital edge is detected. The source of the digital edge is specified in the NIRFSG_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE attribute, and the active edge is always rising.'
-                },
-                'name': 'NIRFSG_VAL_DIGITAL_EDGE',
-                'value': 1
-            }
-        ]
-    },
-    'ConfigurationListRepeat': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'NI-RFSG runs the configuration list continuously.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_REPEAT_CONTINUOUS',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG runs the configuration list only once.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_REPEAT_SINGLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            }
-        ]
-    },
-    'DacDecoderMode': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_MAX_SNR',
-                'value': 28001
-            },
-            {
-                'name': 'NIRFSG_VAL_MAX_LINEARITY',
-                'value': 28002
-            }
-        ]
-    },
-    'DebuggingOptions': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_PLL_LOCK_COUNT',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_MEASURE_IO_TIME',
-                'value': 2
-            }
-        ]
-    },
-    'DeembeddingTypeAttrVals': {
-        'codegen_method': 'public',
+    'DeembeddingType': {
         'values': [
             {
                 'documentation': {
@@ -433,8 +255,7 @@ enums = {
             }
         ]
     },
-    'DigModType': {
-        'codegen_method': 'public',
+    'DigitalModulationType': {
         'values': [
             {
                 'documentation': {
@@ -466,8 +287,7 @@ enums = {
             }
         ]
     },
-    'DigModWfmType': {
-        'codegen_method': 'public',
+    'DigitalModulationWaveformType': {
         'values': [
             {
                 'documentation': {
@@ -486,7 +306,6 @@ enums = {
         ]
     },
     'DigitalEqualizationEnabled': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -505,7 +324,6 @@ enums = {
         ]
     },
     'DirectDownload': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -531,7 +349,6 @@ enums = {
         ]
     },
     'FilterType': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -557,7 +374,6 @@ enums = {
         ]
     },
     'Format': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -582,20 +398,7 @@ enums = {
             }
         ]
     },
-    'FrequencyResponseFilterEnabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
     'FrequencySettlingUnits': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -620,20 +423,7 @@ enums = {
             }
         ]
     },
-    'GainStateFromSelfCal': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
     'GenerationMode': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -659,7 +449,6 @@ enums = {
         ]
     },
     'IQOutPortTermCfg': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -677,66 +466,7 @@ enums = {
             }
         ]
     },
-    'ImpairmentsFilterEnabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'Lo1OutputFilter': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            }
-        ]
-    },
-    'LoOutEnabled': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The local oscillator signal is present at the LO OUT front panel connector.'
-                },
-                'name': 'NIRFSG_VAL_DISABLE',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'The local oscillator signal is  not present at the LO OUT front panel connector..'
-                },
-                'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            }
-        ]
-    },
     'LoOutExportConfigureFromRFSaEnable': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -746,36 +476,15 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'Allow NI-RFSA to control the NI-RFSG local oscillator export.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
                 'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
-            }
-        ]
-    },
-    'LoOutSource': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_INTERNAL_LO',
-                'value': 'Internal_LO'
-            },
-            {
-                'name': 'NIRFSG_VAL_ONBOARD',
-                'value': 'Onboard'
             }
         ]
     },
     'LoPlLfractionalModeEnabled': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -785,24 +494,15 @@ enums = {
                 'value': 0
             },
             {
-                'name': 'NIRFSG_VAL_MANUAL',
-                'value': 0
-            },
-            {
                 'documentation': {
                     'description': 'Enables fractional mode for the LO PLL.'
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
                 'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER',
-                'value': 1
             }
         ]
     },
     'LoadConfigurationResetOptions': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -835,7 +535,6 @@ enums = {
         ]
     },
     'LoadOptions': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -854,7 +553,6 @@ enums = {
         ]
     },
     'LoopBandwidth': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -880,7 +578,6 @@ enums = {
         ]
     },
     'MarkerEventOutputBehavior': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -899,7 +596,6 @@ enums = {
         ]
     },
     'MarkerEventPulseWidthUnits': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -918,7 +614,6 @@ enums = {
         ]
     },
     'MarkerEventToggleInitialState': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -936,20 +631,7 @@ enums = {
             }
         ]
     },
-    'MismatchCorrectionEnabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
     'Module': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -975,7 +657,6 @@ enums = {
         ]
     },
     'OffsetUnits': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -993,20 +674,7 @@ enums = {
             }
         ]
     },
-    'OptimizePathForSignalBandwidth': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
     'OutputPort': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1039,7 +707,6 @@ enums = {
         ]
     },
     'OverflowErrorReporting': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1058,7 +725,6 @@ enums = {
         ]
     },
     'PhaseContinuityEnabled': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1083,27 +749,7 @@ enums = {
             }
         ]
     },
-    'PortTypes': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the PXIe-5840 RF OUT port.'
-                },
-                'name': 'NIRFSG_VAL_PORT_RF_OUT',
-                'value': 14501
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the PXIe-5840 RF IN port. This value is not supported as the first element of an array.'
-                },
-                'name': 'NIRFSG_VAL_PORT_RF_IN',
-                'value': 14500
-            }
-        ]
-    },
     'PowerLevelType': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1122,7 +768,6 @@ enums = {
         ]
     },
     'PpaInheritance': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1148,7 +793,6 @@ enums = {
         ]
     },
     'PulseModulationMode': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1181,7 +825,6 @@ enums = {
         ]
     },
     'RFBlanking': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1199,34 +842,7 @@ enums = {
             }
         ]
     },
-    'RFFilter': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_HI_FREQ_MOD',
-                'value': '0'
-            },
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_LO_FREQ_MOD_4000',
-                'value': '1'
-            },
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_LO_FREQ_MOD_2500',
-                'value': '2'
-            }
-        ]
-    },
     'RFInLoExportEnabled': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1251,32 +867,7 @@ enums = {
             }
         ]
     },
-    'RFPowerMeterEnabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'RFPowerProtectionEnabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'RefPllBandwidth': {
-        'codegen_method': 'public',
+    'ReferencePllBandwidth': {
         'values': [
             {
                 'documentation': {
@@ -1302,14 +893,13 @@ enums = {
         ]
     },
     'ReferenceClockExportedRate': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
                     'description': 'Uses a 10MHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': '_10mhz',
+                'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
                 'value': 10000000
             },
             {
@@ -1317,7 +907,7 @@ enums = {
                     'description': 'Uses a 100MHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_100MHZ',
-                'python_name': '_100mhz',
+                'python_name': 'CLOCK_RATE_100_MEGAHERTZ',
                 'value': 100000000.0
             },
             {
@@ -1325,13 +915,12 @@ enums = {
                     'description': 'Uses a 1GHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_1GHZ',
-                'python_name': '_1ghz',
+                'python_name': 'CLOCK_RATE_1_GIGAHERTZ',
                 'value': 1000000000.0
             }
         ]
     },
     'ReferenceClockRate': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1345,13 +934,12 @@ enums = {
                     'description': 'Uses a 10MHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': '_10mhz',
+                'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
                 'value': 10000000
             }
         ]
     },
     'RelativeTo': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1370,7 +958,7 @@ enums = {
         ]
     },
     'ResetWithOptionsStepsToOmit': {
-        'codegen_method': 'public',
+        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -1409,8 +997,7 @@ enums = {
             }
         ]
     },
-    'ScriptTrigDigEdgeEdge': {
-        'codegen_method': 'public',
+    'ScriptTriggerDigitalEdgeEdge': {
         'values': [
             {
                 'documentation': {
@@ -1428,8 +1015,7 @@ enums = {
             }
         ]
     },
-    'ScriptTrigDigLevelActiveLevel': {
-        'codegen_method': 'public',
+    'ScriptTriggerDigitalLevelActiveLevel': {
         'values': [
             {
                 'documentation': {
@@ -1447,8 +1033,7 @@ enums = {
             }
         ]
     },
-    'ScriptTrigType': {
-        'codegen_method': 'public',
+    'ScriptTriggerType': {
         'values': [
             {
                 'documentation': {
@@ -1481,7 +1066,7 @@ enums = {
         ]
     },
     'SelfCalibrateRangeStepsToOmit': {
-        'codegen_method': 'public',
+        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -1528,15 +1113,7 @@ enums = {
         ]
     },
     'Signal': {
-        'codegen_method': 'public',
         'values': [
-            {
-                'documentation': {
-                    'description': 'Exports a Configuration Settled Event.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT',
-                'value': 7
-            },
             {
                 'documentation': {
                     'description': 'Exports a Start Trigger.'
@@ -1578,18 +1155,10 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_DONE_EVENT',
                 'value': 5
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a Configuration List Step Trigger.'
-                },
-                'name': 'NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER',
-                'value': 6
             }
         ]
     },
     'SoftwareTriggerType': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1608,7 +1177,6 @@ enums = {
         ]
     },
     'SparameterOrientation': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1626,8 +1194,7 @@ enums = {
             }
         ]
     },
-    'StartTrigDigEdgeEdge': {
-        'codegen_method': 'public',
+    'StartTriggerDigitalEdgeEdge': {
         'values': [
             {
                 'documentation': {
@@ -1645,8 +1212,7 @@ enums = {
             }
         ]
     },
-    'StartTrigType': {
-        'codegen_method': 'public',
+    'StartTriggerType': {
         'values': [
             {
                 'documentation': {
@@ -1668,74 +1234,10 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'The data operation does not start until the endpoint reaches the threshold specified in the NIRFSG_ATTR_P2P_ENDPOINT_FULLNESS_START_TRIGGER_LEVEL attribute.'
-                },
-                'name': 'NIRFSG_VAL_P2P_ENDPOINT_FULLNESS',
-                'value': 3
-            }
-        ]
-    },
-    'StatusChecksDisabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_POWER_PROTECTION',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_DSP',
-                'value': 2
-            },
-            {
-                'name': 'NIRFSG_VAL_LO_PLL',
-                'value': 4
-            },
-            {
-                'name': 'NIRFSG_VAL_ALL',
-                'value': -1
-            }
-        ]
-    },
-    'Sts5532SignalPath': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DIRECT',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_GAIN',
-                'value': 1
-            },
-            {
-                'name': 'NIRFSG_VAL_LOOP',
-                'value': 2
-            },
-            {
-                'name': 'NIRFSG_VAL_AUTO',
-                'value': -1
-            }
-        ]
-    },
-    'TimerStartSource': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_STARTTRIGGER',
-                'value': 'StartTrigger'
-            },
-            {
-                'name': 'NIRFSG_VAL_SCRIPTTRIGGER0',
-                'value': 'ScriptTrigger0'
             }
         ]
     },
     'UpconverterFrequencyOffsetMode': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1760,52 +1262,7 @@ enums = {
             }
         ]
     },
-    'UseCalibration': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLE',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            }
-        ]
-    },
-    'VcoSelfCalEnabled': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_DISABLED',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 1
-            }
-        ]
-    },
-    'WaveformSource': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'name': 'NIRFSG_VAL_WGEN',
-                'value': 27000
-            },
-            {
-                'name': 'NIRFSG_VAL_P2P',
-                'value': 27001
-            },
-            {
-                'name': 'NIRFSG_VAL_USER',
-                'value': 27002
-            }
-        ]
-    },
     'WriteWaveformBurstDetection': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1824,7 +1281,6 @@ enums = {
         ]
     },
     'WriteWaveformBurstDetectionMode': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1843,7 +1299,6 @@ enums = {
         ]
     },
     'WriteWaveformNormalization': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1862,7 +1317,6 @@ enums = {
         ]
     },
     'YigMainCoilDrive': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {

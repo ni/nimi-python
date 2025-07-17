@@ -75,17 +75,17 @@ script_triggers
         passes a string of :python:`'scripttrigger0, scripttrigger1, scripttrigger2'` to the set attribute function.
 
 
-waveform
---------
+waveforms
+---------
 
-    .. py:attribute:: nirfsg.Session.waveform[]
+    .. py:attribute:: nirfsg.Session.waveforms[]
 
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
 
         .. code:: python
 
-            session.waveform['0-2'].channel_enabled = True
+            session.waveforms['0-2'].channel_enabled = True
 
         passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
 
@@ -96,21 +96,47 @@ waveform
 
         .. code:: python
 
-            session.waveform['waveform::0-waveform::2'].channel_enabled = True
+            session.waveforms['waveform::0-waveform::2'].channel_enabled = True
 
         passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
 
 
-deembedding_port
-----------------
+ports
+-----
 
-    .. py:attribute:: nirfsg.Session.deembedding_port[]
+    .. py:attribute:: nirfsg.Session.ports[]
 
         .. code:: python
 
-            session.deembedding_port['0-2'].channel_enabled = True
+            session.ports['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+lo_channels
+-----------
+
+    .. py:attribute:: nirfsg.Session.lo_channels[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.lo_channels['0-2'].channel_enabled = True
+
+        passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.lo_channels['LO0-LO2'].channel_enabled = True
+
+        passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
 
 
 
