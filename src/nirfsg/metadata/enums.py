@@ -1,66 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file is generated from NI-RFSG API metadata version 25.5.0d9999
 enums = {
-    '5696AmpBand': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_250_KHZ_-_250_MHZ',
-                'value': 96000
-            },
-            {
-                'name': 'NIRFSG_VAL_250_MHZ_-_1_GHZ',
-                'value': 96001
-            },
-            {
-                'name': 'NIRFSG_VAL_1_GHZ_-_2.4_GHZ',
-                'value': 96002
-            },
-            {
-                'name': 'NIRFSG_VAL_2.4_GHZ_-_3.86_GHZ',
-                'value': 96003
-            },
-            {
-                'name': 'NIRFSG_VAL_3.86_GHZ_-_5.37_GHZ',
-                'value': 96004
-            },
-            {
-                'name': 'NIRFSG_VAL_5.37_GHZ_-_7.45_GHZ',
-                'value': 96005
-            },
-            {
-                'name': 'NIRFSG_VAL_7.45_GHZ_-_10.4_GHZ',
-                'value': 96006
-            },
-            {
-                'name': 'NIRFSG_VAL_10.4_GHZ_-_14.4_GHZ',
-                'value': 96007
-            },
-            {
-                'name': 'NIRFSG_VAL_14.4GHZ_-_20_GHZ',
-                'value': 96008
-            },
-            {
-                'name': 'NIRFSG_VAL_LOW_GROUP_DELAY_14.4_GHZ_-_17_GHZ',
-                'value': 96009
-            },
-            {
-                'name': 'NIRFSG_VAL_LOW_GROUP_DELAY_17_GHZ_-_20_GHZ',
-                'value': 96010
-            }
-        ]
-    },
-    '5840Modulator': {
-        'values': [
-            {
-                'name': 'NIRFSG_VAL_BYPASS',
-                'value': 95000
-            },
-            {
-                'name': 'NIRFSG_VAL_ENABLED',
-                'value': 95001
-            }
-        ]
-    },
     'AllowOutOfSpecificationUserSettings': {
         'codegen_method': 'public',
         'values': [
@@ -126,7 +66,7 @@ enums = {
                     'description': 'Specifies a range from 100Hz to 1kHz.'
                 },
                 'name': 'NIRFSG_VAL_100HZ_TO_1KHZ',
-                'python_name': '_100hzto1khz',
+                'python_name': '_100Hzto1kHz',
                 'value': 18000
             },
             {
@@ -134,7 +74,7 @@ enums = {
                     'description': 'Specifies a range from 1kHz to 10kHz.'
                 },
                 'name': 'NIRFSG_VAL_1KHZ_TO_10KHZ',
-                'python_name': '_1khzto10khz',
+                'python_name': '_1kHzto10kHz',
                 'value': 18001
             },
             {
@@ -142,7 +82,7 @@ enums = {
                     'description': 'Specifies a range from 10kHz to 100kHz.'
                 },
                 'name': 'NIRFSG_VAL_10KHZ_TO_100KHZ',
-                'python_name': '_10khzto100khz',
+                'python_name': '_10kHzto100kHz',
                 'value': 18002
             }
         ]
@@ -631,44 +571,6 @@ enums = {
             }
         ]
     },
-    'Lo1OutputFilter': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_5.5GHz_HIGH_PASS',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_5.5GHz_LOW_PASS',
-                'value': 1
-            }
-        ]
-    },
-    'LoOutEnabled': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The local oscillator signal is present at the LO OUT front panel connector.'
-                },
-                'name': 'NIRFSG_VAL_DISABLE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'The local oscillator signal is  not present at the LO OUT front panel connector..'
-                },
-                'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
-            }
-        ]
-    },
     'LoOutExportConfigureFromRFSaEnable': {
         'codegen_method': 'public',
         'values': [
@@ -1001,25 +903,6 @@ enums = {
             }
         ]
     },
-    'PortTypes': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the PXIe-5840 RF OUT port.'
-                },
-                'name': 'NIRFSG_VAL_PORT_RF_OUT',
-                'value': 14501
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the PXIe-5840 RF IN port. This value is not supported as the first element of an array.'
-                },
-                'name': 'NIRFSG_VAL_PORT_RF_IN',
-                'value': 14500
-            }
-        ]
-    },
     'PowerLevelType': {
         'codegen_method': 'public',
         'values': [
@@ -1117,32 +1000,6 @@ enums = {
             }
         ]
     },
-    'RFFilter': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_HI_FREQ_MOD',
-                'value': '0'
-            },
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_LO_FREQ_MOD_4000',
-                'value': '1'
-            },
-            {
-                'documentation': {
-                    'description': 'yet to be defined'
-                },
-                'name': 'NIRFSG_VAL_LO_FREQ_MOD_2500',
-                'value': '2'
-            }
-        ]
-    },
     'RFInLoExportEnabled': {
         'codegen_method': 'public',
         'values': [
@@ -1227,7 +1084,7 @@ enums = {
                     'description': 'Uses a 10MHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': '_10mhz',
+                'python_name': '_10MHz',
                 'value': 10000000
             },
             {
@@ -1235,7 +1092,7 @@ enums = {
                     'description': 'Uses a 100MHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_100MHZ',
-                'python_name': '_100mhz',
+                'python_name': '_100MHz',
                 'value': 100000000.0
             },
             {
@@ -1243,7 +1100,7 @@ enums = {
                     'description': 'Uses a 1GHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_1GHZ',
-                'python_name': '_1ghz',
+                'python_name': '_1GHz',
                 'value': 1000000000.0
             }
         ]
@@ -1263,7 +1120,7 @@ enums = {
                     'description': 'Uses a 10MHz Reference Clock rate.'
                 },
                 'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': '_10mhz',
+                'python_name': '_10MHz',
                 'value': 10000000
             }
         ]

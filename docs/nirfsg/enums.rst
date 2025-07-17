@@ -86,7 +86,7 @@ AnalogModulationFmNarrowbandIntegrator
 
 .. py:class:: AnalogModulationFmNarrowbandIntegrator
 
-    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._100hzto1khz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._100Hzto1kHz
 
 
 
@@ -96,7 +96,7 @@ AnalogModulationFmNarrowbandIntegrator
 
 
 
-    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._1khzto10khz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._1kHzto10kHz
 
 
 
@@ -106,7 +106,7 @@ AnalogModulationFmNarrowbandIntegrator
 
 
 
-    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._10khzto100khz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._10kHzto100kHz
 
 
 
@@ -651,56 +651,6 @@ IQOutPortTermCfg
 
 
 
-Lo1OutputFilter
----------------
-
-.. py:class:: Lo1OutputFilter
-
-    .. py:attribute:: Lo1OutputFilter.HIGH
-
-
-
-        yet to be defined
-
-        
-
-
-
-    .. py:attribute:: Lo1OutputFilter.LOW
-
-
-
-        yet to be defined
-
-        
-
-
-
-LoOutEnabled
-------------
-
-.. py:class:: LoOutEnabled
-
-    .. py:attribute:: LoOutEnabled.DISABLE
-
-
-
-        The local oscillator signal is present at the LO OUT front panel connector.
-
-        
-
-
-
-    .. py:attribute:: LoOutEnabled.ENABLE
-
-
-
-        The local oscillator signal is  not present at the LO OUT front panel connector..
-
-        
-
-
-
 LoOutExportConfigureFromRFSaEnable
 ----------------------------------
 
@@ -1096,31 +1046,6 @@ PhaseContinuityEnabled
 
 
 
-PortTypes
----------
-
-.. py:class:: PortTypes
-
-    .. py:attribute:: PortTypes.OUT
-
-
-
-        Specifies the PXIe-5840 RF OUT port.
-
-        
-
-
-
-    .. py:attribute:: PortTypes.IN
-
-
-
-        Specifies the PXIe-5840 RF IN port. This value is not supported as the first element of an array.
-
-        
-
-
-
 PowerLevelType
 --------------
 
@@ -1251,41 +1176,6 @@ RFBlanking
 
 
 
-RFFilter
---------
-
-.. py:class:: RFFilter
-
-    .. py:attribute:: RFFilter.HI_FREQ_MOD
-
-
-
-        yet to be defined
-
-        
-
-
-
-    .. py:attribute:: RFFilter.LO_FREQ_MOD_4000
-
-
-
-        yet to be defined
-
-        
-
-
-
-    .. py:attribute:: RFFilter.LO_FREQ_MOD_2500
-
-
-
-        yet to be defined
-
-        
-
-
-
 RFInLoExportEnabled
 -------------------
 
@@ -1326,7 +1216,7 @@ ReferenceClockExportedRate
 
 .. py:class:: ReferenceClockExportedRate
 
-    .. py:attribute:: ReferenceClockExportedRate._10mhz
+    .. py:attribute:: ReferenceClockExportedRate._10MHz
 
 
 
@@ -1336,7 +1226,7 @@ ReferenceClockExportedRate
 
 
 
-    .. py:attribute:: ReferenceClockExportedRate._100mhz
+    .. py:attribute:: ReferenceClockExportedRate._100MHz
 
 
 
@@ -1346,7 +1236,7 @@ ReferenceClockExportedRate
 
 
 
-    .. py:attribute:: ReferenceClockExportedRate._1ghz
+    .. py:attribute:: ReferenceClockExportedRate._1GHz
 
 
 
@@ -1371,7 +1261,7 @@ ReferenceClockRate
 
 
 
-    .. py:attribute:: ReferenceClockRate._10mhz
+    .. py:attribute:: ReferenceClockRate._10MHz
 
 
 

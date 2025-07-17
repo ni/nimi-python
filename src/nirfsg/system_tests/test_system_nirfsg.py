@@ -164,7 +164,7 @@ class SystemTests:
         trigger.exported_script_trigger_output_terminal = requested_terminal_name
         assert trigger.exported_script_trigger_output_terminal == requested_terminal_name
 
-    def test_waveform_rep_cap(self, rfsg_device_session):
+    def test_waveforms_rep_cap(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
         rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
@@ -172,12 +172,12 @@ class SystemTests:
         rfsg_device_session.waveforms['mywaveform'].waveform_iq_rate = requested_waveform_iq_rate
         assert rfsg_device_session.waveforms['mywaveform'].waveform_iq_rate == requested_waveform_iq_rate
 
-    def test_port_rep_cap(self, simulated_5831_device_session):
+    def test_ports_rep_cap(self, simulated_5831_device_session):
         requested_deembedding_type = nirfsg.DeembeddingType.SCALAR
         simulated_5831_device_session.ports['if1'].deembedding_type = requested_deembedding_type
         assert simulated_5831_device_session.ports['if1'].deembedding_type == requested_deembedding_type
 
-    def test_lo_rep_cap(self, simulated_5831_device_session):
+    def test_lo_channels_rep_cap(self, simulated_5831_device_session):
         requested_lo_source = "SG_SA_Shared"
         simulated_5831_device_session.lo_channels[2].lo_source = requested_lo_source
         assert simulated_5831_device_session.lo_channels[2].lo_source == requested_lo_source

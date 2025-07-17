@@ -3572,7 +3572,7 @@ analog_modulation_fm_narrowband_integrator
 
         This property is valid only when you set the :py:attr:`nirfsg.Session.analog_modulation_type` property to :py:data:`~nirfsg.AnalogModulationType.FM` and the :py:attr:`nirfsg.Session.analog_modulation_fm_band` property to :py:data:`~nirfsg.AnalogModulationFmBand.NARROWBAND`.
 
-        **Default Value:** :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._100hzto1khz`
+        **Default Value:** :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._100Hzto1kHz`
 
         **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -3585,11 +3585,11 @@ analog_modulation_fm_narrowband_integrator
         +--------------------------------------------------------------------------+----------------+---------------------------------------------+
         | Name                                                                     | Value          | Description                                 |
         +==========================================================================+================+=============================================+
-        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._100hzto1khz`   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
+        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._100Hzto1kHz`   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
         +--------------------------------------------------------------------------+----------------+---------------------------------------------+
-        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._10khzto100khz` | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
+        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._10kHzto100kHz` | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
         +--------------------------------------------------------------------------+----------------+---------------------------------------------+
-        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._1khzto10khz`   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
+        | :py:data:`~nirfsg.AnalogModulationFmNarrowbandIntegrator._1kHzto10kHz`   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
         +--------------------------------------------------------------------------+----------------+---------------------------------------------+
 
         The following table lists the characteristics of this property.
@@ -6768,7 +6768,7 @@ exported_ref_clock_rate
 
         Specifies the Reference Clock Rate, in Hz, of the signal sent to the Reference Clock Export Output Terminal. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ReferenceClockExportedRate._10mhz`
+        **Default Value:** :py:data:`~nirfsg.ReferenceClockExportedRate._10MHz`
 
         **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6777,11 +6777,11 @@ exported_ref_clock_rate
         +-------------------------------------------------------+--------------+-------------------------------------+
         | Name                                                  | Value        | Description                         |
         +=======================================================+==============+=====================================+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate._10mhz`  | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
+        | :py:data:`~nirfsg.ReferenceClockExportedRate._10MHz`  | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
         +-------------------------------------------------------+--------------+-------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate._100mhz` | 100000000.0  | Uses a 100MHz Reference Clock rate. |
+        | :py:data:`~nirfsg.ReferenceClockExportedRate._100MHz` | 100000000.0  | Uses a 100MHz Reference Clock rate. |
         +-------------------------------------------------------+--------------+-------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate._1ghz`   | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
+        | :py:data:`~nirfsg.ReferenceClockExportedRate._1GHz`   | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
         +-------------------------------------------------------+--------------+-------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -10434,7 +10434,7 @@ ref_clock_rate
 
         **Valid Values:**
 
-        PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the :py:data:`~nirfsg.ReferenceClockRate.AUTO` and :py:data:`~nirfsg.ReferenceClockRate._10mhz` values.
+        PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the :py:data:`~nirfsg.ReferenceClockRate.AUTO` and :py:data:`~nirfsg.ReferenceClockRate._10MHz` values.
 
         PXIe-5841 with PXIe-5655, PXIe-5842: 10 MHz, 100 MHz, 270 MHz, and 3.84 MHz
 
@@ -10465,7 +10465,7 @@ ref_clock_rate
         +==============================================+===================================================================================================================================+
         | :py:data:`~nirfsg.ReferenceClockRate.AUTO`   | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
         +----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockRate._10mhz` | Uses a 10 MHz Reference Clock rate.                                                                                               |
+        | :py:data:`~nirfsg.ReferenceClockRate._10MHz` | Uses a 10 MHz Reference Clock rate.                                                                                               |
         +----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: Automatic detection of the Reference Clock rate is supported on only the PXIe-5654/5654 with PXIe-5696. For all other supported devices, NI-RFSG uses the default Reference Clock rate of 10MHz.

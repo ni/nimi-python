@@ -39,15 +39,15 @@ class AnalogModulationFmBand(Enum):
 
 
 class AnalogModulationFmNarrowbandIntegrator(Enum):
-    _100hzto1khz = 18000
+    _100Hzto1kHz = 18000
     r'''
     Specifies a range from 100Hz to 1kHz.
     '''
-    _1khzto10khz = 18001
+    _1kHzto10kHz = 18001
     r'''
     Specifies a range from 1kHz to 10kHz.
     '''
-    _10khzto100khz = 18002
+    _10kHzto100kHz = 18002
     r'''
     Specifies a range from 10kHz to 100kHz.
     '''
@@ -284,28 +284,6 @@ class IQOutPortTermCfg(Enum):
     '''
 
 
-class Lo1OutputFilter(Enum):
-    HIGH = 0
-    r'''
-    yet to be defined
-    '''
-    LOW = 1
-    r'''
-    yet to be defined
-    '''
-
-
-class LoOutEnabled(Enum):
-    DISABLE = 0
-    r'''
-    The local oscillator signal is present at the LO OUT front panel connector.
-    '''
-    ENABLE = 1
-    r'''
-    The local oscillator signal is  not present at the LO OUT front panel connector..
-    '''
-
-
 class LoOutExportConfigureFromRFSaEnable(Enum):
     DISABLE = 0
     r'''
@@ -477,17 +455,6 @@ class PhaseContinuityEnabled(Enum):
     '''
 
 
-class PortTypes(Enum):
-    OUT = 14501
-    r'''
-    Specifies the PXIe-5840 RF OUT port.
-    '''
-    IN = 14500
-    r'''
-    Specifies the PXIe-5840 RF IN port. This value is not supported as the first element of an array.
-    '''
-
-
 class PowerLevelType(Enum):
     AVERAGE = 7000
     r'''
@@ -544,21 +511,6 @@ class RFBlanking(Enum):
     '''
 
 
-class RFFilter(Enum):
-    HI_FREQ_MOD = '0'
-    r'''
-    yet to be defined
-    '''
-    LO_FREQ_MOD_4000 = '1'
-    r'''
-    yet to be defined
-    '''
-    LO_FREQ_MOD_2500 = '2'
-    r'''
-    yet to be defined
-    '''
-
-
 class RFInLoExportEnabled(Enum):
     UNSPECIFIED = -2
     r'''
@@ -575,15 +527,15 @@ class RFInLoExportEnabled(Enum):
 
 
 class ReferenceClockExportedRate(Enum):
-    _10mhz = 10000000
+    _10MHz = 10000000
     r'''
     Uses a 10MHz Reference Clock rate.
     '''
-    _100mhz = 100000000.0
+    _100MHz = 100000000.0
     r'''
     Uses a 100MHz Reference Clock rate.
     '''
-    _1ghz = 1000000000.0
+    _1GHz = 1000000000.0
     r'''
     Uses a 1GHz Reference Clock rate.
     '''
@@ -594,7 +546,7 @@ class ReferenceClockRate(Enum):
     r'''
     Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it.
     '''
-    _10mhz = 10000000
+    _10MHz = 10000000
     r'''
     Uses a 10MHz Reference Clock rate.
     '''
