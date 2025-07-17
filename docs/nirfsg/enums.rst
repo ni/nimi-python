@@ -86,7 +86,7 @@ AnalogModulationFmNarrowbandIntegrator
 
 .. py:class:: AnalogModulationFmNarrowbandIntegrator
 
-    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._100Hzto1kHz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator.RANGE_100_HERTZ_TO_1_KILOHERTZ
 
 
 
@@ -96,7 +96,7 @@ AnalogModulationFmNarrowbandIntegrator
 
 
 
-    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._1kHzto10kHz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator.RANGE_1_KILOHERTZ_TO_10_KILOHERTZ
 
 
 
@@ -106,7 +106,7 @@ AnalogModulationFmNarrowbandIntegrator
 
 
 
-    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator._10kHzto100kHz
+    .. py:attribute:: AnalogModulationFmNarrowbandIntegrator.RANGE_10_KILOHERTZ_TO_100_KILOHERTZ
 
 
 
@@ -1216,7 +1216,7 @@ ReferenceClockExportedRate
 
 .. py:class:: ReferenceClockExportedRate
 
-    .. py:attribute:: ReferenceClockExportedRate._10MHz
+    .. py:attribute:: ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ
 
 
 
@@ -1226,7 +1226,7 @@ ReferenceClockExportedRate
 
 
 
-    .. py:attribute:: ReferenceClockExportedRate._100MHz
+    .. py:attribute:: ReferenceClockExportedRate.CLOCK_RATE_100_MEGAHERTZ
 
 
 
@@ -1236,7 +1236,7 @@ ReferenceClockExportedRate
 
 
 
-    .. py:attribute:: ReferenceClockExportedRate._1GHz
+    .. py:attribute:: ReferenceClockExportedRate.CLOCK_RATE_1_GIGAHERTZ
 
 
 
@@ -1261,7 +1261,7 @@ ReferenceClockRate
 
 
 
-    .. py:attribute:: ReferenceClockRate._10MHz
+    .. py:attribute:: ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ
 
 
 
@@ -1551,16 +1551,6 @@ Signal
 
 .. py:class:: Signal
 
-    .. py:attribute:: Signal.CONFIGURATION_SETTLED_EVENT
-
-
-
-        Exports a Configuration Settled Event.
-
-        
-
-
-
     .. py:attribute:: Signal.START_TRIGGER
 
 
@@ -1621,16 +1611,6 @@ Signal
 
 
 
-    .. py:attribute:: Signal.CONFIGURATION_LIST_STEP_TRIGGER
-
-
-
-        Exports a Configuration List Step Trigger.
-
-        
-
-
-
 SoftwareTriggerType
 -------------------
 
@@ -1661,7 +1641,7 @@ SparameterOrientation
 
 .. py:class:: SparameterOrientation
 
-    .. py:attribute:: SparameterOrientation.PORT1
+    .. py:attribute:: SparameterOrientation.PORT1_TOWARDS_DUT
 
 
 
@@ -1671,7 +1651,7 @@ SparameterOrientation
 
 
 
-    .. py:attribute:: SparameterOrientation.PORT2
+    .. py:attribute:: SparameterOrientation.PORT2_TOWARDS_DUT
 
 
 

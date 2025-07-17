@@ -311,7 +311,7 @@ class _SessionBase(object):
 
     This property is valid only when you set the analog_modulation_type property to AnalogModulationType.FM and the analog_modulation_fm_band property to AnalogModulationFmBand.NARROWBAND.
 
-    **Default Value:** AnalogModulationFmNarrowbandIntegrator._100Hzto1kHz
+    **Default Value:** AnalogModulationFmNarrowbandIntegrator.RANGE_100_HERTZ_TO_1_KILOHERTZ
 
     **Supported Devices:** PXIe-5654/5654 with PXIe-5696
 
@@ -321,15 +321,15 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-------------------------------------------------------+----------------+---------------------------------------------+
-    | Name                                                  | Value          | Description                                 |
-    +=======================================================+================+=============================================+
-    | AnalogModulationFmNarrowbandIntegrator._100Hzto1kHz   | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
-    +-------------------------------------------------------+----------------+---------------------------------------------+
-    | AnalogModulationFmNarrowbandIntegrator._10kHzto100kHz | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
-    +-------------------------------------------------------+----------------+---------------------------------------------+
-    | AnalogModulationFmNarrowbandIntegrator._1kHzto10kHz   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
-    +-------------------------------------------------------+----------------+---------------------------------------------+
+    +----------------------------------------------------------------------------+----------------+---------------------------------------------+
+    | Name                                                                       | Value          | Description                                 |
+    +============================================================================+================+=============================================+
+    | AnalogModulationFmNarrowbandIntegrator.RANGE_100_HERTZ_TO_1_KILOHERTZ      | 18000 (0x4650) | Specifies a range from 100Â Hz to 1Â kHz.   |
+    +----------------------------------------------------------------------------+----------------+---------------------------------------------+
+    | AnalogModulationFmNarrowbandIntegrator.RANGE_10_KILOHERTZ_TO_100_KILOHERTZ | 18002 (0x4652) | Specifies a range from 10Â kHz to 100Â kHz. |
+    +----------------------------------------------------------------------------+----------------+---------------------------------------------+
+    | AnalogModulationFmNarrowbandIntegrator.RANGE_1_KILOHERTZ_TO_10_KILOHERTZ   | 18001 (0x4651) | Specifies a range from 1Â kHz to 10Â kHz.   |
+    +----------------------------------------------------------------------------+----------------+---------------------------------------------+
     '''
     analog_modulation_fm_sensitivity = _attributes.AttributeViReal64(1150166)
     '''Type: float
@@ -2084,21 +2084,21 @@ class _SessionBase(object):
 
     Specifies the Reference Clock Rate, in Hz, of the signal sent to the Reference Clock Export Output Terminal. To set this property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** ReferenceClockExportedRate._10MHz
+    **Default Value:** ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ
 
     **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
     **Defined Values**:
 
-    +------------------------------------+--------------+-------------------------------------+
-    | Name                               | Value        | Description                         |
-    +====================================+==============+=====================================+
-    | ReferenceClockExportedRate._10MHz  | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
-    +------------------------------------+--------------+-------------------------------------+
-    | ReferenceClockExportedRate._100MHz | 100000000.0  | Uses a 100MHz Reference Clock rate. |
-    +------------------------------------+--------------+-------------------------------------+
-    | ReferenceClockExportedRate._1GHz   | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
-    +------------------------------------+--------------+-------------------------------------+
+    +-----------------------------------------------------+--------------+-------------------------------------+
+    | Name                                                | Value        | Description                         |
+    +=====================================================+==============+=====================================+
+    | ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ  | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
+    +-----------------------------------------------------+--------------+-------------------------------------+
+    | ReferenceClockExportedRate.CLOCK_RATE_100_MEGAHERTZ | 100000000.0  | Uses a 100MHz Reference Clock rate. |
+    +-----------------------------------------------------+--------------+-------------------------------------+
+    | ReferenceClockExportedRate.CLOCK_RATE_1_GIGAHERTZ   | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
+    +-----------------------------------------------------+--------------+-------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4123,7 +4123,7 @@ class _SessionBase(object):
 
     **Valid Values:**
 
-    PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the ReferenceClockRate.AUTO and ReferenceClockRate._10MHz values.
+    PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the ReferenceClockRate.AUTO and ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ values.
 
     PXIe-5841 with PXIe-5655, PXIe-5842: 10 MHz, 100 MHz, 270 MHz, and 3.84 MHz
 
@@ -4149,13 +4149,13 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-    | Value                     | Description                                                                                                                       |
-    +===========================+===================================================================================================================================+
-    | ReferenceClockRate.AUTO   | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
-    +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-    | ReferenceClockRate._10MHz | Uses a 10 MHz Reference Clock rate.                                                                                               |
-    +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+    +--------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+    | Value                                      | Description                                                                                                                       |
+    +============================================+===================================================================================================================================+
+    | ReferenceClockRate.AUTO                    | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
+    +--------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+    | ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ | Uses a 10 MHz Reference Clock rate.                                                                                               |
+    +--------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
     Note: Automatic detection of the Reference Clock rate is supported on only the PXIe-5654/5654 with PXIe-5696. For all other supported devices, NI-RFSG uses the default Reference Clock rate of 10MHz.
 
@@ -7050,13 +7050,13 @@ class Session(_SessionBase):
 
             sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :
 
-                +-----------------------------+----------------+-----------------------------------------------------+
-                | Name                        | Value          | Description                                         |
-                +=============================+================+=====================================================+
-                | SparameterOrientation.PORT1 | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
-                +-----------------------------+----------------+-----------------------------------------------------+
-                | SparameterOrientation.PORT2 | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
-                +-----------------------------+----------------+-----------------------------------------------------+
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                    | Value          | Description                                         |
+                +=========================================+================+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
 
         '''
         if type(sparameter_orientation) is not enums.SparameterOrientation:
@@ -7161,25 +7161,25 @@ class Session(_SessionBase):
 
                  **Defined Values** :
 
-                +----------------------------------------+---------+--------------------------------------------+
-                | Name                                   | Value   | Description                                |
-                +========================================+=========+============================================+
-                | Signal.START_TRIGGER                   | 0 (0x0) | Exports a Start Trigger.                   |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.SCRIPT_TRIGGER                  | 1 (0x1) | Exports a Script Trigger.                  |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.MARKER_EVENT                    | 2 (0x2) | Exports a Marker Event.                    |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.REF_CLOCK                       | 3 (0x3) | Exports the Reference Clock.               |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.STARTED_EVENT                   | 4 (0x4) | Exports a Started Event.                   |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.DONE_EVENT                      | 5 (0x5) | Exports a Done Event.                      |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
-                +----------------------------------------+---------+--------------------------------------------+
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Name                                       | Value   | Description                                |
+                +============================================+=========+============================================+
+                | Signal.START_TRIGGER                       | 0 (0x0) | Exports a Start Trigger.                   |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.SCRIPT_TRIGGER                      | 1 (0x1) | Exports a Script Trigger.                  |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.MARKER_EVENT                        | 2 (0x2) | Exports a Marker Event.                    |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.REF_CLOCK                           | 3 (0x3) | Exports the Reference Clock.               |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.STARTED_EVENT                       | 4 (0x4) | Exports a Started Event.                   |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.DONE_EVENT                          | 5 (0x5) | Exports a Done Event.                      |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +--------------------------------------------+---------+--------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -7479,25 +7479,25 @@ class Session(_SessionBase):
         Args:
             signal (enums.Signal): Specifies the signal to query. **Defined Values** :
 
-                +----------------------------------------+---------+--------------------------------------------+
-                | Name                                   | Value   | Description                                |
-                +========================================+=========+============================================+
-                | Signal.START_TRIGGER                   | 0 (0x0) | Exports a Start Trigger.                   |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.SCRIPT_TRIGGER                  | 1 (0x1) | Exports a Script Trigger.                  |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.MARKER_EVENT                    | 2 (0x2) | Exports a Marker Event.                    |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.REF_CLOCK                       | 3 (0x3) | Exports the Reference Clock.               |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.STARTED_EVENT                   | 4 (0x4) | Exports a Started Event.                   |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.DONE_EVENT                      | 5 (0x5) | Exports a Done Event.                      |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
-                +----------------------------------------+---------+--------------------------------------------+
-                | Signal.CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
-                +----------------------------------------+---------+--------------------------------------------+
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Name                                       | Value   | Description                                |
+                +============================================+=========+============================================+
+                | Signal.START_TRIGGER                       | 0 (0x0) | Exports a Start Trigger.                   |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.SCRIPT_TRIGGER                      | 1 (0x1) | Exports a Script Trigger.                  |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.MARKER_EVENT                        | 2 (0x2) | Exports a Marker Event.                    |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.REF_CLOCK                           | 3 (0x3) | Exports the Reference Clock.               |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.STARTED_EVENT                       | 4 (0x4) | Exports a Started Event.                   |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | Signal.DONE_EVENT                          | 5 (0x5) | Exports a Done Event.                      |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
+                +--------------------------------------------+---------+--------------------------------------------+
+                | NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
+                +--------------------------------------------+---------+--------------------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

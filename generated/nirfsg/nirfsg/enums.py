@@ -39,15 +39,15 @@ class AnalogModulationFmBand(Enum):
 
 
 class AnalogModulationFmNarrowbandIntegrator(Enum):
-    _100Hzto1kHz = 18000
+    RANGE_100_HERTZ_TO_1_KILOHERTZ = 18000
     r'''
     Specifies a range from 100Hz to 1kHz.
     '''
-    _1kHzto10kHz = 18001
+    RANGE_1_KILOHERTZ_TO_10_KILOHERTZ = 18001
     r'''
     Specifies a range from 1kHz to 10kHz.
     '''
-    _10kHzto100kHz = 18002
+    RANGE_10_KILOHERTZ_TO_100_KILOHERTZ = 18002
     r'''
     Specifies a range from 10kHz to 100kHz.
     '''
@@ -527,15 +527,15 @@ class RFInLoExportEnabled(Enum):
 
 
 class ReferenceClockExportedRate(Enum):
-    _10MHz = 10000000
+    CLOCK_RATE_10_MEGAHERTZ = 10000000
     r'''
     Uses a 10MHz Reference Clock rate.
     '''
-    _100MHz = 100000000.0
+    CLOCK_RATE_100_MEGAHERTZ = 100000000.0
     r'''
     Uses a 100MHz Reference Clock rate.
     '''
-    _1GHz = 1000000000.0
+    CLOCK_RATE_1_GIGAHERTZ = 1000000000.0
     r'''
     Uses a 1GHz Reference Clock rate.
     '''
@@ -546,7 +546,7 @@ class ReferenceClockRate(Enum):
     r'''
     Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it.
     '''
-    _10MHz = 10000000
+    CLOCK_RATE_10_MEGAHERTZ = 10000000
     r'''
     Uses a 10MHz Reference Clock rate.
     '''
@@ -670,10 +670,6 @@ class SelfCalibrateRangeStepsToOmit(IntFlag):
 
 
 class Signal(Enum):
-    CONFIGURATION_SETTLED_EVENT = 7
-    r'''
-    Exports a Configuration Settled Event.
-    '''
     START_TRIGGER = 0
     r'''
     Exports a Start Trigger.
@@ -698,10 +694,6 @@ class Signal(Enum):
     r'''
     Exports a Done Event.
     '''
-    CONFIGURATION_LIST_STEP_TRIGGER = 6
-    r'''
-    Exports a Configuration List Step Trigger.
-    '''
 
 
 class SoftwareTriggerType(Enum):
@@ -716,11 +708,11 @@ class SoftwareTriggerType(Enum):
 
 
 class SparameterOrientation(Enum):
-    PORT1 = 24000
+    PORT1_TOWARDS_DUT = 24000
     r'''
     Port 1 of the S2P is oriented towards the DUT port.
     '''
-    PORT2 = 24001
+    PORT2_TOWARDS_DUT = 24001
     r'''
     Port 2 of the S2P is oriented towards the DUT port.
     '''
