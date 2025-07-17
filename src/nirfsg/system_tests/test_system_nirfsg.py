@@ -537,8 +537,8 @@ class SystemTests:
 
     @pytest.mark.skipif(sys.platform == "linux", reason="Function not supported on Linux OS")
     def test_deembedding_table_with_s2p_file(self, rfsg_device_session):
-        rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2)
-        rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1)
+        rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
+        rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT)
         rfsg_device_session.configure_deembedding_table_interpolation_linear('', 'myTable1', nirfsg.Format.MAGNITUDE_AND_PHASE)
         rfsg_device_session.ports[''].deembedding_selected_table = 'myTable1'
         with rfsg_device_session.initiate():
