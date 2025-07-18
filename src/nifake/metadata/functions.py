@@ -2990,10 +2990,10 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'FunctionWithNumpy3dArrayInputParameter': {
+    'FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Function that takes a 3D numpy array as an input parameter.'
+            'description': 'Function that takes a 3D numpy array of numpy complex128 as an input parameter.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -3002,7 +3002,7 @@ functions = {
                 'documentation_filename': 'numpy_method',
                 'library_interpreter_filename': 'numpy_write_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'numpy_3d_array_method'
+                'session_filename': 'numpy_write_method'
             }
         ],
         'parameters': [
@@ -3020,9 +3020,9 @@ functions = {
                 'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the 3D array of complex numbers to write. '
+                    'description': 'Specifies the 3D array of numpy complex numbers to write. '
                 },
-                'name': 'frequency',
+                'name': 'multidimensionalArray',
                 'type': 'NIComplexNumber[]',
                 'numpy': True,
                 'use_numpy_array': True,

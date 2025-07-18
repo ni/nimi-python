@@ -34,10 +34,10 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             complex_dtype = numpy.dtype(library_type)
             if value.ndim > 1:
                 # we create a flattened view of the multi-dimensional numpy array
-                structured_array = value.reshape(-1).view(complex_dtype)
+                restructured_array_view = value.ravel().view(complex_dtype)
             else:
-                structured_array = value.view(complex_dtype)
-            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+                restructured_array_view = value.view(complex_dtype)
+            return restructured_array_view.ctypes.data_as(ctypes.POINTER(library_type))
         else:
             return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
@@ -222,17 +222,17 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def function_with3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        multidimensional_array_ctype = _get_ctypes_pointer_for_buffer(value=multidimensional_array, library_type=_complextype.NIComplexNumber)  # case B510
+        error_code = self._library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(vi_ctype, multidimensional_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def function_with_intflag_parameter(self, flag):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         flag_ctype = _visatype.ViUInt64(flag.value)  # case S130
         error_code = self._library.niFake_FunctionWithIntflagParameter(vi_ctype, flag_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def function_with_numpy3d_array_input_parameter(self, frequency):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        frequency_ctype = _get_ctypes_pointer_for_buffer(value=frequency, library_type=_complextype.NIComplexNumber)  # case B510
-        error_code = self._library.niFake_FunctionWithNumpy3dArrayInputParameter(vi_ctype, frequency_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

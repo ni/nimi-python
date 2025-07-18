@@ -132,10 +132,7 @@ def _get_library_interpreter_output_param_return_snippet(output_parameter, param
     val_suffix = '' if is_custom_type else '.value'
 
     if output_parameter['use_array']:
-        if output_parameter['numpy'] and output_parameter['complex_type'] is not None:
-            snippet = 'list({}_array)'.format(output_parameter['python_name'])
-        else:
-            snippet = '{}_array'.format(output_parameter['python_name'])
+        snippet = '{}_array'.format(output_parameter['python_name'])
     elif output_parameter['is_buffer']:
         if output_parameter['size']['mechanism'] == 'fixed':
             size = str(output_parameter['size']['value'])

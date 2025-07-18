@@ -945,6 +945,27 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         self._interpreter.fetch_waveform_into(waveform_data)
 
+    def function_with3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):
+        r'''function_with3d_numpy_array_of_numpy_complex128_input_parameter
+
+        Method that takes a 3D numpy array of numpy complex128 as an input parameter.
+
+        Args:
+            multidimensional_array (numpy.array(dtype=numpy.complex128)): Specifies the 3D array of numpy complex numbers to write.
+
+        '''
+        import numpy
+
+        if type(multidimensional_array) is not numpy.ndarray:
+            raise TypeError('multidimensional_array must be {0}, is {1}'.format(numpy.ndarray, type(multidimensional_array)))
+        if numpy.isfortran(multidimensional_array) is True:
+            raise TypeError('multidimensional_array must be in C-order')
+        if multidimensional_array.dtype is not numpy.dtype('complex128'):
+            raise TypeError('multidimensional_array must be numpy.ndarray of dtype=complex128, is ' + str(multidimensional_array.dtype))
+        if multidimensional_array.ndim != 3:
+            raise TypeError('multidimensional_array must be numpy.ndarray of dimension=3, is ' + str(multidimensional_array.ndim))
+        self._interpreter.function_with3d_numpy_array_of_numpy_complex128_input_parameter(multidimensional_array)
+
     @ivi_synchronized
     def function_with_intflag_parameter(self, flag):
         r'''function_with_intflag_parameter
@@ -958,25 +979,6 @@ class Session(_SessionBase):
         if type(flag) is not enums.IntFlagEnum:
             raise TypeError('Parameter flag must be of type ' + str(enums.IntFlagEnum))
         self._interpreter.function_with_intflag_parameter(flag)
-
-    def function_with_numpy3d_array_input_parameter(self, frequency):
-        r'''function_with_numpy3d_array_input_parameter
-
-        Method that takes a 3D numpy array as an input parameter.
-
-        Args:
-            frequency (numpy.array(dtype=numpy.complex128)): Specifies the 3D array of complex numbers to write.
-
-        '''
-        import numpy
-
-        if type(frequency) is not numpy.ndarray:
-            raise TypeError('frequency must be {0}, is {1}'.format(numpy.ndarray, type(frequency)))
-        if numpy.isfortran(frequency) is True:
-            raise TypeError('frequency must be in C-order')
-        if frequency.ndim != 3:
-            raise TypeError('frequency must be numpy.ndarray of dimension=3, is ' + str(frequency.ndim))
-        self._interpreter.function_with_numpy3d_array_input_parameter(frequency)
 
     @ivi_synchronized
     def get_a_boolean(self):

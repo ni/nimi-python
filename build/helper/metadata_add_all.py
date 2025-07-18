@@ -133,9 +133,9 @@ def _add_complex_type(parameter):
 
 
 def _add_array_dimension(parameter):
-    '''Adds a array_dimension parameter to the metadata for 3d arrays'''
+    '''Adds a array_dimension parameter to the metadata for multi dimensional arrays'''
     if 'array_dimension' not in parameter:
-        parameter['array_dimension'] = 0
+        parameter['array_dimension'] = 1
 
 
 def _add_numpy_info(parameter, parameters, config):

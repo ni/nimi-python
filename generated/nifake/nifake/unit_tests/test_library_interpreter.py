@@ -899,7 +899,7 @@ class TestLibraryInterpreter:
             _matchers.NIComplexI16PointerMatcher(waveform_data_pointer, number_of_samples)
         )
 
-    def test_function_with_numpy3d_array_input_parameter(self):
+    def test_write_3d_numpy_array_of_numpy_complex128(self):
         from nifake._complextype import NIComplexNumber
 
         array_3d = numpy.full((2, 3, 4), 1.0 + 2.0j, dtype=numpy.complex128)
@@ -909,38 +909,38 @@ class TestLibraryInterpreter:
         for i, value in enumerate(flattened_array):
             complex_array[i] = NIComplexNumber(value.real, value.imag)
         array_3d_ptr = ctypes.cast(complex_array, ctypes.POINTER(NIComplexNumber))
-        self.patched_library.niFake_FunctionWithNumpy3dArrayInputParameter.side_effect = self.side_effects_helper.niFake_FunctionWithNumpy3dArrayInputParameter
+        self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.side_effect = self.side_effects_helper.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter
         interpreter = self.get_initialized_library_interpreter()
-        interpreter.function_with_numpy3d_array_input_parameter(array_3d)
-        self.patched_library.niFake_FunctionWithNumpy3dArrayInputParameter.assert_called_once_with(
+        interpreter.function_with3d_numpy_array_of_numpy_complex128_input_parameter(array_3d)
+        self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.assert_called_once_with(
             _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
             _matchers.NIComplexNumberPointerMatcher(array_3d_ptr, number_of_samples)
         )
 
-    def test_numpy3dcomplexarrayinput_nomemorycopy(self):
+    def test_no_memorycopy_with_multi_dimensional_numpy_complex128_array(self):
         array_3d = numpy.full((2, 3, 4), 1.0 + 2.0j, dtype=numpy.complex128)
-        self.patched_library.niFake_FunctionWithNumpy3dArrayInputParameter.side_effect = self.side_effects_helper.niFake_FunctionWithNumpy3dArrayInputParameter
+        self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.side_effect = self.side_effects_helper.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter
         interpreter = self.get_initialized_library_interpreter()
-        interpreter.function_with_numpy3d_array_input_parameter(array_3d)
-        args, kwargs = self.patched_library.niFake_FunctionWithNumpy3dArrayInputParameter.call_args
+        interpreter.function_with3d_numpy_array_of_numpy_complex128_input_parameter(array_3d)
+        args, kwargs = self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.call_args
         actual_pointer = args[1]
-        numpy_addr = array_3d.__array_interface__['data'][0]
-        ctypes_addr = ctypes.addressof(actual_pointer.contents)
-        assert numpy_addr == ctypes_addr, f"Addresses do NOT match: numpy={numpy_addr}, ctypes={ctypes_addr}"
+        input_address = array_3d.__array_interface__['data'][0]
+        address_passed_to_library = ctypes.addressof(actual_pointer.contents)
+        assert input_address == address_passed_to_library, f"Addresses do NOT match: input_address={input_address}, address_passed_to_library={address_passed_to_library}"
 
-    def test_numpy1dcomplexarrayinput_nomemorycopy(self):
-        waveform_data = numpy.full(1000, 0.707 + 0.707j, dtype=numpy.complex128)
+    def test_no_memorycopy_with_numpy_complex64_array(self):
+        array_1d = numpy.full(1000, 0.707 + 0.707j, dtype=numpy.complex64)
         self.patched_library.niFake_WriteWaveformNumpyComplex64.side_effect = (
             self.side_effects_helper.niFake_WriteWaveformNumpyComplex64
         )
         interpreter = self.get_initialized_library_interpreter()
-        interpreter.write_waveform_numpy_complex64(waveform_data)
+        interpreter.write_waveform_numpy_complex64(array_1d)
         args, kwargs = self.patched_library.niFake_WriteWaveformNumpyComplex64.call_args
         actual_pointer = args[2]
-        numpy_addr = waveform_data.__array_interface__['data'][0]
-        ctypes_addr = ctypes.addressof(actual_pointer.contents)
-        assert numpy_addr == ctypes_addr, (
-            f"Addresses do NOT match: numpy={numpy_addr}, ctypes={ctypes_addr}"
+        input_address = array_1d.__array_interface__['data'][0]
+        address_passed_to_library = ctypes.addressof(actual_pointer.contents)
+        assert input_address == address_passed_to_library, (
+            f"Addresses do NOT match: input_address={input_address}, address_passed_to_library={address_passed_to_library}"
         )
 
     def test_matcher_prints(self):

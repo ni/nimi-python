@@ -55,10 +55,10 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
             complex_dtype = numpy.dtype(library_type)
             if value.ndim > 1:
                 # we create a flattened view of the multi-dimensional numpy array
-                structured_array = value.reshape(-1).view(complex_dtype)
+                restructured_array_view = value.ravel().view(complex_dtype)
             else:
-                structured_array = value.view(complex_dtype)
-            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+                restructured_array_view = value.view(complex_dtype)
+            return restructured_array_view.ctypes.data_as(ctypes.POINTER(library_type))
         else:
             return numpy.ctypeslib.as_ctypes(value)
         % else:
