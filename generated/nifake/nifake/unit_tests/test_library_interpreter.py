@@ -899,7 +899,7 @@ class TestLibraryInterpreter:
             _matchers.NIComplexI16PointerMatcher(waveform_data_pointer, number_of_samples)
         )
 
-    def test_create_deembedding_sparameter_table_array(self):
+    def test_function_with_numpy3d_array_input_parameter(self):
         from nifake._complextype import NIComplexNumber
 
         array_3d = numpy.full((2, 3, 4), 1.0 + 2.0j, dtype=numpy.complex128)
