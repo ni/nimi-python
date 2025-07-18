@@ -42,6 +42,8 @@ class SideEffectsHelper(object):
         self._defaults['FetchWaveform']['return'] = 0
         self._defaults['FetchWaveform']['waveformData'] = None
         self._defaults['FetchWaveform']['actualNumberOfSamples'] = None
+        self._defaults['FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter'] = {}
+        self._defaults['FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter']['return'] = 0
         self._defaults['FunctionWithIntflagParameter'] = {}
         self._defaults['FunctionWithIntflagParameter']['return'] = 0
         self._defaults['FunctionWithRepeatedCapabilityType'] = {}
@@ -338,6 +340,11 @@ class SideEffectsHelper(object):
         if actual_number_of_samples is not None:
             actual_number_of_samples.contents.value = self._defaults['FetchWaveform']['actualNumberOfSamples']
         return self._defaults['FetchWaveform']['return']
+
+    def niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(self, vi, multidimensional_array):  # noqa: N802
+        if self._defaults['FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter']['return'] != 0:
+            return self._defaults['FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter']['return']
+        return self._defaults['FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter']['return']
 
     def niFake_FunctionWithIntflagParameter(self, vi, flag):  # noqa: N802
         if self._defaults['FunctionWithIntflagParameter']['return'] != 0:
@@ -1043,6 +1050,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_ExportAttributeConfigurationBuffer.return_value = 0
         mock_library.niFake_FetchWaveform.side_effect = MockFunctionCallError("niFake_FetchWaveform")
         mock_library.niFake_FetchWaveform.return_value = 0
+        mock_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.side_effect = MockFunctionCallError("niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter")
+        mock_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.return_value = 0
         mock_library.niFake_FunctionWithIntflagParameter.side_effect = MockFunctionCallError("niFake_FunctionWithIntflagParameter")
         mock_library.niFake_FunctionWithIntflagParameter.return_value = 0
         mock_library.niFake_FunctionWithRepeatedCapabilityType.side_effect = MockFunctionCallError("niFake_FunctionWithRepeatedCapabilityType")
