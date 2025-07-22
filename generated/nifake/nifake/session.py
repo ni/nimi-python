@@ -945,8 +945,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         self._interpreter.fetch_waveform_into(waveform_data)
 
-    def function_with3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):
-        r'''function_with3d_numpy_array_of_numpy_complex128_input_parameter
+    def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):
+        r'''function_with_3d_numpy_array_of_numpy_complex128_input_parameter
 
         Method that takes a 3D numpy array of numpy complex128 as an input parameter.
 
@@ -964,7 +964,7 @@ class Session(_SessionBase):
             raise TypeError('multidimensional_array must be numpy.ndarray of dtype=complex128, is ' + str(multidimensional_array.dtype))
         if multidimensional_array.ndim != 3:
             raise TypeError('multidimensional_array must be numpy.ndarray of dimension=3, is ' + str(multidimensional_array.ndim))
-        self._interpreter.function_with3d_numpy_array_of_numpy_complex128_input_parameter(multidimensional_array)
+        self._interpreter.function_with_3d_numpy_array_of_numpy_complex128_input_parameter(multidimensional_array)
 
     @ivi_synchronized
     def function_with_intflag_parameter(self, flag):
@@ -1703,6 +1703,8 @@ class Session(_SessionBase):
             raise TypeError('waveform must be in C-order')
         if waveform.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform must be numpy.ndarray of dtype=float64, is ' + str(waveform.dtype))
+        if waveform.ndim != 1:
+            raise TypeError('waveform must be numpy.ndarray of dimension=1, is ' + str(waveform.ndim))
         self._interpreter.write_waveform_numpy(waveform)
 
     @ivi_synchronized
@@ -1723,6 +1725,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('complex128'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_waveform_numpy_complex128(waveform_data_array)
 
     @ivi_synchronized
@@ -1743,6 +1747,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('complex64'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_waveform_numpy_complex64(waveform_data_array)
 
     @ivi_synchronized
@@ -1763,6 +1769,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_waveform_numpy_complex_interleaved_i16(waveform_data_array)
 
     def _close(self):

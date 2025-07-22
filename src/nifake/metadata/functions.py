@@ -3030,6 +3030,7 @@ functions = {
                 'array_dimension': 3
             },
         ],
+        'python_name': 'function_with_3d_numpy_array_of_numpy_complex128_input_parameter',
         'returns': 'ViStatus',
         'use_session_lock': False
     },

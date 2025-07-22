@@ -1703,6 +1703,8 @@ class _SessionBase(object):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('float64'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=float64, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         waveform_handle = self._interpreter.create_waveform_f64_numpy(self._repeated_capability, waveform_data_array)
         return waveform_handle
 
@@ -1876,6 +1878,8 @@ class _SessionBase(object):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         waveform_handle = self._interpreter.create_waveform_i16_numpy(self._repeated_capability, waveform_data_array)
         return waveform_handle
 
@@ -2687,6 +2691,8 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('int16'):
             raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
+        if data.ndim != 1:
+            raise TypeError('data must be numpy.ndarray of dimension=1, is ' + str(data.ndim))
         self._interpreter.write_binary16_waveform_numpy(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized
@@ -2781,6 +2787,8 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('float64'):
             raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
+        if data.ndim != 1:
+            raise TypeError('data must be numpy.ndarray of dimension=1, is ' + str(data.ndim))
         self._interpreter.write_named_waveform_f64_numpy(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
@@ -2824,6 +2832,8 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('int16'):
             raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
+        if data.ndim != 1:
+            raise TypeError('data must be numpy.ndarray of dimension=1, is ' + str(data.ndim))
         self._interpreter.write_named_waveform_i16_numpy(self._repeated_capability, waveform_name, data)
 
     @ivi_synchronized
@@ -2947,6 +2957,8 @@ class _SessionBase(object):
             raise TypeError('data must be in C-order')
         if data.dtype is not numpy.dtype('float64'):
             raise TypeError('data must be numpy.ndarray of dtype=float64, is ' + str(data.dtype))
+        if data.ndim != 1:
+            raise TypeError('data must be numpy.ndarray of dimension=1, is ' + str(data.ndim))
         self._interpreter.write_waveform_numpy(self._repeated_capability, waveform_handle, data)
 
     @ivi_synchronized

@@ -908,20 +908,20 @@ class TestLibraryInterpreter:
         complex_array = (NIComplexNumber * len(flattened_array))()
         for i, value in enumerate(flattened_array):
             complex_array[i] = NIComplexNumber(value.real, value.imag)
-        array_3d_ptr = ctypes.cast(complex_array, ctypes.POINTER(NIComplexNumber))
+        flattened_array_ptr = ctypes.cast(complex_array, ctypes.POINTER(NIComplexNumber))
         self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.side_effect = self.side_effects_helper.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter
         interpreter = self.get_initialized_library_interpreter()
-        interpreter.function_with3d_numpy_array_of_numpy_complex128_input_parameter(array_3d)
+        interpreter.function_with_3d_numpy_array_of_numpy_complex128_input_parameter(array_3d)
         self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.assert_called_once_with(
             _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
-            _matchers.NIComplexNumberPointerMatcher(array_3d_ptr, number_of_samples)
+            _matchers.NIComplexNumberPointerMatcher(flattened_array_ptr, number_of_samples)
         )
 
     def test_no_memorycopy_with_multi_dimensional_numpy_complex128_array(self):
         array_3d = numpy.full((2, 3, 4), 1.0 + 2.0j, dtype=numpy.complex128)
         self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.side_effect = self.side_effects_helper.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter
         interpreter = self.get_initialized_library_interpreter()
-        interpreter.function_with3d_numpy_array_of_numpy_complex128_input_parameter(array_3d)
+        interpreter.function_with_3d_numpy_array_of_numpy_complex128_input_parameter(array_3d)
         args, kwargs = self.patched_library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter.call_args
         actual_pointer = args[1]
         input_address = array_3d.__array_interface__['data'][0]

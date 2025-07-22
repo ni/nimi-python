@@ -144,7 +144,7 @@ class GrpcStubInterpreter(object):
     def fetch_waveform_into(self, number_of_samples):  # noqa: N802
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
-    def function_with3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
+    def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_intflag_parameter(self, flag):  # noqa: N802
