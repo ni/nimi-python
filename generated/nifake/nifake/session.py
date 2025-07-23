@@ -1711,7 +1711,7 @@ class Session(_SessionBase):
     def write_waveform_numpy_complex128(self, waveform_data_array):
         r'''write_waveform_numpy_complex128
 
-        A method that writes a waveform of numpy complex128 numbers
+        A method that writes a waveform of numpy complex128 numbers.
 
         Args:
             waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.

@@ -2883,7 +2883,7 @@ functions = {
     'WriteWaveformNumpyComplex128': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex128 numbers'
+            'description': 'A function that writes a waveform of numpy complex128 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
