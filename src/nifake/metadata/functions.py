@@ -2883,7 +2883,7 @@ functions = {
     'WriteWaveformNumpyComplex128': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex128 numbers'
+            'description': 'A function that writes a waveform of numpy complex128 numbers.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2989,6 +2989,50 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
+    },
+    'FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Function that takes a 3D numpy array of numpy complex128 as an input parameter.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the 3D array of numpy complex numbers to write. '
+                },
+                'name': 'multidimensionalArray',
+                'type': 'NIComplexNumber[]',
+                'numpy': True,
+                'use_numpy_array': True,
+                'use_in_python_api': True,
+                'array_dimension': 3
+            },
+        ],
+        'python_name': 'function_with_3d_numpy_array_of_numpy_complex128_input_parameter',
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'close': {
         'codegen_method': 'private',

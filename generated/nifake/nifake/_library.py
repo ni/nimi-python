@@ -36,6 +36,7 @@ class Library(object):
         self.niFake_EnumInputFunctionWithDefaults_cfunc = None
         self.niFake_ExportAttributeConfigurationBuffer_cfunc = None
         self.niFake_FetchWaveform_cfunc = None
+        self.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter_cfunc = None
         self.niFake_FunctionWithIntflagParameter_cfunc = None
         self.niFake_FunctionWithRepeatedCapabilityType_cfunc = None
         self.niFake_GetABoolean_cfunc = None
@@ -187,6 +188,14 @@ class Library(object):
                 self.niFake_FetchWaveform_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niFake_FetchWaveform_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_FetchWaveform_cfunc(vi, number_of_samples, waveform_data, actual_number_of_samples)
+
+    def niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(self, vi, multidimensional_array):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter_cfunc is None:
+                self.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter_cfunc = self._get_library_function('niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter')
+                self.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter_cfunc.argtypes = [ViSession, ctypes.POINTER(NIComplexNumber)]  # noqa: F405
+                self.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter_cfunc(vi, multidimensional_array)
 
     def niFake_FunctionWithIntflagParameter(self, vi, flag):  # noqa: N802
         with self._func_lock:

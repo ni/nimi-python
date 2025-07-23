@@ -32,8 +32,12 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         import numpy
         if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
             complex_dtype = numpy.dtype(library_type)
-            structured_array = value.view(complex_dtype)
-            return structured_array.ctypes.data_as(ctypes.POINTER(library_type))
+            if value.ndim > 1:
+                # we create a flattened view of the multi-dimensional numpy array
+                restructured_array_view = value.ravel().view(complex_dtype)
+            else:
+                restructured_array_view = value.view(complex_dtype)
+            return restructured_array_view.ctypes.data_as(ctypes.POINTER(library_type))
         else:
             return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
@@ -215,6 +219,13 @@ class LibraryInterpreter(object):
         waveform_data_ctype = _get_ctypes_pointer_for_buffer(value=waveform_data)  # case B510
         actual_number_of_samples_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niFake_FetchWaveform(vi_ctype, number_of_samples_ctype, waveform_data_ctype, None if actual_number_of_samples_ctype is None else (ctypes.pointer(actual_number_of_samples_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        multidimensional_array_ctype = _get_ctypes_pointer_for_buffer(value=multidimensional_array, library_type=_complextype.NIComplexNumber)  # case B510
+        error_code = self._library.niFake_FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(vi_ctype, multidimensional_array_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

@@ -8074,6 +8074,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('complex64'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_arb_waveform_complex_f32(waveform_name, waveform_data_array, more_data_pending)
 
     def _write_arb_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):
@@ -8112,6 +8114,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('complex128'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
     def _write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):
@@ -8145,6 +8149,8 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be in C-order')
         if waveform_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('waveform_data_array must be numpy.ndarray of dtype=int16, is ' + str(waveform_data_array.dtype))
+        if waveform_data_array.ndim != 1:
+            raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_arb_waveform_complex_i16(waveform_name, waveform_data_array)
 
     def write_arb_waveform(self, waveform_name, waveform_data_array, more_data_pending=False):
