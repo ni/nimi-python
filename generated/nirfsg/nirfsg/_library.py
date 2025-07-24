@@ -49,6 +49,7 @@ class Library(object):
         self.niRFSG_ConfigureRefClock_cfunc = None
         self.niRFSG_ConfigureSoftwareScriptTrigger_cfunc = None
         self.niRFSG_ConfigureSoftwareStartTrigger_cfunc = None
+        self.niRFSG_CreateDeembeddingSparameterTableArray_cfunc = None
         self.niRFSG_CreateDeembeddingSparameterTableS2PFile_cfunc = None
         self.niRFSG_DeleteAllDeembeddingTables_cfunc = None
         self.niRFSG_DeleteDeembeddingTable_cfunc = None
@@ -57,7 +58,6 @@ class Library(object):
         self.niRFSG_DisableStartTrigger_cfunc = None
         self.niRFSG_ErrorMessage_cfunc = None
         self.niRFSG_ErrorQuery_cfunc = None
-        self.niRFSG_ExportSignal_cfunc = None
         self.niRFSG_GetAllNamedWaveformNames_cfunc = None
         self.niRFSG_GetAllScriptNames_cfunc = None
         self.niRFSG_GetAttributeViBoolean_cfunc = None
@@ -67,6 +67,8 @@ class Library(object):
         self.niRFSG_GetAttributeViSession_cfunc = None
         self.niRFSG_GetAttributeViString_cfunc = None
         self.niRFSG_GetChannelName_cfunc = None
+        self.niRFSG_GetDeembeddingSparameters_cfunc = None
+        self.niRFSG_GetDeembeddingTableNumberOfPorts_cfunc = None
         self.niRFSG_GetError_cfunc = None
         self.niRFSG_GetExternalCalibrationLastDateAndTime_cfunc = None
         self.niRFSG_GetMaxSettablePower_cfunc = None
@@ -353,6 +355,14 @@ class Library(object):
                 self.niRFSG_ConfigureSoftwareStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ConfigureSoftwareStartTrigger_cfunc(vi)
 
+    def niRFSG_CreateDeembeddingSparameterTableArray(self, vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_CreateDeembeddingSparameterTableArray_cfunc is None:
+                self.niRFSG_CreateDeembeddingSparameterTableArray_cfunc = self._get_library_function('niRFSG_CreateDeembeddingSparameterTableArray')
+                self.niRFSG_CreateDeembeddingSparameterTableArray_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(NIComplexNumber), ViInt32, ViInt32, ViInt32]  # noqa: F405
+                self.niRFSG_CreateDeembeddingSparameterTableArray_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_CreateDeembeddingSparameterTableArray_cfunc(vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
+
     def niRFSG_CreateDeembeddingSparameterTableS2PFile(self, vi, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_CreateDeembeddingSparameterTableS2PFile_cfunc is None:
@@ -416,14 +426,6 @@ class Library(object):
                 self.niRFSG_ErrorQuery_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_ErrorQuery_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ErrorQuery_cfunc(vi, error_code, error_message)
-
-    def niRFSG_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_ExportSignal_cfunc is None:
-                self.niRFSG_ExportSignal_cfunc = self._get_library_function('niRFSG_ExportSignal')
-                self.niRFSG_ExportSignal_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niRFSG_ExportSignal_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ExportSignal_cfunc(vi, signal, signal_identifier, output_terminal)
 
     def niRFSG_GetAllNamedWaveformNames(self, vi, waveform_names, buffer_size, actual_buffer_size):  # noqa: N802
         with self._func_lock:
@@ -496,6 +498,22 @@ class Library(object):
                 self.niRFSG_GetChannelName_cfunc.argtypes = [ViSession, ViInt32, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_GetChannelName_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetChannelName_cfunc(vi, index, buffer_size, name)
+
+    def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, sparameter_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetDeembeddingSparameters_cfunc is None:
+                self.niRFSG_GetDeembeddingSparameters_cfunc = self._get_library_function('niRFSG_GetDeembeddingSparameters')
+                self.niRFSG_GetDeembeddingSparameters_cfunc.argtypes = [ViSession, ctypes.POINTER(NIComplexNumber), ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetDeembeddingSparameters_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetDeembeddingSparameters_cfunc(vi, sparameters, sparameter_array_size, number_of_sparameters, number_of_ports)
+
+    def niRFSG_GetDeembeddingTableNumberOfPorts(self, vi, number_of_ports):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetDeembeddingTableNumberOfPorts_cfunc is None:
+                self.niRFSG_GetDeembeddingTableNumberOfPorts_cfunc = self._get_library_function('niRFSG_GetDeembeddingTableNumberOfPorts')
+                self.niRFSG_GetDeembeddingTableNumberOfPorts_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetDeembeddingTableNumberOfPorts_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetDeembeddingTableNumberOfPorts_cfunc(vi, number_of_ports)
 
     def niRFSG_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:

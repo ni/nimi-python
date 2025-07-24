@@ -1197,12 +1197,12 @@ class _SessionBase(object):
     +----------------------------+--------------------------+-------------------------+
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific device_temperatures within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container device_temperatures to specify a subset.
 
-    Example: :py:attr:`my_session.ports[ ... ].device_temperature`
+    Example: :py:attr:`my_session.device_temperatures[ ... ].device_temperature`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all device_temperatures, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.device_temperature`
     '''
@@ -1873,10 +1873,6 @@ class _SessionBase(object):
 
     `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-    **High-Level Methods**:
-
-    - export_signal
-
     **Possible Values**:
 
     +---------------+---------------------------------------------------------------------------------------------------------------------------------+
@@ -1939,10 +1935,6 @@ class _SessionBase(object):
     `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
 
     `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-    **High-Level Methods**:
-
-    - export_signal
 
     **Possible Values**:
 
@@ -2118,10 +2110,6 @@ class _SessionBase(object):
 
     `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-    **High-Level Methods**:
-
-    - export_signal
-
     **Possible Values**:
 
     +----------------+---------------------------------------------------------------------------------------------------------------------------------+
@@ -2194,10 +2182,6 @@ class _SessionBase(object):
     `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
 
     `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-    **High-Level Methods**:
-
-    - export_signal
 
     **Possible Values**:
 
@@ -2750,7 +2734,7 @@ class _SessionBase(object):
     iq_out_port_common_mode_offset = _attributes.AttributeViReal64(1150148)
     '''Type: float
 
-    Specifies the common-mode offset applied to the signals generated at each differential output terminal. This property applies only when you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.DIFFERENTIAL. Common-mode offset shifts both positive and negative terminals in the same direction.
+    Specifies the common-mode offset applied to the signals generated at each differential output terminal. This property applies only when you set the iq_out_port_terminal_configuration property to IQOutPortTerminalConfiguration.DIFFERENTIAL. Common-mode offset shifts both positive and negative terminals in the same direction.
 
     To use this property, you must use the channelName parameter of the _set_attribute_vi_real64 method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
@@ -2771,12 +2755,12 @@ class _SessionBase(object):
      - The valid range is dependent on the load impedance.
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-    Example: :py:attr:`my_session.ports[ ... ].iq_out_port_common_mode_offset`
+    Example: :py:attr:`my_session.channels[ ... ].iq_out_port_common_mode_offset`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.iq_out_port_common_mode_offset`
     '''
@@ -2795,9 +2779,9 @@ class _SessionBase(object):
 
     **Valid Values:**
 
-    PXIe-5645: 1V :sub:`pk-pk`  maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.DIFFERENTIAL, and 0.5V :sub:`pk-pk`
+    PXIe-5645: 1V :sub:`pk-pk`  maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTerminalConfiguration.DIFFERENTIAL, and 0.5V :sub:`pk-pk`
 
-    maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.SINGLE_ENDED.
+    maximum if you set the iq_out_port_terminal_configuration property to IQOutPortTerminalConfiguration.SINGLE_ENDED.
 
     PXIe-5820: 3.4V :sub:`pk-pk` maximum for signal bandwidth less than 160MHz, and 2V :sub:`pk-pk`
 
@@ -2812,12 +2796,12 @@ class _SessionBase(object):
      - The valid values are only applicable when you set the iq_out_port_load_impedance property to 50 Ω and when you set the iq_out_port_offset property to 0.
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-    Example: :py:attr:`my_session.ports[ ... ].iq_out_port_level`
+    Example: :py:attr:`my_session.channels[ ... ].iq_out_port_level`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.iq_out_port_level`
     '''
@@ -2832,19 +2816,19 @@ class _SessionBase(object):
 
     **Valid Values:** Any value greater than 0. Values greater than or equal to 1 megaohms (MΩ) are interpreted as high impedance.
 
-    **Default Value:** 50 Ω if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.SINGLE_ENDED, and 100 Ω if you set the iq_out_port_terminal_configuration property to IQOutPortTermCfg.DIFFERENTIAL.
+    **Default Value:** 50 Ω if you set the iq_out_port_terminal_configuration property to IQOutPortTerminalConfiguration.SINGLE_ENDED, and 100 Ω if you set the iq_out_port_terminal_configuration property to IQOutPortTerminalConfiguration.DIFFERENTIAL.
 
     **Supported Devices:** PXIe-5645, PXIe-5820
 
     Note: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-    Example: :py:attr:`my_session.ports[ ... ].iq_out_port_load_impedance`
+    Example: :py:attr:`my_session.channels[ ... ].iq_out_port_load_impedance`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.iq_out_port_load_impedance`
     '''
@@ -2866,12 +2850,12 @@ class _SessionBase(object):
     Note: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-    Example: :py:attr:`my_session.ports[ ... ].iq_out_port_offset`
+    Example: :py:attr:`my_session.channels[ ... ].iq_out_port_offset`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.iq_out_port_offset`
     '''
@@ -2886,20 +2870,20 @@ class _SessionBase(object):
 
     Note: If you query this property during RF list mode, list steps may take longer to complete during list execution.
     '''
-    iq_out_port_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IQOutPortTermCfg, 1150146)
-    '''Type: enums.IQOutPortTermCfg
+    iq_out_port_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IQOutPortTerminalConfiguration, 1150146)
+    '''Type: enums.IQOutPortTerminalConfiguration
 
-    Specifies whether to use the I/Q OUT port for differential configuration or single-ended configuration. If you set this property to IQOutPortTermCfg.SINGLE_ENDED, you must terminate the negative I and Q output connectors with a 50 Ohm termination.
+    Specifies whether to use the I/Q OUT port for differential configuration or single-ended configuration. If you set this property to IQOutPortTerminalConfiguration.SINGLE_ENDED, you must terminate the negative I and Q output connectors with a 50 Ohm termination.
 
-    If you set this property to IQOutPortTermCfg.SINGLE_ENDED, the positive I and Q connectors generate the resulting waveform. If you set this property to IQOutPortTermCfg.DIFFERENTIAL, both the positive and negative I and Q connectors generate the resulting waveform.
+    If you set this property to IQOutPortTerminalConfiguration.SINGLE_ENDED, the positive I and Q connectors generate the resulting waveform. If you set this property to IQOutPortTerminalConfiguration.DIFFERENTIAL, both the positive and negative I and Q connectors generate the resulting waveform.
 
     To use this property, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
     To set this property, the NI-RFSG device must be in the Configuration state.
 
-    **Default Value:** IQOutPortTermCfg.DIFFERENTIAL
+    **Default Value:** IQOutPortTerminalConfiguration.DIFFERENTIAL
 
-    PXIe-5820: The only valid value for this property is IQOutPortTermCfg.DIFFERENTIAL.
+    PXIe-5820: The only valid value for this property is IQOutPortTerminalConfiguration.DIFFERENTIAL.
 
     **Supported Devices:** PXIe-5645, PXIe-5820
 
@@ -2909,23 +2893,23 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +-------------------------------+----------------+--------------------------------------------------+
-    | Name                          | Value          | Description                                      |
-    +===============================+================+==================================================+
-    | IQOutPortTermCfg.DIFFERENTIAL | 15000 (0x3a98) | Sets the terminal configuration to differential. |
-    +-------------------------------+----------------+--------------------------------------------------+
-    | IQOutPortTermCfg.SINGLE_ENDED | 15001 (0x3a99) | Sets the terminal configuration to single-ended. |
-    +-------------------------------+----------------+--------------------------------------------------+
+    +---------------------------------------------+----------------+--------------------------------------------------+
+    | Name                                        | Value          | Description                                      |
+    +=============================================+================+==================================================+
+    | IQOutPortTerminalConfiguration.DIFFERENTIAL | 15000 (0x3a98) | Sets the terminal configuration to differential. |
+    +---------------------------------------------+----------------+--------------------------------------------------+
+    | IQOutPortTerminalConfiguration.SINGLE_ENDED | 15001 (0x3a99) | Sets the terminal configuration to single-ended. |
+    +---------------------------------------------+----------------+--------------------------------------------------+
 
     Note: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-    Example: :py:attr:`my_session.ports[ ... ].iq_out_port_terminal_configuration`
+    Example: :py:attr:`my_session.channels[ ... ].iq_out_port_terminal_configuration`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.iq_out_port_terminal_configuration`
     '''
@@ -3128,12 +3112,12 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].loop_bandwidth`
+    Example: :py:attr:`my_session.los[ ... ].loop_bandwidth`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.loop_bandwidth`
     '''
@@ -3155,12 +3139,12 @@ class _SessionBase(object):
     Note: This property is read/write if you are using an external LO. Otherwise, this property is read-only.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].lo_frequency`
+    Example: :py:attr:`my_session.los[ ... ].lo_frequency`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.lo_frequency`
     '''
@@ -3238,12 +3222,12 @@ class _SessionBase(object):
      - For the PXIe-5644/5645/5646, this property is always read-only.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].lo_in_power`
+    Example: :py:attr:`my_session.los[ ... ].lo_in_power`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.lo_in_power`
     '''
@@ -3276,12 +3260,12 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].lo_out_enabled`
+    Example: :py:attr:`my_session.los[ ... ].lo_out_enabled`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.lo_out_enabled`
     '''
@@ -3327,12 +3311,12 @@ class _SessionBase(object):
     Note: For the PXIe-5644/5645/5646 and PXIe-5673/5673E, this property is always read-only.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].lo_out_power`
+    Example: :py:attr:`my_session.los[ ... ].lo_out_power`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.lo_out_power`
     '''
@@ -3369,12 +3353,12 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].lo_pll_fractional_mode_enabled`
+    Example: :py:attr:`my_session.los[ ... ].lo_pll_fractional_mode_enabled`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
     '''
@@ -3414,12 +3398,12 @@ class _SessionBase(object):
     Note: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to SG_SA_Shared.
 
     Tip:
-    This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-    Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+    This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
 
-    Example: :py:attr:`my_session.lo_channels[ ... ].lo_source`
+    Example: :py:attr:`my_session.los[ ... ].lo_source`
 
-    To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.lo_source`
     '''
@@ -5316,7 +5300,9 @@ class _SessionBase(object):
         self.script_triggers = _RepeatedCapabilities(self, 'scripttrigger', repeated_capability_list)
         self.waveforms = _RepeatedCapabilities(self, 'waveform::', repeated_capability_list)
         self.ports = _RepeatedCapabilities(self, '', repeated_capability_list)
-        self.lo_channels = _RepeatedCapabilities(self, 'LO', repeated_capability_list)
+        self.los = _RepeatedCapabilities(self, 'LO', repeated_capability_list)
+        self.device_temperatures = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
@@ -7026,6 +7012,65 @@ class Session(_SessionBase):
         self._interpreter.configure_software_start_trigger()
 
     @ivi_synchronized
+    def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):
+        r'''_create_deembedding_sparameter_table_array
+
+        Creates an s-parameter de-embedding table for the port from the input data.
+
+        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+
+        Args:
+            port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+
+            table_name (str): Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
+
+            frequencies (numpy.array(dtype=numpy.float64)): Specifies the frequencies for the SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
+
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :
+
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                    | Value          | Description                                         |
+                +=========================================+================+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+
+        '''
+        import numpy
+
+        if type(sparameter_orientation) is not enums.SparameterOrientation:
+            raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
+        if type(frequencies) is not numpy.ndarray:
+            raise TypeError('frequencies must be {0}, is {1}'.format(numpy.ndarray, type(frequencies)))
+        if numpy.isfortran(frequencies) is True:
+            raise TypeError('frequencies must be in C-order')
+        if frequencies.dtype is not numpy.dtype('float64'):
+            raise TypeError('frequencies must be numpy.ndarray of dtype=float64, is ' + str(frequencies.dtype))
+        if frequencies.ndim != 1:
+            raise TypeError('frequencies must be numpy.ndarray of dimension=1, is ' + str(frequencies.ndim))
+        if type(sparameter_table) is not numpy.ndarray:
+            raise TypeError('sparameter_table must be {0}, is {1}'.format(numpy.ndarray, type(sparameter_table)))
+        if numpy.isfortran(sparameter_table) is True:
+            raise TypeError('sparameter_table must be in C-order')
+        if sparameter_table.dtype is not numpy.dtype('complex128'):
+            raise TypeError('sparameter_table must be numpy.ndarray of dtype=complex128, is ' + str(sparameter_table.dtype))
+        if sparameter_table.ndim != 3:
+            raise TypeError('sparameter_table must be numpy.ndarray of dimension=3, is ' + str(sparameter_table.ndim))
+        self._interpreter.create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
+
+    @ivi_synchronized
     def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
         r'''create_deembedding_sparameter_table_s2p_file
 
@@ -7135,105 +7180,57 @@ class Session(_SessionBase):
         return error_code, error_message
 
     @ivi_synchronized
-    def export_signal(self, signal, signal_identifier, output_terminal):
-        r'''export_signal
+    def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_orientation):
+        '''create_deembedding_sparameter_table_array
 
-        Routes signals (triggers, clocks, and events) to a specified output terminal.
+        Creates an s-parameter de-embedding table for the port from the input data.
 
-        The NI-RFSG device must be in the Configuration state before you call this method.
+        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
 
-        You can clear a previously routed signal by exporting the signal to "" (empty string).
-
-        **Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
         **Related Topics**
 
-        `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
-
-        `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
-
-        `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
-
-        `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
+        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
 
         Args:
-            signal (enums.Signal): Specifies the type of signal to route.
+            port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
 
-                 **Defined Values** :
+            table_name (str): Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
 
-                +--------------------------------------------+---------+--------------------------------------------+
-                | Name                                       | Value   | Description                                |
-                +============================================+=========+============================================+
-                | Signal.START_TRIGGER                       | 0 (0x0) | Exports a Start Trigger.                   |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | Signal.SCRIPT_TRIGGER                      | 1 (0x1) | Exports a Script Trigger.                  |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | Signal.MARKER_EVENT                        | 2 (0x2) | Exports a Marker Event.                    |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | Signal.REF_CLOCK                           | 3 (0x3) | Exports the Reference Clock.               |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | Signal.STARTED_EVENT                       | 4 (0x4) | Exports a Started Event.                   |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | Signal.DONE_EVENT                          | 5 (0x5) | Exports a Done Event.                      |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER | 6 (0x6) | Exports a Configuration List Step Trigger. |
-                +--------------------------------------------+---------+--------------------------------------------+
-                | NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT     | 7 (0x7) | Exports a Configuration Settled Event.     |
-                +--------------------------------------------+---------+--------------------------------------------+
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-            signal_identifier (str): Specifies which instance of the selected signal to export. This parameter is useful when you set the SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or Signal.MARKER_EVENT. Otherwise, set the SIGNAL_IDENTIFIER parameter to "".
-
-                **Possible Values** :
-
-                +------------------+-----------------------------+
-                | Possible Value   | Description                 |
-                +==================+=============================+
-                | "marker0"        | Specifies Marker 0.         |
-                +------------------+-----------------------------+
-                | "marker1"        | Specifies Marker 1.         |
-                +------------------+-----------------------------+
-                | "marker2"        | Specifies Marker 2.         |
-                +------------------+-----------------------------+
-                | "marker3"        | Specifies Marker 3.         |
-                +------------------+-----------------------------+
-                | "scriptTrigger0" | Specifies Script Trigger 0. |
-                +------------------+-----------------------------+
-                | "scriptTrigger1" | Specifies Script Trigger 1. |
-                +------------------+-----------------------------+
-                | "scriptTrigger2" | Specifies Script Trigger 2. |
-                +------------------+-----------------------------+
-                | "scriptTrigger3" | Specifies Script Trigger 3. |
-                +------------------+-----------------------------+
+            frequencies (numpy.array(dtype=numpy.float64)): Specifies the frequencies for the SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+            sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
 
-            output_terminal (str): Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :
 
-                 **Possible Values** :
-
-                +----------------+--------------------------------------------------------------------------------------------+
-                | Possible Value | Description                                                                                |
-                +================+============================================================================================+
-                | "ClkOut"       | Exports the Reference Clock signal to the CLK OUT connector of the device.                 |
-                +----------------+--------------------------------------------------------------------------------------------+
-                | ""             | The Reference Clock signal is not exported.                                                |
-                +----------------+--------------------------------------------------------------------------------------------+
-                | "RefOut"       | Exports the Reference Clock signal to the REF OUT connector of the device.                 |
-                +----------------+--------------------------------------------------------------------------------------------+
-                | "RefOut2"      | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. |
-                +----------------+--------------------------------------------------------------------------------------------+
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                    | Value          | Description                                         |
+                +=========================================+================+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
 
         '''
-        if type(signal) is not enums.Signal:
-            raise TypeError('Parameter signal must be of type ' + str(enums.Signal))
-        self._interpreter.export_signal(signal, signal_identifier, output_terminal)
+        if (str(type(sparameter_table)).find("'numpy.ndarray'") != -1) or (str(type(frequencies)).find("'numpy.ndarray'") != -1):
+            if sparameter_table.ndim == 3:
+                if frequencies.size == sparameter_table.shape[0]:
+                    if sparameter_table.shape[1] == sparameter_table.shape[2]:
+                        number_of_ports = sparameter_table.shape[1]
+                        sparameter_table_size = sparameter_table.size
+                        return self._create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
+                    else:
+                        raise IndexError("Row and column count of sparameters table should be equal. Table row count is {} and column count is {}.".format(sparameter_table.shape[1], sparameter_table.shape[2]))
+                else:
+                    raise IndexError("Frequencies count does not match the sparameter table count. Frequencies count is {} and s parameter table count is {}.".format(frequencies.size, sparameter_table.shape[0]))
+            else:
+                raise IndexError("Unsupported array dimension. Is {}, expected 3".format(sparameter_table.ndim))
+        else:
+            raise TypeError("Unsupported datatype. Expected numpy array.")
 
     @ivi_synchronized
     def get_all_named_waveform_names(self):
@@ -7297,6 +7294,54 @@ class Session(_SessionBase):
         '''
         name = self._interpreter.get_channel_name(index)
         return name
+
+    @ivi_synchronized
+    def get_deembedding_sparameters(self):
+        '''get_deembedding_sparameters
+
+        Returns the S-parameters used for de-embedding a measurement on the selected port.
+
+        This includes interpolation of the parameters based on the configured carrier frequency. This method returns an empty array if no de-embedding is done.
+
+        If you want to call this method just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        **Note**: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
+
+        Args:
+            sparameter_array_size (int): Specifies the size of the array that is returned by the SPARAMETERS output.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+
+        Returns:
+            sparameters (list of NIComplexNumber): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+            number_of_ports (int): Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
+
+        '''
+        import numpy as np
+        number_of_ports = self._get_deembedding_table_number_of_ports()
+        sparameter_table_size = number_of_ports ** 2
+        sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
+        number_of_ports = self._interpreter.get_deembedding_sparameters(sparameters, sparameter_table_size)
+        sparameters = sparameters.reshape((number_of_ports, number_of_ports))
+        return sparameters, number_of_ports
+
+    @ivi_synchronized
+    def _get_deembedding_table_number_of_ports(self):
+        r'''_get_deembedding_table_number_of_ports
+
+        Returns the number of S-parameter ports.
+
+        Returns:
+            number_of_ports (int): Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
+
+        '''
+        number_of_ports = self._interpreter.get_deembedding_table_number_of_ports()
+        return number_of_ports
 
     @ivi_synchronized
     def _get_external_calibration_last_date_and_time(self):
@@ -8195,7 +8240,7 @@ class Session(_SessionBase):
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
-            raise TypeError("Unsupported datatype. Expected {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+            raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
         return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 

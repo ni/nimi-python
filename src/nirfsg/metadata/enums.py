@@ -448,7 +448,7 @@ enums = {
             }
         ]
     },
-    'IQOutPortTermCfg': {
+    'IQOutPortTerminalConfiguration': {
         'values': [
             {
                 'documentation': {

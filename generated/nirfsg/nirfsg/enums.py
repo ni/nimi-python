@@ -273,7 +273,7 @@ class GenerationMode(Enum):
     '''
 
 
-class IQOutPortTermCfg(Enum):
+class IQOutPortTerminalConfiguration(Enum):
     DIFFERENTIAL = 15000
     r'''
     Sets the terminal configuration to differential.

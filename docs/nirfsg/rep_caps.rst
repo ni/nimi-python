@@ -113,17 +113,17 @@ ports
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
-lo_channels
------------
+los
+---
 
-    .. py:attribute:: nirfsg.Session.lo_channels[]
+    .. py:attribute:: nirfsg.Session.los[]
 
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
 
         .. code:: python
 
-            session.lo_channels['0-2'].channel_enabled = True
+            session.los['0-2'].channel_enabled = True
 
         passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
 
@@ -134,9 +134,33 @@ lo_channels
 
         .. code:: python
 
-            session.lo_channels['LO0-LO2'].channel_enabled = True
+            session.los['LO0-LO2'].channel_enabled = True
 
         passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
+
+
+device_temperatures
+-------------------
+
+    .. py:attribute:: nirfsg.Session.device_temperatures[]
+
+        .. code:: python
+
+            session.device_temperatures['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+
+channels
+--------
+
+    .. py:attribute:: nirfsg.Session.channels[]
+
+        .. code:: python
+
+            session.channels['0-2'].channel_enabled = True
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
 
