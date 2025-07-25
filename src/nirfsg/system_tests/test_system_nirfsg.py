@@ -177,10 +177,10 @@ class SystemTests:
         simulated_5831_device_session.ports['if1'].deembedding_type = requested_deembedding_type
         assert simulated_5831_device_session.ports['if1'].deembedding_type == requested_deembedding_type
 
-    def test_lo_channels_rep_cap(self, simulated_5831_device_session):
+    def test_los_rep_cap(self, simulated_5831_device_session):
         requested_lo_source = "SG_SA_Shared"
-        simulated_5831_device_session.lo_channels[2].lo_source = requested_lo_source
-        assert simulated_5831_device_session.lo_channels[2].lo_source == requested_lo_source
+        simulated_5831_device_session.los[2].lo_source = requested_lo_source
+        assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
 
 # Configuration methods related tests
     def test_configure_rf(self, rfsg_device_session):
@@ -363,31 +363,10 @@ class SystemTests:
         rfsg_device_session.script_triggers[3].disable_script_trigger()
         assert rfsg_device_session.script_triggers[3].script_trigger_type == nirfsg.ScriptTriggerType.NONE
 
-    def test_export_signal(self, rfsg_device_session):
-        rfsg_device_session.export_signal(nirfsg.Signal.START_TRIGGER, '', 'PXI_Trig0')
-        assert rfsg_device_session.exported_start_trigger_output_terminal == 'PXI_Trig0'
-        rfsg_device_session.export_signal(nirfsg.Signal.SCRIPT_TRIGGER, 'scriptTrigger2', 'PXI_Trig1')
-        assert rfsg_device_session.script_triggers[2].exported_script_trigger_output_terminal == 'PXI_Trig1'
-        rfsg_device_session.export_signal(nirfsg.Signal.MARKER_EVENT, 'marker1', 'PXI_Trig2')
-        assert rfsg_device_session.markers[1].exported_marker_event_output_terminal == 'PXI_Trig2'
-        rfsg_device_session.export_signal(nirfsg.Signal.REF_CLOCK, '', '')
-        assert rfsg_device_session.exported_ref_clock_output_terminal == ''
-        rfsg_device_session.export_signal(nirfsg.Signal.STARTED_EVENT, '', 'PXI_Trig3')
-        assert rfsg_device_session.exported_started_event_output_terminal == 'PXI_Trig3'
-        rfsg_device_session.export_signal(nirfsg.Signal.DONE_EVENT, '', 'PFI0')
-        assert rfsg_device_session.exported_done_event_output_terminal == 'PFI0'
-
-    def test_export_signal_with_invalid_signal(self, rfsg_device_session):
-        try:
-            rfsg_device_session.export_signal(nirfsg.Signal.INVALID, '', 'PXI_Trig0')
-            assert False
-        except AttributeError:
-            pass
-
     @pytest.mark.skipif(use_simulated_session is True, reason="RoCo is not invoked for simulated device")
-    def test_export_signal_with_invalid_terminal(self, rfsg_device_session):
+    def test_export_started_event_with_invalid_terminal(self, rfsg_device_session):
         try:
-            rfsg_device_session.export_signal(nirfsg.Signal.START_TRIGGER, '', 'InvalidTerminal')
+            rfsg_device_session.exported_started_event_output_terminal = 'InvalidTerminal'
             rfsg_device_session.commit()
             assert False
         except nirfsg.Error as e:
@@ -536,7 +515,7 @@ class SystemTests:
             rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
 
     @pytest.mark.skipif(sys.platform == "linux", reason="Function not supported on Linux OS")
-    def test_deembedding_table_with_s2p_file(self, rfsg_device_session):
+    def test_create_deembedding_sparameter_table_s2p_file(self, rfsg_device_session):
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT)
         rfsg_device_session.configure_deembedding_table_interpolation_linear('', 'myTable1', nirfsg.Format.MAGNITUDE_AND_PHASE)
@@ -557,6 +536,37 @@ class SystemTests:
         rfsg_device_session.ports[''].deembedding_selected_table = ''
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
+
+    def test_set_get_deembedding_sparameters(self, rfsg_device_session):
+        frequencies = np.array([1e9, 2e9, 3e9], dtype=np.float64)
+        sparameter_tables = np.array([[[1 + 1j, 2 + 2j], [3 + 3j, 4 + 4j]], [[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], [[9 + 9j, 10 + 10j], [11 + 11j, 12 + 12j]]], dtype=np.complex128)
+        expected_sparameter_table = np.array([[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], dtype=np.complex128)
+        rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, sparameter_tables, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
+        rfsg_device_session.frequency = 2e9
+        returned_sparameter_table, number_of_ports = rfsg_device_session.get_deembedding_sparameters()
+        assert number_of_ports == 2
+        assert returned_sparameter_table.all() == expected_sparameter_table.all()
+
+    def test_create_deembedding_sparameter_table_array_error_cases(self, rfsg_device_session):
+        frequencies = np.array([1e9, 2e9, 3e9], dtype=np.float64)
+        wrong_number_of_tables = np.full((2, 2, 2), 2.0 + 0.0j, dtype=np.complex128)
+        wrong_table_size = np.full((3, 2, 3), 2.0 + 0.0j, dtype=np.complex128)
+        wrong_array_dimensions = np.full((3, 2), 2.0 + 0.0j, dtype=np.complex128)
+        try:
+            rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, wrong_number_of_tables, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
+            assert False
+        except ValueError as e:
+            assert str(e) == 'Frequencies count does not match the sparameter table count. Frequencies count is 3 and sparameter table count is 2.'
+        try:
+            rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, wrong_table_size, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
+            assert False
+        except ValueError as e:
+            assert str(e) == 'Row and column count of sparameter table should be equal. Table row count is 2 and column count is 3.'
+        try:
+            rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, wrong_array_dimensions, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
+            assert False
+        except ValueError as e:
+            assert str(e) == 'Unsupported array dimension. Is 2, expected 3'
 
     def test_read_and_download_waveform_from_file_tdms(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
