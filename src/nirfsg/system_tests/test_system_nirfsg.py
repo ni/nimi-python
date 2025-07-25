@@ -515,7 +515,7 @@ class SystemTests:
             rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
 
     @pytest.mark.skipif(sys.platform == "linux", reason="Function not supported on Linux OS")
-    def test_deembedding_table_with_s2p_file(self, rfsg_device_session):
+    def test_create_deembedding_sparameter_table_s2p_file(self, rfsg_device_session):
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable1', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
         rfsg_device_session.create_deembedding_sparameter_table_s2p_file('', 'myTable2', get_test_file_path('samples2pfile.s2p'), nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT)
         rfsg_device_session.configure_deembedding_table_interpolation_linear('', 'myTable1', nirfsg.Format.MAGNITUDE_AND_PHASE)
@@ -537,7 +537,7 @@ class SystemTests:
         with rfsg_device_session.initiate():
             rfsg_device_session.check_generation_status()
 
-    def test_set_get_deembedding_table(self, rfsg_device_session):
+    def test_set_get_deembedding_sparameters(self, rfsg_device_session):
         frequencies = np.array([1e9, 2e9, 3e9], dtype=np.float64)
         sparameter_tables = np.array([[[1 + 1j, 2 + 2j], [3 + 3j, 4 + 4j]], [[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], [[9 + 9j, 10 + 10j], [11 + 11j, 12 + 12j]]], dtype=np.complex128)
         expected_sparameter_table = np.array([[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], dtype=np.complex128)
@@ -547,7 +547,7 @@ class SystemTests:
         assert number_of_ports == 2
         assert returned_sparameter_table.all() == expected_sparameter_table.all()
 
-    def test_configure_deembedding_table_error_cases(self, rfsg_device_session):
+    def test_create_deembedding_sparameter_table_array_error_cases(self, rfsg_device_session):
         frequencies = np.array([1e9, 2e9, 3e9], dtype=np.float64)
         wrong_number_of_tables = np.full((2, 2, 2), 2.0 + 0.0j, dtype=np.complex128)
         wrong_table_size = np.full((3, 2, 3), 2.0 + 0.0j, dtype=np.complex128)
@@ -555,17 +555,17 @@ class SystemTests:
         try:
             rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, wrong_number_of_tables, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
             assert False
-        except IndexError as e:
-            assert str(e) == 'Frequencies count does not match the sparameter table count. Frequencies count is 3 and s parameter table count is 2.'
+        except ValueError as e:
+            assert str(e) == 'Frequencies count does not match the sparameter table count. Frequencies count is 3 and sparameter table count is 2.'
         try:
             rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, wrong_table_size, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
             assert False
-        except IndexError as e:
-            assert str(e) == 'Row and column count of sparameters table should be equal. Table row count is 2 and column count is 3.'
+        except ValueError as e:
+            assert str(e) == 'Row and column count of sparameter table should be equal. Table row count is 2 and column count is 3.'
         try:
             rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, wrong_array_dimensions, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
             assert False
-        except IndexError as e:
+        except ValueError as e:
             assert str(e) == 'Unsupported array dimension. Is 2, expected 3'
 
     def test_read_and_download_waveform_from_file_tdms(self, rfsg_device_session):

@@ -1232,7 +1232,7 @@ create_deembedding_sparameter_table_array
 
             Creates an s-parameter de-embedding table for the port from the input data.
 
-            If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+            If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 

@@ -7017,7 +7017,7 @@ class Session(_SessionBase):
 
         Creates an s-parameter de-embedding table for the port from the input data.
 
-        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+        If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
 
         **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -7185,7 +7185,7 @@ class Session(_SessionBase):
 
         Creates an s-parameter de-embedding table for the port from the input data.
 
-        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+        If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
 
         **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -7224,11 +7224,11 @@ class Session(_SessionBase):
                         sparameter_table_size = sparameter_table.size
                         return self._create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
                     else:
-                        raise IndexError("Row and column count of sparameters table should be equal. Table row count is {} and column count is {}.".format(sparameter_table.shape[1], sparameter_table.shape[2]))
+                        raise ValueError("Row and column count of sparameter table should be equal. Table row count is {} and column count is {}.".format(sparameter_table.shape[1], sparameter_table.shape[2]))
                 else:
-                    raise IndexError("Frequencies count does not match the sparameter table count. Frequencies count is {} and s parameter table count is {}.".format(frequencies.size, sparameter_table.shape[0]))
+                    raise ValueError("Frequencies count does not match the sparameter table count. Frequencies count is {} and sparameter table count is {}.".format(frequencies.size, sparameter_table.shape[0]))
             else:
-                raise IndexError("Unsupported array dimension. Is {}, expected 3".format(sparameter_table.ndim))
+                raise ValueError("Unsupported array dimension. Is {}, expected 3".format(sparameter_table.ndim))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array.")
 

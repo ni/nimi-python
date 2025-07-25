@@ -813,7 +813,7 @@ functions = {
     'CreateDeembeddingSparameterTableArray': {
         'codegen_method': 'private',
         'documentation': {
-        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n                \nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -945,7 +945,7 @@ functions = {
     'FancyCreateDeembeddingSparameterTableArray': {
         'codegen_method': 'python-only',
         'documentation': {
-        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n                \nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
