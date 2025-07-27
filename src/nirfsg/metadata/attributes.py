@@ -740,7 +740,7 @@ attributes = {
         'lv_property': 'RF:LO Out Enabled',
         'name': 'LO_OUT_ENABLED',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViBoolean'
     },
@@ -864,7 +864,7 @@ attributes = {
         'lv_property': 'Device Characteristics:Device Temperature (Degrees C)',
         'name': 'DEVICE_TEMPERATURE',
         'supported_rep_caps': [
-            'ports'
+            'device_temperatures'
         ],
         'type': 'ViReal64'
     },
@@ -1087,7 +1087,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for exporting the Script Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_ —Refer to this topic for information about trigger delay.\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ExportSignal\n\n**Possible Values**:',
+            'description': 'Specifies the destination terminal for exporting the Script Trigger. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_ —Refer to this topic for information about trigger delay.\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**Possible Values**:',
             'table_body': [
                 [
                     '""',
@@ -1259,7 +1259,7 @@ attributes = {
         'lv_property': 'RF:Loop Bandwidth',
         'name': 'LOOP_BANDWIDTH',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViInt32'
     },
@@ -1924,7 +1924,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for exporting the Done event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ExportSignal\n\n**Possible Values**:',
+            'description': 'Specifies the destination terminal for exporting the Done event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**Possible Values**:',
             'table_body': [
                 [
                     '""',
@@ -2024,7 +2024,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for exporting the Marker Event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ExportSignal\n\n**Possible Values**:',
+            'description': 'Specifies the destination terminal for exporting the Marker Event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Marker Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/marker_events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**Possible Values**:',
             'table_body': [
                 [
                     '""',
@@ -2127,7 +2127,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for exporting the Started event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ExportSignal\n\n**Possible Values**:',
+            'description': 'Specifies the destination terminal for exporting the Started event. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_\n\n**Possible Values**:',
             'table_body': [
                 [
                     '""',
@@ -2233,7 +2233,7 @@ attributes = {
         'lv_property': 'RF:LO Out Power (dBm)',
         'name': 'LO_OUT_POWER',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViReal64'
     },
@@ -2247,7 +2247,7 @@ attributes = {
         'lv_property': 'RF:LO In Power (dBm)',
         'name': 'LO_IN_POWER',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViReal64'
     },
@@ -2851,11 +2851,11 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'IQOutPortTermCfg',
+        'enum': 'IQOutPortTerminalConfiguration',
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Terminal Configuration',
         'name': 'IQ_OUT_PORT_TERMINAL_CONFIGURATION',
         'supported_rep_caps': [
-            'ports'
+            'channels'
         ],
         'type': 'ViInt32'
     },
@@ -2869,7 +2869,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Level',
         'name': 'IQ_OUT_PORT_LEVEL',
         'supported_rep_caps': [
-            'ports'
+            'channels'
         ],
         'type': 'ViReal64'
     },
@@ -2883,7 +2883,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Common Mode Offset',
         'name': 'IQ_OUT_PORT_COMMON_MODE_OFFSET',
         'supported_rep_caps': [
-            'ports'
+            'channels'
         ],
         'type': 'ViReal64'
     },
@@ -2897,7 +2897,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Offset',
         'name': 'IQ_OUT_PORT_OFFSET',
         'supported_rep_caps': [
-            'ports'
+            'channels'
         ],
         'type': 'ViReal64'
     },
@@ -2937,7 +2937,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Source',
         'name': 'LO_SOURCE',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViString'
     },
@@ -3017,7 +3017,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO PLL Fractional Mode Enabled',
         'name': 'LO_PLL_FRACTIONAL_MODE_ENABLED',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViInt32'
     },
@@ -3181,7 +3181,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ Out Port:Load Impedance',
         'name': 'IQ_OUT_PORT_LOAD_IMPEDANCE',
         'supported_rep_caps': [
-            'ports'
+            'channels'
         ],
         'type': 'ViReal64'
     },
@@ -3531,7 +3531,7 @@ attributes = {
         'lv_property': 'RF:LO Frequency (Hz)',
         'name': 'LO_FREQUENCY',
         'supported_rep_caps': [
-            'lo_channels'
+            'los'
         ],
         'type': 'ViReal64'
     },

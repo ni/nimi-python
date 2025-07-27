@@ -1223,6 +1223,81 @@ configure_software_start_trigger
 
 
 
+create_deembedding_sparameter_table_array
+-----------------------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_orientation)
+
+            Creates an s-parameter de-embedding table for the port from the input data.
+
+            If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
+
+            **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            **Related Topics**
+
+            `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+
+            
+
+
+
+            :param port:
+
+
+                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+
+                
+
+
+            :type port: str
+            :param table_name:
+
+
+                Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
+
+                
+
+
+            :type table_name: str
+            :param frequencies:
+
+
+                Specifies the frequencies for the :py:attr:`nirfsg.Session.SPARAMETER_TABLE` rows. Frequencies must be unique and in ascending order.
+
+                
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            :type frequencies: numpy.array(dtype=numpy.float64)
+            :param sparameter_table:
+
+
+                Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
+
+                
+
+
+            :type sparameter_table: numpy.array(dtype=numpy.complex128)
+            :param sparameter_orientation:
+
+
+                Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :
+
+                +------------------------------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                                       | Value          | Description                                         |
+                +============================================================+================+=====================================================+
+                | :py:data:`~nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT` | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------------------+----------------+-----------------------------------------------------+
+                | :py:data:`~nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT` | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------------------+----------------+-----------------------------------------------------+
+
+
+            :type sparameter_orientation: :py:data:`nirfsg.SparameterOrientation`
+
 create_deembedding_sparameter_table_s2p_file
 --------------------------------------------
 
@@ -1481,121 +1556,6 @@ error_query
 
 
 
-export_signal
--------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: export_signal(signal, signal_identifier, output_terminal)
-
-            Routes signals (triggers, clocks, and events) to a specified output terminal.
-
-            The NI-RFSG device must be in the Configuration state before you call this method.
-
-            You can clear a previously routed signal by exporting the signal to "" (empty string).
-
-            **Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            **Related Topics**
-
-            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
-
-            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
-
-            `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
-
-            `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-            
-
-
-
-            :param signal:
-
-
-                Specifies the type of signal to route.
-
-                 **Defined Values** :
-
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | Name                                                          | Value   | Description                                |
-                +===============================================================+=========+============================================+
-                | :py:data:`~nirfsg.Signal.START_TRIGGER`                       | 0 (0x0) | Exports a Start Trigger.                   |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.Signal.SCRIPT_TRIGGER`                      | 1 (0x1) | Exports a Script Trigger.                  |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.Signal.MARKER_EVENT`                        | 2 (0x2) | Exports a Marker Event.                    |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.Signal.REF_CLOCK`                           | 3 (0x3) | Exports the Reference Clock.               |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.Signal.STARTED_EVENT`                       | 4 (0x4) | Exports a Started Event.                   |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.Signal.DONE_EVENT`                          | 5 (0x5) | Exports a Done Event.                      |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER` | 6 (0x6) | Exports a Configuration List Step Trigger. |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-                | :py:data:`~nirfsg.NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT`     | 7 (0x7) | Exports a Configuration Settled Event.     |
-                +---------------------------------------------------------------+---------+--------------------------------------------+
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type signal: :py:data:`nirfsg.Signal`
-            :param signal_identifier:
-
-
-                Specifies which instance of the selected signal to export. This parameter is useful when you set the :py:attr:`nirfsg.Session.SIGNAL` parameter to :py:data:`~nirfsg.NIRFSG_VAL_SCRIPT_TRIGGER` or :py:data:`~nirfsg.Signal.MARKER_EVENT`. Otherwise, set the :py:attr:`nirfsg.Session.SIGNAL_IDENTIFIER` parameter to "".
-
-                **Possible Values** :
-
-                +------------------+-----------------------------+
-                | Possible Value   | Description                 |
-                +==================+=============================+
-                | "marker0"        | Specifies Marker 0.         |
-                +------------------+-----------------------------+
-                | "marker1"        | Specifies Marker 1.         |
-                +------------------+-----------------------------+
-                | "marker2"        | Specifies Marker 2.         |
-                +------------------+-----------------------------+
-                | "marker3"        | Specifies Marker 3.         |
-                +------------------+-----------------------------+
-                | "scriptTrigger0" | Specifies Script Trigger 0. |
-                +------------------+-----------------------------+
-                | "scriptTrigger1" | Specifies Script Trigger 1. |
-                +------------------+-----------------------------+
-                | "scriptTrigger2" | Specifies Script Trigger 2. |
-                +------------------+-----------------------------+
-                | "scriptTrigger3" | Specifies Script Trigger 3. |
-                +------------------+-----------------------------+
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type signal_identifier: str
-            :param output_terminal:
-
-
-                Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.
-
-                 **Possible Values** :
-
-                +----------------+--------------------------------------------------------------------------------------------+
-                | Possible Value | Description                                                                                |
-                +================+============================================================================================+
-                | "ClkOut"       | Exports the Reference Clock signal to the CLK OUT connector of the device.                 |
-                +----------------+--------------------------------------------------------------------------------------------+
-                | ""             | The Reference Clock signal is not exported.                                                |
-                +----------------+--------------------------------------------------------------------------------------------+
-                | "RefOut"       | Exports the Reference Clock signal to the REF OUT connector of the device.                 |
-                +----------------+--------------------------------------------------------------------------------------------+
-                | "RefOut2"      | Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable. |
-                +----------------+--------------------------------------------------------------------------------------------+
-
-
-            :type output_terminal: str
-
 get_all_named_waveform_names
 ----------------------------
 
@@ -1706,6 +1666,60 @@ get_channel_name
 
 
                     Returns a channel string from the channel table at the index you specify in the Index parameter. Do not modify the contents of the channel string.
+
+                    
+
+
+
+get_deembedding_sparameters
+---------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_deembedding_sparameters(sparameter_array_size)
+
+            Returns the S-parameters used for de-embedding a measurement on the selected port.
+
+            This includes interpolation of the parameters based on the configured carrier frequency. This method returns an empty array if no de-embedding is done.
+
+            If you want to call this method just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.
+
+            **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            **Note**: The port orientation for the returned S-parameters is normalized to :py:data:`~nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT`.
+
+            
+
+
+
+            :param sparameter_array_size:
+
+
+                Specifies the size of the array that is returned by the :py:attr:`nirfsg.Session.SPARAMETERS` output.
+
+                
+
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            :type sparameter_array_size: int
+
+            :rtype: tuple (sparameters, number_of_ports)
+
+                WHERE
+
+                sparameters (list of NIComplexNumber): 
+
+
+                    Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+                    
+
+
+                number_of_ports (int): 
+
+
+                    Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
 
                     
 
@@ -5405,26 +5419,26 @@ device_temperature
         +----------------------------+--------------------------+-------------------------+
 
 
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
+        .. tip:: This property can be set/get on specific device_temperatures within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container device_temperatures to specify a subset.
 
-            Example: :py:attr:`my_session.ports[ ... ].device_temperature`
+            Example: :py:attr:`my_session.device_temperatures[ ... ].device_temperature`
 
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all device_temperatures, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.device_temperature`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | ports     |
-            +-----------------------+-----------+
+            +-----------------------+---------------------+
+            | Characteristic        | Value               |
+            +=======================+=====================+
+            | Datatype              | float               |
+            +-----------------------+---------------------+
+            | Permissions           | read only           |
+            +-----------------------+---------------------+
+            | Repeated Capabilities | device_temperatures |
+            +-----------------------+---------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6457,10 +6471,6 @@ exported_done_event_output_terminal
 
         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.export_signal`
-
         **Possible Values**:
 
         +---------------+---------------------------------------------------------------------------------------------------------------------------------+
@@ -6543,10 +6553,6 @@ exported_marker_event_output_terminal
         `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
 
         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.export_signal`
 
         **Possible Values**:
 
@@ -6821,10 +6827,6 @@ exported_script_trigger_output_terminal
 
         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
 
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.export_signal`
-
         **Possible Values**:
 
         +----------------+---------------------------------------------------------------------------------------------------------------------------------+
@@ -6917,10 +6919,6 @@ exported_started_event_output_terminal
         `PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_
 
         `PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.export_signal`
 
         **Possible Values**:
 
@@ -8041,7 +8039,7 @@ iq_out_port_common_mode_offset
 
     .. py:attribute:: iq_out_port_common_mode_offset
 
-        Specifies the common-mode offset applied to the signals generated at each differential output terminal. This property applies only when you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL`. Common-mode offset shifts both positive and negative terminals in the same direction.
+        Specifies the common-mode offset applied to the signals generated at each differential output terminal. This property applies only when you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL`. Common-mode offset shifts both positive and negative terminals in the same direction.
 
         To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_real64` method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
@@ -8064,12 +8062,12 @@ iq_out_port_common_mode_offset
              - The valid range is dependent on the load impedance.
 
 
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_common_mode_offset`
+            Example: :py:attr:`my_session.channels[ ... ].iq_out_port_common_mode_offset`
 
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_common_mode_offset`
 
@@ -8082,7 +8080,7 @@ iq_out_port_common_mode_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | ports      |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -8108,9 +8106,9 @@ iq_out_port_level
 
         **Valid Values:**
 
-        PXIe-5645: 1V :sub:`pk-pk`  maximum if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL`, and 0.5V :sub:`pk-pk`
+        PXIe-5645: 1V :sub:`pk-pk`  maximum if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL`, and 0.5V :sub:`pk-pk`
 
-        maximum if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTermCfg.SINGLE_ENDED`.
+        maximum if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.SINGLE_ENDED`.
 
         PXIe-5820: 3.4V :sub:`pk-pk` maximum for signal bandwidth less than 160MHz, and 2V :sub:`pk-pk`
 
@@ -8127,12 +8125,12 @@ iq_out_port_level
              - The valid values are only applicable when you set the :py:attr:`nirfsg.Session.iq_out_port_load_impedance` property to 50 Ω and when you set the :py:attr:`nirfsg.Session.iq_out_port_offset` property to 0.
 
 
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_level`
+            Example: :py:attr:`my_session.channels[ ... ].iq_out_port_level`
 
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_level`
 
@@ -8145,7 +8143,7 @@ iq_out_port_level
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | ports      |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -8167,7 +8165,7 @@ iq_out_port_load_impedance
 
         **Valid Values:** Any value greater than 0. Values greater than or equal to 1 megaohms (MΩ) are interpreted as high impedance.
 
-        **Default Value:** 50 Ω if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTermCfg.SINGLE_ENDED`, and 100 Ω if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL`.
+        **Default Value:** 50 Ω if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.SINGLE_ENDED`, and 100 Ω if you set the :py:attr:`nirfsg.Session.iq_out_port_terminal_configuration` property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL`.
 
         **Supported Devices:** PXIe-5645, PXIe-5820
 
@@ -8176,12 +8174,12 @@ iq_out_port_load_impedance
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
 
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_load_impedance`
+            Example: :py:attr:`my_session.channels[ ... ].iq_out_port_load_impedance`
 
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_load_impedance`
 
@@ -8194,7 +8192,7 @@ iq_out_port_load_impedance
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | ports      |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -8225,12 +8223,12 @@ iq_out_port_offset
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
 
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_offset`
+            Example: :py:attr:`my_session.channels[ ... ].iq_out_port_offset`
 
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_offset`
 
@@ -8243,7 +8241,7 @@ iq_out_port_offset
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | ports      |
+            | Repeated Capabilities | channels   |
             +-----------------------+------------+
 
         .. tip::
@@ -8290,17 +8288,17 @@ iq_out_port_terminal_configuration
 
     .. py:attribute:: iq_out_port_terminal_configuration
 
-        Specifies whether to use the I/Q OUT port for differential configuration or single-ended configuration. If you set this property to :py:data:`~nirfsg.IQOutPortTermCfg.SINGLE_ENDED`, you must terminate the negative I and Q output connectors with a 50 Ohm termination.
+        Specifies whether to use the I/Q OUT port for differential configuration or single-ended configuration. If you set this property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.SINGLE_ENDED`, you must terminate the negative I and Q output connectors with a 50 Ohm termination.
 
-        If you set this property to :py:data:`~nirfsg.IQOutPortTermCfg.SINGLE_ENDED`, the positive I and Q connectors generate the resulting waveform. If you set this property to :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL`, both the positive and negative I and Q connectors generate the resulting waveform.
+        If you set this property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.SINGLE_ENDED`, the positive I and Q connectors generate the resulting waveform. If you set this property to :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL`, both the positive and negative I and Q connectors generate the resulting waveform.
 
         To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
         To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL`
+        **Default Value:** :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL`
 
-        PXIe-5820: The only valid value for this property is :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL`.
+        PXIe-5820: The only valid value for this property is :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL`.
 
         **Supported Devices:** PXIe-5645, PXIe-5820
 
@@ -8310,37 +8308,37 @@ iq_out_port_terminal_configuration
 
         **Defined Values**:
 
-        +--------------------------------------------------+----------------+--------------------------------------------------+
-        | Name                                             | Value          | Description                                      |
-        +==================================================+================+==================================================+
-        | :py:data:`~nirfsg.IQOutPortTermCfg.DIFFERENTIAL` | 15000 (0x3a98) | Sets the terminal configuration to differential. |
-        +--------------------------------------------------+----------------+--------------------------------------------------+
-        | :py:data:`~nirfsg.IQOutPortTermCfg.SINGLE_ENDED` | 15001 (0x3a99) | Sets the terminal configuration to single-ended. |
-        +--------------------------------------------------+----------------+--------------------------------------------------+
+        +----------------------------------------------------------------+----------------+--------------------------------------------------+
+        | Name                                                           | Value          | Description                                      |
+        +================================================================+================+==================================================+
+        | :py:data:`~nirfsg.IQOutPortTerminalConfiguration.DIFFERENTIAL` | 15000 (0x3a98) | Sets the terminal configuration to differential. |
+        +----------------------------------------------------------------+----------------+--------------------------------------------------+
+        | :py:data:`~nirfsg.IQOutPortTerminalConfiguration.SINGLE_ENDED` | 15001 (0x3a99) | Sets the terminal configuration to single-ended. |
+        +----------------------------------------------------------------+----------------+--------------------------------------------------+
 
         .. note:: For the PXIe-5645, this property is ignored if you are using the RF ports.
 
 
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
+        .. tip:: This property can be set/get on specific channels within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container channels to specify a subset.
 
-            Example: :py:attr:`my_session.ports[ ... ].iq_out_port_terminal_configuration`
+            Example: :py:attr:`my_session.channels[ ... ].iq_out_port_terminal_configuration`
 
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all channels, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.iq_out_port_terminal_configuration`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.IQOutPortTermCfg |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | ports                  |
-            +-----------------------+------------------------+
+            +-----------------------+--------------------------------------+
+            | Characteristic        | Value                                |
+            +=======================+======================================+
+            | Datatype              | enums.IQOutPortTerminalConfiguration |
+            +-----------------------+--------------------------------------+
+            | Permissions           | read-write                           |
+            +-----------------------+--------------------------------------+
+            | Repeated Capabilities | channels                             |
+            +-----------------------+--------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8685,12 +8683,12 @@ loop_bandwidth
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].loop_bandwidth`
+            Example: :py:attr:`my_session.los[ ... ].loop_bandwidth`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.loop_bandwidth`
 
@@ -8703,7 +8701,7 @@ loop_bandwidth
             +-----------------------+---------------------+
             | Permissions           | read-write          |
             +-----------------------+---------------------+
-            | Repeated Capabilities | lo_channels         |
+            | Repeated Capabilities | los                 |
             +-----------------------+---------------------+
 
         .. tip::
@@ -8734,26 +8732,26 @@ lo_frequency
         .. note:: This property is read/write if you are using an external LO. Otherwise, this property is read-only.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].lo_frequency`
+            Example: :py:attr:`my_session.los[ ... ].lo_frequency`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_frequency`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------+
-            | Characteristic        | Value       |
-            +=======================+=============+
-            | Datatype              | float       |
-            +-----------------------+-------------+
-            | Permissions           | read-write  |
-            +-----------------------+-------------+
-            | Repeated Capabilities | lo_channels |
-            +-----------------------+-------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | los        |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8859,26 +8857,26 @@ lo_in_power
              - For the PXIe-5644/5645/5646, this property is always read-only.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].lo_in_power`
+            Example: :py:attr:`my_session.los[ ... ].lo_in_power`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_in_power`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------+
-            | Characteristic        | Value       |
-            +=======================+=============+
-            | Datatype              | float       |
-            +-----------------------+-------------+
-            | Permissions           | read-write  |
-            +-----------------------+-------------+
-            | Repeated Capabilities | lo_channels |
-            +-----------------------+-------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | los        |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8916,26 +8914,26 @@ lo_out_enabled
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].lo_out_enabled`
+            Example: :py:attr:`my_session.los[ ... ].lo_out_enabled`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_out_enabled`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------+
-            | Characteristic        | Value       |
-            +=======================+=============+
-            | Datatype              | bool        |
-            +-----------------------+-------------+
-            | Permissions           | read-write  |
-            +-----------------------+-------------+
-            | Repeated Capabilities | lo_channels |
-            +-----------------------+-------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | bool       |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | los        |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9008,26 +9006,26 @@ lo_out_power
         .. note:: For the PXIe-5644/5645/5646 and PXIe-5673/5673E, this property is always read-only.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].lo_out_power`
+            Example: :py:attr:`my_session.los[ ... ].lo_out_power`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_out_power`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------+
-            | Characteristic        | Value       |
-            +=======================+=============+
-            | Datatype              | float       |
-            +-----------------------+-------------+
-            | Permissions           | read-write  |
-            +-----------------------+-------------+
-            | Repeated Capabilities | lo_channels |
-            +-----------------------+-------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | los        |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9069,12 +9067,12 @@ lo_pll_fractional_mode_enabled
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].lo_pll_fractional_mode_enabled`
+            Example: :py:attr:`my_session.los[ ... ].lo_pll_fractional_mode_enabled`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
 
@@ -9087,7 +9085,7 @@ lo_pll_fractional_mode_enabled
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | lo_channels                      |
+            | Repeated Capabilities | los                              |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -9134,26 +9132,26 @@ lo_source
         .. note:: For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to SG_SA_Shared.
 
 
-        .. tip:: This property can be set/get on specific lo_channels within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container lo_channels to specify a subset.
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsg.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
 
-            Example: :py:attr:`my_session.lo_channels[ ... ].lo_source`
+            Example: :py:attr:`my_session.los[ ... ].lo_source`
 
-            To set/get on all lo_channels, you can call the property directly on the :py:class:`nirfsg.Session`.
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsg.Session`.
 
             Example: :py:attr:`my_session.lo_source`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------+
-            | Characteristic        | Value       |
-            +=======================+=============+
-            | Datatype              | str         |
-            +-----------------------+-------------+
-            | Permissions           | read-write  |
-            +-----------------------+-------------+
-            | Repeated Capabilities | lo_channels |
-            +-----------------------+-------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | str        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | los        |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

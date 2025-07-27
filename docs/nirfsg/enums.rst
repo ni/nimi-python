@@ -626,12 +626,12 @@ GenerationMode
 
 
 
-IQOutPortTermCfg
-----------------
+IQOutPortTerminalConfiguration
+------------------------------
 
-.. py:class:: IQOutPortTermCfg
+.. py:class:: IQOutPortTerminalConfiguration
 
-    .. py:attribute:: IQOutPortTermCfg.DIFFERENTIAL
+    .. py:attribute:: IQOutPortTerminalConfiguration.DIFFERENTIAL
 
 
 
@@ -641,7 +641,7 @@ IQOutPortTermCfg
 
 
 
-    .. py:attribute:: IQOutPortTermCfg.SINGLE_ENDED
+    .. py:attribute:: IQOutPortTerminalConfiguration.SINGLE_ENDED
 
 
 

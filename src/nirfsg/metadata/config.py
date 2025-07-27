@@ -69,7 +69,15 @@ config = {
         },
         {
             'prefix': 'LO',
-            'python_name': 'lo_channels'
+            'python_name': 'los'
+        },
+        {
+            'prefix': '',
+            'python_name': 'device_temperatures'
+        },
+        {
+            'prefix': '',
+            'python_name': 'channels'
         }
     ],
     'session_class_description': 'An NI-RFSG session to the NI-RFSG driver',

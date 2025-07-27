@@ -810,6 +810,240 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'CreateDeembeddingSparameterTableArray': {
+        'codegen_method': 'private',
+        'documentation': {
+        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSG_ATTR_VI is obtained from the nirfsg_Init or nirfsg_InitWithOptions function.'
+                },
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'port',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is \"\" (empty string).'
+                },
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'tableName',
+                'documentation': {
+                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                },
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'frequencies',
+                'documentation': {
+                    'description': 'Specifies the frequencies for the NIRFSG_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
+                },
+                'type': 'ViReal64[]',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'frequenciesSize'
+                },
+                'numpy': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'frequenciesSize',
+                'documentation': {
+                    'description': 'Specifies the size of the frequency array.'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'name': 'sparameterTable',
+                'documentation': {
+                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
+                },
+                'type': 'NIComplexNumber[]',
+                'numpy': True,
+                'use_in_python_api': True,
+                'array_dimension': 3
+            },
+            {
+                'direction': 'in',
+                'name': 'sparameterTableSize',
+                'documentation': {
+                    'description': 'Specifies the size of the S-parameter table array.'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'name': 'numberOfPorts',
+                'documentation': {
+                    'description': 'Specifies the number of DUT ports.'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': ' Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'SparameterOrientation',
+                'name': 'sparameterOrientation',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+    },
+    'FancyCreateDeembeddingSparameterTableArray': {
+        'codegen_method': 'python-only',
+        'documentation': {
+        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'create_deembedding_sparameter_table_array'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSG_ATTR_VI is obtained from the nirfsg_Init or nirfsg_InitWithOptions function.'
+                },
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'port',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is \"\" (empty string).'
+                },
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'name': 'tableName',
+                'documentation': {
+                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                },
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'name': 'frequencies',
+                'documentation': {
+                    'description': 'Specifies the frequencies for the NIRFSG_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
+                },
+                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
+                'type': 'ViReal64[]',
+                'numpy': True,
+                'use_in_python_api': True
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'name': 'sparameterTable',
+                'documentation': {
+                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
+                },
+                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
+                'type': 'NIComplexNumber[]',
+                'numpy': True,
+                'use_in_python_api': True,
+                'array_dimension': 3
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': ' Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'SparameterOrientation',
+                'name': 'sparameterOrientation',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'create_deembedding_sparameter_table_array',
+        'returns': 'ViStatus',
+    },
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
@@ -985,6 +1219,121 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'GetDeembeddingTableNumberOfPorts': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nReturns the number of S-parameter ports.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
+                },
+                'name': 'numberOfPorts',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetDeembeddingSparameters': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port. \n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Note**: The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.\n                '
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'get_deembedding_sparameter'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameters',
+                'size': {
+                    'mechanism': 'pass',
+                    'value': 'numberOfSparameters'
+                },
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'complex_type': 'numpy',
+                'use_in_python_api': True,
+                'array_dimension': 3
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array that is returned by the NIRFSG_ATTR_SPARAMETERS output.'
+                },
+                'name': 'sparameterArraySize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'name': 'numberOfSparameters',
+                'documentation': {
+                    'description': 'Returns the number of S-parameters.'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'out',
+                'name': 'numberOfPorts',
+                'documentation': {
+                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'get_deembedding_sparameters',
         'returns': 'ViStatus'
     },
     'ConfigureDigitalEdgeScriptTrigger': {
@@ -1798,172 +2147,6 @@ functions = {
                     'value': 256
                 },
                 'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ExportSignal': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nRoutes signals (triggers, clocks, and events) to a specified output terminal.\n\nThe NI-RFSG device must be in the Configuration state before you call this function.\n\nYou can clear a previously routed signal by exporting the signal to "" (empty string).\n\n**Supported Devices** :PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_\n\n`PFI Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pfi_lines.html>`_\n\n`PXI Trigger Lines <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_trigger.html>`_'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': ' Specifies the type of signal to route.\n\n **Defined Values** :',
-                    'table_body': [
-                        [
-                            'NIRFSG_VAL_START_TRIGGER',
-                            '0 (0x0)',
-                            'Exports a Start Trigger.'
-                        ],
-                        [
-                            'NIRFSG_VAL_SCRIPT_TRIGGER',
-                            '1 (0x1)',
-                            'Exports a Script Trigger.'
-                        ],
-                        [
-                            'NIRFSG_VAL_MARKER_EVENT',
-                            '2 (0x2)',
-                            'Exports a Marker Event.'
-                        ],
-                        [
-                            'NIRFSG_VAL_REF_CLOCK',
-                            '3 (0x3)',
-                            'Exports the Reference Clock.'
-                        ],
-                        [
-                            'NIRFSG_VAL_STARTED_EVENT',
-                            '4 (0x4)',
-                            'Exports a Started Event.'
-                        ],
-                        [
-                            'NIRFSG_VAL_DONE_EVENT',
-                            '5 (0x5)',
-                            'Exports a Done Event.'
-                        ],
-                        [
-                            'NIRFSG_VAL_CONFIGURATION_LIST_STEP_TRIGGER',
-                            '6 (0x6)',
-                            'Exports a Configuration List Step Trigger.'
-                        ],
-                        [
-                            'NIRFSG_VAL_CONFIGURATION_SETTLED_EVENT',
-                            '7 (0x7)',
-                            'Exports a Configuration Settled Event.'
-                        ]
-                    ],
-                    'table_header': [
-                        'Name',
-                        'Value',
-                        'Description'
-                    ]
-                },
-                'enum': 'Signal',
-                'name': 'signal',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies which instance of the selected signal to export. This parameter is useful when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT. Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to "".\n\n**Possible Values** :',
-                    'table_body': [
-                        [
-                            '"marker0"',
-                            'Specifies Marker 0.'
-                        ],
-                        [
-                            '"marker1"',
-                            'Specifies Marker 1.'
-                        ],
-                        [
-                            '"marker2"',
-                            'Specifies Marker 2.'
-                        ],
-                        [
-                            '"marker3"',
-                            'Specifies Marker 3.'
-                        ],
-                        [
-                            '"scriptTrigger0"',
-                            'Specifies Script Trigger 0.'
-                        ],
-                        [
-                            '"scriptTrigger1"',
-                            'Specifies Script Trigger 1.'
-                        ],
-                        [
-                            '"scriptTrigger2"',
-                            'Specifies Script Trigger 2.'
-                        ],
-                        [
-                            '"scriptTrigger3"',
-                            'Specifies Script Trigger 3.'
-                        ]
-                    ],
-                    'table_header': [
-                        'Possible Value',
-                        'Description'
-                    ]
-                },
-                'name': 'signalIdentifier',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the terminal where the signal is exported. You can choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.\n\n **Possible Values** :',
-                    'table_body': [
-                        [
-                            '"ClkOut"',
-                            'Exports the Reference Clock signal to the CLK OUT connector of the device.'
-                        ],
-                        [
-                            '""',
-                            'The Reference Clock signal is not exported.'
-                        ],
-                        [
-                            '"RefOut"',
-                            'Exports the Reference Clock signal to the REF OUT connector of the device.'
-                        ],
-                        [
-                            '"RefOut2"',
-                            'Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.'
-                        ]
-                    ],
-                    'table_header': [
-                        'Possible Value',
-                        'Description'
-                    ]
-                },
-                'name': 'outputTerminal',
-                'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -5145,7 +5328,7 @@ functions = {
                 },
                 'type': 'NIComplexNumberF32[]',
                 'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_array': True
             },
             {
                 'direction': 'in',
@@ -5223,7 +5406,7 @@ functions = {
                 },
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_array': True
             },
             {
                 'direction': 'in',
@@ -5301,7 +5484,7 @@ functions = {
                 },
                 'type': 'NIComplexI16[]',
                 'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_array': True
             }
         ],
         'returns': 'ViStatus',
@@ -5369,7 +5552,7 @@ functions = {
                 },
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_array': True
             },
             {
                 'direction': 'in',

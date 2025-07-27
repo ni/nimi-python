@@ -77,6 +77,8 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureSoftwareScriptTrigger']['return'] = 0
         self._defaults['ConfigureSoftwareStartTrigger'] = {}
         self._defaults['ConfigureSoftwareStartTrigger']['return'] = 0
+        self._defaults['CreateDeembeddingSparameterTableArray'] = {}
+        self._defaults['CreateDeembeddingSparameterTableArray']['return'] = 0
         self._defaults['CreateDeembeddingSparameterTableS2PFile'] = {}
         self._defaults['CreateDeembeddingSparameterTableS2PFile']['return'] = 0
         self._defaults['DeleteAllDeembeddingTables'] = {}
@@ -95,8 +97,6 @@ class SideEffectsHelper(object):
         self._defaults['ErrorQuery']['return'] = 0
         self._defaults['ErrorQuery']['errorCode'] = None
         self._defaults['ErrorQuery']['errorMessage'] = None
-        self._defaults['ExportSignal'] = {}
-        self._defaults['ExportSignal']['return'] = 0
         self._defaults['GetAllNamedWaveformNames'] = {}
         self._defaults['GetAllNamedWaveformNames']['return'] = 0
         self._defaults['GetAllNamedWaveformNames']['actualBufferSize'] = None
@@ -126,6 +126,14 @@ class SideEffectsHelper(object):
         self._defaults['GetChannelName'] = {}
         self._defaults['GetChannelName']['return'] = 0
         self._defaults['GetChannelName']['name'] = None
+        self._defaults['GetDeembeddingSparameters'] = {}
+        self._defaults['GetDeembeddingSparameters']['return'] = 0
+        self._defaults['GetDeembeddingSparameters']['sparameters'] = None
+        self._defaults['GetDeembeddingSparameters']['numberOfSparameters'] = None
+        self._defaults['GetDeembeddingSparameters']['numberOfPorts'] = None
+        self._defaults['GetDeembeddingTableNumberOfPorts'] = {}
+        self._defaults['GetDeembeddingTableNumberOfPorts']['return'] = 0
+        self._defaults['GetDeembeddingTableNumberOfPorts']['numberOfPorts'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -418,6 +426,11 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureSoftwareStartTrigger']['return']
         return self._defaults['ConfigureSoftwareStartTrigger']['return']
 
+    def niRFSG_CreateDeembeddingSparameterTableArray(self, vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):  # noqa: N802
+        if self._defaults['CreateDeembeddingSparameterTableArray']['return'] != 0:
+            return self._defaults['CreateDeembeddingSparameterTableArray']['return']
+        return self._defaults['CreateDeembeddingSparameterTableArray']['return']
+
     def niRFSG_CreateDeembeddingSparameterTableS2PFile(self, vi, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         if self._defaults['CreateDeembeddingSparameterTableS2PFile']['return'] != 0:
             return self._defaults['CreateDeembeddingSparameterTableS2PFile']['return']
@@ -471,11 +484,6 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             error_message[i] = test_value[i]
         return self._defaults['ErrorQuery']['return']
-
-    def niRFSG_ExportSignal(self, vi, signal, signal_identifier, output_terminal):  # noqa: N802
-        if self._defaults['ExportSignal']['return'] != 0:
-            return self._defaults['ExportSignal']['return']
-        return self._defaults['ExportSignal']['return']
 
     def niRFSG_GetAllNamedWaveformNames(self, vi, waveform_names, buffer_size, actual_buffer_size):  # noqa: N802
         if self._defaults['GetAllNamedWaveformNames']['return'] != 0:
@@ -580,6 +588,42 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetChannelName']['name'])
         name.value = self._defaults['GetChannelName']['name'].encode('ascii')
         return self._defaults['GetChannelName']['return']
+
+    def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, sparameter_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
+        if self._defaults['GetDeembeddingSparameters']['return'] != 0:
+            return self._defaults['GetDeembeddingSparameters']['return']
+        # sparameters
+        if self._defaults['GetDeembeddingSparameters']['sparameters'] is None:
+            raise MockFunctionCallError("niRFSG_GetDeembeddingSparameters", param='sparameters')
+        test_value = self._defaults['GetDeembeddingSparameters']['sparameters']
+        try:
+            sparameters_ref = sparameters.contents
+        except AttributeError:
+            sparameters_ref = sparameters
+        assert len(sparameters_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            sparameters_ref[i] = test_value[i]
+        # number_of_sparameters
+        if self._defaults['GetDeembeddingSparameters']['numberOfSparameters'] is None:
+            raise MockFunctionCallError("niRFSG_GetDeembeddingSparameters", param='numberOfSparameters')
+        if number_of_sparameters is not None:
+            number_of_sparameters.contents.value = self._defaults['GetDeembeddingSparameters']['numberOfSparameters']
+        # number_of_ports
+        if self._defaults['GetDeembeddingSparameters']['numberOfPorts'] is None:
+            raise MockFunctionCallError("niRFSG_GetDeembeddingSparameters", param='numberOfPorts')
+        if number_of_ports is not None:
+            number_of_ports.contents.value = self._defaults['GetDeembeddingSparameters']['numberOfPorts']
+        return self._defaults['GetDeembeddingSparameters']['return']
+
+    def niRFSG_GetDeembeddingTableNumberOfPorts(self, vi, number_of_ports):  # noqa: N802
+        if self._defaults['GetDeembeddingTableNumberOfPorts']['return'] != 0:
+            return self._defaults['GetDeembeddingTableNumberOfPorts']['return']
+        # number_of_ports
+        if self._defaults['GetDeembeddingTableNumberOfPorts']['numberOfPorts'] is None:
+            raise MockFunctionCallError("niRFSG_GetDeembeddingTableNumberOfPorts", param='numberOfPorts')
+        if number_of_ports is not None:
+            number_of_ports.contents.value = self._defaults['GetDeembeddingTableNumberOfPorts']['numberOfPorts']
+        return self._defaults['GetDeembeddingTableNumberOfPorts']['return']
 
     def niRFSG_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -1064,6 +1108,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ConfigureSoftwareScriptTrigger.return_value = 0
         mock_library.niRFSG_ConfigureSoftwareStartTrigger.side_effect = MockFunctionCallError("niRFSG_ConfigureSoftwareStartTrigger")
         mock_library.niRFSG_ConfigureSoftwareStartTrigger.return_value = 0
+        mock_library.niRFSG_CreateDeembeddingSparameterTableArray.side_effect = MockFunctionCallError("niRFSG_CreateDeembeddingSparameterTableArray")
+        mock_library.niRFSG_CreateDeembeddingSparameterTableArray.return_value = 0
         mock_library.niRFSG_CreateDeembeddingSparameterTableS2PFile.side_effect = MockFunctionCallError("niRFSG_CreateDeembeddingSparameterTableS2PFile")
         mock_library.niRFSG_CreateDeembeddingSparameterTableS2PFile.return_value = 0
         mock_library.niRFSG_DeleteAllDeembeddingTables.side_effect = MockFunctionCallError("niRFSG_DeleteAllDeembeddingTables")
@@ -1080,8 +1126,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ErrorMessage.return_value = 0
         mock_library.niRFSG_ErrorQuery.side_effect = MockFunctionCallError("niRFSG_ErrorQuery")
         mock_library.niRFSG_ErrorQuery.return_value = 0
-        mock_library.niRFSG_ExportSignal.side_effect = MockFunctionCallError("niRFSG_ExportSignal")
-        mock_library.niRFSG_ExportSignal.return_value = 0
         mock_library.niRFSG_GetAllNamedWaveformNames.side_effect = MockFunctionCallError("niRFSG_GetAllNamedWaveformNames")
         mock_library.niRFSG_GetAllNamedWaveformNames.return_value = 0
         mock_library.niRFSG_GetAllScriptNames.side_effect = MockFunctionCallError("niRFSG_GetAllScriptNames")
@@ -1100,6 +1144,10 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_GetAttributeViString.return_value = 0
         mock_library.niRFSG_GetChannelName.side_effect = MockFunctionCallError("niRFSG_GetChannelName")
         mock_library.niRFSG_GetChannelName.return_value = 0
+        mock_library.niRFSG_GetDeembeddingSparameters.side_effect = MockFunctionCallError("niRFSG_GetDeembeddingSparameters")
+        mock_library.niRFSG_GetDeembeddingSparameters.return_value = 0
+        mock_library.niRFSG_GetDeembeddingTableNumberOfPorts.side_effect = MockFunctionCallError("niRFSG_GetDeembeddingTableNumberOfPorts")
+        mock_library.niRFSG_GetDeembeddingTableNumberOfPorts.return_value = 0
         mock_library.niRFSG_GetError.side_effect = MockFunctionCallError("niRFSG_GetError")
         mock_library.niRFSG_GetError.return_value = 0
         mock_library.niRFSG_GetExternalCalibrationLastDateAndTime.side_effect = MockFunctionCallError("niRFSG_GetExternalCalibrationLastDateAndTime")
