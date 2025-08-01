@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.5.0d9999
+# This file is generated from NI-RFSG API metadata version 25.8.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -810,240 +810,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'CreateDeembeddingSparameterTableArray': {
-        'codegen_method': 'private',
-        'documentation': {
-        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_write_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'numpy_write_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSG_ATTR_VI is obtained from the nirfsg_Init or nirfsg_InitWithOptions function.'
-                },
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'name': 'port',
-                'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is \"\" (empty string).'
-                },
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'name': 'tableName',
-                'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
-                },
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'name': 'frequencies',
-                'documentation': {
-                    'description': 'Specifies the frequencies for the NIRFSG_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
-                },
-                'type': 'ViReal64[]',
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'frequenciesSize'
-                },
-                'numpy': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'name': 'frequenciesSize',
-                'documentation': {
-                    'description': 'Specifies the size of the frequency array.'
-                },
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'complex_type': 'numpy',
-                'direction': 'in',
-                'name': 'sparameterTable',
-                'documentation': {
-                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
-                },
-                'type': 'NIComplexNumber[]',
-                'numpy': True,
-                'use_in_python_api': True,
-                'array_dimension': 3
-            },
-            {
-                'direction': 'in',
-                'name': 'sparameterTableSize',
-                'documentation': {
-                    'description': 'Specifies the size of the S-parameter table array.'
-                },
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'in',
-                'name': 'numberOfPorts',
-                'documentation': {
-                    'description': 'Specifies the number of DUT ports.'
-                },
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': ' Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :',
-                    'table_body': [
-                        [
-                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
-                            '24000 (0x5dc0)',
-                            'Port 1 of the S2P is oriented towards the DUT port.'
-                        ],
-                        [
-                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
-                            '24001 (0x5dc1)',
-                            'Port 2 of the S2P is oriented towards the DUT port.'
-                        ]
-                    ],
-                    'table_header': [
-                        'Name',
-                        'Value',
-                        'Description'
-                    ]
-                },
-                'enum': 'SparameterOrientation',
-                'name': 'sparameterOrientation',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-    },
-    'FancyCreateDeembeddingSparameterTableArray': {
-        'codegen_method': 'python-only',
-        'documentation': {
-        'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
-                'session_filename': 'create_deembedding_sparameter_table_array'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSG_ATTR_VI is obtained from the nirfsg_Init or nirfsg_InitWithOptions function.'
-                },
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'name': 'port',
-                'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is \"\" (empty string).'
-                },
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'name': 'tableName',
-                'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
-                },
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'complex_type': 'numpy',
-                'direction': 'in',
-                'name': 'frequencies',
-                'documentation': {
-                    'description': 'Specifies the frequencies for the NIRFSG_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
-                },
-                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
-                'type': 'ViReal64[]',
-                'numpy': True,
-                'use_in_python_api': True
-            },
-            {
-                'complex_type': 'numpy',
-                'direction': 'in',
-                'name': 'sparameterTable',
-                'documentation': {
-                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
-                },
-                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
-                'type': 'NIComplexNumber[]',
-                'numpy': True,
-                'use_in_python_api': True,
-                'array_dimension': 3
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': ' Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :',
-                    'table_body': [
-                        [
-                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
-                            '24000 (0x5dc0)',
-                            'Port 1 of the S2P is oriented towards the DUT port.'
-                        ],
-                        [
-                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
-                            '24001 (0x5dc1)',
-                            'Port 2 of the S2P is oriented towards the DUT port.'
-                        ]
-                    ],
-                    'table_header': [
-                        'Name',
-                        'Value',
-                        'Description'
-                    ]
-                },
-                'enum': 'SparameterOrientation',
-                'name': 'sparameterOrientation',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': 'create_deembedding_sparameter_table_array',
-        'returns': 'ViStatus',
-    },
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
@@ -1221,126 +987,12 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetDeembeddingTableNumberOfPorts': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': '\nReturns the number of S-parameter ports.'
-        },
-        'included_in_proto': False,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
-                },
-                'name': 'numberOfPorts',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetDeembeddingSparameters': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port. \n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Note**: The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.\n                '
-        },
-        'included_in_proto': False,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'numpy_read_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'get_deembedding_sparameter'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
-                },
-                'name': 'sparameters',
-                'size': {
-                    'mechanism': 'pass',
-                    'value': 'numberOfSparameters'
-                },
-                'numpy': True,
-                'type': 'NIComplexNumber[]',
-                'complex_type': 'numpy',
-                'use_in_python_api': True,
-                'array_dimension': 3
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the array that is returned by the NIRFSG_ATTR_SPARAMETERS output.'
-                },
-                'name': 'sparameterArraySize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'name': 'numberOfSparameters',
-                'documentation': {
-                    'description': 'Returns the number of S-parameters.'
-                },
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'out',
-                'name': 'numberOfPorts',
-                'documentation': {
-                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
-                },
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': 'get_deembedding_sparameters',
-        'returns': 'ViStatus'
-    },
     'ConfigureDigitalEdgeScriptTrigger': {
         'codegen_method': 'public',
         'documentation': {
             'description': '\nConfigures the specified Script Trigger for digital edge triggering.\n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Digital Edge Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_edge.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -1366,10 +1018,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script Trigger to configure.'
                 },
-                'name': 'triggerId',
-                'type': 'ViConstString',
                 'is_repeated_capability': True,
+                'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
+                'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -1388,13 +1040,15 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the active edge for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE attribute to this value.'
                 },
-                'name': 'edge',
                 'enum': 'ScriptTriggerDigitalEdgeEdge',
+                'grpc_enum': None,
+                'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'script_triggers',
         'returns': 'ViStatus'
     },
     'ConfigureDigitalEdgeStartTrigger': {
@@ -1438,8 +1092,9 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the active edge for the Start Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute to this value.'
                 },
-                'name': 'edge',
                 'enum': 'StartTriggerDigitalEdgeEdge',
+                'grpc_enum': None,
+                'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1452,6 +1107,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures a specified Script Trigger for digital level triggering.\n\nThe NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Digital Level Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_level.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -1477,7 +1133,9 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script Trigger to configure.'
                 },
+                'is_repeated_capability': True,
                 'name': 'triggerId',
+                'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1503,6 +1161,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'script_triggers',
         'returns': 'ViStatus'
     },
     'ConfigureDigitalModulationUserDefinedWaveform': {
@@ -1726,6 +1385,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the Script Trigger for software triggering.\n\nRefer to the nirfsg_SendSoftwareEdgeTrigger function for more information about using the software Script Trigger. The NI-RFSG device must be in the Configuration state before calling this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_\n\n`Trigger Types <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_types.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -1751,14 +1411,15 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script Trigger to configure.'
                 },
-                'name': 'triggerId',
-                'type': 'ViConstString',
                 'is_repeated_capability': True,
+                'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
+                'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'script_triggers',
         'returns': 'ViStatus'
     },
     'ConfigureSoftwareStartTrigger': {
@@ -1783,6 +1444,137 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'CreateDeembeddingSparameterTableArray': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                },
+                'name': 'port',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                },
+                'name': 'tableName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the frequencies for the NIRFSG_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
+                },
+                'name': 'frequencies',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'frequenciesSize'
+                },
+                'type': 'ViReal64[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the frequency array.'
+                },
+                'name': 'frequenciesSize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
+                'array_dimension': 3,
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameterTable',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the S-parameter table array.'
+                },
+                'name': 'sparameterTableSize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of DUT ports.'
+                },
+                'name': 'numberOfPorts',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the orientation of the input data relative to the port on the DUT port.\n\n**Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'SparameterOrientation',
+                'name': 'sparameterOrientation',
+                'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -1984,6 +1776,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the device not to wait for the specified Script Trigger.\n\nCall this function only if you previously configured a Script Trigger and now want it disabled. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -2009,14 +1802,15 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script trigger to configure.'
                 },
-                'name': 'triggerId',
-                'type': 'ViConstString',
                 'is_repeated_capability': True,
+                'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
+                'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'script_triggers',
         'returns': 'ViStatus'
     },
     'DisableStartTrigger': {
@@ -2066,7 +1860,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        The ViSession handle that you obtain from nirfsg_Init or nirfsg_InitWithOptions. The handle identifies a particular instrument session.\n\n        You can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsg_Init or nirfsg_InitWithOptions fails.\n\n        **Default Value** : VI_NULL\n\n        '
+                    'description': 'The ViSession handle that you obtain from nirfsg_Init or nirfsg_InitWithOptions. The handle identifies a particular instrument session.\n\nYou can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsg_Init or nirfsg_InitWithOptions fails.\n\n**Default Value** : VI_NULL'
                 },
                 'name': 'vi',
                 'type': 'ViSession',
@@ -2076,7 +1870,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Pass the status parameter that is returned from any NI-RFSG function.\n\n        **Default Value** : 0 (VI_SUCCESS)\n\n        '
+                    'description': 'Pass the status parameter that is returned from any NI-RFSG function.\n\n**Default Value** : 0 (VI_SUCCESS)'
                 },
                 'name': 'errorCode',
                 'type': 'ViStatus',
@@ -2086,7 +1880,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Returns the user-readable message string that corresponds to the status code you specify.\n\n        You must pass a ViChar array with at least 256 bytes to this parameter.\n\n        '
+                    'description': 'Returns the user-readable message string that corresponds to the status code you specify.\n\nYou must pass a ViChar array with at least 256 bytes to this parameter.'
                 },
                 'name': 'errorMessage',
                 'size': {
@@ -2139,7 +1933,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': '                        Returns the error message string read from the instrument error message queue.\n\n        You must pass a ViChar array with at least 256 bytes.        '
+                    'description': 'Returns the error message string read from the instrument error message queue.\n\nYou must pass a ViChar array with at least 256 bytes.'
                 },
                 'name': 'errorMessage',
                 'size': {
@@ -2152,6 +1946,110 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
+    },
+    'FancyCreateDeembeddingSparameterTableArray': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview<https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        },
+        'included_in_proto': True,
+        'method_name_for_documentation': 'create_deembedding_sparameter_table_array',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'create_deembedding_sparameter_table_array'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                },
+                'name': 'port',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                },
+                'name': 'tableName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the frequencies for the NIRFSG_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
+                },
+                'name': 'frequencies',
+                'numpy': True,
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
+                'use_in_python_api': True
+            },
+            {
+                'array_dimension': 3,
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameterTable',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the orientation of the input data relative to the port on the DUT port.\n\n**Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSG_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSG_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'SparameterOrientation',
+                'grpc_enum': None,
+                'name': 'sparameterOrientation',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'create_deembedding_sparameter_table_array',
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'GetAllNamedWaveformNames': {
         'codegen_method': 'public',
@@ -2702,6 +2600,103 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'GetDeembeddingSparameters': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'get_deembedding_sparameter'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'array_dimension': 2,
+                'complex_type': 'numpy',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameters',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array that is returned by the NIRFSG_ATTR_SPARAMETERS output.'
+                },
+                'name': 'sparametersArraySize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameters.'
+                },
+                'name': 'numberOfSparameters',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
+                },
+                'name': 'numberOfPorts',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetDeembeddingTableNumberOfPorts': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nReturns the number of S-parameter ports.'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
+                },
+                'name': 'numberOfPorts',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetError': {
         'codegen_method': 'public',
         'documentation': {
@@ -2896,19 +2891,18 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
                 'documentation': {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
-                'name': 'module',
                 'enum': 'Module',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
+                'grpc_enum': None,
+                'name': 'module',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
             },
             {
                 'direction': 'out',
@@ -2981,8 +2975,9 @@ functions = {
                 'documentation': {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
-                'name': 'module',
                 'enum': 'Module',
+                'grpc_enum': None,
+                'name': 'module',
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3078,7 +3073,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.     **Default Value** : NIRFSG_VAL_PRIMARY_MODULE    **Defined Values** :    ',
+                    'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration temperature. \n                    **Default Value** : NIRFSG_VAL_PRIMARY_MODULE\n                    **Defined Values** :\n                    ',
                     'table_body': [
                         [
                             'NIRFSG_VAL_PRIMARY_MODULE',
@@ -3149,7 +3144,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the signal to query. **Defined Values** :    ',
+                    'description': 'Specifies the signal to query. **Defined Values** :\n                    ',
                     'table_body': [
                         [
                             'NIRFSG_VAL_START_TRIGGER',
@@ -3207,7 +3202,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to "" (empty string). **Possible Values** :    ',
+                    'description': 'Specifies which instance of the selected signal to query. This parameter is necessary when you set the NIRFSG_ATTR_SIGNAL parameter to NIRFSG_VAL_SCRIPT_TRIGGER or NIRFSG_VAL_MARKER_EVENT  . Otherwise, set the NIRFSG_ATTR_SIGNAL_IDENTIFIER parameter to "" (empty string). **Possible Values** :\n                    ',
                     'table_body': [
                         [
                             '"marker0"',
@@ -3284,6 +3279,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the burst start locations of the waveform stored in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -3309,8 +3305,8 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
-                'name': 'channelName',
                 'is_repeated_capability': True,
+                'name': 'channelName',
                 'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3351,6 +3347,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'waveforms',
         'returns': 'ViStatus'
     },
     'GetWaveformBurstStopLocations': {
@@ -3358,6 +3355,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the burst stop locations of the waveform stored in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -3383,8 +3381,8 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
-                'name': 'channelName',
                 'is_repeated_capability': True,
+                'name': 'channelName',
                 'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3425,6 +3423,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'waveforms',
         'returns': 'ViStatus'
     },
     'GetWaveformMarkerEventLocations': {
@@ -3432,6 +3431,7 @@ functions = {
         'documentation': {
             'description': '\nReturns the marker locations associated with the waveform and the marker stored in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -3455,10 +3455,10 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
+                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
                 },
-                'name': 'channelName',
                 'is_repeated_capability': True,
+                'name': 'channelName',
                 'repeated_capability_type': 'markers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3499,6 +3499,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'markers',
         'returns': 'ViStatus'
     },
     'InitWithOptions': {
@@ -3922,35 +3923,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'reset': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nResets all attributes to their default values and moves the NI-RFSG device to the Configuration state.\n\nThis function aborts the generation, deletes all de-embedding tables, clears all routes, and resets session attributes to their initial values. During a reset, routes of signals between this and other devices are released, regardless of which device created the route.\n\nGenerally, calling this function instead of the nirfsg_ResetDevice function is acceptable. The nirfsg_Reset function executes faster than the nirfsg_ResetDevice function.\n\nTo avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the nirfsg_ResetWithOptions function, with **stepsToOmit** set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES .\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
-            'note': 'This function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'ResetAttribute': {
         'codegen_method': 'public',
         'documentation': {
@@ -4056,66 +4028,10 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'RevisionQuery': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nReturns the revision numbers of the NI-RFSG driver and the instrument firmware.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the value of the NIRFSG_ATTR_SPECIFIC_DRIVER_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
-                },
-                'name': 'instrumentDriverRevision',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the value of the NIRFSG_ATTR_INSTRUMENT_FIRMWARE_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
-                },
-                'name': 'firmwareRevision',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'ResetWithOptions': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nResets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\nBy default, this function exhibits the same behavior as nirfsg_Reset. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES for the NIRFSG_ATTR_STEPS_TO_OMIT parameter, this function does not release signal routes during the reset process.\n\nWhen routes of signals between two devices are released, they are released regardless of which device created the route.\n\nTo avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this function instead of nirfsg_Reset, with NIRFSG_ATTR_STEPS_TO_OMIT set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>``Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_'
+            'description': '\nResets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\nBy default, this function exhibits the same behavior as nirfsg_Reset. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES for the NIRFSG_ATTR_STEPS_TO_OMIT parameter, this function does not release signal routes during the reset process.\n\nWhen routes of signals between two devices are released, they are released regardless of which device created the route.\n\nTo avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using this function instead of nirfsg_Reset, with NIRFSG_ATTR_STEPS_TO_OMIT set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4175,10 +4091,66 @@ functions = {
                         'Description'
                     ]
                 },
-                'type_in_documentation': 'Bitwise combination of enums.ResetWithOptionsStepsToOmit flags',
                 'enum': 'ResetWithOptionsStepsToOmit',
                 'name': 'stepsToOmit',
                 'type': 'ViUInt64',
+                'type_in_documentation': 'Bitwise combination of enums.ResetWithOptionsStepsToOmit flags',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'RevisionQuery': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nReturns the revision numbers of the NI-RFSG driver and the instrument firmware.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the value of the NIRFSG_ATTR_SPECIFIC_DRIVER_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
+                },
+                'name': 'instrumentDriverRevision',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the value of the NIRFSG_ATTR_INSTRUMENT_FIRMWARE_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
+                },
+                'name': 'firmwareRevision',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -4369,10 +4341,10 @@ functions = {
                         'Description'
                     ]
                 },
-                'type_in_documentation': 'Bitwise combination of enums.SelfCalibrateRangeStepsToOmit flags',
                 'enum': 'SelfCalibrateRangeStepsToOmit',
                 'name': 'stepsToOmit',
                 'type': 'ViInt64',
+                'type_in_documentation': 'Bitwise combination of enums.SelfCalibrateRangeStepsToOmit flags',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -5003,6 +4975,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the start location of the burst in samples where the burst refers to the active portion of a waveform.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -5028,8 +5001,8 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the waveform name and the marker name. Example: "waveform::waveform0/marker0"'
                 },
-                'name': 'channelName',
                 'is_repeated_capability': True,
+                'name': 'channelName',
                 'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5042,8 +5015,7 @@ functions = {
                 },
                 'name': 'numberOfLocations',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'direction': 'in',
@@ -5059,6 +5031,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'waveforms',
         'returns': 'ViStatus'
     },
     'SetWaveformBurstStopLocations': {
@@ -5066,6 +5039,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the stop location of the burst in samples where the burst refers to the active portion of a waveform.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -5089,10 +5063,10 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
+                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
                 },
-                'name': 'channelName',
                 'is_repeated_capability': True,
+                'name': 'channelName',
                 'repeated_capability_type': 'waveforms',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5105,8 +5079,7 @@ functions = {
                 },
                 'name': 'numberOfLocations',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'direction': 'in',
@@ -5122,6 +5095,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'waveforms',
         'returns': 'ViStatus'
     },
     'SetWaveformMarkerEventLocations': {
@@ -5129,6 +5103,7 @@ functions = {
         'documentation': {
             'description': '\nConfigures the marker locations associated with waveform and marker in the NI-RFSG session.\n\n**Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_templates': [
             {
@@ -5152,10 +5127,10 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': '                        Specifies the waveform name and the marker name.\n\n        Example:\n\n        "waveform::waveform0/marker0"        '
+                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
                 },
-                'name': 'channelName',
                 'is_repeated_capability': True,
+                'name': 'channelName',
                 'repeated_capability_type': 'markers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5168,8 +5143,7 @@ functions = {
                 },
                 'name': 'numberOfLocations',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'direction': 'in',
@@ -5185,6 +5159,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'markers',
         'returns': 'ViStatus'
     },
     'UnlockSession': {
@@ -5266,13 +5241,13 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-     'WriteArbWaveformComplexF32': {
+    'WriteArbWaveformComplexF32': {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
             'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'write_arb_waveform',
         'method_templates': [
@@ -5311,8 +5286,7 @@ functions = {
                 },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'complex_type': 'numpy',
@@ -5327,8 +5301,7 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexNumberF32[]',
-                'use_in_python_api': True,
-                'use_array': True
+                'use_in_python_api': True
             },
             {
                 'direction': 'in',
@@ -5341,16 +5314,15 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'returns': 'ViStatus',
-        'use_session_lock': False
+        'returns': 'ViStatus'
     },
     'WriteArbWaveformComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
-            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'write_arb_waveform',
         'method_templates': [
@@ -5389,8 +5361,7 @@ functions = {
                 },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'complex_type': 'numpy',
@@ -5405,8 +5376,7 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexNumber[]',
-                'use_in_python_api': True,
-                'use_array': True
+                'use_in_python_api': True
             },
             {
                 'direction': 'in',
@@ -5419,8 +5389,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'returns': 'ViStatus',
-        'use_session_lock': False
+        'returns': 'ViStatus'
     },
     'WriteArbWaveformComplexI16': {
         'codegen_method': 'private',
@@ -5428,7 +5397,7 @@ functions = {
             'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the interleaved I/Q data of a complex baseband signal. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
             'note': 'This function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'write_arb_waveform',
         'method_templates': [
@@ -5467,8 +5436,7 @@ functions = {
                 },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'complex_type': 'interleaved',
@@ -5483,21 +5451,20 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexI16[]',
-                'use_in_python_api': True,
-                'use_array': True
+                'use_in_python_api': True
             }
         ],
-        'returns': 'ViStatus',
-        'use_session_lock': False
+        'returns': 'ViStatus'
     },
     'WriteArbWaveformDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, this function can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
-            'note': 'This function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\nIf you are writing interleaved numpy array of numpy.int16, then this function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform as interleaved numpy array of numpy.int16 when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
+        'method_name_for_documentation': 'write_arb_waveform',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -5528,40 +5495,25 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in the data array.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
                 'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
-                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
                 'name': 'waveformDataArray',
                 'numpy': True,
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberOfSamples'
-                },
                 'type': 'NIComplexNumber[]',
-                'use_in_python_api': True,
-                'use_array': True
+                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
+                'use_in_python_api': True
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
                 },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
-                'default_value': False,
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -5631,5 +5583,35 @@ functions = {
         'python_name': '_close',
         'returns': 'ViStatus',
         'use_session_lock': False
+    },
+    'reset': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nResets all attributes to their default values and moves the NI-RFSG device to the Configuration state.\n\nThis function aborts the generation, deletes all de-embedding tables, clears all routes, and resets session attributes to their initial values. During a reset, routes of signals between this and other devices are released, regardless of which device created the route.\n\nGenerally, calling this function instead of the nirfsg_ResetDevice function is acceptable. The nirfsg_Reset function executes faster than the nirfsg_ResetDevice function.\n\nTo avoid resetting routes on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSA sessions, NI recommends using the nirfsg_ResetWithOptions function, with **stepsToOmit** set to NIRFSG_VAL_RESET_WITH_OPTIONS_ROUTES .\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
+            'note': 'This function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG.'
+        },
+        'grpc_name': 'Reset',
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
     }
 }

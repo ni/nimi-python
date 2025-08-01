@@ -944,7 +944,7 @@ configure_digital_level_script_trigger
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: configure_digital_level_script_trigger(trigger_id, source, level)
+    .. py:method:: configure_digital_level_script_trigger(source, level)
 
             Configures a specified Script Trigger for digital level triggering.
 
@@ -961,16 +961,17 @@ configure_digital_level_script_trigger
             
 
 
+            .. tip:: This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+                and then call this method on the result.
 
-            :param trigger_id:
+                Example: :py:meth:`my_session.script_triggers[ ... ].configure_digital_level_script_trigger`
+
+                To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.configure_digital_level_script_trigger`
 
 
-                Specifies the Script Trigger to configure.
-
-                
-
-
-            :type trigger_id: str
             :param source:
 
 
@@ -1238,7 +1239,7 @@ create_deembedding_sparameter_table_array
 
             **Related Topics**
 
-            `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+            `De-embedding Overview<https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
 
             
 
@@ -1285,7 +1286,9 @@ create_deembedding_sparameter_table_array
             :param sparameter_orientation:
 
 
-                Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :
+                Specifies the orientation of the input data relative to the port on the DUT port.
+
+                **Defined Values** :
 
                 +------------------------------------------------------------+----------------+-----------------------------------------------------+
                 | Name                                                       | Value          | Description                                         |
@@ -1500,7 +1503,7 @@ error_message
 
                 Pass the status parameter that is returned from any NI-RFSG method.
 
-                        **Default Value** : 0 (VI_SUCCESS)
+                **Default Value** : 0 (VI_SUCCESS)
 
                 
 
@@ -1511,7 +1514,7 @@ error_message
 
                 Returns the user-readable message string that corresponds to the status code you specify.
 
-                        You must pass a ViChar array with at least 256 bytes to this parameter.
+                You must pass a ViChar array with at least 256 bytes to this parameter.
 
                 
 
@@ -1550,7 +1553,7 @@ error_query
 
                     Returns the error message string read from the instrument error message queue.
 
-                            You must pass a ViChar array with at least 256 bytes.
+                    You must pass a ViChar array with at least 256 bytes.
 
                     
 
@@ -1676,7 +1679,7 @@ get_deembedding_sparameters
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_deembedding_sparameters(sparameter_array_size)
+    .. py:method:: get_deembedding_sparameters(sparameters_array_size)
 
             Returns the S-parameters used for de-embedding a measurement on the selected port.
 
@@ -1686,13 +1689,13 @@ get_deembedding_sparameters
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
-            **Note**: The port orientation for the returned S-parameters is normalized to :py:data:`~nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT`.
-
             
 
+            .. note:: The port orientation for the returned S-parameters is normalized to :py:data:`~nirfsg.SparameterOrientation.PORT1_TOWARDS_DUT`.
 
 
-            :param sparameter_array_size:
+
+            :param sparameters_array_size:
 
 
                 Specifies the size of the array that is returned by the :py:attr:`nirfsg.Session.SPARAMETERS` output.
@@ -1702,7 +1705,7 @@ get_deembedding_sparameters
                 .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-            :type sparameter_array_size: int
+            :type sparameters_array_size: int
 
             :rtype: tuple (sparameters, number_of_ports)
 
@@ -1880,7 +1883,9 @@ get_self_calibration_temperature
             :param module:
 
 
-                Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.     **Default Value** : :py:data:`~nirfsg.Module.PRIMARY_MODULE`    **Defined Values** :
+                Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.
+                                    **Default Value** : :py:data:`~nirfsg.Module.PRIMARY_MODULE`
+                                    **Defined Values** :
 
                 +------------------------------------------+----------------+---------------------------------------------------------------------+
                 | Name                                     | Value          | Description                                                         |
@@ -2508,7 +2513,9 @@ reset_with_options
 
             **Related Topics**
 
-            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>``Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+            `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+            `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
 
             
 
@@ -3101,9 +3108,9 @@ write_arb_waveform
 
             Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform` method, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, this method can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform`, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
 
-            **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+            **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
             **Related Topics**
 
@@ -3113,7 +3120,8 @@ write_arb_waveform
 
             
 
-            .. note:: This method only supports :py:data:`~nirfsg.PowerLevelType.PEAK` mode as specified in the :py:attr:`nirfsg.Session.power_level_type` property. If you download a waveform when using this method, you cannot set the :py:attr:`nirfsg.Session.power_level_type` to :py:data:`~nirfsg.PowerLevelType.AVERAGE` without causing error in the output.
+            .. note:: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+                If you are writing interleaved numpy array of numpy.int16, then this method only supports :py:data:`~nirfsg.PowerLevelType.PEAK` mode as specified in the :py:attr:`nirfsg.Session.power_level_type` property. If you download a waveform as interleaved numpy array of numpy.int16 when using this method, you cannot set the :py:attr:`nirfsg.Session.power_level_type` to :py:data:`~nirfsg.PowerLevelType.AVERAGE` without causing error in the output.
 
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
@@ -8948,9 +8956,9 @@ lo_out_export_configure_from_rfsa
 
         Specifies whether to allow NI-RFSA to control the NI-RFSG LO out export.
 
-        Set this property to :py:data:`~nirfsg.LoOutExportConfigureFromRFSaEnable.ENABLE` to allow NI-RFSA to control the LO out export. Use the RF OUT LO EXPORT ENABLED property to control the LO out export from NI-RFSA.
+        Set this property to :py:data:`~nirfsg.LoOutExportConfigureFromRfsaEnable.ENABLE` to allow NI-RFSA to control the LO out export. Use the RF OUT LO EXPORT ENABLED property to control the LO out export from NI-RFSA.
 
-        **Default Value:** :py:data:`~nirfsg.LoOutExportConfigureFromRFSaEnable.DISABLE`
+        **Default Value:** :py:data:`~nirfsg.LoOutExportConfigureFromRfsaEnable.DISABLE`
 
         **Supported Devices**: PXIe-5840/5841/5842
 
@@ -8959,9 +8967,9 @@ lo_out_export_configure_from_rfsa
         +---------------------------------------------------------------+---------+----------------------------------------------------------------------+
         | Name                                                          | Value   | Description                                                          |
         +===============================================================+=========+======================================================================+
-        | :py:data:`~nirfsg.LoOutExportConfigureFromRFSaEnable.ENABLE`  | 0 (0x0) | Do not allow NI-RFSA to control the NI-RFSG local oscillator export. |
+        | :py:data:`~nirfsg.LoOutExportConfigureFromRfsaEnable.ENABLE`  | 0 (0x0) | Do not allow NI-RFSA to control the NI-RFSG local oscillator export. |
         +---------------------------------------------------------------+---------+----------------------------------------------------------------------+
-        | :py:data:`~nirfsg.LoOutExportConfigureFromRFSaEnable.DISABLE` | 1 (0x1) | Allow NI-RFSA to control the NI-RFSG local oscillator export.        |
+        | :py:data:`~nirfsg.LoOutExportConfigureFromRfsaEnable.DISABLE` | 1 (0x1) | Allow NI-RFSA to control the NI-RFSG local oscillator export.        |
         +---------------------------------------------------------------+---------+----------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -8971,7 +8979,7 @@ lo_out_export_configure_from_rfsa
             +-----------------------+------------------------------------------+
             | Characteristic        | Value                                    |
             +=======================+==========================================+
-            | Datatype              | enums.LoOutExportConfigureFromRFSaEnable |
+            | Datatype              | enums.LoOutExportConfigureFromRfsaEnable |
             +-----------------------+------------------------------------------+
             | Permissions           | read-write                               |
             +-----------------------+------------------------------------------+
@@ -9044,7 +9052,7 @@ lo_pll_fractional_mode_enabled
 
         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" .
 
-        **Default Value:** :py:data:`~nirfsg.LoPlLfractionalModeEnabled.ENABLE`
+        **Default Value:** :py:data:`~nirfsg.LoPllFractionalModeEnabled.ENABLE`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -9057,9 +9065,9 @@ lo_pll_fractional_mode_enabled
         +-------------------------------------------------------+---------+------------------------------------------+
         | Name                                                  | Value   | Description                              |
         +=======================================================+=========+==========================================+
-        | :py:data:`~nirfsg.LoPlLfractionalModeEnabled.ENABLE`  | 0 (0x0) | Disables fractional mode for the LO PLL. |
+        | :py:data:`~nirfsg.LoPllFractionalModeEnabled.ENABLE`  | 0 (0x0) | Disables fractional mode for the LO PLL. |
         +-------------------------------------------------------+---------+------------------------------------------+
-        | :py:data:`~nirfsg.LoPlLfractionalModeEnabled.DISABLE` | 1 (0x1) | Enables fractional mode for the LO PLL.  |
+        | :py:data:`~nirfsg.LoPllFractionalModeEnabled.DISABLE` | 1 (0x1) | Enables fractional mode for the LO PLL.  |
         +-------------------------------------------------------+---------+------------------------------------------+
 
         .. note:: For the PXIe-5841 with PXIe-5655, this property is ignored if the PXIe-5655 is used as the LO source.
@@ -9081,7 +9089,7 @@ lo_pll_fractional_mode_enabled
             +-----------------------+----------------------------------+
             | Characteristic        | Value                            |
             +=======================+==================================+
-            | Datatype              | enums.LoPlLfractionalModeEnabled |
+            | Datatype              | enums.LoPllFractionalModeEnabled |
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.5.0d9999
+# This file is generated from NI-RFSG API metadata version 25.8.0d9999
 config = {
-    'api_version': '25.5.0d9999',
+    'api_version': '25.8.0d9999',
     'c_function_prefix': 'niRFSG_',
     'close_function': 'close',
     'context_manager_name': {
@@ -12,7 +12,16 @@ config = {
     'custom_types': [
     ],
     'driver_name': 'NI-RFSG',
+    'enum_whitelist_prefix': [
+        'RANGE_',
+        'CLOCK_RATE_'
+    ],
     'enum_whitelist_suffix': [
+        '_HERTZ',
+        '_KILOHERTZ',
+        '_MEGAHERTZ',
+        '_GIGAHERTZ',
+        '_TOWARDS_DUT'
     ],
     'extra_errors_used': [
         'InvalidRepeatedCapabilityError',
@@ -39,17 +48,6 @@ config = {
         }
     },
     'module_name': 'nirfsg',
-    'enum_whitelist_prefix': [
-        'RANGE_',
-        'CLOCK_RATE_'
-    ],
-    'enum_whitelist_suffix': [
-        '_HERTZ',
-        '_KILOHERTZ',
-        '_MEGAHERTZ',
-        '_GIGAHERTZ',
-        '_TOWARDS_DUT'
-    ],
     'repeated_capabilities': [
         {
             'prefix': 'marker',

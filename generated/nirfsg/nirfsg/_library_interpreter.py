@@ -264,7 +264,7 @@ class LibraryInterpreter(object):
 
     def configure_digital_level_script_trigger(self, trigger_id, source, level):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C020
+        trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C010
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViInt32(level)  # case S150
         error_code = self._library.niRFSG_ConfigureDigitalLevelScriptTrigger(vi_ctype, trigger_id_ctype, source_ctype, level_ctype)
@@ -486,13 +486,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return name_ctype.value.decode(self._encoding)
 
-    def get_deembedding_sparameters(self, sparameters, sparameter_array_size):  # noqa: N802
+    def get_deembedding_sparameters(self, sparameters, sparameters_array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         sparameters_ctype = _get_ctypes_pointer_for_buffer(value=sparameters, library_type=_complextype.NIComplexNumber)  # case B510
-        sparameter_array_size_ctype = _visatype.ViInt32(sparameter_array_size)  # case S150
+        sparameters_array_size_ctype = _visatype.ViInt32(sparameters_array_size)  # case S150
         number_of_sparameters_ctype = _visatype.ViInt32()  # case S220
         number_of_ports_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niRFSG_GetDeembeddingSparameters(vi_ctype, sparameters_ctype, sparameter_array_size_ctype, None if number_of_sparameters_ctype is None else (ctypes.pointer(number_of_sparameters_ctype)), None if number_of_ports_ctype is None else (ctypes.pointer(number_of_ports_ctype)))
+        error_code = self._library.niRFSG_GetDeembeddingSparameters(vi_ctype, sparameters_ctype, sparameters_array_size_ctype, None if number_of_sparameters_ctype is None else (ctypes.pointer(number_of_sparameters_ctype)), None if number_of_ports_ctype is None else (ctypes.pointer(number_of_ports_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(number_of_ports_ctype.value)
 

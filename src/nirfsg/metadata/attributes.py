@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.5.0d9999
+# This file is generated from NI-RFSG API metadata version 25.8.0d9999
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -3013,7 +3013,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'LoPlLfractionalModeEnabled',
+        'enum': 'LoPllFractionalModeEnabled',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO PLL Fractional Mode Enabled',
         'name': 'LO_PLL_FRACTIONAL_MODE_ENABLED',
         'supported_rep_caps': [
@@ -3790,7 +3790,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'LoOutExportConfigureFromRFSaEnable',
+        'enum': 'LoOutExportConfigureFromRfsaEnable',
         'lv_property': 'RF:LO Out Export Configure From RFSA',
         'name': 'LO_OUT_EXPORT_CONFIGURE_FROM_RFSA',
         'type': 'ViInt32'
