@@ -2051,6 +2051,52 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
+    'FancyGetDeembeddingSparameters': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.'
+        },
+        'included_in_proto': True,
+        'method_name_for_documentation': 'get_deembedding_sparameters',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'get_deembedding_sparameter'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'array_dimension': 2,
+                'complex_type': 'numpy',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameters',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'get_deembedding_sparameters',
+        'returns': None,
+        'use_session_lock': False
+    },
     'GetAllNamedWaveformNames': {
         'codegen_method': 'public',
         'documentation': {
@@ -2601,7 +2647,7 @@ functions = {
         'returns': 'ViStatus'
     },
     'GetDeembeddingSparameters': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
             'note': 'The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.'
@@ -2609,10 +2655,10 @@ functions = {
         'included_in_proto': True,
         'method_templates': [
             {
-                'documentation_filename': 'default_method',
+                'documentation_filename': 'numpy_method',
                 'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'get_deembedding_sparameter'
+                'session_filename': 'numpy_read_method'
             }
         ],
         'parameters': [
@@ -2656,7 +2702,7 @@ functions = {
                 'name': 'numberOfSparameters',
                 'type': 'ViInt32',
                 'use_array': False,
-                'use_in_python_api': False
+                'use_in_python_api': True
             },
             {
                 'direction': 'out',
@@ -5244,8 +5290,8 @@ functions = {
     'WriteArbWaveformComplexF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
-            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform function, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5306,7 +5352,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the NIRFSG_ATTR_WAVEFORM_NAME parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the NIRFSG_ATTR_WAVEFORM_NAME parameter. Set more_data_pending to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
                 },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
@@ -5319,8 +5365,8 @@ functions = {
     'WriteArbWaveformComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
-            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5381,7 +5427,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
                 },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',
@@ -5459,8 +5505,8 @@ functions = {
     'WriteArbWaveformDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
-            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **NIRFSG_ATTR_MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\nIf you are writing interleaved numpy array of numpy.int16, then this function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform as interleaved numpy array of numpy.int16 when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
+            'description': '\nWrites an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.\n\nThis function accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the nirfsg_AllocateArbWaveform, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this function. When streaming is enabled, you can call this function when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.\n\n**Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Streaming <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/streaming.html>`_\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-attributes-to-a-wavef.html>`_',
+            'note': 'On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.\nIf you are writing interleaved numpy array of numpy.int16, then this function only supports NIRFSG_VAL_PEAK_POWER mode as specified in the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute. If you download a waveform as interleaved numpy array of numpy.int16 when using this function, you cannot set the NIRFSG_ATTR_POWER_LEVEL_TYPE to NIRFSG_VAL_AVERAGE_POWER without causing error in the output.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -5510,7 +5556,7 @@ functions = {
                 'default_value': False,
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **NIRFSG_ATTR_MORE_DATA_PENDING** to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
+                    'description': 'Specifies whether or not the data block contains the end of the waveform. Set this parameter to VI_TRUE to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to VI_FALSE to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.'
                 },
                 'name': 'moreDataPending',
                 'type': 'ViBoolean',

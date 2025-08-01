@@ -494,7 +494,7 @@ class LibraryInterpreter(object):
         number_of_ports_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niRFSG_GetDeembeddingSparameters(vi_ctype, sparameters_ctype, sparameters_array_size_ctype, None if number_of_sparameters_ctype is None else (ctypes.pointer(number_of_sparameters_ctype)), None if number_of_ports_ctype is None else (ctypes.pointer(number_of_ports_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(number_of_ports_ctype.value)
+        return int(number_of_sparameters_ctype.value), int(number_of_ports_ctype.value)
 
     def get_deembedding_table_number_of_ports(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

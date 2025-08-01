@@ -7244,6 +7244,31 @@ class Session(_SessionBase):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array.")
 
+    def get_deembedding_sparameters(self):
+        '''get_deembedding_sparameters
+
+        Returns the S-parameters used for de-embedding a measurement on the selected port.
+
+        This includes interpolation of the parameters based on the configured carrier frequency. This method returns an empty array if no de-embedding is done.
+
+        If you want to call this method just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
+
+        Returns:
+            sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+        '''
+        import numpy as np
+        number_of_ports = self._get_deembedding_table_number_of_ports()
+        sparameter_array_size = number_of_ports ** 2
+        sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
+        number_of_sparameters, number_of_ports = self._get_deembedding_sparameters(sparameters, sparameter_array_size)
+        sparameters = sparameters.reshape((number_of_ports, number_of_ports))
+        return sparameters
+
     @ivi_synchronized
     def get_all_named_waveform_names(self):
         r'''get_all_named_waveform_names
@@ -7308,8 +7333,8 @@ class Session(_SessionBase):
         return name
 
     @ivi_synchronized
-    def get_deembedding_sparameters(self):
-        '''get_deembedding_sparameters
+    def _get_deembedding_sparameters(self, sparameters, sparameters_array_size):
+        r'''_get_deembedding_sparameters
 
         Returns the S-parameters used for de-embedding a measurement on the selected port.
 
@@ -7322,6 +7347,8 @@ class Session(_SessionBase):
         Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
 
         Args:
+            sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
             sparameters_array_size (int): Specifies the size of the array that is returned by the SPARAMETERS output.
 
                 Note:
@@ -7329,18 +7356,21 @@ class Session(_SessionBase):
 
 
         Returns:
-            sparameters (list of NIComplexNumber): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+            number_of_sparameters (int): Returns the number of S-parameters.
 
             number_of_ports (int): Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
 
         '''
-        import numpy as np
-        number_of_ports = self._get_deembedding_table_number_of_ports()
-        sparameter_table_size = number_of_ports ** 2
-        sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
-        number_of_ports = self._interpreter.get_deembedding_sparameters(sparameters, sparameter_table_size)
-        sparameters = sparameters.reshape((number_of_ports, number_of_ports))
-        return sparameters, number_of_ports
+        import numpy
+
+        if type(sparameters) is not numpy.ndarray:
+            raise TypeError('sparameters must be {0}, is {1}'.format(numpy.ndarray, type(sparameters)))
+        if numpy.isfortran(sparameters) is True:
+            raise TypeError('sparameters must be in C-order')
+        if sparameters.dtype is not numpy.dtype('complex128'):
+            raise TypeError('sparameters must be numpy.ndarray of dtype=complex128, is ' + str(sparameters.dtype))
+        number_of_sparameters, number_of_ports = self._interpreter.get_deembedding_sparameters(sparameters, sparameters_array_size)
+        return number_of_sparameters, number_of_ports
 
     @ivi_synchronized
     def _get_deembedding_table_number_of_ports(self):
@@ -8102,7 +8132,7 @@ class Session(_SessionBase):
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-        This method accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the allocate_arb_waveform method, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+        This method accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the allocate_arb_waveform method, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
 
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8112,17 +8142,14 @@ class Session(_SessionBase):
 
         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
             waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
 
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the WAVEFORM_NAME parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the WAVEFORM_NAME parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -8146,7 +8173,7 @@ class Session(_SessionBase):
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-        This method accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the allocate_arb_waveform, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.
+        This method accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the allocate_arb_waveform, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.
 
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
 
@@ -8156,20 +8183,14 @@ class Session(_SessionBase):
 
         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the **MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
             waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
 
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
         '''
         import numpy
@@ -8225,7 +8246,7 @@ class Session(_SessionBase):
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-        This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the allocate_arb_waveform, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+        This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the allocate_arb_waveform, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
 
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8235,21 +8256,15 @@ class Session(_SessionBase):
 
         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
         If you are writing interleaved numpy array of numpy.int16, then this method only supports PowerLevelType.PEAK mode as specified in the power_level_type property. If you download a waveform as interleaved numpy array of numpy.int16 when using this method, you cannot set the power_level_type to PowerLevelType.AVERAGE without causing error in the output.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
             waveform_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
 
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
         '''
         import numpy

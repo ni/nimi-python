@@ -1679,7 +1679,7 @@ get_deembedding_sparameters
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_deembedding_sparameters(sparameters_array_size)
+    .. py:method:: get_deembedding_sparameters()
 
             Returns the S-parameters used for de-embedding a measurement on the selected port.
 
@@ -1695,34 +1695,11 @@ get_deembedding_sparameters
 
 
 
-            :param sparameters_array_size:
-
-
-                Specifies the size of the array that is returned by the :py:attr:`nirfsg.Session.SPARAMETERS` output.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type sparameters_array_size: int
-
-            :rtype: tuple (sparameters, number_of_ports)
-
-                WHERE
-
-                sparameters (list of NIComplexNumber): 
+            :rtype: numpy.array(dtype=numpy.complex128)
+            :return:
 
 
                     Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
-
-                    
-
-
-                number_of_ports (int): 
-
-
-                    Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
 
                     
 
@@ -3108,7 +3085,7 @@ write_arb_waveform
 
             Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform`, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+            This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the :py:meth:`nirfsg.Session.allocate_arb_waveform`, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
 
             **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -3120,10 +3097,8 @@ write_arb_waveform
 
             
 
-            .. note:: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+            .. note:: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
                 If you are writing interleaved numpy array of numpy.int16, then this method only supports :py:data:`~nirfsg.PowerLevelType.PEAK` mode as specified in the :py:attr:`nirfsg.Session.power_level_type` property. If you download a waveform as interleaved numpy array of numpy.int16 when using this method, you cannot set the :py:attr:`nirfsg.Session.power_level_type` to :py:data:`~nirfsg.PowerLevelType.AVERAGE` without causing error in the output.
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
 
@@ -3148,11 +3123,9 @@ write_arb_waveform
             :param more_data_pending:
 
 
-                Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **:py:attr:`nirfsg.Session.MORE_DATA_PENDING`** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
+                Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
                 
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
             :type more_data_pending: bool
