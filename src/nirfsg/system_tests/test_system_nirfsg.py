@@ -543,8 +543,7 @@ class SystemTests:
         expected_sparameter_table = np.array([[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], dtype=np.complex128)
         rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, sparameter_tables, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
         rfsg_device_session.frequency = 2e9
-        returned_sparameter_table, number_of_ports = rfsg_device_session.get_deembedding_sparameters()
-        assert number_of_ports == 2
+        returned_sparameter_table = rfsg_device_session.get_deembedding_sparameters()
         assert returned_sparameter_table.all() == expected_sparameter_table.all()
 
     def test_create_deembedding_sparameter_table_array_error_cases(self, rfsg_device_session):

@@ -284,7 +284,7 @@ class IQOutPortTerminalConfiguration(Enum):
     '''
 
 
-class LoOutExportConfigureFromRFSaEnable(Enum):
+class LoOutExportConfigureFromRfsaEnable(Enum):
     DISABLE = 0
     r'''
     Do not allow NI-RFSA to control the NI-RFSG local oscillator export.
@@ -295,7 +295,7 @@ class LoOutExportConfigureFromRFSaEnable(Enum):
     '''
 
 
-class LoPlLfractionalModeEnabled(Enum):
+class LoPllFractionalModeEnabled(Enum):
     DISABLE = 0
     r'''
     Disables fractional mode for the LO PLL.

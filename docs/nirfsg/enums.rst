@@ -651,12 +651,12 @@ IQOutPortTerminalConfiguration
 
 
 
-LoOutExportConfigureFromRFSaEnable
+LoOutExportConfigureFromRfsaEnable
 ----------------------------------
 
-.. py:class:: LoOutExportConfigureFromRFSaEnable
+.. py:class:: LoOutExportConfigureFromRfsaEnable
 
-    .. py:attribute:: LoOutExportConfigureFromRFSaEnable.DISABLE
+    .. py:attribute:: LoOutExportConfigureFromRfsaEnable.DISABLE
 
 
 
@@ -666,7 +666,7 @@ LoOutExportConfigureFromRFSaEnable
 
 
 
-    .. py:attribute:: LoOutExportConfigureFromRFSaEnable.ENABLE
+    .. py:attribute:: LoOutExportConfigureFromRfsaEnable.ENABLE
 
 
 
@@ -676,12 +676,12 @@ LoOutExportConfigureFromRFSaEnable
 
 
 
-LoPlLfractionalModeEnabled
+LoPllFractionalModeEnabled
 --------------------------
 
-.. py:class:: LoPlLfractionalModeEnabled
+.. py:class:: LoPllFractionalModeEnabled
 
-    .. py:attribute:: LoPlLfractionalModeEnabled.DISABLE
+    .. py:attribute:: LoPllFractionalModeEnabled.DISABLE
 
 
 
@@ -691,7 +691,7 @@ LoPlLfractionalModeEnabled
 
 
 
-    .. py:attribute:: LoPlLfractionalModeEnabled.ENABLE
+    .. py:attribute:: LoPllFractionalModeEnabled.ENABLE
 
 
 

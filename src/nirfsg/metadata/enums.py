@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.5.0d9999
+# This file is generated from NI-RFSG API metadata version 25.8.0d9999
 enums = {
     'AllowOutOfSpecificationUserSettings': {
         'values': [
@@ -255,6 +255,24 @@ enums = {
             }
         ]
     },
+    'DigitalEqualizationEnabled': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Filter is not applied'
+                },
+                'name': 'NIRFSG_VAL_DISABLE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Filter is applied.'
+                },
+                'name': 'NIRFSG_VAL_ENABLE',
+                'value': 1
+            }
+        ]
+    },
     'DigitalModulationType': {
         'values': [
             {
@@ -302,24 +320,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_USER_DEFINED',
                 'value': 5001
-            }
-        ]
-    },
-    'DigitalEqualizationEnabled': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Filter is not applied'
-                },
-                'name': 'NIRFSG_VAL_DISABLE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Filter is applied.'
-                },
-                'name': 'NIRFSG_VAL_ENABLE',
-                'value': 1
             }
         ]
     },
@@ -466,7 +466,7 @@ enums = {
             }
         ]
     },
-    'LoOutExportConfigureFromRFSaEnable': {
+    'LoOutExportConfigureFromRfsaEnable': {
         'values': [
             {
                 'documentation': {
@@ -484,7 +484,7 @@ enums = {
             }
         ]
     },
-    'LoPlLfractionalModeEnabled': {
+    'LoPllFractionalModeEnabled': {
         'values': [
             {
                 'documentation': {
@@ -867,31 +867,6 @@ enums = {
             }
         ]
     },
-    'ReferencePllBandwidth': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Uses the narrowest loop bandwidth setting for the PLL. Setting this attribute to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.'
-                },
-                'name': 'NIRFSG_VAL_NARROW',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the medium loop bandwidth setting for the PLL.'
-                },
-                'name': 'NIRFSG_VAL_MEDIUM',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the widest loop bandwidth setting for the PLL. Setting this attribute to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.'
-                },
-                'name': 'NIRFSG_VAL_WIDE',
-                'value': 2
-            }
-        ]
-    },
     'ReferenceClockExportedRate': {
         'values': [
             {
@@ -936,6 +911,31 @@ enums = {
                 'name': 'NIRFSG_VAL_10MHZ',
                 'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
                 'value': 10000000
+            }
+        ]
+    },
+    'ReferencePllBandwidth': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the narrowest loop bandwidth setting for the PLL. Setting this attribute to NIRFSG_VAL_NARROW allows the PXIe-5653 to lock to a reference with worse phase noise than the PXIe-5653 and utilize the better phase noise of the PXIe-5653.'
+                },
+                'name': 'NIRFSG_VAL_NARROW',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the medium loop bandwidth setting for the PLL.'
+                },
+                'name': 'NIRFSG_VAL_MEDIUM',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the widest loop bandwidth setting for the PLL. Setting this attribute to NIRFSG_VAL_WIDE on the PXIe-5653 allows the reference PLL to lock to a better reference with better phase noise than the PXIe-5653 and utilize the better phase noise of the reference.'
+                },
+                'name': 'NIRFSG_VAL_WIDE',
+                'value': 2
             }
         ]
     },
