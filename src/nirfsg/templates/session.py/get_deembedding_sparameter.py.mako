@@ -12,6 +12,6 @@
         number_of_ports = self._get_deembedding_table_number_of_ports()
         sparameter_array_size = number_of_ports ** 2
         sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
-        number_of_sparameters, number_of_ports = self._get_deembedding_sparameters(sparameters, sparameter_array_size)
+        _, number_of_ports = self._get_deembedding_sparameters(sparameters, sparameter_array_size)
         sparameters = sparameters.reshape((number_of_ports, number_of_ports))
         return sparameters

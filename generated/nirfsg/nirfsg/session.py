@@ -7265,7 +7265,7 @@ class Session(_SessionBase):
         number_of_ports = self._get_deembedding_table_number_of_ports()
         sparameter_array_size = number_of_ports ** 2
         sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
-        number_of_sparameters, number_of_ports = self._get_deembedding_sparameters(sparameters, sparameter_array_size)
+        _, number_of_ports = self._get_deembedding_sparameters(sparameters, sparameter_array_size)
         sparameters = sparameters.reshape((number_of_ports, number_of_ports))
         return sparameters
 
@@ -8279,8 +8279,6 @@ class Session(_SessionBase):
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
-
-        return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
     @ivi_synchronized
     def write_script(self, script):
