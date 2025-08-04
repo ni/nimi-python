@@ -3269,14 +3269,14 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lo_out_enabled`
     '''
-    lo_out_export_configure_from_rfsa = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoOutExportConfigureFromRFSaEnable, 1150242)
-    '''Type: enums.LoOutExportConfigureFromRFSaEnable
+    lo_out_export_configure_from_rfsa = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoOutExportConfigureFromRfsaEnable, 1150242)
+    '''Type: enums.LoOutExportConfigureFromRfsaEnable
 
     Specifies whether to allow NI-RFSA to control the NI-RFSG LO out export.
 
-    Set this property to LoOutExportConfigureFromRFSaEnable.ENABLE to allow NI-RFSA to control the LO out export. Use the RF OUT LO EXPORT ENABLED property to control the LO out export from NI-RFSA.
+    Set this property to LoOutExportConfigureFromRfsaEnable.ENABLE to allow NI-RFSA to control the LO out export. Use the RF OUT LO EXPORT ENABLED property to control the LO out export from NI-RFSA.
 
-    **Default Value:** LoOutExportConfigureFromRFSaEnable.DISABLE
+    **Default Value:** LoOutExportConfigureFromRfsaEnable.DISABLE
 
     **Supported Devices**: PXIe-5840/5841/5842
 
@@ -3285,9 +3285,9 @@ class _SessionBase(object):
     +--------------------------------------------+---------+----------------------------------------------------------------------+
     | Name                                       | Value   | Description                                                          |
     +============================================+=========+======================================================================+
-    | LoOutExportConfigureFromRFSaEnable.ENABLE  | 0 (0x0) | Do not allow NI-RFSA to control the NI-RFSG local oscillator export. |
+    | LoOutExportConfigureFromRfsaEnable.ENABLE  | 0 (0x0) | Do not allow NI-RFSA to control the NI-RFSG local oscillator export. |
     +--------------------------------------------+---------+----------------------------------------------------------------------+
-    | LoOutExportConfigureFromRFSaEnable.DISABLE | 1 (0x1) | Allow NI-RFSA to control the NI-RFSG local oscillator export.        |
+    | LoOutExportConfigureFromRfsaEnable.DISABLE | 1 (0x1) | Allow NI-RFSA to control the NI-RFSG local oscillator export.        |
     +--------------------------------------------+---------+----------------------------------------------------------------------+
 
     Note:
@@ -3320,8 +3320,8 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lo_out_power`
     '''
-    lo_pll_fractional_mode_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoPlLfractionalModeEnabled, 1150152)
-    '''Type: enums.LoPlLfractionalModeEnabled
+    lo_pll_fractional_mode_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoPllFractionalModeEnabled, 1150152)
+    '''Type: enums.LoPllFractionalModeEnabled
 
     Specifies whether to use fractional mode for the local oscillator (LO) phase-locked loop (PLL). This property enables or disables fractional frequency tuning in the LO. Fractional mode provides a finer frequency step resolution and allows smaller values for the lo_frequency_step_size property. However, fractional mode may introduce non-harmonic spurs.
 
@@ -3329,7 +3329,7 @@ class _SessionBase(object):
 
     To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" .
 
-    **Default Value:** LoPlLfractionalModeEnabled.ENABLE
+    **Default Value:** LoPllFractionalModeEnabled.ENABLE
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -3342,9 +3342,9 @@ class _SessionBase(object):
     +------------------------------------+---------+------------------------------------------+
     | Name                               | Value   | Description                              |
     +====================================+=========+==========================================+
-    | LoPlLfractionalModeEnabled.ENABLE  | 0 (0x0) | Disables fractional mode for the LO PLL. |
+    | LoPllFractionalModeEnabled.ENABLE  | 0 (0x0) | Disables fractional mode for the LO PLL. |
     +------------------------------------+---------+------------------------------------------+
-    | LoPlLfractionalModeEnabled.DISABLE | 1 (0x1) | Enables fractional mode for the LO PLL.  |
+    | LoPllFractionalModeEnabled.DISABLE | 1 (0x1) | Enables fractional mode for the LO PLL.  |
     +------------------------------------+---------+------------------------------------------+
 
     Note: For the PXIe-5841 with PXIe-5655, this property is ignored if the PXIe-5655 is used as the LO source.
@@ -5514,6 +5514,41 @@ class _SessionBase(object):
         self._interpreter.configure_digital_edge_script_trigger(self._repeated_capability, source, edge)
 
     @ivi_synchronized
+    def configure_digital_level_script_trigger(self, source, level):
+        r'''configure_digital_level_script_trigger
+
+        Configures a specified Script Trigger for digital level triggering.
+
+        The NI-RFSG device must be in the Configuration state before calling this method.
+
+        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
+
+        `Digital Level Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_level.html>`_
+
+        Tip:
+        This method can be called on specific script_triggers within your :py:class:`nirfsg.Session` instance.
+        Use Python index notation on the repeated capabilities container script_triggers to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.script_triggers[ ... ].configure_digital_level_script_trigger`
+
+        To call the method on all script_triggers, you can call it directly on the :py:class:`nirfsg.Session`.
+
+        Example: :py:meth:`my_session.configure_digital_level_script_trigger`
+
+        Args:
+            source (str): Specifies the trigger source terminal for the digital level Script Trigger. NI-RFSG sets the digital_level_script_trigger_source property to this value.
+
+            level (int): Specifies the active level for the digital level Script Trigger. NI-RFSG sets the digital_level_script_trigger_active_level property to this value.
+
+        '''
+        self._interpreter.configure_digital_level_script_trigger(self._repeated_capability, source, level)
+
+    @ivi_synchronized
     def configure_software_script_trigger(self):
         r'''configure_software_script_trigger
 
@@ -5579,11 +5614,11 @@ class _SessionBase(object):
         Args:
             error_code (int): Pass the status parameter that is returned from any NI-RFSG method.
 
-                        **Default Value** : 0 (VI_SUCCESS)
+                **Default Value** : 0 (VI_SUCCESS)
 
             error_message (str): Returns the user-readable message string that corresponds to the status code you specify.
 
-                        You must pass a ViChar array with at least 256 bytes to this parameter.
+                You must pass a ViChar array with at least 256 bytes to this parameter.
 
         '''
         self._interpreter.error_message(error_code, error_message)
@@ -6852,32 +6887,6 @@ class Session(_SessionBase):
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
     @ivi_synchronized
-    def configure_digital_level_script_trigger(self, trigger_id, source, level):
-        r'''configure_digital_level_script_trigger
-
-        Configures a specified Script Trigger for digital level triggering.
-
-        The NI-RFSG device must be in the Configuration state before calling this method.
-
-        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Script Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/script_triggers.html>`_
-
-        `Digital Level Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/trigger_level.html>`_
-
-        Args:
-            trigger_id (str): Specifies the Script Trigger to configure.
-
-            source (str): Specifies the trigger source terminal for the digital level Script Trigger. NI-RFSG sets the digital_level_script_trigger_source property to this value.
-
-            level (int): Specifies the active level for the digital level Script Trigger. NI-RFSG sets the digital_level_script_trigger_active_level property to this value.
-
-        '''
-        self._interpreter.configure_digital_level_script_trigger(trigger_id, source, level)
-
-    @ivi_synchronized
     def configure_digital_modulation_user_defined_waveform(self, number_of_samples, user_defined_waveform):
         r'''configure_digital_modulation_user_defined_waveform
 
@@ -7037,7 +7046,9 @@ class Session(_SessionBase):
 
             sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
 
-            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port.
+
+                **Defined Values** :
 
                 +-----------------------------------------+----------------+-----------------------------------------------------+
                 | Name                                    | Value          | Description                                         |
@@ -7173,13 +7184,12 @@ class Session(_SessionBase):
 
             error_message (str): Returns the error message string read from the instrument error message queue.
 
-                        You must pass a ViChar array with at least 256 bytes.
+                You must pass a ViChar array with at least 256 bytes.
 
         '''
         error_code, error_message = self._interpreter.error_query()
         return error_code, error_message
 
-    @ivi_synchronized
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_orientation):
         '''create_deembedding_sparameter_table_array
 
@@ -7191,7 +7201,7 @@ class Session(_SessionBase):
 
         **Related Topics**
 
-        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+        `De-embedding Overview<https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -7205,7 +7215,9 @@ class Session(_SessionBase):
 
             sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
 
-            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port. **Defined Values** :
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port.
+
+                **Defined Values** :
 
                 +-----------------------------------------+----------------+-----------------------------------------------------+
                 | Name                                    | Value          | Description                                         |
@@ -7231,6 +7243,31 @@ class Session(_SessionBase):
                 raise ValueError("Unsupported array dimension. Is {}, expected 3".format(sparameter_table.ndim))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array.")
+
+    def get_deembedding_sparameters(self):
+        '''get_deembedding_sparameters
+
+        Returns the S-parameters used for de-embedding a measurement on the selected port.
+
+        This includes interpolation of the parameters based on the configured carrier frequency. This method returns an empty array if no de-embedding is done.
+
+        If you want to call this method just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
+
+        Returns:
+            sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+        '''
+        import numpy as np
+        number_of_ports = self._get_deembedding_table_number_of_ports()
+        sparameter_array_size = number_of_ports ** 2
+        sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
+        _, number_of_ports = self._get_deembedding_sparameters(sparameters, sparameter_array_size)
+        sparameters = sparameters.reshape((number_of_ports, number_of_ports))
+        return sparameters
 
     @ivi_synchronized
     def get_all_named_waveform_names(self):
@@ -7296,8 +7333,8 @@ class Session(_SessionBase):
         return name
 
     @ivi_synchronized
-    def get_deembedding_sparameters(self):
-        '''get_deembedding_sparameters
+    def _get_deembedding_sparameters(self, sparameters, sparameters_array_size):
+        r'''_get_deembedding_sparameters
 
         Returns the S-parameters used for de-embedding a measurement on the selected port.
 
@@ -7307,28 +7344,33 @@ class Session(_SessionBase):
 
         **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
-        **Note**: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
+        Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
 
         Args:
-            sparameter_array_size (int): Specifies the size of the array that is returned by the SPARAMETERS output.
+            sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+            sparameters_array_size (int): Specifies the size of the array that is returned by the SPARAMETERS output.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
 
         Returns:
-            sparameters (list of NIComplexNumber): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+            number_of_sparameters (int): Returns the number of S-parameters.
 
             number_of_ports (int): Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
 
         '''
-        import numpy as np
-        number_of_ports = self._get_deembedding_table_number_of_ports()
-        sparameter_table_size = number_of_ports ** 2
-        sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
-        number_of_ports = self._interpreter.get_deembedding_sparameters(sparameters, sparameter_table_size)
-        sparameters = sparameters.reshape((number_of_ports, number_of_ports))
-        return sparameters, number_of_ports
+        import numpy
+
+        if type(sparameters) is not numpy.ndarray:
+            raise TypeError('sparameters must be {0}, is {1}'.format(numpy.ndarray, type(sparameters)))
+        if numpy.isfortran(sparameters) is True:
+            raise TypeError('sparameters must be in C-order')
+        if sparameters.dtype is not numpy.dtype('complex128'):
+            raise TypeError('sparameters must be numpy.ndarray of dtype=complex128, is ' + str(sparameters.dtype))
+        number_of_sparameters, number_of_ports = self._interpreter.get_deembedding_sparameters(sparameters, sparameters_array_size)
+        return number_of_sparameters, number_of_ports
 
     @ivi_synchronized
     def _get_deembedding_table_number_of_ports(self):
@@ -7481,7 +7523,9 @@ class Session(_SessionBase):
         **Supported Devices** : PXI-5610, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
 
         Args:
-            module (enums.Module): Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.     **Default Value** : Module.PRIMARY_MODULE    **Defined Values** :
+            module (enums.Module): Specifies from which stand-alone module to retrieve the last successful self-calibration temperature.
+                                    **Default Value** : Module.PRIMARY_MODULE
+                                    **Defined Values** :
 
                 +-----------------------+----------------+---------------------------------------------------------------------+
                 | Name                  | Value          | Description                                                         |
@@ -7838,7 +7882,9 @@ class Session(_SessionBase):
 
         **Related Topics**
 
-        `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>``Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/triggers.html>`_
+
+        `Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -8080,12 +8126,13 @@ class Session(_SessionBase):
         '''
         self._interpreter.wait_until_settled(max_time_milliseconds)
 
+    @ivi_synchronized
     def _write_arb_waveform_complex_f32(self, waveform_name, waveform_data_array, more_data_pending):
         r'''_write_arb_waveform_complex_f32
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-        This method accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the allocate_arb_waveform method, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+        This method accepts the complex baseband data in the form of complex singles. If the waveform to write is already allocated using the allocate_arb_waveform method, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
 
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8095,17 +8142,14 @@ class Session(_SessionBase):
 
         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the **MORE_DATA_PENDING** parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
             waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
 
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the WAVEFORM_NAME parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the WAVEFORM_NAME parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -8123,12 +8167,13 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_arb_waveform_complex_f32(waveform_name, waveform_data_array, more_data_pending)
 
+    @ivi_synchronized
     def _write_arb_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):
         r'''_write_arb_waveform_complex_f64
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-        This method accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the allocate_arb_waveform, the moreDataPending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.
+        This method accepts the complex baseband data in the form of complex doubles. If the waveform to write is already allocated using the allocate_arb_waveform, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842 is in the Generation state.
 
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842
 
@@ -8138,17 +8183,14 @@ class Session(_SessionBase):
 
         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
-        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the moreDataPending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
             waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
 
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
         '''
         import numpy
@@ -8163,6 +8205,7 @@ class Session(_SessionBase):
             raise TypeError('waveform_data_array must be numpy.ndarray of dimension=1, is ' + str(waveform_data_array.ndim))
         self._interpreter.write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
+    @ivi_synchronized
     def _write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):
         r'''_write_arb_waveform_complex_i16
 
@@ -8203,9 +8246,9 @@ class Session(_SessionBase):
 
         Writes an arbitrary waveform to the NI-RFSG device starting at the position of the last data written in onboard memory.
 
-        This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the allocate_arb_waveform method, the **MORE_DATA_PENDING** parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, this method can be called when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
+        This method accepts the complex baseband data in the form of numpy array of numpy.complex64 or numpy.complex128 or interleaved numpy array of numpy.int16. If the waveform to write is already allocated using the allocate_arb_waveform, the more_data_pending parameter is ignored. The PXI-5670/5671 must be in the Configuration state before you call this method. When streaming is enabled, you can call this method when the PXIe-5672/5673/5673E or PXIe-5820/5830/5831/5832/5840/5841/5842/5860 is in the Generation state.
 
-        **Supported Devices** : PXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         **Related Topics**
 
@@ -8213,20 +8256,15 @@ class Session(_SessionBase):
 
         `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/assigning-properties-or-properties-to-a-wavef.html>`_
 
-        Note: This method only supports PowerLevelType.PEAK mode as specified in the power_level_type property. If you download a waveform when using this method, you cannot set the power_level_type to PowerLevelType.AVERAGE without causing error in the output.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
+        Note: On the PXIe-5644/5645/5646, PXIe-5672/5673/5673E, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860, the more_data_pending parameter is always ignored. To write data in blocks on these devices, you must allocate the waveform before writing it.
+        If you are writing interleaved numpy array of numpy.int16, then this method only supports PowerLevelType.PEAK mode as specified in the power_level_type property. If you download a waveform as interleaved numpy array of numpy.int16 when using this method, you cannot set the power_level_type to PowerLevelType.AVERAGE without causing error in the output.
 
         Args:
             waveform_name (str): Specifies the name used to identify the waveform. This string is case-insensitive and alphanumeric, and it does not use reserved words.
 
             waveform_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the allocate_arb_waveform method.
 
-            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set **MORE_DATA_PENDING** to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            more_data_pending (bool): Specifies whether or not the data block contains the end of the waveform. Set this parameter to True to allow data to be appended later to the waveform. Splitting the waveform into multiple data blocks can reduce the memory requirements of the write operation. Append data to a previously written waveform by using the same waveform in the **name** parameter. Set more_data_pending to False to indicate that this data block contains the end of the waveform. If the waveform is already allocated, this parameter is ignored.
 
         '''
         import numpy
@@ -8241,8 +8279,6 @@ class Session(_SessionBase):
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(waveform_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
-
-        return self._write_arb_waveform_complex_f64(waveform_name, waveform_data_array, more_data_pending)
 
     @ivi_synchronized
     def write_script(self, script):

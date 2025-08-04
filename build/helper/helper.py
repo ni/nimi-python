@@ -117,21 +117,24 @@ def get_development_status(config):
        .bN, cN, rcN - Beta
        <nothing> or postN - Stable
     '''
-    v = Version(config['module_version'])
-    if v.release[0] == 0 and v.release[1] < 5:
-        dev_status = '3 - Alpha'
-    elif v.release[0] == 0:
-        dev_status = '4 - Beta'
+    if 'development_status' in config:
+        dev_status = config['development_status']
     else:
-        if v.dev is not None or (v.pre is not None and v.pre[0] == 'a'):
-            # .devN or .aN
+        v = Version(config['module_version'])
+        if v.release[0] == 0 and v.release[1] < 5:
             dev_status = '3 - Alpha'
-        elif v.pre is not None:
-            # .bN, .cN, .rcN
+        elif v.release[0] == 0:
             dev_status = '4 - Beta'
         else:
-            # <nothing> or .postN
-            dev_status = '5 - Production/Stable'
+            if v.dev is not None or (v.pre is not None and v.pre[0] == 'a'):
+                # .devN or .aN
+                dev_status = '3 - Alpha'
+            elif v.pre is not None:
+                # .bN, .cN, .rcN
+                dev_status = '4 - Beta'
+            else:
+                # <nothing> or .postN
+                dev_status = '5 - Production/Stable'
 
     return dev_status
 
