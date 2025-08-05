@@ -1685,7 +1685,13 @@
 
 ### nirfsg (NI-RFSG)
 
+- [Unreleased](#nirfsg-unreleased)
 - [1.0.0](#nirfsg-100---2025-08-05)
+
+#### [nirfsg] Unreleased
+- Added
+- Changed
+- Removed
 
 #### [nirfsg] 1.0.0 - 2025-08-05
 - Added
