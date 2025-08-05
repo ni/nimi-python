@@ -1685,15 +1685,12 @@
 
 ### nirfsg (NI-RFSG)
 
-- [Unreleased](#nirfsg-unreleased)
+- [1.0.0](#nirfsg-100---2025-08-05)
 
-#### [nirfsg] Unreleased
+#### [nirfsg] 1.0.0 - 2025-08-05
 - Added
-  - Enabled selected public APIs
-  - Basic example
-  - Documentation for APIs (not final)
-- Changed
-- Removed
+  - Initial release
+---
 
 ### niscope (NI-SCOPE)
 

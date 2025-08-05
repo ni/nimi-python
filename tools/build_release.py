@@ -21,7 +21,7 @@ class CustomFormatter(argparse.ArgumentDefaultsHelpFormatter, argparse.RawDescri
 
 
 def main():
-    drivers_to_update = ['nidcpower', 'nidigital', 'nidmm', 'nifake', 'niswitch', 'nimodinst', 'nifgen', 'niscope', 'nise', 'nitclk']
+    drivers_to_update = ['nidcpower', 'nidigital', 'nidmm', 'nifake', 'niswitch', 'nimodinst', 'nifgen', 'nirfsg', 'niscope', 'nise', 'nitclk']
 
     # Setup the required arguments for this script
     usage = """Release script
