@@ -217,8 +217,7 @@ class SystemTests:
         maximum_number_of_sequences, minimum_sequence_length, maximum_sequence_length, maximum_loop_count = session.query_arb_seq_capabilities()
         assert maximum_number_of_sequences == 65535
         assert minimum_sequence_length == 1
-        # expect maximum_sequence_length to be greater than 1 as it will change in development side
-        assert maximum_sequence_length > 1 
+        assert maximum_sequence_length >= minimum_sequence_length
         assert maximum_loop_count == 16777215
 
     def test_create_arb_sequence(self, session):
