@@ -16,7 +16,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.0.0',
+    version='1.0.1.dev0',
     description='NI-RFSG Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -35,7 +35,7 @@ setup(
         'nitclk',
     ],
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "Intended Audience :: Manufacturing",
         "Intended Audience :: Science/Research",
