@@ -1,4 +1,3 @@
-
 //---------------------------------------------------------------------
 // This file is generated from NI-RFSG API metadata version 25.5.0
 //---------------------------------------------------------------------
@@ -1275,11 +1274,13 @@ message CreateDeembeddingSparameterTableArrayRequest {
   string port = 2;
   string table_name = 3;
   repeated double frequencies = 4;
-  repeated nidevice_grpc.NIComplexNumber sparameter_table = 5;
-  sint32 number_of_ports = 6;
+  sint32 frequencies_size = 5;
+  repeated nidevice_grpc.NIComplexNumber sparameter_table = 6;
+  sint32 sparameter_table_size = 7;
+  sint32 number_of_ports = 8;
   oneof sparameter_orientation_enum {
-    SParameterOrientation sparameter_orientation = 7;
-    sint32 sparameter_orientation_raw = 8;
+    SParameterOrientation sparameter_orientation = 9;
+    sint32 sparameter_orientation_raw = 10;
   }
 }
 
@@ -1531,6 +1532,7 @@ message GetChannelNameResponse {
 
 message GetDeembeddingSparametersRequest {
   nidevice_grpc.Session vi = 1;
+  sint32 sparameters_array_size = 2;
 }
 
 message GetDeembeddingSparametersResponse {
@@ -2088,4 +2090,3 @@ message WriteScriptRequest {
 message WriteScriptResponse {
   int32 status = 1;
 }
-
