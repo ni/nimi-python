@@ -153,13 +153,21 @@ def _get_library_interpreter_output_param_return_snippet(output_parameter, param
     return snippet
 
 
-def _get_grpc_interpreter_output_param_return_snippet(output_parameter, parameters, config):
+def _get_grpc_interpreter_output_param_return_snippet(output_parameter, parameters, config, use_numpy_array=False):
     param_accessor = 'response.' + output_parameter['grpc_name']
 
     return_type, is_custom_type = _get_interpreter_output_param_return_type(output_parameter, config)
     if hasattr(builtins, return_type):
         return_type = None
 
+    if use_numpy_array and output_parameter['type'] in ['NIComplexNumber[]', 'NIComplexNumberF32[]', 'NIComplexI16[]']:
+        numpy_type = 'numpy.complex128'
+        if output_parameter['type'] == 'NIComplexNumberF32[]':
+            numpy_type = 'numpy.complex64'
+        elif output_parameter['type'] == 'NIComplexI16[]':
+            numpy_type = 'numpy.int16'
+        return f"numpy.array([complex(c.real, c.imaginary) for c in {param_accessor}], dtype={numpy_type})"
+    
     convert_array_elements = output_parameter['is_buffer'] and return_type is not None
     if output_parameter.get('python_api_converter_name') == 'convert_to_bytes':
         # Don't convert individual array elements; convert_to_bytes will handle it
@@ -192,10 +200,10 @@ def get_library_interpreter_method_return_snippet(parameters, config, use_numpy_
     return ('return ' + ', '.join(snippets)).strip()
 
 
-def get_grpc_interpreter_method_return_snippet(parameters, config):
+def get_grpc_interpreter_method_return_snippet(parameters, config, use_numpy_array=False):
     '''Returns a string suitable to use as the return argument of a _gprc.LibraryInterpreter method'''
-    parameters_to_use = filter_parameters(parameters, ParameterUsageOptions.API_OUTPUT_PARAMETERS)
-    snippets = [_get_grpc_interpreter_output_param_return_snippet(p, parameters, config) for p in parameters_to_use]
+    parameters_to_use = filter_parameters(parameters, ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS if use_numpy_array else ParameterUsageOptions.API_OUTPUT_PARAMETERS)
+    snippets = [_get_grpc_interpreter_output_param_return_snippet(p, parameters, config, use_numpy_array=use_numpy_array) for p in parameters_to_use]
     return ('return ' + ', '.join(snippets)).strip()
 
 
