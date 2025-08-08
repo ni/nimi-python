@@ -16,7 +16,9 @@
 %>\
 
     def ${full_func_name}(${param_names_method}):  # noqa: N802
+% if numpy_complex_params:
         import numpy
+% endif
 % if included_in_proto:
         ${capture_response}self._invoke(
             self._client.${grpc_name},

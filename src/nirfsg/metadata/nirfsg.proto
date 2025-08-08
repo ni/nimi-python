@@ -1274,13 +1274,11 @@ message CreateDeembeddingSparameterTableArrayRequest {
   string port = 2;
   string table_name = 3;
   repeated double frequencies = 4;
-  sint32 frequencies_size = 5;
-  repeated nidevice_grpc.NIComplexNumber sparameter_table = 6;
-  sint32 sparameter_table_size = 7;
-  sint32 number_of_ports = 8;
+  repeated nidevice_grpc.NIComplexNumber sparameter_table = 5;
+  sint32 number_of_ports = 6;
   oneof sparameter_orientation_enum {
-    SParameterOrientation sparameter_orientation = 9;
-    sint32 sparameter_orientation_raw = 10;
+    SParameterOrientation sparameter_orientation = 7;
+    sint32 sparameter_orientation_raw = 8;
   }
 }
 
@@ -1532,7 +1530,6 @@ message GetChannelNameResponse {
 
 message GetDeembeddingSparametersRequest {
   nidevice_grpc.Session vi = 1;
-  sint32 sparameters_array_size = 2;
 }
 
 message GetDeembeddingSparametersResponse {
