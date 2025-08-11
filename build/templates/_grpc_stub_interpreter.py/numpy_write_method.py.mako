@@ -32,17 +32,17 @@
 % for p in numpy_complex_params:
 % if p['original_type'] == 'NIComplexNumber[]':
         ${p['python_name']}_list = [
-            grpc_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
             for val in ${p['python_name']}.ravel()
         ]
 % elif p['original_type'] == 'NIComplexNumberF32[]':
         ${p['python_name']}_list = [
-            grpc_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
+            grpc_complex_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
             for val in ${p['python_name']}.ravel()
         ]
 % elif p['original_type'] == 'NIComplexI16[]':
         ${p['python_name']}_list = [
-            grpc_types.NIComplexI16(real=int(val['real']), imaginary=int(val['imag']))
+            grpc_complex_types.NIComplexI16(real=int(val['real']), imaginary=int(val['imag']))
             for val in ${p['python_name']}.ravel()
         ]
 % endif

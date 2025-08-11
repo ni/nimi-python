@@ -5341,6 +5341,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfmData',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
@@ -5416,6 +5417,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfmData',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
@@ -5491,6 +5493,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfmData',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
