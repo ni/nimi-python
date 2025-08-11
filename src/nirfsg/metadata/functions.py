@@ -1020,6 +1020,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1031,6 +1032,7 @@ functions = {
                     'description': 'Specifies the source terminal for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE attribute to this value.'
                 },
                 'name': 'source',
+                'grpc_enum': 'TriggerSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1083,6 +1085,7 @@ functions = {
                     'description': 'Specifies the source terminal for the digital edge trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute to this value.'
                 },
                 'name': 'source',
+                'grpc_enum': 'TriggerSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1135,6 +1138,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1413,6 +1417,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1804,6 +1809,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3289,6 +3295,7 @@ functions = {
                     ]
                 },
                 'name': 'signalIdentifier',
+                'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4574,6 +4581,7 @@ functions = {
                     ]
                 },
                 'name': 'triggerIdentifier',
+                'grpc_enum': 'SignalIdentifier'
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
