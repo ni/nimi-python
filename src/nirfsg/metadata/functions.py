@@ -4581,7 +4581,7 @@ functions = {
                     ]
                 },
                 'name': 'triggerIdentifier',
-                'grpc_enum': 'SignalIdentifier'
+                'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
