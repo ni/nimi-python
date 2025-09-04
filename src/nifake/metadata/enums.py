@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 24.8.0f100
+# This file is generated from NI-FAKE API metadata version 25.8.0d9999
 enums = {
     'AltColor': {
         'values': [
@@ -200,6 +200,18 @@ enums = {
             }
         ]
     },
+    'ExtCalParts': {
+        'values': [
+            {
+                'name': 'NIFAKE_EXTCAL_PART1',
+                'value': 1
+            },
+            {
+                'name': 'NIFAKE_EXTCAL_PART2',
+                'value': 2
+            }
+        ]
+    },
     'FloatEnum': {
         'values': [
             {
@@ -240,8 +252,8 @@ enums = {
         ]
     },
     'IntFlagEnum': {
+        'class': 'IntFlag',
         'codegen_method': 'public',
-        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -259,10 +271,10 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Flag C option.'
+                    'description': 'Flag E option.'
                 },
-                'name': 'NIFAKE_VAL_FLAG_C',
-                'value': 9223372036854775808
+                'name': 'NIFAKE_VAL_FLAG_E',
+                'value': 1073741824
             }
         ]
     },

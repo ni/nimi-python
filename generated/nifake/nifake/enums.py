@@ -63,9 +63,9 @@ class IntFlagEnum(IntFlag):
     r'''
     Flag B option.
     '''
-    C = 9223372036854775808
+    E = 1073741824
     r'''
-    Flag C option.
+    Flag E option.
     '''
 
 
