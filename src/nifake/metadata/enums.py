@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 25.8.0d9999
+# This file is generated from NI-FAKE API metadata version 24.8.0f100
 enums = {
     'AltColor': {
         'values': [
@@ -196,18 +196,6 @@ enums = {
             },
             {
                 'name': 'NIFAKE_VAL_TWO',
-                'value': 2
-            }
-        ]
-    },
-    'ExtCalParts': {
-        'values': [
-            {
-                'name': 'NIFAKE_EXTCAL_PART1',
-                'value': 1
-            },
-            {
-                'name': 'NIFAKE_EXTCAL_PART2',
                 'value': 2
             }
         ]

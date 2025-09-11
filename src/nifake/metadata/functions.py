@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 25.8.0d9999
+# This file is generated from NI-FAKE API metadata version 25.5.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -348,52 +348,12 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Function that takes a 3D numpy array of numpy complex128 as an input parameter.'
-        },
-        'grpc_name': 'FunctionWith3DNumpyArrayOfNumpyComplex128InputParameter',
-        'included_in_proto': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_write_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'numpy_write_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'array_dimensions': 3,
-                'complex_array_representation': 'complex_number_array',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the 3D array of numpy complex numbers to write.'
-                },
-                'name': 'multidimensionalArray',
-                'numpy': True,
-                'type': 'NIComplexNumber[]',
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': 'function_with_3d_numpy_array_of_numpy_complex128_input_parameter',
-        'returns': 'ViStatus'
-    },
     'FunctionWithIntflagParameter': {
         'codegen_method': 'public',
         'documentation': {
             'description': "Calls a function that takes a flag parameter which can be OR'd from multiple enum values."
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -409,6 +369,7 @@ functions = {
                     'description': 'A flag parameter that can be a combination (bitwise OR) of IntFlagEnum values.'
                 },
                 'enum': 'IntFlagEnum',
+                'grpc_enum': None,
                 'name': 'flag',
                 'type': 'ViUInt64'
             }
@@ -2864,62 +2825,13 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'WriteWaveformNumpyComplex128': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'A function that writes a waveform of numpy complex128 samples.'
-        },
-        'included_in_proto': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_write_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'numpy_write_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in the message signal.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_in_python_api': False
-            },
-            {
-                'complex_array_representation': 'complex_number_array',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform.'
-                },
-                'name': 'waveformDataArray',
-                'numpy': True,
-                'size': {
-                    'mechanism': 'len',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'NIComplexNumber[]',
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'WriteWaveformNumpyComplex64': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex64 samples.'
+            'description': 'A function that writes a waveform of numpy complex64 numbers.'
         },
         'included_in_proto': False,
+        'is_error_handling': False,
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -2935,7 +2847,9 @@ functions = {
                     'description': 'Identifies a particular instrument session.'
                 },
                 'name': 'vi',
-                'type': 'ViSession'
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
             },
             {
                 'direction': 'in',
@@ -2944,13 +2858,14 @@ functions = {
                 },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
+                'use_array': False,
                 'use_in_python_api': False
             },
             {
-                'complex_array_representation': 'complex_number_array',
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform.'
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
                 },
                 'name': 'waveformDataArray',
                 'numpy': True,
@@ -2959,17 +2874,19 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexNumberF32[]',
-                'use_in_python_api': True
+                'use_in_python_api': True,
+                'use_numpy_array': True
             }
         ],
         'returns': 'ViStatus'
     },
-    'WriteWaveformNumpyComplexInterleavedI16': {
+    'WriteWaveformNumpyComplex128': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex i16 samples.'
+            'description': 'A function that writes a waveform of numpy complex128 numbers.'
         },
         'included_in_proto': False,
+        'is_error_handling': False,
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -2985,7 +2902,9 @@ functions = {
                     'description': 'Identifies a particular instrument session.'
                 },
                 'name': 'vi',
-                'type': 'ViSession'
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
             },
             {
                 'direction': 'in',
@@ -2994,13 +2913,69 @@ functions = {
                 },
                 'name': 'numberOfSamples',
                 'type': 'ViInt32',
+                'use_array': False,
                 'use_in_python_api': False
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform.'
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                },
+                'name': 'waveformDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'numberOfSamples'
+                },
+                'type': 'NIComplexNumber[]',
+                'use_in_python_api': True,
+                'use_numpy_array': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'WriteWaveformNumpyComplexInterleavedI16': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'A function that writes a waveform of numpy complex i16 numbers.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples in the message signal.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'complex_type': 'interleaved',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
                 },
                 'name': 'waveformDataArray',
                 'numpy': True,
@@ -3009,10 +2984,55 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexI16[]',
-                'use_in_python_api': True
+                'use_in_python_api': True,
+                'use_numpy_array': True
             }
         ],
         'returns': 'ViStatus'
+    },
+    'FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Function that takes a 3D numpy array of numpy complex128 as an input parameter.'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_write_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_write_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_type': 'numpy',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the 3D array of numpy complex numbers to write. '
+                },
+                'name': 'multidimensionalArray',
+                'type': 'NIComplexNumber[]',
+                'numpy': True,
+                'use_numpy_array': True,
+                'use_in_python_api': True,
+                'array_dimension': 3
+            },
+        ],
+        'python_name': 'function_with_3d_numpy_array_of_numpy_complex128_input_parameter',
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'close': {
         'codegen_method': 'private',

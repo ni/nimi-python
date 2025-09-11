@@ -1519,8 +1519,8 @@ functions = {
                 'use_array': False
             },
             {
-                'array_dimensions': 3,
-                'complex_array_representation': 'complex_number_array',
+                'array_dimension': 3,
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
@@ -2005,8 +2005,8 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimensions': 3,
-                'complex_array_representation': 'complex_number_array',
+                'array_dimension': 3,
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
@@ -2079,8 +2079,8 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimensions': 2,
-                'complex_array_representation': 'complex_number_array',
+                'array_dimension': 2,
+                'complex_type': 'numpy',
                 'direction': 'out',
                 'documentation': {
                     'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
@@ -2673,8 +2673,8 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimensions': 2,
-                'complex_array_representation': 'complex_number_array',
+                'array_dimension': 2,
+                'complex_type': 'numpy',
                 'direction': 'out',
                 'documentation': {
                     'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
@@ -5335,7 +5335,7 @@ functions = {
                 'use_array': False
             },
             {
-                'complex_array_representation': 'complex_number_array',
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
@@ -5410,7 +5410,7 @@ functions = {
                 'use_array': False
             },
             {
-                'complex_array_representation': 'complex_number_array',
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
@@ -5485,7 +5485,7 @@ functions = {
                 'use_array': False
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_type': 'interleaved',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
@@ -5541,7 +5541,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'complex_array_representation': 'complex_number_array',
+                'complex_type': 'numpy',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
