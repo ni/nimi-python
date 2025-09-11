@@ -7478,25 +7478,6 @@ class Session(_SessionBase):
         return value
 
     @ivi_synchronized
-    def get_script(self, script_name):
-        r'''get_script
-
-        TBD
-
-        Args:
-            script_name (str):
-
-
-        Returns:
-            script (str):
-
-            actual_buffer_size (int):
-
-        '''
-        script, actual_buffer_size = self._interpreter.get_script(script_name)
-        return script, actual_buffer_size
-
-    @ivi_synchronized
     def _get_self_calibration_date_and_time(self, module):
         r'''_get_self_calibration_date_and_time
 

@@ -535,20 +535,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
 
-    def get_script(self, script_name):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        script_name_ctype = ctypes.create_string_buffer(script_name.encode(self._encoding))  # case C020
-        script_ctype = None  # case C050
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
-        actual_buffer_size_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niRFSG_GetScript(vi_ctype, script_name_ctype, script_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        script_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
-        error_code = self._library.niRFSG_GetScript(vi_ctype, script_name_ctype, script_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return script_ctype.value.decode(self._encoding), int(actual_buffer_size_ctype.value)
-
     def get_self_calibration_date_and_time(self, module):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         module_ctype = _visatype.ViInt32(module.value)  # case S130

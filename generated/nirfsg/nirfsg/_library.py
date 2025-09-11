@@ -72,7 +72,6 @@ class Library(object):
         self.niRFSG_GetError_cfunc = None
         self.niRFSG_GetExternalCalibrationLastDateAndTime_cfunc = None
         self.niRFSG_GetMaxSettablePower_cfunc = None
-        self.niRFSG_GetScript_cfunc = None
         self.niRFSG_GetSelfCalibrationDateAndTime_cfunc = None
         self.niRFSG_GetSelfCalibrationTemperature_cfunc = None
         self.niRFSG_GetTerminalName_cfunc = None
@@ -539,14 +538,6 @@ class Library(object):
                 self.niRFSG_GetMaxSettablePower_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niRFSG_GetMaxSettablePower_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetMaxSettablePower_cfunc(vi, value)
-
-    def niRFSG_GetScript(self, vi, script_name, script, buffer_size, actual_buffer_size):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_GetScript_cfunc is None:
-                self.niRFSG_GetScript_cfunc = self._get_library_function('niRFSG_GetScript')
-                self.niRFSG_GetScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niRFSG_GetScript_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_GetScript_cfunc(vi, script_name, script, buffer_size, actual_buffer_size)
 
     def niRFSG_GetSelfCalibrationDateAndTime(self, vi, module, year, month, day, hour, minute, second):  # noqa: N802
         with self._func_lock:

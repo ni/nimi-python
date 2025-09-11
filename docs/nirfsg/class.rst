@@ -1803,44 +1803,6 @@ get_max_settable_power
 
 
 
-get_script
-----------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: get_script(script_name)
-
-            TBD
-
-            
-
-
-
-            :param script_name:
-
-
-                
-
-
-            :type script_name: str
-
-            :rtype: tuple (script, actual_buffer_size)
-
-                WHERE
-
-                script (str): 
-
-
-                    
-
-
-                actual_buffer_size (int): 
-
-
-                    
-
-
-
 get_self_calibration_last_date_and_time
 ---------------------------------------
 
