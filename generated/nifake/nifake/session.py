@@ -945,6 +945,7 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         self._interpreter.fetch_waveform_into(waveform_data)
 
+    @ivi_synchronized
     def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):
         r'''function_with_3d_numpy_array_of_numpy_complex128_input_parameter
 
