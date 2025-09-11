@@ -2217,7 +2217,7 @@ functions = {
                 'name': 'actualBufferSize',
                 'type': 'ViInt32',
                 'use_array': False,
-                'use_in_python_api': True
+                'use_in_python_api': False
             }
         ],
         'returns': 'ViStatus'

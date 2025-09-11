@@ -412,7 +412,7 @@ class LibraryInterpreter(object):
         script_names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niRFSG_GetAllScriptNames(vi_ctype, script_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return script_names_ctype.value.decode(self._encoding), int(actual_buffer_size_ctype.value)
+        return script_names_ctype.value.decode(self._encoding)
 
     def get_attribute_vi_boolean(self, channel_name, attribute):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

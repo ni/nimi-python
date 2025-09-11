@@ -7302,16 +7302,9 @@ class Session(_SessionBase):
         Returns:
             script_names (str): Returns a string having script names separated by commas.
 
-            actual_buffer_size (int): Fetch the number of bytes needed to pass in the BUFFER_SIZE parameter.
-
-                It can be fetch by passing VI_NULL in the SCRIPT_NAMES parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
         '''
-        script_names, actual_buffer_size = self._interpreter.get_all_script_names()
-        return script_names, actual_buffer_size
+        script_names = self._interpreter.get_all_script_names()
+        return script_names
 
     @ivi_synchronized
     def get_channel_name(self, index):

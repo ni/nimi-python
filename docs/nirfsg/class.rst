@@ -1614,28 +1614,13 @@ get_all_script_names
 
 
 
-            :rtype: tuple (script_names, actual_buffer_size)
-
-                WHERE
-
-                script_names (str): 
+            :rtype: str
+            :return:
 
 
                     Returns a string having script names separated by commas.
 
                     
-
-
-                actual_buffer_size (int): 
-
-
-                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
-
-                    It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.SCRIPT_NAMES` parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
 
