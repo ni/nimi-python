@@ -7077,8 +7077,8 @@ class Session(_SessionBase):
             raise TypeError('sparameter_table must be in C-order')
         if sparameter_table.dtype is not numpy.dtype('complex128'):
             raise TypeError('sparameter_table must be numpy.ndarray of dtype=complex128, is ' + str(sparameter_table.dtype))
-        if sparameter_table.ndim != 3:
-            raise TypeError('sparameter_table must be numpy.ndarray of dimension=3, is ' + str(sparameter_table.ndim))
+        if sparameter_table.ndim != 1:
+            raise TypeError('sparameter_table must be numpy.ndarray of dimension=1, is ' + str(sparameter_table.ndim))
         self._interpreter.create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
 
     @ivi_synchronized

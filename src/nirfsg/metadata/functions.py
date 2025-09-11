@@ -2079,7 +2079,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimensions': 2,
+                'array_dimension': 2,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'out',
                 'documentation': {
@@ -2673,7 +2673,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimensions': 2,
+                'array_dimension': 2,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'out',
                 'documentation': {

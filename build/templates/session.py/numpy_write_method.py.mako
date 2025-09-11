@@ -30,8 +30,8 @@
             raise TypeError('${parameter['python_name']} must be in C-order')
         if ${parameter['python_name']}.dtype is not numpy.dtype('${parameter['numpy_type']}'):
             raise TypeError('${parameter['python_name']} must be numpy.ndarray of dtype=${parameter['numpy_type']}, is ' + str(${parameter['python_name']}.dtype))
-        if ${parameter['python_name']}.ndim != ${parameter['array_dimensions']}:
-            raise TypeError('${parameter['python_name']} must be numpy.ndarray of dimension=${parameter['array_dimensions']}, is ' + str(${parameter['python_name']}.ndim))
+        if ${parameter['python_name']}.ndim != ${parameter['array_dimension']}:
+            raise TypeError('${parameter['python_name']} must be numpy.ndarray of dimension=${parameter['array_dimension']}, is ' + str(${parameter['python_name']}.ndim))
 % endfor
 % for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.INTERPRETER_METHOD_CALL):
 %   if 'python_api_converter_name' in p:
