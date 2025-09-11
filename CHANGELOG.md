@@ -1691,6 +1691,7 @@
 #### [nirfsg] Unreleased
 - Added
 - Changed
+  - Fix default value for option string in examples to be empty and make resource name as required input
 - Removed
 
 #### [nirfsg] 1.0.0 - 2025-08-05
