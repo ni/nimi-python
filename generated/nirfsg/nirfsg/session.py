@@ -7304,7 +7304,7 @@ class Session(_SessionBase):
 
         '''
         script_names = self._interpreter.get_all_script_names()
-        return script_names
+        return _converters.convert_comma_separated_string_to_list(script_names)
 
     @ivi_synchronized
     def get_channel_name(self, index):
