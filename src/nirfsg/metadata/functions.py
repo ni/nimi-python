@@ -2197,6 +2197,7 @@ functions = {
                     'value': 'bufferSize'
                 },
                 'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
                 'use_array': False,
                 'use_in_python_api': True
             },

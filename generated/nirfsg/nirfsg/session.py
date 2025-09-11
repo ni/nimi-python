@@ -7300,7 +7300,7 @@ class Session(_SessionBase):
         **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
 
         Returns:
-            script_names (str): Returns a string having script names separated by commas.
+            script_names (list of str): Returns a string having script names separated by commas.
 
         '''
         script_names = self._interpreter.get_all_script_names()

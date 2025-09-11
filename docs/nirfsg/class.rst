@@ -1614,7 +1614,7 @@ get_all_script_names
 
 
 
-            :rtype: str
+            :rtype: list of str
             :return:
 
 
