@@ -2998,44 +2998,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'GetScript': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'included_in_proto': True,
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'scriptName',
-                'type': 'ViConstString'
-            },
-            {
-                'direction': 'out',
-                'name': 'script',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
-                },
-                'type': 'ViChar[]'
-            },
-            {
-                'direction': 'in',
-                'name': 'bufferSize',
-                'type': 'ViInt32'
-            },
-            {
-                'direction': 'out',
-                'name': 'actualBufferSize',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'GetSelfCalibrationDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
