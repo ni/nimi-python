@@ -126,16 +126,16 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
 
 
-def _add_complex_array_representation(parameter):
-    '''Adds a complex_array_representation parameter to the metadata for complex numbers'''
-    if 'complex_array_representation' not in parameter:
-        parameter['complex_array_representation'] = None
+def _add_complex_type(parameter):
+    '''Adds a complex_type parameter to the metadata for complex numbers'''
+    if 'complex_type' not in parameter:
+        parameter['complex_type'] = None
 
 
-def _add_array_dimensions(parameter):
-    '''Adds a array_dimensions parameter to the metadata for multi dimensional arrays'''
-    if 'array_dimensions' not in parameter:
-        parameter['array_dimensions'] = 1
+def _add_array_dimension(parameter):
+    '''Adds a array_dimension parameter to the metadata for multi dimensional arrays'''
+    if 'array_dimension' not in parameter:
+        parameter['array_dimension'] = 1
 
 
 def _add_numpy_info(parameter, parameters, config):
@@ -462,8 +462,8 @@ def add_all_function_metadata(functions, config):
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
-            _add_complex_array_representation(p)
-            _add_array_dimensions(p)
+            _add_complex_type(p)
+            _add_array_dimension(p)
             _add_numpy_info(p, functions[f]['parameters'], config)
             _add_default_value_name(p)
             _add_default_value_name_for_docs(p, config['module_name'])

@@ -945,7 +945,6 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         self._interpreter.fetch_waveform_into(waveform_data)
 
-    @ivi_synchronized
     def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):
         r'''function_with_3d_numpy_array_of_numpy_complex128_input_parameter
 
@@ -1712,10 +1711,10 @@ class Session(_SessionBase):
     def write_waveform_numpy_complex128(self, waveform_data_array):
         r'''write_waveform_numpy_complex128
 
-        A method that writes a waveform of numpy complex128 samples.
+        A method that writes a waveform of numpy complex128 numbers.
 
         Args:
-            waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform.
+            waveform_data_array (numpy.array(dtype=numpy.complex128)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.
 
         '''
         import numpy
@@ -1734,10 +1733,10 @@ class Session(_SessionBase):
     def write_waveform_numpy_complex64(self, waveform_data_array):
         r'''write_waveform_numpy_complex64
 
-        A method that writes a waveform of numpy complex64 samples.
+        A method that writes a waveform of numpy complex64 numbers.
 
         Args:
-            waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform.
+            waveform_data_array (numpy.array(dtype=numpy.complex64)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.
 
         '''
         import numpy
@@ -1756,10 +1755,10 @@ class Session(_SessionBase):
     def write_waveform_numpy_complex_interleaved_i16(self, waveform_data_array):
         r'''write_waveform_numpy_complex_interleaved_i16
 
-        A method that writes a waveform of numpy complex i16 samples.
+        A method that writes a waveform of numpy complex i16 numbers.
 
         Args:
-            waveform_data_array (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform.
+            waveform_data_array (numpy.array(dtype=numpy.int16)): Specifies the array of data to load into the waveform. Array should be numberOfSamples big.
 
         '''
         import numpy

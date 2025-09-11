@@ -257,7 +257,7 @@ def get_ctype_variable_declaration_snippet(parameter, parameters, ivi_dance_step
         module_name = '_visatype'
 
     # Use _complextype.py file for complex parameter
-    if parameter.get('complex_array_representation') is not None:
+    if parameter['complex_type'] is not None:
         module_name = '_complextype'
 
     if parameter['is_string'] is True:
@@ -368,7 +368,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             # Parameter denotes the size of another (the "corresponding") parameter.
             # Interleaved array length is going to be double the length of number of samples.
             # This is used for complex waveforms, where the real and imaginary parts are interleaved in the array.
-            if corresponding_buffer_parameters[0].get('complex_array_representation') == 'interleaved_real_number_array':
+            if corresponding_buffer_parameters[0]['complex_type'] == 'interleaved':
                 definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}) // 2)  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
             else:
                 definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
@@ -435,7 +435,7 @@ def _get_ctype_variable_definition_snippet_for_buffers(parameter, parameters, iv
     definition = None
 
     if parameter['numpy'] is True and use_numpy_array is True:
-        if parameter.get('complex_array_representation') is None:
+        if parameter['complex_type'] is None:
             definition = '_get_ctypes_pointer_for_buffer(value={})  # case B510'.format(parameter['python_name'])
         else:
             definition = '_get_ctypes_pointer_for_buffer(value={}, library_type={}.{})  # case B510'.format(parameter['python_name'], module_name, parameter['ctypes_type'])
