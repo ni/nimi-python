@@ -19,7 +19,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.SESSION_METHOD_PASSTHROUGH_CALL: {
         'skip_session_handle': True,
@@ -34,7 +34,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
@@ -49,7 +49,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',
         'python_api_list': False,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INTERPRETER_NUMPY_INTO_METHOD_DECLARATION: {
         'skip_session_handle': True,
@@ -64,7 +64,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',
         'python_api_list': False,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.SESSION_METHOD_CALL: {
         'skip_session_handle': True,
@@ -79,7 +79,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.DOCUMENTATION_SESSION_METHOD: {
         'skip_session_handle': True,
@@ -94,7 +94,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LIBRARY_METHOD_DECLARATION: {
         'skip_session_handle': False,
@@ -109,7 +109,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LIBRARY_METHOD_CALL: {
         'skip_session_handle': False,
@@ -124,7 +124,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.GRPC_REQUEST_PARAMETERS: {
         'skip_session_handle': False,
@@ -139,7 +139,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.CTYPES_ARGTYPES: {
         'skip_session_handle': False,
@@ -154,7 +154,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION: {
         'skip_session_handle': True,
@@ -169,7 +169,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'fixed, passed-in, len',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -184,7 +184,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LIBRARY_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -199,7 +199,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.API_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -214,7 +214,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': False,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -229,7 +229,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': False,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.GRPC_OUTPUT_PARAMETERS: {
         'skip_session_handle': True,
@@ -244,7 +244,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': False,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.NUMPY_PARAMETERS: {
         'skip_session_handle': True,
@@ -259,7 +259,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': True,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.IVI_DANCE_PARAMETER: {
         'skip_session_handle': True,
@@ -274,7 +274,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'ivi-dance, ivi-dance-with-a-twist',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.LEN_PARAMETER: {
         'skip_session_handle': True,
@@ -289,7 +289,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'len',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.INPUT_ENUM_PARAMETERS: {
         'skip_session_handle': True,
@@ -304,7 +304,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': False,
+        'skip_all_except_complex_type_parameters': False,
     },
     ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS: {
         'skip_session_handle': True,
@@ -319,7 +319,7 @@ _ParameterUsageOptionsFiltering = {
         'skip_all_except_numpy_parameters': False,
         'mechanism': 'any',
         'python_api_list': True,
-        'skip_all_except_complex_array_representation_parameters': True,
+        'skip_all_except_complex_type_parameters': True,
     },
 }
 
@@ -384,7 +384,7 @@ def filter_parameters(parameters, parameter_usage_options):
             skip = False
         if not options_to_use['python_api_list'] and not x['use_in_python_api']:
             skip = True
-        if options_to_use['skip_all_except_complex_array_representation_parameters'] and x['complex_array_representation'] is None:
+        if options_to_use['skip_all_except_complex_type_parameters'] and x['complex_type'] is None:
             skip = True
         if not skip:
             parameters_to_use.append(x)
