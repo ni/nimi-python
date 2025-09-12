@@ -1574,7 +1574,7 @@ get_all_named_waveform_names
 
 
 
-            :rtype: str
+            :rtype: list of str
             :return:
 
 

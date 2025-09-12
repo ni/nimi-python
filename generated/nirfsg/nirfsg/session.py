@@ -7278,7 +7278,7 @@ class Session(_SessionBase):
         **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
 
         Returns:
-            waveform_names (str): Returns a string having waveform names separated by commas.
+            waveform_names (list of str): Returns a string having waveform names separated by commas.
 
         '''
         waveform_names = self._interpreter.get_all_named_waveform_names()
