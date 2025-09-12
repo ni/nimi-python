@@ -2130,10 +2130,12 @@ functions = {
                 'name': 'waveformNames',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'bufferSize',
+                    'value_twist': 'actualBufferSize'
                 },
                 'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2193,8 +2195,9 @@ functions = {
                 'name': 'scriptNames',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'bufferSize',
+                    'value_twist': 'actualBufferSize'
                 },
                 'type': 'ViChar[]',
                 'type_in_documentation': 'list of str',
@@ -2219,7 +2222,7 @@ functions = {
                 'name': 'actualBufferSize',
                 'type': 'ViInt32',
                 'use_array': False,
-                'use_in_python_api': False
+                'use_in_python_api': True
             }
         ],
         'returns': 'ViStatus'

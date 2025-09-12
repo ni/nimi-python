@@ -7280,16 +7280,9 @@ class Session(_SessionBase):
         Returns:
             waveform_names (str): Returns a string having waveform names separated by commas.
 
-            actual_buffer_size (int): Fetch the number of bytes needed to pass in the BUFFER_SIZE parameter.
-
-                It can be fetch by passing VI_NULL in the WAVEFORM_NAMES parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
         '''
-        waveform_names, actual_buffer_size = self._interpreter.get_all_named_waveform_names()
-        return _converters.convert_comma_separated_string_to_list(waveform_names), actual_buffer_size
+        waveform_names = self._interpreter.get_all_named_waveform_names()
+        return _converters.convert_comma_separated_string_to_list(waveform_names)
 
     @ivi_synchronized
     def get_all_script_names(self):
