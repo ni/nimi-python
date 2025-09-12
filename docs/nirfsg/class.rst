@@ -1578,7 +1578,7 @@ get_all_named_waveform_names
             :return:
 
 
-                    Returns a string having waveform names separated by commas.
+                    Returns a list of string having waveform names.
 
                     
 
@@ -1603,7 +1603,7 @@ get_all_script_names
             :return:
 
 
-                    Returns a string having script names separated by commas.
+                    Returns a list of string having script names.
 
                     
 

@@ -7278,7 +7278,7 @@ class Session(_SessionBase):
         **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
 
         Returns:
-            waveform_names (list of str): Returns a string having waveform names separated by commas.
+            waveform_names (list of str): Returns a list of string having waveform names.
 
         '''
         waveform_names = self._interpreter.get_all_named_waveform_names()
@@ -7293,7 +7293,7 @@ class Session(_SessionBase):
         **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
 
         Returns:
-            script_names (list of str): Returns a string having script names separated by commas.
+            script_names (list of str): Returns a list of string having script names.
 
         '''
         script_names = self._interpreter.get_all_script_names()

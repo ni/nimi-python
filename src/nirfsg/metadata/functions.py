@@ -2125,7 +2125,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns a string having waveform names separated by commas.'
+                    'description': 'Returns a list of string having waveform names.'
                 },
                 'name': 'waveformNames',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
@@ -2190,7 +2190,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns a string having script names separated by commas.'
+                    'description': 'Returns a list of string having script names.'
                 },
                 'name': 'scriptNames',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
