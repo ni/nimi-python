@@ -2190,8 +2190,8 @@ functions = {
                 'documentation': {
                     'description': 'Returns a string having script names separated by commas.'
                 },
-                'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'name': 'scriptNames',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufferSize'
