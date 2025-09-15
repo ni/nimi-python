@@ -1519,7 +1519,7 @@ functions = {
                 'use_array': False
             },
             {
-                'array_dimensions': 3,
+                'array_dimension': 3,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
@@ -2005,7 +2005,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimensions': 3,
+                'array_dimension': 3,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
