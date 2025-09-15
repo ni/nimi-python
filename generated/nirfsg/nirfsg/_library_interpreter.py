@@ -390,29 +390,29 @@ class LibraryInterpreter(object):
 
     def get_all_named_waveform_names(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        waveform_names_ctype = None  # case C050
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        waveform_names_ctype = None  # case C090
+        buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         actual_buffer_size_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niRFSG_GetAllNamedWaveformNames(vi_ctype, waveform_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        waveform_names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(actual_buffer_size_ctype.value)  # case S200
+        waveform_names_ctype = (_visatype.ViChar * actual_buffer_size_ctype.value)()  # case C100
         error_code = self._library.niRFSG_GetAllNamedWaveformNames(vi_ctype, waveform_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return waveform_names_ctype.value.decode(self._encoding), int(actual_buffer_size_ctype.value)
+        return waveform_names_ctype.value.decode(self._encoding)
 
     def get_all_script_names(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        script_names_ctype = None  # case C050
-        buffer_size_ctype = _visatype.ViInt32()  # case S170
+        script_names_ctype = None  # case C090
+        buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         actual_buffer_size_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niRFSG_GetAllScriptNames(vi_ctype, script_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
-        script_names_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
+        buffer_size_ctype = _visatype.ViInt32(actual_buffer_size_ctype.value)  # case S200
+        script_names_ctype = (_visatype.ViChar * actual_buffer_size_ctype.value)()  # case C100
         error_code = self._library.niRFSG_GetAllScriptNames(vi_ctype, script_names_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return script_names_ctype.value.decode(self._encoding), int(actual_buffer_size_ctype.value)
+        return script_names_ctype.value.decode(self._encoding)
 
     def get_attribute_vi_boolean(self, channel_name, attribute):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

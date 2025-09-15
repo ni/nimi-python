@@ -1574,28 +1574,13 @@ get_all_named_waveform_names
 
 
 
-            :rtype: tuple (waveform_names, actual_buffer_size)
-
-                WHERE
-
-                waveform_names (str): 
+            :rtype: list of str
+            :return:
 
 
-                    Returns a string having waveform names separated by commas.
+                    Returns a list of string having waveform names.
 
                     
-
-
-                actual_buffer_size (int): 
-
-
-                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
-
-                    It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.WAVEFORM_NAMES` parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
 
@@ -1614,28 +1599,13 @@ get_all_script_names
 
 
 
-            :rtype: tuple (script_names, actual_buffer_size)
-
-                WHERE
-
-                script_names (str): 
+            :rtype: list of str
+            :return:
 
 
-                    Returns a string having script names separated by commas.
+                    Returns a list of string having script names.
 
                     
-
-
-                actual_buffer_size (int): 
-
-
-                    Fetch the number of bytes needed to pass in the :py:attr:`nirfsg.Session.BUFFER_SIZE` parameter.
-
-                    It can be fetch by passing VI_NULL in the :py:attr:`nirfsg.Session.SCRIPT_NAMES` parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
 
