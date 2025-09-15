@@ -240,8 +240,8 @@ enums = {
         ]
     },
     'IntFlagEnum': {
+        'class': 'IntFlag',
         'codegen_method': 'public',
-        'enum_class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -259,10 +259,10 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'Flag C option.'
+                    'description': 'Flag E option.'
                 },
-                'name': 'NIFAKE_VAL_FLAG_C',
-                'value': 9223372036854775808
+                'name': 'NIFAKE_VAL_FLAG_E',
+                'value': 1073741824
             }
         ]
     },

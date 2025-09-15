@@ -958,7 +958,7 @@ enums = {
         ]
     },
     'ResetWithOptionsStepsToOmit': {
-        'enum_class': 'IntFlag',
+        'class': 'IntFlag',
         'values': [
             {
                 'documentation': {
@@ -1066,7 +1066,7 @@ enums = {
         ]
     },
     'SelfCalibrateRangeStepsToOmit': {
-        'enum_class': 'IntFlag',
+        'class': 'IntFlag',
         'values': [
             {
                 'documentation': {
