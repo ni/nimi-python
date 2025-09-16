@@ -6,13 +6,13 @@ config = template_parameters['metadata'].config
 enums = config['enums']
 %>
 from enum import Enum
-% if any(enums[e].get('enum_class', 'Enum') == 'IntFlag' for e in enums):
+% if any(enums[e].get('class', 'Enum') == 'IntFlag' for e in enums):
 from enum import IntFlag
 % endif
 % for enum_name in sorted(helper.filter_codegen_enums(enums)):
 
 
-class ${enums[enum_name]['python_name']}(${enums[enum_name].get('enum_class', 'Enum')}):
+class ${enums[enum_name]['python_name']}(${enums[enum_name].get('class', 'Enum')}):
 <%
     print_list = []
 %>\

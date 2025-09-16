@@ -126,10 +126,10 @@ def _add_ctypes_type(parameter, config):
         parameter['ctypes_type_library_call'] = module_name + parameter['ctypes_type']
 
 
-def _add_complex_type(parameter):
-    '''Adds a complex_type parameter to the metadata for complex numbers'''
-    if 'complex_type' not in parameter:
-        parameter['complex_type'] = None
+def _add_complex_array_representation(parameter):
+    '''Adds a complex_array_representation parameter to the metadata for complex numbers'''
+    if 'complex_array_representation' not in parameter:
+        parameter['complex_array_representation'] = None
 
 
 def _add_array_dimensions(parameter):
@@ -462,7 +462,7 @@ def add_all_function_metadata(functions, config):
             _add_python_type(p, config)
             _add_ctypes_variable_name(p)
             _add_ctypes_type(p, config)
-            _add_complex_type(p)
+            _add_complex_array_representation(p)
             _add_array_dimensions(p)
             _add_numpy_info(p, functions[f]['parameters'], config)
             _add_default_value_name(p)
