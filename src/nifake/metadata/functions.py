@@ -3023,7 +3023,7 @@ functions = {
                 'type': 'NIComplexNumber[]',
                 'numpy': True,
                 'use_in_python_api': True,
-                'array_dimension': 3
+                'array_dimensions': 3
             },
         ],
         'python_name': 'function_with_3d_numpy_array_of_numpy_complex128_input_parameter',

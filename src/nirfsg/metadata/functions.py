@@ -1519,7 +1519,7 @@ functions = {
                 'use_array': False
             },
             {
-                'array_dimension': 3,
+                'array_dimensions': 3,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
@@ -2005,7 +2005,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimension': 3,
+                'array_dimensions': 3,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
@@ -2079,7 +2079,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimension': 2,
+                'array_dimensions': 2,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'out',
                 'documentation': {
@@ -2673,7 +2673,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'array_dimension': 2,
+                'array_dimensions': 2,
                 'complex_array_representation': 'complex_number_array',
                 'direction': 'out',
                 'documentation': {
