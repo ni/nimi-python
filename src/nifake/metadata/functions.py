@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 25.5.0d9999
+# This file is generated from NI-FAKE API metadata version 25.8.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2828,10 +2828,9 @@ functions = {
     'WriteWaveformNumpyComplex64': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex64 numbers.'
+            'description': 'A function that writes a waveform of numpy complex64 samples.'
         },
         'included_in_proto': False,
-        'is_error_handling': False,
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -2862,10 +2861,10 @@ functions = {
                 'use_in_python_api': False
             },
             {
-                'complex_type': 'numpy',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                    'description': 'Specifies the array of data to load into the waveform.'
                 },
                 'name': 'waveformDataArray',
                 'numpy': True,
@@ -2874,8 +2873,7 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexNumberF32[]',
-                'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_in_python_api': True
             }
         ],
         'returns': 'ViStatus'
@@ -2883,7 +2881,7 @@ functions = {
     'WriteWaveformNumpyComplex128': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex128 numbers.'
+            'description': 'A function that writes a waveform of numpy complex128 samples.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2917,10 +2915,10 @@ functions = {
                 'use_in_python_api': False
             },
             {
-                'complex_type': 'numpy',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                    'description': 'Specifies the array of data to load into the waveform.'
                 },
                 'name': 'waveformDataArray',
                 'numpy': True,
@@ -2929,8 +2927,7 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexNumber[]',
-                'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_in_python_api': True
             }
         ],
         'returns': 'ViStatus'
@@ -2938,7 +2935,7 @@ functions = {
     'WriteWaveformNumpyComplexInterleavedI16': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'A function that writes a waveform of numpy complex i16 numbers.'
+            'description': 'A function that writes a waveform of numpy complex i16 samples.'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2972,10 +2969,10 @@ functions = {
                 'use_in_python_api': False
             },
             {
-                'complex_type': 'interleaved',
+                'complex_array_representation': 'interleaved_real_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the array of data to load into the waveform. Array should be numberOfSamples big.'
+                    'description': 'Specifies the array of data to load into the waveform.'
                 },
                 'name': 'waveformDataArray',
                 'numpy': True,
@@ -2984,8 +2981,7 @@ functions = {
                     'value': 'numberOfSamples'
                 },
                 'type': 'NIComplexI16[]',
-                'use_in_python_api': True,
-                'use_numpy_array': True
+                'use_in_python_api': True
             }
         ],
         'returns': 'ViStatus'
@@ -3017,15 +3013,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'complex_type': 'numpy',
+                
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the 3D array of numpy complex numbers to write. '
+                    'description': 'Specifies the 3D array of numpy complex numbers to write.'
                 },
                 'name': 'multidimensionalArray',
                 'type': 'NIComplexNumber[]',
                 'numpy': True,
-                'use_numpy_array': True,
                 'use_in_python_api': True,
                 'array_dimension': 3
             },
