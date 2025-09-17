@@ -898,6 +898,76 @@ enums_input = {
             }
         ]
     },
+    'EnumWithCommonPrefixInValueNames': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'COLOR_BRIGHT_RED',
+                'value': 1
+            },
+            {
+                'name': 'COLOR_BRIGHT_BLUE',
+                'value': 2
+            }
+        ]
+    },
+    'EnumWithExplicitValueNames': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'THE_COLOR_RED',
+                'python_name': 'COLOR_DARK_RED',
+                'value': 1
+            },
+            {
+                'name': 'THE_COLOR_BLUE',
+                'python_name': 'COLOR_DARK_BLUE',
+                'value': 2
+            }
+        ]
+    },
+    'EnumWithExplicitValueNamesMixedIn': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'DISTANCE_MILES',
+                'value': 1
+            },
+            {
+                'name': 'DISTANCE_KILOMETERS',
+                'python_name': 'DISTANCE_KILOMETERS',
+                'value': 2
+            },
+            {
+                'name': 'DISTANCE_METERS',
+                'python_name': 'DISTANCE_METERS',
+                'value': 5
+            },
+            {
+                'name': 'DISTANCE_YARDS',
+                'value': 42
+            }
+        ]
+    },
+    'EnumWithOneExpandedValueAndCommonPrefixSuffix': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX',
+                'value': 1
+            },
+            {
+                'name': 'COMMON_PREFIX_BASEBALL',
+                'python_name': 'BASEBALL',  # we want to test that this excludes it from common prefix/suffix calculations
+                'value': 2
+            },
+            {
+                'name': 'BASKETBALL_COMMON_SUFFIX',
+                'python_name': 'BASKETBALL',  # we want to test that this excludes it from common prefix/suffix calculations
+                'value': 3
+            },
+        ]
+    },
 }
 
 
@@ -922,6 +992,41 @@ enums_expected = {
             {'name': 'BLUE', 'value': 2, 'converts_to_value': False, 'python_name': 'BLUE'},
             {'name': 'YELLOW', 'value': 5, 'converts_to_value': 'yellow', 'python_name': 'YELLOW'},
             {'name': 'BLACK', 'value': 42, 'converts_to_value': 42, 'python_name': 'BLACK'}
+        ]
+    },
+    'EnumWithCommonPrefixInValueNames': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithCommonPrefixInValueNames',
+        'values': [
+            {'name': 'COLOR_BRIGHT_RED', 'value': 1, 'python_name': 'RED', 'prefix': 'COLOR_BRIGHT_'},
+            {'name': 'COLOR_BRIGHT_BLUE', 'value': 2, 'python_name': 'BLUE', 'prefix': 'COLOR_BRIGHT_'}
+        ]
+    },
+    'EnumWithExplicitValueNames': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithExplicitValueNames',
+        'values': [
+            {'name': 'THE_COLOR_RED', 'value': 1, 'python_name': 'COLOR_DARK_RED'},
+            {'name': 'THE_COLOR_BLUE', 'value': 2, 'python_name': 'COLOR_DARK_BLUE'}
+        ]
+    },
+    'EnumWithExplicitValueNamesMixedIn': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithExplicitValueNamesMixedIn',
+        'values': [
+            {'name': 'DISTANCE_MILES', 'value': 1, 'python_name': 'MILES', 'prefix': 'DISTANCE_'},
+            {'name': 'DISTANCE_KILOMETERS', 'value': 2, 'python_name': 'DISTANCE_KILOMETERS'},  # explicitly set
+            {'name': 'DISTANCE_METERS', 'value': 5, 'python_name': 'DISTANCE_METERS'},  # explicitly set
+            {'name': 'DISTANCE_YARDS', 'value': 42, 'python_name': 'YARDS', 'prefix': 'DISTANCE_'}
+        ]
+    },
+    'EnumWithOneExpandedValueAndCommonPrefixSuffix': {
+        'codegen_method': 'public',
+        'python_name': 'EnumWithOneExpandedValueAndCommonPrefixSuffix',
+        'values': [
+            {'name': 'COMMON_PREFIX_FOOTBALL_COMMON_SUFFIX', 'value': 1, 'python_name': 'SUFFIX', 'prefix': 'COMMON_PREFIX_FOOTBALL_COMMON_'},
+            {'name': 'COMMON_PREFIX_BASEBALL', 'value': 2, 'python_name': 'BASEBALL'},  # explicitly set
+            {'name': 'BASKETBALL_COMMON_SUFFIX', 'value': 3, 'python_name': 'BASKETBALL'},  # explicitly set
         ]
     },
 }
@@ -1141,6 +1246,10 @@ def test_get_functions_that_use_enums():
     expected_output = {
         'Color': ['PythonOnlyMethod'],
         'EnumWithConverter': ['PublicMethod', 'PrivateMethod'],
+        'EnumWithCommonPrefixInValueNames': [],
+        'EnumWithExplicitValueNames': [],
+        'EnumWithExplicitValueNamesMixedIn': [],
+        'EnumWithOneExpandedValueAndCommonPrefixSuffix': [],
     }
     actual_output = _get_functions_that_use_enums(actual_enums, actual_config)
     _compare_dicts(actual_output, expected_output)
@@ -1151,6 +1260,10 @@ def test_get_attributes_that_use_enums():
     expected_output = {
         'Color': ['1000002'],
         'EnumWithConverter': ['1000001', '1000003'],
+        'EnumWithCommonPrefixInValueNames': [],
+        'EnumWithExplicitValueNames': [],
+        'EnumWithExplicitValueNamesMixedIn': [],
+        'EnumWithOneExpandedValueAndCommonPrefixSuffix': [],
     }
     actual_output = _get_attributes_that_use_enums(actual_enums, actual_config)
     _compare_dicts(actual_output, expected_output)
