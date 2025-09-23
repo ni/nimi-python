@@ -95,6 +95,9 @@ class GrpcStubInterpreter(object):
         )
         return response.an_array
 
+    def cached_read_status(self):  # noqa: N802
+        raise NotImplementedError('cached_read_status is not supported over gRPC')
+
     def configure_abc(self):  # noqa: N802
         self._invoke(
             self._client.ConfigureAbc,
@@ -148,10 +151,7 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_intflag_parameter(self, flag):  # noqa: N802
-        self._invoke(
-            self._client.FunctionWithIntflagParameter,
-            grpc_types.FunctionWithIntflagParameterRequest(vi=self._vi, flag=flag.value),
-        )
+        raise NotImplementedError('function_with_intflag_parameter is not supported over gRPC')
 
     def function_with_repeated_capability_type(self, site_list):  # noqa: N802
         raise NotImplementedError('function_with_repeated_capability_type is not supported over gRPC')
@@ -393,6 +393,9 @@ class GrpcStubInterpreter(object):
             grpc_types.ReadFromChannelRequest(vi=self._vi, channel_name=channel_name, maximum_time=maximum_time),
         )
         return response.reading
+
+    def read_status(self):  # noqa: N802
+        raise NotImplementedError('read_status is not supported over gRPC')
 
     def return_a_number_and_a_string(self):  # noqa: N802
         response = self._invoke(
