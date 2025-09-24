@@ -7278,18 +7278,11 @@ class Session(_SessionBase):
         **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
 
         Returns:
-            waveform_names (str): Returns a string having waveform names separated by commas.
-
-            actual_buffer_size (int): Fetch the number of bytes needed to pass in the BUFFER_SIZE parameter.
-
-                It can be fetch by passing VI_NULL in the WAVEFORM_NAMES parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            waveform_names (list of str): Returns a list of string having waveform names.
 
         '''
-        waveform_names, actual_buffer_size = self._interpreter.get_all_named_waveform_names()
-        return _converters.convert_comma_separated_string_to_list(waveform_names), actual_buffer_size
+        waveform_names = self._interpreter.get_all_named_waveform_names()
+        return _converters.convert_comma_separated_string_to_list(waveform_names)
 
     @ivi_synchronized
     def get_all_script_names(self):
@@ -7300,18 +7293,11 @@ class Session(_SessionBase):
         **Supported Devices** :PXIe-5830/5831/5840/5841/5842E
 
         Returns:
-            script_names (str): Returns a string having script names separated by commas.
-
-            actual_buffer_size (int): Fetch the number of bytes needed to pass in the BUFFER_SIZE parameter.
-
-                It can be fetch by passing VI_NULL in the SCRIPT_NAMES parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            script_names (list of str): Returns a list of string having script names.
 
         '''
-        script_names, actual_buffer_size = self._interpreter.get_all_script_names()
-        return script_names, actual_buffer_size
+        script_names = self._interpreter.get_all_script_names()
+        return _converters.convert_comma_separated_string_to_list(script_names)
 
     @ivi_synchronized
     def get_channel_name(self, index):
