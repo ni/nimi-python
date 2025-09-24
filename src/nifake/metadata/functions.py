@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 25.8.0d9999
+# This file is generated from NI-FAKE API metadata version 25.8.0d100
 functions = {
     'Abort': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Aborts a previously initiated thingie.'
         },
-        'included_in_proto': True,
+        'included_in_proto': False,
         'parameters': [
             {
                 'direction': 'in',
@@ -93,6 +93,31 @@ functions = {
                     'value': 'numberOfElements'
                 },
                 'type': 'ViBoolean[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'CachedReadStatus': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'acqBacklog',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'enum': 'AcquisitionStatus',
+                'name': 'acqStatus',
+                'type': 'ViInt16'
             }
         ],
         'returns': 'ViStatus'
@@ -2108,6 +2133,31 @@ functions = {
                 },
                 'name': 'reading',
                 'type': 'ViReal64'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'ReadStatus': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'acquisitionBacklog',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'enum': 'AcquisitionStatus',
+                'name': 'acquisitionStatus',
+                'type': 'ViInt16'
             }
         ],
         'returns': 'ViStatus'

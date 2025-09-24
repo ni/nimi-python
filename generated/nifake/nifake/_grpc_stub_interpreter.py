@@ -77,10 +77,7 @@ class GrpcStubInterpreter(object):
         return response
 
     def abort(self):  # noqa: N802
-        self._invoke(
-            self._client.Abort,
-            grpc_types.AbortRequest(vi=self._vi),
-        )
+        raise NotImplementedError('abort is not supported over gRPC')
 
     def accept_list_of_durations_in_seconds(self, delays):  # noqa: N802
         self._invoke(
@@ -94,6 +91,9 @@ class GrpcStubInterpreter(object):
             grpc_types.BoolArrayOutputFunctionRequest(vi=self._vi, number_of_elements=number_of_elements),
         )
         return response.an_array
+
+    def cached_read_status(self):  # noqa: N802
+        raise NotImplementedError('cached_read_status is not supported over gRPC')
 
     def configure_abc(self):  # noqa: N802
         self._invoke(
@@ -390,6 +390,9 @@ class GrpcStubInterpreter(object):
             grpc_types.ReadFromChannelRequest(vi=self._vi, channel_name=channel_name, maximum_time=maximum_time),
         )
         return response.reading
+
+    def read_status(self):  # noqa: N802
+        raise NotImplementedError('read_status is not supported over gRPC')
 
     def return_a_number_and_a_string(self):  # noqa: N802
         response = self._invoke(
