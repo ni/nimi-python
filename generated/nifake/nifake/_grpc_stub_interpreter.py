@@ -95,9 +95,6 @@ class GrpcStubInterpreter(object):
         )
         return response.an_array
 
-    def cached_read_status(self):  # noqa: N802
-        raise NotImplementedError('cached_read_status is not supported over gRPC')
-
     def configure_abc(self):  # noqa: N802
         self._invoke(
             self._client.ConfigureAbc,
@@ -393,9 +390,6 @@ class GrpcStubInterpreter(object):
             grpc_types.ReadFromChannelRequest(vi=self._vi, channel_name=channel_name, maximum_time=maximum_time),
         )
         return response.reading
-
-    def read_status(self):  # noqa: N802
-        raise NotImplementedError('read_status is not supported over gRPC')
 
     def return_a_number_and_a_string(self):  # noqa: N802
         response = self._invoke(

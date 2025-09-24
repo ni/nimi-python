@@ -1,30 +1,6 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-FAKE API metadata version 25.8.0d100
+# This file is generated from NI-FAKE API metadata version 25.8.0d9999
 enums = {
-    'AcquisitionStatus': {
-        'values': [
-            {
-                'name': 'NIFAKE_VAL_RUNNING',
-                'value': 'NIFAKE_VAL_ACQUISITION_STATUS_RUNNING'
-            },
-            {
-                'name': 'NIFAKE_VAL_FINISHED_WITH_BACKLOG',
-                'value': 'NIFAKE_VAL_ACQUISITION_STATUS_FINISHED_WITH_BACKLOG'
-            },
-            {
-                'name': 'NIFAKE_VAL_FINISHED_WITH_NO_BACKLOG',
-                'value': 'NIFAKE_VAL_ACQUISITION_STATUS_FINISHED_WITH_NO_BACKLOG'
-            },
-            {
-                'name': 'NIFAKE_VAL_PAUSED',
-                'value': 'NIFAKE_VAL_ACQUISITION_STATUS_PAUSED'
-            },
-            {
-                'name': 'NIFAKE_VAL_NO_ACQUISITION_IN_PROGRESS',
-                'value': 'NIFAKE_VAL_ACQUISITION_STATUS_NO_ACQUISITION_IN_PROGRESS'
-            }
-        ]
-    },
     'AltColor': {
         'values': [
             {
@@ -220,18 +196,6 @@ enums = {
             },
             {
                 'name': 'NIFAKE_VAL_TWO',
-                'value': 2
-            }
-        ]
-    },
-    'ExtCalParts': {
-        'values': [
-            {
-                'name': 'NIFAKE_EXTCAL_PART1',
-                'value': 1
-            },
-            {
-                'name': 'NIFAKE_EXTCAL_PART2',
                 'value': 2
             }
         ]
