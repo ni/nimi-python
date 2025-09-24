@@ -1691,6 +1691,7 @@
 #### [nirfsg] Unreleased
 - Added
 - Changed
+  - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
 - Removed
 
 #### [nirfsg] 1.0.0 - 2025-08-05
