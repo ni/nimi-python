@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.8.0d9999 
+# This file is generated from NI-RFSG API metadata version 25.8.0d197
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -2125,15 +2125,17 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns a string having waveform names separated by commas.'
+                    'description': 'Returns a list of string having waveform names.'
                 },
                 'name': 'waveformNames',
                 'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'bufferSize',
+                    'value_twist': 'actualBufferSize'
                 },
                 'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2188,14 +2190,17 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns a string having script names separated by commas.'
+                    'description': 'Returns a list of string having script names.'
                 },
                 'name': 'scriptNames',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
                 'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'bufferSize',
+                    'value_twist': 'actualBufferSize'
                 },
                 'type': 'ViChar[]',
+                'type_in_documentation': 'list of str',
                 'use_array': False,
                 'use_in_python_api': True
             },
