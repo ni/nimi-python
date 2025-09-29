@@ -578,6 +578,37 @@ class SystemTests:
         with rfsg_device_session.initiate():
             rfsg_device_session.wait_until_settled(15000)
 
+    def test_get_all_named_waveform_names(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
+        waveform_data2 = np.full(800, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('waveform1', waveform_data1, False)
+        rfsg_device_session.write_arb_waveform('waveform2', waveform_data2, False)
+        names = rfsg_device_session.get_all_named_waveform_names()
+        assert 'waveform1' in names
+        assert 'waveform2' in names
+
+    @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
+    def test_get_all_script_names(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
+        waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex64)
+        rfsg_device_session.write_arb_waveform('mywaveform', waveform_data, False)
+        script1 = '''script myScript1
+        repeat forever
+        generate mywaveform
+        end repeat
+        end script'''
+        script2 = '''script myScript2
+        repeat forever
+        generate mywaveform
+        end repeat
+        end script'''
+        rfsg_device_session.write_script(script1)
+        rfsg_device_session.write_script(script2)
+        script_names = rfsg_device_session.get_all_script_names()
+        assert 'myScript1' in script_names
+        assert 'myScript2' in script_names
+
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')

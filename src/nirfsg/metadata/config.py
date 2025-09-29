@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.8.0d9999
+# This file is generated from NI-RFSG API metadata version 25.8.0d197
 config = {
-    'api_version': '25.8.0d9999',
+    'api_version': '25.8.0d197',
     'c_function_prefix': 'niRFSG_',
     'close_function': 'close',
     'context_manager_name': {

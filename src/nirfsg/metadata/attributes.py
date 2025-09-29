@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.8.0d9999
+# This file is generated from NI-RFSG API metadata version 25.8.0d197
 attributes = {
     1050002: {
         'access': 'read-write',
