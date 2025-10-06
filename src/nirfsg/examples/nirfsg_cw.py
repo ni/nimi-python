@@ -19,7 +19,7 @@ def example(resource_name, options, frequency, power_level):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Generates a continuous wave (CW) signal using NI-RFSG.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='', required=True, help='Resource name of the NI RF signal generator.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of the NI RF signal generator.')
     parser.add_argument('-f', '--frequency', default=1e9, type=float, help='Frequency in Hz.')
     parser.add_argument('-p', '--power-level', default=-10.0, type=float, help='Power level in dBm.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string for the session.')
