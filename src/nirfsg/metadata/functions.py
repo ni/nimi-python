@@ -166,6 +166,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -225,6 +226,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -235,7 +237,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -285,6 +286,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -295,7 +297,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt64AttributeValues',
                 'name': 'value',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -345,6 +346,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -355,7 +357,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -405,6 +406,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -464,6 +466,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -474,7 +477,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute. The value must be a NULL-terminated string.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1020,6 +1022,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                # 'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1031,6 +1034,7 @@ functions = {
                     'description': 'Specifies the source terminal for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE attribute to this value.'
                 },
                 'name': 'source',
+                # 'grpc_enum': 'TriggerSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1041,7 +1045,7 @@ functions = {
                     'description': 'Specifies the active edge for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE attribute to this value.'
                 },
                 'enum': 'ScriptTriggerDigitalEdgeEdge',
-                'grpc_enum': None,
+                'grpc_enum': 'DigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1083,6 +1087,7 @@ functions = {
                     'description': 'Specifies the source terminal for the digital edge trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute to this value.'
                 },
                 'name': 'source',
+                # 'grpc_enum': 'TriggerSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1093,7 +1098,7 @@ functions = {
                     'description': 'Specifies the active edge for the Start Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute to this value.'
                 },
                 'enum': 'StartTriggerDigitalEdgeEdge',
-                'grpc_enum': None,
+                'grpc_enum': 'DigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1135,6 +1140,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                # 'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1413,6 +1419,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                # 'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1804,6 +1811,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                # 'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2268,6 +2276,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2326,6 +2335,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2384,6 +2394,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2442,6 +2453,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2500,6 +2512,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2558,6 +2571,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2687,6 +2701,7 @@ functions = {
                 'name': 'sparameters',
                 'numpy': True,
                 'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -3294,6 +3309,7 @@ functions = {
                     ]
                 },
                 'name': 'signalIdentifier',
+                # 'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3674,6 +3690,7 @@ functions = {
                     'description': 'Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG function calls.'
                 },
                 'name': 'newVi',
+                'grpc_name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4579,6 +4596,7 @@ functions = {
                     ]
                 },
                 'name': 'triggerIdentifier',
+                # 'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4705,6 +4723,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4764,6 +4783,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4774,7 +4794,6 @@ functions = {
                     'description': 'Specifies the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -4824,6 +4843,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4833,7 +4853,6 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value to which you want to set the attribute.\n\n<blockquote>\nSome values may not be valid. The allowed values depend on the current settings of the instrument session.\n</blockquote>'
                 },
-                'grpc_enum': 'NiRFSGInt64AttributeValues',
                 'name': 'value',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -4883,6 +4902,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4893,7 +4913,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4943,6 +4962,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5002,6 +5022,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5012,7 +5033,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -5346,6 +5366,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfm_data',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
@@ -5421,6 +5442,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfm_data',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
@@ -5496,6 +5518,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfm_data',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
