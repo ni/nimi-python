@@ -542,6 +542,16 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(output_array_ctype[i]) for i in range(output_array_size_ctype.value)], [float(output_array_of_fixed_length_ctype[i]) for i in range(3)]
 
+    def multiple_arrays_different_size(self, values_array, data_array):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        values_array_ctype = _get_ctypes_pointer_for_buffer(value=values_array, library_type=_visatype.ViReal64)  # case B550
+        values_array_size_ctype = _visatype.ViInt32(0 if values_array is None else len(values_array))  # case S160
+        data_array_ctype = _get_ctypes_pointer_for_buffer(value=data_array, library_type=_visatype.ViInt32)  # case B550
+        data_array_size_ctype = _visatype.ViInt32(0 if data_array is None else len(data_array))  # case S160
+        error_code = self._library.niFake_MultipleArraysDifferentSize(vi_ctype, values_array_ctype, values_array_size_ctype, data_array_ctype, data_array_size_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def multiple_arrays_same_size(self, values1, values2, values3, values4):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         values1_ctype = _get_ctypes_pointer_for_buffer(value=values1, library_type=_visatype.ViReal64)  # case B550
