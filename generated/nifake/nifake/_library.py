@@ -72,6 +72,7 @@ class Library(object):
         self.niFake_MethodWithGrpcOnlyParam_cfunc = None
         self.niFake_MethodWithProtoOnlyParameter_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
+        self.niFake_MultipleArraysDifferentSize_cfunc = None
         self.niFake_MultipleArraysSameSize_cfunc = None
         self.niFake_OneInputFunction_cfunc = None
         self.niFake_ParametersAreMultipleTypes_cfunc = None
@@ -476,6 +477,14 @@ class Library(object):
                 self.niFake_MultipleArrayTypes_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt16)]  # noqa: F405
                 self.niFake_MultipleArrayTypes_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_MultipleArrayTypes_cfunc(vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers)
+
+    def niFake_MultipleArraysDifferentSize(self, vi, values_array, values_array_size, data_array, data_array_size):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_MultipleArraysDifferentSize_cfunc is None:
+                self.niFake_MultipleArraysDifferentSize_cfunc = self._get_library_function('niFake_MultipleArraysDifferentSize')
+                self.niFake_MultipleArraysDifferentSize_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ViInt32), ViInt32]  # noqa: F405
+                self.niFake_MultipleArraysDifferentSize_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MultipleArraysDifferentSize_cfunc(vi, values_array, values_array_size, data_array, data_array_size)
 
     def niFake_MultipleArraysSameSize(self, vi, values1, values2, values3, values4, size):  # noqa: N802
         with self._func_lock:

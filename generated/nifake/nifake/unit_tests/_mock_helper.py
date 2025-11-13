@@ -152,6 +152,8 @@ class SideEffectsHelper(object):
         self._defaults['MultipleArrayTypes']['return'] = 0
         self._defaults['MultipleArrayTypes']['outputArray'] = None
         self._defaults['MultipleArrayTypes']['outputArrayOfFixedLength'] = None
+        self._defaults['MultipleArraysDifferentSize'] = {}
+        self._defaults['MultipleArraysDifferentSize']['return'] = 0
         self._defaults['MultipleArraysSameSize'] = {}
         self._defaults['MultipleArraysSameSize']['return'] = 0
         self._defaults['OneInputFunction'] = {}
@@ -763,6 +765,11 @@ class SideEffectsHelper(object):
             output_array_of_fixed_length_ref[i] = test_value[i]
         return self._defaults['MultipleArrayTypes']['return']
 
+    def niFake_MultipleArraysDifferentSize(self, vi, values_array, values_array_size, data_array, data_array_size):  # noqa: N802
+        if self._defaults['MultipleArraysDifferentSize']['return'] != 0:
+            return self._defaults['MultipleArraysDifferentSize']['return']
+        return self._defaults['MultipleArraysDifferentSize']['return']
+
     def niFake_MultipleArraysSameSize(self, vi, values1, values2, values3, values4, size):  # noqa: N802
         if self._defaults['MultipleArraysSameSize']['return'] != 0:
             return self._defaults['MultipleArraysSameSize']['return']
@@ -1122,6 +1129,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_MethodWithProtoOnlyParameter.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
         mock_library.niFake_MultipleArrayTypes.return_value = 0
+        mock_library.niFake_MultipleArraysDifferentSize.side_effect = MockFunctionCallError("niFake_MultipleArraysDifferentSize")
+        mock_library.niFake_MultipleArraysDifferentSize.return_value = 0
         mock_library.niFake_MultipleArraysSameSize.side_effect = MockFunctionCallError("niFake_MultipleArraysSameSize")
         mock_library.niFake_MultipleArraysSameSize.return_value = 0
         mock_library.niFake_OneInputFunction.side_effect = MockFunctionCallError("niFake_OneInputFunction")

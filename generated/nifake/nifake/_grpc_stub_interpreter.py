@@ -356,6 +356,12 @@ class GrpcStubInterpreter(object):
         )
         return response.output_array, response.output_array_of_fixed_length
 
+    def multiple_arrays_different_size(self, values_array, data_array):  # noqa: N802
+        self._invoke(
+            self._client.MultipleArraysDifferentSize,
+            grpc_types.MultipleArraysDifferentSizeRequest(vi=self._vi, values_array=values_array, data_array=data_array),
+        )
+
     def multiple_arrays_same_size(self, values1, values2, values3, values4):  # noqa: N802
         self._invoke(
             self._client.MultipleArraysSameSize,
