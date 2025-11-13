@@ -237,7 +237,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -298,7 +297,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt64AttributeValues',
                 'name': 'value',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -359,7 +357,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -480,7 +477,6 @@ functions = {
                     'description': 'Pass the value that you want to verify as a valid value for the attribute. The value must be a NULL-terminated string.',
                     'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
                 },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1026,6 +1022,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1037,6 +1034,7 @@ functions = {
                     'description': 'Specifies the source terminal for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE attribute to this value.'
                 },
                 'name': 'source',
+                'grpc_enum': 'TriggerSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1089,6 +1087,7 @@ functions = {
                     'description': 'Specifies the source terminal for the digital edge trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute to this value.'
                 },
                 'name': 'source',
+                'grpc_enum': 'TriggerSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1141,6 +1140,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1419,6 +1419,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1810,6 +1811,7 @@ functions = {
                 },
                 'is_repeated_capability': True,
                 'name': 'triggerId',
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'repeated_capability_type': 'script_triggers',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2046,7 +2048,6 @@ functions = {
                     ]
                 },
                 'enum': 'SparameterOrientation',
-                'grpc_enum': None,
                 'name': 'sparameterOrientation',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -2958,7 +2959,6 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'enum': 'Module',
-                'grpc_enum': None,
                 'name': 'module',
                 'type': 'ViInt32'
             },
@@ -3039,7 +3039,6 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'enum': 'Module',
-                'grpc_enum': None,
                 'name': 'module',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3306,6 +3305,7 @@ functions = {
                     ]
                 },
                 'name': 'signalIdentifier',
+                'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4592,6 +4592,7 @@ functions = {
                     ]
                 },
                 'name': 'triggerIdentifier',
+                'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4789,7 +4790,6 @@ functions = {
                     'description': 'Specifies the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -4849,7 +4849,6 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value to which you want to set the attribute.\n\n<blockquote>\nSome values may not be valid. The allowed values depend on the current settings of the instrument session.\n</blockquote>'
                 },
-                'grpc_enum': 'NiRFSGInt64AttributeValues',
                 'name': 'value',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -4910,7 +4909,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -5031,7 +5029,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,
