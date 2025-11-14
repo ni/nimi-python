@@ -2048,6 +2048,7 @@ functions = {
                     ]
                 },
                 'enum': 'SparameterOrientation',
+                'grpc_enum': None,
                 'name': 'sparameterOrientation',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -2959,6 +2960,7 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'enum': 'Module',
+                'grpc_enum': None,
                 'name': 'module',
                 'type': 'ViInt32'
             },
@@ -3039,6 +3041,7 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'enum': 'Module',
+                'grpc_enum': None,
                 'name': 'module',
                 'type': 'ViInt32',
                 'use_array': False,
