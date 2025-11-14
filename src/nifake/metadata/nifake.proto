@@ -42,6 +42,7 @@ service NiFake {
   rpc InitWithOptions(InitWithOptionsRequest) returns (InitWithOptionsResponse);
   rpc MultipleArrayTypes(MultipleArrayTypesRequest) returns (MultipleArrayTypesResponse);
   rpc MultipleArraysSameSize(MultipleArraysSameSizeRequest) returns (MultipleArraysSameSizeResponse);
+  rpc MultipleArraysDifferentSize(MultipleArraysDifferentSizeRequest) returns (MultipleArraysDifferentSizeResponse);
   rpc OneInputFunction(OneInputFunctionRequest) returns (OneInputFunctionResponse);
   rpc ParametersAreMultipleTypes(ParametersAreMultipleTypesRequest) returns (ParametersAreMultipleTypesResponse);
   rpc PoorlyNamedSimpleFunction(PoorlyNamedSimpleFunctionRequest) returns (PoorlyNamedSimpleFunctionResponse);
@@ -542,6 +543,16 @@ message MultipleArraysSameSizeRequest {
 }
 
 message MultipleArraysSameSizeResponse {
+  int32 status = 1;
+}
+
+message MultipleArraysDifferentSizeRequest {
+  nidevice_grpc.Session vi = 1;
+  repeated double values_array = 2;
+  repeated sint32 data_array = 3;
+}
+
+message MultipleArraysDifferentSizeResponse {
   int32 status = 1;
 }
 
