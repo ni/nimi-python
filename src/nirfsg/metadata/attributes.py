@@ -1,152 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file is generated from NI-RFSG API metadata version 25.8.0d197
 attributes = {
-    1050002: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to validate attribute values and function parameters. Range checking parameters is very useful for debugging. After you validate your program, set this attribute to VI_FALSE to disable range checking and maximize performance. NI-RFSG can choose to ignore range checking for particular attributes, regardless of the setting of this attribute. Use the nirfsg_InitWithOptions function to override the default value.\n\n**Default Value:** VI_TRUE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Enable range checking.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Disable range checking.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
-        'name': 'RANGE_CHECK',
-        'type': 'ViBoolean'
-    },
-    1050003: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether NI-RFSG queries the NI-RFSG device status after each operation. Querying the device status is useful for debugging. After you validate your program, set this attribute to VI_FALSE to disable status checking and maximize performance.\n\nNI-RFSG can choose to ignore status checking for particular attributes, regardless of the setting of this attribute. Use the nirfsg_InitWithOptions function to override the default value.\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'NI-RFSG queries the instrument status after each operation.'
-                ],
-                [
-                    'VI_FALSE',
-                    'NI-RFSG does not query the instrument status.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
-        'name': 'QUERY_INSTRUMENT_STATUS',
-        'type': 'ViBoolean'
-    },
-    1050004: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to cache the value of attributes. When caching is enabled, NI-RFSG tracks the current NI-RFSG device settings and avoids sending redundant commands to the device. NI-RFSG can always cache or never cache particular attributes, regardless of the setting of this attribute. Call the nirfsg_InitWithOptions function to override the default value.\n\n**Default Value:** VI_TRUE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Enables caching.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Disables caching.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Cache',
-        'name': 'CACHE',
-        'type': 'ViBoolean'
-    },
-    1050005: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns whether NI-RFSG simulates I/O operations. This attribute is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the nirfsg_InitWithOptions function to enable simulation.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Simulation is enabled.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Simulation is disabled.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
-        'name': 'SIMULATE',
-        'type': 'ViBoolean'
-    },
-    1050006: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type attributes.\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
-            'note': 'Enabling record value coercions is not supported.',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'The IVI engine keeps a list of coercions.'
-                ],
-                [
-                    'VI_FALSE',
-                    'The IVI engine does not keep a list of coercions.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_COERCIONS',
-        'type': 'ViBoolean'
-    },
-    1050021: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
-            'note': 'Enabling interchangeability check is not supported.',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Interchange check is enabled.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Interchange check is disabled.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
-        'name': 'INTERCHANGE_CHECK',
-        'type': 'ViBoolean'
-    },
     1050302: {
         'access': 'read only',
         'codegen_method': 'public',
@@ -201,7 +55,7 @@ attributes = {
         'access': 'read only',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns a string that contains the firmware revision information for the NI-RFSG device you are currently using.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsg_RevisionQuery'
+            'description': 'Returns a string that contains the firmware revision information for the NI-RFSG device you are currently using.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Firmware Revision',
         'name': 'INSTRUMENT_FIRMWARE_REVISION',
@@ -281,8 +135,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the Reference Clock source. To set this attribute, the NI-RFSG device must be in the Configuration state. Only certain combinations of this attribute and the NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute are valid, as shown in the following table.\n\n**Default Value:** OnboardClock\n\n**Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigureRefClock\n\n**Possible Values**:',
-            'note': 'The PXI-5670/5671 and PXIe-5672 devices also allow you to drive the PXI 10 MHz backplane clock on PXI chassis *only* using the NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute.',
+            'description': 'Specifies the Reference Clock source. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** OnboardClock\n\n**Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigureRefClock\n\n**Possible Values**:',
             'table_body': [
                 [
                     '"OnboardClock"',
@@ -534,39 +387,11 @@ attributes = {
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
     },
-    1150004: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the clock source for driving the PXI 10 MHz backplane Reference Clock. This attribute is configurable if the PXI-5610 upconverter module is installed in *only* Slot 2 of a PXI chassis. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Possible Values**:\n\nPossible Value: Description\n\n"" :Do not drive the PXI_CLK10 signal.\n\n"OnboardClock" :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.\n\n"RefIn" :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.\n\n**Default Value:** ""\n\n**Supported Devices:** PXI-5610, PXI-5670/5671\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigurePxiChassisClk10\n\n\nOnly certain combinations of this attribute and the NIRFSG_ATTR_REF_CLOCK_SOURCE attribute are valid, as shown in the following table.',
-            'table_body': [
-                [
-                    '"", OnboardClock',
-                    'OnboardClock'
-                ],
-                [
-                    '"", RefIn',
-                    'RefIn'
-                ],
-                [
-                    '"", RefIn',
-                    'PXI_CLK'
-                ]
-            ],
-            'table_header': [
-                'NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE Setting',
-                'NIRFSG_ATTR_REF_CLOCK_SOURCE Setting'
-            ]
-        },
-        'lv_property': 'Clock:PXI Chassis Clk 10 Source',
-        'name': 'PXI_CHASSIS_CLK10_SOURCE',
-        'type': 'ViString'
-    },
     1150005: {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether the driver maintains phase continuity in the arbitrary waveforms. When this attribute is set to NIRFSG_VAL_ENABLE, NI-RFSG may increase the waveform size. When this attribute is set to NIRFSG_VAL_ENABLE, the NIRFSG_ATTR_FREQUENCY_TOLERANCE attribute specifies the maximum allowable frequency error that can be introduced when keeping the signal phase-continuous. To set the NIRFSG_ATTR_PHASE_CONTINUITY_ENABLED attribute, the NI-RFSG device must be in the Configuration state. NIRFSG_ATTR_PHASE_CONTINUITY_ENABLED applies only when the NIRFSG_ATTR_GENERATION_MODE attribute is set to NIRFSG_VAL_ARB_WAVEFORM or NIRFSG_VAL_SCRIPT.\n\nPXI-5671: When using the PXI-5671 with I/Q rates less than or equal to 8.33MS/s, an input phase-continuous signal is always phase-continuous upon output, and this attribute has no effect.\n\nPXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: Phase continuity is *always* enabled on this device.\n\n**Default Value:** NIRFSG_VAL_AUTO\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Phase Continuity <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/phasecontinuity.html>`_\n\n`Arb Waveform Mode Tuning Speed Factors <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5670_arb_waveform_mode_tuning_speed_factors.html>`_\n\n**Defined Values**:',
+            'description': 'Specifies whether the driver maintains phase continuity in the arbitrary waveforms. When this attribute is set to NIRFSG_VAL_ENABLE, NI-RFSG may increase the waveform size. To set the NIRFSG_ATTR_PHASE_CONTINUITY_ENABLED attribute, the NI-RFSG device must be in the Configuration state. NIRFSG_ATTR_PHASE_CONTINUITY_ENABLED applies only when the NIRFSG_ATTR_GENERATION_MODE attribute is set to NIRFSG_VAL_ARB_WAVEFORM or NIRFSG_VAL_SCRIPT.\n\nPXI-5671: When using the PXI-5671 with I/Q rates less than or equal to 8.33MS/s, an input phase-continuous signal is always phase-continuous upon output, and this attribute has no effect.\n\nPXIe-5644/5645/5646, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860: Phase continuity is *always* enabled on this device.\n\n**Default Value:** NIRFSG_VAL_AUTO\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Phase Continuity <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/phasecontinuity.html>`_\n\n`Arb Waveform Mode Tuning Speed Factors <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5670_arb_waveform_mode_tuning_speed_factors.html>`_\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSG_VAL_AUTO',
@@ -594,16 +419,6 @@ attributes = {
         'lv_property': 'Arb:Phase Continuity Enabled',
         'name': 'PHASE_CONTINUITY_ENABLED',
         'type': 'ViInt32'
-    },
-    1150006: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the allowable frequency error introduced during the software upconversion process. NI-RFSG may introduce a frequency error up to the specified amount to optimize computational speed and onboard memory usage while upconverting phase-continuous signals.\n\nIf the NIRFSG_ATTR_PHASE_CONTINUITY_ENABLED attribute is set to NIRFSG_VAL_DISABLE, the NIRFSG_ATTR_FREQUENCY_TOLERANCE attribute is ignored, and the driver does not introduce a frequency error. On devices that do not use software upconversion, this attribute is ignored. The PXI-5670 always uses software upconversion, and the PXI-5671 uses software upconversion for I/Q rates greater than 8.33MS/s.\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Units**: hertz (Hz)\n\n**Default Value:** 50\n\n**Supported Devices:** PXI-5670/5671\n\n**Related Topics**\n\n`Phase Continuity <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/phasecontinuity.html>`_'
-        },
-        'lv_property': 'RF:Frequency Tolerance (Hz)',
-        'name': 'FREQUENCY_TOLERANCE',
-        'type': 'ViReal64'
     },
     1150007: {
         'access': 'read-write',
@@ -642,41 +457,6 @@ attributes = {
         'lv_property': 'RF:Automatic Thermal Correction',
         'name': 'AUTOMATIC_THERMAL_CORRECTION',
         'type': 'ViInt32'
-    },
-    1150009: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether attenuator hold is enabled. While this attribute is set to VI_TRUE, changing the power level causes NI-RFSG to scale the digital data sent to the AWG instead of adjusting the attenuators. Changing power levels in this manner allows the device to increase or decrease the power level in more accurate increments, but it may affect signal-to-noise ratios (noise density).\n\nSetting the NIRFSG_ATTR_ATTENUATOR_HOLD_ENABLED attribute to VI_TRUE limits the power levels that can be attained. With attenuator hold enabled, the power level must satisfy the following conditions:\n\n- Power level less than or equal to NIRFSG_ATTR_ATTENUATOR_HOLD_MAX_POWER\n- Power level greater than or equal to (maximum power level -70dB)\n- Power level greater than or equal to -145dBm\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E\n\n**Related Topics**\n\n`Attenuator Hold <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/attenuator_hold_mode.html>`_\n\n`Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_\n\n**Defined Values**:',
-            'note': 'The frequency cannot be changed on the PXI-5670/5671 or PXIe-5672 while this attribute is set to VI_TRUE.',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Enables attenuator hold.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Disables attenuator hold.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'RF:Attenuator Hold Enabled',
-        'name': 'ATTENUATOR_HOLD_ENABLED',
-        'type': 'ViBoolean'
-    },
-    1150010: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the maximum power level of the RF output signal when the NIRFSG_ATTR_ATTENUATOR_HOLD_ENABLED attribute is set to VI_TRUE.\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Units**: dBm\n\n**Defined Values**:\nRefer to the specifications document for your device for allowable maximum power levels.\n\n**Default Value:**\n\nPXI-5670/5671, PXIe-5672: 17\n\nPXIe-5673/5673E: 10\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E\n\n**Related Topics**\n\n`Attenuator Hold <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/attenuator_hold_mode.html>`_\n\n`Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_'
-        },
-        'lv_property': 'RF:Attenuator Hold Max Power (dBm)',
-        'name': 'ATTENUATOR_HOLD_MAX_POWER',
-        'type': 'ViReal64'
     },
     1150011: {
         'access': 'read only',
@@ -796,16 +576,6 @@ attributes = {
         },
         'lv_property': 'Arb:Arb Carrier Frequency (Hz)',
         'name': 'ARB_CARRIER_FREQUENCY',
-        'type': 'ViReal64'
-    },
-    1150016: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Indicates the average output power from the PXI-5421, PXI-5441, PXIe-5442, and PXIe-5450 AWG module. If an arbitrary waveform is being generated, this attribute specifies either the average power or the peak power of the signal, depending on the NIRFSG_ATTR_POWER_LEVEL_TYPE attribute setting.\n\n**Units**: dBm\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E'
-        },
-        'lv_property': 'Arb:Arb Power (dBm)',
-        'name': 'ARB_POWER',
         'type': 'ViReal64'
     },
     1150017: {
@@ -1361,165 +1131,6 @@ attributes = {
         'name': 'ANALOG_MODULATION_TYPE',
         'type': 'ViInt32'
     },
-    1150033: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the type of waveform to use as the message signal for analog modulation.\n\n**Default Value:** NIRFSG_VAL_SINE\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_SINE',
-                    '3000 (0xbb8)',
-                    'Specifies that the analog modulation waveform type is sine.'
-                ],
-                [
-                    'NIRFSG_VAL_SQUARE',
-                    '3001 (0xbb9)',
-                    'Specifies that the analog modulation waveform type is square.'
-                ],
-                [
-                    'NIRFSG_VAL_TRIANGLE',
-                    '3002 (0xbba)',
-                    'Specifies that the analog modulation waveform type is triangle.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'AnalogModulationWaveformType',
-        'lv_property': 'Modulation:Analog:Waveform Type',
-        'name': 'ANALOG_MODULATION_WAVEFORM_TYPE',
-        'type': 'ViInt32'
-    },
-    1150034: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the frequency of the waveform to use as the message signal in analog modulation.\n\n**Units:** hertz (Hz)\n\n**Default Value:** 1kHz\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_'
-        },
-        'lv_property': 'Modulation:Analog:Waveform Frequency (Hz)',
-        'name': 'ANALOG_MODULATION_WAVEFORM_FREQUENCY',
-        'type': 'ViReal64'
-    },
-    1150035: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the frequency deviation to use in frequency modulation.\n\n**Units**: hertz (Hz)\n\n**Default Value:** 1kHz\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_'
-        },
-        'lv_property': 'Modulation:Analog:FM Deviation (Hz)',
-        'name': 'ANALOG_MODULATION_FM_DEVIATION',
-        'type': 'ViReal64'
-    },
-    1150036: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the digital modulation format to use.\n\n**Default Value:** NIRFSG_VAL_NONE\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_FSK',
-                    '4000 (0xfa0)',
-                    'Specifies that the digital modulation type is frequency-shift keying (FSK).'
-                ],
-                [
-                    'NIRFSG_VAL_NONE',
-                    '0 (0x0)',
-                    'Disables digital modulation.'
-                ],
-                [
-                    'NIRFSG_VAL_OOK',
-                    '4001 (0xfa1)',
-                    'Specifies that the digital modulation type is on-off keying (OOK).'
-                ],
-                [
-                    'NIRFSG_VAL_PSK',
-                    '4002 (0xfa2)',
-                    'Specifies that the digital modulation type is phase-shift keying (PSK).'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'DigitalModulationType',
-        'lv_property': 'Modulation:Digital:Modulation Type',
-        'name': 'DIGITAL_MODULATION_TYPE',
-        'type': 'ViInt32'
-    },
-    1150037: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the symbol rate of the bit stream for digital modulation.\n\n**Units**: hertz (Hz)\n\n**Default Value:** 1kHz\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_'
-        },
-        'lv_property': 'Modulation:Digital:Symbol Rate',
-        'name': 'DIGITAL_MODULATION_SYMBOL_RATE',
-        'type': 'ViReal64'
-    },
-    1150038: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the type of waveform to use as the message signal in digital modulation.\n\n**Default Value:** NIRFSG_VAL_PRBS\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_PRBS',
-                    '5000 (0x1388)',
-                    'Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).'
-                ],
-                [
-                    'NIRFSG_VAL_USER_DEFINED',
-                    '5001 (0x1389)',
-                    'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the niRFSG_ConfigureDigitalModulationUserDefinedWaveform function.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'DigitalModulationWaveformType',
-        'lv_property': 'Modulation:Digital:Waveform Type',
-        'name': 'DIGITAL_MODULATION_WAVEFORM_TYPE',
-        'type': 'ViInt32'
-    },
-    1150039: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the order of pseudorandom bit sequence (PRBS) internally generated by hardware and used as the message signal in digital modulation.\n\n**Default Value:** 16\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_'
-        },
-        'lv_property': 'Modulation:Digital:PRBS Order',
-        'name': 'DIGITAL_MODULATION_PRBS_ORDER',
-        'type': 'ViInt32'
-    },
-    1150040: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the seed of the internally generated pseudorandom bit sequence (PRBS).\n\n**Default Value:** 1\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_'
-        },
-        'lv_property': 'Modulation:Digital:PRBS Seed',
-        'name': 'DIGITAL_MODULATION_PRBS_SEED',
-        'type': 'ViInt32'
-    },
-    1150041: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the deviation to use in FSK modulation.\n\n**Units**: hertz (Hz)\n\n**Default Value:** 1,000\n\n**Supported Devices:** PXI/PXIe-5650/5651/5652\n\n**Related Topics**\n\n`Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_'
-        },
-        'lv_property': 'Modulation:Digital:FSK Deviation (Hz)',
-        'name': 'DIGITAL_MODULATION_FSK_DEVIATION',
-        'type': 'ViReal64'
-    },
     1150042: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1578,30 +1189,6 @@ attributes = {
         'name': 'POWER_LEVEL_TYPE',
         'type': 'ViInt32'
     },
-    1150044: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Enables or disables digital pattern on the PXI-5421/5441 AWG module. This attribute must be set to VI_TRUE to enable signal routing to and from the Digital Data & Control connector.\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXI-5670/5671\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Signal routing enabled.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Signal routing disabled.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Arb:Digital Pattern',
-        'name': 'DIGITAL_PATTERN',
-        'type': 'ViBoolean'
-    },
     1150045: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1645,16 +1232,6 @@ attributes = {
         'lv_property': 'Arb:Data Transfer:Streaming:Space Available In Streaming Waveform (Samples)',
         'name': 'STREAMING_SPACE_AVAILABLE_IN_WAVEFORM',
         'type': 'ViInt64'
-    },
-    1150048: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Indicates the number of samples to transfer at one time from the device to host memory. This attribute is useful when the total data to be transferred to onboard memory is large.\n\n**Units**: samples (s)\n\n**Default Value**: 1Ms\n\n**Supported Devices:** PXIe-5672/5673/5673E'
-        },
-        'lv_property': 'Arb:Data Transfer:Data Transfer Block Size',
-        'name': 'DATA_TRANSFER_BLOCK_SIZE',
-        'type': 'ViInt32'
     },
     1150052: {
         'access': 'read-write',
@@ -1845,59 +1422,6 @@ attributes = {
             'script_triggers'
         ],
         'type': 'ViInt32'
-    },
-    1150056: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the pulse-shaping filter type for the FIR filter. You can use this attribute only with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this attribute with a device that does not support OSP.\n\n**Default Value:** NIRFSG_VAL_NONE\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_NONE',
-                    '0 (0x0)',
-                    'Disables analog modulation.'
-                ],
-                [
-                    'NIRFSG_VAL_ARB_FILTER_TYPE_RAISED_COSINE',
-                    '10002 (0x2712)',
-                    'Applies a raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA attribute.'
-                ],
-                [
-                    'NIRFSG_VAL_ARB_FILTER_TYPE_ROOT_RAISED_COSINE',
-                    '10001 (0x2711)',
-                    'Applies a root-raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.'
-                ]
-            ],
-            'table_header': [
-                'Name',
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'FilterType',
-        'lv_property': 'Arb:Pulse Shaping:Filter Type',
-        'name': 'ARB_FILTER_TYPE',
-        'type': 'ViInt32'
-    },
-    1150057: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the alpha value to use when calculating the pulse-shaping FIR filter coefficients. You can use this attribute only when the NIRFSG_ATTR_ARB_FILTER_TYPE attribute is set to NIRFSG_VAL_ARB_FILTER_TYPE_ROOT_RAISED_COSINE and with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this attribute with a device that does not support OSP.\n\n**Supported Devices:** PXI-5671, PXIe-5672/5673/5673E'
-        },
-        'lv_property': 'Arb:Pulse Shaping:Root Raised Cosine Alpha',
-        'name': 'ARB_FILTER_ROOT_RAISED_COSINE_ALPHA',
-        'type': 'ViReal64'
-    },
-    1150060: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the alpha value to use when calculating the pulse-shaping filter coefficients. You can use this attribute only when the NIRFSG_ATTR_ARB_FILTER_TYPE attribute is set to NIRFSG_VAL_ARB_FILTER_TYPE_RAISED_COSINE and with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this attribute with a device that does not support OSP.\n\n**Supported Devices:** PXI-5671, PXIe-5672/5673/5673E'
-        },
-        'lv_property': 'Arb:Pulse Shaping:Raised Cosine Alpha',
-        'name': 'ARB_FILTER_RAISED_COSINE_ALPHA',
-        'type': 'ViReal64'
     },
     1150061: {
         'access': 'read only',
@@ -2359,7 +1883,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the units of the NIRFSG_ATTR_IQ_I_OFFSET attribute and NIRFSG_ATTR_IQ_Q_OFFSET attribute. Offset units are either percent or volts.\n\nThe AWG or VST offset is the specified percentage of the AWG or VST peak power level when the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_PERCENT. Given perfect carrier leakage suppression, the following equation is satisfied\n\n\nor equivalently\n\nIf the NIRFSG_ATTR_IQ_I_OFFSET attribute is set to 100%, NIRFSG_ATTR_IQ_Q_OFFSET attribute is set to 0%, and NIRFSG_ATTR_POWER_LEVEL attribute set to 0 dBm, the desired RF signal is at 0 dBm and the carrier leakage is also at 0 dBm.\n\nThe AWG or VST peak power level changes when settings change in other attributes such as the NIRFSG_ATTR_POWER_LEVEL, NIRFSG_ATTR_FREQUENCY, NIRFSG_ATTR_IQ_SKEW, NIRFSG_ATTR_IQ_GAIN_IMBALANCE, NIRFSG_ATTR_ATTENUATOR_HOLD_ENABLED, and NIRFSG_ATTR_ARB_PRE_FILTER_GAIN attributes. When the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_PERCENT, the actual AWG or VST offset changes as the AWG or VST peak power level changes to satisfy the preceding equations. These changes are useful if you are intentionally adding carrier leakage to test the tolerance of a receiver. When the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_PERCENT, the carrier leakage, in dBc, remains at a consistent level.\n\nIf you are trying to eliminate residual carrier leakage due to calibration inaccuracies or drift, set the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute to NIRFSG_VAL_VOLTS. Offset correction voltage is applied to the I/Q modulator or VST, regardless of changes to the AWG or VST peak power level.\n\n**Default Value**: NIRFSG_VAL_PERCENT\n\n**Supported Devices:** PXIe-5644/5645/5646, PXIe-5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Defined Values**:',
+            'description': 'Specifies the units of the NIRFSG_ATTR_IQ_I_OFFSET attribute and NIRFSG_ATTR_IQ_Q_OFFSET attribute. Offset units are either percent or volts.\n\nThe AWG or VST offset is the specified percentage of the AWG or VST peak power level when the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_PERCENT. Given perfect carrier leakage suppression, the following equation is satisfied\n\n\nor equivalently\n\nIf the NIRFSG_ATTR_IQ_I_OFFSET attribute is set to 100%, NIRFSG_ATTR_IQ_Q_OFFSET attribute is set to 0%, and NIRFSG_ATTR_POWER_LEVEL attribute set to 0 dBm, the desired RF signal is at 0 dBm and the carrier leakage is also at 0 dBm.\n\nThe AWG or VST peak power level changes when settings change in other attributes such as the NIRFSG_ATTR_POWER_LEVEL, NIRFSG_ATTR_FREQUENCY, NIRFSG_ATTR_IQ_SKEW, NIRFSG_ATTR_IQ_GAIN_IMBALANCE and NIRFSG_ATTR_ARB_PRE_FILTER_GAIN attributes. When the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_PERCENT, the actual AWG or VST offset changes as the AWG or VST peak power level changes to satisfy the preceding equations. These changes are useful if you are intentionally adding carrier leakage to test the tolerance of a receiver. When the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_PERCENT, the carrier leakage, in dBc, remains at a consistent level.\n\nIf you are trying to eliminate residual carrier leakage due to calibration inaccuracies or drift, set the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute to NIRFSG_VAL_VOLTS. Offset correction voltage is applied to the I/Q modulator or VST, regardless of changes to the AWG or VST peak power level.\n\n**Default Value**: NIRFSG_VAL_PERCENT\n\n**Supported Devices:** PXIe-5644/5645/5646, PXIe-5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Defined Values**:',
             'note': 'For any devices except PXIe-5820, if the NIRFSG_ATTR_IQ_OFFSET_UNITS attribute is set to NIRFSG_VAL_VOLTS, a 0.1 I offset results in a 0.1 V offset in the output. For PXIe-5820 devices, 0.1 I offset results in a 10% offset in the output.',
             'table_body': [
                 [
@@ -2443,47 +1967,6 @@ attributes = {
         'lv_property': 'RF:External Gain (dB)',
         'name': 'EXTERNAL_GAIN',
         'type': 'ViReal64'
-    },
-    1150086: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the maximum amount of bus bandwidth to use for data transfers.\n\n**Units**: bytes per second\n\n**Default Value**: Device maximum\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E\n\n**Related Topics**\n\n`Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_'
-        },
-        'lv_property': 'Arb:Data Transfer:Maximum Bandwidth',
-        'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
-        'type': 'ViReal64'
-    },
-    1150087: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the preferred size of the data field in a PCI Express read request packet.\n\nIn general, the larger the packet size, the more efficiently the device uses the bus. By default, NI RF signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.\n\nRecommended values for this attribute are powers of two between 64 and 512.\n\n**Units**: bytes\n\n**Default Value**: Device maximum\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E\n\n**Related Topics**\n\n`Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_',
-            'note': 'In some cases, the RF signal generator generates packets smaller than the preferred size you set with this attribute.'
-        },
-        'lv_property': 'Arb:Data Transfer:Advanced:Preferred Packet Size',
-        'name': 'DATA_TRANSFER_PREFERRED_PACKET_SIZE',
-        'type': 'ViInt32'
-    },
-    1150088: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the maximum number of concurrent PCI Express read requests the RF signal generator can issue.\n\nWhen transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this attribute is set to the highest value the RF signal generator supports.\n\nIf other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the RF signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.\n\n**Units**: number of packets\n\n**Default Value**: Device maximum\n\n**Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E\n\n**Related Topics**\n\n`Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_'
-        },
-        'lv_property': 'Arb:Data Transfer:Advanced:Maximum In-Flight Read Requests',
-        'name': 'DATA_TRANSFER_MAXIMUM_IN_FLIGHT_READS',
-        'type': 'ViInt32'
-    },
-    1150089: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': "Specifies the oscillator phase digital-to-analog converter (DAC) value on the arbitrary waveform generator (AWG). Use this attribute to reduce the trigger jitter when synchronizing multiple devices with NI-TClk. This attribute can also help maintain synchronization repeatability by writing a previous measurement's phase DAC value to the current session. This attribute is applicable only when using the NIRFSG_ATTR_ARB_SAMPLE_CLOCK_SOURCE attribute set to ClkIn.\n\n**Supported Devices:** PXIe-5673/5673E\n\n**Related Topics**\n\n`NI-TClk Overview <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_tclk_help.html>`_"
-        },
-        'lv_property': 'Clock:Advanced:Arb Oscillator Phase DAC Value',
-        'name': 'ARB_OSCILLATOR_PHASE_DAC_VALUE',
-        'type': 'ViInt32'
     },
     1150100: {
         'access': 'read-write',
@@ -2718,31 +2201,6 @@ attributes = {
         'name': 'STREAMING_WRITE_TIMEOUT',
         'type': 'ViReal64',
         'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
-    },
-    1150141: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Determines the inheritance behavior of the NIRFSG_ATTR_PEAK_POWER_ADJUSTMENT attribute when a script inherits values from specified waveforms.\n\n**Default Value:** NIRFSG_VAL_EXACT_MATCH\n\n**Supported Devices:** PXIe-5673/5673E\n\n**Related Topics**\n\n`Assigning Properties or Attributes to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'NIRFSG_VAL_EXACT_MATCH',
-                    'Errors out if different values are detected in the script.'
-                ],
-                [
-                    'NIRFSG_VAL_MINIMUM',
-                    'Uses the minimum value found in the script.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'enum': 'PpaInheritance',
-        'lv_property': 'RF:Peak Power Adjustment Inheritance',
-        'name': 'PEAK_POWER_ADJUSTMENT_INHERITANCE',
-        'type': 'ViInt32'
     },
     1150142: {
         'access': 'read-write',
@@ -4396,30 +3854,6 @@ attributes = {
         'lv_property': 'Signal Path:Advanced:Available Paths',
         'name': 'AVAILABLE_PATHS',
         'type': 'ViString'
-    },
-    1152832: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Enables or disables compensation for filter group delay on the AWG module. This attribute also accounts for the upconverter group delay and aligns the RF output with the Started Event, Done Event, and Marker Events.\n\nAt a low I/Q rate, the group delay can become so large that some devices may not be able to align the events with the RF output, in which case you must increase the I/Q rate or disable this attribute.\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXIe-5672\n\n**Defined Values**:',
-            'table_body': [
-                [
-                    'VI_TRUE',
-                    'Enables compensation for filter group delay.'
-                ],
-                [
-                    'VI_FALSE',
-                    'Disables compensation for filter group delay.'
-                ]
-            ],
-            'table_header': [
-                'Value',
-                'Description'
-            ]
-        },
-        'lv_property': 'Arb:Advanced:Compensate for Filter Group Delay',
-        'name': 'COMPENSATE_FOR_FILTER_GROUP_DELAY',
-        'type': 'ViBoolean'
     },
     1154097: {
         'access': 'read-write',
