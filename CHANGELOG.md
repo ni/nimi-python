@@ -1693,6 +1693,8 @@
 - Changed
   - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
 - Removed
+  - Methods and properties applicable only to hardware which are not supported anymore
+  - Methods and properties which are necessary for IVI compliance of the driver, but are not applicable for Python
 
 #### [nirfsg] 1.0.0 - 2025-08-05
 - Added

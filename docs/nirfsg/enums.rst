@@ -186,41 +186,6 @@ AnalogModulationType
 
 
 
-AnalogModulationWaveformType
-----------------------------
-
-.. py:class:: AnalogModulationWaveformType
-
-    .. py:attribute:: AnalogModulationWaveformType.SINE
-
-
-
-        Specifies that the analog modulation waveform type is sine.
-
-        
-
-
-
-    .. py:attribute:: AnalogModulationWaveformType.SQUARE
-
-
-
-        Specifies that the analog modulation waveform type is square.
-
-        
-
-
-
-    .. py:attribute:: AnalogModulationWaveformType.TRIANGLE
-
-
-
-        Specifies that the analog modulation waveform type is triangle.
-
-        
-
-
-
 ArbOnboardSampleClockMode
 -------------------------
 
@@ -381,76 +346,6 @@ DigitalEqualizationEnabled
 
 
 
-DigitalModulationType
----------------------
-
-.. py:class:: DigitalModulationType
-
-    .. py:attribute:: DigitalModulationType.NONE
-
-
-
-        Disables digital modulation.
-
-        
-
-
-
-    .. py:attribute:: DigitalModulationType.FSK
-
-
-
-        Specifies that the digital modulation type is frequency-shift keying (FSK).
-
-        
-
-
-
-    .. py:attribute:: DigitalModulationType.OOK
-
-
-
-        Specifies that the digital modulation type is on-off keying (OOK).
-
-        
-
-
-
-    .. py:attribute:: DigitalModulationType.PSK
-
-
-
-        Specifies that the digital modulation type is phase-shift keying (PSK).
-
-        
-
-
-
-DigitalModulationWaveformType
------------------------------
-
-.. py:class:: DigitalModulationWaveformType
-
-    .. py:attribute:: DigitalModulationWaveformType.PRBS
-
-
-
-        Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).
-
-        
-
-
-
-    .. py:attribute:: DigitalModulationWaveformType.USER_DEFINED
-
-
-
-        Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the :py:meth:`nirfsg.Session.configure_digital_modulation_user_defined_waveform` method.
-
-        
-
-
-
 DirectDownload
 --------------
 
@@ -481,41 +376,6 @@ DirectDownload
 
 
         The RF IN local oscillator signal may or may not be present at the front panel LO OUT connector, because NI-RFSA may be controlling it.
-
-        
-
-
-
-FilterType
-----------
-
-.. py:class:: FilterType
-
-    .. py:attribute:: FilterType.NONE
-
-
-
-        No filter type is applied.
-
-        
-
-
-
-    .. py:attribute:: FilterType.ARB_FILTER_TYPE_ROOT_RAISED_COSINE
-
-
-
-        Applies a root-raised cosine filter to the data with the alpha value specified with the :py:attr:`nirfsg.Session.arb_filter_root_raised_cosine_alpha` property.
-
-        
-
-
-
-    .. py:attribute:: FilterType.ARB_FILTER_TYPE_RAISED_COSINE
-
-
-
-        Applies a raised cosine filter to the data with the alpha value specified with the :py:attr:`nirfsg.Session.arb_filter_raised_cosine_alpha` property.
 
         
 
@@ -1066,41 +926,6 @@ PowerLevelType
 
 
         Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the :py:attr:`nirfsg.Session.arb_waveform_software_scaling_factor` property. You can use the :py:attr:`nirfsg.Session.peak_power_adjustment` property in conjunction with the :py:attr:`nirfsg.Session.power_level` property when the :py:attr:`nirfsg.Session.power_level_type` property is set to :py:data:`~nirfsg.PowerLevelType.PEAK`.
-
-        
-
-
-
-PpaInheritance
---------------
-
-.. py:class:: PpaInheritance
-
-    .. py:attribute:: PpaInheritance.EXACT_MATCH
-
-
-
-        Errors out if different values are detected in the script.
-
-        
-
-
-
-    .. py:attribute:: PpaInheritance.MINIMUM
-
-
-
-        Uses the minimum value found in the script.
-
-        
-
-
-
-    .. py:attribute:: PpaInheritance.MAXIMUM
-
-
-
-        Uses the maximum value found in the script.
 
         
 

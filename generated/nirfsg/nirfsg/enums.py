@@ -83,21 +83,6 @@ class AnalogModulationType(Enum):
     '''
 
 
-class AnalogModulationWaveformType(Enum):
-    SINE = 3000
-    r'''
-    Specifies that the analog modulation waveform type is sine.
-    '''
-    SQUARE = 3001
-    r'''
-    Specifies that the analog modulation waveform type is square.
-    '''
-    TRIANGLE = 3002
-    r'''
-    Specifies that the analog modulation waveform type is triangle.
-    '''
-
-
 class ArbOnboardSampleClockMode(Enum):
     HIGH_RESOLUTION = 6000
     r'''
@@ -168,36 +153,6 @@ class DigitalEqualizationEnabled(Enum):
     '''
 
 
-class DigitalModulationType(Enum):
-    NONE = 0
-    r'''
-    Disables digital modulation.
-    '''
-    FSK = 4000
-    r'''
-    Specifies that the digital modulation type is frequency-shift keying (FSK).
-    '''
-    OOK = 4001
-    r'''
-    Specifies that the digital modulation type is on-off keying (OOK).
-    '''
-    PSK = 4002
-    r'''
-    Specifies that the digital modulation type is phase-shift keying (PSK).
-    '''
-
-
-class DigitalModulationWaveformType(Enum):
-    PRBS = 5000
-    r'''
-    Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).
-    '''
-    USER_DEFINED = 5001
-    r'''
-    Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the configure_digital_modulation_user_defined_waveform method.
-    '''
-
-
 class DirectDownload(Enum):
     DISABLE = 0
     r'''
@@ -210,21 +165,6 @@ class DirectDownload(Enum):
     UNSPECIFIED = -2
     r'''
     The RF IN local oscillator signal may or may not be present at the front panel LO OUT connector, because NI-RFSA may be controlling it.
-    '''
-
-
-class FilterType(Enum):
-    NONE = 0
-    r'''
-    No filter type is applied.
-    '''
-    ARB_FILTER_TYPE_ROOT_RAISED_COSINE = 10001
-    r'''
-    Applies a root-raised cosine filter to the data with the alpha value specified with the arb_filter_root_raised_cosine_alpha property.
-    '''
-    ARB_FILTER_TYPE_RAISED_COSINE = 10002
-    r'''
-    Applies a raised cosine filter to the data with the alpha value specified with the arb_filter_raised_cosine_alpha property.
     '''
 
 
@@ -463,21 +403,6 @@ class PowerLevelType(Enum):
     PEAK = 7001
     r'''
     Indicates the maximum power level of the RF signal averaged over one period of the RF carrier frequency (the peak envelope power). This setting requires that the magnitude of the I/Q waveform must always be less than or equal to one. When using peak power, the power level of the RF signal matches the specified power level at moments when the magnitude of the I/Q waveform equals one. If you write more than one waveform, the relative scaling between waveforms is preserved. In peak power mode, waveforms are scaled according to the arb_waveform_software_scaling_factor property. You can use the peak_power_adjustment property in conjunction with the power_level property when the power_level_type property is set to PowerLevelType.PEAK.
-    '''
-
-
-class PpaInheritance(Enum):
-    EXACT_MATCH = 0
-    r'''
-    Errors out if different values are detected in the script.
-    '''
-    MINIMUM = 1
-    r'''
-    Uses the minimum value found in the script.
-    '''
-    MAXIMUM = 2
-    r'''
-    Uses the maximum value found in the script.
     '''
 
 

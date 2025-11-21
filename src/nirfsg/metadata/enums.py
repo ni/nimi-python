@@ -133,31 +133,6 @@ enums = {
             }
         ]
     },
-    'AnalogModulationWaveformType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies that the analog modulation waveform type is sine.'
-                },
-                'name': 'NIRFSG_VAL_SINE',
-                'value': 3000
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the analog modulation waveform type is square.'
-                },
-                'name': 'NIRFSG_VAL_SQUARE',
-                'value': 3001
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the analog modulation waveform type is triangle.'
-                },
-                'name': 'NIRFSG_VAL_TRIANGLE',
-                'value': 3002
-            }
-        ]
-    },
     'ArbOnboardSampleClockMode': {
         'values': [
             {
@@ -273,56 +248,6 @@ enums = {
             }
         ]
     },
-    'DigitalModulationType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Disables digital modulation.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation type is frequency-shift keying (FSK).'
-                },
-                'name': 'NIRFSG_VAL_FSK',
-                'value': 4000
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation type is on-off keying (OOK).'
-                },
-                'name': 'NIRFSG_VAL_OOK',
-                'value': 4001
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation type is phase-shift keying (PSK).'
-                },
-                'name': 'NIRFSG_VAL_PSK',
-                'value': 4002
-            }
-        ]
-    },
-    'DigitalModulationWaveformType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).'
-                },
-                'name': 'NIRFSG_VAL_PRBS',
-                'value': 5000
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the nirfsg_ConfigureDigitalModulationUserDefinedWaveform function.'
-                },
-                'name': 'NIRFSG_VAL_USER_DEFINED',
-                'value': 5001
-            }
-        ]
-    },
     'DirectDownload': {
         'values': [
             {
@@ -345,31 +270,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_UNSPECIFIED',
                 'value': -2
-            }
-        ]
-    },
-    'FilterType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'No filter type is applied.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Applies a root-raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.'
-                },
-                'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_ROOT_RAISED_COSINE',
-                'value': 10001
-            },
-            {
-                'documentation': {
-                    'description': 'Applies a raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA attribute.'
-                },
-                'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_RAISED_COSINE',
-                'value': 10002
             }
         ]
     },
@@ -764,31 +664,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_PEAK_POWER',
                 'value': 7001
-            }
-        ]
-    },
-    'PpaInheritance': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Errors out if different values are detected in the script.'
-                },
-                'name': 'NIRFSG_VAL_EXACT_MATCH',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the minimum value found in the script.'
-                },
-                'name': 'NIRFSG_VAL_MINIMUM',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the maximum value found in the script.'
-                },
-                'name': 'NIRFSG_VAL_MAXIMUM',
-                'value': 2
             }
         ]
     },

@@ -22,18 +22,6 @@ class SideEffectsHelper(object):
         self._defaults['AllocateArbWaveform']['return'] = 0
         self._defaults['ChangeExternalCalibrationPassword'] = {}
         self._defaults['ChangeExternalCalibrationPassword']['return'] = 0
-        self._defaults['CheckAttributeViBoolean'] = {}
-        self._defaults['CheckAttributeViBoolean']['return'] = 0
-        self._defaults['CheckAttributeViInt32'] = {}
-        self._defaults['CheckAttributeViInt32']['return'] = 0
-        self._defaults['CheckAttributeViInt64'] = {}
-        self._defaults['CheckAttributeViInt64']['return'] = 0
-        self._defaults['CheckAttributeViReal64'] = {}
-        self._defaults['CheckAttributeViReal64']['return'] = 0
-        self._defaults['CheckAttributeViSession'] = {}
-        self._defaults['CheckAttributeViSession']['return'] = 0
-        self._defaults['CheckAttributeViString'] = {}
-        self._defaults['CheckAttributeViString']['return'] = 0
         self._defaults['CheckGenerationStatus'] = {}
         self._defaults['CheckGenerationStatus']['return'] = 0
         self._defaults['CheckGenerationStatus']['isDone'] = None
@@ -47,8 +35,6 @@ class SideEffectsHelper(object):
         self._defaults['ClearAllArbWaveforms']['return'] = 0
         self._defaults['ClearArbWaveform'] = {}
         self._defaults['ClearArbWaveform']['return'] = 0
-        self._defaults['ClearError'] = {}
-        self._defaults['ClearError']['return'] = 0
         self._defaults['ClearSelfCalibrateRange'] = {}
         self._defaults['ClearSelfCalibrateRange']['return'] = 0
         self._defaults['Commit'] = {}
@@ -65,10 +51,6 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
         self._defaults['ConfigureDigitalLevelScriptTrigger'] = {}
         self._defaults['ConfigureDigitalLevelScriptTrigger']['return'] = 0
-        self._defaults['ConfigureDigitalModulationUserDefinedWaveform'] = {}
-        self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return'] = 0
-        self._defaults['ConfigurePxiChassisClk10'] = {}
-        self._defaults['ConfigurePxiChassisClk10']['return'] = 0
         self._defaults['ConfigureRF'] = {}
         self._defaults['ConfigureRF']['return'] = 0
         self._defaults['ConfigureRefClock'] = {}
@@ -85,18 +67,12 @@ class SideEffectsHelper(object):
         self._defaults['DeleteAllDeembeddingTables']['return'] = 0
         self._defaults['DeleteDeembeddingTable'] = {}
         self._defaults['DeleteDeembeddingTable']['return'] = 0
-        self._defaults['Disable'] = {}
-        self._defaults['Disable']['return'] = 0
         self._defaults['DisableScriptTrigger'] = {}
         self._defaults['DisableScriptTrigger']['return'] = 0
         self._defaults['DisableStartTrigger'] = {}
         self._defaults['DisableStartTrigger']['return'] = 0
         self._defaults['ErrorMessage'] = {}
         self._defaults['ErrorMessage']['return'] = 0
-        self._defaults['ErrorQuery'] = {}
-        self._defaults['ErrorQuery']['return'] = 0
-        self._defaults['ErrorQuery']['errorCode'] = None
-        self._defaults['ErrorQuery']['errorMessage'] = None
         self._defaults['GetAllNamedWaveformNames'] = {}
         self._defaults['GetAllNamedWaveformNames']['return'] = 0
         self._defaults['GetAllNamedWaveformNames']['actualBufferSize'] = None
@@ -123,9 +99,6 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['value'] = None
-        self._defaults['GetChannelName'] = {}
-        self._defaults['GetChannelName']['return'] = 0
-        self._defaults['GetChannelName']['name'] = None
         self._defaults['GetDeembeddingSparameters'] = {}
         self._defaults['GetDeembeddingSparameters']['return'] = 0
         self._defaults['GetDeembeddingSparameters']['sparameters'] = None
@@ -197,18 +170,12 @@ class SideEffectsHelper(object):
         self._defaults['QueryArbWaveformCapabilities']['maxWaveformSize'] = None
         self._defaults['ReadAndDownloadWaveformFromFileTDMS'] = {}
         self._defaults['ReadAndDownloadWaveformFromFileTDMS']['return'] = 0
-        self._defaults['ResetAttribute'] = {}
-        self._defaults['ResetAttribute']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
         self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['ResetWithOptions'] = {}
         self._defaults['ResetWithOptions']['return'] = 0
-        self._defaults['RevisionQuery'] = {}
-        self._defaults['RevisionQuery']['return'] = 0
-        self._defaults['RevisionQuery']['instrumentDriverRevision'] = None
-        self._defaults['RevisionQuery']['firmwareRevision'] = None
         self._defaults['SaveConfigurationsToFile'] = {}
         self._defaults['SaveConfigurationsToFile']['return'] = 0
         self._defaults['SelectArbWaveform'] = {}
@@ -281,36 +248,6 @@ class SideEffectsHelper(object):
             return self._defaults['ChangeExternalCalibrationPassword']['return']
         return self._defaults['ChangeExternalCalibrationPassword']['return']
 
-    def niRFSG_CheckAttributeViBoolean(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['CheckAttributeViBoolean']['return'] != 0:
-            return self._defaults['CheckAttributeViBoolean']['return']
-        return self._defaults['CheckAttributeViBoolean']['return']
-
-    def niRFSG_CheckAttributeViInt32(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['CheckAttributeViInt32']['return'] != 0:
-            return self._defaults['CheckAttributeViInt32']['return']
-        return self._defaults['CheckAttributeViInt32']['return']
-
-    def niRFSG_CheckAttributeViInt64(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['CheckAttributeViInt64']['return'] != 0:
-            return self._defaults['CheckAttributeViInt64']['return']
-        return self._defaults['CheckAttributeViInt64']['return']
-
-    def niRFSG_CheckAttributeViReal64(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['CheckAttributeViReal64']['return'] != 0:
-            return self._defaults['CheckAttributeViReal64']['return']
-        return self._defaults['CheckAttributeViReal64']['return']
-
-    def niRFSG_CheckAttributeViSession(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['CheckAttributeViSession']['return'] != 0:
-            return self._defaults['CheckAttributeViSession']['return']
-        return self._defaults['CheckAttributeViSession']['return']
-
-    def niRFSG_CheckAttributeViString(self, vi, channel_name, attribute, value):  # noqa: N802
-        if self._defaults['CheckAttributeViString']['return'] != 0:
-            return self._defaults['CheckAttributeViString']['return']
-        return self._defaults['CheckAttributeViString']['return']
-
     def niRFSG_CheckGenerationStatus(self, vi, is_done):  # noqa: N802
         if self._defaults['CheckGenerationStatus']['return'] != 0:
             return self._defaults['CheckGenerationStatus']['return']
@@ -350,11 +287,6 @@ class SideEffectsHelper(object):
         if self._defaults['ClearArbWaveform']['return'] != 0:
             return self._defaults['ClearArbWaveform']['return']
         return self._defaults['ClearArbWaveform']['return']
-
-    def niRFSG_ClearError(self, vi):  # noqa: N802
-        if self._defaults['ClearError']['return'] != 0:
-            return self._defaults['ClearError']['return']
-        return self._defaults['ClearError']['return']
 
     def niRFSG_ClearSelfCalibrateRange(self, vi):  # noqa: N802
         if self._defaults['ClearSelfCalibrateRange']['return'] != 0:
@@ -396,16 +328,6 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
         return self._defaults['ConfigureDigitalLevelScriptTrigger']['return']
 
-    def niRFSG_ConfigureDigitalModulationUserDefinedWaveform(self, vi, number_of_samples, user_defined_waveform):  # noqa: N802
-        if self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return'] != 0:
-            return self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return']
-        return self._defaults['ConfigureDigitalModulationUserDefinedWaveform']['return']
-
-    def niRFSG_ConfigurePxiChassisClk10(self, vi, pxi_clk10_source):  # noqa: N802
-        if self._defaults['ConfigurePxiChassisClk10']['return'] != 0:
-            return self._defaults['ConfigurePxiChassisClk10']['return']
-        return self._defaults['ConfigurePxiChassisClk10']['return']
-
     def niRFSG_ConfigureRF(self, vi, frequency, power_level):  # noqa: N802
         if self._defaults['ConfigureRF']['return'] != 0:
             return self._defaults['ConfigureRF']['return']
@@ -446,11 +368,6 @@ class SideEffectsHelper(object):
             return self._defaults['DeleteDeembeddingTable']['return']
         return self._defaults['DeleteDeembeddingTable']['return']
 
-    def niRFSG_Disable(self, vi):  # noqa: N802
-        if self._defaults['Disable']['return'] != 0:
-            return self._defaults['Disable']['return']
-        return self._defaults['Disable']['return']
-
     def niRFSG_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
         if self._defaults['DisableScriptTrigger']['return'] != 0:
             return self._defaults['DisableScriptTrigger']['return']
@@ -465,25 +382,6 @@ class SideEffectsHelper(object):
         if self._defaults['ErrorMessage']['return'] != 0:
             return self._defaults['ErrorMessage']['return']
         return self._defaults['ErrorMessage']['return']
-
-    def niRFSG_ErrorQuery(self, vi, error_code, error_message):  # noqa: N802
-        if self._defaults['ErrorQuery']['return'] != 0:
-            return self._defaults['ErrorQuery']['return']
-        # error_code
-        if self._defaults['ErrorQuery']['errorCode'] is None:
-            raise MockFunctionCallError("niRFSG_ErrorQuery", param='errorCode')
-        if error_code is not None:
-            error_code.contents.value = self._defaults['ErrorQuery']['errorCode']
-        # error_message
-        if self._defaults['ErrorQuery']['errorMessage'] is None:
-            raise MockFunctionCallError("niRFSG_ErrorQuery", param='errorMessage')
-        test_value = self._defaults['ErrorQuery']['errorMessage']
-        if type(test_value) is str:
-            test_value = test_value.encode('ascii')
-        assert len(error_message) >= len(test_value)
-        for i in range(len(test_value)):
-            error_message[i] = test_value[i]
-        return self._defaults['ErrorQuery']['return']
 
     def niRFSG_GetAllNamedWaveformNames(self, vi, waveform_names, buffer_size, actual_buffer_size):  # noqa: N802
         if self._defaults['GetAllNamedWaveformNames']['return'] != 0:
@@ -577,17 +475,6 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['value'])
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
-
-    def niRFSG_GetChannelName(self, vi, index, buffer_size, name):  # noqa: N802
-        if self._defaults['GetChannelName']['return'] != 0:
-            return self._defaults['GetChannelName']['return']
-        # name
-        if self._defaults['GetChannelName']['name'] is None:
-            raise MockFunctionCallError("niRFSG_GetChannelName", param='name')
-        if buffer_size.value == 0:
-            return len(self._defaults['GetChannelName']['name'])
-        name.value = self._defaults['GetChannelName']['name'].encode('ascii')
-        return self._defaults['GetChannelName']['return']
 
     def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
         if self._defaults['GetDeembeddingSparameters']['return'] != 0:
@@ -875,11 +762,6 @@ class SideEffectsHelper(object):
             return self._defaults['ReadAndDownloadWaveformFromFileTDMS']['return']
         return self._defaults['ReadAndDownloadWaveformFromFileTDMS']['return']
 
-    def niRFSG_ResetAttribute(self, vi, channel_name, attribute_id):  # noqa: N802
-        if self._defaults['ResetAttribute']['return'] != 0:
-            return self._defaults['ResetAttribute']['return']
-        return self._defaults['ResetAttribute']['return']
-
     def niRFSG_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
             return self._defaults['ResetDevice']['return']
@@ -894,29 +776,6 @@ class SideEffectsHelper(object):
         if self._defaults['ResetWithOptions']['return'] != 0:
             return self._defaults['ResetWithOptions']['return']
         return self._defaults['ResetWithOptions']['return']
-
-    def niRFSG_RevisionQuery(self, vi, instrument_driver_revision, firmware_revision):  # noqa: N802
-        if self._defaults['RevisionQuery']['return'] != 0:
-            return self._defaults['RevisionQuery']['return']
-        # instrument_driver_revision
-        if self._defaults['RevisionQuery']['instrumentDriverRevision'] is None:
-            raise MockFunctionCallError("niRFSG_RevisionQuery", param='instrumentDriverRevision')
-        test_value = self._defaults['RevisionQuery']['instrumentDriverRevision']
-        if type(test_value) is str:
-            test_value = test_value.encode('ascii')
-        assert len(instrument_driver_revision) >= len(test_value)
-        for i in range(len(test_value)):
-            instrument_driver_revision[i] = test_value[i]
-        # firmware_revision
-        if self._defaults['RevisionQuery']['firmwareRevision'] is None:
-            raise MockFunctionCallError("niRFSG_RevisionQuery", param='firmwareRevision')
-        test_value = self._defaults['RevisionQuery']['firmwareRevision']
-        if type(test_value) is str:
-            test_value = test_value.encode('ascii')
-        assert len(firmware_revision) >= len(test_value)
-        for i in range(len(test_value)):
-            firmware_revision[i] = test_value[i]
-        return self._defaults['RevisionQuery']['return']
 
     def niRFSG_SaveConfigurationsToFile(self, vi, channel_name, file_path):  # noqa: N802
         if self._defaults['SaveConfigurationsToFile']['return'] != 0:
@@ -1056,18 +915,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_AllocateArbWaveform.return_value = 0
         mock_library.niRFSG_ChangeExternalCalibrationPassword.side_effect = MockFunctionCallError("niRFSG_ChangeExternalCalibrationPassword")
         mock_library.niRFSG_ChangeExternalCalibrationPassword.return_value = 0
-        mock_library.niRFSG_CheckAttributeViBoolean.side_effect = MockFunctionCallError("niRFSG_CheckAttributeViBoolean")
-        mock_library.niRFSG_CheckAttributeViBoolean.return_value = 0
-        mock_library.niRFSG_CheckAttributeViInt32.side_effect = MockFunctionCallError("niRFSG_CheckAttributeViInt32")
-        mock_library.niRFSG_CheckAttributeViInt32.return_value = 0
-        mock_library.niRFSG_CheckAttributeViInt64.side_effect = MockFunctionCallError("niRFSG_CheckAttributeViInt64")
-        mock_library.niRFSG_CheckAttributeViInt64.return_value = 0
-        mock_library.niRFSG_CheckAttributeViReal64.side_effect = MockFunctionCallError("niRFSG_CheckAttributeViReal64")
-        mock_library.niRFSG_CheckAttributeViReal64.return_value = 0
-        mock_library.niRFSG_CheckAttributeViSession.side_effect = MockFunctionCallError("niRFSG_CheckAttributeViSession")
-        mock_library.niRFSG_CheckAttributeViSession.return_value = 0
-        mock_library.niRFSG_CheckAttributeViString.side_effect = MockFunctionCallError("niRFSG_CheckAttributeViString")
-        mock_library.niRFSG_CheckAttributeViString.return_value = 0
         mock_library.niRFSG_CheckGenerationStatus.side_effect = MockFunctionCallError("niRFSG_CheckGenerationStatus")
         mock_library.niRFSG_CheckGenerationStatus.return_value = 0
         mock_library.niRFSG_CheckIfScriptExists.side_effect = MockFunctionCallError("niRFSG_CheckIfScriptExists")
@@ -1078,8 +925,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ClearAllArbWaveforms.return_value = 0
         mock_library.niRFSG_ClearArbWaveform.side_effect = MockFunctionCallError("niRFSG_ClearArbWaveform")
         mock_library.niRFSG_ClearArbWaveform.return_value = 0
-        mock_library.niRFSG_ClearError.side_effect = MockFunctionCallError("niRFSG_ClearError")
-        mock_library.niRFSG_ClearError.return_value = 0
         mock_library.niRFSG_ClearSelfCalibrateRange.side_effect = MockFunctionCallError("niRFSG_ClearSelfCalibrateRange")
         mock_library.niRFSG_ClearSelfCalibrateRange.return_value = 0
         mock_library.niRFSG_Commit.side_effect = MockFunctionCallError("niRFSG_Commit")
@@ -1096,10 +941,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_ConfigureDigitalEdgeStartTrigger.return_value = 0
         mock_library.niRFSG_ConfigureDigitalLevelScriptTrigger.side_effect = MockFunctionCallError("niRFSG_ConfigureDigitalLevelScriptTrigger")
         mock_library.niRFSG_ConfigureDigitalLevelScriptTrigger.return_value = 0
-        mock_library.niRFSG_ConfigureDigitalModulationUserDefinedWaveform.side_effect = MockFunctionCallError("niRFSG_ConfigureDigitalModulationUserDefinedWaveform")
-        mock_library.niRFSG_ConfigureDigitalModulationUserDefinedWaveform.return_value = 0
-        mock_library.niRFSG_ConfigurePxiChassisClk10.side_effect = MockFunctionCallError("niRFSG_ConfigurePxiChassisClk10")
-        mock_library.niRFSG_ConfigurePxiChassisClk10.return_value = 0
         mock_library.niRFSG_ConfigureRF.side_effect = MockFunctionCallError("niRFSG_ConfigureRF")
         mock_library.niRFSG_ConfigureRF.return_value = 0
         mock_library.niRFSG_ConfigureRefClock.side_effect = MockFunctionCallError("niRFSG_ConfigureRefClock")
@@ -1116,16 +957,12 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_DeleteAllDeembeddingTables.return_value = 0
         mock_library.niRFSG_DeleteDeembeddingTable.side_effect = MockFunctionCallError("niRFSG_DeleteDeembeddingTable")
         mock_library.niRFSG_DeleteDeembeddingTable.return_value = 0
-        mock_library.niRFSG_Disable.side_effect = MockFunctionCallError("niRFSG_Disable")
-        mock_library.niRFSG_Disable.return_value = 0
         mock_library.niRFSG_DisableScriptTrigger.side_effect = MockFunctionCallError("niRFSG_DisableScriptTrigger")
         mock_library.niRFSG_DisableScriptTrigger.return_value = 0
         mock_library.niRFSG_DisableStartTrigger.side_effect = MockFunctionCallError("niRFSG_DisableStartTrigger")
         mock_library.niRFSG_DisableStartTrigger.return_value = 0
         mock_library.niRFSG_ErrorMessage.side_effect = MockFunctionCallError("niRFSG_ErrorMessage")
         mock_library.niRFSG_ErrorMessage.return_value = 0
-        mock_library.niRFSG_ErrorQuery.side_effect = MockFunctionCallError("niRFSG_ErrorQuery")
-        mock_library.niRFSG_ErrorQuery.return_value = 0
         mock_library.niRFSG_GetAllNamedWaveformNames.side_effect = MockFunctionCallError("niRFSG_GetAllNamedWaveformNames")
         mock_library.niRFSG_GetAllNamedWaveformNames.return_value = 0
         mock_library.niRFSG_GetAllScriptNames.side_effect = MockFunctionCallError("niRFSG_GetAllScriptNames")
@@ -1142,8 +979,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_GetAttributeViSession.return_value = 0
         mock_library.niRFSG_GetAttributeViString.side_effect = MockFunctionCallError("niRFSG_GetAttributeViString")
         mock_library.niRFSG_GetAttributeViString.return_value = 0
-        mock_library.niRFSG_GetChannelName.side_effect = MockFunctionCallError("niRFSG_GetChannelName")
-        mock_library.niRFSG_GetChannelName.return_value = 0
         mock_library.niRFSG_GetDeembeddingSparameters.side_effect = MockFunctionCallError("niRFSG_GetDeembeddingSparameters")
         mock_library.niRFSG_GetDeembeddingSparameters.return_value = 0
         mock_library.niRFSG_GetDeembeddingTableNumberOfPorts.side_effect = MockFunctionCallError("niRFSG_GetDeembeddingTableNumberOfPorts")
@@ -1182,16 +1017,12 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_QueryArbWaveformCapabilities.return_value = 0
         mock_library.niRFSG_ReadAndDownloadWaveformFromFileTDMS.side_effect = MockFunctionCallError("niRFSG_ReadAndDownloadWaveformFromFileTDMS")
         mock_library.niRFSG_ReadAndDownloadWaveformFromFileTDMS.return_value = 0
-        mock_library.niRFSG_ResetAttribute.side_effect = MockFunctionCallError("niRFSG_ResetAttribute")
-        mock_library.niRFSG_ResetAttribute.return_value = 0
         mock_library.niRFSG_ResetDevice.side_effect = MockFunctionCallError("niRFSG_ResetDevice")
         mock_library.niRFSG_ResetDevice.return_value = 0
         mock_library.niRFSG_ResetWithDefaults.side_effect = MockFunctionCallError("niRFSG_ResetWithDefaults")
         mock_library.niRFSG_ResetWithDefaults.return_value = 0
         mock_library.niRFSG_ResetWithOptions.side_effect = MockFunctionCallError("niRFSG_ResetWithOptions")
         mock_library.niRFSG_ResetWithOptions.return_value = 0
-        mock_library.niRFSG_RevisionQuery.side_effect = MockFunctionCallError("niRFSG_RevisionQuery")
-        mock_library.niRFSG_RevisionQuery.return_value = 0
         mock_library.niRFSG_SaveConfigurationsToFile.side_effect = MockFunctionCallError("niRFSG_SaveConfigurationsToFile")
         mock_library.niRFSG_SaveConfigurationsToFile.return_value = 0
         mock_library.niRFSG_SelectArbWaveform.side_effect = MockFunctionCallError("niRFSG_SelectArbWaveform")
