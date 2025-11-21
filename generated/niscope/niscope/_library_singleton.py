@@ -40,7 +40,6 @@ def get():
     Returns the library.Library singleton for niscope.
     '''
     global _instance
-    global _instance_lock
 
     with _instance_lock:
         if _instance is None:
