@@ -144,6 +144,11 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.MultipleArraysSameSizeRequest.SerializeToString,
                 response_deserializer=nifake__pb2.MultipleArraysSameSizeResponse.FromString,
                 )
+        self.MultipleArraysDifferentSize = channel.unary_unary(
+                '/nifake_grpc.NiFake/MultipleArraysDifferentSize',
+                request_serializer=nifake__pb2.MultipleArraysDifferentSizeRequest.SerializeToString,
+                response_deserializer=nifake__pb2.MultipleArraysDifferentSizeResponse.FromString,
+                )
         self.OneInputFunction = channel.unary_unary(
                 '/nifake_grpc.NiFake/OneInputFunction',
                 request_serializer=nifake__pb2.OneInputFunctionRequest.SerializeToString,
@@ -655,6 +660,12 @@ class NiFakeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def MultipleArraysSameSize(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def MultipleArraysDifferentSize(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1218,6 +1229,11 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.MultipleArraysSameSize,
                     request_deserializer=nifake__pb2.MultipleArraysSameSizeRequest.FromString,
                     response_serializer=nifake__pb2.MultipleArraysSameSizeResponse.SerializeToString,
+            ),
+            'MultipleArraysDifferentSize': grpc.unary_unary_rpc_method_handler(
+                    servicer.MultipleArraysDifferentSize,
+                    request_deserializer=nifake__pb2.MultipleArraysDifferentSizeRequest.FromString,
+                    response_serializer=nifake__pb2.MultipleArraysDifferentSizeResponse.SerializeToString,
             ),
             'OneInputFunction': grpc.unary_unary_rpc_method_handler(
                     servicer.OneInputFunction,
@@ -2023,6 +2039,23 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MultipleArraysSameSize',
             nifake__pb2.MultipleArraysSameSizeRequest.SerializeToString,
             nifake__pb2.MultipleArraysSameSizeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MultipleArraysDifferentSize(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/MultipleArraysDifferentSize',
+            nifake__pb2.MultipleArraysDifferentSizeRequest.SerializeToString,
+            nifake__pb2.MultipleArraysDifferentSizeResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
