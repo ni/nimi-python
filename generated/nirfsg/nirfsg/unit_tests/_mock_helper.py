@@ -187,6 +187,7 @@ class SideEffectsHelper(object):
         self._defaults['SelfTest'] = {}
         self._defaults['SelfTest']['return'] = 0
         self._defaults['SelfTest']['selfTestResult'] = None
+        self._defaults['SelfTest']['selfTestMessage'] = None
         self._defaults['SendSoftwareEdgeTrigger'] = {}
         self._defaults['SendSoftwareEdgeTrigger']['return'] = 0
         self._defaults['SetArbWaveformNextWritePosition'] = {}
@@ -805,6 +806,15 @@ class SideEffectsHelper(object):
             raise MockFunctionCallError("niRFSG_SelfTest", param='selfTestResult')
         if self_test_result is not None:
             self_test_result.contents.value = self._defaults['SelfTest']['selfTestResult']
+        # self_test_message
+        if self._defaults['SelfTest']['selfTestMessage'] is None:
+            raise MockFunctionCallError("niRFSG_SelfTest", param='selfTestMessage')
+        test_value = self._defaults['SelfTest']['selfTestMessage']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
         return self._defaults['SelfTest']['return']
 
     def niRFSG_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_identifier):  # noqa: N802

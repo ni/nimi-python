@@ -118,6 +118,10 @@ class SystemTests:
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is False
 
+    def test_self_test(self, rfsg_device_session):
+        # We should not get an assert if self_test passes
+        rfsg_device_session.self_test()
+
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
     def test_self_cal(self, rfsg_device_session):
         rfsg_device_session.self_cal()

@@ -7088,7 +7088,7 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
-    def _self_test(self, self_test_message):
+    def _self_test(self):
         r'''_self_test
 
         Performs a self-test on the NI-RFSG device and returns the test results.
@@ -7103,12 +7103,6 @@ class Session(_SessionBase):
 
         `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_
 
-        Args:
-            self_test_message (str): Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-
         Returns:
             self_test_result (int): This parameter contains the value returned from the NI-RFSG device self test.
 
@@ -7120,9 +7114,13 @@ class Session(_SessionBase):
                 | 1              | Self test failed |
                 +----------------+------------------+
 
+            self_test_message (str): Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
+
+                You must pass a ViChar array with at least 256 bytes.
+
         '''
-        self_test_result = self._interpreter.self_test(self_test_message)
-        return self_test_result
+        self_test_result, self_test_message = self._interpreter.self_test()
+        return self_test_result, self_test_message
 
     @ivi_synchronized
     def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
