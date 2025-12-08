@@ -1694,7 +1694,55 @@
   - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
 - Removed
   - Methods and properties applicable only to hardware which are not supported anymore
+    - Methods
+      - `configure_digital_modulation_user_defined_waveform`
+      - `configure_pxi_chassis_clk10`
+    - Properties
+      - `analog_modulation_fm_deviation`
+      - `analog_modulation_waveform_frequency`
+      - `arb_filter_raised_cosine_alpha`
+      - `arb_filter_root_raised_cosine_alpha`
+      - `arb_filter_type`
+      - `arb_oscillator_phase_dac_value`
+      - `arb_power`
+      - `attenuator_hold_enabled`
+      - `attenuator_hold_max_power`
+      - `compensate_for_filter_group_delay`
+      - `data_transfer_block_size`
+      - `data_transfer_maximum_bandwidth`
+      - `data_transfer_maximum_in_flight_reads`
+      - `data_transfer_preferred_packet_size`
+      - `digital_modulation_fsk_deviation`
+      - `digital_modulation_prbs_order`
+      - `digital_modulation_prbs_seed`
+      - `digital_modulation_symbol_rate`
+      - `digital_modulation_type`
+      - `digital_modulation_waveform_type`
+      - `digital_pattern`
+      - `frequency_tolerance`
+      - `peak_power_adjustment_inheritance`
+      - `pxi_chassis_clk10_source`
   - Methods and properties which are necessary for IVI compliance of the driver, but are not applicable for Python
+    - Methods
+      - `check_attribute_vi_boolean`
+      - `check_attribute_vi_int32`
+      - `check_attribute_vi_int64`
+      - `check_attribute_vi_real64`
+      - `check_attribute_vi_session`
+      - `check_attribute_vi_string`
+      - `clear_error`
+      - `disable`
+      - `error_query`
+      - `get_channel_name`
+      - `reset_attribute`
+      - `revision_query`
+    - Properties
+      - `cache`
+      - `interchange_check`
+      - `query_instrument_status`
+      - `range_check`
+      - `record_coercions`
+      - `simulate`
 
 #### [nirfsg] 1.0.0 - 2025-08-05
 - Added
