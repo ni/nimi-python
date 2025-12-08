@@ -5942,7 +5942,7 @@ class Session(_SessionBase):
         self._interpreter.clear_all_arb_waveforms()
 
     @ivi_synchronized
-    def clear_arb_waveform(self, name):
+    def clear_arb_waveform(self, waveform_name):
         r'''clear_arb_waveform
 
         Deletes a specified waveform from the pool of currently defined waveforms.
@@ -5952,10 +5952,10 @@ class Session(_SessionBase):
         **Supported Devices** : PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
-            name (str): Name of the stored waveform to delete.
+            waveform_name (str): Name of the stored waveform to delete.
 
         '''
-        self._interpreter.clear_arb_waveform(name)
+        self._interpreter.clear_arb_waveform(waveform_name)
 
     @ivi_synchronized
     def clear_self_calibrate_range(self):
@@ -6528,8 +6528,8 @@ class Session(_SessionBase):
         return hightime.datetime(year, month, day, hour, minute, second)
 
     @ivi_synchronized
-    def get_self_calibration_last_date_and_time(self, module):
-        '''get_self_calibration_last_date_and_time
+    def get_self_cal_last_date_and_time(self, module=enums.Module.PRIMARY_MODULE):
+        '''get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
 
@@ -6605,7 +6605,7 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
-    def get_self_calibration_temperature(self, module):
+    def get_self_calibration_temperature(self, module=enums.Module.PRIMARY_MODULE):
         r'''get_self_calibration_temperature
 
         Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
@@ -6991,7 +6991,7 @@ class Session(_SessionBase):
         self._interpreter.reset_with_options(steps_to_omit)
 
     @ivi_synchronized
-    def select_arb_waveform(self, name):
+    def select_arb_waveform(self, waveform_name):
         r'''select_arb_waveform
 
         Specifies the waveform that is generated upon a call to the _initiate method when the generation_mode property is set to GenerationMode.ARB_WAVEFORM.
@@ -7008,10 +7008,10 @@ class Session(_SessionBase):
         One or more of the referenced properties are not in the Python API for this driver.
 
         Args:
-            name (str): Specifies the name of the stored waveform to generate. This is a case-insensitive alphanumeric string that does not use reserved words. NI-RFSG sets the arb_selected_waveform property to this value.
+            waveform_name (str): Specifies the name of the stored waveform to generate. This is a case-insensitive alphanumeric string that does not use reserved words. NI-RFSG sets the arb_selected_waveform property to this value.
 
         '''
-        self._interpreter.select_arb_waveform(name)
+        self._interpreter.select_arb_waveform(waveform_name)
 
     @ivi_synchronized
     def self_cal(self):
@@ -7088,8 +7088,8 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
-    def self_test(self, self_test_message):
-        r'''self_test
+    def _self_test(self, self_test_message):
+        r'''_self_test
 
         Performs a self-test on the NI-RFSG device and returns the test results.
 
@@ -7373,6 +7373,35 @@ class Session(_SessionBase):
         `NI-RFSG Programming State Model <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_5670_programming_state_model.html>`_
         '''
         self._interpreter.close()
+
+    @ivi_synchronized
+    def self_test(self):
+        '''self_test
+
+        Performs a self-test on the NI-RFSG device and returns the test results.
+
+        This method performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.
+
+        This method does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this method. The NI-RFSG device must be in the Configuration state before you call this method.
+
+        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_
+
+        +----------------+------------------+
+        | Self-Test Code | Description      |
+        +================+==================+
+        | 0              | Passed self-test |
+        +----------------+------------------+
+        | 1              | Self-test failed |
+        +----------------+------------------+
+        '''
+        code, msg = self._self_test()
+        if code:
+            raise errors.SelfTestError(code, msg)
+        return None
 
     @ivi_synchronized
     def reset(self):

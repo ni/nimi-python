@@ -165,13 +165,13 @@ class Library(object):
                 self.niRFSG_ClearAllArbWaveforms_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_ClearAllArbWaveforms_cfunc(vi)
 
-    def niRFSG_ClearArbWaveform(self, vi, name):  # noqa: N802
+    def niRFSG_ClearArbWaveform(self, vi, waveform_name):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_ClearArbWaveform_cfunc is None:
                 self.niRFSG_ClearArbWaveform_cfunc = self._get_library_function('niRFSG_ClearArbWaveform')
                 self.niRFSG_ClearArbWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_ClearArbWaveform_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_ClearArbWaveform_cfunc(vi, name)
+        return self.niRFSG_ClearArbWaveform_cfunc(vi, waveform_name)
 
     def niRFSG_ClearSelfCalibrateRange(self, vi):  # noqa: N802
         with self._func_lock:
@@ -573,13 +573,13 @@ class Library(object):
                 self.niRFSG_SaveConfigurationsToFile_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_SaveConfigurationsToFile_cfunc(vi, channel_name, file_path)
 
-    def niRFSG_SelectArbWaveform(self, vi, name):  # noqa: N802
+    def niRFSG_SelectArbWaveform(self, vi, waveform_name):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_SelectArbWaveform_cfunc is None:
                 self.niRFSG_SelectArbWaveform_cfunc = self._get_library_function('niRFSG_SelectArbWaveform')
                 self.niRFSG_SelectArbWaveform_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSG_SelectArbWaveform_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_SelectArbWaveform_cfunc(vi, name)
+        return self.niRFSG_SelectArbWaveform_cfunc(vi, waveform_name)
 
     def niRFSG_SelfCal(self, vi):  # noqa: N802
         with self._func_lock:

@@ -136,8 +136,8 @@ class SystemTests:
         assert isinstance(dt, hightime.datetime)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
-    def test_get_self_calibration_last_date_and_time(self, rfsg_device_session):
-        dt = rfsg_device_session.get_self_calibration_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
+    def test_get_self_cal_last_date_and_time(self, rfsg_device_session):
+        dt = rfsg_device_session.get_self_cal_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
         assert isinstance(dt, hightime.datetime)
 
     def test_get_terminal_name(self, rfsg_device_session):

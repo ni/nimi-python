@@ -283,7 +283,7 @@ class SideEffectsHelper(object):
             return self._defaults['ClearAllArbWaveforms']['return']
         return self._defaults['ClearAllArbWaveforms']['return']
 
-    def niRFSG_ClearArbWaveform(self, vi, name):  # noqa: N802
+    def niRFSG_ClearArbWaveform(self, vi, waveform_name):  # noqa: N802
         if self._defaults['ClearArbWaveform']['return'] != 0:
             return self._defaults['ClearArbWaveform']['return']
         return self._defaults['ClearArbWaveform']['return']
@@ -782,7 +782,7 @@ class SideEffectsHelper(object):
             return self._defaults['SaveConfigurationsToFile']['return']
         return self._defaults['SaveConfigurationsToFile']['return']
 
-    def niRFSG_SelectArbWaveform(self, vi, name):  # noqa: N802
+    def niRFSG_SelectArbWaveform(self, vi, waveform_name):  # noqa: N802
         if self._defaults['SelectArbWaveform']['return'] != 0:
             return self._defaults['SelectArbWaveform']['return']
         return self._defaults['SelectArbWaveform']['return']

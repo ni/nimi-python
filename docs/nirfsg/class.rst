@@ -361,7 +361,7 @@ clear_arb_waveform
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: clear_arb_waveform(name)
+    .. py:method:: clear_arb_waveform(waveform_name)
 
             Deletes a specified waveform from the pool of currently defined waveforms.
 
@@ -373,7 +373,7 @@ clear_arb_waveform
 
 
 
-            :param name:
+            :param waveform_name:
 
 
                 Name of the stored waveform to delete.
@@ -381,7 +381,7 @@ clear_arb_waveform
                 
 
 
-            :type name: str
+            :type waveform_name: str
 
 clear_self_calibrate_range
 --------------------------
@@ -1342,12 +1342,12 @@ get_max_settable_power
 
 
 
-get_self_calibration_last_date_and_time
----------------------------------------
+get_self_cal_last_date_and_time
+-------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_self_calibration_last_date_and_time(module)
+    .. py:method:: get_self_cal_last_date_and_time(module=nirfsg.Module.PRIMARY_MODULE)
 
             Returns the date and time of the last successful self-calibration.
 
@@ -1386,7 +1386,7 @@ get_self_calibration_temperature
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_self_calibration_temperature(module)
+    .. py:method:: get_self_calibration_temperature(module=nirfsg.Module.PRIMARY_MODULE)
 
             Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
@@ -2069,7 +2069,7 @@ select_arb_waveform
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: select_arb_waveform(name)
+    .. py:method:: select_arb_waveform(waveform_name)
 
             Specifies the waveform that is generated upon a call to the :py:meth:`nirfsg.Session._initiate` method when the generation_mode property is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM`.
 
@@ -2087,7 +2087,7 @@ select_arb_waveform
 
 
 
-            :param name:
+            :param waveform_name:
 
 
                 Specifies the name of the stored waveform to generate. This is a case-insensitive alphanumeric string that does not use reserved words. NI-RFSG sets the :py:attr:`nirfsg.Session.arb_selected_waveform` property to this value.
@@ -2095,7 +2095,7 @@ select_arb_waveform
                 
 
 
-            :type name: str
+            :type waveform_name: str
 
 self_cal
 --------
@@ -2216,7 +2216,7 @@ self_test
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: self_test(self_test_message)
+    .. py:method:: self_test()
 
             Performs a self-test on the NI-RFSG device and returns the test results.
 
@@ -2230,35 +2230,13 @@ self_test
 
             `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_
 
-            
-
-
-
-            :param self_test_message:
-
-
-                Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-                
-
-
-            :type self_test_message: str
-
-            :rtype: int
-            :return:
-
-
-                    This parameter contains the value returned from the NI-RFSG device self test.
-
-                    +----------------+------------------+
-                    | Self-Test Code | Description      |
-                    +================+==================+
-                    | 0              | Self test passed |
-                    +----------------+------------------+
-                    | 1              | Self test failed |
-                    +----------------+------------------+
+            +----------------+------------------+
+            | Self-Test Code | Description      |
+            +================+==================+
+            | 0              | Passed self-test |
+            +----------------+------------------+
+            | 1              | Self-test failed |
+            +----------------+------------------+
 
 
 

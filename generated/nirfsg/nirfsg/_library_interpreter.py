@@ -141,10 +141,10 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def clear_arb_waveform(self, name):  # noqa: N802
+    def clear_arb_waveform(self, waveform_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        name_ctype = ctypes.create_string_buffer(name.encode(self._encoding))  # case C020
-        error_code = self._library.niRFSG_ClearArbWaveform(vi_ctype, name_ctype)
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        error_code = self._library.niRFSG_ClearArbWaveform(vi_ctype, waveform_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
@@ -601,10 +601,10 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def select_arb_waveform(self, name):  # noqa: N802
+    def select_arb_waveform(self, waveform_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        name_ctype = ctypes.create_string_buffer(name.encode(self._encoding))  # case C020
-        error_code = self._library.niRFSG_SelectArbWaveform(vi_ctype, name_ctype)
+        waveform_name_ctype = ctypes.create_string_buffer(waveform_name.encode(self._encoding))  # case C020
+        error_code = self._library.niRFSG_SelectArbWaveform(vi_ctype, waveform_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
