@@ -184,9 +184,6 @@ class SideEffectsHelper(object):
         self._defaults['SelfCal']['return'] = 0
         self._defaults['SelfCalibrateRange'] = {}
         self._defaults['SelfCalibrateRange']['return'] = 0
-        self._defaults['SelfTest'] = {}
-        self._defaults['SelfTest']['return'] = 0
-        self._defaults['SelfTest']['selfTestResult'] = None
         self._defaults['SendSoftwareEdgeTrigger'] = {}
         self._defaults['SendSoftwareEdgeTrigger']['return'] = 0
         self._defaults['SetArbWaveformNextWritePosition'] = {}
@@ -226,6 +223,10 @@ class SideEffectsHelper(object):
         self._defaults['close']['return'] = 0
         self._defaults['reset'] = {}
         self._defaults['reset']['return'] = 0
+        self._defaults['self_test'] = {}
+        self._defaults['self_test']['return'] = 0
+        self._defaults['self_test']['selfTestResult'] = None
+        self._defaults['self_test']['selfTestMessage'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -283,7 +284,7 @@ class SideEffectsHelper(object):
             return self._defaults['ClearAllArbWaveforms']['return']
         return self._defaults['ClearAllArbWaveforms']['return']
 
-    def niRFSG_ClearArbWaveform(self, vi, name):  # noqa: N802
+    def niRFSG_ClearArbWaveform(self, vi, waveform_name):  # noqa: N802
         if self._defaults['ClearArbWaveform']['return'] != 0:
             return self._defaults['ClearArbWaveform']['return']
         return self._defaults['ClearArbWaveform']['return']
@@ -782,7 +783,7 @@ class SideEffectsHelper(object):
             return self._defaults['SaveConfigurationsToFile']['return']
         return self._defaults['SaveConfigurationsToFile']['return']
 
-    def niRFSG_SelectArbWaveform(self, vi, name):  # noqa: N802
+    def niRFSG_SelectArbWaveform(self, vi, waveform_name):  # noqa: N802
         if self._defaults['SelectArbWaveform']['return'] != 0:
             return self._defaults['SelectArbWaveform']['return']
         return self._defaults['SelectArbWaveform']['return']
@@ -796,16 +797,6 @@ class SideEffectsHelper(object):
         if self._defaults['SelfCalibrateRange']['return'] != 0:
             return self._defaults['SelfCalibrateRange']['return']
         return self._defaults['SelfCalibrateRange']['return']
-
-    def niRFSG_SelfTest(self, vi, self_test_result, self_test_message):  # noqa: N802
-        if self._defaults['SelfTest']['return'] != 0:
-            return self._defaults['SelfTest']['return']
-        # self_test_result
-        if self._defaults['SelfTest']['selfTestResult'] is None:
-            raise MockFunctionCallError("niRFSG_SelfTest", param='selfTestResult')
-        if self_test_result is not None:
-            self_test_result.contents.value = self._defaults['SelfTest']['selfTestResult']
-        return self._defaults['SelfTest']['return']
 
     def niRFSG_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_identifier):  # noqa: N802
         if self._defaults['SendSoftwareEdgeTrigger']['return'] != 0:
@@ -906,6 +897,25 @@ class SideEffectsHelper(object):
         if self._defaults['reset']['return'] != 0:
             return self._defaults['reset']['return']
         return self._defaults['reset']['return']
+
+    def niRFSG_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+        if self._defaults['self_test']['return'] != 0:
+            return self._defaults['self_test']['return']
+        # self_test_result
+        if self._defaults['self_test']['selfTestResult'] is None:
+            raise MockFunctionCallError("niRFSG_self_test", param='selfTestResult')
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        # self_test_message
+        if self._defaults['self_test']['selfTestMessage'] is None:
+            raise MockFunctionCallError("niRFSG_self_test", param='selfTestMessage')
+        test_value = self._defaults['self_test']['selfTestMessage']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
+        return self._defaults['self_test']['return']
 
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
@@ -1031,8 +1041,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_SelfCal.return_value = 0
         mock_library.niRFSG_SelfCalibrateRange.side_effect = MockFunctionCallError("niRFSG_SelfCalibrateRange")
         mock_library.niRFSG_SelfCalibrateRange.return_value = 0
-        mock_library.niRFSG_SelfTest.side_effect = MockFunctionCallError("niRFSG_SelfTest")
-        mock_library.niRFSG_SelfTest.return_value = 0
         mock_library.niRFSG_SendSoftwareEdgeTrigger.side_effect = MockFunctionCallError("niRFSG_SendSoftwareEdgeTrigger")
         mock_library.niRFSG_SendSoftwareEdgeTrigger.return_value = 0
         mock_library.niRFSG_SetArbWaveformNextWritePosition.side_effect = MockFunctionCallError("niRFSG_SetArbWaveformNextWritePosition")
@@ -1071,3 +1079,5 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_close.return_value = 0
         mock_library.niRFSG_reset.side_effect = MockFunctionCallError("niRFSG_reset")
         mock_library.niRFSG_reset.return_value = 0
+        mock_library.niRFSG_self_test.side_effect = MockFunctionCallError("niRFSG_self_test")
+        mock_library.niRFSG_self_test.return_value = 0

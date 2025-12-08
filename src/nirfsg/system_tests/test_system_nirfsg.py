@@ -118,6 +118,10 @@ class SystemTests:
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is False
 
+    def test_self_test(self, rfsg_device_session):
+        # We should not get an assert if self_test passes
+        rfsg_device_session.self_test()
+
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
     def test_self_cal(self, rfsg_device_session):
         rfsg_device_session.self_cal()
@@ -136,8 +140,8 @@ class SystemTests:
         assert isinstance(dt, hightime.datetime)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
-    def test_get_self_calibration_last_date_and_time(self, rfsg_device_session):
-        dt = rfsg_device_session.get_self_calibration_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
+    def test_get_self_cal_last_date_and_time(self, rfsg_device_session):
+        dt = rfsg_device_session.get_self_cal_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
         assert isinstance(dt, hightime.datetime)
 
     def test_get_terminal_name(self, rfsg_device_session):

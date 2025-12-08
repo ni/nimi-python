@@ -359,7 +359,7 @@ functions = {
                 'documentation': {
                     'description': 'Name of the stored waveform to delete.'
                 },
-                'name': 'name',
+                'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2333,6 +2333,7 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'enum': 'Module',
+                'default_value': 'Module.PRIMARY_MODULE',
                 'grpc_enum': None,
                 'name': 'module',
                 'type': 'ViInt32'
@@ -2348,7 +2349,7 @@ functions = {
                 'type': 'hightime.datetime'
             }
         ],
-        'python_name': 'get_self_calibration_last_date_and_time',
+        'python_name': 'get_self_cal_last_date_and_time',
         'real_datetime_call': 'GetSelfCalibrationDateAndTime',
         'returns': 'ViStatus'
     },
@@ -2536,6 +2537,7 @@ functions = {
                     ]
                 },
                 'enum': 'Module',
+                'default_value': 'Module.PRIMARY_MODULE',
                 'name': 'module',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3544,7 +3546,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the name of the stored waveform to generate. This is a case-insensitive alphanumeric string that does not use reserved words. NI-RFSG sets the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute to this value.'
                 },
-                'name': 'name',
+                'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3700,8 +3702,8 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SelfTest': {
-        'codegen_method': 'public',
+    'self_test': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_'
         },
@@ -3738,7 +3740,7 @@ functions = {
                 'type': 'ViInt16'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this function.\n\nYou must pass a ViChar array with at least 256 bytes.'
                 },
@@ -3750,6 +3752,48 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'fancy_self_test': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_',
+            'table_body': [
+                [
+                    '0',
+                    'Passed self-test'
+                ],
+                [
+                    '1',
+                    'Self-test failed'
+                ]
+            ],
+            'table_header': [
+                'Self-Test Code',
+                'Description'
+            ]
+        },
+        'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_self_test'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            }
+        ],
+        'python_name': 'self_test',
         'returns': 'ViStatus'
     },
     'SendSoftwareEdgeTrigger': {
