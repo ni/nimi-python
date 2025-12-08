@@ -1695,7 +1695,7 @@
   - Changed the parameter name for waveform name from `name` to `waveform_name` in `clear_arb_waveform` and `select_arb_waveform` to be consistent with other waveform methods
   - Changed the name of `get_self_calibration_last_date_and_time` to `get_self_cal_last_date_and_time` to be consistent with other MI drivers
   - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
-  - Updated the `self_test` to not have any parameters aligning with other MI drivers
+  - Updated `self_test` to not have any parameters, aligning with other MI drivers
 - Removed
   - Methods and properties applicable only to hardware which are not supported anymore
     - Methods
