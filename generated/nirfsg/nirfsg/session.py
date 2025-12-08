@@ -289,21 +289,6 @@ class _SessionBase(object):
     | AnalogModulationFmBand.WIDEBAND   | 17001 (0x4269) | Specifies wideband frequency modulation.   |
     +-----------------------------------+----------------+--------------------------------------------+
     '''
-    analog_modulation_fm_deviation = _attributes.AttributeViReal64(1150035)
-    '''Type: float
-
-    Specifies the frequency deviation to use in frequency modulation.
-
-    **Units**: hertz (Hz)
-
-    **Default Value:** 1kHz
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-    '''
     analog_modulation_fm_narrowband_integrator = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationFmNarrowbandIntegrator, 1150165)
     '''Type: enums.AnalogModulationFmNarrowbandIntegrator
 
@@ -433,46 +418,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    analog_modulation_waveform_frequency = _attributes.AttributeViReal64(1150034)
-    '''Type: float
-
-    Specifies the frequency of the waveform to use as the message signal in analog modulation.
-
-    **Units:** hertz (Hz)
-
-    **Default Value:** 1kHz
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-    '''
-    analog_modulation_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AnalogModulationWaveformType, 1150033)
-    '''Type: enums.AnalogModulationWaveformType
-
-    Specifies the type of waveform to use as the message signal for analog modulation.
-
-    **Default Value:** AnalogModulationWaveformType.SINE
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-    **Defined Values**:
-
-    +---------------------------------------+--------------+-----------------------------------------------------------------+
-    | Name                                  | Value        | Description                                                     |
-    +=======================================+==============+=================================================================+
-    | AnalogModulationWaveformType.SINE     | 3000 (0xbb8) | Specifies that the analog modulation waveform type is sine.     |
-    +---------------------------------------+--------------+-----------------------------------------------------------------+
-    | AnalogModulationWaveformType.SQUARE   | 3001 (0xbb9) | Specifies that the analog modulation waveform type is square.   |
-    +---------------------------------------+--------------+-----------------------------------------------------------------+
-    | AnalogModulationWaveformType.TRIANGLE | 3002 (0xbba) | Specifies that the analog modulation waveform type is triangle. |
-    +---------------------------------------+--------------+-----------------------------------------------------------------+
-    '''
     arb_carrier_frequency = _attributes.AttributeViReal64(1150015)
     '''Type: float
 
@@ -507,44 +452,6 @@ class _SessionBase(object):
     **Default Value:** 0 dB
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    arb_filter_raised_cosine_alpha = _attributes.AttributeViReal64(1150060)
-    '''Type: float
-
-    Specifies the alpha value to use when calculating the pulse-shaping filter coefficients. You can use this property only when the arb_filter_type property is set to FilterType.ARB_FILTER_TYPE_RAISED_COSINE and with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this property with a device that does not support OSP.
-
-    **Supported Devices:** PXI-5671, PXIe-5672/5673/5673E
-    '''
-    arb_filter_root_raised_cosine_alpha = _attributes.AttributeViReal64(1150057)
-    '''Type: float
-
-    Specifies the alpha value to use when calculating the pulse-shaping FIR filter coefficients. You can use this property only when the arb_filter_type property is set to FilterType.ARB_FILTER_TYPE_ROOT_RAISED_COSINE and with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this property with a device that does not support OSP.
-
-    **Supported Devices:** PXI-5671, PXIe-5672/5673/5673E
-    '''
-    arb_filter_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FilterType, 1150056)
-    '''Type: enums.FilterType
-
-    Specifies the pulse-shaping filter type for the FIR filter. You can use this property only with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this property with a device that does not support OSP.
-
-    **Default Value:** FilterType.NONE
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-    **Defined Values**:
-
-    +-----------------------------------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                          | Value          | Description                                                                                                                           |
-    +===============================================+================+=======================================================================================================================================+
-    | FilterType.NONE                               | 0 (0x0)        | Disables analog modulation.                                                                                                           |
-    +-----------------------------------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------+
-    | FilterType.ARB_FILTER_TYPE_RAISED_COSINE      | 10002 (0x2712) | Applies a raised cosine filter to the data with the alpha value specified with the arb_filter_raised_cosine_alpha property.           |
-    +-----------------------------------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------+
-    | FilterType.ARB_FILTER_TYPE_ROOT_RAISED_COSINE | 10001 (0x2711) | Applies a root-raised cosine filter to the data with the alpha value specified with the arb_filter_root_raised_cosine_alpha property. |
-    +-----------------------------------------------+----------------+---------------------------------------------------------------------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     arb_max_number_waveforms = _attributes.AttributeViInt32(1250454)
     '''Type: int
@@ -587,26 +494,6 @@ class _SessionBase(object):
     +-------------------------------------------+--------------------------------------------------------------+
 
     Note: Using the high resolution clock may result in increased phase noise.
-    '''
-    arb_oscillator_phase_dac_value = _attributes.AttributeViInt32(1150089)
-    '''Type: int
-
-    Specifies the oscillator phase digital-to-analog converter (DAC) value on the arbitrary waveform generator (AWG). Use this property to reduce the trigger jitter when synchronizing multiple devices with NI-TClk. This property can also help maintain synchronization repeatability by writing a previous measurement's phase DAC value to the current session. This property is applicable only when using the arb_sample_clock_source property set to ClkIn.
-
-    **Supported Devices:** PXIe-5673/5673E
-
-    **Related Topics**
-
-    `NI-TClk Overview <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_tclk_help.html>`_
-    '''
-    arb_power = _attributes.AttributeViReal64(1150016)
-    '''Type: float
-
-    Indicates the average output power from the PXI-5421, PXI-5441, PXIe-5442, and PXIe-5450 AWG module. If an arbitrary waveform is being generated, this property specifies either the average power or the peak power of the signal, depending on the power_level_type property setting.
-
-    **Units**: dBm
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
     '''
     arb_pre_filter_gain = _attributes.AttributeViReal64(1150025)
     '''Type: float
@@ -765,67 +652,6 @@ class _SessionBase(object):
 
     `Spurious Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/spurious_performance.html>`_
     '''
-    attenuator_hold_enabled = _attributes.AttributeViBoolean(1150009)
-    '''Type: bool
-
-    Specifies whether attenuator hold is enabled. While this property is set to True, changing the power level causes NI-RFSG to scale the digital data sent to the AWG instead of adjusting the attenuators. Changing power levels in this manner allows the device to increase or decrease the power level in more accurate increments, but it may affect signal-to-noise ratios (noise density).
-
-    Setting the attenuator_hold_enabled property to True limits the power levels that can be attained. With attenuator hold enabled, the power level must satisfy the following conditions:
-
-    - Power level less than or equal to attenuator_hold_max_power
-    - Power level greater than or equal to (maximum power level -70dB)
-    - Power level greater than or equal to -145dBm
-
-    To set this property, the NI-RFSG device must be in the Configuration state.
-
-    **Default Value:** False
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-    **Related Topics**
-
-    `Attenuator Hold <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/attenuator_hold_mode.html>`_
-
-    `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_
-
-    **Defined Values**:
-
-    +-------+---------------------------+
-    | Value | Description               |
-    +=======+===========================+
-    | True  | Enables attenuator hold.  |
-    +-------+---------------------------+
-    | False | Disables attenuator hold. |
-    +-------+---------------------------+
-
-    Note: The frequency cannot be changed on the PXI-5670/5671 or PXIe-5672 while this property is set to True.
-    '''
-    attenuator_hold_max_power = _attributes.AttributeViReal64(1150010)
-    '''Type: float
-
-    Specifies the maximum power level of the RF output signal when the attenuator_hold_enabled property is set to True.
-
-    To set this property, the NI-RFSG device must be in the Configuration state.
-
-    **Units**: dBm
-
-    **Defined Values**:
-    Refer to the specifications document for your device for allowable maximum power levels.
-
-    **Default Value:**
-
-    PXI-5670/5671, PXIe-5672: 17
-
-    PXIe-5673/5673E: 10
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-    **Related Topics**
-
-    `Attenuator Hold <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/attenuator_hold_mode.html>`_
-
-    `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_
-    '''
     attenuator_setting = _attributes.AttributeViReal64(1150173)
     '''Type: float
 
@@ -913,46 +739,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties. When caching is enabled, NI-RFSG tracks the current NI-RFSG device settings and avoids sending redundant commands to the device. NI-RFSG can always cache or never cache particular properties, regardless of the setting of this property. Call the __init__ method to override the default value.
-
-    **Default Value:** True
-
-    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **Defined Values**:
-
-    +-------+-------------------+
-    | Value | Description       |
-    +=======+===================+
-    | True  | Enables caching.  |
-    +-------+-------------------+
-    | False | Disables caching. |
-    +-------+-------------------+
-    '''
-    compensate_for_filter_group_delay = _attributes.AttributeViBoolean(1152832)
-    '''Type: bool
-
-    Enables or disables compensation for filter group delay on the AWG module. This property also accounts for the upconverter group delay and aligns the RF output with the Started Event, Done Event, and Marker Events.
-
-    At a low I/Q rate, the group delay can become so large that some devices may not be able to align the events with the RF output, in which case you must increase the I/Q rate or disable this property.
-
-    **Default Value:** False
-
-    **Supported Devices:** PXIe-5672
-
-    **Defined Values**:
-
-    +-------+-----------------------------------------------+
-    | Value | Description                                   |
-    +=======+===============================================+
-    | True  | Enables compensation for filter group delay.  |
-    +-------+-----------------------------------------------+
-    | False | Disables compensation for filter group delay. |
-    +-------+-----------------------------------------------+
-    '''
     configuration_settled_event_terminal_name = _attributes.AttributeViString(1150194)
     '''Type: str
 
@@ -988,72 +774,6 @@ class _SessionBase(object):
     Note: - Resetting this property reverts back to the default unset behavior.
 
      - Use this property only when your application requires the same settings to be used every time, regardless of the temperature variation. In these cases, it is best to ensure that the temperature does not vary too much.
-    '''
-    data_transfer_block_size = _attributes.AttributeViInt32(1150048)
-    '''Type: int
-
-    Indicates the number of samples to transfer at one time from the device to host memory. This property is useful when the total data to be transferred to onboard memory is large.
-
-    **Units**: samples (s)
-
-    **Default Value**: 1Ms
-
-    **Supported Devices:** PXIe-5672/5673/5673E
-    '''
-    data_transfer_maximum_bandwidth = _attributes.AttributeViReal64(1150086)
-    '''Type: float
-
-    Specifies the maximum amount of bus bandwidth to use for data transfers.
-
-    **Units**: bytes per second
-
-    **Default Value**: Device maximum
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-    **Related Topics**
-
-    `Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_
-    '''
-    data_transfer_maximum_in_flight_reads = _attributes.AttributeViInt32(1150088)
-    '''Type: int
-
-    Specifies the maximum number of concurrent PCI Express read requests the RF signal generator can issue.
-
-    When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this property is set to the highest value the RF signal generator supports.
-
-    If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the RF signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
-
-    **Units**: number of packets
-
-    **Default Value**: Device maximum
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-    **Related Topics**
-
-    `Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_
-    '''
-    data_transfer_preferred_packet_size = _attributes.AttributeViInt32(1150087)
-    '''Type: int
-
-    Specifies the preferred size of the data field in a PCI Express read request packet.
-
-    In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI RF signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
-
-    Recommended values for this property are powers of two between 64 and 512.
-
-    **Units**: bytes
-
-    **Default Value**: Device maximum
-
-    **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-    **Related Topics**
-
-    `Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_
-
-    Note: In some cases, the RF signal generator generates packets smaller than the preferred size you set with this property.
     '''
     deembedding_compensation_gain = _attributes.AttributeViReal64(1150289)
     '''Type: float
@@ -1591,139 +1311,6 @@ class _SessionBase(object):
     To set/get on all script_triggers, you can call the property directly on the :py:class:`nirfsg.Session`.
 
     Example: :py:attr:`my_session.digital_level_script_trigger_source`
-    '''
-    digital_modulation_fsk_deviation = _attributes.AttributeViReal64(1150041)
-    '''Type: float
-
-    Specifies the deviation to use in FSK modulation.
-
-    **Units**: hertz (Hz)
-
-    **Default Value:** 1,000
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-    '''
-    digital_modulation_prbs_order = _attributes.AttributeViInt32(1150039)
-    '''Type: int
-
-    Specifies the order of pseudorandom bit sequence (PRBS) internally generated by hardware and used as the message signal in digital modulation.
-
-    **Default Value:** 16
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-    '''
-    digital_modulation_prbs_seed = _attributes.AttributeViInt32(1150040)
-    '''Type: int
-
-    Specifies the seed of the internally generated pseudorandom bit sequence (PRBS).
-
-    **Default Value:** 1
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-    '''
-    digital_modulation_symbol_rate = _attributes.AttributeViReal64(1150037)
-    '''Type: float
-
-    Specifies the symbol rate of the bit stream for digital modulation.
-
-    **Units**: hertz (Hz)
-
-    **Default Value:** 1kHz
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-    '''
-    digital_modulation_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalModulationType, 1150036)
-    '''Type: enums.DigitalModulationType
-
-    Specifies the digital modulation format to use.
-
-    **Default Value:** DigitalModulationType.NONE
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-    **Defined Values**:
-
-    +----------------------------+--------------+-----------------------------------------------------------------------------+
-    | Name                       | Value        | Description                                                                 |
-    +============================+==============+=============================================================================+
-    | DigitalModulationType.FSK  | 4000 (0xfa0) | Specifies that the digital modulation type is frequency-shift keying (FSK). |
-    +----------------------------+--------------+-----------------------------------------------------------------------------+
-    | DigitalModulationType.NONE | 0 (0x0)      | Disables digital modulation.                                                |
-    +----------------------------+--------------+-----------------------------------------------------------------------------+
-    | DigitalModulationType.OOK  | 4001 (0xfa1) | Specifies that the digital modulation type is on-off keying (OOK).          |
-    +----------------------------+--------------+-----------------------------------------------------------------------------+
-    | DigitalModulationType.PSK  | 4002 (0xfa2) | Specifies that the digital modulation type is phase-shift keying (PSK).     |
-    +----------------------------+--------------+-----------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    digital_modulation_waveform_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitalModulationWaveformType, 1150038)
-    '''Type: enums.DigitalModulationWaveformType
-
-    Specifies the type of waveform to use as the message signal in digital modulation.
-
-    **Default Value:** DigitalModulationWaveformType.PRBS
-
-    **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-    **Related Topics**
-
-    `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-    **Defined Values**:
-
-    +--------------------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                       | Value         | Description                                                                                                                                                                    |
-    +============================================+===============+================================================================================================================================================================================+
-    | DigitalModulationWaveformType.PRBS         | 5000 (0x1388) | Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).                                                                                       |
-    +--------------------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | DigitalModulationWaveformType.USER_DEFINED | 5001 (0x1389) | Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the configure_digital_modulation_user_defined_waveform method. |
-    +--------------------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    digital_pattern = _attributes.AttributeViBoolean(1150044)
-    '''Type: bool
-
-    Enables or disables digital pattern on the PXI-5421/5441 AWG module. This property must be set to True to enable signal routing to and from the Digital Data & Control connector.
-
-    To set this property, the NI-RFSG device must be in the Configuration state.
-
-    **Default Value:** False
-
-    **Supported Devices:** PXI-5670/5671
-
-    **Defined Values**:
-
-    +-------+--------------------------+
-    | Value | Description              |
-    +=======+==========================+
-    | True  | Signal routing enabled.  |
-    +-------+--------------------------+
-    | False | Signal routing disabled. |
-    +-------+--------------------------+
     '''
     direct_download = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DirectDownload, 1150042)
     '''Type: enums.DirectDownload
@@ -2490,28 +2077,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced properties are not in the Python API for this driver.
     '''
-    frequency_tolerance = _attributes.AttributeViReal64(1150006)
-    '''Type: float
-
-    Specifies the allowable frequency error introduced during the software upconversion process. NI-RFSG may introduce a frequency error up to the specified amount to optimize computational speed and onboard memory usage while upconverting phase-continuous signals.
-
-    If the phase_continuity_enabled property is set to NIRFSG_VAL_DISABLE, the frequency_tolerance property is ignored, and the driver does not introduce a frequency error. On devices that do not use software upconversion, this property is ignored. The PXI-5670 always uses software upconversion, and the PXI-5671 uses software upconversion for I/Q rates greater than 8.33MS/s.
-
-    To set this property, the NI-RFSG device must be in the Configuration state.
-
-    **Units**: hertz (Hz)
-
-    **Default Value:** 50
-
-    **Supported Devices:** PXI-5670/5671
-
-    **Related Topics**
-
-    `Phase Continuity <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/phasecontinuity.html>`_
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
     generation_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.GenerationMode, 1150018)
     '''Type: enums.GenerationMode
 
@@ -2567,10 +2132,6 @@ class _SessionBase(object):
     Returns a string that contains the firmware revision information for the NI-RFSG device you are currently using.
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **High-Level Methods**:
-
-    - revision_query
     '''
     instrument_manufacturer = _attributes.AttributeViString(1050511)
     '''Type: str
@@ -2585,27 +2146,6 @@ class _SessionBase(object):
     Returns a string that contains the model number or name of the NI-RFSG device that you are currently using. For drivers that support more than one device, this property returns a comma-separated list of supported devices.
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.
-
-    **Default Value:** False
-
-    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **Defined Values**:
-
-    +-------+--------------------------------+
-    | Value | Description                    |
-    +=======+================================+
-    | True  | Interchange check is enabled.  |
-    +-------+--------------------------------+
-    | False | Interchange check is disabled. |
-    +-------+--------------------------------+
-
-    Note: Enabling interchangeability check is not supported.
     '''
     interpolation_delay = _attributes.AttributeViReal64(1150153)
     '''Type: float
@@ -2692,7 +2232,7 @@ class _SessionBase(object):
 
     If the iq_i_offset property is set to 100%, iq_q_offset property is set to 0%, and power_level property set to 0 dBm, the desired RF signal is at 0 dBm and the carrier leakage is also at 0 dBm.
 
-    The AWG or VST peak power level changes when settings change in other properties such as the power_level, frequency, iq_skew, iq_gain_imbalance, attenuator_hold_enabled, and arb_pre_filter_gain properties. When the iq_offset_units property is set to OffsetUnits.PERCENT, the actual AWG or VST offset changes as the AWG or VST peak power level changes to satisfy the preceding equations. These changes are useful if you are intentionally adding carrier leakage to test the tolerance of a receiver. When the iq_offset_units property is set to OffsetUnits.PERCENT, the carrier leakage, in dBc, remains at a consistent level.
+    The AWG or VST peak power level changes when settings change in other properties such as the power_level, frequency, iq_skew, iq_gain_imbalance and arb_pre_filter_gain properties. When the iq_offset_units property is set to OffsetUnits.PERCENT, the actual AWG or VST offset changes as the AWG or VST peak power level changes to satisfy the preceding equations. These changes are useful if you are intentionally adding carrier leakage to test the tolerance of a receiver. When the iq_offset_units property is set to OffsetUnits.PERCENT, the carrier leakage, in dBc, remains at a consistent level.
 
     If you are trying to eliminate residual carrier leakage due to calibration inaccuracies or drift, set the iq_offset_units property to OffsetUnits.VOLTS. Offset correction voltage is applied to the I/Q modulator or VST, regardless of changes to the AWG or VST peak power level.
 
@@ -3747,33 +3287,10 @@ class _SessionBase(object):
 
      - For the PXIe-5645, this property is ignored if you are using the I/Q ports.
     '''
-    peak_power_adjustment_inheritance = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PpaInheritance, 1150141)
-    '''Type: enums.PpaInheritance
-
-    Determines the inheritance behavior of the peak_power_adjustment property when a script inherits values from specified waveforms.
-
-    **Default Value:** PpaInheritance.EXACT_MATCH
-
-    **Supported Devices:** PXIe-5673/5673E
-
-    **Related Topics**
-
-    `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_
-
-    **Defined Values**:
-
-    +----------------------------+------------------------------------------------------------+
-    | Value                      | Description                                                |
-    +============================+============================================================+
-    | PpaInheritance.EXACT_MATCH | Errors out if different values are detected in the script. |
-    +----------------------------+------------------------------------------------------------+
-    | PpaInheritance.MINIMUM     | Uses the minimum value found in the script.                |
-    +----------------------------+------------------------------------------------------------+
-    '''
     phase_continuity_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PhaseContinuityEnabled, 1150005)
     '''Type: enums.PhaseContinuityEnabled
 
-    Specifies whether the driver maintains phase continuity in the arbitrary waveforms. When this property is set to PhaseContinuityEnabled.ENABLE, NI-RFSG may increase the waveform size. When this property is set to PhaseContinuityEnabled.ENABLE, the frequency_tolerance property specifies the maximum allowable frequency error that can be introduced when keeping the signal phase-continuous. To set the phase_continuity_enabled property, the NI-RFSG device must be in the Configuration state. phase_continuity_enabled applies only when the generation_mode property is set to GenerationMode.ARB_WAVEFORM or GenerationMode.SCRIPT.
+    Specifies whether the driver maintains phase continuity in the arbitrary waveforms. When this property is set to PhaseContinuityEnabled.ENABLE, NI-RFSG may increase the waveform size. To set the phase_continuity_enabled property, the NI-RFSG device must be in the Configuration state. phase_continuity_enabled applies only when the generation_mode property is set to GenerationMode.ARB_WAVEFORM or GenerationMode.SCRIPT.
 
     PXI-5671: When using the PXI-5671 with I/Q rates less than or equal to 8.33MS/s, an input phase-continuous signal is always phase-continuous upon output, and this property has no effect.
 
@@ -3993,109 +3510,6 @@ class _SessionBase(object):
     | "Marker3"      | The trigger is received from the Marker 3.                                                   |
     +----------------+----------------------------------------------------------------------------------------------+
     '''
-    pxi_chassis_clk10_source = _attributes.AttributeViString(1150004)
-    '''Type: str
-
-    Specifies the clock source for driving the PXI 10 MHz backplane Reference Clock. This property is configurable if the PXI-5610 upconverter module is installed in *only* Slot 2 of a PXI chassis. To set this property, the NI-RFSG device must be in the Configuration state.
-
-    **Possible Values**:
-
-    Possible Value: Description
-
-    "" :Do not drive the PXI_CLK10 signal.
-
-    "OnboardClock" :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.
-
-    "RefIn" :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.
-
-    **Default Value:** ""
-
-    **Supported Devices:** PXI-5610, PXI-5670/5671
-
-    **Related Topics**
-
-    `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_
-
-    `System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_
-
-    **High-Level Methods**:
-
-    - configure_pxi_chassis_clk10
-
-
-    Only certain combinations of this property and the ref_clock_source property are valid, as shown in the following table.
-
-    +----------------------------------+--------------------------+
-    | pxi_chassis_clk10_source Setting | ref_clock_source Setting |
-    +==================================+==========================+
-    | "", OnboardClock                 | OnboardClock             |
-    +----------------------------------+--------------------------+
-    | "", RefIn                        | RefIn                    |
-    +----------------------------------+--------------------------+
-    | "", RefIn                        | PXI_CLK                  |
-    +----------------------------------+--------------------------+
-    '''
-    query_instrument_status = _attributes.AttributeViBoolean(1050003)
-    '''Type: bool
-
-    Specifies whether NI-RFSG queries the NI-RFSG device status after each operation. Querying the device status is useful for debugging. After you validate your program, set this property to False to disable status checking and maximize performance.
-
-    NI-RFSG can choose to ignore status checking for particular properties, regardless of the setting of this property. Use the __init__ method to override the default value.
-
-    **Default Value:** False
-
-    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **Defined Values**:
-
-    +-------+-------------------------------------------------------------+
-    | Value | Description                                                 |
-    +=======+=============================================================+
-    | True  | NI-RFSG queries the instrument status after each operation. |
-    +-------+-------------------------------------------------------------+
-    | False | NI-RFSG does not query the instrument status.               |
-    +-------+-------------------------------------------------------------+
-    '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters. Range checking parameters is very useful for debugging. After you validate your program, set this property to False to disable range checking and maximize performance. NI-RFSG can choose to ignore range checking for particular properties, regardless of the setting of this property. Use the __init__ method to override the default value.
-
-    **Default Value:** True
-
-    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **Defined Values**:
-
-    +-------+-------------------------+
-    | Value | Description             |
-    +=======+=========================+
-    | True  | Enable range checking.  |
-    +-------+-------------------------+
-    | False | Disable range checking. |
-    +-------+-------------------------+
-    '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties.
-
-    **Default Value:** False
-
-    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **Defined Values**:
-
-    +-------+---------------------------------------------------+
-    | Value | Description                                       |
-    +=======+===================================================+
-    | True  | The IVI engine keeps a list of coercions.         |
-    +-------+---------------------------------------------------+
-    | False | The IVI engine does not keep a list of coercions. |
-    +-------+---------------------------------------------------+
-
-    Note: Enabling record value coercions is not supported.
-    '''
     ref_clock_rate = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.ReferenceClockRate, 1250322)
     '''Type: enums.ReferenceClockRate
 
@@ -4149,7 +3563,7 @@ class _SessionBase(object):
     ref_clock_source = _attributes.AttributeViString(1150001)
     '''Type: str
 
-    Specifies the Reference Clock source. To set this property, the NI-RFSG device must be in the Configuration state. Only certain combinations of this property and the pxi_chassis_clk10_source property are valid, as shown in the following table.
+    Specifies the Reference Clock source. To set this property, the NI-RFSG device must be in the Configuration state.
 
     **Default Value:** OnboardClock
 
@@ -4180,8 +3594,6 @@ class _SessionBase(object):
     +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | "PXI_ClkMaster" | This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653** —NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_CLK as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
     +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-    Note: The PXI-5670/5671 and PXIe-5672 devices also allow you to drive the PXI 10 MHz backplane clock on PXI chassis *only* using the pxi_chassis_clk10_source property.
     '''
     ref_pll_bandwidth = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferencePllBandwidth, 1150133)
     '''Type: enums.ReferencePllBandwidth
@@ -4481,23 +3893,6 @@ class _SessionBase(object):
     `PXIe-5831/5832 Frequency and Bandwidth Selection <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_and_bandwidth_selection.html>`_
 
     `PXIe-5841 Frequency and Bandwidth Selection <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/frequency_and_bandwidth_selection.html>`_
-    '''
-    simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: bool
-
-    Returns whether NI-RFSG simulates I/O operations. This property is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the __init__ method to enable simulation.
-
-    **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    **Defined Values**:
-
-    +-------+-------------------------+
-    | Value | Description             |
-    +=======+=========================+
-    | True  | Simulation is enabled.  |
-    +-------+-------------------------+
-    | False | Simulation is disabled. |
-    +-------+-------------------------+
     '''
     specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
     '''Type: int
@@ -5319,164 +4714,6 @@ class _SessionBase(object):
     ''' These are code-generated '''
 
     @ivi_synchronized
-    def check_attribute_vi_boolean(self, attribute, value):
-        r'''check_attribute_vi_boolean
-
-        Checks the validity of a value you specify for a ViBoolean property.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_boolean`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.check_attribute_vi_boolean`
-
-        Args:
-            attribute (int): Pass the ID of a property.
-
-            value (bool): Pass the value that you want to verify as a valid value for the property.
-
-                Note: Some of the values might not be valid depending on the current settings of the instrument session.
-
-        '''
-        self._interpreter.check_attribute_vi_boolean(self._repeated_capability, attribute, value)
-
-    @ivi_synchronized
-    def check_attribute_vi_int32(self, attribute, value):
-        r'''check_attribute_vi_int32
-
-        Checks the validity of a value you specify for a ViInt32 property.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_int32`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.check_attribute_vi_int32`
-
-        Args:
-            attribute (int): Pass the ID of a property.
-
-            value (int): Pass the value that you want to verify as a valid value for the property.
-
-                Note: Some of the values might not be valid depending on the current settings of the instrument session.
-
-        '''
-        self._interpreter.check_attribute_vi_int32(self._repeated_capability, attribute, value)
-
-    @ivi_synchronized
-    def check_attribute_vi_int64(self, attribute, value):
-        r'''check_attribute_vi_int64
-
-        Checks the validity of a value you specify for a ViInt64 property.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_int64`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.check_attribute_vi_int64`
-
-        Args:
-            attribute (int): Pass the ID of a property.
-
-            value (int): Pass the value that you want to verify as a valid value for the property.
-
-                Note: Some of the values might not be valid depending on the current settings of the instrument session.
-
-        '''
-        self._interpreter.check_attribute_vi_int64(self._repeated_capability, attribute, value)
-
-    @ivi_synchronized
-    def check_attribute_vi_real64(self, attribute, value):
-        r'''check_attribute_vi_real64
-
-        Checks the validity of a value you specify for a ViReal64 property.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_real64`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.check_attribute_vi_real64`
-
-        Args:
-            attribute (int): Pass the ID of a property.
-
-            value (float): Pass the value that you want to verify as a valid value for the property.
-
-                Note: Some of the values might not be valid depending on the current settings of the instrument session.
-
-        '''
-        self._interpreter.check_attribute_vi_real64(self._repeated_capability, attribute, value)
-
-    @ivi_synchronized
-    def check_attribute_vi_session(self, attribute):
-        r'''check_attribute_vi_session
-
-        Checks the validity of a value you specify for a ViSession property.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_session`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.check_attribute_vi_session`
-
-        Args:
-            attribute (int): Pass the ID of a property.
-
-        '''
-        self._interpreter.check_attribute_vi_session(self._repeated_capability, attribute)
-
-    @ivi_synchronized
-    def check_attribute_vi_string(self, attribute, value):
-        r'''check_attribute_vi_string
-
-        Checks the validity of a value you specify for a ViString property.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_string`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.check_attribute_vi_string`
-
-        Args:
-            attribute (int): Pass the ID of a property.
-
-            value (str): Pass the value that you want to verify as a valid value for the property. The value must be a NULL-terminated string.
-
-                Note: Some of the values might not be valid depending on the current settings of the instrument session.
-
-        '''
-        self._interpreter.check_attribute_vi_string(self._repeated_capability, attribute, value)
-
-    @ivi_synchronized
     def configure_digital_edge_script_trigger(self, source, edge):
         r'''configure_digital_edge_script_trigger
 
@@ -5975,31 +5212,6 @@ class _SessionBase(object):
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    @ivi_synchronized
-    def reset_attribute(self, attribute_id):
-        r'''reset_attribute
-
-        Resets the property to its default value.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].reset_attribute`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-        Example: :py:meth:`my_session.reset_attribute`
-
-        Args:
-            attribute_id (int): Pass the ID of a property.
-
-        '''
-        self._interpreter.reset_attribute(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def save_configurations_to_file(self, file_path):
@@ -6746,25 +5958,6 @@ class Session(_SessionBase):
         self._interpreter.clear_arb_waveform(name)
 
     @ivi_synchronized
-    def clear_error(self):
-        r'''clear_error
-
-        Clears the error information associated with the session.
-
-        If you pass VI_NULL for the VI parameter, this method clears the error information for the current execution thread.
-
-        The IVI Engine also maintains this error information separately for each thread. This feature of the IVI Engine is useful if you do not have a session handle to pass to the clear_error method or the get_error method, which occurs when a call to the Init method or the __init__ method fails.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
-
-        Note: The get_error method clears the error information after it is retrieved. A call to the clear_error method is necessary only when you do not use a call to the get_error method to retrieve error information.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-        '''
-        self._interpreter.clear_error()
-
-    @ivi_synchronized
     def clear_self_calibrate_range(self):
         r'''clear_self_calibrate_range
 
@@ -6885,47 +6078,6 @@ class Session(_SessionBase):
         if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
             raise TypeError('Parameter edge must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
-
-    @ivi_synchronized
-    def configure_digital_modulation_user_defined_waveform(self, number_of_samples, user_defined_waveform):
-        r'''configure_digital_modulation_user_defined_waveform
-
-        Specifies the message signal used for digital modulation when the digital_modulation_waveform_type property is set to NIRFSG_VAL_USER_DEFINED.
-
-        **Supported Devices** : PXI/PXIe-5650/5651/5652
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        Args:
-            number_of_samples (int): Specifies the number of samples in the message signal.
-
-            user_defined_waveform (list of int): Specifies the user-defined message signal used for digital modulation.
-
-        '''
-        self._interpreter.configure_digital_modulation_user_defined_waveform(number_of_samples, user_defined_waveform)
-
-    @ivi_synchronized
-    def configure_pxi_chassis_clk10(self, pxi_clk10_source):
-        r'''configure_pxi_chassis_clk10
-
-        Specifies the signal to drive the 10MHz Reference Clock on the PXI backplane.
-
-        This option can only be configured when the PXI-5610 is in Slot 2 of the PXI chassis. The NI-RFSG device must be in the Configuration state before you call this method.
-
-        **Supported Devices** : PXI-5610, PXI-5670/5671
-
-        **Related Topics**
-
-        `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_
-
-        `System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_
-
-        Args:
-            pxi_clk10_source (str): Specifies the source of the Reference Clock signal.
-
-        '''
-        self._interpreter.configure_pxi_chassis_clk10(pxi_clk10_source)
 
     @ivi_synchronized
     def configure_rf(self, frequency, power_level):
@@ -7146,16 +6298,6 @@ class Session(_SessionBase):
         self._interpreter.delete_deembedding_table(port, table_name)
 
     @ivi_synchronized
-    def disable(self):
-        r'''disable
-
-        Places the instrument in a quiescent state where it has minimal or no impact on the system to which it is connected.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXI-5670/5671, PXIe-5672/5673/5673E
-        '''
-        self._interpreter.disable()
-
-    @ivi_synchronized
     def disable_start_trigger(self):
         r'''disable_start_trigger
 
@@ -7170,25 +6312,6 @@ class Session(_SessionBase):
         `Start Trigger <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/start_triggers.html>`_
         '''
         self._interpreter.disable_start_trigger()
-
-    @ivi_synchronized
-    def error_query(self):
-        r'''error_query
-
-        Reads an error code and an error message from the instrument error queue.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
-
-        Returns:
-            error_code (int): Returns the error code read from the instrument error queue.
-
-            error_message (str): Returns the error message string read from the instrument error message queue.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-        '''
-        error_code, error_message = self._interpreter.error_query()
-        return error_code, error_message
 
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_orientation):
         '''create_deembedding_sparameter_table_array
@@ -7298,25 +6421,6 @@ class Session(_SessionBase):
         '''
         script_names = self._interpreter.get_all_script_names()
         return _converters.convert_comma_separated_string_to_list(script_names)
-
-    @ivi_synchronized
-    def get_channel_name(self, index):
-        r'''get_channel_name
-
-        Returns the channel string that is in the channel table at an index you specify.
-
-        **Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E
-
-        Args:
-            index (int): Specifies a one-based index into the channel table.
-
-
-        Returns:
-            name (str): Returns a channel string from the channel table at the index you specify in the Index parameter. Do not modify the contents of the channel string.
-
-        '''
-        name = self._interpreter.get_channel_name(index)
-        return name
 
     @ivi_synchronized
     def _get_deembedding_sparameters(self, sparameters, sparameters_array_size):
@@ -7678,20 +6782,6 @@ class Session(_SessionBase):
 
                 The `DriverSetup string <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/driver_setup_string.html>`_ is required in order to simulate a specific device.
 
-                +------------------+-------------------------+
-                | Name             | Property Name           |
-                +==================+=========================+
-                | RangeCheck       | range_check             |
-                +------------------+-------------------------+
-                | QueryInstrStatus | query_instrument_status |
-                +------------------+-------------------------+
-                | Cache            | cache                   |
-                +------------------+-------------------------+
-                | RecordCoercions  | record_coercions        |
-                +------------------+-------------------------+
-                | Simulate         | simulate                |
-                +------------------+-------------------------+
-
 
         Returns:
             new_vi (int): Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG method calls.
@@ -7899,27 +6989,6 @@ class Session(_SessionBase):
         if type(steps_to_omit) is not enums.ResetWithOptionsStepsToOmit:
             raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.ResetWithOptionsStepsToOmit))
         self._interpreter.reset_with_options(steps_to_omit)
-
-    @ivi_synchronized
-    def revision_query(self):
-        r'''revision_query
-
-        Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Returns:
-            instrument_driver_revision (str): Returns the value of the specific_driver_revision property in the form of a string.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-            firmware_revision (str): Returns the value of the instrument_firmware_revision property in the form of a string.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-        '''
-        instrument_driver_revision, firmware_revision = self._interpreter.revision_query()
-        return instrument_driver_revision, firmware_revision
 
     @ivi_synchronized
     def select_arb_waveform(self, name):
