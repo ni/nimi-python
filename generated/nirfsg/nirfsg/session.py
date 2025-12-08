@@ -7088,41 +7088,6 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
     @ivi_synchronized
-    def _self_test(self):
-        r'''_self_test
-
-        Performs a self-test on the NI-RFSG device and returns the test results.
-
-        This method performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.
-
-        This method does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this method. The NI-RFSG device must be in the Configuration state before you call this method.
-
-        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_
-
-        Returns:
-            self_test_result (int): This parameter contains the value returned from the NI-RFSG device self test.
-
-                +----------------+------------------+
-                | Self-Test Code | Description      |
-                +================+==================+
-                | 0              | Self test passed |
-                +----------------+------------------+
-                | 1              | Self test failed |
-                +----------------+------------------+
-
-            self_test_message (str): Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-        '''
-        self_test_result, self_test_message = self._interpreter.self_test()
-        return self_test_result, self_test_message
-
-    @ivi_synchronized
     def set_arb_waveform_next_write_position(self, waveform_name, relative_to, offset):
         r'''set_arb_waveform_next_write_position
 
@@ -7418,3 +7383,38 @@ class Session(_SessionBase):
         Note: This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG.
         '''
         self._interpreter.reset()
+
+    @ivi_synchronized
+    def _self_test(self):
+        r'''_self_test
+
+        Performs a self-test on the NI-RFSG device and returns the test results.
+
+        This method performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.
+
+        This method does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this method. The NI-RFSG device must be in the Configuration state before you call this method.
+
+        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_
+
+        Returns:
+            self_test_result (int): This parameter contains the value returned from the NI-RFSG device self test.
+
+                +----------------+------------------+
+                | Self-Test Code | Description      |
+                +================+==================+
+                | 0              | Self test passed |
+                +----------------+------------------+
+                | 1              | Self test failed |
+                +----------------+------------------+
+
+            self_test_message (str): Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
+
+                You must pass a ViChar array with at least 256 bytes.
+
+        '''
+        self_test_result, self_test_message = self._interpreter.self_test()
+        return self_test_result, self_test_message

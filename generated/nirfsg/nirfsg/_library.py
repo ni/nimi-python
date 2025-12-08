@@ -81,7 +81,6 @@ class Library(object):
         self.niRFSG_SelectArbWaveform_cfunc = None
         self.niRFSG_SelfCal_cfunc = None
         self.niRFSG_SelfCalibrateRange_cfunc = None
-        self.niRFSG_SelfTest_cfunc = None
         self.niRFSG_SendSoftwareEdgeTrigger_cfunc = None
         self.niRFSG_SetArbWaveformNextWritePosition_cfunc = None
         self.niRFSG_SetAttributeViBoolean_cfunc = None
@@ -101,6 +100,7 @@ class Library(object):
         self.niRFSG_WriteScript_cfunc = None
         self.niRFSG_close_cfunc = None
         self.niRFSG_reset_cfunc = None
+        self.niRFSG_self_test_cfunc = None
 
     def _get_library_function(self, name):
         try:
@@ -597,14 +597,6 @@ class Library(object):
                 self.niRFSG_SelfCalibrateRange_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_SelfCalibrateRange_cfunc(vi, steps_to_omit, min_frequency, max_frequency, min_power_level, max_power_level)
 
-    def niRFSG_SelfTest(self, vi, self_test_result, self_test_message):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSG_SelfTest_cfunc is None:
-                self.niRFSG_SelfTest_cfunc = self._get_library_function('niRFSG_SelfTest')
-                self.niRFSG_SelfTest_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niRFSG_SelfTest_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_SelfTest_cfunc(vi, self_test_result, self_test_message)
-
     def niRFSG_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_identifier):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_SendSoftwareEdgeTrigger_cfunc is None:
@@ -756,3 +748,11 @@ class Library(object):
                 self.niRFSG_reset_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_reset_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_reset_cfunc(vi)
+
+    def niRFSG_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_self_test_cfunc is None:
+                self.niRFSG_self_test_cfunc = self._get_library_function('niRFSG_self_test')
+                self.niRFSG_self_test_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt16), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_self_test_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_self_test_cfunc(vi, self_test_result, self_test_message)

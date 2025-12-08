@@ -3702,7 +3702,7 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SelfTest': {
+    'self_test': {
         'codegen_method': 'private',
         'documentation': {
             'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_'

@@ -625,14 +625,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_test(self):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_test_result_ctype = _visatype.ViInt16()  # case S220
-        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niRFSG_SelfTest(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
-
     def send_software_edge_trigger(self, trigger, trigger_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
@@ -791,3 +783,11 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSG_reset(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
+
+    def self_test(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        self_test_result_ctype = _visatype.ViInt16()  # case S220
+        self_test_message_ctype = (_visatype.ViChar * 256)()  # case C070
+        error_code = self._library.niRFSG_self_test(vi_ctype, None if self_test_result_ctype is None else (ctypes.pointer(self_test_result_ctype)), self_test_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(self_test_result_ctype.value), self_test_message_ctype.value.decode(self._encoding)
