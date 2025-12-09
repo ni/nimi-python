@@ -1696,6 +1696,9 @@
   - Changed the name of `get_self_calibration_last_date_and_time` to `get_self_cal_last_date_and_time` to be consistent with other MI drivers
   - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
   - Updated `self_test` to not have any parameters, aligning with other MI drivers
+  - Changed `frequency_settling` property to be of type float instead of hightime.timedelta, since it can have multiple interpretation based on `frequency_settling_units` property value
+  - Changed `interpolation_delay` and `relative_delay` properties to be of type hightime.timedelta, so that it aligns with _delay_ attributes across all drivers
+  - Changed `exported_ref_clock_rate` and `ref_clock_rate` properties to be of type float instead of enum, since the enums just represented raw float values
 - Removed
   - Methods and properties applicable only to hardware which are not supported anymore
     - Methods

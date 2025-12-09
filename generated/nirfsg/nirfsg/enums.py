@@ -451,32 +451,6 @@ class RFInLoExportEnabled(Enum):
     '''
 
 
-class ReferenceClockExportedRate(Enum):
-    CLOCK_RATE_10_MEGAHERTZ = 10000000
-    r'''
-    Uses a 10MHz Reference Clock rate.
-    '''
-    CLOCK_RATE_100_MEGAHERTZ = 100000000.0
-    r'''
-    Uses a 100MHz Reference Clock rate.
-    '''
-    CLOCK_RATE_1_GIGAHERTZ = 1000000000.0
-    r'''
-    Uses a 1GHz Reference Clock rate.
-    '''
-
-
-class ReferenceClockRate(Enum):
-    AUTO = -1
-    r'''
-    Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it.
-    '''
-    CLOCK_RATE_10_MEGAHERTZ = 10000000
-    r'''
-    Uses a 10MHz Reference Clock rate.
-    '''
-
-
 class ReferencePllBandwidth(Enum):
     NARROW = 0
     r'''

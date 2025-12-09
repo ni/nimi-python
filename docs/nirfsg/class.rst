@@ -5325,35 +5325,33 @@ exported_ref_clock_rate
 
         Specifies the Reference Clock Rate, in Hz, of the signal sent to the Reference Clock Export Output Terminal. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ`
+        **Default Value:** 10MHz
 
         **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         **Defined Values**:
 
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-        | Name                                                                   | Value        | Description                         |
-        +========================================================================+==============+=====================================+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ`  | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_100_MEGAHERTZ` | 100000000.0  | Uses a 100MHz Reference Clock rate. |
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_1_GIGAHERTZ`   | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +--------------+-------------------------------------+
+        | Value        | Description                         |
+        +==============+=====================================+
+        | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
+        +--------------+-------------------------------------+
+        | 100000000.0  | Uses a 100MHz Reference Clock rate. |
+        +--------------+-------------------------------------+
+        | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
+        +--------------+-------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------------+
-            | Characteristic        | Value                            |
-            +=======================+==================================+
-            | Datatype              | enums.ReferenceClockExportedRate |
-            +-----------------------+----------------------------------+
-            | Permissions           | read-write                       |
-            +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
-            +-----------------------+----------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5972,15 +5970,15 @@ frequency_settling
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6246,15 +6244,15 @@ interpolation_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8665,11 +8663,11 @@ ref_clock_rate
 
         To set this property, the NI-RFSG device must be in the Configuration state. If you are using the PXIe-5654/5654 with PXIe-5696, the NI-RFSG device must be in the Committed state to read this property. When you read this property, it returns the frequency the device is locked to during the Committed state.
 
-        If you set this property to :py:data:`~nirfsg.ReferenceClockRate.AUTO`, NI-RFSG uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if automatic detection is supported by the device.
+        If you set this property to Auto, NI-RFSG uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if automatic detection is supported by the device.
 
         **Valid Values:**
 
-        PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the :py:data:`~nirfsg.ReferenceClockRate.AUTO` and :py:data:`~nirfsg.ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ` values.
+        PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the Auto and 10MHz values.
 
         PXIe-5841 with PXIe-5655, PXIe-5842: 10 MHz, 100 MHz, 270 MHz, and 3.84 MHz
 
@@ -8681,7 +8679,7 @@ ref_clock_rate
 
         **Units**: hertz (Hz)
 
-        **Default Value:** :py:data:`~nirfsg.ReferenceClockRate.AUTO`
+        **Default Value:** Auto
 
         **Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8695,29 +8693,27 @@ ref_clock_rate
 
         **Defined Values**:
 
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-        | Value                                                         | Description                                                                                                                       |
-        +===============================================================+===================================================================================================================================+
-        | :py:data:`~nirfsg.ReferenceClockRate.AUTO`                    | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ` | Uses a 10 MHz Reference Clock rate.                                                                                               |
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+        +-------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+        | Name  | Value      | Description                                                                                                                       |
+        +=======+============+===================================================================================================================================+
+        | Auto  | -1.0       | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
+        +-------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+        | 10MHz | 10000000.0 | Uses a 10 MHz Reference Clock rate.                                                                                               |
+        +-------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: Automatic detection of the Reference Clock rate is supported on only the PXIe-5654/5654 with PXIe-5696. For all other supported devices, NI-RFSG uses the default Reference Clock rate of 10MHz.
 
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.ReferenceClockRate |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8860,15 +8856,15 @@ relative_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
