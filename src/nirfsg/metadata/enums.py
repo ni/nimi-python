@@ -742,53 +742,6 @@ enums = {
             }
         ]
     },
-    'ReferenceClockExportedRate': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Uses a 10MHz Reference Clock rate.'
-                },
-                'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
-                'value': 10000000
-            },
-            {
-                'documentation': {
-                    'description': 'Uses a 100MHz Reference Clock rate.'
-                },
-                'name': 'NIRFSG_VAL_100MHZ',
-                'python_name': 'CLOCK_RATE_100_MEGAHERTZ',
-                'value': 100000000.0
-            },
-            {
-                'documentation': {
-                    'description': 'Uses a 1GHz Reference Clock rate.'
-                },
-                'name': 'NIRFSG_VAL_1GHZ',
-                'python_name': 'CLOCK_RATE_1_GIGAHERTZ',
-                'value': 1000000000.0
-            }
-        ]
-    },
-    'ReferenceClockRate': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it.'
-                },
-                'name': 'NIRFSG_VAL_AUTO',
-                'value': -1
-            },
-            {
-                'documentation': {
-                    'description': 'Uses a 10MHz Reference Clock rate.'
-                },
-                'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
-                'value': 10000000
-            }
-        ]
-    },
     'ReferencePllBandwidth': {
         'values': [
             {

@@ -1937,15 +1937,13 @@ attributes = {
     },
     1150083: {
         'access': 'read-write',
-        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the frequency settling time. Interpretation of this value depends on the NIRFSG_ATTR_FREQUENCY_SETTLING_UNITS attribute.\n\n**Valid Values:**\n\nThe valid values for this attribute depend on the NIRFSG_ATTR_FREQUENCY_SETTLING_UNITS attribute.\n\n\n\n**Default Value**: 1.0\n\n**Supported Devices:** PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXIe-5673/5673E, PXIe-5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/events.html>`_'
         },
         'lv_property': 'RF:Frequency Settling',
         'name': 'FREQUENCY_SETTLING',
-        'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
+        'type': 'ViReal64'
     },
     1150084: {
         'access': 'read only',
@@ -2481,13 +2479,15 @@ attributes = {
     },
     1150153: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the delay, in seconds, to apply to the I/Q waveform. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Units:** Seconds\n\n**Valid Values:** Plus or minus half of one I/Q sample period\n\n**Supported Devices:** PXIe-5644/5645/5646'
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:Interpolation Delay',
         'name': 'INTERPOLATION_DELAY',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150154: {
         'access': 'read-write',
@@ -3144,6 +3144,7 @@ attributes = {
     },
     1150220: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the delay, in seconds, to apply to the I/Q waveform.\n\nRelative delay allows for delaying the generated signal from one device relative to the generated signal of another device after those devices have been synchronized. You can achieve a negative relative delay by delaying both synchronized devices by the same value (1 μs) before generation begins and then changing the relative delay to a smaller amount than the initial value on only one of the devices.\n\nTo set this attribute, the NI-RFSG device must be in the Configuration or Generation state.\n\n**Units:** Seconds\n\n**Valid Values:**\n\nPXIe-PXIe-5820/5830/5831/5832/5840/5841: 0 μs to 3.2 μs\n\nPXIe-5842: 0 μs to 6.5 μs\n\n**Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Related Topics**\n\n`NI-TClk Overview <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_tclk_help.html>`_',
@@ -3151,7 +3152,8 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:Relative Delay',
         'name': 'RELATIVE_DELAY',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150225: {
         'access': 'read-write',
@@ -3651,31 +3653,26 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the Reference Clock Rate, in Hz, of the signal sent to the Reference Clock Export Output Terminal. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** NIRFSG_VAL_10MHZ\n\n**Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
+            'description': 'Specifies the Reference Clock Rate, in Hz, of the signal sent to the Reference Clock Export Output Terminal. To set this attribute, the NI-RFSG device must be in the Configuration state.\n\n**Default Value:** 10MHz\n\n**Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
             'table_body': [
                 [
-                    'NIRFSG_VAL_10MHZ',
                     '10000000.0',
                     'Uses a 10MHz Reference Clock rate.'
                 ],
                 [
-                    'NIRFSG_VAL_100MHZ',
                     '100000000.0',
                     'Uses a 100MHz Reference Clock rate.'
                 ],
                 [
-                    'NIRFSG_VAL_1GHZ',
                     '1000000000.0',
                     'Uses a 1GHz Reference Clock rate.'
                 ]
             ],
             'table_header': [
-                'Name',
                 'Value',
                 'Description'
             ]
         },
-        'enum': 'ReferenceClockExportedRate',
         'lv_property': 'Clock:Reference Clock Exported Rate (Hz)',
         'name': 'EXPORTED_REF_CLOCK_RATE',
         'type': 'ViReal64'
@@ -3952,24 +3949,26 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the Reference Clock rate, in Hz, of the signal present at the REF IN or CLK IN connector. This property is only valid when the NIRFSG_ATTR_REF_CLOCK_SOURCE attribute is set to ClkIn, RefIn, or RefIn2\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state. If you are using the PXIe-5654/5654 with PXIe-5696, the NI-RFSG device must be in the Committed state to read this attribute. When you read this attribute, it returns the frequency the device is locked to during the Committed state.\n\nIf you set this attribute to NIRFSG_VAL_AUTO, NI-RFSG uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if automatic detection is supported by the device.\n\n**Valid Values:**\n\nPXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the NIRFSG_VAL_AUTO and NIRFSG_VAL_10MHZ values.\n\nPXIe-5841 with PXIe-5655, PXIe-5842: 10 MHz, 100 MHz, 270 MHz, and 3.84 MHz \n\ny, where\n\ny is 4, 8, 16, 24, 25, or 32.\n\nPXIe-5860: 10 MHz, 100 MHz\n\n**Units**: hertz (Hz)\n\n**Default Value:** NIRFSG_VAL_AUTO\n\n**Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigureRefClock\n\n**Defined Values**:',
+            'description': 'Specifies the Reference Clock rate, in Hz, of the signal present at the REF IN or CLK IN connector. This property is only valid when the NIRFSG_ATTR_REF_CLOCK_SOURCE attribute is set to ClkIn, RefIn, or RefIn2\n\nTo set this attribute, the NI-RFSG device must be in the Configuration state. If you are using the PXIe-5654/5654 with PXIe-5696, the NI-RFSG device must be in the Committed state to read this attribute. When you read this attribute, it returns the frequency the device is locked to during the Committed state.\n\nIf you set this attribute to Auto, NI-RFSG uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if automatic detection is supported by the device.\n\n**Valid Values:**\n\nPXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the Auto and 10MHz values.\n\nPXIe-5841 with PXIe-5655, PXIe-5842: 10 MHz, 100 MHz, 270 MHz, and 3.84 MHz \n\ny, where\n\ny is 4, 8, 16, 24, 25, or 32.\n\nPXIe-5860: 10 MHz, 100 MHz\n\n**Units**: hertz (Hz)\n\n**Default Value:** Auto\n\n**Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n**High-Level Functions**:\n\n- nirfsg_ConfigureRefClock\n\n**Defined Values**:',
             'note': 'Automatic detection of the Reference Clock rate is supported on only the PXIe-5654/5654 with PXIe-5696. For all other supported devices, NI-RFSG uses the default Reference Clock rate of 10MHz.',
             'table_body': [
                 [
-                    'NIRFSG_VAL_AUTO',
+                    'Auto',
+                    '-1.0',
                     'Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it.'
                 ],
                 [
-                    'NIRFSG_VAL_10MHZ',
+                    '10MHz',
+                    '10000000.0',
                     'Uses a 10 MHz Reference Clock rate.'
                 ]
             ],
             'table_header': [
+                'Name',
                 'Value',
                 'Description'
             ]
         },
-        'enum': 'ReferenceClockRate',
         'lv_property': 'Clock:Reference Clock Rate (Hz)',
         'name': 'REF_CLOCK_RATE',
         'type': 'ViReal64'
