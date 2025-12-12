@@ -1693,11 +1693,14 @@
 - Changed
   - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
   - Changed the parameter name for waveform name from `name` to `waveform_name` in `clear_arb_waveform` and `select_arb_waveform` to be consistent with other waveform methods
-  - Changed the name of `get_self_calibration_last_date_and_time` to `get_self_cal_last_date_and_time` to be consistent with other MI drivers
+  - Changed the name of below methods to be consistent with other MI drivers
+    - `get_self_calibration_last_date_and_time` to `get_self_cal_last_date_and_time`
+    - `get_external_calibration_last_date_and_time` to `get_ext_cal_last_date_and_time`
   - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
   - Updated `self_test` to not have any parameters, aligning with other MI drivers
   - Changed `frequency_settling` property to be of type float instead of hightime.timedelta, since it can have multiple interpretation based on `frequency_settling_units` property value
   - Changed `interpolation_delay` and `relative_delay` properties to be of type hightime.timedelta, so that it aligns with _delay_ attributes across all drivers
+  - Updated `wait_until_settled` method to have `max_time_milliseconds` parameter as type hightime.timedelta with a default value of 10 seconds
   - Changed `exported_ref_clock_rate` and `ref_clock_rate` properties to be of type float instead of enum, since the enums just represented raw float values
 - Removed
   - Methods and properties applicable only to hardware which are not supported anymore

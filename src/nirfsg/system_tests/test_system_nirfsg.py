@@ -580,7 +580,7 @@ class SystemTests:
     def test_wait_until_settled(self, rfsg_device_session):
         rfsg_device_session.configure_rf(2e9, -5.0)
         with rfsg_device_session.initiate():
-            rfsg_device_session.wait_until_settled(15000)
+            rfsg_device_session.wait_until_settled()
 
     def test_get_all_named_waveform_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
