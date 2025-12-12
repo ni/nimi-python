@@ -135,8 +135,8 @@ class SystemTests:
         rfsg_device_session.clear_self_calibrate_range()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
-    def test_get_external_calibration_last_date_and_time(self, rfsg_device_session):
-        dt = rfsg_device_session.get_external_calibration_last_date_and_time()
+    def test_get_ext_cal_last_date_and_time(self, rfsg_device_session):
+        dt = rfsg_device_session.get_ext_cal_last_date_and_time()
         assert isinstance(dt, hightime.datetime)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
