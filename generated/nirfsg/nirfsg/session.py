@@ -6501,8 +6501,8 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
-    def get_external_calibration_last_date_and_time(self):
-        '''get_external_calibration_last_date_and_time
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
 
         Returns the date and time of the last successful external calibration.
 
@@ -7119,7 +7119,7 @@ class Session(_SessionBase):
         self._interpreter.set_arb_waveform_next_write_position(waveform_name, relative_to, offset)
 
     @ivi_synchronized
-    def wait_until_settled(self, max_time_milliseconds):
+    def wait_until_settled(self, max_time_milliseconds=hightime.timedelta(seconds=10.0)):
         r'''wait_until_settled
 
         Waits until the RF output signal has settled. This method is useful for devices that support changes while in the Generation state.
@@ -7131,11 +7131,12 @@ class Session(_SessionBase):
         **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
-            max_time_milliseconds (int): Specifies the maximum time the method waits for the output to settle. If the maximum time is exceeded, this method returns an error. The units are expressed in milliseconds.
+            max_time_milliseconds (hightime.timedelta, datetime.timedelta, or int in milliseconds): Specifies the maximum time the method waits for the output to settle. If the maximum time is exceeded, this method returns an error. The units are expressed in milliseconds.
 
                 **Default Value** : 10000
 
         '''
+        max_time_milliseconds = _converters.convert_timedelta_to_milliseconds_int32(max_time_milliseconds)
         self._interpreter.wait_until_settled(max_time_milliseconds)
 
     @ivi_synchronized

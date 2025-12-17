@@ -135,8 +135,8 @@ class SystemTests:
         rfsg_device_session.clear_self_calibrate_range()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
-    def test_get_external_calibration_last_date_and_time(self, rfsg_device_session):
-        dt = rfsg_device_session.get_external_calibration_last_date_and_time()
+    def test_get_ext_cal_last_date_and_time(self, rfsg_device_session):
+        dt = rfsg_device_session.get_ext_cal_last_date_and_time()
         assert isinstance(dt, hightime.datetime)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
@@ -580,7 +580,7 @@ class SystemTests:
     def test_wait_until_settled(self, rfsg_device_session):
         rfsg_device_session.configure_rf(2e9, -5.0)
         with rfsg_device_session.initiate():
-            rfsg_device_session.wait_until_settled(15000)
+            rfsg_device_session.wait_until_settled()
 
     def test_get_all_named_waveform_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
