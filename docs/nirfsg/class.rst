@@ -1288,12 +1288,12 @@ get_error
 
 
 
-get_external_calibration_last_date_and_time
--------------------------------------------
+get_ext_cal_last_date_and_time
+------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_external_calibration_last_date_and_time()
+    .. py:method:: get_ext_cal_last_date_and_time()
 
             Returns the date and time of the last successful external calibration.
 
@@ -2492,7 +2492,7 @@ wait_until_settled
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: wait_until_settled(max_time_milliseconds)
+    .. py:method:: wait_until_settled(max_time_milliseconds=hightime.timedelta(seconds=10.0))
 
             Waits until the RF output signal has settled. This method is useful for devices that support changes while in the Generation state.
 
@@ -2516,7 +2516,7 @@ wait_until_settled
                 
 
 
-            :type max_time_milliseconds: int
+            :type max_time_milliseconds: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 write_arb_waveform
 ------------------

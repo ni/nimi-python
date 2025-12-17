@@ -2207,7 +2207,7 @@ functions = {
             'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
-        'method_name_for_documentation': 'get_external_calibration_last_date_and_time',
+        'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
         'parameters': [
             {
                 'direction': 'in',
@@ -2308,7 +2308,7 @@ functions = {
                 'type': 'hightime.datetime'
             }
         ],
-        'python_name': 'get_external_calibration_last_date_and_time',
+        'python_name': 'get_ext_cal_last_date_and_time',
         'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
         'returns': 'ViStatus'
     },
@@ -4589,14 +4589,17 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the maximum time the function waits for the output to settle. If the maximum time is exceeded, this function returns an error. The units are expressed in milliseconds.\n\n**Default Value** : 10000'
                 },
                 'name': 'maxTimeMilliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds',
                 'use_array': False,
-                'use_in_python_api': True
+                'use_in_python_api': True                
             }
         ],
         'returns': 'ViStatus'
