@@ -2310,7 +2310,7 @@ send_software_edge_trigger
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger_identifier: str
+            :type trigger_identifier: :py:data:`nirfsg.TriggerIdentifier`
 
 set_arb_waveform_next_write_position
 ------------------------------------
@@ -3460,15 +3460,15 @@ arb_sample_clock_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ArbSampleClockSource |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5243,15 +5243,15 @@ exported_pulse_modulation_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------------------------------+
+            | Characteristic        | Value                               |
+            +=======================+=====================================+
+            | Datatype              | enums.PulseModulationOutputTerminal |
+            +-----------------------+-------------------------------------+
+            | Permissions           | read-write                          |
+            +-----------------------+-------------------------------------+
+            | Repeated Capabilities | None                                |
+            +-----------------------+-------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5302,15 +5302,15 @@ exported_ref_clock_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+------------------------------------------+
+            | Characteristic        | Value                                    |
+            +=======================+==========================================+
+            | Datatype              | enums.ReferenceClockExportOutputTerminal |
+            +-----------------------+------------------------------------------+
+            | Permissions           | read-write                               |
+            +-----------------------+------------------------------------------+
+            | Repeated Capabilities | None                                     |
+            +-----------------------+------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7604,15 +7604,15 @@ lo_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | los        |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | enums.LoSource |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | los            |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8638,15 +8638,15 @@ pulse_modulation_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.PulseModulationSource |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | None                        |
+            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8760,15 +8760,15 @@ ref_clock_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ReferenceClockSource |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

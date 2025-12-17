@@ -517,8 +517,8 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5644/5645/5646, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    arb_sample_clock_source = _attributes.AttributeViString(1150030)
-    '''Type: str
+    arb_sample_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ArbSampleClockSource, 1150030)
+    '''Type: enums.ArbSampleClockSource
 
     Specifies the Sample Clock source for the device. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -1600,8 +1600,8 @@ class _SessionBase(object):
     | ScriptTriggerDigitalLevelActiveLevel.LOW  | 9001 (0x2329) | Trigger when the digital trigger signal is low.  |
     +-------------------------------------------+---------------+--------------------------------------------------+
     '''
-    exported_pulse_modulation_event_output_terminal = _attributes.AttributeViString(1150309)
-    '''Type: str
+    exported_pulse_modulation_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.PulseModulationOutputTerminal, 1150309)
+    '''Type: enums.PulseModulationOutputTerminal
 
     Specifies the destination terminal for exporting the Pulse Modulation Event. The Pulse Modulation Event tracks the RF Envelope when Pulse Modulation is Enabled. If this property is set to a value other than `do not export str`, calling NI-RFSG Commit will cause the output terminal to be pulled to the logic level that is the inverse of `exported pulse modulation event active level`. You can tri-state this terminal by setting this property to `do not export str` or by calling `niRFSG Reset`. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -1619,8 +1619,8 @@ class _SessionBase(object):
     | "PulseOut"     | Export the pulse modulation video signal on the pulse out terminal. |
     +----------------+---------------------------------------------------------------------+
     '''
-    exported_ref_clock_output_terminal = _attributes.AttributeViString(1150053)
-    '''Type: str
+    exported_ref_clock_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockExportOutputTerminal, 1150053)
+    '''Type: enums.ReferenceClockExportOutputTerminal
 
     Specifies the destination terminal for exporting the Reference Clock on the RF signal generators. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -2899,8 +2899,8 @@ class _SessionBase(object):
 
     Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
     '''
-    lo_source = _attributes.AttributeViString(1150150)
-    '''Type: str
+    lo_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.LoSource, 1150150)
+    '''Type: enums.LoSource
 
     Specifies whether to use the internal or external local oscillator (LO) source. If the lo_source property is set to "" (empty string), NI-RFSG uses the internal LO source. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -3482,8 +3482,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    pulse_modulation_source = _attributes.AttributeViString(1150308)
-    '''Type: str
+    pulse_modulation_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.PulseModulationSource, 1150308)
+    '''Type: enums.PulseModulationSource
 
     Specifies the source of the pulse modulation signal. When Pulse In in used, the pulse modulation is applied with the lowest latency and jitter, but is not aligned to any particular waveform sample. When a marker is used, the RF pulse is aligned to a specific sample in the arbitrary waveform. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -3554,8 +3554,8 @@ class _SessionBase(object):
 
     Note: Automatic detection of the Reference Clock rate is supported on only the PXIe-5654/5654 with PXIe-5696. For all other supported devices, NI-RFSG uses the default Reference Clock rate of 10MHz.
     '''
-    ref_clock_source = _attributes.AttributeViString(1150001)
-    '''Type: str
+    ref_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockSource, 1150001)
+    '''Type: enums.ReferenceClockSource
 
     Specifies the Reference Clock source. To set this property, the NI-RFSG device must be in the Configuration state.
 
@@ -5264,7 +5264,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            trigger_identifier (str): Specifies the Script Trigger to configure. This parameter is valid only when you set the TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the TRIGGER_IDENTIFIER parameter to "" (empty string).
+            trigger_identifier (enums.TriggerIdentifier): Specifies the Script Trigger to configure. This parameter is valid only when you set the TRIGGER parameter to NIRFSG_VAL_START_TRIGGER. Otherwise, set the TRIGGER_IDENTIFIER parameter to "" (empty string).
 
                 **Default Value:** "" (empty string)
 
@@ -5293,6 +5293,8 @@ class _SessionBase(object):
         '''
         if type(trigger) is not enums.SoftwareTriggerType:
             raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTriggerType))
+        if type(trigger_identifier) is not enums.TriggerIdentifier:
+            raise TypeError('Parameter trigger_identifier must be of type ' + str(enums.TriggerIdentifier))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
     @ivi_synchronized

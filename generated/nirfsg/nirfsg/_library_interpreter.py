@@ -628,7 +628,7 @@ class LibraryInterpreter(object):
     def send_software_edge_trigger(self, trigger, trigger_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_ctype = _visatype.ViInt32(trigger.value)  # case S130
-        trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.encode(self._encoding))  # case C020
+        trigger_identifier_ctype = ctypes.create_string_buffer(trigger_identifier.value.encode(self._encoding))  # case C030
         error_code = self._library.niRFSG_SendSoftwareEdgeTrigger(vi_ctype, trigger_ctype, trigger_identifier_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

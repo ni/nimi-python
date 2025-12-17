@@ -182,7 +182,7 @@ class SystemTests:
         assert simulated_5831_device_session.ports['if1'].deembedding_type == requested_deembedding_type
 
     def test_los_rep_cap(self, simulated_5831_device_session):
-        requested_lo_source = "SG_SA_Shared"
+        requested_lo_source = nirfsg.LoSource.SG_SA_SHARED
         simulated_5831_device_session.los[2].lo_source = requested_lo_source
         assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
 
@@ -515,8 +515,8 @@ class SystemTests:
         rfsg_device_session.configure_software_start_trigger()
         rfsg_device_session.script_triggers[0].configure_software_script_trigger()
         with rfsg_device_session.initiate():
-            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.START, '')
-            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
+            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.START, nirfsg.TriggerIdentifier.NONE)
+            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, nirfsg.TriggerIdentifier.SCRIPT_TRIGGER0)
 
     @pytest.mark.skipif(sys.platform == "linux", reason="Function not supported on Linux OS")
     def test_create_deembedding_sparameter_table_s2p_file(self, rfsg_device_session):

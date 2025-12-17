@@ -151,6 +151,24 @@ enums = {
             }
         ]
     },
+    'ArbSampleClockSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the AWG module onboard clock as the Sample Clock source.'
+                },
+                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
+                'value': 'OnboardClock'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the external clock as the Sample Clock source.'
+                },
+                'name': 'NIRFSG_VAL_CLK_IN_STR',
+                'value': 'ClkIn'
+            }
+        ]
+    },
     'AutomaticLevelControl': {
         'values': [
             {
@@ -434,6 +452,46 @@ enums = {
             }
         ]
     },
+    'LoSource': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_ONBOARD_STR',
+                'value': 'Onboard'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the UPCONVERTER_CENTER_FREQUENCY attribute to specify the LO frequency.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_LO_IN_STR',
+                'value': 'LO_In'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_SECONDARY_STR',
+                'value': 'Secondary'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_SG_SA_SHARED_STR',
+                'value': 'SG_SA_Shared'
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_AUTOMATIC_SG_SA_SHARED_STR',
+                'value': 'Automatic_SG_SA_Shared'
+            }
+        ]
+    },
     'LoadOptions': {
         'values': [
             {
@@ -699,6 +757,63 @@ enums = {
             }
         ]
     },
+    'PulseModulationOutputTerminal': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Pulse modulation video signal is not exported.'
+                },
+                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
+                'value': ''
+            },
+            {
+                'documentation': {
+                    'description': 'Export the pulse modulation video signal on the pulse out terminal.'
+                },
+                'name': 'NIRFSG_VAL_PULSE_OUT_STR',
+                'value': 'PulseOut'
+            }
+        ]
+    },
+    'PulseModulationSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
+                },
+                'name': 'NIRFSG_VAL_PULSE_IN_STR',
+                'value': 'PulseIn'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 0.'
+                },
+                'name': 'NIRFSG_VAL_MARKER0_STR',
+                'value': 'Marker0'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 1.'
+                },
+                'name': 'NIRFSG_VAL_MARKER1_STR',
+                'value': 'Marker1'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 2.'
+                },
+                'name': 'NIRFSG_VAL_MARKER2_STR',
+                'value': 'Marker2'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 3.'
+                },
+                'name': 'NIRFSG_VAL_MARKER3_STR',
+                'value': 'Marker3'
+            }
+        ]
+    },
     'RFBlanking': {
         'values': [
             {
@@ -739,6 +854,84 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_ENABLE',
                 'value': 1
+            }
+        ]
+    },
+    'ReferenceClockExportOutputTerminal': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The Reference Clock signal is not exported.'
+                },
+                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
+                'value': ''
+            },
+            {
+                'documentation': {
+                    'description': 'Exports the Reference Clock signal to the REF OUT connector of the device.'
+                },
+                'name': 'NIRFSG_VAL_REF_OUT_STR',
+                'value': 'RefOut'
+            },
+            {
+                'documentation': {
+                    'description': 'Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.'
+                },
+                'name': 'NIRFSG_VAL_REF_OUT2_STR',
+                'value': 'RefOut2'
+            },
+            {
+                'documentation': {
+                    'description': 'Exports the Reference Clock signal to the CLK OUT connector of the device.'
+                },
+                'name': 'NIRFSG_VAL_CLK_OUT_STR',
+                'value': 'ClkOut'
+            }
+        ]
+    },
+    'ReferenceClockSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the onboard Reference Clock as the clock source.'
+                },
+                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
+                'value': 'OnboardClock'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the clock signal present at the front panel REF IN connector as the Reference Clock source.'
+                },
+                'name': 'NIRFSG_VAL_REF_IN_STR',
+                'value': 'RefIn'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.'
+                },
+                'name': 'NIRFSG_VAL_PXI_CLK_STR',
+                'value': 'PXI_CLK'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.'
+                },
+                'name': 'NIRFSG_VAL_CLK_IN_STR',
+                'value': 'ClkIn'
+            },
+            {
+                'documentation': {
+                    'description': 'This value is not valid on any supported devices.'
+                },
+                'name': 'NIRFSG_VAL_REF_IN_2_STR',
+                'value': 'RefIn2'
+            },
+            {
+                'documentation': {
+                    'description': 'This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 -** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use NIRFSG_VAL_PXI_CLK_STR as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
+                },
+                'name': 'NIRFSG_VAL_PXI_CLK_MASTER_STR',
+                'value': 'PXI_ClkMaster'
             }
         ]
     },
@@ -1062,6 +1255,46 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
+            }
+        ]
+    },
+    'TriggerIdentifier': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 0.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER0',
+                'value': 'scriptTrigger0'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 1.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER1',
+                'value': 'scriptTrigger1'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 2.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER2',
+                'value': 'scriptTrigger2'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 3.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER3',
+                'value': 'scriptTrigger3'
+            },
+            {
+                'documentation': {
+                    'description': 'None (no signal to export)'
+                },
+                'name': 'NIRFSG_VAL_NONE_EMPTY_STRING',
+                'python_name': 'NONE',
+                'value': ''
             }
         ]
     },

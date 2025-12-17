@@ -94,6 +94,17 @@ class ArbOnboardSampleClockMode(Enum):
     '''
 
 
+class ArbSampleClockSource(Enum):
+    ONBOARD_CLOCK = 'OnboardClock'
+    r'''
+    Uses the AWG module onboard clock as the Sample Clock source.
+    '''
+    CLK_IN = 'ClkIn'
+    r'''
+    Uses the external clock as the Sample Clock source.
+    '''
+
+
 class AutomaticLevelControl(Enum):
     DISABLE = 0
     r'''
@@ -243,6 +254,29 @@ class LoPllFractionalModeEnabled(Enum):
     ENABLE = 1
     r'''
     Enables fractional mode for the LO PLL.
+    '''
+
+
+class LoSource(Enum):
+    ONBOARD = 'Onboard'
+    r'''
+    Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.
+    '''
+    LO_IN = 'LO_In'
+    r'''
+    Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the UPCONVERTER_CENTER_FREQUENCY property to specify the LO frequency.
+    '''
+    SECONDARY = 'Secondary'
+    r'''
+    Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.
+    '''
+    SG_SA_SHARED = 'SG_SA_Shared'
+    r'''
+    Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.
+    '''
+    AUTOMATIC_SG_SA_SHARED = 'Automatic_SG_SA_Shared'
+    r'''
+    NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.
     '''
 
 
@@ -425,6 +459,40 @@ class PulseModulationMode(Enum):
     '''
 
 
+class PulseModulationOutputTerminal(Enum):
+    DO_NOT_EXPORT = ''
+    r'''
+    Pulse modulation video signal is not exported.
+    '''
+    PULSE_OUT = 'PulseOut'
+    r'''
+    Export the pulse modulation video signal on the pulse out terminal.
+    '''
+
+
+class PulseModulationSource(Enum):
+    PULSE_IN = 'PulseIn'
+    r'''
+    The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.
+    '''
+    MARKER0 = 'Marker0'
+    r'''
+    The trigger is received from the Marker 0.
+    '''
+    MARKER1 = 'Marker1'
+    r'''
+    The trigger is received from the Marker 1.
+    '''
+    MARKER2 = 'Marker2'
+    r'''
+    The trigger is received from the Marker 2.
+    '''
+    MARKER3 = 'Marker3'
+    r'''
+    The trigger is received from the Marker 3.
+    '''
+
+
 class RFBlanking(Enum):
     DISABLE = 0
     r'''
@@ -448,6 +516,52 @@ class RFInLoExportEnabled(Enum):
     ENABLE = 1
     r'''
     The RF In local oscillator signal is present at the front panel LO OUT connector.
+    '''
+
+
+class ReferenceClockExportOutputTerminal(Enum):
+    DO_NOT_EXPORT = ''
+    r'''
+    The Reference Clock signal is not exported.
+    '''
+    REF_OUT = 'RefOut'
+    r'''
+    Exports the Reference Clock signal to the REF OUT connector of the device.
+    '''
+    REF_OUT2 = 'RefOut2'
+    r'''
+    Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.
+    '''
+    CLK_OUT = 'ClkOut'
+    r'''
+    Exports the Reference Clock signal to the CLK OUT connector of the device.
+    '''
+
+
+class ReferenceClockSource(Enum):
+    ONBOARD_CLOCK = 'OnboardClock'
+    r'''
+    Uses the onboard Reference Clock as the clock source.
+    '''
+    REF_IN = 'RefIn'
+    r'''
+    Uses the clock signal present at the front panel REF IN connector as the Reference Clock source.
+    '''
+    PXI_CLK = 'PXI_CLK'
+    r'''
+    Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.
+    '''
+    CLK_IN = 'ClkIn'
+    r'''
+    Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.
+    '''
+    REF_IN_2 = 'RefIn2'
+    r'''
+    This value is not valid on any supported devices.
+    '''
+    PXI_CLK_MASTER = 'PXI_ClkMaster'
+    r'''
+    This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 -** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use ReferenceClockSource.PXI_CLK as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.
     '''
 
 
@@ -640,6 +754,29 @@ class StartTriggerType(Enum):
     SOFTWARE = 2
     r'''
     The data operation does not start until a software event occurs. You may create a software trigger by calling the send_software_edge_trigger method.
+    '''
+
+
+class TriggerIdentifier(Enum):
+    SCRIPT_TRIGGER0 = 'scriptTrigger0'
+    r'''
+    Specifies Script Trigger 0.
+    '''
+    SCRIPT_TRIGGER1 = 'scriptTrigger1'
+    r'''
+    Specifies Script Trigger 1.
+    '''
+    SCRIPT_TRIGGER2 = 'scriptTrigger2'
+    r'''
+    Specifies Script Trigger 2.
+    '''
+    SCRIPT_TRIGGER3 = 'scriptTrigger3'
+    r'''
+    Specifies Script Trigger 3.
+    '''
+    NONE = ''
+    r'''
+    None (no signal to export)
     '''
 
 

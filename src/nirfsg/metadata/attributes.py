@@ -167,6 +167,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ReferenceClockSource',
         'lv_property': 'Clock:Reference Clock Source',
         'name': 'REF_CLOCK_SOURCE',
         'type': 'ViString'
@@ -1079,6 +1080,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ArbSampleClockSource',
         'lv_property': 'Clock:Arb Sample Clock Source',
         'name': 'ARB_SAMPLE_CLOCK_SOURCE',
         'type': 'ViString'
@@ -1277,6 +1279,7 @@ attributes = {
                 'Supported devices'
             ]
         },
+        'enum': 'ReferenceClockExportOutputTerminal',
         'lv_property': 'Clock:Reference Clock Export Output Terminal',
         'name': 'EXPORTED_REF_CLOCK_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2390,6 +2393,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'LoSource',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Source',
         'name': 'LO_SOURCE',
         'supported_rep_caps': [
@@ -3776,6 +3780,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'PulseModulationSource',
         'lv_property': 'Modulation:Pulse:Pulse Modulation Source',
         'name': 'PULSE_MODULATION_SOURCE',
         'type': 'ViString'
@@ -3800,6 +3805,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'PulseModulationOutputTerminal',
         'lv_property': 'Events:Pulse Modulation:Exported Pulse Modulation Event Output Terminal',
         'name': 'EXPORTED_PULSE_MODULATION_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'

@@ -211,6 +211,31 @@ ArbOnboardSampleClockMode
 
 
 
+ArbSampleClockSource
+--------------------
+
+.. py:class:: ArbSampleClockSource
+
+    .. py:attribute:: ArbSampleClockSource.ONBOARD_CLOCK
+
+
+
+        Uses the AWG module onboard clock as the Sample Clock source.
+
+        
+
+
+
+    .. py:attribute:: ArbSampleClockSource.CLK_IN
+
+
+
+        Uses the external clock as the Sample Clock source.
+
+        
+
+
+
 AutomaticLevelControl
 ---------------------
 
@@ -556,6 +581,61 @@ LoPllFractionalModeEnabled
 
 
         Enables fractional mode for the LO PLL.
+
+        
+
+
+
+LoSource
+--------
+
+.. py:class:: LoSource
+
+    .. py:attribute:: LoSource.ONBOARD
+
+
+
+        Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.
+
+        
+
+
+
+    .. py:attribute:: LoSource.LO_IN
+
+
+
+        Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the UPCONVERTER_CENTER_FREQUENCY property to specify the LO frequency.
+
+        
+
+
+
+    .. py:attribute:: LoSource.SECONDARY
+
+
+
+        Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.
+
+        
+
+
+
+    .. py:attribute:: LoSource.SG_SA_SHARED
+
+
+
+        Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.
+
+        
+
+
+
+    .. py:attribute:: LoSource.AUTOMATIC_SG_SA_SHARED
+
+
+
+        NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.
 
         
 
@@ -976,6 +1056,86 @@ PulseModulationMode
 
 
 
+PulseModulationOutputTerminal
+-----------------------------
+
+.. py:class:: PulseModulationOutputTerminal
+
+    .. py:attribute:: PulseModulationOutputTerminal.DO_NOT_EXPORT
+
+
+
+        Pulse modulation video signal is not exported.
+
+        
+
+
+
+    .. py:attribute:: PulseModulationOutputTerminal.PULSE_OUT
+
+
+
+        Export the pulse modulation video signal on the pulse out terminal.
+
+        
+
+
+
+PulseModulationSource
+---------------------
+
+.. py:class:: PulseModulationSource
+
+    .. py:attribute:: PulseModulationSource.PULSE_IN
+
+
+
+        The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.
+
+        
+
+
+
+    .. py:attribute:: PulseModulationSource.MARKER0
+
+
+
+        The trigger is received from the Marker 0.
+
+        
+
+
+
+    .. py:attribute:: PulseModulationSource.MARKER1
+
+
+
+        The trigger is received from the Marker 1.
+
+        
+
+
+
+    .. py:attribute:: PulseModulationSource.MARKER2
+
+
+
+        The trigger is received from the Marker 2.
+
+        
+
+
+
+    .. py:attribute:: PulseModulationSource.MARKER3
+
+
+
+        The trigger is received from the Marker 3.
+
+        
+
+
+
 RFBlanking
 ----------
 
@@ -1031,6 +1191,116 @@ RFInLoExportEnabled
 
 
         The RF In local oscillator signal is present at the front panel LO OUT connector.
+
+        
+
+
+
+ReferenceClockExportOutputTerminal
+----------------------------------
+
+.. py:class:: ReferenceClockExportOutputTerminal
+
+    .. py:attribute:: ReferenceClockExportOutputTerminal.DO_NOT_EXPORT
+
+
+
+        The Reference Clock signal is not exported.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportOutputTerminal.REF_OUT
+
+
+
+        Exports the Reference Clock signal to the REF OUT connector of the device.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportOutputTerminal.REF_OUT2
+
+
+
+        Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportOutputTerminal.CLK_OUT
+
+
+
+        Exports the Reference Clock signal to the CLK OUT connector of the device.
+
+        
+
+
+
+ReferenceClockSource
+--------------------
+
+.. py:class:: ReferenceClockSource
+
+    .. py:attribute:: ReferenceClockSource.ONBOARD_CLOCK
+
+
+
+        Uses the onboard Reference Clock as the clock source.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.REF_IN
+
+
+
+        Uses the clock signal present at the front panel REF IN connector as the Reference Clock source.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.PXI_CLK
+
+
+
+        Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.CLK_IN
+
+
+
+        Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.REF_IN_2
+
+
+
+        This value is not valid on any supported devices.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.PXI_CLK_MASTER
+
+
+
+        This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 -** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use :py:data:`~nirfsg.ReferenceClockSource.PXI_CLK` as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.
 
         
 
@@ -1481,6 +1751,61 @@ StartTriggerType
 
 
         The data operation does not start until a software event occurs. You may create a software trigger by calling the :py:meth:`nirfsg.Session.send_software_edge_trigger` method.
+
+        
+
+
+
+TriggerIdentifier
+-----------------
+
+.. py:class:: TriggerIdentifier
+
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER0
+
+
+
+        Specifies Script Trigger 0.
+
+        
+
+
+
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER1
+
+
+
+        Specifies Script Trigger 1.
+
+        
+
+
+
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER2
+
+
+
+        Specifies Script Trigger 2.
+
+        
+
+
+
+    .. py:attribute:: TriggerIdentifier.SCRIPT_TRIGGER3
+
+
+
+        Specifies Script Trigger 3.
+
+        
+
+
+
+    .. py:attribute:: TriggerIdentifier.NONE
+
+
+
+        None (no signal to export)
 
         
 

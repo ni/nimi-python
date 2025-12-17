@@ -3880,6 +3880,7 @@ functions = {
                         'Description'
                     ]
                 },
+                'enum': 'TriggerIdentifier',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
