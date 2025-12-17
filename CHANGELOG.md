@@ -1691,17 +1691,17 @@
 #### [nirfsg] Unreleased
 - Added
 - Changed
-  - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
+  - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
   - Changed the parameter name for waveform name from `name` to `waveform_name` in `clear_arb_waveform` and `select_arb_waveform` to be consistent with other waveform methods
   - Changed the name of below methods to be consistent with other APIs in the repository
     - `get_self_calibration_last_date_and_time` to `get_self_cal_last_date_and_time`
     - `get_external_calibration_last_date_and_time` to `get_ext_cal_last_date_and_time`
-  - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
-  - Updated `self_test` to not have any parameters, aligning with other APIs in the repository
   - Changed `frequency_settling` property to be of type float instead of hightime.timedelta, since it can have multiple interpretation based on `frequency_settling_units` property value
   - Changed `interpolation_delay` and `relative_delay` properties to be of type hightime.timedelta, so that it aligns with _delay_ attributes across other APIs in the repository
-  - Updated `wait_until_settled` method to have `max_time_milliseconds` parameter as type hightime.timedelta with a default value of 10 seconds
   - Changed `exported_ref_clock_rate` and `ref_clock_rate` properties to be of type float instead of enum, since the enums just represented raw float values
+  - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
+  - Updated `self_test` to not have any parameters, aligning with other APIs in the repository
+  - Updated `wait_until_settled` method to have `max_time_milliseconds` parameter as type hightime.timedelta with a default value of 10 seconds
   - Updated below properties and method parameters to be of string enum type instead of plain string, since they would support only fixed set of strings
     - `pulse_modulation_source`
     - `exported_pulse_modulation_event_output_terminal`
