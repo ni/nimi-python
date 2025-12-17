@@ -129,5 +129,26 @@ attributes = {
         'grpc_enum': 'SampleInterval',
         'name': 'SAMPLE_INTERVAL',
         'type': 'ViReal64'
+    },
+    1000014: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViInt32TimeDeltaMonths',
+        'documentation': {
+            'description': 'Attribute in months'
+        },
+        'lv_property': 'Fake attributes:Read Write Int with month Converter',
+        'name': 'READ_WRITE_INTEGER_WITH_MONTH_CONVERTER',
+        'type': 'ViInt32',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in months'
+    },
+    1000015: {
+        'access': 'read-write',
+        'attribute_class': 'AttributeViStringCommaSeparated',
+        'documentation': {
+            'description': 'An attribute of type comma separated string with read/write access.'
+        },
+        'lv_property': 'Fake attributes:Read Write Comma Separated String',
+        'name': 'READ_WRITE_COMMA_SEPARATED_STRING',
+        'type': 'ViString'
     }
 }
