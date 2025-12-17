@@ -3805,7 +3805,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'PulseModulationOutputTerm',
+        'enum': 'PulseModulationOutputTerminal',
         'lv_property': 'Events:Pulse Modulation:Exported Pulse Modulation Event Output Terminal',
         'name': 'EXPORTED_PULSE_MODULATION_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'

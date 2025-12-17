@@ -757,7 +757,7 @@ enums = {
             }
         ]
     },
-    'PulseModulationOutputTerm': {
+    'PulseModulationOutputTerminal': {
         'values': [
             {
                 'documentation': {
@@ -1293,6 +1293,7 @@ enums = {
                     'description': 'None (no signal to export)'
                 },
                 'name': 'NIRFSG_VAL_NONE_EMPTY_STRING',
+                'python_name': 'NONE',
                 'value': ''
             }
         ]

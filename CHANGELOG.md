@@ -1702,6 +1702,14 @@
   - Changed `interpolation_delay` and `relative_delay` properties to be of type hightime.timedelta, so that it aligns with _delay_ attributes across other APIs in the repository
   - Updated `wait_until_settled` method to have `max_time_milliseconds` parameter as type hightime.timedelta with a default value of 10 seconds
   - Changed `exported_ref_clock_rate` and `ref_clock_rate` properties to be of type float instead of enum, since the enums just represented raw float values
+  - Updated below attributes and method parameters to be of string enum type instead of plain string, since they would support only fixed set of strings
+    - `pulse_modulation_source`
+    - `exported_pulse_modulation_event_output_terminal`
+    - `exported_ref_clock_output_terminal`
+    - `lo_source`
+    - `arb_sample_clock_source`
+    - `ref_clock_source`
+    - `trigger_identifier` parameter in `send_software_edge_trigger` method
 - Removed
   - Methods and properties applicable only to hardware which are not supported anymore
     - Methods
