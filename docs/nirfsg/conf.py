@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI-RFSG Python API'
-copyright = '2025-2025, National Instruments Corporation'
+copyright = '2025-2026, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
