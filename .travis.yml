@@ -8,7 +8,6 @@ matrix:
       # This is where additional tests are run so we give it more time.
       # When the version used for codegen changes, the version that runs first should change to match.
       - python: "3.12"
-      - python: "3.9"
       - python: "3.10"
       - python: "3.11"
       - python: "3.13"
