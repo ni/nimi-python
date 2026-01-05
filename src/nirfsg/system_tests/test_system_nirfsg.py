@@ -53,12 +53,21 @@ class SystemTests:
         model = rfsg_device_session.instrument_model
         assert model == "NI PXIe-5841"
 
+    def test_get_list_of_strings_attribute(self, rfsg_device_session):
+        models = rfsg_device_session.supported_instrument_models
+        assert isinstance(models, list) and all(isinstance(model, str) for model in models)
+        assert "NI PXIe-5841" in models
+
     def test_set_string_attribute(self, rfsg_device_session):
         rfsg_device_session.selected_script = "myScript"
         assert rfsg_device_session.selected_script == "myScript"
 
-    def test_get_int32_attribute(self, rfsg_device_session):
+    def test_get_timedelta_attribute(self, rfsg_device_session):
         value = rfsg_device_session.external_calibration_recommended_interval
+        assert isinstance(value, hightime.timedelta)
+
+    def test_get_int32_attribute(self, rfsg_device_session):
+        value = rfsg_device_session.arb_waveform_quantum
         assert isinstance(value, int)
 
     def test_set_int32_enum_attribute(self, rfsg_device_session):

@@ -3892,15 +3892,15 @@ available_paths
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3919,15 +3919,15 @@ available_ports
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5629,21 +5629,19 @@ external_calibration_recommended_interval
 
         Returns the recommended interval between each external calibration of the device.
 
-        **Units**: months
-
         **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+--------------------+
+            | Characteristic        | Value              |
+            +=======================+====================+
+            | Datatype              | hightime.timedelta |
+            +-----------------------+--------------------+
+            | Permissions           | read only          |
+            +-----------------------+--------------------+
+            | Repeated Capabilities | None               |
+            +-----------------------+--------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -5772,15 +5770,15 @@ fixed_group_delay_across_ports
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6099,15 +6097,15 @@ group_capabilities
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9798,15 +9796,15 @@ supported_instrument_models
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
