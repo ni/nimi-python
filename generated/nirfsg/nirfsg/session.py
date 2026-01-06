@@ -730,12 +730,12 @@ class _SessionBase(object):
     available_paths = _attributes.AttributeViStringCommaSeparated(1150312)
     '''Type: list of str
 
-    Returns a comma separated list of the configurable paths available for use based on your instrument configuration.
+    Returns a list of the configurable paths available for use based on your instrument configuration.
     '''
     available_ports = _attributes.AttributeViStringCommaSeparated(1150249)
     '''Type: list of str
 
-    Returns a comma-separated list of the ports available for use based on your instrument configuration.
+    Returns a list of the ports available for use based on your instrument configuration.
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -1939,7 +1939,7 @@ class _SessionBase(object):
     fixed_group_delay_across_ports = _attributes.AttributeViStringCommaSeparated(1150271)
     '''Type: list of str
 
-    Specifies a comma-separated list of ports for which to fix the group delay.
+    Specifies a list of ports for which to fix the group delay.
 
 
     **Supported Devices:** PXIe-5831/5832
@@ -2104,7 +2104,7 @@ class _SessionBase(object):
     group_capabilities = _attributes.AttributeViStringCommaSeparated(1050401)
     '''Type: list of str
 
-    Returns a string that contains a comma-separated list of class-extension groups that NI-RFSG implements.
+    Returns a list of class-extension groups that NI-RFSG implements.
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -4099,7 +4099,7 @@ class _SessionBase(object):
     supported_instrument_models = _attributes.AttributeViStringCommaSeparated(1050327)
     '''Type: list of str
 
-    Returns a string that contains a model code of the NI-RFSG device. For drivers that support more than one device, this property contains a comma-separated list of supported devices.
+    Returns a list of supported devices.
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''

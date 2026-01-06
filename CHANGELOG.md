@@ -1711,7 +1711,7 @@
     - `arb_sample_clock_source`
     - `ref_clock_source`
     - `trigger_identifier` parameter in `send_software_edge_trigger` method
-  - Updated below properties to be of list of strings type instead of them returning a comma separated list of string values 
+  - Updated below properties to be list of str instead of them returning a comma separated list of string values 
     - `available_paths`
     - `available_ports`
     - `fixed_group_delay_across_ports`

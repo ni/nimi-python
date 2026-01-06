@@ -3888,7 +3888,7 @@ available_paths
 
     .. py:attribute:: available_paths
 
-        Returns a comma separated list of the configurable paths available for use based on your instrument configuration.
+        Returns a list of the configurable paths available for use based on your instrument configuration.
 
         The following table lists the characteristics of this property.
 
@@ -3913,7 +3913,7 @@ available_ports
 
     .. py:attribute:: available_ports
 
-        Returns a comma-separated list of the ports available for use based on your instrument configuration.
+        Returns a list of the ports available for use based on your instrument configuration.
 
         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -5763,7 +5763,7 @@ fixed_group_delay_across_ports
 
     .. py:attribute:: fixed_group_delay_across_ports
 
-        Specifies a comma-separated list of ports for which to fix the group delay.
+        Specifies a list of ports for which to fix the group delay.
 
 
         **Supported Devices:** PXIe-5831/5832
@@ -6091,7 +6091,7 @@ group_capabilities
 
     .. py:attribute:: group_capabilities
 
-        Returns a string that contains a comma-separated list of class-extension groups that NI-RFSG implements.
+        Returns a list of class-extension groups that NI-RFSG implements.
 
         **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -9790,7 +9790,7 @@ supported_instrument_models
 
     .. py:attribute:: supported_instrument_models
 
-        Returns a string that contains a model code of the NI-RFSG device. For drivers that support more than one device, this property contains a comma-separated list of supported devices.
+        Returns a list of supported devices.
 
         **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
