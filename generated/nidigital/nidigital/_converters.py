@@ -337,6 +337,8 @@ def convert_list_to_comma_separated_string(list_of_strings):
     Returns:
         str: Comma-separated string.
     '''
+    if not isinstance(list_of_strings, list) or not all(isinstance(item, str) for item in list_of_strings):
+        raise TypeError('Input must be a list of str')
     return ','.join(list_of_strings)
 
 
