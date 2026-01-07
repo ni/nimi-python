@@ -52,6 +52,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nidcpower] 1.5.0 - 2025-07-01
 - Added
@@ -546,6 +547,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nidigital] 1.4.9 - 2025-02-26
 - Added
@@ -779,6 +781,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nidmm] 1.4.9 - 2025-02-26
 - Added
@@ -1094,6 +1097,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nifgen] 1.4.9 - 2025-02-26
 - Added
@@ -1470,6 +1474,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nimodinst] 1.4.9 - 2025-02-26
 - Added
@@ -1718,6 +1723,7 @@
     - `group_capabilities`
     - `supported_instrument_models`
 - Removed
+  - Python 3.9 Support
   - Methods and properties applicable only to hardware which are not supported anymore
     - Methods
       - `configure_digital_modulation_user_defined_waveform`
@@ -1806,6 +1812,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [niscope] 1.4.9 - 2025-02-26
 - Added
@@ -2245,6 +2252,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nise] 1.4.9 - 2025-02-26
 - Added
@@ -2401,6 +2409,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [niswitch] 1.4.9 - 2025-02-26
 - Added
@@ -2652,6 +2661,7 @@
 - Added
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nitclk] 1.4.9 - 2025-02-26
 - Added
