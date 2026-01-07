@@ -727,15 +727,15 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    available_paths = _attributes.AttributeViString(1150312)
-    '''Type: str
+    available_paths = _attributes.AttributeViStringCommaSeparated(1150312)
+    '''Type: list of str
 
-    Returns a comma separated list of the configurable paths available for use based on your instrument configuration.
+    Returns a list of the configurable paths available for use based on your instrument configuration.
     '''
-    available_ports = _attributes.AttributeViString(1150249)
-    '''Type: str
+    available_ports = _attributes.AttributeViStringCommaSeparated(1150249)
+    '''Type: list of str
 
-    Returns a comma-separated list of the ports available for use based on your instrument configuration.
+    Returns a list of the ports available for use based on your instrument configuration.
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -1882,12 +1882,10 @@ class _SessionBase(object):
     | "DIO/PFI7"     | The trigger is received on PFI7 from the front panel DIO terminal.                                                                     |
     +----------------+----------------------------------------------------------------------------------------------------------------------------------------+
     '''
-    external_calibration_recommended_interval = _attributes.AttributeViInt32(1150076)
-    '''Type: int
+    external_calibration_recommended_interval = _attributes.AttributeViInt32TimeDeltaMonths(1150076)
+    '''Type: hightime.timedelta
 
     Returns the recommended interval between each external calibration of the device.
-
-    **Units**: months
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -1938,10 +1936,10 @@ class _SessionBase(object):
     | False | The RF signal generator has the 1 ms tuning option.        |
     +-------+------------------------------------------------------------+
     '''
-    fixed_group_delay_across_ports = _attributes.AttributeViString(1150271)
-    '''Type: str
+    fixed_group_delay_across_ports = _attributes.AttributeViStringCommaSeparated(1150271)
+    '''Type: list of str
 
-    Specifies a comma-separated list of ports for which to fix the group delay.
+    Specifies a list of ports for which to fix the group delay.
 
 
     **Supported Devices:** PXIe-5831/5832
@@ -2103,10 +2101,10 @@ class _SessionBase(object):
     | GenerationMode.SCRIPT       | 1002 (0x3ea) | Configures the RF signal generator to generate arbitrary waveforms as directed by the selected_script property..       |
     +-----------------------------+--------------+------------------------------------------------------------------------------------------------------------------------+
     '''
-    group_capabilities = _attributes.AttributeViString(1050401)
-    '''Type: str
+    group_capabilities = _attributes.AttributeViStringCommaSeparated(1050401)
+    '''Type: list of str
 
-    Returns a string that contains a comma-separated list of class-extension groups that NI-RFSG implements.
+    Returns a list of class-extension groups that NI-RFSG implements.
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -4098,10 +4096,10 @@ class _SessionBase(object):
 
     `Streaming Waveform Data <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/streaming_waveform_data.html>`_
     '''
-    supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: str
+    supported_instrument_models = _attributes.AttributeViStringCommaSeparated(1050327)
+    '''Type: list of str
 
-    Returns a string that contains a model code of the NI-RFSG device. For drivers that support more than one device, this property contains a comma-separated list of supported devices.
+    Returns a list of supported devices.
 
     **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''

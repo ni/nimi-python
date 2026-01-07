@@ -1705,6 +1705,7 @@
   - Changed `interpolation_delay` and `relative_delay` properties to be of type hightime.timedelta, so that it aligns with _delay_ attributes across other APIs in the repository
   - Changed `exported_ref_clock_rate` and `ref_clock_rate` properties to be of type float instead of enum, since the enums just represented raw float values
   - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
+  - Updated `external_calibration_recommended_interval` property to return a hightime.timedelta object instead of months as an int, aligning with other APIs in the repository
   - Updated `self_test` to not have any parameters, aligning with other APIs in the repository
   - Updated `wait_until_settled` method to have `max_time_milliseconds` parameter as type hightime.timedelta with a default value of 10 seconds
   - Updated below properties and method parameters to be of string enum type instead of plain string, since they would support only fixed set of strings
@@ -1715,6 +1716,12 @@
     - `arb_sample_clock_source`
     - `ref_clock_source`
     - `trigger_identifier` parameter in `send_software_edge_trigger` method
+  - Updated below properties to be list of str instead of them returning a comma separated list of string values 
+    - `available_paths`
+    - `available_ports`
+    - `fixed_group_delay_across_ports`
+    - `group_capabilities`
+    - `supported_instrument_models`
 - Removed
   - Python 3.9 Support
   - Methods and properties applicable only to hardware which are not supported anymore
