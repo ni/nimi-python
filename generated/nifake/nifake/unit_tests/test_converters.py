@@ -418,4 +418,4 @@ def test_convert_list_to_comma_separated_string():
 def test_convert_list_to_comma_separated_string_invalid_input():
     with pytest.raises(TypeError) as error_info:
         _converters.convert_list_to_comma_separated_string('PinA,PinB,PinC')
-    assert str(error_info.value) == 'Input must be a list of str'
+    assert str(error_info.value) == 'Input must be a list or tuple of str'
