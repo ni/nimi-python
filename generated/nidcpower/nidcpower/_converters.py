@@ -330,14 +330,16 @@ def convert_comma_separated_string_to_list(comma_separated_string):
 
 
 def convert_list_to_comma_separated_string(list_of_strings):
-    '''Convert a list of strings into a comma-separated string.
+    '''Convert a list or tuple of strings into a comma-separated string.
 
     Args:
-        list_of_strings (list[str]): List of strings.
+        list_of_strings (list or tuple of str): List or tuple of strings.
 
     Returns:
         str: Comma-separated string.
     '''
+    if not isinstance(list_of_strings, (list, tuple)) or not all(isinstance(item, str) for item in list_of_strings):
+        raise TypeError('Input must be a list or tuple of str')
     return ','.join(list_of_strings)
 
 
