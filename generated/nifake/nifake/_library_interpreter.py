@@ -150,6 +150,14 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [bool(an_array_ctype[i]) for i in range(number_of_elements_ctype.value)]
 
+    def cached_read_status(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        acq_backlog_ctype = _visatype.ViInt32()  # case S220
+        acq_status_ctype = _visatype.ViInt16()  # case S220
+        error_code = self._library.niFake_CachedReadStatus(vi_ctype, None if acq_backlog_ctype is None else (ctypes.pointer(acq_backlog_ctype)), None if acq_status_ctype is None else (ctypes.pointer(acq_status_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(acq_backlog_ctype.value), enums.AcquisitionStatus(acq_status_ctype.value)
+
     def configure_abc(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_ConfigureABC(vi_ctype)
@@ -595,6 +603,14 @@ class LibraryInterpreter(object):
         error_code = self._library.niFake_ReadFromChannel(vi_ctype, channel_name_ctype, maximum_time_ctype, None if reading_ctype is None else (ctypes.pointer(reading_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(reading_ctype.value)
+
+    def read_status(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        acquisition_backlog_ctype = _visatype.ViInt32()  # case S220
+        acquisition_status_ctype = _visatype.ViInt16()  # case S220
+        error_code = self._library.niFake_ReadStatus(vi_ctype, None if acquisition_backlog_ctype is None else (ctypes.pointer(acquisition_backlog_ctype)), None if acquisition_status_ctype is None else (ctypes.pointer(acquisition_status_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(acquisition_backlog_ctype.value), enums.AcquisitionStatus(acquisition_status_ctype.value)
 
     def return_a_number_and_a_string(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
