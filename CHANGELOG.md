@@ -1690,11 +1690,10 @@
 
 ### nirfsg (NI-RFSG)
 
-- [Unreleased](#nirfsg-unreleased)
+- [1.0.1](#nirfsg-101---2026-01-09)
 - [1.0.0](#nirfsg-100---2025-08-05)
 
-#### [nirfsg] Unreleased
-- Added
+#### [nirfsg] 1.0.1 - 2026-01-09
 - Changed
   - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
   - Changed the parameter name for waveform name from `name` to `waveform_name` in `clear_arb_waveform` and `select_arb_waveform` to be consistent with other waveform methods
