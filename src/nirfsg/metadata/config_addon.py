@@ -2,7 +2,7 @@
 config_additional_config = {
     'module_version': '1.0.2.dev0',
     'development_status': '4 - Beta',
-    'latest_runtime_version_tested_against': '2025 Q3',
+    'latest_runtime_version_tested_against': '2025 Q4 Patch 1',
     'initial_release_year': '2025',
     'custom_types': [
     ]
