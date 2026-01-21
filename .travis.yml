@@ -24,7 +24,7 @@ before_script:
   - if [[ "$TRAVIS_PYTHON_VERSION" != "3.13" ]]; then python tools/ensure_codegen_up_to_date.py; fi
 
 script:
-  - tox -c tox-travis.ini
+  - tox -c tox-travis.ini -p auto -o
 
 after_success:
   # Install and verify codecov tool
