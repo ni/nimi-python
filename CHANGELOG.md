@@ -50,6 +50,7 @@
 
 #### [nidcpower] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -545,6 +546,7 @@
 
 #### [nidigital] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -779,6 +781,7 @@
 
 #### [nidmm] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -1095,6 +1098,7 @@
 
 #### [nifgen] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -1472,6 +1476,7 @@
 
 #### [nimodinst] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -1696,6 +1701,7 @@
 
 #### [nirfsg] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
 
@@ -1815,6 +1821,7 @@
 
 #### [niscope] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -2255,6 +2262,7 @@
 
 #### [nise] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -2412,6 +2420,7 @@
 
 #### [niswitch] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
@@ -2664,6 +2673,7 @@
 
 #### [nitclk] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
   - Python 3.9 Support
