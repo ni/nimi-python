@@ -53,12 +53,21 @@ class SystemTests:
         model = rfsg_device_session.instrument_model
         assert model == "NI PXIe-5841"
 
+    def test_get_list_of_strings_attribute(self, rfsg_device_session):
+        models = rfsg_device_session.supported_instrument_models
+        assert isinstance(models, list) and all(isinstance(model, str) for model in models)
+        assert "NI PXIe-5841" in models
+
     def test_set_string_attribute(self, rfsg_device_session):
         rfsg_device_session.selected_script = "myScript"
         assert rfsg_device_session.selected_script == "myScript"
 
-    def test_get_int32_attribute(self, rfsg_device_session):
+    def test_get_timedelta_attribute(self, rfsg_device_session):
         value = rfsg_device_session.external_calibration_recommended_interval
+        assert isinstance(value, hightime.timedelta)
+
+    def test_get_int32_attribute(self, rfsg_device_session):
+        value = rfsg_device_session.arb_waveform_quantum
         assert isinstance(value, int)
 
     def test_set_int32_enum_attribute(self, rfsg_device_session):
@@ -118,6 +127,10 @@ class SystemTests:
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is False
 
+    def test_self_test(self, rfsg_device_session):
+        # We should not get an assert if self_test passes
+        rfsg_device_session.self_test()
+
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
     def test_self_cal(self, rfsg_device_session):
         rfsg_device_session.self_cal()
@@ -131,13 +144,13 @@ class SystemTests:
         rfsg_device_session.clear_self_calibrate_range()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
-    def test_get_external_calibration_last_date_and_time(self, rfsg_device_session):
-        dt = rfsg_device_session.get_external_calibration_last_date_and_time()
+    def test_get_ext_cal_last_date_and_time(self, rfsg_device_session):
+        dt = rfsg_device_session.get_ext_cal_last_date_and_time()
         assert isinstance(dt, hightime.datetime)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
-    def test_get_self_calibration_last_date_and_time(self, rfsg_device_session):
-        dt = rfsg_device_session.get_self_calibration_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
+    def test_get_self_cal_last_date_and_time(self, rfsg_device_session):
+        dt = rfsg_device_session.get_self_cal_last_date_and_time(nirfsg.Module.PRIMARY_MODULE)
         assert isinstance(dt, hightime.datetime)
 
     def test_get_terminal_name(self, rfsg_device_session):
@@ -178,7 +191,7 @@ class SystemTests:
         assert simulated_5831_device_session.ports['if1'].deembedding_type == requested_deembedding_type
 
     def test_los_rep_cap(self, simulated_5831_device_session):
-        requested_lo_source = "SG_SA_Shared"
+        requested_lo_source = nirfsg.LoSource.SG_SA_SHARED
         simulated_5831_device_session.los[2].lo_source = requested_lo_source
         assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
 
@@ -511,8 +524,8 @@ class SystemTests:
         rfsg_device_session.configure_software_start_trigger()
         rfsg_device_session.script_triggers[0].configure_software_script_trigger()
         with rfsg_device_session.initiate():
-            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.START, '')
-            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, 'scriptTrigger0')
+            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.START, nirfsg.TriggerIdentifier.NONE)
+            rfsg_device_session.send_software_edge_trigger(nirfsg.SoftwareTriggerType.SCRIPT, nirfsg.TriggerIdentifier.SCRIPT_TRIGGER0)
 
     @pytest.mark.skipif(sys.platform == "linux", reason="Function not supported on Linux OS")
     def test_create_deembedding_sparameter_table_s2p_file(self, rfsg_device_session):
@@ -576,7 +589,7 @@ class SystemTests:
     def test_wait_until_settled(self, rfsg_device_session):
         rfsg_device_session.configure_rf(2e9, -5.0)
         with rfsg_device_session.initiate():
-            rfsg_device_session.wait_until_settled(15000)
+            rfsg_device_session.wait_until_settled()
 
     def test_get_all_named_waveform_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM

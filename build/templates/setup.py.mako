@@ -35,7 +35,7 @@ setup(
     license='MIT',
     include_package_data=True,
     packages=['${config['module_name']}'],
-    python_requires='>=3.9',
+    python_requires='>=3.10',
     install_requires=[
         'hightime>=0.2.0',
         % if config['uses_nitclk']:
@@ -59,12 +59,13 @@ setup(
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Programming Language :: Python :: Implementation :: CPython",
+        "Topic :: Scientific/Engineering :: Instrument Drivers",
         "Topic :: System :: Hardware :: Hardware Drivers"
     ],
     package_data={pypi_name: ['VERSION']},

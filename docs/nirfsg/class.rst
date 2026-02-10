@@ -210,259 +210,6 @@ change_external_calibration_password
 
             :type new_password: str
 
-check_attribute_vi_boolean
---------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_attribute_vi_boolean(attribute, value)
-
-            Checks the validity of a value you specify for a ViBoolean property.
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_boolean`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.check_attribute_vi_boolean`
-
-
-            :param attribute:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute: int
-            :param value:
-
-
-                Pass the value that you want to verify as a valid value for the property.
-
-                
-
-                .. note:: Some of the values might not be valid depending on the current settings of the instrument session.
-
-
-            :type value: bool
-
-check_attribute_vi_int32
-------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_attribute_vi_int32(attribute, value)
-
-            Checks the validity of a value you specify for a ViInt32 property.
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_int32`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.check_attribute_vi_int32`
-
-
-            :param attribute:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute: int
-            :param value:
-
-
-                Pass the value that you want to verify as a valid value for the property.
-
-                
-
-                .. note:: Some of the values might not be valid depending on the current settings of the instrument session.
-
-
-            :type value: int
-
-check_attribute_vi_int64
-------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_attribute_vi_int64(attribute, value)
-
-            Checks the validity of a value you specify for a ViInt64 property.
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_int64`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.check_attribute_vi_int64`
-
-
-            :param attribute:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute: int
-            :param value:
-
-
-                Pass the value that you want to verify as a valid value for the property.
-
-                
-
-                .. note:: Some of the values might not be valid depending on the current settings of the instrument session.
-
-
-            :type value: int
-
-check_attribute_vi_real64
--------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_attribute_vi_real64(attribute, value)
-
-            Checks the validity of a value you specify for a ViReal64 property.
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_real64`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.check_attribute_vi_real64`
-
-
-            :param attribute:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute: int
-            :param value:
-
-
-                Pass the value that you want to verify as a valid value for the property.
-
-                
-
-                .. note:: Some of the values might not be valid depending on the current settings of the instrument session.
-
-
-            :type value: float
-
-check_attribute_vi_session
---------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_attribute_vi_session(attribute)
-
-            Checks the validity of a value you specify for a ViSession property.
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_session`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.check_attribute_vi_session`
-
-
-            :param attribute:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute: int
-
-check_attribute_vi_string
--------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: check_attribute_vi_string(attribute, value)
-
-            Checks the validity of a value you specify for a ViString property.
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].check_attribute_vi_string`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.check_attribute_vi_string`
-
-
-            :param attribute:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute: int
-            :param value:
-
-
-                Pass the value that you want to verify as a valid value for the property. The value must be a NULL-terminated string.
-
-                
-
-                .. note:: Some of the values might not be valid depending on the current settings of the instrument session.
-
-
-            :type value: str
-
 check_generation_status
 -----------------------
 
@@ -614,7 +361,7 @@ clear_arb_waveform
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: clear_arb_waveform(name)
+    .. py:method:: clear_arb_waveform(waveform_name)
 
             Deletes a specified waveform from the pool of currently defined waveforms.
 
@@ -626,7 +373,7 @@ clear_arb_waveform
 
 
 
-            :param name:
+            :param waveform_name:
 
 
                 Name of the stored waveform to delete.
@@ -634,30 +381,7 @@ clear_arb_waveform
                 
 
 
-            :type name: str
-
-clear_error
------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: clear_error()
-
-            Clears the error information associated with the session.
-
-            If you pass VI_NULL for the :py:attr:`nirfsg.Session.VI` parameter, this method clears the error information for the current execution thread.
-
-            The IVI Engine also maintains this error information separately for each thread. This feature of the IVI Engine is useful if you do not have a session handle to pass to the :py:meth:`nirfsg.Session.clear_error` method or the :py:meth:`nirfsg.Session.get_error` method, which occurs when a call to the :py:meth:`nirfsg.Session.Init` method or the :py:meth:`nirfsg.Session.__init__` method fails.
-
-            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
-
-            
-
-            .. note:: The :py:meth:`nirfsg.Session.get_error` method clears the error information after it is retrieved. A call to the :py:meth:`nirfsg.Session.clear_error` method is necessary only when you do not use a call to the :py:meth:`nirfsg.Session.get_error` method to retrieve error information.
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
+            :type waveform_name: str
 
 clear_self_calibrate_range
 --------------------------
@@ -990,75 +714,6 @@ configure_digital_level_script_trigger
 
 
             :type level: int
-
-configure_digital_modulation_user_defined_waveform
---------------------------------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_digital_modulation_user_defined_waveform(number_of_samples, user_defined_waveform)
-
-            Specifies the message signal used for digital modulation when the :py:attr:`nirfsg.Session.digital_modulation_waveform_type` property is set to :py:data:`~nirfsg.NIRFSG_VAL_USER_DEFINED`.
-
-            **Supported Devices** : PXI/PXIe-5650/5651/5652
-
-            
-
-            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-
-            :param number_of_samples:
-
-
-                Specifies the number of samples in the message signal.
-
-                
-
-
-            :type number_of_samples: int
-            :param user_defined_waveform:
-
-
-                Specifies the user-defined message signal used for digital modulation.
-
-                
-
-
-            :type user_defined_waveform: list of int
-
-configure_pxi_chassis_clk10
----------------------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: configure_pxi_chassis_clk10(pxi_clk10_source)
-
-            Specifies the signal to drive the 10MHz Reference Clock on the PXI backplane.
-
-            This option can only be configured when the PXI-5610 is in Slot 2 of the PXI chassis. The NI-RFSG device must be in the Configuration state before you call this method.
-
-            **Supported Devices** : PXI-5610, PXI-5670/5671
-
-            **Related Topics**
-
-            `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_
-
-            `System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_
-
-            
-
-
-
-            :param pxi_clk10_source:
-
-
-                Specifies the source of the Reference Clock signal.
-
-                
-
-
-            :type pxi_clk10_source: str
 
 configure_ref_clock
 -------------------
@@ -1416,21 +1071,6 @@ delete_deembedding_table
 
             :type table_name: str
 
-disable
--------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: disable()
-
-            Places the instrument in a quiescent state where it has minimal or no impact on the system to which it is connected.
-
-            **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXI-5670/5671, PXIe-5672/5673/5673E
-
-            
-
-
-
 disable_script_trigger
 ----------------------
 
@@ -1521,44 +1161,6 @@ error_message
 
             :type error_message: str
 
-error_query
------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: error_query()
-
-            Reads an error code and an error message from the instrument error queue.
-
-            **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860
-
-            
-
-
-
-            :rtype: tuple (error_code, error_message)
-
-                WHERE
-
-                error_code (int): 
-
-
-                    Returns the error code read from the instrument error queue.
-
-                    
-
-
-                error_message (str): 
-
-
-                    Returns the error message string read from the instrument error message queue.
-
-                    You must pass a ViChar array with at least 256 bytes.
-
-                    
-
-
-
 get_all_named_waveform_names
 ----------------------------
 
@@ -1609,41 +1211,6 @@ get_all_script_names
 
 
 
-get_channel_name
-----------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: get_channel_name(index)
-
-            Returns the channel string that is in the channel table at an index you specify.
-
-            **Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E
-
-            
-
-
-
-            :param index:
-
-
-                Specifies a one-based index into the channel table.
-
-                
-
-
-            :type index: int
-
-            :rtype: str
-            :return:
-
-
-                    Returns a channel string from the channel table at the index you specify in the Index parameter. Do not modify the contents of the channel string.
-
-                    
-
-
-
 get_deembedding_sparameters
 ---------------------------
 
@@ -1688,7 +1255,9 @@ get_error
 
             
 
-            .. note:: If the **bufferSize** parameter is 0, this method does not clear the error information. By passing 0 to the **bufferSize** parameter, you can determine the buffer size required to obtain the entire :py:attr:`nirfsg.Session.ERROR_DESCRIPTION` string. You can then call this method again with a sufficiently large buffer. If you specify a valid IVI session for the :py:attr:`nirfsg.Session.VI` parameter, this method retrieves and clears the error information for the session. If you pass VI_NULL for the :py:attr:`nirfsg.Session.VI` parameter, this method retrieves and clears the error information for the current execution thread. If the :py:attr:`nirfsg.Session.VI` parameter is an invalid session, this method does nothing and returns an error. Normally, the error information describes the first error that occurred since the user last called this method or the :py:meth:`nirfsg.Session.clear_error` method.
+            .. note:: If the **bufferSize** parameter is 0, this method does not clear the error information. By passing 0 to the **bufferSize** parameter, you can determine the buffer size required to obtain the entire :py:attr:`nirfsg.Session.ERROR_DESCRIPTION` string. You can then call this method again with a sufficiently large buffer. If you specify a valid IVI session for the :py:attr:`nirfsg.Session.VI` parameter, this method retrieves and clears the error information for the session. If you pass VI_NULL for the :py:attr:`nirfsg.Session.VI` parameter, this method retrieves and clears the error information for the current execution thread. If the :py:attr:`nirfsg.Session.VI` parameter is an invalid session, this method does nothing and returns an error. Normally, the error information describes the first error that occurred since the user last called this method or the :py:meth:`nirfsg.Session.ClearError` method.
+
+            .. note:: One or more of the referenced methods are not in the Python API for this driver.
 
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
@@ -1719,12 +1288,12 @@ get_error
 
 
 
-get_external_calibration_last_date_and_time
--------------------------------------------
+get_ext_cal_last_date_and_time
+------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_external_calibration_last_date_and_time()
+    .. py:method:: get_ext_cal_last_date_and_time()
 
             Returns the date and time of the last successful external calibration.
 
@@ -1773,12 +1342,12 @@ get_max_settable_power
 
 
 
-get_self_calibration_last_date_and_time
----------------------------------------
+get_self_cal_last_date_and_time
+-------------------------------
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_self_calibration_last_date_and_time(module)
+    .. py:method:: get_self_cal_last_date_and_time(module=nirfsg.Module.PRIMARY_MODULE)
 
             Returns the date and time of the last successful self-calibration.
 
@@ -1817,7 +1386,7 @@ get_self_calibration_temperature
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_self_calibration_temperature(module)
+    .. py:method:: get_self_calibration_temperature(module=nirfsg.Module.PRIMARY_MODULE)
 
             Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
@@ -2359,41 +1928,6 @@ reset
 
 
 
-reset_attribute
----------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: reset_attribute(attribute_id)
-
-            Resets the property to its default value.
-
-            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].reset_attribute`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
-
-                Example: :py:meth:`my_session.reset_attribute`
-
-
-            :param attribute_id:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute_id: int
-
 reset_device
 ------------
 
@@ -2495,46 +2029,6 @@ reset_with_options
 
             :type steps_to_omit: :py:data:`nirfsg.ResetWithOptionsStepsToOmit`
 
-revision_query
---------------
-
-    .. py:currentmodule:: nirfsg.Session
-
-    .. py:method:: revision_query()
-
-            Returns the revision numbers of the NI-RFSG driver and the instrument firmware.
-
-            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-
-            :rtype: tuple (instrument_driver_revision, firmware_revision)
-
-                WHERE
-
-                instrument_driver_revision (str): 
-
-
-                    Returns the value of the :py:attr:`nirfsg.Session.specific_driver_revision` property in the form of a string.
-
-                    You must pass a ViChar array with at least 256 bytes.
-
-                    
-
-
-                firmware_revision (str): 
-
-
-                    Returns the value of the :py:attr:`nirfsg.Session.instrument_firmware_revision` property in the form of a string.
-
-                    You must pass a ViChar array with at least 256 bytes.
-
-                    
-
-
-
 save_configurations_to_file
 ---------------------------
 
@@ -2575,7 +2069,7 @@ select_arb_waveform
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: select_arb_waveform(name)
+    .. py:method:: select_arb_waveform(waveform_name)
 
             Specifies the waveform that is generated upon a call to the :py:meth:`nirfsg.Session._initiate` method when the generation_mode property is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM`.
 
@@ -2593,7 +2087,7 @@ select_arb_waveform
 
 
 
-            :param name:
+            :param waveform_name:
 
 
                 Specifies the name of the stored waveform to generate. This is a case-insensitive alphanumeric string that does not use reserved words. NI-RFSG sets the :py:attr:`nirfsg.Session.arb_selected_waveform` property to this value.
@@ -2601,7 +2095,7 @@ select_arb_waveform
                 
 
 
-            :type name: str
+            :type waveform_name: str
 
 self_cal
 --------
@@ -2722,7 +2216,7 @@ self_test
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: self_test(self_test_message)
+    .. py:method:: self_test()
 
             Performs a self-test on the NI-RFSG device and returns the test results.
 
@@ -2736,35 +2230,13 @@ self_test
 
             `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_
 
-            
-
-
-
-            :param self_test_message:
-
-
-                Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this method.
-
-                You must pass a ViChar array with at least 256 bytes.
-
-                
-
-
-            :type self_test_message: str
-
-            :rtype: int
-            :return:
-
-
-                    This parameter contains the value returned from the NI-RFSG device self test.
-
-                    +----------------+------------------+
-                    | Self-Test Code | Description      |
-                    +================+==================+
-                    | 0              | Self test passed |
-                    +----------------+------------------+
-                    | 1              | Self test failed |
-                    +----------------+------------------+
+            +----------------+------------------+
+            | Self-Test Code | Description      |
+            +================+==================+
+            | 0              | Passed self-test |
+            +----------------+------------------+
+            | 1              | Self-test failed |
+            +----------------+------------------+
 
 
 
@@ -2838,7 +2310,7 @@ send_software_edge_trigger
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type trigger_identifier: str
+            :type trigger_identifier: :py:data:`nirfsg.TriggerIdentifier`
 
 set_arb_waveform_next_write_position
 ------------------------------------
@@ -3020,7 +2492,7 @@ wait_until_settled
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: wait_until_settled(max_time_milliseconds)
+    .. py:method:: wait_until_settled(max_time_milliseconds=hightime.timedelta(seconds=10.0))
 
             Waits until the RF output signal has settled. This method is useful for devices that support changes while in the Generation state.
 
@@ -3044,7 +2516,7 @@ wait_until_settled
                 
 
 
-            :type max_time_milliseconds: int
+            :type max_time_milliseconds: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
 write_arb_waveform
 ------------------
@@ -3493,41 +2965,6 @@ analog_modulation_fm_band
                 - LabVIEW Property: **Modulation:Analog:FM Band**
                 - C Attribute: **NIRFSG_ATTR_ANALOG_MODULATION_FM_BAND**
 
-analog_modulation_fm_deviation
-------------------------------
-
-    .. py:attribute:: analog_modulation_fm_deviation
-
-        Specifies the frequency deviation to use in frequency modulation.
-
-        **Units**: hertz (Hz)
-
-        **Default Value:** 1kHz
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Analog:FM Deviation (Hz)**
-                - C Attribute: **NIRFSG_ATTR_ANALOG_MODULATION_FM_DEVIATION**
-
 analog_modulation_fm_narrowband_integrator
 ------------------------------------------
 
@@ -3776,86 +3213,6 @@ analog_modulation_type
                 - LabVIEW Property: **Modulation:Analog:Modulation Type**
                 - C Attribute: **NIRFSG_ATTR_ANALOG_MODULATION_TYPE**
 
-analog_modulation_waveform_frequency
-------------------------------------
-
-    .. py:attribute:: analog_modulation_waveform_frequency
-
-        Specifies the frequency of the waveform to use as the message signal in analog modulation.
-
-        **Units:** hertz (Hz)
-
-        **Default Value:** 1kHz
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Analog:Waveform Frequency (Hz)**
-                - C Attribute: **NIRFSG_ATTR_ANALOG_MODULATION_WAVEFORM_FREQUENCY**
-
-analog_modulation_waveform_type
--------------------------------
-
-    .. py:attribute:: analog_modulation_waveform_type
-
-        Specifies the type of waveform to use as the message signal for analog modulation.
-
-        **Default Value:** :py:data:`~nirfsg.AnalogModulationWaveformType.SINE`
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        **Defined Values**:
-
-        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
-        | Name                                                     | Value        | Description                                                     |
-        +==========================================================+==============+=================================================================+
-        | :py:data:`~nirfsg.AnalogModulationWaveformType.SINE`     | 3000 (0xbb8) | Specifies that the analog modulation waveform type is sine.     |
-        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
-        | :py:data:`~nirfsg.AnalogModulationWaveformType.SQUARE`   | 3001 (0xbb9) | Specifies that the analog modulation waveform type is square.   |
-        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
-        | :py:data:`~nirfsg.AnalogModulationWaveformType.TRIANGLE` | 3002 (0xbba) | Specifies that the analog modulation waveform type is triangle. |
-        +----------------------------------------------------------+--------------+-----------------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------------------------------+
-            | Characteristic        | Value                              |
-            +=======================+====================================+
-            | Datatype              | enums.AnalogModulationWaveformType |
-            +-----------------------+------------------------------------+
-            | Permissions           | read-write                         |
-            +-----------------------+------------------------------------+
-            | Repeated Capabilities | None                               |
-            +-----------------------+------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Analog:Waveform Type**
-                - C Attribute: **NIRFSG_ATTR_ANALOG_MODULATION_WAVEFORM_TYPE**
-
 arb_carrier_frequency
 ---------------------
 
@@ -3929,103 +3286,6 @@ arb_digital_gain
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIRFSG_ATTR_ARB_DIGITAL_GAIN**
-
-arb_filter_raised_cosine_alpha
-------------------------------
-
-    .. py:attribute:: arb_filter_raised_cosine_alpha
-
-        Specifies the alpha value to use when calculating the pulse-shaping filter coefficients. You can use this property only when the :py:attr:`nirfsg.Session.arb_filter_type` property is set to :py:data:`~nirfsg.FilterType.ARB_FILTER_TYPE_RAISED_COSINE` and with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this property with a device that does not support OSP.
-
-        **Supported Devices:** PXI-5671, PXIe-5672/5673/5673E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Pulse Shaping:Raised Cosine Alpha**
-                - C Attribute: **NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA**
-
-arb_filter_root_raised_cosine_alpha
------------------------------------
-
-    .. py:attribute:: arb_filter_root_raised_cosine_alpha
-
-        Specifies the alpha value to use when calculating the pulse-shaping FIR filter coefficients. You can use this property only when the :py:attr:`nirfsg.Session.arb_filter_type` property is set to :py:data:`~nirfsg.FilterType.ARB_FILTER_TYPE_ROOT_RAISED_COSINE` and with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this property with a device that does not support OSP.
-
-        **Supported Devices:** PXI-5671, PXIe-5672/5673/5673E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Pulse Shaping:Root Raised Cosine Alpha**
-                - C Attribute: **NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA**
-
-arb_filter_type
----------------
-
-    .. py:attribute:: arb_filter_type
-
-        Specifies the pulse-shaping filter type for the FIR filter. You can use this property only with signal generators that support onboard signal processing (OSP). NI-RFSG returns an error if you use this property with a device that does not support OSP.
-
-        **Default Value:** :py:data:`~nirfsg.FilterType.NONE`
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        **Defined Values**:
-
-        +------------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                             | Value          | Description                                                                                                                                                     |
-        +==================================================================+================+=================================================================================================================================================================+
-        | :py:data:`~nirfsg.FilterType.NONE`                               | 0 (0x0)        | Disables analog modulation.                                                                                                                                     |
-        +------------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.FilterType.ARB_FILTER_TYPE_RAISED_COSINE`      | 10002 (0x2712) | Applies a raised cosine filter to the data with the alpha value specified with the :py:attr:`nirfsg.Session.arb_filter_raised_cosine_alpha` property.           |
-        +------------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.FilterType.ARB_FILTER_TYPE_ROOT_RAISED_COSINE` | 10001 (0x2711) | Applies a root-raised cosine filter to the data with the alpha value specified with the :py:attr:`nirfsg.Session.arb_filter_root_raised_cosine_alpha` property. |
-        +------------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------------+
-            | Characteristic        | Value            |
-            +=======================+==================+
-            | Datatype              | enums.FilterType |
-            +-----------------------+------------------+
-            | Permissions           | read-write       |
-            +-----------------------+------------------+
-            | Repeated Capabilities | None             |
-            +-----------------------+------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Pulse Shaping:Filter Type**
-                - C Attribute: **NIRFSG_ATTR_ARB_FILTER_TYPE**
 
 arb_max_number_waveforms
 ------------------------
@@ -4108,66 +3368,6 @@ arb_onboard_sample_clock_mode
 
                 - LabVIEW Property: **Clock:Arb Onboard Sample Clock Mode**
                 - C Attribute: **NIRFSG_ATTR_ARB_ONBOARD_SAMPLE_CLOCK_MODE**
-
-arb_oscillator_phase_dac_value
-------------------------------
-
-    .. py:attribute:: arb_oscillator_phase_dac_value
-
-        Specifies the oscillator phase digital-to-analog converter (DAC) value on the arbitrary waveform generator (AWG). Use this property to reduce the trigger jitter when synchronizing multiple devices with NI-TClk. This property can also help maintain synchronization repeatability by writing a previous measurement's phase DAC value to the current session. This property is applicable only when using the :py:attr:`nirfsg.Session.arb_sample_clock_source` property set to ClkIn.
-
-        **Supported Devices:** PXIe-5673/5673E
-
-        **Related Topics**
-
-        `NI-TClk Overview <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/ni_tclk_help.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Clock:Advanced:Arb Oscillator Phase DAC Value**
-                - C Attribute: **NIRFSG_ATTR_ARB_OSCILLATOR_PHASE_DAC_VALUE**
-
-arb_power
----------
-
-    .. py:attribute:: arb_power
-
-        Indicates the average output power from the PXI-5421, PXI-5441, PXIe-5442, and PXIe-5450 AWG module. If an arbitrary waveform is being generated, this property specifies either the average power or the peak power of the signal, depending on the :py:attr:`nirfsg.Session.power_level_type` property setting.
-
-        **Units**: dBm
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Arb Power (dBm)**
-                - C Attribute: **NIRFSG_ATTR_ARB_POWER**
 
 arb_pre_filter_gain
 -------------------
@@ -4260,15 +3460,15 @@ arb_sample_clock_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ArbSampleClockSource |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4548,107 +3748,6 @@ arb_waveform_software_scaling_factor
                 - LabVIEW Property: **Arb:Software Scaling Factor**
                 - C Attribute: **NIRFSG_ATTR_ARB_WAVEFORM_SOFTWARE_SCALING_FACTOR**
 
-attenuator_hold_enabled
------------------------
-
-    .. py:attribute:: attenuator_hold_enabled
-
-        Specifies whether attenuator hold is enabled. While this property is set to True, changing the power level causes NI-RFSG to scale the digital data sent to the AWG instead of adjusting the attenuators. Changing power levels in this manner allows the device to increase or decrease the power level in more accurate increments, but it may affect signal-to-noise ratios (noise density).
-
-        Setting the :py:attr:`nirfsg.Session.attenuator_hold_enabled` property to True limits the power levels that can be attained. With attenuator hold enabled, the power level must satisfy the following conditions:
-
-        - Power level less than or equal to :py:attr:`nirfsg.Session.attenuator_hold_max_power`
-        - Power level greater than or equal to (maximum power level -70dB)
-        - Power level greater than or equal to -145dBm
-
-        To set this property, the NI-RFSG device must be in the Configuration state.
-
-        **Default Value:** False
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        **Related Topics**
-
-        `Attenuator Hold <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/attenuator_hold_mode.html>`_
-
-        `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_
-
-        **Defined Values**:
-
-        +-------+---------------------------+
-        | Value | Description               |
-        +=======+===========================+
-        | True  | Enables attenuator hold.  |
-        +-------+---------------------------+
-        | False | Disables attenuator hold. |
-        +-------+---------------------------+
-
-        .. note:: The frequency cannot be changed on the PXI-5670/5671 or PXIe-5672 while this property is set to True.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **RF:Attenuator Hold Enabled**
-                - C Attribute: **NIRFSG_ATTR_ATTENUATOR_HOLD_ENABLED**
-
-attenuator_hold_max_power
--------------------------
-
-    .. py:attribute:: attenuator_hold_max_power
-
-        Specifies the maximum power level of the RF output signal when the :py:attr:`nirfsg.Session.attenuator_hold_enabled` property is set to True.
-
-        To set this property, the NI-RFSG device must be in the Configuration state.
-
-        **Units**: dBm
-
-        **Defined Values**:
-        Refer to the specifications document for your device for allowable maximum power levels.
-
-        **Default Value:**
-
-        PXI-5670/5671, PXIe-5672: 17
-
-        PXIe-5673/5673E: 10
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        **Related Topics**
-
-        `Attenuator Hold <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/attenuator_hold_mode.html>`_
-
-        `Settling Times <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/settling_times.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **RF:Attenuator Hold Max Power (dBm)**
-                - C Attribute: **NIRFSG_ATTR_ATTENUATOR_HOLD_MAX_POWER**
-
 attenuator_setting
 ------------------
 
@@ -4789,19 +3888,19 @@ available_paths
 
     .. py:attribute:: available_paths
 
-        Returns a comma separated list of the configurable paths available for use based on your instrument configuration.
+        Returns a list of the configurable paths available for use based on your instrument configuration.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4814,107 +3913,27 @@ available_ports
 
     .. py:attribute:: available_ports
 
-        Returns a comma-separated list of the ports available for use based on your instrument configuration.
+        Returns a list of the ports available for use based on your instrument configuration.
 
         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Signal Path:Available Ports**
                 - C Attribute: **NIRFSG_ATTR_AVAILABLE_PORTS**
-
-cache
------
-
-    .. py:attribute:: cache
-
-        Specifies whether to cache the value of properties. When caching is enabled, NI-RFSG tracks the current NI-RFSG device settings and avoids sending redundant commands to the device. NI-RFSG can always cache or never cache particular properties, regardless of the setting of this property. Call the :py:meth:`nirfsg.Session.__init__` method to override the default value.
-
-        **Default Value:** True
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Defined Values**:
-
-        +-------+-------------------+
-        | Value | Description       |
-        +=======+===================+
-        | True  | Enables caching.  |
-        +-------+-------------------+
-        | False | Disables caching. |
-        +-------+-------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
-                - C Attribute: **NIRFSG_ATTR_CACHE**
-
-compensate_for_filter_group_delay
----------------------------------
-
-    .. py:attribute:: compensate_for_filter_group_delay
-
-        Enables or disables compensation for filter group delay on the AWG module. This property also accounts for the upconverter group delay and aligns the RF output with the Started Event, Done Event, and Marker Events.
-
-        At a low I/Q rate, the group delay can become so large that some devices may not be able to align the events with the RF output, in which case you must increase the I/Q rate or disable this property.
-
-        **Default Value:** False
-
-        **Supported Devices:** PXIe-5672
-
-        **Defined Values**:
-
-        +-------+-----------------------------------------------+
-        | Value | Description                                   |
-        +=======+===============================================+
-        | True  | Enables compensation for filter group delay.  |
-        +-------+-----------------------------------------------+
-        | False | Disables compensation for filter group delay. |
-        +-------+-----------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Advanced:Compensate for Filter Group Delay**
-                - C Attribute: **NIRFSG_ATTR_COMPENSATE_FOR_FILTER_GROUP_DELAY**
 
 configuration_settled_event_terminal_name
 -----------------------------------------
@@ -4993,154 +4012,6 @@ correction_temperature
 
                 - LabVIEW Property: **RF:Advanced:Correction Temperature**
                 - C Attribute: **NIRFSG_ATTR_CORRECTION_TEMPERATURE**
-
-data_transfer_block_size
-------------------------
-
-    .. py:attribute:: data_transfer_block_size
-
-        Indicates the number of samples to transfer at one time from the device to host memory. This property is useful when the total data to be transferred to onboard memory is large.
-
-        **Units**: samples (s)
-
-        **Default Value**: 1Ms
-
-        **Supported Devices:** PXIe-5672/5673/5673E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Data Transfer:Data Transfer Block Size**
-                - C Attribute: **NIRFSG_ATTR_DATA_TRANSFER_BLOCK_SIZE**
-
-data_transfer_maximum_bandwidth
--------------------------------
-
-    .. py:attribute:: data_transfer_maximum_bandwidth
-
-        Specifies the maximum amount of bus bandwidth to use for data transfers.
-
-        **Units**: bytes per second
-
-        **Default Value**: Device maximum
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        **Related Topics**
-
-        `Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Data Transfer:Maximum Bandwidth**
-                - C Attribute: **NIRFSG_ATTR_DATA_TRANSFER_MAXIMUM_BANDWIDTH**
-
-data_transfer_maximum_in_flight_reads
--------------------------------------
-
-    .. py:attribute:: data_transfer_maximum_in_flight_reads
-
-        Specifies the maximum number of concurrent PCI Express read requests the RF signal generator can issue.
-
-        When transferring data from computer memory to device onboard memory across the PCI Express bus, the signal generator can issue multiple memory reads at the same time. In general, the larger the number of read requests, the more efficiently the device uses the bus because the multiple read requests keep the data flowing, even in a PCI Express topology that has high latency due to PCI Express switches in the data path. Most NI devices can issue a large number of read requests (typically 8 or 16). By default, this property is set to the highest value the RF signal generator supports.
-
-        If other devices in your system cannot tolerate long data latencies, it may be helpful to decrease the number of in-flight read requests the RF signal generator issues. This helps to reduce the amount of data the signal generator reads at one time.
-
-        **Units**: number of packets
-
-        **Default Value**: Device maximum
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        **Related Topics**
-
-        `Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Data Transfer:Advanced:Maximum In-Flight Read Requests**
-                - C Attribute: **NIRFSG_ATTR_DATA_TRANSFER_MAXIMUM_IN_FLIGHT_READS**
-
-data_transfer_preferred_packet_size
------------------------------------
-
-    .. py:attribute:: data_transfer_preferred_packet_size
-
-        Specifies the preferred size of the data field in a PCI Express read request packet.
-
-        In general, the larger the packet size, the more efficiently the device uses the bus. By default, NI RF signal generators use the largest packet size allowed by the system. However, due to different system implementations, some systems may perform better with smaller packet sizes.
-
-        Recommended values for this property are powers of two between 64 and 512.
-
-        **Units**: bytes
-
-        **Default Value**: Device maximum
-
-        **Supported Devices:** PXI-5670/5671, PXIe-5672/5673/5673E
-
-        **Related Topics**
-
-        `Improving Streaming Performance <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/improving_streaming_performance.html>`_
-
-
-
-        .. note:: In some cases, the RF signal generator generates packets smaller than the preferred size you set with this property.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Data Transfer:Advanced:Preferred Packet Size**
-                - C Attribute: **NIRFSG_ATTR_DATA_TRANSFER_PREFERRED_PACKET_SIZE**
 
 deembedding_compensation_gain
 -----------------------------
@@ -5920,277 +4791,6 @@ digital_level_script_trigger_source
                 - LabVIEW Property: **Triggers:Script:Digital Level:Source**
                 - C Attribute: **NIRFSG_ATTR_DIGITAL_LEVEL_SCRIPT_TRIGGER_SOURCE**
 
-digital_modulation_fsk_deviation
---------------------------------
-
-    .. py:attribute:: digital_modulation_fsk_deviation
-
-        Specifies the deviation to use in FSK modulation.
-
-        **Units**: hertz (Hz)
-
-        **Default Value:** 1,000
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Digital:FSK Deviation (Hz)**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_MODULATION_FSK_DEVIATION**
-
-digital_modulation_prbs_order
------------------------------
-
-    .. py:attribute:: digital_modulation_prbs_order
-
-        Specifies the order of pseudorandom bit sequence (PRBS) internally generated by hardware and used as the message signal in digital modulation.
-
-        **Default Value:** 16
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Digital:PRBS Order**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_MODULATION_PRBS_ORDER**
-
-digital_modulation_prbs_seed
-----------------------------
-
-    .. py:attribute:: digital_modulation_prbs_seed
-
-        Specifies the seed of the internally generated pseudorandom bit sequence (PRBS).
-
-        **Default Value:** 1
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Digital:PRBS Seed**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_MODULATION_PRBS_SEED**
-
-digital_modulation_symbol_rate
-------------------------------
-
-    .. py:attribute:: digital_modulation_symbol_rate
-
-        Specifies the symbol rate of the bit stream for digital modulation.
-
-        **Units**: hertz (Hz)
-
-        **Default Value:** 1kHz
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Digital:Symbol Rate**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_MODULATION_SYMBOL_RATE**
-
-digital_modulation_type
------------------------
-
-    .. py:attribute:: digital_modulation_type
-
-        Specifies the digital modulation format to use.
-
-        **Default Value:** :py:data:`~nirfsg.DigitalModulationType.NONE`
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        **Defined Values**:
-
-        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | Name                                          | Value        | Description                                                                 |
-        +===============================================+==============+=============================================================================+
-        | :py:data:`~nirfsg.DigitalModulationType.FSK`  | 4000 (0xfa0) | Specifies that the digital modulation type is frequency-shift keying (FSK). |
-        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigitalModulationType.NONE` | 0 (0x0)      | Disables digital modulation.                                                |
-        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigitalModulationType.OOK`  | 4001 (0xfa1) | Specifies that the digital modulation type is on-off keying (OOK).          |
-        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigitalModulationType.PSK`  | 4002 (0xfa2) | Specifies that the digital modulation type is phase-shift keying (PSK).     |
-        +-----------------------------------------------+--------------+-----------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.DigitalModulationType |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Digital:Modulation Type**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_MODULATION_TYPE**
-
-digital_modulation_waveform_type
---------------------------------
-
-    .. py:attribute:: digital_modulation_waveform_type
-
-        Specifies the type of waveform to use as the message signal in digital modulation.
-
-        **Default Value:** :py:data:`~nirfsg.DigitalModulationWaveformType.PRBS`
-
-        **Supported Devices:** PXI/PXIe-5650/5651/5652
-
-        **Related Topics**
-
-        `Modulation Schemes <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/modulation_modes.html>`_
-
-        **Defined Values**:
-
-        +---------------------------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                          | Value         | Description                                                                                                                                                                                              |
-        +===============================================================+===============+==========================================================================================================================================================================================================+
-        | :py:data:`~nirfsg.DigitalModulationWaveformType.PRBS`         | 5000 (0x1388) | Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).                                                                                                                 |
-        +---------------------------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DigitalModulationWaveformType.USER_DEFINED` | 5001 (0x1389) | Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the :py:meth:`nirfsg.Session.configure_digital_modulation_user_defined_waveform` method. |
-        +---------------------------------------------------------------+---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-------------------------------------+
-            | Characteristic        | Value                               |
-            +=======================+=====================================+
-            | Datatype              | enums.DigitalModulationWaveformType |
-            +-----------------------+-------------------------------------+
-            | Permissions           | read-write                          |
-            +-----------------------+-------------------------------------+
-            | Repeated Capabilities | None                                |
-            +-----------------------+-------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Modulation:Digital:Waveform Type**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_MODULATION_WAVEFORM_TYPE**
-
-digital_pattern
----------------
-
-    .. py:attribute:: digital_pattern
-
-        Enables or disables digital pattern on the PXI-5421/5441 AWG module. This property must be set to True to enable signal routing to and from the Digital Data & Control connector.
-
-        To set this property, the NI-RFSG device must be in the Configuration state.
-
-        **Default Value:** False
-
-        **Supported Devices:** PXI-5670/5671
-
-        **Defined Values**:
-
-        +-------+--------------------------+
-        | Value | Description              |
-        +=======+==========================+
-        | True  | Signal routing enabled.  |
-        +-------+--------------------------+
-        | False | Signal routing disabled. |
-        +-------+--------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Arb:Digital Pattern**
-                - C Attribute: **NIRFSG_ATTR_DIGITAL_PATTERN**
-
 direct_download
 ---------------
 
@@ -6643,15 +5243,15 @@ exported_pulse_modulation_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------------------------------+
+            | Characteristic        | Value                               |
+            +=======================+=====================================+
+            | Datatype              | enums.PulseModulationOutputTerminal |
+            +-----------------------+-------------------------------------+
+            | Permissions           | read-write                          |
+            +-----------------------+-------------------------------------+
+            | Repeated Capabilities | None                                |
+            +-----------------------+-------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6702,15 +5302,15 @@ exported_ref_clock_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+------------------------------------------+
+            | Characteristic        | Value                                    |
+            +=======================+==========================================+
+            | Datatype              | enums.ReferenceClockExportOutputTerminal |
+            +-----------------------+------------------------------------------+
+            | Permissions           | read-write                               |
+            +-----------------------+------------------------------------------+
+            | Repeated Capabilities | None                                     |
+            +-----------------------+------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6725,35 +5325,33 @@ exported_ref_clock_rate
 
         Specifies the Reference Clock Rate, in Hz, of the signal sent to the Reference Clock Export Output Terminal. To set this property, the NI-RFSG device must be in the Configuration state.
 
-        **Default Value:** :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ`
+        **Default Value:** 10MHz
 
         **Supported Devices:** PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         **Defined Values**:
 
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-        | Name                                                                   | Value        | Description                         |
-        +========================================================================+==============+=====================================+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_10_MEGAHERTZ`  | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_100_MEGAHERTZ` | 100000000.0  | Uses a 100MHz Reference Clock rate. |
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockExportedRate.CLOCK_RATE_1_GIGAHERTZ`   | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
-        +------------------------------------------------------------------------+--------------+-------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        +--------------+-------------------------------------+
+        | Value        | Description                         |
+        +==============+=====================================+
+        | 10000000.0   | Uses a 10MHz Reference Clock rate.  |
+        +--------------+-------------------------------------+
+        | 100000000.0  | Uses a 100MHz Reference Clock rate. |
+        +--------------+-------------------------------------+
+        | 1000000000.0 | Uses a 1GHz Reference Clock rate.   |
+        +--------------+-------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------------+
-            | Characteristic        | Value                            |
-            +=======================+==================================+
-            | Datatype              | enums.ReferenceClockExportedRate |
-            +-----------------------+----------------------------------+
-            | Permissions           | read-write                       |
-            +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
-            +-----------------------+----------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7031,21 +5629,19 @@ external_calibration_recommended_interval
 
         Returns the recommended interval between each external calibration of the device.
 
-        **Units**: months
-
         **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+--------------------+
+            | Characteristic        | Value              |
+            +=======================+====================+
+            | Datatype              | hightime.timedelta |
+            +-----------------------+--------------------+
+            | Permissions           | read only          |
+            +-----------------------+--------------------+
+            | Repeated Capabilities | None               |
+            +-----------------------+--------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7167,22 +5763,22 @@ fixed_group_delay_across_ports
 
     .. py:attribute:: fixed_group_delay_across_ports
 
-        Specifies a comma-separated list of ports for which to fix the group delay.
+        Specifies a list of ports for which to fix the group delay.
 
 
         **Supported Devices:** PXIe-5831/5832
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read-write  |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7372,15 +5968,15 @@ frequency_settling
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7441,49 +6037,6 @@ frequency_settling_units
                 - LabVIEW Property: **RF:Frequency Settling Units**
                 - C Attribute: **NIRFSG_ATTR_FREQUENCY_SETTLING_UNITS**
 
-frequency_tolerance
--------------------
-
-    .. py:attribute:: frequency_tolerance
-
-        Specifies the allowable frequency error introduced during the software upconversion process. NI-RFSG may introduce a frequency error up to the specified amount to optimize computational speed and onboard memory usage while upconverting phase-continuous signals.
-
-        If the :py:attr:`nirfsg.Session.phase_continuity_enabled` property is set to :py:data:`~nirfsg.NIRFSG_VAL_DISABLE`, the :py:attr:`nirfsg.Session.frequency_tolerance` property is ignored, and the driver does not introduce a frequency error. On devices that do not use software upconversion, this property is ignored. The PXI-5670 always uses software upconversion, and the PXI-5671 uses software upconversion for I/Q rates greater than 8.33MS/s.
-
-        To set this property, the NI-RFSG device must be in the Configuration state.
-
-        **Units**: hertz (Hz)
-
-        **Default Value:** 50
-
-        **Supported Devices:** PXI-5670/5671
-
-        **Related Topics**
-
-        `Phase Continuity <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/phasecontinuity.html>`_
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **RF:Frequency Tolerance (Hz)**
-                - C Attribute: **NIRFSG_ATTR_FREQUENCY_TOLERANCE**
-
 generation_mode
 ---------------
 
@@ -7538,21 +6091,21 @@ group_capabilities
 
     .. py:attribute:: group_capabilities
 
-        Returns a string that contains a comma-separated list of class-extension groups that NI-RFSG implements.
+        Returns a list of class-extension groups that NI-RFSG implements.
 
         **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7601,10 +6154,6 @@ instrument_firmware_revision
         Returns a string that contains the firmware revision information for the NI-RFSG device you are currently using.
 
         **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.revision_query`
 
         The following table lists the characteristics of this property.
 
@@ -7678,47 +6227,6 @@ instrument_model
                 - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
                 - C Attribute: **NIRFSG_ATTR_INSTRUMENT_MODEL**
 
-interchange_check
------------------
-
-    .. py:attribute:: interchange_check
-
-        Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.
-
-        **Default Value:** False
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Defined Values**:
-
-        +-------+--------------------------------+
-        | Value | Description                    |
-        +=======+================================+
-        | True  | Interchange check is enabled.  |
-        +-------+--------------------------------+
-        | False | Interchange check is disabled. |
-        +-------+--------------------------------+
-
-        .. note:: Enabling interchangeability check is not supported.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
-                - C Attribute: **NIRFSG_ATTR_INTERCHANGE_CHECK**
-
 interpolation_delay
 -------------------
 
@@ -7734,15 +6242,15 @@ interpolation_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7906,7 +6414,7 @@ iq_offset_units
 
         If the :py:attr:`nirfsg.Session.iq_i_offset` property is set to 100%, :py:attr:`nirfsg.Session.iq_q_offset` property is set to 0%, and :py:attr:`nirfsg.Session.power_level` property set to 0 dBm, the desired RF signal is at 0 dBm and the carrier leakage is also at 0 dBm.
 
-        The AWG or VST peak power level changes when settings change in other properties such as the :py:attr:`nirfsg.Session.power_level`, :py:attr:`nirfsg.Session.frequency`, :py:attr:`nirfsg.Session.iq_skew`, :py:attr:`nirfsg.Session.iq_gain_imbalance`, :py:attr:`nirfsg.Session.attenuator_hold_enabled`, and :py:attr:`nirfsg.Session.arb_pre_filter_gain` properties. When the :py:attr:`nirfsg.Session.iq_offset_units` property is set to :py:data:`~nirfsg.OffsetUnits.PERCENT`, the actual AWG or VST offset changes as the AWG or VST peak power level changes to satisfy the preceding equations. These changes are useful if you are intentionally adding carrier leakage to test the tolerance of a receiver. When the :py:attr:`nirfsg.Session.iq_offset_units` property is set to :py:data:`~nirfsg.OffsetUnits.PERCENT`, the carrier leakage, in dBc, remains at a consistent level.
+        The AWG or VST peak power level changes when settings change in other properties such as the :py:attr:`nirfsg.Session.power_level`, :py:attr:`nirfsg.Session.frequency`, :py:attr:`nirfsg.Session.iq_skew`, :py:attr:`nirfsg.Session.iq_gain_imbalance` and :py:attr:`nirfsg.Session.arb_pre_filter_gain` properties. When the :py:attr:`nirfsg.Session.iq_offset_units` property is set to :py:data:`~nirfsg.OffsetUnits.PERCENT`, the actual AWG or VST offset changes as the AWG or VST peak power level changes to satisfy the preceding equations. These changes are useful if you are intentionally adding carrier leakage to test the tolerance of a receiver. When the :py:attr:`nirfsg.Session.iq_offset_units` property is set to :py:data:`~nirfsg.OffsetUnits.PERCENT`, the carrier leakage, in dBc, remains at a consistent level.
 
         If you are trying to eliminate residual carrier leakage due to calibration inaccuracies or drift, set the :py:attr:`nirfsg.Session.iq_offset_units` property to :py:data:`~nirfsg.OffsetUnits.VOLTS`. Offset correction voltage is applied to the I/Q modulator or VST, regardless of changes to the AWG or VST peak power level.
 
@@ -9094,15 +7602,15 @@ lo_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | los        |
-            +-----------------------+------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | enums.LoSource |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | los            |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9761,55 +8269,12 @@ peak_power_adjustment
                 - LabVIEW Property: **RF:Peak Power Adjustment (dB)**
                 - C Attribute: **NIRFSG_ATTR_PEAK_POWER_ADJUSTMENT**
 
-peak_power_adjustment_inheritance
----------------------------------
-
-    .. py:attribute:: peak_power_adjustment_inheritance
-
-        Determines the inheritance behavior of the :py:attr:`nirfsg.Session.peak_power_adjustment` property when a script inherits values from specified waveforms.
-
-        **Default Value:** :py:data:`~nirfsg.PpaInheritance.EXACT_MATCH`
-
-        **Supported Devices:** PXIe-5673/5673E
-
-        **Related Topics**
-
-        `Assigning Properties or Properties to a Waveform <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/assigning_properties_or_attributes_to_a_waveform.html>`_
-
-        **Defined Values**:
-
-        +-----------------------------------------------+------------------------------------------------------------+
-        | Value                                         | Description                                                |
-        +===============================================+============================================================+
-        | :py:data:`~nirfsg.PpaInheritance.EXACT_MATCH` | Errors out if different values are detected in the script. |
-        +-----------------------------------------------+------------------------------------------------------------+
-        | :py:data:`~nirfsg.PpaInheritance.MINIMUM`     | Uses the minimum value found in the script.                |
-        +-----------------------------------------------+------------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.PpaInheritance |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **RF:Peak Power Adjustment Inheritance**
-                - C Attribute: **NIRFSG_ATTR_PEAK_POWER_ADJUSTMENT_INHERITANCE**
-
 phase_continuity_enabled
 ------------------------
 
     .. py:attribute:: phase_continuity_enabled
 
-        Specifies whether the driver maintains phase continuity in the arbitrary waveforms. When this property is set to :py:data:`~nirfsg.PhaseContinuityEnabled.ENABLE`, NI-RFSG may increase the waveform size. When this property is set to :py:data:`~nirfsg.PhaseContinuityEnabled.ENABLE`, the :py:attr:`nirfsg.Session.frequency_tolerance` property specifies the maximum allowable frequency error that can be introduced when keeping the signal phase-continuous. To set the :py:attr:`nirfsg.Session.phase_continuity_enabled` property, the NI-RFSG device must be in the Configuration state. :py:attr:`nirfsg.Session.phase_continuity_enabled` applies only when the :py:attr:`nirfsg.Session.generation_mode` property is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM` or :py:data:`~nirfsg.GenerationMode.SCRIPT`.
+        Specifies whether the driver maintains phase continuity in the arbitrary waveforms. When this property is set to :py:data:`~nirfsg.PhaseContinuityEnabled.ENABLE`, NI-RFSG may increase the waveform size. To set the :py:attr:`nirfsg.Session.phase_continuity_enabled` property, the NI-RFSG device must be in the Configuration state. :py:attr:`nirfsg.Session.phase_continuity_enabled` applies only when the :py:attr:`nirfsg.Session.generation_mode` property is set to :py:data:`~nirfsg.GenerationMode.ARB_WAVEFORM` or :py:data:`~nirfsg.GenerationMode.SCRIPT`.
 
         PXI-5671: When using the PXI-5671 with I/Q rates less than or equal to 8.33MS/s, an input phase-continuous signal is always phase-continuous upon output, and this property has no effect.
 
@@ -10171,204 +8636,21 @@ pulse_modulation_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.PulseModulationSource |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | None                        |
+            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - LabVIEW Property: **Modulation:Pulse:Pulse Modulation Source**
                 - C Attribute: **NIRFSG_ATTR_PULSE_MODULATION_SOURCE**
-
-pxi_chassis_clk10_source
-------------------------
-
-    .. py:attribute:: pxi_chassis_clk10_source
-
-        Specifies the clock source for driving the PXI 10 MHz backplane Reference Clock. This property is configurable if the PXI-5610 upconverter module is installed in *only* Slot 2 of a PXI chassis. To set this property, the NI-RFSG device must be in the Configuration state.
-
-        **Possible Values**:
-
-        Possible Value: Description
-
-        "" :Do not drive the PXI_CLK10 signal.
-
-        "OnboardClock" :Uses the highly stable oven-controlled onboard Reference Clock to drive the PXI_CLK signal.
-
-        "RefIn" :Uses the clock present at the front panel REF IN connector to drive the PXI_CLK signal.
-
-        **Default Value:** ""
-
-        **Supported Devices:** PXI-5610, PXI-5670/5671
-
-        **Related Topics**
-
-        `Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_
-
-        `System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsg.Session.configure_pxi_chassis_clk10`
-
-
-        Only certain combinations of this property and the :py:attr:`nirfsg.Session.ref_clock_source` property are valid, as shown in the following table.
-
-        +------------------------------------------------------------+----------------------------------------------------+
-        | :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` Setting | :py:attr:`nirfsg.Session.ref_clock_source` Setting |
-        +============================================================+====================================================+
-        | "", OnboardClock                                           | OnboardClock                                       |
-        +------------------------------------------------------------+----------------------------------------------------+
-        | "", RefIn                                                  | RefIn                                              |
-        +------------------------------------------------------------+----------------------------------------------------+
-        | "", RefIn                                                  | PXI_CLK                                            |
-        +------------------------------------------------------------+----------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Clock:PXI Chassis Clk 10 Source**
-                - C Attribute: **NIRFSG_ATTR_PXI_CHASSIS_CLK10_SOURCE**
-
-query_instrument_status
------------------------
-
-    .. py:attribute:: query_instrument_status
-
-        Specifies whether NI-RFSG queries the NI-RFSG device status after each operation. Querying the device status is useful for debugging. After you validate your program, set this property to False to disable status checking and maximize performance.
-
-        NI-RFSG can choose to ignore status checking for particular properties, regardless of the setting of this property. Use the :py:meth:`nirfsg.Session.__init__` method to override the default value.
-
-        **Default Value:** False
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Defined Values**:
-
-        +-------+-------------------------------------------------------------+
-        | Value | Description                                                 |
-        +=======+=============================================================+
-        | True  | NI-RFSG queries the instrument status after each operation. |
-        +-------+-------------------------------------------------------------+
-        | False | NI-RFSG does not query the instrument status.               |
-        +-------+-------------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
-                - C Attribute: **NIRFSG_ATTR_QUERY_INSTRUMENT_STATUS**
-
-range_check
------------
-
-    .. py:attribute:: range_check
-
-        Specifies whether to validate property values and method parameters. Range checking parameters is very useful for debugging. After you validate your program, set this property to False to disable range checking and maximize performance. NI-RFSG can choose to ignore range checking for particular properties, regardless of the setting of this property. Use the :py:meth:`nirfsg.Session.__init__` method to override the default value.
-
-        **Default Value:** True
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Defined Values**:
-
-        +-------+-------------------------+
-        | Value | Description             |
-        +=======+=========================+
-        | True  | Enable range checking.  |
-        +-------+-------------------------+
-        | False | Disable range checking. |
-        +-------+-------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
-                - C Attribute: **NIRFSG_ATTR_RANGE_CHECK**
-
-record_coercions
-----------------
-
-    .. py:attribute:: record_coercions
-
-        Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties.
-
-        **Default Value:** False
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Defined Values**:
-
-        +-------+---------------------------------------------------+
-        | Value | Description                                       |
-        +=======+===================================================+
-        | True  | The IVI engine keeps a list of coercions.         |
-        +-------+---------------------------------------------------+
-        | False | The IVI engine does not keep a list of coercions. |
-        +-------+---------------------------------------------------+
-
-        .. note:: Enabling record value coercions is not supported.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-                - C Attribute: **NIRFSG_ATTR_RECORD_COERCIONS**
 
 ref_clock_rate
 --------------
@@ -10379,11 +8661,11 @@ ref_clock_rate
 
         To set this property, the NI-RFSG device must be in the Configuration state. If you are using the PXIe-5654/5654 with PXIe-5696, the NI-RFSG device must be in the Committed state to read this property. When you read this property, it returns the frequency the device is locked to during the Committed state.
 
-        If you set this property to :py:data:`~nirfsg.ReferenceClockRate.AUTO`, NI-RFSG uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if automatic detection is supported by the device.
+        If you set this property to Auto, NI-RFSG uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if automatic detection is supported by the device.
 
         **Valid Values:**
 
-        PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the :py:data:`~nirfsg.ReferenceClockRate.AUTO` and :py:data:`~nirfsg.ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ` values.
+        PXIe-5654/5654 with PXIe-5696: Values between 1MHz to 20MHz in 1MHz steps are supported in addition to the Auto and 10MHz values.
 
         PXIe-5841 with PXIe-5655, PXIe-5842: 10 MHz, 100 MHz, 270 MHz, and 3.84 MHz
 
@@ -10395,7 +8677,7 @@ ref_clock_rate
 
         **Units**: hertz (Hz)
 
-        **Default Value:** :py:data:`~nirfsg.ReferenceClockRate.AUTO`
+        **Default Value:** Auto
 
         **Supported Devices:** PXI-5610, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -10409,29 +8691,27 @@ ref_clock_rate
 
         **Defined Values**:
 
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-        | Value                                                         | Description                                                                                                                       |
-        +===============================================================+===================================================================================================================================+
-        | :py:data:`~nirfsg.ReferenceClockRate.AUTO`                    | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.ReferenceClockRate.CLOCK_RATE_10_MEGAHERTZ` | Uses a 10 MHz Reference Clock rate.                                                                                               |
-        +---------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+        +-------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+        | Name  | Value      | Description                                                                                                                       |
+        +=======+============+===================================================================================================================================+
+        | Auto  | -1.0       | Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it. |
+        +-------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
+        | 10MHz | 10000000.0 | Uses a 10 MHz Reference Clock rate.                                                                                               |
+        +-------+------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: Automatic detection of the Reference Clock rate is supported on only the PXIe-5654/5654 with PXIe-5696. For all other supported devices, NI-RFSG uses the default Reference Clock rate of 10MHz.
 
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.ReferenceClockRate |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | float      |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10444,7 +8724,7 @@ ref_clock_source
 
     .. py:attribute:: ref_clock_source
 
-        Specifies the Reference Clock source. To set this property, the NI-RFSG device must be in the Configuration state. Only certain combinations of this property and the :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` property are valid, as shown in the following table.
+        Specifies the Reference Clock source. To set this property, the NI-RFSG device must be in the Configuration state.
 
         **Default Value:** OnboardClock
 
@@ -10476,19 +8756,17 @@ ref_clock_source
         | "PXI_ClkMaster" | This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653** —NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_CLK as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
         +-----------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-        .. note:: The PXI-5670/5671 and PXIe-5672 devices also allow you to drive the PXI 10 MHz backplane clock on PXI chassis *only* using the :py:attr:`nirfsg.Session.pxi_chassis_clk10_source` property.
-
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ReferenceClockSource |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10576,15 +8854,15 @@ relative_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11037,43 +9315,6 @@ signal_bandwidth
 
                 - LabVIEW Property: **Arb:Signal Bandwidth (Hz)**
                 - C Attribute: **NIRFSG_ATTR_SIGNAL_BANDWIDTH**
-
-simulate
---------
-
-    .. py:attribute:: simulate
-
-        Returns whether NI-RFSG simulates I/O operations. This property is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the :py:meth:`nirfsg.Session.__init__` method to enable simulation.
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Defined Values**:
-
-        +-------+-------------------------+
-        | Value | Description             |
-        +=======+=========================+
-        | True  | Simulation is enabled.  |
-        +-------+-------------------------+
-        | False | Simulation is disabled. |
-        +-------+-------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
-                - C Attribute: **NIRFSG_ATTR_SIMULATE**
 
 specific_driver_class_spec_major_version
 ----------------------------------------
@@ -11549,21 +9790,21 @@ supported_instrument_models
 
     .. py:attribute:: supported_instrument_models
 
-        Returns a string that contains a model code of the NI-RFSG device. For drivers that support more than one device, this property contains a comma-separated list of supported devices.
+        Returns a list of supported devices.
 
         **Supported Devices:** PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
+            +-----------------------+-------------+
+            | Characteristic        | Value       |
+            +=======================+=============+
+            | Datatype              | list of str |
+            +-----------------------+-------------+
+            | Permissions           | read only   |
+            +-----------------------+-------------+
+            | Repeated Capabilities | None        |
+            +-----------------------+-------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

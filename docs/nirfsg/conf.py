@@ -55,7 +55,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'NI-RFSG Python API'
-copyright = '2025-2025, National Instruments Corporation'
+copyright = '2025-2026, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -63,7 +63,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.0.1.dev0'
+release = '1.0.2.dev0'
 # The short X.Y version.
 version = release[:3]
 

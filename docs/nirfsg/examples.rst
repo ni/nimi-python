@@ -1,7 +1,7 @@
 Examples
 ========
 
-`You can download all nirfsg examples for latest version here <https://github.com/ni/nimi-python/releases/download/nirfsg-1.0.0/nirfsg_examples.zip>`_
+`You can download all nirfsg examples for latest version here <https://github.com/ni/nimi-python/releases/download/nirfsg-1.0.1/nirfsg_examples.zip>`_
 
 nirfsg_arb_waveform.py
 ----------------------

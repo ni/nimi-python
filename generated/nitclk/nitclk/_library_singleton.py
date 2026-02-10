@@ -40,7 +40,10 @@ def get():
     Returns the library.Library singleton for nitclk.
     '''
     global _instance
+<<<<<<< HEAD
     global _instance_lock  # noqa: F824
+=======
+>>>>>>> origin/master
 
     with _instance_lock:
         if _instance is None:

@@ -125,364 +125,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'CheckAttributeViBoolean': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nChecks the validity of a value you specify for a ViBoolean attribute.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attribute',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to verify as a valid value for the attribute.',
-                    'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
-                },
-                'name': 'value',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CheckAttributeViInt32': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nChecks the validity of a value you specify for a ViInt32 attribute.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attribute',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to verify as a valid value for the attribute.',
-                    'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
-                },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
-                'name': 'value',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CheckAttributeViInt64': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nChecks the validity of a value you specify for a ViInt64 attribute.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attribute',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to verify as a valid value for the attribute.',
-                    'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
-                },
-                'grpc_enum': 'NiRFSGInt64AttributeValues',
-                'name': 'value',
-                'type': 'ViInt64',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CheckAttributeViReal64': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nChecks the validity of a value you specify for a ViReal64 attribute.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attribute',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to verify as a valid value for the attribute.',
-                    'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
-                },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
-                'name': 'value',
-                'type': 'ViReal64',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CheckAttributeViSession': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nChecks the validity of a value you specify for a ViSession attribute.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attribute',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to verify as a valid value for the attribute.',
-                    'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
-                },
-                'name': 'value',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'CheckAttributeViString': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nChecks the validity of a value you specify for a ViString attribute.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the waveform name and the marker name.\n\nExample:\n\n"waveform::waveform0/marker0"'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attribute',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the value that you want to verify as a valid value for the attribute. The value must be a NULL-terminated string.',
-                    'note': 'Some of the values might not be valid depending on the current settings of the instrument session.'
-                },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
-                'name': 'value',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'CheckGenerationStatus': {
         'codegen_method': 'public',
         'documentation': {
@@ -717,37 +359,8 @@ functions = {
                 'documentation': {
                     'description': 'Name of the stored waveform to delete.'
                 },
-                'name': 'name',
+                'name': 'waveformName',
                 'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ClearError': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nClears the error information associated with the session.\n\nIf you pass VI_NULL for the NIRFSG_ATTR_VI parameter, this function clears the error information for the current execution thread.\n\nThe IVI Engine also maintains this error information separately for each thread. This feature of the IVI Engine is useful if you do not have a session handle to pass to the nirfsg_ClearError function or the nirfsg_GetError function, which occurs when a call to the nirfsg_Init function or the nirfsg_InitWithOptions function fails.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860',
-            'note': 'The nirfsg_GetError function clears the error information after it is retrieved. A call to the nirfsg_ClearError function is necessary only when you do not use a call to the nirfsg_GetError function to retrieve error information.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -1041,7 +654,7 @@ functions = {
                     'description': 'Specifies the active edge for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_EDGE attribute to this value.'
                 },
                 'enum': 'ScriptTriggerDigitalEdgeEdge',
-                'grpc_enum': None,
+                'grpc_enum': 'DigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1093,7 +706,7 @@ functions = {
                     'description': 'Specifies the active edge for the Start Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_EDGE attribute to this value.'
                 },
                 'enum': 'StartTriggerDigitalEdgeEdge',
-                'grpc_enum': None,
+                'grpc_enum': 'DigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1162,96 +775,6 @@ functions = {
             }
         ],
         'repeated_capability_type': 'script_triggers',
-        'returns': 'ViStatus'
-    },
-    'ConfigureDigitalModulationUserDefinedWaveform': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nSpecifies the message signal used for digital modulation when the NIRFSG_ATTR_DIGITAL_MODULATION_WAVEFORM_TYPE attribute is set to NIRFSG_VAL_USER_DEFINED.\n\n**Supported Devices** : PXI/PXIe-5650/5651/5652'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the number of samples in the message signal.'
-                },
-                'name': 'numberOfSamples',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the user-defined message signal used for digital modulation.'
-                },
-                'name': 'userDefinedWaveform',
-                'size': {
-                    'mechanism': 'passed-in',
-                    'value': 'numberOfSamples'
-                },
-                'type': 'ViInt8[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'ConfigurePxiChassisClk10': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nSpecifies the signal to drive the 10MHz Reference Clock on the PXI backplane.\n\nThis option can only be configured when the PXI-5610 is in Slot 2 of the PXI chassis. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXI-5670/5671\n\n**Related Topics**\n\n`Timing Configurations <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/timing_configurations.html>`_\n\n`System Reference Clock <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/integration_pxi_clk10.html>`_'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the source of the Reference Clock signal.'
-                },
-                'name': 'pxiClk10Source',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
         'returns': 'ViStatus'
     },
     'ConfigureRF': {
@@ -1743,34 +1266,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'Disable': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nPlaces the instrument in a quiescent state where it has minimal or no impact on the system to which it is connected.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXI-5670/5671, PXIe-5672/5673/5673E'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'DisableScriptTrigger': {
         'codegen_method': 'public',
         'documentation': {
@@ -1894,58 +1389,6 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': False
-    },
-    'ErrorQuery': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nReads an error code and an error message from the instrument error queue.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the error code read from the instrument error queue.'
-                },
-                'name': 'errorCode',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the error message string read from the instrument error message queue.\n\nYou must pass a ViChar array with at least 256 bytes.'
-                },
-                'name': 'errorMessage',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
     },
     'FancyCreateDeembeddingSparameterTableArray': {
         'codegen_method': 'python-only',
@@ -2268,6 +1711,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2326,6 +1770,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2384,6 +1829,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2442,6 +1888,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2500,6 +1947,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2558,6 +2006,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2581,68 +2030,6 @@ functions = {
                 'size': {
                     'mechanism': 'ivi-dance',
                     'value': 'bufSize'
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetChannelName': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nReturns the channel string that is in the channel table at an index you specify.\n\n**Supported Devices** : PXI-5670/5671, PXIe-5672/5673/5673E'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies a one-based index into the channel table.'
-                },
-                'name': 'index',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the buffer for the channel string.'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns a channel string from the channel table at the index you specify in the Index parameter. Do not modify the contents of the channel string.'
-                },
-                'name': 'name',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'bufferSize'
                 },
                 'type': 'ViChar[]',
                 'use_array': False,
@@ -2820,7 +2207,7 @@ functions = {
             'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
-        'method_name_for_documentation': 'get_external_calibration_last_date_and_time',
+        'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
         'parameters': [
             {
                 'direction': 'in',
@@ -2921,7 +2308,7 @@ functions = {
                 'type': 'hightime.datetime'
             }
         ],
-        'python_name': 'get_external_calibration_last_date_and_time',
+        'python_name': 'get_ext_cal_last_date_and_time',
         'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
         'returns': 'ViStatus'
     },
@@ -2946,6 +2333,7 @@ functions = {
                     'description': 'Specifies from which stand-alone module to retrieve the last successful self-calibration date and time.'
                 },
                 'enum': 'Module',
+                'default_value': 'Module.PRIMARY_MODULE',
                 'grpc_enum': None,
                 'name': 'module',
                 'type': 'ViInt32'
@@ -2961,7 +2349,7 @@ functions = {
                 'type': 'hightime.datetime'
             }
         ],
-        'python_name': 'get_self_calibration_last_date_and_time',
+        'python_name': 'get_self_cal_last_date_and_time',
         'real_datetime_call': 'GetSelfCalibrationDateAndTime',
         'returns': 'ViStatus'
     },
@@ -3149,6 +2537,7 @@ functions = {
                     ]
                 },
                 'enum': 'Module',
+                'default_value': 'Module.PRIMARY_MODULE',
                 'name': 'module',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3635,33 +3024,7 @@ functions = {
                 'default_value': '""',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the initial value of certain attributes for the session. The following table lists the attributes and the name you pass in this parameter to identify the attribute.\n\nThe format of this string consists of the following relations:\n"AttributeName=Value"\n\nwhere\n*AttributeName* is the name of the attribute and *Value* is the value to which the attribute is set. To set multiple attributes, separate their assignments with a comma, as shown in the following option string:\n\n"RangeCheck=1,QueryInstrStatus=0,Cache=1,DriverSetup=AWG:pxi1slot4"\n\nThe `DriverSetup string <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/driver_setup_string.html>`_ is required in order to simulate a specific device.',
-                    'table_body': [
-                        [
-                            'RangeCheck',
-                            'NIRFSG_ATTR_RANGE_CHECK'
-                        ],
-                        [
-                            'QueryInstrStatus',
-                            'NIRFSG_ATTR_QUERY_INSTRUMENT_STATUS'
-                        ],
-                        [
-                            'Cache',
-                            'NIRFSG_ATTR_CACHE'
-                        ],
-                        [
-                            'RecordCoercions',
-                            'NIRFSG_ATTR_RECORD_COERCIONS'
-                        ],
-                        [
-                            'Simulate',
-                            'NIRFSG_ATTR_SIMULATE'
-                        ]
-                    ],
-                    'table_header': [
-                        'Name',
-                        'Attribute Name'
-                    ]
+                    'description': 'Specifies the initial value of certain attributes for the session. The following table lists the attributes and the name you pass in this parameter to identify the attribute.\n\nThe format of this string consists of the following relations:\n"AttributeName=Value"\n\nwhere\n*AttributeName* is the name of the attribute and *Value* is the value to which the attribute is set. To set multiple attributes, separate their assignments with a comma, as shown in the following option string:\n\n"RangeCheck=1,QueryInstrStatus=0,Cache=1,DriverSetup=AWG:pxi1slot4"\n\nThe `DriverSetup string <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/driver_setup_string.html>`_ is required in order to simulate a specific device.'
                 },
                 'name': 'optionString',
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
@@ -3674,6 +3037,7 @@ functions = {
                     'description': 'Returns a ViSession handle that you use to identify the NI-RFSG device in all subsequent NI-RFSG function calls.'
                 },
                 'name': 'newVi',
+                'grpc_name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3974,54 +3338,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'ResetAttribute': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nResets the attribute to its default value.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name of the channel.'
-                },
-                'name': 'channelName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Pass the ID of an attribute.'
-                },
-                'name': 'attributeId',
-                'type': 'ViAttr',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'ResetDevice': {
         'codegen_method': 'public',
         'documentation': {
@@ -4152,62 +3468,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'RevisionQuery': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nReturns the revision numbers of the NI-RFSG driver and the instrument firmware.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the value of the NIRFSG_ATTR_SPECIFIC_DRIVER_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
-                },
-                'name': 'instrumentDriverRevision',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the value of the NIRFSG_ATTR_INSTRUMENT_FIRMWARE_REVISION attribute in the form of a string.\n\nYou must pass a ViChar array with at least 256 bytes.'
-                },
-                'name': 'firmwareRevision',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'SaveConfigurationsToFile': {
         'codegen_method': 'public',
         'documentation': {
@@ -4286,7 +3546,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the name of the stored waveform to generate. This is a case-insensitive alphanumeric string that does not use reserved words. NI-RFSG sets the NIRFSG_ATTR_ARB_SELECTED_WAVEFORM attribute to this value.'
                 },
-                'name': 'name',
+                'name': 'waveformName',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4442,8 +3702,8 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SelfTest': {
-        'codegen_method': 'public',
+    'self_test': {
+        'codegen_method': 'private',
         'documentation': {
             'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_'
         },
@@ -4480,7 +3740,7 @@ functions = {
                 'type': 'ViInt16'
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'Returns the self-test response string from the NI-RFSG device. For an explanation of the string contents, refer to the **status** parameter of this function.\n\nYou must pass a ViChar array with at least 256 bytes.'
                 },
@@ -4492,6 +3752,48 @@ functions = {
                 'type': 'ViChar[]'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'fancy_self_test': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nPerforms a self-test on the NI-RFSG device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSG device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSG device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/warmup.html>`_',
+            'table_body': [
+                [
+                    '0',
+                    'Passed self-test'
+                ],
+                [
+                    '1',
+                    'Self-test failed'
+                ]
+            ],
+            'table_header': [
+                'Self-Test Code',
+                'Description'
+            ]
+        },
+        'grpc_name': 'FancySelfTest',
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'fancy_self_test'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            }
+        ],
+        'python_name': 'self_test',
         'returns': 'ViStatus'
     },
     'SendSoftwareEdgeTrigger': {
@@ -4578,6 +3880,7 @@ functions = {
                         'Description'
                     ]
                 },
+                'enum': 'TriggerIdentifier',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4705,6 +4008,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4764,6 +4068,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4824,6 +4129,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4883,6 +4189,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4943,6 +4250,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5002,6 +4310,7 @@ functions = {
                     'description': 'Pass the ID of an attribute.'
                 },
                 'name': 'attribute',
+                'grpc_name': 'attribute_id',
                 'type': 'ViAttr',
                 'use_array': False,
                 'use_in_python_api': True
@@ -5280,14 +4589,17 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the maximum time the function waits for the output to settle. If the maximum time is exceeded, this function returns an error. The units are expressed in milliseconds.\n\n**Default Value** : 10000'
                 },
                 'name': 'maxTimeMilliseconds',
+                'python_api_converter_name': 'convert_timedelta_to_milliseconds_int32',
                 'type': 'ViInt32',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in milliseconds',
                 'use_array': False,
-                'use_in_python_api': True
+                'use_in_python_api': True                
             }
         ],
         'returns': 'ViStatus'
@@ -5346,6 +4658,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfm_data',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
@@ -5421,6 +4734,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfm_data',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',
@@ -5496,6 +4810,7 @@ functions = {
                     'description': 'Specifies the array of data to load into the waveform. The array must have at least as many elements as the value in the **size_in_samples** parameter in the nirfsg_AllocateArbWaveform function.'
                 },
                 'name': 'waveformDataArray',
+                'grpc_name': 'wfm_data',
                 'numpy': True,
                 'size': {
                     'mechanism': 'len',

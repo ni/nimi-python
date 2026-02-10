@@ -50,8 +50,10 @@
 
 #### [nidcpower] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nidcpower] 1.5.0 - 2025-07-01
 - Added
@@ -544,8 +546,10 @@
 
 #### [nidigital] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nidigital] 1.4.9 - 2025-02-26
 - Added
@@ -777,8 +781,10 @@
 
 #### [nidmm] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nidmm] 1.4.9 - 2025-02-26
 - Added
@@ -1092,8 +1098,10 @@
 
 #### [nifgen] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nifgen] 1.4.9 - 2025-02-26
 - Added
@@ -1468,8 +1476,10 @@
 
 #### [nimodinst] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nimodinst] 1.4.9 - 2025-02-26
 - Added
@@ -1686,13 +1696,95 @@
 ### nirfsg (NI-RFSG)
 
 - [Unreleased](#nirfsg-unreleased)
+- [1.0.1](#nirfsg-101---2026-01-09)
 - [1.0.0](#nirfsg-100---2025-08-05)
 
 #### [nirfsg] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
-  - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
 - Removed
+
+#### [nirfsg] 1.0.1 - 2026-01-09
+- Changed
+  - Added default value for `module` parameter in `get_self_cal_last_date_and_time` and `get_self_calibration_temperature` methods to align with documentation and allow duck-typing
+  - Changed the parameter name for waveform name from `name` to `waveform_name` in `clear_arb_waveform` and `select_arb_waveform` to be consistent with other waveform methods
+  - Changed the name of below methods to be consistent with other APIs in the repository
+    - `get_self_calibration_last_date_and_time` to `get_self_cal_last_date_and_time`
+    - `get_external_calibration_last_date_and_time` to `get_ext_cal_last_date_and_time`
+  - Changed `frequency_settling` property to be of type float instead of hightime.timedelta, since it can have multiple interpretation based on `frequency_settling_units` property value
+  - Changed `interpolation_delay` and `relative_delay` properties to be of type hightime.timedelta, so that it aligns with _delay_ attributes across other APIs in the repository
+  - Changed `exported_ref_clock_rate` and `ref_clock_rate` properties to be of type float instead of enum, since the enums just represented raw float values
+  - Fixed the return type of `get_all_script_names` and `get_all_named_waveform_names` to remove the size parameter and return a list of strings instead of a comma-separated string
+  - Updated `external_calibration_recommended_interval` property to return a hightime.timedelta object instead of months as an int, aligning with other APIs in the repository
+  - Updated `self_test` to not have any parameters, aligning with other APIs in the repository
+  - Updated `wait_until_settled` method to have `max_time_milliseconds` parameter as type hightime.timedelta with a default value of 10 seconds
+  - Updated below properties and method parameters to be of string enum type instead of plain string, since they would support only fixed set of strings
+    - `pulse_modulation_source`
+    - `exported_pulse_modulation_event_output_terminal`
+    - `exported_ref_clock_output_terminal`
+    - `lo_source`
+    - `arb_sample_clock_source`
+    - `ref_clock_source`
+    - `trigger_identifier` parameter in `send_software_edge_trigger` method
+  - Updated below properties to be list of str instead of them returning a comma separated list of string values 
+    - `available_paths`
+    - `available_ports`
+    - `fixed_group_delay_across_ports`
+    - `group_capabilities`
+    - `supported_instrument_models`
+- Removed
+  - Python 3.9 Support
+  - Methods and properties applicable only to hardware which are not supported anymore
+    - Methods
+      - `configure_digital_modulation_user_defined_waveform`
+      - `configure_pxi_chassis_clk10`
+    - Properties
+      - `analog_modulation_fm_deviation`
+      - `analog_modulation_waveform_frequency`
+      - `arb_filter_raised_cosine_alpha`
+      - `arb_filter_root_raised_cosine_alpha`
+      - `arb_filter_type`
+      - `arb_oscillator_phase_dac_value`
+      - `arb_power`
+      - `attenuator_hold_enabled`
+      - `attenuator_hold_max_power`
+      - `compensate_for_filter_group_delay`
+      - `data_transfer_block_size`
+      - `data_transfer_maximum_bandwidth`
+      - `data_transfer_maximum_in_flight_reads`
+      - `data_transfer_preferred_packet_size`
+      - `digital_modulation_fsk_deviation`
+      - `digital_modulation_prbs_order`
+      - `digital_modulation_prbs_seed`
+      - `digital_modulation_symbol_rate`
+      - `digital_modulation_type`
+      - `digital_modulation_waveform_type`
+      - `digital_pattern`
+      - `frequency_tolerance`
+      - `peak_power_adjustment_inheritance`
+      - `pxi_chassis_clk10_source`
+  - Methods and properties which are necessary for IVI compliance of the driver, but are not applicable for Python
+    - Methods
+      - `check_attribute_vi_boolean`
+      - `check_attribute_vi_int32`
+      - `check_attribute_vi_int64`
+      - `check_attribute_vi_real64`
+      - `check_attribute_vi_session`
+      - `check_attribute_vi_string`
+      - `clear_error`
+      - `disable`
+      - `error_query`
+      - `get_channel_name`
+      - `reset_attribute`
+      - `revision_query`
+    - Properties
+      - `cache`
+      - `interchange_check`
+      - `query_instrument_status`
+      - `range_check`
+      - `record_coercions`
+      - `simulate`
 
 #### [nirfsg] 1.0.0 - 2025-08-05
 - Added
@@ -1729,8 +1821,10 @@
 
 #### [niscope] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [niscope] 1.4.9 - 2025-02-26
 - Added
@@ -2168,8 +2262,10 @@
 
 #### [nise] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nise] 1.4.9 - 2025-02-26
 - Added
@@ -2324,8 +2420,10 @@
 
 #### [niswitch] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [niswitch] 1.4.9 - 2025-02-26
 - Added
@@ -2575,8 +2673,10 @@
 
 #### [nitclk] Unreleased
 - Added
+  - Python 3.14 Support
 - Changed
 - Removed
+  - Python 3.9 Support
 
 #### [nitclk] 1.4.9 - 2025-02-26
 - Added

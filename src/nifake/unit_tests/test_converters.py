@@ -50,6 +50,19 @@ def test_convert_timedeltas_to_seconds_real64():
     assert all([actual == pytest.approx(expected) for actual, expected in zip(test_result, time_values)])
 
 
+def test_convert_timedelta_to_months_int32():
+    # 1 month = 60*60*24*30.4167 seconds = 2628002.88 seconds
+    seconds_per_month = 60 * 60 * 24 * 30.4167
+    test_result = _converters.convert_timedelta_to_months_int32(hightime.timedelta(seconds=seconds_per_month))
+    assert test_result == 1
+    test_result = _converters.convert_timedelta_to_months_int32(hightime.timedelta(seconds=-5 * seconds_per_month))
+    assert test_result == -5
+    test_result = _converters.convert_timedelta_to_months_int32(seconds_per_month * 2)
+    assert test_result == 2
+    test_result = _converters.convert_timedelta_to_months_int32(-seconds_per_month)
+    assert test_result == -1
+
+
 def test_convert_seconds_real64_to_timedelta():
     time_value = -5e-10
     test_result = _converters.convert_seconds_real64_to_timedelta(time_value)
@@ -395,3 +408,14 @@ def test_string_to_list_prefix():
 def test_convert_comma_separated_string_to_list():
     out_list = _converters.convert_comma_separated_string_to_list(' PinA ,  PinB , PinC  ')
     assert out_list == ['PinA', 'PinB', 'PinC']
+
+
+def test_convert_list_to_comma_separated_string():
+    out_string = _converters.convert_list_to_comma_separated_string(['PinA', 'PinB', 'PinC'])
+    assert out_string == 'PinA,PinB,PinC'
+
+
+def test_convert_list_to_comma_separated_string_invalid_input():
+    with pytest.raises(TypeError) as error_info:
+        _converters.convert_list_to_comma_separated_string('PinA,PinB,PinC')
+    assert str(error_info.value) == 'Input must be a list or tuple of str'
