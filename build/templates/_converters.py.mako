@@ -266,6 +266,12 @@ def convert_month_to_timedelta(months):
     return hightime.timedelta(days=(30.4167 * months))
 
 
+# Scaling factor to apply on seconds to get months
+# would be 1/(60 seconds * 60 minutes * 24 hours * 30.4167 days)
+def convert_timedelta_to_months_int32(value):
+    return _convert_timedelta(value, _visatype.ViInt32, 1.0 / (60 * 60 * 24 * 30.4167))
+
+
 # This converter is not called from the normal codegen path for function. Instead it is
 # call from init and is a special case.
 def convert_init_with_options_dictionary(values):
@@ -330,6 +336,20 @@ def convert_to_bytes(value):  # noqa: F811
 
 def convert_comma_separated_string_to_list(comma_separated_string):
     return [x.strip() for x in comma_separated_string.split(',')]
+
+
+def convert_list_to_comma_separated_string(list_of_strings):
+    '''Convert a list or tuple of strings into a comma-separated string.
+
+    Args:
+        list_of_strings (list or tuple of str): List or tuple of strings.
+
+    Returns:
+        str: Comma-separated string.
+    '''
+    if not isinstance(list_of_strings, (list, tuple)) or not all(isinstance(item, str) for item in list_of_strings):
+        raise TypeError('Input must be a list or tuple of str')
+    return ','.join(list_of_strings)
 
 
 def convert_chained_repeated_capability_to_parts(chained_repeated_capability):

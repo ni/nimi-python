@@ -116,6 +116,11 @@ class _SessionBase(object):
 
     A property of type Color with read/write access.
     '''
+    read_write_comma_separated_string = _attributes.AttributeViStringCommaSeparated(1000015)
+    '''Type: str
+
+    A property of type comma separated string with read/write access.
+    '''
     read_write_double = _attributes.AttributeViReal64(1000001)
     '''Type: float
 
@@ -154,6 +159,11 @@ class _SessionBase(object):
     '''Type: hightime.timedelta, datetime.timedelta, or int in milliseconds
 
     Property in milliseconds
+    '''
+    read_write_integer_with_month_converter = _attributes.AttributeViInt32TimeDeltaMonths(1000014)
+    '''Type: hightime.timedelta, datetime.timedelta, or int in months
+
+    Property in months
     '''
     read_write_string = _attributes.AttributeViString(1000002)
     '''Type: str

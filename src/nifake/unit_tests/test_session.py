@@ -402,6 +402,24 @@ class TestSession:
             session.read_write_integer_with_converter = hightime.timedelta(milliseconds=test_number_ms)
             self.patched_library_interpreter.set_attribute_vi_int32.assert_called_once_with('', attribute_id, test_number_ms)
 
+    def test_get_attribute_int32_with_month_converter(self):
+        attribute_id = 1000014
+        test_number_months = 2
+        test_number_s = 5256005.76
+        self.patched_library_interpreter.get_attribute_vi_int32.side_effect = [test_number_months]
+        with nifake.Session('dev1') as session:
+            attr_timedelta = session.read_write_integer_with_month_converter
+            assert attr_timedelta.total_seconds() == test_number_s
+            self.patched_library_interpreter.get_attribute_vi_int32.assert_called_once_with('', attribute_id)
+
+    def test_set_attribute_int32_with_month_converter(self):
+        self.patched_library_interpreter.set_attribute_vi_int32.side_effect = [None]
+        attribute_id = 1000014
+        test_number_months = 3
+        with nifake.Session('dev1') as session:
+            session.read_write_integer_with_month_converter = hightime.timedelta(seconds=60 * 60 * 24 * 30.4167 * test_number_months)
+            self.patched_library_interpreter.set_attribute_vi_int32.assert_called_once_with('', attribute_id, test_number_months)
+
     def test_get_attribute_real64(self):
         attribute_id = 1000001
         test_number = 1.5
@@ -452,6 +470,25 @@ class TestSession:
         with nifake.Session('dev1') as session:
             session.read_write_string = attrib_string
             self.patched_library_interpreter.set_attribute_vi_string.assert_called_once_with('', attribute_id, 'This is test string')
+
+    def test_get_attribute_comma_separated_string(self):
+        comma_separated_string = 'PinA,PinB,PinC'
+        expected_list = ['PinA', 'PinB', 'PinC']
+        self.patched_library_interpreter.get_attribute_vi_string.side_effect = [comma_separated_string]
+        attribute_id = 1000015
+        with nifake.Session('dev1') as session:
+            attr_list = session.read_write_comma_separated_string
+            assert attr_list == expected_list
+            self.patched_library_interpreter.get_attribute_vi_string.assert_called_once_with('', attribute_id)
+
+    def test_set_attribute_comma_separated_string(self):
+        self.patched_library_interpreter.set_attribute_vi_string.side_effect = [None]
+        attribute_id = 1000015
+        attrib_list = ['PinA', 'PinB', 'PinC']
+        expected_string = 'PinA,PinB,PinC'
+        with nifake.Session('dev1') as session:
+            session.read_write_comma_separated_string = attrib_list
+            self.patched_library_interpreter.set_attribute_vi_string.assert_called_once_with('', attribute_id, expected_string)
 
     def test_get_attribute_string_with_converter(self):
         string = 'not that interesting'

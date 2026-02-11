@@ -133,31 +133,6 @@ enums = {
             }
         ]
     },
-    'AnalogModulationWaveformType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies that the analog modulation waveform type is sine.'
-                },
-                'name': 'NIRFSG_VAL_SINE',
-                'value': 3000
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the analog modulation waveform type is square.'
-                },
-                'name': 'NIRFSG_VAL_SQUARE',
-                'value': 3001
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the analog modulation waveform type is triangle.'
-                },
-                'name': 'NIRFSG_VAL_TRIANGLE',
-                'value': 3002
-            }
-        ]
-    },
     'ArbOnboardSampleClockMode': {
         'values': [
             {
@@ -173,6 +148,24 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_DIVIDE_DOWN',
                 'value': 6001
+            }
+        ]
+    },
+    'ArbSampleClockSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses the AWG module onboard clock as the Sample Clock source.'
+                },
+                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
+                'value': 'OnboardClock'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the external clock as the Sample Clock source.'
+                },
+                'name': 'NIRFSG_VAL_CLK_IN_STR',
+                'value': 'ClkIn'
             }
         ]
     },
@@ -273,56 +266,6 @@ enums = {
             }
         ]
     },
-    'DigitalModulationType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Disables digital modulation.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation type is frequency-shift keying (FSK).'
-                },
-                'name': 'NIRFSG_VAL_FSK',
-                'value': 4000
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation type is on-off keying (OOK).'
-                },
-                'name': 'NIRFSG_VAL_OOK',
-                'value': 4001
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation type is phase-shift keying (PSK).'
-                },
-                'name': 'NIRFSG_VAL_PSK',
-                'value': 4002
-            }
-        ]
-    },
-    'DigitalModulationWaveformType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation waveform type is pseudorandom bit sequence (PRBS).'
-                },
-                'name': 'NIRFSG_VAL_PRBS',
-                'value': 5000
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies that the digital modulation waveform type is user defined. To specify the user-defined waveform, call the nirfsg_ConfigureDigitalModulationUserDefinedWaveform function.'
-                },
-                'name': 'NIRFSG_VAL_USER_DEFINED',
-                'value': 5001
-            }
-        ]
-    },
     'DirectDownload': {
         'values': [
             {
@@ -345,31 +288,6 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_UNSPECIFIED',
                 'value': -2
-            }
-        ]
-    },
-    'FilterType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'No filter type is applied.'
-                },
-                'name': 'NIRFSG_VAL_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Applies a root-raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_ROOT_RAISED_COSINE_ALPHA attribute.'
-                },
-                'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_ROOT_RAISED_COSINE',
-                'value': 10001
-            },
-            {
-                'documentation': {
-                    'description': 'Applies a raised cosine filter to the data with the alpha value specified with the NIRFSG_ATTR_ARB_FILTER_RAISED_COSINE_ALPHA attribute.'
-                },
-                'name': 'NIRFSG_VAL_ARB_FILTER_TYPE_RAISED_COSINE',
-                'value': 10002
             }
         ]
     },
@@ -531,6 +449,46 @@ enums = {
                 },
                 'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
                 'value': 0
+            }
+        ]
+    },
+    'LoSource': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Uses an internal LO as the LO source. If you specify an internal LO source, the LO is generated inside the device itself.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_ONBOARD_STR',
+                'value': 'Onboard'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses an external LO as the LO source. Connect a signal to the LO IN connector on the device and use the UPCONVERTER_CENTER_FREQUENCY attribute to specify the LO frequency.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_LO_IN_STR',
+                'value': 'LO_In'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid only on the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_SECONDARY_STR',
+                'value': 'Secondary'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSG selects an internal synthesizer and the synthesizer signal is switched to both the RF In and RF Out mixers. This value is valid only on the PXIe-5830/5831/5832/5841 with PXIe-5655/5842.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_SG_SA_SHARED_STR',
+                'value': 'SG_SA_Shared'
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG internally makes the configuration to share the LO between NI-RFSA and NI-RFSG. This value is valid only on the PXIe-5820/5830/5831/5832/5840/5841/5842.'
+                },
+                'name': 'NIRFSG_VAL_LO_SOURCE_AUTOMATIC_SG_SA_SHARED_STR',
+                'value': 'Automatic_SG_SA_Shared'
             }
         ]
     },
@@ -767,31 +725,6 @@ enums = {
             }
         ]
     },
-    'PpaInheritance': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Errors out if different values are detected in the script.'
-                },
-                'name': 'NIRFSG_VAL_EXACT_MATCH',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the minimum value found in the script.'
-                },
-                'name': 'NIRFSG_VAL_MINIMUM',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Uses the maximum value found in the script.'
-                },
-                'name': 'NIRFSG_VAL_MAXIMUM',
-                'value': 2
-            }
-        ]
-    },
     'PulseModulationMode': {
         'values': [
             {
@@ -821,6 +754,63 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_DIGITAL',
                 'value': 20003
+            }
+        ]
+    },
+    'PulseModulationOutputTerminal': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Pulse modulation video signal is not exported.'
+                },
+                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
+                'value': ''
+            },
+            {
+                'documentation': {
+                    'description': 'Export the pulse modulation video signal on the pulse out terminal.'
+                },
+                'name': 'NIRFSG_VAL_PULSE_OUT_STR',
+                'value': 'PulseOut'
+            }
+        ]
+    },
+    'PulseModulationSource': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
+                },
+                'name': 'NIRFSG_VAL_PULSE_IN_STR',
+                'value': 'PulseIn'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 0.'
+                },
+                'name': 'NIRFSG_VAL_MARKER0_STR',
+                'value': 'Marker0'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 1.'
+                },
+                'name': 'NIRFSG_VAL_MARKER1_STR',
+                'value': 'Marker1'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 2.'
+                },
+                'name': 'NIRFSG_VAL_MARKER2_STR',
+                'value': 'Marker2'
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger is received from the Marker 3.'
+                },
+                'name': 'NIRFSG_VAL_MARKER3_STR',
+                'value': 'Marker3'
             }
         ]
     },
@@ -867,50 +857,81 @@ enums = {
             }
         ]
     },
-    'ReferenceClockExportedRate': {
+    'ReferenceClockExportOutputTerminal': {
         'values': [
             {
                 'documentation': {
-                    'description': 'Uses a 10MHz Reference Clock rate.'
+                    'description': 'The Reference Clock signal is not exported.'
                 },
-                'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
-                'value': 10000000
+                'name': 'NIRFSG_VAL_DO_NOT_EXPORT_STR',
+                'value': ''
             },
             {
                 'documentation': {
-                    'description': 'Uses a 100MHz Reference Clock rate.'
+                    'description': 'Exports the Reference Clock signal to the REF OUT connector of the device.'
                 },
-                'name': 'NIRFSG_VAL_100MHZ',
-                'python_name': 'CLOCK_RATE_100_MEGAHERTZ',
-                'value': 100000000.0
+                'name': 'NIRFSG_VAL_REF_OUT_STR',
+                'value': 'RefOut'
             },
             {
                 'documentation': {
-                    'description': 'Uses a 1GHz Reference Clock rate.'
+                    'description': 'Exports the Reference Clock signal to the REF OUT2 connector of the device, if applicable.'
                 },
-                'name': 'NIRFSG_VAL_1GHZ',
-                'python_name': 'CLOCK_RATE_1_GIGAHERTZ',
-                'value': 1000000000.0
+                'name': 'NIRFSG_VAL_REF_OUT2_STR',
+                'value': 'RefOut2'
+            },
+            {
+                'documentation': {
+                    'description': 'Exports the Reference Clock signal to the CLK OUT connector of the device.'
+                },
+                'name': 'NIRFSG_VAL_CLK_OUT_STR',
+                'value': 'ClkOut'
             }
         ]
     },
-    'ReferenceClockRate': {
+    'ReferenceClockSource': {
         'values': [
             {
                 'documentation': {
-                    'description': 'Uses the default Reference Clock rate for the device or automatically detects the Reference Clock rate if the device supports it.'
+                    'description': 'Uses the onboard Reference Clock as the clock source.'
                 },
-                'name': 'NIRFSG_VAL_AUTO',
-                'value': -1
+                'name': 'NIRFSG_VAL_ONBOARD_CLOCK_STR',
+                'value': 'OnboardClock'
             },
             {
                 'documentation': {
-                    'description': 'Uses a 10MHz Reference Clock rate.'
+                    'description': 'Uses the clock signal present at the front panel REF IN connector as the Reference Clock source.'
                 },
-                'name': 'NIRFSG_VAL_10MHZ',
-                'python_name': 'CLOCK_RATE_10_MEGAHERTZ',
-                'value': 10000000
+                'name': 'NIRFSG_VAL_REF_IN_STR',
+                'value': 'RefIn'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the PXI_CLK signal, which is present on the PXI backplane, as the Reference Clock source.'
+                },
+                'name': 'NIRFSG_VAL_PXI_CLK_STR',
+                'value': 'PXI_CLK'
+            },
+            {
+                'documentation': {
+                    'description': 'Uses the clock signal present at the front panel CLK IN connector as the Reference Clock source. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5831 with PXIe-5653/5832/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655.'
+                },
+                'name': 'NIRFSG_VAL_CLK_IN_STR',
+                'value': 'ClkIn'
+            },
+            {
+                'documentation': {
+                    'description': 'This value is not valid on any supported devices.'
+                },
+                'name': 'NIRFSG_VAL_REF_IN_2_STR',
+                'value': 'RefIn2'
+            },
+            {
+                'documentation': {
+                    'description': 'This value is valid on only the PXIe-5831/5832 with PXIe-5653. **PXIe-5831/5832 with PXIe-5653 -** NI-RFSG configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use NIRFSG_VAL_PXI_CLK_STR as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.'
+                },
+                'name': 'NIRFSG_VAL_PXI_CLK_MASTER_STR',
+                'value': 'PXI_ClkMaster'
             }
         ]
     },
@@ -1234,6 +1255,46 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_SOFTWARE',
                 'value': 2
+            }
+        ]
+    },
+    'TriggerIdentifier': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 0.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER0',
+                'value': 'scriptTrigger0'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 1.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER1',
+                'value': 'scriptTrigger1'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 2.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER2',
+                'value': 'scriptTrigger2'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies Script Trigger 3.'
+                },
+                'name': 'NIRFSG_VAL_SCRIPT_TRIGGER3',
+                'value': 'scriptTrigger3'
+            },
+            {
+                'documentation': {
+                    'description': 'None (no signal to export)'
+                },
+                'name': 'NIRFSG_VAL_NONE_EMPTY_STRING',
+                'python_name': 'NONE',
+                'value': ''
             }
         ]
     },

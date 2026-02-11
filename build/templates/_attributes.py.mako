@@ -35,6 +35,15 @@ class AttributeViInt32TimeDeltaMilliseconds(Attribute):
         session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_milliseconds_int32(value))
 
 
+class AttributeViInt32TimeDeltaMonths(Attribute):
+
+    def __get__(self, session, session_type):
+        return _converters.convert_month_to_timedelta(session._get_attribute_vi_int32(self._attribute_id))
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_int32(self._attribute_id, _converters.convert_timedelta_to_months_int32(value))
+
+
 class AttributeViInt64(Attribute):
 
     def __get__(self, session, session_type):
@@ -78,6 +87,15 @@ class AttributeViStringRepeatedCapability(Attribute):
 
     def __set__(self, session, value):
         session._set_attribute_vi_string(self._attribute_id, _converters.convert_repeated_capabilities_without_prefix(value))
+
+
+class AttributeViStringCommaSeparated(Attribute):
+
+    def __get__(self, session, session_type):
+        return _converters.convert_comma_separated_string_to_list(session._get_attribute_vi_string(self._attribute_id))
+
+    def __set__(self, session, value):
+        session._set_attribute_vi_string(self._attribute_id, _converters.convert_list_to_comma_separated_string(value))
 
 
 class AttributeViBoolean(Attribute):

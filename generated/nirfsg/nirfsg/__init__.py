@@ -2,7 +2,7 @@
 # This file was generated
 
 
-__version__ = '1.0.1.dev0'
+__version__ = '1.0.2.dev0'
 
 from nirfsg.enums import *  # noqa: F403,F401,H303
 from nirfsg.errors import DriverWarning  # noqa: F401
@@ -55,21 +55,16 @@ def get_diagnostic_information():
     else:
         raise SystemError('Unsupported platform: {}'.format(platform.system()))
 
-    if sys.version_info[1] >= 10:
-        installed_packages_names = [
-            name
-            for name_list in importlib.metadata.packages_distributions().values()
-            for name in name_list
-        ]
-        installed_packages_names = set(installed_packages_names)
-        installed_packages_list = [
-            {'name': name, 'version': importlib.metadata.distribution(name).version}
-            for name in sorted(installed_packages_names)
-        ]
-    else:
-        import pkg_resources
-        installed_packages = pkg_resources.working_set
-        installed_packages_list = [{'name': i.key, 'version': i.version, } for i in installed_packages]
+    installed_packages_names = [
+        name
+        for name_list in importlib.metadata.packages_distributions().values()
+        for name in name_list
+    ]
+    installed_packages_names = set(installed_packages_names)
+    installed_packages_list = [
+        {'name': name, 'version': importlib.metadata.distribution(name).version}
+        for name in sorted(installed_packages_names)
+    ]
 
     info['os']['name'] = os_name
     info['os']['version'] = platform.version()
@@ -77,7 +72,7 @@ def get_diagnostic_information():
     info['driver']['name'] = "NI-RFSG"
     info['driver']['version'] = driver_version
     info['module']['name'] = 'nirfsg'
-    info['module']['version'] = "1.0.1.dev0"
+    info['module']['version'] = "1.0.2.dev0"
     info['python']['version'] = sys.version
     info['python']['bits'] = '64' if is_python_64bit() else '32'
     info['python']['is_venv'] = is_venv()
