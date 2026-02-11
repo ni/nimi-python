@@ -40,7 +40,6 @@ def get():
     Returns the library.Library singleton for nifake.
     '''
     global _instance
-    global _instance_lock  # noqa: F824
 
     with _instance_lock:
         if _instance is None:
