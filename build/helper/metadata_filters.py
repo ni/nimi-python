@@ -1,3 +1,4 @@
+from .metadata_find import find_len_size_parameter_names
 from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
 
@@ -357,12 +358,7 @@ def filter_parameters(parameters, parameter_usage_options):
         # Determine any size parameters that should be skipped based on the presence of ivi-dance or len-sized buffers.
         # For ivi-dance, there is a single shared size parameter; for len, there may be multiple independent size parameters.
         ivi_dance_size_parameter = find_size_parameter(filter_ivi_dance_parameters(parameters), parameters)
-        # Collect all size parameter names referenced by len-sized parameters
-        len_params = filter_len_parameters(parameters)
-        for param in len_params:
-            len_size_param = find_size_parameter(param, parameters)
-            if len_size_param is not None:
-                len_size_parameter_names.add(len_size_param['name'])
+        len_size_parameter_names = find_len_size_parameter_names(parameters)
         size_twist_parameter = find_size_parameter(filter_ivi_dance_twist_parameters(parameters), parameters, key='value_twist')
     for x in parameters:
         skip = False
@@ -457,7 +453,7 @@ def filter_len_parameters(parameters):
 
     Return:
         Empty list if no len parameter found
-        List of parameters if any are found
+        List of parameter dicts if any are found
     '''
     params = filter_parameters(parameters, ParameterUsageOptions.LEN_PARAMETER)
     return params

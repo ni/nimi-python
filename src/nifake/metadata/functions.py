@@ -3179,8 +3179,7 @@ functions = {
                 },
                 'name': 'dataArraySize',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             }
         ],
         'returns': 'ViStatus'
