@@ -22,11 +22,11 @@ def _parameter(name, direction='in', mechanism='fixed', size_value=None):
 
 def test_filter_parameters_mixed_usage_ivi_dance_and_len():
     parameters = [
-        _parameter('ivi_size', mechanism='passed-in'),
+        _parameter('ivi_size'),
         _parameter('out_waveform', direction='out', mechanism='ivi-dance', size_value='ivi_size'),
-        _parameter('len_size', mechanism='passed-in'),
+        _parameter('len_size'),
         _parameter('len_data', mechanism='len', size_value='len_size'),
-        _parameter('timeout', mechanism='fixed'),
+        _parameter('timeout'),
     ]
 
     filtered = filter_parameters(parameters, ParameterUsageOptions.SESSION_METHOD_DECLARATION)
@@ -35,15 +35,13 @@ def test_filter_parameters_mixed_usage_ivi_dance_and_len():
     assert filtered_names == ['len_data', 'timeout']
 
 
-def test_filter_parameters_mixed_usage_ivi_dance_and_multiple_len_sizes():
+def test_filter_parameters_multiple_len_sizes():
     parameters = [
-        _parameter('ivi_size', mechanism='passed-in'),
-        _parameter('out_waveform', direction='out', mechanism='ivi-dance', size_value='ivi_size'),
-        _parameter('len_a_size', mechanism='passed-in'),
-        _parameter('len_b_size', mechanism='passed-in'),
+        _parameter('len_a_size'),
+        _parameter('len_b_size'),
         _parameter('len_a_data', mechanism='len', size_value='len_a_size'),
         _parameter('len_b_data', mechanism='len', size_value='len_b_size'),
-        _parameter('timeout', mechanism='fixed'),
+        _parameter('timeout'),
     ]
 
     filtered = filter_parameters(parameters, ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION)
