@@ -2,7 +2,7 @@ from build.helper.metadata_filters import filter_parameters
 from build.helper.parameter_usage_options import ParameterUsageOptions
 
 
-def _parameter(name, direction='in', mechanism='fixed', size_value=None):
+def _parameter(name, direction='in', mechanism='passed-in', size_value=None):
     size = {'mechanism': mechanism}
     if size_value is not None:
         size['value'] = size_value
