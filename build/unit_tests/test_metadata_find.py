@@ -1,7 +1,7 @@
 from build.helper.metadata_find import find_len_size_parameter_names
 
 
-def _parameter(name, mechanism='fixed', size_value=None):
+def _parameter(name, mechanism='passed-in', size_value=None):
     size = {'mechanism': mechanism}
     if size_value is not None:
         size['value'] = size_value
@@ -14,11 +14,11 @@ def _parameter(name, mechanism='fixed', size_value=None):
 
 def test_find_len_size_parameter_names_multiple_sizes():
     parameters = [
-        _parameter('len_a_size', mechanism='passed-in'),
-        _parameter('len_b_size', mechanism='passed-in'),
+        _parameter('len_a_size'),
+        _parameter('len_b_size'),
         _parameter('len_a_data', mechanism='len', size_value='len_a_size'),
         _parameter('len_b_data', mechanism='len', size_value='len_b_size'),
-        _parameter('timeout', mechanism='fixed'),
+        _parameter('timeout'),
     ]
 
     size_names = find_len_size_parameter_names(parameters)
@@ -28,8 +28,8 @@ def test_find_len_size_parameter_names_multiple_sizes():
 
 def test_find_len_size_parameter_names_empty_when_no_len_parameters():
     parameters = [
-        _parameter('value', mechanism='passed-in'),
-        _parameter('timeout', mechanism='fixed'),
+        _parameter('value'),
+        _parameter('timeout'),
     ]
 
     size_names = find_len_size_parameter_names(parameters)
