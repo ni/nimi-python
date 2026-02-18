@@ -23,6 +23,10 @@ class SideEffectsHelper(object):
         self._defaults['BoolArrayOutputFunction'] = {}
         self._defaults['BoolArrayOutputFunction']['return'] = 0
         self._defaults['BoolArrayOutputFunction']['anArray'] = None
+        self._defaults['CachedReadStatus'] = {}
+        self._defaults['CachedReadStatus']['return'] = 0
+        self._defaults['CachedReadStatus']['acqBacklog'] = None
+        self._defaults['CachedReadStatus']['acqStatus'] = None
         self._defaults['ConfigureABC'] = {}
         self._defaults['ConfigureABC']['return'] = 0
         self._defaults['CustomNestedStructRoundtrip'] = {}
@@ -168,6 +172,10 @@ class SideEffectsHelper(object):
         self._defaults['ReadFromChannel'] = {}
         self._defaults['ReadFromChannel']['return'] = 0
         self._defaults['ReadFromChannel']['reading'] = None
+        self._defaults['ReadStatus'] = {}
+        self._defaults['ReadStatus']['return'] = 0
+        self._defaults['ReadStatus']['acquisitionBacklog'] = None
+        self._defaults['ReadStatus']['acquisitionStatus'] = None
         self._defaults['ReturnANumberAndAString'] = {}
         self._defaults['ReturnANumberAndAString']['return'] = 0
         self._defaults['ReturnANumberAndAString']['aNumber'] = None
@@ -263,6 +271,21 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             an_array_ref[i] = test_value[i]
         return self._defaults['BoolArrayOutputFunction']['return']
+
+    def niFake_CachedReadStatus(self, vi, acq_backlog, acq_status):  # noqa: N802
+        if self._defaults['CachedReadStatus']['return'] != 0:
+            return self._defaults['CachedReadStatus']['return']
+        # acq_backlog
+        if self._defaults['CachedReadStatus']['acqBacklog'] is None:
+            raise MockFunctionCallError("niFake_CachedReadStatus", param='acqBacklog')
+        if acq_backlog is not None:
+            acq_backlog.contents.value = self._defaults['CachedReadStatus']['acqBacklog']
+        # acq_status
+        if self._defaults['CachedReadStatus']['acqStatus'] is None:
+            raise MockFunctionCallError("niFake_CachedReadStatus", param='acqStatus')
+        if acq_status is not None:
+            acq_status.contents.value = self._defaults['CachedReadStatus']['acqStatus']
+        return self._defaults['CachedReadStatus']['return']
 
     def niFake_ConfigureABC(self, vi):  # noqa: N802
         if self._defaults['ConfigureABC']['return'] != 0:
@@ -810,6 +833,21 @@ class SideEffectsHelper(object):
             reading.contents.value = self._defaults['ReadFromChannel']['reading']
         return self._defaults['ReadFromChannel']['return']
 
+    def niFake_ReadStatus(self, vi, acquisition_backlog, acquisition_status):  # noqa: N802
+        if self._defaults['ReadStatus']['return'] != 0:
+            return self._defaults['ReadStatus']['return']
+        # acquisition_backlog
+        if self._defaults['ReadStatus']['acquisitionBacklog'] is None:
+            raise MockFunctionCallError("niFake_ReadStatus", param='acquisitionBacklog')
+        if acquisition_backlog is not None:
+            acquisition_backlog.contents.value = self._defaults['ReadStatus']['acquisitionBacklog']
+        # acquisition_status
+        if self._defaults['ReadStatus']['acquisitionStatus'] is None:
+            raise MockFunctionCallError("niFake_ReadStatus", param='acquisitionStatus')
+        if acquisition_status is not None:
+            acquisition_status.contents.value = self._defaults['ReadStatus']['acquisitionStatus']
+        return self._defaults['ReadStatus']['return']
+
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         if self._defaults['ReturnANumberAndAString']['return'] != 0:
             return self._defaults['ReturnANumberAndAString']['return']
@@ -1043,6 +1081,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
         mock_library.niFake_BoolArrayOutputFunction.return_value = 0
+        mock_library.niFake_CachedReadStatus.side_effect = MockFunctionCallError("niFake_CachedReadStatus")
+        mock_library.niFake_CachedReadStatus.return_value = 0
         mock_library.niFake_ConfigureABC.side_effect = MockFunctionCallError("niFake_ConfigureABC")
         mock_library.niFake_ConfigureABC.return_value = 0
         mock_library.niFake_CustomNestedStructRoundtrip.side_effect = MockFunctionCallError("niFake_CustomNestedStructRoundtrip")
@@ -1143,6 +1183,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_Read.return_value = 0
         mock_library.niFake_ReadFromChannel.side_effect = MockFunctionCallError("niFake_ReadFromChannel")
         mock_library.niFake_ReadFromChannel.return_value = 0
+        mock_library.niFake_ReadStatus.side_effect = MockFunctionCallError("niFake_ReadStatus")
+        mock_library.niFake_ReadStatus.return_value = 0
         mock_library.niFake_ReturnANumberAndAString.side_effect = MockFunctionCallError("niFake_ReturnANumberAndAString")
         mock_library.niFake_ReturnANumberAndAString.return_value = 0
         mock_library.niFake_ReturnDurationInSeconds.side_effect = MockFunctionCallError("niFake_ReturnDurationInSeconds")

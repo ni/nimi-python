@@ -827,6 +827,21 @@ class Session(_SessionBase):
         return an_array
 
     @ivi_synchronized
+    def cached_read_status(self):
+        r'''cached_read_status
+
+        TBD
+
+        Returns:
+            acq_backlog (int):
+
+            acq_status (enums.AcquisitionStatus):
+
+        '''
+        acq_backlog, acq_status = self._interpreter.cached_read_status()
+        return acq_backlog, acq_status
+
+    @ivi_synchronized
     def configure_abc(self):
         r'''configure_abc
 
@@ -955,6 +970,7 @@ class Session(_SessionBase):
             raise TypeError('waveform_data must be numpy.ndarray of dtype=float64, is ' + str(waveform_data.dtype))
         self._interpreter.fetch_waveform_into(waveform_data)
 
+    @ivi_synchronized
     def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):
         r'''function_with_3d_numpy_array_of_numpy_complex128_input_parameter
 
@@ -1527,6 +1543,21 @@ class Session(_SessionBase):
         maximum_time = _converters.convert_timedelta_to_seconds_real64(maximum_time)
         reading = self._interpreter.read(maximum_time)
         return reading
+
+    @ivi_synchronized
+    def read_status(self):
+        r'''read_status
+
+        TBD
+
+        Returns:
+            acquisition_backlog (int):
+
+            acquisition_status (enums.AcquisitionStatus):
+
+        '''
+        acquisition_backlog, acquisition_status = self._interpreter.read_status()
+        return acquisition_backlog, acquisition_status
 
     @ivi_synchronized
     def return_a_number_and_a_string(self):

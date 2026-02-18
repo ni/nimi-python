@@ -29,6 +29,7 @@ class Library(object):
         self.niFake_Abort_cfunc = None
         self.niFake_AcceptListOfDurationsInSeconds_cfunc = None
         self.niFake_BoolArrayOutputFunction_cfunc = None
+        self.niFake_CachedReadStatus_cfunc = None
         self.niFake_ConfigureABC_cfunc = None
         self.niFake_CustomNestedStructRoundtrip_cfunc = None
         self.niFake_DoubleAllTheNums_cfunc = None
@@ -79,6 +80,7 @@ class Library(object):
         self.niFake_PoorlyNamedSimpleFunction_cfunc = None
         self.niFake_Read_cfunc = None
         self.niFake_ReadFromChannel_cfunc = None
+        self.niFake_ReadStatus_cfunc = None
         self.niFake_ReturnANumberAndAString_cfunc = None
         self.niFake_ReturnDurationInSeconds_cfunc = None
         self.niFake_ReturnListOfDurationsInSeconds_cfunc = None
@@ -133,6 +135,14 @@ class Library(object):
                 self.niFake_BoolArrayOutputFunction_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViBoolean)]  # noqa: F405
                 self.niFake_BoolArrayOutputFunction_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_BoolArrayOutputFunction_cfunc(vi, number_of_elements, an_array)
+
+    def niFake_CachedReadStatus(self, vi, acq_backlog, acq_status):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_CachedReadStatus_cfunc is None:
+                self.niFake_CachedReadStatus_cfunc = self._get_library_function('niFake_CachedReadStatus')
+                self.niFake_CachedReadStatus_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt16)]  # noqa: F405
+                self.niFake_CachedReadStatus_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_CachedReadStatus_cfunc(vi, acq_backlog, acq_status)
 
     def niFake_ConfigureABC(self, vi):  # noqa: N802
         with self._func_lock:
@@ -533,6 +543,14 @@ class Library(object):
                 self.niFake_ReadFromChannel_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niFake_ReadFromChannel_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_ReadFromChannel_cfunc(vi, channel_name, maximum_time, reading)
+
+    def niFake_ReadStatus(self, vi, acquisition_backlog, acquisition_status):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_ReadStatus_cfunc is None:
+                self.niFake_ReadStatus_cfunc = self._get_library_function('niFake_ReadStatus')
+                self.niFake_ReadStatus_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt16)]  # noqa: F405
+                self.niFake_ReadStatus_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_ReadStatus_cfunc(vi, acquisition_backlog, acquisition_status)
 
     def niFake_ReturnANumberAndAString(self, vi, a_number, a_string):  # noqa: N802
         with self._func_lock:
