@@ -3,4 +3,13 @@ config_additional_config = {
     'module_version': '1.4.10.dev0',
     'latest_runtime_version_tested_against': '2025 Q4',
     'initial_release_year': '2017',
+    'repeated_capabilities': [
+        {
+            'attr_for_docs_example': 'is_source_channel',
+            'attr_type_for_docs_example': 'property',
+            'prefix': '',
+            'python_name': 'channels',
+            'value_for_docs_example': True,
+        }
+    ],
 }

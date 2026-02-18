@@ -19,48 +19,48 @@
 
 ${helper.get_rst_header_snippet('Repeated Capabilities', '=')}
 
-    Repeated capabilities attributes are used to set the `channel_string` parameter to the
-    underlying driver function call. This can be the actual function based on the :py:class:`Session`
-    method being called, or it can be the appropriate Get/Set Attribute function, such as :c:`${config['c_function_prefix']}SetAttributeViInt32()`.
-
-    Repeated capabilities attributes use the indexing operator :python:`[]` to indicate the repeated capabilities.
-    The parameter can be a string, list, tuple, or slice (range). Each element of those can be a string or
-    an integer. If it is a string, you can indicate a range using the same format as the driver: :python:`'0-2'` or
-    :python:`'0:2'`
-
-    Some repeated capabilities use a prefix before the number and this is optional
+    :py:class:`${module_name}.Session` supports "Repeated Capabilities", which are multiple instances of the same type of
+    functionality. The repeated capabilities supported by :py:class:`${module_name}.Session` are:
 
 % for rep_cap in config['repeated_capabilities']:
 <%
 name = rep_cap['python_name']
-prefix = rep_cap['prefix']
+%>\
+    #. ${name}_
+% endfor
+
+    Use the indexing operator :python:`[]` to indicate which repeated capability instance you are trying to access.
+    The parameter can be a single element or an iterable that implements sequence semantics, such as list, tuple, range and slice.
+
+    A single element will access one repeated capability.
+
+    An iterable will access multiple repeated capabilites at once.
+
+% for rep_cap in config['repeated_capabilities']:
+<%
+name = rep_cap['python_name']
+
+single_index_snippet, single_index_explanation = helper.get_repeated_capability_single_index_python_example(rep_cap)
+tuple_index_snippet, tuple_index_explanation = helper.get_repeated_capability_tuple_index_python_example(rep_cap)
+
 %>\
 ${helper.get_rst_header_snippet(name, '-')}
 
     .. py:attribute:: ${module_name}.Session.${name}[]
 
-% if len(prefix) > 0:
-        If no prefix is added to the items in the parameter, the correct prefix will be added when
-        the driver function call is made.
+        ${helper.get_repeated_capability_element_recommendation(rep_cap)}
 
         .. code:: python
 
-            session.${name}['0-2'].channel_enabled = True
+            ${single_index_snippet}
 
-        passes a string of :python:`'${prefix}0, ${prefix}1, ${prefix}2'` to the set attribute function.
+        ${single_index_explanation}
 
-        If an invalid repeated capability is passed to the driver, the driver will return an error.
-
-        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
-        for the specific repeated capability.
-
-% endif
         .. code:: python
 
-            session.${name}['${prefix}0-${prefix}2'].channel_enabled = True
+            ${tuple_index_snippet}
 
-        passes a string of :python:`'${prefix}0, ${prefix}1, ${prefix}2'` to the set attribute function.
-
+        ${tuple_index_explanation}
 
 % endfor
 
