@@ -3120,6 +3120,70 @@ functions = {
         'python_name': 'self_test',
         'returns': 'ViStatus'
     },
+    'MultipleArraysDifferentSize': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Test function with multiple arrays that have different size parameters. This tests the length handling mechanism where different array parameters can reference different size parameters.'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Array of double values with its own size parameter.'
+                },
+                'name': 'valuesArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'valuesArraySize'
+                },
+                'type': 'ViReal64[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the values array.'
+                },
+                'name': 'valuesArraySize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Array of integer values with a different size parameter.'
+                },
+                'name': 'dataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'dataArraySize'
+                },
+                'type': 'ViInt32[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the data array.'
+                },
+                'name': 'dataArraySize',
+                'type': 'ViInt32',
+                'use_array': False
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'self_test': {
         'codegen_method': 'private',
         'documentation': {

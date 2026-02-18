@@ -40,6 +40,22 @@ def find_size_parameter(parameter_list, parameters, key='value'):
     return None
 
 
+def find_len_size_parameter_names(parameters):
+    '''Returns names of size parameters referenced by len-sized parameters.
+
+    A function may have multiple len-sized parameters, each with a different size parameter.
+    '''
+    len_size_parameter_names = set()
+    len_parameters = [parameter for parameter in parameters if parameter['size']['mechanism'] == 'len']
+
+    for parameter in len_parameters:
+        len_size_parameter = find_size_parameter(parameter, parameters)
+        if len_size_parameter is not None:
+            len_size_parameter_names.add(len_size_parameter['name'])
+
+    return len_size_parameter_names
+
+
 def find_custom_type(p, config):
     for c in config['custom_types']:
         if p['ctypes_type'] == c['ctypes_type']:

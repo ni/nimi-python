@@ -1,3 +1,4 @@
+from .metadata_find import find_len_size_parameter_names
 from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
 
@@ -348,15 +349,16 @@ def filter_parameters(parameters, parameter_usage_options):
     parameters_to_use = []
 
     # Filter based on options
-    size_parameter = None
+    ivi_dance_size_parameter = None
+    len_size_parameter_names = set()
     size_twist_parameter = None
     # If we are being called looking for the ivi-dance, len or code param, we do not care about the size param so we do
     #  not call back into ourselves, to avoid infinite recursion
     if parameter_usage_options not in [ParameterUsageOptions.IVI_DANCE_PARAMETER, ParameterUsageOptions.LEN_PARAMETER]:
-        # Find the size parameter - we are assuming there can only be one type, either from ivi-dance or len
-        size_parameter = find_size_parameter(filter_ivi_dance_parameters(parameters), parameters)
-        if size_parameter is None:
-            size_parameter = find_size_parameter(filter_len_parameters(parameters), parameters)
+        # Determine any size parameters that should be skipped based on the presence of ivi-dance or len-sized buffers.
+        # For ivi-dance, there is a single shared size parameter; for len, there may be multiple independent size parameters.
+        ivi_dance_size_parameter = find_size_parameter(filter_ivi_dance_parameters(parameters), parameters)
+        len_size_parameter_names = find_len_size_parameter_names(parameters)
         size_twist_parameter = find_size_parameter(filter_ivi_dance_twist_parameters(parameters), parameters, key='value_twist')
     for x in parameters:
         skip = False
@@ -364,7 +366,9 @@ def filter_parameters(parameters, parameter_usage_options):
             skip = True
         if x['direction'] == 'in' and options_to_use['skip_input_parameters']:
             skip = True
-        if x == size_parameter and options_to_use['skip_size_parameter']:
+        if ivi_dance_size_parameter is not None and x == ivi_dance_size_parameter and options_to_use['skip_size_parameter']:
+            skip = True
+        if len_size_parameter_names and x['name'] in len_size_parameter_names and options_to_use['skip_size_parameter']:
             skip = True
         if size_twist_parameter is not None and x == size_twist_parameter and options_to_use['skip_size_parameter']:
             skip = True
@@ -443,18 +447,15 @@ def filter_ivi_dance_twist_parameters(parameters):
 def filter_len_parameters(parameters):
     '''Returns the len parameters of a session method if there are any. These are the parameters whose size is determined at runtime using the value of a different parameter.
 
-    asserts all parameters that use len reference the same parameter
+    Note: Multiple len parameters may reference different size parameters.
     Args:
         parameters: parameters to be checked
 
     Return:
-        None if no len parameter found
-        Parameters dict if one is found
+        Empty list if no len parameter found
+        List of parameter dicts if any are found
     '''
     params = filter_parameters(parameters, ParameterUsageOptions.LEN_PARAMETER)
-    if len(params) > 0:
-        size_param = params[0]['size']['value']
-        assert all(x['size']['value'] == size_param for x in params)
     return params
 
 

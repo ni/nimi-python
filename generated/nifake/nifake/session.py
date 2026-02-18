@@ -1415,6 +1415,20 @@ class Session(_SessionBase):
         return output_array, output_array_of_fixed_length
 
     @ivi_synchronized
+    def multiple_arrays_different_size(self, values_array, data_array):
+        r'''multiple_arrays_different_size
+
+        Test method with multiple arrays that have different size parameters. This tests the length handling mechanism where different array parameters can reference different size parameters.
+
+        Args:
+            values_array (list of float): Array of double values with its own size parameter.
+
+            data_array (list of int): Array of integer values with a different size parameter.
+
+        '''
+        self._interpreter.multiple_arrays_different_size(values_array, data_array)
+
+    @ivi_synchronized
     def multiple_arrays_same_size(self, values1, values2, values3, values4):
         r'''multiple_arrays_same_size
 
