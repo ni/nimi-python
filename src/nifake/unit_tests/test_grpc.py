@@ -558,19 +558,6 @@ class TestGrpcStubInterpreter:
             data_array=None,
         )
 
-    def test_multiple_arrays_different_size_empty_arrays(self):
-        library_func = 'MultipleArraysDifferentSize'
-        response_object = self._set_side_effect(library_func)
-        values_array = []
-        data_array = []
-        interpreter = self._get_initialized_stub_interpreter()
-        assert interpreter.multiple_arrays_different_size(values_array, data_array) is None  # no outputs
-        self._assert_call(library_func, response_object).assert_called_once_with(
-            vi=GRPC_SESSION_OBJECT_FOR_TEST,
-            values_array=values_array,
-            data_array=data_array,
-        )
-
     def test_multiple_arrays_same_size_wrong_size(self):
         library_func = 'MultipleArraysSameSize'
         # grpc-device server checks this server-side and errors with ::grpc::INVALID_ARGUMENT

@@ -3181,6 +3181,28 @@ functions = {
                 'type': 'ViInt32',
                 'use_array': False
             }
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The number of elements in the ViChar array you specify for names.'
+                },
+                'name': 'nameSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The channel name(s) at the specified indices.'
+                },
+                'name': 'names',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'nameSize'
+                },
+                'type': 'ViString',
+                'type_in_documentation': 'list of str'
+            }
         ],
         'returns': 'ViStatus'
     },
