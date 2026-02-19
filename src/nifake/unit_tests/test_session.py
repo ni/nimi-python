@@ -736,6 +736,14 @@ class TestSession:
             except ValueError:
                 pass
 
+    def test_multiple_arrays_different_size(self):
+        values_array = [1.1, 2.2, 3.3]
+        data_array = [10, 20, 30, 40, 50]
+        self.patched_library_interpreter.multiple_arrays_different_size.side_effect = [None]
+        with nifake.Session('dev1') as session:
+            assert session.multiple_arrays_different_size(values_array, data_array) is None
+            self.patched_library_interpreter.multiple_arrays_different_size.assert_called_once_with(values_array, data_array)
+
     def test_get_cal_date_time(self):
         month = 12
         day = 30
