@@ -3184,6 +3184,66 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'MixedIviDanceAndLenMechanism': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Test function with mixed size mechanisms: one len-sized input array and one IVI-dance output array.'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Input array of doubles using len size mechanism.'
+                },
+                'name': 'inputValues',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'inputValuesSize'
+                },
+                'type': 'ViReal64[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of elements in inputValues.'
+                },
+                'name': 'inputValuesSize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The number of elements in the output array for IVI dance.'
+                },
+                'name': 'outputSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Output array using IVI-dance size mechanism.'
+                },
+                'name': 'outputArray',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'outputSize'
+                },
+                'type': 'ViInt32[]'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'self_test': {
         'codegen_method': 'private',
         'documentation': {

@@ -1388,6 +1388,23 @@ class Session(_SessionBase):
         self._interpreter.method_with_proto_only_parameter(attribute_value)
 
     @ivi_synchronized
+    def mixed_ivi_dance_and_len_mechanism(self, input_values):
+        r'''mixed_ivi_dance_and_len_mechanism
+
+        Test method with mixed size mechanisms: one len-sized input array and one IVI-dance output array.
+
+        Args:
+            input_values (list of float): Input array of doubles using len size mechanism.
+
+
+        Returns:
+            output_array (list of int): Output array using IVI-dance size mechanism.
+
+        '''
+        output_array = self._interpreter.mixed_ivi_dance_and_len_mechanism(input_values)
+        return output_array
+
+    @ivi_synchronized
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers=None):
         r'''multiple_array_types
 

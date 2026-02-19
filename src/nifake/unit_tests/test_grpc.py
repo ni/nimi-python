@@ -533,6 +533,43 @@ class TestGrpcStubInterpreter:
             values4=None,
         )
 
+    def test_multiple_arrays_different_size(self):
+        library_func = 'MultipleArraysDifferentSize'
+        response_object = self._set_side_effect(library_func)
+        values_array = [1.1, 2.2, 3.3]
+        data_array = [10, 20, 30, 40, 50]
+        interpreter = self._get_initialized_stub_interpreter()
+        assert interpreter.multiple_arrays_different_size(values_array, data_array) is None  # no outputs
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            values_array=values_array,
+            data_array=data_array,
+        )
+
+    def test_multiple_arrays_different_size_none_input(self):
+        library_func = 'MultipleArraysDifferentSize'
+        response_object = self._set_side_effect(library_func)
+        values_array = [1.1, 2.2, 3.3]
+        interpreter = self._get_initialized_stub_interpreter()
+        assert interpreter.multiple_arrays_different_size(values_array, None) is None  # no outputs
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            values_array=values_array,
+            data_array=None,
+        )
+
+    def test_mixed_ivi_dance_and_len_mechanism(self):
+        library_func = 'MixedIviDanceAndLenMechanism'
+        input_values = [1.1, 2.2, 3.3]
+        expected_output = []
+        response_object = self._set_side_effect(library_func, output_array=expected_output)
+        interpreter = self._get_initialized_stub_interpreter()
+        interpreter.mixed_ivi_dance_and_len_mechanism(input_values)
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            input_values=input_values,
+        )
+
     def test_multiple_arrays_same_size_wrong_size(self):
         library_func = 'MultipleArraysSameSize'
         # grpc-device server checks this server-side and errors with ::grpc::INVALID_ARGUMENT
