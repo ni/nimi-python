@@ -3181,27 +3181,65 @@ functions = {
                 'type': 'ViInt32',
                 'use_array': False
             }
+        ],
+        'returns': 'ViStatus'
+    },
+    'MixedIviDanceAndLenMechanism': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Test function with mixed size mechanisms: one len-sized input array and one IVI-dance output array.'
+        },
+        'included_in_proto': True,
+        'parameters': [
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'The number of elements in the ViChar array you specify for names.'
+                    'description': 'Identifies a particular instrument session.'
                 },
-                'name': 'nameSize',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Input array of doubles using len size mechanism.'
+                },
+                'name': 'inputValues',
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'inputValuesSize'
+                },
+                'type': 'ViReal64[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of elements in inputValues.'
+                },
+                'name': 'inputValuesSize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The number of elements in the output array for IVI dance.'
+                },
+                'name': 'outputSize',
                 'type': 'ViInt32'
             },
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'The channel name(s) at the specified indices.'
+                    'description': 'Output array using IVI-dance size mechanism.'
                 },
-                'name': 'names',
-                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'name': 'outputArray',
                 'size': {
                     'mechanism': 'ivi-dance',
-                    'value': 'nameSize'
+                    'value': 'outputSize'
                 },
-                'type': 'ViString',
-                'type_in_documentation': 'list of str'
+                'type': 'ViInt32[]'
             }
         ],
         'returns': 'ViStatus'

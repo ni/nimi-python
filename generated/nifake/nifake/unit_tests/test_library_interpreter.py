@@ -352,6 +352,12 @@ class TestLibraryInterpreter:
             _matchers.ViInt32Matcher(0),
         )
 
+    def test_mixed_ivi_dance_and_len_mechanism(self):
+        self.patched_library.niFake_MixedIviDanceAndLenMechanism.side_effect = [1, 0]
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.mixed_ivi_dance_and_len_mechanism([1.1])
+        assert self.patched_library.niFake_MixedIviDanceAndLenMechanism.call_count == 2
+
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
         boolean_val = True
