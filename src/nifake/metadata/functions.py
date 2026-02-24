@@ -3210,7 +3210,6 @@ functions = {
                     'value': 'inputValuesSize'
                 },
                 'type': 'ViReal64[]',
-                'use_in_python_api': True
             },
             {
                 'direction': 'in',
@@ -3219,7 +3218,6 @@ functions = {
                 },
                 'name': 'inputValuesSize',
                 'type': 'ViInt32',
-                'use_array': False
             },
             {
                 'direction': 'in',
