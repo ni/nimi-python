@@ -8,15 +8,12 @@
 
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
-        import numpy as np
-
         if (str(type(sparameter_table)).find("'numpy.ndarray'") != -1) or (str(type(frequencies)).find("'numpy.ndarray'") != -1):
             if sparameter_table.ndim == 3:
                 if frequencies.size == sparameter_table.shape[0]:
                     if sparameter_table.shape[1] == sparameter_table.shape[2]:
                         number_of_ports = sparameter_table.shape[1]
-                        flattened_sparameter_table = np.ascontiguousarray(sparameter_table).reshape(-1)
-                        return self._interpreter.create_deembedding_sparameter_table_array(port, table_name, frequencies, flattened_sparameter_table, number_of_ports, sparameter_orientation)
+                        return self._create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation)
                     else:
                         raise ValueError("Row and column count of sparameter table should be equal. Table row count is {} and column count is {}.".format(sparameter_table.shape[1], sparameter_table.shape[2]))
                 else:
