@@ -1149,7 +1149,7 @@ def test_get_ctype_variable_declaration_snippet_case_s160():
     assert actual == ["input_array_size_ctype = _visatype.ViInt32(0 if input_array is None else len(input_array))  # case S160"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_s160_multidimensional_array_dimensions():
+def test_get_ctype_variable_declaration_snippet_case_s160_multidimensional_array():
     size_parameter = parameters_for_testing[11]
     buffer_parameter = dict(parameters_for_testing[10])
     buffer_parameter['array_dimensions'] = 3
