@@ -1500,52 +1500,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'FancyGetDeembeddingSparameters': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
-            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSG_VAL_PORT1_TOWARDS_DUT.'
-        },
-        'included_in_proto': True,
-        'method_name_for_documentation': 'get_deembedding_sparameters',
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'array_dimensions': 2,
-                'complex_array_representation': 'complex_number_array',
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
-                },
-                'name': 'sparameters',
-                'numpy': True,
-                'type': 'NIComplexNumber[]',
-                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': 'get_deembedding_sparameters',
-        'returns': None,
-        'use_session_lock': False
-    },
     'GetAllNamedWaveformNames': {
         'codegen_method': 'public',
         'documentation': {
@@ -2113,7 +2067,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'python_name': 'get_deembedding_sparameters',
+        'python_name': '_get_deembedding_sparameters',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
