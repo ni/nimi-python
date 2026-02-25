@@ -1513,7 +1513,7 @@ functions = {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
-                'session_filename': 'get_deembedding_sparameter'
+                'session_filename': 'default_method'
             }
         ],
         'parameters': [
@@ -2053,10 +2053,10 @@ functions = {
         'included_in_proto': True,
         'method_templates': [
             {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_read_method',
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'get_deembedding_sparameter',
                 'method_python_name_suffix': '',
-                'session_filename': 'numpy_read_method'
+                'session_filename': 'default_method'
             }
         ],
         'parameters': [
@@ -2113,7 +2113,9 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'returns': 'ViStatus'
+        'python_name': 'get_deembedding_sparameters',
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'GetDeembeddingTableNumberOfPorts': {
         'codegen_method': 'private',
