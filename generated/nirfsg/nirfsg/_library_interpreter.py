@@ -240,14 +240,14 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):  # noqa: N802
+    def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
         table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
         frequencies_ctype = _get_ctypes_pointer_for_buffer(value=frequencies)  # case B510
         frequencies_size_ctype = _visatype.ViInt32(0 if frequencies is None else len(frequencies))  # case S160
         sparameter_table_ctype = _get_ctypes_pointer_for_buffer(value=sparameter_table, library_type=_complextype.NIComplexNumber)  # case B510
-        sparameter_table_size_ctype = _visatype.ViInt32(sparameter_table_size)  # case S150
+        sparameter_table_size_ctype = _visatype.ViInt32(0 if sparameter_table is None else len(sparameter_table))  # case S160
         number_of_ports_ctype = _visatype.ViInt32(number_of_ports)  # case S150
         sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation.value)  # case S130
         error_code = self._library.niRFSG_CreateDeembeddingSparameterTableArray(vi_ctype, port_ctype, table_name_ctype, frequencies_ctype, frequencies_size_ctype, sparameter_table_ctype, sparameter_table_size_ctype, number_of_ports_ctype, sparameter_orientation_ctype)
