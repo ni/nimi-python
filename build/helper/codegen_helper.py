@@ -337,7 +337,7 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
         S120. Input is size of buffer with mechanism is python-code:               visatype.ViInt32(<custom python code>)
         S130. Input enum:                                                          visatype.ViInt32(parameter_name.value)
         S150. Input scalar:                                                        visatype.ViInt32(parameter_name)
-        S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list))
+        S160. Input is size of input buffer:                                       visatype.ViInt32(0 if list is None else len(list)) or visatype.ViInt32(0 if array is None else array.size)
         S170. Input is size of output buffer with mechanism ivi-dance, QUERY_SIZE: visatype.ViInt32()
         S180. Input is size of output buffer with mechanism ivi-dance, GET_DATA:   visatype.ViInt32(error_code)
         S190. Input is size of output buffer with mechanism ivi-dance-with-a-twist, QUERY_SIZE: visatype.ViInt32()
@@ -371,7 +371,11 @@ def _get_ctype_variable_definition_snippet_for_scalar(parameter, parameters, ivi
             if corresponding_buffer_parameters[0].get('complex_array_representation') == 'interleaved_real_number_array':
                 definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}) // 2)  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
             else:
-                definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
+                array_dimensions = corresponding_buffer_parameters[0].get('array_dimensions')
+                if isinstance(array_dimensions, int) and array_dimensions > 1:
+                    definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else {2}.size)  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
+                else:
+                    definitions.append(parameter['ctypes_variable_name'] + ' = {0}.{1}(0 if {2} is None else len({2}))  # case S160'.format(module_name, parameter['ctypes_type'], corresponding_buffer_parameters[0]['python_name']))
         else:
             if corresponding_buffer_parameters[0]['size']['mechanism'] == 'ivi-dance':  # We are only looking at the first one. Assumes all are the same here, assert below if not
                 # Verify all corresponding_buffer_parameters are 'out' and 'ivi-dance'
