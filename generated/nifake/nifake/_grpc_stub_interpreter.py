@@ -349,6 +349,13 @@ class GrpcStubInterpreter(object):
             grpc_types.MethodWithProtoOnlyParameterRequest(attribute_value=attribute_value),
         )
 
+    def mixed_ivi_dance_and_len_mechanism(self, input_values):  # noqa: N802
+        response = self._invoke(
+            self._client.MixedIviDanceAndLenMechanism,
+            grpc_types.MixedIviDanceAndLenMechanismRequest(vi=self._vi, input_values=input_values),
+        )
+        return response.output_array
+
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
         response = self._invoke(
             self._client.MultipleArrayTypes,

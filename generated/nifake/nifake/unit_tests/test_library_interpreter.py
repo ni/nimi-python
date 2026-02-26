@@ -339,6 +339,28 @@ class TestLibraryInterpreter:
             _matchers.ViInt32Matcher(len(data_array)),
         )
 
+    def test_multiple_arrays_different_size_none_input(self):
+        self.patched_library.niFake_MultipleArraysDifferentSize.side_effect = self.side_effects_helper.niFake_MultipleArraysDifferentSize
+        values_array = [1.1, 2.2, 3.3]
+        interpreter = self.get_initialized_library_interpreter()
+        interpreter.multiple_arrays_different_size(values_array, None)
+        self.patched_library.niFake_MultipleArraysDifferentSize.assert_called_once_with(
+            _matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST),
+            _matchers.ViReal64BufferMatcher(values_array),
+            _matchers.ViInt32Matcher(len(values_array)),
+            None,
+            _matchers.ViInt32Matcher(0),
+        )
+
+    def test_mixed_ivi_dance_and_len_mechanism(self):
+        self.patched_library.niFake_MixedIviDanceAndLenMechanism.side_effect = self.side_effects_helper.niFake_MixedIviDanceAndLenMechanism
+        expected_output = [4, 5]
+        self.side_effects_helper['MixedIviDanceAndLenMechanism']['outputArray'] = expected_output
+        interpreter = self.get_initialized_library_interpreter()
+        result_array = interpreter.mixed_ivi_dance_and_len_mechanism([1.1])
+        assert result_array == expected_output
+        assert self.patched_library.niFake_MixedIviDanceAndLenMechanism.call_count == 2
+
     def test_parameters_are_multiple_types(self):
         self.patched_library.niFake_ParametersAreMultipleTypes.side_effect = self.side_effects_helper.niFake_ParametersAreMultipleTypes
         boolean_val = True
