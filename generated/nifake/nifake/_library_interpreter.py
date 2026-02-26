@@ -528,6 +528,21 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def mixed_ivi_dance_and_len_mechanism(self, input_values):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        input_values_ctype = _get_ctypes_pointer_for_buffer(value=input_values, library_type=_visatype.ViReal64)  # case B550
+        input_values_size_ctype = _visatype.ViInt32(0 if input_values is None else len(input_values))  # case S160
+        output_size_ctype = _visatype.ViInt32()  # case S170
+        output_array_ctype = None  # case B580
+        error_code = self._library.niFake_MixedIviDanceAndLenMechanism(vi_ctype, input_values_ctype, input_values_size_ctype, output_size_ctype, output_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        output_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        output_array_size = output_size_ctype.value  # case B590
+        output_array_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViInt32, size=output_array_size)  # case B590
+        error_code = self._library.niFake_MixedIviDanceAndLenMechanism(vi_ctype, input_values_ctype, input_values_size_ctype, output_size_ctype, output_array_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return [int(output_array_ctype[i]) for i in range(output_size_ctype.value)]
+
     def multiple_array_types(self, output_array_size, input_array_of_floats, input_array_of_integers):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         output_array_size_ctype = _visatype.ViInt32(output_array_size)  # case S210

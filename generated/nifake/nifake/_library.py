@@ -71,6 +71,7 @@ class Library(object):
         self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc = None
         self.niFake_MethodWithGrpcOnlyParam_cfunc = None
         self.niFake_MethodWithProtoOnlyParameter_cfunc = None
+        self.niFake_MixedIviDanceAndLenMechanism_cfunc = None
         self.niFake_MultipleArrayTypes_cfunc = None
         self.niFake_MultipleArraysDifferentSize_cfunc = None
         self.niFake_MultipleArraysSameSize_cfunc = None
@@ -469,6 +470,14 @@ class Library(object):
                 self.niFake_MethodWithProtoOnlyParameter_cfunc.argtypes = [ViInt32]  # noqa: F405
                 self.niFake_MethodWithProtoOnlyParameter_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_MethodWithProtoOnlyParameter_cfunc(attribute_value)
+
+    def niFake_MixedIviDanceAndLenMechanism(self, vi, input_values, input_values_size, output_size, output_array):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_MixedIviDanceAndLenMechanism_cfunc is None:
+                self.niFake_MixedIviDanceAndLenMechanism_cfunc = self._get_library_function('niFake_MixedIviDanceAndLenMechanism')
+                self.niFake_MixedIviDanceAndLenMechanism_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64), ViInt32, ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niFake_MixedIviDanceAndLenMechanism_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_MixedIviDanceAndLenMechanism_cfunc(vi, input_values, input_values_size, output_size, output_array)
 
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         with self._func_lock:
