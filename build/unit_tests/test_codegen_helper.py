@@ -1149,12 +1149,12 @@ def test_get_ctype_variable_declaration_snippet_case_s160():
     assert actual == ["input_array_size_ctype = _visatype.ViInt32(0 if input_array is None else len(input_array))  # case S160"]
 
 
-def test_get_ctype_variable_declaration_snippet_case_s160_multidimensional_array():
+def test_get_ctype_variable_declaration_snippet_case_s161_multidimensional_array():
     size_parameter = parameters_for_testing[11]
     buffer_parameter = dict(parameters_for_testing[10])
     buffer_parameter['array_dimensions'] = 3
     snippet = get_ctype_variable_declaration_snippet(size_parameter, [size_parameter, buffer_parameter], IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
-    assert snippet == ["input_array_size_ctype = _visatype.ViInt32(0 if input_array is None else input_array.size)  # case S160"]
+    assert snippet == ["input_array_size_ctype = _visatype.ViInt32(0 if input_array is None else input_array.size)  # case S161"]
 
 
 def test_get_ctype_variable_declaration_snippet_case_s170():
