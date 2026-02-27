@@ -148,6 +148,9 @@ class SideEffectsHelper(object):
         self._defaults['MethodWithGrpcOnlyParam']['return'] = 0
         self._defaults['MethodWithProtoOnlyParameter'] = {}
         self._defaults['MethodWithProtoOnlyParameter']['return'] = 0
+        self._defaults['MixedIviDanceAndLenMechanism'] = {}
+        self._defaults['MixedIviDanceAndLenMechanism']['return'] = 0
+        self._defaults['MixedIviDanceAndLenMechanism']['outputArray'] = None
         self._defaults['MultipleArrayTypes'] = {}
         self._defaults['MultipleArrayTypes']['return'] = 0
         self._defaults['MultipleArrayTypes']['outputArray'] = None
@@ -738,6 +741,22 @@ class SideEffectsHelper(object):
             return self._defaults['MethodWithProtoOnlyParameter']['return']
         return self._defaults['MethodWithProtoOnlyParameter']['return']
 
+    def niFake_MixedIviDanceAndLenMechanism(self, vi, input_values, input_values_size, output_size, output_array):  # noqa: N802
+        if self._defaults['MixedIviDanceAndLenMechanism']['return'] != 0:
+            return self._defaults['MixedIviDanceAndLenMechanism']['return']
+        # output_array
+        if self._defaults['MixedIviDanceAndLenMechanism']['outputArray'] is None:
+            raise MockFunctionCallError("niFake_MixedIviDanceAndLenMechanism", param='outputArray')
+        if output_size.value == 0:
+            return len(self._defaults['MixedIviDanceAndLenMechanism']['outputArray'])
+        try:
+            output_array_ref = output_array.contents
+        except AttributeError:
+            output_array_ref = output_array
+        for i in range(len(self._defaults['MixedIviDanceAndLenMechanism']['outputArray'])):
+            output_array_ref[i] = self._defaults['MixedIviDanceAndLenMechanism']['outputArray'][i]
+        return self._defaults['MixedIviDanceAndLenMechanism']['return']
+
     def niFake_MultipleArrayTypes(self, vi, output_array_size, output_array, output_array_of_fixed_length, input_array_sizes, input_array_of_floats, input_array_of_integers):  # noqa: N802
         if self._defaults['MultipleArrayTypes']['return'] != 0:
             return self._defaults['MultipleArrayTypes']['return']
@@ -1127,6 +1146,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_MethodWithGrpcOnlyParam.return_value = 0
         mock_library.niFake_MethodWithProtoOnlyParameter.side_effect = MockFunctionCallError("niFake_MethodWithProtoOnlyParameter")
         mock_library.niFake_MethodWithProtoOnlyParameter.return_value = 0
+        mock_library.niFake_MixedIviDanceAndLenMechanism.side_effect = MockFunctionCallError("niFake_MixedIviDanceAndLenMechanism")
+        mock_library.niFake_MixedIviDanceAndLenMechanism.return_value = 0
         mock_library.niFake_MultipleArrayTypes.side_effect = MockFunctionCallError("niFake_MultipleArrayTypes")
         mock_library.niFake_MultipleArrayTypes.return_value = 0
         mock_library.niFake_MultipleArraysDifferentSize.side_effect = MockFunctionCallError("niFake_MultipleArraysDifferentSize")
