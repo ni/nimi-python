@@ -389,13 +389,13 @@ class Library(object):
                 self.niRFSG_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetAttributeViString_cfunc(vi, channel_name, attribute, buf_size, value)
 
-    def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
+    def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, number_of_sparameters, number_of_ports):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_GetDeembeddingSparameters_cfunc is None:
                 self.niRFSG_GetDeembeddingSparameters_cfunc = self._get_library_function('niRFSG_GetDeembeddingSparameters')
-                self.niRFSG_GetDeembeddingSparameters_cfunc.argtypes = [ViSession, ctypes.POINTER(NIComplexNumber), ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetDeembeddingSparameters_cfunc.argtypes = [ViSession, ctypes.POINTER(NIComplexNumber), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niRFSG_GetDeembeddingSparameters_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSG_GetDeembeddingSparameters_cfunc(vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports)
+        return self.niRFSG_GetDeembeddingSparameters_cfunc(vi, sparameters, number_of_sparameters, number_of_ports)
 
     def niRFSG_GetDeembeddingTableNumberOfPorts(self, vi, number_of_ports):  # noqa: N802
         with self._func_lock:

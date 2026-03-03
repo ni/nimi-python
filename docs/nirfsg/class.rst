@@ -1232,11 +1232,32 @@ get_deembedding_sparameters
 
 
 
-            :rtype: numpy.array(dtype=numpy.complex128)
-            :return:
+            :param sparameters:
 
 
-                    Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+                Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+                
+
+
+            :type sparameters: numpy.array(dtype=numpy.complex128)
+
+            :rtype: tuple (number_of_sparameters, number_of_ports)
+
+                WHERE
+
+                number_of_sparameters (int): 
+
+
+                    Returns the number of S-parameters.
+
+                    
+
+
+                number_of_ports (int): 
+
+
+                    Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
 
                     
 

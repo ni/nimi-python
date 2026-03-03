@@ -477,7 +477,7 @@ class SideEffectsHelper(object):
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
 
-    def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
+    def niRFSG_GetDeembeddingSparameters(self, vi, sparameters, number_of_sparameters, number_of_ports):  # noqa: N802
         if self._defaults['GetDeembeddingSparameters']['return'] != 0:
             return self._defaults['GetDeembeddingSparameters']['return']
         # sparameters
