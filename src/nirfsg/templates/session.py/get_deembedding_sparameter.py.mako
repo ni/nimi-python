@@ -8,5 +8,5 @@
 
         ${helper.get_function_docstring(f, True, config, indent=8)}
         '''
-        sparameters = self._interpreter.get_deembedding_sparameters()
+        sparameters = self._interpreter._get_deembedding_sparameters()
         return sparameters

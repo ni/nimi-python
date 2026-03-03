@@ -384,7 +384,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
 
-    def get_deembedding_sparameters(self):
+    def _get_deembedding_sparameters(self):
         import numpy as np
         number_of_ports = self.get_deembedding_table_number_of_ports()
         sparameters_array_size = number_of_ports ** 2

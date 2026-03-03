@@ -1216,7 +1216,7 @@ get_deembedding_sparameters
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: get_deembedding_sparameters(sparameters_array_size)
+    .. py:method:: get_deembedding_sparameters()
 
             Returns the S-parameters used for de-embedding a measurement on the selected port.
 
@@ -1232,32 +1232,11 @@ get_deembedding_sparameters
 
 
 
-            :param sparameters:
+            :rtype: numpy.array(dtype=numpy.complex128)
+            :return:
 
 
-                Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
-
-                
-
-
-            :type sparameters: numpy.array(dtype=numpy.complex128)
-
-            :rtype: tuple (number_of_sparameters, number_of_ports)
-
-                WHERE
-
-                number_of_sparameters (int): 
-
-
-                    Returns the number of S-parameters.
-
-                    
-
-
-                number_of_ports (int): 
-
-
-                    Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.
+                    Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
 
                     
 
