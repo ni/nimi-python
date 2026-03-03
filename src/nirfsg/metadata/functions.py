@@ -2084,6 +2084,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array that is returned by the NIRFSG_ATTR_SPARAMETERS output.'
+                },
+                'name': 'sparametersArraySize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
                 'direction': 'out',
                 'documentation': {
                     'description': 'Returns the number of S-parameters.'
