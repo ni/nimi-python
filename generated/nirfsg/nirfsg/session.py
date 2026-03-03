@@ -6374,7 +6374,7 @@ class Session(_SessionBase):
 
         Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
 
-        Args:
+        Returns:
             sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
 
         '''

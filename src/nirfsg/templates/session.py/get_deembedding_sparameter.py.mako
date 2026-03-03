@@ -3,10 +3,10 @@
     '''Creates a numpy array based on number of ports queried from driver and passes it to "get_deembedding_sparameters" method.'''
     import build.helper as helper
 %>\
-    def ${f['python_name']}(self):
+    def ${f['python_name']}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
-        ${helper.get_function_docstring(f, True, config, indent=8)}
+        ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         sparameters = self._interpreter._get_deembedding_sparameters()
         return sparameters
