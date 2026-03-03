@@ -2090,7 +2090,8 @@ functions = {
                 },
                 'name': 'sparametersArraySize',
                 'type': 'ViInt32',
-                'use_array': False
+                'use_array': False,
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',

@@ -1241,17 +1241,6 @@ get_deembedding_sparameters
 
 
             :type sparameters: numpy.array(dtype=numpy.complex128)
-            :param sparameters_array_size:
-
-
-                Specifies the size of the array that is returned by the :py:attr:`nirfsg.Session.SPARAMETERS` output.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type sparameters_array_size: int
 
             :rtype: tuple (number_of_sparameters, number_of_ports)
 
