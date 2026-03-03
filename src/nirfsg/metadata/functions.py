@@ -2053,7 +2053,7 @@ functions = {
         'included_in_proto': True,
         'method_templates': [
             {
-                'documentation_filename': 'get_deembedding_sparameter',
+                'documentation_filename': 'numpy_method',
                 'library_interpreter_filename': 'get_deembedding_sparameter',
                 'method_python_name_suffix': '',
                 'session_filename': 'none'
@@ -2090,8 +2090,7 @@ functions = {
                 },
                 'name': 'sparametersArraySize',
                 'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': False
+                'use_array': False
             },
             {
                 'direction': 'out',
