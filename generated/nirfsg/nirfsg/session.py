@@ -6378,8 +6378,8 @@ class Session(_SessionBase):
             sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
 
         '''
-        sparameters = self._interpreter._get_deembedding_sparameters()
-        return sparameters
+        sparameters, number_of_sparameters, number_of_ports = self._interpreter._get_deembedding_sparameters()
+        return sparameters, number_of_sparameters, number_of_ports
 
     @ivi_synchronized
     def get_all_named_waveform_names(self):

@@ -22,6 +22,7 @@
         number_of_ports_ctype = _visatype.ViInt32()  # case S220
         error_code = self._library.niRFSG_GetDeembeddingSparameters(vi_ctype, sparameters_ctype, sparameters_array_size_ctype, None if number_of_sparameters_ctype is None else (ctypes.pointer(number_of_sparameters_ctype)), None if number_of_ports_ctype is None else (ctypes.pointer(number_of_ports_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        number_of_sparameters = int(number_of_sparameters_ctype.value)
         number_of_ports = int(number_of_ports_ctype.value)
         sparameters = sparameters.reshape((number_of_ports, number_of_ports))
-        return sparameters
+        return sparameters, number_of_sparameters, number_of_ports
