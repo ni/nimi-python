@@ -1151,6 +1151,7 @@ def test_get_ctype_variable_declaration_snippet_case_s160():
 
 def test_get_ctype_variable_declaration_snippet_case_s161():
     parameters_with_multidim_buffer = list(parameters_for_testing)
+    # Create a copy to add 'array_dimensions' without modifying original parameters_for_testing[10]
     buffer_parameter = dict(parameters_with_multidim_buffer[10])
     buffer_parameter['array_dimensions'] = 3
     parameters_with_multidim_buffer[10] = buffer_parameter
