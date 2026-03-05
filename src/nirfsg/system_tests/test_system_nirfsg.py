@@ -555,7 +555,7 @@ class SystemTests:
         sparameter_tables = np.array([[[1 + 1j, 2 + 2j], [3 + 3j, 4 + 4j]], [[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], [[9 + 9j, 10 + 10j], [11 + 11j, 12 + 12j]]], dtype=np.complex128)
         expected_sparameter_table = np.array([[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], dtype=np.complex128)
         rfsg_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, sparameter_tables, nirfsg.SparameterOrientation.PORT2_TOWARDS_DUT)
-        rfsg_device_session.frequency = 2e9
+        rfsg_device_session.configure_rf(2e9, -5.0)
         returned_sparameter_table = rfsg_device_session.get_deembedding_sparameters()
         assert returned_sparameter_table.all() == expected_sparameter_table.all()
 
