@@ -4095,7 +4095,6 @@ functions = {
                     'description': 'Specifies the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -4215,8 +4214,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
-                'grpc_name': 'value_raw',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4337,7 +4334,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,
