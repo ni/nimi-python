@@ -1151,11 +1151,10 @@ def test_get_ctype_variable_declaration_snippet_case_s160():
 
 def test_get_ctype_variable_declaration_snippet_case_s161():
     parameters_with_multidim_buffer = list(parameters_for_testing)
-    size_parameter = parameters_with_multidim_buffer[11]
     buffer_parameter = dict(parameters_with_multidim_buffer[10])
     buffer_parameter['array_dimensions'] = 3
     parameters_with_multidim_buffer[10] = buffer_parameter
-    snippet = get_ctype_variable_declaration_snippet(size_parameter, parameters_with_multidim_buffer, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
+    snippet = get_ctype_variable_declaration_snippet(parameters_with_multidim_buffer[11], parameters_with_multidim_buffer, IviDanceStep.NOT_APPLICABLE, config_for_testing, use_numpy_array=False)
     assert snippet == ["input_array_size_ctype = _visatype.ViInt32(0 if input_array is None else input_array.size)  # case S161"]
 
 
