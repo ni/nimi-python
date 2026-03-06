@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Creates a numpy array based on number of ports queried from driver and passes it to "get_deembedding_sparameters" method.'''
+    '''Retrieves S-parameters from the gRPC call response and converts them to a reshaped numpy array.'''
     import build.helper as helper
 %>\
     def ${f['interpreter_name']}(self):

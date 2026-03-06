@@ -1,6 +1,6 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Creates a numpy array based on number of ports queried from driver and passes it to "get_deembedding_sparameters" method.'''
+    '''Gets S-parameters from the driver. Queries the number of ports, retrieves the S-parameter data into a pre-allocated buffer, and reshapes it.'''
     import build.helper as helper
 %>\
 
