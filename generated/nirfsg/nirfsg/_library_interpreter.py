@@ -247,7 +247,7 @@ class LibraryInterpreter(object):
         frequencies_ctype = _get_ctypes_pointer_for_buffer(value=frequencies)  # case B510
         frequencies_size_ctype = _visatype.ViInt32(0 if frequencies is None else len(frequencies))  # case S160
         sparameter_table_ctype = _get_ctypes_pointer_for_buffer(value=sparameter_table, library_type=_complextype.NIComplexNumber)  # case B510
-        sparameter_table_size_ctype = _visatype.ViInt32(0 if sparameter_table is None else sparameter_table.size)  # case S160
+        sparameter_table_size_ctype = _visatype.ViInt32(0 if sparameter_table is None else sparameter_table.size)  # case S161
         number_of_ports_ctype = _visatype.ViInt32(number_of_ports)  # case S150
         sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation.value)  # case S130
         error_code = self._library.niRFSG_CreateDeembeddingSparameterTableArray(vi_ctype, port_ctype, table_name_ctype, frequencies_ctype, frequencies_size_ctype, sparameter_table_ctype, sparameter_table_size_ctype, number_of_ports_ctype, sparameter_orientation_ctype)
