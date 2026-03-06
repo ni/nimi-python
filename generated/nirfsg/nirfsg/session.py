@@ -6362,7 +6362,7 @@ class Session(_SessionBase):
             raise TypeError("Unsupported datatype. Expected numpy array.")
 
     def get_deembedding_sparameters(self):
-        '''get_deembedding_sparameters
+        r'''get_deembedding_sparameters
 
         Returns the S-parameters used for de-embedding a measurement on the selected port.
 
@@ -6378,8 +6378,8 @@ class Session(_SessionBase):
             sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
 
         '''
-        sparameters, number_of_sparameters, number_of_ports = self._interpreter._get_deembedding_sparameters()
-        return sparameters, number_of_sparameters, number_of_ports
+        sparameters = self._interpreter.get_deembedding_sparameters()
+        return sparameters
 
     @ivi_synchronized
     def get_all_named_waveform_names(self):

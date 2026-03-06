@@ -1513,7 +1513,7 @@ functions = {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
-                'session_filename': 'get_deembedding_sparameter'
+                'session_filename': 'default_method'
             }
         ],
         'parameters': [
