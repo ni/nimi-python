@@ -1517,7 +1517,7 @@ functions = {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
-                'session_filename': 'get_deembedding_sparameter'
+                'session_filename': 'default_method'
             }
         ],
         'parameters': [
@@ -2058,9 +2058,9 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_read_method',
+                'library_interpreter_filename': 'get_deembedding_sparameter',
                 'method_python_name_suffix': '',
-                'session_filename': 'numpy_read_method'
+                'session_filename': 'none'
             }
         ],
         'parameters': [
@@ -2125,6 +2125,14 @@ functions = {
             'description': '\nReturns the number of S-parameter ports.'
         },
         'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
         'parameters': [
             {
                 'direction': 'in',
