@@ -1055,6 +1055,10 @@ functions = {
                 },
                 'name': 'sparameterTable',
                 'numpy': True,
+                'size': {
+                    'mechanism': 'len',
+                    'value': 'sparameterTableSize'
+                },
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },

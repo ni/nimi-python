@@ -13,8 +13,7 @@
                 if frequencies.size == sparameter_table.shape[0]:
                     if sparameter_table.shape[1] == sparameter_table.shape[2]:
                         number_of_ports = sparameter_table.shape[1]
-                        sparameter_table_size = sparameter_table.size
-                        return self._create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
+                        return self._create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation)
                     else:
                         raise ValueError("Row and column count of sparameter table should be equal. Table row count is {} and column count is {}.".format(sparameter_table.shape[1], sparameter_table.shape[2]))
                 else:
