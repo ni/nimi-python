@@ -350,6 +350,39 @@ class SystemTests:
             assert e.code == -1074101603
             assert "A waveform matching the provided name does not exist in memory" in e.description
 
+    @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
+    def test_get_script(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
+        waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex64)
+        rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
+        script_content = '''script myScript1
+        repeat forever
+        generate mywaveform1
+        end repeat
+        end script'''
+        rfsg_device_session.write_script(script_content)
+        retrieved_script = rfsg_device_session.get_script('myScript1')
+        assert retrieved_script is not None
+        assert 'myScript1' in retrieved_script
+        assert 'mywaveform1' in retrieved_script
+
+    @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
+    def test_delete_script(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
+        waveform_data = np.full(1000, 0.707 + 0.707j, dtype=np.complex64)
+        rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
+        script = '''script myScript1
+        repeat forever
+        generate mywaveform1
+        end repeat
+        end script'''
+        rfsg_device_session.write_script(script)
+        script_exists = rfsg_device_session.check_if_script_exists('myScript1')
+        assert script_exists is True
+        rfsg_device_session.delete_script('myScript1')
+        script_exists = rfsg_device_session.check_if_script_exists('myScript1')
+        assert script_exists is False
+
     def test_configure_software_trigger(self, rfsg_device_session):
         rfsg_device_session.configure_software_start_trigger()
         assert rfsg_device_session.start_trigger_type == nirfsg.StartTriggerType.SOFTWARE
