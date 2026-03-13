@@ -1702,6 +1702,9 @@
 #### [nirfsg] Unreleased
 - Added
   - Python 3.14 Support
+  - Methods Added:
+      - `get_script()`
+      - `delete_script()`
 - Changed
 - Removed
 
