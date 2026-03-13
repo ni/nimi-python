@@ -67,6 +67,8 @@ class SideEffectsHelper(object):
         self._defaults['DeleteAllDeembeddingTables']['return'] = 0
         self._defaults['DeleteDeembeddingTable'] = {}
         self._defaults['DeleteDeembeddingTable']['return'] = 0
+        self._defaults['DeleteScript'] = {}
+        self._defaults['DeleteScript']['return'] = 0
         self._defaults['DisableScriptTrigger'] = {}
         self._defaults['DisableScriptTrigger']['return'] = 0
         self._defaults['DisableStartTrigger'] = {}
@@ -122,6 +124,10 @@ class SideEffectsHelper(object):
         self._defaults['GetMaxSettablePower'] = {}
         self._defaults['GetMaxSettablePower']['return'] = 0
         self._defaults['GetMaxSettablePower']['value'] = None
+        self._defaults['GetScript'] = {}
+        self._defaults['GetScript']['return'] = 0
+        self._defaults['GetScript']['actualBufferSize'] = None
+        self._defaults['GetScript']['script'] = None
         self._defaults['GetSelfCalibrationDateAndTime'] = {}
         self._defaults['GetSelfCalibrationDateAndTime']['return'] = 0
         self._defaults['GetSelfCalibrationDateAndTime']['year'] = None
@@ -369,6 +375,11 @@ class SideEffectsHelper(object):
             return self._defaults['DeleteDeembeddingTable']['return']
         return self._defaults['DeleteDeembeddingTable']['return']
 
+    def niRFSG_DeleteScript(self, vi, script_name):  # noqa: N802
+        if self._defaults['DeleteScript']['return'] != 0:
+            return self._defaults['DeleteScript']['return']
+        return self._defaults['DeleteScript']['return']
+
     def niRFSG_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
         if self._defaults['DisableScriptTrigger']['return'] != 0:
             return self._defaults['DisableScriptTrigger']['return']
@@ -573,6 +584,22 @@ class SideEffectsHelper(object):
         if value is not None:
             value.contents.value = self._defaults['GetMaxSettablePower']['value']
         return self._defaults['GetMaxSettablePower']['return']
+
+    def niRFSG_GetScript(self, vi, script_name, script, buffer_size, actual_buffer_size):  # noqa: N802
+        if self._defaults['GetScript']['return'] != 0:
+            return self._defaults['GetScript']['return']
+        # actual_buffer_size
+        if self._defaults['GetScript']['actualBufferSize'] is None:
+            raise MockFunctionCallError("niRFSG_GetScript", param='actualBufferSize')
+        if actual_buffer_size is not None:
+            actual_buffer_size.contents.value = self._defaults['GetScript']['actualBufferSize']
+        # script
+        if self._defaults['GetScript']['script'] is None:
+            raise MockFunctionCallError("niRFSG_GetScript", param='script')
+        if buffer_size.value == 0:
+            return len(self._defaults['GetScript']['script'])
+        script.value = self._defaults['GetScript']['script'].encode('ascii')
+        return self._defaults['GetScript']['return']
 
     def niRFSG_GetSelfCalibrationDateAndTime(self, vi, module, year, month, day, hour, minute, second):  # noqa: N802
         if self._defaults['GetSelfCalibrationDateAndTime']['return'] != 0:
@@ -967,6 +994,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_DeleteAllDeembeddingTables.return_value = 0
         mock_library.niRFSG_DeleteDeembeddingTable.side_effect = MockFunctionCallError("niRFSG_DeleteDeembeddingTable")
         mock_library.niRFSG_DeleteDeembeddingTable.return_value = 0
+        mock_library.niRFSG_DeleteScript.side_effect = MockFunctionCallError("niRFSG_DeleteScript")
+        mock_library.niRFSG_DeleteScript.return_value = 0
         mock_library.niRFSG_DisableScriptTrigger.side_effect = MockFunctionCallError("niRFSG_DisableScriptTrigger")
         mock_library.niRFSG_DisableScriptTrigger.return_value = 0
         mock_library.niRFSG_DisableStartTrigger.side_effect = MockFunctionCallError("niRFSG_DisableStartTrigger")
@@ -999,6 +1028,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_GetExternalCalibrationLastDateAndTime.return_value = 0
         mock_library.niRFSG_GetMaxSettablePower.side_effect = MockFunctionCallError("niRFSG_GetMaxSettablePower")
         mock_library.niRFSG_GetMaxSettablePower.return_value = 0
+        mock_library.niRFSG_GetScript.side_effect = MockFunctionCallError("niRFSG_GetScript")
+        mock_library.niRFSG_GetScript.return_value = 0
         mock_library.niRFSG_GetSelfCalibrationDateAndTime.side_effect = MockFunctionCallError("niRFSG_GetSelfCalibrationDateAndTime")
         mock_library.niRFSG_GetSelfCalibrationDateAndTime.return_value = 0
         mock_library.niRFSG_GetSelfCalibrationTemperature.side_effect = MockFunctionCallError("niRFSG_GetSelfCalibrationTemperature")

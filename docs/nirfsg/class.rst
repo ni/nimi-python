@@ -1071,6 +1071,31 @@ delete_deembedding_table
 
             :type table_name: str
 
+delete_script
+-------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: delete_script(script_name)
+
+            Deletes a specified script from the pool of currently defined scripts. The NI-RFSG device must be in the Configuration state before you call this method.
+
+            **Supported Devices** :PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+
+            :param script_name:
+
+
+                Specifies the name of the script to delete. This string is case-insensitive.
+
+                
+
+
+            :type script_name: str
+
 disable_script_trigger
 ----------------------
 
@@ -1337,6 +1362,41 @@ get_max_settable_power
 
 
                     Returns maximum settable power level in dBm.
+
+                    
+
+
+
+get_script
+----------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: get_script(script_name)
+
+            Returns the content of specified script.
+
+            **Supported Devices** :PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+
+            :param script_name:
+
+
+                Specifies the name of the script. This string is case-insensitive.
+
+                
+
+
+            :type script_name: str
+
+            :rtype: str
+            :return:
+
+
+                    Returns the script.
 
                     
 
@@ -2114,7 +2174,11 @@ self_cal
 
             
 
-            .. note:: If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate.
+            .. note:: If there is an existing NI-RFSA session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSA_Commit or niRFSA_Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.
+
+                **PXIe-5860**
+
+                While this VI is running on one channel, if there are any existing NI-RFSG or NI-RFSA sessions open on the other channel, they may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate or niRFSA Commit or niRFSA Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.
 
 
 
