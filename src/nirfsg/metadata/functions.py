@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 26.3.0d258
+# This file is generated from NI-RFSG API metadata version 26.3.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -633,6 +633,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script Trigger to configure.'
                 },
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'is_repeated_capability': True,
                 'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
@@ -645,6 +646,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the source terminal for the digital edge Script Trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_SCRIPT_TRIGGER_SOURCE attribute to this value.'
                 },
+                'grpc_enum': 'TriggerSource',
                 'name': 'source',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -697,6 +699,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the source terminal for the digital edge trigger. NI-RFSG sets the NIRFSG_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute to this value.'
                 },
+                'grpc_enum': 'TriggerSource',
                 'name': 'source',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -748,6 +751,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script Trigger to configure.'
                 },
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'is_repeated_capability': True,
                 'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
@@ -936,6 +940,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script Trigger to configure.'
                 },
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'is_repeated_capability': True,
                 'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
@@ -1056,7 +1061,7 @@ functions = {
                     'mechanism': 'len',
                     'value': 'sparameterTableSize'
                 },
-                'type': 'NIComplexNumber[][]',
+                'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },
             {
@@ -1341,6 +1346,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the Script trigger to configure.'
                 },
+                'grpc_enum': 'DigitalEdgeScriptTriggerIdentifier',
                 'is_repeated_capability': True,
                 'name': 'triggerId',
                 'repeated_capability_type': 'script_triggers',
@@ -2807,6 +2813,7 @@ functions = {
                         'Description'
                     ]
                 },
+                'grpc_enum': 'SignalIdentifier',
                 'name': 'signalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3915,6 +3922,7 @@ functions = {
                 },
                 'enum': 'TriggerIdentifier',
                 'name': 'triggerIdentifier',
+                'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4112,7 +4120,6 @@ functions = {
                     'description': 'Specifies the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -4172,7 +4179,6 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value to which you want to set the attribute.\n\n<blockquote>\nSome values may not be valid. The allowed values depend on the current settings of the instrument session.\n</blockquote>'
                 },
-                'grpc_enum': 'NiRFSGInt64AttributeValues',
                 'name': 'value',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -4233,7 +4239,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_enum': 'NiRFSGReal64AttributeValues',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4354,7 +4359,6 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
-                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,

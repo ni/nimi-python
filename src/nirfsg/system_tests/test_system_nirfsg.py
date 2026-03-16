@@ -362,9 +362,7 @@ class SystemTests:
         end script'''
         rfsg_device_session.write_script(script_content)
         retrieved_script = rfsg_device_session.get_script('myScript1')
-        assert retrieved_script is not None
-        assert 'myScript1' in retrieved_script
-        assert 'mywaveform1' in retrieved_script
+        assert retrieved_script == script_content
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
     def test_delete_script(self, rfsg_device_session):
