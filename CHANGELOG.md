@@ -1702,9 +1702,12 @@
 #### [nirfsg] Unreleased
 - Added
   - Python 3.14 Support
-  - Methods Added:
+  - Methods added:
       - `get_script()`
       - `delete_script()`
+  - Enum values added:
+      - `SCRIPTS` added to enum `LoadOptions`
+      - `DO_NOT_DRIVE_SIGNAL` added to enum `PulseModulationSource`
 - Changed
 - Removed
 
