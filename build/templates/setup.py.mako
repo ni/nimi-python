@@ -6,6 +6,9 @@ import build.helper as helper
 config         = template_parameters['metadata'].config
 grpc_supported = template_parameters['include_grpc_support']
 module_version = config['module_version']
+functions = config['functions']
+functions = helper.filter_codegen_functions(functions)
+are_complex_parameters_used = helper.are_complex_parameters_used(functions)
 %>
 
 from setuptools import setup
@@ -40,6 +43,9 @@ setup(
         'hightime>=0.2.0',
         % if config['uses_nitclk']:
         'nitclk',
+        % endif
+        % if are_complex_parameters_used:
+        'numpy',
         % endif
     ],
     % if grpc_supported:
