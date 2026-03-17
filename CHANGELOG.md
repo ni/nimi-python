@@ -1705,6 +1705,7 @@
   - `get_script` and `delete_script` methods
   - `SCRIPTS` added to enum `LoadOptions`
   - `DO_NOT_DRIVE_SIGNAL` added to enum `PulseModulationSource`
+  - `numpy` as an install dependency for modules that use numpy values
 - Changed
 - Removed
 
