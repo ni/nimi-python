@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 25.8.0d197
+# This file is generated from NI-RFSG API metadata version 26.3.0d9999
 enums = {
     'AllowOutOfSpecificationUserSettings': {
         'values': [
@@ -384,6 +384,24 @@ enums = {
             }
         ]
     },
+    'LoOutEnabled': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The local oscillator signal is present at the LO OUT front panel connector.'
+                },
+                'name': 'NIRFSG_VAL_DISABLE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'The local oscillator signal is  not present at the LO OUT front panel connector..'
+                },
+                'name': 'NIRFSG_VAL_ENABLE',
+                'value': 1
+            }
+        ]
+    },
     'LoOutExportConfigureFromRfsaEnable': {
         'values': [
             {
@@ -420,40 +438,7 @@ enums = {
             }
         ]
     },
-    'LoadConfigurationResetOptions': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'NI-RFSG skips resetting the waveform configurations.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG skips resetting the de-embedding tables.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
-                'value': 8
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG skips resetting the scripts.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSG resets all configurations.'
-                },
-                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
-                'value': 0
-            }
-        ]
-    },
     'LoSource': {
-        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -492,6 +477,38 @@ enums = {
             }
         ]
     },
+    'LoadConfigurationResetOptions': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips resetting the waveform configurations.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_WAVEFORMS',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips resetting the de-embedding tables.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips resetting the scripts.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_SCRIPTS',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG resets all configurations.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_NONE',
+                'value': 0
+            }
+        ]
+    },
     'LoadOptions': {
         'values': [
             {
@@ -507,6 +524,13 @@ enums = {
                 },
                 'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_WAVEFORMS',
                 'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSG skips loading the scripts to the session.'
+                },
+                'name': 'RFSG_VAL_LOAD_CONFIGURATIONS_FROM_FILE_LOAD_OPTIONS_SKIP_SCRIPTS',
+                'value': 2
             }
         ]
     },
@@ -782,6 +806,7 @@ enums = {
                     'description': 'The trigger is received on the PULSE IN terminal. This value is valid on only the PXIe-5842.'
                 },
                 'name': 'NIRFSG_VAL_PULSE_IN_STR',
+                'python_name': 'PULSE_IN',
                 'value': 'PulseIn'
             },
             {
@@ -789,6 +814,7 @@ enums = {
                     'description': 'The trigger is received from the Marker 0.'
                 },
                 'name': 'NIRFSG_VAL_MARKER0_STR',
+                'python_name': 'MARKER0',
                 'value': 'Marker0'
             },
             {
@@ -796,6 +822,7 @@ enums = {
                     'description': 'The trigger is received from the Marker 1.'
                 },
                 'name': 'NIRFSG_VAL_MARKER1_STR',
+                'python_name': 'MARKER1',
                 'value': 'Marker1'
             },
             {
@@ -803,6 +830,7 @@ enums = {
                     'description': 'The trigger is received from the Marker 2.'
                 },
                 'name': 'NIRFSG_VAL_MARKER2_STR',
+                'python_name': 'MARKER2',
                 'value': 'Marker2'
             },
             {
@@ -810,7 +838,15 @@ enums = {
                     'description': 'The trigger is received from the Marker 3.'
                 },
                 'name': 'NIRFSG_VAL_MARKER3_STR',
+                'python_name': 'MARKER3',
                 'value': 'Marker3'
+            },
+            {
+                'documentation': {
+                    'description': 'Do not drive pulse modulation.'
+                },
+                'name': 'NIRFSG_VAL_DO_NOT_DRIVE_SIGNAL',
+                'value': ''
             }
         ]
     },

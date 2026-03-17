@@ -278,6 +278,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def delete_script(self, script_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        script_name_ctype = ctypes.create_string_buffer(script_name.encode(self._encoding))  # case C020
+        error_code = self._library.niRFSG_DeleteScript(vi_ctype, script_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def disable_script_trigger(self, trigger_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         trigger_id_ctype = ctypes.create_string_buffer(trigger_id.encode(self._encoding))  # case C010
@@ -437,6 +444,20 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSG_GetMaxSettablePower(vi_ctype, None if value_ctype is None else (ctypes.pointer(value_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(value_ctype.value)
+
+    def get_script(self, script_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        script_name_ctype = ctypes.create_string_buffer(script_name.encode(self._encoding))  # case C020
+        script_ctype = None  # case C090
+        buffer_size_ctype = _visatype.ViInt32(0)  # case S190
+        actual_buffer_size_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSG_GetScript(vi_ctype, script_name_ctype, script_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        buffer_size_ctype = _visatype.ViInt32(actual_buffer_size_ctype.value)  # case S200
+        script_ctype = (_visatype.ViChar * actual_buffer_size_ctype.value)()  # case C100
+        error_code = self._library.niRFSG_GetScript(vi_ctype, script_name_ctype, script_ctype, buffer_size_ctype, None if actual_buffer_size_ctype is None else (ctypes.pointer(actual_buffer_size_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return script_ctype.value.decode(self._encoding)
 
     def get_self_calibration_date_and_time(self, module):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

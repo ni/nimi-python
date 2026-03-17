@@ -308,6 +308,10 @@ class LoadOptions(Enum):
     r'''
     NI-RFSG skips loading the waveform configurations to the session.
     '''
+    SCRIPTS = 2
+    r'''
+    NI-RFSG skips loading the scripts to the session.
+    '''
 
 
 class LoopBandwidth(Enum):
@@ -490,6 +494,10 @@ class PulseModulationSource(Enum):
     MARKER3 = 'Marker3'
     r'''
     The trigger is received from the Marker 3.
+    '''
+    DO_NOT_DRIVE_SIGNAL = ''
+    r'''
+    Do not drive pulse modulation.
     '''
 
 

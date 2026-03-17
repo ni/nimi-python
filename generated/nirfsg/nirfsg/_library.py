@@ -44,6 +44,7 @@ class Library(object):
         self.niRFSG_CreateDeembeddingSparameterTableS2PFile_cfunc = None
         self.niRFSG_DeleteAllDeembeddingTables_cfunc = None
         self.niRFSG_DeleteDeembeddingTable_cfunc = None
+        self.niRFSG_DeleteScript_cfunc = None
         self.niRFSG_DisableScriptTrigger_cfunc = None
         self.niRFSG_DisableStartTrigger_cfunc = None
         self.niRFSG_ErrorMessage_cfunc = None
@@ -60,6 +61,7 @@ class Library(object):
         self.niRFSG_GetError_cfunc = None
         self.niRFSG_GetExternalCalibrationLastDateAndTime_cfunc = None
         self.niRFSG_GetMaxSettablePower_cfunc = None
+        self.niRFSG_GetScript_cfunc = None
         self.niRFSG_GetSelfCalibrationDateAndTime_cfunc = None
         self.niRFSG_GetSelfCalibrationTemperature_cfunc = None
         self.niRFSG_GetTerminalName_cfunc = None
@@ -301,6 +303,14 @@ class Library(object):
                 self.niRFSG_DeleteDeembeddingTable_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_DeleteDeembeddingTable_cfunc(vi, port, table_name)
 
+    def niRFSG_DeleteScript(self, vi, script_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_DeleteScript_cfunc is None:
+                self.niRFSG_DeleteScript_cfunc = self._get_library_function('niRFSG_DeleteScript')
+                self.niRFSG_DeleteScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_DeleteScript_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_DeleteScript_cfunc(vi, script_name)
+
     def niRFSG_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_DisableScriptTrigger_cfunc is None:
@@ -428,6 +438,14 @@ class Library(object):
                 self.niRFSG_GetMaxSettablePower_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
                 self.niRFSG_GetMaxSettablePower_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_GetMaxSettablePower_cfunc(vi, value)
+
+    def niRFSG_GetScript(self, vi, script_name, script, buffer_size, actual_buffer_size):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_GetScript_cfunc is None:
+                self.niRFSG_GetScript_cfunc = self._get_library_function('niRFSG_GetScript')
+                self.niRFSG_GetScript_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSG_GetScript_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_GetScript_cfunc(vi, script_name, script, buffer_size, actual_buffer_size)
 
     def niRFSG_GetSelfCalibrationDateAndTime(self, vi, module, year, month, day, hour, minute, second):  # noqa: N802
         with self._func_lock:

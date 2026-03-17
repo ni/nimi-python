@@ -711,6 +711,16 @@ LoadOptions
 
 
 
+    .. py:attribute:: LoadOptions.SCRIPTS
+
+
+
+        NI-RFSG skips loading the scripts to the session.
+
+        
+
+
+
 LoopBandwidth
 -------------
 
@@ -1131,6 +1141,16 @@ PulseModulationSource
 
 
         The trigger is received from the Marker 3.
+
+        
+
+
+
+    .. py:attribute:: PulseModulationSource.DO_NOT_DRIVE_SIGNAL
+
+
+
+        Do not drive pulse modulation.
 
         
 
