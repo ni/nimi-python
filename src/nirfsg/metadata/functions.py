@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 26.3.0d9999
+# This file is generated from NI-RFSG API metadata version 26.3.0d277
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -3922,7 +3922,6 @@ functions = {
                 },
                 'enum': 'TriggerIdentifier',
                 'name': 'triggerIdentifier',
-                'grpc_enum': 'SignalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4120,6 +4119,7 @@ functions = {
                     'description': 'Specifies the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
+                'grpc_enum': 'NiRFSGInt32AttributeValues',
                 'name': 'value',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -4179,6 +4179,7 @@ functions = {
                 'documentation': {
                     'description': 'Pass the value to which you want to set the attribute.\n\n<blockquote>\nSome values may not be valid. The allowed values depend on the current settings of the instrument session.\n</blockquote>'
                 },
+                'grpc_enum': 'NiRFSGInt64AttributeValues',
                 'name': 'value',
                 'type': 'ViInt64',
                 'use_array': False,
@@ -4239,6 +4240,7 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
+                'grpc_enum': 'NiRFSGReal64AttributeValues',
                 'name': 'value',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4359,6 +4361,7 @@ functions = {
                     'description': 'Pass the value to which you want to set the attribute.',
                     'note': 'Some values may not be valid. The allowed values depend on the current settings of the instrument session.'
                 },
+                'grpc_mapped_enum': 'NiRFSGStringAttributeValuesMapped',
                 'name': 'value',
                 'type': 'ViConstString',
                 'use_array': False,
