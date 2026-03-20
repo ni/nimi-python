@@ -8,6 +8,7 @@ module_name = config['module_name']
 proto_name = config.get('proto_name', module_name)
 service_class_prefix = config['grpc_service_class_prefix']
 functions = helper.filter_codegen_functions(config['functions'])
+are_complex_parameters_used = helper.are_complex_parameters_used(functions)
 %>\
 
 import grpc
@@ -19,6 +20,9 @@ import warnings
 from . import enums as enums  # noqa: F401
 % endif
 from . import errors as errors
+% if are_complex_parameters_used:
+from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
+% endif
 from . import ${proto_name}_pb2 as grpc_types
 from . import ${proto_name}_pb2_grpc as ${module_name}_grpc
 from . import session_pb2 as session_grpc_types
