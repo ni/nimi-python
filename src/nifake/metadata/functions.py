@@ -2991,7 +2991,7 @@ functions = {
         'documentation': {
             'description': 'Function that takes a 3D numpy array of numpy complex128 as an input parameter.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
             {

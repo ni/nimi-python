@@ -146,7 +146,14 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        multidimensional_array_list = [
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            for val in multidimensional_array.ravel()
+        ]
+        self._invoke(
+            self._client.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter,
+            grpc_types.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest(vi=self._vi, multidimensional_array=multidimensional_array_list),
+        )
 
     def function_with_intflag_parameter(self, flag):  # noqa: N802
         self._invoke(
