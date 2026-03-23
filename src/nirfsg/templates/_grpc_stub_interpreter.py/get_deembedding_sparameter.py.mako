@@ -3,6 +3,7 @@
     '''Retrieves S-parameters from the gRPC call response and converts them to a reshaped numpy array.'''
     import build.helper as helper
 %>\
+
     def ${f['interpreter_name']}(self):
         import numpy as np
         response = self._invoke(

@@ -7,6 +7,7 @@ __version__ = '1.0.2.dev0'
 from nirfsg.enums import *  # noqa: F403,F401,H303
 from nirfsg.errors import DriverWarning  # noqa: F401
 from nirfsg.errors import Error  # noqa: F401
+from nirfsg.grpc_session_options import *  # noqa: F403,F401,H303
 from nirfsg.session import Session  # noqa: F401
 
 
