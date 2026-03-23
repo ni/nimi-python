@@ -199,6 +199,15 @@ def get_grpc_interpreter_method_return_snippet(parameters, config):
     return ('return ' + ', '.join(snippets)).strip()
 
 
+def get_grpc_response_info(function, config):
+    '''Returns (return_snippet, response_assignment_prefix) for a gRPC stub method.'''
+    return_snippet = get_grpc_interpreter_method_return_snippet(function['parameters'], config)
+    if return_snippet == 'return':
+        return_snippet = None
+    response_assignment_prefix = 'response = ' if return_snippet else ''
+    return return_snippet, response_assignment_prefix
+
+
 def get_session_method_return_snippet(parameters, config, use_numpy_array=False):
     '''Returns a string suitable to use as the return argument of a Session method'''
     options = ParameterUsageOptions.API_NUMPY_OUTPUT_PARAMETERS if use_numpy_array else ParameterUsageOptions.API_OUTPUT_PARAMETERS

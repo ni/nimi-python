@@ -501,6 +501,18 @@ def are_complex_parameters_used(functions):
     return are_complex_parameters_used
 
 
-def function_has_complex_parameters(function):
+def does_function_use_complex_parameters(function):
     '''Returns bool based on whether any complex parameters are used in the function metadata.'''
     return bool(filter_parameters(function['parameters'], ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS))
+
+
+def get_grpc_complex_request_args_snippet(function, complex_params):
+    '''Builds the gRPC request args snippet for a function, replacing complex parameter names with _list suffixed versions.'''
+    from build.helper.codegen_helper import get_params_snippet
+    snippet = get_params_snippet(function, ParameterUsageOptions.GRPC_REQUEST_PARAMETERS)
+    for p in complex_params:
+        snippet = snippet.replace(
+            p['grpc_name'] + '=' + p['python_name'],
+            p['grpc_name'] + '=' + p['python_name'] + '_list'
+        )
+    return snippet

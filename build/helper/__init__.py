@@ -3,6 +3,7 @@ from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_value_snippet  # noqa: F401
 from build.helper.codegen_helper import get_grpc_interpreter_method_return_snippet  # noqa: F401
+from build.helper.codegen_helper import get_grpc_response_info  # noqa: F401
 from build.helper.codegen_helper import get_library_interpreter_method_return_snippet  # noqa: F401
 from build.helper.codegen_helper import get_parameter_size_check_snippets  # noqa: F401
 from build.helper.codegen_helper import get_params_snippet  # noqa: F401
@@ -43,6 +44,7 @@ from build.helper.helper import sorted_attrs  # noqa: F401
 from build.helper.metadata_add_all import add_all_metadata  # noqa: F401
 
 from build.helper.metadata_filters import are_complex_parameters_used  # noqa: F401
+from build.helper.metadata_filters import does_function_use_complex_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_codegen_attributes  # noqa: F401
 from build.helper.metadata_filters import filter_codegen_attributes_public_only  # noqa: F401
 from build.helper.metadata_filters import filter_codegen_enums  # noqa: F401
@@ -52,7 +54,7 @@ from build.helper.metadata_filters import filter_len_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_library_functions  # noqa: F401
 from build.helper.metadata_filters import filter_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_public_functions  # noqa: F401
-from build.helper.metadata_filters import function_has_complex_parameters  # noqa: F401
+from build.helper.metadata_filters import get_grpc_complex_request_args_snippet  # noqa: F401
 
 from build.helper.metadata_find import find_custom_type  # noqa: F401
 from build.helper.metadata_find import find_session_handle_parameter  # noqa: F401
