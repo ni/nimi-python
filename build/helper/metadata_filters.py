@@ -499,3 +499,8 @@ def are_complex_parameters_used(functions):
             are_complex_parameters_used = True
             break
     return are_complex_parameters_used
+
+
+def function_has_complex_parameters(function):
+    '''Returns bool based on whether any complex parameters are used in the function metadata.'''
+    return bool(filter_parameters(function['parameters'], ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS))

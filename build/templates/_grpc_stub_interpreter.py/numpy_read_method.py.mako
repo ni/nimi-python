@@ -8,13 +8,10 @@
     included_in_proto = f.get('included_in_proto', True)
     
     # Identify numpy parameters with complex number types
-    numpy_complex_params = [
-        p for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.NUMPY_PARAMETERS)
-        if p.get('complex_array_representation') is not None and p.get('original_type') in ('NIComplexNumber[]', 'NIComplexNumberF32[]', 'NIComplexI16[]')
-    ]
+    numpy_complex_params = helper.filter_parameters(parameters, helper.ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS)
     
     # Only generate gRPC implementation if the function has complex parameters and is included in proto
-    should_generate_grpc_impl = len(numpy_complex_params) > 0 and included_in_proto
+    should_generate_grpc_impl = helper.function_has_complex_parameters(f) and included_in_proto
     
     if should_generate_grpc_impl:
         # Generate gRPC request with complex number conversion
