@@ -11,9 +11,9 @@
     numpy_complex_params = helper.filter_parameters(parameters, helper.ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS)
     
     # Only generate gRPC implementation if the function has complex parameters and is included in proto
-    should_generate_grpc_impl = helper.function_has_complex_parameters(f) and included_in_proto
+    has_complex_grpc_support = helper.function_has_complex_parameters(f) and included_in_proto
     
-    if should_generate_grpc_impl:
+    if has_complex_grpc_support:
         # Generate gRPC request with complex number conversion
         grpc_name = f.get('grpc_name', f['name'])
         grpc_request_args = helper.get_params_snippet(f, helper.ParameterUsageOptions.GRPC_REQUEST_PARAMETERS)
@@ -32,7 +32,7 @@
 %>\
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
-% if should_generate_grpc_impl:
+% if has_complex_grpc_support:
 % for p in numpy_complex_params:
 % if p['original_type'] == 'NIComplexNumber[]':
         ${p['python_name']}_list = [

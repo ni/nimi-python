@@ -520,13 +520,38 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def write_waveform_numpy_complex128(self, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            for val in waveform_data_array.ravel()
+        ]
+        self._invoke(
+            self._client.WriteWaveformNumpyComplex128,
+            grpc_types.WriteWaveformNumpyComplex128Request(vi=self._vi, waveform_data_array=waveform_data_array_list),
+        )
 
     def write_waveform_numpy_complex64(self, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
+            for val in waveform_data_array.ravel()
+        ]
+        self._invoke(
+            self._client.WriteWaveformNumpyComplex64,
+            grpc_types.WriteWaveformNumpyComplex64Request(vi=self._vi, waveform_data_array=waveform_data_array_list),
+        )
 
     def write_waveform_numpy_complex_interleaved_i16(self, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        arr = waveform_data_array.ravel()
+        if arr.size % 2 != 0:
+            raise ValueError("Interleaved int16 array must have even length (real/imag pairs)")
+        arr_pairs = arr.reshape(-1, 2)
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexI16(real=int(pair[0]), imaginary=int(pair[1]))
+            for pair in arr_pairs
+        ]
+        self._invoke(
+            self._client.WriteWaveformNumpyComplexInterleavedI16,
+            grpc_types.WriteWaveformNumpyComplexInterleavedI16Request(vi=self._vi, waveform_data_array=waveform_data_array_list),
+        )
 
     def close(self):  # noqa: N802
         self._invoke(
