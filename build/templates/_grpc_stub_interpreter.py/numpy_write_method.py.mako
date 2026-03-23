@@ -1,33 +1,41 @@
 <%page args="f, config, method_template"/>\
 <%
-    '''Renders a GrpcStubInterpreter method corresponding to the passed-in function metadata.'''
+    '''Renders a GrpcStubInterpreter method for numpy write operations with complex number support.'''
     import build.helper as helper
     parameters = f['parameters']
     full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
     method_decl_params = helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION)
-    grpc_name = f.get('grpc_name', f['name'])
-    grpc_request_args = helper.get_params_snippet(f, helper.ParameterUsageOptions.GRPC_REQUEST_PARAMETERS)
-    return_statement = helper.get_grpc_interpreter_method_return_snippet(f['parameters'], config)
-    if return_statement == 'return':
-        return_statement = None
-    capture_response = 'response = ' if return_statement else ''
     included_in_proto = f.get('included_in_proto', True)
+    
+    # Identify numpy parameters with complex number types
     numpy_complex_params = [
         p for p in helper.filter_parameters(parameters, helper.ParameterUsageOptions.NUMPY_PARAMETERS)
         if p.get('complex_array_representation') is not None and p.get('original_type') in ('NIComplexNumber[]', 'NIComplexNumberF32[]', 'NIComplexI16[]')
     ]
-    # For numpy complex inputs, create NIComplex message lists and map them in the request args
-    for p in numpy_complex_params:
-        # Replace occurrences like "field=python_name" with "field=python_name_list"
-        grpc_request_args = grpc_request_args.replace(
-            p['grpc_name'] + '=' + p['python_name'],
-            p['grpc_name'] + '=' + p['python_name'] + '_list'
-        )
-
+    
+    # Only generate gRPC implementation if the function has complex parameters and is included in proto
+    should_generate_grpc_impl = len(numpy_complex_params) > 0 and included_in_proto
+    
+    if should_generate_grpc_impl:
+        # Generate gRPC request with complex number conversion
+        grpc_name = f.get('grpc_name', f['name'])
+        grpc_request_args = helper.get_params_snippet(f, helper.ParameterUsageOptions.GRPC_REQUEST_PARAMETERS)
+        
+        # Replace parameter names with _list suffixed versions for complex parameters
+        for p in numpy_complex_params:
+            grpc_request_args = grpc_request_args.replace(
+                p['grpc_name'] + '=' + p['python_name'],
+                p['grpc_name'] + '=' + p['python_name'] + '_list'
+            )
+        
+        return_statement = helper.get_grpc_interpreter_method_return_snippet(f['parameters'], config)
+        if return_statement == 'return':
+            return_statement = None
+        capture_response = 'response = ' if return_statement else ''
 %>\
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
-% if included_in_proto:
+% if should_generate_grpc_impl:
 % for p in numpy_complex_params:
 % if p['original_type'] == 'NIComplexNumber[]':
         ${p['python_name']}_list = [
@@ -40,7 +48,6 @@
             for val in ${p['python_name']}.ravel()
         ]
 % elif p['original_type'] == 'NIComplexI16[]':
-        import numpy as np
         arr = ${p['python_name']}.ravel()
         if arr.size % 2 != 0:
             raise ValueError("Interleaved int16 array must have even length (real/imag pairs)")
@@ -59,5 +66,5 @@
         ${return_statement}
 % endif
 % else:
-        raise NotImplementedError('${full_func_name} is not supported over gRPC')
+        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 % endif

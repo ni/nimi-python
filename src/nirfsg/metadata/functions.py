@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 26.3.0d9999
+# This file is generated from NI-RFSG API metadata version 26.3.0d293
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -3921,8 +3921,8 @@ functions = {
                     ]
                 },
                 'enum': 'TriggerIdentifier',
-                'name': 'triggerIdentifier',
                 'grpc_enum': 'SignalIdentifier',
+                'name': 'triggerIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
