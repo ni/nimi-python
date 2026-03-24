@@ -2,25 +2,26 @@
 <%
     '''Renders a GrpcStubInterpreter method for numpy write operations with complex number support.'''
     import build.helper as helper
-    parameters = f['parameters']
     full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
     method_decl_params = helper.get_params_snippet(f, helper.ParameterUsageOptions.INTERPRETER_METHOD_DECLARATION)
+    grpc_name = f.get('grpc_name', f['name'])
+    grpc_request_args = helper.get_params_snippet(f, helper.ParameterUsageOptions.GRPC_REQUEST_PARAMETERS)
+    return_statement = helper.get_grpc_interpreter_method_return_snippet(f['parameters'], config)
+    if return_statement == 'return':
+        return_statement = None
+    capture_response = 'response = ' if return_statement else ''
     included_in_proto = f.get('included_in_proto', True)
-    
-    # Identify numpy parameters with complex number types.
-    numpy_complex_params = helper.filter_parameters(parameters, helper.ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS)
-    
-    # Only generate gRPC implementation if the function has complex parameters and is included in proto
-    should_generate_complex_grpc_impl = bool(numpy_complex_params) and included_in_proto
-    
-    if should_generate_complex_grpc_impl:
-        grpc_method_name = f.get('grpc_name', f['name'])
-        grpc_request_args_snippet = helper.get_grpc_complex_request_args_snippet(f, numpy_complex_params)
-        return_snippet, response_assignment_prefix = helper.get_grpc_response_info(f, config)
+    numpy_complex_params = helper.filter_parameters(f['parameters'], helper.ParameterUsageOptions.COMPLEX_NUMBER_PARAMETERS)
+    for param in numpy_complex_params:
+        grpc_request_args = grpc_request_args.replace(
+            param['grpc_name'] + '=' + param['python_name'],
+            param['grpc_name'] + '=' + param['python_name'] + '_list'
+        )
 %>\
 
     def ${full_func_name}(${method_decl_params}):  # noqa: N802
-% if should_generate_complex_grpc_impl:
+% if included_in_proto:
+% if numpy_complex_params:
 % for p in numpy_complex_params:
 % if p['original_type'] == 'NIComplexNumber[]':
         ${p['python_name']}_list = [
@@ -43,13 +44,16 @@
         ]
 % endif
 % endfor
-        ${response_assignment_prefix}self._invoke(
-            self._client.${grpc_method_name},
-            grpc_types.${grpc_method_name}Request(${grpc_request_args_snippet}),
+        ${capture_response}self._invoke(
+            self._client.${grpc_name},
+            grpc_types.${grpc_name}Request(${grpc_request_args}),
         )
 % if return_snippet:
         ${return_snippet}
 % endif
 % else:
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+% endif
+% else:
+        raise NotImplementedError('${full_func_name} is not supported over gRPC')
 % endif
