@@ -59,6 +59,9 @@ service NiFake {
   rpc TwoInputFunction(TwoInputFunctionRequest) returns (TwoInputFunctionResponse);
   rpc Use64BitNumber(Use64BitNumberRequest) returns (Use64BitNumberResponse);
   rpc WriteWaveform(WriteWaveformRequest) returns (WriteWaveformResponse);
+  rpc WriteWaveformNumpyComplex128(WriteWaveformNumpyComplex128Request) returns (WriteWaveformNumpyComplex128Response);
+  rpc WriteWaveformNumpyComplex64(WriteWaveformNumpyComplex64Request) returns (WriteWaveformNumpyComplex64Response);
+  rpc WriteWaveformNumpyComplexInterleavedI16(WriteWaveformNumpyComplexInterleavedI16Request) returns (WriteWaveformNumpyComplexInterleavedI16Response);
   rpc SetCustomType(SetCustomTypeRequest) returns (SetCustomTypeResponse);
   rpc SetCustomTypeArray(SetCustomTypeArrayRequest) returns (SetCustomTypeArrayResponse);
   rpc GetCustomType(GetCustomTypeRequest) returns (GetCustomTypeResponse);
@@ -77,6 +80,7 @@ service NiFake {
   rpc GetParameterWithOverriddenGrpcName(GetParameterWithOverriddenGrpcNameRequest) returns (GetParameterWithOverriddenGrpcNameResponse);
   rpc IviDanceWithTwistWithMultipleArraysAndOneBufferSize(IviDanceWithTwistWithMultipleArraysAndOneBufferSizeRequest) returns (IviDanceWithTwistWithMultipleArraysAndOneBufferSizeResponse);
   rpc FunctionWithOverriddenGrpcName2x(FunctionWithOverriddenGrpcName2xRequest) returns (FunctionWithOverriddenGrpcName2xResponse);
+  rpc FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest) returns (FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterResponse);
   rpc StringValuedEnumNoEnumGenerated(StringValuedEnumNoEnumGeneratedRequest) returns (StringValuedEnumNoEnumGeneratedResponse);
   rpc IviDanceWithATwistCalculatedSizeOut(IviDanceWithATwistCalculatedSizeOutRequest) returns (IviDanceWithATwistCalculatedSizeOutResponse);
   rpc ImportAttributeConfigurationBuffer(ImportAttributeConfigurationBufferRequest) returns (ImportAttributeConfigurationBufferResponse);
@@ -259,6 +263,11 @@ message NIComplexI16_struct {
 message NIComplexNumber_struct {
   double real = 1;
   double imaginary = 2;
+}
+
+message NIComplexNumberF32_struct {
+  float real = 1;
+  float imaginary = 2;
 }
 
 message StringAndTurtle {
@@ -746,6 +755,33 @@ message WriteWaveformResponse {
   int32 status = 1;
 }
 
+message WriteWaveformNumpyComplex128Request {
+  nidevice_grpc.Session vi = 1;
+  repeated NIComplexNumber_struct waveform_data_array = 2;
+}
+
+message WriteWaveformNumpyComplex128Response {
+  int32 status = 1;
+}
+
+message WriteWaveformNumpyComplex64Request {
+  nidevice_grpc.Session vi = 1;
+  repeated NIComplexNumberF32_struct waveform_data_array = 2;
+}
+
+message WriteWaveformNumpyComplex64Response {
+  int32 status = 1;
+}
+
+message WriteWaveformNumpyComplexInterleavedI16Request {
+  nidevice_grpc.Session vi = 1;
+  repeated NIComplexI16_struct waveform_data_array = 2;
+}
+
+message WriteWaveformNumpyComplexInterleavedI16Response {
+  int32 status = 1;
+}
+
 message SetCustomTypeRequest {
   nidevice_grpc.Session vi = 1;
   FakeCustomStruct cs = 2;
@@ -924,6 +960,15 @@ message FunctionWithOverriddenGrpcName2xRequest {
 }
 
 message FunctionWithOverriddenGrpcName2xResponse {
+  int32 status = 1;
+}
+
+message FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest {
+  nidevice_grpc.Session vi = 1;
+  repeated NIComplexNumber_struct multidimensional_array = 2;
+}
+
+message FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterResponse {
   int32 status = 1;
 }
 

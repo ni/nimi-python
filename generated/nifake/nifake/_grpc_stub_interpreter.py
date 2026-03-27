@@ -146,6 +146,7 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         multidimensional_array_list = [
             grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
             for val in multidimensional_array.ravel()
@@ -520,6 +521,7 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def write_waveform_numpy_complex128(self, waveform_data_array):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         waveform_data_array_list = [
             grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
             for val in waveform_data_array.ravel()
@@ -530,6 +532,7 @@ class GrpcStubInterpreter(object):
         )
 
     def write_waveform_numpy_complex64(self, waveform_data_array):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         waveform_data_array_list = [
             grpc_complex_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
             for val in waveform_data_array.ravel()
@@ -540,6 +543,7 @@ class GrpcStubInterpreter(object):
         )
 
     def write_waveform_numpy_complex_interleaved_i16(self, waveform_data_array):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         arr = waveform_data_array.ravel()
         if arr.size % 2 != 0:
             raise ValueError("Interleaved int16 array must have even length (real/imag pairs)")

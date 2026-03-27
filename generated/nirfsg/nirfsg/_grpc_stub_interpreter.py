@@ -195,6 +195,7 @@ class GrpcStubInterpreter(object):
         )
 
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         sparameter_table_list = [
             grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
             for val in sparameter_table.ravel()
@@ -560,6 +561,7 @@ class GrpcStubInterpreter(object):
         )
 
     def write_arb_waveform_complex_f32(self, waveform_name, waveform_data_array, more_data_pending):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         waveform_data_array_list = [
             grpc_complex_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
             for val in waveform_data_array.ravel()
@@ -570,6 +572,7 @@ class GrpcStubInterpreter(object):
         )
 
     def write_arb_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         waveform_data_array_list = [
             grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
             for val in waveform_data_array.ravel()
@@ -580,6 +583,7 @@ class GrpcStubInterpreter(object):
         )
 
     def write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):  # noqa: N802
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         arr = waveform_data_array.ravel()
         if arr.size % 2 != 0:
             raise ValueError("Interleaved int16 array must have even length (real/imag pairs)")
