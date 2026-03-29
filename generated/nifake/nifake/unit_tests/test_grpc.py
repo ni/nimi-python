@@ -416,7 +416,7 @@ class TestGrpcStubInterpreter:
         ]
         response_object = self._set_side_effect(library_func)
         interpreter = self._get_initialized_stub_interpreter()
-        assert interpreter.write_waveform_numpy_complex128(waveform) is None
+        assert interpreter.write_waveform_numpy_complex128(waveform) is None  # no outputs
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST,
             waveform_data_array=grpc_waveform,
@@ -431,7 +431,7 @@ class TestGrpcStubInterpreter:
         ]
         response_object = self._set_side_effect(library_func)
         interpreter = self._get_initialized_stub_interpreter()
-        assert interpreter.write_waveform_numpy_complex64(waveform) is None
+        assert interpreter.write_waveform_numpy_complex64(waveform) is None  # no outputs
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST,
             waveform_data_array=grpc_waveform,
@@ -448,7 +448,7 @@ class TestGrpcStubInterpreter:
         assert len(grpc_waveform) == len(waveform) // 2
         response_object = self._set_side_effect(library_func)
         interpreter = self._get_initialized_stub_interpreter()
-        assert interpreter.write_waveform_numpy_complex_interleaved_i16(waveform) is None
+        assert interpreter.write_waveform_numpy_complex_interleaved_i16(waveform) is None  # no outputs
         self._assert_call(library_func, response_object).assert_called_once_with(
             vi=GRPC_SESSION_OBJECT_FOR_TEST,
             waveform_data_array=grpc_waveform,
