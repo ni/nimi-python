@@ -1,5 +1,4 @@
 import array
-import fasteners
 import grpc
 import hightime
 import nirfsg
@@ -8,7 +7,6 @@ import os
 import pathlib
 import pytest
 import sys
-import tempfile
 import time
 
 
@@ -19,11 +17,6 @@ import system_test_utilities  # noqa: E402
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 use_simulated_session = True
 real_hw_resource_name = '5841'
-
-rfsg_sim_5841_lock_file = os.path.join(tempfile.gettempdir(), 'rfsg_5841sim.lock')
-rfsg_sim_5841_lock = fasteners.InterProcessLock(rfsg_sim_5841_lock_file)
-rfsg_sim_5831_lock_file = os.path.join(tempfile.gettempdir(), 'rfsg_5831sim.lock')
-rfsg_sim_5831_lock = fasteners.InterProcessLock(rfsg_sim_5831_lock_file)
 
 
 def get_test_file_path(file_name):
@@ -37,18 +30,16 @@ class SystemTests:
     @pytest.fixture(scope='function')
     def rfsg_device_session(self, session_creation_kwargs):
         if use_simulated_session:
-            with rfsg_sim_5841_lock:
-                with nirfsg.Session("", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
-                    yield sim_5841_session
+            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                yield sim_5841_session
         else:
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
-        with rfsg_sim_5831_lock:
-            with nirfsg.Session("", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
-                yield sim_5831_session
+        with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+            yield sim_5831_session
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsg_device_session):
@@ -654,6 +645,21 @@ class SystemTests:
         assert 'myScript2' in script_names
 
 
+class TestGrpc(SystemTests):
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
+
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
@@ -672,19 +678,4 @@ class TestLibrary(SystemTests):
         names = rfsg_device_session.get_all_named_waveform_names()
         assert 'waveform1' in names
         assert 'waveform2' in names
-
-
-class TestGrpc(SystemTests):
-    @pytest.fixture(scope='class')
-    def grpc_channel(self):
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
-        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
-            yield channel
-
-    @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
-        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
-        return {'grpc_options': grpc_options}
 
