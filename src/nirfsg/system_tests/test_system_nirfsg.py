@@ -623,18 +623,6 @@ class SystemTests:
         with rfsg_device_session.initiate():
             rfsg_device_session.wait_until_settled()
 
-    # Re-enabled for 32-bit testing after gRPC device update
-    @pytest.mark.skipif(use_simulated_session is True, reason="Needs Updated gRPC device that supports get_all_named_waveform_names bug fix")
-    def test_get_all_named_waveform_names(self, rfsg_device_session):
-        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
-        waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
-        waveform_data2 = np.full(800, 1 + 0j, dtype=np.complex128)
-        rfsg_device_session.write_arb_waveform('waveform1', waveform_data1, False)
-        rfsg_device_session.write_arb_waveform('waveform2', waveform_data2, False)
-        names = rfsg_device_session.get_all_named_waveform_names()
-        assert 'waveform1' in names
-        assert 'waveform2' in names
-
     @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
     def test_get_all_script_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
@@ -661,6 +649,16 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
+
+    def test_get_all_named_waveform_names(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
+        waveform_data2 = np.full(800, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('waveform1', waveform_data1, False)
+        rfsg_device_session.write_arb_waveform('waveform2', waveform_data2, False)
+        names = rfsg_device_session.get_all_named_waveform_names()
+        assert 'waveform1' in names
+        assert 'waveform2' in names
 
 
 class TestGrpc(SystemTests):
