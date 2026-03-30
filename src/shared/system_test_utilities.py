@@ -8,21 +8,45 @@ import time
 
 
 class GrpcServerProcess:
+    _SERVER_STARTUP_TIMEOUT = 60
+
     def __init__(self, config_file_path):
         server_exe = self._get_grpc_server_exe()
-        self._proc = subprocess.Popen([str(server_exe), config_file_path], stdout=subprocess.PIPE)
+        self._proc = subprocess.Popen(
+            [str(server_exe), config_file_path],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        self._stderr_lines = []
+        self._stderr_thread = threading.Thread(target=self._capture_stderr, daemon=True)
+        self._stderr_thread.start()
 
-        # Read/parse output until we find the port number or the process exits; discard the rest.
+        # Read/parse output until we find the port number, the process exits, or we time out.
         try:
             self.server_port = None
-            while self.server_port is None and self._proc.poll() is None:
-                line = self._proc.stdout.readline()
-                match = re.search(rb"Server listening on port (\d+)", line)
-                if match:
-                    self.server_port = int(match.group(1))
+            reader_thread = threading.Thread(target=self._read_port, daemon=True)
+            reader_thread.start()
+            reader_thread.join(timeout=self._SERVER_STARTUP_TIMEOUT)
+
+            if reader_thread.is_alive():
+                self._proc.kill()
+                self._stderr_thread.join(timeout=5)
+                stderr_output = b''.join(self._stderr_lines).decode(errors='replace').strip()
+                msg = f"Server did not start within {self._SERVER_STARTUP_TIMEOUT} seconds"
+                if stderr_output:
+                    msg += f"\nServer stderr:\n{stderr_output}"
+                raise RuntimeError(msg)
 
             if self._proc.poll() is not None:
-                raise RuntimeError(f"Server exited with return code {self._proc.returncode}")
+                self._stderr_thread.join(timeout=5)
+                stderr_output = b''.join(self._stderr_lines).decode(errors='replace').strip()
+                msg = f"Server exited with return code {self._proc.returncode}"
+                if stderr_output:
+                    msg += f"\nServer stderr:\n{stderr_output}"
+                raise RuntimeError(msg)
+
+            if self.server_port is None:
+                raise RuntimeError("Server process ended without reporting a port")
 
             self._stdout_thread = threading.Thread(target=self._discard_output, args=(self._proc.stdout,), daemon=True)
             self._stdout_thread.start()
@@ -51,6 +75,19 @@ class GrpcServerProcess:
         if not server_exe.exists():
             pytest.skip("NI gRPC Device Server not installed")
         return server_exe
+
+    def _read_port(self):
+        while self.server_port is None and self._proc.poll() is None:
+            line = self._proc.stdout.readline()
+            if not line:
+                break
+            match = re.search(rb"Server listening on port (\d+)", line)
+            if match:
+                self.server_port = int(match.group(1))
+
+    def _capture_stderr(self):
+        for line in self._proc.stderr:
+            self._stderr_lines.append(line)
 
     def _discard_output(self, stdout):
         while True:
