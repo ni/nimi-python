@@ -1,4 +1,5 @@
 import array
+import fasteners
 import grpc
 import hightime
 import nirfsg
@@ -7,6 +8,7 @@ import os
 import pathlib
 import pytest
 import sys
+import tempfile
 import time
 
 
@@ -17,6 +19,11 @@ import system_test_utilities  # noqa: E402
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 use_simulated_session = True
 real_hw_resource_name = '5841'
+
+rfsg_sim_5841_lock_file = os.path.join(tempfile.gettempdir(), 'rfsg_5841sim.lock')
+rfsg_sim_5841_lock = fasteners.InterProcessLock(rfsg_sim_5841_lock_file)
+rfsg_sim_5831_lock_file = os.path.join(tempfile.gettempdir(), 'rfsg_5831sim.lock')
+rfsg_sim_5831_lock = fasteners.InterProcessLock(rfsg_sim_5831_lock_file)
 
 
 def get_test_file_path(file_name):
@@ -30,16 +37,18 @@ class SystemTests:
     @pytest.fixture(scope='function')
     def rfsg_device_session(self, session_creation_kwargs):
         if use_simulated_session:
-            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
-                yield sim_5841_session
+            with rfsg_sim_5841_lock:
+                with nirfsg.Session("", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                    yield sim_5841_session
         else:
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
-        with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
-            yield sim_5831_session
+        with rfsg_sim_5831_lock:
+            with nirfsg.Session("", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+                yield sim_5831_session
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsg_device_session):
@@ -650,6 +659,10 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(self):
         return {}
 
+    # grpc-device had a bug in get_all_named_waveform_names
+    # (https://github.com/ni/grpc-device/pull/1243), which is now merged.
+    # This test is temporarily kept in TestLibrary until the pipeline uses a
+    # grpc-device version that includes this fix
     def test_get_all_named_waveform_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
