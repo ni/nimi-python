@@ -665,6 +665,7 @@ class TestLibrary(SystemTests):
         assert 'waveform2' in names
 
 
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
 class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def grpc_channel(self):
