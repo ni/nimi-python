@@ -29,13 +29,13 @@ class SystemTests:
         print(f"[FIXTURE] rfsg_device_session: Starting, session_creation_kwargs = {session_creation_kwargs}", flush=True)
         if use_simulated_session:
             print("[FIXTURE] rfsg_device_session: Creating simulated 5841 session...", flush=True)
-            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+            with nirfsg.Session("", False, True, "Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
                 print("[FIXTURE] rfsg_device_session: Session created, yielding...", flush=True)
                 yield sim_5841_session
                 print("[FIXTURE] rfsg_device_session: Cleaning up simulated session", flush=True)
         else:
             print(f"[FIXTURE] rfsg_device_session: Creating real hardware session ({real_hw_resource_name})...", flush=True)
-            with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
+            with nirfsg.Session(real_hw_resource_name, False, True, "", **session_creation_kwargs) as real_rfsg_device_session:
                 print("[FIXTURE] rfsg_device_session: Session created, yielding...", flush=True)
                 yield real_rfsg_device_session
                 print("[FIXTURE] rfsg_device_session: Cleaning up real hardware session", flush=True)
@@ -44,7 +44,7 @@ class SystemTests:
     def simulated_5831_device_session(self, session_creation_kwargs):
         print(f"[FIXTURE] simulated_5831_device_session: Starting, session_creation_kwargs = {session_creation_kwargs}", flush=True)
         print("[FIXTURE] simulated_5831_device_session: Creating simulated 5831 session...", flush=True)
-        with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+        with nirfsg.Session("", False, True, "Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
             print("[FIXTURE] simulated_5831_device_session: Session created, yielding...", flush=True)
             yield sim_5831_session
             print("[FIXTURE] simulated_5831_device_session: Cleaning up", flush=True)

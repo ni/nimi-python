@@ -41,6 +41,7 @@ setup(
             'protobuf>=4.21.6'
         ],
     },
+  
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
