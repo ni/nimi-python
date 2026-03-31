@@ -29,17 +29,28 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/
 class SystemTests:
     @pytest.fixture(scope='function')
     def rfsg_device_session(self, session_creation_kwargs):
+        print(f"[FIXTURE] rfsg_device_session: Starting, session_creation_kwargs = {session_creation_kwargs}")
         if use_simulated_session:
+            print("[FIXTURE] rfsg_device_session: Creating simulated 5841 session...")
             with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                print("[FIXTURE] rfsg_device_session: Session created, yielding...")
                 yield sim_5841_session
+                print("[FIXTURE] rfsg_device_session: Cleaning up simulated session")
         else:
+            print(f"[FIXTURE] rfsg_device_session: Creating real hardware session ({real_hw_resource_name})...")
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
+                print("[FIXTURE] rfsg_device_session: Session created, yielding...")
                 yield real_rfsg_device_session
+                print("[FIXTURE] rfsg_device_session: Cleaning up real hardware session")
 
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
+        print(f"[FIXTURE] simulated_5831_device_session: Starting, session_creation_kwargs = {session_creation_kwargs}")
+        print("[FIXTURE] simulated_5831_device_session: Creating simulated 5831 session...")
         with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+            print("[FIXTURE] simulated_5831_device_session: Session created, yielding...")
             yield sim_5831_session
+            print("[FIXTURE] simulated_5831_device_session: Cleaning up")
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsg_device_session):
@@ -648,21 +659,32 @@ class SystemTests:
 class TestGrpc(SystemTests):
     @pytest.fixture(scope='class')
     def grpc_channel(self):
+        print("[FIXTURE] grpc_channel: Starting fixture setup")
         current_directory = os.path.dirname(os.path.abspath(__file__))
+        print(f"[FIXTURE] grpc_channel: current_directory = {current_directory}")
         config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        print(f"[FIXTURE] grpc_channel: config_file_path = {config_file_path}")
+        print("[FIXTURE] grpc_channel: Creating GrpcServerProcess...")
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            print(f"[FIXTURE] grpc_channel: GrpcServerProcess created, server_port = {proc.server_port}")
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            print(f"[FIXTURE] grpc_channel: Channel created, yielding...")
             yield channel
+            print("[FIXTURE] grpc_channel: Cleaning up...")
 
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self, grpc_channel):
+        print(f"[FIXTURE] session_creation_kwargs (TestGrpc): Starting, grpc_channel = {grpc_channel}")
+        print("[FIXTURE] session_creation_kwargs (TestGrpc): Creating GrpcSessionOptions...")
         grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        print(f"[FIXTURE] session_creation_kwargs (TestGrpc): Returning kwargs with grpc_options = {grpc_options}")
         return {'grpc_options': grpc_options}
 
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
+        print("[FIXTURE] session_creation_kwargs (TestLibrary): Returning empty kwargs")
         return {}
 
     # grpc-device had a bug in get_all_named_waveform_names
