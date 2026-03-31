@@ -668,7 +668,7 @@ class TestGrpc(SystemTests):
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             print(f"[FIXTURE] grpc_channel: GrpcServerProcess created, server_port = {proc.server_port}")
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
-            print(f"[FIXTURE] grpc_channel: Channel created, yielding...")
+            print("[FIXTURE] grpc_channel: Channel created, yielding...")
             yield channel
             print("[FIXTURE] grpc_channel: Cleaning up...")
 
