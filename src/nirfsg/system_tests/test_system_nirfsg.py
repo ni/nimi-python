@@ -23,19 +23,22 @@ def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
 
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/nirfsg'))
+
+
 class SystemTests:
     @pytest.fixture(scope='function')
     def rfsg_device_session(self, session_creation_kwargs):
         if use_simulated_session:
-            with nirfsg.Session("", False, True, "Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
                 yield sim_5841_session
         else:
-            with nirfsg.Session(real_hw_resource_name, False, True, "", **session_creation_kwargs) as real_rfsg_device_session:
+            with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
-        with nirfsg.Session("", False, True, "Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+        with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
             yield sim_5831_session
 
 # Attribute set and get related tests
