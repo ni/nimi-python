@@ -23,9 +23,6 @@ def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
 
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/nirfsg'))
-
-
 class SystemTests:
     @pytest.fixture(scope='function')
     def rfsg_device_session(self, session_creation_kwargs):
