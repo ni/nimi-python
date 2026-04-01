@@ -1,4 +1,5 @@
 import array
+import grpc
 import hightime
 import nirfsg
 import numpy as np
@@ -622,16 +623,6 @@ class SystemTests:
         with rfsg_device_session.initiate():
             rfsg_device_session.wait_until_settled()
 
-    def test_get_all_named_waveform_names(self, rfsg_device_session):
-        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
-        waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
-        waveform_data2 = np.full(800, 1 + 0j, dtype=np.complex128)
-        rfsg_device_session.write_arb_waveform('waveform1', waveform_data1, False)
-        rfsg_device_session.write_arb_waveform('waveform2', waveform_data2, False)
-        names = rfsg_device_session.get_all_named_waveform_names()
-        assert 'waveform1' in names
-        assert 'waveform2' in names
-
     @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
     def test_get_all_script_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.SCRIPT
@@ -658,3 +649,34 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
+
+    # grpc-device had a bug in get_all_named_waveform_names
+    # (https://github.com/ni/grpc-device/pull/1243), which is now merged.
+    # This test is temporarily kept in TestLibrary until the pipeline uses a
+    # grpc-device version that includes this fix
+    def test_get_all_named_waveform_names(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
+        waveform_data2 = np.full(800, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('waveform1', waveform_data1, False)
+        rfsg_device_session.write_arb_waveform('waveform2', waveform_data2, False)
+        names = rfsg_device_session.get_all_named_waveform_names()
+        assert 'waveform1' in names
+        assert 'waveform2' in names
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpc(SystemTests):
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
+
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+

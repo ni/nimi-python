@@ -2830,7 +2830,7 @@ functions = {
         'documentation': {
             'description': 'A function that writes a waveform of numpy complex64 samples.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -2883,7 +2883,7 @@ functions = {
         'documentation': {
             'description': 'A function that writes a waveform of numpy complex128 samples.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
             {
@@ -2937,7 +2937,7 @@ functions = {
         'documentation': {
             'description': 'A function that writes a waveform of numpy complex i16 samples.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
             {
@@ -2991,7 +2991,7 @@ functions = {
         'documentation': {
             'description': 'Function that takes a 3D numpy array of numpy complex128 as an input parameter.'
         },
-        'included_in_proto': False,
+        'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
             {

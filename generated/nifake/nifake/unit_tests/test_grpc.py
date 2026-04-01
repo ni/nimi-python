@@ -407,6 +407,71 @@ class TestGrpcStubInterpreter:
         except NotImplementedError:
             pass
 
+    def test_write_waveform_numpy_complex128(self):
+        library_func = 'WriteWaveformNumpyComplex128'
+        waveform = numpy.array([1.0 + 2.0j, 3.0 + 4.0j, 5.0 + 6.0j], dtype=numpy.complex128)
+        grpc_waveform = [
+            nifake._grpc_stub_interpreter.grpc_complex_types.NIComplexNumber(real=value.real, imaginary=value.imag)
+            for value in waveform.ravel()
+        ]
+        response_object = self._set_side_effect(library_func)
+        interpreter = self._get_initialized_stub_interpreter()
+        assert interpreter.write_waveform_numpy_complex128(waveform) is None  # no outputs
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            waveform_data_array=grpc_waveform,
+        )
+
+    def test_write_waveform_numpy_complex64(self):
+        library_func = 'WriteWaveformNumpyComplex64'
+        waveform = numpy.array([1.0 + 2.0j, 3.0 + 4.0j, 5.0 + 6.0j], dtype=numpy.complex64)
+        grpc_waveform = [
+            nifake._grpc_stub_interpreter.grpc_complex_types.NIComplexNumberF32(real=value.real, imaginary=value.imag)
+            for value in waveform.ravel()
+        ]
+        response_object = self._set_side_effect(library_func)
+        interpreter = self._get_initialized_stub_interpreter()
+        assert interpreter.write_waveform_numpy_complex64(waveform) is None  # no outputs
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            waveform_data_array=grpc_waveform,
+        )
+
+    def test_write_waveform_numpy_complex_interleaved_i16(self):
+        library_func = 'WriteWaveformNumpyComplexInterleavedI16'
+        waveform = numpy.array([32767, 0, 123, -456], dtype=numpy.int16)
+        assert len(waveform) % 2 == 0
+        grpc_waveform = [
+            nifake._grpc_stub_interpreter.grpc_complex_types.NIComplexI16(real=waveform[i], imaginary=waveform[i + 1])
+            for i in range(0, len(waveform), 2)
+        ]
+        assert len(grpc_waveform) == len(waveform) // 2
+        response_object = self._set_side_effect(library_func)
+        interpreter = self._get_initialized_stub_interpreter()
+        assert interpreter.write_waveform_numpy_complex_interleaved_i16(waveform) is None  # no outputs
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            waveform_data_array=grpc_waveform,
+        )
+
+    def test_function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self):
+        library_func = 'FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter'
+        array_3d = numpy.array(
+            [[[1.0 + 2.0j, 3.0 + 4.0j], [5.0 + 6.0j, 7.0 + 8.0j]], [[9.0 + 10.0j, 11.0 + 12.0j], [13.0 + 14.0j, 15.0 + 16.0j]]],
+            dtype=numpy.complex128,
+        )
+        grpc_array = [
+            nifake._grpc_stub_interpreter.grpc_complex_types.NIComplexNumber(real=value.real, imaginary=value.imag)
+            for value in array_3d.ravel()
+        ]
+        response_object = self._set_side_effect(library_func)
+        interpreter = self._get_initialized_stub_interpreter()
+        assert interpreter.function_with_3d_numpy_array_of_numpy_complex128_input_parameter(array_3d) is None
+        self._assert_call(library_func, response_object).assert_called_once_with(
+            vi=GRPC_SESSION_OBJECT_FOR_TEST,
+            multidimensional_array=grpc_array,
+        )
+
     def test_return_multiple_types(self):
         library_func = 'ReturnMultipleTypes'
         boolean_val = True

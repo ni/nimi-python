@@ -8,6 +8,7 @@ import warnings
 
 from . import enums as enums  # noqa: F401
 from . import errors as errors
+from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
 from . import nirfsg_pb2 as grpc_types
 from . import nirfsg_pb2_grpc as nirfsg_grpc
 from . import session_pb2 as session_grpc_types
@@ -194,7 +195,15 @@ class GrpcStubInterpreter(object):
         )
 
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        sparameter_table_list = [
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            for val in sparameter_table.ravel()
+        ]
+        self._invoke(
+            self._client.CreateDeembeddingSparameterTableArray,
+            grpc_types.CreateDeembeddingSparameterTableArrayRequest(vi=self._vi, port=port, table_name=table_name, frequencies=frequencies, sparameter_table=sparameter_table_list, number_of_ports=number_of_ports, sparameter_orientation_raw=sparameter_orientation.value),
+        )
 
     def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         self._invoke(
@@ -552,13 +561,41 @@ class GrpcStubInterpreter(object):
         )
 
     def write_arb_waveform_complex_f32(self, waveform_name, waveform_data_array, more_data_pending):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
+            for val in waveform_data_array.ravel()
+        ]
+        self._invoke(
+            self._client.WriteArbWaveformComplexF32,
+            grpc_types.WriteArbWaveformComplexF32Request(vi=self._vi, waveform_name=waveform_name, wfm_data=waveform_data_array_list, more_data_pending=more_data_pending),
+        )
 
     def write_arb_waveform_complex_f64(self, waveform_name, waveform_data_array, more_data_pending):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            for val in waveform_data_array.ravel()
+        ]
+        self._invoke(
+            self._client.WriteArbWaveformComplexF64,
+            grpc_types.WriteArbWaveformComplexF64Request(vi=self._vi, waveform_name=waveform_name, wfm_data=waveform_data_array_list, more_data_pending=more_data_pending),
+        )
 
     def write_arb_waveform_complex_i16(self, waveform_name, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        arr = waveform_data_array.ravel()
+        if arr.size % 2 != 0:
+            raise ValueError("Interleaved int16 array must have even length (real/imag pairs)")
+        arr_pairs = arr.reshape(-1, 2)
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexI16(real=int(pair[0]), imaginary=int(pair[1]))
+            for pair in arr_pairs
+        ]
+        self._invoke(
+            self._client.WriteArbWaveformComplexI16,
+            grpc_types.WriteArbWaveformComplexI16Request(vi=self._vi, waveform_name=waveform_name, wfm_data=waveform_data_array_list),
+        )
 
     def write_script(self, script):  # noqa: N802
         self._invoke(

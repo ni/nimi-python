@@ -229,6 +229,21 @@ class NiFakeStub(object):
                 request_serializer=nifake__pb2.WriteWaveformRequest.SerializeToString,
                 response_deserializer=nifake__pb2.WriteWaveformResponse.FromString,
                 )
+        self.WriteWaveformNumpyComplex128 = channel.unary_unary(
+                '/nifake_grpc.NiFake/WriteWaveformNumpyComplex128',
+                request_serializer=nifake__pb2.WriteWaveformNumpyComplex128Request.SerializeToString,
+                response_deserializer=nifake__pb2.WriteWaveformNumpyComplex128Response.FromString,
+                )
+        self.WriteWaveformNumpyComplex64 = channel.unary_unary(
+                '/nifake_grpc.NiFake/WriteWaveformNumpyComplex64',
+                request_serializer=nifake__pb2.WriteWaveformNumpyComplex64Request.SerializeToString,
+                response_deserializer=nifake__pb2.WriteWaveformNumpyComplex64Response.FromString,
+                )
+        self.WriteWaveformNumpyComplexInterleavedI16 = channel.unary_unary(
+                '/nifake_grpc.NiFake/WriteWaveformNumpyComplexInterleavedI16',
+                request_serializer=nifake__pb2.WriteWaveformNumpyComplexInterleavedI16Request.SerializeToString,
+                response_deserializer=nifake__pb2.WriteWaveformNumpyComplexInterleavedI16Response.FromString,
+                )
         self.SetCustomType = channel.unary_unary(
                 '/nifake_grpc.NiFake/SetCustomType',
                 request_serializer=nifake__pb2.SetCustomTypeRequest.SerializeToString,
@@ -318,6 +333,11 @@ class NiFakeStub(object):
                 '/nifake_grpc.NiFake/FunctionWithOverriddenGrpcName2x',
                 request_serializer=nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.SerializeToString,
                 response_deserializer=nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.FromString,
+                )
+        self.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter = channel.unary_unary(
+                '/nifake_grpc.NiFake/FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter',
+                request_serializer=nifake__pb2.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest.SerializeToString,
+                response_deserializer=nifake__pb2.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterResponse.FromString,
                 )
         self.StringValuedEnumNoEnumGenerated = channel.unary_unary(
                 '/nifake_grpc.NiFake/StringValuedEnumNoEnumGenerated',
@@ -772,6 +792,24 @@ class NiFakeServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def WriteWaveformNumpyComplex128(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def WriteWaveformNumpyComplex64(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def WriteWaveformNumpyComplexInterleavedI16(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SetCustomType(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -875,6 +913,12 @@ class NiFakeServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def FunctionWithOverriddenGrpcName2x(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1326,6 +1370,21 @@ def add_NiFakeServicer_to_server(servicer, server):
                     request_deserializer=nifake__pb2.WriteWaveformRequest.FromString,
                     response_serializer=nifake__pb2.WriteWaveformResponse.SerializeToString,
             ),
+            'WriteWaveformNumpyComplex128': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteWaveformNumpyComplex128,
+                    request_deserializer=nifake__pb2.WriteWaveformNumpyComplex128Request.FromString,
+                    response_serializer=nifake__pb2.WriteWaveformNumpyComplex128Response.SerializeToString,
+            ),
+            'WriteWaveformNumpyComplex64': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteWaveformNumpyComplex64,
+                    request_deserializer=nifake__pb2.WriteWaveformNumpyComplex64Request.FromString,
+                    response_serializer=nifake__pb2.WriteWaveformNumpyComplex64Response.SerializeToString,
+            ),
+            'WriteWaveformNumpyComplexInterleavedI16': grpc.unary_unary_rpc_method_handler(
+                    servicer.WriteWaveformNumpyComplexInterleavedI16,
+                    request_deserializer=nifake__pb2.WriteWaveformNumpyComplexInterleavedI16Request.FromString,
+                    response_serializer=nifake__pb2.WriteWaveformNumpyComplexInterleavedI16Response.SerializeToString,
+            ),
             'SetCustomType': grpc.unary_unary_rpc_method_handler(
                     servicer.SetCustomType,
                     request_deserializer=nifake__pb2.SetCustomTypeRequest.FromString,
@@ -1415,6 +1474,11 @@ def add_NiFakeServicer_to_server(servicer, server):
                     servicer.FunctionWithOverriddenGrpcName2x,
                     request_deserializer=nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.FromString,
                     response_serializer=nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.SerializeToString,
+            ),
+            'FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter': grpc.unary_unary_rpc_method_handler(
+                    servicer.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter,
+                    request_deserializer=nifake__pb2.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest.FromString,
+                    response_serializer=nifake__pb2.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterResponse.SerializeToString,
             ),
             'StringValuedEnumNoEnumGenerated': grpc.unary_unary_rpc_method_handler(
                     servicer.StringValuedEnumNoEnumGenerated,
@@ -2348,6 +2412,57 @@ class NiFake(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def WriteWaveformNumpyComplex128(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/WriteWaveformNumpyComplex128',
+            nifake__pb2.WriteWaveformNumpyComplex128Request.SerializeToString,
+            nifake__pb2.WriteWaveformNumpyComplex128Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def WriteWaveformNumpyComplex64(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/WriteWaveformNumpyComplex64',
+            nifake__pb2.WriteWaveformNumpyComplex64Request.SerializeToString,
+            nifake__pb2.WriteWaveformNumpyComplex64Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def WriteWaveformNumpyComplexInterleavedI16(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/WriteWaveformNumpyComplexInterleavedI16',
+            nifake__pb2.WriteWaveformNumpyComplexInterleavedI16Request.SerializeToString,
+            nifake__pb2.WriteWaveformNumpyComplexInterleavedI16Response.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def SetCustomType(request,
             target,
             options=(),
@@ -2650,6 +2765,23 @@ class NiFake(object):
         return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FunctionWithOverriddenGrpcName2x',
             nifake__pb2.FunctionWithOverriddenGrpcName2xRequest.SerializeToString,
             nifake__pb2.FunctionWithOverriddenGrpcName2xResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/nifake_grpc.NiFake/FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter',
+            nifake__pb2.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest.SerializeToString,
+            nifake__pb2.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

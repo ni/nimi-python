@@ -8,6 +8,7 @@ import warnings
 
 from . import enums as enums  # noqa: F401
 from . import errors as errors
+from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
 from . import nifake_pb2 as grpc_types
 from . import nifake_pb2_grpc as nifake_grpc
 from . import session_pb2 as session_grpc_types
@@ -145,7 +146,15 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def function_with_3d_numpy_array_of_numpy_complex128_input_parameter(self, multidimensional_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        multidimensional_array_list = [
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            for val in multidimensional_array.ravel()
+        ]
+        self._invoke(
+            self._client.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameter,
+            grpc_types.FunctionWith3dNumpyArrayOfNumpyComplex128InputParameterRequest(vi=self._vi, multidimensional_array=multidimensional_array_list),
+        )
 
     def function_with_intflag_parameter(self, flag):  # noqa: N802
         self._invoke(
@@ -512,13 +521,41 @@ class GrpcStubInterpreter(object):
         raise NotImplementedError('numpy-specific methods are not supported over gRPC')
 
     def write_waveform_numpy_complex128(self, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexNumber(real=val.real, imaginary=val.imag)
+            for val in waveform_data_array.ravel()
+        ]
+        self._invoke(
+            self._client.WriteWaveformNumpyComplex128,
+            grpc_types.WriteWaveformNumpyComplex128Request(vi=self._vi, waveform_data_array=waveform_data_array_list),
+        )
 
     def write_waveform_numpy_complex64(self, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexNumberF32(real=val.real, imaginary=val.imag)
+            for val in waveform_data_array.ravel()
+        ]
+        self._invoke(
+            self._client.WriteWaveformNumpyComplex64,
+            grpc_types.WriteWaveformNumpyComplex64Request(vi=self._vi, waveform_data_array=waveform_data_array_list),
+        )
 
     def write_waveform_numpy_complex_interleaved_i16(self, waveform_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+        # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
+        arr = waveform_data_array.ravel()
+        if arr.size % 2 != 0:
+            raise ValueError("Interleaved int16 array must have even length (real/imag pairs)")
+        arr_pairs = arr.reshape(-1, 2)
+        waveform_data_array_list = [
+            grpc_complex_types.NIComplexI16(real=int(pair[0]), imaginary=int(pair[1]))
+            for pair in arr_pairs
+        ]
+        self._invoke(
+            self._client.WriteWaveformNumpyComplexInterleavedI16,
+            grpc_types.WriteWaveformNumpyComplexInterleavedI16Request(vi=self._vi, waveform_data_array=waveform_data_array_list),
+        )
 
     def close(self):  # noqa: N802
         self._invoke(
