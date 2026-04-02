@@ -1423,7 +1423,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'in',
+                'direction': 'out',
                 'documentation': {
                     'description': 'Returns the user-readable message string that corresponds to the status code you specify.\n\nYou must pass a ViChar array with at least 256 bytes to this parameter.'
                 },

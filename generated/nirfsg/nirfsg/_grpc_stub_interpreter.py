@@ -241,11 +241,12 @@ class GrpcStubInterpreter(object):
             grpc_types.DisableStartTriggerRequest(vi=self._vi),
         )
 
-    def error_message(self, error_code, error_message):  # noqa: N802
-        self._invoke(
+    def error_message(self, error_code):  # noqa: N802
+        response = self._invoke(
             self._client.ErrorMessage,
-            grpc_types.ErrorMessageRequest(vi=self._vi, error_code=error_code, error_message=error_message),
+            grpc_types.ErrorMessageRequest(vi=self._vi, error_code=error_code),
         )
+        return response.error_message
 
     def get_all_named_waveform_names(self):  # noqa: N802
         response = self._invoke(
