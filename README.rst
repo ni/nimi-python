@@ -586,16 +586,16 @@ Documentation
 
 Documentation is available on **Read the Docs**:
 
-- https://nidcpower.readthedocs.io/en/stable
-- https://nidigital.readthedocs.io/en/stable
-- https://nidmm.readthedocs.io/en/stable
-- https://nifgen.readthedocs.io/en/stable
-- https://nimodinst.readthedocs.io/en/stable
-- https://nirfsg.readthedocs.io/en/stable
-- https://niscope.readthedocs.io/en/stable
-- https://nise.readthedocs.io/en/stable
-- https://niswitch.readthedocs.io/en/stable
-- https://nitclk.readthedocs.io/en/stable
+- https://nidcpower.readthedocs.io/en/latest
+- https://nidigital.readthedocs.io/en/latest
+- https://nidmm.readthedocs.io/en/latest
+- https://nifgen.readthedocs.io/en/latest
+- https://nimodinst.readthedocs.io/en/latest
+- https://nirfsg.readthedocs.io/en/latest
+- https://niscope.readthedocs.io/en/latest
+- https://nise.readthedocs.io/en/latest
+- https://niswitch.readthedocs.io/en/latest
+- https://nitclk.readthedocs.io/en/latest
 
 
 
