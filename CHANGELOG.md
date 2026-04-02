@@ -1708,6 +1708,7 @@
   - `numpy` is now an install dependency
   - gRPC support, enabling remote session management via NI gRPC Device Server
 - Changed
+  - Fixed `error_message` method to return the error string as output
 - Removed
 
 #### [nirfsg] 1.0.1 - 2026-01-09
