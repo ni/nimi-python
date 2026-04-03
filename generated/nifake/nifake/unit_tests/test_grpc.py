@@ -12,8 +12,9 @@ from unittest.mock import MagicMock
 from unittest.mock import patch
 
 import _mock_helper
+import session_pb2
 
-GRPC_SESSION_OBJECT_FOR_TEST = nifake.session_pb2.Session(name="TestSession", id=42)
+GRPC_SESSION_OBJECT_FOR_TEST = session_pb2.Session(name="TestSession")
 
 
 Metadatum = collections.namedtuple('Metadatum', ('key', 'value'))
@@ -202,8 +203,8 @@ class TestGrpcStubInterpreter:
     def test_api_key_sent_to_init(self):
         library_func = 'InitWithOptions'
         expected_metadata = (('ni-api-key', nifake.MEASUREMENTLINK_23Q1_NIMI_PYTHON_API_KEY),)
-        from nifake.session_pb2 import Session as GrpcSession
-        grpc_session_object = GrpcSession(id=42, name='')
+        from session_pb2 import Session as GrpcSession
+        grpc_session_object = GrpcSession(name='')
         response_object = self._set_side_effect(library_func, new_session_initialized=True, vi=grpc_session_object)
         init_behavior = nifake.SessionInitializationBehavior.AUTO
         grpc_options = nifake.GrpcSessionOptions(object(), '', initialization_behavior=init_behavior)

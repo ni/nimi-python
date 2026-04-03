@@ -11,7 +11,7 @@ from . import errors as errors
 from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
 from . import nirfsg_pb2 as grpc_types
 from . import nirfsg_pb2_grpc as nirfsg_grpc
-from . import session_pb2 as session_grpc_types
+import session_pb2 as session_grpc_types
 
 
 class GrpcStubInterpreter(object):

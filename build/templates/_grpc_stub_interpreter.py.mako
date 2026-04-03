@@ -25,7 +25,7 @@ from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
 % endif
 from . import ${proto_name}_pb2 as grpc_types
 from . import ${proto_name}_pb2_grpc as ${module_name}_grpc
-from . import session_pb2 as session_grpc_types
+import session_pb2 as session_grpc_types
 % for c in config['custom_types']:
 
 from . import ${c['file_name']} as ${c['file_name']}  # noqa: F401
