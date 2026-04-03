@@ -13,6 +13,7 @@ are_complex_parameters_used = helper.are_complex_parameters_used(functions)
 
 import grpc
 import hightime  # noqa: F401
+import session_pb2 as session_grpc_types
 import threading
 import warnings
 
@@ -25,7 +26,6 @@ from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
 % endif
 from . import ${proto_name}_pb2 as grpc_types
 from . import ${proto_name}_pb2_grpc as ${module_name}_grpc
-import session_pb2 as session_grpc_types
 % for c in config['custom_types']:
 
 from . import ${c['file_name']} as ${c['file_name']}  # noqa: F401

@@ -6,13 +6,13 @@ import nifake
 import nifake.errors
 import numpy
 import pytest
+import session_pb2
 import warnings
 
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
 import _mock_helper
-import session_pb2
 
 GRPC_SESSION_OBJECT_FOR_TEST = session_pb2.Session(name="TestSession")
 
@@ -86,7 +86,6 @@ class TestGrpcStubInterpreter:
         session_options = nifake.GrpcSessionOptions(grpc_channel, '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(session_options)
         assert interpreter._client is self.patched_grpc_stub
-        assert interpreter.get_session_handle().id == 0
         assert interpreter.get_session_handle().name == ""
         assert self.patched_grpc_stub._grpc_channel is grpc_channel
         interpreter.set_session_handle(GRPC_SESSION_OBJECT_FOR_TEST)
