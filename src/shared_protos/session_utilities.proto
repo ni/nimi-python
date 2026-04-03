@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.ni.grpc.device";
+option java_outer_classname = "NiDevice";
+option csharp_namespace = "NationalInstruments.Grpc.Device";
+
+package nidevice_grpc;
+
+service SessionUtilities {
+  // Provides a list of devices or chassis connected to server under localhost
+  rpc EnumerateDevices(EnumerateDevicesRequest)
+      returns (EnumerateDevicesResponse);
+
+  // Provides a list of NI software installed on server under localhost
+  rpc EnumerateInstalledSoftware(EnumerateInstalledSoftwareRequest)
+      returns (EnumerateInstalledSoftwareResponse);
+
+  // Reserve a set of client defined resources for exclusive use
+  rpc Reserve(ReserveRequest) returns (ReserveResponse);
+
+  // Determines if a set of client defined resources is currently reserved by a
+  // specific client
+  rpc IsReservedByClient(IsReservedByClientRequest)
+      returns (IsReservedByClientResponse);
+
+  // Unreserves a previously reserved resource
+  rpc Unreserve(UnreserveRequest) returns (UnreserveResponse);
+
+  // Resets the server to a default state with no open sessions
+  rpc ResetServer(ResetServerRequest) returns (ResetServerResponse);
+}
+
+message DeviceProperties {
+  string name = 1;
+  string model = 2;
+  string vendor = 3;
+  string serial_number = 4;
+  uint32 product_id = 5;
+}
+
+message EnumerateDevicesRequest {}
+
+message EnumerateDevicesResponse {
+  repeated DeviceProperties devices = 1;
+}
+
+message SoftwareProperties {
+  string package_id = 1;
+  string package_version = 2;
+  string product_name = 3;
+}
+
+message EnumerateInstalledSoftwareRequest {
+  bool include_hidden_packages = 1;
+}
+
+message EnumerateInstalledSoftwareResponse {
+  repeated SoftwareProperties software = 1;
+}
+
+message ReserveRequest {
+  // client defined string representing a set of reservable resources
+  string reservation_id = 1;
+  // client defined identifier for a specific client
+  string client_id = 2;
+}
+
+message ReserveResponse {
+  bool is_reserved = 1;
+}
+
+message IsReservedByClientRequest {
+  // client defined string representing a set of reservable resources
+  string reservation_id = 1;
+  // client defined identifier for a specific client
+  string client_id = 2;
+}
+
+message IsReservedByClientResponse {
+  bool is_reserved = 1;
+}
+
+message UnreserveRequest {
+  // client defined string representing a set of reservable resources
+  string reservation_id = 1;
+  // client defined identifier for a specific client
+  string client_id = 2;
+}
+
+message UnreserveResponse {
+  bool is_unreserved = 1;
+}
+
+message ResetServerRequest {}
+
+message ResetServerResponse {
+  bool is_server_reset = 1;
+}
