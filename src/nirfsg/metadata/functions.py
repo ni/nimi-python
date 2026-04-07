@@ -1425,7 +1425,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns the user-readable message string that corresponds to the status code you specify.\n\nYou must pass a ViChar array with at least 256 bytes to this parameter.'
+                    'description': 'Returns the user-readable message string that corresponds to the status code you specify.'
                 },
                 'name': 'errorMessage',
                 'size': {

@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 import _mock_helper
 
-GRPC_SESSION_OBJECT_FOR_TEST = nifake.session_pb2.Session(name="TestSession", id=42)
+GRPC_SESSION_OBJECT_FOR_TEST = session_pb2.Session(name="TestSession", id=42)
 
 
 Metadatum = collections.namedtuple('Metadatum', ('key', 'value'))

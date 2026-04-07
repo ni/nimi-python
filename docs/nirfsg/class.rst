@@ -1191,8 +1191,6 @@ error_message
 
                     Returns the user-readable message string that corresponds to the status code you specify.
 
-                    You must pass a ViChar array with at least 256 bytes to this parameter.
-
                     
 
 
