@@ -298,13 +298,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def error_message(self, error_code, error_message):  # noqa: N802
+    def error_message(self, error_code):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code_ctype = _visatype.ViStatus(error_code)  # case S150
-        error_message_ctype = ctypes.create_string_buffer(error_message.encode(self._encoding))  # case C020
+        error_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niRFSG_ErrorMessage(vi_ctype, error_code_ctype, error_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
-        return
+        return error_message_ctype.value.decode(self._encoding)
 
     def get_all_named_waveform_names(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

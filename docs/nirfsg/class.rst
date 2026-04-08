@@ -1163,7 +1163,7 @@ error_message
 
     .. py:currentmodule:: nirfsg.Session
 
-    .. py:method:: error_message(error_code, error_message)
+    .. py:method:: error_message(error_code)
 
             Converts an error code returned by an NI-RFSG method into a user-readable string.
 
@@ -1184,17 +1184,16 @@ error_message
 
 
             :type error_code: int
-            :param error_message:
+
+            :rtype: str
+            :return:
 
 
-                Returns the user-readable message string that corresponds to the status code you specify.
+                    Returns the user-readable message string that corresponds to the status code you specify.
 
-                You must pass a ViChar array with at least 256 bytes to this parameter.
-
-                
+                    
 
 
-            :type error_message: str
 
 get_all_named_waveform_names
 ----------------------------

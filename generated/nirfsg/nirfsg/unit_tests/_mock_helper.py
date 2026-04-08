@@ -75,6 +75,7 @@ class SideEffectsHelper(object):
         self._defaults['DisableStartTrigger']['return'] = 0
         self._defaults['ErrorMessage'] = {}
         self._defaults['ErrorMessage']['return'] = 0
+        self._defaults['ErrorMessage']['errorMessage'] = None
         self._defaults['GetAllNamedWaveformNames'] = {}
         self._defaults['GetAllNamedWaveformNames']['return'] = 0
         self._defaults['GetAllNamedWaveformNames']['actualBufferSize'] = None
@@ -393,6 +394,15 @@ class SideEffectsHelper(object):
     def niRFSG_ErrorMessage(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['ErrorMessage']['return'] != 0:
             return self._defaults['ErrorMessage']['return']
+        # error_message
+        if self._defaults['ErrorMessage']['errorMessage'] is None:
+            raise MockFunctionCallError("niRFSG_ErrorMessage", param='errorMessage')
+        test_value = self._defaults['ErrorMessage']['errorMessage']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(error_message) >= len(test_value)
+        for i in range(len(test_value)):
+            error_message[i] = test_value[i]
         return self._defaults['ErrorMessage']['return']
 
     def niRFSG_GetAllNamedWaveformNames(self, vi, waveform_names, buffer_size, actual_buffer_size):  # noqa: N802

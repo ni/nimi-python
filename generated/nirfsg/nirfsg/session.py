@@ -4833,7 +4833,7 @@ class _SessionBase(object):
         '''
         self._interpreter.disable_script_trigger(self._repeated_capability)
 
-    def error_message(self, error_code, error_message):
+    def error_message(self, error_code):
         r'''error_message
 
         Converts an error code returned by an NI-RFSG method into a user-readable string.
@@ -4845,12 +4845,13 @@ class _SessionBase(object):
 
                 **Default Value** : 0 (VI_SUCCESS)
 
+
+        Returns:
             error_message (str): Returns the user-readable message string that corresponds to the status code you specify.
 
-                You must pass a ViChar array with at least 256 bytes to this parameter.
-
         '''
-        self._interpreter.error_message(error_code, error_message)
+        error_message = self._interpreter.error_message(error_code)
+        return error_message
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute):
