@@ -3,6 +3,7 @@
 
 import grpc
 import hightime  # noqa: F401
+import session_pb2 as session_grpc_types
 import threading
 import warnings
 
@@ -10,7 +11,6 @@ from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import niscope_pb2 as grpc_types
 from . import niscope_pb2_grpc as niscope_grpc
-from . import session_pb2 as session_grpc_types
 
 from . import waveform_info as waveform_info  # noqa: F401
 

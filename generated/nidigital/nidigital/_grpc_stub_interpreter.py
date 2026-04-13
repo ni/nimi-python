@@ -3,6 +3,7 @@
 
 import grpc
 import hightime  # noqa: F401
+import session_pb2 as session_grpc_types
 import threading
 import warnings
 
@@ -10,7 +11,6 @@ from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import nidigitalpattern_pb2 as grpc_types
 from . import nidigitalpattern_pb2_grpc as nidigital_grpc
-from . import session_pb2 as session_grpc_types
 
 from . import history_ram_cycle_information as history_ram_cycle_information  # noqa: F401
 
