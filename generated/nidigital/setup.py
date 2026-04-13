@@ -37,8 +37,7 @@ setup(
     extras_require={
         'grpc': [
             'grpcio>=1.59.0,<2.0',
-            'protobuf>=4.21.6',
-            'ni-grpcdevice-v1-proto',
+            'protobuf>=4.21.6'
         ],
     },
     classifiers=[

@@ -60,6 +60,7 @@ $(MODULE_DIR)/%: %.mako $(BUILD_HELPER_SCRIPTS) $(METADATA_FILES)
 $(MODULE_DIR)/%_pb2.py: %.proto
 	$(call trace_to_console, "Generating",$@ and $(notdir $*)_pb2_grpc.py)
 	$(_hide_cmds)$(call log_command,python -m grpc_tools.protoc $(addprefix -I=,$(PROTO_DIRS)) --python_out=$(MODULE_DIR) --grpc_python_out=$(MODULE_DIR) $*.proto)
+	$(_hide_cmds)$(call log_command,sed -i 's/^import session_pb2/from . import session_pb2/' $(MODULE_DIR)/$*_pb2*.py)
 	$(_hide_cmds)$(call log_command,sed -i 's/^import nidevice_pb2/from . import nidevice_pb2/' $(MODULE_DIR)/$*_pb2*.py)
 	$(_hide_cmds)$(call log_command,sed -i 's/^import $(notdir $*)_pb2/from . import $(notdir $*)_pb2/' $(MODULE_DIR)/$*_pb2*.py)
 

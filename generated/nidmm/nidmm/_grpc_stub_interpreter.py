@@ -3,7 +3,6 @@
 
 import grpc
 import hightime  # noqa: F401
-import session_pb2 as session_grpc_types
 import threading
 import warnings
 
@@ -11,6 +10,7 @@ from . import enums as enums  # noqa: F401
 from . import errors as errors
 from . import nidmm_pb2 as grpc_types
 from . import nidmm_pb2_grpc as nidmm_grpc
+from . import session_pb2 as session_grpc_types
 
 
 class GrpcStubInterpreter(object):

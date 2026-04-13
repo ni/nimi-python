@@ -67,6 +67,8 @@ DEFAULT_PY_FILES_TO_GENERATE := \
         $(basename $(notdir $(PROTO_FILE)))_pb2_grpc.py \
         nidevice_pb2.py \
         nidevice_pb2_grpc.py \
+        session_pb2.py \
+        session_pb2_grpc.py \
     ) \
 
 DEFAULT_PY_FILES_TO_COPY := \

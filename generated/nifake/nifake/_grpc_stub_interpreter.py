@@ -3,7 +3,6 @@
 
 import grpc
 import hightime  # noqa: F401
-import session_pb2 as session_grpc_types
 import threading
 import warnings
 
@@ -12,6 +11,7 @@ from . import errors as errors
 from . import nidevice_pb2 as grpc_complex_types  # noqa: F401
 from . import nifake_pb2 as grpc_types
 from . import nifake_pb2_grpc as nifake_grpc
+from . import session_pb2 as session_grpc_types
 
 from . import custom_struct as custom_struct  # noqa: F401
 
