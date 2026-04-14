@@ -51,8 +51,8 @@ Install the wheel found in generated/<driver>/dist
         logging.error('No wheel found. Has the build run successfully?')
         sys.exit(2)
 
-    # Install/upgrade the wheel with grpc extras
-    call(['pip', 'install', '--upgrade', f'{wheel}[grpc]'])
+    # Install/upgrade the wheel
+    call(['pip', 'install', '--upgrade', wheel])
 
 
 if __name__ == '__main__':
