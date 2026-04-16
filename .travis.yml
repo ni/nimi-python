@@ -1,6 +1,8 @@
 group: travis_latest
 language: python
 dist: focal
+git:
+  submodules: false
 matrix:
     include:
       # Historically, we've run tests on the latest supported version of Python first.
@@ -14,6 +16,7 @@ matrix:
       - python: "3.14"
 
 install:
+  - git submodule update --init --recursive --progress
   - travis_retry sudo apt-get -y install python3-pip
   - travis_retry pip install --upgrade pip
   # tox 4.0 broke plugin compatibility

@@ -51,6 +51,12 @@ Building **[`nimi-python`](https://github.com/ni/nimi-python)**
 ---------------------------------------------------------------
 
 1. Fork [the repository](https://github.com/ni/nimi-python) on GitHub and clone it to your local system.
+1. Initialize and update submodules:
+
+       git submodule update --init --recursive
+
+   This step is required - submodules contain files needed for code generation.
+
 1. On a terminal, navigate to the **[`nimi-python`](https://github.com/ni/nimi-python)** root
    directory. Then run
 
