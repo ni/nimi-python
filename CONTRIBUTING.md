@@ -51,6 +51,14 @@ Building **[`nimi-python`](https://github.com/ni/nimi-python)**
 ---------------------------------------------------------------
 
 1. Fork [the repository](https://github.com/ni/nimi-python) on GitHub and clone it to your local system.
+1. Initialize and fetch submodules (also re-run this after `git pull` to keep the submodule up to date):
+
+       git submodule update --init --recursive
+
+   Optionally, configure git to do this automatically after `git fetch`, `git pull` and `git checkout`:
+
+       git config submodule.recurse true
+
 1. On a terminal, navigate to the **[`nimi-python`](https://github.com/ni/nimi-python)** root
    directory. Then run
 
@@ -69,6 +77,16 @@ Building **[`nimi-python`](https://github.com/ni/nimi-python)**
 1. To clean everything and start fresh
 
         tox -e clean
+
+
+Updating submodules
+-------------------
+
+To update the submodule (e.g., ni-apis) to the latest version from its remote repository:
+
+    git submodule update --remote
+
+This fetches and checks out the latest commit from the submodule's default branch. You'll periodically need to do this to pick up the latest changes.
 
 
 Running the system tests

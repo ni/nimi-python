@@ -9,7 +9,8 @@ DRIVER_DIR := $(ROOT_DIR)/src/$(DRIVER)
 METADATA_DIR := $(DRIVER_DIR)/metadata
 METADATA_FILES := $(wildcard $(METADATA_DIR)/*.py)
 SHARED_PROTOS_DIR := $(ROOT_DIR)/src/shared_protos
-PROTO_DIRS := $(METADATA_DIR) $(SHARED_PROTOS_DIR)
+NI_APIS_PROTOS_DIR := $(ROOT_DIR)/third_party/ni-apis/ni/grpcdevice/v1
+PROTO_DIRS := $(METADATA_DIR) $(SHARED_PROTOS_DIR) $(NI_APIS_PROTOS_DIR)
 PROTO_FILE ?= $(METADATA_DIR)/$(DRIVER).proto
 
 BUILD_HELPER_SCRIPTS := $(wildcard $(BUILD_HELPER_DIR)/*.py $(BUILD_HELPER_DIR)/helper/*.py)
@@ -67,8 +68,6 @@ DEFAULT_PY_FILES_TO_GENERATE := \
         $(basename $(notdir $(PROTO_FILE)))_pb2_grpc.py \
         nidevice_pb2.py \
         nidevice_pb2_grpc.py \
-        session_pb2.py \
-        session_pb2_grpc.py \
     ) \
 
 DEFAULT_PY_FILES_TO_COPY := \
