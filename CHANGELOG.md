@@ -1695,11 +1695,11 @@
 
 ### nirfsg (NI-RFSG)
 
-- [Unreleased](#nirfsg-unreleased)
+- [1.1.0](#nirfsg-110---2026-04-17)
 - [1.0.1](#nirfsg-101---2026-01-09)
 - [1.0.0](#nirfsg-100---2025-08-05)
 
-#### [nirfsg] Unreleased
+#### [nirfsg] 1.1.0 - 2026-04-17
 - Added
   - Python 3.14 Support
   - `get_script` and `delete_script` methods
