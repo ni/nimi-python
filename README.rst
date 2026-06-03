@@ -298,7 +298,7 @@ NI-RFSG Python API Status
 +-------------------------------+-----------------------+
 | NI-RFSG (nirfsg)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2025 Q4 Patch 1       |
+| Driver Version Tested Against | 2026 Q2               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsgLatestVersion| |
 +-------------------------------+-----------------------+

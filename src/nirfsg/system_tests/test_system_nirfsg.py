@@ -644,16 +644,6 @@ class SystemTests:
         assert 'myScript1' in script_names
         assert 'myScript2' in script_names
 
-
-class TestLibrary(SystemTests):
-    @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
-        return {}
-
-    # grpc-device had a bug in get_all_named_waveform_names
-    # (https://github.com/ni/grpc-device/pull/1243), which is now merged.
-    # This test is temporarily kept in TestLibrary until the pipeline uses a
-    # grpc-device version that includes this fix
     def test_get_all_named_waveform_names(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data1 = np.full(1000, 1 + 0j, dtype=np.complex128)
@@ -663,6 +653,12 @@ class TestLibrary(SystemTests):
         names = rfsg_device_session.get_all_named_waveform_names()
         assert 'waveform1' in names
         assert 'waveform2' in names
+
+
+class TestLibrary(SystemTests):
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self):
+        return {}
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
