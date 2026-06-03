@@ -26,7 +26,7 @@ jobs:
       - self-hosted
       - linux
       - x64
-      - rdss-nimibot-rhel-83-py64
+      - rdss-nimibot-rhel-96-py64
     timeout-minutes: 40
     strategy:
       matrix:
