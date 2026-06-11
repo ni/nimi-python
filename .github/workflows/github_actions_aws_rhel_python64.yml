@@ -16,13 +16,13 @@ on:
       - synchronize
       - reopened
 
-  # Allows you to run this workflow manually from the Actions tab. 
+  # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
 jobs:
   do-the-job1:
     name: system_test
     if: github.repository == 'ni/nimi-python'
-    runs-on:
+    runs-on: 
       - self-hosted
       - linux
       - x64
