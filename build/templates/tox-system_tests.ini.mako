@@ -42,6 +42,9 @@ description =
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
     ${module_name}-coverage: Prepare coverage report for upload to codecov.io  # upload handled by GitHub Actions
 
+allowlist_externals =
+    lsni
+
 changedir =
 % if uses_other_wheel:
     ${wheel_env_no_py}: ../${other_wheel}
