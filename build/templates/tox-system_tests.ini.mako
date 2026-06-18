@@ -42,9 +42,6 @@ description =
     ${module_name}-system_tests: Run ${module_name} system tests (requires ${driver_name} runtime to be installed)
     ${module_name}-coverage: Prepare coverage report for upload to codecov.io  # upload handled by GitHub Actions
 
-allowlist_externals =
-    lsni
-
 changedir =
 % if uses_other_wheel:
     ${wheel_env_no_py}: ../${other_wheel}
@@ -63,10 +60,6 @@ commands =
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver ${other_wheel} --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: python -c "import sys, shutil, subprocess; lsni = shutil.which('lsni'); subprocess.run([lsni, '-u', '-v'], check=False) if (sys.platform != 'win32' and lsni) else None"
-    ${module_name}-system_tests: python -c "import shutil, subprocess; nisimdev = shutil.which('nisimdev'); subprocess.run([nisimdev, 'create', '-S', 'true', '-V', 'National Instruments', '-M', 'NI PXI-5124', '-l', 'PXI1', '-s', '2', '-a', '5124'], check=False) if nisimdev else None"
-    ${module_name}-system_tests: python -c "import shutil, subprocess; nisimdev = shutil.which('nisimdev'); subprocess.run([nisimdev, 'create', '-S', 'true', '-V', 'National Instruments', '-M', 'NI PXI-5142', '-l', 'PXI1', '-s', '3', '-a', '5142'], check=False) if nisimdev else None"
-    ${module_name}-system_tests: python -c "import sys, shutil, subprocess; lsni = shutil.which('lsni'); subprocess.run([lsni, '-u', '-v'], check=False) if (sys.platform != 'win32' and lsni) else None"
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-examples-{env:BITNESS:64}.xml {posargs}
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 {posargs}
 

@@ -90,24 +90,14 @@ class SystemTests:
     @pytest.fixture(scope='function')
     def session_5124(self, session_creation_kwargs):
         with daqmx_sim_5124_lock:
-            try:
-                with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
-                    yield simulated_session
-            except niscope.Error as e:
-                if 'Invalid Identifier' in str(e):
-                    pytest.skip('Skipping: simulated NI PXI-5124 is not available in this environment.')
-                raise
+            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
+                yield simulated_session
 
     @pytest.fixture(scope='function')
     def session_5142(self, session_creation_kwargs):
         with daqmx_sim_5142_lock:
-            try:
-                with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
-                    yield simulated_session
-            except niscope.Error as e:
-                if 'Invalid Identifier' in str(e):
-                    pytest.skip('Skipping: simulated NI PXI-5142 is not available in this environment.')
-                raise
+            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
+                yield simulated_session
 
     # Attribute tests
     def test_vi_boolean_attribute(self, multi_instrument_session):
