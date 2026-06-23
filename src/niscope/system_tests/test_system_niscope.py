@@ -441,7 +441,6 @@ class SystemTests:
         multi_instrument_session.configure_chan_characteristics(50, 0)
         assert 50.0 == multi_instrument_session.input_impedance
 
-    @pytest.mark.skip(reason="Requires a persistently simulated PXI-5142 instrument named '5142' which cannot be created via nisimdev. Run through pipeline where it is preconfigured.")
     def test_filter_coefficients(self, session_5142):
         assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
         try:
@@ -514,7 +513,6 @@ class SystemTests:
     def test_configure_trigger_software(self, multi_instrument_session):
         multi_instrument_session.configure_trigger_software()
 
-    @pytest.mark.skip(reason="Requires a persistently simulated PXI-5124 instrument named '5124' which cannot be created via nisimdev. Run through pipeline where it is preconfigured.")
     def test_configure_trigger_video(self, session_5124):
         session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
