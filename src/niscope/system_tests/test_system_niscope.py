@@ -90,13 +90,13 @@ class SystemTests:
     @pytest.fixture(scope='function')
     def session_5124(self, session_creation_kwargs):
         with daqmx_sim_5124_lock:
-            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
+            with niscope.Session('5124', False, False, 'Simulate=1, DriverSetup=Model:5124; BoardType:PXI', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
                 yield simulated_session
 
     @pytest.fixture(scope='function')
     def session_5142(self, session_creation_kwargs):
         with daqmx_sim_5142_lock:
-            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
+            with niscope.Session('5142', False, False, 'Simulate=1, DriverSetup=Model:5142; BoardType:PXI', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
                 yield simulated_session
 
     # Attribute tests
