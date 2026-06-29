@@ -22,10 +22,20 @@
 
         try:
             '''
+            It is possible that the session is valid but the returned_error_code unequal to error_code
+            '''
+            error_string = self.error_message(error_code)
+            return error_string
+        except errors.Error:
+            pass
+
+        try:
+            '''
             It is expected for get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use error_message instead. It doesn't require a session.
             '''
+            self.set_session_handle()
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
