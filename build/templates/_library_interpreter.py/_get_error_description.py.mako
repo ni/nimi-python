@@ -21,9 +21,7 @@
 % if 'error_message' in config['functions']:
 
         try:
-            '''
-            It is possible that the session is valid but the returned_error_code unequal to error_code
-            '''
+            # It is possible that the session is valid but the returned_error_code unequal to error_code
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
