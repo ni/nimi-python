@@ -34,7 +34,6 @@ channels
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
-
 pins
 ----
 
@@ -46,7 +45,6 @@ pins
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
-
 instruments
 -----------
 
@@ -57,7 +55,6 @@ instruments
             session.instruments['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
 
 pattern_opcode_events
 ---------------------
@@ -84,7 +81,6 @@ pattern_opcode_events
 
         passes a string of :python:`'patternOpcodeEvent0, patternOpcodeEvent1, patternOpcodeEvent2'` to the set attribute function.
 
-
 conditional_jump_triggers
 -------------------------
 
@@ -109,7 +105,6 @@ conditional_jump_triggers
             session.conditional_jump_triggers['conditionalJumpTrigger0-conditionalJumpTrigger2'].channel_enabled = True
 
         passes a string of :python:`'conditionalJumpTrigger0, conditionalJumpTrigger1, conditionalJumpTrigger2'` to the set attribute function.
-
 
 sites
 -----
@@ -136,7 +131,6 @@ sites
 
         passes a string of :python:`'site0, site1, site2'` to the set attribute function.
 
-
 rio_events
 ----------
 
@@ -162,7 +156,6 @@ rio_events
 
         passes a string of :python:`'RIOEvent0, RIOEvent1, RIOEvent2'` to the set attribute function.
 
-
 rio_triggers
 ------------
 
@@ -187,6 +180,4 @@ rio_triggers
             session.rio_triggers['RIOTrigger0-RIOTrigger2'].channel_enabled = True
 
         passes a string of :python:`'RIOTrigger0, RIOTrigger1, RIOTrigger2'` to the set attribute function.
-
-
 

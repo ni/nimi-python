@@ -34,5 +34,3 @@ channels
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
-
-

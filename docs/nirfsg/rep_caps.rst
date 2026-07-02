@@ -48,7 +48,6 @@ markers
 
         passes a string of :python:`'marker0, marker1, marker2'` to the set attribute function.
 
-
 script_triggers
 ---------------
 
@@ -73,7 +72,6 @@ script_triggers
             session.script_triggers['scripttrigger0-scripttrigger2'].channel_enabled = True
 
         passes a string of :python:`'scripttrigger0, scripttrigger1, scripttrigger2'` to the set attribute function.
-
 
 waveforms
 ---------
@@ -100,7 +98,6 @@ waveforms
 
         passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
 
-
 ports
 -----
 
@@ -111,7 +108,6 @@ ports
             session.ports['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
 
 los
 ---
@@ -138,7 +134,6 @@ los
 
         passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
 
-
 device_temperatures
 -------------------
 
@@ -150,7 +145,6 @@ device_temperatures
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
-
 channels
 --------
 
@@ -161,6 +155,4 @@ channels
             session.channels['0-2'].channel_enabled = True
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
-
 
