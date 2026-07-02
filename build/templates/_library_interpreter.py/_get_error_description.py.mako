@@ -33,10 +33,13 @@
             (IVI spec requires GetError to fail).
             Use error_message instead. It doesn't require a session.
             '''
+            save_vi = self.get_session_handle()
             self.set_session_handle()
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
             pass
+        finally:
+            self.set_session_handle(save_vi)
 % endif
         return "Failed to retrieve error description."
