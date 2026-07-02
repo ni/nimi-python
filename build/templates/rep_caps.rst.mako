@@ -34,12 +34,18 @@ ${helper.get_rst_header_snippet('Repeated Capabilities', '=')}
 <%
 name = rep_cap['python_name']
 prefix = rep_cap['prefix']
+rep_cap_doc = rep_cap.get('documentation', {})
+has_custom_doc = len(rep_cap_doc) > 0
+auto_prefix = rep_cap_doc.get('auto_prefix_addition_supported', len(prefix) > 0)
 %>\
 ${helper.get_rst_header_snippet(name, '-')}
 
     .. py:attribute:: ${module_name}.Session.${name}[]
 
-% if len(prefix) > 0:
+% if has_custom_doc and 'description' in rep_cap_doc:
+        ${rep_cap_doc['description']}
+
+% elif auto_prefix:
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
 
@@ -51,16 +57,30 @@ ${helper.get_rst_header_snippet(name, '-')}
 
         If an invalid repeated capability is passed to the driver, the driver will return an error.
 
+% if len(prefix) > 0:
         You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
         for the specific repeated capability.
 
 % endif
+% endif
+% if not has_custom_doc or 'examples' not in rep_cap_doc:
         .. code:: python
 
             session.${name}['${prefix}0-${prefix}2'].channel_enabled = True
 
         passes a string of :python:`'${prefix}0, ${prefix}1, ${prefix}2'` to the set attribute function.
 
+% endif
+% if has_custom_doc and 'valid_identifiers' in rep_cap_doc and len(rep_cap_doc['valid_identifiers']) > 0:
+        Valid identifiers: :python:`'${", ".join(rep_cap_doc["valid_identifiers"])}'`.
+
+% endif
+% if has_custom_doc and 'examples' in rep_cap_doc and len(rep_cap_doc['examples']) > 0:
+% for example in rep_cap_doc['examples']:
+        .. code:: python
+
+            ${example}
 
 % endfor
-
+% endif
+% endfor
