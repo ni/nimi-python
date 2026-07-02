@@ -106,13 +106,13 @@ class LibraryInterpreter(object):
         except errors.Error:
             pass
 
+        save_vi = self.get_session_handle()
         try:
             '''
             It is expected for get_error to raise when the session is invalid
             (IVI spec requires GetError to fail).
             Use error_message instead. It doesn't require a session.
             '''
-            save_vi = self.get_session_handle()
             self.set_session_handle()
             error_string = self.error_message(error_code)
             return error_string
