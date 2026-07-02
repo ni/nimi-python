@@ -100,7 +100,12 @@ class LibraryInterpreter(object):
             pass
 
         try:
-            # It is possible that the session is valid but the returned_error_code unequal to error_code
+            # get_error reads the session's error queue, which may have been overwritten,
+            # causing it to return a mismatched error code. error_message takes the error
+            # code directly as a parameter and looks up its description without reading the
+            # queue, it will return the description for the specific error code.
+            # Use error_message in current session before the handle reset in the next block.
+
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
@@ -108,11 +113,10 @@ class LibraryInterpreter(object):
 
         save_vi = self.get_session_handle()
         try:
-            '''
-            It is expected for get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use error_message instead. It doesn't require a session.
-            '''
+            # It is expected for get_error to raise when the session is invalid
+            # (IVI spec requires GetError to fail).
+            # Use error_message instead. It doesn't require a session.
+
             self.set_session_handle()
             error_string = self.error_message(error_code)
             return error_string
