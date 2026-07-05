@@ -38,20 +38,6 @@ daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
-# The two tests below (test_configure_trigger_video and test_filter_coefficients) are the only NI-SCOPE
-# system tests that require the persistently-simulated PXI-5124 and PXI-5142 instruments described above.
-# Those are ni-scope-daqmx devices, and per Bug 3934983 (nisimdev persistent simulation for ni-scope-daqmx
-# devices fails for RHEL 9.6 and newer), they can no longer be created on the nimi-bot VMs now that CI runs
-# on RHEL 9.6+. Without those simulated instruments the fixtures fail while opening the session, turning
-# these tests into ERRORs (not SKIPs) and taking the whole NI-SCOPE system-test run down with them.
-#
-# We deliberately skip these two tests and accept the coverage gap (video triggering on the 5124 and
-# equalization/OSP filter coefficients on the 5142). The functionality exercised is model-specific and
-# cannot be reproduced on the PXIe-5164 (or any model that simulates correctly on RHEL 9.6+), so there is
-# no equivalent replacement device to move these tests onto -- unlike, for example, nimodinst, which only
-# needs *some* instrument present and can therefore switch to devices that simulate fine on RHEL 9.6+.
-# Re-enable these tests once Bug 3934983 is resolved and the 5124/5142 simulated instruments are available
-# again. See: https://dev.azure.com/ni/DevCentral/_workitems/edit/3934983
 _ni_scope_daqmx_simulation_skip_reason = (
     'Skipped due to Bug 3934983: nisimdev persistent simulation for ni-scope-daqmx devices '
     '(PXI-5124/PXI-5142) fails on RHEL 9.6 and newer, so the persistently-simulated instruments '
