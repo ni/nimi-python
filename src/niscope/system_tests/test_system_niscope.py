@@ -38,6 +38,26 @@ daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
+# The two tests below (test_configure_trigger_video and test_filter_coefficients) are the only NI-SCOPE
+# system tests that require the persistently-simulated PXI-5124 and PXI-5142 instruments described above.
+# Those are ni-scope-daqmx devices, and per Bug 3934983 (nisimdev persistent simulation for ni-scope-daqmx
+# devices fails for RHEL 9.6 and newer), they can no longer be created on the nimi-bot VMs now that CI runs
+# on RHEL 9.6+. Without those simulated instruments the fixtures fail while opening the session, turning
+# these tests into ERRORs (not SKIPs) and taking the whole NI-SCOPE system-test run down with them.
+#
+# We deliberately skip these two tests and accept the coverage gap (video triggering on the 5124 and
+# equalization/OSP filter coefficients on the 5142). The functionality exercised is model-specific and
+# cannot be reproduced on the PXIe-5164 (or any model that simulates correctly on RHEL 9.6+), so there is
+# no equivalent replacement device to move these tests onto -- unlike, for example, nimodinst, which only
+# needs *some* instrument present and can therefore switch to devices that simulate fine on RHEL 9.6+.
+# Re-enable these tests once Bug 3934983 is resolved and the 5124/5142 simulated instruments are available
+# again. See: https://dev.azure.com/ni/DevCentral/_workitems/edit/3934983
+_ni_scope_daqmx_simulation_skip_reason = (
+    'Skipped due to Bug 3934983: nisimdev persistent simulation for ni-scope-daqmx devices '
+    '(PXI-5124/PXI-5142) fails on RHEL 9.6 and newer, so the persistently-simulated instruments '
+    'these tests require cannot be created in CI. Accepting the coverage gap until the bug is resolved.'
+)
+
 
 def check_fetched_data(
     data,  # either waveforms or measurement_stats
@@ -441,6 +461,7 @@ class SystemTests:
         multi_instrument_session.configure_chan_characteristics(50, 0)
         assert 50.0 == multi_instrument_session.input_impedance
 
+    @pytest.mark.skip(reason=_ni_scope_daqmx_simulation_skip_reason)
     def test_filter_coefficients(self, session_5142):
         assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
         try:
@@ -513,6 +534,7 @@ class SystemTests:
     def test_configure_trigger_software(self, multi_instrument_session):
         multi_instrument_session.configure_trigger_software()
 
+    @pytest.mark.skip(reason=_ni_scope_daqmx_simulation_skip_reason)
     def test_configure_trigger_video(self, session_5124):
         session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
