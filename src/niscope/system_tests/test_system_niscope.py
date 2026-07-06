@@ -40,8 +40,7 @@ daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
 _ni_scope_daqmx_simulation_skip_reason = (
     'Skipped due to Bug 3934983: nisimdev persistent simulation for ni-scope-daqmx devices '
-    '(PXI-5124/PXI-5142) fails on RHEL 9.6 and newer, so the persistently-simulated instruments '
-    'these tests require cannot be created in CI. Accepting the coverage gap until the bug is resolved.'
+    '(PXI-5124/PXI-5142) fails on RHEL 9.6, so skipping these test as the pipeline cannot execute.'
 )
 
 
