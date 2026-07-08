@@ -16,7 +16,7 @@ on:
       - synchronize
       - reopened
 
-  # Allows you to run this workflow manually from the Actions tab.
+  # Allows you to run this workflow manually from the Actions tab. 
   workflow_dispatch:
 jobs:
   do-the-job1:
