@@ -104,15 +104,30 @@ class LibraryInterpreter(object):
             pass
 
         try:
-            '''
-            It is expected for get_error to raise when the session is invalid
-            (IVI spec requires GetError to fail).
-            Use error_message instead. It doesn't require a session.
-            '''
+            # get_error reads the session's error queue, which may have been overwritten,
+            # causing it to return a mismatched error code. error_message takes the error
+            # code directly as a parameter and looks up its description without reading the
+            # queue, it will return the description for the specific error code.
+            # Use error_message in current session before the handle reset in the next block.
+
             error_string = self.error_message(error_code)
             return error_string
         except errors.Error:
             pass
+
+        save_vi = self.get_session_handle()
+        try:
+            # It is expected for get_error to raise when the session is invalid
+            # (IVI spec requires GetError to fail).
+            # Use error_message instead. It doesn't require a session.
+
+            self.set_session_handle()
+            error_string = self.error_message(error_code)
+            return error_string
+        except errors.Error:
+            pass
+        finally:
+            self.set_session_handle(save_vi)
         return "Failed to retrieve error description."
 
     def abort(self):  # noqa: N802
