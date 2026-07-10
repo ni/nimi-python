@@ -3,6 +3,15 @@ Examples
 
 `You can download all nirfsg examples for latest version here <https://github.com/ni/nimi-python/releases/download/nirfsg-1.1.0/nirfsg_examples.zip>`_
 
+conftest.py
+-----------
+
+.. literalinclude:: ../../src/nirfsg/examples/conftest.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(conftest.py) <https://github.com/ni/nimi-python/blob/master/src/nirfsg/examples/conftest.py>`_
+
 nirfsg_arb_waveform.py
 ----------------------
 

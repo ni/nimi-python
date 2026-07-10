@@ -1,10 +1,52 @@
+import faulthandler
+import gc
 import os
 import pathlib
 import pytest
 import re
 import subprocess
+import sys
 import threading
 import time
+
+
+def enable_native_teardown_diagnostics():
+    '''Dump Python tracebacks for all threads if a fatal signal fires.
+
+    The RHEL 9.6 / Python 3.10 system-test aborts (SIGABRT -6, SIGSEGV -11)
+    happen inside the NI native runtime teardown at interpreter shutdown,
+    after every test has already passed. Enabling faulthandler makes the
+    interpreter print the Python stack of every live thread at the moment
+    of the crash, so the offending thread/call chain shows up in the CI log
+    next to the glibc assertion. This is safe to leave enabled permanently.
+    '''
+    if not faulthandler.is_enabled():
+        faulthandler.enable(all_threads=True)
+
+
+def finalize_test_process(exitstatus):
+    '''Force a deterministic process teardown after the test session ends.
+
+    - Runs gc.collect() a few times so session/driver finalizers execute
+      while the interpreter is still fully alive, instead of at random
+      during interpreter shutdown where the native mutex teardown race
+      becomes fatal on newer glibc.
+    - If NIMI_FORCE_HARD_EXIT is set, flushes output and calls os._exit(),
+      which skips atexit handlers and native library unload entirely.
+      Diagnostic use: if the -6 SIGABRT disappears when this is set, the
+      crash is confirmed to live in interpreter-shutdown-time native
+      teardown rather than in the tests or driver logic.
+
+      NOTE: os._exit() also skips coverage's atexit writer, so coverage
+      data will not be produced for a run that hard-exits. Only enable
+      NIMI_FORCE_HARD_EXIT for diagnostic runs, not for coverage runs.
+    '''
+    for _ in range(3):
+        gc.collect()
+    if os.environ.get('NIMI_FORCE_HARD_EXIT'):
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os._exit(0 if exitstatus == 0 else 1)
 
 
 class GrpcServerProcess:
