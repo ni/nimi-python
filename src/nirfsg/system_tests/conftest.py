@@ -4,12 +4,14 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
-
-def pytest_configure(config):
-    '''Enable fatal-signal tracebacks for the nirfsg system-test process.'''
-    system_test_utilities.enable_native_teardown_diagnostics()
+_session_exitstatus = {}
 
 
 def pytest_sessionfinish(session, exitstatus):
-    '''Force a deterministic teardown once the nirfsg system tests finish.'''
-    system_test_utilities.finalize_test_process(exitstatus)
+    '''Capture the pytest result code for use during unconfigure.'''
+    _session_exitstatus['code'] = int(exitstatus)
+
+
+def pytest_unconfigure(config):
+    '''Hard-exit after all reporting is done to skip the py3.10 native abort.'''
+    system_test_utilities.finalize_test_process(_session_exitstatus.get('code', 0))

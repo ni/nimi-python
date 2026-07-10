@@ -1,5 +1,3 @@
-import faulthandler
-import gc
 import os
 import pathlib
 import pytest
@@ -10,43 +8,32 @@ import threading
 import time
 
 
-def enable_native_teardown_diagnostics():
-    '''Dump Python tracebacks for all threads if a fatal signal fires.
-
-    The RHEL 9.6 / Python 3.10 system-test aborts (SIGABRT -6, SIGSEGV -11)
-    happen inside the NI native runtime teardown at interpreter shutdown,
-    after every test has already passed. Enabling faulthandler makes the
-    interpreter print the Python stack of every live thread at the moment
-    of the crash, so the offending thread/call chain shows up in the CI log
-    next to the glibc assertion. This is safe to leave enabled permanently.
-    '''
-    if not faulthandler.is_enabled():
-        faulthandler.enable(all_threads=True)
-
-
 def finalize_test_process(exitstatus):
-    '''Force a deterministic process teardown after the test session ends.
+    '''Exit the process immediately to avoid the py3.10 native-teardown abort.
 
-    - Runs gc.collect() a few times so session/driver finalizers execute
-      while the interpreter is still fully alive, instead of at random
-      during interpreter shutdown where the native mutex teardown race
-      becomes fatal on newer glibc.
-    - If NIMI_FORCE_HARD_EXIT is set, flushes output and calls os._exit(),
-      which skips atexit handlers and native library unload entirely.
-      Diagnostic use: if the -6 SIGABRT disappears when this is set, the
-      crash is confirmed to live in interpreter-shutdown-time native
-      teardown rather than in the tests or driver logic.
+    On the RHEL 9.6 / Python 3.10 runner the NI native runtime aborts with a
+    fatal glibc robust-mutex assertion (SIGABRT, exit -6) during interpreter
+    finalization -- after every test has already passed and after faulthandler
+    itself has been torn down. The abort is in native teardown that runs after
+    Python shutdown, so it cannot be caught or fixed from Python. Python 3.11+
+    finalizes in a different order and does not hit it.
 
-      NOTE: os._exit() also skips coverage's atexit writer, so coverage
-      data will not be produced for a run that hard-exits. Only enable
-      NIMI_FORCE_HARD_EXIT for diagnostic runs, not for coverage runs.
+    Calling os._exit() exits before interpreter finalization and skips that
+    native teardown entirely. Coverage data (started by `coverage run`) is
+    explicitly stopped and saved first so that it is not lost, then stdio is
+    flushed, then the process exits with the pytest result code.
     '''
-    for _ in range(3):
-        gc.collect()
-    if os.environ.get('NIMI_FORCE_HARD_EXIT'):
-        sys.stdout.flush()
-        sys.stderr.flush()
-        os._exit(0 if exitstatus == 0 else 1)
+    try:
+        import coverage
+        cov = coverage.Coverage.current()
+        if cov is not None:
+            cov.stop()
+            cov.save()
+    except Exception:
+        pass
+    sys.stdout.flush()
+    sys.stderr.flush()
+    os._exit(int(exitstatus))
 
 
 class GrpcServerProcess:
