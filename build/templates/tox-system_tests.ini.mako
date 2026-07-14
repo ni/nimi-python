@@ -49,6 +49,10 @@ changedir =
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
 
+setenv =
+    # Unbuffered so the native glibc/teardown output is not reordered or lost when a process aborts.
+    ${module_name}-system_tests: PYTHONUNBUFFERED = 1
+
 commands =
 % if uses_other_wheel:
     ${wheel_env_no_py}: python -m build --wheel
@@ -60,8 +64,9 @@ commands =
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver ${other_wheel} --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-examples-{env:BITNESS:64}.xml {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 {posargs}
+    # -X faulthandler: dump Python tracebacks on fatal signals. python -v: trace interpreter finalization (# cleanup/# destroy) to see which module unload precedes a -6 abort. pytest -s: don't capture, so native teardown output is inline. -rA: full short test summary.
+    ${module_name}-system_tests: python -X faulthandler -v -m coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples -s -rA --junitxml=../junit/junit-${module_name}-{envname}-examples-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-system_tests: python -X faulthandler -v -m coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini -s -rA --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 {posargs}
 
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
