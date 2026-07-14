@@ -4,6 +4,7 @@ include $(BUILD_HELPER_DIR)/tools.mak
 README := $(OUTPUT_DIR)/README.rst
 SETUP := $(OUTPUT_DIR)/setup.py
 TOX_INI := $(OUTPUT_DIR)/tox-system_tests.ini
+CONFTEST := $(OUTPUT_DIR)/conftest.py
 
 MODULE_FILES := \
                 $(addprefix $(MODULE_DIR)/,$(MODULE_FILES_TO_GENERATE)) \
@@ -12,6 +13,7 @@ MODULE_FILES := \
                 $(README) \
                 $(SETUP) \
                 $(TOX_INI) \
+                $(CONFTEST) \
 
 RST_FILES := \
                 $(addprefix $(DRIVER_DOCS_DIR)/,$(RST_FILES_TO_GENERATE)) \
@@ -124,6 +126,10 @@ $(SETUP): $(TEMPLATE_DIR)/setup.py.mako $(METADATA_FILES)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
 $(TOX_INI): $(TEMPLATE_DIR)/tox-system_tests.ini.mako $(METADATA_FILES)
+	$(call trace_to_console, "Generating",$@)
+	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
+
+$(CONFTEST): $(TEMPLATE_DIR)/conftest.py.mako $(METADATA_FILES)
 	$(call trace_to_console, "Generating",$@)
 	$(_hide_cmds)$(call log_command,$(call GENERATE_SCRIPT, $<, $(dir $@), $(METADATA_DIR)))
 
