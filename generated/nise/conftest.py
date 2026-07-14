@@ -1,8 +1,4 @@
-<%
-    config = template_parameters['metadata'].config
-    module_name = config['module_name']
-%>\
-"""Diagnostic conftest.py — generated for ${module_name} system tests.
+"""Diagnostic conftest.py — generated for nise system tests.
 
 Gathers evidence for the glibc 2.34 libpthread-merge crash hypothesis:
   - Fatal glibc error / SIGABRT (-6) or SIGSEGV (-11) during process teardown
@@ -93,7 +89,7 @@ def _atexit_callback():
 
 @pytest.fixture(autouse=True, scope="session")
 def _diagnostic_logging():
-    """Diagnostic fixture active for all ${module_name} system tests.
+    """Diagnostic fixture active for all nise system tests.
 
     Placed in the tox rootdir conftest so it is loaded regardless of whether
     the tests are in examples/ or system_tests/.
