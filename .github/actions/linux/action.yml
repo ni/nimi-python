@@ -9,46 +9,51 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Configure core dumps
-      run: |
-        # Redirect core dumps to a writable directory before the tests run.
-        # RHEL 9 default core_pattern pipes through systemd-coredump which
-        # requires root to read back; writing directly to /tmp/cores avoids that.
+    - run: |
+        # ulimit and core_pattern must be set in the SAME shell as tox so the
+        # child python processes inherit the unlimited core size.
         sudo mkdir -p /tmp/cores
         sudo chmod 1777 /tmp/cores
-        echo "/tmp/cores/core.%e.%p.%t" | sudo tee /proc/sys/kernel/core_pattern
-        echo "Core pattern set to: $(cat /proc/sys/kernel/core_pattern)"
-      shell: bash
-    - run: |
+        if echo "/tmp/cores/core.%e.%p.%t" | sudo tee /proc/sys/kernel/core_pattern; then
+          echo "Core pattern set: $(cat /proc/sys/kernel/core_pattern)"
+        else
+          echo "WARNING: Could not set core_pattern; systemd-coredump will capture instead."
+        fi
+        ulimit -c unlimited
+        echo "Core size limit: $(ulimit -c)"
+
         source /etc/bashrc
         cd generated
         mkdir junit
         cd ${{ inputs.module_name }}
-        # Unlimited core size for this shell and all child processes.
-        # COREDUMP_FILTER=0xff: write all memory regions (anonymous + file-backed
-        # + shared + hugetlb) so the full heap/vtable state is captured.
-        ulimit -c unlimited
-        export COREDUMP_FILTER=0xff
         python -m tox -c tox-system_tests.ini
       shell: bash
     - name: Collect core dumps
       if: always()
       run: |
-        shopt -s nullglob
-        cores=(/tmp/cores/core.python.*)
-        if [ ${#cores[@]} -eq 0 ]; then
-          echo "No core dumps found."
-          exit 0
-        fi
-        echo "Core dump(s) found:"
-        ls -lh "${cores[@]}"
         mkdir -p /tmp/core_artifacts
+
+        # Path 1: direct dump to /tmp/cores (core_pattern override succeeded)
+        shopt -s nullglob
+        cores=(/tmp/cores/core.python.* /tmp/cores/core.python3.*)
         for f in "${cores[@]}"; do
-          echo "Compressing $f (gzip -6) ..."
-          # -6 balances speed vs ratio; NI should gunzip before loading in gdb.
+          echo "Found direct core: $f ($(du -sh "$f" | cut -f1))"
           gzip -6 -c "$f" > "/tmp/core_artifacts/$(basename "$f").gz"
         done
-        ls -lh /tmp/core_artifacts/
+
+        # Path 2: systemd-coredump captured it instead
+        if command -v coredumpctl &>/dev/null; then
+          mapfile -t entries < <(coredumpctl list --no-pager --since "-1h" 2>/dev/null \
+            | grep python | awk '{print $5}')
+          for pid in "${entries[@]}"; do
+            out="/tmp/core_artifacts/core.python.coredumpctl.${pid}"
+            echo "Exporting systemd-coredump entry PID $pid"
+            coredumpctl dump "$pid" --output="$out" 2>/dev/null \
+              && gzip -6 "$out" || true
+          done
+        fi
+
+        ls -lh /tmp/core_artifacts/ 2>/dev/null || echo "No core artifacts collected."
       shell: bash
     - name: Upload core dumps
       if: always()
@@ -58,4 +63,3 @@ runs:
         path: /tmp/core_artifacts/*.gz
         if-no-files-found: ignore
         retention-days: 14
-
