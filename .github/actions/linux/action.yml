@@ -10,15 +10,10 @@ runs:
   using: "composite"
   steps:
     - run: |
-        # ulimit and core_pattern must be set in the SAME shell as tox so the
-        # child python processes inherit the unlimited core size.
-        sudo mkdir -p /tmp/cores
-        sudo chmod 1777 /tmp/cores
-        if echo "/tmp/cores/core.%e.%p.%t" | sudo tee /proc/sys/kernel/core_pattern; then
-          echo "Core pattern set: $(cat /proc/sys/kernel/core_pattern)"
-        else
-          echo "WARNING: Could not set core_pattern; systemd-coredump will capture instead."
-        fi
+        # Do NOT override core_pattern — changing it shifts process exit timing
+        # and can suppress the race condition we are trying to capture.
+        # systemd-coredump on RHEL 9.6 captures dumps automatically; we just
+        # need ulimit set in the same shell as the crashing process.
         ulimit -c unlimited
         echo "Core size limit: $(ulimit -c)"
 
@@ -33,15 +28,15 @@ runs:
       run: |
         mkdir -p /tmp/core_artifacts
 
-        # Path 1: direct dump to /tmp/cores (core_pattern override succeeded)
+        # Path 1: direct dump in CWD (ulimit triggered, systemd not intercepting)
         shopt -s nullglob
-        cores=(/tmp/cores/core.python.* /tmp/cores/core.python3.*)
+        cores=(/tmp/cores/core.python.* /tmp/cores/core.python3.* core.*)
         for f in "${cores[@]}"; do
           echo "Found direct core: $f ($(du -sh "$f" | cut -f1))"
           gzip -6 -c "$f" > "/tmp/core_artifacts/$(basename "$f").gz"
         done
 
-        # Path 2: systemd-coredump captured it instead
+        # Path 2: systemd-coredump captured it (most likely on RHEL 9.6)
         if command -v coredumpctl &>/dev/null; then
           mapfile -t entries < <(coredumpctl list --no-pager --since "-1h" 2>/dev/null \
             | grep python | awk '{print $5}')
