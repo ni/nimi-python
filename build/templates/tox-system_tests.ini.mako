@@ -49,12 +49,6 @@ changedir =
     ${module_name}-system_tests: .
     ${module_name}-coverage: .
 
-setenv =
-    # COREDUMP_FILTER=0xff: include all memory regions (anonymous, file-backed,
-    # shared, hugetlb) in the core dump so the full heap/vtable state is
-    # captured for post-mortem analysis with gdb.
-    ${module_name}-system_tests: COREDUMP_FILTER=0xff
-
 commands =
 % if uses_other_wheel:
     ${wheel_env_no_py}: python -m build --wheel
@@ -66,9 +60,8 @@ commands =
     ${module_name}-system_tests: python ../../tools/install_local_wheel.py --driver ${other_wheel} --start-path ../..
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
-    # -X faulthandler: dump Python tracebacks on fatal signals (complements the core dump).
-    ${module_name}-system_tests: python -X faulthandler -m coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-examples-{env:BITNESS:64}.xml {posargs}
-    ${module_name}-system_tests: python -X faulthandler -m coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-examples-{env:BITNESS:64}.xml {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 {posargs}
 
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload

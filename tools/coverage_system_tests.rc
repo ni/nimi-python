@@ -1,7 +1,6 @@
 ; This file controls what modules are examined for code coverage in our system tests.
 
 [run]
-parallel = True
 omit =
     ; Common code, so covered by nifake unit tests.
     ; Some modules don't even exercise all of _attributes.py and _converters.py, making parts unreachable in system tests.

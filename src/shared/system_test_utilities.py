@@ -104,27 +104,3 @@ def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_
     t2.start()
     t2.join()
     assert not t2.is_alive()
-
-
-def register_teardown_markers():
-    '''Emit a marker at the very end of the atexit chain.
-
-    Registered from a system_tests conftest at import time, so it runs late in
-    the LIFO atexit order. If ">>> ATEXIT-END REACHED" appears in the log, the
-    process finished all Python atexit handlers and any -6 abort is happening
-    afterwards, during interpreter finalization / native library unload. If the
-    marker does NOT appear before the "Fatal glibc error", the abort happened
-    during the atexit chain (e.g. a native atexit or the coverage save).
-    '''
-    import atexit
-    import sys
-
-    def _teardown_marker():
-        try:
-            sys.stdout.flush()
-            sys.stderr.flush()
-            print('>>> ATEXIT-END REACHED: all Python atexit handlers completed <<<', flush=True)
-        except Exception:
-            pass
-
-    atexit.register(_teardown_marker)
