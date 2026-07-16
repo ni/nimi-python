@@ -38,15 +38,6 @@ daqmx_sim_5124_lock = fasteners.InterProcessLock(daqmx_sim_5124_lock_file)
 daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock')
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
-_ni_scope_daqmx_simulation_skip_reason = (
-    "These tests need persistently simulated DAQmx-based digitizers (PXI-5124/PXI-5142), which aren't working on machines with RHEL 9.6 version. "
-    "We use `nisimdev` at image creation time to create these simulated digitizers, "
-    "but that is now throwing an error as 'DriverError -1073807343: Invalid Identifier: 5142/5124'"
-    "and creating DAQmx-based simulated sessions is also failing on this system. We only use these boards for Video Triggering and OSP coverage, "
-    "since those features are exclusive to DAQmx-based digitizers. So we're skipping these tests for now to unblock other PR contributions, "
-    "until DAQmx simulation behaves correctly on RHEL 9.6."
-)
-
 
 def check_fetched_data(
     data,  # either waveforms or measurement_stats
@@ -450,8 +441,11 @@ class SystemTests:
         multi_instrument_session.configure_chan_characteristics(50, 0)
         assert 50.0 == multi_instrument_session.input_impedance
 
-    @pytest.mark.skip(reason=_ni_scope_daqmx_simulation_skip_reason)
+    @pytest.mark.skip(reason="Skipped temporarily until 5142 device simulation is fixed")
     def test_filter_coefficients(self, session_5142):
+        # Test needs persistent simulated 5142 which is currently having issue with RHEL 9.6 version. Skipping the test
+        # creates gap in Video Triggering and OSP coverage which are only supported on DAQmx-based digitizers, but the decision
+        # is to accept this gap to unblock other PR contributions until the issue is fully resolved.
         assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
         try:
             filter_coefficients = [1.0, 0.0, 0.0]
@@ -523,8 +517,11 @@ class SystemTests:
     def test_configure_trigger_software(self, multi_instrument_session):
         multi_instrument_session.configure_trigger_software()
 
-    @pytest.mark.skip(reason=_ni_scope_daqmx_simulation_skip_reason)
+    @pytest.mark.skip(reason="Skipped temporarily until 5124 device simulation is fixed")
     def test_configure_trigger_video(self, session_5124):
+        # Test needs persistent simulated 5124 which is currently having issue with RHEL 9.6 version. Skipping the test
+        # creates gap in Video Triggering and OSP coverage which are only supported on DAQmx-based digitizers, but the decision
+        # is to accept this gap to unblock other PR contributions until the issue is fully resolved.
         session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
         assert niscope.VideoTriggerEvent.FIELD1 == session_5124.tv_trigger_event
