@@ -444,7 +444,7 @@ class SystemTests:
     @pytest.mark.skip(reason="Skipped temporarily until 5142 device simulation is fixed")
     def test_filter_coefficients(self, session_5142):
         # Test needs persistent simulated 5142 which is currently having issue with RHEL 9.6 version. Skipping the test
-        # creates gap in Video Triggering and OSP coverage which are only supported on DAQmx-based digitizers, but the decision
+        # creates gap in OSP coverage which is only supported on DAQmx-based digitizers, but the decision
         # is to accept this gap to unblock other PR contributions until the issue is fully resolved.
         assert [1.0] + [0.0] * 34 == session_5142.get_equalization_filter_coefficients()  # coefficients list should have 35 items
         try:
@@ -520,7 +520,7 @@ class SystemTests:
     @pytest.mark.skip(reason="Skipped temporarily until 5124 device simulation is fixed")
     def test_configure_trigger_video(self, session_5124):
         # Test needs persistent simulated 5124 which is currently having issue with RHEL 9.6 version. Skipping the test
-        # creates gap in Video Triggering and OSP coverage which are only supported on DAQmx-based digitizers, but the decision
+        # creates gap in Video Triggering coverage which is only supported on DAQmx-based digitizers, but the decision
         # is to accept this gap to unblock other PR contributions until the issue is fully resolved.
         session_5124.configure_trigger_video('0', niscope.VideoSignalFormat.PAL, niscope.VideoTriggerEvent.FIELD1, niscope.VideoPolarity.POSITIVE, niscope.TriggerCoupling.DC)
         assert niscope.VideoSignalFormat.PAL == session_5124.tv_trigger_signal_format
