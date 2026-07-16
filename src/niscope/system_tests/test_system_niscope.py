@@ -39,8 +39,12 @@ daqmx_sim_5142_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_5142.lock'
 daqmx_sim_5142_lock = fasteners.InterProcessLock(daqmx_sim_5142_lock_file)
 
 _ni_scope_daqmx_simulation_skip_reason = (
-    'Skipped due to Bug 3934983: nisimdev persistent simulation for ni-scope-daqmx devices '
-    '(PXI-5124/PXI-5142) fails on RHEL 9.6, so skipping these test as the pipeline cannot execute.'
+    "These tests need persistently simulated DAQmx-based digitizers (PXI-5124/PXI-5142), which aren't working on machines with RHEL 9.6 version. "
+    "We use `nisimdev` at image creation time to create these simulated digitizers, "
+    "but that is now throwing an error as 'DriverError -1073807343: Invalid Identifier: 5142/5124'"
+    "and creating DAQmx-based simulated sessions is also failing on this system. We only use these boards for Video Triggering and OSP coverage, "
+    "since those features are exclusive to DAQmx-based digitizers. So we're skipping these tests for now to unblock other PR contributions, "
+    "until DAQmx simulation behaves correctly on RHEL 9.6."
 )
 
 
