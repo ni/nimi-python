@@ -61,7 +61,7 @@ commands =
 % endif
     ${module_name}-system_tests: python -c "import ${module_name}; ${module_name}.print_diagnostic_information()"
     ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/examples --junitxml=../junit/junit-${module_name}-{envname}-examples-{env:BITNESS:64}.xml {posargs}
-    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 {posargs}
+    ${module_name}-system_tests: coverage run --rcfile=../../tools/coverage_system_tests.rc --source ${module_name} --parallel-mode -m pytest ../../src/${module_name}/system_tests -c tox-system_tests.ini --junitxml=../junit/junit-${module_name}-{envname}-{env:BITNESS:64}.xml --durations=5 -p system_test_pytest_delay_terminate_plugin {posargs}
 
     ${module_name}-coverage: coverage combine --rcfile=../../tools/coverage_system_tests.rc ./
     # Create the report to upload
@@ -102,6 +102,9 @@ passenv =
     BRANCH_NAME
     JENKINS_URL
     BUILD_NUMBER
+
+setenv =
+    PYTHONPATH = ../../src/shared
 
 [pytest]
 addopts = --verbose
