@@ -245,6 +245,20 @@ enums = {
                 },
                 'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR',
                 'value': 25002
+            },
+            {
+                'documentation': {
+                    'description': 'De-embeds the measurement using wideband amplitude flatness correction.'
+                },
+                'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
+                'value': 25003
+            },
+            {
+                'documentation': {
+                    'description': 'De-embeds the measurement using wideband amplitude and phase flatness correction.'
+                },
+                'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
+                'value': 25004
             }
         ]
     },

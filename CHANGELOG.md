@@ -1702,6 +1702,7 @@
 
 #### [nirfsg] Unreleased
 - Added
+  - `AMPLITUDE_FLATNESS` and `AMPLITUDE_AND_PHASE_FLATNESS` added to enum `DeembeddingType`
 - Changed
 - Removed
 

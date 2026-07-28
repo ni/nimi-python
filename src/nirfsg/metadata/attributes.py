@@ -3360,7 +3360,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Default Value**: NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_NONE\n\n**Valid Values for PXIe-5831** NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR, NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR, or NIRFSG_VAL_DEEMBEDDING_TYPE_NONE. NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
+            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to any value besides NIRFSG_VAL_DEEMBEDDING_TYPE_NONE, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Default Value**: NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841** : NIRFSG_VAL_DEEMBEDDING_TYPE_NONE or NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5842/5860** : NIRFSG_VAL_DEEMBEDDING_TYPE_NONE or NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS or NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS\n\n**Valid Values for PXIe-5831** NIRFSG_VAL_DEEMBEDDING_TYPE_NONE, NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR. NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_NONE',
@@ -3376,6 +3376,16 @@ attributes = {
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR',
                     '25002 (0x61aa)',
                     'De-embeds the measurement using the gain term and the reflection term.'
+                ],
+                [
+                    'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
+                    '25003 (0x61ab)',
+                    'De-embeds the measurement using wideband amplitude flatness correction.'
+                ],
+                [
+                    'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
+                    '25004 (0x61ac)',
+                    'De-embeds the measurement using wideband amplitude and phase flatness correction.'
                 ]
             ],
             'table_header': [
