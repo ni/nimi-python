@@ -1696,17 +1696,11 @@
 ### nirfsg (NI-RFSG)
 
 - [Unreleased](#nirfsg-unreleased)
-- [1.2.0](#nirfsg-120---2026-07-28)
 - [1.1.0](#nirfsg-110---2026-04-17)
 - [1.0.1](#nirfsg-101---2026-01-09)
 - [1.0.0](#nirfsg-100---2025-08-05)
 
 #### [nirfsg] Unreleased
-- Added
-- Changed
-- Removed
-
-#### [nirfsg] 1.2.0 - 2026-07-28
 - Added
   - `AMPLITUDE_FLATNESS` and `AMPLITUDE_AND_PHASE_FLATNESS` added to enum `DeembeddingType`
 - Changed
