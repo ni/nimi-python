@@ -822,27 +822,33 @@ class _SessionBase(object):
 
     To use this property, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the port to configure for de-embedding.
 
-    If you set this property to DeembeddingType.SCALAR or DeembeddingType.VECTOR, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+    If you set this property to any value besides DeembeddingType.NONE, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
     **Default Value**: DeembeddingType.SCALAR
 
-    **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : DeembeddingType.SCALAR or DeembeddingType.NONE
+    **Valid Values for PXIe-5830/5832/5840/5841** : DeembeddingType.NONE or DeembeddingType.SCALAR
 
-    **Valid Values for PXIe-5831** DeembeddingType.SCALAR, DeembeddingType.VECTOR, or DeembeddingType.NONE. DeembeddingType.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
+    **Valid Values for PXIe-5842/5860** : DeembeddingType.NONE or DeembeddingType.SCALAR or DeembeddingType.AMPLITUDE_FLATNESS or DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS
+
+    **Valid Values for PXIe-5831** DeembeddingType.NONE, DeembeddingType.SCALAR, or DeembeddingType.VECTOR. DeembeddingType.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
     **Defined Values**:
 
-    +------------------------+----------------+------------------------------------------------------------------------+
-    | Name                   | Value          | Description                                                            |
-    +========================+================+========================================================================+
-    | DeembeddingType.NONE   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
-    +------------------------+----------------+------------------------------------------------------------------------+
-    | DeembeddingType.SCALAR | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
-    +------------------------+----------------+------------------------------------------------------------------------+
-    | DeembeddingType.VECTOR | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
-    +------------------------+----------------+------------------------------------------------------------------------+
+    +----------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+    | Name                                         | Value          | Description                                                                       |
+    +==============================================+================+===================================================================================+
+    | DeembeddingType.NONE                         | 25000 (0x61a8) | De-embedding is not applied to the measurement.                                   |
+    +----------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+    | DeembeddingType.SCALAR                       | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                               |
+    +----------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+    | DeembeddingType.VECTOR                       | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term.            |
+    +----------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+    | DeembeddingType.AMPLITUDE_FLATNESS           | 25003 (0x61ab) | De-embeds the measurement using wideband amplitude flatness correction.           |
+    +----------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+    | DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS | 25004 (0x61ac) | De-embeds the measurement using wideband amplitude and phase flatness correction. |
+    +----------------------------------------------+----------------+-----------------------------------------------------------------------------------+
 
     Tip:
     This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.

@@ -346,6 +346,26 @@ DeembeddingType
 
 
 
+    .. py:attribute:: DeembeddingType.AMPLITUDE_FLATNESS
+
+
+
+        De-embeds the measurement using wideband amplitude flatness correction.
+
+        
+
+
+
+    .. py:attribute:: DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS
+
+
+
+        De-embeds the measurement using wideband amplitude and phase flatness correction.
+
+        
+
+
+
 DigitalEqualizationEnabled
 --------------------------
 
