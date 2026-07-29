@@ -63,7 +63,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.1.1.dev0'
+release = '1.2.0'
 # The short X.Y version.
 version = release[:3]
 
