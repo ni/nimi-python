@@ -22,7 +22,6 @@ def test_rep_caps_template_uses_custom_documentation_overrides():
                 'python_name': 'resources',
                 'documentation': {
                     'description': 'Resource repeated capabilities use fully-qualified identifiers.',
-                    'auto_prefix_addition_supported': False,
                     'valid_identifiers': ['dev0/res0', 'dev0/res1'],
                     'examples': [
                         "session.resources['dev0/res0'].channel_enabled = True",

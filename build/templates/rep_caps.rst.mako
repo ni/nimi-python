@@ -36,7 +36,6 @@ name = rep_cap['python_name']
 prefix = rep_cap['prefix']
 rep_cap_doc = rep_cap.get('documentation', {})
 has_custom_doc = len(rep_cap_doc) > 0
-auto_prefix = rep_cap_doc.get('auto_prefix_addition_supported', len(prefix) > 0)
 %>\
 ${helper.get_rst_header_snippet(name, '-')}
 
@@ -45,7 +44,7 @@ ${helper.get_rst_header_snippet(name, '-')}
 % if has_custom_doc and 'description' in rep_cap_doc:
         ${rep_cap_doc['description']}
 
-% elif auto_prefix:
+% elif len(prefix) > 0:
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
 
