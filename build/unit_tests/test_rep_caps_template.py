@@ -2,13 +2,14 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from mako.template import Template
+from build.helper.metadata_add_all import add_all_config_metadata
 
 
 def _render_rep_caps(config):
     repo_root = Path(__file__).resolve().parents[2]
     template_path = repo_root / 'build' / 'templates' / 'rep_caps.rst.mako'
     template = Template(filename=str(template_path))
-    metadata = SimpleNamespace(config=config)
+    metadata = SimpleNamespace(config=add_all_config_metadata(config))
     return template.render(template_parameters={'metadata': metadata})
 
 
@@ -61,4 +62,26 @@ def test_rep_caps_template_preserves_default_prefixed_behavior():
 
     assert 'If no prefix is added to the items in the parameter' in rendered
     assert "session.channels['0-2'].channel_enabled = True" in rendered
+    assert "'channel0, channel1, channel2'" in rendered
+
+
+def test_rep_caps_template_expands_default_documentation_fields():
+    config = {
+        'module_name': 'nifake',
+        'c_function_prefix': 'niFake_',
+        'repeated_capabilities': [
+            {
+                'prefix': 'channel',
+                'python_name': 'channels',
+                'documentation': {
+                    'description': 'Custom channel documentation.',
+                },
+            }
+        ],
+    }
+
+    rendered = _render_rep_caps(config)
+
+    assert 'Custom channel documentation.' in rendered
+    assert "session.channels['channel0-channel2'].channel_enabled = True" in rendered
     assert "'channel0, channel1, channel2'" in rendered
