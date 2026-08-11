@@ -52,6 +52,7 @@
 
 #### [nidcpower] Unreleased
 - Added
+  -`nidcpower_hardware_timed_single_point.py` example
 - Changed
 - Removed
 
@@ -795,6 +796,7 @@
 
 #### [nidmm] Unreleased
 - Added
+  -`nidmm_triggered_fetch_waveform.py` example
 - Changed
 - Removed
 
@@ -2483,6 +2485,7 @@
 
 #### [niswitch] Unreleased
 - Added
+  -`niswitch_software_scanning.py` example
 - Changed
 - Removed
 
