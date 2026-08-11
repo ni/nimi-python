@@ -4179,27 +4179,33 @@ deembedding_type
 
         To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_int32` method to specify the name of the port to configure for de-embedding.
 
-        If you set this property to :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.VECTOR`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+        If you set this property to any value besides :py:data:`~nirfsg.DeembeddingType.NONE`, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
         **Default Value**: :py:data:`~nirfsg.DeembeddingType.SCALAR`
 
-        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.NONE`
+        **Valid Values for PXIe-5830/5832/5840/5841** : :py:data:`~nirfsg.DeembeddingType.NONE` or :py:data:`~nirfsg.DeembeddingType.SCALAR`
 
-        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingType.SCALAR`, :py:data:`~nirfsg.DeembeddingType.VECTOR`, or :py:data:`~nirfsg.DeembeddingType.NONE`. :py:data:`~nirfsg.DeembeddingType.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
+        **Valid Values for PXIe-5842/5860** : :py:data:`~nirfsg.DeembeddingType.NONE` or :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_FLATNESS` or :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS`
+
+        **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingType.NONE`, :py:data:`~nirfsg.DeembeddingType.SCALAR`, or :py:data:`~nirfsg.DeembeddingType.VECTOR`. :py:data:`~nirfsg.DeembeddingType.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         **Defined Values**:
 
-        +-------------------------------------------+----------------+------------------------------------------------------------------------+
-        | Name                                      | Value          | Description                                                            |
-        +===========================================+================+========================================================================+
-        | :py:data:`~nirfsg.DeembeddingType.NONE`   | 25000 (0x61a8) | De-embedding is not applied to the measurement.                        |
-        +-------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingType.SCALAR` | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                    |
-        +-------------------------------------------+----------------+------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingType.VECTOR` | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term. |
-        +-------------------------------------------+----------------+------------------------------------------------------------------------+
+        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+        | Name                                                            | Value          | Description                                                                       |
+        +=================================================================+================+===================================================================================+
+        | :py:data:`~nirfsg.DeembeddingType.NONE`                         | 25000 (0x61a8) | De-embedding is not applied to the measurement.                                   |
+        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.SCALAR`                       | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                               |
+        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.VECTOR`                       | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term.            |
+        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_FLATNESS`           | 25003 (0x61ab) | De-embeds the measurement using wideband amplitude flatness correction.           |
+        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS` | 25004 (0x61ac) | De-embeds the measurement using wideband amplitude and phase flatness correction. |
+        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
