@@ -92,6 +92,11 @@ def test_repeated_capabilities_string_prefix():
     assert test_result_list == ['ScriptTrigger0']
 
 
+def test_repeated_capabilities_fully_qualified_string_prefix():
+    test_result_list = _converters.convert_repeated_capabilities('PXI1Slot2/tmu0,PXI1Slot2/tmu1', prefix='tmu')
+    assert test_result_list == ['PXI1Slot2/tmu0', 'PXI1Slot2/tmu1']
+
+
 def test_repeated_capabilities_list_channel():
     test_result_list = _converters.convert_repeated_capabilities(['0'])
     assert test_result_list == ['0']

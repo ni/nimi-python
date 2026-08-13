@@ -1,8 +1,8 @@
 from pathlib import Path
 from types import SimpleNamespace
 
-from mako.template import Template
 from build.helper.metadata_add_all import add_all_config_metadata
+from mako.template import Template
 
 
 def _render_rep_caps(config):

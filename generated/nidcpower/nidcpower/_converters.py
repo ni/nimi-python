@@ -112,6 +112,11 @@ def _(repeated_capability, prefix):
     return _convert_repeated_capabilities(rng, prefix)
 
 
+def _add_repeated_capability_prefix(repeated_capability, prefix):
+    path, separator, identifier = repeated_capability.rpartition('/')
+    return path + separator + prefix + identifier
+
+
 def convert_repeated_capabilities(repeated_capability, prefix=''):
     '''Convert a repeated capabilities object to a comma delimited list
 
@@ -125,7 +130,10 @@ def convert_repeated_capabilities(repeated_capability, prefix=''):
     # We need to explicitly handle None here. Everything else we can pass on to the singledispatch functions
     if repeated_capability is None:
         return []
-    return [prefix + r for r in _convert_repeated_capabilities(repeated_capability, prefix)]
+    return [
+        _add_repeated_capability_prefix(repeated_capability, prefix)
+        for repeated_capability in _convert_repeated_capabilities(repeated_capability, prefix)
+    ]
 
 
 def convert_repeated_capabilities_without_prefix(repeated_capability):
