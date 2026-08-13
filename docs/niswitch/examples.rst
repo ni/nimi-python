@@ -30,3 +30,12 @@ niswitch_relay_control.py
    :encoding: utf8
    :caption: `(niswitch_relay_control.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_relay_control.py>`_
 
+niswitch_software_scanning.py
+-----------------------------
+
+.. literalinclude:: ../../src/niswitch/examples/niswitch_software_scanning.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(niswitch_software_scanning.py) <https://github.com/ni/nimi-python/blob/master/src/niswitch/examples/niswitch_software_scanning.py>`_
+
