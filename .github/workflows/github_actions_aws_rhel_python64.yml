@@ -35,6 +35,7 @@ jobs:
           - nidmm
           - nifgen
           - nimodinst
+          - nirfsa
           - nirfsg
           - niscope
           - niswitch
