@@ -10,6 +10,7 @@ Driver specific installation instructions can be found on **Read the Docs**:
 * `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
 * `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
 * `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `nirfsa <https://nirfsa.readthedocs.io/en/latest/nirfsa.html#installation>`_
 * `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 * `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
 * `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
