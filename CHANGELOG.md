@@ -1731,6 +1731,7 @@
 
 #### [nirfsa] Unreleased
 - Added
+  - All methods and attributes which are part of first release
 - Changed
 - Removed
 
