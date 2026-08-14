@@ -1730,7 +1730,7 @@
 - [Unreleased](#nirfsa-unreleased)
 
 #### [nirfsa] Unreleased
-- Added
+- Added all methods and attributes which are part of first release
 - Changed
 - Removed
 
