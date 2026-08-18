@@ -4,19 +4,17 @@ import numpy as np
 import sys
 
 
-def example(resource_name, options, center_frequency, span, reference_level, number_of_spectral_lines):
+def example(resource_name, options, center_frequency, span, reference_level):
     with nirfsa.Session(resource_name=resource_name, id_query=False, reset_device=False, options=options) as rfsa_session:
         # Configurations
         rfsa_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         rfsa_session.reference_level = reference_level
         rfsa_session.resolution_bandwidth = 10e3
-
         rfsa_session.configure_spectrum_frequency(center_frequency=center_frequency, span=span)
-        rfsa_session.number_of_spectral_lines = number_of_spectral_lines
 
-        spectrum_buf = np.zeros(rfsa_session.number_of_spectral_lines, dtype=np.float64)
+        spectrum_buffer = np.zeros(rfsa_session.number_of_spectral_lines, dtype=np.float64)
 
-        spectrum_info = rfsa_session.read_power_spectrum_into(spectrum_buf, timeout=10.0)
+        spectrum_info = rfsa_session.read_power_spectrum_into(spectrum_buffer, timeout=10.0)
 
         # Do something useful with the data.
         # We will find the highest peak in a bin, which is not the actual highest
@@ -39,10 +37,9 @@ def _main(argsv):
     parser.add_argument('-c', '--center-frequency', default=1e9, type=float, help='Center frequency in Hz.')
     parser.add_argument('-s', '--span', default=100e6, type=float, help='Span in Hz.')
     parser.add_argument('-r', '--reference-level', default=0.0, type=float, help='Reference level in dBm.')
-    parser.add_argument('-l', '--number-of-spectral-lines', default=1024, type=int, help='Number of spectral lines to acquire.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string for the session.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.center_frequency, args.span, args.reference_level, args.number_of_spectral_lines)
+    example(args.resource_name, args.option_string, args.center_frequency, args.span, args.reference_level)
 
 
 def main():
@@ -55,7 +52,7 @@ def test_example():
 
 
 def test_main():
-    cmd_line = ['--resource-name', 'simulated5841', '--center-frequency', '1e9', '--span', '100e6', '--reference-level', '-10', '--number-of-spectral-lines', '1024', '--option-string', 'Simulate=1, DriverSetup=Model:5841']
+    cmd_line = ['--resource-name', 'simulated5841', '--center-frequency', '1e9', '--span', '100e6', '--reference-level', '-10', '--option-string', 'Simulate=1, DriverSetup=Model:5841']
     _main(cmd_line)
 
 

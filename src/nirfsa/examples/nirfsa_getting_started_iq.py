@@ -12,33 +12,27 @@ def example(resource_name, options, iq_carrier_frequency, reference_level, numbe
         rfsa_session.reference_level = reference_level
         rfsa_session.iq_carrier_frequency = iq_carrier_frequency
         rfsa_session.number_of_samples = number_of_samples
-        rfsa_session.iq_rate = 1e6
-
-        iq_data_array = np.zeros(number_of_samples, dtype=np.complex128)
-
-        wfm_info = rfsa_session.read_iq_single_record_into(iq_data_array)
-
-        samples = np.asarray(wfm_info.samples)
-        accumulator = 0.0
 
         # Do something useful with the data.
         # We will present average power: 10log(((I^2 + Q ^2) / 2R) * 1000), where
         # R = 50 Ohms.
+
+        iq_data_array = np.zeros(number_of_samples, dtype=np.complex128)
+        wfm_info = rfsa_session.read_iq_single_record_into(iq_data_array)
+        samples = np.asarray(wfm_info.samples)
+        accumulator = 0.0
         if len(samples) > 0:
             for sample in samples:
                 magnitude_squared = sample.real * sample.real + sample.imag * sample.imag
-
                 # we need to handle this because log(0) return a range error.
                 if magnitude_squared == 0.0:
                     magnitude_squared = 0.00000001
-
                 accumulator += 10.0 * np.log10((magnitude_squared / (2.0 * 50.0)) * 1000.0)
-
             print('Average power = %0.1f dBm' % (accumulator / len(samples)))
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Acquires a power spectrum using NI-RFSA.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Acquires IQ data using NI-RFSA.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of the NI RF signal analyzer.')
     parser.add_argument('-c', '--iq-carrier-frequency', default=1e9, type=float, help='IQ carrier frequency in Hz.')
     parser.add_argument('-r', '--reference-level', default=0.0, type=float, help='Reference level in dBm.')
