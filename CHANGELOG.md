@@ -6,6 +6,7 @@
 - [nidmm (NI-DMM)](#nidmm-ni-dmm)
 - [nifgen (NI-FGEN)](#nifgen-ni-fgen)
 - [nimodinst (NI-ModInst)](#nimodinst-ni-modinst)
+- [nirfsa (NI-RFSA)](#nirfsa-ni-rfsa)
 - [nirfsg (NI-RFSG)](#nirfsg-ni-rfsg)
 - [niscope (NI-SCOPE)](#niscope-ni-scope)
 - [nise (NI Switch Executive)](#nise-ni-switch-executive)
@@ -1725,6 +1726,16 @@
 - Added
   - Initial release
 ---
+
+### nirfsa (NI-RFSA)
+
+- [Unreleased](#nirfsa-unreleased)
+
+#### [nirfsa] Unreleased
+- Added
+  - All methods and attributes which are part of first release
+- Changed
+- Removed
 
 ### nirfsg (NI-RFSG)
 
