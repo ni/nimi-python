@@ -48,7 +48,7 @@ def main():
 
 def test_example():
     options = {'simulate': True, 'driver_setup': {'Model': '5841', }, }
-    example('simulated5841', options, 1e9, 100e6, -10.0, 1024)
+    example('simulated5841', options, 1e9, 100e6, -10.0)
 
 
 def test_main():
