@@ -133,7 +133,7 @@ def main():
 def test_example():
     """Simulated hardware test — runs example() with virtual NI-2568 switch (no real HW needed)."""
     example(
-        resource_name='PXI2568',
+        resource_name='',
         topology='2568/31-SPST',
         scan_list='ch0->com0;',
         continuous_scan=True,
