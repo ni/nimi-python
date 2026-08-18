@@ -131,7 +131,7 @@ def main():
 
 
 def test_example():
-    """Simulated hardware test — runs example() with virtual NI-2568 switch (no real HW needed)."""
+    """Simulated hardware test — runs example() with virtual NI-2568 switch module(no real HW needed)."""
     example(
         resource_name='',
         topology='2568/31-SPST',
