@@ -13,12 +13,12 @@ def example(resource_name, options, iq_carrier_frequency, reference_level, numbe
         rfsa_session.iq_carrier_frequency = iq_carrier_frequency
         rfsa_session.number_of_samples = number_of_samples
 
+        iq_data_array = np.zeros(number_of_samples, dtype=np.complex128)
+        wfm_info = rfsa_session.read_iq_single_record_into(iq_data_array)
+
         # Do something useful with the data.
         # We will present average power: 10log(((I^2 + Q ^2) / 2R) * 1000), where
         # R = 50 Ohms.
-
-        iq_data_array = np.zeros(number_of_samples, dtype=np.complex128)
-        wfm_info = rfsa_session.read_iq_single_record_into(iq_data_array)
         samples = np.asarray(wfm_info.samples)
         accumulator = 0.0
         if len(samples) > 0:
