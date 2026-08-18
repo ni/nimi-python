@@ -15,7 +15,7 @@ i.   From terminal (with default values):
         python nidcpower_hardware_timed_single_point.py
 
 ii.  From terminal (with custom values):
-        python nidcpower_hardware_timed_single_point.py -n "PXI1Slot1" \
+        python nidcpower_hardware_timed_single_point.py -n "PXI1Slot2" \
             -vl1 3.0 -vl2 5.0 -sd 0.1
 
 iii. To simulate without hardware:
@@ -39,7 +39,7 @@ def example(resource_name, options, voltage_level_1, voltage_level_2,
     """Core measurement logic — sources two voltage levels sequentially and returns both measurements.
 
     Args:
-        resource_name (str)         : NI-MAX resource name, eg: "PXI1Slot1"
+        resource_name (str)         : NI-MAX resource name, eg: "PXI1Slot2"
         options (str or dict)       : Driver options, eg: "" for real HW or simulate dict for simulation
         voltage_level_1 (float)     : First voltage level to source (V) —  must be <= voltage_level_range
         voltage_level_2 (float)     : Second voltage level to source (V) —  must be <= voltage_level_range
@@ -90,7 +90,7 @@ def _main(argsv):
         description='Hardware-timed single point: source two voltage levels and measure.',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot1', help='Resource name of NI SMU')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2/0', help='Resource name of NI SMU')
     parser.add_argument('-vl1', '--voltage-level-1', default=2.0, type=float, help='First voltage level (V)')
     parser.add_argument('-vl2', '--voltage-level-2', default=4.0, type=float, help='Second voltage level (V)')
     parser.add_argument('-vr', '--voltage-level-range', default=10.0, type=float, help='Voltage level range — must be >= both voltage levels (V)')
@@ -117,9 +117,9 @@ def main():
 
 
 def test_example():
-    """Simulated hardware test — runs example() with a virtual PXIe-4163 (no real HW needed)."""
+    """Simulated hardware test — runs example() with a virtual PXIe-4162 (no real HW needed)."""
     options = {'simulate': True, 'driver_setup': {'Model': '4162', 'BoardType': 'PXIe'}}
-    example('PXI1Slot1', options, 2.0, 4.0, 10.0, 0.01, 0.01, 0.05)
+    example('PXI1Slot2/0', options, 2.0, 4.0, 10.0, 0.01, 0.01, 0.05)
 
 
 def test_main():

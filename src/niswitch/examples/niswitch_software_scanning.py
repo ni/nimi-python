@@ -144,7 +144,7 @@ def test_example():
 
 def test_main():
     """Simulated CLI test — runs _main() with simulate flag."""
-    cmd_line = ['--simulate', '--continuous-scan']
+    cmd_line = ['--topology', '2568/31-SPST', '--simulate', '--continuous-scan']
     _main(cmd_line)
 
 
