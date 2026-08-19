@@ -1,3 +1,4 @@
+import grpc
 import hightime
 import nirfsa
 import numpy as np
@@ -608,3 +609,19 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpc(SystemTests):
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
+
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}

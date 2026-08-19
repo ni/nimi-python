@@ -7,6 +7,7 @@ __version__ = '1.0.0.dev0'
 from nirfsa.enums import *  # noqa: F403,F401,H303
 from nirfsa.errors import DriverWarning  # noqa: F401
 from nirfsa.errors import Error  # noqa: F401
+from nirfsa.grpc_session_options import *  # noqa: F403,F401,H303
 from nirfsa.session import Session  # noqa: F401
 
 from nirfsa.coefficient_info_type import CoefficientInfo  # noqa: F401
