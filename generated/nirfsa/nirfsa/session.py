@@ -482,7 +482,7 @@ class _SessionBase(object):
 
     **Valid Values for PXIe-5830/5832/5840/5841** : DeembeddingType.NONE or DeembeddingType.SCALAR
 
-    **Valid Values for PXIe-5842/5860** : DeembeddingType.NONE or DeembeddingType.SCALAR or NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS or NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS
+    **Valid Values for PXIe-5842/5860** : DeembeddingType.NONE or DeembeddingType.SCALAR or DeembeddingType.AMPLITUDE_FLATNESS
 
     **Valid Values for PXIe-5831:** DeembeddingType.NONE, DeembeddingType.SCALAR, or DeembeddingType.VECTOR. DeembeddingType.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
 
@@ -490,18 +490,17 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +------------------------+------------------------------------------------------------------------+
-    | Name                   | Description                                                            |
-    +========================+========================================================================+
-    | DeembeddingType.NONE   | De-embedding is not applied to the measurement.                        |
-    +------------------------+------------------------------------------------------------------------+
-    | DeembeddingType.SCALAR | De-embeds the measurement using only the gain term.                    |
-    +------------------------+------------------------------------------------------------------------+
-    | DeembeddingType.VECTOR | De-embeds the measurement using the gain term and the reflection term. |
-    +------------------------+------------------------------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+    +------------------------------------+-------------------------------------------------------------------------+
+    | Name                               | Description                                                             |
+    +====================================+=========================================================================+
+    | DeembeddingType.NONE               | De-embedding is not applied to the measurement.                         |
+    +------------------------------------+-------------------------------------------------------------------------+
+    | DeembeddingType.SCALAR             | De-embeds the measurement using only the gain term.                     |
+    +------------------------------------+-------------------------------------------------------------------------+
+    | DeembeddingType.VECTOR             | De-embeds the measurement using the gain term and the reflection term.  |
+    +------------------------------------+-------------------------------------------------------------------------+
+    | DeembeddingType.AMPLITUDE_FLATNESS | De-embeds the measurement using wideband amplitude flatness correction. |
+    +------------------------------------+-------------------------------------------------------------------------+
 
     Tip:
     This property can be set/get on specific ports within your :py:class:`nirfsa.Session` instance.

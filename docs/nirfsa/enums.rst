@@ -391,6 +391,16 @@ DeembeddingType
 
 
 
+    .. py:attribute:: DeembeddingType.AMPLITUDE_FLATNESS
+
+
+
+        De-embeds the measurement using wideband amplitude flatness correction.
+
+        
+
+
+
 DeviceResponseType
 ------------------
 
