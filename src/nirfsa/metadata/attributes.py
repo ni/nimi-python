@@ -3986,7 +3986,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsa_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to any value besides NIRFSA_VAL_DEEMBEDDING_TYPE_NONE, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Default Value**: NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841** : NIRFSA_VAL_DEEMBEDDING_TYPE_NONE or NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5842/5860** : NIRFSA_VAL_DEEMBEDDING_TYPE_NONE or NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS or NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS\n\n**Valid Values for PXIe-5831:** NIRFSA_VAL_DEEMBEDDING_TYPE_NONE, NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR. NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
+            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsa_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to any value besides NIRFSA_VAL_DEEMBEDDING_TYPE_NONE, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Default Value**: NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841** : NIRFSA_VAL_DEEMBEDDING_TYPE_NONE or NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5842/5860** : NIRFSA_VAL_DEEMBEDDING_TYPE_NONE or NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS\n\n**Valid Values for PXIe-5831:** NIRFSA_VAL_DEEMBEDDING_TYPE_NONE, NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR. NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSA_VAL_DEEMBEDDING_TYPE_NONE',
@@ -3999,6 +3999,10 @@ attributes = {
                 [
                     'NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR',
                     'De-embeds the measurement using the gain term and the reflection term.'
+                ],
+                [
+                    'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
+                    'De-embeds the measurement using wideband amplitude flatness correction.'
                 ]
             ],
             'table_header': [
