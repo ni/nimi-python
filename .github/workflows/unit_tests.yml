@@ -23,7 +23,17 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         # Run the code-generation Python version first, as Travis CI did.
-        python-version: ['3.12', '3.10', '3.11', '3.13', '3.14']
+        include:
+          - python-version: '3.12'
+            tox-version: '312'
+          - python-version: '3.10'
+            tox-version: '310'
+          - python-version: '3.11'
+            tox-version: '311'
+          - python-version: '3.13'
+            tox-version: '313'
+          - python-version: '3.14'
+            tox-version: '314'
     steps:
       - name: Check out repo
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -45,13 +55,13 @@ jobs:
           path: .tox
           key: nimi-python-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('tox.ini') }}
       - name: Build installers
-        run: tox -c tox.ini -e py${{ matrix.python-version }}-installers
+        run: tox -c tox.ini -e py${{ matrix.tox-version }}-installers
       - name: Run build and package checks
         if: matrix.python-version == '3.12'
         run: tox -c tox.ini -e py312-build_test,py312-flake8,py312-docs,py312-pkg
       - name: Run unit tests
         run: >-
-          mkdir -p test_results && tox -c tox.ini -e py${{ matrix.python-version }}-test --
+          mkdir -p test_results && tox -c tox.ini -e py${{ matrix.tox-version }}-test --
           --junitxml=test_results/unit-tests-${{ runner.os }}-py${{ matrix.python-version }}.xml
       - name: Upload codegen unit-test coverage
         uses: codecov/codecov-action@v3
