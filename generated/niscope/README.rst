@@ -12,9 +12,9 @@ Info         NI Modular Instrument driver APIs for Python.
 Author       NI
 ===========  ============================================================================================================================
 
-.. |BuildStatus| image:: https://api.travis-ci.com/ni/nimi-python.svg
+.. |BuildStatus| image:: https://github.com/ni/nimi-python/actions/workflows/unit_tests.yml/badge.svg?branch=master
     :alt: Build Status - master branch
-    :target: https://travis-ci.org/ni/nimi-python
+    :target: https://github.com/ni/nimi-python/actions/workflows/unit_tests.yml
 
 .. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License

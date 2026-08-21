@@ -69,7 +69,7 @@ installers: $(foreach d,$(ALL_DRIVERS), $(d)_installers)
 
 SUPPRESS_ERROR_OUTPUT ?= 2> /dev/null
 
-# We need to ensure generated exists for Travis CI builds
+# Keep the generated directory available for CI builds
 clean: start
 	@echo 'Cleaning...'
 	-$(_hide_cmds)rm -Rf $(GENERATED_DIR)/ $(SUPPRESS_ERROR_OUTPUT) ||:
