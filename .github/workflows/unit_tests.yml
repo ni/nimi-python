@@ -21,18 +21,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
         # Run the code-generation Python version first, as Travis CI did.
         include:
-          - python-version: '3.12'
+          - os: ubuntu-latest
+            python-version: '3.12'
             tox-version: '312'
-          - python-version: '3.10'
+          - os: ubuntu-latest
+            python-version: '3.10'
             tox-version: '310'
-          - python-version: '3.11'
+          - os: ubuntu-latest
+            python-version: '3.11'
             tox-version: '311'
-          - python-version: '3.13'
+          - os: ubuntu-latest
+            python-version: '3.13'
             tox-version: '313'
-          - python-version: '3.14'
+          - os: ubuntu-latest
+            python-version: '3.14'
             tox-version: '314'
     steps:
       - name: Check out repo
