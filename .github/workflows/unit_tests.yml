@@ -44,9 +44,14 @@ jobs:
         with:
           path: .tox
           key: nimi-python-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('tox.ini') }}
-      - name: Run tox
+      - name: Build installers
+        run: tox -c tox.ini -e py${{ matrix.python-version }}-installers
+      - name: Run build and package checks
+        if: matrix.python-version == '3.12'
+        run: tox -c tox.ini -e py312-build_test,py312-flake8,py312-docs,py312-pkg
+      - name: Run unit tests
         run: >-
-          mkdir -p test_results && tox -c tox.ini --
+          mkdir -p test_results && tox -c tox.ini -e py${{ matrix.python-version }}-test --
           --junitxml=test_results/unit-tests-${{ runner.os }}-py${{ matrix.python-version }}.xml
       - name: Upload codegen unit-test coverage
         uses: codecov/codecov-action@v3
