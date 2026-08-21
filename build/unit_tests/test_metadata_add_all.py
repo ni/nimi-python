@@ -1008,7 +1008,18 @@ config_expected = {
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
     'repeated_capabilities': [
-        {'python_name': 'channels', 'prefix': '', },
+        {
+            'python_name': 'channels',
+            'prefix': '',
+            'documentation': {
+                'description': '',
+                'examples': [
+                    "session.channels['0-2'].channel_enabled = True\n\n"
+                    "passes a string of :python:`'0, 1, 2'` to the set attribute function.",
+                ],
+                'valid_identifiers': [],
+            },
+        },
     ],
     'use_locking': True,
     'functions': functions_expected,

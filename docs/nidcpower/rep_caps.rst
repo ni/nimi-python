@@ -31,9 +31,8 @@ channels
         .. code:: python
 
             session.channels['0-2'].channel_enabled = True
-
-        passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
+            
+            passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 instruments
 -----------
@@ -43,8 +42,6 @@ instruments
         .. code:: python
 
             session.instruments['0-2'].channel_enabled = True
-
-        passes a string of :python:`'0, 1, 2'` to the set attribute function.
-
-
+            
+            passes a string of :python:`'0, 1, 2'` to the set attribute function.
 

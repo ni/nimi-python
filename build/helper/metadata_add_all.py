@@ -729,6 +729,38 @@ def add_all_config_metadata(config):
     '''
     config = merge_helper(config, 'config', config, use_re=False)
 
+    for repeated_capability in config['repeated_capabilities']:
+        documentation = repeated_capability.setdefault('documentation', {})
+        prefix = repeated_capability['prefix']
+        name = repeated_capability['python_name']
+
+        if prefix:
+            documentation.setdefault(
+                'description',
+                (
+                    'If no prefix is added to the items in the parameter, the correct prefix will be added when\n'
+                    'the driver function call is made.\n\n'
+                    ".. code:: python\n\n    session.{}['0-2'].channel_enabled = True\n\n"
+                    "passes a string of :python:`'{}0, {}1, {}2'` to the set attribute function.\n\n"
+                    'If an invalid repeated capability is passed to the driver, the driver will return an error.\n\n'
+                    'You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix\n'
+                    'for the specific repeated capability.'
+                ).format(name, prefix, prefix, prefix)
+            )
+        else:
+            documentation.setdefault('description', '')
+
+        documentation.setdefault(
+            'examples',
+            [
+                (
+                    "session.{}['{}0-{}2'].channel_enabled = True\n\n"
+                    "passes a string of :python:`'{}0, {}1, {}2'` to the set attribute function."
+                ).format(name, prefix, prefix, prefix, prefix, prefix)
+            ]
+        )
+        documentation.setdefault('valid_identifiers', [])
+
     if 'use_locking' not in config:
         config['use_locking'] = True
 
