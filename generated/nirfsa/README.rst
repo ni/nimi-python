@@ -104,7 +104,7 @@ As a prerequisite to using the **nirfsa** module, you must install the NI-RFSA r
 
 The nimi-python modules (i.e. for **NI-RFSA**) can be installed with `pip <http://pypi.python.org/pypi/pip>`_::
 
-  $ python -m pip install nirfsa~=1.0.0
+  $ python -m pip install nirfsa
 
 
 Contributing
