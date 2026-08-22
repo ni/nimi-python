@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Run the code-generation Python version first, as Travis CI did.
+        # Run the code-generation Python version first.
         include:
           - os: ubuntu-latest
             python-version: '3.12'
