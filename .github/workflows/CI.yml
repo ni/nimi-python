@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - releases/**
   workflow_call:
   workflow_dispatch:
 
