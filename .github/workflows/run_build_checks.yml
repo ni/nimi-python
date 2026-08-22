@@ -26,5 +26,7 @@ jobs:
         with:
           path: .tox
           key: nimi-python-build-checks-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('tox.ini') }}
+      - name: Build installers
+        run: tox -c tox.ini -e py312-installers
       - name: Run build and package checks
         run: tox -c tox.ini -e py312-build_test,py312-flake8,py312-docs,py312-pkg
