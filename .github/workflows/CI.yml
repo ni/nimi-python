@@ -18,7 +18,7 @@ jobs:
   run_unit_tests:
     name: Run unit tests
     needs: ensure_codegen_up_to_date
-    uses: ./.github/workflows/unit_tests.yml
+    uses: ./.github/workflows/run_unit_tests.yml
 
   run_build_checks:
     name: Run build checks
