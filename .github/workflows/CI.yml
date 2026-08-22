@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - releases/**
+  workflow_call:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ensure_codegen_up_to_date:
+    name: Ensure codegen is up to date
+    uses: ./.github/workflows/ensure_codegen_up_to_date.yml
+
+  run_unit_tests:
+    name: Run unit tests
+    needs: ensure_codegen_up_to_date
+    uses: ./.github/workflows/unit_tests.yml
+
+  run_build_checks:
+    name: Run build checks
+    needs: ensure_codegen_up_to_date
+    uses: ./.github/workflows/run_build_checks.yml
