@@ -51,13 +51,6 @@ jobs:
         run: >-
           mkdir -p test_results && tox -c tox.ini -e py${{ matrix.tox-version }}-test --
           --junitxml=test_results/unit-tests-${{ runner.os }}-py${{ matrix.python-version }}.xml
-      - name: Upload codegen unit-test coverage
-        uses: codecov/codecov-action@v3
-        with:
-          # See ../PUBLIC_CODECOV_TOKEN_README.md
-          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
-          flags: codegenunittests
-          files: ./codegen.xml
       - name: Upload nifake unit-test coverage
         uses: codecov/codecov-action@v3
         with:

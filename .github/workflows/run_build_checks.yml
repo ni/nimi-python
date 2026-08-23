@@ -30,3 +30,10 @@ jobs:
         run: tox -c tox.ini -e py312-installers
       - name: Run build and package checks
         run: tox -c tox.ini -e py312-build_test,py312-flake8,py312-docs,py312-pkg
+      - name: Upload codegen unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          # See ../PUBLIC_CODECOV_TOKEN_README.md
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: codegenunittests
+          files: ./codegen.xml
