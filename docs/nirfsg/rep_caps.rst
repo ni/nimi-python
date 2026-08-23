@@ -45,8 +45,8 @@ markers
         .. code:: python
 
             session.markers['marker0-marker2'].channel_enabled = True
-            
-            passes a string of :python:`'marker0, marker1, marker2'` to the set attribute function.
+
+        passes a string of :python:`'marker0, marker1, marker2'` to the set attribute function.
 
 script_triggers
 ---------------
@@ -70,8 +70,8 @@ script_triggers
         .. code:: python
 
             session.script_triggers['scripttrigger0-scripttrigger2'].channel_enabled = True
-            
-            passes a string of :python:`'scripttrigger0, scripttrigger1, scripttrigger2'` to the set attribute function.
+
+        passes a string of :python:`'scripttrigger0, scripttrigger1, scripttrigger2'` to the set attribute function.
 
 waveforms
 ---------
@@ -95,8 +95,8 @@ waveforms
         .. code:: python
 
             session.waveforms['waveform::0-waveform::2'].channel_enabled = True
-            
-            passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
+
+        passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
 
 ports
 -----
@@ -106,8 +106,8 @@ ports
         .. code:: python
 
             session.ports['0-2'].channel_enabled = True
-            
-            passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 los
 ---
@@ -131,8 +131,8 @@ los
         .. code:: python
 
             session.los['LO0-LO2'].channel_enabled = True
-            
-            passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
+
+        passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
 
 device_temperatures
 -------------------
@@ -142,8 +142,8 @@ device_temperatures
         .. code:: python
 
             session.device_temperatures['0-2'].channel_enabled = True
-            
-            passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 channels
 --------
@@ -153,6 +153,6 @@ channels
         .. code:: python
 
             session.channels['0-2'].channel_enabled = True
-            
-            passes a string of :python:`'0, 1, 2'` to the set attribute function.
+
+        passes a string of :python:`'0, 1, 2'` to the set attribute function.
 

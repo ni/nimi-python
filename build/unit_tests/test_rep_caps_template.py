@@ -1,16 +1,19 @@
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 
+from build.generate_template import generate_template
 from build.helper.metadata_add_all import add_all_config_metadata
-from mako.template import Template
 
 
 def _render_rep_caps(config):
     repo_root = Path(__file__).resolve().parents[2]
     template_path = repo_root / 'build' / 'templates' / 'rep_caps.rst.mako'
-    template = Template(filename=str(template_path))
     metadata = SimpleNamespace(config=add_all_config_metadata(config))
-    return template.render(template_parameters={'metadata': metadata})
+    with TemporaryDirectory() as temp_dir:
+        output_path = Path(temp_dir) / 'rep_caps.rst'
+        generate_template(str(template_path), {'metadata': metadata}, str(output_path))
+        return output_path.read_text()
 
 
 def test_rep_caps_template_uses_custom_documentation_overrides():
@@ -63,6 +66,10 @@ def test_rep_caps_template_preserves_default_prefixed_behavior():
     assert 'If no prefix is added to the items in the parameter' in rendered
     assert "session.channels['0-2'].channel_enabled = True" in rendered
     assert "'channel0, channel1, channel2'" in rendered
+    assert (
+        "            session.channels['0-2'].channel_enabled = True\n        \n"
+        "        passes a string of :python:`'channel0, channel1, channel2'` to the set attribute function."
+    ) in rendered
 
 
 def test_rep_caps_template_expands_default_documentation_fields():

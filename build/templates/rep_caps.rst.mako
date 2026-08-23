@@ -50,7 +50,11 @@ ${helper.get_rst_header_snippet(name, '-')}
 % for example in rep_cap_doc['examples']:
         .. code:: python
 
-            ${example.replace('\n', '\n            ')}
+            ${example.split('\n\n', 1)[0].replace('\n', '\n            ')}
 
+% if '\n\n' in example:
+        ${example.split('\n\n', 1)[1].replace('\n', '\n        ')}
+
+% endif
 % endfor
 % endfor
