@@ -43,8 +43,8 @@ ${helper.get_rst_header_snippet(name, '-')}
     ${rep_cap_doc['description'].replace('\n', '\n        ')}
 
 % endif
-% if rep_cap_doc['valid_identifiers']:
-        Valid identifiers: :python:`'${", ".join(rep_cap_doc["valid_identifiers"])}'`.
+% if rep_cap_doc['valid_indices']:
+    Valid Indices: :python:`'${", ".join(rep_cap_doc["valid_indices"])}'`.
 
 % endif
 % for example in rep_cap_doc['examples']:

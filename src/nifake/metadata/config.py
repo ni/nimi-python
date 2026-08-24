@@ -66,7 +66,7 @@ config = {
         {
             'documentation': {
                 'description': 'Sites are identified by the ``site`` prefix followed by a zero-based index.',
-                'valid_identifiers': ['site0', 'site1'],
+                'valid_indices': ['site0', 'site1'],
                 'examples': [
                     "session.sites['site0'].function_with_repeated_capability_type()",
                     "session.sites['site0', 'site1'].function_with_repeated_capability_type()",

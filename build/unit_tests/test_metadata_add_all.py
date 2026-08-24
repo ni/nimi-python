@@ -1017,7 +1017,7 @@ config_expected = {
                     "session.channels['0-2'].channel_enabled = True\n\n"
                     "passes a string of :python:`'0, 1, 2'` to the set attribute function.",
                 ],
-                'valid_identifiers': [],
+                'valid_indices': [],
             },
         },
     ],

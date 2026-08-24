@@ -759,7 +759,7 @@ def add_all_config_metadata(config):
                 ).format(name, prefix, prefix, prefix, prefix, prefix)
             ]
         )
-        documentation.setdefault('valid_identifiers', [])
+        documentation.setdefault('valid_indices', [])
 
     if 'use_locking' not in config:
         config['use_locking'] = True

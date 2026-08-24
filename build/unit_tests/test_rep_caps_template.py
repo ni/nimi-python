@@ -26,7 +26,7 @@ def test_rep_caps_template_uses_custom_documentation_overrides():
                 'python_name': 'resources',
                 'documentation': {
                     'description': 'Resource repeated capabilities use fully-qualified identifiers.',
-                    'valid_identifiers': ['dev0/res0', 'dev0/res1'],
+                    'valid_indices': ['dev0/res0', 'dev0/res1'],
                     'examples': [
                         "session.resources['dev0/res0'].channel_enabled = True",
                         "session.resources['dev0/res1'].channel_enabled = True",
@@ -39,7 +39,7 @@ def test_rep_caps_template_uses_custom_documentation_overrides():
     rendered = _render_rep_caps(config)
 
     assert 'Resource repeated capabilities use fully-qualified identifiers.' in rendered
-    assert "Valid identifiers: :python:`'dev0/res0, dev0/res1'`." in rendered
+    assert "Valid Indices: :python:`'dev0/res0, dev0/res1'`." in rendered
     assert "session.resources['dev0/res0'].channel_enabled = True" in rendered
     assert "session.resources['dev0/res1'].channel_enabled = True" in rendered
 
