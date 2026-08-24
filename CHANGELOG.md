@@ -53,6 +53,7 @@
 
 #### [nidcpower] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -555,6 +556,7 @@
 
 #### [nidigital] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -796,6 +798,7 @@
 
 #### [nidmm] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -1119,6 +1122,7 @@
 
 #### [nifgen] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -1732,6 +1736,7 @@
 
 #### [nirfsa] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -1749,6 +1754,7 @@
 
 #### [nirfsg] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -1887,6 +1893,7 @@
 
 #### [niscope] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
@@ -2498,6 +2505,7 @@
 
 #### [niswitch] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
 - Changed
 - Removed
 
