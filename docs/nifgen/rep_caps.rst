@@ -34,6 +34,7 @@ channels
 
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
+
 script_triggers
 ---------------
 
@@ -58,6 +59,7 @@ script_triggers
             session.script_triggers['ScriptTrigger0-ScriptTrigger2'].channel_enabled = True
 
         passes a string of :python:`'ScriptTrigger0, ScriptTrigger1, ScriptTrigger2'` to the set attribute function.
+
 
 markers
 -------
@@ -84,6 +86,7 @@ markers
 
         passes a string of :python:`'Marker0, Marker1, Marker2'` to the set attribute function.
 
+
 data_markers
 ------------
 
@@ -108,4 +111,6 @@ data_markers
             session.data_markers['DataMarker0-DataMarker2'].channel_enabled = True
 
         passes a string of :python:`'DataMarker0, DataMarker1, DataMarker2'` to the set attribute function.
+
+
 

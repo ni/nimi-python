@@ -57,6 +57,10 @@ def test_rep_caps_template_preserves_default_prefixed_behavior():
             {
                 'prefix': 'channel',
                 'python_name': 'channels',
+            },
+            {
+                'prefix': '',
+                'python_name': 'instruments',
             }
         ],
     }
@@ -71,6 +75,8 @@ def test_rep_caps_template_preserves_default_prefixed_behavior():
     )
     assert rendered.count(example_description) == 2
     assert '\n    passes a string' not in rendered
+    assert "set attribute function.\n\n\ninstruments\n" in rendered
+    assert rendered.endswith('\n\n\n\n')
     assert not any(line.isspace() for line in rendered.splitlines())
 
 
