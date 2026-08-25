@@ -151,6 +151,14 @@ class DeembeddingType(Enum):
     r'''
     De-embeds the measurement using the gain term and the reflection term.
     '''
+    AMPLITUDE_FLATNESS = 25003
+    r'''
+    De-embeds the measurement using wideband amplitude flatness correction.
+    '''
+    AMPLITUDE_AND_PHASE_FLATNESS = 25004
+    r'''
+    De-embeds the measurement using wideband amplitude and phase flatness correction.
+    '''
 
 
 class DigitalEqualizationEnabled(Enum):

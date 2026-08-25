@@ -5,7 +5,7 @@ of a coverage upload when using tokenless uploads. The underlying issue is rate-
 
 There are 2 possible fixes:
 1. Pass the token, when uploading
-2. Implement a retry on upload failure (we do this for travis-ci)
+2. Implement a retry on upload failure
 
 # OKAY, BUT WHY AREN'T WE STORING THIS TOKEN IN A SECRET?
 According to GitHub: "With the exception of GITHUB_TOKEN, secrets are not passed to the runner when a workflow is triggered from a forked repository."

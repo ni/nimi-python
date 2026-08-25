@@ -6,6 +6,7 @@
 - [nidmm (NI-DMM)](#nidmm-ni-dmm)
 - [nifgen (NI-FGEN)](#nifgen-ni-fgen)
 - [nimodinst (NI-ModInst)](#nimodinst-ni-modinst)
+- [nirfsa (NI-RFSA)](#nirfsa-ni-rfsa)
 - [nirfsg (NI-RFSG)](#nirfsg-ni-rfsg)
 - [niscope (NI-SCOPE)](#niscope-ni-scope)
 - [nise (NI Switch Executive)](#nise-ni-switch-executive)
@@ -15,7 +16,9 @@
 ---
 
 ### nidcpower (NI-DCPower)
-- [Unreleased](#nidcpower-unreleased)
+
+  [Unreleased](#nidcpower-unreleased)
+- [1.6.0](#nidcpower-160---2026-07-30)
 - [1.5.0](#nidcpower-150---2025-07-01)
 - [1.4.9](#nidcpower-149---2025-02-26)
 - [1.4.8](#nidcpower-148---2024-04-26)
@@ -49,6 +52,12 @@
 - [0.3.0](#nidcpower-030---2017-10-13)
 
 #### [nidcpower] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [nidcpower] 1.6.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -526,7 +535,8 @@
 
 ### nidigital (NI-Digital Pattern Driver)
 
-- [Unreleased](#nidigital-unreleased)
+  [Unreleased](#nidigital-unreleased)
+- [1.5.0](#nidigital-150---2026-07-30)
 - [1.4.9](#nidigital-149---2025-02-26)
 - [1.4.8](#nidigital-148---2024-04-26)
 - [1.4.6](#nidigital-146---2023-09-11)
@@ -545,6 +555,12 @@
 - [0.1.1](#nidigital-011---2019-10-21)
 
 #### [nidigital] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [nidigital] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -749,7 +765,8 @@
 
 ### nidmm (NI-DMM)
 
-- [Unreleased](#nidmm-unreleased)
+  [Unreleased](#nidmm-unreleased)
+- [1.5.0](#nidmm-150---2026-07-30)
 - [1.4.9](#nidmm-149---2025-02-26)
 - [1.4.8](#nidmm-148---2024-04-26)
 - [1.4.6](#nidmm-146---2023-09-11)
@@ -780,6 +797,12 @@
 - [0.1.0](#nidmm-010---2017-09-01)
 
 #### [nidmm] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [nidmm] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -1067,7 +1090,8 @@
 
 ### nifgen (NI-FGEN)
 
-- [Unreleased](#nifgen-unreleased)
+  [Unreleased](#nifgen-unreleased)
+- [1.5.0](#nifgen-150---2026-07-30)
 - [1.4.9](#nifgen-149---2025-02-26)
 - [1.4.8](#nifgen-148---2024-04-26)
 - [1.4.6](#nifgen-146---2023-09-11)
@@ -1097,6 +1121,12 @@
 - [0.4.0](#nifgen-040---2017-11-07)
 
 #### [nifgen] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [nifgen] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -1446,7 +1476,8 @@
 
 ### nimodinst (NI-ModInst)
 
-- [Unreleased](#nimodinst-unreleased)
+  [Unreleased](#nimodinst-unreleased)
+- [1.5.0](#nimodinst-150---2026-07-30)
 - [1.4.9](#nimodinst-149---2025-02-26)
 - [1.4.8](#nimodinst-148---2024-04-26)
 - [1.4.6](#nimodinst-146---2023-09-11)
@@ -1475,6 +1506,11 @@
 - [0.2.0](#nimodinst-020---2017-09-20)
 
 #### [nimodinst] Unreleased
+- Added
+- Changed
+- Removed
+
+#### [nimodinst] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -1693,15 +1729,38 @@
   - Initial release
 ---
 
+### nirfsa (NI-RFSA)
+
+- [Unreleased](#nirfsa-unreleased)
+- [1.0.0](#nirfsa-100---2026-08-20)
+
+#### [nirfsa] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [nirfsa] 1.0.0 - 2026-08-20
+- Added
+  - All methods and attributes which are part of first release
+
 ### nirfsg (NI-RFSG)
 
 - [Unreleased](#nirfsg-unreleased)
+- [1.2.0](#nirfsg-120---2026-07-29)
 - [1.1.0](#nirfsg-110---2026-04-17)
 - [1.0.1](#nirfsg-101---2026-01-09)
 - [1.0.0](#nirfsg-100---2025-08-05)
 
 #### [nirfsg] Unreleased
 - Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [nirfsg] 1.2.0 - 2026-07-29
+- Added
+  - `AMPLITUDE_FLATNESS` and `AMPLITUDE_AND_PHASE_FLATNESS` added to enum `DeembeddingType`
 - Changed
 - Removed
 
@@ -1805,7 +1864,8 @@
 
 ### niscope (NI-SCOPE)
 
-- [Unreleased](#niscope-unreleased)
+  [Unreleased](#niscope-unreleased)
+- [1.5.0](#niscope-150---2026-07-30)
 - [1.4.9](#niscope-149---2025-02-26)
 - [1.4.8](#niscope-148---2024-04-26)
 - [1.4.6](#niscope-146---2023-09-11)
@@ -1832,6 +1892,12 @@
 - [0.5.0](#niscope-050---2017-11-27)
 
 #### [niscope] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [niscope] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -2252,7 +2318,8 @@
 
 ### nise (NI Switch Executive)
 
-- [Unreleased](#nise-unreleased)
+  [Unreleased](#nise-unreleased)
+- [1.5.0](#nise-150---2026-07-30)
 - [1.4.9](#nise-149---2025-02-26)
 - [1.4.8](#nise-148---2024-04-26)
 - [1.4.6](#nise-146---2023-09-11)
@@ -2273,6 +2340,11 @@
 - [0.1.0](#nise-010---2018-10-17)
 
 #### [nise] Unreleased
+- Added
+- Changed
+- Removed
+
+#### [nise] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -2400,7 +2472,8 @@
 
 ### niswitch (NI-SWITCH)
 
-- [Unreleased](#niswitch-unreleased)
+  [Unreleased](#niswitch-unreleased)
+- [1.5.0](#niswitch-150---2026-07-30)
 - [1.4.9](#niswitch-149---2025-02-26)
 - [1.4.8](#niswitch-148---2024-04-26)
 - [1.4.6](#niswitch-146---2023-09-11)
@@ -2431,6 +2504,12 @@
 - [0.2.0](#niswitch-020---2017-09-20)
 
 #### [niswitch] Unreleased
+- Added
+  - (Common) Added `nitlsconfig[grpc]>=1.0.0a1` to the optional gRPC dependencies.
+- Changed
+- Removed
+
+#### [niswitch] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed
@@ -2665,7 +2744,8 @@
 
 ### nitclk (NI-TClk)
 
-- [Unreleased](#nitclk-unreleased)
+  [Unreleased](#nitclk-unreleased)
+- [1.5.0](#nitclk-150---2026-07-30)
 - [1.4.9](#nitclk-149---2025-02-26)
 - [1.4.8](#nitclk-148---2024-04-26)
 - [1.4.6](#nitclk-146---2023-09-11)
@@ -2684,6 +2764,11 @@
 - [0.1.0](#nitclk-010---2019-10-21)
 
 #### [nitclk] Unreleased
+- Added
+- Changed
+- Removed
+
+#### [nitclk] 1.5.0 - 2026-07-30
 - Added
   - Python 3.14 Support
 - Changed

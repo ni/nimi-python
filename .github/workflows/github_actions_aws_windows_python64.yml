@@ -51,6 +51,7 @@ jobs:
             - nifgen
             - nidcpower
             - nidmm
+            - nirfsa
             - nirfsg
             - niscope
             - nimodinst

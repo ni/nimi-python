@@ -1,0 +1,101 @@
+name: Run unit tests
+
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  run_unit_tests:
+    name: Run unit tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python-version: '3.10'
+            tox-version: '310'
+          - os: ubuntu-latest
+            python-version: '3.11'
+            tox-version: '311'
+          - os: ubuntu-latest
+            python-version: '3.12'
+            tox-version: '312'
+          - os: ubuntu-latest
+            python-version: '3.13'
+            tox-version: '313'
+          - os: ubuntu-latest
+            python-version: '3.14'
+            tox-version: '314'
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          submodules: recursive
+      - name: Set up Python
+        uses: ni/python-actions/setup-python@aa64e60612cb078b0c2ada666becbd70d4817d55 # v0.7.1
+        id: setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install tox
+        run: python -m pip install --upgrade tox
+      - name: Cache tox environments
+        uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5.0.2
+        with:
+          path: .tox
+          key: nimi-python-${{ runner.os }}-py${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('tox.ini') }}
+      - name: Build installers
+        run: tox -c tox.ini -e py${{ matrix.tox-version }}-installers
+      - name: Run unit tests
+        run: >-
+          mkdir -p test_results && tox -c tox.ini -e py${{ matrix.tox-version }}-test --
+          --junitxml=test_results/unit-tests-${{ runner.os }}-py${{ matrix.python-version }}.xml
+      - name: Upload nifake unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nifakeunittests
+          files: ./nifakeunittest.xml
+      - name: Upload nidcpower unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nidcpowerunittests
+          files: ./nidcpowerunittest.xml
+      - name: Upload nidigital unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nidigitalunittests
+          files: ./nidigitalunittest.xml
+      - name: Upload nimodinst unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nimodinstunittests
+          files: ./nimodinstunittest.xml
+      - name: Upload nirfsa unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nirfsaunittests
+          files: ./nirfsaunittest.xml
+      - name: Upload niscope unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: niscopeunittests
+          files: ./niscopeunittest.xml
+      - name: Upload nitclk unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nitclkunittests
+          files: ./nitclkunittest.xml
+      - name: Upload test results
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: test_results_unit_${{ runner.os }}_py${{ matrix.python-version }}
+          path: test_results/*.xml
+        if: always()

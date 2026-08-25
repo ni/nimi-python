@@ -63,7 +63,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.4.10.dev0'
+release = '1.5.1.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -189,6 +189,7 @@ intersphinx_mapping = {
     'nidmm': ('https://nidmm.readthedocs.io/en/latest/', None),
     'nifgen': ('https://nifgen.readthedocs.io/en/latest/', None),
     'nimodinst': ('https://nimodinst.readthedocs.io/en/latest/', None),
+    'nirfsa': ('https://nirfsa.readthedocs.io/en/latest/', None),
     'nirfsg': ('https://nirfsg.readthedocs.io/en/latest/', None),
     'niscope': ('https://niscope.readthedocs.io/en/latest/', None),
     'nise': ('https://nise.readthedocs.io/en/latest/', None),

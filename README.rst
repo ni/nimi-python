@@ -12,9 +12,9 @@ Info         NI Modular Instrument driver APIs for Python.
 Author       NI
 ===========  ============================================================================================================================
 
-.. |BuildStatus| image:: https://api.travis-ci.com/ni/nimi-python.svg
+.. |BuildStatus| image:: https://github.com/ni/nimi-python/actions/workflows/CI.yml/badge.svg?branch=master
     :alt: Build Status - master branch
-    :target: https://travis-ci.org/ni/nimi-python
+    :target: https://github.com/ni/nimi-python/actions/workflows/CI.yml
 
 .. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License
@@ -46,6 +46,7 @@ following drivers are supported:
 * NI-DMM (Python module: nidmm)
 * NI-FGEN (Python module: nifgen)
 * NI-ModInst (Python module: nimodinst)
+* NI-RFSA (Python module: nirfsa)
 * NI-RFSG (Python module: nirfsg)
 * NI-SCOPE (Python module: niscope)
 * NI Switch Executive (Python module: nise)
@@ -68,7 +69,7 @@ NI-DCPower Python API Status
 +-------------------------------+--------------------------+
 | NI-DCPower (nidcpower)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 2025 Q4 Patch 1          |
+| Driver Version Tested Against | 2026 Q3                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nidcpowerLatestVersion| |
 +-------------------------------+--------------------------+
@@ -114,7 +115,7 @@ NI-Digital Pattern Driver Python API Status
 +---------------------------------------+--------------------------+
 | NI-Digital Pattern Driver (nidigital) |                          |
 +=======================================+==========================+
-| Driver Version Tested Against         | 2025 Q4                  |
+| Driver Version Tested Against         | 2026 Q3                  |
 +---------------------------------------+--------------------------+
 | PyPI Version                          | |nidigitalLatestVersion| |
 +---------------------------------------+--------------------------+
@@ -160,7 +161,7 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
-| Driver Version Tested Against | 2025 Q4              |
+| Driver Version Tested Against | 2026 Q3              |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+
@@ -206,7 +207,7 @@ NI-FGEN Python API Status
 +-------------------------------+-----------------------+
 | NI-FGEN (nifgen)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2025 Q4               |
+| Driver Version Tested Against | 2026 Q3               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nifgenLatestVersion| |
 +-------------------------------+-----------------------+
@@ -252,7 +253,7 @@ NI-ModInst Python API Status
 +-------------------------------+--------------------------+
 | NI-ModInst (nimodinst)        |                          |
 +===============================+==========================+
-| Driver Version Tested Against | 2025 Q4                  |
+| Driver Version Tested Against | 2026 Q3                  |
 +-------------------------------+--------------------------+
 | PyPI Version                  | |nimodinstLatestVersion| |
 +-------------------------------+--------------------------+
@@ -292,13 +293,59 @@ NI-ModInst Python API Status
 
 
 
+NI-RFSA Python API Status
+-------------------------
+
++-------------------------------+-----------------------+
+| NI-RFSA (nirfsa)              |                       |
++===============================+=======================+
+| Driver Version Tested Against | 2026 Q3               |
++-------------------------------+-----------------------+
+| PyPI Version                  | |nirfsaLatestVersion| |
++-------------------------------+-----------------------+
+| Supported Python Version      | |nirfsaPythonVersion| |
++-------------------------------+-----------------------+
+| Documentation                 | |nirfsaDocs|          |
++-------------------------------+-----------------------+
+| Open Issues                   | |nirfsaOpenIssues|    |
++-------------------------------+-----------------------+
+| Open Pull Requests            | |nirfsaOpenPRs|       |
++-------------------------------+-----------------------+
+
+
+.. |nirfsaLatestVersion| image:: http://img.shields.io/pypi/v/nirfsa.svg
+    :alt: Latest NI-RFSA Version
+    :target: http://pypi.python.org/pypi/nirfsa
+
+
+.. |nirfsaPythonVersion| image:: http://img.shields.io/pypi/pyversions/nirfsa.svg
+    :alt: NI-RFSA supported Python versions
+    :target: http://pypi.python.org/pypi/nirfsa
+
+
+.. |nirfsaDocs| image:: https://readthedocs.org/projects/nirfsa/badge/?version=latest
+    :alt: NI-RFSA Python API Documentation Status
+    :target: https://nirfsa.readthedocs.io/en/latest
+
+
+.. |nirfsaOpenIssues| image:: https://img.shields.io/github/issues/ni/nimi-python/nirfsa.svg
+    :alt: Open Issues + Pull Requests for NI-RFSA
+    :target: https://github.com/ni/nimi-python/issues?q=is%3Aopen+is%3Aissue+label%3Anirfsa
+
+
+.. |nirfsaOpenPRs| image:: https://img.shields.io/github/issues-pr/ni/nimi-python/nirfsa.svg
+    :alt: Pull Requests for NI-RFSA
+    :target: https://github.com/ni/nimi-python/pulls?q=is%3Aopen+is%3Aissue+label%3Anirfsa
+
+
+
 NI-RFSG Python API Status
 -------------------------
 
 +-------------------------------+-----------------------+
 | NI-RFSG (nirfsg)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2025 Q4 Patch 1       |
+| Driver Version Tested Against | 2026 Q3               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsgLatestVersion| |
 +-------------------------------+-----------------------+
@@ -344,7 +391,7 @@ NI-SCOPE Python API Status
 +-------------------------------+------------------------+
 | NI-SCOPE (niscope)            |                        |
 +===============================+========================+
-| Driver Version Tested Against | 2025 Q4                |
+| Driver Version Tested Against | 2026 Q3                |
 +-------------------------------+------------------------+
 | PyPI Version                  | |niscopeLatestVersion| |
 +-------------------------------+------------------------+
@@ -436,7 +483,7 @@ NI-SWITCH Python API Status
 +-------------------------------+-------------------------+
 | NI-SWITCH (niswitch)          |                         |
 +===============================+=========================+
-| Driver Version Tested Against | 2025 Q4                 |
+| Driver Version Tested Against | 2026 Q3                 |
 +-------------------------------+-------------------------+
 | PyPI Version                  | |niswitchLatestVersion| |
 +-------------------------------+-------------------------+
@@ -482,7 +529,7 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | NI-TClk (nitclk)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2025 Q4               |
+| Driver Version Tested Against | 2026 Q3               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+
@@ -533,6 +580,7 @@ Driver specific installation instructions can be found on **Read the Docs**:
 * `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
 * `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
 * `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `nirfsa <https://nirfsa.readthedocs.io/en/latest/nirfsa.html#installation>`_
 * `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 * `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
 * `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
@@ -591,6 +639,7 @@ Documentation is available on **Read the Docs**:
 - https://nidmm.readthedocs.io
 - https://nifgen.readthedocs.io
 - https://nimodinst.readthedocs.io
+- https://nirfsa.readthedocs.io
 - https://nirfsg.readthedocs.io
 - https://niscope.readthedocs.io
 - https://nise.readthedocs.io

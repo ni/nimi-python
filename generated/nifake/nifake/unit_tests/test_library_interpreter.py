@@ -716,6 +716,36 @@ class TestLibraryInterpreter:
             assert e.description == test_error_desc
         self.patched_library.niFake_error_message.assert_called_once_with(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(test_error_code), _matchers.ViCharBufferMatcher(256))
 
+    def test_get_error_description_error_message_after_session_reset(self):
+        test_error_code = -42
+        test_error_desc = "The answer to the ultimate question"
+        self.patched_library.niFake_PoorlyNamedSimpleFunction.side_effect = self.side_effects_helper.niFake_PoorlyNamedSimpleFunction
+        self.side_effects_helper['PoorlyNamedSimpleFunction']['return'] = test_error_code
+        self.patched_library.niFake_GetError.side_effect = self.side_effects_helper.niFake_GetError
+        self.side_effects_helper['GetError']['errorCode'] = -1
+        self.side_effects_helper['GetError']['description'] = "Shouldn't get this"
+        self.side_effects_helper['GetError']['return'] = -2
+        self.side_effects_helper['error_message']['errorMessage'] = test_error_desc
+
+        def error_message_side_effect(vi, error_code, error_message_buf):
+            if vi.value == SESSION_NUM_FOR_TEST:
+                return -3
+            return self.side_effects_helper.niFake_error_message(vi, error_code, error_message_buf)
+
+        self.patched_library.niFake_error_message.side_effect = error_message_side_effect
+        interpreter = self.get_initialized_library_interpreter()
+        try:
+            interpreter.simple_function()
+            assert False
+        except nifake.Error as e:
+            assert e.code == test_error_code
+            assert e.description == test_error_desc
+        assert self.patched_library.niFake_error_message.call_count == 2
+        self.patched_library.niFake_error_message.assert_has_calls([
+            call(_matchers.ViSessionMatcher(SESSION_NUM_FOR_TEST), _matchers.ViInt32Matcher(test_error_code), _matchers.ViCharBufferMatcher(256)),
+            call(_matchers.ViSessionMatcher(0), _matchers.ViInt32Matcher(test_error_code), _matchers.ViCharBufferMatcher(256)),
+        ])
+
     # Custom types
 
     def test_set_custom_type(self):

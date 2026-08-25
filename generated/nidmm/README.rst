@@ -12,9 +12,9 @@ Info         NI Modular Instrument driver APIs for Python.
 Author       NI
 ===========  ============================================================================================================================
 
-.. |BuildStatus| image:: https://api.travis-ci.com/ni/nimi-python.svg
+.. |BuildStatus| image:: https://github.com/ni/nimi-python/actions/workflows/CI.yml/badge.svg?branch=master
     :alt: Build Status - master branch
-    :target: https://travis-ci.org/ni/nimi-python
+    :target: https://github.com/ni/nimi-python/actions/workflows/CI.yml
 
 .. |MITLicense| image:: https://img.shields.io/badge/License-MIT-yellow.svg
     :alt: MIT License
@@ -55,7 +55,7 @@ NI-DMM Python API Status
 +-------------------------------+----------------------+
 | NI-DMM (nidmm)                |                      |
 +===============================+======================+
-| Driver Version Tested Against | 2025 Q4              |
+| Driver Version Tested Against | 2026 Q3              |
 +-------------------------------+----------------------+
 | PyPI Version                  | |nidmmLatestVersion| |
 +-------------------------------+----------------------+

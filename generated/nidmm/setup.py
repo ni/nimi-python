@@ -16,7 +16,7 @@ def read_contents(file_to_read):
 setup(
     name=pypi_name,
     zip_safe=True,
-    version='1.4.10.dev0',
+    version='1.5.1.dev0',
     description='NI-DMM Python API',
     long_description=read_contents('README.rst'),
     long_description_content_type='text/x-rst',
@@ -37,7 +37,8 @@ setup(
         'grpc': [
             'grpcio>=1.59.0,<2.0',
             'protobuf>=4.21.6',
-            'ni.grpcdevice.v1.proto>=1.0.0'
+            'ni.grpcdevice.v1.proto>=1.0.0',
+            'nitlsconfig[grpc]>=1.0.0a1',
         ],
     },
     classifiers=[
