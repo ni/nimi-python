@@ -40,7 +40,7 @@ ${helper.get_rst_header_snippet(name, '-')}
     .. py:attribute:: ${module_name}.Session.${name}[]
 
 % if rep_cap_doc['description']:
-    ${rep_cap_doc['description'].replace('\n', '\n        ')}
+        ${rep_cap_doc['description'].replace('\n', '\n        ')}
 
 % endif
 % if rep_cap_doc['valid_indices']:

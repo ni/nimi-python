@@ -28,7 +28,7 @@ markers
 
     .. py:attribute:: nirfsg.Session.markers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -53,7 +53,7 @@ script_triggers
 
     .. py:attribute:: nirfsg.Session.script_triggers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -78,7 +78,7 @@ waveforms
 
     .. py:attribute:: nirfsg.Session.waveforms[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -114,7 +114,7 @@ los
 
     .. py:attribute:: nirfsg.Session.los[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python

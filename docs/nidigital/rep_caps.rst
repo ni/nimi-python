@@ -61,7 +61,7 @@ pattern_opcode_events
 
     .. py:attribute:: nidigital.Session.pattern_opcode_events[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -86,7 +86,7 @@ conditional_jump_triggers
 
     .. py:attribute:: nidigital.Session.conditional_jump_triggers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -111,7 +111,7 @@ sites
 
     .. py:attribute:: nidigital.Session.sites[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -136,7 +136,7 @@ rio_events
 
     .. py:attribute:: nidigital.Session.rio_events[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -161,7 +161,7 @@ rio_triggers
 
     .. py:attribute:: nidigital.Session.rio_triggers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python

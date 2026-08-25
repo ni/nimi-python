@@ -39,7 +39,7 @@ script_triggers
 
     .. py:attribute:: nifgen.Session.script_triggers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -64,7 +64,7 @@ markers
 
     .. py:attribute:: nifgen.Session.markers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
@@ -89,7 +89,7 @@ data_markers
 
     .. py:attribute:: nifgen.Session.data_markers[]
 
-    If no prefix is added to the items in the parameter, the correct prefix will be added when
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
         
         .. code:: python
