@@ -30,15 +30,15 @@ markers
 
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
-        
+
         .. code:: python
-        
+
             session.markers['0-2'].channel_enabled = True
-        
+
         passes a string of :python:`'marker0, marker1, marker2'` to the set attribute function.
-        
+
         If an invalid repeated capability is passed to the driver, the driver will return an error.
-        
+
         You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
         for the specific repeated capability.
 
@@ -55,15 +55,15 @@ script_triggers
 
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
-        
+
         .. code:: python
-        
+
             session.script_triggers['0-2'].channel_enabled = True
-        
+
         passes a string of :python:`'scripttrigger0, scripttrigger1, scripttrigger2'` to the set attribute function.
-        
+
         If an invalid repeated capability is passed to the driver, the driver will return an error.
-        
+
         You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
         for the specific repeated capability.
 
@@ -80,15 +80,15 @@ waveforms
 
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
-        
+
         .. code:: python
-        
+
             session.waveforms['0-2'].channel_enabled = True
-        
+
         passes a string of :python:`'waveform::0, waveform::1, waveform::2'` to the set attribute function.
-        
+
         If an invalid repeated capability is passed to the driver, the driver will return an error.
-        
+
         You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
         for the specific repeated capability.
 
@@ -116,15 +116,15 @@ los
 
         If no prefix is added to the items in the parameter, the correct prefix will be added when
         the driver function call is made.
-        
+
         .. code:: python
-        
+
             session.los['0-2'].channel_enabled = True
-        
+
         passes a string of :python:`'LO0, LO1, LO2'` to the set attribute function.
-        
+
         If an invalid repeated capability is passed to the driver, the driver will return an error.
-        
+
         You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
         for the specific repeated capability.
 

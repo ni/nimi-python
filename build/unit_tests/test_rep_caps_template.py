@@ -66,10 +66,12 @@ def test_rep_caps_template_preserves_default_prefixed_behavior():
     assert 'If no prefix is added to the items in the parameter' in rendered
     assert "session.channels['0-2'].channel_enabled = True" in rendered
     assert "'channel0, channel1, channel2'" in rendered
-    assert (
-        "            session.channels['0-2'].channel_enabled = True\n        \n"
+    example_description = (
         "        passes a string of :python:`'channel0, channel1, channel2'` to the set attribute function."
-    ) in rendered
+    )
+    assert rendered.count(example_description) == 2
+    assert '\n    passes a string' not in rendered
+    assert not any(line.isspace() for line in rendered.splitlines())
 
 
 def test_rep_caps_template_expands_default_documentation_fields():
