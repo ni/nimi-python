@@ -21,6 +21,15 @@ nidcpower_constant_resistance_and_constant_power.py
    :encoding: utf8
    :caption: `(nidcpower_constant_resistance_and_constant_power.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_constant_resistance_and_constant_power.py>`_
 
+nidcpower_hardware_timed_single_point.py
+----------------------------------------
+
+.. literalinclude:: ../../src/nidcpower/examples/nidcpower_hardware_timed_single_point.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidcpower_hardware_timed_single_point.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_hardware_timed_single_point.py>`_
+
 nidcpower_lcr_source_ac_voltage.py
 ----------------------------------
 
