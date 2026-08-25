@@ -75,6 +75,12 @@ jobs:
           token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
           flags: nimodinstunittests
           files: ./nimodinstunittest.xml
+      - name: Upload nirfsa unit-test coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: 4c58f03d-b74c-489a-889a-ab0a77b7809f
+          flags: nirfsaunittests
+          files: ./nirfsaunittest.xml
       - name: Upload niscope unit-test coverage
         uses: codecov/codecov-action@v3
         with:
