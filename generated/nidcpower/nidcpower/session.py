@@ -7681,7 +7681,14 @@ class Session(_SessionBase):
         # if _fancy_initialize fails, the error handler can reference it.
         # And then here, once _fancy_initialize succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
+        connected = False
+        try:
+            self._interpreter.set_session_handle(self._fancy_initialize(resource_name, channels, reset, options, independent_channels))
+            connected = True
+        finally:
+            if grpc_options:
+                import nitlsconfig
+                nitlsconfig.audit_session_connect('NI-DCPower', grpc_options.grpc_channel, connected)
 
         # Store the parameter list for later printing in __repr__
         param_list = []
