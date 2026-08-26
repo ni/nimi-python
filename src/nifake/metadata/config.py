@@ -64,14 +64,6 @@ config = {
             'python_name': 'channels'
         },
         {
-            'documentation': {
-                'description': 'Sites are identified by the ``site`` prefix followed by a zero-based index.',
-                'valid_indices': ['0', '1', '2', '3', '4'],
-                'examples': [
-                    "session.sites['site0'].function_with_repeated_capability_type()",
-                    "session.sites['site0', 'site1'].function_with_repeated_capability_type()",
-                ],
-            },
             'prefix': 'site',
             'python_name': 'sites'
         },
