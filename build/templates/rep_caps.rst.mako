@@ -1,6 +1,6 @@
 <%
     import build.helper as helper
-    import re
+    import textwrap
 
     config = template_parameters['metadata'].config
     module_name = config['module_name']
@@ -41,7 +41,7 @@ ${helper.get_rst_header_snippet(name, '-')}
     .. py:attribute:: ${module_name}.Session.${name}[]
 
 % if rep_cap_doc['description']:
-    ${'    ' + re.sub(r'\n(?=[^\n])', '\n        ', rep_cap_doc['description'])}
+${textwrap.indent(rep_cap_doc['description'], '        ')}
 
 % endif
 % if rep_cap_doc['valid_indices']:
@@ -54,7 +54,7 @@ ${helper.get_rst_header_snippet(name, '-')}
             ${example.split('\n\n', 1)[0].replace('\n', '\n            ')}
 
 % if '\n\n' in example:
-    ${'    ' + re.sub(r'\n(?=[^\n])', '\n        ', example.split('\n\n', 1)[1])}
+${textwrap.indent(example.split('\n\n', 1)[1], '        ')}
 
 % endif
 % endfor
