@@ -16,7 +16,7 @@ def _render_rep_caps(config):
         return output_path.read_text()
 
 
-def test_rep_caps_template_uses_custom_documentation_overrides():
+def test_custom_documentation_overwrites_rep_caps_template_defaults():
     config = {
         'module_name': 'nifake',
         'c_function_prefix': 'niFake_',
@@ -43,7 +43,7 @@ def test_rep_caps_template_uses_custom_documentation_overrides():
     assert "session.resources['dev0/res0'].channel_enabled = True" in rendered
     assert "session.resources['dev0/res1'].channel_enabled = True" in rendered
 
-    # Generic auto-prefix guidance should be suppressed when override disables it.
+    # Custom documentation should overwrite the generic auto-prefix guidance.
     assert 'If no prefix is added to the items in the parameter' not in rendered
     assert "session.resources['0-2'].channel_enabled = True" not in rendered
     assert "'res0, res1, res2'" not in rendered
