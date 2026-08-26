@@ -68,6 +68,12 @@ class TestSession:
         session.close()
         self.patched_library_interpreter.close.assert_called_once_with()
 
+    def test_init_without_grpc_options_does_not_audit(self):
+        with patch('nitlsconfig.audit_session_connect', autospec=True) as patched_audit:
+            with nifake.Session('dev1'):
+                pass
+        patched_audit.assert_not_called()
+
     def test_close(self):
         session = nifake.Session('dev1')
         assert session._interpreter._vi == SESSION_NUM_FOR_TEST
@@ -965,6 +971,19 @@ class TestGrpcSession:
         assert session._interpreter._vi == GRPC_SESSION_OBJECT_FOR_TEST
         session.close()
         self.patched_grpc_interpreter.close.assert_called_once_with()
+
+    def test_init_audits_successful_connect(self, nitls_tagged_channel):
+        with patch('nitlsconfig.audit_session_connect', autospec=True) as patched_audit:
+            with nifake.Session('dev1', grpc_options=nifake.GrpcSessionOptions(nitls_tagged_channel, '')):
+                pass
+        patched_audit.assert_called_once_with('NI-FAKE', nitls_tagged_channel, True)
+
+    def test_init_audits_failed_connect(self, nitls_tagged_channel):
+        self.patched_grpc_interpreter.init_with_options.side_effect = nifake.Error('Fake init failure')
+        with patch('nitlsconfig.audit_session_connect', autospec=True) as patched_audit:
+            with pytest.raises(nifake.Error):
+                nifake.Session('dev1', grpc_options=nifake.GrpcSessionOptions(nitls_tagged_channel, ''))
+        patched_audit.assert_called_once_with('NI-FAKE', nitls_tagged_channel, False)
 
     # Session locking
 
