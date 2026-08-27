@@ -753,10 +753,12 @@ def add_all_config_metadata(config):
         documentation.setdefault(
             'examples',
             [
-                (
-                    "session.{}['{}0-{}2'].channel_enabled = True\n\n"
-                    "passes a string of :python:`'{}0, {}1, {}2'` to the set attribute function."
-                ).format(name, prefix, prefix, prefix, prefix, prefix)
+                {
+                    'code': "session.{}['{}0-{}2'].channel_enabled = True".format(name, prefix, prefix),
+                    'description': (
+                        "passes a string of :python:`'{}0, {}1, {}2'` to the set attribute function."
+                    ).format(prefix, prefix, prefix),
+                }
             ]
         )
         documentation.setdefault('valid_indices', [])

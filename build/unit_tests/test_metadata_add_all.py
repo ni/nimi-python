@@ -1024,7 +1024,12 @@ config_with_custom_rep_cap_documentation['repeated_capabilities'] = [
         'prefix': 'res',
         'documentation': {
             'description': 'Resources use fully-qualified identifiers.',
-            'examples': ["session.resources['dev0/res0'].channel_enabled = True"],
+            'examples': [
+                {
+                    'code': "session.resources['dev0/res0'].channel_enabled = True",
+                    'description': 'Enables the first resource.',
+                }
+            ],
             'valid_indices': ['dev0/res0', 'dev0/res1'],
         },
     },
@@ -1089,11 +1094,9 @@ def test_add_all_metadata():
     actual_functions = copy.deepcopy(functions_input)
     actual_attributes = copy.deepcopy(attributes_input)
     actual_enums = copy.deepcopy(enums_input)
-    # actual_config = copy.deepcopy(config_input)
     actual_config = copy.deepcopy(config_with_custom_rep_cap_documentation)
     actual_config['use_locking'] = False
     expected = copy.deepcopy(config_with_custom_rep_cap_documentation_expected)
-    # expected = copy.deepcopy(config_expected)
     expected['use_locking'] = False
     _do_the_test_add_all_metadata(
         functions=actual_functions,

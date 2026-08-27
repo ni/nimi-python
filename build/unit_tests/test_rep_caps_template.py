@@ -28,8 +28,20 @@ def test_custom_documentation_overwrites_rep_caps_template_defaults():
                     'description': 'Resource repeated capabilities use fully-qualified identifiers.',
                     'valid_indices': ['dev0/res0', 'dev0/res1'],
                     'examples': [
-                        "session.resources['dev0/res0'].channel_enabled = True",
-                        "session.resources['dev0/res1'].channel_enabled = True",
+                        {
+                            'code': (
+                                "session.resources['dev0/res0'].channel_enabled = True\n"
+                                "session.resources['dev0/res1'].channel_enabled = True"
+                            ),
+                            'description': (
+                                'The first line enables resource 0.\n'
+                                'The second line enables resource 1.'
+                            ),
+                        },
+                        {
+                            'code': "session.resources['dev0/res2'].channel_enabled = True",
+                            'description': '',
+                        },
                     ],
                 },
             }
@@ -42,8 +54,10 @@ def test_custom_documentation_overwrites_rep_caps_template_defaults():
     assert "Valid Indices: :python:`'dev0/res0, dev0/res1'`." in rendered
     assert "session.resources['dev0/res0'].channel_enabled = True" in rendered
     assert "session.resources['dev0/res1'].channel_enabled = True" in rendered
+    assert "session.resources['dev0/res2'].channel_enabled = True" in rendered
+    assert '        The first line enables resource 0.\n        The second line enables resource 1.' in rendered
 
-    # Custom documentation should overwrite the generic auto-prefix guidance.
+    # Custom documentation should override the generic auto-prefix guidance.
     assert 'If no prefix is added to the items in the parameter' not in rendered
     assert "session.resources['0-2'].channel_enabled = True" not in rendered
     assert "'res0, res1, res2'" not in rendered

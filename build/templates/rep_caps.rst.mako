@@ -51,10 +51,10 @@ ${textwrap.indent(rep_cap_doc['description'], '        ')}
 % for example in rep_cap_doc['examples']:
         .. code:: python
 
-            ${example.split('\n\n', 1)[0].replace('\n', '\n            ')}
+${textwrap.indent(example['code'], '            ')}
 
-% if '\n\n' in example:
-${textwrap.indent(example.split('\n\n', 1)[1], '        ')}
+% if example['description']:
+${textwrap.indent(example['description'], '        ')}
 
 % endif
 % endfor
