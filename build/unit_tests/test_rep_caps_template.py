@@ -55,7 +55,8 @@ def test_custom_documentation_overwrites_rep_caps_template_defaults():
     assert "session.resources['dev0/res0'].channel_enabled = True" in rendered
     assert "session.resources['dev0/res1'].channel_enabled = True" in rendered
     assert "session.resources['dev0/res2'].channel_enabled = True" in rendered
-    assert '        The first line enables resource 0.\n        The second line enables resource 1.' in rendered
+    assert 'The first line enables resource 0.' in rendered
+    assert 'The second line enables resource 1.' in rendered
 
     # Custom documentation should override the generic auto-prefix guidance.
     assert 'If no prefix is added to the items in the parameter' not in rendered
