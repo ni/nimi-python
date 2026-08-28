@@ -350,6 +350,10 @@ class TestSession:
         with nifake.Session('dev1') as session:
             assert session.sites[0, 1].channels[2, 3]._repeated_capability_list == ['site0/2', 'site0/3', 'site1/2', 'site1/3']
 
+    def test_multi_instrument_chained_repeated_capabilities_list(self):
+        with nifake.Session('dev1,dev2') as session:
+            assert session.instruments['dev1', 'dev2'].sites[0, 1]._repeated_capability_list == ['dev1/site0', 'dev1/site1', 'dev2/site0', 'dev2/site1']
+
     def test_chained_repeated_capability_method_on_specific_channel(self):
         test_maximum_time_ms = 10     # milliseconds
         test_maximum_time = hightime.timedelta(milliseconds=test_maximum_time_ms)
