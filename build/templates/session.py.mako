@@ -276,7 +276,18 @@ if grpc_supported:
         # if ${init_function['python_name']} fails, the error handler can reference it.
         # And then here, once ${init_function['python_name']} succeeds, we call set_session_handle
         # with the actual session handle.
+% if grpc_supported:
+        connected = False
+        try:
+            self._interpreter.set_session_handle(self.${init_function['python_name']}(${init_call_params}))
+            connected = True
+        finally:
+            if grpc_options:
+                import nitlsconfig
+                nitlsconfig.audit_session_connect('${config['driver_name']}', grpc_options.grpc_channel, connected)
+% else:
         self._interpreter.set_session_handle(self.${init_function['python_name']}(${init_call_params}))
+% endif
 
 % if config['uses_nitclk']:
 %   if grpc_supported:

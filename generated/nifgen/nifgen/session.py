@@ -3166,7 +3166,14 @@ class Session(_SessionBase):
         # if _initialize_with_channels fails, the error handler can reference it.
         # And then here, once _initialize_with_channels succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self._initialize_with_channels(resource_name, channel_name, reset_device, options))
+        connected = False
+        try:
+            self._interpreter.set_session_handle(self._initialize_with_channels(resource_name, channel_name, reset_device, options))
+            connected = True
+        finally:
+            if grpc_options:
+                import nitlsconfig
+                nitlsconfig.audit_session_connect('NI-FGEN', grpc_options.grpc_channel, connected)
 
         # NI-TClk does not work over NI gRPC Device Server
         if not grpc_options:

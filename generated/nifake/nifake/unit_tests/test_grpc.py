@@ -4,6 +4,7 @@ import grpc
 import math
 import nifake
 import nifake.errors
+import nitlsconfig
 import numpy
 import pytest
 import session_pb2
@@ -175,6 +176,24 @@ class TestGrpcStubInterpreter:
         expected_error_message = 'Failed to connect to server'
         self._set_side_effect(library_func, side_effect=MyRpcError(None, '', grpc_error=grpc_error))
         grpc_options = nifake.GrpcSessionOptions(object(), '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
+        interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
+        try:
+            interpreter.init_with_options('dev1', False, False, '')
+            assert False
+        except nifake.Error as e:
+            assert e.rpc_code == grpc_error
+            assert e.description == expected_error_message
+            assert str(e) == f'StatusCode.UNAVAILABLE: {expected_error_message}'
+
+    def test_server_unavailable_with_tls_elaboration(self, nitls_tagged_channel):
+        library_func = 'InitWithOptions'
+        grpc_error = grpc.StatusCode.UNAVAILABLE
+        self._set_side_effect(library_func, side_effect=MyRpcError(None, '', grpc_error=grpc_error))
+        # The real elaboration, so this fails if nitlsconfig stops recognizing our channel.
+        expected_error_message = nitlsconfig.get_tls_connection_error_elaboration(nitls_tagged_channel)
+        assert expected_error_message is not None
+        assert expected_error_message != 'Failed to connect to server'
+        grpc_options = nifake.GrpcSessionOptions(nitls_tagged_channel, '', initialization_behavior=nifake.SessionInitializationBehavior.AUTO)
         interpreter = nifake._grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
         try:
             interpreter.init_with_options('dev1', False, False, '')
