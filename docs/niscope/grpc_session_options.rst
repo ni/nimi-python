@@ -19,9 +19,10 @@ Every NI-SCOPE gRPC session is created from a ``grpc.Channel`` that you build an
 close it after the last session using it is closed.
 
 The recommended way to create a gRPC channel to a remote system running NI gRPC Device Server is
-``create_grpc_device_channel`` from the `nitlsconfig <https://pypi.org/project/nitlsconfig/>`_ package,
-which the ``grpc`` extra installs for you. It reads the nitlsconfig client configuration installed
-with the NI-SCOPE runtime and by default will attempt to build an encrypted gRPC channel using mTLS.
+:py:func:`nitlsconfig.create_grpc_device_channel() <nitlsconfig.grpc_channel.create_grpc_device_channel>`
+from the `nitlsconfig <https://nitlsconfig-python.readthedocs.io/en/latest/>`_ package, which the
+``grpc`` extra installs for you. It reads the nitlsconfig client configuration installed with the
+NI-SCOPE runtime and by default will attempt to build an encrypted gRPC channel using mTLS.
 
 Before ``create_grpc_device_channel`` can succeed, you must use NI Hardware Manager to perform a
 certificate exchange with the remote system.
