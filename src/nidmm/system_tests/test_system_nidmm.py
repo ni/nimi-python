@@ -1,7 +1,6 @@
 import math
 import os
 import pathlib
-import shutil
 import sys
 import tempfile
 import time
@@ -411,12 +410,22 @@ class TestGrpcUnsecuredTLS:
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
+    def test_take_simple_measurement_works(self, session):
+        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
+        assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
+
     def test_acquisition(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         with session.initiate():
             session.fetch()
         with session.initiate():
             session.fetch()
+
+    def test_multi_point_acquisition(self, session):
+        session.configure_multi_point(4, 2)
+        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
+        measurements = session.read_multi_point(8)
+        assert len(measurements) == 8
 
 
 class TestGrpcNoTLS:
@@ -438,12 +447,22 @@ class TestGrpcNoTLS:
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
+    def test_take_simple_measurement_works(self, session):
+        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
+        assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
+
     def test_acquisition(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         with session.initiate():
             session.fetch()
         with session.initiate():
             session.fetch()
+
+    def test_multi_point_acquisition(self, session):
+        session.configure_multi_point(4, 2)
+        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
+        measurements = session.read_multi_point(8)
+        assert len(measurements) == 8
 
 
 def test_unsecured_client():
