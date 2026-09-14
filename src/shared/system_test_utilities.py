@@ -118,19 +118,23 @@ def exchange_certificates(
     # 26.5 versions of ni-grpc-device server installers do not properly create the trusted.d directory,
     # which causes issues with the certificate exchange process. This has been fixed in the 26.8 version
     # of the installer, but it has not yet been released. For now, we're creating it manually; this can
-    # be removed once nimibot system tests are updated to test against 26.8 versions of the drivers.
-    trusted_servers_path = pathlib.Path(
-        r"C:/ProgramData/National Instruments/nitlsconfig/server.d/ni-grpc-device/trusted.d"
-        if sys.platform == "win32" else
-        r"/etc/nitlsconfig/server.d/ni-grpc-device/trusted.d"
-    )
+    # be removed once nimibot system tests are updated to test against >= 26.8 versions of the drivers.
+    trusted_servers_path = pathlib.Path(r"C:/ProgramData/National Instruments/nitlsconfig/server.d/ni-grpc-device/trusted.d")
     trusted_servers_path.mkdir(parents=True, exist_ok=True)
 
-    script_path = (
-        r"C:/NITests/nitlsconfigtest/exchange_certificates.py"
-        if sys.platform == "win32" else
-        r"/opt/NITests/nitlsconfigtest/exchange_certificates.py"
+    # 26.5 versions of ni-grpc-device client configuration use a default certificate_mode of Disabled,
+    # which prevents client-side certificate generation from this script. In 26.8 and beyond, the default
+    # is Managed. We set it manually here; this can be removed once nimibot system tests are updated to
+    # test against >= 26.8 versions of the drivers.
+    client_config_path = (
+        pathlib.Path(os.environ["LOCALAPPDATA"])
+        / "National Instruments" / "nitlsconfig" / "client.d" / "ni-grpc-device.conf.yml"
     )
+    content = client_config_path.read_text()
+    content = re.sub(r"(?m)^certificate_mode:.*$", "certificate_mode: Managed", content)
+    client_config_path.write_text(content)
+
+    script_path = r"C:/NITests/nitlsconfigtest/exchange_certificates.py"
     if not pathlib.Path(script_path).is_file():
         raise FileNotFoundError(f"Certificate exchange script not found: {script_path}")
 
@@ -163,11 +167,7 @@ def configure_tls_modes(
     client_cert_mode: str | None = None,
     client_server_mode: str | None = None,
 ):
-    script_path = (
-        r"C:/NITests/nitlsconfigtest/configure_tls_modes.py"
-        if sys.platform == "win32" else
-        r"/opt/NITests/nitlsconfigtest/configure_tls_modes.py"
-    )
+    script_path = r"C:/NITests/nitlsconfigtest/configure_tls_modes.py"
     if not pathlib.Path(script_path).is_file():
         raise FileNotFoundError(f"Configure TLS modes script not found: {script_path}")
 
