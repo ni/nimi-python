@@ -1,3 +1,4 @@
+import ctypes
 import json
 import os
 import pathlib
@@ -7,6 +8,23 @@ import subprocess
 import sys
 import threading
 import time
+
+
+def _disable_wow64_fs_redirection():
+    # A 32-bit test process can't see the native 64-bit nitlsconfig.exe otherwise: WOW64 silently
+    # redirects its System32 lookups to SysWOW64, which only has a same-named DLL, not the CLI exe.
+    # This must run once, early, since it only affects the calling (main) thread going forward, and
+    # every "nitlsconfig" subprocess call in this test run happens from that same thread.
+    if os.name != "nt":
+        return
+    old = ctypes.c_void_p()
+    try:
+        ctypes.windll.kernel32.Wow64DisableWow64FsRedirection(ctypes.byref(old))
+    except (AttributeError, OSError):
+        pass
+
+
+_disable_wow64_fs_redirection()
 
 
 class GrpcServerProcess:
@@ -108,25 +126,6 @@ def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_
     assert not t2.is_alive()
 
 
-def _run_nitlsconfigtest_script(script_path: str, args: list, env: dict) -> None:
-    # The nitlsconfig CLI these scripts shell out to lives only in the real (64-bit) System32.
-    # Adding Sysnative to PATH doesn't help: CreateProcess's implicit PATH search for a bare
-    # command name still goes through WOW64 redirection. Disabling redirection only affects the
-    # calling thread, so we disable it and run the script in-process (via runpy) instead of as a
-    # separate subprocess, ensuring its own "nitlsconfig" subprocess call inherits the disabled state.
-    bootstrap = (
-        "import ctypes, runpy, sys\n"
-        "old = ctypes.c_void_p()\n"
-        "try:\n"
-        "    ctypes.windll.kernel32.Wow64DisableWow64FsRedirection(ctypes.byref(old))\n"
-        "except (AttributeError, OSError):\n"
-        "    pass\n"
-        f"sys.argv = [{script_path!r}] + {args!r}\n"
-        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
-    )
-    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
-
-
 def exchange_certificates(
     server_host: str,
     server_user: str | None = None,
@@ -181,7 +180,7 @@ def exchange_certificates(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_nitlsconfigtest_script(script_path, command[2:], env)
+    subprocess.run(command, check=True, env=env)
 
 
 def configure_tls_modes(
@@ -231,4 +230,4 @@ def configure_tls_modes(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_nitlsconfigtest_script(script_path, command[2:], env)
+    subprocess.run(command, check=True, env=env)
