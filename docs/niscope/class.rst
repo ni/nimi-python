@@ -9,6 +9,7 @@ Session
 
     Performs the following initialization actions:
     -  Test of Read the Docs Integration
+    -  Test 2
     -  Creates a new IVI instrument driver and optionally sets the initial
        state of the following session properties: Range Check, Cache,
        Simulate, Record Value Coercions
