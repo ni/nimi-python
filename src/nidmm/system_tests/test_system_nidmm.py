@@ -313,7 +313,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     def test_fetch_waveform_into(self, session):
@@ -330,7 +331,8 @@ class TestLibrary(SystemTests):
 
 class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         system_test_utilities.configure_tls_modes(
             service="ni-grpc-device",
             server_host="localhost",
@@ -348,7 +350,8 @@ class TestGrpcSecuredTLS(SystemTests):
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
@@ -389,7 +392,8 @@ class TestGrpcUnsecuredTLS:
             yield simulated_session
 
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         system_test_utilities.configure_tls_modes(
             service="ni-grpc-device",
             server_host="localhost",
@@ -406,7 +410,8 @@ class TestGrpcUnsecuredTLS:
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
@@ -435,7 +440,8 @@ class TestGrpcNoTLS:
             yield simulated_session
 
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
         config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
@@ -443,7 +449,8 @@ class TestGrpcNoTLS:
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
