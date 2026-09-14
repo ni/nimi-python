@@ -157,8 +157,17 @@ def exchange_certificates(
 
     command = [sys.executable, str(pathlib.Path(script_path)), server_host_arg, server_user_arg]
     command.extend(arg for arg in (client_host_arg, client_user_arg, verbosity_arg) if arg is not None)
+
+    # The script expects this environment variable to be set
     env = os.environ.copy()
-    env.setdefault("USERNAME", "Administrator") # The script expects this environment variable to be set
+    env.setdefault("USERNAME", "Administrator") 
+    
+    # The nitlsconfig tool that the script calls lives in System32, so the 32-bit system test processes 
+    # won't be able to find it. We can use Sysnative to explicitly add the 64-bit System32 to the PATH.
+    if os.environ.get("PROCESSOR_ARCHITEW6432"):
+        sysnative = os.path.join(os.environ["SystemRoot"], "Sysnative")
+        env["PATH"] = sysnative + os.pathsep + env.get("PATH", "")
+
     subprocess.run(command, check=True, env=env)
 
 
@@ -204,6 +213,14 @@ def configure_tls_modes(
         )
         if arg is not None
     )
+
+    # The script expects this environment variable to be set
     env = os.environ.copy()
-    env.setdefault("USERNAME", "Administrator") # The script expects this environment variable to be set
+    env.setdefault("USERNAME", "Administrator")
+
+    # The nitlsconfig tool that the script calls lives in System32, so the 32-bit system test processes 
+    # won't be able to find it. We can use Sysnative to explicitly add the 64-bit System32 to the PATH.
+    if os.environ.get("PROCESSOR_ARCHITEW6432"):
+        sysnative = os.path.join(os.environ["SystemRoot"], "Sysnative")
+        env["PATH"] = sysnative + os.pathsep + env.get("PATH", "")
     subprocess.run(command, check=True, env=env)
