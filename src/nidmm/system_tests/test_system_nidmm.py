@@ -339,7 +339,7 @@ class TestGrpcSecuredTLS(SystemTests):
             client_cert_mode="Managed",
             client_server_mode="TrustedCertificates"
         )
-        system_test_utilities.exchange_certificates("localhost")
+        system_test_utilities.exchange_certificates(server_host="localhost", client_host="localhost", client_user="Administrator")
 
         current_directory = os.path.dirname(os.path.abspath(__file__))
         config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
@@ -474,7 +474,7 @@ def test_unsecured_client():
         client_cert_mode="Managed",
         client_server_mode="TrustedCertificates"
     )
-    system_test_utilities.exchange_certificates("localhost")
+    system_test_utilities.exchange_certificates(server_host="localhost", client_host="localhost", client_user="Administrator")
 
     system_test_utilities.configure_tls_modes(
         service="ni-grpc-device",
@@ -512,7 +512,7 @@ def test_unsecured_server():
         client_cert_mode="Managed",
         client_server_mode="TrustedCertificates"
     )
-    system_test_utilities.exchange_certificates("localhost")
+    system_test_utilities.exchange_certificates(server_host="localhost", client_host="localhost", client_user="Administrator")
 
     system_test_utilities.configure_tls_modes(
         service="ni-grpc-device",

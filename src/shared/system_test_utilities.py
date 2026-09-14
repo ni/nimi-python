@@ -126,13 +126,13 @@ def exchange_certificates(
     # which prevents client-side certificate generation from this script. In 26.8 and beyond, the default
     # is Managed. We set it manually here; this can be removed once nimibot system tests are updated to
     # test against >= 26.8 versions of the drivers.
-    # client_config_path = (
-    #     pathlib.Path(os.environ["LOCALAPPDATA"])
-    #     / "National Instruments" / "nitlsconfig" / "client.d" / "ni-grpc-device.conf.yml"
-    # )
-    # content = client_config_path.read_text()
-    # content = re.sub(r"(?m)^certificate_mode:.*$", "certificate_mode: Managed", content)
-    # client_config_path.write_text(content)
+    client_config_path = (
+        pathlib.Path(os.environ["LOCALAPPDATA"])
+        / "National Instruments" / "nitlsconfig" / "client.d" / "ni-grpc-device.conf.yml"
+    )
+    content = client_config_path.read_text()
+    content = re.sub(r"(?m)^certificate_mode:.*$", "certificate_mode: Managed", content)
+    client_config_path.write_text(content)
 
     script_path = r"C:/NITests/nitlsconfigtest/exchange_certificates.py"
     if not pathlib.Path(script_path).is_file():
