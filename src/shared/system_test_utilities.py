@@ -153,7 +153,9 @@ def exchange_certificates(
 
     command = [sys.executable, str(pathlib.Path(script_path)), server_host_arg, server_user_arg]
     command.extend(arg for arg in (client_host_arg, client_user_arg, verbosity_arg) if arg is not None)
-    subprocess.run(command, check=True)
+    env = os.environ.copy()
+    env.setdefault("USERNAME", "Administrator")
+    subprocess.run(command, check=True, env=env)
 
 
 def configure_tls_modes(
@@ -194,4 +196,9 @@ def configure_tls_modes(
         )
         if arg is not None
     )
-    subprocess.run(command, check=True)
+    # getpass.getuser() fails on the CI runner (no USERNAME env var set); passing --client-user
+    # instead makes the script treat the client as remote and shell out to ssh, even for
+    # localhost, so we supply the env var it falls back to instead.
+    env = os.environ.copy()
+    env.setdefault("USERNAME", "Administrator")
+    subprocess.run(command, check=True, env=env)
