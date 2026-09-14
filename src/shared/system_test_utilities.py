@@ -1,4 +1,3 @@
-import ctypes
 import json
 import os
 import pathlib
@@ -9,22 +8,7 @@ import sys
 import threading
 import time
 
-
-def _disable_wow64_fs_redirection():
-    # A 32-bit test process can't see the native 64-bit nitlsconfig.exe otherwise: WOW64 silently
-    # redirects its System32 lookups to SysWOW64, which only has a same-named DLL, not the CLI exe.
-    # This must run once, early, since it only affects the calling (main) thread going forward, and
-    # every "nitlsconfig" subprocess call in this test run happens from that same thread.
-    if os.name != "nt":
-        return
-    old = ctypes.c_void_p()
-    try:
-        ctypes.windll.kernel32.Wow64DisableWow64FsRedirection(ctypes.byref(old))
-    except (AttributeError, OSError):
-        pass
-
-
-_disable_wow64_fs_redirection()
+import nitlsconfig_32_bit_patch  # noqa: F401
 
 
 class GrpcServerProcess:
@@ -126,19 +110,6 @@ def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_
     assert not t2.is_alive()
 
 
-def _run_vendor_script(script_path: str, args: list, env: dict) -> None:
-    # Runs as a fresh child process, so our own WOW64 disable (done once at import time, in this
-    # process) doesn't carry over to it. Re-importing this module in that child process re-runs
-    # the disable there too, before the vendor script gets a chance to shell out to "nitlsconfig".
-    bootstrap = (
-        "import runpy, sys\n"
-        "import system_test_utilities\n"
-        f"sys.argv = [{script_path!r}] + {args!r}\n"
-        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
-    )
-    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
-
-
 def exchange_certificates(
     server_host: str,
     server_user: str | None = None,
@@ -193,7 +164,7 @@ def exchange_certificates(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_vendor_script(script_path, command[2:], env)
+    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
 
 
 def configure_tls_modes(
@@ -243,4 +214,15 @@ def configure_tls_modes(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_vendor_script(script_path, command[2:], env)
+    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+
+def _run_nitlsconfigtest_script_with_patch(script_path: str, args: list, env: dict) -> None:
+    # A bootstrap script is used to import the patcher so that the scripts can see the nitlsconfig executable even if
+    # they are in a 32-bit context.
+    bootstrap = (
+        "import runpy, sys\n"
+        "import nitlsconfig_32_bit_patch\n"
+        f"sys.argv = [{script_path!r}] + {args!r}\n"
+        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
+    )
+    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
