@@ -108,6 +108,25 @@ def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_
     assert not t2.is_alive()
 
 
+def _run_nitlsconfigtest_script(script_path: str, args: list, env: dict) -> None:
+    # The nitlsconfig CLI these scripts shell out to lives only in the real (64-bit) System32.
+    # Adding Sysnative to PATH doesn't help: CreateProcess's implicit PATH search for a bare
+    # command name still goes through WOW64 redirection. Disabling redirection only affects the
+    # calling thread, so we disable it and run the script in-process (via runpy) instead of as a
+    # separate subprocess, ensuring its own "nitlsconfig" subprocess call inherits the disabled state.
+    bootstrap = (
+        "import ctypes, runpy, sys\n"
+        "old = ctypes.c_void_p()\n"
+        "try:\n"
+        "    ctypes.windll.kernel32.Wow64DisableWow64FsRedirection(ctypes.byref(old))\n"
+        "except (AttributeError, OSError):\n"
+        "    pass\n"
+        f"sys.argv = [{script_path!r}] + {args!r}\n"
+        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
+    )
+    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
+
+
 def exchange_certificates(
     server_host: str,
     server_user: str | None = None,
@@ -160,15 +179,9 @@ def exchange_certificates(
 
     # The script expects this environment variable to be set
     env = os.environ.copy()
-    env.setdefault("USERNAME", "Administrator") 
-    
-    # The nitlsconfig tool that the script calls lives in System32, so the 32-bit system test processes 
-    # won't be able to find it. We can use Sysnative to explicitly add the 64-bit System32 to the PATH.
-    if os.environ.get("PROCESSOR_ARCHITEW6432"):
-        sysnative = os.path.join(os.environ["SystemRoot"], "Sysnative")
-        env["PATH"] = sysnative + os.pathsep + env.get("PATH", "")
+    env.setdefault("USERNAME", "Administrator")
 
-    subprocess.run(command, check=True, env=env)
+    _run_nitlsconfigtest_script(script_path, command[2:], env)
 
 
 def configure_tls_modes(
@@ -218,9 +231,4 @@ def configure_tls_modes(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    # The nitlsconfig tool that the script calls lives in System32, so the 32-bit system test processes 
-    # won't be able to find it. We can use Sysnative to explicitly add the 64-bit System32 to the PATH.
-    if os.environ.get("PROCESSOR_ARCHITEW6432"):
-        sysnative = os.path.join(os.environ["SystemRoot"], "Sysnative")
-        env["PATH"] = sysnative + os.pathsep + env.get("PATH", "")
-    subprocess.run(command, check=True, env=env)
+    _run_nitlsconfigtest_script(script_path, command[2:], env)
