@@ -115,6 +115,10 @@ def exchange_certificates(
     client_user: str | None = None,
     verbosity: int = 2,
 ):
+    # gRPC tests only run on Windows, so this isn't necessary on Linux.
+    if os.name != "nt":
+        return
+
     # 26.5 versions of ni-grpc-device server installers do not properly create the trusted.d directory,
     # which causes issues with the certificate exchange process. This has been fixed in the 26.8 version
     # of the installer, but it has not yet been released. For now, we're creating it manually; this can
@@ -154,7 +158,7 @@ def exchange_certificates(
     command = [sys.executable, str(pathlib.Path(script_path)), server_host_arg, server_user_arg]
     command.extend(arg for arg in (client_host_arg, client_user_arg, verbosity_arg) if arg is not None)
     env = os.environ.copy()
-    env.setdefault("USERNAME", "Administrator")
+    env.setdefault("USERNAME", "Administrator") # The script expects this environment variable to be set
     subprocess.run(command, check=True, env=env)
 
 
@@ -169,6 +173,10 @@ def configure_tls_modes(
     client_cert_mode: str | None = None,
     client_server_mode: str | None = None,
 ):
+    # gRPC tests only run on Windows, so this isn't necessary on Linux.
+    if os.name != "nt":
+        return
+
     script_path = r"C:/NITests/nitlsconfigtest/configure_tls_modes.py"
     if not pathlib.Path(script_path).is_file():
         raise FileNotFoundError(f"Configure TLS modes script not found: {script_path}")
@@ -196,9 +204,6 @@ def configure_tls_modes(
         )
         if arg is not None
     )
-    # getpass.getuser() fails on the CI runner (no USERNAME env var set); passing --client-user
-    # instead makes the script treat the client as remote and shell out to ssh, even for
-    # localhost, so we supply the env var it falls back to instead.
     env = os.environ.copy()
-    env.setdefault("USERNAME", "Administrator")
+    env.setdefault("USERNAME", "Administrator") # The script expects this environment variable to be set
     subprocess.run(command, check=True, env=env)

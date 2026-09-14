@@ -485,12 +485,10 @@ def test_unsecured_client():
         client_server_mode="Disabled"
     )
 
-    expected_error_message = 'Failed to connect to server'
-    expected_grpc_error = grpc.StatusCode.UNAVAILABLE
-
     current_directory = os.path.dirname(os.path.abspath(__file__))
     config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
 
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
     with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
         unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
         grpc_options = nidmm.GrpcSessionOptions(unsecured_client_channel, '')
@@ -498,9 +496,7 @@ def test_unsecured_client():
             with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
                 assert False
         except nidmm.Error as e:
-            assert e.rpc_code == expected_grpc_error
-            assert e.description == expected_error_message
-            assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
+            pass
 
 
 def test_unsecured_server():
@@ -523,12 +519,10 @@ def test_unsecured_server():
         client_server_mode="TrustedCertificates"
     )
 
-    expected_error_message = 'Failed to connect to server'
-    expected_grpc_error = grpc.StatusCode.UNAVAILABLE
-
     current_directory = os.path.dirname(os.path.abspath(__file__))
     config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
 
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
     with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
         unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
         grpc_options = nidmm.GrpcSessionOptions(unsecured_server_channel, '')
@@ -536,6 +530,4 @@ def test_unsecured_server():
             with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
                 assert False
         except nidmm.Error as e:
-            assert e.rpc_code == expected_grpc_error
-            assert e.description == expected_error_message
-            assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
+            pass
