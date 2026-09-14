@@ -126,6 +126,19 @@ def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_
     assert not t2.is_alive()
 
 
+def _run_vendor_script(script_path: str, args: list, env: dict) -> None:
+    # Runs as a fresh child process, so our own WOW64 disable (done once at import time, in this
+    # process) doesn't carry over to it. Re-importing this module in that child process re-runs
+    # the disable there too, before the vendor script gets a chance to shell out to "nitlsconfig".
+    bootstrap = (
+        "import runpy, sys\n"
+        "import system_test_utilities\n"
+        f"sys.argv = [{script_path!r}] + {args!r}\n"
+        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
+    )
+    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
+
+
 def exchange_certificates(
     server_host: str,
     server_user: str | None = None,
@@ -180,7 +193,7 @@ def exchange_certificates(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    subprocess.run(command, check=True, env=env)
+    _run_vendor_script(script_path, command[2:], env)
 
 
 def configure_tls_modes(
@@ -230,4 +243,4 @@ def configure_tls_modes(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    subprocess.run(command, check=True, env=env)
+    _run_vendor_script(script_path, command[2:], env)
