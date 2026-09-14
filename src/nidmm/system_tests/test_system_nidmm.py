@@ -495,7 +495,7 @@ def test_unsecured_client():
         try:
             with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
                 assert False
-        except nidmm.Error as e:
+        except nidmm.Error:
             pass
 
 
@@ -529,5 +529,5 @@ def test_unsecured_server():
         try:
             with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
                 assert False
-        except nidmm.Error as e:
+        except nidmm.Error:
             pass
