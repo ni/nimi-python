@@ -6,6 +6,7 @@ import sys
 
 import grpc
 import hightime
+import nitlsconfig
 import numpy
 import pytest
 
@@ -1327,7 +1328,8 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     def test_enable_match_fail_combination(self, multi_instrument_session):
@@ -1347,16 +1349,195 @@ class TestLibrary(SystemTests):
             multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG0)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="ManagedSelfSigned",
+            server_client_mode="ManagedSelfSigned",
+            client_cert_mode="Managed",
+            client_server_mode="TrustedCertificates"
+        )
+        system_test_utilities.exchange_certificates("localhost")
+
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+class TestGrpcUnsecuredTLS:
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="Disabled",
+            server_client_mode="Disabled",
+            client_cert_mode="Disabled",
+            client_server_mode="Disabled"
+        )
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    def test_self_calibrate(self, multi_instrument_session):
+        multi_instrument_session.self_calibrate()
+
+    def test_channels_rep_cap(self, multi_instrument_session):
+        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+        multi_instrument_session.vil = 1
+        ch_0_63 = multi_instrument_session.get_channel_names(indices=[0, 63])
+        multi_instrument_session.channels[ch_0_63].vil = 2
+        assert multi_instrument_session.pins[ch_0_63].vil == pytest.approx(2, abs=1e-3)
+        ch_1 = multi_instrument_session.get_channel_names(indices=1)
+        assert multi_instrument_session.pins[ch_1].vil == pytest.approx(1, abs=1e-3)
+
+    def test_sites_rep_cap(self, multi_instrument_session):
+        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+        assert multi_instrument_session.sites[0].is_site_enabled()
+        assert multi_instrument_session.sites[1].is_site_enabled()
+
+        multi_instrument_session.sites[0, 1].disable_sites()
+        assert not multi_instrument_session.sites[0].is_site_enabled()
+        assert not multi_instrument_session.sites[1].is_site_enabled()
+
+
+class TestGrpcNoTLS:
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    def test_self_calibrate(self, multi_instrument_session):
+        multi_instrument_session.self_calibrate()
+
+    def test_channels_rep_cap(self, multi_instrument_session):
+        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+        multi_instrument_session.vil = 1
+        ch_0_63 = multi_instrument_session.get_channel_names(indices=[0, 63])
+        multi_instrument_session.channels[ch_0_63].vil = 2
+        assert multi_instrument_session.pins[ch_0_63].vil == pytest.approx(2, abs=1e-3)
+        ch_1 = multi_instrument_session.get_channel_names(indices=1)
+        assert multi_instrument_session.pins[ch_1].vil == pytest.approx(1, abs=1e-3)
+
+    def test_sites_rep_cap(self, multi_instrument_session):
+        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+
+        assert multi_instrument_session.sites[0].is_site_enabled()
+        assert multi_instrument_session.sites[1].is_site_enabled()
+
+        multi_instrument_session.sites[0, 1].disable_sites()
+        assert not multi_instrument_session.sites[0].is_site_enabled()
+        assert not multi_instrument_session.sites[1].is_site_enabled()
+
+
+def test_unsecured_client():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nidigital.GrpcSessionOptions(unsecured_client_channel, "")
+        try:
+            with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', grpc_options=grpc_options):
+                assert False
+        except nidigital.Error:
+            pass
+
+
+def test_unsecured_server():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nidigital.GrpcSessionOptions(unsecured_server_channel, "")
+        try:
+            with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', grpc_options=grpc_options):
+                assert False
+        except nidigital.Error:
+            pass

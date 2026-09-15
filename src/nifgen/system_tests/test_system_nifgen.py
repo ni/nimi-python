@@ -6,6 +6,7 @@ import warnings
 
 import grpc
 import hightime
+import nitlsconfig
 import numpy
 import pytest
 
@@ -471,7 +472,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     # Test doesn't run over gRPC because numpy isn't supported by gRPC.
@@ -513,16 +515,213 @@ class TestLibrary(SystemTests):
         session.write_waveform('foo', data)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="ManagedSelfSigned",
+            server_client_mode="ManagedSelfSigned",
+            client_cert_mode="Managed",
+            client_server_mode="TrustedCertificates"
+        )
+        system_test_utilities.exchange_certificates("localhost")
+
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
+        return {'grpc_options': grpc_options}
+
+
+class TestGrpcUnsecuredTLS:
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="Disabled",
+            server_client_mode="Disabled",
+            client_cert_mode="Disabled",
+            client_server_mode="Disabled"
+        )
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
+        return {'grpc_options': grpc_options}
+
+    def test_script_triggers_rep_cap(self, session):
+        assert '' == session.script_triggers[0].exported_script_trigger_output_terminal
+
+        requested_terminal_name = '/Dev1/PXI_Trig0'
+        session.script_triggers[0].exported_script_trigger_output_terminal = requested_terminal_name
+        assert requested_terminal_name == session.script_triggers[0].exported_script_trigger_output_terminal
+
+    def test_standard_waveform(self, session):
+        session.output_mode = nifgen.OutputMode.FUNC
+        session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
+        expected_frequency = 2000000
+        with session.initiate():
+            assert session.func_amplitude == 2.0
+            assert session.func_waveform == nifgen.Waveform.SINE
+            actual_frequency = session.func_frequency
+            in_range = abs(actual_frequency - expected_frequency) <= max(1e-09 * max(abs(actual_frequency), abs(expected_frequency)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+            assert in_range is True
+            assert session.func_dc_offset == 1.0
+            assert session.func_start_phase == 0.0
+            assert session.is_done() is False
+
+    def test_frequency_list(self, session):
+        session.output_mode = nifgen.OutputMode.FREQ_LIST
+        duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+        frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
+        waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
+        session.configure_freq_list(waveform_handle, 2.0, 0, 0)
+        session.trigger_mode = nifgen.TriggerMode.CONTINUOUS
+        session.output_enabled = True
+        assert session.func_waveform == nifgen.Waveform.SQUARE
+        assert session.func_amplitude == 2.0
+
+
+class TestGrpcNoTLS:
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
+
+    def test_script_triggers_rep_cap(self, session):
+        assert '' == session.script_triggers[0].exported_script_trigger_output_terminal
+
+        requested_terminal_name = '/Dev1/PXI_Trig0'
+        session.script_triggers[0].exported_script_trigger_output_terminal = requested_terminal_name
+        assert requested_terminal_name == session.script_triggers[0].exported_script_trigger_output_terminal
+
+    def test_standard_waveform(self, session):
+        session.output_mode = nifgen.OutputMode.FUNC
+        session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
+        expected_frequency = 2000000
+        with session.initiate():
+            assert session.func_amplitude == 2.0
+            assert session.func_waveform == nifgen.Waveform.SINE
+            actual_frequency = session.func_frequency
+            in_range = abs(actual_frequency - expected_frequency) <= max(1e-09 * max(abs(actual_frequency), abs(expected_frequency)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+            assert in_range is True
+            assert session.func_dc_offset == 1.0
+            assert session.func_start_phase == 0.0
+            assert session.is_done() is False
+
+    def test_frequency_list(self, session):
+        session.output_mode = nifgen.OutputMode.FREQ_LIST
+        duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
+        frequency_array = [1000, 100900, 200800, 300700, 400600, 500500, 600400, 700300, 800200, 900100]
+        waveform_handle = session.create_freq_list(nifgen.Waveform.SQUARE, frequency_array, duration_array)
+        session.configure_freq_list(waveform_handle, 2.0, 0, 0)
+        session.trigger_mode = nifgen.TriggerMode.CONTINUOUS
+        session.output_enabled = True
+        assert session.func_waveform == nifgen.Waveform.SQUARE
+        assert session.func_amplitude == 2.0
+
+
+def test_unsecured_client():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nifgen.GrpcSessionOptions(unsecured_client_channel, '')
+        try:
+            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', grpc_options=grpc_options):
+                assert False
+        except nifgen.Error:
+            pass
+
+
+def test_unsecured_server():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nifgen.GrpcSessionOptions(unsecured_server_channel, '')
+        try:
+            with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', grpc_options=grpc_options):
+                assert False
+        except nifgen.Error:
+            pass

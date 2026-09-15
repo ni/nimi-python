@@ -1140,8 +1140,6 @@ class TestGrpcSecuredTLS(SystemTests):
 class TestGrpcUnsecuredTLS:
     @pytest.fixture(scope='function')
     def session(self, request, session_creation_kwargs):
-        """Creates an NI-DCPower Session. This is based on SystemTests.session."""
-
         init_args = {
             'resource_name': '4162',
             'channels': '',
@@ -1208,8 +1206,6 @@ class TestGrpcUnsecuredTLS:
 class TestGrpcNoTLS:
     @pytest.fixture(scope='function')
     def session(self, request, session_creation_kwargs):
-        """Creates an NI-DCPower Session. This is based on SystemTests.session."""
-
         init_args = {
             'resource_name': '4162',
             'channels': '',
