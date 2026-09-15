@@ -586,11 +586,6 @@ class TestGrpcUnsecuredTLS:
             assert session.func_start_phase == 0.0
             assert session.is_done() is False
 
-    def test_configure_arb_waveform(self, session):
-        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-        session.output_mode = nifgen.OutputMode.ARB
-        session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
-
     def test_frequency_list(self, session):
         session.output_mode = nifgen.OutputMode.FREQ_LIST
         duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
@@ -601,6 +596,11 @@ class TestGrpcUnsecuredTLS:
         session.output_enabled = True
         assert session.func_waveform == nifgen.Waveform.SQUARE
         assert session.func_amplitude == 2.0
+
+    def test_configure_arb_waveform(self, session):
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        session.output_mode = nifgen.OutputMode.ARB
+        session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
 
 
 class TestGrpcNoTLS:
@@ -638,11 +638,6 @@ class TestGrpcNoTLS:
             assert session.func_start_phase == 0.0
             assert session.is_done() is False
 
-    def test_configure_arb_waveform(self, session):
-        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
-        session.output_mode = nifgen.OutputMode.ARB
-        session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
-
     def test_frequency_list(self, session):
         session.output_mode = nifgen.OutputMode.FREQ_LIST
         duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
@@ -653,6 +648,11 @@ class TestGrpcNoTLS:
         session.output_enabled = True
         assert session.func_waveform == nifgen.Waveform.SQUARE
         assert session.func_amplitude == 2.0
+
+    def test_configure_arb_waveform(self, session):
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        session.output_mode = nifgen.OutputMode.ARB
+        session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
 
 
 def test_unsecured_client():
