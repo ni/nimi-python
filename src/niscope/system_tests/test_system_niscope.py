@@ -8,6 +8,7 @@ import tempfile
 import fasteners
 import grpc
 import hightime
+import nitlsconfig
 import numpy
 import pytest
 
@@ -545,7 +546,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     # not supported by grpc due to numpy usage
@@ -617,17 +619,29 @@ class TestLibrary(SystemTests):
         assert single_instrument_session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="ManagedSelfSigned",
+            server_client_mode="ManagedSelfSigned",
+            client_cert_mode="Managed",
+            client_server_mode="TrustedCertificates"
+        )
+        system_test_utilities.exchange_certificates("localhost")
+
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
@@ -642,3 +656,204 @@ class TestGrpc(SystemTests):
             single_instrument_session.reset_with_defaults()
         assert exc_info.value.args[0] == 'reset_with_defaults is not supported over gRPC'
         assert str(exc_info.value) == 'reset_with_defaults is not supported over gRPC'
+
+
+class TestGrpcUnsecuredTLS:
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="Disabled",
+            server_client_mode="Disabled",
+            client_cert_mode="Disabled",
+            client_server_mode="Disabled"
+        )
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    def test_read(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 2000
+        test_num_records = 3
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+        waveforms = multi_instrument_session.channels[test_channels_1].read(num_samples=test_record_length, num_records=test_num_records)
+        check_fetched_data(waveforms, test_channels_1_expanded, test_record_length, test_num_records)
+
+    def test_fetch(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 2000
+        test_starting_record_number = 2
+        test_num_records_to_acquire = 5
+        test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels_1].fetch(
+                num_samples=test_record_length,
+                record_number=test_starting_record_number,
+                num_records=test_num_records_to_fetch)
+        check_fetched_data(
+            waveforms,
+            test_channels_1_expanded,
+            test_record_length,
+            test_num_records_to_fetch,
+            test_starting_record_number,
+        )
+
+    def test_fetch_defaults(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 2000
+        test_num_channels = 2
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels_1].fetch()
+        assert len(waveforms) == test_num_channels
+
+
+class TestGrpcNoTLS:
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    def test_read(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 2000
+        test_num_records = 3
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
+        waveforms = multi_instrument_session.channels[test_channels_1].read(num_samples=test_record_length, num_records=test_num_records)
+        check_fetched_data(waveforms, test_channels_1_expanded, test_record_length, test_num_records)
+
+    def test_fetch(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 2000
+        test_starting_record_number = 2
+        test_num_records_to_acquire = 5
+        test_num_records_to_fetch = test_num_records_to_acquire - test_starting_record_number
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records_to_acquire, True)
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels_1].fetch(
+                num_samples=test_record_length,
+                record_number=test_starting_record_number,
+                num_records=test_num_records_to_fetch)
+        check_fetched_data(
+            waveforms,
+            test_channels_1_expanded,
+            test_record_length,
+            test_num_records_to_fetch,
+            test_starting_record_number,
+        )
+
+    def test_fetch_defaults(self, multi_instrument_session):
+        test_voltage = 1.0
+        test_record_length = 2000
+        test_num_channels = 2
+        multi_instrument_session.configure_vertical(test_voltage, niscope.VerticalCoupling.AC)
+        multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, 1, True)
+        with multi_instrument_session.initiate():
+            waveforms = multi_instrument_session.channels[test_channels_1].fetch()
+        assert len(waveforms) == test_num_channels
+
+
+def test_unsecured_client():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = niscope.GrpcSessionOptions(unsecured_client_channel, "")
+        try:
+            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', grpc_options=grpc_options):
+                assert False
+        except niscope.Error:
+            pass
+
+
+def test_unsecured_server():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = niscope.GrpcSessionOptions(unsecured_server_channel, "")
+        try:
+            with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', grpc_options=grpc_options):
+                assert False
+        except niscope.Error:
+            pass

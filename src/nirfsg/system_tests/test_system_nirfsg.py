@@ -2,6 +2,7 @@ import array
 import grpc
 import hightime
 import nirfsg
+import nitlsconfig
 import numpy as np
 import os
 import pathlib
@@ -647,7 +648,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     # grpc-device had a bug in get_all_named_waveform_names
@@ -666,17 +668,202 @@ class TestLibrary(SystemTests):
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
-class TestGrpc(SystemTests):
+class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="ManagedSelfSigned",
+            server_client_mode="ManagedSelfSigned",
+            client_cert_mode="Managed",
+            client_server_mode="TrustedCertificates"
+        )
+        system_test_utilities.exchange_certificates("localhost")
+
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcUnsecuredTLS:
+    @pytest.fixture(scope='function')
+    def rfsg_device_session(self, session_creation_kwargs):
+        if use_simulated_session:
+            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                yield sim_5841_session
+        else:
+            with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
+                yield real_rfsg_device_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="Disabled",
+            server_client_mode="Disabled",
+            client_cert_mode="Disabled",
+            client_server_mode="Disabled"
+        )
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    def test_abort(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        rfsg_device_session.initiate()
+        rfsg_device_session.check_generation_status()
+        rfsg_device_session.abort()
+
+    def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform1')
+        assert waveform_exists is True
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
+        assert waveform_exists is False
+
+    def test_wait_until_settled(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        with rfsg_device_session.initiate():
+            rfsg_device_session.wait_until_settled()
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcNoTLS:
+    @pytest.fixture(scope='function')
+    def rfsg_device_session(self, session_creation_kwargs):
+        if use_simulated_session:
+            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                yield sim_5841_session
+        else:
+            with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
+                yield real_rfsg_device_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    def test_abort(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        rfsg_device_session.initiate()
+        rfsg_device_session.check_generation_status()
+        rfsg_device_session.abort()
+
+    def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform1')
+        assert waveform_exists is True
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
+        assert waveform_exists is False
+
+    def test_wait_until_settled(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        with rfsg_device_session.initiate():
+            rfsg_device_session.wait_until_settled()
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+def test_unsecured_client():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nirfsg.GrpcSessionOptions(unsecured_client_channel, "")
+        try:
+            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", grpc_options=grpc_options):
+                assert False
+        except nirfsg.Error:
+            pass
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+def test_unsecured_server():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nirfsg.GrpcSessionOptions(unsecured_server_channel, "")
+        try:
+            with nirfsg.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", grpc_options=grpc_options):
+                assert False
+        except nirfsg.Error:
+            pass
 

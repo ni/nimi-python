@@ -5,6 +5,7 @@ import tempfile
 
 import grpc
 import hightime
+import nitlsconfig
 import pytest
 
 import nidcpower
@@ -1074,7 +1075,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     @pytest.mark.resource_name("4190/0")
@@ -1096,17 +1098,29 @@ class TestLibrary(SystemTests):
         session.configure_lcr_compensation(compensation_data_bytes_from_file)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="ManagedSelfSigned",
+            server_client_mode="ManagedSelfSigned",
+            client_cert_mode="Managed",
+            client_server_mode="TrustedCertificates"
+        )
+        system_test_utilities.exchange_certificates("localhost")
+
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
@@ -1121,3 +1135,210 @@ class TestGrpc(SystemTests):
             session.configure_lcr_compensation([])
         assert exc_info.value.args[0] == 'configure_lcr_compensation is not supported over gRPC'
         assert str(exc_info.value) == 'configure_lcr_compensation is not supported over gRPC'
+
+
+class TestGrpcUnsecuredTLS:
+    @pytest.fixture(scope='function')
+    def session(self, request, session_creation_kwargs):
+        init_args = {
+            'resource_name': '4162',
+            'channels': '',
+            'reset': False,
+            'options': 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe',
+            'independent_channels': request.param
+        }
+
+        for marker in request.node.iter_markers():
+            if marker.name in init_args:
+                init_args[marker.name] = marker.args[0]
+
+        with nidcpower.Session(**init_args, **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="Disabled",
+            server_client_mode="Disabled",
+            client_cert_mode="Disabled",
+            client_server_mode="Disabled"
+        )
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    @pytest.mark.channels('0')
+    def test_measure(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+        session.voltage_level_range = 6
+        session.voltage_level = 2
+        with session.initiate():
+            reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
+            assert session.query_in_compliance() is False
+        assert reading == 2
+
+    @pytest.mark.channels('0')
+    def test_fetch_multiple(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+        session.voltage_level = 1
+        count = 10
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        with session.initiate():
+            measurements = session.fetch_multiple(count)
+            assert len(measurements) == count
+            assert measurements[1].voltage == 1.0
+            assert measurements[1].current == 0.00001
+
+    def test_measure_multiple(self, session):
+        with session.initiate():
+            # session is open to all 12 channels on the device
+            measurements = session.measure_multiple()
+            assert len(measurements) == 12
+            assert measurements[1].in_compliance is None
+            assert measurements[1].voltage == 0.0
+            assert measurements[1].current == 0.00001
+
+
+class TestGrpcNoTLS:
+    @pytest.fixture(scope='function')
+    def session(self, request, session_creation_kwargs):
+        init_args = {
+            'resource_name': '4162',
+            'channels': '',
+            'reset': False,
+            'options': 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe',
+            'independent_channels': request.param
+        }
+
+        for marker in request.node.iter_markers():
+            if marker.name in init_args:
+                init_args[marker.name] = marker.args[0]
+
+        with nidcpower.Session(**init_args, **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    @pytest.mark.channels('0')
+    def test_measure(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+        session.voltage_level_range = 6
+        session.voltage_level = 2
+        with session.initiate():
+            reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
+            assert session.query_in_compliance() is False
+        assert reading == 2
+
+    @pytest.mark.channels('0')
+    def test_fetch_multiple(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+        session.voltage_level = 1
+        count = 10
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        with session.initiate():
+            measurements = session.fetch_multiple(count)
+            assert len(measurements) == count
+            assert measurements[1].voltage == 1.0
+            assert measurements[1].current == 0.00001
+
+    def test_measure_multiple(self, session):
+        with session.initiate():
+            # session is open to all 12 channels on the device
+            measurements = session.measure_multiple()
+            assert len(measurements) == 12
+            assert measurements[1].in_compliance is None
+            assert measurements[1].voltage == 0.0
+            assert measurements[1].current == 0.00001
+
+
+def test_unsecured_client():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nidcpower.GrpcSessionOptions(unsecured_client_channel, "")
+        with pytest.raises(nidcpower.Error):
+            with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', grpc_options=grpc_options):
+                pass
+
+
+def test_unsecured_server():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nidcpower.GrpcSessionOptions(unsecured_server_channel, "")
+        with pytest.raises(nidcpower.Error):
+            with nidcpower.Session('4162', '', False, 'Simulate=1, DriverSetup=Model:4162; BoardType:PXIe', grpc_options=grpc_options):
+                pass
