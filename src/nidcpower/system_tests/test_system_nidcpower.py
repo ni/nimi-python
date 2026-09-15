@@ -1179,9 +1179,6 @@ class TestGrpcUnsecuredTLS:
         grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
-    def test_self_test(self, session):
-        session.self_test()
-
     @pytest.mark.channels('0')
     def test_measure(self, session):
         session.source_mode = nidcpower.SourceMode.SINGLE_POINT
@@ -1192,6 +1189,19 @@ class TestGrpcUnsecuredTLS:
             reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
             assert session.query_in_compliance() is False
         assert reading == 2
+
+    @pytest.mark.channels('0')
+    def test_fetch_multiple(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+        session.voltage_level = 1
+        count = 10
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        with session.initiate():
+            measurements = session.fetch_multiple(count)
+            assert len(measurements) == count
+            assert measurements[1].voltage == 1.0
+            assert measurements[1].current == 0.00001
 
     def test_measure_multiple(self, session):
         with session.initiate():
@@ -1236,9 +1246,6 @@ class TestGrpcNoTLS:
         grpc_options = nidcpower.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
-    def test_self_test(self, session):
-        session.self_test()
-
     @pytest.mark.channels('0')
     def test_measure(self, session):
         session.source_mode = nidcpower.SourceMode.SINGLE_POINT
@@ -1249,6 +1256,19 @@ class TestGrpcNoTLS:
             reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
             assert session.query_in_compliance() is False
         assert reading == 2
+
+    @pytest.mark.channels('0')
+    def test_fetch_multiple(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+        session.voltage_level = 1
+        count = 10
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        with session.initiate():
+            measurements = session.fetch_multiple(count)
+            assert len(measurements) == count
+            assert measurements[1].voltage == 1.0
+            assert measurements[1].current == 0.00001
 
     def test_measure_multiple(self, session):
         with session.initiate():

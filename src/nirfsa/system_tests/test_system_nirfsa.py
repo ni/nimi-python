@@ -1,6 +1,7 @@
 import grpc
 import hightime
 import nirfsa
+import nitlsconfig
 import numpy as np
 import os
 import pathlib
@@ -607,21 +608,225 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
-class TestGrpc(SystemTests):
+class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="ManagedSelfSigned",
+            server_client_mode="ManagedSelfSigned",
+            client_cert_mode="Managed",
+            client_server_mode="TrustedCertificates"
+        )
+        system_test_utilities.exchange_certificates("localhost")
+
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcUnsecuredTLS:
+    @pytest.fixture(scope='function')
+    def rfsa_device_session(self, session_creation_kwargs):
+        if use_simulated_session:
+            with nirfsa.Session("5841sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                yield sim_5841_session
+        else:
+            with nirfsa.Session(real_hw_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_rfsa_device_session:
+                yield real_rfsa_device_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes(
+            service="ni-grpc-device",
+            server_host="localhost",
+            server_cert_mode="Disabled",
+            server_client_mode="Disabled",
+            client_cert_mode="Disabled",
+            client_server_mode="Disabled"
+        )
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        iq_data_array = np.zeros(64, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
+
+    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_samples = 64
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
+        assert len(wfm_info) == rfsa_device_session.number_of_records
+        for i in range(len(wfm_info)):
+            if isinstance(wfm_info[i], nirfsa.WaveformInfo):
+                assert np.asarray(wfm_info[i].samples).dtype == np.complex128
+                assert len(wfm_info[i].samples) == rfsa_device_session.number_of_samples
+
+    def test_read_power_spectrum_with_data_array_size_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_device_session.number_of_spectral_lines = 1024
+        power_spectrum_data_array = np.zeros(512, dtype=np.float64)
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcNoTLS:
+    @pytest.fixture(scope='function')
+    def rfsa_device_session(self, session_creation_kwargs):
+        if use_simulated_session:
+            with nirfsa.Session("5841sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                yield sim_5841_session
+        else:
+            with nirfsa.Session(real_hw_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_rfsa_device_session:
+                yield real_rfsa_device_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        iq_data_array = np.zeros(64, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
+
+    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_samples = 64
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
+        assert len(wfm_info) == rfsa_device_session.number_of_records
+        for i in range(len(wfm_info)):
+            if isinstance(wfm_info[i], nirfsa.WaveformInfo):
+                assert np.asarray(wfm_info[i].samples).dtype == np.complex128
+                assert len(wfm_info[i].samples) == rfsa_device_session.number_of_samples
+
+    def test_read_power_spectrum_with_data_array_size_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_device_session.number_of_spectral_lines = 1024
+        power_spectrum_data_array = np.zeros(512, dtype=np.float64)
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+def test_unsecured_client():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nirfsa.GrpcSessionOptions(unsecured_client_channel, "")
+        try:
+            with nirfsa.Session("5841sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5841", grpc_options=grpc_options):
+                assert False
+        except nirfsa.Error:
+            pass
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+def test_unsecured_server():
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+    system_test_utilities.exchange_certificates("localhost")
+
+    system_test_utilities.configure_tls_modes(
+        service="ni-grpc-device",
+        server_host="localhost",
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+    current_directory = os.path.dirname(os.path.abspath(__file__))
+    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+
+    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
+    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+        grpc_options = nirfsa.GrpcSessionOptions(unsecured_server_channel, "")
+        try:
+            with nirfsa.Session("5841sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5841", grpc_options=grpc_options):
+                assert False
+        except nirfsa.Error:
+            pass

@@ -572,13 +572,6 @@ class TestGrpcUnsecuredTLS:
         grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
-    def test_script_triggers_rep_cap(self, session):
-        assert '' == session.script_triggers[0].exported_script_trigger_output_terminal
-
-        requested_terminal_name = '/Dev1/PXI_Trig0'
-        session.script_triggers[0].exported_script_trigger_output_terminal = requested_terminal_name
-        assert requested_terminal_name == session.script_triggers[0].exported_script_trigger_output_terminal
-
     def test_standard_waveform(self, session):
         session.output_mode = nifgen.OutputMode.FUNC
         session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
@@ -592,6 +585,11 @@ class TestGrpcUnsecuredTLS:
             assert session.func_dc_offset == 1.0
             assert session.func_start_phase == 0.0
             assert session.is_done() is False
+
+    def test_configure_arb_waveform(self, session):
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        session.output_mode = nifgen.OutputMode.ARB
+        session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
 
     def test_frequency_list(self, session):
         session.output_mode = nifgen.OutputMode.FREQ_LIST
@@ -626,13 +624,6 @@ class TestGrpcNoTLS:
         grpc_options = nifgen.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
-    def test_script_triggers_rep_cap(self, session):
-        assert '' == session.script_triggers[0].exported_script_trigger_output_terminal
-
-        requested_terminal_name = '/Dev1/PXI_Trig0'
-        session.script_triggers[0].exported_script_trigger_output_terminal = requested_terminal_name
-        assert requested_terminal_name == session.script_triggers[0].exported_script_trigger_output_terminal
-
     def test_standard_waveform(self, session):
         session.output_mode = nifgen.OutputMode.FUNC
         session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
@@ -646,6 +637,11 @@ class TestGrpcNoTLS:
             assert session.func_dc_offset == 1.0
             assert session.func_start_phase == 0.0
             assert session.is_done() is False
+
+    def test_configure_arb_waveform(self, session):
+        waveform_data = [x * (1.0 / 256.0) for x in range(256)]
+        session.output_mode = nifgen.OutputMode.ARB
+        session.configure_arb_waveform(session.create_waveform(waveform_data), 1.0, 0.0)
 
     def test_frequency_list(self, session):
         session.output_mode = nifgen.OutputMode.FREQ_LIST

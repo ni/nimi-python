@@ -1406,28 +1406,43 @@ class TestGrpcUnsecuredTLS:
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
-    def test_self_calibrate(self, multi_instrument_session):
-        multi_instrument_session.self_calibrate()
+    def configure_session(self, session, test_name):
+        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
 
-    def test_channels_rep_cap(self, multi_instrument_session):
-        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+        session.load_specifications_levels_and_timing(
+            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
+            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
+            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
+        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
 
-        multi_instrument_session.vil = 1
-        ch_0_63 = multi_instrument_session.get_channel_names(indices=[0, 63])
-        multi_instrument_session.channels[ch_0_63].vil = 2
-        assert multi_instrument_session.pins[ch_0_63].vil == pytest.approx(2, abs=1e-3)
-        ch_1 = multi_instrument_session.get_channel_names(indices=1)
-        assert multi_instrument_session.pins[ch_1].vil == pytest.approx(1, abs=1e-3)
+    def get_test_file_path(self, test_name, file_name):
+        return os.path.join(test_files_base_dir, test_name, file_name)
 
-    def test_sites_rep_cap(self, multi_instrument_session):
-        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    def test_burst_pattern_pass_fail(self, multi_instrument_session):
+        test_files_folder = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_files_folder)
 
-        assert multi_instrument_session.sites[0].is_site_enabled()
-        assert multi_instrument_session.sites[1].is_site_enabled()
+        multi_instrument_session.load_pattern(self.get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-        multi_instrument_session.sites[0, 1].disable_sites()
-        assert not multi_instrument_session.sites[0].is_site_enabled()
-        assert not multi_instrument_session.sites[1].is_site_enabled()
+        result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
+        assert result == {0: True, 1: True, 2: True, 3: True}
+
+    def test_ppmu_measure(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
+            nidigital.PPMUMeasurementType.VOLTAGE)
+
+        assert len(voltage_measurements) == 2
+
+    def test_read_static(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+        assert pin_states == [nidigital.PinState.L] * 2
 
 
 class TestGrpcNoTLS:
@@ -1451,28 +1466,43 @@ class TestGrpcNoTLS:
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
-    def test_self_calibrate(self, multi_instrument_session):
-        multi_instrument_session.self_calibrate()
+    def configure_session(self, session, test_name):
+        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
 
-    def test_channels_rep_cap(self, multi_instrument_session):
-        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+        session.load_specifications_levels_and_timing(
+            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
+            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
+            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
+        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
 
-        multi_instrument_session.vil = 1
-        ch_0_63 = multi_instrument_session.get_channel_names(indices=[0, 63])
-        multi_instrument_session.channels[ch_0_63].vil = 2
-        assert multi_instrument_session.pins[ch_0_63].vil == pytest.approx(2, abs=1e-3)
-        ch_1 = multi_instrument_session.get_channel_names(indices=1)
-        assert multi_instrument_session.pins[ch_1].vil == pytest.approx(1, abs=1e-3)
+    def get_test_file_path(self, test_name, file_name):
+        return os.path.join(test_files_base_dir, test_name, file_name)
 
-    def test_sites_rep_cap(self, multi_instrument_session):
-        multi_instrument_session.load_pin_map(os.path.join(test_files_base_dir, "pin_map.pinmap"))
+    def test_burst_pattern_pass_fail(self, multi_instrument_session):
+        test_files_folder = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_files_folder)
 
-        assert multi_instrument_session.sites[0].is_site_enabled()
-        assert multi_instrument_session.sites[1].is_site_enabled()
+        multi_instrument_session.load_pattern(self.get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-        multi_instrument_session.sites[0, 1].disable_sites()
-        assert not multi_instrument_session.sites[0].is_site_enabled()
-        assert not multi_instrument_session.sites[1].is_site_enabled()
+        result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
+        assert result == {0: True, 1: True, 2: True, 3: True}
+
+    def test_ppmu_measure(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
+            nidigital.PPMUMeasurementType.VOLTAGE)
+
+        assert len(voltage_measurements) == 2
+
+    def test_read_static(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+        assert pin_states == [nidigital.PinState.L] * 2
 
 
 def test_unsecured_client():
