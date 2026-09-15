@@ -1,10 +1,14 @@
+import json
 import os
 import pathlib
 import pytest
 import re
 import subprocess
+import sys
 import threading
 import time
+
+import nitlsconfig_32_bit_patch  # noqa: F401
 
 
 class GrpcServerProcess:
@@ -104,3 +108,121 @@ def impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(ivi_method_
     t2.start()
     t2.join()
     assert not t2.is_alive()
+
+
+def exchange_certificates(
+    server_host: str,
+    server_user: str | None = None,
+    client_host: str | None = None,
+    client_user: str | None = None,
+    verbosity: int = 2,
+):
+    # gRPC tests only run on Windows, so this isn't necessary on Linux.
+    if os.name != "nt":
+        return
+
+    # 26.5 versions of ni-grpc-device server installers do not properly create the trusted.d directory,
+    # which causes issues with the certificate exchange process. This has been fixed in the 26.8 version
+    # of the installer, but it has not yet been released. For now, we're creating it manually; this can
+    # be removed once nimibot system tests are updated to test against >= 26.8 versions of the drivers.
+    trusted_servers_path = pathlib.Path(r"C:/ProgramData/National Instruments/nitlsconfig/server.d/ni-grpc-device/trusted.d")
+    trusted_servers_path.mkdir(parents=True, exist_ok=True)
+
+    # 26.5 versions of ni-grpc-device client configuration use a default certificate_mode of Disabled,
+    # which prevents client-side certificate generation from this script. In 26.8 and beyond, the default
+    # is Managed. We set it manually here; this can be removed once nimibot system tests are updated to
+    # test against >= 26.8 versions of the drivers.
+    client_config_path = (
+        pathlib.Path(os.environ["LOCALAPPDATA"])
+        / "National Instruments" / "nitlsconfig" / "client.d" / "ni-grpc-device.conf.yml"
+    )
+    content = client_config_path.read_text()
+    content = re.sub(r"(?m)^certificate_mode:.*$", "certificate_mode: Managed", content)
+    client_config_path.write_text(content)
+
+    script_path = r"C:/NITests/nitlsconfigtest/exchange_certificates.py"
+    if not pathlib.Path(script_path).is_file():
+        raise FileNotFoundError(f"Certificate exchange script not found: {script_path}")
+
+    server_host_arg = f"--server-host={server_host}"
+    server_user_arg = f"--server-user={server_user}" if server_user else "--local-server"
+    client_host_arg = f"--client-host={client_host}" if client_host else None
+    client_user_arg = f"--client-user={client_user}" if client_user else None
+
+    verbosity = max(0, min(verbosity, 4))
+    verbosity_arg = {
+        0: "-qq",
+        1: "-q",
+        3: "-v",
+        4: "-vv",
+    }.get(verbosity)
+
+    command = [sys.executable, str(pathlib.Path(script_path)), server_host_arg, server_user_arg]
+    command.extend(arg for arg in (client_host_arg, client_user_arg, verbosity_arg) if arg is not None)
+
+    # The script expects this environment variable to be set
+    env = os.environ.copy()
+    env.setdefault("USERNAME", "Administrator")
+
+    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+
+
+def configure_tls_modes(
+    service: str,
+    server_host: str,
+    server_user: str | None = None,
+    client_host: str | None = None,
+    client_user: str | None = None,
+    server_cert_mode: str | None = None,
+    server_client_mode: str | None = None,
+    client_cert_mode: str | None = None,
+    client_server_mode: str | None = None,
+):
+    # gRPC tests only run on Windows, so this isn't necessary on Linux.
+    if os.name != "nt":
+        return
+
+    script_path = r"C:/NITests/nitlsconfigtest/configure_tls_modes.py"
+    if not pathlib.Path(script_path).is_file():
+        raise FileNotFoundError(f"Configure TLS modes script not found: {script_path}")
+
+    service_arg = f"--service={service}"
+    server_host_arg = f"--server-host={server_host}"
+    server_user_arg = f"--server-user={server_user}" if server_user else "--local-server"
+    client_host_arg = f"--client-host={client_host}" if client_host else None
+    client_user_arg = f"--client-user={client_user}" if client_user else None
+    server_cert_mode_arg = f"--server-certificate-mode={server_cert_mode}" if server_cert_mode else None
+    server_client_mode_arg = f"--server-client-mode={server_client_mode}" if server_client_mode else None
+    client_cert_mode_arg = f"--client-certificate-mode={client_cert_mode}" if client_cert_mode else None
+    client_server_mode_arg = f"--client-server-mode={client_server_mode}" if client_server_mode else None
+
+    command = [sys.executable, str(pathlib.Path(script_path)), service_arg, server_host_arg, server_user_arg]
+    command.extend(
+        arg
+        for arg in (
+            client_host_arg,
+            client_user_arg,
+            server_cert_mode_arg,
+            server_client_mode_arg,
+            client_cert_mode_arg,
+            client_server_mode_arg,
+        )
+        if arg is not None
+    )
+
+    # The script expects this environment variable to be set
+    env = os.environ.copy()
+    env.setdefault("USERNAME", "Administrator")
+
+    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+
+def _run_nitlsconfigtest_script_with_patch(script_path: str, args: list, env: dict) -> None:
+    # A bootstrap script is used to import the patcher so that the scripts can see the nitlsconfig executable even if
+    # they are in a 32-bit context.
+    bootstrap = (
+        "import runpy, sys\n"
+        "import nitlsconfig_32_bit_patch\n"
+        f"sys.argv = [{script_path!r}] + {args!r}\n"
+        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
+    )
+    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
