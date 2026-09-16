@@ -376,6 +376,7 @@ class TestGrpcNoTLS(SystemTests):
             assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
 
 
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests are not supported in 32-bit processes")
 class TestGrpcSecuredTLS(BasicValidationTests):
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
@@ -401,6 +402,7 @@ class TestGrpcSecuredTLS(BasicValidationTests):
         return {'grpc_options': grpc_options}
 
 
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests are not supported in 32-bit processes")
 class TestGrpcUnsecuredTLS(BasicValidationTests):
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
