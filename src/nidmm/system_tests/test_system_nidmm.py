@@ -16,14 +16,7 @@ import nidmm
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
-
-class SystemTests:
-    @pytest.fixture(scope='function')
-    def session(self, session_creation_kwargs):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    # Basic usability tests
+class BasicValidationTests:
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
@@ -40,6 +33,13 @@ class SystemTests:
         session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
         measurements = session.read_multi_point(8)
         assert len(measurements) == 8
+
+
+class SystemTests(BasicValidationTests):
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
 
     # Attribute tests
     def test_vi_string_attribute(self, session):
@@ -333,14 +333,7 @@ class TestGrpcSecuredTLS(SystemTests):
     @pytest.fixture(scope='class')
     @classmethod
     def grpc_channel(cls):
-        system_test_utilities.configure_tls_modes(
-            service="ni-grpc-device",
-            server_host="localhost",
-            server_cert_mode="ManagedSelfSigned",
-            server_client_mode="ManagedSelfSigned",
-            client_cert_mode="Managed",
-            client_server_mode="TrustedCertificates"
-        )
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
         system_test_utilities.exchange_certificates("localhost")
 
         current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -385,7 +378,7 @@ class TestGrpcSecuredTLS(SystemTests):
             assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
 
 
-class TestGrpcUnsecuredTLS:
+class TestGrpcUnsecuredTLS(BasicValidationTests):
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
@@ -394,14 +387,7 @@ class TestGrpcUnsecuredTLS:
     @pytest.fixture(scope='class')
     @classmethod
     def grpc_channel(cls):
-        system_test_utilities.configure_tls_modes(
-            service="ni-grpc-device",
-            server_host="localhost",
-            server_cert_mode="Disabled",
-            server_client_mode="Disabled",
-            client_cert_mode="Disabled",
-            client_server_mode="Disabled"
-        )
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
 
         current_directory = os.path.dirname(os.path.abspath(__file__))
         config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
@@ -415,25 +401,8 @@ class TestGrpcUnsecuredTLS:
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
-    def test_take_simple_measurement_works(self, session):
-        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
 
-    def test_acquisition(self, session):
-        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        with session.initiate():
-            session.fetch()
-        with session.initiate():
-            session.fetch()
-
-    def test_multi_point_acquisition(self, session):
-        session.configure_multi_point(4, 2)
-        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
-        measurements = session.read_multi_point(8)
-        assert len(measurements) == 8
-
-
-class TestGrpcNoTLS:
+class TestGrpcNoTLS(BasicValidationTests):
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
@@ -453,88 +422,3 @@ class TestGrpcNoTLS:
     def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
-
-    def test_take_simple_measurement_works(self, session):
-        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
-
-    def test_acquisition(self, session):
-        session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
-        with session.initiate():
-            session.fetch()
-        with session.initiate():
-            session.fetch()
-
-    def test_multi_point_acquisition(self, session):
-        session.configure_multi_point(4, 2)
-        session.configure_measurement_digits(nidmm.Function.DC_VOLTS, 1, 5.5)
-        measurements = session.read_multi_point(8)
-        assert len(measurements) == 8
-
-
-def test_unsecured_client():
-    system_test_utilities.configure_tls_modes(
-        service="ni-grpc-device",
-        server_host="localhost",
-        server_cert_mode="ManagedSelfSigned",
-        server_client_mode="ManagedSelfSigned",
-        client_cert_mode="Managed",
-        client_server_mode="TrustedCertificates"
-    )
-    system_test_utilities.exchange_certificates("localhost")
-
-    system_test_utilities.configure_tls_modes(
-        service="ni-grpc-device",
-        server_host="localhost",
-        server_cert_mode="ManagedSelfSigned",
-        server_client_mode="ManagedSelfSigned",
-        client_cert_mode="Disabled",
-        client_server_mode="Disabled"
-    )
-
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
-
-    # Attempt to connect to the server. Since it is expecting a TLS-enabled client, this should fail.
-    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-        unsecured_client_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
-        grpc_options = nidmm.GrpcSessionOptions(unsecured_client_channel, '')
-        try:
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
-                assert False
-        except nidmm.Error:
-            pass
-
-
-def test_unsecured_server():
-    system_test_utilities.configure_tls_modes(
-        service="ni-grpc-device",
-        server_host="localhost",
-        server_cert_mode="ManagedSelfSigned",
-        server_client_mode="ManagedSelfSigned",
-        client_cert_mode="Managed",
-        client_server_mode="TrustedCertificates"
-    )
-    system_test_utilities.exchange_certificates("localhost")
-
-    system_test_utilities.configure_tls_modes(
-        service="ni-grpc-device",
-        server_host="localhost",
-        server_cert_mode="Disabled",
-        server_client_mode="Disabled",
-        client_cert_mode="Managed",
-        client_server_mode="TrustedCertificates"
-    )
-
-    current_directory = os.path.dirname(os.path.abspath(__file__))
-    config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
-
-    # Attempt to connect to the server. Since the client is expecting a TLS-enabled server, this should fail.
-    with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-        unsecured_server_channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
-        grpc_options = nidmm.GrpcSessionOptions(unsecured_server_channel, '')
-        try:
-            with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', grpc_options=grpc_options):
-                assert False
-        except nidmm.Error:
-            pass

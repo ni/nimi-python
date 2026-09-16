@@ -216,6 +216,44 @@ def configure_tls_modes(
 
     _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
 
+def configure_tls_modes_secure(
+    service: str,
+    server_host: str,
+    server_user: str | None = None,
+    client_host: str | None = None,
+    client_user: str | None = None,
+):
+    configure_tls_modes(
+        service=service,
+        server_host=server_host,
+        server_user=server_user,
+        client_host=client_host,
+        client_user=client_user,
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
+    )
+
+def configure_tls_modes_insecure(
+    service: str,
+    server_host: str,
+    server_user: str | None = None,
+    client_host: str | None = None,
+    client_user: str | None = None,
+):
+    configure_tls_modes(
+        service=service,
+        server_host=server_host,
+        server_user=server_user,
+        client_host=client_host,
+        client_user=client_user,
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
+
 def _run_nitlsconfigtest_script_with_patch(script_path: str, args: list, env: dict) -> None:
     # A bootstrap script is used to import the patcher so that the scripts can see the nitlsconfig executable even if
     # they are in a 32-bit context.
