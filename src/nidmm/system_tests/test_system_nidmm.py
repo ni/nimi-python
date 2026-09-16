@@ -16,6 +16,7 @@ import nidmm
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
+
 class BasicValidationTests:
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
