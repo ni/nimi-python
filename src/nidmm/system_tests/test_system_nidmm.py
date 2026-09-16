@@ -337,7 +337,7 @@ class TestGrpcNoTLS(SystemTests):
         current_directory = os.path.dirname(os.path.abspath(__file__))
         config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
