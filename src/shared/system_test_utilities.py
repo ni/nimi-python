@@ -8,8 +8,6 @@ import sys
 import threading
 import time
 
-import nitlsconfig_32_bit_patch  # noqa: F401
-
 
 class GrpcServerProcess:
     def __init__(self, config_file_path):
@@ -164,7 +162,7 @@ def exchange_certificates(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+    subprocess.run(command, check=True, env=env)
 
 
 def configure_tls_modes(
@@ -214,7 +212,8 @@ def configure_tls_modes(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+    subprocess.run(command, check=True, env=env)
+
 
 def configure_tls_modes_secure(
     service: str,
@@ -235,6 +234,7 @@ def configure_tls_modes_secure(
         client_server_mode="TrustedCertificates"
     )
 
+
 def configure_tls_modes_insecure(
     service: str,
     server_host: str,
@@ -253,14 +253,3 @@ def configure_tls_modes_insecure(
         client_cert_mode="Disabled",
         client_server_mode="Disabled"
     )
-
-def _run_nitlsconfigtest_script_with_patch(script_path: str, args: list, env: dict) -> None:
-    # A bootstrap script is used to import the patcher so that the scripts can see the nitlsconfig executable even if
-    # they are in a 32-bit context.
-    bootstrap = (
-        "import runpy, sys\n"
-        "import nitlsconfig_32_bit_patch\n"
-        f"sys.argv = [{script_path!r}] + {args!r}\n"
-        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
-    )
-    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)

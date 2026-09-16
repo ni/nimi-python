@@ -330,15 +330,12 @@ class TestLibrary(SystemTests):
             assert not math.isnan(sample)
 
 
-class TestGrpcSecuredTLS(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
     @classmethod
     def grpc_channel(cls):
-        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
-        system_test_utilities.exchange_certificates("localhost")
-
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
             yield channel
@@ -379,6 +376,31 @@ class TestGrpcSecuredTLS(SystemTests):
             assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
 
 
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
+        return {'grpc_options': grpc_options}
+
+
 class TestGrpcUnsecuredTLS(BasicValidationTests):
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
@@ -394,28 +416,6 @@ class TestGrpcUnsecuredTLS(BasicValidationTests):
         config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
-            yield channel
-
-    @pytest.fixture(scope='class')
-    @classmethod
-    def session_creation_kwargs(cls, grpc_channel):
-        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
-        return {'grpc_options': grpc_options}
-
-
-class TestGrpcNoTLS(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session(self, session_creation_kwargs):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='class')
-    @classmethod
-    def grpc_channel(cls):
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
-        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
