@@ -8,8 +8,6 @@ import sys
 import threading
 import time
 
-import nitlsconfig_32_bit_patch  # noqa: F401
-
 
 class GrpcServerProcess:
     def __init__(self, config_file_path):
@@ -164,15 +162,12 @@ def exchange_certificates(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+    subprocess.run(command, check=True, env=env)
 
 
 def configure_tls_modes(
     service: str,
     server_host: str,
-    server_user: str | None = None,
-    client_host: str | None = None,
-    client_user: str | None = None,
     server_cert_mode: str | None = None,
     server_client_mode: str | None = None,
     client_cert_mode: str | None = None,
@@ -188,9 +183,7 @@ def configure_tls_modes(
 
     service_arg = f"--service={service}"
     server_host_arg = f"--server-host={server_host}"
-    server_user_arg = f"--server-user={server_user}" if server_user else "--local-server"
-    client_host_arg = f"--client-host={client_host}" if client_host else None
-    client_user_arg = f"--client-user={client_user}" if client_user else None
+    server_user_arg = "--local-server"
     server_cert_mode_arg = f"--server-certificate-mode={server_cert_mode}" if server_cert_mode else None
     server_client_mode_arg = f"--server-client-mode={server_client_mode}" if server_client_mode else None
     client_cert_mode_arg = f"--client-certificate-mode={client_cert_mode}" if client_cert_mode else None
@@ -200,8 +193,6 @@ def configure_tls_modes(
     command.extend(
         arg
         for arg in (
-            client_host_arg,
-            client_user_arg,
             server_cert_mode_arg,
             server_client_mode_arg,
             client_cert_mode_arg,
@@ -214,15 +205,32 @@ def configure_tls_modes(
     env = os.environ.copy()
     env.setdefault("USERNAME", "Administrator")
 
-    _run_nitlsconfigtest_script_with_patch(script_path, command[2:], env)
+    subprocess.run(command, check=True, env=env)
 
-def _run_nitlsconfigtest_script_with_patch(script_path: str, args: list, env: dict) -> None:
-    # A bootstrap script is used to import the patcher so that the scripts can see the nitlsconfig executable even if
-    # they are in a 32-bit context.
-    bootstrap = (
-        "import runpy, sys\n"
-        "import nitlsconfig_32_bit_patch\n"
-        f"sys.argv = [{script_path!r}] + {args!r}\n"
-        f"runpy.run_path({script_path!r}, run_name='__main__')\n"
+
+def configure_tls_modes_secure(
+    service: str,
+    server_host: str
+):
+    configure_tls_modes(
+        service=service,
+        server_host=server_host,
+        server_cert_mode="ManagedSelfSigned",
+        server_client_mode="ManagedSelfSigned",
+        client_cert_mode="Managed",
+        client_server_mode="TrustedCertificates"
     )
-    subprocess.run([sys.executable, "-c", bootstrap], check=True, env=env)
+
+
+def configure_tls_modes_insecure(
+    service: str,
+    server_host: str
+):
+    configure_tls_modes(
+        service=service,
+        server_host=server_host,
+        server_cert_mode="Disabled",
+        server_client_mode="Disabled",
+        client_cert_mode="Disabled",
+        client_server_mode="Disabled"
+    )
