@@ -16,8 +16,14 @@ import nidmm
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
-
+# Defines a subset of system tests to validate basic DMM functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
 class BasicValidationTests:
+    @pytest.fixture(scope='function')
+    def session(self, session_creation_kwargs):
+        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
@@ -37,11 +43,6 @@ class BasicValidationTests:
 
 
 class SystemTests(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session(self, session_creation_kwargs):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
     # Attribute tests
     def test_vi_string_attribute(self, session):
         assert session.instrument_model == 'NI PXIe-4082'
@@ -376,13 +377,8 @@ class TestGrpcNoTLS(SystemTests):
             assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
 
 
-@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests are not supported in 32-bit processes")
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
 class TestGrpcSecuredTLS(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session(self, session_creation_kwargs):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
     @pytest.fixture(scope='class')
     @classmethod
     def grpc_channel(cls):
@@ -402,13 +398,8 @@ class TestGrpcSecuredTLS(BasicValidationTests):
         return {'grpc_options': grpc_options}
 
 
-@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests are not supported in 32-bit processes")
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
 class TestGrpcUnsecuredTLS(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session(self, session_creation_kwargs):
-        with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
     @pytest.fixture(scope='class')
     @classmethod
     def grpc_channel(cls):

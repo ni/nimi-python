@@ -168,9 +168,6 @@ def exchange_certificates(
 def configure_tls_modes(
     service: str,
     server_host: str,
-    server_user: str | None = None,
-    client_host: str | None = None,
-    client_user: str | None = None,
     server_cert_mode: str | None = None,
     server_client_mode: str | None = None,
     client_cert_mode: str | None = None,
@@ -186,9 +183,7 @@ def configure_tls_modes(
 
     service_arg = f"--service={service}"
     server_host_arg = f"--server-host={server_host}"
-    server_user_arg = f"--server-user={server_user}" if server_user else "--local-server"
-    client_host_arg = f"--client-host={client_host}" if client_host else None
-    client_user_arg = f"--client-user={client_user}" if client_user else None
+    server_user_arg = "--local-server"
     server_cert_mode_arg = f"--server-certificate-mode={server_cert_mode}" if server_cert_mode else None
     server_client_mode_arg = f"--server-client-mode={server_client_mode}" if server_client_mode else None
     client_cert_mode_arg = f"--client-certificate-mode={client_cert_mode}" if client_cert_mode else None
@@ -198,8 +193,6 @@ def configure_tls_modes(
     command.extend(
         arg
         for arg in (
-            client_host_arg,
-            client_user_arg,
             server_cert_mode_arg,
             server_client_mode_arg,
             client_cert_mode_arg,
@@ -217,17 +210,11 @@ def configure_tls_modes(
 
 def configure_tls_modes_secure(
     service: str,
-    server_host: str,
-    server_user: str | None = None,
-    client_host: str | None = None,
-    client_user: str | None = None,
+    server_host: str
 ):
     configure_tls_modes(
         service=service,
         server_host=server_host,
-        server_user=server_user,
-        client_host=client_host,
-        client_user=client_user,
         server_cert_mode="ManagedSelfSigned",
         server_client_mode="ManagedSelfSigned",
         client_cert_mode="Managed",
@@ -237,17 +224,11 @@ def configure_tls_modes_secure(
 
 def configure_tls_modes_insecure(
     service: str,
-    server_host: str,
-    server_user: str | None = None,
-    client_host: str | None = None,
-    client_user: str | None = None,
+    server_host: str
 ):
     configure_tls_modes(
         service=service,
         server_host=server_host,
-        server_user=server_user,
-        client_host=client_host,
-        client_user=client_user,
         server_cert_mode="Disabled",
         server_client_mode="Disabled",
         client_cert_mode="Disabled",
