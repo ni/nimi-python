@@ -33,6 +33,14 @@ class BasicValidationTests:
     def session(self, session_creation_kwargs):
         with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, **session_creation_kwargs) as simulated_session:
             yield simulated_session
+    
+    @pytest.fixture(scope='function')
+    def session_2532(self, session_creation_kwargs):
+        with daqmx_sim_db_lock:
+            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
+        yield simulated_session
+        with daqmx_sim_db_lock:
+            simulated_session.close()
 
     def test_functions_self_test(self, session):
         # We should not get an assert if self_test passes
@@ -60,7 +68,7 @@ class BasicValidationTests:
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
         session.disconnect_all()
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-    
+
     @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
     def test_continuous_software_scanning(self, session_2532):
         scan_list = 'r0->c0; r1->c1'
@@ -85,14 +93,6 @@ class BasicValidationTests:
 
 
 class SystemTests(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session_2532(self, session_creation_kwargs):
-        with daqmx_sim_db_lock:
-            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
-        yield simulated_session
-        with daqmx_sim_db_lock:
-            simulated_session.close()
-
     # Attribute Tests
     # No R/W non-IVI boolean attributes on all devices
     '''

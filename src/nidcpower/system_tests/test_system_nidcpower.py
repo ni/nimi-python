@@ -77,7 +77,7 @@ class BasicValidationTests:
         # initialize and yield session
         with nidcpower.Session(**init_args, **session_creation_kwargs) as simulated_session:
             yield simulated_session
-    
+
     def test_self_test(self, session):
         session.self_test()
 

@@ -76,11 +76,6 @@ class BasicValidationTests:
             yield simulated_session
 
     @pytest.fixture(scope='function')
-    def multi_instrument_session(self, session_creation_kwargs):
-        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-    @pytest.fixture(scope='function')
     def single_instrument_session_5171(self, session_creation_kwargs):  # High channel-count session for get_channel_names testing
         with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5171R (8CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
@@ -88,6 +83,11 @@ class BasicValidationTests:
     @pytest.fixture(scope='function')
     def multi_instrument_session_5171(self, session_creation_kwargs):  # High channel-count session for get_channel_names testing
         with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5171R (8CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+    
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
     def test_self_test(self, multi_instrument_session):
