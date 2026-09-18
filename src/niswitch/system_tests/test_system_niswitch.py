@@ -95,7 +95,7 @@ class BasicValidationTests:
 class SystemTests(BasicValidationTests):
     # Attribute Tests
     # No R/W non-IVI boolean attributes on all devices
-    
+
     # def test_vi_boolean_attribute(session):
     #     session.power_down_latching_relays_after_debounce = False
     #     assert session.power_down_latching_relays_after_debounce is False
