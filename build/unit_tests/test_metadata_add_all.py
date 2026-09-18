@@ -961,9 +961,7 @@ config_input = {
         },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
-    'repeated_capabilities': [
-        {'python_name': 'channels', 'prefix': '', },
-    ],
+    'repeated_capabilities': [],
     # These are added here strictly for testing.
     'functions': {},
     'attributes': {},
@@ -1007,9 +1005,7 @@ config_expected = {
         },
     ],
     'enum_whitelist_suffix': ['_POINT_FIVE'],
-    'repeated_capabilities': [
-        {'python_name': 'channels', 'prefix': '', },
-    ],
+    'repeated_capabilities': [],
     'use_locking': True,
     'functions': functions_expected,
     'attributes': attributes_expected,
@@ -1019,6 +1015,31 @@ config_expected = {
     },
     'uses_nitclk': False,
 }
+
+
+config_with_custom_rep_cap_documentation = copy.deepcopy(config_input)
+config_with_custom_rep_cap_documentation['repeated_capabilities'] = [
+    {
+        'python_name': 'resources',
+        'prefix': 'res',
+        'documentation': {
+            'description': 'Resources use fully-qualified identifiers.',
+            'examples': [
+                {
+                    'code': "session.resources['dev0/res0'].channel_enabled = True",
+                    'description': 'Enables the first resource.',
+                }
+            ],
+            'valid_indices': ['dev0/res0', 'dev0/res1'],
+        },
+    },
+]
+
+
+config_with_custom_rep_cap_documentation_expected = copy.deepcopy(config_expected)
+config_with_custom_rep_cap_documentation_expected['repeated_capabilities'] = copy.deepcopy(
+    config_with_custom_rep_cap_documentation['repeated_capabilities']
+)
 
 
 def _do_the_test_add_functions_metadata(functions, expected):
@@ -1073,9 +1094,9 @@ def test_add_all_metadata():
     actual_functions = copy.deepcopy(functions_input)
     actual_attributes = copy.deepcopy(attributes_input)
     actual_enums = copy.deepcopy(enums_input)
-    actual_config = copy.deepcopy(config_input)
+    actual_config = copy.deepcopy(config_with_custom_rep_cap_documentation)
     actual_config['use_locking'] = False
-    expected = copy.deepcopy(config_expected)
+    expected = copy.deepcopy(config_with_custom_rep_cap_documentation_expected)
     expected['use_locking'] = False
     _do_the_test_add_all_metadata(
         functions=actual_functions,

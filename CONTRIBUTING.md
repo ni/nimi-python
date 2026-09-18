@@ -105,6 +105,8 @@ Download and install the latest versions for the supported driver runtimes from 
 * NI-Digital Pattern Driver
 * NI-DMM
 * NI-FGEN
+* NI-RFSA
+* NI-RFSG
 * NI-SCOPE
 * NI-SWITCH
 * NI Switch Executive

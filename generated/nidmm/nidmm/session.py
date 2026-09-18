@@ -1049,7 +1049,14 @@ class Session(_SessionBase):
         # if _init_with_options fails, the error handler can reference it.
         # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
+        connected = False
+        try:
+            self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
+            connected = True
+        finally:
+            if grpc_options:
+                import nitlsconfig
+                nitlsconfig.audit_session_connect('NI-DMM', grpc_options.grpc_channel, connected)
 
         # Store the parameter list for later printing in __repr__
         param_list = []

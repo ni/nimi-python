@@ -204,4 +204,6 @@ intersphinx_mapping = {
 % for module in sorted(external_modules):
     '${module}': ('https://${module}.readthedocs.io/en/latest/', None),
 % endfor
+    # Read the Docs project slug differs from the module name.
+    'nitlsconfig': ('https://nitlsconfig-python.readthedocs.io/en/latest/', None),
 }

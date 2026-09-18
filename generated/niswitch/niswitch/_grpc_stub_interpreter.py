@@ -3,6 +3,7 @@
 
 import grpc
 import hightime  # noqa: F401
+import nitlsconfig
 import session_pb2 as session_grpc_types
 import threading
 import warnings
@@ -50,7 +51,11 @@ class GrpcStubInterpreter(object):
             elif grpc_error == grpc.StatusCode.INVALID_ARGUMENT:
                 raise ValueError(error_message) from None
             elif grpc_error == grpc.StatusCode.UNAVAILABLE:
-                error_message = 'Failed to connect to server'
+                # gRPC reports a rejected TLS handshake and an unreachable server with the
+                # same code, so ask NI-TLS whether it built this channel and can say more.
+                error_message = nitlsconfig.get_tls_connection_error_elaboration(
+                    self._grpc_options.grpc_channel
+                ) or 'Failed to connect to server'
             elif grpc_error == grpc.StatusCode.UNIMPLEMENTED:
                 error_message = (
                     'This operation is not supported by the NI gRPC Device Server being used. Upgrade NI gRPC Device Server.'

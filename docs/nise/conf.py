@@ -195,4 +195,6 @@ intersphinx_mapping = {
     'niscope': ('https://niscope.readthedocs.io/en/latest/', None),
     'niswitch': ('https://niswitch.readthedocs.io/en/latest/', None),
     'nitclk': ('https://nitclk.readthedocs.io/en/latest/', None),
+    # Read the Docs project slug differs from the module name.
+    'nitlsconfig': ('https://nitlsconfig-python.readthedocs.io/en/latest/', None),
 }
