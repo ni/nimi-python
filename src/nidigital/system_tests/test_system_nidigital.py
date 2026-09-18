@@ -27,6 +27,32 @@ class BasicValidationTests:
         with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
+    def test_self_test(self, multi_instrument_session):
+        multi_instrument_session.self_test()
+
+    def test_ppmu_source(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
+
+    def test_ppmu_measure(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
+            nidigital.PPMUMeasurementType.VOLTAGE)
+
+        assert len(voltage_measurements) == 2
+
+    def test_read_static(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+        assert pin_states == [nidigital.PinState.L] * 2
+
 
 class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
@@ -55,9 +81,6 @@ class SystemTests(BasicValidationTests):
         assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
         multi_instrument_session.reset_device()
         assert multi_instrument_session.selected_function == nidigital.SelectedFunction.DISCONNECT
-
-    def test_self_test(self, multi_instrument_session):
-        multi_instrument_session.self_test()
 
     def test_get_error(self, multi_instrument_session):
         try:
@@ -656,29 +679,6 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
 
         fail_count = multi_instrument_session.pins['site0/LO0', 'site0/HI1', 'site2/HI3'].get_fail_count()
         assert fail_count == [0] * 3
-
-    def test_ppmu_measure(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
-            nidigital.PPMUMeasurementType.VOLTAGE)
-
-        assert len(voltage_measurements) == 2
-
-    def test_ppmu_source(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
-
-    def test_read_static(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
-
-        assert pin_states == [nidigital.PinState.L] * 2
 
     def test_write_static(self, multi_instrument_session):
         test_name = 'simple_pattern'

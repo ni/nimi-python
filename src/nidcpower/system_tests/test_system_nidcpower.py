@@ -77,12 +77,54 @@ class BasicValidationTests:
         # initialize and yield session
         with nidcpower.Session(**init_args, **session_creation_kwargs) as simulated_session:
             yield simulated_session
-
-
-class SystemTests(BasicValidationTests):
+    
     def test_self_test(self, session):
         session.self_test()
 
+    @pytest.mark.channels('0')
+    def test_measure(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
+        session.voltage_level_range = 6
+        session.voltage_level = 2
+        with session.initiate():
+            reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
+            assert session.query_in_compliance() is False
+        assert reading == 2
+
+    @pytest.mark.channels('0')
+    def test_fetch_multiple(self, session):
+        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
+        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
+        session.voltage_level = 1
+        count = 10
+        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
+        with session.initiate():
+            measurements = session.fetch_multiple(count)
+            assert len(measurements) == count
+            assert isinstance(measurements[1].voltage, float)
+            assert isinstance(measurements[1].current, float)
+            assert measurements[1].in_compliance in [True, False]
+            assert measurements[1].voltage == 1.0
+            assert measurements[1].current == 0.00001
+
+    def test_measure_multiple(self, session):
+        with session.initiate():
+            # session is open to all 12 channels on the device
+            measurements = session.measure_multiple()
+            assert len(measurements) == 12
+            assert measurements[1].in_compliance is None
+            assert measurements[1].voltage == 0.0
+            assert measurements[1].current == 0.00001
+            # now a subset of the channels
+            measurements = session.channels[range(4)].measure_multiple()
+            assert len(measurements) == 4
+            assert measurements[1].in_compliance is None
+            assert measurements[1].voltage == 0.0
+            assert measurements[1].current == 0.00001
+
+
+class SystemTests(BasicValidationTests):
     # Workaround for driver runtime bug. See issue #1798 for details.
     @pytest.mark.legacy_session_only
     def test_self_cal(self, session):
@@ -167,17 +209,6 @@ class SystemTests(BasicValidationTests):
         assert channel.output_enabled is False
 
     @pytest.mark.channels('0')
-    def test_measure(self, session):
-        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
-        session.output_function = nidcpower.OutputFunction.DC_VOLTAGE
-        session.voltage_level_range = 6
-        session.voltage_level = 2
-        with session.initiate():
-            reading = session.measure(nidcpower.MeasurementTypes.VOLTAGE)
-            assert session.query_in_compliance() is False
-        assert reading == 2
-
-    @pytest.mark.channels('0')
     def test_query_output_state(self, session):
         with session.initiate():
             assert session.query_output_state(nidcpower.OutputStates.CONSTANT_VOLTAGE) is True   # since default function is DCVolt when initiated output state for DC Volt\DC current should be True and False respectively
@@ -196,37 +227,6 @@ class SystemTests(BasicValidationTests):
         expected_aperture_time = 5
         aperture_time_in_range = abs(aperture_time - expected_aperture_time) <= max(1e-09 * max(abs(aperture_time), abs(expected_aperture_time)), 0.0)  # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
         assert aperture_time_in_range is True
-
-    @pytest.mark.channels('0')
-    def test_fetch_multiple(self, session):
-        session.source_mode = nidcpower.SourceMode.SINGLE_POINT
-        session.configure_aperture_time(0, nidcpower.ApertureTimeUnits.SECONDS)
-        session.voltage_level = 1
-        count = 10
-        session.measure_when = nidcpower.MeasureWhen.AUTOMATICALLY_AFTER_SOURCE_COMPLETE
-        with session.initiate():
-            measurements = session.fetch_multiple(count)
-            assert len(measurements) == count
-            assert isinstance(measurements[1].voltage, float)
-            assert isinstance(measurements[1].current, float)
-            assert measurements[1].in_compliance in [True, False]
-            assert measurements[1].voltage == 1.0
-            assert measurements[1].current == 0.00001
-
-    def test_measure_multiple(self, session):
-        with session.initiate():
-            # session is open to all 12 channels on the device
-            measurements = session.measure_multiple()
-            assert len(measurements) == 12
-            assert measurements[1].in_compliance is None
-            assert measurements[1].voltage == 0.0
-            assert measurements[1].current == 0.00001
-            # now a subset of the channels
-            measurements = session.channels[range(4)].measure_multiple()
-            assert len(measurements) == 4
-            assert measurements[1].in_compliance is None
-            assert measurements[1].voltage == 0.0
-            assert measurements[1].current == 0.00001
 
     @pytest.mark.parametrize(
         'resource_name,channels,independent_channels,measurement_channels,expected_measured_channel',

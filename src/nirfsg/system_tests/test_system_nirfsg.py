@@ -39,6 +39,21 @@ class BasicValidationTests:
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
+    def test_self_test(self, rfsg_device_session):
+        # We should not get an assert if self_test passes
+        rfsg_device_session.self_test()
+
+    def test_configure_rf(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        assert rfsg_device_session.power_level == -5.0
+        assert rfsg_device_session.frequency == 2e9
+
+    def test_abort(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        rfsg_device_session.initiate()
+        rfsg_device_session.check_generation_status()
+        rfsg_device_session.abort()
+
 
 class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
@@ -133,10 +148,6 @@ class SystemTests(BasicValidationTests):
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is False
 
-    def test_self_test(self, rfsg_device_session):
-        # We should not get an assert if self_test passes
-        rfsg_device_session.self_test()
-
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
     def test_self_cal(self, rfsg_device_session):
         rfsg_device_session.self_cal()
@@ -202,11 +213,6 @@ class SystemTests(BasicValidationTests):
         assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
 
 # Configuration methods related tests
-    def test_configure_rf(self, rfsg_device_session):
-        rfsg_device_session.configure_rf(2e9, -5.0)
-        assert rfsg_device_session.power_level == -5.0
-        assert rfsg_device_session.frequency == 2e9
-
     def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
@@ -452,12 +458,6 @@ class SystemTests(BasicValidationTests):
         with rfsg_device_session.initiate():
             is_done = rfsg_device_session.check_generation_status()
             assert is_done is False  # is_done will never be True in CW mode
-
-    def test_abort(self, rfsg_device_session):
-        rfsg_device_session.configure_rf(2e9, -5.0)
-        rfsg_device_session.initiate()
-        rfsg_device_session.check_generation_status()
-        rfsg_device_session.abort()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="is_done is always True on simulated device")
     def test_abort_with_status(self, rfsg_device_session):

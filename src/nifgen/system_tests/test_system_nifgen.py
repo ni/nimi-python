@@ -39,12 +39,30 @@ class BasicValidationTests:
         with nifgen.Session('', '0', False, 'Simulate=1, DriverSetup=Model:5433 (2CH);BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
-
-class SystemTests(BasicValidationTests):
     def test_self_test(self, session):
         # We should not get an assert if self_test passes
         session.self_test()
 
+    def test_standard_waveform(self, session):
+        session.output_mode = nifgen.OutputMode.FUNC
+        session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
+        expected_frequency = 2000000
+        with session.initiate():
+            assert session.func_amplitude == 2.0
+            assert session.func_waveform == nifgen.Waveform.SINE
+            actual_frequency = session.func_frequency
+            in_range = abs(actual_frequency - expected_frequency) <= max(1e-09 * max(abs(actual_frequency), abs(expected_frequency)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
+            assert in_range is True
+            assert session.func_dc_offset == 1.0
+            assert session.func_start_phase == 0.0
+            assert session.is_done() is False
+
+    def test_create_waveform_from_list(self, session):
+        data = [0.1] * 10000
+        assert type(session.create_waveform(data)) is int
+
+
+class SystemTests(BasicValidationTests):
     def test_get_attribute_string(self, session):
         model = session.instrument_model
         assert model == 'NI PXIe-5433 (2CH)'
@@ -117,20 +135,6 @@ class SystemTests(BasicValidationTests):
         session.script_triggers[0].exported_script_trigger_output_terminal = requested_terminal_name
         assert requested_terminal_name == session.script_triggers[0].exported_script_trigger_output_terminal
 
-    def test_standard_waveform(self, session):
-        session.output_mode = nifgen.OutputMode.FUNC
-        session.configure_standard_waveform(nifgen.Waveform.SINE, 2.0, 2000000, 1.0, 0.0)
-        expected_frequency = 2000000
-        with session.initiate():
-            assert session.func_amplitude == 2.0
-            assert session.func_waveform == nifgen.Waveform.SINE
-            actual_frequency = session.func_frequency
-            in_range = abs(actual_frequency - expected_frequency) <= max(1e-09 * max(abs(actual_frequency), abs(expected_frequency)), 0.0)   # https://stackoverflow.com/questions/5595425/what-is-the-best-way-to-compare-floats-for-almost-equality-in-python
-            assert in_range is True
-            assert session.func_dc_offset == 1.0
-            assert session.func_start_phase == 0.0
-            assert session.is_done() is False
-
     def test_frequency_list(self, session):
         session.output_mode = nifgen.OutputMode.FREQ_LIST
         duration_array = [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
@@ -144,10 +148,6 @@ class SystemTests(BasicValidationTests):
 
     def test_clear_freq_list(self, session):
         session.clear_freq_list(-1)
-
-    def test_create_waveform_from_list(self, session):
-        data = [0.1] * 10000
-        assert type(session.create_waveform(data)) is int
 
     def test_configure_arb_waveform(self, session):
         waveform_data = [x * (1.0 / 256.0) for x in range(256)]

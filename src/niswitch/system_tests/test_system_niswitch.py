@@ -34,17 +34,10 @@ class BasicValidationTests:
         with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
+    def test_functions_self_test(self, session):
+        # We should not get an assert if self_test passes
+        session.self_test()
 
-class SystemTests(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session_2532(self, session_creation_kwargs):
-        with daqmx_sim_db_lock:
-            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
-        yield simulated_session
-        with daqmx_sim_db_lock:
-            simulated_session.close()
-
-    # Basic Use Case Tests
     def test_relayclose(self, session):
         relay_name = 'kr0c0'
         assert session.get_relay_position(relay_name) == niswitch.RelayPosition.OPEN
@@ -67,7 +60,7 @@ class SystemTests(BasicValidationTests):
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
         session.disconnect_all()
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-
+    
     @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
     def test_continuous_software_scanning(self, session_2532):
         scan_list = 'r0->c0; r1->c1'
@@ -89,6 +82,16 @@ class SystemTests(BasicValidationTests):
                 assert False
             except niswitch.Error as e:
                 assert e.code == -1074126826  # Error : Max time exceeded.
+
+
+class SystemTests(BasicValidationTests):
+    @pytest.fixture(scope='function')
+    def session_2532(self, session_creation_kwargs):
+        with daqmx_sim_db_lock:
+            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
+        yield simulated_session
+        with daqmx_sim_db_lock:
+            simulated_session.close()
 
     # Attribute Tests
     # No R/W non-IVI boolean attributes on all devices
@@ -142,10 +145,6 @@ class SystemTests(BasicValidationTests):
     def test_functions_get_channel_name(self, session):
         channel_name = session.get_channel_name(1)
         assert channel_name == 'r0'
-
-    def test_functions_self_test(self, session):
-        # We should not get an assert if self_test passes
-        session.self_test()
 
     def test_locks_are_reentrant(self, session):
         with session.lock():

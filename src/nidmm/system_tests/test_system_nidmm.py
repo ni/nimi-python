@@ -25,6 +25,10 @@ class BasicValidationTests:
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
+    def test_method_self_test(self, session):
+        # We should not get an assert if self_test passes
+        session.self_test()
+
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
@@ -84,10 +88,6 @@ class SystemTests(BasicValidationTests):
             session.configure_trigger(nidmm.TriggerSource.IMMEDIATE)
         except nidmm.Error:
             assert True
-
-    def test_method_self_test(self, session):
-        # We should not get an assert if self_test passes
-        session.self_test()
 
     def test_method_get_dev_temp(self, session):
         temperature = session.get_dev_temp('')

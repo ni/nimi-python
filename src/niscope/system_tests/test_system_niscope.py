@@ -71,15 +71,13 @@ def check_fetched_data(
 # independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
 class BasicValidationTests:
     @pytest.fixture(scope='function')
-    def multi_instrument_session(self, session_creation_kwargs):
-        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
-            yield simulated_session
-
-
-class SystemTests(BasicValidationTests):
-    @pytest.fixture(scope='function')
     def single_instrument_session(self, session_creation_kwargs):
         with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
+            yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def multi_instrument_session(self, session_creation_kwargs):
+        with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
     @pytest.fixture(scope='function')
@@ -92,43 +90,9 @@ class SystemTests(BasicValidationTests):
         with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5171R (8CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
-    @pytest.fixture(scope='function')
-    def session_5124(self, session_creation_kwargs):
-        with daqmx_sim_5124_lock:
-            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
-                yield simulated_session
-
-    @pytest.fixture(scope='function')
-    def session_5142(self, session_creation_kwargs):
-        with daqmx_sim_5142_lock:
-            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
-                yield simulated_session
-
-    # Attribute tests
-    def test_vi_boolean_attribute(self, multi_instrument_session):
-        multi_instrument_session.allow_more_records_than_memory = False
-        default_option = multi_instrument_session.allow_more_records_than_memory
-        assert default_option is False
-
-    def test_vi_string_attribute(self, multi_instrument_session):
-        trigger_source = f'/{instruments[1]}/NISCOPE_VAL_IMMEDIATE'
-        multi_instrument_session.acq_arm_source = trigger_source
-        assert trigger_source == multi_instrument_session.acq_arm_source
-
-    # Basic usability tests
-    def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
-        expected_string = [f'{x}' for x in range(8)]
-        # Sanity test few different types of input. No need for test to be exhaustive
-        # since all the various types are covered by converter unit tests.
-        channel_indices = ['0-1, 2, 3:4', 5, range(6, 7), slice(7, 8)]
-        assert single_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
-
-    def test_get_channel_names_with_multi_instrument_session(self, multi_instrument_session_5171):
-        expected_string = [f'{instruments[0]}/{x}' for x in range(8)] + [f'{instruments[1]}/{x}' for x in range(4)]
-        # Sanity test few different types of input. No need for test to be exhaustive
-        # since all the various types are covered by converter unit tests.
-        channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
-        assert multi_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
+    def test_self_test(self, multi_instrument_session):
+        # We should not get an assert if self_test passes
+        multi_instrument_session.self_test()
 
     @pytest.mark.parametrize(
         "test_channels,test_channels_expanded",
@@ -145,6 +109,20 @@ class SystemTests(BasicValidationTests):
         multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
         waveforms = multi_instrument_session.channels[test_channels].read(num_samples=test_record_length, num_records=test_num_records)
         check_fetched_data(waveforms, test_channels_expanded, test_record_length, test_num_records)
+
+    def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
+        expected_string = [f'{x}' for x in range(8)]
+        # Sanity test few different types of input. No need for test to be exhaustive
+        # since all the various types are covered by converter unit tests.
+        channel_indices = ['0-1, 2, 3:4', 5, range(6, 7), slice(7, 8)]
+        assert single_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
+
+    def test_get_channel_names_with_multi_instrument_session(self, multi_instrument_session_5171):
+        expected_string = [f'{instruments[0]}/{x}' for x in range(8)] + [f'{instruments[1]}/{x}' for x in range(4)]
+        # Sanity test few different types of input. No need for test to be exhaustive
+        # since all the various types are covered by converter unit tests.
+        channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+        assert multi_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
 
     @pytest.mark.parametrize(
         "test_channels,test_channels_expanded",
@@ -185,6 +163,31 @@ class SystemTests(BasicValidationTests):
         assert len(waveforms) == test_num_channels
         for i in range(len(waveforms)):
             assert len(waveforms[i].samples) == test_record_length
+
+
+class SystemTests(BasicValidationTests):
+    @pytest.fixture(scope='function')
+    def session_5124(self, session_creation_kwargs):
+        with daqmx_sim_5124_lock:
+            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
+                yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_5142(self, session_creation_kwargs):
+        with daqmx_sim_5142_lock:
+            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
+                yield simulated_session
+
+    # Attribute tests
+    def test_vi_boolean_attribute(self, multi_instrument_session):
+        multi_instrument_session.allow_more_records_than_memory = False
+        default_option = multi_instrument_session.allow_more_records_than_memory
+        assert default_option is False
+
+    def test_vi_string_attribute(self, multi_instrument_session):
+        trigger_source = f'/{instruments[1]}/NISCOPE_VAL_IMMEDIATE'
+        multi_instrument_session.acq_arm_source = trigger_source
+        assert trigger_source == multi_instrument_session.acq_arm_source
 
     @pytest.fixture(params=[(1000, 1000), (2000, 2000), (3000, 2000)], ids=["less_than_actual", "equal_to_actual", "greater_than_actual"])
     def measurement_wfm_length(self, request):
@@ -358,10 +361,6 @@ class SystemTests(BasicValidationTests):
 
         assert isinstance(measurement_stat[0].__str__(), str)
         assert isinstance(measurement_stat[0].__repr__(), str)
-
-    def test_self_test(self, multi_instrument_session):
-        # We should not get an assert if self_test passes
-        multi_instrument_session.self_test()
 
     def test_reset(self, multi_instrument_session):
         default_fetch_relative_to = multi_instrument_session._fetch_relative_to
