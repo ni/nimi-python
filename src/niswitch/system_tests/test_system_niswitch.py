@@ -34,6 +34,17 @@ class BasicValidationTests:
         with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
+
+class SystemTests(BasicValidationTests):
+    @pytest.fixture(scope='function')
+    def session_2532(self, session_creation_kwargs):
+        with daqmx_sim_db_lock:
+            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
+        yield simulated_session
+        with daqmx_sim_db_lock:
+            simulated_session.close()
+
+    # Basic Use Case Tests
     def test_relayclose(self, session):
         relay_name = 'kr0c0'
         assert session.get_relay_position(relay_name) == niswitch.RelayPosition.OPEN
@@ -56,20 +67,6 @@ class BasicValidationTests:
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_EXISTS
         session.disconnect_all()
         assert session.can_connect(channel1, channel2) == niswitch.PathCapability.PATH_AVAILABLE
-
-    def test_functions_connect_disconnect_multiple(self, session):
-        session.connect_multiple('c0->r0, c0->r1')   # expect no errors
-        session.disconnect_multiple('c0->r0, c0->r1')   # expect no errors
-
-
-class SystemTests(BasicValidationTests):
-    @pytest.fixture(scope='function')
-    def session_2532(self, session_creation_kwargs):
-        with daqmx_sim_db_lock:
-            simulated_session = niswitch.Session('', '2532/1-Wire 4x128 Matrix', True, False, **session_creation_kwargs)
-        yield simulated_session
-        with daqmx_sim_db_lock:
-            simulated_session.close()
 
     @pytest.mark.skip(reason="TODO(sbethur): Intermittent failures, GitHub issue #1622.")
     def test_continuous_software_scanning(self, session_2532):
@@ -164,6 +161,10 @@ class SystemTests(BasicValidationTests):
         assert path == 'r0->c0'
         session.disconnect(channel1, channel2)
         session.set_path(path)
+
+    def test_functions_connect_disconnect_multiple(self, session):
+        session.connect_multiple('c0->r0, c0->r1')   # expect no errors
+        session.disconnect_multiple('c0->r0, c0->r1')   # expect no errors
 
     def test_functions_disable(self, session):
         channel1 = 'c0'

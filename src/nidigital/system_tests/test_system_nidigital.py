@@ -27,44 +27,6 @@ class BasicValidationTests:
         with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
-    def configure_session(self, session, test_name):
-        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
-
-        session.load_specifications_levels_and_timing(
-            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
-            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
-            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
-        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
-
-    def get_test_file_path(self, test_name, file_name):
-        return os.path.join(test_files_base_dir, test_name, file_name)
-
-    def test_burst_pattern_pass_fail(self, multi_instrument_session):
-        test_files_folder = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_files_folder)
-
-        multi_instrument_session.load_pattern(self.get_test_file_path(test_files_folder, 'pattern.digipat'))
-
-        result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
-        assert result == {0: True, 1: True, 2: True, 3: True}
-
-    def test_ppmu_measure(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
-            nidigital.PPMUMeasurementType.VOLTAGE)
-
-        assert len(voltage_measurements) == 2
-
-    def test_read_static(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
-
-        assert pin_states == [nidigital.PinState.L] * 2
-
 
 class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
@@ -259,6 +221,15 @@ class SystemTests(BasicValidationTests):
         result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=False)
         assert result is None
 
+    def test_burst_pattern_pass_fail(self, multi_instrument_session):
+        test_files_folder = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_files_folder)
+
+        multi_instrument_session.load_pattern(self.get_test_file_path(test_files_folder, 'pattern.digipat'))
+
+        result = multi_instrument_session.burst_pattern(start_label='new_pattern', wait_until_done=True)
+        assert result == {0: True, 1: True, 2: True, 3: True}
+
     def test_source_waveform_parallel_broadcast(self, multi_instrument_session):
         '''Test methods for using source waveform with parallel sourcing and broadcast data mapping.
 
@@ -280,6 +251,18 @@ class SystemTests(BasicValidationTests):
 
         pass_fail = multi_instrument_session.burst_pattern(start_label='new_pattern')
         assert pass_fail == {0: True, 1: True}
+
+    def configure_session(self, session, test_name):
+        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
+
+        session.load_specifications_levels_and_timing(
+            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
+            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
+            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
+        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
+
+    def get_test_file_path(self, test_name, file_name):
+        return os.path.join(test_files_base_dir, test_name, file_name)
 
     @pytest.fixture(params=[array.array, numpy.array, list])
     def source_waveform_type(self, request):
@@ -674,11 +657,28 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
         fail_count = multi_instrument_session.pins['site0/LO0', 'site0/HI1', 'site2/HI3'].get_fail_count()
         assert fail_count == [0] * 3
 
+    def test_ppmu_measure(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
+            nidigital.PPMUMeasurementType.VOLTAGE)
+
+        assert len(voltage_measurements) == 2
+
     def test_ppmu_source(self, multi_instrument_session):
         test_name = 'simple_pattern'
         self.configure_session(multi_instrument_session, test_name)
 
         multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
+
+    def test_read_static(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+        assert pin_states == [nidigital.PinState.L] * 2
 
     def test_write_static(self, multi_instrument_session):
         test_name = 'simple_pattern'

@@ -39,26 +39,6 @@ class BasicValidationTests:
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
-    def test_abort(self, rfsg_device_session):
-        rfsg_device_session.configure_rf(2e9, -5.0)
-        rfsg_device_session.initiate()
-        rfsg_device_session.check_generation_status()
-        rfsg_device_session.abort()
-
-    def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
-        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
-        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
-        rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
-        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform1')
-        assert waveform_exists is True
-        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
-        assert waveform_exists is False
-
-    def test_wait_until_settled(self, rfsg_device_session):
-        rfsg_device_session.configure_rf(2e9, -5.0)
-        with rfsg_device_session.initiate():
-            rfsg_device_session.wait_until_settled()
-
 
 class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
@@ -226,6 +206,15 @@ class SystemTests(BasicValidationTests):
         rfsg_device_session.configure_rf(2e9, -5.0)
         assert rfsg_device_session.power_level == -5.0
         assert rfsg_device_session.frequency == 2e9
+
+    def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.write_arb_waveform('mywaveform1', waveform_data, False)
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform1')
+        assert waveform_exists is True
+        waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
+        assert waveform_exists is False
 
     def test_write_arb_waveform_numpy_complex64(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
@@ -464,6 +453,12 @@ class SystemTests(BasicValidationTests):
             is_done = rfsg_device_session.check_generation_status()
             assert is_done is False  # is_done will never be True in CW mode
 
+    def test_abort(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        rfsg_device_session.initiate()
+        rfsg_device_session.check_generation_status()
+        rfsg_device_session.abort()
+
     @pytest.mark.skipif(use_simulated_session is True, reason="is_done is always True on simulated device")
     def test_abort_with_status(self, rfsg_device_session):
         rfsg_device_session.configure_rf(2e9, -5.0)
@@ -627,6 +622,11 @@ class SystemTests(BasicValidationTests):
         rfsg_device_session.read_and_download_waveform_from_file_tdms('mywaveform', get_test_file_path('ValidWaveformTDMSFile.tdms'), 0)
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is True
+
+    def test_wait_until_settled(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        with rfsg_device_session.initiate():
+            rfsg_device_session.wait_until_settled()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Scripts not compiled on simulated device")
     def test_get_all_script_names(self, rfsg_device_session):

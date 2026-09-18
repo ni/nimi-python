@@ -35,35 +35,6 @@ class BasicValidationTests:
             with nirfsa.Session(real_hw_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_rfsa_device_session:
                 yield real_rfsa_device_session
 
-    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
-        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.iq_rate = 1e6
-        iq_data_array = np.zeros(64, dtype=np.complex128)
-        with rfsa_device_session.initiate():
-            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
-        assert len(wfm_info.samples) == wfm_info.actual_samples
-        assert np.asarray(wfm_info.samples).dtype == np.complex128
-
-    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
-        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.number_of_samples = 64
-        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
-        with rfsa_device_session.initiate():
-            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
-        assert len(wfm_info) == rfsa_device_session.number_of_records
-        for i in range(len(wfm_info)):
-            if isinstance(wfm_info[i], nirfsa.WaveformInfo):
-                assert np.asarray(wfm_info[i].samples).dtype == np.complex128
-                assert len(wfm_info[i].samples) == rfsa_device_session.number_of_samples
-
-    def test_read_power_spectrum_with_data_array_size_passed_as_none(self, rfsa_device_session):
-        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_device_session.number_of_spectral_lines = 1024
-        power_spectrum_data_array = np.zeros(512, dtype=np.float64)
-        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array)
-        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
-        assert np.asarray(spectrum_info.samples).dtype == np.float64
-
 
 class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
@@ -407,6 +378,15 @@ class SystemTests(BasicValidationTests):
             assert rfsa_device_session.check_acquisition_status() is True
 
 # Fetch tests
+    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        iq_data_array = np.zeros(64, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
+
     def test_fetch_iq_single_record_subset(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
@@ -448,6 +428,18 @@ class SystemTests(BasicValidationTests):
             )
         assert np.asarray(wfm_info.samples).dtype == np.int16
         assert len(wfm_info.samples) == wfm_info.actual_samples
+
+    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_samples = 64
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
+        assert len(wfm_info) == rfsa_device_session.number_of_records
+        for i in range(len(wfm_info)):
+            if isinstance(wfm_info[i], nirfsa.WaveformInfo):
+                assert np.asarray(wfm_info[i].samples).dtype == np.complex128
+                assert len(wfm_info[i].samples) == rfsa_device_session.number_of_samples
 
     def test_fetch_iq_multi_record_with_samples_passed_as_none(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -540,6 +532,14 @@ class SystemTests(BasicValidationTests):
         assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
         assert np.asarray(spectrum_info.samples).dtype == np.float64
         assert len(power_spectrum_data_array) == 1024
+
+    def test_read_power_spectrum_with_data_array_size_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_device_session.number_of_spectral_lines = 1024
+        power_spectrum_data_array = np.zeros(512, dtype=np.float64)
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
 
 # Deembedding tests
     def test_set_get_deembedding_sparameters(self, rfsa_device_session):
