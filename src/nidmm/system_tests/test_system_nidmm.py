@@ -7,6 +7,7 @@ import time
 
 import grpc
 import hightime
+import nitlsconfig
 import numpy
 import pytest
 
@@ -16,13 +17,14 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
 
-class SystemTests:
+# Defines a subset of system tests to validate basic DMM functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
+class BasicValidationTests:
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
-    # Basic usability tests
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
         assert session.read() != 0  # Assumes DMM reading is not exactly zero to support non-connected modules and simulated modules.
@@ -40,6 +42,8 @@ class SystemTests:
         measurements = session.read_multi_point(8)
         assert len(measurements) == 8
 
+
+class SystemTests(BasicValidationTests):
     # Attribute tests
     def test_vi_string_attribute(self, session):
         assert session.instrument_model == 'NI PXIe-4082'
@@ -312,7 +316,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     def test_fetch_waveform_into(self, session):
@@ -327,17 +332,19 @@ class TestLibrary(SystemTests):
             assert not math.isnan(sample)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
         return {'grpc_options': grpc_options}
 
@@ -369,3 +376,44 @@ class TestGrpc(SystemTests):
             assert e.rpc_code == expected_grpc_error
             assert e.description == expected_error_message
             assert str(e) == f'{expected_grpc_error}: {expected_error_message}'
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcUnsecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidmm.GrpcSessionOptions(grpc_channel, '')
+        return {'grpc_options': grpc_options}
