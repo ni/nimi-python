@@ -27,6 +27,15 @@ class BasicValidationTests:
         with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
+    def configure_session(self, session, test_name):
+        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
+
+        session.load_specifications_levels_and_timing(
+            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
+            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
+            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
+        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
+
     def test_self_test(self, multi_instrument_session):
         multi_instrument_session.self_test()
 
@@ -274,15 +283,6 @@ class SystemTests(BasicValidationTests):
 
         pass_fail = multi_instrument_session.burst_pattern(start_label='new_pattern')
         assert pass_fail == {0: True, 1: True}
-
-    def configure_session(self, session, test_name):
-        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
-
-        session.load_specifications_levels_and_timing(
-            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
-            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
-            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
-        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
 
     def get_test_file_path(self, test_name, file_name):
         return os.path.join(test_files_base_dir, test_name, file_name)
