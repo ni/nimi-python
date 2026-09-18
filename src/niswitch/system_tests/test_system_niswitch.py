@@ -33,7 +33,7 @@ class BasicValidationTests:
     def session(self, session_creation_kwargs):
         with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, **session_creation_kwargs) as simulated_session:
             yield simulated_session
-    
+
     @pytest.fixture(scope='function')
     def session_2532(self, session_creation_kwargs):
         with daqmx_sim_db_lock:
@@ -95,13 +95,12 @@ class BasicValidationTests:
 class SystemTests(BasicValidationTests):
     # Attribute Tests
     # No R/W non-IVI boolean attributes on all devices
-    '''
-    def test_vi_boolean_attribute(session):
-        session.power_down_latching_relays_after_debounce = False
-        assert session.power_down_latching_relays_after_debounce is False
-        session.power_down_latching_relays_after_debounce = True
-        assert session.power_down_latching_relays_after_debounce is True
-    '''
+    
+    # def test_vi_boolean_attribute(session):
+    #     session.power_down_latching_relays_after_debounce = False
+    #     assert session.power_down_latching_relays_after_debounce is False
+    #     session.power_down_latching_relays_after_debounce = True
+    #     assert session.power_down_latching_relays_after_debounce is True
 
     def test_vi_string_attribute(self, session):
         assert 'NI PXIe-2737' == session.instrument_model
