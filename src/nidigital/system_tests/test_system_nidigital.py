@@ -6,6 +6,7 @@ import sys
 
 import grpc
 import hightime
+import nitlsconfig
 import numpy
 import pytest
 
@@ -18,12 +19,54 @@ instruments = ['PXI1Slot2', 'PXI1Slot5']
 test_files_base_dir = os.path.join(os.path.dirname(__file__), 'test_files')
 
 
-class SystemTests:
+# Defines a subset of system tests to validate basic NI-Digital functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
+class BasicValidationTests:
     @pytest.fixture(scope='function')
     def multi_instrument_session(self, session_creation_kwargs):
         with nidigital.Session(resource_name=','.join(instruments), options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
+    def configure_session(self, session, test_name):
+        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
+
+        session.load_specifications_levels_and_timing(
+            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
+            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
+            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
+        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
+
+    def get_test_file_path(self, test_name, file_name):
+        return os.path.join(test_files_base_dir, test_name, file_name)
+
+    def test_self_test(self, multi_instrument_session):
+        multi_instrument_session.self_test()
+
+    def test_ppmu_source(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
+
+    def test_ppmu_measure(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
+            nidigital.PPMUMeasurementType.VOLTAGE)
+
+        assert len(voltage_measurements) == 2
+
+    def test_read_static(self, multi_instrument_session):
+        test_name = 'simple_pattern'
+        self.configure_session(multi_instrument_session, test_name)
+
+        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
+
+        assert pin_states == [nidigital.PinState.L] * 2
+
+
+class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
     def single_instrument_session(self, session_creation_kwargs):
         with nidigital.Session(resource_name=instruments[0], options='Simulate=1, DriverSetup=Model:6570', **session_creation_kwargs) as simulated_session:
@@ -50,9 +93,6 @@ class SystemTests:
         assert multi_instrument_session.selected_function == nidigital.SelectedFunction.PPMU
         multi_instrument_session.reset_device()
         assert multi_instrument_session.selected_function == nidigital.SelectedFunction.DISCONNECT
-
-    def test_self_test(self, multi_instrument_session):
-        multi_instrument_session.self_test()
 
     def test_get_error(self, multi_instrument_session):
         try:
@@ -246,18 +286,6 @@ class SystemTests:
 
         pass_fail = multi_instrument_session.burst_pattern(start_label='new_pattern')
         assert pass_fail == {0: True, 1: True}
-
-    def configure_session(self, session, test_name):
-        session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
-
-        session.load_specifications_levels_and_timing(
-            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
-            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
-            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
-        session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
-
-    def get_test_file_path(self, test_name, file_name):
-        return os.path.join(test_files_base_dir, test_name, file_name)
 
     @pytest.fixture(params=[array.array, numpy.array, list])
     def source_waveform_type(self, request):
@@ -651,29 +679,6 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
 
         fail_count = multi_instrument_session.pins['site0/LO0', 'site0/HI1', 'site2/HI3'].get_fail_count()
         assert fail_count == [0] * 3
-
-    def test_ppmu_measure(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
-            nidigital.PPMUMeasurementType.VOLTAGE)
-
-        assert len(voltage_measurements) == 2
-
-    def test_ppmu_source(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_source()
-
-    def test_read_static(self, multi_instrument_session):
-        test_name = 'simple_pattern'
-        self.configure_session(multi_instrument_session, test_name)
-
-        pin_states = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].read_static()
-
-        assert pin_states == [nidigital.PinState.L] * 2
 
     def test_write_static(self, multi_instrument_session):
         test_name = 'simple_pattern'
@@ -1327,7 +1332,8 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     def test_enable_match_fail_combination(self, multi_instrument_session):
@@ -1347,16 +1353,59 @@ class TestLibrary(SystemTests):
             multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG0)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcUnsecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
