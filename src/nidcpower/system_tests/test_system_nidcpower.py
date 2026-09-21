@@ -38,7 +38,7 @@ def pytest_generate_tests(metafunc):
             metafunc.parametrize('session', [True], indirect=True)
 
 
-# Defines a subset of system tests to validate basic NI-DCPower functionality. This is run as a part of the full SystemTests class, and
+# Defines a subset of system tests to validate basic nidcpower functionality. This is run as a part of the full SystemTests class, and
 # independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
 class BasicValidationTests:
     @pytest.fixture(scope='function')

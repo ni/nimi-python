@@ -17,7 +17,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
 
-# Defines a subset of system tests to validate basic DMM functionality. This is run as a part of the full SystemTests class, and
+# Defines a subset of system tests to validate basic nidmm functionality. This is run as a part of the full SystemTests class, and
 # independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
 class BasicValidationTests:
     @pytest.fixture(scope='function')

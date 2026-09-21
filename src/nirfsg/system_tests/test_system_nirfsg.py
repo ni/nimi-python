@@ -27,7 +27,7 @@ def get_test_file_path(file_name):
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/nirfsg'))
 
 
-# Defines a subset of system tests to validate basic NI-RFSG functionality. This is run as a part of the full SystemTests class, and
+# Defines a subset of system tests to validate basic nirfsg functionality. This is run as a part of the full SystemTests class, and
 # independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
 class BasicValidationTests:
     @pytest.fixture(scope='function')
@@ -53,6 +53,14 @@ class BasicValidationTests:
         rfsg_device_session.initiate()
         rfsg_device_session.check_generation_status()
         rfsg_device_session.abort()
+
+    def test_allocate_arb_waveform(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # To be able to call write multiple times on same waveform
+        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.allocate_arb_waveform('foo', len(waveform_data) * 2)
+        rfsg_device_session.write_arb_waveform('foo', waveform_data, True)
+        rfsg_device_session.write_arb_waveform('foo', waveform_data, False)
 
 
 class SystemTests(BasicValidationTests):
@@ -280,14 +288,6 @@ class SystemTests(BasicValidationTests):
         assert waveform_exists is False
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
         assert waveform_exists is False
-
-    def test_allocate_arb_waveform(self, rfsg_device_session):
-        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
-        rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # To be able to call write multiple times on same waveform
-        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
-        rfsg_device_session.allocate_arb_waveform('foo', len(waveform_data) * 2)
-        rfsg_device_session.write_arb_waveform('foo', waveform_data, True)
-        rfsg_device_session.write_arb_waveform('foo', waveform_data, False)
 
     def test_set_arb_waveform_next_write_position(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
