@@ -94,6 +94,20 @@ class BasicValidationTests:
         # We should not get an assert if self_test passes
         multi_instrument_session.self_test()
 
+    def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
+        expected_string = [f'{x}' for x in range(8)]
+        # Sanity test few different types of input. No need for test to be exhaustive
+        # since all the various types are covered by converter unit tests.
+        channel_indices = ['0-1, 2, 3:4', 5, range(6, 7), slice(7, 8)]
+        assert single_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
+
+    def test_get_channel_names_with_multi_instrument_session(self, multi_instrument_session_5171):
+        expected_string = [f'{instruments[0]}/{x}' for x in range(8)] + [f'{instruments[1]}/{x}' for x in range(4)]
+        # Sanity test few different types of input. No need for test to be exhaustive
+        # since all the various types are covered by converter unit tests.
+        channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
+        assert multi_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
+
     @pytest.mark.parametrize(
         "test_channels,test_channels_expanded",
         [
@@ -109,20 +123,6 @@ class BasicValidationTests:
         multi_instrument_session.configure_horizontal_timing(50000000, test_record_length, 50.0, test_num_records, True)
         waveforms = multi_instrument_session.channels[test_channels].read(num_samples=test_record_length, num_records=test_num_records)
         check_fetched_data(waveforms, test_channels_expanded, test_record_length, test_num_records)
-
-    def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
-        expected_string = [f'{x}' for x in range(8)]
-        # Sanity test few different types of input. No need for test to be exhaustive
-        # since all the various types are covered by converter unit tests.
-        channel_indices = ['0-1, 2, 3:4', 5, range(6, 7), slice(7, 8)]
-        assert single_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
-
-    def test_get_channel_names_with_multi_instrument_session(self, multi_instrument_session_5171):
-        expected_string = [f'{instruments[0]}/{x}' for x in range(8)] + [f'{instruments[1]}/{x}' for x in range(4)]
-        # Sanity test few different types of input. No need for test to be exhaustive
-        # since all the various types are covered by converter unit tests.
-        channel_indices = ['0-1, 2, 3:4', 5, (6, 7), range(8, 10), slice(10, 12)]
-        assert multi_instrument_session_5171.get_channel_names(indices=channel_indices) == expected_string
 
     @pytest.mark.parametrize(
         "test_channels,test_channels_expanded",
