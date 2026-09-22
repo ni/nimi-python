@@ -1,6 +1,7 @@
 import grpc
 import hightime
 import nirfsa
+import nitlsconfig
 import numpy as np
 import os
 import pathlib
@@ -22,7 +23,9 @@ def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
 
-class SystemTests:
+# Defines a subset of system tests to validate basic nirfsa functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
+class BasicValidationTests:
     @pytest.fixture(scope='function')
     def rfsa_device_session(self, session_creation_kwargs):
         if use_simulated_session:
@@ -32,6 +35,33 @@ class SystemTests:
             with nirfsa.Session(real_hw_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_rfsa_device_session:
                 yield real_rfsa_device_session
 
+    def test_self_test(self, rfsa_device_session):
+        # We should not get an assert if self_test passes
+        rfsa_device_session.self_test()
+
+    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        iq_data_array = np.zeros(64, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
+
+    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_samples = 64
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
+        assert len(wfm_info) == rfsa_device_session.number_of_records
+        for i in range(len(wfm_info)):
+            if isinstance(wfm_info[i], nirfsa.WaveformInfo):
+                assert np.asarray(wfm_info[i].samples).dtype == np.complex128
+                assert len(wfm_info[i].samples) == rfsa_device_session.number_of_samples
+
+
+class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
         with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
@@ -155,10 +185,6 @@ class SystemTests:
         except nirfsa.Error as e:
             assert e.code == -1074097772
             assert 'de-embedding table cannot be found' in e.description
-
-    def test_self_test(self, rfsa_device_session):
-        # We should not get an assert if self_test passes
-        rfsa_device_session.self_test()
 
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time on real device")
     def test_self_cal_range(self, rfsa_device_session):
@@ -373,15 +399,6 @@ class SystemTests:
             assert rfsa_device_session.check_acquisition_status() is True
 
 # Fetch tests
-    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
-        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.iq_rate = 1e6
-        iq_data_array = np.zeros(64, dtype=np.complex128)
-        with rfsa_device_session.initiate():
-            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
-        assert len(wfm_info.samples) == wfm_info.actual_samples
-        assert np.asarray(wfm_info.samples).dtype == np.complex128
-
     def test_fetch_iq_single_record_subset(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
@@ -423,18 +440,6 @@ class SystemTests:
             )
         assert np.asarray(wfm_info.samples).dtype == np.int16
         assert len(wfm_info.samples) == wfm_info.actual_samples
-
-    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
-        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.number_of_samples = 64
-        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
-        with rfsa_device_session.initiate():
-            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
-        assert len(wfm_info) == rfsa_device_session.number_of_records
-        for i in range(len(wfm_info)):
-            if isinstance(wfm_info[i], nirfsa.WaveformInfo):
-                assert np.asarray(wfm_info[i].samples).dtype == np.complex128
-                assert len(wfm_info[i].samples) == rfsa_device_session.number_of_samples
 
     def test_fetch_iq_multi_record_with_samples_passed_as_none(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -607,21 +612,65 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
-class TestGrpc(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcUnsecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}

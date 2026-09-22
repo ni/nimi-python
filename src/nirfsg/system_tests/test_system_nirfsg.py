@@ -2,6 +2,7 @@ import array
 import grpc
 import hightime
 import nirfsg
+import nitlsconfig
 import numpy as np
 import os
 import pathlib
@@ -26,7 +27,9 @@ def get_test_file_path(file_name):
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/nirfsg'))
 
 
-class SystemTests:
+# Defines a subset of system tests to validate basic nirfsg functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
+class BasicValidationTests:
     @pytest.fixture(scope='function')
     def rfsg_device_session(self, session_creation_kwargs):
         if use_simulated_session:
@@ -36,6 +39,31 @@ class SystemTests:
             with nirfsg.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsg_device_session:
                 yield real_rfsg_device_session
 
+    def test_self_test(self, rfsg_device_session):
+        # We should not get an assert if self_test passes
+        rfsg_device_session.self_test()
+
+    def test_configure_rf(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        assert rfsg_device_session.power_level == -5.0
+        assert rfsg_device_session.frequency == 2e9
+
+    def test_abort(self, rfsg_device_session):
+        rfsg_device_session.configure_rf(2e9, -5.0)
+        rfsg_device_session.initiate()
+        rfsg_device_session.check_generation_status()
+        rfsg_device_session.abort()
+
+    def test_allocate_arb_waveform(self, rfsg_device_session):
+        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
+        rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # To be able to call write multiple times on same waveform
+        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
+        rfsg_device_session.allocate_arb_waveform('foo', len(waveform_data) * 2)
+        rfsg_device_session.write_arb_waveform('foo', waveform_data, True)
+        rfsg_device_session.write_arb_waveform('foo', waveform_data, False)
+
+
+class SystemTests(BasicValidationTests):
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
         with nirfsg.Session("5831sim", options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
@@ -128,10 +156,6 @@ class SystemTests:
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform')
         assert waveform_exists is False
 
-    def test_self_test(self, rfsg_device_session):
-        # We should not get an assert if self_test passes
-        rfsg_device_session.self_test()
-
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time in real device")
     def test_self_cal(self, rfsg_device_session):
         rfsg_device_session.self_cal()
@@ -197,11 +221,6 @@ class SystemTests:
         assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
 
 # Configuration methods related tests
-    def test_configure_rf(self, rfsg_device_session):
-        rfsg_device_session.configure_rf(2e9, -5.0)
-        assert rfsg_device_session.power_level == -5.0
-        assert rfsg_device_session.frequency == 2e9
-
     def test_write_arb_waveform_numpy_complex128(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
         waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
@@ -269,14 +288,6 @@ class SystemTests:
         assert waveform_exists is False
         waveform_exists = rfsg_device_session.check_if_waveform_exists('mywaveform2')
         assert waveform_exists is False
-
-    def test_allocate_arb_waveform(self, rfsg_device_session):
-        rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
-        rfsg_device_session.power_level_type = nirfsg.PowerLevelType.PEAK  # To be able to call write multiple times on same waveform
-        waveform_data = np.full(1000, 1 + 0j, dtype=np.complex128)
-        rfsg_device_session.allocate_arb_waveform('foo', len(waveform_data) * 2)
-        rfsg_device_session.write_arb_waveform('foo', waveform_data, True)
-        rfsg_device_session.write_arb_waveform('foo', waveform_data, False)
 
     def test_set_arb_waveform_next_write_position(self, rfsg_device_session):
         rfsg_device_session.generation_mode = nirfsg.GenerationMode.ARB_WAVEFORM
@@ -447,12 +458,6 @@ class SystemTests:
         with rfsg_device_session.initiate():
             is_done = rfsg_device_session.check_generation_status()
             assert is_done is False  # is_done will never be True in CW mode
-
-    def test_abort(self, rfsg_device_session):
-        rfsg_device_session.configure_rf(2e9, -5.0)
-        rfsg_device_session.initiate()
-        rfsg_device_session.check_generation_status()
-        rfsg_device_session.abort()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="is_done is always True on simulated device")
     def test_abort_with_status(self, rfsg_device_session):
@@ -647,7 +652,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     # grpc-device had a bug in get_all_named_waveform_names
@@ -666,17 +672,60 @@ class TestLibrary(SystemTests):
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
-class TestGrpc(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpcUnsecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nirfsg.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 

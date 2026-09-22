@@ -17,13 +17,17 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
 import system_test_utilities  # noqa: E402
 
 
-# Defines a subset of system tests to validate basic DMM functionality. This is run as a part of the full SystemTests class, and
+# Defines a subset of system tests to validate basic nidmm functionality. This is run as a part of the full SystemTests class, and
 # independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
 class BasicValidationTests:
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
         with nidmm.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
+
+    def test_method_self_test(self, session):
+        # We should not get an assert if self_test passes
+        session.self_test()
 
     def test_take_simple_measurement_works(self, session):
         session.configure_measurement_digits(nidmm.Function.DC_CURRENT, 1, 5.5)
@@ -84,10 +88,6 @@ class SystemTests(BasicValidationTests):
             session.configure_trigger(nidmm.TriggerSource.IMMEDIATE)
         except nidmm.Error:
             assert True
-
-    def test_method_self_test(self, session):
-        # We should not get an assert if self_test passes
-        session.self_test()
 
     def test_method_get_dev_temp(self, session):
         temperature = session.get_dev_temp('')

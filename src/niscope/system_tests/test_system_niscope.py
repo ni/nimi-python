@@ -8,6 +8,7 @@ import tempfile
 import fasteners
 import grpc
 import hightime
+import nitlsconfig
 import numpy
 import pytest
 
@@ -66,7 +67,9 @@ def check_fetched_data(
         assert data[i].record == expected_records[i]
 
 
-class SystemTests:
+# Defines a subset of system tests to validate basic niscope functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
+class BasicValidationTests:
     @pytest.fixture(scope='function')
     def single_instrument_session(self, session_creation_kwargs):
         with niscope.Session('FakeDevice', False, True, 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', **session_creation_kwargs) as simulated_session:
@@ -87,30 +90,10 @@ class SystemTests:
         with niscope.Session(','.join(instruments), False, True, 'Simulate=1, DriverSetup=Model:5171R (8CH); BoardType:PXIe', **session_creation_kwargs) as simulated_session:
             yield simulated_session
 
-    @pytest.fixture(scope='function')
-    def session_5124(self, session_creation_kwargs):
-        with daqmx_sim_5124_lock:
-            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
-                yield simulated_session
+    def test_self_test(self, multi_instrument_session):
+        # We should not get an assert if self_test passes
+        multi_instrument_session.self_test()
 
-    @pytest.fixture(scope='function')
-    def session_5142(self, session_creation_kwargs):
-        with daqmx_sim_5142_lock:
-            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
-                yield simulated_session
-
-    # Attribute tests
-    def test_vi_boolean_attribute(self, multi_instrument_session):
-        multi_instrument_session.allow_more_records_than_memory = False
-        default_option = multi_instrument_session.allow_more_records_than_memory
-        assert default_option is False
-
-    def test_vi_string_attribute(self, multi_instrument_session):
-        trigger_source = f'/{instruments[1]}/NISCOPE_VAL_IMMEDIATE'
-        multi_instrument_session.acq_arm_source = trigger_source
-        assert trigger_source == multi_instrument_session.acq_arm_source
-
-    # Basic usability tests
     def test_get_channel_names_with_single_instrument_session(self, single_instrument_session_5171):
         expected_string = [f'{x}' for x in range(8)]
         # Sanity test few different types of input. No need for test to be exhaustive
@@ -180,6 +163,31 @@ class SystemTests:
         assert len(waveforms) == test_num_channels
         for i in range(len(waveforms)):
             assert len(waveforms[i].samples) == test_record_length
+
+
+class SystemTests(BasicValidationTests):
+    @pytest.fixture(scope='function')
+    def session_5124(self, session_creation_kwargs):
+        with daqmx_sim_5124_lock:
+            with niscope.Session('5124', False, False, '', **session_creation_kwargs) as simulated_session:  # 5124 is needed for video triggering
+                yield simulated_session
+
+    @pytest.fixture(scope='function')
+    def session_5142(self, session_creation_kwargs):
+        with daqmx_sim_5142_lock:
+            with niscope.Session('5142', False, False, '', **session_creation_kwargs) as simulated_session:  # 5142 is needed for OSP
+                yield simulated_session
+
+    # Attribute tests
+    def test_vi_boolean_attribute(self, multi_instrument_session):
+        multi_instrument_session.allow_more_records_than_memory = False
+        default_option = multi_instrument_session.allow_more_records_than_memory
+        assert default_option is False
+
+    def test_vi_string_attribute(self, multi_instrument_session):
+        trigger_source = f'/{instruments[1]}/NISCOPE_VAL_IMMEDIATE'
+        multi_instrument_session.acq_arm_source = trigger_source
+        assert trigger_source == multi_instrument_session.acq_arm_source
 
     @pytest.fixture(params=[(1000, 1000), (2000, 2000), (3000, 2000)], ids=["less_than_actual", "equal_to_actual", "greater_than_actual"])
     def measurement_wfm_length(self, request):
@@ -353,10 +361,6 @@ class SystemTests:
 
         assert isinstance(measurement_stat[0].__str__(), str)
         assert isinstance(measurement_stat[0].__repr__(), str)
-
-    def test_self_test(self, multi_instrument_session):
-        # We should not get an assert if self_test passes
-        multi_instrument_session.self_test()
 
     def test_reset(self, multi_instrument_session):
         default_fetch_relative_to = multi_instrument_session._fetch_relative_to
@@ -545,7 +549,8 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
     # not supported by grpc due to numpy usage
@@ -617,17 +622,19 @@ class TestLibrary(SystemTests):
         assert single_instrument_session.meas_time_histogram_high_time == hightime.timedelta(microseconds=500)
 
 
-class TestGrpc(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
 
@@ -642,3 +649,44 @@ class TestGrpc(SystemTests):
             single_instrument_session.reset_with_defaults()
         assert exc_info.value.args[0] == 'reset_with_defaults is not supported over gRPC'
         assert str(exc_info.value) == 'reset_with_defaults is not supported over gRPC'
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcUnsecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = niscope.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}

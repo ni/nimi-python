@@ -6,6 +6,7 @@ import tempfile
 import fasteners
 import grpc
 import hightime
+import nitlsconfig
 import pytest
 
 import niswitch
@@ -25,7 +26,9 @@ daqmx_sim_db_lock_file = os.path.join(tempfile.gettempdir(), 'daqmx_db.lock')
 daqmx_sim_db_lock = fasteners.InterProcessLock(daqmx_sim_db_lock_file)
 
 
-class SystemTests:
+# Defines a subset of system tests to validate basic niswitch functionality. This is run as a part of the full SystemTests class, and
+# independently for test classes which do not require running the entire suite (TLS-enabled gRPC tests today).
+class BasicValidationTests:
     @pytest.fixture(scope='function')
     def session(self, session_creation_kwargs):
         with niswitch.Session('', '2737/2-Wire 4x64 Matrix', True, True, **session_creation_kwargs) as simulated_session:
@@ -39,7 +42,10 @@ class SystemTests:
         with daqmx_sim_db_lock:
             simulated_session.close()
 
-    # Basic Use Case Tests
+    def test_functions_self_test(self, session):
+        # We should not get an assert if self_test passes
+        session.self_test()
+
     def test_relayclose(self, session):
         relay_name = 'kr0c0'
         assert session.get_relay_position(relay_name) == niswitch.RelayPosition.OPEN
@@ -85,15 +91,16 @@ class SystemTests:
             except niswitch.Error as e:
                 assert e.code == -1074126826  # Error : Max time exceeded.
 
+
+class SystemTests(BasicValidationTests):
     # Attribute Tests
     # No R/W non-IVI boolean attributes on all devices
-    '''
-    def test_vi_boolean_attribute(session):
-        session.power_down_latching_relays_after_debounce = False
-        assert session.power_down_latching_relays_after_debounce is False
-        session.power_down_latching_relays_after_debounce = True
-        assert session.power_down_latching_relays_after_debounce is True
-    '''
+
+    # def test_vi_boolean_attribute(session):
+    #     session.power_down_latching_relays_after_debounce = False
+    #     assert session.power_down_latching_relays_after_debounce is False
+    #     session.power_down_latching_relays_after_debounce = True
+    #     assert session.power_down_latching_relays_after_debounce is True
 
     def test_vi_string_attribute(self, session):
         assert 'NI PXIe-2737' == session.instrument_model
@@ -137,10 +144,6 @@ class SystemTests:
     def test_functions_get_channel_name(self, session):
         channel_name = session.get_channel_name(1)
         assert channel_name == 'r0'
-
-    def test_functions_self_test(self, session):
-        # We should not get an assert if self_test passes
-        session.self_test()
 
     def test_locks_are_reentrant(self, session):
         with session.lock():
@@ -188,20 +191,64 @@ class SystemTests:
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self):
+    @classmethod
+    def session_creation_kwargs(cls):
         return {}
 
 
-class TestGrpc(SystemTests):
+class TestGrpcNoTLS(SystemTests):
     @pytest.fixture(scope='class')
-    def grpc_channel(self):
+    @classmethod
+    def grpc_channel(cls):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_no_tls.json')
         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
             yield channel
 
     @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = niswitch.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcSecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_secure(service="ni-grpc-device", server_host="localhost")
+        system_test_utilities.exchange_certificates("localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
+        grpc_options = niswitch.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
+class TestGrpcUnsecuredTLS(BasicValidationTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def grpc_channel(cls):
+        system_test_utilities.configure_tls_modes_insecure(service="ni-grpc-device", server_host="localhost")
+
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config_tls.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = nitlsconfig.create_grpc_device_channel('localhost', proc.server_port)
+            yield channel
+
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls, grpc_channel):
         grpc_options = niswitch.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
