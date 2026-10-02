@@ -115,7 +115,7 @@ We welcome contributions! You can clone the project repository, build it, and in
 Usage
 ------
 
-The following is a basic example of using the **nidcpower** module to open a session to a Source Meter Unit and measure voltage and current.
+The following is a basic example of using the **nidcpower** module to open a session to a Source Measure Unit and measure voltage and current.
 
 .. code-block:: python
 
