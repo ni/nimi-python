@@ -12,6 +12,15 @@ nidmm_fetch_waveform.py
    :encoding: utf8
    :caption: `(nidmm_fetch_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_fetch_waveform.py>`_
 
+nidmm_measure_ac_volts.py
+-------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_ac_volts.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_ac_volts.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_ac_volts.py>`_
+
 nidmm_measurement.py
 --------------------
 
