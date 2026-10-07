@@ -678,28 +678,30 @@ def _add_enum_value_python_name(enum_info, config):
 
 
 def fixup_enum_names(config):
-    '''Fix enum types for private enums
+    '''Fix enum types in attributes and functions to use the enum's python_name
 
     Now that we have all the metadata calculated, we need to fix any enum types in attributes and functions
-    where the underlying enum is private. At the time the 'python_type' was set, we hadn't yet calculated
-    whether the enum would be private or not. We couldn't because we needed to process all the functions and
-    attributes first.
+    to reference the underlying enum's 'python_name', which can differ from the enum's metadata key (e.g. for
+    private enums, which get a '_' prefix, or enums with an explicit 'python_name' override). At the time the
+    'python_type' was set, 'config['enums']' wasn't populated yet, so we couldn't look this up.
     '''
     # Check all the functions that will be code generated
     for f in config['functions']:
         if config['functions'][f]['codegen_method'] != 'no':
             for p in config['functions'][f]['parameters']:
-                if p['enum'] is not None and config['enums'][p['enum']]['codegen_method'] == 'private':
-                    # We need to update the python type since the enum is private
+                if p['enum'] is not None:
                     p['python_type'] = 'enums.' + config['enums'][p['enum']]['python_name']
+                    if p['type_in_documentation_was_calculated']:
+                        p['type_in_documentation'] = p['python_type']
 
     # Check all attributes that will be code generated
     for a in config['attributes']:
         attr = config['attributes'][a]
         if attr['codegen_method'] != 'no':
-            if attr['enum'] is not None and config['enums'][attr['enum']]['codegen_method'] == 'private':
-                # We need to update the python type since the enum is private
+            if attr['enum'] is not None:
                 attr['python_type'] = 'enums.' + config['enums'][attr['enum']]['python_name']
+                if attr['type_in_documentation_was_calculated']:
+                    attr['type_in_documentation'] = attr['python_type']
 
 
 def add_all_enum_metadata(enums, config):

@@ -6682,33 +6682,33 @@ input_isolation_enabled
 
         For the PXIe-5830/5831/5832, input isolation is supported for all available ports for your hardware configuration.
 
-        **Default Value**: :py:data:`~nirfsa.InputIsolationEnabled.DISABLED`, if the device configuration is supported.
+        **Default Value**: :py:data:`~nirfsa.IqInPortTerminalConfiguration.DISABLED`, if the device configuration is supported.
 
         **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5693, PXIe-5820/5830/5831/5832/5840/5841
 
         **Defined Values**:
 
-        +---------------------------------------------------+---------------------------+
-        | Name                                              | Description               |
-        +===================================================+===========================+
-        | :py:data:`~nirfsa.InputIsolationEnabled.DISABLED` | Disables input isolation. |
-        +---------------------------------------------------+---------------------------+
-        | :py:data:`~nirfsa.InputIsolationEnabled.ENABLED`  | Enables input isolation.  |
-        +---------------------------------------------------+---------------------------+
+        +-----------------------------------------------------------+---------------------------+
+        | Name                                                      | Description               |
+        +===========================================================+===========================+
+        | :py:data:`~nirfsa.IqInPortTerminalConfiguration.DISABLED` | Disables input isolation. |
+        +-----------------------------------------------------------+---------------------------+
+        | :py:data:`~nirfsa.IqInPortTerminalConfiguration.ENABLED`  | Enables input isolation.  |
+        +-----------------------------------------------------------+---------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.InputIsolationEnabled |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
+            +-----------------------+-------------------------------------+
+            | Characteristic        | Value                               |
+            +=======================+=====================================+
+            | Datatype              | enums.IqInPortTerminalConfiguration |
+            +-----------------------+-------------------------------------+
+            | Permissions           | read-write                          |
+            +-----------------------+-------------------------------------+
+            | Repeated Capabilities | None                                |
+            +-----------------------+-------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
