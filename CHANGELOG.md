@@ -799,6 +799,7 @@
 #### [nidmm] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added `nidmm_improve_dc_noise_rejection.py`, a multipoint measurement example with configurable aperture time and DC noise rejection.
 - Changed
 - Removed
 
