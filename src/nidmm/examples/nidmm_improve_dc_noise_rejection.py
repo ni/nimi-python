@@ -39,12 +39,12 @@ def main():
 
 
 def test_example():
-    options = {'simulate': True, 'driver_setup': {'Model': '4082', 'BoardType': 'PXI', }, }
+    options = {'simulate': True, 'driver_setup': {'Model': '4082', 'BoardType': 'PXIe', }, }
     example('PXI1Slot2', options, 'DC_VOLTS', 0.1, 6.5, 0.1, 'NORMAL', 10, 'OFF')
 
 
 def test_main():
-    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:4082; BoardType:PXI', '--auto-zero', 'ON', ]
+    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', ]
     _main(cmd_line)
 
 
