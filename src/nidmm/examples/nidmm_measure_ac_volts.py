@@ -19,7 +19,7 @@ def example(resource_name, options, function, range, digits, min_ac_frequency, m
 
 def _main(argsv):
     supported_functions = list(nidmm.Function.__members__.keys())
-    parser = argparse.ArgumentParser(description='Performs a single measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser = argparse.ArgumentParser(description='Performs a single AC voltage measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Contains the resource_name of the device to initialize.')
     parser.add_argument('-f', '--function', default='AC_VOLTS', choices=supported_functions, type=str.upper, help='Specifies the measurement_function used to acquire the measurement.')
     parser.add_argument('-r', '--range', default=2, type=float, help='Specifies the range for the function specified in the Measurement_Function parameter.')
