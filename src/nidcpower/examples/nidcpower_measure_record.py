@@ -15,7 +15,7 @@ def example(resource_name, options, voltage, length):
         session.voltage_level = voltage
 
         session.commit()
-        print(f'Effective measurement rate: {session.measure_record_delta_time / 1} S/s')
+        print(f'Effective measurement rate: {1 / session.measure_record_delta_time} S/s')
 
         print('Channel           Num  Voltage    Current    In Compliance')
         row_format = '{0:15} {1:3d}    {2:8.6f}   {3:8.6f}   {4}'
