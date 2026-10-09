@@ -519,6 +519,17 @@ class IFfilterSelection(Enum):
     '''
 
 
+class IqInPortTerminalConfiguration(Enum):
+    DIFFERENTIAL = 2100
+    r'''
+    Sets the terminal configuration to differential.
+    '''
+    SINGLE_ENDED = 2101
+    r'''
+    Sets the terminal configuration to single-ended.
+    '''
+
+
 class IfConditioningDownConversionEnabled(Enum):
     DISABLED = 1900
     r'''
@@ -557,17 +568,6 @@ class InputPort(Enum):
     I_ONLY = 2003
     r'''
     Enables the I terminals of the I/Q IN port. It is supported only for PXIe-5645.
-    '''
-
-
-class IqInPortTerminalConfiguration(Enum):
-    DIFFERENTIAL = 2100
-    r'''
-    Sets the terminal configuration to differential.
-    '''
-    SINGLE_ENDED = 2101
-    r'''
-    Sets the terminal configuration to single-ended.
     '''
 
 
