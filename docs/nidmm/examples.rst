@@ -21,6 +21,15 @@ nidmm_improve_dc_noise_rejection.py
    :encoding: utf8
    :caption: `(nidmm_improve_dc_noise_rejection.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_improve_dc_noise_rejection.py>`_
 
+nidmm_measure_ac_volts.py
+-------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_ac_volts.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_ac_volts.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_ac_volts.py>`_
+
 nidmm_measurement.py
 --------------------
 

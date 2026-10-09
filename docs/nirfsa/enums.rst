@@ -1226,6 +1226,31 @@ IFfilterSelection
 
 
 
+IqInPortTerminalConfiguration
+-----------------------------
+
+.. py:class:: IqInPortTerminalConfiguration
+
+    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
+
+
+
+        Sets the terminal configuration to differential.
+
+        
+
+
+
+    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
+
+
+
+        Sets the terminal configuration to single-ended.
+
+        
+
+
+
 IfConditioningDownConversionEnabled
 -----------------------------------
 
@@ -1316,31 +1341,6 @@ InputPort
 
 
         Enables the I terminals of the I/Q IN port. It is supported only for PXIe-5645.
-
-        
-
-
-
-IqInPortTerminalConfiguration
------------------------------
-
-.. py:class:: IqInPortTerminalConfiguration
-
-    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
-
-
-
-        Sets the terminal configuration to differential.
-
-        
-
-
-
-    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
-
-
-
-        Sets the terminal configuration to single-ended.
 
         
 
