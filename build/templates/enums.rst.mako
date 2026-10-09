@@ -20,7 +20,7 @@ ${helper.get_rst_header_snippet(enums[enum_name]['python_name'], '-')}
 .. py:class:: ${enums[enum_name]['python_name']}
     % for enum_value in enums[enum_name]['values']:
 
-    .. py:attribute:: ${enum_name}.${enum_value['python_name']}
+    .. py:attribute:: ${enums[enum_name]['python_name']}.${enum_value['python_name']}
 
 ${helper.get_documentation_for_node_rst(enum_value, config, indent=8)}
     % endfor

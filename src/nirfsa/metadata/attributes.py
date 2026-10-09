@@ -2353,7 +2353,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ReferenceTriggerIqPowerEdgeSlope',
+        'enum': 'ReferenceTriggerIQPowerEdgeSlope',
         'lv_property': 'Triggers:Ref:IQ Power Edge:Slope',
         'name': 'IQ_POWER_EDGE_REF_TRIGGER_SLOPE',
         'type': 'ViInt32'
@@ -3346,7 +3346,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'IqInPortTerminalConfiguration',
+        'enum': 'IQInPortTerminalConfiguration',
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ In Port:Terminal Configuration',
         'name': 'IQ_IN_PORT_TERMINAL_CONFIGURATION',
         'type': 'ViInt32'
