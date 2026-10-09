@@ -1226,31 +1226,6 @@ IFfilterSelection
 
 
 
-IqInPortTerminalConfiguration
------------------------------
-
-.. py:class:: IqInPortTerminalConfiguration
-
-    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
-
-
-
-        Sets the terminal configuration to differential.
-
-        
-
-
-
-    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
-
-
-
-        Sets the terminal configuration to single-ended.
-
-        
-
-
-
 IfConditioningDownConversionEnabled
 -----------------------------------
 

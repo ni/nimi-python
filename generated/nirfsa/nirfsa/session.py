@@ -2639,8 +2639,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
     '''
-    input_isolation_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IqInPortTerminalConfiguration, 1150170)
-    '''Type: enums.IqInPortTerminalConfiguration
+    input_isolation_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.InputIsolationEnabled, 1150170)
+    '''Type: enums.InputIsolationEnabled
 
     Specifies whether input isolation is enabled.
 
@@ -2654,19 +2654,19 @@ class _SessionBase(object):
 
     For the PXIe-5830/5831/5832, input isolation is supported for all available ports for your hardware configuration.
 
-    **Default Value**: IqInPortTerminalConfiguration.DISABLED, if the device configuration is supported.
+    **Default Value**: InputIsolationEnabled.DISABLED, if the device configuration is supported.
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5693, PXIe-5820/5830/5831/5832/5840/5841
 
     **Defined Values**:
 
-    +----------------------------------------+---------------------------+
-    | Name                                   | Description               |
-    +========================================+===========================+
-    | IqInPortTerminalConfiguration.DISABLED | Disables input isolation. |
-    +----------------------------------------+---------------------------+
-    | IqInPortTerminalConfiguration.ENABLED  | Enables input isolation.  |
-    +----------------------------------------+---------------------------+
+    +--------------------------------+---------------------------+
+    | Name                           | Description               |
+    +================================+===========================+
+    | InputIsolationEnabled.DISABLED | Disables input isolation. |
+    +--------------------------------+---------------------------+
+    | InputIsolationEnabled.ENABLED  | Enables input isolation.  |
+    +--------------------------------+---------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

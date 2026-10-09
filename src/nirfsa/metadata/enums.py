@@ -936,7 +936,6 @@ enums = {
     },
     'InputIsolationEnabled': {
         'codegen_method': 'public',
-        'python_name': 'IqInPortTerminalConfiguration',
         'values': [
             {
                 'documentation': {
@@ -1008,6 +1007,7 @@ enums = {
     },
     'IqInPortTerminalConfiguration': {
         'codegen_method': 'public',
+        'python_name': 'IqInPortTerminalConfiguration',
         'values': [
             {
                 'documentation': {
