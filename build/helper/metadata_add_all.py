@@ -681,8 +681,7 @@ def fixup_enum_names(config):
     '''Fix enum types in attributes and functions to use the enum's python_name
 
     Now that we have all the metadata calculated, we need to fix any enum types in attributes and functions
-    to reference the underlying enum's 'python_name', which can differ from the enum's metadata key (e.g. for
-    private enums, which get a '_' prefix, or enums with an explicit 'python_name' override). At the time the
+    to reference the underlying enum's 'python_name'. At the time the
     'python_type' was set, 'config['enums']' wasn't populated yet, so we couldn't look this up.
     '''
     # Check all the functions that will be code generated
