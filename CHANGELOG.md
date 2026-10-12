@@ -799,6 +799,7 @@
 #### [nidmm] Unreleased
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
+  - Added the `nidmm_cont_acq_chart_multiple_samples.py` example.
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
