@@ -10,7 +10,7 @@ import sys
 CHART_HISTORY_SIZE = 2048
 
 
-def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, fetch_count=None):
+def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, fetch_count):
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=measurement_range, resolution_digits=digits)
         # A sample_count of 0 configures a continuous acquisition
@@ -20,7 +20,7 @@ def example(resource_name, options, function, measurement_range, digits, samples
         (line,) = axes.plot([])
         axes.set_title('Measurements')
         axes.set_xlabel('Samples')
-        axes.set_ylabel('Amplitude (Volts)')
+        axes.set_ylabel('Measured value')
         axes.grid(True)
 
         measurements = []
@@ -28,7 +28,9 @@ def example(resource_name, options, function, measurement_range, digits, samples
         try:
             with session.initiate():
                 # A fetch_count of None runs until the chart window is closed or Ctrl+C is pressed
-                while plt.fignum_exists(figure.number) and fetches != fetch_count:
+                while plt.fignum_exists(figure.number) and (
+                    fetch_count is None or fetches < fetch_count
+                ):
                     measurements = (measurements + list(session.fetch_multi_point(array_size=samples_to_fetch)))[-CHART_HISTORY_SIZE:]
                     line.set_data(range(len(measurements)), measurements)
                     axes.relim()
@@ -37,7 +39,8 @@ def example(resource_name, options, function, measurement_range, digits, samples
                     fetches += 1
         except KeyboardInterrupt:
             pass
-        plt.close(figure)
+        finally:
+            plt.close(figure)
 
 
 def _main(argsv):
