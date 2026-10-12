@@ -439,7 +439,7 @@ def format_type_for_rst_documentation(param, numpy, config):
     if numpy and param['numpy']:
         p_type = param['numpy_type']
     elif param['enum'] is not None:
-        p_type = ':py:data:`{}.{}`'.format(config['module_name'], param['enum'])
+        p_type = ':py:data:`{}.{}`'.format(config['module_name'], config['enums'][param['enum']]['python_name'])
     else:
         p_type = param['type_in_documentation']
 

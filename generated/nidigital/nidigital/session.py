@@ -2691,7 +2691,7 @@ class _SessionBase(object):
         Example: :py:meth:`my_session._get_site_results_site_numbers`
 
         Args:
-            site_result_type (enums.SiteResultType): The type of data specified in the results array.
+            site_result_type (enums._SiteResultType): The type of data specified in the results array.
 
                 -   _SiteResultType.PASS_FAIL: Get site numbers for pass/fail data.
                 -   _SiteResultType.CAPTURE_WAVEFORM: Get site numbers for capture waveforms.

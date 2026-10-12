@@ -603,7 +603,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is NIRFSA_VAL_RISING_SLOPE.\n\n| Value                                | Description                                                |\n|:--------------------------------|:-------------------------------------------------|\n| NIRFSA_VAL_RISING_SLOPE (1000)  | NI-RFSA detects a rising edge (positive slope).  |\n| NIRFSA_VAL_FALLING_SLOPE (1001) | NI-RFSA detects a falling edge (negative slope). |',
                 },
-                'enum' : 'ReferenceTriggerIqPowerEdgeSlope',
+                'enum' : 'ReferenceTriggerIQPowerEdgeSlope',
                 'name': 'slope',
                 'type': 'ViInt32',
                 'use_array': False,
