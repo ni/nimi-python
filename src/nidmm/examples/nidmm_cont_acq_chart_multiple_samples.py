@@ -24,7 +24,7 @@ def example(resource_name, options, function, measurement_range, digits, samples
         (line,) = axes.plot([])
         axes.set_title('Measurements')
         axes.set_xlabel('Samples')
-        axes.set_ylabel('Amplitude (volts)')
+        axes.set_ylabel('Measured value')
         axes.grid(True)
 
         measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
