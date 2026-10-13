@@ -28,6 +28,7 @@ def example(resource_name, options, function, measurement_range, digits, samples
         axes.grid(True)
 
         measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
+        total_samples = 0
         fetches = 0
         try:
             with session.initiate():
@@ -35,8 +36,11 @@ def example(resource_name, options, function, measurement_range, digits, samples
                 while plt.fignum_exists(figure.number) and (
                     fetch_count is None or fetches < fetch_count
                 ):
-                    measurements.extend(session.fetch_multi_point(array_size=samples_to_fetch))
-                    line.set_data(range(len(measurements)), measurements)
+                    new_samples = session.fetch_multi_point(array_size=samples_to_fetch)
+                    measurements.extend(new_samples)
+                    total_samples += len(new_samples)
+                    first_sample = total_samples - len(measurements)
+                    line.set_data(range(first_sample, total_samples), measurements)
                     axes.relim()
                     axes.autoscale_view()
                     plt.pause(0.001)
