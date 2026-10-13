@@ -78,7 +78,7 @@ deps =
     ${module_name}-system_tests: nisync
 % endif
 % if module_name == 'nidmm':
-    ${module_name}-system_tests: matplotlib
+    ${module_name}-system_tests: matplotlib; platform_machine != "x86" and (sys_platform != "win32" or platform_machine == "AMD64")
 % endif
     ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage

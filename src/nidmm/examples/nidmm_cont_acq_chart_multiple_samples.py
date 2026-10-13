@@ -1,16 +1,20 @@
 #!/usr/bin/python
 
 import argparse
-import matplotlib.pyplot as plt
+import collections
 import nidmm
+import pytest
 import sys
 
 
 # Number of most recent measurements kept on the chart
-CHART_HISTORY_SIZE = 2048
+CHART_HISTORY_SIZE = 250
 
 
 def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, fetch_count):
+    # Imported lazily because matplotlib is unavailable on some platforms (e.g. 32-bit Python)
+    import matplotlib.pyplot as plt
+
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=measurement_range, resolution_digits=digits)
         # A sample_count of 0 configures a continuous acquisition
@@ -20,10 +24,10 @@ def example(resource_name, options, function, measurement_range, digits, samples
         (line,) = axes.plot([])
         axes.set_title('Measurements')
         axes.set_xlabel('Samples')
-        axes.set_ylabel('Measured value')
+        axes.set_ylabel('Amplitude (volts)')
         axes.grid(True)
 
-        measurements = []
+        measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
         fetches = 0
         try:
             with session.initiate():
@@ -31,7 +35,7 @@ def example(resource_name, options, function, measurement_range, digits, samples
                 while plt.fignum_exists(figure.number) and (
                     fetch_count is None or fetches < fetch_count
                 ):
-                    measurements = (measurements + list(session.fetch_multi_point(array_size=samples_to_fetch)))[-CHART_HISTORY_SIZE:]
+                    measurements.extend(session.fetch_multi_point(array_size=samples_to_fetch))
                     line.set_data(range(len(measurements)), measurements)
                     axes.relim()
                     axes.autoscale_view()
@@ -61,12 +65,14 @@ def main():
 
 
 def test_example():
+    plt = pytest.importorskip('matplotlib.pyplot')
     plt.switch_backend('Agg')  # Avoid opening a chart window during the test
     options = {'simulate': True, 'driver_setup': {'Model': '4082', 'BoardType': 'PXIe', }, }
     example('PXI1Slot2', options, 'DC_VOLTS', 10, 5.5, 4, 2)
 
 
 def test_main():
+    plt = pytest.importorskip('matplotlib.pyplot')
     plt.switch_backend('Agg')  # Avoid opening a chart window during the test
     cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', '--fetch-count', '2', ]
     _main(cmd_line)
