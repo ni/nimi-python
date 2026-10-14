@@ -17,6 +17,7 @@ import zipfile
 
 from build import configure_logging
 from build import generate_template
+from build.helper import metadata_add_all
 from build.utilities import load_build
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,8 @@ STATIC_DOCS_DIR = DOCS_DIR / '_static'
 SRC_DIR = ROOT_DIR / 'src'
 SHARED_PROTOS_DIR = SRC_DIR / 'shared_protos'
 NI_APIS_PROTOS_DIR = ROOT_DIR / 'third_party' / 'ni-apis' / 'ni' / 'grpcdevice' / 'v1'
+
+_drivers_with_processed_metadata = set()
 
 DEFAULT_PY_FILES_TO_GENERATE = (
     '_attributes.py',
@@ -255,6 +258,9 @@ def _load_metadata(driver):
     # Every template must start from freshly loaded metadata because loading it modifies it in place.
     for name in [n for n in sys.modules if n == 'metadata' or n.startswith('metadata.')]:
         del sys.modules[name]
+    # The processed metadata files are the same every time, so only write them once per driver.
+    metadata_add_all.write_processed_metadata = driver.name not in _drivers_with_processed_metadata
+    _drivers_with_processed_metadata.add(driver.name)
     return load_build(str(driver.metadata_dir))
 
 
