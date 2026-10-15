@@ -10,8 +10,8 @@ SIGNAL_NOT_DETECTED_WARNING_CODE = 0x3FFA4F80
 
 def example(resource_name, options, function, min_frequency, max_period, voltage_range, digits):
     # Frequency mode takes the minimum frequency as its range; period mode takes the maximum period.
-    range = min_frequency if function == 'FREQUENCY' else max_period
-    units = 'Hz' if function == 'FREQUENCY' else 's'
+    range = min_frequency if function == 'FREQ' else max_period
+    units = 'Hz' if function == 'FREQ' else 's'
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=range, resolution_digits=digits)
         session.freq_voltage_range = voltage_range
@@ -27,7 +27,7 @@ def example(resource_name, options, function, min_frequency, max_period, voltage
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Performs a single frequency or period measurement using the NI-DMM API.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Contains the resource_name of the device to initialize.')
-    parser.add_argument('-f', '--function', default='FREQUENCY', choices=['FREQUENCY', 'PERIOD'], type=str.upper, help='Specifies the measurement_function used to acquire the measurement.')
+    parser.add_argument('-f', '--function', default='FREQ', choices=['FREQ', 'PERIOD'], type=str.upper, help='Specifies the measurement_function used to acquire the measurement.')
     parser.add_argument('--min-frequency', default=100, type=float, help='Minimum frequency expected, in Hz. Used as the range in FREQ mode.')
     parser.add_argument('--max-period', default=0.01, type=float, help='Maximum period expected, in seconds. Used as the range in PERIOD mode.')
     parser.add_argument('--voltage-range', default=50, type=float, help='Specifies the voltage range of the input signal for frequency measurements.')
