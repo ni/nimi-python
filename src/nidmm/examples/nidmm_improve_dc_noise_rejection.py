@@ -11,7 +11,9 @@ def example(resource_name, options, function, range, digits, aperture_time, dc_n
         session.configure_multi_point(trigger_count=1, sample_count=sample_count)
         session.auto_zero = nidmm.AutoZero[auto_zero]
         session.aperture_time_units = nidmm.ApertureTimeUnits.SECONDS
-        # To remove low frequency noise from a measurement, set the aperture time to a multiple of 1/f, where f is the noise frequency.
+        # To reject noise at frequency f, choose the aperture time based on the weighting mode:
+        # NORMAL: a multiple of 1/f; SECOND_ORDER: a multiple of 2/f;
+        # HIGH_ORDER: at least 4/f, with no benefit to going above 4.5/f.
         session.aperture_time = aperture_time
         # NORMAL weighs all samples equally; SECOND_ORDER and HIGH_ORDER weigh samples in the middle of the aperture more.
         session.dc_noise_rejection = nidmm.DCNoiseRejection[dc_noise_rejection]
