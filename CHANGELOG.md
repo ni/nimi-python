@@ -799,6 +799,7 @@
 #### [nidmm] Unreleased
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
+  - Added the `nidmm_max_dc_reading_rate_at_7_5_digits.py` example.
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
