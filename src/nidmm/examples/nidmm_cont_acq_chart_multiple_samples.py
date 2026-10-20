@@ -11,7 +11,7 @@ import sys
 CHART_HISTORY_SIZE = 250
 
 
-def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, fetch_count):
+def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, total_samples):
     # Imported lazily because matplotlib is unavailable on some platforms (e.g. 32-bit Python)
     import matplotlib.pyplot as plt
 
@@ -28,23 +28,33 @@ def example(resource_name, options, function, measurement_range, digits, samples
         axes.grid(True)
 
         measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
-        total_samples = 0
-        fetches = 0
+
         try:
             with session.initiate():
-                # A fetch_count of None runs until the chart window is closed or Ctrl+C is pressed
+                samples_fetched = 0
+
+                # A total_samples of None runs until the chart window is closed or Ctrl+C is pressed
                 while plt.fignum_exists(figure.number) and (
-                    fetch_count is None or fetches < fetch_count
+                    total_samples is None or samples_fetched < total_samples
                 ):
-                    new_samples = session.fetch_multi_point(array_size=samples_to_fetch)
+                    # The last fetch only takes the samples still needed to reach total_samples
+                    samples_in_this_fetch = samples_to_fetch
+                    if total_samples is not None:
+                        samples_in_this_fetch = min(samples_to_fetch, total_samples - samples_fetched)
+                        
+                    new_samples = session.fetch_multi_point(array_size=samples_in_this_fetch)
+
                     measurements.extend(new_samples)
-                    total_samples += len(new_samples)
-                    first_sample = total_samples - len(measurements)
-                    line.set_data(range(first_sample, total_samples), measurements)
+                    samples_fetched += len(new_samples)
+                    first_sample = samples_fetched - len(measurements)
+                    line.set_data(range(first_sample, samples_fetched), measurements)
                     axes.relim()
                     axes.autoscale_view()
                     plt.pause(0.001)
-                    fetches += 1
+
+            # The acquisition has stopped; keep the final chart on screen until its window is closed
+            if total_samples is not None and plt.fignum_exists(figure.number):
+                plt.show()
         except KeyboardInterrupt:
             pass
         finally:
@@ -58,10 +68,10 @@ def _main(argsv):
     parser.add_argument('-r', '--range', default=10, type=float, help='Specifies the range for the function specified in the Measurement_Function parameter.')
     parser.add_argument('-d', '--digits', default=5.5, type=float, help='Specifies the resolution of the measurement in digits.')
     parser.add_argument('-s', '--samples-to-fetch', default=4, type=int, help='Specifies the number of measurements to fetch at a time.')
-    parser.add_argument('--fetch-count', default=None, type=int, help='Stops after this many fetches; omit to run until the chart window is closed or Ctrl+C is pressed.')
+    parser.add_argument('--total-samples', default=None, type=int, help='Stops fetching after this many samples and keeps the chart open until its window is closed; omit to run until the chart window is closed or Ctrl+C is pressed.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Sets the initial value of certain attributes for the session.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.function, args.range, args.digits, args.samples_to_fetch, args.fetch_count)
+    example(args.resource_name, args.option_string, args.function, args.range, args.digits, args.samples_to_fetch, args.total_samples)
 
 
 def main():
@@ -72,13 +82,13 @@ def test_example():
     plt = pytest.importorskip('matplotlib.pyplot')
     plt.switch_backend('Agg')  # Avoid opening a chart window during the test
     options = {'simulate': True, 'driver_setup': {'Model': '4082', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', options, 'DC_VOLTS', 10, 5.5, 4, 2)
+    example('PXI1Slot2', options, 'DC_VOLTS', 10, 5.5, 4, 10)
 
 
 def test_main():
     plt = pytest.importorskip('matplotlib.pyplot')
     plt.switch_backend('Agg')  # Avoid opening a chart window during the test
-    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', '--fetch-count', '2', ]
+    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:4082; BoardType:PXIe', '--total-samples', '10', ]
     _main(cmd_line)
 
 
