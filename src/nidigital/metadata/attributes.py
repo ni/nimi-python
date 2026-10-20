@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 24.3.0f175
+# This file is generated from NI-Digital Pattern Driver API metadata version 26.8.0f154
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -1090,7 +1090,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the maximum number of History RAM samples to acquire per site. If the property is set to -1, it will acquire until the History RAM buffer is full.\n'
         },
-        'grpc_enum': 'HistoryRAMMaxSamplesToAcquirePerSite',
+        'enum': 'HistoryRAMMaxSamplesToAcquirePerSite',
         'name': 'HISTORY_RAM_MAX_SAMPLES_TO_ACQUIRE_PER_SITE',
         'type': 'ViInt32'
     },
@@ -1308,5 +1308,288 @@ attributes = {
             'rio_events'
         ],
         'type': 'ViString'
+    },
+    1150098: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies whether the TMU is enabled. Set this attribute to %replace_me{true} to enable the TMU. When a TMU is disabled, calling the %function{tmu initiate} function for that TMU returns an error. TMU configuration is preserved when the TMU is disabled.\n'
+        },
+        'name': 'TMU_ENABLED',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViBoolean'
+    },
+    1150099: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the channel to monitor for the TMU start event.\nThe value must be a single pin or channel name; lists and pin group names are not supported. Pin names apply to all enabled sites unless qualified as siteN/pinName, where N is the site number. Channel names can be device-qualified, for example, PXI1Slot2/0, where PXI1Slot2 is the instrument resource name and 0 is the channel name.\n'
+        },
+        'name': 'TMU_START_SOURCE',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViString'
+    },
+    1150100: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the channel to monitor for the TMU stop event.\nThe value must be a single pin or channel name; lists and pin group names are not supported. Pin names apply to all enabled sites unless qualified as siteN/pinName, where N is the site number. Channel names can be device-qualified, for example, PXI1Slot2/0, where PXI1Slot2 is the instrument resource name and 0 is the channel name.\n'
+        },
+        'name': 'TMU_STOP_SOURCE',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViString'
+    },
+    1150101: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the start source channel event that determines the measurement start timestamp.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOL',
+                    'The event occurs when the signal crosses the configured VOL threshold.'
+                ],
+                [
+                    'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOH',
+                    'The event occurs when the signal crosses the configured VOH threshold.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUSourceEvent',
+        'name': 'TMU_START_SOURCE_EVENT',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150102: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the stop source channel event that determines the measurement stop timestamp.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOL',
+                    'The event occurs when the signal crosses the configured VOL threshold.'
+                ],
+                [
+                    'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOH',
+                    'The event occurs when the signal crosses the configured VOH threshold.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUSourceEvent',
+        'name': 'TMU_STOP_SOURCE_EVENT',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150103: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the start source event edge polarity that determines the measurement start timestamp.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_RISING_EDGE',
+                    'The event is detected on the rising edge of the source signal.'
+                ],
+                [
+                    'NIDIGITAL_VAL_FALLING_EDGE',
+                    'The event is detected on the falling edge of the source signal.'
+                ],
+                [
+                    'NIDIGITAL_VAL_EITHER_EDGE',
+                    'The event is detected on either the rising or falling edge of the source signal.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUPolarity',
+        'name': 'TMU_START_SOURCE_EVENT_POLARITY',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150104: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the stop source event edge polarity that determines the measurement stop timestamp.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_RISING_EDGE',
+                    'The event is detected on the rising edge of the source signal.'
+                ],
+                [
+                    'NIDIGITAL_VAL_FALLING_EDGE',
+                    'The event is detected on the falling edge of the source signal.'
+                ],
+                [
+                    'NIDIGITAL_VAL_EITHER_EDGE',
+                    'The event is detected on either the rising or falling edge of the source signal.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUPolarity',
+        'name': 'TMU_STOP_SOURCE_EVENT_POLARITY',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150105: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the number of samples the TMU acquires per measurement.\n'
+        },
+        'name': 'TMU_SAMPLES_TO_ACQUIRE',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt64'
+    },
+    1150106: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the maximum time, in seconds, that the TMU waits during each phase of sample acquisition: first waiting for the arm condition to be satisfied, then waiting for both the start and stop events after the arm arrives. The timeout counter restarts when the arm arrives, so each phase gets the full timeout duration independently. If the timeout expires in either phase, the TMU stops and an error is returned when fetching the time measurement.\n'
+        },
+        'name': 'TMU_SAMPLE_TIMEOUT',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViReal64'
+    },
+    1150107: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the mechanism used to arm the TMU. When set to Immediate, the TMU arms immediately when the %function{tmu initiate} function is called. When set to Edge, the TMU waits for a source event on the configured edge arm source before arming.\n',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_IMMEDIATE',
+                    'The TMU arms immediately when you call the %function{tmu initiate} function.'
+                ],
+                [
+                    'NIDIGITAL_VAL_EDGE',
+                    'The TMU waits for a source event on the configured edge arm source channel before arming.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUArmType',
+        'name': 'TMU_ARM_TYPE',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150108: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the channel to monitor for the TMU edge arm source event. This attribute is only applicable when the %attribute{tmu arm type} attribute is set to Edge.\nThe value must be a single pin or channel name; lists and pin group names are not supported. Pin names apply to all enabled sites unless qualified as siteN/pinName, where N is the site number. Channel names can be device-qualified, for example, PXI1Slot2/0, where PXI1Slot2 is the instrument resource name and 0 is the channel name.**Note**\n The specified %attribute{tmu edge arm source} must match either the %attribute{tmu start source} or %attribute{tmu stop source} for the PXIe-6570/6571.'
+        },
+        'name': 'TMU_EDGE_ARM_SOURCE',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViString'
+    },
+    1150109: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the event at the edge arm source channel that triggers arming. This attribute is only applicable when the %attribute{tmu arm type} attribute is set to Edge. The specified %attribute{tmu edge arm source event} must match either the %attribute{tmu start source event} or %attribute{tmu stop source event} for the PXIe-6570/6571.',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOL',
+                    'The event occurs when the signal crosses the configured VOL threshold.'
+                ],
+                [
+                    'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOH',
+                    'The event occurs when the signal crosses the configured VOH threshold.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUSourceEvent',
+        'name': 'TMU_EDGE_ARM_SOURCE_EVENT',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150110: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the edge polarity of the edge arm source event that triggers arming. This attribute is only applicable when the %attribute{tmu arm type} attribute is set to Edge. The specified %attribute{tmu edge arm polarity} must match either the %attribute{tmu start source event polarity} or %attribute{tmu stop source event polarity} for the PXIe-6570/6571.',
+            'table_body': [
+                [
+                    'NIDIGITAL_VAL_RISING_EDGE',
+                    'The event is detected on the rising edge of the source signal.'
+                ],
+                [
+                    'NIDIGITAL_VAL_FALLING_EDGE',
+                    'The event is detected on the falling edge of the source signal.'
+                ],
+                [
+                    'NIDIGITAL_VAL_EITHER_EDGE',
+                    'The event is detected on either the rising or falling edge of the source signal.'
+                ]
+            ],
+            'table_header': [
+                'Defined Values:'
+            ]
+        },
+        'enum': 'TMUPolarity',
+        'name': 'TMU_EDGE_ARM_POLARITY',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViInt32'
+    },
+    1150111: {
+        'access': 'read only',
+        'documentation': {
+            'description': 'Returns the total number of TMUs available across all modules in the session. This attribute can be queried without configuring or enabling any TMUs. The value reflects the aggregate TMU hardware resources available across all modules in the session. However, TMU resources available on an individual module cannot be shared or used with other modules in the session. Returns 0 if none of the modules in the session have TMU support.\n'
+        },
+        'name': 'TMU_COUNT',
+        'type': 'ViInt32'
+    },
+    1150112: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the debounce time, in seconds, applied to the start source input of the TMU. The TMU ignores signal transitions on the start source that are shorter than the configured debounce time, which helps filter out noise or glitches.\nSet to 0 to disable debouncing on the start source input. %attribute{tmu start input debounce time} and %attribute{tmu stop input debounce time} must be equal for period measurements (i.e %attribute{tmu start source} = %attribute{tmu stop source}, %attribute{tmu start source event} = %attribute{tmu stop source event}, and %attribute{tmu start source event polarity} = %attribute{tmu stop source event polarity}).\n The configured debounce time also applies to the arm input when the arm source matches the start/stop source.\n PXIe-6570/6571: Debounce is coerced to the nearest multiple of 5 ns.'
+        },
+        'name': 'TMU_START_INPUT_DEBOUNCE_TIME',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViReal64'
+    },
+    1150113: {
+        'access': 'read-write',
+        'documentation': {
+            'description': 'Specifies the debounce time, in seconds, applied to the stop source input of the TMU. The TMU ignores signal transitions on the stop source that are shorter than the configured debounce time, which helps filter out noise or glitches.\nSet to 0 to disable debouncing on the stop source input. %attribute{tmu stop input debounce time} and %attribute{tmu start input debounce time} must be equal for period measurements (i.e %attribute{tmu start source} = %attribute{tmu stop source}, %attribute{tmu start source event} = %attribute{tmu stop source event}, and %attribute{tmu start source event polarity} = %attribute{tmu stop source event polarity}).\n The configured debounce time also applies to the arm input when the arm source matches the start/stop source.\n PXIe-6570/6571: Debounce is coerced to the nearest multiple of 5 ns.'
+        },
+        'name': 'TMU_STOP_INPUT_DEBOUNCE_TIME',
+        'supported_rep_caps': [
+            'time_measurement_units'
+        ],
+        'type': 'ViReal64'
     }
 }

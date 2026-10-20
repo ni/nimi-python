@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 24.3.0f175
+# This file is generated from NI-Digital Pattern Driver API metadata version 26.8.0f154
 config = {
-    'api_version': '24.3.0f175',
+    'api_version': '26.8.0f154',
     'c_function_prefix': 'niDigital_',
     'close_function': 'close',
     'context_manager_name': {
@@ -10,6 +10,12 @@ config = {
         'task': 'burst'
     },
     'custom_types': [
+        {
+            'ctypes_type': 'struct_InternalPattern',
+            'file_name': 'internal_pattern',
+            'grpc_name': 'InternalPattern',
+            'python_name': 'InternalPattern'
+        }
     ],
     'driver_name': 'NI-Digital Pattern Driver',
     'enum_whitelist_suffix': [
@@ -72,6 +78,17 @@ config = {
         {
             'prefix': 'RIOTrigger',
             'python_name': 'rio_triggers'
+        },
+        {
+            'documentation': {
+                'description': 'TMU repeated capabilities identify the time measurement unit contexts for an instrument. Valid TMU identifiers are tmu0 and tmu1. The numeric portion of the identifier may be used without the "tmu" prefix. In that case, the correct prefix will be added when the driver function call is made. When accessing TMUs from an instrument context, select one TMU identifier at a time.',
+                'examples': [
+                    "session.instruments['PXI1Slot2'].time_measurement_units[0].tmu_enabled = True",
+                    "session.instruments['PXI1Slot2'].time_measurement_units['tmu0'].tmu_enabled = True"
+                ]
+            },
+            'prefix': 'tmu',
+            'python_name': 'time_measurement_units'
         }
     ],
     'session_class_description': 'An NI-Digital Pattern Driver session',
