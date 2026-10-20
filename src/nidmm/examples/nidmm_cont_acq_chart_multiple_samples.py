@@ -41,7 +41,7 @@ def example(resource_name, options, function, measurement_range, digits, samples
                     samples_in_this_fetch = samples_to_fetch
                     if total_samples is not None:
                         samples_in_this_fetch = min(samples_to_fetch, total_samples - samples_fetched)
-                        
+
                     new_samples = session.fetch_multi_point(array_size=samples_in_this_fetch)
 
                     measurements.extend(new_samples)
