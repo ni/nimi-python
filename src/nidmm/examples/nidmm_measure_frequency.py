@@ -5,8 +5,9 @@ import nidmm
 import sys
 import warnings
 
+# NIDMM_WARN_UNDERRANGE; reported by read() when the input is under range, used here as "signal not detected"
 SIGNAL_NOT_DETECTED_WARNING_CODE = 0x3FFA4F80
-# Required by the API; not used for frequency or period measurements.
+# Required by configure_measurement_digits(); 5.5 is the driver's documented default
 RESOLUTION_DIGITS = 5.5
 
 
