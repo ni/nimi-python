@@ -1371,6 +1371,24 @@ class TestLibrary(SystemTests):
         with pytest.raises(nidigital.Error):
             tmu.tmu_fetch_averaged_measurement(timeout=0.1)
 
+    def test_tmu_fetch_averaged_measurement_returns_measurement(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = True
+        tmu.tmu_start_source = f'{instruments[0]}/0'
+        tmu.tmu_stop_source = f'{instruments[0]}/0'
+        tmu.tmu_start_source_event = nidigital.TMUSourceEvent.VOL
+        tmu.tmu_stop_source_event = nidigital.TMUSourceEvent.VOH
+        tmu.tmu_start_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_stop_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_samples_to_acquire = 1
+        tmu.tmu_sample_timeout = 1.0
+        tmu.tmu_arm_type = nidigital.TMUArmType.IMMEDIATE
+
+        tmu.tmu_initiate()
+        measurement = tmu.tmu_fetch_averaged_measurement(timeout=1.0)
+
+        assert measurement == 0.0
+
     def test_enable_match_fail_combination(self, multi_instrument_session):
         import nisync
 
@@ -1403,6 +1421,27 @@ class TestGrpcNoTLS(SystemTests):
     def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    @pytest.mark.parametrize(
+        'target, method_name, kwargs',
+        [
+            ('tmu', 'tmu_abort', {}),
+            ('tmu', 'tmu_fetch_averaged_measurement', {'timeout': 0.1}),
+            ('session', 'tmu_get_disabled_tmu_contexts', {}),
+            ('tmu', 'tmu_initiate', {}),
+        ],
+    )
+    def test_tmu_methods_are_not_supported_over_grpc(self, multi_instrument_session, target, method_name, kwargs):
+        if target == 'tmu':
+            target = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        else:
+            target = multi_instrument_session
+
+        with pytest.raises(
+            NotImplementedError,
+            match=f'^{method_name} is not supported over gRPC$',
+        ):
+            getattr(target, method_name)(**kwargs)
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
