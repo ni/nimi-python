@@ -3,6 +3,15 @@ Examples
 
 `You can download all nidmm examples for latest version here <https://github.com/ni/nimi-python/releases/download/nidmm-1.5.0/nidmm_examples.zip>`_
 
+nidmm_cont_acq_multiple_samples_ext_trig.py
+-------------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_cont_acq_multiple_samples_ext_trig.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_cont_acq_multiple_samples_ext_trig.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_cont_acq_multiple_samples_ext_trig.py>`_
+
 nidmm_fetch_waveform.py
 -----------------------
 
