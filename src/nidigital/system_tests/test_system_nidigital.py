@@ -1195,6 +1195,16 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
         # We shouldn't time out, having sent the trigger, though in simulation it might complete, anyway
         multi_instrument_session.wait_until_done(timeout=hightime.timedelta(seconds=5.0))
 
+    def test_send_software_edge_trigger_invalid_type(self, multi_instrument_session):
+        with pytest.raises(
+            TypeError,
+            match=f'Parameter trigger must be of type {nidigital.SoftwareTrigger}',
+        ):
+            multi_instrument_session.send_software_edge_trigger(
+                trigger=0,
+                trigger_identifier='',
+            )
+
     def test_specifications_levels_and_timing_single(self, multi_instrument_session):
         '''Test methods for loading, applying and unloading specifications, levels, and timing files.
 
