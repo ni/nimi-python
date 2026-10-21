@@ -3,16 +3,37 @@
 import argparse
 import collections
 import nidmm
+import pytest
 import sys
 import time
 
-import pytest
 
-
-# adc_calibration and number_of_averages are documented for the NI 4070/4071/4072 only (nidmm.readthedocs.io)
 SUPPORTED_MODELS = ('4071', '4081')
 
-CHART_HISTORY_SIZE = 2048
+CHART_HISTORY_SIZE = 250
+
+
+def _create_chart(plt):
+    figure, axes = plt.subplots()
+    (line,) = axes.plot([])
+    axes.set_xlabel('Sample Number')
+    axes.set_ylabel('Reading Value')
+    axes.grid(True)
+    return figure, axes, line
+
+
+def _update_chart(plt, figure, axes, line, measurements, new_samples, samples_fetched, reads_per_sec):
+    measurements.extend(new_samples)
+    samples_fetched += len(new_samples)
+    if new_samples:
+        # Offset X values to account for readings removed from the history buffer
+        first_sample = samples_fetched - len(measurements)
+        line.set_data(range(first_sample, samples_fetched), measurements)
+        axes.set_title(f'Reads/sec: {reads_per_sec:.0f}')
+        axes.relim()
+        axes.autoscale_view()
+    plt.pause(0.001)
+    return samples_fetched, plt.fignum_exists(figure.number)
 
 
 def example(device_name, options, powerline_frequency, measurement_range, aperture_time, adc_calibration, auto_zero, number_of_averages, total_samples):
@@ -23,39 +44,36 @@ def example(device_name, options, powerline_frequency, measurement_range, apertu
         if not session.instrument_model.endswith(SUPPORTED_MODELS):
             raise ValueError(f'{session.instrument_model} is not supported. This example requires an NI PXI-4071 or NI PXIe-4081.')
 
-        # Timebase for the aperture time in PLCs
+        # Powerline frequency defines the timebase for aperture values in PLCs.
         session.powerline_freq = powerline_frequency
         session.configure_measurement_digits(measurement_function=nidmm.Function.DC_VOLTS, range=measurement_range, resolution_digits=7.5)
-        # A sample_count of 0 configures a continuous acquisition
+        # A sample count of zero selects continuous acquisition.
         session.configure_multi_point(trigger_count=1, sample_count=0)
-        # Averaging applies only with a fixed aperture and Auto Zero ON
         session.aperture_time_units = nidmm.ApertureTimeUnits.POWER_LINE_CYCLES
         session.aperture_time = aperture_time
         session.number_of_averages = number_of_averages
         session.auto_zero = nidmm.AutoZero[auto_zero]
-        # OFF skips the gain-reference measurement, which raises the reading rate
+        # Disabling ADC calibration avoids the gain-reference measurement and increases reading rate.
         session.adc_calibration = nidmm.ADCCalibration[adc_calibration]
 
+        figure, axes, line = _create_chart(plt)
         measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
         samples_fetched = 0
-        figure = plt.figure()
         start_time = time.perf_counter()
         try:
             with session.initiate():
-                # Closing the chart window stops the acquisition, like the STOP button in the LabVIEW example
-                while plt.fignum_exists(figure.number) and (total_samples is None or samples_fetched < total_samples):
-                    # Fetch only what is already acquired, so the chart stays responsive
+                chart_open = True
+                while chart_open and (total_samples is None or samples_fetched < total_samples):
                     backlog, _ = session.read_status()
                     if total_samples is not None:
                         backlog = min(backlog, total_samples - samples_fetched)
-                    if backlog > 0:
-                        measurements.extend(session.fetch_multi_point(array_size=backlog))
-                        samples_fetched += backlog
-                        plt.cla()
-                        plt.plot(measurements)
-                        plt.title(f'Reads/sec: {samples_fetched / (time.perf_counter() - start_time):.0f}')
-                    plt.pause(0.001)
+                    new_samples = session.fetch_multi_point(array_size=backlog) if backlog > 0 else ()
+                    reads_per_sec = (samples_fetched + len(new_samples)) / (time.perf_counter() - start_time)
+                    samples_fetched, chart_open = _update_chart(
+                        plt, figure, axes, line, measurements, new_samples, samples_fetched, reads_per_sec,
+                    )
 
+            # The acquisition has stopped; keep the final chart on screen until its window is closed
             if total_samples is not None and plt.fignum_exists(figure.number):
                 plt.show()
         except KeyboardInterrupt:
