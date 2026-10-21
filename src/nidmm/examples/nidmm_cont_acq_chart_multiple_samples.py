@@ -11,6 +11,28 @@ import sys
 CHART_HISTORY_SIZE = 250
 
 
+def _create_chart(plt):
+    figure, axes = plt.subplots()
+    (line,) = axes.plot([])
+    axes.set_title('Measurements')
+    axes.set_xlabel('Samples')
+    axes.set_ylabel('Measured value')
+    axes.grid(True)
+    return figure, axes, line
+
+
+def _update_chart(plt, axes, line, measurements, new_samples, samples_fetched):
+    measurements.extend(new_samples)
+    samples_fetched += len(new_samples)
+    # The x-axis keeps absolute sample numbers, so it starts after the samples dropped from the history
+    first_sample = samples_fetched - len(measurements)
+    line.set_data(range(first_sample, samples_fetched), measurements)
+    axes.relim()
+    axes.autoscale_view()
+    plt.pause(0.001)
+    return samples_fetched
+
+
 def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, total_samples):
     # Imported lazily because matplotlib is unavailable on some platforms (e.g. 32-bit Python)
     import matplotlib.pyplot as plt
@@ -20,13 +42,9 @@ def example(resource_name, options, function, measurement_range, digits, samples
         # A sample_count of 0 configures a continuous acquisition
         session.configure_multi_point(trigger_count=1, sample_count=0)
 
-        figure, axes = plt.subplots()
-        (line,) = axes.plot([])
-        axes.set_title('Measurements')
-        axes.set_xlabel('Samples')
-        axes.set_ylabel('Measured value')
-        axes.grid(True)
-
+        # Create an empty chart; the line is filled in as samples arrive
+        figure, axes, line = _create_chart(plt)
+        # Only the most recent CHART_HISTORY_SIZE measurements are kept
         measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
 
         try:
@@ -44,13 +62,8 @@ def example(resource_name, options, function, measurement_range, digits, samples
 
                     new_samples = session.fetch_multi_point(array_size=samples_in_this_fetch)
 
-                    measurements.extend(new_samples)
-                    samples_fetched += len(new_samples)
-                    first_sample = samples_fetched - len(measurements)
-                    line.set_data(range(first_sample, samples_fetched), measurements)
-                    axes.relim()
-                    axes.autoscale_view()
-                    plt.pause(0.001)
+                    # Add the new samples to the chart and get the updated total sample count
+                    samples_fetched = _update_chart(plt, axes, line, measurements, new_samples, samples_fetched)
 
             # The acquisition has stopped; keep the final chart on screen until its window is closed
             if total_samples is not None and plt.fignum_exists(figure.number):
