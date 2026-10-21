@@ -155,6 +155,15 @@ HistoryRAMCyclesToAcquire
 
 
 
+HistoryRAMMaxSamplesToAcquirePerSite
+------------------------------------
+
+.. py:class:: HistoryRAMMaxSamplesToAcquirePerSite
+
+    .. py:attribute:: HistoryRAMMaxSamplesToAcquirePerSite.SAMPLES
+
+
+
 HistoryRAMTriggerType
 ---------------------
 
@@ -600,6 +609,91 @@ TDREndpointTermination
 
 
         TDR channels are connected to a short to ground.
+
+        
+
+
+
+TMUArmType
+----------
+
+.. py:class:: TMUArmType
+
+    .. py:attribute:: TMUArmType.IMMEDIATE
+
+
+
+        The TMU arms immediately when you call the %method{tmu initiate} method.
+
+        
+
+
+
+    .. py:attribute:: TMUArmType.EDGE
+
+
+
+        The TMU waits for a source event on the configured edge arm source channel before arming.
+
+        
+
+
+
+TMUPolarity
+-----------
+
+.. py:class:: TMUPolarity
+
+    .. py:attribute:: TMUPolarity.RISING
+
+
+
+        The event is detected on the rising edge of the source signal.
+
+        
+
+
+
+    .. py:attribute:: TMUPolarity.FALLING
+
+
+
+        The event is detected on the falling edge of the source signal.
+
+        
+
+
+
+    .. py:attribute:: TMUPolarity.EITHER
+
+
+
+        The event is detected on either the rising or falling edge of the source signal.
+
+        
+
+
+
+TMUSourceEvent
+--------------
+
+.. py:class:: TMUSourceEvent
+
+    .. py:attribute:: TMUSourceEvent.VOL
+
+
+
+        The event occurs when the signal crosses the configured VOL threshold.
+
+        
+
+
+
+    .. py:attribute:: TMUSourceEvent.VOH
+
+
+
+        The event occurs when the signal crosses the configured VOH threshold.
 
         
 

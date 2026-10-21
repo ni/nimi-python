@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 26.8.0f154
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d50
 enums = {
     'BitOrder': {
         'values': [
