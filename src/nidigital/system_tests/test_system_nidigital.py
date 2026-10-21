@@ -1336,6 +1336,41 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(cls):
         return {}
 
+    def test_tmu_get_disabled_tmu_contexts(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = False
+
+        assert multi_instrument_session.tmu_count > 0
+        assert f'{instruments[0]}/tmu0' in multi_instrument_session.tmu_get_disabled_tmu_contexts()
+
+    def test_tmu_initiate_abort(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = True
+        tmu.tmu_start_source = f'{instruments[0]}/0'
+        tmu.tmu_stop_source = f'{instruments[0]}/1'
+        tmu.tmu_start_source_event = nidigital.TMUSourceEvent.VOL
+        tmu.tmu_stop_source_event = nidigital.TMUSourceEvent.VOH
+        tmu.tmu_start_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_stop_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_arm_type = nidigital.TMUArmType.IMMEDIATE
+
+        tmu.tmu_initiate()
+        tmu.tmu_abort()
+
+    def test_tmu_fetch_averaged_measurement_before_initiate(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = True
+        tmu.tmu_start_source = f'{instruments[0]}/0'
+        tmu.tmu_stop_source = f'{instruments[0]}/1'
+        tmu.tmu_start_source_event = nidigital.TMUSourceEvent.VOL
+        tmu.tmu_stop_source_event = nidigital.TMUSourceEvent.VOH
+        tmu.tmu_start_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_stop_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_arm_type = nidigital.TMUArmType.IMMEDIATE
+
+        with pytest.raises(nidigital.Error):
+            tmu.tmu_fetch_averaged_measurement(timeout=0.1)
+
     def test_enable_match_fail_combination(self, multi_instrument_session):
         import nisync
 
