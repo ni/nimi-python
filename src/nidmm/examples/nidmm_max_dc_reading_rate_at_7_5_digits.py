@@ -23,9 +23,9 @@ def _create_chart(plt):
 
 
 def _update_chart(plt, figure, axes, line, measurements, new_samples, samples_fetched, reads_per_sec):
-    measurements.extend(new_samples)
-    samples_fetched += len(new_samples)
     if new_samples:
+        measurements.extend(new_samples)
+        samples_fetched += len(new_samples)
         # Offset X values to account for readings removed from the history buffer
         first_sample = samples_fetched - len(measurements)
         line.set_data(range(first_sample, samples_fetched), measurements)
