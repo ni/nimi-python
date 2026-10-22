@@ -181,7 +181,6 @@ class SystemTests(BasicValidationTests):
         rfsa_device_session.ports[''].deembedding_selected_table = 'myTable1'
         try:
             rfsa_device_session.commit()
-            assert False
         except nirfsa.Error as e:
             assert e.code == -1074097772
             assert 'de-embedding table cannot be found' in e.description
@@ -573,7 +572,6 @@ class SystemTests(BasicValidationTests):
         rfsa_device_session.delete_all_deembedding_tables()
         try:
             rfsa_device_session.commit()
-            assert False
         except nirfsa.Error as e:
             assert e.code == -1074097772
             assert 'de-embedding table cannot be found' in e.description

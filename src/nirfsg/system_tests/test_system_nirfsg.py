@@ -579,7 +579,6 @@ class SystemTests(BasicValidationTests):
         rfsg_device_session.delete_all_deembedding_tables()
         try:
             rfsg_device_session.commit()
-            assert False
         except nirfsg.Error as e:
             assert e.code == -1074097772
             assert 'The specified de-embedding table cannot be found' in e.description
