@@ -21,6 +21,15 @@ nidmm_measure_ac_volts.py
    :encoding: utf8
    :caption: `(nidmm_measure_ac_volts.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_ac_volts.py>`_
 
+nidmm_measure_frequency.py
+--------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_frequency.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_frequency.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_frequency.py>`_
+
 nidmm_measurement.py
 --------------------
 
