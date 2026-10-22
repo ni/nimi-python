@@ -1739,6 +1739,8 @@
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
+  - Modified test `test_create_deembedding_sparameter_table_s2p_file` to match with the underlying driver behaviour
+  - Modified test `test_reset_with_options` to match with the underlying driver behaviour
 - Removed
 
 #### [nirfsa] 1.0.0 - 2026-08-20
@@ -1757,6 +1759,7 @@
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
+  - Modified test `test_create_deembedding_sparameter_table_s2p_file` to match with the underlying driver behaviour
 - Removed
 
 #### [nirfsg] 1.2.0 - 2026-07-29
