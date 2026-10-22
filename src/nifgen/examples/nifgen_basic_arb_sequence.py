@@ -3,6 +3,7 @@
 import argparse
 import math
 import nifgen
+import numpy
 import sys
 import time
 
@@ -24,8 +25,11 @@ DEFAULT_WAVEFORMS = [
 
 
 def create_waveform_data(waveform_type, amplitude, number_of_points):
+    if not math.isfinite(amplitude) or not -1.0 <= amplitude <= 1.0:
+        raise ValueError('Amplitude must be finite and between -1.0 and 1.0.')
     shape = WAVEFORM_SHAPES[waveform_type]
-    return [amplitude * shape(i / number_of_points) for i in range(number_of_points)]
+    waveform_data = [round(32767 * amplitude * shape(i / number_of_points)) for i in range(number_of_points)]
+    return numpy.array(waveform_data, dtype=numpy.int16)
 
 
 def example(resource_name, options, waveforms, gain, offset, gen_time):
@@ -45,7 +49,7 @@ def example(resource_name, options, waveforms, gain, offset, gen_time):
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Continuously generates an arbitrary sequence of waveforms.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of an NI arbitrary waveform generator.')
-    parser.add_argument('-w', '--waveform', nargs=3, action='append', metavar=('TYPE', 'AMPLITUDE', 'POINTS'), help='Waveform to append to the sequence. Repeat to add more. TYPE is one of {}. If omitted, the sequence is {}'.format(', '.join(WAVEFORM_SHAPES), ', '.join('{} {} {}'.format(*w) for w in DEFAULT_WAVEFORMS)))
+    parser.add_argument('-w', '--waveform', nargs=3, action='append', metavar=('TYPE', 'AMPLITUDE', 'POINTS'), help='Sequence entry: type, normalized peak amplitude (-1 to 1), and point count. Repeat in output order; supplied entries replace the defaults. Types: {}. Default sequence: {}'.format(', '.join(WAVEFORM_SHAPES), ', '.join('{} {} {}'.format(*waveform) for waveform in DEFAULT_WAVEFORMS)))
     parser.add_argument('-g', '--gain', default=1.0, type=float, help='Gain')
     parser.add_argument('-o', '--offset', default=0.0, type=float, help='DC offset (V)')
     parser.add_argument('-t', '--time', default=5.0, type=float, help='Generation time (s)')
