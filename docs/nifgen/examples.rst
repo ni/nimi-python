@@ -3,6 +3,15 @@ Examples
 
 `You can download all nifgen examples for latest version here <https://github.com/ni/nimi-python/releases/download/nifgen-1.5.0/nifgen_examples.zip>`_
 
+nifgen_arb_sequence.py
+----------------------
+
+.. literalinclude:: ../../src/nifgen/examples/nifgen_arb_sequence.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nifgen_arb_sequence.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_arb_sequence.py>`_
+
 nifgen_arb_waveform.py
 ----------------------
 
