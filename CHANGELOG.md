@@ -54,6 +54,7 @@
 #### [nidcpower] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - `nidcpower_sink_dc_voltage_with_output_resistance.py` example
 - Changed
 - Removed
 
@@ -1799,7 +1800,7 @@
     - `arb_sample_clock_source`
     - `ref_clock_source`
     - `trigger_identifier` parameter in `send_software_edge_trigger` method
-  - Updated below properties to be list of str instead of them returning a comma separated list of string values 
+  - Updated below properties to be list of str instead of them returning a comma separated list of string values
     - `available_paths`
     - `available_ports`
     - `fixed_group_delay_across_ports`
