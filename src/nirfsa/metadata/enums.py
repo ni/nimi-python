@@ -360,7 +360,8 @@ enums = {
                 'documentation': {
                     'description': 'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
+                'python_name': 'NONE',
                 'value': 'None'
             },
             {
@@ -1600,7 +1601,8 @@ enums = {
                 'documentation': {
                     'description': 'The device does not drive the PXI 10 MHz backplane Reference Clock.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
+                'python_name': 'NONE',
                 'value': 'None'
             },
             {
@@ -1657,7 +1659,8 @@ enums = {
                 'documentation': {
                     'description': 'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
+                'python_name': 'NONE',
                 'value': 'None'
             },
             {
@@ -1700,7 +1703,8 @@ enums = {
                 'documentation': {
                     'description': 'No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
+                'python_name': 'NONE',
                 'value': 'None'
             },
             {
