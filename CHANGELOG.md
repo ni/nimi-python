@@ -1744,6 +1744,7 @@
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
+  - Removed enum value `None` from enum `LoSource`
 
 #### [nirfsa] 1.0.0 - 2026-08-20
 - Added
