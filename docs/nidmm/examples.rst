@@ -3,6 +3,15 @@ Examples
 
 `You can download all nidmm examples for latest version here <https://github.com/ni/nimi-python/releases/download/nidmm-1.5.0/nidmm_examples.zip>`_
 
+nidmm_cont_acq_chart_multiple_samples.py
+----------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_cont_acq_chart_multiple_samples.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_cont_acq_chart_multiple_samples.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_cont_acq_chart_multiple_samples.py>`_
+
 nidmm_diode_test.py
 -------------------
 
