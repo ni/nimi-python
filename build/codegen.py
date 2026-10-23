@@ -21,8 +21,8 @@ from build.helper import metadata_add_all
 from build.utilities import load_build
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-BUILD_DIR = ROOT_DIR / 'build'
-TEMPLATE_DIR = BUILD_DIR / 'templates'
+BUILD_HELPER_DIR = ROOT_DIR / 'build'
+TEMPLATE_DIR = BUILD_HELPER_DIR / 'templates'
 GENERATED_DIR = ROOT_DIR / 'generated'
 DOCS_DIR = ROOT_DIR / 'docs'
 STATIC_DOCS_DIR = DOCS_DIR / '_static'
@@ -369,9 +369,9 @@ def generate(drivers, include_root_readme):
 def clean(drivers):
     print('Cleaning...')
     shutil.rmtree(GENERATED_DIR, ignore_errors=True)
-    for pycache_dir in BUILD_DIR.rglob('__pycache__'):
+    for pycache_dir in BUILD_HELPER_DIR.rglob('__pycache__'):
         shutil.rmtree(pycache_dir, ignore_errors=True)
-    for pyc_file in BUILD_DIR.rglob('*.pyc'):
+    for pyc_file in BUILD_HELPER_DIR.rglob('*.pyc'):
         pyc_file.unlink()
     for driver in drivers:
         if driver.docs_dir.is_dir():

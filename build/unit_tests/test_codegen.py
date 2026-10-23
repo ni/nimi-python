@@ -169,7 +169,7 @@ def test_clean_removes_generated_files_but_not_doc_subfolders(monkeypatch, tmp_p
     (build / '__pycache__' / 'x.pyc').write_text('')
     (root / 'README.rst').write_text('')
     (root / '.coverage').write_text('')
-    for name, value in (('ROOT_DIR', root), ('GENERATED_DIR', generated), ('DOCS_DIR', docs), ('BUILD_DIR', build)):
+    for name, value in (('ROOT_DIR', root), ('GENERATED_DIR', generated), ('DOCS_DIR', docs), ('BUILD_HELPER_DIR', build)):
         monkeypatch.setattr(codegen, name, value)
 
     codegen.clean([codegen.DRIVERS['nidmm']])
