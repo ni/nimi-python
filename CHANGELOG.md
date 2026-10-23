@@ -799,6 +799,7 @@
 #### [nidmm] Unreleased
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
+  - Added the `nidmm_improve_dc_noise_rejection.py` example.
   - Added the `nidmm_diode_test.py` example.
   - Added the `nidmm_measure_capacitance.py` example.
   - Added the `nidmm_measure_temperature_rtd.py` example.
