@@ -30,6 +30,15 @@ nidmm_measure_ac_volts.py
    :encoding: utf8
    :caption: `(nidmm_measure_ac_volts.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_ac_volts.py>`_
 
+nidmm_measure_temperature_thermistor.py
+---------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_temperature_thermistor.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_temperature_thermistor.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_thermistor.py>`_
+
 nidmm_measure_capacitance.py
 ----------------------------
 
