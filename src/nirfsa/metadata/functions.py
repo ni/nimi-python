@@ -186,7 +186,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSelects the linear interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'description': 'Selects the linear interpolation method for the specified port or calibration plane.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -212,7 +212,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).',
+                    'description': 'Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -222,7 +222,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.',
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -265,7 +265,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSelects the nearest interpolation method.\n\nNI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'description': 'Selects the nearest interpolation method for the specified port or calibration plane.\n\nNI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -291,7 +291,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).',
+                    'description': 'Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -301,7 +301,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.',
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -315,7 +315,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSelects the spline interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'description': 'Selects the spline interpolation method for the specified port or calibration plane.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -341,7 +341,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).',
+                    'description': 'Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -351,7 +351,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.',
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -977,7 +977,7 @@ functions = {
     'CreateDeembeddingSparameterTableArray': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_',
+            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane from the input data.\n\nA calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\nThe calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\nFor devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\nCreating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\nIf only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1002,7 +1002,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).',
+                    'description': 'Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -1012,7 +1012,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.',
+                    'description': 'Specifies the name of the de-embedding table. If a table with the same name already exists in the calibration plane for the specified port, the existing table is replaced.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -1109,7 +1109,7 @@ functions = {
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nCreates an S-parameter de-embedding table for the port based on the specified S2P file.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_',
+            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane based on the specified S2P file.\n\nA calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\nThe calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\nFor devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\nCreating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\nIf only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1135,7 +1135,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).',
+                    'description': 'Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -1145,7 +1145,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.',
+                    'description': 'Specifies the name of the de-embedding table. If a table with the same name already exists in the calibration plane for the specified port, the existing table is replaced.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -1155,7 +1155,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the path to the S2P file that contains de-embedding information for the specified port.',
+                    'description': 'Specifies the path to the S2P file that contains de-embedding information for the specified port or calibration plane.'
                 },
                 'name': 's2pFilePath',
                 'type': 'ViConstString',
@@ -1194,7 +1194,7 @@ functions = {
     'DeleteAllDeembeddingTables': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nDeletes all configured de-embedding tables for the session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'description': 'Deletes all de-embedding tables configured for the current session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1224,7 +1224,7 @@ functions = {
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nDeletes the selected de-embedding table for a given port.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'description': 'Deletes the selected de-embedding table for the specified port or calibration plane.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1250,7 +1250,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).',
+                    'description': 'Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -1260,7 +1260,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.',
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -1294,6 +1294,46 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DisableCalibrationPlane': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Disables the calibration plane for the specified channel for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the selector identifying the calibration plane and port.'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -1354,6 +1394,46 @@ functions = {
                 },
                 'name': 'vi',
                 'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'EnableCalibrationPlane': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Enables the calibration plane for the specified channel for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the selector identifying the calibration plane and port.'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -2844,8 +2924,7 @@ functions = {
     'GetDeembeddingSparameters': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
-            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT1_TOWARDS_DUT.'
+            'description': 'Returns the S-parameters used for de-embedding on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n----\n\nThe port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT2_TOWARDS_DUT.\n\n----\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [
