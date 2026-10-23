@@ -584,16 +584,30 @@ class GrpcStubInterpreter(object):
         return response.offsets
 
     def tmu_abort(self, tmu):  # noqa: N802
-        raise NotImplementedError('tmu_abort is not supported over gRPC')
+        self._invoke(
+            self._client.TMUAbort,
+            grpc_types.TMUAbortRequest(vi=self._vi, tmu=tmu),
+        )
 
     def tmu_fetch_averaged_measurement(self, tmu, timeout):  # noqa: N802
-        raise NotImplementedError('tmu_fetch_averaged_measurement is not supported over gRPC')
+        response = self._invoke(
+            self._client.TMUFetchAveragedMeasurement,
+            grpc_types.TMUFetchAveragedMeasurementRequest(vi=self._vi, tmu=tmu, timeout=timeout),
+        )
+        return response.measurement
 
     def tmu_get_disabled_tmu_contexts(self):  # noqa: N802
-        raise NotImplementedError('tmu_get_disabled_tmu_contexts is not supported over gRPC')
+        response = self._invoke(
+            self._client.TMUGetDisabledTMUContexts,
+            grpc_types.TMUGetDisabledTMUContextsRequest(vi=self._vi),
+        )
+        return response.tmu_contexts
 
     def tmu_initiate(self, tmu):  # noqa: N802
-        raise NotImplementedError('tmu_initiate is not supported over gRPC')
+        self._invoke(
+            self._client.TMUInitiate,
+            grpc_types.TMUInitiateRequest(vi=self._vi, tmu=tmu),
+        )
 
     def unload_all_patterns(self, unload_keep_alive_pattern):  # noqa: N802
         self._invoke(

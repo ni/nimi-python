@@ -22,11 +22,11 @@ def example(resource_name, options, channels, measure, aperture_time,
 
         # Configure the PPMU measurement aperture time
         session.channels[channels].ppmu_aperture_time = aperture_time
-        session.channels[channels].ppmu_aperture_time_units = nidigital.PPMUApertureTimeUnits.SECONDS
+        session.channels[channels].ppmu_aperture_time_units = nidigital.PpmuApertureTimeUnits.SECONDS
 
         # Configure and source
         if source == 'source-current':
-            session.channels[channels].ppmu_output_function = nidigital.PPMUOutputFunction.CURRENT
+            session.channels[channels].ppmu_output_function = nidigital.PpmuOutputFunction.CURRENT
 
             session.channels[channels].ppmu_current_level_range = current_level_range
             session.channels[channels].ppmu_current_level = current_level
@@ -39,7 +39,7 @@ def example(resource_name, options, channels, measure, aperture_time,
             time.sleep(settling_time)
 
         elif source == 'source-voltage':
-            session.channels[channels].ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
+            session.channels[channels].ppmu_output_function = nidigital.PpmuOutputFunction.VOLTAGE
 
             session.channels[channels].ppmu_current_limit_range = current_limit_range
             session.channels[channels].ppmu_voltage_level = voltage_level
@@ -53,14 +53,14 @@ def example(resource_name, options, channels, measure, aperture_time,
 
         # Measure
         if measure == 'current':
-            current_measurements = session.channels[channels].ppmu_measure(nidigital.PPMUMeasurementType.CURRENT)
+            current_measurements = session.channels[channels].ppmu_measure(nidigital.PpmuMeasurementType.CURRENT)
 
             print('{:<6} {:<20} {:<10}'.format('Site', 'Pin Name', 'Current'))
 
             for pin, current in zip(pin_info, current_measurements):
                 print(f'{pin.site_number:<6d} {pin.pin_name:<20} {current:<10f}')
         else:
-            voltage_measurements = session.channels[channels].ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
+            voltage_measurements = session.channels[channels].ppmu_measure(nidigital.PpmuMeasurementType.VOLTAGE)
 
             print('{:<6} {:<20} {:<10}'.format('Site', 'Pin Name', 'Voltage'))
 

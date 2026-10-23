@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d50
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d54
 functions = {
     'Abort': {
         'documentation': {
@@ -3689,7 +3689,7 @@ functions = {
         },
         'grpc_name': 'TMUAbort',
         'has_repeated_capability': True,
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3720,7 +3720,7 @@ functions = {
         },
         'grpc_name': 'TMUFetchAveragedMeasurement',
         'has_repeated_capability': True,
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3766,7 +3766,7 @@ functions = {
             'description': 'Returns a comma-separated list of the TMU context strings of all disabled TMUs. Returns an empty string if all TMUs are enabled.\n'
         },
         'grpc_name': 'TMUGetDisabledTMUContexts',
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',
@@ -3805,7 +3805,7 @@ functions = {
         },
         'grpc_name': 'TMUInitiate',
         'has_repeated_capability': True,
-        'included_in_proto': False,
+        'included_in_proto': True,
         'parameters': [
             {
                 'direction': 'in',

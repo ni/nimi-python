@@ -53,7 +53,7 @@ class BasicValidationTests:
         self.configure_session(multi_instrument_session, test_name)
 
         voltage_measurements = multi_instrument_session.pins['site0/LO0', 'site1/HI0'].ppmu_measure(
-            nidigital.PPMUMeasurementType.VOLTAGE)
+            nidigital.PpmuMeasurementType.VOLTAGE)
 
         assert len(voltage_measurements) == 2
 
@@ -495,8 +495,8 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
 
         session.load_pattern(self.get_test_file_path(test_files_folder, 'pattern.digipat'))
 
-        session.history_ram_trigger_type = nidigital.HistoryRAMTriggerType.FIRST_FAILURE
-        session.history_ram_cycles_to_acquire = nidigital.HistoryRAMCyclesToAcquire.ALL
+        session.history_ram_trigger_type = nidigital.HistoryRamTriggerType.FIRST_FAILURE
+        session.history_ram_cycles_to_acquire = nidigital.HistoryRamCyclesToAcquire.ALL
         session.history_ram_pretrigger_samples = 0
         session.history_ram_number_of_samples_is_finite = True
 
