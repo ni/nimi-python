@@ -76,7 +76,7 @@ GRPC_DOC_FILES_TO_GENERATE = (
     ('grpc_session_options.rst', 'grpc_session_options.rst.mako'),
 )
 
-SPHINX_FILES_TO_GENERATE = (
+DOC_CONFIG_FILES_TO_GENERATE = (
     ('conf.py', 'conf.py.mako'),
     ('.readthedocs.yaml', '.readthedocs.yaml.mako'),
 )
@@ -341,7 +341,7 @@ def generate_driver(driver):
     if driver.has_docs:
         for file_name, template_name in doc_files_to_generate(driver):
             render_template(driver, _find_template(driver, template_name), driver.docs_dir / file_name)
-        for file_name, template_name in SPHINX_FILES_TO_GENERATE:
+        for file_name, template_name in DOC_CONFIG_FILES_TO_GENERATE:
             render_template(driver, _find_template(driver, template_name), driver.docs_dir / file_name)
 
     # We can't build the actual readme for nifake since not all the files are created.
