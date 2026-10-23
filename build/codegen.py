@@ -17,7 +17,6 @@ import zipfile
 
 from build import configure_logging
 from build import generate_template
-from build.helper import metadata_add_all
 from build.utilities import load_build
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -29,8 +28,6 @@ STATIC_DOCS_DIR = DOCS_DIR / '_static'
 SRC_DIR = ROOT_DIR / 'src'
 SHARED_PROTOS_DIR = SRC_DIR / 'shared_protos'
 NI_APIS_PROTOS_DIR = ROOT_DIR / 'third_party' / 'ni-apis' / 'ni' / 'grpcdevice' / 'v1'
-
-_drivers_with_processed_metadata = set()
 
 DEFAULT_PY_FILES_TO_GENERATE = (
     '_attributes.py',
@@ -255,20 +252,17 @@ def rewrite_pb2_imports(contents, proto_stem):
 
 
 def _load_metadata(driver):
-    # Every template must start from freshly loaded metadata because loading it modifies it in place.
+    # Every driver's metadata package is named "metadata", so the previous driver's must be unloaded.
     for name in [n for n in sys.modules if n == 'metadata' or n.startswith('metadata.')]:
         del sys.modules[name]
-    # The processed metadata files are the same every time, so only write them once per driver.
-    metadata_add_all.write_processed_metadata = driver.name not in _drivers_with_processed_metadata
-    _drivers_with_processed_metadata.add(driver.name)
     return load_build(str(driver.metadata_dir))
 
 
-def render_template(driver, template, dest_file):
+def render_template(driver, metadata, template, dest_file):
     _trace('Generating', dest_file)
     Path(dest_file).parent.mkdir(parents=True, exist_ok=True)
     template_params = {
-        'metadata': _load_metadata(driver),
+        'metadata': metadata,
         'include_grpc_support': driver.grpc_supported,
     }
     generate_template(str(template), template_params, str(dest_file))
@@ -319,12 +313,15 @@ def zip_examples(driver):
 def generate_driver(driver):
     print()
     print(f'Making {driver.name}')
+    # We only unload and load metadata once for each driver api.
+    # This is only safe if templates don't modify the metadata.
+    metadata = _load_metadata(driver)
 
     for file_name in py_files_to_generate(driver):
         if file_name.endswith(('_pb2.py', '_pb2_grpc.py')):
             continue
         dest = driver.module_dir / file_name
-        render_template(driver, _find_template(driver, Path(file_name).name + '.mako'), dest)
+        render_template(driver, metadata, _find_template(driver, Path(file_name).name + '.mako'), dest)
     if driver.grpc_supported:
         generate_pb2_files(driver)
 
@@ -335,14 +332,14 @@ def generate_driver(driver):
     for source in unit_test_files_to_copy(driver):
         copy_file(source, driver.module_dir / 'unit_tests' / source.name)
 
-    render_template(driver, TEMPLATE_DIR / 'setup.py.mako', driver.output_dir / 'setup.py')
-    render_template(driver, TEMPLATE_DIR / 'tox-system_tests.ini.mako', driver.output_dir / 'tox-system_tests.ini')
+    render_template(driver, metadata, TEMPLATE_DIR / 'setup.py.mako', driver.output_dir / 'setup.py')
+    render_template(driver, metadata, TEMPLATE_DIR / 'tox-system_tests.ini.mako', driver.output_dir / 'tox-system_tests.ini')
 
     if driver.has_docs:
         for file_name, template_name in doc_files_to_generate(driver):
-            render_template(driver, _find_template(driver, template_name), driver.docs_dir / file_name)
+            render_template(driver, metadata, _find_template(driver, template_name), driver.docs_dir / file_name)
         for file_name, template_name in DOC_CONFIG_FILES_TO_GENERATE:
-            render_template(driver, _find_template(driver, template_name), driver.docs_dir / file_name)
+            render_template(driver, metadata, _find_template(driver, template_name), driver.docs_dir / file_name)
 
     # We can't build the actual readme for nifake since not all the files are created.
     # A placeholder is needed for inclusion into the wheel that will never be used.

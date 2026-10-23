@@ -23,10 +23,6 @@ import pprint
 
 pp = pprint.PrettyPrinter(indent=4, width=80)
 
-# Writing generated/processed_metadata is a debugging aid and is slow. Code generation turns this off
-# when it loads the same metadata again.
-write_processed_metadata = True
-
 # Functions to add information to metadata structures that are specific to our codegen needs.
 
 
@@ -806,11 +802,6 @@ def add_all_metadata(functions, attributes, enums, config, persist_output=True):
 
     # If we are not persisting the output (I.e. during a test) we return early
     if not persist_output:
-        return config
-
-    if not write_processed_metadata:
-        # The files are only a debugging aid, but keep the metadata the same as when they are written
-        del config['modules']
         return config
 
     if not os.path.exists(metadata_dir):
