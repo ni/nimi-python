@@ -599,6 +599,29 @@ class SystemTests(BasicValidationTests):
         rfsa_device_session.create_deembedding_sparameter_table_array('', 'myTable2', frequencies, sparameter_tables, nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT)
         rfsa_device_session.delete_all_deembedding_tables()
 
+    def test_deembedding_compensation_gain_changes_with_enabled_calibration_planes(self, rfsa_device_session):
+        frequencies = np.array([1e9, 2e9, 3e9], dtype=np.float64)
+        sparametertables1 = np.array([[[0.1 + 0.0j, 0.5 + 0.0j], [0.5 + 0.0j, 0.1 + 0.0j]], [[0.1 + 0.0j, 0.45 + 0.0j], [0.45 + 0.0j, 0.1 + 0.0j]], [[0.1 + 0.0j, 0.4 + 0.0j], [0.4 + 0.0j, 0.1 + 0.0j]]], dtype=np.complex128)
+        sparametertables2 = np.array([[[0.2 + 0.0j, 0.25 + 0.0j], [0.25 + 0.0j, 0.2 + 0.0j]], [[0.2 + 0.0j, 0.2 + 0.0j], [0.2 + 0.0j, 0.2 + 0.0j]], [[0.2 + 0.0j, 0.15 + 0.0j], [0.15 + 0.0j, 0.2 + 0.0j]]], dtype=np.complex128)
+        rfsa_device_session.create_deembedding_sparameter_table_array('calplane::plane1', 'table1', frequencies, sparametertables1, nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT)
+        rfsa_device_session.create_deembedding_sparameter_table_array('calplane::plane2', 'table2', frequencies, sparametertables2, nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT)
+        rfsa_device_session.calplanes['plane1'].deembedding_selected_table = 'table1'
+        rfsa_device_session.calplanes['plane2'].deembedding_selected_table = 'table2'
+        rfsa_device_session.center_frequency = 2e9
+        rfsa_device_session.commit()
+        gain_both_enabled = rfsa_device_session.deembedding_compensation_gain
+        rfsa_device_session.calplanes['plane2'].disable_calibration_plane()
+        rfsa_device_session.commit()
+        gain_only_plane1_enabled = rfsa_device_session.deembedding_compensation_gain
+        rfsa_device_session.calplanes['plane1'].disable_calibration_plane()
+        rfsa_device_session.commit()
+        gain_both_disabled = rfsa_device_session.deembedding_compensation_gain
+        rfsa_device_session.calplanes['plane2'].enable_calibration_plane()
+        rfsa_device_session.commit()
+        gain_only_plane2_enabled = rfsa_device_session.deembedding_compensation_gain
+
+        assert len({gain_both_enabled, gain_only_plane1_enabled, gain_only_plane2_enabled, gain_both_disabled}) == 4
+
 
 class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')

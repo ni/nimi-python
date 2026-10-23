@@ -460,12 +460,12 @@ class _SessionBase(object):
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
     Tip:
-    This property can be set/get on specific ports within your :py:class:`nirfsa.Session` instance.
-    Use Python index notation on the repeated capabilities container ports to specify a subset.
+    This property can be set/get on specific ports or calplanes within your :py:class:`nirfsa.Session` instance.
+    Use Python index notation on the repeated capabilities container ports or calplanes to specify a subset.
 
     Example: :py:attr:`my_session.ports[ ... ].deembedding_selected_table`
 
-    To set/get on all ports, you can call the property directly on the :py:class:`nirfsa.Session`.
+    To set/get on all ports or calplanes, you can call the property directly on the :py:class:`nirfsa.Session`.
 
     Example: :py:attr:`my_session.deembedding_selected_table`
     '''
@@ -4876,6 +4876,7 @@ class _SessionBase(object):
         self.los = _RepeatedCapabilities(self, 'LO', repeated_capability_list)
         self.device_temperatures = _RepeatedCapabilities(self, '', repeated_capability_list)
         self.channels = _RepeatedCapabilities(self, '', repeated_capability_list)
+        self.calplanes = _RepeatedCapabilities(self, 'calplane::', repeated_capability_list)
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
@@ -5035,13 +5036,13 @@ class _SessionBase(object):
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        This method can be called on specific calplanes within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container calplanes to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].disable_calibration_plane`
+        Example: :py:meth:`my_session.calplanes[ ... ].disable_calibration_plane`
 
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+        To call the method on all calplanes, you can call it directly on the :py:class:`nirfsa.Session`.
 
         Example: :py:meth:`my_session.disable_calibration_plane`
         '''
@@ -5056,13 +5057,13 @@ class _SessionBase(object):
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        This method can be called on specific calplanes within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container calplanes to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].enable_calibration_plane`
+        Example: :py:meth:`my_session.calplanes[ ... ].enable_calibration_plane`
 
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+        To call the method on all calplanes, you can call it directly on the :py:class:`nirfsa.Session`.
 
         Example: :py:meth:`my_session.enable_calibration_plane`
         '''

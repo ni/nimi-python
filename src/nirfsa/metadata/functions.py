@@ -1306,6 +1306,7 @@ functions = {
         'documentation': {
             'description': 'Disables the calibration plane for the specified channel for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -1332,12 +1333,15 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the selector identifying the calibration plane and port.'
                 },
+                'is_repeated_capability': True,
                 'name': 'channelName',
+                'repeated_capability_type': 'calplanes',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'calplanes',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -1406,6 +1410,7 @@ functions = {
         'documentation': {
             'description': 'Enables the calibration plane for the specified channel for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -1432,12 +1437,15 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the selector identifying the calibration plane and port.'
                 },
+                'is_repeated_capability': True,
                 'name': 'channelName',
+                'repeated_capability_type': 'calplanes',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'calplanes',
         'returns': 'ViStatus',
         'use_session_lock': True
     },

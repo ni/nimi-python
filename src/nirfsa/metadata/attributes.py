@@ -4023,7 +4023,8 @@ attributes = {
         'lv_property': 'De-embedding:Selected Table',
         'name': 'DEEMBEDDING_SELECTED_TABLE',
         'supported_rep_caps': [
-            'ports'
+            'ports',
+            'calplanes'
         ],
         'type': 'ViString'
     },
