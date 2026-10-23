@@ -800,6 +800,7 @@
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
   - Added the `nidmm_measure_temperature_rtd.py` example.
+  - Added the `nidmm_measure_temperature_thermocouple.py` example.
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
