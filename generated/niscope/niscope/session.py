@@ -4223,7 +4223,7 @@ class Session(_SessionBase):
         TBD
 
         Args:
-            which_one (enums.CalibrationTypes):
+            which_one (enums._CalibrationTypes):
 
 
         Returns:

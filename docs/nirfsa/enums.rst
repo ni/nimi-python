@@ -486,7 +486,7 @@ DigitizerSampleClockExportedTerminal
 
 .. py:class:: DigitizerSampleClockExportedTerminal
 
-    .. py:attribute:: DigitizerSampleClockExportedTerminal.NONE
+    .. py:attribute:: DigitizerSampleClockExportedTerminal.NONE_STR
 
 
 
@@ -631,6 +631,31 @@ DownconverterLoopBandwidth
 
 
 
+EnableAttrVals
+--------------
+
+.. py:class:: EnableAttrVals
+
+    .. py:attribute:: EnableAttrVals.DISABLED
+
+
+
+        The property is disabled.
+
+        
+
+
+
+    .. py:attribute:: EnableAttrVals.ENABLED
+
+
+
+        The property is enabled.
+
+        
+
+
+
 DownconverterPreselectorEnabled
 -------------------------------
 
@@ -661,31 +686,6 @@ DownconverterPreselectorEnabled
 
 
         Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible avoid an error.
-
-        
-
-
-
-EnableAttrVals
---------------
-
-.. py:class:: EnableAttrVals
-
-    .. py:attribute:: EnableAttrVals.DISABLED
-
-
-
-        The property is disabled.
-
-        
-
-
-
-    .. py:attribute:: EnableAttrVals.ENABLED
-
-
-
-        The property is enabled.
 
         
 
@@ -1226,6 +1226,31 @@ IFfilterSelection
 
 
 
+IqInPortTerminalConfiguration
+-----------------------------
+
+.. py:class:: IqInPortTerminalConfiguration
+
+    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
+
+
+
+        Sets the terminal configuration to differential.
+
+        
+
+
+
+    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
+
+
+
+        Sets the terminal configuration to single-ended.
+
+        
+
+
+
 IfConditioningDownConversionEnabled
 -----------------------------------
 
@@ -1316,31 +1341,6 @@ InputPort
 
 
         Enables the I terminals of the I/Q IN port. It is supported only for PXIe-5645.
-
-        
-
-
-
-IqInPortTerminalConfiguration
------------------------------
-
-.. py:class:: IqInPortTerminalConfiguration
-
-    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
-
-
-
-        Sets the terminal configuration to differential.
-
-        
-
-
-
-    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
-
-
-
-        Sets the terminal configuration to single-ended.
 
         
 
@@ -1575,16 +1575,6 @@ LoSource
 --------
 
 .. py:class:: LoSource
-
-    .. py:attribute:: LoSource.NONE
-
-
-
-        Specifies that no LO source is required to downconvert the RF input signal.
-
-        
-
-
 
     .. py:attribute:: LoSource.ONBOARD
 
@@ -2086,7 +2076,7 @@ PxiChassisClk10Source
 
 .. py:class:: PxiChassisClk10Source
 
-    .. py:attribute:: PxiChassisClk10Source.NONE
+    .. py:attribute:: PxiChassisClk10Source.NONE_STR
 
 
 
@@ -2156,7 +2146,7 @@ ReferenceClockExportedTerminal
 
 .. py:class:: ReferenceClockExportedTerminal
 
-    .. py:attribute:: ReferenceClockExportedTerminal.NONE
+    .. py:attribute:: ReferenceClockExportedTerminal.NONE_STR
 
 
 
@@ -2211,7 +2201,7 @@ ReferenceClockSource
 
 .. py:class:: ReferenceClockSource
 
-    .. py:attribute:: ReferenceClockSource.NONE
+    .. py:attribute:: ReferenceClockSource.NONE_STR
 
 
 

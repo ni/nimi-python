@@ -209,7 +209,7 @@ class DigitizerDitherEnabled(Enum):
 
 
 class DigitizerSampleClockExportedTerminal(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
     '''
@@ -272,6 +272,17 @@ class DownconverterLoopBandwidth(Enum):
     '''
 
 
+class EnableAttrVals(Enum):
+    DISABLED = 1900
+    r'''
+    The property is disabled.
+    '''
+    ENABLED = 1901
+    r'''
+    The property is enabled.
+    '''
+
+
 class DownconverterPreselectorEnabled(Enum):
     DISABLED = 2600
     r'''
@@ -284,17 +295,6 @@ class DownconverterPreselectorEnabled(Enum):
     ENABLED = 2602
     r'''
     Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH whenever possible avoid an error.
-    '''
-
-
-class EnableAttrVals(Enum):
-    DISABLED = 1900
-    r'''
-    The property is disabled.
-    '''
-    ENABLED = 1901
-    r'''
-    The property is enabled.
     '''
 
 
@@ -519,6 +519,17 @@ class IFfilterSelection(Enum):
     '''
 
 
+class IqInPortTerminalConfiguration(Enum):
+    DIFFERENTIAL = 2100
+    r'''
+    Sets the terminal configuration to differential.
+    '''
+    SINGLE_ENDED = 2101
+    r'''
+    Sets the terminal configuration to single-ended.
+    '''
+
+
 class IfConditioningDownConversionEnabled(Enum):
     DISABLED = 1900
     r'''
@@ -557,17 +568,6 @@ class InputPort(Enum):
     I_ONLY = 2003
     r'''
     Enables the I terminals of the I/Q IN port. It is supported only for PXIe-5645.
-    '''
-
-
-class IqInPortTerminalConfiguration(Enum):
-    DIFFERENTIAL = 2100
-    r'''
-    Sets the terminal configuration to differential.
-    '''
-    SINGLE_ENDED = 2101
-    r'''
-    Sets the terminal configuration to single-ended.
     '''
 
 
@@ -669,10 +669,6 @@ class LoPllFractionalModeEnabled(Enum):
 
 
 class LoSource(Enum):
-    NONE = 'None'
-    r'''
-    Specifies that no LO source is required to downconvert the RF input signal.
-    '''
     ONBOARD = 'Onboard'
     r'''
     Specifies that the onboard synthesizer is used to generate the LO signal that downconverts the RF input signal.**PXIe-5831/5832** This configuration uses the onboard LO of the PXIe-3622, using the LO2 stage.**PXIe-5831/5832 with PXIe-5653** This configuration uses the onboard LO of the PXIe-5653 when associated with the PXIe-3622.**PXIe-5841 with PXIe-5655** This configuration uses the onboard LO of the PXIe-5655.
@@ -881,7 +877,7 @@ class PowerSpectrumUnits(Enum):
 
 
 class PxiChassisClk10Source(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     The device does not drive the PXI 10 MHz backplane Reference Clock.
     '''
@@ -911,7 +907,7 @@ class ReferenceClockExportedRate(Enum):
 
 
 class ReferenceClockExportedTerminal(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
     '''
@@ -934,7 +930,7 @@ class ReferenceClockExportedTerminal(Enum):
 
 
 class ReferenceClockSource(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.
     '''
@@ -1112,27 +1108,27 @@ class SelfCalSteps(IntFlag):
     r'''
     Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
     '''
-    LO_SELF_CAL = 10
+    LO_SELF_CAL = 16
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    AMPLITUDE_ACCURACY = 20
+    AMPLITUDE_ACCURACY = 32
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    RESIDUAL_LO_POWER = 40
+    RESIDUAL_LO_POWER = 64
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    IMAGE_SUPPRESSION = 80
+    IMAGE_SUPPRESSION = 128
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    SYNTHESIZER_ALIGNMENT = 100
+    SYNTHESIZER_ALIGNMENT = 256
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    DC_OFFSET = 200
+    DC_OFFSET = 512
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
@@ -1159,27 +1155,27 @@ class SelfCalibrateRangeStepsToOmit(IntFlag):
     r'''
     Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
     '''
-    LO_SELF_CAL = 10
+    LO_SELF_CAL = 16
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    AMPLITUDE_ACCURACY = 20
+    AMPLITUDE_ACCURACY = 32
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    RESIDUAL_LO_POWER = 40
+    RESIDUAL_LO_POWER = 64
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    IMAGE_SUPPRESSION = 80
+    IMAGE_SUPPRESSION = 128
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    SYNTHESIZER_ALIGNMENT = 100
+    SYNTHESIZER_ALIGNMENT = 256
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    DC_OFFSET = 200
+    DC_OFFSET = 512
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
