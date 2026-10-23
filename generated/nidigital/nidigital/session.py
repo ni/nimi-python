@@ -240,6 +240,9 @@ class _SessionBase(object):
     | DigitalEdge.FALLING | Specifies the signal transition from high level to low level. |
     +---------------------+---------------------------------------------------------------+
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can be set/get on specific conditional_jump_triggers within your :py:class:`nidigital.Session` instance.
     Use Python index notation on the repeated capabilities container conditional_jump_triggers to specify a subset.
@@ -284,6 +287,9 @@ class _SessionBase(object):
     | DigitalEdge.FALLING | Specifies the signal transition from high level to low level. |
     +---------------------+---------------------------------------------------------------+
 
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
     Tip:
     This property can be set/get on specific rio_triggers within your :py:class:`nidigital.Session` instance.
     Use Python index notation on the repeated capabilities container rio_triggers to specify a subset.
@@ -327,6 +333,9 @@ class _SessionBase(object):
     +---------------------+-------------------------------------------------------------------------------+
     | DigitalEdge.FALLING | Asserts the trigger when the signal transitions from high level to low level. |
     +---------------------+-------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     digital_edge_start_trigger_source = _attributes.AttributeViString(1150030)
     '''Type: str
@@ -559,8 +568,8 @@ class _SessionBase(object):
     | HistoryRAMCyclesToAcquire.ALL    | Acquires all cycles after the triggering conditions are met.                      |
     +----------------------------------+-----------------------------------------------------------------------------------+
     '''
-    history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
-    '''Type: int
+    history_ram_max_samples_to_acquire_per_site = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMMaxSamplesToAcquirePerSite, 1150077)
+    '''Type: enums.HistoryRAMMaxSamplesToAcquirePerSite
 
     Specifies the maximum number of History RAM samples to acquire per site. If the property is set to -1, it will acquire until the History RAM buffer is full.
     '''
@@ -1157,6 +1166,317 @@ class _SessionBase(object):
 
     Specifies whether the timing_absolute_delay property should be applied to adjust the digital pattern instrument timing reference relative to other instruments in the system. Do not use this feature with digital pattern instruments in a Semiconductor Test System (STS). Timing absolute delay conflicts with the adjustment performed during STS timing calibration. When set to True, the digital pattern instrument automatically adjusts the timing absolute delay to correct the instrument timing reference relative to other instruments in the system for better timing alignment among synchronized instruments.
     '''
+    tmu_arm_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUArmType, 1150107)
+    '''Type: enums.TMUArmType
+
+    Specifies the mechanism used to arm the TMU. When set to Immediate, the TMU arms immediately when the %method{tmu initiate} method is called. When set to Edge, the TMU waits for a source event on the configured edge arm source before arming.
+
+    +----------------------+-------------------------------------------------------------------------------------------+
+    | Defined Values:      |                                                                                           |
+    +======================+===========================================================================================+
+    | TMUArmType.IMMEDIATE | The TMU arms immediately when you call the %method{tmu initiate} method.                  |
+    +----------------------+-------------------------------------------------------------------------------------------+
+    | TMUArmType.EDGE      | The TMU waits for a source event on the configured edge arm source channel before arming. |
+    +----------------------+-------------------------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_arm_type`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_arm_type`
+    '''
+    tmu_count = _attributes.AttributeViInt32(1150111)
+    '''Type: int
+
+    Returns the total number of TMUs available across all modules in the session. This property can be queried without configuring or enabling any TMUs. The value reflects the aggregate TMU hardware resources available across all modules in the session. However, TMU resources available on an individual module cannot be shared or used with other modules in the session. Returns 0 if none of the modules in the session have TMU support.
+    '''
+    tmu_edge_arm_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUPolarity, 1150110)
+    '''Type: enums.TMUPolarity
+
+    Specifies the edge polarity of the edge arm source event that triggers arming. This property is only applicable when the %property{tmu arm type} property is set to Edge. The specified %property{tmu edge arm polarity} must match either the %property{tmu start source event polarity} or %property{tmu stop source event polarity} for the PXIe-6570/6571.
+
+    +---------------------+----------------------------------------------------------------------------------+
+    | Defined Values:     |                                                                                  |
+    +=====================+==================================================================================+
+    | TMUPolarity.RISING  | The event is detected on the rising edge of the source signal.                   |
+    +---------------------+----------------------------------------------------------------------------------+
+    | TMUPolarity.FALLING | The event is detected on the falling edge of the source signal.                  |
+    +---------------------+----------------------------------------------------------------------------------+
+    | TMUPolarity.EITHER  | The event is detected on either the rising or falling edge of the source signal. |
+    +---------------------+----------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_edge_arm_polarity`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_edge_arm_polarity`
+    '''
+    tmu_edge_arm_source = _attributes.AttributeViString(1150108)
+    '''Type: str
+
+    Specifies the channel to monitor for the TMU edge arm source event. This property is only applicable when the %property{tmu arm type} property is set to Edge.
+    The value must be a single pin or channel name; lists and pin group names are not supported. Pin names apply to all enabled sites unless qualified as siteN/pinName, where N is the site number. Channel names can be device-qualified, for example, PXI1Slot2/0, where PXI1Slot2 is the instrument resource name and 0 is the channel name.**Note**
+     The specified %property{tmu edge arm source} must match either the %property{tmu start source} or %property{tmu stop source} for the PXIe-6570/6571.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_edge_arm_source`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_edge_arm_source`
+    '''
+    tmu_edge_arm_source_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUSourceEvent, 1150109)
+    '''Type: enums.TMUSourceEvent
+
+    Specifies the event at the edge arm source channel that triggers arming. This property is only applicable when the %property{tmu arm type} property is set to Edge. The specified %property{tmu edge arm source event} must match either the %property{tmu start source event} or %property{tmu stop source event} for the PXIe-6570/6571.
+
+    +--------------------+------------------------------------------------------------------------+
+    | Defined Values:    |                                                                        |
+    +====================+========================================================================+
+    | TMUSourceEvent.VOL | The event occurs when the signal crosses the configured VOL threshold. |
+    +--------------------+------------------------------------------------------------------------+
+    | TMUSourceEvent.VOH | The event occurs when the signal crosses the configured VOH threshold. |
+    +--------------------+------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_edge_arm_source_event`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_edge_arm_source_event`
+    '''
+    tmu_enabled = _attributes.AttributeViBoolean(1150098)
+    '''Type: bool
+
+    Specifies whether the TMU is enabled. Set this property to %replace_me{true} to enable the TMU. When a TMU is disabled, calling the %method{tmu initiate} method for that TMU returns an error. TMU configuration is preserved when the TMU is disabled.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_enabled`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_enabled`
+    '''
+    tmu_samples_to_acquire = _attributes.AttributeViInt64(1150105)
+    '''Type: int
+
+    Specifies the number of samples the TMU acquires per measurement.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_samples_to_acquire`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_samples_to_acquire`
+    '''
+    tmu_sample_timeout = _attributes.AttributeViReal64(1150106)
+    '''Type: float
+
+    Specifies the maximum time, in seconds, that the TMU waits during each phase of sample acquisition: first waiting for the arm condition to be satisfied, then waiting for both the start and stop events after the arm arrives. The timeout counter restarts when the arm arrives, so each phase gets the full timeout duration independently. If the timeout expires in either phase, the TMU stops and an error is returned when fetching the time measurement.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_sample_timeout`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_sample_timeout`
+    '''
+    tmu_start_input_debounce_time = _attributes.AttributeViReal64(1150112)
+    '''Type: float
+
+    Specifies the debounce time, in seconds, applied to the start source input of the TMU. The TMU ignores signal transitions on the start source that are shorter than the configured debounce time, which helps filter out noise or glitches.
+    Set to 0 to disable debouncing on the start source input. %property{tmu start input debounce time} and %property{tmu stop input debounce time} must be equal for period measurements (i.e %property{tmu start source} = %property{tmu stop source}, %property{tmu start source event} = %property{tmu stop source event}, and %property{tmu start source event polarity} = %property{tmu stop source event polarity}).
+     The configured debounce time also applies to the arm input when the arm source matches the start/stop source.
+     PXIe-6570/6571: Debounce is coerced to the nearest multiple of 5 ns.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_start_input_debounce_time`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_start_input_debounce_time`
+    '''
+    tmu_start_source = _attributes.AttributeViString(1150099)
+    '''Type: str
+
+    Specifies the channel to monitor for the TMU start event.
+    The value must be a single pin or channel name; lists and pin group names are not supported. Pin names apply to all enabled sites unless qualified as siteN/pinName, where N is the site number. Channel names can be device-qualified, for example, PXI1Slot2/0, where PXI1Slot2 is the instrument resource name and 0 is the channel name.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_start_source`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_start_source`
+    '''
+    tmu_start_source_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUSourceEvent, 1150101)
+    '''Type: enums.TMUSourceEvent
+
+    Specifies the start source channel event that determines the measurement start timestamp.
+
+    +--------------------+------------------------------------------------------------------------+
+    | Defined Values:    |                                                                        |
+    +====================+========================================================================+
+    | TMUSourceEvent.VOL | The event occurs when the signal crosses the configured VOL threshold. |
+    +--------------------+------------------------------------------------------------------------+
+    | TMUSourceEvent.VOH | The event occurs when the signal crosses the configured VOH threshold. |
+    +--------------------+------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_start_source_event`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_start_source_event`
+    '''
+    tmu_start_source_event_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUPolarity, 1150103)
+    '''Type: enums.TMUPolarity
+
+    Specifies the start source event edge polarity that determines the measurement start timestamp.
+
+    +---------------------+----------------------------------------------------------------------------------+
+    | Defined Values:     |                                                                                  |
+    +=====================+==================================================================================+
+    | TMUPolarity.RISING  | The event is detected on the rising edge of the source signal.                   |
+    +---------------------+----------------------------------------------------------------------------------+
+    | TMUPolarity.FALLING | The event is detected on the falling edge of the source signal.                  |
+    +---------------------+----------------------------------------------------------------------------------+
+    | TMUPolarity.EITHER  | The event is detected on either the rising or falling edge of the source signal. |
+    +---------------------+----------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_start_source_event_polarity`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_start_source_event_polarity`
+    '''
+    tmu_stop_input_debounce_time = _attributes.AttributeViReal64(1150113)
+    '''Type: float
+
+    Specifies the debounce time, in seconds, applied to the stop source input of the TMU. The TMU ignores signal transitions on the stop source that are shorter than the configured debounce time, which helps filter out noise or glitches.
+    Set to 0 to disable debouncing on the stop source input. %property{tmu stop input debounce time} and %property{tmu start input debounce time} must be equal for period measurements (i.e %property{tmu start source} = %property{tmu stop source}, %property{tmu start source event} = %property{tmu stop source event}, and %property{tmu start source event polarity} = %property{tmu stop source event polarity}).
+     The configured debounce time also applies to the arm input when the arm source matches the start/stop source.
+     PXIe-6570/6571: Debounce is coerced to the nearest multiple of 5 ns.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_stop_input_debounce_time`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_stop_input_debounce_time`
+    '''
+    tmu_stop_source = _attributes.AttributeViString(1150100)
+    '''Type: str
+
+    Specifies the channel to monitor for the TMU stop event.
+    The value must be a single pin or channel name; lists and pin group names are not supported. Pin names apply to all enabled sites unless qualified as siteN/pinName, where N is the site number. Channel names can be device-qualified, for example, PXI1Slot2/0, where PXI1Slot2 is the instrument resource name and 0 is the channel name.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_stop_source`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_stop_source`
+    '''
+    tmu_stop_source_event = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUSourceEvent, 1150102)
+    '''Type: enums.TMUSourceEvent
+
+    Specifies the stop source channel event that determines the measurement stop timestamp.
+
+    +--------------------+------------------------------------------------------------------------+
+    | Defined Values:    |                                                                        |
+    +====================+========================================================================+
+    | TMUSourceEvent.VOL | The event occurs when the signal crosses the configured VOL threshold. |
+    +--------------------+------------------------------------------------------------------------+
+    | TMUSourceEvent.VOH | The event occurs when the signal crosses the configured VOH threshold. |
+    +--------------------+------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_stop_source_event`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_stop_source_event`
+    '''
+    tmu_stop_source_event_polarity = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.TMUPolarity, 1150104)
+    '''Type: enums.TMUPolarity
+
+    Specifies the stop source event edge polarity that determines the measurement stop timestamp.
+
+    +---------------------+----------------------------------------------------------------------------------+
+    | Defined Values:     |                                                                                  |
+    +=====================+==================================================================================+
+    | TMUPolarity.RISING  | The event is detected on the rising edge of the source signal.                   |
+    +---------------------+----------------------------------------------------------------------------------+
+    | TMUPolarity.FALLING | The event is detected on the falling edge of the source signal.                  |
+    +---------------------+----------------------------------------------------------------------------------+
+    | TMUPolarity.EITHER  | The event is detected on either the rising or falling edge of the source signal. |
+    +---------------------+----------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+    Tip:
+    This property can be set/get on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+    Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset.
+
+    Example: :py:attr:`my_session.time_measurement_units[ ... ].tmu_stop_source_event_polarity`
+
+    To set/get on all time_measurement_units, you can call the property directly on the :py:class:`nidigital.Session`.
+
+    Example: :py:attr:`my_session.tmu_stop_source_event_polarity`
+    '''
     vih = _attributes.AttributeViReal64(1150008)
     '''Type: float
 
@@ -1254,6 +1574,7 @@ class _SessionBase(object):
         self.sites = _RepeatedCapabilities(self, 'site', repeated_capability_list)
         self.rio_events = _RepeatedCapabilities(self, 'RIOEvent', repeated_capability_list)
         self.rio_triggers = _RepeatedCapabilities(self, 'RIOTrigger', repeated_capability_list)
+        self.time_measurement_units = _RepeatedCapabilities(self, 'tmu', repeated_capability_list)
 
         # Finally, set _is_frozen to True which is used to prevent clients from accidentally adding
         # members when trying to set a property with a typo.
@@ -3115,6 +3436,72 @@ class _SessionBase(object):
         offsets = self._interpreter.tdr(self._repeated_capability, apply_offsets)
         return _converters.convert_seconds_real64_to_timedeltas(offsets)
 
+    @ivi_synchronized
+    def tmu_abort(self):
+        r'''tmu_abort
+
+        Aborts an active time measurement acquisition on the specified TMU. In-progress measurements are discarded and will not be available. Completed measurements will not be discarded.
+
+        Tip:
+        This method can be called on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.time_measurement_units[ ... ].tmu_abort`
+
+        To call the method on all time_measurement_units, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.tmu_abort`
+        '''
+        self._interpreter.tmu_abort(self._repeated_capability)
+
+    @ivi_synchronized
+    def tmu_fetch_averaged_measurement(self, timeout):
+        r'''tmu_fetch_averaged_measurement
+
+        Fetches the averaged time measurement from the specified TMU. Blocks until the configured number of samples have been acquired and averaged, or until the timeout elapses. You must call the %method{tmu initiate} method before calling this method. Returns the arithmetic mean of the acquired samples, in seconds. This method has non-destructive behavior; the averaged measurement can be fetched repeatedly until a new acquisition is initiated by calling the %method{tmu initiate} method. Multiple calls to this method return the same result. To obtain a new measurement, call the %method{tmu initiate} method to start a fresh acquisition.
+
+        Tip:
+        This method can be called on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.time_measurement_units[ ... ].tmu_fetch_averaged_measurement`
+
+        To call the method on all time_measurement_units, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.tmu_fetch_averaged_measurement`
+
+        Args:
+            timeout (float): The maximum time, in seconds, to wait for the measurement to complete. The timeout must be greater than 0.
+
+
+        Returns:
+            measurement (float): The returned averaged time measurement, in seconds; pass the address of a double variable.
+
+        '''
+        measurement = self._interpreter.tmu_fetch_averaged_measurement(self._repeated_capability, timeout)
+        return measurement
+
+    @ivi_synchronized
+    def tmu_initiate(self):
+        r'''tmu_initiate
+
+        Initiates a time measurement acquisition for the specified TMU. Applies the current TMU settings, clears previous data, and prepares the TMU to capture start and stop events. This method returns immediately and does not block. Do not call this method while an acquisition is already active on the specified TMU. Call %method{tmu abort} first to stop an active acquisition. You must configure %property{tmu start source}, %property{tmu stop source}, and %property{tmu enabled} before calling this method.
+
+        Tip:
+        This method can be called on specific time_measurement_units within your :py:class:`nidigital.Session` instance.
+        Use Python index notation on the repeated capabilities container time_measurement_units to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.time_measurement_units[ ... ].tmu_initiate`
+
+        To call the method on all time_measurement_units, you can call it directly on the :py:class:`nidigital.Session`.
+
+        Example: :py:meth:`my_session.tmu_initiate`
+        '''
+        self._interpreter.tmu_initiate(self._repeated_capability)
+
     def unlock(self):
         '''unlock
 
@@ -3835,6 +4222,19 @@ class Session(_SessionBase):
         if type(trigger) is not enums.SoftwareTrigger:
             raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTrigger))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
+
+    @ivi_synchronized
+    def tmu_get_disabled_tmu_contexts(self):
+        r'''tmu_get_disabled_tmu_contexts
+
+        Returns a comma-separated list of the TMU context strings of all disabled TMUs. Returns an empty string if all TMUs are enabled.
+
+        Returns:
+            tmu_contexts (list of str): The returned comma-separated list of disabled TMU context strings. The returned list uses the physical TMU context format (e.g., PXI1Slot2/tmu0). If there are no disabled TMU contexts, the method returns an empty string.  The buffer must contain at least as many elements as the value you specify with the buffer size parameter. If you pass 0 for **%parameter{tmu contexts buffer size}**, pass %replace_me{null} for this parameter. This method can be used in combination with %property{tmu count} to enumerate TMU resources per module.
+
+        '''
+        tmu_contexts = self._interpreter.tmu_get_disabled_tmu_contexts()
+        return _converters.convert_comma_separated_string_to_list(tmu_contexts)
 
     @ivi_synchronized
     def unload_all_patterns(self, unload_keep_alive_pattern=False):

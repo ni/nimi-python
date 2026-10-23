@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 24.3.0f175
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d54
 enums = {
     'BitOrder': {
         'values': [
@@ -642,6 +642,67 @@ enums = {
             }
         ]
     },
+    'TMUArmType': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The TMU arms immediately when you call the %function{tmu initiate} function.'
+                },
+                'name': 'NIDIGITAL_VAL_IMMEDIATE',
+                'value': 4000
+            },
+            {
+                'documentation': {
+                    'description': 'The TMU waits for a source event on the configured edge arm source channel before arming.'
+                },
+                'name': 'NIDIGITAL_VAL_EDGE',
+                'value': 4001
+            }
+        ]
+    },
+    'TMUPolarity': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The event is detected on the rising edge of the source signal.'
+                },
+                'name': 'NIDIGITAL_VAL_RISING_EDGE',
+                'value': 1800
+            },
+            {
+                'documentation': {
+                    'description': 'The event is detected on the falling edge of the source signal.'
+                },
+                'name': 'NIDIGITAL_VAL_FALLING_EDGE',
+                'value': 1801
+            },
+            {
+                'documentation': {
+                    'description': 'The event is detected on either the rising or falling edge of the source signal.'
+                },
+                'name': 'NIDIGITAL_VAL_EITHER_EDGE',
+                'value': 1802
+            }
+        ]
+    },
+    'TMUSourceEvent': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The event occurs when the signal crosses the configured VOL threshold.'
+                },
+                'name': 'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOL',
+                'value': 3900
+            },
+            {
+                'documentation': {
+                    'description': 'The event occurs when the signal crosses the configured VOH threshold.'
+                },
+                'name': 'NIDIGITAL_VAL_TMU_SOURCE_EVENT_VOH',
+                'value': 3901
+            }
+        ]
+    },
     'TerminationMode': {
         'values': [
             {
@@ -664,6 +725,24 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_HIGH_Z',
                 'value': 1202
+            }
+        ]
+    },
+    'TimeMeasurementUnit': {
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Specifies TMU 0. To access attributes or call functions on this TMU, the instrument resource name must be prepended to the TMU name. For example, for an instrument with resource name PXI1Slot2, use *PXI1Slot2/tmu0* as the TMU context string.'
+                },
+                'name': 'NIDIGITAL_VAL_TMU0',
+                'value': 'tmu0'
+            },
+            {
+                'documentation': {
+                    'description': 'Specifies TMU 1. To access attributes or call functions on this TMU, the instrument resource name must be prepended to the TMU name. For example, for an instrument with resource name PXI1Slot2, use *PXI1Slot2/tmu1* as the TMU context string.'
+                },
+                'name': 'NIDIGITAL_VAL_TMU1',
+                'value': 'tmu1'
             }
         ]
     },

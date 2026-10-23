@@ -71,6 +71,10 @@ class HistoryRAMCyclesToAcquire(Enum):
     '''
 
 
+class HistoryRAMMaxSamplesToAcquirePerSite(Enum):
+    SAMPLES = -1
+
+
 class HistoryRAMTriggerType(Enum):
     FIRST_FAILURE = 2200
     r'''
@@ -267,6 +271,43 @@ class TDREndpointTermination(Enum):
     SHORT_TO_GROUND = 3601
     r'''
     TDR channels are connected to a short to ground.
+    '''
+
+
+class TMUArmType(Enum):
+    IMMEDIATE = 4000
+    r'''
+    The TMU arms immediately when you call the %method{tmu initiate} method.
+    '''
+    EDGE = 4001
+    r'''
+    The TMU waits for a source event on the configured edge arm source channel before arming.
+    '''
+
+
+class TMUPolarity(Enum):
+    RISING = 1800
+    r'''
+    The event is detected on the rising edge of the source signal.
+    '''
+    FALLING = 1801
+    r'''
+    The event is detected on the falling edge of the source signal.
+    '''
+    EITHER = 1802
+    r'''
+    The event is detected on either the rising or falling edge of the source signal.
+    '''
+
+
+class TMUSourceEvent(Enum):
+    VOL = 3900
+    r'''
+    The event occurs when the signal crosses the configured VOL threshold.
+    '''
+    VOH = 3901
+    r'''
+    The event occurs when the signal crosses the configured VOH threshold.
     '''
 
 

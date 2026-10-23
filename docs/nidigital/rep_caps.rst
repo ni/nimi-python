@@ -189,4 +189,26 @@ rio_triggers
         passes a string of :python:`'RIOTrigger0, RIOTrigger1, RIOTrigger2'` to the set attribute function.
 
 
+time_measurement_units
+----------------------
+
+    .. py:attribute:: nidigital.Session.time_measurement_units[]
+
+        TMU repeated capabilities identify the time measurement unit contexts for an instrument. The numeric portion of the identifier may be used without the "tmu" prefix. In that case, the correct prefix will be added when the driver function call is made. When accessing TMUs from an instrument context, select one TMU identifier at a time.
+
+    Valid Indices: :python:`'tmu0, tmu1'`.
+
+        .. code:: python
+
+            session.instruments['PXI1Slot2'].time_measurement_units[0].tmu_enabled = True
+
+        passes a string of :python:`'PXI1Slot2/tmu0'` to the set attribute function.
+
+        .. code:: python
+
+            session.instruments['PXI1Slot2'].time_measurement_units['tmu0'].tmu_enabled = True
+
+        passes a string of :python:`'PXI1Slot2/tmu0'` to the set attribute function.
+
+
 

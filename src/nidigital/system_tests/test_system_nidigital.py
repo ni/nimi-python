@@ -1195,6 +1195,16 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
         # We shouldn't time out, having sent the trigger, though in simulation it might complete, anyway
         multi_instrument_session.wait_until_done(timeout=hightime.timedelta(seconds=5.0))
 
+    def test_send_software_edge_trigger_invalid_type(self, multi_instrument_session):
+        with pytest.raises(
+            TypeError,
+            match=f'Parameter trigger must be of type {nidigital.SoftwareTrigger}',
+        ):
+            multi_instrument_session.send_software_edge_trigger(
+                trigger=0,
+                trigger_identifier='',
+            )
+
     def test_specifications_levels_and_timing_single(self, multi_instrument_session):
         '''Test methods for loading, applying and unloading specifications, levels, and timing files.
 
@@ -1336,6 +1346,59 @@ class TestLibrary(SystemTests):
     def session_creation_kwargs(cls):
         return {}
 
+    def test_tmu_get_disabled_tmu_contexts(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = False
+
+        assert multi_instrument_session.tmu_count > 0
+        assert f'{instruments[0]}/tmu0' in multi_instrument_session.tmu_get_disabled_tmu_contexts()
+
+    def test_tmu_initiate_abort(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = True
+        tmu.tmu_start_source = f'{instruments[0]}/0'
+        tmu.tmu_stop_source = f'{instruments[0]}/1'
+        tmu.tmu_start_source_event = nidigital.TMUSourceEvent.VOL
+        tmu.tmu_stop_source_event = nidigital.TMUSourceEvent.VOH
+        tmu.tmu_start_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_stop_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_arm_type = nidigital.TMUArmType.IMMEDIATE
+
+        tmu.tmu_initiate()
+        tmu.tmu_abort()
+
+    def test_tmu_fetch_averaged_measurement_before_initiate(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = True
+        tmu.tmu_start_source = f'{instruments[0]}/0'
+        tmu.tmu_stop_source = f'{instruments[0]}/1'
+        tmu.tmu_start_source_event = nidigital.TMUSourceEvent.VOL
+        tmu.tmu_stop_source_event = nidigital.TMUSourceEvent.VOH
+        tmu.tmu_start_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_stop_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_arm_type = nidigital.TMUArmType.IMMEDIATE
+
+        with pytest.raises(nidigital.Error):
+            tmu.tmu_fetch_averaged_measurement(timeout=0.1)
+
+    def test_tmu_fetch_averaged_measurement_returns_measurement(self, multi_instrument_session):
+        tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        tmu.tmu_enabled = True
+        tmu.tmu_start_source = f'{instruments[0]}/0'
+        tmu.tmu_stop_source = f'{instruments[0]}/0'
+        tmu.tmu_start_source_event = nidigital.TMUSourceEvent.VOL
+        tmu.tmu_stop_source_event = nidigital.TMUSourceEvent.VOH
+        tmu.tmu_start_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_stop_source_event_polarity = nidigital.TMUPolarity.RISING
+        tmu.tmu_samples_to_acquire = 1
+        tmu.tmu_sample_timeout = 1.0
+        tmu.tmu_arm_type = nidigital.TMUArmType.IMMEDIATE
+
+        tmu.tmu_initiate()
+        measurement = tmu.tmu_fetch_averaged_measurement(timeout=1.0)
+
+        assert measurement == 0.0
+
     def test_enable_match_fail_combination(self, multi_instrument_session):
         import nisync
 
@@ -1368,6 +1431,27 @@ class TestGrpcNoTLS(SystemTests):
     def session_creation_kwargs(cls, grpc_channel):
         grpc_options = nidigital.GrpcSessionOptions(grpc_channel, "")
         return {'grpc_options': grpc_options}
+
+    @pytest.mark.parametrize(
+        'target, method_name, kwargs',
+        [
+            ('tmu', 'tmu_abort', {}),
+            ('tmu', 'tmu_fetch_averaged_measurement', {'timeout': 0.1}),
+            ('session', 'tmu_get_disabled_tmu_contexts', {}),
+            ('tmu', 'tmu_initiate', {}),
+        ],
+    )
+    def test_tmu_methods_are_not_supported_over_grpc(self, multi_instrument_session, target, method_name, kwargs):
+        if target == 'tmu':
+            target = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
+        else:
+            target = multi_instrument_session
+
+        with pytest.raises(
+            NotImplementedError,
+            match=f'^{method_name} is not supported over gRPC$',
+        ):
+            getattr(target, method_name)(**kwargs)
 
 
 @pytest.mark.skipif(sys.maxsize < 2**32, reason="TLS configuration and certificate exchange scripts are not supported in 32-bit processes")
