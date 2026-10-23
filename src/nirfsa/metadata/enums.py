@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSA API metadata version 26.5.0d9999
+# This file is generated from NI-RFSA API metadata version 27.0.0d9999
 enums = {
     'AcquisitionType': {
         'codegen_method': 'public',
@@ -39,6 +39,25 @@ enums = {
             }
         ]
     },
+    'AdvanceTriggerDigitalEdgeEdge': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The trigger asserts on the rising edge of the signal.'
+                },
+                'name': 'NIRFSA_VAL_RISING_EDGE',
+                'value': 900
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger asserts on the falling edge of the signal.'
+                },
+                'name': 'NIRFSA_VAL_FALLING_EDGE',
+                'value': 901
+            }
+        ]
+    },
     'AdvanceTriggerType': {
         'codegen_method': 'public',
         'values': [
@@ -62,25 +81,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_SOFTWARE_EDGE',
                 'value': 604
-            }
-        ]
-    },
-    'AdvanceTriggerDigitalEdgeEdge': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger asserts on the rising edge of the signal.'
-                },
-                'name': 'NIRFSA_VAL_RISING_EDGE',
-                'value': 900
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger asserts on the falling edge of the signal.'
-                },
-                'name': 'NIRFSA_VAL_FALLING_EDGE',
-                'value': 901
             }
         ]
     },
@@ -360,14 +360,15 @@ enums = {
                 'documentation': {
                     'description': 'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT',
+                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'python_name': 'CLK_OUT',
                 'value': 'ClkOut'
             }
         ]
@@ -379,35 +380,40 @@ enums = {
                 'documentation': {
                     'description': 'The digitizer uses its onboard clock as the Sample Clock timebase.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_CLOCK',
+                'name': 'NIRFSA_VAL_ONBOARD_CLOCK_STR',
+                'python_name': 'ONBOARD_CLOCK',
                 'value': 'OnboardClock'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal present on the CLK IN connector as the Sample Clock timebase.'
                 },
-                'name': 'NIRFSA_VAL_CLK_IN',
+                'name': 'NIRFSA_VAL_CLK_IN_STR',
+                'python_name': 'CLK_IN',
                 'value': 'ClkIn'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal generated on the 100 MHz REF OUT terminal on the PXIe-5653 as the Sample Clock timebase. This value is supported only for the PXIe-5665.'
                 },
-                'name': 'NIRFSA_VAL_LO_REF_CLK',
+                'name': 'NIRFSA_VAL_LO_REF_CLK_STR',
+                'python_name': 'LO_REF_CLK',
                 'value': 'LORefClk'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal present at the PXI star trigger line as the Sample Clock timebase. This value is not supported for the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_PXI_STAR',
+                'name': 'NIRFSA_VAL_PXI_STAR_STR',
+                'python_name': 'PXI_STAR',
                 'value': 'PXI_STAR'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal present on the LO2 OUT connector on the downconverter as the Sample Clock timebase. This value is supported only for the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_DOWNCONVERTER_LO2_OUT',
+                'name': 'NIRFSA_VAL_DOWNCONVERTER_LO2_OUT_STR',
+                'python_name': 'DOWNCONVERTER_LO2_OUT',
                 'value': 'DownconverterLO2Out'
             }
         ]
@@ -483,8 +489,9 @@ enums = {
             }
         ]
     },
-    'DownconverterPreselectorEnabled': {
+    'EnablePreselector': {
         'codegen_method': 'public',
+        'python_name': 'DownconverterPreselectorEnabled',
         'values': [
             {
                 'documentation': {
@@ -542,32 +549,6 @@ enums = {
             }
         ]
     },
-    'RfOutLoExport': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The LO signal is not exported from the RF OUT LO OUT terminal.'
-                },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
-            },
-            {
-                'documentation': {
-                    'description': 'The LO signal is exported from the RF OUT LO OUT terminal.'
-                },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
-            },
-            {
-                'documentation': {
-                    'description': 'The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.'
-                },
-                'name': 'NIRFSA_VAL_UNSPECIFIED',
-                'value': 1902
-            }
-        ]
-    },
     'ExportOutputTerminal': {
         'codegen_method': 'public',
         'values': [
@@ -575,168 +556,192 @@ enums = {
                 'documentation': {
                     'description': 'The signal is not exported.'
                 },
-                'name': 'NIRFSA_VAL_DO_NOT_EXPORT',
+                'name': 'NIRFSA_VAL_DO_NOT_EXPORT_STR',
+                'python_name': 'DO_NOT_EXPORT',
                 'value': ''
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT',
+                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'python_name': 'CLK_OUT',
                 'value': 'ClkOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT',
+                'name': 'NIRFSA_VAL_REF_OUT_STR',
+                'python_name': 'REF_OUT',
                 'value': 'RefOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT2',
+                'name': 'NIRFSA_VAL_REF_OUT2_STR',
+                'python_name': 'REF_OUT2',
                 'value': 'RefOut2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.'
                 },
-                'name': 'NIRFSA_VAL_PFI0',
+                'name': 'NIRFSA_VAL_PFI0_STR',
+                'python_name': 'PFI0',
                 'value': 'PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 1.'
                 },
-                'name': 'NIRFSA_VAL_PFI1',
+                'name': 'NIRFSA_VAL_PFI1_STR',
+                'python_name': 'PFI1',
                 'value': 'PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 0.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG0',
+                'name': 'NIRFSA_VAL_PXI_TRIG0_STR',
+                'python_name': 'PXI_TRIG0',
                 'value': 'PXI_Trig0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 1.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG1',
+                'name': 'NIRFSA_VAL_PXI_TRIG1_STR',
+                'python_name': 'PXI_TRIG1',
                 'value': 'PXI_Trig1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 2.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG2',
+                'name': 'NIRFSA_VAL_PXI_TRIG2_STR',
+                'python_name': 'PXI_TRIG2',
                 'value': 'PXI_Trig2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 3.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG3',
+                'name': 'NIRFSA_VAL_PXI_TRIG3_STR',
+                'python_name': 'PXI_TRIG3',
                 'value': 'PXI_Trig3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 4.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG4',
+                'name': 'NIRFSA_VAL_PXI_TRIG4_STR',
+                'python_name': 'PXI_TRIG4',
                 'value': 'PXI_Trig4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 5.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG5',
+                'name': 'NIRFSA_VAL_PXI_TRIG5_STR',
+                'python_name': 'PXI_TRIG5',
                 'value': 'PXI_Trig5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 6.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG6',
+                'name': 'NIRFSA_VAL_PXI_TRIG6_STR',
+                'python_name': 'PXI_TRIG6',
                 'value': 'PXI_Trig6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 7.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG7',
+                'name': 'NIRFSA_VAL_PXI_TRIG7_STR',
+                'python_name': 'PXI_TRIG7',
                 'value': 'PXI_Trig7'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_PXI_STAR',
+                'name': 'NIRFSA_VAL_PXI_STAR_STR',
+                'python_name': 'PXI_STAR',
                 'value': 'PXI_STAR'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_PXIE_DSTARC',
+                'name': 'NIRFSA_VAL_PXIE_DSTARC_STR',
+                'python_name': 'PXIE_DSTARC',
                 'value': 'PXIe_DStarC'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI0',
+                'name': 'NIRFSA_VAL_DIO_PFI0_STR',
+                'python_name': 'DIO_PFI0',
                 'value': 'DIO/PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI1',
+                'name': 'NIRFSA_VAL_DIO_PFI1_STR',
+                'python_name': 'DIO_PFI1',
                 'value': 'DIO/PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI2',
+                'name': 'NIRFSA_VAL_DIO_PFI2_STR',
+                'python_name': 'DIO_PFI2',
                 'value': 'DIO/PFI2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI3',
+                'name': 'NIRFSA_VAL_DIO_PFI3_STR',
+                'python_name': 'DIO_PFI3',
                 'value': 'DIO/PFI3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI4',
+                'name': 'NIRFSA_VAL_DIO_PFI4_STR',
+                'python_name': 'DIO_PFI4',
                 'value': 'DIO/PFI4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI5',
+                'name': 'NIRFSA_VAL_DIO_PFI5_STR',
+                'python_name': 'DIO_PFI5',
                 'value': 'DIO/PFI5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI6',
+                'name': 'NIRFSA_VAL_DIO_PFI6_STR',
+                'python_name': 'DIO_PFI6',
                 'value': 'DIO/PFI6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI7',
+                'name': 'NIRFSA_VAL_DIO_PFI7_STR',
+                'python_name': 'DIO_PFI7',
                 'value': 'DIO/PFI7'
             }
         ]
@@ -934,22 +939,23 @@ enums = {
             }
         ]
     },
-    'InputIsolationEnabled': {
+    'IQInPortTerminalConfiguration': {
         'codegen_method': 'public',
+        'python_name': 'IqInPortTerminalConfiguration',
         'values': [
             {
                 'documentation': {
-                    'description': 'Disables input isolation.'
+                    'description': 'Sets the terminal configuration to differential.'
                 },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
+                'name': 'NIRFSA_VAL_DIFFERENTIAL',
+                'value': 2100
             },
             {
                 'documentation': {
-                    'description': 'Enables input isolation.'
+                    'description': 'Sets the terminal configuration to single-ended.'
                 },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
+                'name': 'NIRFSA_VAL_SINGLE_ENDED',
+                'value': 2101
             }
         ]
     },
@@ -966,6 +972,25 @@ enums = {
             {
                 'documentation': {
                     'description': 'Enables IF conditioning downconversion.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
+    'InputIsolationEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables input isolation.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables input isolation.'
                 },
                 'name': 'NIRFSA_VAL_ENABLED',
                 'value': 1901
@@ -1002,108 +1027,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_I_ONLY',
                 'value': 2003
-            }
-        ]
-    },
-    'IQInPortTerminalConfiguration': {
-        'codegen_method': 'public',
-        'python_name': 'IqInPortTerminalConfiguration',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets the terminal configuration to differential.'
-                },
-                'name': 'NIRFSA_VAL_DIFFERENTIAL',
-                'value': 2100
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the terminal configuration to single-ended.'
-                },
-                'name': 'NIRFSA_VAL_SINGLE_ENDED',
-                'value': 2101
-            }
-        ]
-    },
-    'SelfCalSteps': {
-        'class': 'IntFlag',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
-                'value': 8
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'No calibration steps are omitted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
-                'value': 4
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
-                'value': 10
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
-                'value': 20
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
-                'value': 40
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
-                'value': 80
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
-                'value': 100
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
-                'value': 200
             }
         ]
     },
@@ -1285,37 +1208,34 @@ enums = {
         'values': [
             {
                 'documentation': {
-                    'description': 'Specifies that no LO source is required to downconvert the RF input signal.'
-                },
-                'name': 'NIRFSA_VAL_NONE',
-                'value': 'None'
-            },
-            {
-                'documentation': {
                     'description': 'Specifies that the onboard synthesizer is used to generate the LO signal that downconverts the RF input signal.**PXIe-5831/5832** This configuration uses the onboard LO of the PXIe-3622, using the LO2 stage.**PXIe-5831/5832 with PXIe-5653** This configuration uses the onboard LO of the PXIe-5653 when associated with the PXIe-3622.**PXIe-5841 with PXIe-5655** This configuration uses the onboard LO of the PXIe-5655.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD',
+                'name': 'NIRFSA_VAL_ONBOARD_STR',
+                'python_name': 'ONBOARD',
                 'value': 'Onboard'
             },
             {
                 'documentation': {
                     'description': 'Specifies that the LO source used to downconvert the RF input signal is connected to the LO IN connector on the front panel.'
                 },
-                'name': 'NIRFSA_VAL_LO_IN',
+                'name': 'NIRFSA_VAL_LO_IN_STR',
+                'python_name': 'LO_IN',
                 'value': 'LO_In'
             },
             {
                 'documentation': {
                     'description': 'Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid on only the PXIe-5831 with PXIe-5653 (LO1 stage only) or PXIe-5832 with PCIe-5653 (LO1 stage only).'
                 },
-                'name': 'NIRFSA_VAL_LO_SOURCE_SECONDARY',
+                'name': 'NIRFSA_VAL_LO_SOURCE_SECONDARY_STR',
+                'python_name': 'LO_SOURCE_SECONDARY',
                 'value': 'Secondary'
             },
             {
                 'documentation': {
                     'description': 'Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSA selects an internal synthesizer and the synthesizer signal is switched to both the RF Out and RF In mixers. This value is valid on only the PXIe-5830/5831/5832/5841 with PXIe-5655.'
                 },
-                'name': 'NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED',
+                'name': 'NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED_STR',
+                'python_name': 'LO_SOURCE_SG_SA_SHARED',
                 'value': 'SG_SA_Shared'
             }
         ]
@@ -1409,175 +1329,200 @@ enums = {
                 'documentation': {
                     'description': 'The signal is not exported.'
                 },
-                'name': 'NIRFSA_VAL_DO_NOT_EXPORT',
+                'name': 'NIRFSA_VAL_DO_NOT_EXPORT_STR',
+                'python_name': 'DO_NOT_EXPORT',
                 'value': ''
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT',
+                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'python_name': 'CLK_OUT',
                 'value': 'ClkOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT',
+                'name': 'NIRFSA_VAL_REF_OUT_STR',
+                'python_name': 'REF_OUT',
                 'value': 'RefOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT2',
+                'name': 'NIRFSA_VAL_REF_OUT2_STR',
+                'python_name': 'REF_OUT2',
                 'value': 'RefOut2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.'
                 },
-                'name': 'NIRFSA_VAL_PFI0',
+                'name': 'NIRFSA_VAL_PFI0_STR',
+                'python_name': 'PFI0',
                 'value': 'PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 1.'
                 },
-                'name': 'NIRFSA_VAL_PFI1',
+                'name': 'NIRFSA_VAL_PFI1_STR',
+                'python_name': 'PFI1',
                 'value': 'PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 0.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG0',
+                'name': 'NIRFSA_VAL_PXI_TRIG0_STR',
+                'python_name': 'PXI_TRIG0',
                 'value': 'PXI_Trig0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 1.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG1',
+                'name': 'NIRFSA_VAL_PXI_TRIG1_STR',
+                'python_name': 'PXI_TRIG1',
                 'value': 'PXI_Trig1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 2.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG2',
+                'name': 'NIRFSA_VAL_PXI_TRIG2_STR',
+                'python_name': 'PXI_TRIG2',
                 'value': 'PXI_Trig2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 3.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG3',
+                'name': 'NIRFSA_VAL_PXI_TRIG3_STR',
+                'python_name': 'PXI_TRIG3',
                 'value': 'PXI_Trig3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 4.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG4',
+                'name': 'NIRFSA_VAL_PXI_TRIG4_STR',
+                'python_name': 'PXI_TRIG4',
                 'value': 'PXI_Trig4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 5.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG5',
+                'name': 'NIRFSA_VAL_PXI_TRIG5_STR',
+                'python_name': 'PXI_TRIG5',
                 'value': 'PXI_Trig5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 6.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG6',
+                'name': 'NIRFSA_VAL_PXI_TRIG6_STR',
+                'python_name': 'PXI_TRIG6',
                 'value': 'PXI_Trig6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 7.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG7',
+                'name': 'NIRFSA_VAL_PXI_TRIG7_STR',
+                'python_name': 'PXI_TRIG7',
                 'value': 'PXI_Trig7'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_PXI_STAR',
+                'name': 'NIRFSA_VAL_PXI_STAR_STR',
+                'python_name': 'PXI_STAR',
                 'value': 'PXI_STAR'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_PXIE_DSTARB',
+                'name': 'NIRFSA_VAL_PXIE_DSTARB_STR',
+                'python_name': 'PXIE_DSTARB',
                 'value': 'PXIe_DStarB'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI0',
+                'name': 'NIRFSA_VAL_DIO_PFI0_STR',
+                'python_name': 'DIO_PFI0',
                 'value': 'DIO/PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI1',
+                'name': 'NIRFSA_VAL_DIO_PFI1_STR',
+                'python_name': 'DIO_PFI1',
                 'value': 'DIO/PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI2',
+                'name': 'NIRFSA_VAL_DIO_PFI2_STR',
+                'python_name': 'DIO_PFI2',
                 'value': 'DIO/PFI2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI3',
+                'name': 'NIRFSA_VAL_DIO_PFI3_STR',
+                'python_name': 'DIO_PFI3',
                 'value': 'DIO/PFI3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI4',
+                'name': 'NIRFSA_VAL_DIO_PFI4_STR',
+                'python_name': 'DIO_PFI4',
                 'value': 'DIO/PFI4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI5',
+                'name': 'NIRFSA_VAL_DIO_PFI5_STR',
+                'python_name': 'DIO_PFI5',
                 'value': 'DIO/PFI5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI6',
+                'name': 'NIRFSA_VAL_DIO_PFI6_STR',
+                'python_name': 'DIO_PFI6',
                 'value': 'DIO/PFI6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI7',
+                'name': 'NIRFSA_VAL_DIO_PFI7_STR',
+                'python_name': 'DIO_PFI7',
                 'value': 'DIO/PFI7'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received from the Timer Event. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841, and for digital edge Advance Triggers on the PXIe-5663E/5665.'
                 },
-                'name': 'NIRFSA_VAL_TIMER_EVENT',
+                'name': 'NIRFSA_VAL_TIMER_EVENT_STR',
+                'python_name': 'TIMER_EVENT',
                 'value': 'TimerEvent'
             }
         ]
@@ -1655,41 +1600,24 @@ enums = {
                 'documentation': {
                     'description': 'The device does not drive the PXI 10 MHz backplane Reference Clock.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'The device drives the PXI 10 MHz backplane Reference Clock with the PXI-5600 onboard clock. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_CLOCK',
+                'name': 'NIRFSA_VAL_ONBOARD_CLOCK_STR',
+                'python_name': 'ONBOARD_CLOCK',
                 'value': 'OnboardClock'
             },
             {
                 'documentation': {
                     'description': 'The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 FREQ REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.'
                 },
-                'name': 'NIRFSA_VAL_REF_IN',
+                'name': 'NIRFSA_VAL_REF_IN_STR',
+                'python_name': 'REF_IN',
                 'value': 'RefIn'
-            }
-        ]
-    },
-    'ReferenceTriggerOspDelayEnabled': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Disables OSP delay for the Reference Trigger.'
-                },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
-            },
-            {
-                'documentation': {
-                    'description': 'Enables OSP delay for the Reference Trigger.'
-                },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
             }
         ]
     },
@@ -1729,28 +1657,31 @@ enums = {
                 'documentation': {
                     'description': 'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT',
+                'name': 'NIRFSA_VAL_REF_OUT_STR',
+                'python_name': 'REF_OUT',
                 'value': 'RefOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT2',
+                'name': 'NIRFSA_VAL_REF_OUT2_STR',
+                'python_name': 'REF_OUT2',
                 'value': 'RefOut2'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT',
+                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'python_name': 'CLK_OUT',
                 'value': 'ClkOut'
             },
             {
@@ -1769,49 +1700,55 @@ enums = {
                 'documentation': {
                     'description': 'No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_NONE',
+                'name': 'NIRFSA_VAL_NONE_STR',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI-5600 RF downconverter onboard clock.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to the PXI/PXIe-5652 LO source onboard clock. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, connect the REF IN/OUT connector on the PXI/PXIe-5652 to the CLK IN terminal on the PXI5622.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694.**PXIe-5668 **Lock the PXIe-5668 to the PXIe-5653 LO SOURCE onboard clock. Connect the LO2 OUT connector on the PXIe-5606 to the CLK IN connector on the PXIe-5624.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to its onboard clock.**PXIe-5841 with PXIe-5655 **Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.**PXIe-5842 **Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the User Manual for the instrument.**PXIe-5860 **Lock to the PXIe-5860 onboard clock.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_CLOCK',
+                'name': 'NIRFSA_VAL_ONBOARD_CLOCK_STR',
+                'python_name': 'ONBOARD_CLOCK',
                 'value': 'OnboardClock'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **NI-RFSA locks the NI-RFSA device to the signal at the external FREQ REF IN connector on the PXI-5600**PXIe-5663/5663E **Connect the external signal to the PXI/PXIe-5652 REF IN/OUT connector. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, this configuration can only be used in external digitizer mode.**PXIe-5665 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the NIRFSA_ATTR_REF_CLOCK_RATE attribute according to the frequency of your external clock signal.**PXIe-5667 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. If your external clock signal frequency is set to a frequency other than 10 MHz, set the NIRFSA_ATTR_REF_CLOCK_RATE attribute according to the frequency of your external clock signal.**PXIe-5668 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the LO2 OUT on the PXIe-5606 to the CLK IN connector on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the **clock rate** parameter according to the frequency of your external clock signal.**PXIe-5694 **Connect the Reference Clock signal to the REF/LO IN connector on the PXIe-5694 front panel.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to the signal at the external REF IN connector.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.**PXIe-5841 with PXIe-5655 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector. **PXIe-5842 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the User Manual for the instrument. PXIe-5860 Lock to the signal at the REF IN connector on the PXIe-5860.'
                 },
-                'name': 'NIRFSA_VAL_REF_IN',
+                'name': 'NIRFSA_VAL_REF_IN_STR',
+                'python_name': 'REF_IN',
                 'value': 'RefIn'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI backplane clock using the PXI-5600. You must connect the PXI 10 MHz connector to the REF IN connector on the PXI-5600 front panel to use this option. **PXIe-5668 **Lock the PXIe-5653 to the PXI backplane clock. Connect the PXIe-5606 LO2 OUT to the LO2 IN connector on the PXIe-5624.**PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667, PXIe-5694, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **Lock the device to the PXI backplane clock.'
                 },
-                'name': 'NIRFSA_VAL_PXI_CLK',
+                'name': 'NIRFSA_VAL_PXI_CLK_STR',
+                'python_name': 'PXI_CLK',
                 'value': 'PXI_Clk'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **This configuration does not apply to the PXI-5661.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to an external 10 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the FREQ REF IN connector on the PXI/PXIe-5652.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the NIRFSA_ATTR_REF_CLOCK_RATE attribute to 100 MHz.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. Set the NIRFSA_ATTR_REF_CLOCK_RATE attribute to 100 MHz.**PXIe-5668 **Lock the PXIe-5668 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5624, and connect the PXIe-5624 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the **clock rate** parameter to 100 MHz.**PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **This configuration does not apply.'
                 },
-                'name': 'NIRFSA_VAL_CLK_IN',
+                'name': 'NIRFSA_VAL_CLK_IN_STR',
+                'python_name': 'CLK_IN',
                 'value': 'ClkIn'
             },
             {
                 'documentation': {
                     'description': '**PXIe-5831/5832 with PXIe-5653 **NI-RFSA configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.**PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5840/5841/5841 with PXIe-5655 /5842/5860**This configuration does not apply.'
                 },
-                'name': 'NIRFSA_VAL_PXI_CLK_MASTER',
+                'name': 'NIRFSA_VAL_PXI_CLK_MASTER_STR',
+                'python_name': 'PXI_CLK_MASTER',
                 'value': 'PXI_ClkMaster'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655 **This configuration does not apply.'
                 },
-                'name': 'NIRFSA_VAL_REF_IN_2',
+                'name': 'NIRFSA_VAL_REF_IN_2_STR',
+                'python_name': 'REF_IN_2',
                 'value': 'RefIn2'
             }
         ]
@@ -1874,6 +1811,25 @@ enums = {
             }
         ]
     },
+    'ReferenceTriggerOspDelayEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables OSP delay for the Reference Trigger.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables OSP delay for the Reference Trigger.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'ReferenceTriggerType': {
         'codegen_method': 'public',
         'values': [
@@ -1915,8 +1871,8 @@ enums = {
         ]
     },
     'ResetWithOptionsStepsToOmit': {
-        'codegen_method': 'public',
         'class': 'IntFlag',
+        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -1962,6 +1918,32 @@ enums = {
             }
         ]
     },
+    'RfOutLoExport': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The LO signal is not exported from the RF OUT LO OUT terminal.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'The LO signal is exported from the RF OUT LO OUT terminal.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            },
+            {
+                'documentation': {
+                    'description': 'The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.'
+                },
+                'name': 'NIRFSA_VAL_UNSPECIFIED',
+                'value': 1902
+            }
+        ]
+    },
     'RfPathSelection': {
         'codegen_method': 'public',
         'values': [
@@ -1996,6 +1978,170 @@ enums = {
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_BAND_4',
                 'python_name': 'EXT_CAL_RF_BAND_4',
                 'value': 1703
+            }
+        ]
+    },
+    'SelfCalSteps': {
+        'class': 'IntFlag',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'No calibration steps are omitted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
+                'value': 16
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
+                'value': 32
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
+                'value': 64
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
+                'value': 128
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
+                'value': 256
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
+                'value': 512
+            }
+        ]
+    },
+    'SelfCalibrateRangeStepsToOmit': {
+        'class': 'IntFlag',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'No calibration steps are omitted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
+                'value': 16
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
+                'value': 32
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
+                'value': 64
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
+                'value': 128
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
+                'value': 256
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
+                'value': 512
             }
         ]
     },
@@ -2071,88 +2217,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
                 'value': 512
-            }
-        ]
-    },
-    'SelfCalibrateRangeStepsToOmit': {
-        'class': 'IntFlag',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
-                'value': 8
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'No calibration steps are omitted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
-                'value': 4
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
-                'value': 10
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
-                'value': 20
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
-                'value': 40
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
-                'value': 80
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
-                'value': 100
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
-                'value': 200
             }
         ]
     },
@@ -2259,6 +2323,39 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_ENABLED',
                 'value': 1901
+            }
+        ]
+    },
+    'SoftwareTriggerType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends a Start software trigger.'
+                },
+                'name': 'NIRFSA_VAL_START_TRIGGER',
+                'value': 1100
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends a Reference software trigger. '
+                },
+                'name': 'NIRFSA_VAL_REF_TRIGGER',
+                'value': 702
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends an Advance software trigger.'
+                },
+                'name': 'NIRFSA_VAL_ADVANCE_TRIGGER',
+                'value': 1102
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.'
+                },
+                'name': 'NIRFSA_VAL_ARM_REF_TRIGGER',
+                'value': 1103
             }
         ]
     },
@@ -2433,14 +2530,16 @@ enums = {
                 'documentation': {
                     'description': 'Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_THREE_DECIBELS',
+                'name': 'NIRFSA_VAL_RBW_3DB',
+                'python_name': 'RBW_THREE_DECIBELS',
                 'value': 300
             },
             {
                 'documentation': {
                     'description': 'Defines the RBW in terms of the 6 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_SIX_DECIBELS',
+                'name': 'NIRFSA_VAL_RBW_6DB',
+                'python_name': 'RBW_SIX_DECIBELS',
                 'value': 301
             },
             {
@@ -2454,7 +2553,8 @@ enums = {
                 'documentation': {
                     'description': 'Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_EQUIVALENT_NOISE_BANDWIDTH',
+                'name': 'NIRFSA_VAL_RBW_ENBW',
+                'python_name': 'RBW_EQUIVALENT_NOISE_BANDWIDTH',
                 'value': 303
             }
         ]
@@ -2546,39 +2646,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_ENABLED',
                 'value': 1901
-            }
-        ]
-    },
-    'SoftwareTriggerType': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends a Start software trigger.'
-                },
-                'name': 'NIRFSA_VAL_START_TRIGGER',
-                'value': 1100
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends a Reference software trigger. '
-                },
-                'name': 'NIRFSA_VAL_REF_TRIGGER',
-                'value': 702
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends an Advance software trigger.'
-                },
-                'name': 'NIRFSA_VAL_ADVANCE_TRIGGER',
-                'value': 1102
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.'
-                },
-                'name': 'NIRFSA_VAL_ARM_REF_TRIGGER',
-                'value': 1103
             }
         ]
     },
