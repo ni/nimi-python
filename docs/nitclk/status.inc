@@ -5,7 +5,7 @@ NI-TClk Python API Status
 +-------------------------------+-----------------------+
 | NI-TClk (nitclk)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2026 Q3               |
+| Driver Version Tested Against | 2026 Q4               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nitclkLatestVersion| |
 +-------------------------------+-----------------------+
