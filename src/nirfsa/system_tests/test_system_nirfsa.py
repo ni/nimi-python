@@ -608,16 +608,17 @@ class SystemTests(BasicValidationTests):
         rfsa_device_session.calplanes['plane1'].deembedding_selected_table = 'table1'
         rfsa_device_session.calplanes['plane2'].deembedding_selected_table = 'table2'
         rfsa_device_session.center_frequency = 2e9
-        rfsa_device_session.commit()
+
         gain_both_enabled = rfsa_device_session.deembedding_compensation_gain
         rfsa_device_session.calplanes['plane2'].disable_calibration_plane()
-        rfsa_device_session.commit()
+ 
+#  assert here only
         gain_only_plane1_enabled = rfsa_device_session.deembedding_compensation_gain
         rfsa_device_session.calplanes['plane1'].disable_calibration_plane()
-        rfsa_device_session.commit()
+
         gain_both_disabled = rfsa_device_session.deembedding_compensation_gain
         rfsa_device_session.calplanes['plane2'].enable_calibration_plane()
-        rfsa_device_session.commit()
+
         gain_only_plane2_enabled = rfsa_device_session.deembedding_compensation_gain
 
         assert len({gain_both_enabled, gain_only_plane1_enabled, gain_only_plane2_enabled, gain_both_disabled}) == 4
