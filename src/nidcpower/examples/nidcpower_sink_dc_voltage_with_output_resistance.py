@@ -36,6 +36,8 @@ def example(
 
         # Configure the output_resistance, in ohms, to force a voltage across the configured
         # output resistance in series with the electronic load.
+        # For more information, see "Sinking DC Voltage with Output Resistance":
+        # https://www.ni.com/docs/en-US/bundle/ni-dcpower/page/sinking-dcvoltage-with-output-resistance.html
         session.output_resistance = output_resistance
 
         with session.initiate():
