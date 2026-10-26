@@ -15,7 +15,6 @@ def example(resource_name, options, function, range, max_amplitude):
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=range, resolution_digits=RESOLUTION_DIGITS)
         session.freq_voltage_range = max_amplitude
-       
         with warnings.catch_warnings(record=True) as caught:
             warnings.simplefilter('always')
             measurement = session.read()
