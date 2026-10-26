@@ -631,41 +631,6 @@ DownconverterLoopBandwidth
 
 
 
-DownconverterPreselectorEnabled
--------------------------------
-
-.. py:class:: DownconverterPreselectorEnabled
-
-    .. py:attribute:: DownconverterPreselectorEnabled.DISABLED
-
-
-
-        Disables the preselector.
-
-        
-
-
-
-    .. py:attribute:: DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH
-
-
-
-        The preselector is automatically enabled when it is in the signal path and is automatically disabled when it is not in the signal path. Use the :py:attr:`nirfsa.Session.preselector_present` property to determine if the downconverter has an preselector.
-
-        
-
-
-
-    .. py:attribute:: DownconverterPreselectorEnabled.ENABLED
-
-
-
-        Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible avoid an error.
-
-        
-
-
-
 EnableAttrVals
 --------------
 
@@ -686,6 +651,40 @@ EnableAttrVals
 
 
         The property is enabled.
+
+        
+
+
+
+DownconverterPreselectorEnabled
+-------------------------------
+
+.. py:class:: DownconverterPreselectorEnabled
+
+    .. py:attribute:: DownconverterPreselectorEnabled.DISABLED
+
+
+
+        Disables the preselector.
+
+
+
+
+    .. py:attribute:: DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH
+
+
+
+        The preselector is automatically enabled when it is in the signal path and is automatically disabled when it is not in the signal path. Use the :py:attr:`nirfsa.Session.preselector_present` property to determine if the downconverter has an preselector.
+
+        
+
+
+
+    .. py:attribute:: DownconverterPreselectorEnabled.ENABLED
+
+
+
+        Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible avoid an error.
 
         
 
@@ -1575,16 +1574,6 @@ LoSource
 --------
 
 .. py:class:: LoSource
-
-    .. py:attribute:: LoSource.NONE
-
-
-
-        Specifies that no LO source is required to downconvert the RF input signal.
-
-        
-
-
 
     .. py:attribute:: LoSource.ONBOARD
 

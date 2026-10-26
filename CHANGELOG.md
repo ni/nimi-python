@@ -54,6 +54,7 @@
 #### [nidcpower] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - `nidcpower_sink_dc_voltage_with_output_resistance.py` example
 - Changed
 - Removed
 
@@ -800,6 +801,10 @@
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
   - Added the `nidmm_max_dc_reading_rate_at_7_5_digits.py` example.
+  - Added the `nidmm_diode_test.py` example.
+  - Added the `nidmm_measure_capacitance.py` example.
+  - Added the `nidmm_measure_temperature_rtd.py` example.
+  - Added the `nidmm_measure_temperature_thermocouple.py` example.
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
@@ -1741,6 +1746,7 @@
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
+  - Removed invalid enum value `None` from enum `LoSource`
 
 #### [nirfsa] 1.0.0 - 2026-08-20
 - Added
@@ -1800,7 +1806,7 @@
     - `arb_sample_clock_source`
     - `ref_clock_source`
     - `trigger_identifier` parameter in `send_software_edge_trigger` method
-  - Updated below properties to be list of str instead of them returning a comma separated list of string values 
+  - Updated below properties to be list of str instead of them returning a comma separated list of string values
     - `available_paths`
     - `available_ports`
     - `fixed_group_delay_across_ports`
