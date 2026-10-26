@@ -605,17 +605,17 @@ class SystemTests(BasicValidationTests):
         sparametertables2 = np.array([[[0.2 + 0.0j, 0.25 + 0.0j], [0.25 + 0.0j, 0.2 + 0.0j]], [[0.2 + 0.0j, 0.2 + 0.0j], [0.2 + 0.0j, 0.2 + 0.0j]], [[0.2 + 0.0j, 0.15 + 0.0j], [0.15 + 0.0j, 0.2 + 0.0j]]], dtype=np.complex128)
         rfsa_device_session.create_deembedding_sparameter_table_array('calplane::plane1', 'table1', frequencies, sparametertables1, nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT)
         rfsa_device_session.create_deembedding_sparameter_table_array('calplane::plane2', 'table2', frequencies, sparametertables2, nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT)
-        rfsa_device_session.calplanes['plane1'].deembedding_selected_table = 'table1'
-        rfsa_device_session.calplanes['plane2'].deembedding_selected_table = 'table2'
+        rfsa_device_session.ports['calplanes::plane1'].deembedding_selected_table = 'table1'
+        rfsa_device_session.ports['calplanes::plane2'].deembedding_selected_table = 'table2'
         rfsa_device_session.center_frequency = 2e9
         gain_both_enabled = rfsa_device_session.deembedding_compensation_gain
-        rfsa_device_session.calplanes['plane2'].disable_calibration_plane()
+        rfsa_device_session.ports['calplanes::plane2'].disable_calibration_plane()
         gain_only_plane1_enabled = rfsa_device_session.deembedding_compensation_gain
         assert gain_only_plane1_enabled != gain_both_enabled
-        rfsa_device_session.calplanes['plane1'].disable_calibration_plane()
+        rfsa_device_session.ports['calplanes::plane1'].disable_calibration_plane()
         gain_both_disabled = rfsa_device_session.deembedding_compensation_gain
         assert gain_both_disabled != gain_only_plane1_enabled
-        rfsa_device_session.calplanes['plane2'].enable_calibration_plane()
+        rfsa_device_session.ports['calplanes::plane2'].enable_calibration_plane()
         gain_only_plane2_enabled = rfsa_device_session.deembedding_compensation_gain
         assert gain_only_plane2_enabled != gain_both_disabled
         assert gain_only_plane2_enabled != gain_only_plane1_enabled

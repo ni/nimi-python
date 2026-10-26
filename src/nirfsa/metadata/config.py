@@ -42,7 +42,6 @@ config = {
         '_TOWARDS_DUT'
     ],
     'extra_errors_used': [
-        'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
     'grpc_service_class_prefix': 'NiRFSA',

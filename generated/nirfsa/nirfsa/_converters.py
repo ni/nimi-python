@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file was generated
 import nirfsa._visatype as _visatype
-import nirfsa.errors as errors
 
 import array
 import collections
@@ -41,7 +40,7 @@ def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
     - (slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17') -->
         ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
     '''
-    raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
+    raise TypeError('Invalid type for a repeated capability: {}'.format(type(arg)))
 
 
 @_convert_repeated_capabilities.register(numbers.Integral)  # noqa: F811
@@ -67,9 +66,8 @@ def _(repeated_capability, prefix):
     # We remove any prefix and change ':' to '-'
     r = repeated_capability.strip().replace(prefix, '').replace(':', '-')
     rc = r.split('-')
-    if len(rc) > 1:
-        if len(rc) > 2:
-            raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
+    # Only a simple range can be expanded. Anything else, such as 'calplane::plane1/port::if1', is returned as-is
+    if len(rc) == 2:
         try:
             start = int(rc[0])
             end = int(rc[1])
