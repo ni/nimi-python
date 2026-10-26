@@ -1742,6 +1742,8 @@
 #### [nirfsa] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added new `enable_calibration_plane` and `disable_calibration_plane` functions.
+  - Added `calplanes` repeated capability support for `deembedding_selected_table` attribute.
 - Changed
 - Removed
   - Removed invalid enum value `None` from enum `LoSource`
