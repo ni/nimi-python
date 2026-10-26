@@ -19,13 +19,13 @@ FFT_FUNCTIONS = {
 
 
 def _create_chart(plt):
-    figure, (waveform_axes, spectrum_axes) = plt.subplots(2, 1)
-    waveform_axes.set_title('Filtered Waveform')
-    waveform_axes.set_xlabel('Time (s)')
-    waveform_axes.set_ylabel('Amplitude')
+    figure, (spectrum_axes, waveform_axes) = plt.subplots(2, 1)
     spectrum_axes.set_title('Spectrum')
     spectrum_axes.set_xlabel('Frequency (Hz)')
-    spectrum_axes.set_ylabel('Amplitude')
+    spectrum_axes.set_ylabel('Amplitude (dB)')
+    waveform_axes.set_title('Filtered Waveform')
+    waveform_axes.set_xlabel('Time (s)')
+    waveform_axes.set_ylabel('Amplitude (V)')
     for axes in (waveform_axes, spectrum_axes):
         axes.grid(True)
     figure.tight_layout()
