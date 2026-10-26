@@ -12,6 +12,15 @@ nidmm_cont_acq_multiple_samples_ext_trig.py
    :encoding: utf8
    :caption: `(nidmm_cont_acq_multiple_samples_ext_trig.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_cont_acq_multiple_samples_ext_trig.py>`_
 
+nidmm_diode_test.py
+-------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_diode_test.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_diode_test.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_diode_test.py>`_
+
 nidmm_fetch_waveform.py
 -----------------------
 
@@ -29,6 +38,33 @@ nidmm_measure_ac_volts.py
    :linenos:
    :encoding: utf8
    :caption: `(nidmm_measure_ac_volts.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_ac_volts.py>`_
+
+nidmm_measure_capacitance.py
+----------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_capacitance.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_capacitance.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_capacitance.py>`_
+
+nidmm_measure_temperature_rtd.py
+--------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_temperature_rtd.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_temperature_rtd.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_rtd.py>`_
+
+nidmm_measure_temperature_thermocouple.py
+-----------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_temperature_thermocouple.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_temperature_thermocouple.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_thermocouple.py>`_
 
 nidmm_measurement.py
 --------------------
