@@ -1339,6 +1339,30 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
         system_test_utilities.impl_test_multi_threading_ivi_synchronized_wrapper_releases_lock(
             multi_instrument_session.abort)
 
+
+class TestLibrary(SystemTests):
+    @pytest.fixture(scope='class')
+    @classmethod
+    def session_creation_kwargs(cls):
+        return {}
+
+    def test_enable_match_fail_combination(self, multi_instrument_session):
+        import nisync
+
+        test_name = self.test_enable_match_fail_combination.__name__
+        multi_instrument_session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
+        multi_instrument_session.load_pattern(self.get_test_file_path(test_name, 'pattern.digipat'))
+        multi_instrument_session.load_specifications_levels_and_timing(
+            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
+            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
+            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
+        multi_instrument_session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
+        with nisync.Session('6674T') as sync_session:
+            multi_instrument_session.enable_match_fail_combination(sync_session)
+            multi_instrument_session.burst_pattern(start_label='new_pattern')
+            multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG0)
+
+    # TMU tests are library-only until the NI gRPC Device Server used in CI implements the TMU RPCs.
     def test_tmu_get_disabled_tmu_contexts(self, multi_instrument_session):
         tmu = multi_instrument_session.instruments[instruments[0]].time_measurement_units['tmu0']
         tmu.tmu_enabled = False
@@ -1391,29 +1415,6 @@ Per Pin Pass Fail   : [[True, True], [False, False]]
         measurement = tmu.tmu_fetch_averaged_measurement(timeout=1.0)
 
         assert measurement == 0.0
-
-
-class TestLibrary(SystemTests):
-    @pytest.fixture(scope='class')
-    @classmethod
-    def session_creation_kwargs(cls):
-        return {}
-
-    def test_enable_match_fail_combination(self, multi_instrument_session):
-        import nisync
-
-        test_name = self.test_enable_match_fail_combination.__name__
-        multi_instrument_session.load_pin_map(self.get_test_file_path(test_name, 'pin_map.pinmap'))
-        multi_instrument_session.load_pattern(self.get_test_file_path(test_name, 'pattern.digipat'))
-        multi_instrument_session.load_specifications_levels_and_timing(
-            specifications_file_paths=self.get_test_file_path(test_name, 'specifications.specs'),
-            levels_file_paths=self.get_test_file_path(test_name, 'pin_levels.digilevels'),
-            timing_file_paths=self.get_test_file_path(test_name, 'timing.digitiming'))
-        multi_instrument_session.apply_levels_and_timing(levels_sheet='pin_levels', timing_sheet='timing')
-        with nisync.Session('6674T') as sync_session:
-            multi_instrument_session.enable_match_fail_combination(sync_session)
-            multi_instrument_session.burst_pattern(start_label='new_pattern')
-            multi_instrument_session.read_sequencer_flag(nidigital.SequencerFlag.FLAG0)
 
 
 class TestGrpcNoTLS(SystemTests):
