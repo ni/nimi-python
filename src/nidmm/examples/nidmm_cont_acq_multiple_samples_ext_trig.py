@@ -24,7 +24,6 @@ def _create_chart(plt):
 def _update_chart(plt, axes, line, measurements, new_samples, samples_fetched):
     measurements.extend(new_samples)
     samples_fetched += len(new_samples)
-    # The x-axis keeps absolute sample numbers, so it starts after the samples dropped from the history
     first_sample = samples_fetched - len(measurements)
     line.set_data(range(first_sample, samples_fetched), measurements)
     axes.relim()
@@ -34,19 +33,20 @@ def _update_chart(plt, axes, line, measurements, new_samples, samples_fetched):
 
 
 def example(resource_name, options, function, measurement_range, digits, trigger_source, total_samples):
-    # Imported lazily because matplotlib is unavailable on some platforms (e.g. 32-bit Python)
     import matplotlib.pyplot as plt
 
-    with nidmm.Session(resource_name=resource_name, options=options) as session:
+    with nidmm.Session(resource_name=resource_name, reset_device=True, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=measurement_range, resolution_digits=digits)
-        # Trigger and sample trigger slope are not configured: the slope properties and enums are not in the Python API (#875)
-        session.configure_trigger(trigger_source=nidmm.TriggerSource[trigger_source])
-        # The sample trigger uses the same source as the trigger; a sample_count of 0 configures a continuous acquisition
-        session.configure_multi_point(trigger_count=1, sample_count=0, sample_trigger=nidmm.SampleTrigger[trigger_source])
+        # Trigger slopes use driver defaults because the public API has no slope configuration (#875).
+        try:
+            session.configure_trigger(trigger_source=nidmm.TriggerSource[trigger_source])
+            # The sample trigger uses the same source as the trigger; a sample_count of 0 configures a continuous acquisition
+            session.configure_multi_point(trigger_count=1, sample_count=0, sample_trigger=nidmm.SampleTrigger[trigger_source])
+        except nidmm.errors.DriverError as e:
+            # Not every device supports every trigger source (for example, NI 408x devices have no external trigger)
+            sys.exit('The device does not support trigger source {}.\n{}'.format(trigger_source, e.description))
 
-        # Create an empty chart; the line is filled in as samples arrive
         figure, axes, line = _create_chart(plt)
-        # Only the most recent CHART_HISTORY_SIZE measurements are kept
         measurements = collections.deque(maxlen=CHART_HISTORY_SIZE)
 
         samples_fetched = 0
@@ -57,17 +57,15 @@ def example(resource_name, options, function, measurement_range, digits, trigger
                     total_samples is None or samples_fetched < total_samples
                 ):
                     backlog, _ = session.read_status()
+                    if total_samples is not None:
+                        # Prevent the last fetch from exceeding the requested total.
+                        backlog = min(backlog, total_samples - samples_fetched)
                     if backlog > 0:
-                        # The last fetch only takes the samples still needed to reach total_samples
-                        samples_in_this_fetch = backlog
-                        if total_samples is not None:
-                            samples_in_this_fetch = min(backlog, total_samples - samples_fetched)
-
-                        new_samples = session.fetch_multi_point(array_size=samples_in_this_fetch)
-
-                        # Add the new samples to the chart and get the updated total sample count
+                        new_samples = session.fetch_multi_point(array_size=backlog)
                         samples_fetched = _update_chart(plt, axes, line, measurements, new_samples, samples_fetched)
-                    plt.pause(0.001)
+                    else:
+                        # Process chart events while waiting for the next trigger.
+                        plt.pause(0.001)
 
             # The acquisition has stopped; keep the final chart on screen until its window is closed
             if total_samples is not None and plt.fignum_exists(figure.number):
