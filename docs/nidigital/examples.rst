@@ -30,3 +30,48 @@ nidigital_ppmu_source_and_measure.py
    :encoding: utf8
    :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
+nidigital_tmu_arm_types.py
+--------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/tmu_arm_types/nidigital_tmu_arm_types.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_tmu_arm_types.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tmu_arm_types/nidigital_tmu_arm_types.py>`_
+
+nidigital_tmu_debounce.py
+-------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/tmu_debounce/nidigital_tmu_debounce.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_tmu_debounce.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tmu_debounce/nidigital_tmu_debounce.py>`_
+
+nidigital_tmu_getting_started.py
+--------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/tmu_getting_started/nidigital_tmu_getting_started.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_tmu_getting_started.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tmu_getting_started/nidigital_tmu_getting_started.py>`_
+
+nidigital_tmu_measurement_types.py
+----------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/tmu_measurement_types/nidigital_tmu_measurement_types.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_tmu_measurement_types.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tmu_measurement_types/nidigital_tmu_measurement_types.py>`_
+
+nidigital_tmu_multi-instrument.py
+---------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/tmu_multi-instrument/nidigital_tmu_multi-instrument.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_tmu_multi-instrument.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tmu_multi-instrument/nidigital_tmu_multi-instrument.py>`_
+
