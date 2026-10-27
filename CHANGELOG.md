@@ -1128,6 +1128,7 @@
 #### [nifgen] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added the `nifgen_function_generator.py` example.
 - Changed
 - Removed
 
