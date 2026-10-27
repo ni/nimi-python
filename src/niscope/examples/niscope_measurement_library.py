@@ -5,8 +5,6 @@ import niscope
 import pytest
 import sys
 
-_TIMEOUT_ERROR_CODE = -1074126845  # "Maximum time exceeded before the operation completed"
-
 
 def _create_chart(plt):
     figure, axes = plt.subplots()
@@ -56,14 +54,7 @@ def example(resource_name, channels, options, vertical_range, vertical_coupling,
             # Run until the chart is closed, Ctrl+C is pressed, or the iteration limit is reached.
             while plt.fignum_exists(figure.number) and (iterations is None or iteration < iterations):
                 # The statistics accumulate once per acquisition, so read a new waveform before each fetch.
-                try:
-                    waveforms = channel.read(num_samples=min_record_length, timeout=timeout)
-                except niscope.errors.DriverError as e:
-                    if e.code != _TIMEOUT_ERROR_CODE:
-                        raise
-                    print(f'Timed out after {timeout} s waiting for a trigger; check the trigger source and level, or use --trigger-type immediate.')
-                    plt.pause(0.02)
-                    continue
+                waveforms = channel.read(num_samples=min_record_length, timeout=timeout)
                 _update_chart(axes, waveforms)
                 stats = channel.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
                 print(f'Acquisition {iteration}: {scalar_measurement}')
