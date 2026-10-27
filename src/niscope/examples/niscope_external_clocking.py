@@ -47,7 +47,7 @@ def example(resource_name, channels, options, min_record_length, voltage_range, 
 
         iterations = 0
         try:
-            # A total_iterations of None runs until the chart window is closed or Ctrl+C is pressed
+            # Run until the chart is closed, Ctrl+C is pressed, or the iteration limit is reached.
             while plt.fignum_exists(figure.number) and (total_iterations is None or iterations < total_iterations):
                 # read() initiates the acquisition, waits for it to complete and fetches the data
                 waveforms = channel_session.read(num_samples=min_record_length)
@@ -55,7 +55,7 @@ def example(resource_name, channels, options, min_record_length, voltage_range, 
                 iterations += 1
                 plt.pause(0.01)
 
-            # The acquisition has stopped; keep the final chart on screen until its window is closed
+            # Keep the final plot window open after acquisition stops until the user closes it.
             if total_iterations is not None and plt.fignum_exists(figure.number):
                 plt.show()
         except KeyboardInterrupt:
