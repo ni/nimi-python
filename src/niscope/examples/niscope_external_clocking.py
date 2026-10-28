@@ -89,13 +89,14 @@ def test_example():
     plt = pytest.importorskip('matplotlib.pyplot')
     plt.switch_backend('Agg')  # Avoid opening a chart window during the test
     options = {'simulate': True, 'driver_setup': {'Model': '5164', 'BoardType': 'PXIe', }, }
-    example('PXI1Slot2', '0', options, 1000, 1.0, 0.0, 'VAL_CLK_IN', 1e8, 1, 1, 2)
+    # The simulated PXIe-5164 only accepts a 1 GHz sample clock timebase
+    example('PXI1Slot2', '0', options, 1000, 1.0, 0.0, 'VAL_CLK_IN', 1e9, 1, 1, 2)
 
 
 def test_main():
     plt = pytest.importorskip('matplotlib.pyplot')
     plt.switch_backend('Agg')  # Avoid opening a chart window during the test
-    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', '--total-iterations', '2', ]
+    cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', '--rate', '1e9', '--total-iterations', '2', ]
     _main(cmd_line)
 
 
