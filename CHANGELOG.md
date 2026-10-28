@@ -1901,6 +1901,7 @@
 #### [niscope] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added the `niscope_external_clocking.py` example.
 - Changed
 - Removed
 
