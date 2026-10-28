@@ -5,7 +5,6 @@ ${template_parameters['encoding_tag']}
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     extra_errors_used = config['extra_errors_used']
-    # Drivers that have repeated capabilities but do not generate InvalidRepeatedCapabilityError pass repeated capabilities they cannot parse to the driver as-is
     validate_repeated_capabilities = 'InvalidRepeatedCapabilityError' in extra_errors_used or len(config['repeated_capabilities']) == 0
     enums = config['enums']
 %>\
@@ -90,7 +89,6 @@ def _(repeated_capability, prefix):
         if len(rc) > 2:
             raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
 % else:
-    # Only a simple range can be expanded. Anything else, such as 'calplane::plane1/port::if1', is returned as-is
     if len(rc) == 2:
 % endif
         try:
