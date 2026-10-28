@@ -9,7 +9,6 @@ def example(resource_name, options, thermistor_type, thermistor_a, thermistor_b,
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function.TEMPERATURE, range=range, resolution_digits=digits)
         session.temp_transducer_type = nidmm.TransducerType.THERMISTOR
-        # The Python API has no configure_thermistor_type method, so the type is set through its property
         session.temp_thermistor_type = nidmm.ThermistorType[thermistor_type]
         # The A, B, and C coefficients apply only to the CUSTOM thermistor type; the driver chooses them for the other types
         if thermistor_type == 'CUSTOM':
