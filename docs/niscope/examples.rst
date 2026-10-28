@@ -30,6 +30,15 @@ niscope_fetch_into.py
    :encoding: utf8
    :caption: `(niscope_fetch_into.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_into.py>`_
 
+niscope_measurement_library.py
+------------------------------
+
+.. literalinclude:: ../../src/niscope/examples/niscope_measurement_library.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(niscope_measurement_library.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_measurement_library.py>`_
+
 niscope_read.py
 ---------------
 
