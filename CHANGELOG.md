@@ -558,6 +558,7 @@
 #### [nidigital] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added the `nidigital_burst_with_conditional_trigger.py` example.
 - Changed
 - Removed
 
