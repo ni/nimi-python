@@ -34,7 +34,7 @@ def _update_chart(axes, waveforms):
         axes.legend(loc='upper right')
     for line, waveform in zip(axes.lines, waveforms):
         x = waveform.relative_initial_x + np.arange(len(waveform.samples)) * waveform.x_increment
-        # Samples may be a memoryview, which matplotlib cannot copy
+        # Samples will be a memoryview, which matplotlib cannot copy
         line.set_data(x, list(waveform.samples))
     axes.relim()
     axes.autoscale_view()
@@ -49,22 +49,19 @@ def example(resource_name, options, channel_name, vertical_range, vertical_offse
     figure, axes = _create_chart(plt)
     acquisition_count = 1
     try:
-        # 1. Opening session
         with niscope.Session(resource_name=resource_name, options=options) as session:
             channel = session.channels[channel_name]
             # Run until the chart is closed, Ctrl+C is pressed, or the iteration limit is reached.
             while plt.fignum_exists(figure.number) and (total_iterations is None or acquisition_count <= total_iterations):
-                # 2. Configuring vertical
                 channel.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling[vertical_coupling], offset=vertical_offset,
                                            probe_attenuation=probe_attenuation, enabled=True)
-                # 3. Configuring channel characteristics
+                # Configuring channel characteristics
                 channel.configure_chan_characteristics(input_impedance=input_impedance, max_input_frequency=max_input_frequency)
-                # 4. Configuring horizontal
                 session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=reference_position,
                                                     num_records=1, enforce_realtime=enforce_realtime)
-                # 5. Configuring auto trigger
+                # Configuring auto trigger
                 session.trigger_modifier = niscope.TriggerModifier[trigger_modifier]
-                # 6. Configuring trigger
+                # Configuring trigger
                 delay = hightime.timedelta(seconds=trigger_delay)
                 match trigger_type:
                     case 'IMMEDIATE':
@@ -77,10 +74,8 @@ def example(resource_name, options, channel_name, vertical_range, vertical_offse
                         session.configure_trigger_window(trigger_source, window_low_level, window_high_level, niscope.TriggerWindowMode[window_mode], niscope.TriggerCoupling[trigger_coupling], delay=delay)
                     case 'HYSTERESIS':
                         session.configure_trigger_hysteresis(trigger_source, trigger_level, hysteresis, niscope.TriggerCoupling[trigger_coupling], slope=niscope.TriggerSlope[trigger_slope], delay=delay)
-                # 7. Initiating and 8. fetching
                 with session.initiate():
                     waveforms = channel.fetch(timeout=hightime.timedelta(seconds=timeout))
-                # 9. Querying actual (coerced) values
                 print(f'Acquisition {acquisition_count}:')
                 print(f'Actual Sample Rate: {session.horz_sample_rate}')
                 print(f'Actual Record Length: {session.horz_record_length}')
