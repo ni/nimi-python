@@ -81,7 +81,7 @@ def _main(argsv):
     parser.add_argument('-r', '--range', default=10, type=float, help='Specifies the range for the function specified in the Measurement_Function parameter.')
     parser.add_argument('-d', '--digits', default=5.5, type=float, help='Specifies the resolution of the measurement in digits.')
     parser.add_argument('-s', '--samples-to-fetch', default=4, type=int, help='Specifies the minimum number of measurements to fetch at a time.')
-    parser.add_argument('--total-samples', default=None, type=int, help='Stops fetching after this many samples and keeps the chart open until its window is closed; omit to run until the chart window is closed or Ctrl+C is pressed.')
+    parser.add_argument('--total-samples', default=None, type=int, help='Specifies the maximum number of samples to acquire; omit to run until the chart closes or Ctrl+C is pressed.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Sets the initial value of certain attributes for the session.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.function, args.range, args.digits, args.samples_to_fetch, args.total_samples)
