@@ -10,6 +10,9 @@ import sys
 # Number of most recent measurements kept on the chart
 CHART_HISTORY_SIZE = 250
 
+# Maximum points a single fetch_multi_point call can return in a continuous acquisition, per the array_size documentation
+MAX_SAMPLES_PER_FETCH = 100000
+
 
 def _create_chart(plt):
     figure, axes = plt.subplots()
@@ -23,13 +26,11 @@ def _create_chart(plt):
 
 def _update_chart(plt, axes, line, measurements, new_samples, samples_fetched):
     measurements.extend(new_samples)
-    samples_fetched += len(new_samples)
     first_sample = samples_fetched - len(measurements)
     line.set_data(range(first_sample, samples_fetched), measurements)
     axes.relim()
     axes.autoscale_view()
     plt.pause(0.001)
-    return samples_fetched
 
 
 def example(resource_name, options, function, measurement_range, digits, trigger_source, total_samples):
@@ -57,12 +58,10 @@ def example(resource_name, options, function, measurement_range, digits, trigger
                     total_samples is None or samples_fetched < total_samples
                 ):
                     backlog, _ = session.read_status()
-                    if total_samples is not None:
-                        # Prevent the last fetch from exceeding the requested total.
-                        backlog = min(backlog, total_samples - samples_fetched)
                     if backlog > 0:
-                        new_samples = session.fetch_multi_point(array_size=backlog)
-                        samples_fetched = _update_chart(plt, axes, line, measurements, new_samples, samples_fetched)
+                        new_samples = session.fetch_multi_point(array_size=min(backlog, MAX_SAMPLES_PER_FETCH))
+                        samples_fetched += len(new_samples)
+                        _update_chart(plt, axes, line, measurements, new_samples, samples_fetched)
                     else:
                         # Process chart events while waiting for the next trigger.
                         plt.pause(0.001)
@@ -83,7 +82,7 @@ def _main(argsv):
     parser.add_argument('-r', '--range', default=10, type=float, help='Specifies the range for the function specified in the Measurement_Function parameter.')
     parser.add_argument('-d', '--digits', default=5.5, type=float, help='Specifies the resolution of the measurement in digits.')
     parser.add_argument('-t', '--trigger-source', default='EXTERNAL', choices=nidmm.TriggerSource.__members__.keys(), type=str.upper, help='Specifies the trigger source that initiates the acquisition.')
-    parser.add_argument('--total-samples', default=None, type=int, help='Stops fetching after this many samples and keeps the chart open until its window is closed; omit to run until the chart window is closed or Ctrl+C is pressed.')
+    parser.add_argument('--total-samples', default=None, type=int, help='Specifies the maximum number of samples to acquire; omit to run until the chart closes or Ctrl+C is pressed.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Sets the initial value of certain attributes for the session.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.function, args.range, args.digits, args.trigger_source, args.total_samples)
