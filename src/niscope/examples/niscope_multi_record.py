@@ -30,15 +30,15 @@ def example(resource_name, options, channel, vertical_range, min_sample_rate, mi
     import matplotlib.pyplot as plt
 
     with niscope.Session(resource_name=resource_name, options=options) as session:
-        session.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling.DC)
+        session.channels[channel].configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling.DC)
         session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=50.0, num_records=num_records, enforce_realtime=True)
-        # Other trigger types (for example hysteresis or window) can be configured here; IMMEDIATE acquires without an input signal crossing the edge level.
+        # Configure the selected trigger here; add other trigger types to this block as needed.
         if trigger_type == 'EDGE':
             session.configure_trigger_edge(trigger_source='0', level=0.0, trigger_coupling=niscope.TriggerCoupling.DC, slope=niscope.TriggerSlope.POSITIVE)
         else:
             session.configure_trigger_immediate()
         with session.initiate():
-            # Fetch waits for all records to be acquired and returns them all.
+            # Wait for num_records to be acquired, then return their waveforms.
             waveforms = session.channels[channel].fetch(num_records=num_records)
 
     figure = _plot_records(plt, waveforms, plot_style, plot_relative_to)
