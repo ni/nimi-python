@@ -10,6 +10,9 @@ import sys
 # Number of most recent measurements kept on the chart
 CHART_HISTORY_SIZE = 250
 
+# Maximum points a single fetch_multi_point call can return in a continuous acquisition, per the array_size documentation
+MAX_SAMPLES_PER_FETCH = 100000
+
 
 def _create_chart(plt):
     figure, axes = plt.subplots()
@@ -23,14 +26,12 @@ def _create_chart(plt):
 
 def _update_chart(plt, axes, line, measurements, new_samples, samples_fetched):
     measurements.extend(new_samples)
-    samples_fetched += len(new_samples)
     # The x-axis keeps absolute sample numbers, so it starts after the samples dropped from the history
     first_sample = samples_fetched - len(measurements)
     line.set_data(range(first_sample, samples_fetched), measurements)
     axes.relim()
     axes.autoscale_view()
     plt.pause(0.001)
-    return samples_fetched
 
 
 def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, total_samples):
@@ -55,15 +56,14 @@ def example(resource_name, options, function, measurement_range, digits, samples
                 while plt.fignum_exists(figure.number) and (
                     total_samples is None or samples_fetched < total_samples
                 ):
-                    # The last fetch only takes the samples still needed to reach total_samples
-                    samples_in_this_fetch = samples_to_fetch
-                    if total_samples is not None:
-                        samples_in_this_fetch = min(samples_to_fetch, total_samples - samples_fetched)
+                    # Fetch the whole backlog when it exceeds samples_to_fetch so the buffer does not overflow
+                    backlog, _ = session.read_status()
+                    samples_in_this_fetch = min(max(samples_to_fetch, backlog), MAX_SAMPLES_PER_FETCH)
 
                     new_samples = session.fetch_multi_point(array_size=samples_in_this_fetch)
 
-                    # Add the new samples to the chart and get the updated total sample count
-                    samples_fetched = _update_chart(plt, axes, line, measurements, new_samples, samples_fetched)
+                    samples_fetched += len(new_samples)
+                    _update_chart(plt, axes, line, measurements, new_samples, samples_fetched)
 
             # The acquisition has stopped; keep the final chart on screen until its window is closed
             if total_samples is not None and plt.fignum_exists(figure.number):
@@ -80,7 +80,7 @@ def _main(argsv):
     parser.add_argument('-f', '--function', default='DC_VOLTS', choices=nidmm.Function.__members__.keys(), type=str.upper, help='Specifies the measurement_function used to acquire the measurement.')
     parser.add_argument('-r', '--range', default=10, type=float, help='Specifies the range for the function specified in the Measurement_Function parameter.')
     parser.add_argument('-d', '--digits', default=5.5, type=float, help='Specifies the resolution of the measurement in digits.')
-    parser.add_argument('-s', '--samples-to-fetch', default=4, type=int, help='Specifies the number of measurements to fetch at a time.')
+    parser.add_argument('-s', '--samples-to-fetch', default=4, type=int, help='Specifies the minimum number of measurements to fetch at a time.')
     parser.add_argument('--total-samples', default=None, type=int, help='Stops fetching after this many samples and keeps the chart open until its window is closed; omit to run until the chart window is closed or Ctrl+C is pressed.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Sets the initial value of certain attributes for the session.')
     args = parser.parse_args(argsv)
