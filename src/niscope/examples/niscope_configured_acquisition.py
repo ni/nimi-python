@@ -8,7 +8,7 @@ import pytest
 import sys
 
 TRIGGER_TYPES = ['IMMEDIATE', 'EDGE', 'DIGITAL', 'WINDOW', 'HYSTERESIS']
-# niscope has no public enum for string trigger sources, so these mirror the VI's digital trigger source ring.
+# NI-SCOPE trigger sources are strings and are not exposed through a public enum.
 DIGITAL_TRIGGER_SOURCES = [
     'VAL_IMMEDIATE', 'VAL_SW_TRIG_FUNC', 'VAL_PXI_STAR',
     *[f'VAL_RTSI_{i}' for i in range(7)],
@@ -22,7 +22,7 @@ def _create_chart(plt):
     figure, axes = plt.subplots()
     axes.set_title('Waveform(s)')
     axes.set_xlabel('Time (s)')
-    axes.set_ylabel('Voltage (V)')
+    axes.set_ylabel('Amplitude (V)')
     axes.grid(True)
     return figure, axes
 
@@ -79,6 +79,7 @@ def example(resource_name, options, channel_name, vertical_range, vertical_offse
                 print(f'Acquisition {acquisition_count}:')
                 print(f'Actual Sample Rate: {session.horz_sample_rate}')
                 print(f'Actual Record Length: {session.horz_record_length}')
+                print()
                 _update_chart(axes, waveforms)
                 acquisition_count += 1
                 plt.pause(0.02)
