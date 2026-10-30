@@ -48,6 +48,15 @@ nidmm_measure_temperature_rtd.py
    :encoding: utf8
    :caption: `(nidmm_measure_temperature_rtd.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_rtd.py>`_
 
+nidmm_measure_temperature_thermistor.py
+---------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_temperature_thermistor.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_temperature_thermistor.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_thermistor.py>`_
+
 nidmm_measure_temperature_thermocouple.py
 -----------------------------------------
 
