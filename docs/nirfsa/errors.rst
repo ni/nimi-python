@@ -57,16 +57,6 @@ DriverTooNewError
 
         An error due to the NI-RFSA driver runtime being too new for this module.
 
-InvalidRepeatedCapabilityError
-------------------------------
-
-    .. py:currentmodule:: nirfsa.errors
-
-    .. exception:: InvalidRepeatedCapabilityError
-
-        An error due to an invalid character in a repeated capability
-
-
 SelfTestError
 -------------
 

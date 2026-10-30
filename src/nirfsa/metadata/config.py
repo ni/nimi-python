@@ -42,7 +42,6 @@ config = {
         '_TOWARDS_DUT'
     ],
     'extra_errors_used': [
-        'InvalidRepeatedCapabilityError',
         'SelfTestError'
     ],
     'grpc_service_class_prefix': 'NiRFSA',
@@ -82,6 +81,10 @@ config = {
         {
             'prefix': '',
             'python_name': 'channels'
+        },
+        {
+            'prefix': 'calplane::',
+            'python_name': 'calplanes'
         }
     ],
     'session_class_description': 'An NI-RFSA session to the NI-RFSA driver',

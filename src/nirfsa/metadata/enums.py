@@ -273,7 +273,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'De-embeds the measurement using only the gain term.'
+                    'description': 'De-embeds the measurement using only the gain term at center frequency.'
                 },
                 'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR',
                 'value': 3901
@@ -287,7 +287,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'De-embeds the measurement using wideband amplitude flatness correction.'
+                    'description': 'De-embeds the measurement using the gain term across the instantaneous bandwidth of the device.'
                 },
                 'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
                 'value': 3903

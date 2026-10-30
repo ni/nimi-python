@@ -226,6 +226,12 @@ class GrpcStubInterpreter(object):
             grpc_types.DisableAdvanceTriggerRequest(vi=self._vi),
         )
 
+    def disable_calibration_plane(self, channel_name):  # noqa: N802
+        self._invoke(
+            self._client.DisableCalibrationPlane,
+            grpc_types.DisableCalibrationPlaneRequest(vi=self._vi, channel_name=channel_name),
+        )
+
     def disable_ref_trigger(self):  # noqa: N802
         self._invoke(
             self._client.DisableRefTrigger,
@@ -236,6 +242,12 @@ class GrpcStubInterpreter(object):
         self._invoke(
             self._client.DisableStartTrigger,
             grpc_types.DisableStartTriggerRequest(vi=self._vi),
+        )
+
+    def enable_calibration_plane(self, channel_name):  # noqa: N802
+        self._invoke(
+            self._client.EnableCalibrationPlane,
+            grpc_types.EnableCalibrationPlaneRequest(vi=self._vi, channel_name=channel_name),
         )
 
     def enable_session_access(self, enable):  # noqa: N802

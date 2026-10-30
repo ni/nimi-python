@@ -85,13 +85,6 @@ class DriverTooNewError(Error):
         super(DriverTooNewError, self).__init__('The NI-RFSA runtime returned an unexpected value. This can occur if it is too new for the nirfsa Python module. Upgrade the nirfsa Python module.')
 
 
-class InvalidRepeatedCapabilityError(Error):
-    '''An error due to an invalid character in a repeated capability'''
-
-    def __init__(self, invalid_character, invalid_string):
-        super(InvalidRepeatedCapabilityError, self).__init__('An invalid character ({}) was found in repeated capability string ({})'.format(invalid_character, invalid_string))
-
-
 class SelfTestError(Error):
     '''An error due to a failed self-test'''
 
