@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 24.3.0f175
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d54
 functions = {
     'Abort': {
         'documentation': {
@@ -3681,6 +3681,153 @@ functions = {
                 'type': 'ViInt32'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'TMU_Abort': {
+        'documentation': {
+            'description': 'Aborts an active time measurement acquisition on the specified TMU. In-progress measurements are discarded and will not be available. Completed measurements will not be discarded.\n'
+        },
+        'grpc_name': 'TMUAbort',
+        'has_repeated_capability': True,
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The instrument session the %function{init} or %function{init with options} function returns.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The TMU to abort, specified as a TMU context string. The string must be in the format *PXI1Slot2/tmuN*, for example *PXI1Slot2/tmu0*.'
+                },
+                'is_repeated_capability': True,
+                'name': 'tmu',
+                'repeated_capability_type': 'time_measurement_units',
+                'type': 'ViConstString'
+            }
+        ],
+        'python_name': 'tmu_abort',
+        'repeated_capability_type': 'time_measurement_units',
+        'returns': 'ViStatus'
+    },
+    'TMU_FetchAveragedMeasurement': {
+        'documentation': {
+            'description': 'Fetches the averaged time measurement from the specified TMU. Blocks until the configured number of samples have been acquired and averaged, or until the timeout elapses. You must call the %function{tmu initiate} function before calling this function. Returns the arithmetic mean of the acquired samples, in seconds. This function has non-destructive behavior; the averaged measurement can be fetched repeatedly until a new acquisition is initiated by calling the %function{tmu initiate} function. Multiple calls to this function return the same result. To obtain a new measurement, call the %function{tmu initiate} function to start a fresh acquisition.\n'
+        },
+        'grpc_name': 'TMUFetchAveragedMeasurement',
+        'has_repeated_capability': True,
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The instrument session the %function{init} or %function{init with options} function returns.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The TMU from which to fetch the measurement, specified as a TMU context string. The string must be in the format *PXI1Slot2/tmuN*, for example *PXI1Slot2/tmu0*.'
+                },
+                'is_repeated_capability': True,
+                'name': 'tmu',
+                'repeated_capability_type': 'time_measurement_units',
+                'type': 'ViConstString'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The maximum time, in seconds, to wait for the measurement to complete. The timeout must be greater than 0.\n'
+                },
+                'name': 'timeout',
+                'type': 'ViReal64'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The returned averaged time measurement, in seconds; pass the address of a double variable.\n'
+                },
+                'name': 'measurement',
+                'type': 'ViReal64'
+            }
+        ],
+        'python_name': 'tmu_fetch_averaged_measurement',
+        'repeated_capability_type': 'time_measurement_units',
+        'returns': 'ViStatus'
+    },
+    'TMU_GetDisabledTMUContexts': {
+        'documentation': {
+            'description': 'Returns a comma-separated list of the TMU context strings of all disabled TMUs. Returns an empty string if all TMUs are enabled.\n'
+        },
+        'grpc_name': 'TMUGetDisabledTMUContexts',
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The instrument session the %function{init} or %function{init with options} function returns.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'tmuContextsBufferSize',
+                'type': 'ViInt32'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'The returned comma-separated list of disabled TMU context strings. The returned list uses the physical TMU context format (e.g., PXI1Slot2/tmu0). If there are no disabled TMU contexts, the function returns an empty string.  The buffer must contain at least as many elements as the value you specify with the buffer size parameter. If you pass 0 for **%parameter{tmu contexts buffer size}**, pass %replace_me{null} for this parameter. This function can be used in combination with %attribute{tmu count} to enumerate TMU resources per module.\n'
+                },
+                'name': 'tmuContexts',
+                'python_api_converter_name': 'convert_comma_separated_string_to_list',
+                'size': {
+                    'mechanism': 'ivi-dance',
+                    'value': 'tmuContextsBufferSize'
+                },
+                'type': 'ViChar[]',
+                'type_in_documentation': 'list of str'
+            }
+        ],
+        'python_name': 'tmu_get_disabled_tmu_contexts',
+        'returns': 'ViStatus'
+    },
+    'TMU_Initiate': {
+        'documentation': {
+            'description': 'Initiates a time measurement acquisition for the specified TMU. Applies the current TMU settings, clears previous data, and prepares the TMU to capture start and stop events. This function returns immediately and does not block. Do not call this function while an acquisition is already active on the specified TMU. Call %function{tmu abort} first to stop an active acquisition. You must configure %attribute{tmu start source}, %attribute{tmu stop source}, and %attribute{tmu enabled} before calling this function.\n'
+        },
+        'grpc_name': 'TMUInitiate',
+        'has_repeated_capability': True,
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The instrument session the %function{init} or %function{init with options} function returns.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The TMU to initiate, specified as a TMU context string. The string must be in the format *PXI1Slot2/tmuN*, for example *PXI1Slot2/tmu0*.'
+                },
+                'is_repeated_capability': True,
+                'name': 'tmu',
+                'repeated_capability_type': 'time_measurement_units',
+                'type': 'ViConstString'
+            }
+        ],
+        'python_name': 'tmu_initiate',
+        'repeated_capability_type': 'time_measurement_units',
         'returns': 'ViStatus'
     },
     'UnloadAllPatterns': {

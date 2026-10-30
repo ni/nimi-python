@@ -558,6 +558,35 @@
 #### [nidigital] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - API parity with NI-Digital Pattern Driver 2026 Q4.
+    - Repeated Capability added:
+      - `time_measurement_units`
+    - Properties added:
+      - `tmu_arm_type`
+      - `tmu_count`
+      - `tmu_edge_arm_polarity`
+      - `tmu_edge_arm_source`
+      - `tmu_edge_arm_source_event`
+      - `tmu_enabled`
+      - `tmu_samples_to_acquire`
+      - `tmu_sample_timeout`
+      - `tmu_start_input_debounce_time`
+      - `tmu_start_source`
+      - `tmu_start_source_event`
+      - `tmu_start_source_event_polarity`
+      - `tmu_stop_input_debounce_time`
+      - `tmu_stop_source`
+      - `tmu_stop_source_event`
+      - `tmu_stop_source_event_polarity`
+    - Methods added:
+      - `tmu_abort`
+      - `tmu_fetch_averaged_measurement`
+      - `tmu_get_disabled_tmu_contexts`
+      - `tmu_initiate`
+    - Enums added:
+      - `TMUArmType`
+      - `TMUPolarity`
+      - `TMUSourceEvent`
 - Changed
 - Removed
 
