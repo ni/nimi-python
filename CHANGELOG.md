@@ -1129,6 +1129,7 @@
 #### [nifgen] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added the `nifgen_create_from_file_i16.py` example.
 - Changed
 - Removed
 
