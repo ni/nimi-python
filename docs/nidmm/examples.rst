@@ -39,6 +39,15 @@ nidmm_measure_capacitance.py
    :encoding: utf8
    :caption: `(nidmm_measure_capacitance.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_capacitance.py>`_
 
+nidmm_measure_frequency.py
+--------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_frequency.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_frequency.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_frequency.py>`_
+
 nidmm_measure_temperature_rtd.py
 --------------------------------
 
