@@ -558,6 +558,7 @@
 #### [nidigital] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added the `nidigital_capture_waveform.py` example.
 - Changed
 - Removed
 
