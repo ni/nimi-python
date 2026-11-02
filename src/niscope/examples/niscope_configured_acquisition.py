@@ -3,8 +3,6 @@
 import argparse
 import hightime
 import niscope
-import numpy as np
-import pytest
 import sys
 
 TRIGGER_TYPES = ['IMMEDIATE', 'EDGE', 'DIGITAL', 'WINDOW', 'HYSTERESIS']
@@ -18,85 +16,52 @@ DIGITAL_TRIGGER_SOURCES = [
 ]
 
 
-def _create_chart(plt):
-    figure, axes = plt.subplots()
-    axes.set_title('Waveform(s)')
-    axes.set_xlabel('Time (s)')
-    axes.set_ylabel('Amplitude (V)')
-    axes.grid(True)
-    return figure, axes
-
-
-def _update_chart(axes, waveforms):
-    if not axes.lines:
-        for waveform in waveforms:
-            axes.plot([], [], label=waveform.channel)
-        axes.legend(loc='upper right')
-    for line, waveform in zip(axes.lines, waveforms):
-        x = waveform.relative_initial_x + np.arange(len(waveform.samples)) * waveform.x_increment
-        # Samples will be a memoryview, which matplotlib cannot copy
-        line.set_data(x, list(waveform.samples))
-    axes.relim()
-    axes.autoscale_view()
-
-
 def example(resource_name, options, channel_name, vertical_range, vertical_offset, vertical_coupling, probe_attenuation,
             input_impedance, max_input_frequency, min_sample_rate, min_record_length, reference_position, enforce_realtime,
             trigger_modifier, trigger_type, trigger_source, digital_trigger_source, trigger_level, trigger_slope, trigger_coupling,
             window_low_level, window_high_level, window_mode, hysteresis, trigger_delay, timeout, total_iterations):
-    import matplotlib.pyplot as plt
+    print(f'Starting acquisition on resource {resource_name}, for {total_iterations} iterations.')
+    with niscope.Session(resource_name=resource_name, options=options) as session:
+        channel = session.channels[channel_name]
+        acquisition_count = 0
+        while acquisition_count < total_iterations:
+            channel.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling[vertical_coupling], offset=vertical_offset,
+                                       probe_attenuation=probe_attenuation, enabled=True)
+            # Configuring channel characteristics
+            channel.configure_chan_characteristics(input_impedance=input_impedance, max_input_frequency=max_input_frequency)
+            session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=reference_position,
+                                                num_records=1, enforce_realtime=enforce_realtime)
+            # Configuring auto trigger
+            session.trigger_modifier = niscope.TriggerModifier[trigger_modifier]
+            # Configuring trigger
+            delay = hightime.timedelta(seconds=trigger_delay)
+            match trigger_type:
+                case 'IMMEDIATE':
+                    session.configure_trigger_immediate()
+                case 'EDGE':
+                    session.configure_trigger_edge(trigger_source, trigger_level, niscope.TriggerCoupling[trigger_coupling], slope=niscope.TriggerSlope[trigger_slope], delay=delay)
+                case 'DIGITAL':
+                    session.configure_trigger_digital(digital_trigger_source, slope=niscope.TriggerSlope[trigger_slope], delay=delay)
+                case 'WINDOW':
+                    session.configure_trigger_window(trigger_source, window_low_level, window_high_level, niscope.TriggerWindowMode[window_mode], niscope.TriggerCoupling[trigger_coupling], delay=delay)
+                case 'HYSTERESIS':
+                    session.configure_trigger_hysteresis(trigger_source, trigger_level, hysteresis, niscope.TriggerCoupling[trigger_coupling], slope=niscope.TriggerSlope[trigger_slope], delay=delay)
+            with session.initiate():
+                channel.fetch(timeout=hightime.timedelta(seconds=timeout))
+            acquisition_count += 1
+            print(f'Acquisition {acquisition_count}:')
+            print(f'Actual Sample Rate: {session.horz_sample_rate}')
+            print(f'Actual Record Length: {session.horz_record_length}')
+            print()
 
-    figure, axes = _create_chart(plt)
-    acquisition_count = 1
-    try:
-        with niscope.Session(resource_name=resource_name, options=options) as session:
-            channel = session.channels[channel_name]
-            # Run until the chart is closed, Ctrl+C is pressed, or the iteration limit is reached.
-            while plt.fignum_exists(figure.number) and (total_iterations is None or acquisition_count <= total_iterations):
-                channel.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling[vertical_coupling], offset=vertical_offset,
-                                           probe_attenuation=probe_attenuation, enabled=True)
-                # Configuring channel characteristics
-                channel.configure_chan_characteristics(input_impedance=input_impedance, max_input_frequency=max_input_frequency)
-                session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=reference_position,
-                                                    num_records=1, enforce_realtime=enforce_realtime)
-                # Configuring auto trigger
-                session.trigger_modifier = niscope.TriggerModifier[trigger_modifier]
-                # Configuring trigger
-                delay = hightime.timedelta(seconds=trigger_delay)
-                match trigger_type:
-                    case 'IMMEDIATE':
-                        session.configure_trigger_immediate()
-                    case 'EDGE':
-                        session.configure_trigger_edge(trigger_source, trigger_level, niscope.TriggerCoupling[trigger_coupling], slope=niscope.TriggerSlope[trigger_slope], delay=delay)
-                    case 'DIGITAL':
-                        session.configure_trigger_digital(digital_trigger_source, slope=niscope.TriggerSlope[trigger_slope], delay=delay)
-                    case 'WINDOW':
-                        session.configure_trigger_window(trigger_source, window_low_level, window_high_level, niscope.TriggerWindowMode[window_mode], niscope.TriggerCoupling[trigger_coupling], delay=delay)
-                    case 'HYSTERESIS':
-                        session.configure_trigger_hysteresis(trigger_source, trigger_level, hysteresis, niscope.TriggerCoupling[trigger_coupling], slope=niscope.TriggerSlope[trigger_slope], delay=delay)
-                with session.initiate():
-                    waveforms = channel.fetch(timeout=hightime.timedelta(seconds=timeout))
-                print(f'Acquisition {acquisition_count}:')
-                print(f'Actual Sample Rate: {session.horz_sample_rate}')
-                print(f'Actual Record Length: {session.horz_record_length}')
-                print()
-                _update_chart(axes, waveforms)
-                acquisition_count += 1
-                plt.pause(0.02)
-        # Keep the final plot window open after acquisition stops until the user closes it.
-        if total_iterations is not None and plt.fignum_exists(figure.number):
-            plt.show()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        plt.close(figure)
+        print('Completed {} acquisitions.'.format(acquisition_count))
 
 
 def _main(argsv):
-    parser = argparse.ArgumentParser(description='Configures the vertical, horizontal, and trigger properties before every acquisition and displays the waveform(s).',
+    parser = argparse.ArgumentParser(description='Configures the vertical, horizontal, and trigger properties before every acquisition and fetches the waveform(s).',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Specifies the resource name of the device to initialize')
-    parser.add_argument('-c', '--channel-name', default='0', help='Comma-separated list of channels to plot, one line per channel')
+    parser.add_argument('-c', '--channel-name', default='0', help='Comma-separated list of channels to acquire')
     parser.add_argument('--timeout', default=5.0, type=float, help='The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available.')
     parser.add_argument('--vertical-range', default=5.0, type=float, help='Specifies the absolute value of the input range for a channel in volts.')
     parser.add_argument('--probe-attenuation', default=1.0, type=float, help='Specifies the probe attenuation for the input channel.')
@@ -130,7 +95,7 @@ def _main(argsv):
                         help='Configures the device to automatically complete an acquisition if a trigger has not been received.')
     parser.add_argument('--enforce-realtime', action=argparse.BooleanOptionalAction, default=True,
                         help='Indicates whether the digitizer enforces real-time measurements or allows equivalent-time (RIS) measurements.')
-    parser.add_argument('--total-iterations', default=None, type=int, help='Specifies the maximum number of acquisitions; omit to run until the chart closes or Ctrl+C is pressed.')
+    parser.add_argument('--total-iterations', default=100, type=int, help='Number of acquisitions to perform before stopping.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Specifies the initial value of certain properties for the session.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.channel_name, args.vertical_range, args.vertical_offset, args.vertical_coupling,
@@ -145,16 +110,12 @@ def main():
 
 
 def test_example():
-    plt = pytest.importorskip('matplotlib.pyplot')
-    plt.switch_backend('Agg')  # Avoid opening a chart window during the test
     options = {'simulate': True, 'driver_setup': {'Model': '5164', 'BoardType': 'PXIe', }, }
     example('PXI1Slot2', options, '0', 5.0, 0.0, 'DC', 1.0, 1000000.0, 0.0, 10000000.0, 1000, 50.0, True,
             'AUTO', 'EDGE', '0', 'VAL_PFI_1', 0.0, 'POSITIVE', 'DC', 0.0, 0.0, 'ENTERING', 0.0, 0.0, 5.0, 2)
 
 
 def test_main():
-    plt = pytest.importorskip('matplotlib.pyplot')
-    plt.switch_backend('Agg')  # Avoid opening a chart window during the test
     cmd_line = ['--option-string', 'Simulate=1, DriverSetup=Model:5164; BoardType:PXIe', '--total-iterations', '2']
     _main(cmd_line)
 
