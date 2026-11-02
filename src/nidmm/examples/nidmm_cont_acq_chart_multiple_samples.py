@@ -10,7 +10,7 @@ MAX_SAMPLES_PER_FETCH = 100000
 
 
 def example(resource_name, options, function, measurement_range, digits, samples_to_fetch, total_samples):
-    print(f'Starting acquisition on resource {resource_name}.')
+    print(f'Starting acquisition on resource {resource_name}, for {total_samples if total_samples is not None else "continuous"} samples.')
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=measurement_range, resolution_digits=digits)
         # A sample_count of 0 configures a continuous acquisition
