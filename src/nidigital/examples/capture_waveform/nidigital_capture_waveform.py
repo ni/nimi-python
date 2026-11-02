@@ -69,7 +69,6 @@ def example(resource_name, options, samples_to_read, pin_list, capture_waveform_
             session.pins[pin_list].selected_function = nidigital.SelectedFunction.DISCONNECT
 
     print('Done capturing waveform')
-    return captured_waveforms
 
 
 def _main(argsv):
@@ -110,14 +109,10 @@ def test_example():
     bit_order = nidigital.BitOrder.MSB
     waveform_file_path = 'CaptureWaveform.digicapture'
 
-    example(resource_name, options, samples_to_read, pin_list, 'Serial',
-            sample_width, bit_order, waveform_file_path)
-    example(resource_name, options, samples_to_read, pin_list, 'Parallel',
-            sample_width, bit_order, waveform_file_path)
-    example(resource_name, options, samples_to_read, pin_list, 'From File: Digicapture',
-            sample_width, bit_order, waveform_file_path)
-    example(resource_name, options, samples_to_read, pin_list, 'Serial', 8,
-            nidigital.BitOrder.LSB, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'Serial', sample_width, bit_order, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'Parallel', sample_width, bit_order, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'From File: Digicapture', sample_width, bit_order, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'Serial', 8, nidigital.BitOrder.LSB, waveform_file_path)
 
 
 if __name__ == '__main__':
