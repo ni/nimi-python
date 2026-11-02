@@ -9,7 +9,7 @@ def example(resource_name, options, range, digits, aperture_time, dc_noise_rejec
     with nidmm.Session(resource_name=resource_name, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function.DC_VOLTS, range=range, resolution_digits=digits)
         session.configure_multi_point(trigger_count=1, sample_count=sample_count)
-        # For aperture times over 100 ms, enable Auto Zero to compensate for drift.
+        # When enabled, Auto Zero measures and subtracts the DMM's zero offset after each measurement.
         session.auto_zero = nidmm.AutoZero[auto_zero]
         session.aperture_time_units = nidmm.ApertureTimeUnits.SECONDS
         # To reject noise at frequency f, choose the aperture time based on the weighting mode:
@@ -18,7 +18,7 @@ def example(resource_name, options, range, digits, aperture_time, dc_noise_rejec
         session.aperture_time = aperture_time
         # NORMAL weighs all samples equally; SECOND_ORDER and HIGH_ORDER weigh samples in the middle of the aperture more.
         session.dc_noise_rejection = nidmm.DCNoiseRejection[dc_noise_rejection]
-        # The DMM averages shorter measurements to produce each returned reading.
+        # Averaging shorter measurements applies only when Auto Zero is ON and the aperture is fixed.
         session.number_of_averages = number_of_averages
         measurements = session.read_multi_point(array_size=sample_count)
         print(f'Measurements for {sample_count} Samples: {measurements}')
@@ -35,7 +35,7 @@ def _main(argsv):
     parser.add_argument('-a', '--aperture-time', default=0.1, type=float, help='Specifies the measurement aperture time for the current configuration, in seconds.')
     parser.add_argument('--dc-noise-rejection', default='NORMAL', choices=supported_noise_rejection_modes, type=str.upper, help='Specifies the DC noise rejection mode.')
     parser.add_argument('-s', '--sample-count', default=10, type=int, help='Specifies the number of measurements the DMM takes each time it receives a trigger in a multiple point acquisition.')
-    parser.add_argument('--number-of-averages', default=8, type=int, help='Specifies the number of averages to perform in a measurement.')
+    parser.add_argument('--number-of-averages', default=8, type=int, help='Specifies the number of averages to perform in a measurement. Applies only when Auto Zero is ON and the aperture is fixed.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.option_string, args.range, args.digits, args.aperture_time, args.dc_noise_rejection, args.sample_count, args.auto_zero, args.number_of_averages)
 
