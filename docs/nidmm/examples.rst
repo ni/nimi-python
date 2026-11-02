@@ -30,6 +30,15 @@ nidmm_max_dc_reading_rate_at_7_5_digits.py
    :encoding: utf8
    :caption: `(nidmm_max_dc_reading_rate_at_7_5_digits.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_max_dc_reading_rate_at_7_5_digits.py>`_
 
+nidmm_improve_dc_noise_rejection.py
+-----------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_improve_dc_noise_rejection.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_improve_dc_noise_rejection.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_improve_dc_noise_rejection.py>`_
+
 nidmm_measure_ac_volts.py
 -------------------------
 
