@@ -48,6 +48,15 @@ nidcpower_sink_dc_current_into_electronic_load.py
    :encoding: utf8
    :caption: `(nidcpower_sink_dc_current_into_electronic_load.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_sink_dc_current_into_electronic_load.py>`_
 
+nidcpower_sink_dc_voltage_with_output_resistance.py
+---------------------------------------------------
+
+.. literalinclude:: ../../src/nidcpower/examples/nidcpower_sink_dc_voltage_with_output_resistance.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidcpower_sink_dc_voltage_with_output_resistance.py) <https://github.com/ni/nimi-python/blob/master/src/nidcpower/examples/nidcpower_sink_dc_voltage_with_output_resistance.py>`_
+
 nidcpower_source_delay_measure.py
 ---------------------------------
 
