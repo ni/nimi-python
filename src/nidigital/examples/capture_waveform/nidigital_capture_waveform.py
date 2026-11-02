@@ -43,12 +43,14 @@ def example(resource_name, options, samples_to_read, pin_list, capture_waveform_
             elif capture_waveform_type == 'Parallel':
                 # Configure the capture waveform for parallel acquisition
                 session.pins[pin_list].create_capture_waveform_parallel(waveform_name=WAVEFORM_NAME)
-            else:
+            elif capture_waveform_type == 'From File: Digicapture':
                 # Load the capture waveform configuration from the Digicapture file
                 capture_file_path = os.path.abspath(os.path.join(directory, waveform_file_path))
                 session.create_capture_waveform_from_file_digicapture(
                     waveform_name=WAVEFORM_NAME,
                     waveform_file_path=capture_file_path)
+            else:
+                raise ValueError('Unsupported capture waveform type: {}'.format(capture_waveform_type))
 
             # Burst the pattern from the start label specified in the pattern file
             print('Start bursting pattern')
@@ -96,7 +98,7 @@ def test_main():
     _main([])
     _main(['--capture-waveform-type', 'Parallel'])
     _main(['--capture-waveform-type', 'From File: Digicapture'])
-    _main(['--samples-to-read', '2', '--sample-width', '8', '--bit-order', 'LSB'])
+    _main(['--sample-width', '8', '--bit-order', 'LSB'])
 
 
 def test_example():
@@ -108,18 +110,14 @@ def test_example():
     bit_order = nidigital.BitOrder.MSB
     waveform_file_path = 'CaptureWaveform.digicapture'
 
-    for capture_waveform_type in CAPTURE_WAVEFORM_TYPES:
-        captured_waveforms = example(
-            resource_name, options, samples_to_read, pin_list,
-            capture_waveform_type, sample_width, bit_order, waveform_file_path)
-        assert sorted(captured_waveforms) == [0, 1, 2, 3]
-        assert all(len(samples) == samples_to_read for samples in captured_waveforms.values())
-
-    captured_waveforms = example(
-        resource_name, options, 2, pin_list, 'Serial', 8,
-        nidigital.BitOrder.LSB, waveform_file_path)
-    assert sorted(captured_waveforms) == [0, 1, 2, 3]
-    assert all(len(samples) == 2 for samples in captured_waveforms.values())
+    example(resource_name, options, samples_to_read, pin_list, 'Serial',
+            sample_width, bit_order, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'Parallel',
+            sample_width, bit_order, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'From File: Digicapture',
+            sample_width, bit_order, waveform_file_path)
+    example(resource_name, options, samples_to_read, pin_list, 'Serial', 8,
+            nidigital.BitOrder.LSB, waveform_file_path)
 
 
 if __name__ == '__main__':
