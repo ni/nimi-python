@@ -22,7 +22,7 @@ def example(
     filter_name, filter_type, cutoff_frequency, center_frequency, width,
     fir_taps, fir_window, iir_order, fft_function, total_iterations,
 ):
-    print(f'Starting acquisition on resource {resource_name}, for {total_iterations if total_iterations is not None else "continuous"} iterations.')
+    print(f'Starting acquisition on resource {resource_name}, for {total_iterations} iterations.')
     with niscope.Session(resource_name=resource_name, options=options) as session:
         session.configure_vertical(range=2.0, coupling=niscope.VerticalCoupling.DC)
         session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=50.0, num_records=1, enforce_realtime=True)
@@ -39,20 +39,16 @@ def example(
         channel_session.meas_filter_ripple = 0.5
 
         iterations = 0
-        try:
-            # A total_iterations of None runs until Ctrl+C is pressed
-            while total_iterations is None or iterations < total_iterations:
-                # The filter runs as a processing step before any other measurement; it is added and cleared on every acquisition
-                channel_session.add_waveform_processing(FILTERS[filter_name])
-                try:
-                    with session.initiate():
-                        channel_session.fetch_array_measurement(niscope.ArrayMeasurement.NO_MEASUREMENT)
-                        channel_session.fetch_array_measurement(FFT_FUNCTIONS[fft_function])
-                finally:
-                    channel_session.clear_waveform_processing()
-                iterations += 1
-        except KeyboardInterrupt:
-            pass
+        while iterations < total_iterations:
+            # The filter runs as a processing step before any other measurement; it is added and cleared on every acquisition
+            channel_session.add_waveform_processing(FILTERS[filter_name])
+            try:
+                with session.initiate():
+                    channel_session.fetch_array_measurement(niscope.ArrayMeasurement.NO_MEASUREMENT)
+                    channel_session.fetch_array_measurement(FFT_FUNCTIONS[fft_function])
+            finally:
+                channel_session.clear_waveform_processing()
+            iterations += 1
 
         print('Completed {} acquisitions.'.format(iterations))
 
@@ -73,13 +69,12 @@ def _main(argsv):
     parser.add_argument('-fw', '--fir-window', default='HANNING', choices=niscope.FIRFilterWindow.__members__.keys(), type=str.upper, help='Specifies the FIR window type.')
     parser.add_argument('-o', '--iir-order', default=2, type=int, help='Specifies the order of an IIR filter.')
     parser.add_argument('--total-iterations', default=100, type=int, help='Number of acquisitions to perform before stopping.')
-    parser.add_argument('--continuous', action='store_true', help='Acquire until Ctrl+C is pressed; overrides --total-iterations.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Specifies initialization commands.')
     args = parser.parse_args(argsv)
     example(
         args.resource_name, args.channels, args.option_string, args.min_sample_rate, args.min_record_length,
         args.filter, args.filter_type, args.cutoff_frequency, args.center_frequency, args.width,
-        args.fir_taps, args.fir_window, args.iir_order, args.fft_function, None if args.continuous else args.total_iterations,
+        args.fir_taps, args.fir_window, args.iir_order, args.fft_function, args.total_iterations,
     )
 
 
