@@ -19,7 +19,7 @@ runs:
       shell: powershell
     - run: |
         .venv\Scripts\Activate.ps1
-        python -m pip install ${{ inputs.module_name }}==${{ inputs.module_version }} pytest
+        python -m pip install ${{ inputs.module_name }}==${{ inputs.module_version }} "pytest<9.2.0"
       shell: powershell
     - if: ${{ inputs.module_name == 'nitclk' }}
       run: |
