@@ -77,9 +77,6 @@ deps =
 % if module_name == 'nidigital':
     ${module_name}-system_tests: nisync
 % endif
-% if module_name == 'niscope':
-    ${module_name}-system_tests: matplotlib; sys_platform != "win32"
-% endif
     ${module_name}-system_tests: pytest
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
