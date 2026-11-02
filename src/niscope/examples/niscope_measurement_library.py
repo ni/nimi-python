@@ -9,7 +9,7 @@ def example(resource_name, channels, options, vertical_range, vertical_coupling,
             min_sample_rate, min_record_length, enforce_realtime, trigger_type, trigger_source,
             trigger_level, trigger_slope, trigger_coupling, timeout, scalar_measurement,
             reference_level_units, low_ref, mid_ref, high_ref, iterations):
-    print(f'Starting acquisition on resource {resource_name}, for {iterations if iterations is not None else "continuous"} iterations.')
+    print(f'Starting acquisition on resource {resource_name}, for {iterations} iterations.')
     with niscope.Session(resource_name=resource_name, options=options) as session:
         session.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling[vertical_coupling])
         session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=50.0, num_records=1, enforce_realtime=enforce_realtime)
@@ -25,15 +25,11 @@ def example(resource_name, channels, options, vertical_range, vertical_coupling,
         channel.meas_chan_high_ref_level = high_ref
 
         acquisition_count = 0
-        try:
-            # Run until Ctrl+C is pressed or the iteration limit is reached.
-            while iterations is None or acquisition_count < iterations:
-                # The statistics accumulate once per acquisition, so read a new waveform before each fetch.
-                channel.read(num_samples=min_record_length, timeout=timeout)
-                channel.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
-                acquisition_count += 1
-        except KeyboardInterrupt:
-            pass
+        while acquisition_count < iterations:
+            # The statistics accumulate once per acquisition, so read a new waveform before each fetch.
+            channel.read(num_samples=min_record_length, timeout=timeout)
+            channel.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
+            acquisition_count += 1
 
         print('Completed {} acquisitions.'.format(acquisition_count))
 
@@ -59,13 +55,12 @@ def _main(argsv):
     parser.add_argument('--trigger-coupling', default='DC', choices=niscope.TriggerCoupling.__members__.keys(), type=str.upper, help='Specifies how the digitizer couples the trigger source.')
     parser.add_argument('-t', '--timeout', default=5.0, type=float, help='The time to wait in seconds for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available.')
     parser.add_argument('--total-iterations', default=100, type=int, help='Number of acquisitions to perform before stopping.')
-    parser.add_argument('--continuous', action='store_true', help='Acquire until Ctrl+C is pressed; overrides --total-iterations.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Specifies the initial value of certain properties for the session.')
     args = parser.parse_args(argsv)
     example(args.resource_name, args.channels, args.option_string, args.vertical_range, args.vertical_coupling,
             args.min_sample_rate, args.min_record_length, args.enforce_realtime, args.trigger_type, args.trigger_source,
             args.trigger_level, args.trigger_slope, args.trigger_coupling, args.timeout, args.scalar_measurement,
-            args.reference_level_units, args.low_ref, args.mid_ref, args.high_ref, None if args.continuous else args.total_iterations)
+            args.reference_level_units, args.low_ref, args.mid_ref, args.high_ref, args.total_iterations)
 
 
 def main():
