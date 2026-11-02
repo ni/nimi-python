@@ -28,8 +28,11 @@ def example(resource_name, channels, options, vertical_range, vertical_coupling,
         while acquisition_count < iterations:
             # The statistics accumulate once per acquisition, so read a new waveform before each fetch.
             channel.read(num_samples=min_record_length, timeout=timeout)
-            channel.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
+            stats = channel.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
             acquisition_count += 1
+            print(f'Acquisition {acquisition_count}: {scalar_measurement}')
+            for stat in stats:
+                print(stat)
 
         print('Completed {} acquisitions.'.format(acquisition_count))
 
