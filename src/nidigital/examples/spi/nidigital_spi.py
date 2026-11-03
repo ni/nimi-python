@@ -44,9 +44,9 @@ def example(resource_name, options, start_label='SPI_Pattern'):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to burst an SPI pattern on the digital pattern instrument and display the pass/fail result for each site.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument. Ensure the resource name matches the instrument name in the pinmap file.')
     parser.add_argument('-s', '--simulate', default=True, action=argparse.BooleanOptionalAction, help='Whether to run on simulated hardware or real hardware')
-    parser.add_argument('-l', '--start-label', default='SPI_Pattern', help='Pattern name or exported pattern label from which to start bursting the pattern.')
+    parser.add_argument('-l', '--start-label', default='SPI_Pattern', help='Pattern label or name of the pattern from which to start bursting.')
     args = parser.parse_args(argsv)
 
     example(args.resource_name,
@@ -63,7 +63,7 @@ def test_main():
 
 
 def test_example():
-    options = {'simulate': True, 'start_label': 'SPI_Pattern', 'driver_setup': {'Model': '6570'}, }
+    options = {'simulate': True, 'driver_setup': {'Model': '6570'}, }
     example('PXI1Slot2,PXI1Slot3', options)
 
 
