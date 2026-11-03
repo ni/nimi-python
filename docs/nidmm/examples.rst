@@ -3,6 +3,15 @@ Examples
 
 `You can download all nidmm examples for latest version here <https://github.com/ni/nimi-python/releases/download/nidmm-1.5.0/nidmm_examples.zip>`_
 
+nidmm_cont_acq_multiple_samples_ext_trig.py
+-------------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_cont_acq_multiple_samples_ext_trig.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_cont_acq_multiple_samples_ext_trig.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_cont_acq_multiple_samples_ext_trig.py>`_
+
 nidmm_diode_test.py
 -------------------
 
@@ -20,6 +29,15 @@ nidmm_fetch_waveform.py
    :linenos:
    :encoding: utf8
    :caption: `(nidmm_fetch_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_fetch_waveform.py>`_
+
+nidmm_improve_dc_noise_rejection.py
+-----------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_improve_dc_noise_rejection.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_improve_dc_noise_rejection.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_improve_dc_noise_rejection.py>`_
 
 nidmm_measure_ac_volts.py
 -------------------------
@@ -47,6 +65,15 @@ nidmm_measure_temperature_rtd.py
    :linenos:
    :encoding: utf8
    :caption: `(nidmm_measure_temperature_rtd.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_rtd.py>`_
+
+nidmm_measure_temperature_thermistor.py
+---------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_temperature_thermistor.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_temperature_thermistor.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_thermistor.py>`_
 
 nidmm_measure_temperature_thermocouple.py
 -----------------------------------------
