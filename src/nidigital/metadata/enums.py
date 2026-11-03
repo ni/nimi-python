@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d54
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d72
 enums = {
     'BitOrder': {
         'values': [
@@ -162,14 +162,6 @@ enums = {
                 },
                 'name': 'NIDIGITAL_VAL_ALL_CYCLES',
                 'value': 2304
-            }
-        ]
-    },
-    'HistoryRAMMaxSamplesToAcquirePerSite': {
-        'values': [
-            {
-                'name': 'NIDIGITAL_VAL_ACQUIRE_ALL_SAMPLES',
-                'value': -1
             }
         ]
     },

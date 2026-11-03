@@ -3999,15 +3999,15 @@ history_ram_max_samples_to_acquire_per_site
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------------------------+
-            | Characteristic        | Value                                      |
-            +=======================+============================================+
-            | Datatype              | enums.HistoryRAMMaxSamplesToAcquirePerSite |
-            +-----------------------+--------------------------------------------+
-            | Permissions           | read-write                                 |
-            +-----------------------+--------------------------------------------+
-            | Repeated Capabilities | None                                       |
-            +-----------------------+--------------------------------------------+
+            +-----------------------+------------+
+            | Characteristic        | Value      |
+            +=======================+============+
+            | Datatype              | int        |
+            +-----------------------+------------+
+            | Permissions           | read-write |
+            +-----------------------+------------+
+            | Repeated Capabilities | None       |
+            +-----------------------+------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

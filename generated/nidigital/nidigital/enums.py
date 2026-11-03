@@ -71,10 +71,6 @@ class HistoryRAMCyclesToAcquire(Enum):
     '''
 
 
-class HistoryRAMMaxSamplesToAcquirePerSite(Enum):
-    SAMPLES = -1
-
-
 class HistoryRAMTriggerType(Enum):
     FIRST_FAILURE = 2200
     r'''

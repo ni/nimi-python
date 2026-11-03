@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d54
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d72
 attributes = {
     1050002: {
         'access': 'read-write',
@@ -1090,7 +1090,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the maximum number of History RAM samples to acquire per site. If the property is set to -1, it will acquire until the History RAM buffer is full.\n'
         },
-        'enum': 'HistoryRAMMaxSamplesToAcquirePerSite',
         'name': 'HISTORY_RAM_MAX_SAMPLES_TO_ACQUIRE_PER_SITE',
         'type': 'ViInt32'
     },

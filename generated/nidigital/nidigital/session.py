@@ -568,8 +568,8 @@ class _SessionBase(object):
     | HistoryRAMCyclesToAcquire.ALL    | Acquires all cycles after the triggering conditions are met.                      |
     +----------------------------------+-----------------------------------------------------------------------------------+
     '''
-    history_ram_max_samples_to_acquire_per_site = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.HistoryRAMMaxSamplesToAcquirePerSite, 1150077)
-    '''Type: enums.HistoryRAMMaxSamplesToAcquirePerSite
+    history_ram_max_samples_to_acquire_per_site = _attributes.AttributeViInt32(1150077)
+    '''Type: int
 
     Specifies the maximum number of History RAM samples to acquire per site. If the property is set to -1, it will acquire until the History RAM buffer is full.
     '''

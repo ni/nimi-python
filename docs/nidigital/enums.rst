@@ -155,15 +155,6 @@ HistoryRAMCyclesToAcquire
 
 
 
-HistoryRAMMaxSamplesToAcquirePerSite
-------------------------------------
-
-.. py:class:: HistoryRAMMaxSamplesToAcquirePerSite
-
-    .. py:attribute:: HistoryRAMMaxSamplesToAcquirePerSite.SAMPLES
-
-
-
 HistoryRAMTriggerType
 ---------------------
 

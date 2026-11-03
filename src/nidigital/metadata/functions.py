@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d54
+# This file is generated from NI-Digital Pattern Driver API metadata version 27.0.0d72
 functions = {
     'Abort': {
         'documentation': {
