@@ -13,13 +13,9 @@ def example(resource_name, options, function, measurement_range, digits, trigger
     with nidmm.Session(resource_name=resource_name, reset_device=True, options=options) as session:
         session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=measurement_range, resolution_digits=digits)
         # Trigger slopes use driver defaults because the public API has no slope configuration (#875).
-        try:
-            session.configure_trigger(trigger_source=nidmm.TriggerSource[trigger_source])
-            # The sample trigger uses the same source as the trigger; a sample_count of 0 configures a continuous acquisition
-            session.configure_multi_point(trigger_count=1, sample_count=0, sample_trigger=nidmm.SampleTrigger[trigger_source])
-        except nidmm.errors.DriverError as e:
-            # Not every device supports every trigger source (for example, NI 408x devices have no external trigger)
-            sys.exit('The device does not support trigger source {}.\n{}'.format(trigger_source, e.description))
+        session.configure_trigger(trigger_source=nidmm.TriggerSource[trigger_source])
+        # The sample trigger uses the same source as the trigger; a sample_count of 0 configures a continuous acquisition
+        session.configure_multi_point(trigger_count=1, sample_count=0, sample_trigger=nidmm.SampleTrigger[trigger_source])
 
         samples_fetched = 0
         with session.initiate():
