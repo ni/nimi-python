@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PinLevelsFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xmlns="http://www.ni.com/Semiconductor/PinLevels">
+  <PinLevelsSheet>
+    <DigitalPinLevelSets>
+      <DigitalPinLevelSet pin="CS">
+        <Vil>dc.vcc * 0.7</Vil>
+        <Vih>0</Vih>
+        <Vol>2.5</Vol>
+        <Voh>0.5</Voh>
+        <Iol>1.5 m</Iol>
+        <Ioh>-1.5 m</Ioh>
+        <Vcom>0</Vcom>
+        <Vterm>0</Vterm>
+        <TerminationMode>HighZ</TerminationMode>
+      </DigitalPinLevelSet>
+      <DigitalPinLevelSet pin="SCLK">
+        <Vil>dc.vcc * 0.7</Vil>
+        <Vih>0</Vih>
+        <Vol>2.5</Vol>
+        <Voh>0.5</Voh>
+        <Iol>1.5 m</Iol>
+        <Ioh>-1.5 m</Ioh>
+        <Vcom>0</Vcom>
+        <Vterm>0</Vterm>
+        <TerminationMode>HighZ</TerminationMode>
+      </DigitalPinLevelSet>
+      <DigitalPinLevelSet pin="MOSI">
+        <Vil>dc.vcc * 0.7</Vil>
+        <Vih>0</Vih>
+        <Vol>2.5</Vol>
+        <Voh>0.5</Voh>
+        <Iol>1.5 m</Iol>
+        <Ioh>-1.5 m</Ioh>
+        <Vcom>0</Vcom>
+        <Vterm>0</Vterm>
+        <TerminationMode>HighZ</TerminationMode>
+      </DigitalPinLevelSet>
+      <DigitalPinLevelSet pin="MISO">
+        <Vil>dc.vcc * 0.7</Vil>
+        <Vih>0</Vih>
+        <Vol>2.5</Vol>
+        <Voh>0.5</Voh>
+        <Iol>1.5 m</Iol>
+        <Ioh>-1.5 m</Ioh>
+        <Vcom>0</Vcom>
+        <Vterm>0</Vterm>
+        <TerminationMode>HighZ</TerminationMode>
+      </DigitalPinLevelSet>
+    </DigitalPinLevelSets>
+  </PinLevelsSheet>
+</PinLevelsFile>
