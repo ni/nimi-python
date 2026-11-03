@@ -801,6 +801,7 @@
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
   - Added the `nidmm_max_dc_reading_rate_at_7_5_digits.py` example.
+  - Added the `nidmm_measure_temperature_thermistor.py` example.
   - Added the `nidmm_improve_dc_noise_rejection.py` example.
   - Added the `nidmm_diode_test.py` example.
   - Added the `nidmm_measure_capacitance.py` example.
