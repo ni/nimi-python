@@ -30,6 +30,15 @@ nidmm_fetch_waveform.py
    :encoding: utf8
    :caption: `(nidmm_fetch_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_fetch_waveform.py>`_
 
+nidmm_improve_dc_noise_rejection.py
+-----------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_improve_dc_noise_rejection.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_improve_dc_noise_rejection.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_improve_dc_noise_rejection.py>`_
+
 nidmm_measure_ac_volts.py
 -------------------------
 
@@ -56,6 +65,15 @@ nidmm_measure_temperature_rtd.py
    :linenos:
    :encoding: utf8
    :caption: `(nidmm_measure_temperature_rtd.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_rtd.py>`_
+
+nidmm_measure_temperature_thermistor.py
+---------------------------------------
+
+.. literalinclude:: ../../src/nidmm/examples/nidmm_measure_temperature_thermistor.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidmm_measure_temperature_thermistor.py) <https://github.com/ni/nimi-python/blob/master/src/nidmm/examples/nidmm_measure_temperature_thermistor.py>`_
 
 nidmm_measure_temperature_thermocouple.py
 -----------------------------------------
