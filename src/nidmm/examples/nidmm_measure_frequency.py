@@ -18,7 +18,7 @@ def example(resource_name, options, function, range, max_amplitude):
         with warnings.catch_warnings(record=True) as caught:
             warnings.simplefilter('always')
             measurement = session.read()
-        signal_not_detected = any(f'Warning {SIGNAL_NOT_DETECTED_WARNING_CODE} occurred' in str(word.message) for word in caught)
+        signal_not_detected = any(f'Warning {SIGNAL_NOT_DETECTED_WARNING_CODE} occurred' in str(warning.message) for warning in caught)
         units = 'Hz' if function == 'FREQ' else 's'
         print(f'Measurement ({units}): {measurement}')
         print(f'Signal not Detected: {signal_not_detected}')
