@@ -36,19 +36,14 @@ def example(resource_name, options, samples_to_read, pin_list, capture_waveform_
         try:
             if capture_waveform_type == 'Serial':
                 # Configure the capture waveform for serial acquisition
-                session.pins[pin_list].create_capture_waveform_serial(
-                    waveform_name=WAVEFORM_NAME,
-                    sample_width=sample_width,
-                    bit_order=bit_order)
+                session.pins[pin_list].create_capture_waveform_serial(waveform_name=WAVEFORM_NAME, sample_width=sample_width, bit_order=bit_order)
             elif capture_waveform_type == 'Parallel':
                 # Configure the capture waveform for parallel acquisition
                 session.pins[pin_list].create_capture_waveform_parallel(waveform_name=WAVEFORM_NAME)
             elif capture_waveform_type == 'From File: Digicapture':
                 # Load the capture waveform configuration from the Digicapture file
                 capture_file_path = os.path.abspath(os.path.join(directory, waveform_file_path))
-                session.create_capture_waveform_from_file_digicapture(
-                    waveform_name=WAVEFORM_NAME,
-                    waveform_file_path=capture_file_path)
+                session.create_capture_waveform_from_file_digicapture(waveform_name=WAVEFORM_NAME, waveform_file_path=capture_file_path)
             else:
                 raise ValueError('Unsupported capture waveform type: {}'.format(capture_waveform_type))
 
@@ -57,9 +52,7 @@ def example(resource_name, options, samples_to_read, pin_list, capture_waveform_
             session.burst_pattern(start_label='new_pattern')
 
             # Fetch the captured waveform data from instrument memory
-            waveforms = session.fetch_capture_waveform(
-                waveform_name=WAVEFORM_NAME,
-                samples_to_read=samples_to_read)
+            waveforms = session.fetch_capture_waveform(waveform_name=WAVEFORM_NAME, samples_to_read=samples_to_read)
             captured_waveforms = {site: list(data) for site, data in waveforms.items()}
             print('Captured data:')
             for site, samples in sorted(captured_waveforms.items()):
