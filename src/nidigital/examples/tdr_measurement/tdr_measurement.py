@@ -1,41 +1,35 @@
 #!/usr/bin/python
 
 import argparse
+import nidigital
 import os
 import sys
 
-import nidigital
 
 def example(resource_name, options, channel_list, endpoint_termination, apply_offsets):
     directory = os.path.dirname(os.path.abspath(__file__))
 
-    with nidigital.Session(
-        resource_name=resource_name, options=options, reset_device=True
-    ) as session:
+    with nidigital.Session(resource_name=resource_name, options=options, reset_device=True) as session:
         try:
             # Load the pin map (.pinmap) created using the Digital Pattern Editor
-            pin_map_filename = os.path.join(directory, "PinMap.pinmap")
+            pin_map_filename = os.path.join(directory, 'PinMap.pinmap')
             session.load_pin_map(pin_map_filename)
 
             # Configure whether the TDR endpoint is open or shorted to ground
             session.tdr_endpoint_termination = endpoint_termination
 
-            # Measure propagation delays for the selected channels or pins.
-            # apply_offsets=True (automatically applies the measured offsets to the instrument).
-            print("Start TDR Measurement")
-
+            # Measure propagation delays and optionally apply the offsets to compensate for them.
+            print('Start TDR Measurement')
             offsets = session.channels[channel_list].tdr(apply_offsets=apply_offsets)
             offsets_in_seconds = [offset.total_seconds() for offset in offsets]
 
-            print("TDR Offsets (seconds): {}".format(offsets_in_seconds))
+            print('TDR Offsets (seconds): {}'.format(offsets_in_seconds))
         finally:
-            # Disconnect all the selected channels using programmable onboard switching.
-            session.channels[channel_list].selected_function = (
-                nidigital.SelectedFunction.DISCONNECT
-            )
+            # Disconnect the selected channels using programmable onboard switching
+            session.channels[channel_list].selected_function = nidigital.SelectedFunction.DISCONNECT
 
-        print("Done TDR Measurement")
-        return offsets
+    print('Done TDR Measurement')
+    return offsets
 
 
 def _main(argsv):
@@ -53,6 +47,7 @@ def _main(argsv):
             nidigital.TDREndpointTermination[args.tdr_endpoint_termination],
             args.apply_offsets == 'True')
 
+
 def main():
     _main(sys.argv[1:])
 
@@ -63,18 +58,17 @@ def test_main():
 
 
 def test_example():
-    resource_name = "PXI1Slot2,PXI1Slot3"
-    options = {"simulate": True, "driver_setup": {"Model": "6570"}}
-    channel_list = "PinGroup1"
+    resource_name = 'PXI1Slot2,PXI1Slot3'
+    options = {'simulate': True, 'driver_setup': {'Model': '6570'}, }
+    channel_list = 'PinGroup1'
 
-    tdr_endpoint_termination = nidigital.TDREndpointTermination.OPEN
+    endpoint_termination = nidigital.TDREndpointTermination.OPEN
+    example(resource_name, options, channel_list, endpoint_termination, apply_offsets=True)
+    example(resource_name, options, channel_list, endpoint_termination, apply_offsets=False)
 
-    example(resource_name, options, channel_list, tdr_endpoint_termination, apply_offsets=True)
-    example(resource_name, options, channel_list, tdr_endpoint_termination, apply_offsets=False)
-
-    tdr_endpoint_termination = nidigital.TDREndpointTermination.SHORT_TO_GROUND
-    example(resource_name, options, channel_list, tdr_endpoint_termination, apply_offsets=True)
-    example(resource_name, options, channel_list, tdr_endpoint_termination, apply_offsets=False)
+    endpoint_termination = nidigital.TDREndpointTermination.SHORT_TO_GROUND
+    example(resource_name, options, channel_list, endpoint_termination, apply_offsets=True)
+    example(resource_name, options, channel_list, endpoint_termination, apply_offsets=False)
 
 
 if __name__ == '__main__':
