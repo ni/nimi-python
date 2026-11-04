@@ -56,7 +56,7 @@ def example(resource_name, options, samples_to_read, pin_list, capture_waveform_
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to configure a capture waveform and capture data on the digital pattern instrument.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name of a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
     parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     parser.add_argument('-r', '--samples-to-read', default=4, type=int, help='Number of samples to fetch.')
     parser.add_argument('-p', '--pin-list', default='DUTPin1', help='List of pins to capture.')
