@@ -16,49 +16,39 @@ def example(resource_name, options, samples_to_read, pin_list, capture_waveform_
 
         directory = os.path.dirname(os.path.abspath(__file__))
 
-        # Load the pin map (.pinmap) created using the Digital Pattern Editor
         pin_map_filename = os.path.join(directory, 'PinMap.pinmap')
         session.load_pin_map(pin_map_filename)
 
-        # Load the specifications (.specs), levels (.digilevels), and timing (.digitiming) sheets created using the Digital Pattern Editor
         spec_filename = os.path.join(directory, 'Specifications.specs')
         levels_filename = os.path.join(directory, 'PinLevels.digilevels')
         timing_filename = os.path.join(directory, 'Timing.digitiming')
         session.load_specifications_levels_and_timing(spec_filename, levels_filename, timing_filename)
 
-        # Apply the settings from the levels and timing sheets we just loaded to the session
         session.apply_levels_and_timing(levels_filename, timing_filename)
 
-        # Load the pattern file (.digipat) created using the Digital Pattern Editor
         pattern_filename = os.path.join(directory, 'Pattern.digipat')
         session.load_pattern(pattern_filename)
 
         try:
             if capture_waveform_type == 'Serial':
-                # Configure the capture waveform for serial acquisition
                 session.pins[pin_list].create_capture_waveform_serial(waveform_name=WAVEFORM_NAME, sample_width=sample_width, bit_order=bit_order)
             elif capture_waveform_type == 'Parallel':
-                # Configure the capture waveform for parallel acquisition
                 session.pins[pin_list].create_capture_waveform_parallel(waveform_name=WAVEFORM_NAME)
             elif capture_waveform_type == 'From File: Digicapture':
-                # Load the capture waveform configuration from the Digicapture file
                 capture_file_path = os.path.abspath(os.path.join(directory, waveform_file_path))
                 session.create_capture_waveform_from_file_digicapture(waveform_name=WAVEFORM_NAME, waveform_file_path=capture_file_path)
             else:
                 raise ValueError('Unsupported capture waveform type: {}'.format(capture_waveform_type))
 
-            # Burst the pattern from the start label specified in the pattern file
             print('Start bursting pattern')
             session.burst_pattern(start_label='new_pattern')
 
-            # Fetch the captured waveform data from instrument memory
             waveforms = session.fetch_capture_waveform(waveform_name=WAVEFORM_NAME, samples_to_read=samples_to_read)
             captured_waveforms = {site: list(data) for site, data in waveforms.items()}
             print('Captured data:')
             for site, samples in sorted(captured_waveforms.items()):
                 print('Site {} ({} samples): {}'.format(site, len(samples), samples))
         finally:
-            # Disconnect the selected pins using programmable onboard switching
             session.pins[pin_list].selected_function = nidigital.SelectedFunction.DISCONNECT
 
     print('Done capturing waveform')
