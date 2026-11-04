@@ -64,14 +64,12 @@ def test_initiate_function_def_for_doc_note_not_list():
             'python_name': '_initiate',
         },
     }
-    config = {
-        'context_manager_name': {
-            'task': 'acquisition',
-            'initiate_function': 'Initiate',
-            'abort_function': 'Abort',
-        },
+    context_manager = {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
     }
-    initiate_doc = initiate_function_def_for_doc(functions, config)
+    initiate_doc = initiate_function_def_for_doc(functions, context_manager)
     assert type(initiate_doc) is dict
     return
 
@@ -87,14 +85,12 @@ def test_initiate_function_def_for_doc_note_list():
             'python_name': '_initiate',
         },
     }
-    config = {
-        'context_manager_name': {
-            'task': 'acquisition',
-            'initiate_function': 'Initiate',
-            'abort_function': 'Abort',
-        },
+    context_manager = {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
     }
-    initiate_doc = initiate_function_def_for_doc(functions, config)
+    initiate_doc = initiate_function_def_for_doc(functions, context_manager)
     assert type(initiate_doc) is dict
     return
 
@@ -109,13 +105,57 @@ def test_initiate_function_def_for_doc_no_note():
             'python_name': '_initiate',
         },
     }
-    config = {
-        'context_manager_name': {
-            'task': 'acquisition',
-            'initiate_function': 'Initiate',
-            'abort_function': 'Abort',
-        },
+    context_manager = {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
     }
-    initiate_doc = initiate_function_def_for_doc(functions, config)
+    initiate_doc = initiate_function_def_for_doc(functions, context_manager)
     assert type(initiate_doc) is dict
 
+
+def test_initiate_function_def_for_doc_default_method_name():
+    functions = {
+        'Initiate': {
+            'documentation': {
+                'description': 'test',
+            },
+            'python_name': '_initiate',
+        },
+    }
+    context_manager = {
+        'task': 'acquisition',
+        'initiate_function': 'Initiate',
+        'abort_function': 'Abort',
+    }
+    initiate_doc = initiate_function_def_for_doc(functions, context_manager)
+    assert initiate_doc['python_name'] == 'initiate'
+
+
+def test_initiate_function_def_for_doc_method_name():
+    functions = {
+        'InitiateGeneration': {
+            'documentation': {
+                'description': 'test',
+            },
+            'python_name': '_initiate_generation',
+        },
+    }
+    context_manager = {
+        'task': 'generation',
+        'initiate_function': 'InitiateGeneration',
+        'abort_function': 'AbortGeneration',
+        'method_name': 'initiate_generation',
+    }
+    initiate_doc = initiate_function_def_for_doc(functions, context_manager)
+    assert initiate_doc['python_name'] == 'initiate_generation'
+
+
+def test_filter_context_managers():
+    from build.helper.metadata_filters import filter_context_managers
+    acquisition = {'task': 'acquisition', 'initiate_function': 'Initiate', 'abort_function': 'Abort'}
+    generation = {'task': 'generation', 'initiate_function': 'InitiateGeneration', 'abort_function': 'AbortGeneration'}
+    assert filter_context_managers({}) == []
+    assert filter_context_managers({'context_manager_name': {}}) == []
+    assert filter_context_managers({'context_manager_name': acquisition}) == [acquisition]
+    assert filter_context_managers({'context_manager_name': [acquisition, generation]}) == [acquisition, generation]
