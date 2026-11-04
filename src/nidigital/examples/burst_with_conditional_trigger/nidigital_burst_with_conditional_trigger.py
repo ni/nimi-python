@@ -55,7 +55,7 @@ def example(resource_name, options, trigger_type, trigger_source, trigger_edge, 
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to burst a pattern on the digital pattern instrument using a conditional trigger.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name of a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
     parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     parser.add_argument('-tt', '--trigger-type', default='SOFTWARE', type=str.upper, choices=nidigital.TriggerType.__members__, help='Disables the conditional jump trigger or configures it for either hardware triggering or software triggering.')
     parser.add_argument('-ts', '--trigger-source', default='/PXI1Slot2/PXI_Trig0', help='Configures the digital trigger source terminal for a conditional jump trigger instance.')
