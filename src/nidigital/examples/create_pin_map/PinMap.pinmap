@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PinMap xmlns="http://www.ni.com/TestStand/SemiconductorModule/PinMap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.5">
+	<Instruments>
+		<NIDigitalPatternInstrument name="PXI1Slot2" numberOfChannels="32" group="Digital" />
+		<NIDigitalPatternInstrument name="PXI1Slot3" numberOfChannels="32" group="Digital" />
+	</Instruments>
+	<Pins>
+		<DUTPin name="SCL" />
+		<DUTPin name="SDA" />
+		<DUTPin name="CS" />
+		<SystemPin name="Vcc" />
+	</Pins>
+	<PinGroups>
+		<PinGroup name="I2C_bus">
+			<PinReference pin="Vcc" />
+			<PinReference pin="SCL" />
+			<PinReference pin="SDA" />
+			<PinReference pin="CS" />
+		</PinGroup>
+	</PinGroups>
+	<Sites>
+		<Site siteNumber="0" />
+		<Site siteNumber="1" />
+	</Sites>
+	<Connections>
+		<Connection pin="CS" siteNumber="0,1" instrument="PXI1Slot2" channel="30" />
+		<Connection pin="SCL" siteNumber="0" instrument="PXI1Slot2" channel="0" />
+		<Connection pin="SCL" siteNumber="1" instrument="PXI1Slot3" channel="0" />
+		<Connection pin="SDA" siteNumber="0" instrument="PXI1Slot2" channel="1" />
+		<Connection pin="SDA" siteNumber="1" instrument="PXI1Slot3" channel="1" />
+		<SystemConnection pin="Vcc" instrument="PXI1Slot2" channel="3" />
+	</Connections>
+</PinMap>
