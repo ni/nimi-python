@@ -75,7 +75,7 @@ def example(resource_name, options):
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to create a pin map file, load levels and timing, and burst a pattern on the digital pattern instrument.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name. This example requires two distinct instrument resource names in site order.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name of a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name. This example requires two distinct instrument resource names in site order.')
     parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     args = parser.parse_args(argsv)
     example(args.resource_name, 'Simulate=1, DriverSetup=Model:6571' if args.simulate == 'True' else '')
