@@ -30,10 +30,8 @@ def example(resource_name, options, start_label='SPI_Pattern'):
         session.load_pattern(pattern_filename)
 
         # Burst the pattern from the start label and block until the pattern is done bursting
-        session.burst_pattern(start_label=start_label)
-
-        # Get the pass/fail result for each site to correlate which sites passed or failed
-        site_pass_fail_results = session.get_site_pass_fail()
+        # The returned dictionary maps each site number to its pass/fail result
+        site_pass_fail_results = session.burst_pattern(start_label=start_label)
 
         # Disconnect all channels using programmable onboard switching
         session.selected_function = nidigital.SelectedFunction.DISCONNECT
@@ -45,12 +43,12 @@ def example(resource_name, options, start_label='SPI_Pattern'):
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to burst an SPI pattern on the digital pattern instrument and display the pass/fail result for each site.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='Resource name of a NI digital pattern instrument. Ensure the resource name matches the instrument name in the pinmap file.')
-    parser.add_argument('-s', '--simulate', default=True, action=argparse.BooleanOptionalAction, help='Whether to run on simulated hardware or real hardware')
+    parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     parser.add_argument('-l', '--start-label', default='SPI_Pattern', help='Pattern label or name of the pattern from which to start bursting.')
     args = parser.parse_args(argsv)
 
     example(args.resource_name,
-            'Simulate=1, DriverSetup=Model:6570' if args.simulate else '',
+            'Simulate=1, DriverSetup=Model:6570' if args.simulate == 'True' else '',
             args.start_label)
 
 
@@ -63,8 +61,10 @@ def test_main():
 
 
 def test_example():
+    resource_name = 'PXI1Slot2,PXI1Slot3'
     options = {'simulate': True, 'driver_setup': {'Model': '6570'}, }
-    example('PXI1Slot2,PXI1Slot3', options)
+    start_label = 'SPI_Pattern'
+    example(resource_name, options, start_label)
 
 
 if __name__ == '__main__':
