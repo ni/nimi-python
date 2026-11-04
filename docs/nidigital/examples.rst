@@ -21,6 +21,15 @@ nidigital_configure_time_set_and_voltage_levels.py
    :encoding: utf8
    :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
 
+nidigital_load_sheets_and_burst.py
+----------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_load_sheets_and_burst.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py>`_
+
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
 
