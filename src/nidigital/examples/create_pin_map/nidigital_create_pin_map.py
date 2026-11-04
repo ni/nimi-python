@@ -36,7 +36,6 @@ def _create_pin_map(resource_name, file_path):
     connections = ElementTree.SubElement(pin_map, 'Connections')
     # Both sites share CS on the first instrument; Vcc is a system pin, not a per-site pin.
     ElementTree.SubElement(connections, 'Connection', pin='CS', siteNumber='0,1', instrument=instruments[0], channel='30')
-    # Each instrument provides SCL and SDA for one site on channels 0 and 1.
     for site, instrument in enumerate(instruments):
         ElementTree.SubElement(sites, 'Site', siteNumber=str(site))
         for pin, channel in (('SCL', '0'), ('SDA', '1')):
@@ -56,25 +55,20 @@ def example(resource_name, options):
             # Load the pin map created at runtime, rather than the bundled reference map.
             session.load_pin_map(pin_map_filename)
 
-            # Load the levels and timing sheets created using the Digital Pattern Editor.
             dir = os.path.dirname(os.path.abspath(__file__))
             levels_filename = os.path.join(dir, 'PinLevels.digilevels')
             timing_filename = os.path.join(dir, 'Timing.digitiming')
             session.load_specifications_levels_and_timing(levels_file_paths=levels_filename, timing_file_paths=timing_filename)
 
-            # Apply the loaded voltage levels and timing settings to the instrument.
             session.apply_levels_and_timing(levels_filename, timing_filename)
 
-            # Load the pattern file created using the Digital Pattern Editor.
             pattern_filename = os.path.join(dir, 'Pattern.digipat')
             session.load_pattern(pattern_filename)
 
             print('Start bursting pattern')
             try:
-                # Burst the pattern and wait until it completes.
                 session.burst_pattern(start_label='new_pattern')
             finally:
-                # Disconnect all channels using programmable onboard switching.
                 session.selected_function = nidigital.SelectedFunction.DISCONNECT
     print('Done bursting pattern')
 
