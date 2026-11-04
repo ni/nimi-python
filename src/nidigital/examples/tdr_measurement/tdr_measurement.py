@@ -11,11 +11,9 @@ def example(resource_name, options, channel_list, endpoint_termination, apply_of
 
     with nidigital.Session(resource_name=resource_name, options=options, reset_device=True) as session:
         try:
-            # Load the pin map (.pinmap) created using the Digital Pattern Editor
             pin_map_filename = os.path.join(directory, 'PinMap.pinmap')
             session.load_pin_map(pin_map_filename)
 
-            # Configure whether the TDR endpoint is open or shorted to ground
             session.tdr_endpoint_termination = endpoint_termination
 
             # Measure propagation delays and optionally apply the offsets to compensate for them.
@@ -25,7 +23,6 @@ def example(resource_name, options, channel_list, endpoint_termination, apply_of
 
             print('TDR Offsets (seconds): {}'.format(offsets_in_seconds))
         finally:
-            # Disconnect the selected channels using programmable onboard switching
             session.channels[channel_list].selected_function = nidigital.SelectedFunction.DISCONNECT
 
     print('Done TDR Measurement')
@@ -34,7 +31,7 @@ def example(resource_name, options, channel_list, endpoint_termination, apply_of
 
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to use Time-Domain Reflectometry (TDR) to measure propagation delays through cables, connectors, and load boards. Use a 50 ohm controlled-impedance system and ensure an open or short exists at the selected TDR plane.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
+    parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name of a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name.')
     parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     parser.add_argument('-c', '--channel-list', default='PinGroup1', help='List of channels or pins to measure.')
     parser.add_argument('-e', '--tdr-endpoint-termination', default='OPEN', type=str.upper, choices=nidigital.TDREndpointTermination.__members__, help='Specifies whether TDR Channels are connected to an open circuit or a short to ground.')
