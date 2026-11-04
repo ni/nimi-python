@@ -41,12 +41,12 @@ def example(resource_name, options, start_label):
 def _main(argsv):
     parser = argparse.ArgumentParser(description='Demonstrates how to load the pin map, specifications, levels, timing, and pattern files on a digital pattern instrument and burst the pattern.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2,PXI1Slot3', help='The specified resource name shown in Measurement & Automation Explorer (MAX) for a digital pattern instrument, for example, PXI1Slot3, where PXI1Slot3 is an instrument resource name. This parameter accepts a comma-delimited list of strings in the form PXI1Slot2,PXI1Slot3. List the instruments in the same order they appear in the pin map.')
-    parser.add_argument('-s', '--simulate', action='store_true', help='Run on simulated hardware instead of real hardware')
+    parser.add_argument('-s', '--simulate', default='True', choices=['True', 'False'], help='Whether to run on simulated hardware or real hardware')
     parser.add_argument('-l', '--start-label', default='new_pattern', help='Pattern name or exported pattern label from which to start bursting the pattern.')
     args = parser.parse_args(argsv)
 
     example(args.resource_name,
-            'Simulate=1, DriverSetup=Model:6570' if args.simulate else '',
+            'Simulate=1, DriverSetup=Model:6570' if args.simulate == 'True' else '',
             args.start_label)
 
 
@@ -55,13 +55,14 @@ def main():
 
 
 def test_main():
-    _main(['--simulate'])
+    _main([])
 
 
 def test_example():
     resource_name = 'PXI1Slot2,PXI1Slot3'
     options = {'simulate': True, 'driver_setup': {'Model': '6570'}, }
-    example(resource_name, options, 'new_pattern')
+    start_label = 'new_pattern'
+    example(resource_name, options, start_label)
 
 
 if __name__ == '__main__':
