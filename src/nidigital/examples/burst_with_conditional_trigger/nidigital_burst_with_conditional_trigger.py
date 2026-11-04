@@ -12,29 +12,23 @@ def example(resource_name, options, trigger_type, trigger_source, trigger_edge, 
 
         directory = os.path.dirname(os.path.abspath(__file__))
 
-        # Load the pin map (.pinmap) created using the Digital Pattern Editor
         pin_map_filename = os.path.join(directory, 'PinMap.pinmap')
         session.load_pin_map(pin_map_filename)
 
-        # Load the specifications (.specs), levels (.digilevels), and timing (.digitiming) sheets created using the Digital Pattern Editor
         spec_filename = os.path.join(directory, 'Specifications.specs')
         levels_filename = os.path.join(directory, 'PinLevels.digilevels')
         timing_filename = os.path.join(directory, 'Timing.digitiming')
         session.load_specifications_levels_and_timing(spec_filename, levels_filename, timing_filename)
 
-        # Apply the settings from the levels and timing sheets we just loaded to the session
         session.apply_levels_and_timing(levels_filename, timing_filename)
 
-        # Load the pattern file (.digipat) created using the Digital Pattern Editor
         pattern_filename = os.path.join(directory, 'Pattern.digipat')
         session.load_pattern(pattern_filename)
 
-        # Configure the conditional jump trigger instance used by the pattern
         trigger_identifier = 'conditionalJumpTrigger0'
         conditional_trigger = session.conditional_jump_triggers[trigger_identifier]
         conditional_trigger.conditional_jump_trigger_type = trigger_type
         if trigger_type == nidigital.TriggerType.DIGITAL_EDGE:
-            # Specify a source and edge for the external conditional jump trigger
             conditional_trigger.digital_edge_conditional_jump_trigger_source = trigger_source
             conditional_trigger.digital_edge_conditional_jump_trigger_edge = trigger_edge
 
@@ -47,18 +41,14 @@ def example(resource_name, options, trigger_type, trigger_source, trigger_edge, 
                     print('Pattern burst stopped without sending a software trigger')
                     return
 
-                # Send the software conditional trigger and wait until the pattern is done bursting
                 session.send_software_edge_trigger(nidigital.SoftwareTrigger.CONDITIONAL_JUMP, trigger_identifier)
                 session.wait_until_done()
             else:
-                # Burst the pattern and block until completion, including any wait for an external conditional trigger
                 session.burst_pattern(start_label='new_pattern')
         finally:
             try:
-                # Abort any pending burst before disconnecting the channels
                 session.abort()
             finally:
-                # Disconnect all channels using programmable onboard switching
                 session.selected_function = nidigital.SelectedFunction.DISCONNECT
     print('Done bursting pattern')
 
