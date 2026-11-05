@@ -21,6 +21,15 @@ nidigital_configure_time_set_and_voltage_levels.py
    :encoding: utf8
    :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
 
+nidigital_leakage.py
+--------------------
+
+.. literalinclude:: ../../src/nidigital/examples/leakage/nidigital_leakage.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_leakage.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/leakage/nidigital_leakage.py>`_
+
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
 
