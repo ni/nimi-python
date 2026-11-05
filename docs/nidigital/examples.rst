@@ -30,3 +30,12 @@ nidigital_ppmu_source_and_measure.py
    :encoding: utf8
    :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
+nidigital_source_waveform.py
+----------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/source_waveform/nidigital_source_waveform.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_source_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/source_waveform/nidigital_source_waveform.py>`_
+
