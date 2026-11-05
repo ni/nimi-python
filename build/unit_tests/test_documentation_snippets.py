@@ -188,6 +188,25 @@ def test_initiate_function_def_for_doc_no_initiate_function():
     assert initiate_function_def_for_doc({}, {'task': 'acquisition'}) is None
 
 
+def test_initiate_function_def_for_doc_singular():
+    from build.helper.metadata_filters import filter_context_managers
+    functions = {
+        'Initiate': {
+            'documentation': {
+                'description': 'acquisition',
+            },
+            'python_name': '_initiate',
+        },
+    }
+    config = {'context_manager_name': _acquisition_context_manager}
+    docs = [initiate_function_def_for_doc(functions, cm) for cm in filter_context_managers(config)]
+    assert [d['python_name'] for d in docs] == ['initiate']
+    assert [d['documentation']['description'] for d in docs] == ['acquisition']
+    # The source function metadata must not be modified
+    assert functions['Initiate']['python_name'] == '_initiate'
+    assert 'note' not in functions['Initiate']['documentation']
+
+
 def test_initiate_function_def_for_doc_multiple():
     from build.helper.metadata_filters import filter_context_managers
     functions = {
