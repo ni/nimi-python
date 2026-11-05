@@ -36,6 +36,18 @@ class _Acquisition(object):
         self._session.abort()
 
 
+class _Generation(object):
+    def __init__(self, session):
+        self._session = session
+        self._session._initiate_generation()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._session.abort_generation()
+
+
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
     @wraps(f)
@@ -222,7 +234,25 @@ class _SessionBase(object):
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
+    def initiate_generation(self):
+        '''initiate_generation
+
+        Initiates a generation.
+
+        Note:
+        This method will return a Python context manager that will initiate on entering and abort on exit.
+        '''
+        return _Generation(self)
+
     ''' These are code-generated '''
+
+    @ivi_synchronized
+    def abort_generation(self):
+        r'''abort_generation
+
+        Aborts a previously initiated generation.
+        '''
+        self._interpreter.abort_generation()
 
     @ivi_synchronized
     def function_with_repeated_capability_type(self):
@@ -406,6 +436,14 @@ class _SessionBase(object):
         indices = _converters.convert_repeated_capabilities_without_prefix(indices)
         names = self._interpreter.get_channel_names(indices)
         return _converters.convert_comma_separated_string_to_list(names)
+
+    @ivi_synchronized
+    def _initiate_generation(self):
+        r'''_initiate_generation
+
+        Initiates a generation.
+        '''
+        self._interpreter.initiate_generation()
 
     def lock(self):
         '''lock
