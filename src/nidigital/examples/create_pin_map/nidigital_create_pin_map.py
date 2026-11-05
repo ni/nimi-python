@@ -22,25 +22,32 @@ def _create_pin_map(resource_name, file_path):
 
     # Pin and group names must match the bundled levels, timing, and pattern files.
     dut_pins = ('SCL', 'SDA', 'CS')
+    system_pins = ('Vcc',)
+    dut_pin_connections = (('SCL', '0'), ('SDA', '1'))
+    shared_pin_connection = {'pin': 'CS', 'siteNumber': '0,1', 'instrument': instruments[0], 'channel': '30'}
+    system_pin_connections = (('Vcc', instruments[0], '3'),)
+
     pins = ElementTree.SubElement(pin_map, 'Pins')
     for pin in dut_pins:
         ElementTree.SubElement(pins, 'DUTPin', name=pin)
-    ElementTree.SubElement(pins, 'SystemPin', name='Vcc')
+    for pin in system_pins:
+        ElementTree.SubElement(pins, 'SystemPin', name=pin)
 
     pin_groups = ElementTree.SubElement(pin_map, 'PinGroups')
     pin_group = ElementTree.SubElement(pin_groups, 'PinGroup', name='I2C_bus')
-    for pin in ('Vcc',) + dut_pins:
+    for pin in system_pins + dut_pins:
         ElementTree.SubElement(pin_group, 'PinReference', pin=pin)
 
     sites = ElementTree.SubElement(pin_map, 'Sites')
     connections = ElementTree.SubElement(pin_map, 'Connections')
     # Both sites share CS on the first instrument; Vcc is a system pin, not a per-site pin.
-    ElementTree.SubElement(connections, 'Connection', pin='CS', siteNumber='0,1', instrument=instruments[0], channel='30')
+    ElementTree.SubElement(connections, 'Connection', **shared_pin_connection)
     for site, instrument in enumerate(instruments):
         ElementTree.SubElement(sites, 'Site', siteNumber=str(site))
-        for pin, channel in (('SCL', '0'), ('SDA', '1')):
+        for pin, channel in dut_pin_connections:
             ElementTree.SubElement(connections, 'Connection', pin=pin, siteNumber=str(site), instrument=instrument, channel=channel)
-    ElementTree.SubElement(connections, 'SystemConnection', pin='Vcc', instrument=instruments[0], channel='3')
+    for pin, instrument, channel in system_pin_connections:
+        ElementTree.SubElement(connections, 'SystemConnection', pin=pin, instrument=instrument, channel=channel)
 
     ElementTree.ElementTree(pin_map).write(file_path, encoding='utf-8', xml_declaration=True)
 
