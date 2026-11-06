@@ -28,7 +28,6 @@ def example(resource_name, options, source_waveform_type='PARALLEL', data_mappin
 
         mapping = nidigital.SourceDataMapping[data_mapping]
 
-        # Configure the source waveform type
         if source_waveform_type == 'PARALLEL':
             session.pins[parallel_channel_list].create_source_waveform_parallel(waveform_name, mapping)
         elif source_waveform_type == 'SERIAL':
@@ -37,15 +36,14 @@ def example(resource_name, options, source_waveform_type='PARALLEL', data_mappin
             # Waveform configuration and data are read from the TDMS file
             session.create_source_waveform_from_file_tdms(waveform_name, waveform_file, write_waveform_data)
 
-        # Write the source waveform data
         if source_waveform_type != 'TDMS':
-            # Placeholder ramp data for illustration; replace with your own waveform samples
+            # Example ramp samples; replace with the data required by your DUT.
             sample_count = 2 ** min(sample_width, 8) if source_waveform_type == 'SERIAL' else 256
-            samples = [i % sample_count for i in range(sample_count)]
+            samples = list(range(sample_count))
             if mapping == nidigital.SourceDataMapping.BROADCAST:
                 session.write_source_waveform_broadcast(waveform_name, samples)
             else:
-                # Site-unique data is a dict of site number to samples; both sites use the same placeholder data here
+                # The bundled pin map has two sites; both use the same example data.
                 session.write_source_waveform_site_unique(waveform_name, {0: samples, 1: samples})
 
         print('Start bursting pattern')
@@ -86,6 +84,7 @@ def test_main():
     _main([])
     _main(['--source-waveform-type', 'SERIAL', '--data-mapping', 'SITE_UNIQUE'])
     _main(['--source-waveform-type', 'TDMS'])
+    _main(['--source-waveform-type', 'TDMS', '--write-waveform-data', 'False'])
 
 
 def test_example():
@@ -94,6 +93,7 @@ def test_example():
     example(resource_name, options)
     example(resource_name, options, 'SERIAL', 'SITE_UNIQUE')
     example(resource_name, options, 'TDMS')
+    example(resource_name, options, 'TDMS', write_waveform_data=False)
 
 
 if __name__ == '__main__':
