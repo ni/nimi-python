@@ -16,26 +16,29 @@ def example(resource_name, options, power_supply_voltage, test_input_voltages, c
         ppmu_pins = 'Power,Digital_In'
         input_pins = 'Digital_In'
         power_pins = 'Power'
+        ppmu_channels = session.channels[ppmu_pins]
+        input_channels = session.channels[input_pins]
+        power_channels = session.channels[power_pins]
 
         try:
-            session.channels[ppmu_pins].selected_function = nidigital.SelectedFunction.PPMU
-            session.channels[ppmu_pins].ppmu_aperture_time = 20e-6
-            session.channels[ppmu_pins].ppmu_aperture_time_units = nidigital.PPMUApertureTimeUnits.SECONDS
+            ppmu_channels.selected_function = nidigital.SelectedFunction.PPMU
+            ppmu_channels.ppmu_aperture_time = 20e-6
+            ppmu_channels.ppmu_aperture_time_units = nidigital.PPMUApertureTimeUnits.SECONDS
 
-            session.channels[input_pins].ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
-            session.channels[input_pins].ppmu_current_limit_range = 10e-6
+            input_channels.ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
+            input_channels.ppmu_current_limit_range = 10e-6
 
-            session.channels[power_pins].ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
-            session.channels[power_pins].ppmu_current_limit_range = 10e-3
-            session.channels[power_pins].ppmu_voltage_level = power_supply_voltage
-            session.channels[power_pins].ppmu_source()
+            power_channels.ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
+            power_channels.ppmu_current_limit_range = 10e-3
+            power_channels.ppmu_voltage_level = power_supply_voltage
+            power_channels.ppmu_source()
 
-            pin_info = session.channels[input_pins].get_pin_results_pin_information()
+            pin_info = input_channels.get_pin_results_pin_information()
 
             for voltage in test_input_voltages:
-                session.channels[input_pins].ppmu_voltage_level = voltage
-                session.channels[input_pins].ppmu_source()
-                current_measurements = session.channels[input_pins].ppmu_measure(nidigital.PPMUMeasurementType.CURRENT)
+                input_channels.ppmu_voltage_level = voltage
+                input_channels.ppmu_source()
+                current_measurements = input_channels.ppmu_measure(nidigital.PPMUMeasurementType.CURRENT)
 
                 for pin, current in zip(pin_info, current_measurements):
                     result = 'PASS' if abs(current) <= current_limit else 'FAIL'
