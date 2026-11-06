@@ -16,31 +16,34 @@ def example(resource_name, options, force_current, high_limit, low_limit):
         all_pins = 'All_Pins'
         power_pins = 'Power'
         continuity_pins = 'Digital_In,Digital_Out'
+        all_channels = session.channels[all_pins]
+        power_channels = session.channels[power_pins]
+        continuity_channels = session.channels[continuity_pins]
 
         try:
-            session.channels[all_pins].selected_function = nidigital.SelectedFunction.PPMU
-            session.channels[all_pins].ppmu_aperture_time = 20e-6
-            session.channels[all_pins].ppmu_aperture_time_units = nidigital.PPMUApertureTimeUnits.SECONDS
+            all_channels.selected_function = nidigital.SelectedFunction.PPMU
+            all_channels.ppmu_aperture_time = 20e-6
+            all_channels.ppmu_aperture_time_units = nidigital.PPMUApertureTimeUnits.SECONDS
 
-            session.channels[power_pins].ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
-            session.channels[power_pins].ppmu_current_limit_range = 10e-3
-            session.channels[power_pins].ppmu_voltage_level = 0
-            session.channels[power_pins].ppmu_source()
+            power_channels.ppmu_output_function = nidigital.PPMUOutputFunction.VOLTAGE
+            power_channels.ppmu_current_limit_range = 10e-3
+            power_channels.ppmu_voltage_level = 0
+            power_channels.ppmu_source()
 
-            session.channels[continuity_pins].ppmu_output_function = nidigital.PPMUOutputFunction.CURRENT
-            session.channels[continuity_pins].ppmu_current_level_range = 32e-6
-            session.channels[continuity_pins].ppmu_voltage_limit_high = 1.5
-            session.channels[continuity_pins].ppmu_voltage_limit_low = -1.5
+            continuity_channels.ppmu_output_function = nidigital.PPMUOutputFunction.CURRENT
+            continuity_channels.ppmu_current_level_range = 32e-6
+            continuity_channels.ppmu_voltage_limit_high = 1.5
+            continuity_channels.ppmu_voltage_limit_low = -1.5
 
-            pin_info = session.channels[continuity_pins].get_pin_results_pin_information()
+            pin_info = continuity_channels.get_pin_results_pin_information()
 
-            session.channels[continuity_pins].ppmu_current_level = force_current
-            session.channels[continuity_pins].ppmu_source()
-            positive_measurements = session.channels[continuity_pins].ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
+            continuity_channels.ppmu_current_level = force_current
+            continuity_channels.ppmu_source()
+            positive_measurements = continuity_channels.ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
 
-            session.channels[continuity_pins].ppmu_current_level = -force_current
-            session.channels[continuity_pins].ppmu_source()
-            negative_measurements = session.channels[continuity_pins].ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
+            continuity_channels.ppmu_current_level = -force_current
+            continuity_channels.ppmu_source()
+            negative_measurements = continuity_channels.ppmu_measure(nidigital.PPMUMeasurementType.VOLTAGE)
 
             for pin, positive_voltage, negative_voltage in zip(pin_info, positive_measurements, negative_measurements):
                 passed = low_limit <= positive_voltage <= high_limit and -high_limit <= negative_voltage <= -low_limit
