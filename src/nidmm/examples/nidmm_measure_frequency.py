@@ -7,13 +7,11 @@ import warnings
 
 # NIDMM_WARN_UNDERRANGE; reported by read() when the input is under range and used here to indicate "signal not detected"
 SIGNAL_NOT_DETECTED_WARNING_CODE = 0x3FFA4F80
-# Required by configure_measurement_digits(); 5.5 is the driver's documented default
-RESOLUTION_DIGITS = 5.5
 
 
-def example(resource_name, options, function, range, max_amplitude):
+def example(resource_name, options, function, range, max_amplitude, resolution_digits=5.5):
     with nidmm.Session(resource_name=resource_name, options=options) as session:
-        session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=range, resolution_digits=RESOLUTION_DIGITS)
+        session.configure_measurement_digits(measurement_function=nidmm.Function[function], range=range, resolution_digits=resolution_digits)
         session.freq_voltage_range = max_amplitude
         with warnings.catch_warnings(record=True) as caught:
             warnings.simplefilter('always')
@@ -30,9 +28,10 @@ def _main(argsv):
     parser.add_argument('-f', '--function', default='FREQ', choices=['FREQ', 'PERIOD'], type=str.upper, help='Specifies the measurement_function used to acquire the measurement.')
     parser.add_argument('-r', '--range', default=20, type=float, help='Specifies the range for the measurement function. For FREQ, the minimum frequency expected in Hz; for PERIOD, the maximum period expected in seconds.')
     parser.add_argument('--max-amplitude', default=50, type=float, help='Specifies the maximum amplitude of the input signal for frequency measurements.')
+    parser.add_argument('--resolution-digits', default=5.5, type=float, help='Specifies the resolution of the measurement in digits.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Sets the initial value of certain attributes for the session.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.function, args.range, args.max_amplitude)
+    example(args.resource_name, args.option_string, args.function, args.range, args.max_amplitude, args.resolution_digits)
 
 
 def main():
