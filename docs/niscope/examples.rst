@@ -30,6 +30,15 @@ niscope_fetch_into.py
    :encoding: utf8
    :caption: `(niscope_fetch_into.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_fetch_into.py>`_
 
+niscope_multi_record.py
+-----------------------
+
+.. literalinclude:: ../../src/niscope/examples/niscope_multi_record.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(niscope_multi_record.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_multi_record.py>`_
+
 niscope_read.py
 ---------------
 
