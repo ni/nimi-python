@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TimingFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xmlns="http://www.ni.com/Semiconductor/Timing">
+  <TimingSheet>
+    <TimeSets>
+      <TimeSet name="SPI">
+        <Period>ac.period</Period>
+        <PinEdges>
+          <PinEdge pin="CS">
+            <DriveNonReturn>
+              <On>0</On>
+              <Data>0</Data>
+              <Off>ac.period</Off>
+            </DriveNonReturn>
+            <CompareStrobe>
+              <Strobe>(3 * ac.period) / 4</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+          <PinEdge pin="SCLK">
+            <ReturnToLow>
+              <On>ac.period / 2</On>
+              <Data>ac.period / 2</Data>
+              <Return>ac.period</Return>
+              <Off>ac.period</Off>
+            </ReturnToLow>
+            <CompareStrobe>
+              <Strobe>(3 * ac.period) / 4</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+          <PinEdge pin="MOSI">
+            <DriveNonReturn>
+              <On>0</On>
+              <Data>0</Data>
+              <Off>ac.period</Off>
+            </DriveNonReturn>
+            <CompareStrobe>
+              <Strobe>(3 * ac.period) / 4</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+          <PinEdge pin="MISO">
+            <DriveNonReturn>
+              <On>0</On>
+              <Data>0</Data>
+              <Off>ac.period</Off>
+            </DriveNonReturn>
+            <CompareStrobe>
+              <Strobe>(3 * ac.period) / 4</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+    </TimeSets>
+  </TimingSheet>
+</TimingFile>
