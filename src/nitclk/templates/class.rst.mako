@@ -9,11 +9,11 @@
     functions_all = template_parameters['metadata'].functions
     functions = helper.filter_public_functions(functions_all)
 
-    if 'context_manager_name' in config:
-        # Add a InitiateDoc entry - only used to add initiate() to the Session documentation
-        initiate_doc = helper.initiate_function_def_for_doc(functions_all, config)
+    # Add InitiateDoc entries - only used to add initiate() (or each configured method_name) to the Session documentation
+    for context_manager in helper.filter_context_managers(config):
+        initiate_doc = helper.initiate_function_def_for_doc(functions_all, context_manager)
         if initiate_doc is not None:
-            functions['InitiateDoc'] = initiate_doc
+            functions['InitiateDoc_' + initiate_doc['python_name']] = initiate_doc
 
     doc_list = {}
     for fname in sorted(functions):

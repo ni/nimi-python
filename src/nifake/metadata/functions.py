@@ -19,6 +19,25 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'AbortGeneration': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Aborts a previously initiated generation.'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            }
+        ],
+        'render_in_session_base': True,
+        'returns': 'ViStatus'
+    },
     'AcceptListOfDurationsInSeconds': {
         'codegen_method': 'public',
         'documentation': {
@@ -1550,6 +1569,25 @@ functions = {
                 'type': 'ViSession'
             }
         ],
+        'returns': 'ViStatus'
+    },
+    'InitiateGeneration': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Initiates a generation.'
+        },
+        'included_in_proto': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            }
+        ],
+        'render_in_session_base': True,
         'returns': 'ViStatus'
     },
     'LockSession': {

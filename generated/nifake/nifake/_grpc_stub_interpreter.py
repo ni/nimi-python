@@ -88,6 +88,9 @@ class GrpcStubInterpreter(object):
             grpc_types.AbortRequest(vi=self._vi),
         )
 
+    def abort_generation(self):  # noqa: N802
+        raise NotImplementedError('abort_generation is not supported over gRPC')
+
     def accept_list_of_durations_in_seconds(self, delays):  # noqa: N802
         self._invoke(
             self._client.AcceptListOfDurationsInSeconds,
@@ -340,6 +343,9 @@ class GrpcStubInterpreter(object):
 
     def initiate(self):  # noqa: N802
         raise NotImplementedError('initiate is not supported over gRPC')
+
+    def initiate_generation(self):  # noqa: N802
+        raise NotImplementedError('initiate_generation is not supported over gRPC')
 
     def lock(self):  # noqa: N802
         self._lock.acquire()

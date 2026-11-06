@@ -11,11 +11,11 @@
 
     grpc_supported = template_parameters['include_grpc_support']
 
-    if 'context_manager_name' in config:
-        # Add a InitiateDoc entry - only used to add initiate() to the Session documentation
-        initiate_doc = helper.initiate_function_def_for_doc(functions_all, config)
+    # Add InitiateDoc entries - only used to add initiate() (or each configured method_name) to the Session documentation
+    for context_manager in helper.filter_context_managers(config):
+        initiate_doc = helper.initiate_function_def_for_doc(functions_all, context_manager)
         if initiate_doc is not None:
-            functions['InitiateDoc'] = initiate_doc
+            functions['InitiateDoc_' + initiate_doc['python_name']] = initiate_doc
 
     # Add a CloseDoc entry - only used to add close() to the Session documentation
     close_doc = helper.close_function_def_for_doc(functions_all, config)

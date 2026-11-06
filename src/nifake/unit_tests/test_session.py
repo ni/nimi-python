@@ -207,6 +207,69 @@ class TestSession:
             self.patched_library_interpreter.abort.assert_called_once_with()
         self.patched_library_interpreter.close.assert_called_once_with()
 
+    def test_acquisition_context_manager_abnormal_exit(self):
+        self.patched_library_interpreter.initiate.side_effect = [None]
+        self.patched_library_interpreter.abort.side_effect = [None]
+        with nifake.Session('dev1') as session:
+            try:
+                with session.initiate():
+                    raise nifake.Error('Fake exception')
+            except nifake.Error:
+                pass
+            self.patched_library_interpreter.initiate.assert_called_once_with()
+            self.patched_library_interpreter.abort.assert_called_once_with()
+
+    def test_generation_context_manager(self):
+        self.patched_library_interpreter.initiate_generation.side_effect = [None]
+        self.patched_library_interpreter.abort_generation.side_effect = [None]
+        with nifake.Session('dev1') as session:
+            with session.initiate_generation():
+                self.patched_library_interpreter.initiate_generation.assert_called_once_with()
+                self.patched_library_interpreter.abort_generation.assert_not_called()
+            self.patched_library_interpreter.abort_generation.assert_called_once_with()
+            self.patched_library_interpreter.initiate.assert_not_called()
+            self.patched_library_interpreter.abort.assert_not_called()
+        self.patched_library_interpreter.close.assert_called_once_with()
+
+    def test_generation_no_context_manager(self):
+        self.patched_library_interpreter.initiate_generation.side_effect = [None]
+        self.patched_library_interpreter.abort_generation.side_effect = [None]
+        with nifake.Session('dev1') as session:
+            session.initiate_generation()
+            self.patched_library_interpreter.initiate_generation.assert_called_once_with()
+            session.abort_generation()
+            self.patched_library_interpreter.abort_generation.assert_called_once_with()
+        self.patched_library_interpreter.close.assert_called_once_with()
+
+    def test_generation_context_manager_on_channels(self):
+        # initiate_generation is rendered in _SessionBase, so it is also available on repeated capabilities
+        self.patched_library_interpreter.initiate_generation.side_effect = [None]
+        self.patched_library_interpreter.abort_generation.side_effect = [None]
+        with nifake.Session('dev1') as session:
+            with session.channels['0'].initiate_generation():
+                self.patched_library_interpreter.initiate_generation.assert_called_once_with()
+            self.patched_library_interpreter.abort_generation.assert_called_once_with()
+
+    def test_initiate_only_on_session(self):
+        # initiate is rendered in Session only, so it is not available on repeated capabilities
+        with nifake.Session('dev1') as session:
+            assert not hasattr(session.channels['0'], 'initiate')
+
+    def test_multiple_context_managers_nested(self):
+        self.patched_library_interpreter.initiate.side_effect = [None]
+        self.patched_library_interpreter.abort.side_effect = [None]
+        self.patched_library_interpreter.initiate_generation.side_effect = [None]
+        self.patched_library_interpreter.abort_generation.side_effect = [None]
+        with nifake.Session('dev1') as session:
+            with session.initiate():
+                with session.initiate_generation():
+                    self.patched_library_interpreter.initiate.assert_called_once_with()
+                    self.patched_library_interpreter.initiate_generation.assert_called_once_with()
+                self.patched_library_interpreter.abort_generation.assert_called_once_with()
+                self.patched_library_interpreter.abort.assert_not_called()
+            self.patched_library_interpreter.abort.assert_called_once_with()
+        self.patched_library_interpreter.close.assert_called_once_with()
+
     def test_single_point_read_timedelta(self):
         test_maximum_time_ns = 1    # nanoseconds
         test_maximum_time_s = 1e-9  # seconds
