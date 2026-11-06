@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TimingFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xmlns="http://www.ni.com/Semiconductor/Timing">
+  <TimingSheet>
+    <TimeSets>
+      <TimeSet name="tset0">
+        <Period>100 ns</Period>
+        <PinEdges>
+          <PinEdge pin="I2C_bus">
+            <DriveNonReturn>
+              <On>0 ns</On>
+              <Data>0 ns</Data>
+              <Off>100 ns</Off>
+            </DriveNonReturn>
+            <CompareStrobe>
+              <Strobe>50 ns</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+    </TimeSets>
+  </TimingSheet>
+</TimingFile>
