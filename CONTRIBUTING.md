@@ -23,8 +23,6 @@ In order to have the ability to build and run the tests you will need a few thin
 
 - Install and enable [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
 - Install the following in **Windows Subsystem for Linux**:
-  - GNU Make: ``sudo apt-get install make``
-  - zip: ``sudo apt-get install zip``
   - 64-bit [Python](https://www.python.org/downloads/)
     -- Use the version that `build_test` uses. See `envlist` definition in [tox.ini](./tox.ini)
 
@@ -77,6 +75,15 @@ Building **[`nimi-python`](https://github.com/ni/nimi-python)**
 1. To clean everything and start fresh
 
         tox -e clean
+
+1. To regenerate only some drivers, pass arguments to the code generator through `tox`. For example:
+
+        tox -e py312-codegen -- --driver nidmm --driver nitclk
+
+   `tox` isn't required: with the `codegen` dependencies installed (see `deps` in [tox.ini](./tox.ini)), you can run the
+   code generator directly with `python -m build.codegen generate [--driver DRIVER ...]`.
+   It also has `clean` and `installers` commands; use `--help` for details.
+   The code generator always regenerates every file it is asked to.
 
 
 Updating submodules
