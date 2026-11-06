@@ -230,6 +230,16 @@ class SideEffectsHelper(object):
         self._defaults['TDR']['return'] = 0
         self._defaults['TDR']['actualNumOffsets'] = None
         self._defaults['TDR']['offsets'] = None
+        self._defaults['TMU_Abort'] = {}
+        self._defaults['TMU_Abort']['return'] = 0
+        self._defaults['TMU_FetchAveragedMeasurement'] = {}
+        self._defaults['TMU_FetchAveragedMeasurement']['return'] = 0
+        self._defaults['TMU_FetchAveragedMeasurement']['measurement'] = None
+        self._defaults['TMU_GetDisabledTMUContexts'] = {}
+        self._defaults['TMU_GetDisabledTMUContexts']['return'] = 0
+        self._defaults['TMU_GetDisabledTMUContexts']['tmuContexts'] = None
+        self._defaults['TMU_Initiate'] = {}
+        self._defaults['TMU_Initiate']['return'] = 0
         self._defaults['UnloadAllPatterns'] = {}
         self._defaults['UnloadAllPatterns']['return'] = 0
         self._defaults['UnloadSpecifications'] = {}
@@ -1030,6 +1040,37 @@ class SideEffectsHelper(object):
             offsets_ref[i] = self._defaults['TDR']['offsets'][i]
         return self._defaults['TDR']['return']
 
+    def niDigital_TMU_Abort(self, vi, tmu):  # noqa: N802
+        if self._defaults['TMU_Abort']['return'] != 0:
+            return self._defaults['TMU_Abort']['return']
+        return self._defaults['TMU_Abort']['return']
+
+    def niDigital_TMU_FetchAveragedMeasurement(self, vi, tmu, timeout, measurement):  # noqa: N802
+        if self._defaults['TMU_FetchAveragedMeasurement']['return'] != 0:
+            return self._defaults['TMU_FetchAveragedMeasurement']['return']
+        # measurement
+        if self._defaults['TMU_FetchAveragedMeasurement']['measurement'] is None:
+            raise MockFunctionCallError("niDigital_TMU_FetchAveragedMeasurement", param='measurement')
+        if measurement is not None:
+            measurement.contents.value = self._defaults['TMU_FetchAveragedMeasurement']['measurement']
+        return self._defaults['TMU_FetchAveragedMeasurement']['return']
+
+    def niDigital_TMU_GetDisabledTMUContexts(self, vi, tmu_contexts_buffer_size, tmu_contexts):  # noqa: N802
+        if self._defaults['TMU_GetDisabledTMUContexts']['return'] != 0:
+            return self._defaults['TMU_GetDisabledTMUContexts']['return']
+        # tmu_contexts
+        if self._defaults['TMU_GetDisabledTMUContexts']['tmuContexts'] is None:
+            raise MockFunctionCallError("niDigital_TMU_GetDisabledTMUContexts", param='tmuContexts')
+        if tmu_contexts_buffer_size.value == 0:
+            return len(self._defaults['TMU_GetDisabledTMUContexts']['tmuContexts'])
+        tmu_contexts.value = self._defaults['TMU_GetDisabledTMUContexts']['tmuContexts'].encode('ascii')
+        return self._defaults['TMU_GetDisabledTMUContexts']['return']
+
+    def niDigital_TMU_Initiate(self, vi, tmu):  # noqa: N802
+        if self._defaults['TMU_Initiate']['return'] != 0:
+            return self._defaults['TMU_Initiate']['return']
+        return self._defaults['TMU_Initiate']['return']
+
     def niDigital_UnloadAllPatterns(self, vi, unload_keep_alive_pattern):  # noqa: N802
         if self._defaults['UnloadAllPatterns']['return'] != 0:
             return self._defaults['UnloadAllPatterns']['return']
@@ -1290,6 +1331,14 @@ class SideEffectsHelper(object):
         mock_library.niDigital_SetRuntimeEnvironment.return_value = 0
         mock_library.niDigital_TDR.side_effect = MockFunctionCallError("niDigital_TDR")
         mock_library.niDigital_TDR.return_value = 0
+        mock_library.niDigital_TMU_Abort.side_effect = MockFunctionCallError("niDigital_TMU_Abort")
+        mock_library.niDigital_TMU_Abort.return_value = 0
+        mock_library.niDigital_TMU_FetchAveragedMeasurement.side_effect = MockFunctionCallError("niDigital_TMU_FetchAveragedMeasurement")
+        mock_library.niDigital_TMU_FetchAveragedMeasurement.return_value = 0
+        mock_library.niDigital_TMU_GetDisabledTMUContexts.side_effect = MockFunctionCallError("niDigital_TMU_GetDisabledTMUContexts")
+        mock_library.niDigital_TMU_GetDisabledTMUContexts.return_value = 0
+        mock_library.niDigital_TMU_Initiate.side_effect = MockFunctionCallError("niDigital_TMU_Initiate")
+        mock_library.niDigital_TMU_Initiate.return_value = 0
         mock_library.niDigital_UnloadAllPatterns.side_effect = MockFunctionCallError("niDigital_UnloadAllPatterns")
         mock_library.niDigital_UnloadAllPatterns.return_value = 0
         mock_library.niDigital_UnloadSpecifications.side_effect = MockFunctionCallError("niDigital_UnloadSpecifications")

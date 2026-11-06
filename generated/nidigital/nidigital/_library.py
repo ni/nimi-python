@@ -101,6 +101,10 @@ class Library(object):
         self.niDigital_SetAttributeViString_cfunc = None
         self.niDigital_SetRuntimeEnvironment_cfunc = None
         self.niDigital_TDR_cfunc = None
+        self.niDigital_TMU_Abort_cfunc = None
+        self.niDigital_TMU_FetchAveragedMeasurement_cfunc = None
+        self.niDigital_TMU_GetDisabledTMUContexts_cfunc = None
+        self.niDigital_TMU_Initiate_cfunc = None
         self.niDigital_UnloadAllPatterns_cfunc = None
         self.niDigital_UnloadSpecifications_cfunc = None
         self.niDigital_UnlockSession_cfunc = None
@@ -762,6 +766,38 @@ class Library(object):
                 self.niDigital_TDR_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViBoolean, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niDigital_TDR_cfunc.restype = ViStatus  # noqa: F405
         return self.niDigital_TDR_cfunc(vi, channel_list, apply_offsets, offsets_buffer_size, offsets, actual_num_offsets)
+
+    def niDigital_TMU_Abort(self, vi, tmu):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_TMU_Abort_cfunc is None:
+                self.niDigital_TMU_Abort_cfunc = self._get_library_function('niDigital_TMU_Abort')
+                self.niDigital_TMU_Abort_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDigital_TMU_Abort_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_TMU_Abort_cfunc(vi, tmu)
+
+    def niDigital_TMU_FetchAveragedMeasurement(self, vi, tmu, timeout, measurement):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_TMU_FetchAveragedMeasurement_cfunc is None:
+                self.niDigital_TMU_FetchAveragedMeasurement_cfunc = self._get_library_function('niDigital_TMU_FetchAveragedMeasurement')
+                self.niDigital_TMU_FetchAveragedMeasurement_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niDigital_TMU_FetchAveragedMeasurement_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_TMU_FetchAveragedMeasurement_cfunc(vi, tmu, timeout, measurement)
+
+    def niDigital_TMU_GetDisabledTMUContexts(self, vi, tmu_contexts_buffer_size, tmu_contexts):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_TMU_GetDisabledTMUContexts_cfunc is None:
+                self.niDigital_TMU_GetDisabledTMUContexts_cfunc = self._get_library_function('niDigital_TMU_GetDisabledTMUContexts')
+                self.niDigital_TMU_GetDisabledTMUContexts_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDigital_TMU_GetDisabledTMUContexts_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_TMU_GetDisabledTMUContexts_cfunc(vi, tmu_contexts_buffer_size, tmu_contexts)
+
+    def niDigital_TMU_Initiate(self, vi, tmu):  # noqa: N802
+        with self._func_lock:
+            if self.niDigital_TMU_Initiate_cfunc is None:
+                self.niDigital_TMU_Initiate_cfunc = self._get_library_function('niDigital_TMU_Initiate')
+                self.niDigital_TMU_Initiate_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niDigital_TMU_Initiate_cfunc.restype = ViStatus  # noqa: F405
+        return self.niDigital_TMU_Initiate_cfunc(vi, tmu)
 
     def niDigital_UnloadAllPatterns(self, vi, unload_keep_alive_pattern):  # noqa: N802
         with self._func_lock:
