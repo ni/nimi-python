@@ -12,6 +12,15 @@ nidigital_burst_with_start_trigger.py
    :encoding: utf8
    :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
 
+nidigital_capture_waveform.py
+-----------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/capture_waveform/nidigital_capture_waveform.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_capture_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/capture_waveform/nidigital_capture_waveform.py>`_
+
 nidigital_configure_time_set_and_voltage_levels.py
 --------------------------------------------------
 
