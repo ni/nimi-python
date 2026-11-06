@@ -3,6 +3,15 @@ Examples
 
 `You can download all niscope examples for latest version here <https://github.com/ni/nimi-python/releases/download/niscope-1.5.0/niscope_examples.zip>`_
 
+niscope_digital_filtering.py
+----------------------------
+
+.. literalinclude:: ../../src/niscope/examples/niscope_digital_filtering.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(niscope_digital_filtering.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_digital_filtering.py>`_
+
 niscope_fetch.py
 ----------------
 
