@@ -85,4 +85,30 @@ channels
         passes a string of :python:`'0, 1, 2'` to the set attribute function.
 
 
+calplanes
+---------
+
+    .. py:attribute:: nirfsa.Session.calplanes[]
+
+        If no prefix is added to the items in the parameter, the correct prefix will be added when
+        the driver function call is made.
+
+        .. code:: python
+
+            session.calplanes['0-2'].channel_enabled = True
+
+        passes a string of :python:`'calplane::0, calplane::1, calplane::2'` to the set attribute function.
+
+        If an invalid repeated capability is passed to the driver, the driver will return an error.
+
+        You can also explicitly use the prefix as part of the parameter, but it must be the correct prefix
+        for the specific repeated capability.
+
+        .. code:: python
+
+            session.calplanes['calplane::0-calplane::2'].channel_enabled = True
+
+        passes a string of :python:`'calplane::0, calplane::1, calplane::2'` to the set attribute function.
+
+
 
