@@ -4,19 +4,11 @@ config = {
     'api_version': '25.8.0d9999',
     'c_function_prefix': 'niFake_',
     'close_function': 'close',
-    'context_manager_name': [
-        {
-            'abort_function': 'Abort',
-            'initiate_function': 'Initiate',
-            'task': 'acquisition'
-        },
-        {
-            'abort_function': 'AbortGeneration',
-            'initiate_function': 'InitiateGeneration',
-            'method_name': 'initiate_generation',
-            'task': 'generation'
-        }
-    ],
+    'context_manager_name': {
+        'abort_function': 'Abort',
+        'initiate_function': 'Initiate',
+        'task': 'acquisition'
+    },
     'custom_types': [
         {
             'ctypes_type': 'struct_CustomStruct',

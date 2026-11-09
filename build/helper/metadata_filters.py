@@ -490,14 +490,14 @@ def filter_codegen_enums(enums):
 
 
 def filter_context_managers(config):
-    '''Returns the 'context_manager_name' config entries as a list, ignoring empty entries.
+    '''Returns the 'context_manager_name' config entries as a list.
 
-    'context_manager_name' may be a single dict or a list of dicts.
+    'context_manager_name' may be a single dict or a list of dicts. A missing or empty value returns an empty list.
     '''
     context_managers = config.get('context_manager_name') or []
     if not isinstance(context_managers, list):
         context_managers = [context_managers]
-    return [cm for cm in context_managers if cm]
+    return context_managers
 
 
 def are_complex_parameters_used(functions):
