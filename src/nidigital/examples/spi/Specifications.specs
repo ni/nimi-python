@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Specifications xmlns:f="http://www.ni.com/schemas/Semiconductor/Formula.xsd" schemaVersion="1.0" xmlns="http://www.ni.com/schemas/Semiconductor/Specifications.xsd">
+  <Section name="dc">
+    <f:Formula symbol="vcc">
+      <f:Definition>5</f:Definition>
+      <f:Description>V</f:Description>
+    </f:Formula>
+  </Section>
+  <Section name="ac">
+    <f:Formula symbol="period">
+      <f:Definition>1 / 1000000</f:Definition>
+      <f:Description>1 MHz</f:Description>
+    </f:Formula>
+  </Section>
+  <Description />
+</Specifications>
