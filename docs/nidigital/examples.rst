@@ -30,3 +30,12 @@ nidigital_ppmu_source_and_measure.py
    :encoding: utf8
    :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
+tdr_measurement.py
+------------------
+
+.. literalinclude:: ../../src/nidigital/examples/tdr_measurement/tdr_measurement.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(tdr_measurement.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tdr_measurement/tdr_measurement.py>`_
+
