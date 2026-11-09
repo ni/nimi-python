@@ -17,17 +17,7 @@ ${template_parameters['encoding_tag']}
 
     close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 
-    context_managers = []
-    for context_manager in helper.filter_context_managers(config):
-        initiate_function = functions[context_manager['initiate_function']]
-        context_managers.append({
-            'class_name': '_' + context_manager['task'].title(),
-            'method_name': context_manager.get('method_name', 'initiate'),
-            'initiate': initiate_function['python_name'],
-            'abort': functions[context_manager['abort_function']]['python_name'],
-            'render_in_session_base': initiate_function['render_in_session_base'],
-            'doc': helper.initiate_function_def_for_doc(functions, context_manager),
-        })
+    context_managers = helper.get_context_managers(functions, config)
 %>\
 import array  # noqa: F401
 % if config['use_locking']:

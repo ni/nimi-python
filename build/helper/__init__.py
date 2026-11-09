@@ -1,3 +1,4 @@
+from build.helper.codegen_helper import get_context_managers  # noqa: F401
 from build.helper.codegen_helper import get_ctype_variable_declaration_snippet  # noqa: F401
 from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401

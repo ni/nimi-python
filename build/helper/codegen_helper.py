@@ -1,6 +1,8 @@
 import builtins
 
+from .documentation_snippets import initiate_function_def_for_doc
 from .helper import get_array_type_for_api_type
+from .metadata_filters import filter_context_managers
 from .metadata_filters import filter_parameters
 from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
@@ -579,3 +581,27 @@ def get_enum_value_snippet(value):
     '''Returns value formatted into string, surrounding it with single quotes if it is of str type'''
     return ("'{}'" if type(value) is str else "{}").format(value)
 
+
+def get_context_managers(functions, config):
+    '''Returns the information session.py.mako needs to generate each session context manager
+
+    Each 'context_manager_name' config entry produces a dict with:
+    - class_name: name of the generated context manager class
+    - method_name: name of the public method that returns the context manager
+    - initiate: python_name of the function called on enter
+    - abort: python_name of the function called on exit
+    - render_in_session_base: whether the method goes in _SessionBase (True) or Session (False)
+    - doc: function definition used for the method's docstring
+    '''
+    context_managers = []
+    for context_manager in filter_context_managers(config):
+        initiate_function = functions[context_manager['initiate_function']]
+        context_managers.append({
+            'class_name': '_' + context_manager['task'].title(),
+            'method_name': context_manager.get('method_name', 'initiate'),
+            'initiate': initiate_function['python_name'],
+            'abort': functions[context_manager['abort_function']]['python_name'],
+            'render_in_session_base': initiate_function['render_in_session_base'],
+            'doc': initiate_function_def_for_doc(functions, context_manager),
+        })
+    return context_managers
