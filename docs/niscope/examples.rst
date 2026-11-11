@@ -12,6 +12,15 @@ niscope_digital_filtering.py
    :encoding: utf8
    :caption: `(niscope_digital_filtering.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_digital_filtering.py>`_
 
+niscope_external_clocking.py
+----------------------------
+
+.. literalinclude:: ../../src/niscope/examples/niscope_external_clocking.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(niscope_external_clocking.py) <https://github.com/ni/nimi-python/blob/master/src/niscope/examples/niscope_external_clocking.py>`_
+
 niscope_fetch.py
 ----------------
 
