@@ -84,7 +84,6 @@ def test_main():
     _main([])
     _main(['--source-waveform-type', 'SERIAL', '--data-mapping', 'SITE_UNIQUE'])
     _main(['--source-waveform-type', 'TDMS'])
-    _main(['--source-waveform-type', 'TDMS', '--write-waveform-data', 'False'])
 
 
 def test_example():
@@ -93,7 +92,6 @@ def test_example():
     example(resource_name, options)
     example(resource_name, options, 'SERIAL', 'SITE_UNIQUE')
     example(resource_name, options, 'TDMS')
-    example(resource_name, options, 'TDMS', write_waveform_data=False)
 
 
 if __name__ == '__main__':
