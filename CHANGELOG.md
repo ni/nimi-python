@@ -800,10 +800,16 @@
 #### [nidmm] Unreleased
 - Added
   - Added the `nidmm_measure_ac_volts.py` example.
+  - Added the `nidmm_max_dc_reading_rate_at_7_5_digits.py` example.
+  - Added the `nidmm_cont_acq_chart_multiple_samples.py` example.
+  - Added the `nidmm_cont_acq_multiple_samples_ext_trig.py` example.
   - Added the `nidmm_diode_test.py` example.
   - Added the `nidmm_measure_capacitance.py` example.
+  - Added the `nidmm_measure_frequency.py` example.
   - Added the `nidmm_measure_temperature_rtd.py` example.
+  - Added the `nidmm_measure_temperature_thermistor.py` example.
   - Added the `nidmm_measure_temperature_thermocouple.py` example.
+  - Added the `nidmm_improve_dc_noise_rejection.py` example.
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
@@ -1901,6 +1907,7 @@
 #### [niscope] Unreleased
 - Added
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
+  - Added the `niscope_external_clocking.py` example.
   - Added the `niscope_measurement_library.py` example.
 - Changed
 - Removed
