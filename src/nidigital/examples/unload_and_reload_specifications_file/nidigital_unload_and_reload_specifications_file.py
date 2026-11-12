@@ -30,62 +30,65 @@ def _sweep_values(start, stop, steps):
 
 def _update_specification_values(specs_file_path, new_values):
     # new_values maps '<Section>.<Symbol>' to the new definition for that specification
-    tree = ElementTree.parse(specs_file_path)
+    specs_tree = ElementTree.parse(specs_file_path)
     for spec_name, value in new_values.items():
-        section_name, symbol = spec_name.split('.')
-        definition = tree.find("s:Section[@name='{}']/f:Formula[@symbol='{}']/f:Definition".format(section_name, symbol), NAMESPACES)
-        definition.text = repr(value)
-    tree.write(specs_file_path, encoding='utf-8', xml_declaration=True)
+        section_name, formula_symbol = spec_name.split('.')
+        definition_element = specs_tree.find("s:Section[@name='{}']/f:Formula[@symbol='{}']/f:Definition".format(section_name, formula_symbol), NAMESPACES)
+        definition_element.text = repr(value)
+    specs_tree.write(specs_file_path, encoding='utf-8', xml_declaration=True)
 
 
-def _count_mismatched_bits(expected, actual):
-    return sum(bin(e ^ a).count('1') for e, a in zip(expected, actual))
+def _count_mismatched_bits(expected_words, actual_words):
+    return sum(bin(expected_word ^ actual_word).count('1') for expected_word, actual_word in zip(expected_words, actual_words))
 
 
 def example(resource_name, options, x_spec_name, x_start, x_stop, x_steps, y_spec_name, y_start, y_stop, y_steps):
-    dir = os.path.join(os.path.dirname(__file__))
+    example_dir = os.path.join(os.path.dirname(__file__))
 
-    pin_map_filename = os.path.join(dir, 'PinMap.pinmap')
-    pattern_filename = os.path.join(dir, 'demo_pattern_no_hw.digipat')
-    capture_waveform_filename = os.path.join(dir, 'demo_waveform.digicapture')
-    original_spec_filename = os.path.join(dir, 'Specifications.specs')
-    levels_filename = os.path.join(dir, 'PinLevels.digilevels')
-    timing_filename = os.path.join(dir, 'Timing.digitiming')
+    pin_map_filename = os.path.join(example_dir, 'PinMap.pinmap')
+    pattern_filename = os.path.join(example_dir, 'demo_pattern_no_hw.digipat')
+    capture_waveform_filename = os.path.join(example_dir, 'demo_waveform.digicapture')
+    original_spec_filename = os.path.join(example_dir, 'Specifications.specs')
+    levels_filename = os.path.join(example_dir, 'PinLevels.digilevels')
+    timing_filename = os.path.join(example_dir, 'Timing.digitiming')
 
     # Work on a temporary copy so the specifications file shipped with the example is never modified
     with tempfile.TemporaryDirectory() as temp_dir, \
             nidigital.Session(resource_name=resource_name, options=options) as session:
-        spec_filename = os.path.join(temp_dir, 'Specifications.specs')
-        shutil.copy(original_spec_filename, spec_filename)
+        temp_spec_filename = os.path.join(temp_dir, 'Specifications.specs')
+        shutil.copy(original_spec_filename, temp_spec_filename)
 
         session.load_pin_map(pin_map_filename)
         session.load_pattern(pattern_filename)
 
         # Source random data; reg0 sets the number of source and capture loops used by the pattern
-        source_data = [random.getrandbits(SAMPLE_WIDTH) for _ in range(NUMBER_OF_SAMPLES)]
-        session.write_sequencer_register(nidigital.SequencerRegister.REGISTER0, len(source_data) * SAMPLE_WIDTH)
+        source_waveform_data = [random.getrandbits(SAMPLE_WIDTH) for _ in range(NUMBER_OF_SAMPLES)]
+        session.write_sequencer_register(nidigital.SequencerRegister.REGISTER0, len(source_waveform_data) * SAMPLE_WIDTH)
         session.pins[SOURCE_PIN].create_source_waveform_serial(SOURCE_WAVEFORM_NAME, nidigital.SourceDataMapping.BROADCAST, SAMPLE_WIDTH, nidigital.BitOrder.MSB)
-        session.write_source_waveform_broadcast(SOURCE_WAVEFORM_NAME, source_data)
+        session.write_source_waveform_broadcast(SOURCE_WAVEFORM_NAME, source_waveform_data)
 
         session.create_capture_waveform_from_file_digicapture(CAPTURE_WAVEFORM_NAME, capture_waveform_filename)
 
-        session.load_specifications_levels_and_timing(spec_filename, levels_filename, timing_filename)
+        session.load_specifications_levels_and_timing(temp_spec_filename, levels_filename, timing_filename)
         session.apply_levels_and_timing(levels_filename, timing_filename)
 
-        total_bits = len(source_data) * SAMPLE_WIDTH
+        total_bits = len(source_waveform_data) * SAMPLE_WIDTH
+        print('Start sweeping specifications')
         print('Fraction of mismatched capture bits for each ({}, {}) pair:'.format(x_spec_name, y_spec_name))
         for y_value in _sweep_values(y_start, y_stop, y_steps):
             for x_value in _sweep_values(x_start, x_stop, x_steps):
                 # Only the specifications are unloaded, so reload only them; the levels and timing sheets are still loaded
-                session.unload_specifications(spec_filename)
-                _update_specification_values(spec_filename, {x_spec_name: x_value, y_spec_name: y_value})
-                session.load_specifications_levels_and_timing(specifications_file_paths=spec_filename)
+                session.unload_specifications(temp_spec_filename)
+                _update_specification_values(temp_spec_filename, {x_spec_name: x_value, y_spec_name: y_value})
+                session.load_specifications_levels_and_timing(specifications_file_paths=temp_spec_filename)
                 session.apply_levels_and_timing(levels_filename, timing_filename)
 
                 session.burst_pattern(start_label='startdemo')
-                captured = next(iter(session.fetch_capture_waveform(CAPTURE_WAVEFORM_NAME, len(source_data)).values()))
-                mismatch = _count_mismatched_bits(source_data, captured) / total_bits
-                print('{}={:g}, {}={:g}: {:.4f}'.format(x_spec_name, x_value, y_spec_name, y_value, mismatch))
+                site_number, captured_waveform = next(iter(session.fetch_capture_waveform(CAPTURE_WAVEFORM_NAME, len(source_waveform_data)).items()))
+                mismatch_fraction = _count_mismatched_bits(source_waveform_data, captured_waveform) / total_bits
+                print('Site {}: {}={:g}, {}={:g}: {:.4f}'.format(site_number, x_spec_name, x_value, y_spec_name, y_value, mismatch_fraction))
+
+        print('Done sweeping specifications')
 
         session.selected_function = nidigital.SelectedFunction.DISCONNECT
 
@@ -97,11 +100,11 @@ def _main(argsv):
     parser.add_argument('-xn', '--x-spec-name', default='AC.Strobe', help='Specification to sweep along the X axis, as <Section>.<Symbol>.')
     parser.add_argument('-xs', '--x-start', default=0.0, type=float, help='First value of the X axis sweep.')
     parser.add_argument('-xe', '--x-stop', default=1e-8, type=float, help='Last value of the X axis sweep.')
-    parser.add_argument('-xc', '--x-steps', default=50, type=int, help='Number of values in the X axis sweep.')
+    parser.add_argument('-xc', '--x-steps', default=5, type=int, help='Number of values in the X axis sweep.')
     parser.add_argument('-yn', '--y-spec-name', default='DC.Voh', help='Specification to sweep along the Y axis, as <Section>.<Symbol>.')
     parser.add_argument('-ys', '--y-start', default=0.0, type=float, help='First value of the Y axis sweep.')
     parser.add_argument('-ye', '--y-stop', default=5.0, type=float, help='Last value of the Y axis sweep.')
-    parser.add_argument('-yc', '--y-steps', default=100, type=int, help='Number of values in the Y axis sweep.')
+    parser.add_argument('-yc', '--y-steps', default=5, type=int, help='Number of values in the Y axis sweep.')
     args = parser.parse_args(argsv)
 
     example(args.resource_name,
