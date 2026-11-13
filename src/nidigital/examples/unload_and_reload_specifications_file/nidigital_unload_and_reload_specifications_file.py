@@ -84,13 +84,13 @@ def example(resource_name, options, x_spec_name, x_start, x_stop, x_steps, y_spe
                 session.apply_levels_and_timing(levels_filename, timing_filename)
 
                 session.burst_pattern(start_label='startdemo')
-                site_number, captured_waveform = next(iter(session.fetch_capture_waveform(CAPTURE_WAVEFORM_NAME, len(source_waveform_data)).items()))
-                mismatch_fraction = _count_mismatched_bits(source_waveform_data, captured_waveform) / total_bits
-                print('Site {}: {}={:g}, {}={:g}: {:.4f}'.format(site_number, x_spec_name, x_value, y_spec_name, y_value, mismatch_fraction))
-
-        print('Done sweeping specifications')
+                captured_waveforms = session.fetch_capture_waveform(CAPTURE_WAVEFORM_NAME, len(source_waveform_data))
+                for site_number, captured_waveform in captured_waveforms.items():
+                    mismatch_fraction = _count_mismatched_bits(source_waveform_data, captured_waveform) / total_bits
+                    print('Site {}: {}={:g}, {}={:g}: {:.4f}'.format(site_number, x_spec_name, x_value, y_spec_name, y_value, mismatch_fraction))
 
         session.selected_function = nidigital.SelectedFunction.DISCONNECT
+        print('Done sweeping specifications')
 
 
 def _main(argsv):
