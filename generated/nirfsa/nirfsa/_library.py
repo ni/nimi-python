@@ -49,8 +49,10 @@ class Library(object):
         self.niRFSA_DeleteAllDeembeddingTables_cfunc = None
         self.niRFSA_DeleteDeembeddingTable_cfunc = None
         self.niRFSA_DisableAdvanceTrigger_cfunc = None
+        self.niRFSA_DisableCalibrationPlane_cfunc = None
         self.niRFSA_DisableRefTrigger_cfunc = None
         self.niRFSA_DisableStartTrigger_cfunc = None
+        self.niRFSA_EnableCalibrationPlane_cfunc = None
         self.niRFSA_EnableSessionAccess_cfunc = None
         self.niRFSA_ErrorMessage_cfunc = None
         self.niRFSA_FetchIQMultiRecordComplexF32_cfunc = None
@@ -292,6 +294,14 @@ class Library(object):
                 self.niRFSA_DisableAdvanceTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_DisableAdvanceTrigger_cfunc(vi)
 
+    def niRFSA_DisableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_DisableCalibrationPlane_cfunc is None:
+                self.niRFSA_DisableCalibrationPlane_cfunc = self._get_library_function('niRFSA_DisableCalibrationPlane')
+                self.niRFSA_DisableCalibrationPlane_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_DisableCalibrationPlane_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_DisableCalibrationPlane_cfunc(vi, channel_name)
+
     def niRFSA_DisableRefTrigger(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_DisableRefTrigger_cfunc is None:
@@ -307,6 +317,14 @@ class Library(object):
                 self.niRFSA_DisableStartTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSA_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_DisableStartTrigger_cfunc(vi)
+
+    def niRFSA_EnableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_EnableCalibrationPlane_cfunc is None:
+                self.niRFSA_EnableCalibrationPlane_cfunc = self._get_library_function('niRFSA_EnableCalibrationPlane')
+                self.niRFSA_EnableCalibrationPlane_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_EnableCalibrationPlane_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_EnableCalibrationPlane_cfunc(vi, channel_name)
 
     def niRFSA_EnableSessionAccess(self, vi, enable):  # noqa: N802
         with self._func_lock:

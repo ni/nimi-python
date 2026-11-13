@@ -63,10 +63,14 @@ class SideEffectsHelper(object):
         self._defaults['DeleteDeembeddingTable']['return'] = 0
         self._defaults['DisableAdvanceTrigger'] = {}
         self._defaults['DisableAdvanceTrigger']['return'] = 0
+        self._defaults['DisableCalibrationPlane'] = {}
+        self._defaults['DisableCalibrationPlane']['return'] = 0
         self._defaults['DisableRefTrigger'] = {}
         self._defaults['DisableRefTrigger']['return'] = 0
         self._defaults['DisableStartTrigger'] = {}
         self._defaults['DisableStartTrigger']['return'] = 0
+        self._defaults['EnableCalibrationPlane'] = {}
+        self._defaults['EnableCalibrationPlane']['return'] = 0
         self._defaults['EnableSessionAccess'] = {}
         self._defaults['EnableSessionAccess']['return'] = 0
         self._defaults['ErrorMessage'] = {}
@@ -341,6 +345,11 @@ class SideEffectsHelper(object):
             return self._defaults['DisableAdvanceTrigger']['return']
         return self._defaults['DisableAdvanceTrigger']['return']
 
+    def niRFSA_DisableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        if self._defaults['DisableCalibrationPlane']['return'] != 0:
+            return self._defaults['DisableCalibrationPlane']['return']
+        return self._defaults['DisableCalibrationPlane']['return']
+
     def niRFSA_DisableRefTrigger(self, vi):  # noqa: N802
         if self._defaults['DisableRefTrigger']['return'] != 0:
             return self._defaults['DisableRefTrigger']['return']
@@ -350,6 +359,11 @@ class SideEffectsHelper(object):
         if self._defaults['DisableStartTrigger']['return'] != 0:
             return self._defaults['DisableStartTrigger']['return']
         return self._defaults['DisableStartTrigger']['return']
+
+    def niRFSA_EnableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        if self._defaults['EnableCalibrationPlane']['return'] != 0:
+            return self._defaults['EnableCalibrationPlane']['return']
+        return self._defaults['EnableCalibrationPlane']['return']
 
     def niRFSA_EnableSessionAccess(self, vi, enable):  # noqa: N802
         if self._defaults['EnableSessionAccess']['return'] != 0:
@@ -939,10 +953,14 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_DeleteDeembeddingTable.return_value = 0
         mock_library.niRFSA_DisableAdvanceTrigger.side_effect = MockFunctionCallError("niRFSA_DisableAdvanceTrigger")
         mock_library.niRFSA_DisableAdvanceTrigger.return_value = 0
+        mock_library.niRFSA_DisableCalibrationPlane.side_effect = MockFunctionCallError("niRFSA_DisableCalibrationPlane")
+        mock_library.niRFSA_DisableCalibrationPlane.return_value = 0
         mock_library.niRFSA_DisableRefTrigger.side_effect = MockFunctionCallError("niRFSA_DisableRefTrigger")
         mock_library.niRFSA_DisableRefTrigger.return_value = 0
         mock_library.niRFSA_DisableStartTrigger.side_effect = MockFunctionCallError("niRFSA_DisableStartTrigger")
         mock_library.niRFSA_DisableStartTrigger.return_value = 0
+        mock_library.niRFSA_EnableCalibrationPlane.side_effect = MockFunctionCallError("niRFSA_EnableCalibrationPlane")
+        mock_library.niRFSA_EnableCalibrationPlane.return_value = 0
         mock_library.niRFSA_EnableSessionAccess.side_effect = MockFunctionCallError("niRFSA_EnableSessionAccess")
         mock_library.niRFSA_EnableSessionAccess.return_value = 0
         mock_library.niRFSA_ErrorMessage.side_effect = MockFunctionCallError("niRFSA_ErrorMessage")
