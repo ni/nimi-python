@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TimingFile xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.0" xmlns="http://www.ni.com/Semiconductor/Timing">
+  <TimingSheet>
+    <TimeSets>
+      <TimeSet name="DriveNext">
+        <Period>AC.Period</Period>
+        <PinEdges>
+          <PinEdge pin="SDATA">
+            <ReturnToLow>
+              <On>AC.Period</On>
+              <Data>1.25*AC.Period</Data>
+              <Return>1.75*AC.Period</Return>
+              <Off>2*AC.Period</Off>
+            </ReturnToLow>
+            <CompareStrobe>
+              <Strobe>AC.Strobe</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+            <Comment>we are sourcing and capturing on the same pin, so we move the drive edges into the subsequent vector period</Comment>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+      <TimeSet name="wait">
+        <Period>3 µs</Period>
+        <PinEdges>
+          <PinEdge pin="All_Pins">
+            <DriveNonReturn>
+              <On>0</On>
+              <Data>0</Data>
+              <Off>AC.Period</Off>
+            </DriveNonReturn>
+            <CompareStrobe>
+              <Strobe>AC.Strobe</Strobe>
+            </CompareStrobe>
+            <DataSource>Pattern</DataSource>
+          </PinEdge>
+        </PinEdges>
+      </TimeSet>
+    </TimeSets>
+  </TimingSheet>
+</TimingFile>

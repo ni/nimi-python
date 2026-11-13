@@ -30,3 +30,12 @@ nidigital_ppmu_source_and_measure.py
    :encoding: utf8
    :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
+nidigital_unload_and_reload_specifications_file.py
+--------------------------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/unload_and_reload_specifications_file/nidigital_unload_and_reload_specifications_file.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_unload_and_reload_specifications_file.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/unload_and_reload_specifications_file/nidigital_unload_and_reload_specifications_file.py>`_
+

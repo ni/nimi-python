@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Specifications xmlns:f="http://www.ni.com/schemas/Semiconductor/Formula.xsd" schemaVersion="1.0" xmlns="http://www.ni.com/schemas/Semiconductor/Specifications.xsd">
+  <Section name="DC">
+    <f:Formula symbol="Vdd">
+      <f:Definition>5.250000E+0</f:Definition>
+    </f:Formula>
+    <f:Formula symbol="Voh">
+      <f:Definition>DC.Vdd - 1</f:Definition>
+    </f:Formula>
+    <f:Formula symbol="Vol">
+      <f:Definition>0.4</f:Definition>
+    </f:Formula>
+  </Section>
+  <Section name="AC">
+    <f:Formula symbol="Frequency">
+      <f:Definition>100 M</f:Definition>
+    </f:Formula>
+    <f:Formula symbol="Period">
+      <f:Definition>1 / AC.Frequency</f:Definition>
+    </f:Formula>
+    <f:Formula symbol="Strobe">
+      <f:Definition>0.4*AC.Period</f:Definition>
+    </f:Formula>
+  </Section>
+</Specifications>
