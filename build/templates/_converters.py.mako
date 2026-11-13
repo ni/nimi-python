@@ -5,13 +5,16 @@ ${template_parameters['encoding_tag']}
     config = template_parameters['metadata'].config
     module_name = config['module_name']
     extra_errors_used = config['extra_errors_used']
+    validate_repeated_capabilities = 'InvalidRepeatedCapabilityError' in extra_errors_used or len(config['repeated_capabilities']) == 0
     enums = config['enums']
 %>\
 import ${module_name}._visatype as _visatype
 % if any(helper.enum_uses_converter(enums[enum_name]) for enum_name in helper.filter_codegen_enums(enums)):
 import ${module_name}.enums as enums
 % endif
+% if validate_repeated_capabilities:
 import ${module_name}.errors as errors
+% endif
 
 import array
 import collections
@@ -51,7 +54,11 @@ def _convert_repeated_capabilities(arg, prefix):  # noqa: F811
     - (slice(0, 1), '2', [4, '5-6'], '7-9', '11:14', '16, 17') -->
         ['0', '2', '4', '5', '6', '7', '8', '9', '11', '12', '13', '14', '16', '17']
     '''
+% if validate_repeated_capabilities:
     raise errors.InvalidRepeatedCapabilityError('Invalid type', type(arg))
+% else:
+    raise TypeError('Invalid type for a repeated capability: {}'.format(type(arg)))
+% endif
 
 
 @_convert_repeated_capabilities.register(numbers.Integral)  # noqa: F811
@@ -77,9 +84,13 @@ def _(repeated_capability, prefix):
     # We remove any prefix and change ':' to '-'
     r = repeated_capability.strip().replace(prefix, '').replace(':', '-')
     rc = r.split('-')
+% if validate_repeated_capabilities:
     if len(rc) > 1:
         if len(rc) > 2:
             raise errors.InvalidRepeatedCapabilityError("Multiple '-' or ':'", repeated_capability)
+% else:
+    if len(rc) == 2:
+% endif
         try:
             start = int(rc[0])
             end = int(rc[1])
