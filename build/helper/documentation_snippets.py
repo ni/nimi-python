@@ -111,22 +111,21 @@ def close_function_def_for_doc(functions, config):
     return function_def
 
 
-def initiate_function_def_for_doc(functions, config):
+def initiate_function_def_for_doc(functions, context_manager):
     # This is very specific to session based APIs. We look for a 'initiate' function in
     # the metadata which is to become a code-generated "private" method of Session
     # for which we then use in a context manager. Copy its documentation so we apply it to
     # the said context manager.
-    session_context_manager_initiate = None
-    if 'initiate_function' in config['context_manager_name']:
-        session_context_manager_initiate = config['context_manager_name']['initiate_function']
+    # context_manager is a single entry from helper.filter_context_managers(config).
+    initiate_function = context_manager.get('initiate_function')
 
-    if session_context_manager_initiate is None:
+    if initiate_function is None:
         # Don't have an initiate
         return None
 
-    if session_context_manager_initiate in functions:
+    if initiate_function in functions:
         import copy
-        function_def = copy.deepcopy(functions[session_context_manager_initiate])
+        function_def = copy.deepcopy(functions[initiate_function])
         if 'documentation' not in function_def:
             function_def['documentation'] = {}
         if 'description' not in function_def['documentation']:
@@ -136,9 +135,9 @@ def initiate_function_def_for_doc(functions, config):
         if type(function_def['documentation']['note']) is not list:
             function_def['documentation']['note'] = [function_def['documentation']['note']]
         function_def['documentation']['note'].append(initiate_function_note)
-        function_def['python_name'] = 'initiate'
+        function_def['python_name'] = context_manager.get('method_name', 'initiate')
     else:
-        assert False, f"No '{session_context_manager_initiate}' function defined"
+        assert False, f"No '{initiate_function}' function defined"
 
     return function_def
 

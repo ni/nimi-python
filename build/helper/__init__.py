@@ -1,3 +1,4 @@
+from build.helper.codegen_helper import get_context_managers  # noqa: F401
 from build.helper.codegen_helper import get_ctype_variable_declaration_snippet  # noqa: F401
 from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
@@ -47,6 +48,7 @@ from build.helper.metadata_filters import filter_codegen_attributes  # noqa: F40
 from build.helper.metadata_filters import filter_codegen_attributes_public_only  # noqa: F401
 from build.helper.metadata_filters import filter_codegen_enums  # noqa: F401
 from build.helper.metadata_filters import filter_codegen_functions  # noqa: F401
+from build.helper.metadata_filters import filter_context_managers  # noqa: F401
 from build.helper.metadata_filters import filter_ivi_dance_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_len_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_library_functions  # noqa: F401

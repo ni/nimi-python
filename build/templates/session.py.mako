@@ -17,12 +17,7 @@ ${template_parameters['encoding_tag']}
 
     close_function_name = helper.camelcase_to_snakecase(config['close_function'])
 
-    session_context_manager = None
-    if 'task' in config['context_manager_name']:
-        session_context_manager = '_' + config['context_manager_name']['task'].title()
-        session_context_manager_initiate = functions[config['context_manager_name']['initiate_function']]['python_name']
-        session_context_manager_abort = functions[config['context_manager_name']['abort_function']]['python_name']
-        render_initiate_in_session_base = functions[config['context_manager_name']['initiate_function']]['render_in_session_base']
+    context_managers = helper.get_context_managers(functions, config)
 %>\
 import array  # noqa: F401
 % if config['use_locking']:
@@ -52,20 +47,20 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 
-% if session_context_manager is not None:
-class ${session_context_manager}(object):
+% for context_manager in context_managers:
+class ${context_manager['class_name']}(object):
     def __init__(self, session):
         self._session = session
-        self._session.${session_context_manager_initiate}()
+        self._session.${context_manager['initiate']}()
 
     def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        self._session.${session_context_manager_abort}()
+        self._session.${context_manager['abort']}()
 
 
-% endif
+% endfor
 % if config['use_locking']:
 # From https://stackoverflow.com/questions/5929107/decorators-with-parameters
 def ivi_synchronized(f):
@@ -195,15 +190,15 @@ constructor_params = helper.filter_parameters(init_function['parameters'], helpe
             raise AttributeError("'{0}' object has no attribute '{1}'".format(type(self).__name__, key))
         object.__setattr__(self, key, value)
 
-% if session_context_manager is not None and render_initiate_in_session_base:
-    def initiate(self):
-        '''initiate
+% for context_manager in [cm for cm in context_managers if cm['render_in_session_base']]:
+    def ${context_manager['method_name']}(self):
+        '''${context_manager['method_name']}
 
-        ${helper.get_function_docstring(helper.initiate_function_def_for_doc(functions, config), False, config, indent=8)}
+        ${helper.get_function_docstring(context_manager['doc'], False, config, indent=8)}
         '''
-        return ${session_context_manager}(self)
+        return ${context_manager['class_name']}(self)
 
-% endif
+% endfor
     ''' These are code-generated '''
 % for func_name in sorted({k: v for k, v in functions.items() if v['render_in_session_base']}):
 % for method_template in functions[func_name]['method_templates']:
@@ -330,15 +325,15 @@ if grpc_supported:
         self.close()
 % endif
 
-% if session_context_manager is not None and not render_initiate_in_session_base:
-    def initiate(self):
-        '''initiate
+% for context_manager in [cm for cm in context_managers if not cm['render_in_session_base']]:
+    def ${context_manager['method_name']}(self):
+        '''${context_manager['method_name']}
 
-        ${helper.get_function_docstring(helper.initiate_function_def_for_doc(functions, config), False, config, indent=8)}
+        ${helper.get_function_docstring(context_manager['doc'], False, config, indent=8)}
         '''
-        return ${session_context_manager}(self)
+        return ${context_manager['class_name']}(self)
 
-% endif
+% endfor
     def close(self):
         '''close
 

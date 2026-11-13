@@ -489,6 +489,17 @@ def filter_codegen_enums(enums):
     return {k: v for k, v in enums.items() if v['codegen_method'] != 'no'}
 
 
+def filter_context_managers(config):
+    '''Returns the 'context_manager_name' config entries as a list.
+
+    'context_manager_name' may be a single dict or a list of dicts. A missing or empty value returns an empty list.
+    '''
+    context_managers = config.get('context_manager_name') or []
+    if not isinstance(context_managers, list):
+        context_managers = [context_managers]
+    return context_managers
+
+
 def are_complex_parameters_used(functions):
     '''Returns bool based on whether any complex parameters are used in the functions metadata.'''
     are_complex_parameters_used = False

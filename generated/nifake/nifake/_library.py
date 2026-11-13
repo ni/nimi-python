@@ -27,6 +27,7 @@ class Library(object):
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niFake_Abort_cfunc = None
+        self.niFake_AbortGeneration_cfunc = None
         self.niFake_AcceptListOfDurationsInSeconds_cfunc = None
         self.niFake_BoolArrayOutputFunction_cfunc = None
         self.niFake_ConfigureABC_cfunc = None
@@ -67,6 +68,7 @@ class Library(object):
         self.niFake_ImportAttributeConfigurationBufferEx_cfunc = None
         self.niFake_InitWithOptions_cfunc = None
         self.niFake_Initiate_cfunc = None
+        self.niFake_InitiateGeneration_cfunc = None
         self.niFake_LockSession_cfunc = None
         self.niFake_MethodUsingWholeAndFractionalNumbers_cfunc = None
         self.niFake_MethodWithGrpcOnlyParam_cfunc = None
@@ -118,6 +120,14 @@ class Library(object):
                 self.niFake_Abort_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFake_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Abort_cfunc(vi)
+
+    def niFake_AbortGeneration(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_AbortGeneration_cfunc is None:
+                self.niFake_AbortGeneration_cfunc = self._get_library_function('niFake_AbortGeneration')
+                self.niFake_AbortGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
+                self.niFake_AbortGeneration_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_AbortGeneration_cfunc(vi)
 
     def niFake_AcceptListOfDurationsInSeconds(self, vi, count, delays):  # noqa: N802
         with self._func_lock:
@@ -438,6 +448,14 @@ class Library(object):
                 self.niFake_Initiate_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niFake_Initiate_cfunc.restype = ViStatus  # noqa: F405
         return self.niFake_Initiate_cfunc(vi)
+
+    def niFake_InitiateGeneration(self, vi):  # noqa: N802
+        with self._func_lock:
+            if self.niFake_InitiateGeneration_cfunc is None:
+                self.niFake_InitiateGeneration_cfunc = self._get_library_function('niFake_InitiateGeneration')
+                self.niFake_InitiateGeneration_cfunc.argtypes = [ViSession]  # noqa: F405
+                self.niFake_InitiateGeneration_cfunc.restype = ViStatus  # noqa: F405
+        return self.niFake_InitiateGeneration_cfunc(vi)
 
     def niFake_LockSession(self, vi, caller_has_lock):  # noqa: N802
         with self._func_lock:
