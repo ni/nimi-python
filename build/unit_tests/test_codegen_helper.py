@@ -1333,3 +1333,66 @@ def test_get_enum_value_snippet():
     assert get_enum_value_snippet(0) == '0'
     assert get_enum_value_snippet('True') == "'True'"
     assert get_enum_value_snippet('0') == "'0'"
+
+
+def _context_manager_functions():
+    def function(python_name, render_in_session_base):
+        return {
+            'documentation': {'description': python_name},
+            'python_name': python_name,
+            'render_in_session_base': render_in_session_base,
+        }
+    return {
+        'Abort': function('abort', False),
+        'Initiate': function('_initiate', False),
+        'AbortGeneration': function('abort_generation', True),
+        'InitiateGeneration': function('_initiate_generation', True),
+    }
+
+
+def test_get_context_managers_none():
+    assert get_context_managers(_context_manager_functions(), {'context_manager_name': {}}) == []
+
+
+def test_get_context_managers_singular():
+    config = {
+        'context_manager_name': {
+            'task': 'acquisition',
+            'initiate_function': 'Initiate',
+            'abort_function': 'Abort',
+        },
+    }
+    context_managers = get_context_managers(_context_manager_functions(), config)
+    assert len(context_managers) == 1
+    context_manager = context_managers[0]
+    assert context_manager['class_name'] == '_Acquisition'
+    assert context_manager['method_name'] == 'initiate'
+    assert context_manager['initiate'] == '_initiate'
+    assert context_manager['abort'] == 'abort'
+    assert context_manager['render_in_session_base'] is False
+    assert context_manager['doc']['python_name'] == 'initiate'
+
+
+def test_get_context_managers_multiple():
+    config = {
+        'context_manager_name': [
+            {
+                'task': 'acquisition',
+                'initiate_function': 'Initiate',
+                'abort_function': 'Abort',
+            },
+            {
+                'task': 'generation',
+                'initiate_function': 'InitiateGeneration',
+                'abort_function': 'AbortGeneration',
+                'method_name': 'initiate_generation',
+            },
+        ],
+    }
+    context_managers = get_context_managers(_context_manager_functions(), config)
+    assert [cm['class_name'] for cm in context_managers] == ['_Acquisition', '_Generation']
+    assert [cm['method_name'] for cm in context_managers] == ['initiate', 'initiate_generation']
+    assert [cm['initiate'] for cm in context_managers] == ['_initiate', '_initiate_generation']
+    assert [cm['abort'] for cm in context_managers] == ['abort', 'abort_generation']
+    assert [cm['render_in_session_base'] for cm in context_managers] == [False, True]
+    assert [cm['doc']['python_name'] for cm in context_managers] == ['initiate', 'initiate_generation']

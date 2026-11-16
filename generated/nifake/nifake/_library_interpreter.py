@@ -148,6 +148,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def abort_generation(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFake_AbortGeneration(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def accept_list_of_durations_in_seconds(self, delays):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         count_ctype = _visatype.ViInt32(0 if delays is None else len(delays))  # case S160
@@ -515,6 +521,12 @@ class LibraryInterpreter(object):
     def initiate(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niFake_Initiate(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def initiate_generation(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        error_code = self._library.niFake_InitiateGeneration(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

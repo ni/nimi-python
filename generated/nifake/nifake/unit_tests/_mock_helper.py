@@ -18,6 +18,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
+        self._defaults['AbortGeneration'] = {}
+        self._defaults['AbortGeneration']['return'] = 0
         self._defaults['AcceptListOfDurationsInSeconds'] = {}
         self._defaults['AcceptListOfDurationsInSeconds']['return'] = 0
         self._defaults['BoolArrayOutputFunction'] = {}
@@ -137,6 +139,8 @@ class SideEffectsHelper(object):
         self._defaults['InitWithOptions']['vi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
+        self._defaults['InitiateGeneration'] = {}
+        self._defaults['InitiateGeneration']['return'] = 0
         self._defaults['LockSession'] = {}
         self._defaults['LockSession']['return'] = 0
         self._defaults['LockSession']['callerHasLock'] = None
@@ -245,6 +249,11 @@ class SideEffectsHelper(object):
         if self._defaults['Abort']['return'] != 0:
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
+
+    def niFake_AbortGeneration(self, vi):  # noqa: N802
+        if self._defaults['AbortGeneration']['return'] != 0:
+            return self._defaults['AbortGeneration']['return']
+        return self._defaults['AbortGeneration']['return']
 
     def niFake_AcceptListOfDurationsInSeconds(self, vi, count, delays):  # noqa: N802
         if self._defaults['AcceptListOfDurationsInSeconds']['return'] != 0:
@@ -706,6 +715,11 @@ class SideEffectsHelper(object):
             return self._defaults['Initiate']['return']
         return self._defaults['Initiate']['return']
 
+    def niFake_InitiateGeneration(self, vi):  # noqa: N802
+        if self._defaults['InitiateGeneration']['return'] != 0:
+            return self._defaults['InitiateGeneration']['return']
+        return self._defaults['InitiateGeneration']['return']
+
     def niFake_LockSession(self, vi, caller_has_lock):  # noqa: N802
         if self._defaults['LockSession']['return'] != 0:
             return self._defaults['LockSession']['return']
@@ -1058,6 +1072,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niFake_Abort.side_effect = MockFunctionCallError("niFake_Abort")
         mock_library.niFake_Abort.return_value = 0
+        mock_library.niFake_AbortGeneration.side_effect = MockFunctionCallError("niFake_AbortGeneration")
+        mock_library.niFake_AbortGeneration.return_value = 0
         mock_library.niFake_AcceptListOfDurationsInSeconds.side_effect = MockFunctionCallError("niFake_AcceptListOfDurationsInSeconds")
         mock_library.niFake_AcceptListOfDurationsInSeconds.return_value = 0
         mock_library.niFake_BoolArrayOutputFunction.side_effect = MockFunctionCallError("niFake_BoolArrayOutputFunction")
@@ -1138,6 +1154,8 @@ class SideEffectsHelper(object):
         mock_library.niFake_InitWithOptions.return_value = 0
         mock_library.niFake_Initiate.side_effect = MockFunctionCallError("niFake_Initiate")
         mock_library.niFake_Initiate.return_value = 0
+        mock_library.niFake_InitiateGeneration.side_effect = MockFunctionCallError("niFake_InitiateGeneration")
+        mock_library.niFake_InitiateGeneration.return_value = 0
         mock_library.niFake_LockSession.side_effect = MockFunctionCallError("niFake_LockSession")
         mock_library.niFake_LockSession.return_value = 0
         mock_library.niFake_MethodUsingWholeAndFractionalNumbers.side_effect = MockFunctionCallError("niFake_MethodUsingWholeAndFractionalNumbers")
