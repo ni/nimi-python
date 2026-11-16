@@ -30,15 +30,6 @@ nidigital_load_sheets_and_burst.py
    :encoding: utf8
    :caption: `(nidigital_load_sheets_and_burst.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py>`_
 
-nidigital_ppmu_source_and_measure.py
-------------------------------------
-
-.. literalinclude:: ../../src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py
-   :language: python
-   :linenos:
-   :encoding: utf8
-   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
-
 nidigital_unload_and_reload_specifications_file.py
 --------------------------------------------------
 
@@ -47,4 +38,13 @@ nidigital_unload_and_reload_specifications_file.py
    :linenos:
    :encoding: utf8
    :caption: `(nidigital_unload_and_reload_specifications_file.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_unload_and_reload_specifications_file/nidigital_unload_and_reload_specifications_file.py>`_
+
+nidigital_ppmu_source_and_measure.py
+------------------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
