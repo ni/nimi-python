@@ -30,6 +30,15 @@ nidigital_load_sheets_and_burst.py
    :encoding: utf8
    :caption: `(nidigital_load_sheets_and_burst.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py>`_
 
+nidigital_source_waveform.py
+----------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/nidigital_source_waveform/nidigital_source_waveform.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_source_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_source_waveform/nidigital_source_waveform.py>`_
+
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
 
@@ -38,13 +47,4 @@ nidigital_ppmu_source_and_measure.py
    :linenos:
    :encoding: utf8
    :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
-
-nidigital_source_waveform.py
-----------------------------
-
-.. literalinclude:: ../../src/nidigital/examples/source_waveform/nidigital_source_waveform.py
-   :language: python
-   :linenos:
-   :encoding: utf8
-   :caption: `(nidigital_source_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/source_waveform/nidigital_source_waveform.py>`_
 
