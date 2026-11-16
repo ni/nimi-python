@@ -12,7 +12,7 @@
     grpc_supported = template_parameters['include_grpc_support']
 
     # Add InitiateDoc entries - only used to add initiate() (or each configured method_name) to the Session documentation
-    for context_manager in helper.filter_context_managers(config):
+    for context_manager in helper.get_context_manager_configs(config):
         initiate_doc = helper.initiate_function_def_for_doc(functions_all, context_manager)
         if initiate_doc is not None:
             functions['InitiateDoc_' + initiate_doc['python_name']] = initiate_doc

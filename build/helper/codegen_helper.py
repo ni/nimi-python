@@ -2,8 +2,8 @@ import builtins
 
 from .documentation_snippets import initiate_function_def_for_doc
 from .helper import get_array_type_for_api_type
-from .metadata_filters import filter_context_managers
 from .metadata_filters import filter_parameters
+from .metadata_filters import get_context_manager_configs
 from .metadata_find import find_custom_type
 from .metadata_find import find_size_parameter
 from .parameter_usage_options import ParameterUsageOptions
@@ -594,7 +594,7 @@ def get_context_managers(functions, config):
     - doc: function definition used for the method's docstring
     '''
     context_managers = []
-    for context_manager in filter_context_managers(config):
+    for context_manager in get_context_manager_configs(config):
         initiate_function = functions[context_manager['initiate_function']]
         context_managers.append({
             'class_name': '_' + context_manager['task'].title(),

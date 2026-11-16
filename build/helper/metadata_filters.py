@@ -489,7 +489,7 @@ def filter_codegen_enums(enums):
     return {k: v for k, v in enums.items() if v['codegen_method'] != 'no'}
 
 
-def filter_context_managers(config):
+def get_context_manager_configs(config):
     '''Returns the 'context_manager_name' config entries as a list.
 
     'context_manager_name' may be a single dict or a list of dicts. A missing or empty value returns an empty list.

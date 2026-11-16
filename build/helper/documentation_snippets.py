@@ -116,7 +116,7 @@ def initiate_function_def_for_doc(functions, context_manager):
     # the metadata which is to become a code-generated "private" method of Session
     # for which we then use in a context manager. Copy its documentation so we apply it to
     # the said context manager.
-    # context_manager is a single entry from helper.filter_context_managers(config).
+    # context_manager is a single entry from helper.get_context_manager_configs(config).
     initiate_function = context_manager.get('initiate_function')
 
     if initiate_function is None:

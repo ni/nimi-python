@@ -165,23 +165,23 @@ _generation_context_manager = {
 }
 
 
-def test_filter_context_managers_none():
-    from build.helper.metadata_filters import filter_context_managers
-    assert filter_context_managers({}) == []
-    assert filter_context_managers({'context_manager_name': {}}) == []
-    assert filter_context_managers({'context_manager_name': []}) == []
+def test_get_context_manager_configs_none():
+    from build.helper.metadata_filters import get_context_manager_configs
+    assert get_context_manager_configs({}) == []
+    assert get_context_manager_configs({'context_manager_name': {}}) == []
+    assert get_context_manager_configs({'context_manager_name': []}) == []
 
 
-def test_filter_context_managers_singular():
-    from build.helper.metadata_filters import filter_context_managers
-    assert filter_context_managers({'context_manager_name': _acquisition_context_manager}) == [_acquisition_context_manager]
-    assert filter_context_managers({'context_manager_name': [_acquisition_context_manager]}) == [_acquisition_context_manager]
+def test_get_context_manager_configs_singular():
+    from build.helper.metadata_filters import get_context_manager_configs
+    assert get_context_manager_configs({'context_manager_name': _acquisition_context_manager}) == [_acquisition_context_manager]
+    assert get_context_manager_configs({'context_manager_name': [_acquisition_context_manager]}) == [_acquisition_context_manager]
 
 
-def test_filter_context_managers_multiple():
-    from build.helper.metadata_filters import filter_context_managers
+def test_get_context_manager_configs_multiple():
+    from build.helper.metadata_filters import get_context_manager_configs
     config = {'context_manager_name': [_acquisition_context_manager, _generation_context_manager]}
-    assert filter_context_managers(config) == [_acquisition_context_manager, _generation_context_manager]
+    assert get_context_manager_configs(config) == [_acquisition_context_manager, _generation_context_manager]
 
 
 def test_initiate_function_def_for_doc_no_initiate_function():
@@ -189,7 +189,7 @@ def test_initiate_function_def_for_doc_no_initiate_function():
 
 
 def test_initiate_function_def_for_doc_singular():
-    from build.helper.metadata_filters import filter_context_managers
+    from build.helper.metadata_filters import get_context_manager_configs
     functions = {
         'Initiate': {
             'documentation': {
@@ -199,7 +199,7 @@ def test_initiate_function_def_for_doc_singular():
         },
     }
     config = {'context_manager_name': _acquisition_context_manager}
-    docs = [initiate_function_def_for_doc(functions, cm) for cm in filter_context_managers(config)]
+    docs = [initiate_function_def_for_doc(functions, cm) for cm in get_context_manager_configs(config)]
     assert [d['python_name'] for d in docs] == ['initiate']
     assert [d['documentation']['description'] for d in docs] == ['acquisition']
     # The source function metadata must not be modified
@@ -208,7 +208,7 @@ def test_initiate_function_def_for_doc_singular():
 
 
 def test_initiate_function_def_for_doc_multiple():
-    from build.helper.metadata_filters import filter_context_managers
+    from build.helper.metadata_filters import get_context_manager_configs
     functions = {
         'Initiate': {
             'documentation': {
@@ -224,7 +224,7 @@ def test_initiate_function_def_for_doc_multiple():
         },
     }
     config = {'context_manager_name': [_acquisition_context_manager, _generation_context_manager]}
-    docs = [initiate_function_def_for_doc(functions, cm) for cm in filter_context_managers(config)]
+    docs = [initiate_function_def_for_doc(functions, cm) for cm in get_context_manager_configs(config)]
     assert [d['python_name'] for d in docs] == ['initiate', 'initiate_generation']
     assert [d['documentation']['description'] for d in docs] == ['acquisition', 'generation']
     # The source function metadata must not be modified
