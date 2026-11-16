@@ -30,6 +30,15 @@ nidigital_load_sheets_and_burst.py
    :encoding: utf8
    :caption: `(nidigital_load_sheets_and_burst.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py>`_
 
+nidigital_tdr_measurement.py
+----------------------------
+
+.. literalinclude:: ../../src/nidigital/examples/nidigital_tdr_measurement/nidigital_tdr_measurement.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nidigital_tdr_measurement.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_tdr_measurement/nidigital_tdr_measurement.py>`_
+
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
 
@@ -38,13 +47,4 @@ nidigital_ppmu_source_and_measure.py
    :linenos:
    :encoding: utf8
    :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
-
-tdr_measurement.py
-------------------
-
-.. literalinclude:: ../../src/nidigital/examples/tdr_measurement/tdr_measurement.py
-   :language: python
-   :linenos:
-   :encoding: utf8
-   :caption: `(tdr_measurement.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/tdr_measurement/tdr_measurement.py>`_
 
