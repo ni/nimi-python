@@ -42,9 +42,9 @@ nidigital_ppmu_source_and_measure.py
 nidigital_spi.py
 ----------------
 
-.. literalinclude:: ../../src/nidigital/examples/spi/nidigital_spi.py
+.. literalinclude:: ../../src/nidigital/examples/nidigital_spi/nidigital_spi.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_spi.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/spi/nidigital_spi.py>`_
+   :caption: `(nidigital_spi.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_spi/nidigital_spi.py>`_
 
