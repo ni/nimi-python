@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PinMap schemaVersion="1.5" xmlns="http://www.ni.com/TestStand/SemiconductorModule/PinMap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Instruments>
+		<NIDigitalPatternInstrument name="PXI1Slot2" numberOfChannels="32" group="Digital" />
+		<NIDigitalPatternInstrument name="PXI1Slot3" numberOfChannels="32" group="Digital" />
+	</Instruments>
+	<Pins>
+		<DUTPin name="SDATA" />
+	</Pins>
+	<PinGroups>
+		<PinGroup name="Digital_Pins">
+			<PinReference pin="SDATA" />
+		</PinGroup>
+		<PinGroup name="All_Pins">
+			<PinReference pin="SDATA" />
+		</PinGroup>
+	</PinGroups>
+	<Sites>
+		<Site siteNumber="0" />
+		<Site siteNumber="1" />
+		<Site siteNumber="2" />
+		<Site siteNumber="3" />
+	</Sites>
+	<Connections>
+		<Connection pin="SDATA" siteNumber="0" instrument="PXI1Slot2" channel="25" />
+		<Connection pin="SDATA" siteNumber="1" instrument="PXI1Slot2" channel="17" />
+		<Connection pin="SDATA" siteNumber="2" instrument="PXI1Slot3" channel="9" />
+		<Connection pin="SDATA" siteNumber="3" instrument="PXI1Slot3" channel="1" />
+	</Connections>
+</PinMap>
