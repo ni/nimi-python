@@ -30,6 +30,15 @@ nifgen_standard_function.py
    :encoding: utf8
    :caption: `(nifgen_standard_function.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_standard_function.py>`_
 
+nifgen_sweep_generator.py
+-------------------------
+
+.. literalinclude:: ../../src/nifgen/examples/nifgen_sweep_generator.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nifgen_sweep_generator.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_sweep_generator.py>`_
+
 nifgen_trigger.py
 -----------------
 
