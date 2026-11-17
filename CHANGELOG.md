@@ -1135,6 +1135,7 @@
 
 #### [nifgen] Unreleased
 - Added
+  - Added the `nifgen_basic_arb_sequence.py` example.
   - (Common) Added `nitlsconfig[grpc]>=1.0.0a2` to the optional gRPC dependencies.
 - Changed
 - Removed
