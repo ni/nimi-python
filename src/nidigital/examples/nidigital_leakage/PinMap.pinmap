@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PinMap xmlns="http://www.ni.com/TestStand/SemiconductorModule/PinMap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" schemaVersion="1.5">
+	<Instruments>
+		<NIDigitalPatternInstrument name="PXI1Slot2" numberOfChannels="32" group="Digital" />
+		<NIDigitalPatternInstrument name="PXI1Slot3" numberOfChannels="32" group="Digital" />
+	</Instruments>
+	<Pins>
+		<DUTPin name="A1" />
+		<DUTPin name="A2" />
+		<DUTPin name="Y1" />
+		<DUTPin name="Y2" />
+		<DUTPin name="VCC" />
+	</Pins>
+	<PinGroups>
+		<PinGroup name="Digital_In">
+			<PinReference pin="A1" />
+			<PinReference pin="A2" />
+		</PinGroup>
+		<PinGroup name="Digital_Out">
+			<PinReference pin="Y2" />
+			<PinReference pin="Y1" />
+		</PinGroup>
+		<PinGroup name="Power">
+			<PinReference pin="VCC" />
+		</PinGroup>
+		<PinGroup name="All_Pins">
+			<PinReference pin="A1" />
+			<PinReference pin="A2" />
+			<PinReference pin="Y1" />
+			<PinReference pin="Y2" />
+			<PinReference pin="VCC" />
+		</PinGroup>
+	</PinGroups>
+	<Sites>
+		<Site siteNumber="0" />
+		<Site siteNumber="1" />
+		<Site siteNumber="2" />
+		<Site siteNumber="3" />
+	</Sites>
+	<Connections>
+		<Connection pin="A1" siteNumber="0" instrument="PXI1Slot2" channel="0" />
+		<Connection pin="A1" siteNumber="1" instrument="PXI1Slot2" channel="5" />
+		<Connection pin="A1" siteNumber="2" instrument="PXI1Slot3" channel="0" />
+		<Connection pin="A1" siteNumber="3" instrument="PXI1Slot3" channel="5" />
+		<Connection pin="A2" siteNumber="0" instrument="PXI1Slot2" channel="1" />
+		<Connection pin="A2" siteNumber="1" instrument="PXI1Slot2" channel="6" />
+		<Connection pin="A2" siteNumber="2" instrument="PXI1Slot3" channel="1" />
+		<Connection pin="A2" siteNumber="3" instrument="PXI1Slot3" channel="6" />
+		<Connection pin="Y1" siteNumber="0" instrument="PXI1Slot2" channel="4" />
+		<Connection pin="Y1" siteNumber="1" instrument="PXI1Slot2" channel="9" />
+		<Connection pin="VCC" siteNumber="0" instrument="PXI1Slot2" channel="3" />
+		<Connection pin="VCC" siteNumber="1" instrument="PXI1Slot2" channel="8" />
+		<Connection pin="VCC" siteNumber="2" instrument="PXI1Slot3" channel="3" />
+		<Connection pin="VCC" siteNumber="3" instrument="PXI1Slot3" channel="8" />
+		<Connection pin="Y1" siteNumber="2" instrument="PXI1Slot3" channel="4" />
+		<Connection pin="Y1" siteNumber="3" instrument="PXI1Slot3" channel="9" />
+		<Connection pin="Y2" siteNumber="0" instrument="PXI1Slot2" channel="2" />
+		<Connection pin="Y2" siteNumber="1" instrument="PXI1Slot2" channel="7" />
+		<Connection pin="Y2" siteNumber="2" instrument="PXI1Slot3" channel="2" />
+		<Connection pin="Y2" siteNumber="3" instrument="PXI1Slot3" channel="7" />
+	</Connections>
+</PinMap>
