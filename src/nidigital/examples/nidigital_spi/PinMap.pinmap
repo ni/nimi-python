@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PinMap schemaVersion="1.5" xmlns="http://www.ni.com/TestStand/SemiconductorModule/PinMap.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Instruments>
+		<NIDigitalPatternInstrument name="PXI1Slot2" numberOfChannels="32" group="Digital" />
+		<NIDigitalPatternInstrument name="PXI1Slot3" numberOfChannels="32" group="Digital" />
+	</Instruments>
+	<Pins>
+		<DUTPin name="CS" />
+		<DUTPin name="SCLK" />
+		<DUTPin name="MOSI" />
+		<DUTPin name="MISO" />
+	</Pins>
+	<PinGroups>
+		<PinGroup name="SPI_PINS">
+			<PinReference pin="SCLK" />
+			<PinReference pin="CS" />
+			<PinReference pin="MOSI" />
+			<PinReference pin="MISO" />
+		</PinGroup>
+	</PinGroups>
+	<Sites>
+		<Site siteNumber="0" />
+		<Site siteNumber="1" />
+		<Site siteNumber="2" />
+		<Site siteNumber="3" />
+	</Sites>
+	<Connections>
+		<Connection pin="CS" siteNumber="0" instrument="PXI1Slot2" channel="0" />
+		<Connection pin="SCLK" siteNumber="0" instrument="PXI1Slot2" channel="1" />
+		<Connection pin="MOSI" siteNumber="0" instrument="PXI1Slot2" channel="2" />
+		<Connection pin="MISO" siteNumber="0" instrument="PXI1Slot2" channel="3" />
+		<Connection pin="CS" siteNumber="1" instrument="PXI1Slot2" channel="4" />
+		<Connection pin="CS" siteNumber="2" instrument="PXI1Slot3" channel="0" />
+		<Connection pin="CS" siteNumber="3" instrument="PXI1Slot3" channel="4" />
+		<Connection pin="SCLK" siteNumber="1" instrument="PXI1Slot2" channel="5" />
+		<Connection pin="MOSI" siteNumber="1" instrument="PXI1Slot2" channel="6" />
+		<Connection pin="MISO" siteNumber="1" instrument="PXI1Slot2" channel="7" />
+		<Connection pin="MISO" siteNumber="2" instrument="PXI1Slot3" channel="3" />
+		<Connection pin="MISO" siteNumber="3" instrument="PXI1Slot3" channel="7" />
+		<Connection pin="MOSI" siteNumber="2" instrument="PXI1Slot3" channel="2" />
+		<Connection pin="MOSI" siteNumber="3" instrument="PXI1Slot3" channel="6" />
+		<Connection pin="SCLK" siteNumber="2" instrument="PXI1Slot3" channel="1" />
+		<Connection pin="SCLK" siteNumber="3" instrument="PXI1Slot3" channel="5" />
+	</Connections>
+</PinMap>
