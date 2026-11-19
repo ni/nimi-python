@@ -16,8 +16,6 @@ generated/*/build/
 generated/*/dist/
 generated/*/log/
 generated/*/*.egg-info/
-generated/driver_file_built
-generated/printed_global_files
 generated/junit/
 generated/*/coverage.xml
 
@@ -33,7 +31,6 @@ nirfsaunittest.xml
 niscopeunittest.xml
 nitclkunittest.xml
 codegen.xml
-commands.log
 .vscode/launch.json
 .vscode/settings.json
 

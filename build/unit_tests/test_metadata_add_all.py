@@ -1,3 +1,4 @@
+from build.helper import metadata_add_all
 from build.helper.metadata_add_all import *
 from build.helper.metadata_add_all import _add_enum_codegen_method
 from build.helper.metadata_add_all import _get_attributes_that_use_enums
@@ -1104,6 +1105,23 @@ def test_add_all_metadata():
         enums=actual_enums,
         config=actual_config,
         expected=expected)
+
+
+def test_add_all_metadata_without_writing_processed_metadata_matches_persisted_config(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+
+    def _processed_config(write):
+        monkeypatch.setattr(metadata_add_all, 'write_processed_metadata', write)
+        config = copy.deepcopy(config_input)
+        return add_all_metadata(copy.deepcopy(functions_input), copy.deepcopy(attributes_input), copy.deepcopy(enums_input), config)
+
+    skipped = _processed_config(write=False)
+    assert not (tmp_path / 'generated').exists()
+    written = _processed_config(write=True)
+    assert (tmp_path / 'generated' / 'processed_metadata').is_dir()
+
+    assert 'modules' not in skipped
+    _compare_dicts(skipped, written)
 
 
 def _setup_inputs_for_enum_codegen_method_tests():
