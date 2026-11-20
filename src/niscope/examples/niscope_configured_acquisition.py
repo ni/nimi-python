@@ -98,7 +98,7 @@ def _main(argsv):
     parser.add_argument('--total-iterations', default=100, type=int, help='Number of acquisitions to perform before stopping.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Specifies the initial value of certain properties for the session.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.channel_name, args.vertical_range, args.vertical_offset, args.vertical_coupling,
+    example(args.resource_name, args.option_string, args.channels, args.vertical_range, args.vertical_offset, args.vertical_coupling,
             args.probe_attenuation, args.input_impedance, args.max_input_frequency, args.min_sample_rate, args.min_record_length, args.reference_position,
             args.enforce_realtime, args.trigger_modifier, args.trigger_type, args.trigger_source, args.digital_trigger_source, args.trigger_level,
             args.trigger_slope, args.trigger_coupling, args.window_low_level, args.window_high_level, args.window_mode, args.hysteresis, args.trigger_delay,
