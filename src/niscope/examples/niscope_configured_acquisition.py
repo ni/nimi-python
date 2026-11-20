@@ -16,19 +16,19 @@ DIGITAL_TRIGGER_SOURCES = [
 ]
 
 
-def example(resource_name, options, channel_name, vertical_range, vertical_offset, vertical_coupling, probe_attenuation,
+def example(resource_name, options, channel_names, vertical_range, vertical_offset, vertical_coupling, probe_attenuation,
             input_impedance, max_input_frequency, min_sample_rate, min_record_length, reference_position, enforce_realtime,
             trigger_modifier, trigger_type, trigger_source, digital_trigger_source, trigger_level, trigger_slope, trigger_coupling,
             window_low_level, window_high_level, window_mode, hysteresis, trigger_delay, timeout, total_iterations):
     print(f'Starting acquisition on resource {resource_name}, for {total_iterations} iterations.')
     with niscope.Session(resource_name=resource_name, options=options) as session:
-        channel = session.channels[channel_name]
+        channels = session.channels[channel_names]
         acquisition_count = 0
         while acquisition_count < total_iterations:
-            channel.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling[vertical_coupling], offset=vertical_offset,
-                                       probe_attenuation=probe_attenuation, enabled=True)
+            channels.configure_vertical(range=vertical_range, coupling=niscope.VerticalCoupling[vertical_coupling], offset=vertical_offset,
+                                        probe_attenuation=probe_attenuation, enabled=True)
             # Configuring channel characteristics
-            channel.configure_chan_characteristics(input_impedance=input_impedance, max_input_frequency=max_input_frequency)
+            channels.configure_chan_characteristics(input_impedance=input_impedance, max_input_frequency=max_input_frequency)
             session.configure_horizontal_timing(min_sample_rate=min_sample_rate, min_num_pts=min_record_length, ref_position=reference_position,
                                                 num_records=1, enforce_realtime=enforce_realtime)
             # Configuring auto trigger
@@ -47,7 +47,7 @@ def example(resource_name, options, channel_name, vertical_range, vertical_offse
                 case 'HYSTERESIS':
                     session.configure_trigger_hysteresis(trigger_source, trigger_level, hysteresis, niscope.TriggerCoupling[trigger_coupling], slope=niscope.TriggerSlope[trigger_slope], delay=delay)
             with session.initiate():
-                channel.fetch(timeout=hightime.timedelta(seconds=timeout))
+                channels.fetch(timeout=hightime.timedelta(seconds=timeout))
             acquisition_count += 1
             print(f'Acquisition {acquisition_count}:')
             print(f'Actual Sample Rate: {session.horz_sample_rate}')
@@ -61,7 +61,7 @@ def _main(argsv):
     parser = argparse.ArgumentParser(description='Configures the vertical, horizontal, and trigger properties before every acquisition and fetches the waveform(s).',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Specifies the resource name of the device to initialize')
-    parser.add_argument('-c', '--channel-name', default='0', help='Comma-separated list of channels to acquire')
+    parser.add_argument('-c', '--channels', default='0', help='Comma-separated list of channels to acquire')
     parser.add_argument('--timeout', default=5.0, type=float, help='The time to wait for data to be acquired; using 0 for this parameter tells NI-SCOPE to fetch whatever is currently available.')
     parser.add_argument('--vertical-range', default=5.0, type=float, help='Specifies the absolute value of the input range for a channel in volts.')
     parser.add_argument('--probe-attenuation', default=1.0, type=float, help='Specifies the probe attenuation for the input channel.')
