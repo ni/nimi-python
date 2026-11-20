@@ -12,6 +12,15 @@ nifgen_arb_waveform.py
    :encoding: utf8
    :caption: `(nifgen_arb_waveform.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_arb_waveform.py>`_
 
+nifgen_create_from_file_i16.py
+------------------------------
+
+.. literalinclude:: ../../src/nifgen/examples/nifgen_create_from_file_i16.py
+   :language: python
+   :linenos:
+   :encoding: utf8
+   :caption: `(nifgen_create_from_file_i16.py) <https://github.com/ni/nimi-python/blob/master/src/nifgen/examples/nifgen_create_from_file_i16.py>`_
+
 nifgen_script.py
 ----------------
 
