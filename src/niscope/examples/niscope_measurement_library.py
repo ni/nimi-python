@@ -5,7 +5,7 @@ import niscope
 import sys
 
 
-def example(resource_name, channels, options, vertical_range, vertical_coupling,
+def example(resource_name, channel_names, options, vertical_range, vertical_coupling,
             min_sample_rate, min_record_length, enforce_realtime, trigger_type, trigger_source,
             trigger_level, trigger_slope, trigger_coupling, timeout, scalar_measurement,
             reference_level_units, low_ref, mid_ref, high_ref, iterations):
@@ -18,17 +18,17 @@ def example(resource_name, channels, options, vertical_range, vertical_coupling,
         else:
             session.configure_trigger_immediate()
 
-        channel = session.channels[channels]
-        channel.meas_ref_level_units = niscope.RefLevelUnits[reference_level_units]
-        channel.meas_chan_low_ref_level = low_ref
-        channel.meas_chan_mid_ref_level = mid_ref
-        channel.meas_chan_high_ref_level = high_ref
+        channels = session.channels[channel_names]
+        channels.meas_ref_level_units = niscope.RefLevelUnits[reference_level_units]
+        channels.meas_chan_low_ref_level = low_ref
+        channels.meas_chan_mid_ref_level = mid_ref
+        channels.meas_chan_high_ref_level = high_ref
 
         acquisition_count = 0
         while acquisition_count < iterations:
             # The statistics accumulate once per acquisition, so read a new waveform before each fetch.
-            channel.read(num_samples=min_record_length, timeout=timeout)
-            stats = channel.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
+            channels.read(num_samples=min_record_length, timeout=timeout)
+            stats = channels.fetch_measurement_stats(niscope.ScalarMeasurement[scalar_measurement])
             acquisition_count += 1
             print(f'Acquisition {acquisition_count}: {scalar_measurement}')
             for stat in stats:
