@@ -6,36 +6,36 @@ Examples
 nidigital_burst_with_start_trigger.py
 -------------------------------------
 
-.. literalinclude:: ../../src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py
+.. literalinclude:: ../../src/nidigital/examples/nidigital_burst_with_start_trigger/nidigital_burst_with_start_trigger.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
+   :caption: `(nidigital_burst_with_start_trigger.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_burst_with_start_trigger/nidigital_burst_with_start_trigger.py>`_
 
 nidigital_configure_time_set_and_voltage_levels.py
 --------------------------------------------------
 
-.. literalinclude:: ../../src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py
+.. literalinclude:: ../../src/nidigital/examples/nidigital_configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
+   :caption: `(nidigital_configure_time_set_and_voltage_levels.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_configure_time_set_and_voltage_levels/nidigital_configure_time_set_and_voltage_levels.py>`_
 
 nidigital_load_sheets_and_burst.py
 ----------------------------------
 
-.. literalinclude:: ../../src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py
+.. literalinclude:: ../../src/nidigital/examples/nidigital_load_sheets_and_burst/nidigital_load_sheets_and_burst.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_load_sheets_and_burst.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/load_sheets_and_burst/nidigital_load_sheets_and_burst.py>`_
+   :caption: `(nidigital_load_sheets_and_burst.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_load_sheets_and_burst/nidigital_load_sheets_and_burst.py>`_
 
 nidigital_ppmu_source_and_measure.py
 ------------------------------------
 
-.. literalinclude:: ../../src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py
+.. literalinclude:: ../../src/nidigital/examples/nidigital_ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py
    :language: python
    :linenos:
    :encoding: utf8
-   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
+   :caption: `(nidigital_ppmu_source_and_measure.py) <https://github.com/ni/nimi-python/blob/master/src/nidigital/examples/nidigital_ppmu_source_and_measure/nidigital_ppmu_source_and_measure.py>`_
 
