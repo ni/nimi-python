@@ -45,6 +45,8 @@ class TestSession:
 
         self.patched_library.niDigital_InitWithOptions.side_effect = self.side_effects_helper.niDigital_InitWithOptions
         self.side_effects_helper['InitWithOptions']['newVi'] = session_id_for_test
+        self.side_effects_helper['InitWithOptions']['errorMessage'] = ''
+        self.side_effects_helper['InitWithOptions']['newSessionInitialized'] = False
 
         self.patched_library.niDigital_close.side_effect = self.side_effects_helper.niDigital_close
 

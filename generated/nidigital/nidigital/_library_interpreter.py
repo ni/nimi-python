@@ -938,6 +938,41 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(offsets_ctype[i]) for i in range(offsets_buffer_size_ctype.value)]
 
+    def tmu_abort(self, tmu):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        tmu_ctype = ctypes.create_string_buffer(tmu.encode(self._encoding))  # case C010
+        error_code = self._library.niDigital_TMU_Abort(vi_ctype, tmu_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def tmu_fetch_averaged_measurement(self, tmu, timeout):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        tmu_ctype = ctypes.create_string_buffer(tmu.encode(self._encoding))  # case C010
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        measurement_ctype = _visatype.ViReal64()  # case S220
+        error_code = self._library.niDigital_TMU_FetchAveragedMeasurement(vi_ctype, tmu_ctype, timeout_ctype, None if measurement_ctype is None else (ctypes.pointer(measurement_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return float(measurement_ctype.value)
+
+    def tmu_get_disabled_tmu_contexts(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        tmu_contexts_buffer_size_ctype = _visatype.ViInt32()  # case S170
+        tmu_contexts_ctype = None  # case C050
+        error_code = self._library.niDigital_TMU_GetDisabledTMUContexts(vi_ctype, tmu_contexts_buffer_size_ctype, tmu_contexts_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        tmu_contexts_buffer_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        tmu_contexts_ctype = (_visatype.ViChar * tmu_contexts_buffer_size_ctype.value)()  # case C060
+        error_code = self._library.niDigital_TMU_GetDisabledTMUContexts(vi_ctype, tmu_contexts_buffer_size_ctype, tmu_contexts_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return tmu_contexts_ctype.value.decode(self._encoding)
+
+    def tmu_initiate(self, tmu):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        tmu_ctype = ctypes.create_string_buffer(tmu.encode(self._encoding))  # case C010
+        error_code = self._library.niDigital_TMU_Initiate(vi_ctype, tmu_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def unload_all_patterns(self, unload_keep_alive_pattern):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         unload_keep_alive_pattern_ctype = _visatype.ViBoolean(unload_keep_alive_pattern)  # case S150
