@@ -77,7 +77,7 @@ deps =
 % if module_name == 'nidigital':
     ${module_name}-system_tests: nisync
 % endif
-    ${module_name}-system_tests: pytest
+    ${module_name}-system_tests: pytest < 9.2.0
     ${module_name}-system_tests: coverage
     ${module_name}-system_tests: numpy
     ${module_name}-system_tests: hightime

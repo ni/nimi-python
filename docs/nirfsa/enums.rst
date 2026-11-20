@@ -631,6 +631,31 @@ DownconverterLoopBandwidth
 
 
 
+EnableAttrVals
+--------------
+
+.. py:class:: EnableAttrVals
+
+    .. py:attribute:: EnableAttrVals.DISABLED
+
+
+
+        The property is disabled.
+
+        
+
+
+
+    .. py:attribute:: EnableAttrVals.ENABLED
+
+
+
+        The property is enabled.
+
+        
+
+
+
 DownconverterPreselectorEnabled
 -------------------------------
 
@@ -661,31 +686,6 @@ DownconverterPreselectorEnabled
 
 
         Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible avoid an error.
-
-        
-
-
-
-EnableAttrVals
---------------
-
-.. py:class:: EnableAttrVals
-
-    .. py:attribute:: EnableAttrVals.DISABLED
-
-
-
-        The property is disabled.
-
-        
-
-
-
-    .. py:attribute:: EnableAttrVals.ENABLED
-
-
-
-        The property is enabled.
 
         
 
@@ -1575,16 +1575,6 @@ LoSource
 --------
 
 .. py:class:: LoSource
-
-    .. py:attribute:: LoSource.NONE
-
-
-
-        Specifies that no LO source is required to downconvert the RF input signal.
-
-        
-
-
 
     .. py:attribute:: LoSource.ONBOARD
 

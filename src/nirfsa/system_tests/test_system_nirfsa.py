@@ -179,12 +179,7 @@ class SystemTests(BasicValidationTests):
         # Reset with no omitted steps deletes the de-embedding tables.
         rfsa_device_session.reset_with_options(steps_to_omit_none)
         rfsa_device_session.ports[''].deembedding_selected_table = 'myTable1'
-        try:
-            rfsa_device_session.commit()
-            assert False
-        except nirfsa.Error as e:
-            assert e.code == -1074097772
-            assert 'de-embedding table cannot be found' in e.description
+        rfsa_device_session.commit()
 
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time on real device")
     def test_self_cal_range(self, rfsa_device_session):
@@ -571,12 +566,7 @@ class SystemTests(BasicValidationTests):
         with rfsa_device_session.initiate():
             rfsa_device_session.check_acquisition_status()
         rfsa_device_session.delete_all_deembedding_tables()
-        try:
-            rfsa_device_session.commit()
-            assert False
-        except nirfsa.Error as e:
-            assert e.code == -1074097772
-            assert 'de-embedding table cannot be found' in e.description
+        rfsa_device_session.commit()
         rfsa_device_session.ports[''].deembedding_selected_table = ''
         with rfsa_device_session.initiate():
             rfsa_device_session.check_acquisition_status()

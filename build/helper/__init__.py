@@ -1,3 +1,4 @@
+from build.helper.codegen_helper import get_context_managers  # noqa: F401
 from build.helper.codegen_helper import get_ctype_variable_declaration_snippet  # noqa: F401
 from build.helper.codegen_helper import get_dictionary_snippet  # noqa: F401
 from build.helper.codegen_helper import get_enum_type_check_snippet  # noqa: F401
@@ -52,6 +53,7 @@ from build.helper.metadata_filters import filter_len_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_library_functions  # noqa: F401
 from build.helper.metadata_filters import filter_parameters  # noqa: F401
 from build.helper.metadata_filters import filter_public_functions  # noqa: F401
+from build.helper.metadata_filters import get_context_manager_configs  # noqa: F401
 
 from build.helper.metadata_find import find_custom_type  # noqa: F401
 from build.helper.metadata_find import find_session_handle_parameter  # noqa: F401
